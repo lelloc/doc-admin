@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<section id="genericinterface">
+    <title>一般インターフェイス</title>
+    <para>
+        OTRSの一般インターフェースは、OTRSをウェブサービスによって他のシステムと通信させる複合レイヤーのフレームワークから成ります。このコミュニケーションは双方向になりえます。:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>供給者としてのOTRS:</emphasis>
+OTRSは、外部システムからのリクエストを聞き、要求されたアクションを行なって、情報を処理し、リクエストに答えるサーバーとして働きます。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>依頼者としてのOTRS:</emphasis>
+OTRSは、遠隔のシステムにリクエストを送り、レスポンスを待って、クライアント情報収集者として働きます。
+            </para>
+        </listitem>
+    </itemizedlist>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="genericinterface/genericinterface-layers.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="genericinterface/genericinterface-communication-flow.xml" />
+
+    <section id="genericinterface-webservices">
+        <title>ウェブサービス</title>
+        <para>
+            Webサービスは、私たちの場合、OTRSとリモート・システムとの間のコミュニケーション方法です。
+         </para>
+         <para>
+            Webサービスの核心はその構成(Configuraiton)です。尚、ここで、以下が定義されます。ウェブサービスがどのアクションを内部に行なうことができるか(オペレーション)、どんなアクションが、OTRS要求がリモート・システムを実行できるか（依頼アクション(Invokers)）どのようにデータが他からひとつのシステムへ変換されるか（Mapping）そしてどのプロトコル上でコミュニケーションが発生するのはどのプロトコル上か（Transport）。
+         </para>
+         <para>
+             一般インターフェースは、互いから独立して、交換可能な、既に作られていたビルディングブロックを使用して、事前定義された方法でOTRSのためのWebサービスを作成することを可能にするフレームワークです。
+        </para>
+    </section>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="genericinterface/genericinterface-webservice-gui.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="genericinterface/genericinterface-webservice-cli.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="genericinterface/genericinterface-webservice-configuration.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="genericinterface/genericinterface-connectors.xml" />
+</section>

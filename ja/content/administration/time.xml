@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="time">
+<title>時間関連機能</title>
+
+<section id="time-settings">
+<title>業務時間、祝祭日とタイムゾーンの設定</title>
+
+<para>
+<link
+linkend="unlock-tickets">チケットの自動アンロック</link>やエスカレーションのようなOTRSのいくつかの機能は、業務時間、祝祭日及びタイムゾーンの適切な構成に依存しています。<link
+linkend="Framework:Core::Time">Framework &gt; Core::Time</link>にある<link
+linkend="sysconfig">SysConfigインターフェース</link>経由でこれらを定義することができます。異なる業務時間、祝祭日及びタイムゾーンを別々の「カレンダー」の異なるセットとして設定することも可能です。（
+<link linkend="Framework:Core::Time::Calendar9">Framework &gt;
+Core::Time::Calendar9</link>から<link
+linkend="Framework:Core::Time::Calendar1">Framework &gt;
+Core::Time::Calendar1</link> で）カレンダーは<link
+linkend="adminarea-queue">キュー設定</link>、あるいはSLAレベルで定義することができます。例えばこれはあなたがカレンダー（「標準」SLA用の5
+x 8
+業務時間）を指定できることを意味します。しかし「Support-USA」キュー用のカレンダーセットと同様に、「Support-Japan」キューよりも異なるタイムゾーンの窓で、あなたの「gold」SLA用の4
+x 27 をサポートする別々のカレンダーを作成します。OTRSは異なる99までのカレンダーを取り扱うことができます。
+</para>
+
+<section id="TimeWorkingHours">
+<title>業務時間</title>
+
+<para>
+SysConfig内でシステムの業務時間を設定します。（<link
+linkend="Framework:Core::Time:TimeWorkingHours">Framework &gt;
+Core::Time::TimeWorkingHours</link>）またはカレンダー構成中のあなたの特定のカレンダーを設定します。OTRSは一時間の精度を取り扱うことができます。ボックス8,9,10...17にチェックマークを入れることは業務時間の
+8 AMから 6 PMに相当します。
+</para>
+
+<para>
+業務時間内にのみエスカレーション・チケットを作成することができます。エスカレーションの通知や送信された保留チケットロックされていないチケットも同様です。
+</para>
+</section>
+
+
+<section id="TimeVacationDays">
+<title>固定の期日、祝祭日</title>
+
+<para>
+毎年ある、元日または独立記念日のような祝祭日は、<link
+linkend="Framework:Core::Time:TimeVacationDays">TimeVacationDays</link>、あるいはカレンダー1-9用の該当箇所の中で指定することができます。
+</para>
+
+<para>
+チケットはエスカレーションしませんしまた、TimeVacationDaysに定義された日付にアンロックされません。
+</para>
+
+<note>
+<para>
+OTRS出荷のデフォルトで<emphasis>ドイツの</emphasis>祝祭日をインストールしています。
+</para>
+</note>
+
+</section>
+
+<section id="TimeVacationDaysOneTime">
+<title>TimeVacationDaysOneTime</title>
+
+<para>
+年1回の固定日を持たず、代わりに毎年変わるイースターのような休日は、<link
+linkend="Framework:Core::Time:TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>の中で指定することができます。
+</para>
+
+<para>
+チケットはエスカレーションしませんしまた、TimeVacationDaysに定義された日付にアンロックされません。
+</para>
+
+<note>
+<para>
+OTRSは、一度だけの休日をつけて出荷しません。イースターまたは感謝祭のような休日はOTRSを構成する際にご自身でシステムに追加して下さい。
+</para>
+</note>
+
+</section>
+
+</section>
+
+<section id="unlock-tickets">
+<title>自動アンロック</title>
+
+<para>
+ロックされたチケットは、システムによって自動的に対応中にすることができます。この機能はこんな場合に有用でしょう。例えば、担当者が処理される必要のあるチケットをロックしているが、彼が何らかの理由でそれらを処理できなければ、「彼は今緊急の用事のためオフィスの外にいます」ということができます。自動アンロック機能は、ロックされたチケットがないことが忘れられないことを確実にするために与えられた時間の後でチケットをアンロックします。
+</para>
+
+<para>
+チケットが対応中にされる前の時間の量は、すべてのキューのための<link
+linkend="adminarea-queue">キュー設定</link>の中で指定することができます。モジュール
+<filename>bin/otrs.UnlockTickets.pl</filename>（cronジョブとして周期的に実行される)は、チケットの自動アンロックします。アンロック中のチケットに関する通知は以下の担当者のみに送信されます。
+</para>
+
+<para>
+「マイ・キュー」にあるアンロックされたチケット・セットを持つキューを持っている担当者。個人的<link
+linkend="user-preferences">選択（選好）</link>のアンロック・チケットに関する通知を活性化した担当者。
+</para>
+
+<para>
+次の条件がすべて満たされれば、チケットはアンロックされます:
+</para>
+
+<itemizedlist>
+<listitem>
+<para>
+チケットがあるキューのために定義された<emphasis>アンロック・タイムアウト</emphasis>があります。
+</para>
+</listitem>
+<listitem>
+<para>
+チケットは<emphasis>ロック済</emphasis>にセットされています。
+</para>
+</listitem>
+<listitem>
+<para>
+チケットの状態は<emphasis>対応中</emphasis>です。
+</para>
+</listitem>
+</itemizedlist>
+
+<para>
+アンロック・タイマーは担当者がチケットに新しい外部記事を追加すればリセットされます。それは次のタイプのうちのいずれかでしょう。:
+<emphasis>外部Eメール</emphasis>、<emphasis>電話</emphasis>、<emphasis>ファックス</emphasis>、<emphasis>sms</emphasis>あるいは<emphasis>外部ノート</emphasis>。
+</para>
+
+<para>
+さらに、チケット中の最後の記事が担当者によって作成され、顧客が別のものを加えれば、ウェブあるいはEメール応答のいずれかによって、アンロック・タイマーはリセットされるでしょう。
+</para>
+
+<para>
+アンロック・タイマーをリセットする最後のイベントは、チケットがもう一人の担当者にいつ割り当てられるかです。
+</para>
+
+</section>
+
+</section>

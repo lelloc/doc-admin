@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="scheduler">
+    <title>OTRSスケジューラ</title>
+    <para>
+        OTRSスケジューラは背景のタスクを実行する独立したシステムプロセスです。これらのプロセスはUnix /
+Linuxシステムでは<emphasis>デーモン</emphasis>として、またWindows環境上では<emphasis>サービス</emphasis>として知られています。それは独立していますが、スケジュールが全て単独で独立しているという意味ではありません。それは十分にOTRSに統合されていて、必要な時に各タスクを完了するためにいかなるOTRSモジュールをも使うことができます。
+    </para>
+
+    <para>
+        正常な理由のためにスケジューラ・プロセスはときどきリスタートする必要があります。これは、一日に一度スケジューラ・プロセス自体によって自動的に行われます。しかし、必要な時、SysConfigを使用して「Scheduler::RestartAfterSeconds」設定の編集すればそれを調節することができます。
+    </para>
+    <para>
+        OTRSスケジューラは完全に自動プロセスです。唯一の人間の介在が必要とされることは、そのステータスを周期的にチェックし、必要な時にそれをスタートするか停止することです。
+    </para>
+    <note>
+        <para>
+            スケジューラが何らかの理由で停止されたら、スケジューラが停止した時に登録された全ての保留タスクと新規タスクは、スケジューラが再開するとすぐに実行されます。(タスクがその後実行される準備ができていない限り)
+        </para>
+    </note>
+    <section id="scheduler-gui">
+        <title>スケジューラ・グラフィカル・インターフェース</title>
+        <para>
+            スケジューラは、それが停止しない限り、OTRSグラフィカルユーザーインターフェイスにおいて不可視です。
+        </para>
+        <section id="scheduler-gui-notify">
+            <title>スケジューラ停止中の通知</title>
+            <para>
+                スケジューラが停止中をシステムが検知する場合、2つの異なるタイプの通知があります。この検知はスケジューラ・プロセスの更新頻度に基づきます。現在時刻と最終プロセス更新時刻の時間差が２倍以上ならば、OTRS通知エリア内にプロセス更新頻度警告メッセージが表示されます。それが4倍以上のプロセス頻度ならば、警告に変わって警戒メッセージが表示されます。
+            </para>
+            <para>
+                スケジューラ・プロセス更新時間は、「Scheduler::PIDUpdateTime」設定中のSysConfigによって構成することができます。警告メッセージを見ても必ずしも処置を講ずる必要はありません。
+            </para>
+            <para>
+                しかし、スケジューラ・プロセスが走っているかどうかをチェックすることは強く推奨します。警戒メッセージを見たら、スケジューラが停止している可能性が高いのでスタートすべきです。
+            </para>
+            <para>
+                データベースに有効なウェブサービスが登録されていたり、または「管理者」グループのユーザだけに表示されている場合、デフォルトでスケジューラは通知を有効ではありません。
+            </para>
+            <para>
+                通知を不能にするためには（推奨しませんが）あるいは、通知グループを変更・追加するためには、SysConfigの中の設定「Frontend::NotifyModule###800-Scheduler-Check」を編集してください。
+            </para>
+            <para>
+                <screenshot>
+<screeninfo>スケジューラ通知</screeninfo> <graphic srccredit="スケジューラ通知 -
+スクリーンショット" scale="40" fileref="screenshots/scheduler-notify.png"></graphic></screenshot>
+            </para>
+            <para>
+                <emphasis>図:スケジューラ通知</emphasis>
+            </para>
+        </section>
+        <section id="scheduler-gui-start">
+            <title>スタート・スケジューラ</title>
+            <para>
+                スケジューラ停止中通知リンク(警告か警戒のいずれか)をクリックすることによって、再びスケジューラ・プロセスをを再開させるためにダイアログ・ボックスを開きます。ダイアログ中のチェックボックスを適切にクリックすることでスケジューラは正常にスタートするか強制的にスタートさせられます。
+            </para>
+            <note>
+                <para>
+                    強制的なスケジューラ・スタートは、前のスケジューラ・プロセスが異常に終了し、プロセスIDがデータベース中でまだ登録されている場合のみ、必要です。
+                </para>
+                <para>
+                    スケジューラ・プロセスを十分にコントロールをするために、以下の述べるコマンドラインツールをつかって、その実際の状態をチェックして下さい。
+                </para>
+            </note>
+            <para>
+                <screenshot>
+<screeninfo>スタート・スケジューラ</screeninfo> <graphic srccredit="スケジューラ開始 -
+スクリーンショット" scale="40" fileref="screenshots/scheduler-start.png"></graphic></screenshot>
+            </para>
+            <para>
+                <emphasis>図:スケジューラの開始</emphasis>
+            </para>
+        </section>
+    </section>
+    <section id="scheduler-cli">
+        <title>スケジューラ・コマンドライン・インタフェース</title>
+        <para>
+            スケジューラ・コマンドライン・ツールによってスケジューラ・プロセス(スタート・ストップ)をコントロールし、スケジュールの状態を尋ねます。さらにオペレーティング・システムによってコントロールされるプロセスを登録するツールがあります。
+        </para>
+        <para>
+            2セットのCLIのツール、すなわちひとつはUnix/Linux用でもう一方はMicrosoft Windows用です。
+        </para>
+        <section id="scheduler-cli-linux">
+            <title>Unix/Linux</title>
+            <section id="scheduler-cli-linux-init">
+                <title>Scheduler init.d files</title>
+                <para>
+                    init.d ファイルは、スタートアップとシャット・ダウンでオペレーティング・システムによって呼び出される特別なスクリプトです。
+                </para>
+                <para>
+                    OTRSは、オペレーティング・システムによってOTRSスケジューラ・プロセスを自動的に始める/止めるためにinit.d
+スクリプトを提供します。これらのスクリプトはOTRS_HOME/scriptsの下にあります。
+                </para>
+                <para>
+                    init.d
+スクリプトは、ご利用のオペレーティング・システムに応じて正しい位置にコピーする必要があります。それらは適切な許可を持つ必要があります。また、いくつかの内部変数を適切に動くようにセットする必要があります。システムをセット・アップにOTRS
+RPMを使用したならば、これは自動的に処理されます。
+                </para>
+                <itemizedlist mark="round">
+                    <title>init.d スクリプト内部変数</title>
+                    <listitem>
+                        <para>
+                            <command>OTRS_HOME</command> - OTRSインストールのパス。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>User</command> - the apache プロセスユーザ名。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>Group</command> - the apache OTRSインストールのグループ名。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <note>
+                    <para>
+                        現在、OTRSは、Linuxプラットフォームのinit.d スクリプトだけを提供します。
+                    </para>
+                </note>
+                <table>
+                    <title>テーブル4.7. init.d スクリプトのリストとサポートされるオペレーティング・システム</title>
+                    <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Init Script</entry>
+                            <entry>サポートするOS</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>otrs-scheduler-linux</entry>
+                            <entry>Red Hat, Fedora, CentOS, SUSE, openSUSE, Debian, Ubuntu</entry>
+                        </row>
+                        <row>
+                            <entry>otrs-scheduler-gentoo-init.d, otrs-scheduler-gentoo-conf.d</entry>
+                            <entry>Gentoo</entry>
+                        </row>
+                    </tbody>
+                    </tgroup>
+                </table>
+                <example>
+                    <title>Linux上でOTRSを開始するサンプル</title>
+                    <para>
+                        <screen>
+                            shell> /etc/init.d/otrs-scheduler-linux start
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>可能なアクション</title>
+                    <listitem>
+                        <para>
+                            <command>start</command> - OTRSスケジューラ・プロセスを開始
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>stop</command> - OTRSスケジューラ・プロセスを停止。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>restart</command> - OTRSスケジューラ・プロセスを再開。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>status</command> - OTRSスケジューラ・プロセス・ステータスをクエリー
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    スケジューラは、そのプロセスIDを登録することができるようにデータベースを必要とします。というのは、この理由は次のものに必要であるからです:
+                    <itemizedlist mark="round">
+                        <listitem>
+                            <para>
+                                データベース・プロセスの活動開始以後、スケジューラ・プロセスを<emphasis>開始する</emphasis>ためにスケジューラinit.d
+スクリプトを実行します。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                データベース・プロセスがシャット・ダウンする前に、スケジューラを<emphasis>停止</emphasis>ためにスケジューラinit.d
+スクリプトを実行します。
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <note>
+                    <para>
+                        スケジューラがシステム起動時に開始することを望むなら、オペレーティング・システムのドキュメンテーションを読んで、init.dスクリプトを置く正しい場所、それらの自動的に開始するための構成方法及び起動順の設定方法を見つけて下さい。
+                    </para>
+                </note>
+            </section>
+            <section id="scheduler-cli-linux-daemon">
+                <title>スケジューラ・デーモン・ファイル</title>
+                <para>
+                    これは、実行すべきタスクをチェックしながらバックグラウンドで稼働し続けるスケジューラの部分です。さらに、それは、プロセスをコントロールするために主機能を提供します。
+                </para>
+                <para>
+                    全てのUnix/Linuxはファイル <command>OTRS_HOME/bin/otrs.Scheduler.pl</command>を使用します。
+                </para>
+                <example>
+                    <title>OTRSスケジューラを開始するサンプル</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler.pl -a start
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>利用可能なオプション</title>
+                    <listitem>
+                        <para>
+                            <command>-a </command> アクション
+                        </para>
+                        <itemizedlist mark="round">
+                            <title>Possible Values</title>
+                            <listitem>
+                                <para>
+                                    <command>start</command> - スケジューラ・プロセスを開始。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>stop</command> - スケジューラ・プロセスを停止。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>status</command> - スケジューラ・プロセス状態のクエリー。
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>-f </command> スケジューラ・プロセスの強制的開始または停止。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <example>
+                    <title>OTRSスケジューラを強要停止するサンプル</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler.pl -a stop -f 1
+                        </screen>
+                    </para>
+                </example>
+                <note>
+                    <para>
+                        スケジューラが走っておらず、プロセスがまだ登録されている時に、スケジューラを強制終了させることは、データベースからプロセスIDを取り除くことになります。
+                    </para>
+                    <para>
+                        スケジューラが走っておらず、プロセスがまだ登録されていれば、スケジューラを強制終了させることは、スケジューラプロセスを開始することになります。
+                    </para>
+                    <para>
+                        強制開始または強制停止は、プロセス開始がプロセス更新時間が失効する前になされる必要な場合のみ必要です。そうでなければ　データベース内の失効エントリーは通常開始で破棄されます。
+                    </para>
+                </note>
+            </section>
+        </section>
+
+       <section id="scheduler-cli-windows">
+            <title>Windows</title>
+            <section id="scheduler-cli-windows-scm">
+                <title>スケジューラ・サービス・インストーラー</title>
+                <para>
+                    Windowにおいては、OTRSスケジューラがWindow・サービス・コントロール・マネージャー(SCM)によってサービスとして登録されます。OTRSスケジューラを持つためには、SCMによってコントロールされるプロセスがこのサービスを登録する必要があります。Windowインストーラを使用した場合インストーラによって処理され、手動のアクションは必要ありません。
+                </para>
+                <para>
+                    OTRSは、SCMへOTRSスケジューラを登録するか登録解除するためにスクリプト<command>OTRS_HOME/bin/otrs.Scheduler4WinInstaller.pl</command>を提供します。
+                </para>
+                <note>
+                    <para>
+                        登録および登録解除することはウィンドウズ上の管理者グループのメンバーによってのみ行なわれます。サービスを正確に登録する前に、cmd.exeを右クリックし、「管理者として運用」を選択するします。
+                    </para>
+                </note>
+                <example>
+                    <title>WindowsサービスとしてOTRSスケジューラを登録するサンプル</title>
+                    <para>
+                        <screen>
+                            shell> perl OTRS_HOME/bin/otrs.Scheduler4WinInstaller.pl -a install
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>利用可能なオプション</title>
+                    <listitem>
+                        <para>
+                            <command>-a </command> アクション
+                        </para>
+                        <itemizedlist mark="round">
+                            <title>Possible Values</title>
+                            <listitem>
+                                <para>
+                                    <command>install</command>- ウィンドウズSCMへスケジューラ・プロセスをインストールしてください。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>remove</command>- ウィンドウズSCMからスケジューラ・プロセスを取り除いてください。
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    WindowsSCMへインストール後、OTRSスケジューラ・プロセスはウィンドウズ上で他のサービスのように使用することができます。それは開始、停止、再開することができ、手動あるいは自動での開始を構成できます。
+                </para>
+                <note>
+                    <para>
+                        ウィンドウズ・サービスおよびウィンドウズSCMに関してもっと学習するために、ウィンドウズ・ドキュメンテーションおよびマイクロソフト・オンライン・ヘルプを読んでください。
+                    </para>
+                </note>
+            </section>
+            <section id="scheduler-cli-linux-service">
+                <title>スケジューラ・サービス・ファイル</title>
+                <para>
+                    これは、実行すべきタスクをチェックしながらバックグラウンドで稼働し続けるスケジューラの部分です。さらに、それは、プロセスをコントロールするために主機能を提供します。
+                </para>
+                <para>
+                    Microsoft Windows uses the file
+<command>OTRS_HOME/bin/otrs.Scheduler4Win.pl</command>.
+                </para>
+                <example>
+                    <title>ウィンドウズ上のOTRSスケジューラを開始するサンプル</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler4Win.pl -a start
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>利用可能なオプション</title>
+                    <listitem>
+                        <para>
+                            <command>-a </command> アクション
+                        </para>
+                        <itemizedlist mark="round">
+                            <title>Possible Values</title>
+                            <listitem>
+                                <para>
+                                    <command>start</command> - スケジューラ・プロセスを開始。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>stop</command> - スケジューラ・プロセスを停止。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>status</command> - スケジューラ・プロセス状態のクエリー。
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>-f </command> スケジューラ・プロセスの強制的開始または停止。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <example>
+                    <title>Windows上でOTRSスケジューラを強制停止するサンプル</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler4Win.pl -a stop -f 1
+                        </screen>
+                    </para>
+                </example>
+                <note>
+                    <para>
+                        スケジューラが走っておらず、プロセスがまだ登録されている時に、スケジューラを強制終了させることは、データベースからプロセスIDを取り除くことになります。
+                    </para>
+                    <para>
+                        スケジューラが走っておらず、プロセスがまだ登録されていれば、スケジューラを強制開始することは、スケジューラプロセスを開始することになります。
+                    </para>
+                    <para>
+                        強制開始または強制停止は、プロセス開始がプロセス更新時間が失効する前になされる必要な場合のみ必要です。そうでなければデータベース内の失効エントリーは通常開始で破棄されます。
+                    </para>
+                </note>
+            </section>
+        </section>
+    </section>
+</section>

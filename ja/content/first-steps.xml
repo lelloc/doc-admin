@@ -1,0 +1,565 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<chapter id="first-steps">
+<title>ファースト・ステップ</title>
+
+<abstract>
+<para>
+この章の目的は、OTRSの簡潔な概要を提供することです。
+</para>
+</abstract>
+
+<section id="agent-interface">
+<title>担当者ウェブインターフェイス</title>
+
+<para>
+担当者は、担当者ウェブインターフェイスで顧客のリクエストに答えることができます。顧客のためあるいは他の担当者のために新規チケットを作成し、顧客との通話に関することをチケットに書き、FAQを記入し、顧客データを編集します。
+</para>
+
+<para>
+URL <ulink url="http://www.example.com/">
+<citetitle>http://www.example.com</citetitle>
+</ulink>経由であなたのOTRSホストへ到達すると仮定すれば、ウェブブラウザ（下図参照）でアドレス<ulink
+url="http://www.example.com/otrs/index.pl">
+<citetitle>http://www.example.com/otrs/index.pl</citetitle>
+</ulink>を使用することでOTRSログイン画面へ到達します。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>index.pl - 担当者のログイン画面</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40" fileref="screenshots/login.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：担当者インターフェイスのログイン画面</emphasis>
+</para>
+
+</section>
+
+<section id="customer-interface">
+<title>顧客ウェブインターフェイス</title>
+
+<para>
+顧客は、OTRSの別々のウェブインターフェイスを持ち、それを通じて、新規アカウントを作成し、アカウント設定を変更し、チケットを作成、編集し、作成したチケットに関する概要を取得することができます。
+</para>
+
+<para>
+上のサンプルを続け、顧客ログイン画面はウェブブラウザでURL<ulink
+url="http://www.example.com/otrs/customer.pl">
+<citetitle>http://www.example.com/otrs/customer.pl</citetitle>
+</ulink>を使用することで到達します。（下図参照）
+</para>
+
+<para>
+<screenshot>
+<screeninfo>customer.pl - 顧客ログイン画面</screeninfo> <graphic srccredit="customer.pl -
+スクリーンショット" scale="40" fileref="screenshots/customer-login.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：顧客ログイン画面</emphasis>
+</para>
+
+</section>
+
+<section id="public-interface">
+<title>公開ウェブインターフェイス</title>
+
+<para>
+担当者と顧客のためのウェブインターフェイスに加えて、OTRSにはさらにFAQモジュールによって利用可能な公開ウェブ・インターフェースがあります。このモジュールを別々にインストールしている必要があります。それはFAQシステムに公衆アクセスを提供し、特別の認可のないFAQエントリーをビジターに捜させます。
+</para>
+
+<para>
+私達のサンプルでは, 公開ウェブインターフェイスは次のいずれかのURL : <ulink
+url="http://www.example.com/otrs/faq.pl">
+<citetitle>http://www.example.com/otrs/faq.pl</citetitle> </ulink> , <ulink
+url="http://www.example.com/otrs/public.pl">
+<citetitle>http://www.example.com/otrs/public.pl</citetitle>
+</ulink>に到達できます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>public.pl - パブリック・ウェブインターフェイス</screeninfo> <graphic srccredit="public.pl -
+スクリーンショット" scale="40" fileref="screenshots/public-interface.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：パブリック・ウェブインターフェイス</emphasis>
+</para>
+
+</section>
+
+<section id="first-login">
+<title>はじめてのログイン</title>
+
+<para>
+セクション<link linkend="agent-interface">Agent web interface
+</link>に記載のようにログイン画面へアクセスします。ユーザ名とパスワードを入力します。システムはインストールされたばかりでユーザはまだ作成されていませんので、まず、ユーザ名として'root@localhost'
+をパスワードとして'root'を使用してOTRS管理者としてログインします。
+</para>
+
+<warning>
+<para>
+このアカウントデータは　どの新規にインストールされたOTRSシステムでも有効です。OTRS管理者パスワードはできるだけ早く変更すべきです。OTRS管理者用画面<link
+linkend="user-preferences">preferences</link>から実行できます。
+</para>
+</warning>
+
+<para>
+OTRS管理者としてログインしたくなければ、あなたの通常の担当者アカウント用のユーザ名とパスワードを入力してもいいです
+</para>
+
+<para>
+パスワードをお忘れの場合、新規パスワードをシステムに要求することができます。単にログインボタンの下のリンクを押すだけです。OTRSアカウント用の入力フィールドに登録されたEメールアドレスを入力します。送信ボタンを押します（下図参照）。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>login.pl - 新規パスワードの要求</screeninfo> <graphic srccredit="login.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/request-new-password.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：新規パスワードの要求</emphasis>
+</para>
+
+</section>
+
+<section id="gui-overview">
+<title>ウェブインターフェイス - 概要</title>
+
+<para>
+システムへログイン成功時、ダッシュボード・ページが表示されます(下記の図を参照)。ロックされたチケットを表示し、キュー、ステータスおよびエスカレーション・ビューへのメニューから直接アクセスを許可し、さらに、新規の電話および電子メール・チケットの生成に対するオプションも保持します。さらに様々な基準を使用して、チケットのクイックサマリも表示します。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>初めてのログイン成功後の画面</screeninfo> <graphic srccredit="初期画面 -
+スクリーンショット" scale="40" fileref="screenshots/first-screen.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：初めてのログイン成功後の画面</emphasis>
+</para>
+
+<para>
+わかりやすさを改善するために、一般的ウェブ・インターフェースは異なるエリアへ分離されています。各ページのトップの列は以下のようないくつかの一般情報を示します。現在のユーザー名、ログアウト・ボタン、ダイレクトアクセスを備えたロックされたチケットの数のリストアイコン、新しい電話/電子メール・チケットなどを作成するリンク。さらにキュー、ステータスおよびエスカレーション・ビューに行くアイコンがあります。
+</para>
+
+<para>
+アイコンの下の行はナビゲーション・バーです。システムのモジュールや異なるエリアへナビゲートしてくれるメニューを表示し、いくつかの全体的アクションを実行させてくれます。ダッシュボード・ボタンをクリックすることでダッシュボード行けます。チケット・ボタンをクリックすれば、チケット・ビューを変更したり、新しいチケット(電話/Eメール)を作成したり、あるいは特定のチケットを探索したりするオプションを備えたサブメニューを使えます。統計ボタンは、新しいものを作成し、既存のものを輸入して、登記済みの統計の概観からあなたが選ぶことを可能にするメニューを表示します。顧客ボタンはあなたを顧客管理スクリーンヘ導きます。管理者ボタンのクリックによって、管理者モジュールすべてにアクセスすることができます、それは新しい代理人、キューなどを作ることを可能にします。さらにチケット探索をするサーチ・ボタンもあります。
+</para>
+
+<para>
+関連するアプリケーションがインストールされている場合、例えばFAQ、サーベイ、これらのアプリケーションを起動するボタンも表示されます。
+</para>
+
+<para>
+ナビゲーション・バー下の赤いバーは様々なシステム・メッセージを表示します。OTRS管理者としてログインすると、このシステム・アカウントを使用して作業しない旨の警告メッセージを受けます。
+</para>
+
+<para>
+現在表示しているセクションのタイトルの下に、いくつかのサブセクションがあります。別々のボックスに各１つづつ、作業中の画面に関する関連情報を含んでいます。
+</para>
+
+<para>
+これらのボックスは各スクリーンの主要部分を含んでいます。それらは常に1つあるいはいくつかのカラムで表示されます。ボックスはそれぞれ、現在のスクリーンに関する関連情報（例えば指示、アドバイス、概観など）を格納することができます。さらに、各画面に関連するアクションを実行するために必要なフォームあるいはツールも表示されます。例えば、レコードの追加、更新、削除、ログのチェック、構成設定の変更等のアクションです。
+</para>
+
+<para>
+最後に、ページの最下部に、サイト・フッタが表示されます(下図参照)。それは、直接OTRS公式ウェブサイトにアクセスするかあるいはページのトップへ行くリンクを含んでいます。
+</para>
+
+<para>
+通常は、アイコン列、ナビゲーション・バーおよびフッタはウェブ・インターフェース上のすべての画面の中で同じに存在します。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>フッター</screeninfo> <graphic srccredit="フッター" scale="40"
+fileref="screenshots/footer.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：フッター</emphasis>
+</para>
+
+</section>
+
+<section id="the-dashboard">
+<title>ダッシュボード</title>
+
+<para>
+    ダッシュボードはシステムのメインページです。ここでチケット・アクティビティに関連する他のスタッフやチケットに関する概要を得ることができます。それは担当者にとっての日常業務のための出発点であると言えます。それはデフォルトでチケットの即時サマリーを表示します。サマリーには他の情報の中で保留、エスカレーション、新規および対応中の情報があります。
+</para>
+
+<para>
+    ダッシュボードの最も重要な機能のひとつは完璧なカスタマイズ機能です。要素を表示あるいは非表示にすることで思い通りに各パートを構成することができることを意味します。要素のヘッダをクリックしながらドラッグし要素をどこにでもドロップすることで同じ列の中でこの要素を再配置することさえ可能です。システムは、ボックスから使用する準備ができているいくつかのウィジェットを持っています。しかし、ダッシュボード画面のモジュール設計は、カスタム・ウィジェットを簡単に統合する準備ができています。
+</para>
+
+<para>
+    この画面のコンテンツは２つのメインカラムに整列され、その左カラムで各状態（リマインダ、エスカレーション、新規、対応中といった）で分類されたチケットに関する情報を見ることができます。この各ウィジェットでは、他のフィルターの中で、アクセスすることを認められるチケット、ロックしたチケット、および他のフィルタ中に担当者が定義したキューにあるチケットのをすべて見るために結果をフィルタすることができます。このカラムには他の種類のウィジェットもあり、それらすべてを以下の述べます。
+</para>
+
+<para>
+    <screenshot>
+<screeninfo>ダッシュボード・ウィジェット</screeninfo> <graphic srccredit="ダッシュボード・ウィジェット"
+scale="40"
+fileref="screenshots/dashboard-left-column-widgets.png"></graphic></screenshot>
+</para>
+
+<para>
+    左列 ダッシュボード・ウィジェット
+</para>
+<itemizedlist mark="round">
+    <listitem>
+        <para>チケット・リスト・ウィジェット</para>
+        <para>
+            このカテゴリーの下のウィジェットは全体的な同じ挙動、ルック・アンド・フィールを共有します。このウィジェットは決定した状態のチケットのリストを表示します。チケット数は各リスト・ページに表示します。リスト・ページは、ウィジェット・オプション(あなたがウィジェットの右上部上にマウスポインタを置くとそれらが現われます)で構成することができます。このウィジェットは次のフィルタを支援します:
+        </para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>自身のロック・チケット</para>
+                <para>ログインした担当者がロックされたチケット</para>
+            </listitem>
+            <listitem>
+                <para>自身の監視チケット</para>
+                <para>
+                    ログインした担当者がウオッチリストを持っているチケット。それを表示するためにTicket::Watcher 設定をオンにすることが必要です。
+                </para>
+            </listitem>
+            <listitem>
+                <para>自身の責任者</para>
+                <para>
+                    ログインしている担当者が責任者として設定されているチケット。Ticket::Responsible設定は、このフィルターを可視化できるようにオンにする必要があります。
+                </para>
+            </listitem>
+            <listitem>
+                <para>自身のキューにあるチケット</para>
+                <para>
+                    このチケットは担当者が「マイ・キュー」として定義するキューにあります。
+                </para>
+            </listitem>
+            <listitem>
+                <para>全てのチケット</para>
+                <para>
+                    担当者がアクセス権を持つ全てのチケット
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>このウィジェットは：</para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>リマインダ・チケット</para>
+                <para>保留として設定され、かつ、リマインダ日を経過したチケット。</para>
+            </listitem>
+            <listitem>
+                <para>エスカレーションされたチケット</para>
+                <para>エスカレーション済のチケット</para>
+            </listitem>
+            <listitem>
+                <para>新規チケット</para>
+                <para>状態「新規」を持つチケット</para>
+            </listitem>
+            <listitem>
+                <para> 対応中チケット / 返答必要</para>
+                <para>状態「対応中」を持つチケットとそれらを対応する準備</para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+    <listitem>
+        <para>イベント・チケット・カレンダー</para>
+        <para>
+            カレンダ・イベントは新規チケットが作成された時、イベント・チケット・カレンダ機能が有効になります。それはチケット作成画面に表示する２つの新規フィールドを必要とし、ひとつはイベント開始時刻、他方は終了時刻用です。この２つの時刻がイベント期間を決定します。定義されます。
+        </para>
+        <para>
+            このウィジェットは次のビューを含みます：月、週、日、及び左右の矢印を使用することでページからスクロールできる担当者です。
+        </para>
+        <para>
+            直前にウィジェットは十分に有効になっていないと述べたようにチケット用の「Date/Time」の動的フィールドのいくつかはシステムに追加し、（管理者パネルにある動的フィールドリンク経由で）それらをこのウィジェットのためにSysConfigで設定すべきです。両方の動的フィールドはチケット生成画面に表示されるように構成されるべきです。それらは、カレンダのイベント（開始及び終了時間）用の時間枠について記述するために、チケット生成あるいは他のチケット・アクション画面(例えば自由フィールド)中に満たされるべきです。チケット・ズーム画面は、それが必要であると考えた場合、動的フィールドも示すように構成されるかもしれません。
+        </para>
+        <para>
+            <screenshot>
+<screeninfo>イベント・チケット・カレンダー・ウィジェット</screeninfo> <graphic srccredit="フッター" scale="40"
+fileref="screenshots/events-ticket-calendar.png"></graphic></screenshot>
+        </para>
+        <para>
+            このウィジェットのためのさらなる構成は、SysConfig中の"Frontend::Agent::Dashboard::EventsTicketCalendar"
+サブグループの下で見つけられるかもしれません。
+        </para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>カレンダー幅</para>
+                <para>カレンダの幅をパーセントで定義します。デフォルトは95%です。</para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldStartTime</para>
+                <para>開始時間の動的フィールド名を定義します。</para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldEndTime</para>
+                <para>終了時間の動的フィールド名を定義します。</para>
+            </listitem>
+            <listitem>
+                <para>キュー</para>
+                <para>
+                    この設定で明記されたキュー上のチケットのみが、カレンダ・ビューで検討されます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldsForEvents</para>
+                <para>
+                    カレンダ・イベント・オーバーレイ画面に表示する動的フィールドを定義します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>TicketFieldsForEvents</para>
+                <para>
+                    カレンダ・イベント・オーバーレイ画面に表示するチケット属性を定義します。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+    <listitem>
+        <para>チケット・キュー・外観</para>
+        <para>
+            このウィジェットは行がキューを表し列がチケット状態を表しているチケット・カウント・マトリックスの中で表示します。各セルには、特定のキュー上に属する定義された状態上のチケット数が表示されます。
+        </para>
+        <para>
+            ウィジェットは、集計行および集計列も表示します。集計行は、すべての示されたキュー上の各状態のチケットの合計を表します。一方、集計列はすべての示された状態上で各キューのチケットの合計を表します。
+        </para>
+        <para>
+            表示されるキューと状態はSysConfigで変更することができます
+        </para>
+        <para>
+            チケット・カウント数のどれかをクリックすると検索結果ページが開き、担当者にそれらのより詳細な概要を得させます。
+        </para>
+    </listitem>
+</itemizedlist>
+<para>
+    右列に特別なウィジェットが位置しており、非表示あるいは表示したいウィジェットをコントロールすることができます。これがウィジェットの設定です。セクションを拡張するヘッダをクリックします。すると下図のように全ての利用可能なウィジェットが見えます。各ウィジェット名にはチェックボックがあり、ダッシュボードでのウィジェットの可視性を定義するためにこのチェックボックスを使用します（チェックが外れているウィジェットは表示されません）。可視性オプションを定義したら、変更を格納するために「保存」をクリックします。このセクションはスクリーンに固定されるので、それをドラッグ＆ドロップができないし閉じることもできないということです。
+</para>
+
+<para>
+    <screenshot>
+<screeninfo>ダッシュボード設定の編集</screeninfo> <graphic srccredit="ダッシュボード設定"
+scale="40" fileref="screenshots/edit-settings.png"></graphic></screenshot>
+</para>
+
+<para>
+    <emphasis>図：ダッシュボード設定の編集</emphasis>
+</para>
+
+<para>
+    右列ダッシュボード・ウィジェット
+</para>
+
+<itemizedlist mark="round">
+    <listitem>
+        <para>7日統計</para>
+        <para>
+            それは、2行のラインを含んでいる過去7日にわたるチケット活動のグラフを示します。通常青い色である第１行は、日次作成チケット数を表示し、通常オレンジ色の第２行は日次完了チケットを表示します。
+        </para>
+    </listitem>
+    <listitem>
+        <para>次回のイベント</para>
+        <para>
+            エスカレーションするためあるいは既にエスカレーションされた至急のチケットはここにリストされます。このウィジェットからの情報は大変役立ちます。なぜなら、注意喚起する必要のあるチケットを知る機会を持つからです。そうしてどのチケットに労力を傾注したいのか、優先度を置きたいのか、単に次の予定をチェックするのか、を決定することができます。
+        </para>
+    </listitem>
+    <listitem>
+        <para>OTRSニュース</para>
+        <para>
+            OTRSアクティビティの完全なリストと新製品のリリースやパッチに関する大変重要な情報
+        </para>
+    </listitem>
+    <listitem>
+        <para>オンライン</para>
+        <para>
+            ここで、現在システムにログインしている担当者に関する要約が示されます。さらにそれは、オンラインの顧客用セクションを含んでいます。このウィジェットは通常非表示であることに注目してください。それは前述の設定ウィジェットを使用して表示することができます。
+        </para>
+    </listitem>
+</itemizedlist>
+
+</section>
+
+<section id="what-is-a-queue">
+<title>キューとは何か？</title>
+
+<para>
+多くのメールシステムでは、全てのメッセージが格納される受信ファイルに流し込むのが普通です。新しいメッセージはその受信ファイルの最後に追加されます。メール・クライアント・プログラムはメールの読み書きに使用され、この受信ファイルを読み、ユーザにコンテンツを表示します。
+</para>
+
+<para>
+多くのメッセージを格納することもできるので、OTRSでのキューは多少受信ボックスと比較できます。キューにはさらに受信ボックスのメール・ファイル以上の特徴があります。OTRS担当者あるいはユーザとして、チケットがどのキューに格納されているかを記憶しておく必要があります。担当者は、キューにあるチケットを開き編集することができ、あるキューから別のキューに移動することもできます。しかし、なぜチケットを移動させるのでしょうか。
+</para>
+
+<para>
+それについてより実践的な説明するために、<link linkend="basic-tts-example">example of a ticket
+system</link>で述べたマックスの会社の例を思い出しましょう。マックスは彼のチームがビデオテープレコーダーを買う会社取引先のサポートをよりよく管理することを可能にするためにOTRSをインストールしました。
+</para>
+
+<para>
+全てのリクエストを持つ1つのキューは、この状況にとって十分です。しかし、マックスがさらにいつかDVDレコーダーを売ることを決定後は、顧客は、ビデオテープレコーダーだけでなく新製品に関する質問をします。より多くのEメールがマックスのOTRSの単一のキューに入り、起こっていることの明瞭な事態を把握することは難しくなります。
+</para>
+
+<para>
+マックスは、サポート・システムを再構成することを決定し、2つの新しいキューを追加します。したがって、これで3つのキューが使用されていることになります。チケットシステムに到着する新しいメッセージは、古いキュー「未対応(raw)」へ格納されます。2つの新しいキューのうち、1つ「ビデオテープレコーダー」はもっぱらビデオテープレコーダーのリクエスト用、もう一方の「dvdレコーダー」はもっぱらdvdレコーダーのリクエスト用です。
+</para>
+
+<para>
+マックスはサンドラに未対応キューを注視し、顧客の要求に応じてメッセージを「ビデオレコーダ」キューまたは「dvdレコーダ」キューにソート（送る）します。
+</para>
+
+<para>
+OTRSは、ユーザ、グループおよび役割のためのアクセス管理をサポートします。いくつかのユーザアカウントにのみアクセス可能なキューを設定することも簡単です。マックスは、さらにフィルタ・ルールで、リクエストを異なるキューに入れる別の方法を使用することができました。そうでなければ、2つの異なるメールアドレスが使用される場合、サンドラは単に自動的に送信できない2つの他のキューへそれらの電子メールを送信しなければなりません。
+</para>
+
+<para>
+異なるキューへの受信メッセージをソートすることは、サポート・システムを組み立てて、かつ整然としていておくのを助けます。担当者はキュー上の異なるアクセス権を持つ異なるグループへ配置されるので、システムはさらに最適化することができます。キューは、ワークフロー・プロセスを定義するかあるいは会社の構造を作るために使用することができます。マックスは例えば、「要求、オファー、注文、請求」等を含む「販売」と呼ばれる別のキューを実行することができました。マックスにとってそのようなキュー構造は、注文処理を最適化するのを助けることができました。
+</para>
+
+<para>
+キューの適切なデザインを通してのような改善されたシステム構造により、重要な時間および原価の削減につなげることができます。キューは、会社の中のプロセスを最適化するのを支援することができる。
+</para>
+</section>
+
+
+<section id="what-is-the-queue-overview">
+<title>キュー概要とは何か？</title>
+
+<para>
+キュー概要は（チケットが表示され、読み書き権限を持つユーザに対する）全てのキューの一覧を提供します。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者用キュー・ビュー（デフォルト）</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40" fileref="screenshots/agent-queue-view.png"></graphic></screenshot>
+</para>
+
+<para>
+キュー概要は、OTRSの日常業務に対して様々なオプションを提供します。まずはじめに、マイキューです。担当者選択（選好）であるいは担当者を管理する場合、内部で作業するために指定された担当者のためにキューのセットは定義可能です。Ticket
+-> Queue View メニューにアクセスする時、すべてのチケットがこのデフォルト・ビューに表示されます。
+</para>
+
+<para>
+キュー・ビューによって提供される２番目のオプションは、個別のキューと作業すべきチケット含むサブ・キューにドリルダウンするナビゲーションです。
+</para>
+
+<para>
+両方のビュータイプでユーザはさらに追加の能力を持ちます。全てのアンロック・チケット、あるいは利用可能なチケットを見ることを選択できます。チケットは、キュー・ビューで見える可視状態タイプの一つでなければなりません。デフォルトでは「対応中、新規、保留、リマインダ、保留-自動」があります。
+</para>
+
+<para>
+ユーザ補助のための視覚アラームがあります。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者キュー・ビュー視覚アラーム</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/agent-queue-overview-visual-alarms.png"></graphic></screenshot>
+</para>
+
+<itemizedlist>
+    <title>視覚アラーム</title>
+    <listitem>
+        <para>ハイライト 時間 1 :
+未対応のチケットを含んでいるハイライトされたキューに対して、数分(第1のレベル)の時間をセットします。「未対応」キューの中で上部に表示されます。</para>
+    </listitem>
+    <listitem>
+        <para>ハイライト 時間 2 :
+未対応のチケットを含んでいるハイライトされたキューに対して、数分(第2のレベル)の時間をセットします。「ポストマスター」キューの中で上部に表示されます。</para>
+    </listitem>
+    <listitem>
+        <para>点滅 :
+最も古いチケットを含んでいるキューの明滅するメカニズムを活性化します。すべてのブラウザでサポートされているわけではありません。その場合「ジャンク」キューの上部に赤色で見えます。</para>
+    </listitem>
+    <listitem>
+        <para>太字：現在のキューは「マイキュー」の上部に太字で見えます。</para>
+    </listitem>
+</itemizedlist>
+</section>
+
+<section id="user-preferences">
+<title>ユーザ選択（選好）</title>
+<para>
+OTRSユーザ（顧客、担当者、OTRS管理者としての）は、必要に応じて自身のアカウントの選択（選好）を構成できます。担当者はウェブインターフェイスの上部右隅にあるログイン名をクリックして構成画面にアクセスできます。顧客は「選択（選好）」リンクをクリックしなければなりません（下図参照）。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者用アカウント選択（選好）画面</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40" fileref="screenshots/agent-preferences.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：担当者の個人選択（選好）</emphasis>
+</para>
+
+<para>
+担当者は選択（選好）から３つの異なるカテゴリーを構成できます。ユーザプロファイル、Eメール設定及びその他設定です。デフォルトの可能性は：
+</para>
+
+<itemizedlist>
+    <title>ユーザ・プロファイル</title>
+    <listitem>
+        <para>現在のパスワードを変更</para>
+    </listitem>
+    <listitem>
+        <para>インターフェイス言語を変更</para>
+    </listitem>
+    <listitem>
+        <para>フロントエンド・スキンを変更</para>
+    </listitem>
+    <listitem>
+        <para>フロントエンド・テーマを変更</para>
+    </listitem>
+    <listitem>
+        <para>業務外時間を活性化し構成</para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>Eメール設定</title>
+    <listitem>
+        <para>担当者へEメール通知をきっかけとするイベントを選択</para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>その他の設定</title>
+    <listitem>
+        <para>「マイキュー」でモニターしたいキューを選択</para>
+    </listitem>
+    <listitem>
+        <para>キュー・ビュー用更新期間を設定</para>
+    </listitem>
+    <listitem>
+        <para>チケット作成後表示する画面を設定</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+<screenshot>
+<screeninfo>顧客用アカウント選択（選好）画面</screeninfo> <graphic srccredit="customer.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/customer-preferences.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：顧客の個人選択（選好）</emphasis>
+</para>
+
+<para>
+顧客はウェブ・インターフェース言語を選択し、チケット概要用の更新間隔をセットし、表示するチケット最大数を選択できます。また新しいパスワードをセットすることも可能です。
+</para>
+</section>
+
+</chapter>

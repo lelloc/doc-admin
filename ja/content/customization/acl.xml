@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="acl" >
+<title>Access Control Lists (ACLs)</title>
+
+<section>
+<title>導入</title>
+
+<para>
+    OTRS
+2.0から、アクセス・コントロール・リスト(ACL)は、チケット、モジュール、キューなどへの制御アクセスに使用することができます。また、ある状況でチケット(完了する、移動するなど)に対するアクションに影響を及ぼすことができます。ACLは<link
+linkend="adminarea-roles">役割</link>と<link
+linkend="adminarea-groups">グループ</link>の既存の許可システムを補足するために使用することができます。ACLを使用すると、システム内の基本的なワークフローは、チケット属性に基づいてマップすることができます。
+</para>
+
+<para>
+    まだ、ACLは<link linkend="SysConfigインターフェース">SysConfig
+interface</link>を使用して作成することができません。直接<filename>Kernel/Config.pm</filename>ファイルにそれらを入力しなければなりません。本章にはいくつかのACL例がありますので、それらはあなたをACLの諸定義を定義する過程へ導き、あらゆる可能で重要なACL設定の参考となるでしょう。
+</para>
+</section>
+
+<section>
+<title>サンプル</title>
+
+<para>
+<example id="acl-move">
+<title>ACLはチケット優先度5のチケットのみをキューへの移動を許可します。</title>
+
+<para>
+    この例は、あなたにACLの基本構造を示します。最初に、それは名前を持つ必要があります。ここでは「ACL-Name-2」とします。まず、ACLは実行の前に数値的にソートされることにご留意下さい。それゆえACLの名前を注意深く使用して下さい。
+</para>
+<para>
+    次に、チケット用のフィルタである「プロパティ」セクションがあります。ここで定義された基準はすべて、ACLが適用されるか否かを判断するチケットに適用されます。例において、チケットが「未対応の」キューかあるいは優先度が「5
+非常に高い」にあれば、チケットは一致するでしょう。これはフォーム内での変更により影響を受けます。（「未対応の」キューかあるいは優先度が「3：普通」のチケットが、その後、優先度のドロップダウンが選択され、優先度が「5：非常に高い」へ変更されたような場合）
+</para>
+<para>
+    最後に、「可能」セクションは画面への修正を定義します。この場合、利用可能キューから、「警告」キューだけがチケット・画面の中で選択することができます。
+</para>
+
+<programlisting>
+# ticket acl
+$Self->{TicketAcl}->{'100-Example-ACL'} = {
+    # マッチプロパティ
+    Properties => {
+        # 現在のチケット・マッチ・プロパティ
+        Ticket => {
+            Queue => ['Raw'],
+            Priority => ['5 very high'],
+        }
+    },
+    # 可能なオプション（ホワイトリスト）を返します
+    Possible => {
+        # 可能なオプション（ホワイトリスト）を返します
+        Ticket => {
+            Queue => ['Alert'],
+        },
+    },
+};
+</programlisting></example>
+</para>
+
+<para>
+<example id="acl-move2">
+<title>
+    データベースに格納された優先度5のチケットだけのキューへ移動を許可するACL
+</title>
+
+<para>
+    この例は先のものに非常に似ています。しかしながら、この例では、「生で」かつ優先度が「５：非常に高い」チケットのみが両者ともにデータベースに保存されて、マッチします。チケットがデータベースの中で実際に更新される前に、この種のACLはフォームの変更を考慮しません。
+</para>
+
+<programlisting>
+# ticket acl
+$Self->{TicketAcl}->{'100-Example-ACL'} = {
+    # マッチプライオリティ
+    PropertiesDatabase => {
+        # 現在のチケット・マッチ・プロパティ
+        Ticket => {
+            Queue => ['Raw'],
+            Priority => ['5 very high'],
+        }
+    },
+    # 可能なオプション（ホワイトリスト）を返します
+    Possible => {
+        # 可能なオプション（ホワイトリスト）を返します
+        Ticket => {
+            Queue => ['Alert'],
+        },
+    },
+};
+</programlisting></example>
+</para>
+
+
+<para>
+<example id="acl-close" >
+<title>未対応のキュー中のチケットの完了を不能にし、閉じるボタンを隠すACL</title>
+
+<para>
+    この例では、どのようにチケット・フィールド（の状態）が、（フォームを選択する１つ以上の可能な値で）フィルターされるかを理解できるでしょう。あるチケット用に実行することができる　アクションを制限することも可能です。この場合、チケットは完了できません。
+</para>
+
+<programlisting>
+$Self->{TicketAcl}->{'101-Second-Example-ACL'} = {
+    # マッチプロパティ
+    Properties => {
+        # 現在のチケット・マッチ・プロパティ
+        Ticket => {
+            Queue => ['Raw'],
+        }
+    },
+    # 可能なオプション（ホワイトリスト）を返します
+    Possible => {
+        # 可能なオプション（ホワイトリスト）を返します
+        Ticket => {
+            State => ['new', 'open', 'pending reminder'],
+        },
+        # 可能なアクション・オプション
+        Action => {
+            AgentTicketBounce        => 1,
+            AgentTicketClose         => 0,
+            AgentTicketCompose       => 1,
+            AgentTicketCustomer      => 1,
+            AgentTicketForward       => 1,
+            AgentTicketFreeText      => 1,
+            AgentTicketHistory       => 1,
+            AgentTicketLink          => 1,
+            AgentTicketLock          => 1,
+            AgentTicketMerge         => 1,
+            AgentTicketMove          => 1,
+            AgentTicketNote          => 1,
+            AgentTicketOwner         => 1,
+            AgentTicketPending       => 1,
+            AgentTicketPhone         => 1, # 分かれているアクションを非表示にするためだけに使用されます
+            AgentTicketPhoneInbound  => 1,
+            AgentTicketPhoneOutbound => 1,
+            AgentTicketPrint         => 1,
+            AgentTicketPriority      => 1,
+            AgentTicketResponsible   => 1,
+            AgentTicketWatcher       => 1,
+            AgentTicketZoom          => 1,
+            AgentLinkObject          => 1, # リンク・アクションを非表示にするためだけに使用されます
+        },
+    },
+};
+</programlisting></example>
+</para>
+
+<para>
+<example id="acl-state" >
+<title>状態：「閉鎖成功」を常に削除するACL</title>
+
+<para>
+    ここの例では、否定フィルタ（状態：「完了（成功）」を取り除く）をどのようにして定義可能か例示します。チケット用のマッチ・プロパティを定義しなければ、どんなチケットでもマッチすることもわかります。例えばACLが常に当てはまります。これは、もしデフォルトで特定の値を非表示にしたくかつ、特殊な環境（例えば担当者が特定のグループにいるならば）だけにそれらを可能にしたいなら活用可能になります。
+</para>
+
+<programlisting>
+$Self->{TicketAcl}->{'102-Third-ACL-Example'} = {
+    # マッチ・プロパティ
+    Properties => {
+        # 現在のチケットのマッチ・プロパティ(常にマッチ)
+    },
+    # 可能なオプションに戻る
+    PossibleNot => {
+        # 可能なチケット・オプション
+        Ticket => {
+            State => ['closed successful'],
+        },
+    },
+};
+</programlisting></example>
+</para>
+
+<para>
+<example id="acl-new-ticket-service" >
+<title>&quot;HW&quot;で始まるキューが作成されるハードウェア・サービス・チケットのみを表示するACL</title>
+
+<para>
+    ここでは、マッチするチケットと利用可能なオプションのフィルタリングのための正規表現を使用することができるかについても例示します。
+</para>
+
+<programlisting>
+$Self->{TicketAcl}->{'Only-Hardware-Services-for-HW-Queues'} = {
+    # マッチ・プロパティ
+    # note we don't have "Ticket => {" because there's no ticket yet
+    Properties => {
+    Queue => {
+        Name => ['[RegExp]HW'],
+        }
+    },
+    # 可能なオプションに戻る
+    Possible => {
+        # 可能なチケット・オプション
+        Ticket => {
+            Service => ['[RegExp]^(Hardware)'],
+        },
+    },
+};
+</programlisting></example>
+</para>
+</section>
+
+<section id="acl-reference">
+<title>参照</title>
+
+<para>
+    下記の例において、ACLで使用可能な全パラメーターのリストがあります。
+</para>
+<para>
+    ACLをプロセス・チケットに使用する方法の詳細な記述については、<link
+linkend="process-management">ProcessManagement</link>文書で<link
+linkend="ACLについてのセクション">section on ACLs</link> を参照してください。
+</para>
+
+<para>
+<example>
+<title>全ての可能かつ重要なACL設定を示すリファレンス（参照）</title>
+<programlisting>
+# ticket acl
+$Self->{TicketAcl}->{‘200-ACL-Reference’} = {
+    # マッチ・プロパティ (フォームからの現在の値)
+    Properties => {
+
+        # 使用されるフロントエンド・モジュール
+        Frontend => {
+            Action => [‘AgentTicketPhone’, ‘AgentTicketEmail’],
+        },
+
+        # ログインした担当者
+        User => {
+            UserLogin => [‘some login’],
+            Group_rw => [
+                ‘hotline’,
+            ],
+            Role => [
+                ‘admin’,
+            ],
+            # …
+        },
+
+        # ログインした顧客
+        CustomerUser => {
+            UserLogin => [‘some login’],
+            Group_rw => [
+                ‘hotline’,
+            ],
+            Role => [
+                ‘admin’,
+            ],
+            # …
+        },
+
+        # プロセス・プロパティ
+        Process => {
+            ProcessEntityID        => [‘P1’],   # 現在のチケットがその一部であるプロセス
+            ActivityEntityID       => [‘A1’],   # 現在のチケットのアクティビティ
+            ActivityDialogEntityID => [‘AD1’],  # 担当者/顧客が使用している現在のActivityDialog
+        },
+
+        # チケット・プロパティ
+        Queue => {
+            Name     => [‘Raw’],
+            QueueID  => [‘some id’],
+            GroupID  => [‘some id’],
+            Email    => [‘some email’],
+            RealName => [‘OTRS System’],
+            # …
+        },
+        Service => {
+            ServiceID => [‘some id’],
+            Name      => [‘some name’],
+            ParentID  => [‘some id’],
+            # …
+        },
+        Type => {
+            ID   => [‘some id’],
+            Name => [‘some name’],
+            # …
+        },
+        Priority = {
+            ID   => [‘some id’],
+            Name => [‘some name’],
+            # …
+        },
+        SLA = {
+            SLAID    => [‘some id’],
+            Name     => [‘some name’],
+            Calendar => [‘some calendar’],
+            # …
+        },
+        State = {
+            ID       => [‘some id’],
+            Name     => [‘some name’],
+            TypeName => [‘some state type name’],,
+            TypeID   => [‘some state type id’],
+            # …
+        },
+        Owner => {
+            UserLogin => [‘some login’],
+            Group_rw => [
+                ‘some group’,
+            ],
+            Role => [
+                ‘admin’,
+            ],
+            # …
+        },
+        Responsible => {
+            UserLogin => [‘some login’],
+            Group_rw => [
+                ‘some group’,
+            ],
+            Role => [
+                ‘admin’,
+            ],
+            # …
+        },
+        DynamicField => {
+            # 名前はDynamicField_&lt;field_name&gt; formatになければなりません。
+            # [ … ] の値は常に未翻訳の内部データキーでなければなりません。
+            #   動的フィールド定義で指定され、かつ
+            #   ユーザに非表示のデータ値です。
+            DynamicField_Field1          => [‘some value’],
+            DynamicField_OtherField      => [‘some value’],
+            DynamicField_TicketFreeText2 => [‘some value’],
+            # …
+        },
+        # 別の方法としてはチケット・プロパティはチケット・ハッシュで指定もできます。
+        Ticket => {
+            Queue                => [‘Raw’],
+            State                => [‘new’, ‘open’],
+            Priority             => [‘some priority’],
+            Lock                 => [‘lock’],
+            CustomerID           => [‘some id’],
+            CustomerUserID       => [‘some id’],
+            Owner                => [‘some owner’],
+            DynamicField_Field1  => [‘some value’],
+            DynamicField_MyField => [‘some value’],
+            # …
+        },
+    },
+
+    # マッチプロパティ (データベースからの既存値)
+    PropertiesDatabase => {
+        # プロパティのセクションを御覧ください。ここと同じconfigが使用されています。
+        # …
+    }
+
+    # 可能なオプションに戻る (ホワイトリスト)
+    Possible => {
+        # 可能なチケットオプション (ホワイトリスト)
+        Ticket => {
+            Queue => [‘Hotline’, ‘Coordination’],
+            State => [‘some state’],
+            Priority => [‘5 very high’],
+            DynamicField_Field1  => [‘some value’],
+            DynamicField_MyField => [‘some value’],
+            # …
+            NewOwner => [‘some owner’],
+            OldOwner => [‘some owner’],
+            # …
+        },
+
+        # 担当者/顧客が１つのプロセス・チケットで利用可能な
+        #   ActivityDialogs数を制限します。
+        ActivityDialog => [‘AD1’, ‘AD3’],
+
+        # 開始可能なプロセス数を制限します。
+        Process => [‘P1’, ‘P2’],
+
+        # 可能なアクション・オプション (ホワイトリスト)
+        Action => {
+            AgentTicketBounce        => 1,
+            AgentTicketClose         => 1,
+            AgentTicketCompose       => 0,
+            AgentTicketCustomer      => 0,
+            AgentTicketForward       => 0,
+            AgentTicketFreeText      => 1,
+            AgentTicketHistory       => 1,
+            AgentTicketLink          => 0,
+            AgentTicketLock          => 1,
+            AgentTicketMerge         => 0,
+            AgentTicketMove          => 1,
+            AgentTicketNote          => 1,
+            AgentTicketOwner         => 1,
+            AgentTicketPending       => 1,
+            AgentTicketPhone         => 1, # 分割アクションを非表示にするためだけに使用します。
+            AgentTicketPhoneInbound  => 0,
+            AgentTicketPhoneOutbound => 1,
+            AgentTicketPrint         => 1,
+            AgentTicketPriority      => 0,
+            AgentTicketResponsible   => 1,
+            AgentTicketWatcher       => 1,
+            AgentTicketZoom          => 1,
+            AgentLinkObject          => 1, # リンク・アクションを非表示にするためだけに使用します。
+        },
+    },
+    # オプション（ブラックリスト）を削除します
+    PossibleNot => {
+        # See section "Possible"
+        # …
+    },
+};
+</programlisting></example>
+</para>
+<note>
+    <para>
+        ACLとマッチしている間に、CustomerUserIDパラメーターが送られると、ACLメカニズムは、CustomerUserハッシュを満たすCustomerUser詳細を集めるために、供給されたCustomerUserIDを使用して、定義されたACLを比較します。またそれは、プロパティ（特性）・マッチ用のチケット・ハッシュ中の顧客情報を無効に(override)します。この計算もPropertiesDatabase部分のためになされるが、その一方で、データを集めるために基礎としてチケット・顧客(the
+Ticket Customer)を使用しています。
+    </para>
+    <para>
+        顧客・インターフェースでは、CustomerUserIDが現在の記録された顧客ユーザとともに常に送信されることに注目してください。
+    </para>
+    <para>
+        チケット検索画面(AgentTicketSearchとCustomerTicketSearch)では、ACLによって影響を受ける属性のみが動的フィールドであることにご留意下さい。チケット検索画面(AgentTicketSearchとCustomerTicketSearch)では、ACLによる影響を受けた数少ない属性が動的フィールドであることにご留意下さい。すなわち、この(検索)画面は、あなたがその他の属性を制限できないことを意味します。（例えばチケットタイプ、状態、キュー等）
+    </para>
+</note>
+</section>
+
+</section>

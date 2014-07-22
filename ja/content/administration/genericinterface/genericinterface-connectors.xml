@@ -1,0 +1,845 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+
+<section id="genericinterface-connectors">
+    <title>コネクタ</title>
+    <para>
+        コネクタは、OTRSがウェブサービス供給者あるいは依頼アクションとして働く場合、あるいは、OTRSがウェブサービス依頼者として働く場合、オペレーションとも呼ばれるアクションのセットの核心になります。しかし、さらに、それは特別のマッピングあるいはトランスポートも含むことができます。
+    </para>
+    <para>
+        1つのコネクタは、オペレーションのみ、依頼アクション(Invokers)のみ、あるいはその両方だけ、であり得ます。コネクタはマッピングやトランスポートのように他のコネクタのパーツを利用することさえ可能です。そのようなことは何もコネクタにとっては特殊なことではなくむしろそれらを実装しようとしている。
+    </para>
+    <para>
+        言いかえれば、コネクタは単なるコントローラー層に制限されていない。しかし、もし必要ならばそれはデータマッピングまたはネットワークのトランスポート層まで拡張することができます。
+    </para>
+    <para>
+        一般インターフェースのモジュール設計により、コネクタはプラグ・インと見なすことができます。;これは、コネクタを加えることによって、次のものを使用して、一般インターフェースの能力を拡張することができることを意味します:
+使用法：OTRS機能追加、OTRSカスタム・モジュール、サードパーティ・モジュール等。
+    </para>
+
+    <section id="genericinterface-bundled-connectors">
+        <title>バンドル・コネクタ</title>
+        <para>
+            OTRSのこのバージョンで含まれて、次のコネクタは、使用される準備ができています。
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    セッション
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Ticket
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <section id="generic-session-connector">
+            <title>セッション・コネクタ</title>
+            <para>
+                このコネクタは他のオペレーションの中で使用することができる有効なSessionIDを作成するのに有能である。
+            </para>
+            <itemizedlist>
+                <para>
+                    提供：
+                </para>
+                <listitem>
+                    <para>
+                        オペレーション:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                セッション作成
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <section id="generic-session-connector-operations">
+                <title>オペレーション</title>
+                <section id="generic-session-connector-operations-sessioncreate">
+                    <title>セッション作成</title>
+                    <para>
+                        SessionCreateは、TicketCreateのような他のコネクタからの他のオペレーションの中で使用される、新規新規有効なSessionIDを作成します。
+                    </para>
+                    <note>
+                        <para>
+                            他のコネクタからの他のオペレーションの中でSessionIDを使用するために、オペレーションはSessionIDによって認証を実装する必要がある。バンドルされたオペレーションの残りはすべて認証方法として有効なSessionIDを受け入れることができます。
+                        </para>
+                    </note>
+                    <para>可能な属性:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <SessionCreate>
+         <!--このレベルでは次の２つの必須選択項目があります。-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Optional:-->
+         <Password>?</Password>
+      </SessionCreate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+            </section>
+        </section>
+
+        <section id="generic-ticket-connector">
+            <title>チケット・コネクタ</title>
+            <para>
+                このコネクタは、チケットとダイアログするために基本機能を供給します。
+            </para>
+            <itemizedlist>
+                <para>
+                    提供：
+                </para>
+                <listitem>
+                    <para>
+                        オペレーション:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                チケット作成
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                TicketCreate(チケット作成)
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                TicketGet(チケット取得)
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                TicketSearch(チケット検索)
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <section id="generic-ticket-connector-operations">
+                <title>オペレーション</title>
+                <section id="generic-ticket-connector-operations-ticketcreate">
+                    <title>チケット作成</title>
+                    <para>
+                        TicketCreateは、OTRSにチケットを作成するインターフェースを提供します。チケットは記事を含んでいなければいけないし、いくつか添付を含むことができます。全ての定義された動的フィールドも、TicketCreateオペレーション上でセットすることができます。
+                    </para>
+                    <para>可能な属性:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketCreate>
+         <!--このレベルでは次の３つの必須選択項目があります。-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Optional:-->
+         <SessionID>?</SessionID>
+         <!--Optional:-->
+         <Password>?</Password>
+         <Ticket>
+            <Title>?</Title>
+            <!--このレベルでは次の２つの必須選択項目があります。-->
+            <!--Optional:-->
+            <QueueID>?</QueueID>
+            <!--Optional:-->
+            <Queue>?</Queue>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <TypeID>?</TypeID>
+            <!--Optional:-->
+            <Type>?</Type>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ServiceID>?</ServiceID>
+            <!--Optional:-->
+            <Service>?</Service>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <SLAID>?</SLAID>
+            <!--Optional:-->
+            <SLA>?</SLA>
+            <!--このレベルでは次の3つの必須選択項目があります。-->
+            <!--Optional:-->
+            <StateID>?</StateID>
+            <!--Optional:-->
+            <State>?</State>
+            <!--このレベルでは次の２つの必須選択項目があります。-->
+            <!--Optional:-->
+            <PriorityID>?</PriorityID>
+            <!--Optional:-->
+            <Priority>?</Priority>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <OwnerID>?</OwnerID>
+            <!--Optional:-->
+            <Owner>?</Owner>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ResponsibleID>?</ResponsibleID>
+            <!--Optional:-->
+            <Responsible>?</Responsible>
+            <CustomerUser>?</CustomerUser>
+            <!--Optional:-->
+            <CustomerID>?</CustomerID>
+            <!--Optional:-->
+            <PendingTime>
+               <Year>?</Year>
+               <Month>?</Month>
+               <Day>?</Day>
+               <Hour>?</Hour>
+               <Minute>?</Minute>
+            </PendingTime>
+         </Ticket>
+         <Article>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ArticleTypeID>?</ArticleTypeID>
+            <!--Optional:-->
+            <ArticleType>?</ArticleType>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <SenderTypeID>?</SenderTypeID>
+            <!--Optional:-->
+            <SenderType>?</SenderType>
+            <!--Optional:-->
+            <From>?</From>
+            <Subject>?</Subject>
+            <Body>?</Body>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ContentType>?</ContentType>
+            <Charset>?</Charset>
+            <MimeType>?</MimeType>
+            <!--Optional:-->
+            <HistoryType>?</HistoryType>
+            <!--Optional:-->
+            <HistoryComment>?</HistoryComment>
+            <!--Optional:-->
+            <AutoResponseType>?</AutoResponseType>
+            <!--Optional:-->
+            <TimeUnit>?</TimeUnit>
+            <!--Optional:-->
+            <NoAgentNotify>?</NoAgentNotify>
+            <!--０回以上の繰り返し:-->
+            <ForceNotificationToUserID>?</ForceNotificationToUserID>
+            <!--０回以上の繰り返し:-->
+            <ExcludeNotificationToUserID>?</ExcludeNotificationToUserID>
+            <!--０回以上の繰り返し:-->
+            <ExcludeMuteNotificationToUserID>?</ExcludeMuteNotificationToUserID>
+         </Article>
+         <!--０回以上の繰り返し:-->
+         <DynamicField>
+            <Name>?</Name>
+            <!--1回以上の繰り返し:-->
+            <Value>?</Value>
+         </DynamicField>
+         <!--０回以上の繰り返し:-->
+         <Attachment>
+            <Content>cid:61886944659</Content>
+            <ContentType>?</ContentType>
+            <Filename>?</Filename>
+         </Attachment>
+      </TicketCreate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-ticket-connector-operations-ticketupdate">
+                    <title>TicketCreate(チケット作成)</title>
+                    <para>
+                        チケット更新オペレーションは、既存のチケットからの属性を修正するかあるいは新規記事を追加する能力を追加します。その記事は、チケットと新規記事のための添付と全ての定義済動的フィールドを含みます。
+                    </para>
+                    <note>
+                        <para>
+                            チケット属性を修正する新規記事を作成することは必要ではありません。
+                        </para>
+                    </note>
+                    <para>可能な属性:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketUpdate>
+         <!--このレベルでは次の３つの必須選択項目があります。-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Optional:-->
+         <SessionID>?</SessionID>
+         <!--Optional:-->
+         <Password>?</Password>
+         <!--このレベルでは次の２つの選択項目があります。-->
+         <TicketID>?</TicketID>
+         <TicketNumber>?</TicketNumber>
+         <!--Optional:-->
+         <Ticket>
+            <!--Optional:-->
+            <Title>?</Title>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <QueueID>?</QueueID>
+            <!--Optional:-->
+            <Queue>?</Queue>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <TypeID>?</TypeID>
+            <!--Optional:-->
+            <Type>?</Type>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ServiceID>?</ServiceID>
+            <!--Optional:-->
+            <Service>?</Service>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <SLAID>?</SLAID>
+            <!--Optional:-->
+            <SLA>?</SLA>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <StateID>?</StateID>
+            <!--Optional:-->
+            <State>?</State>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <PriorityID>?</PriorityID>
+            <!--Optional:-->
+            <Priority>?</Priority>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <OwnerID>?</OwnerID>
+            <!--Optional:-->
+            <Owner>?</Owner>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ResponsibleID>?</ResponsibleID>
+            <!--Optional:-->
+            <Responsible>?</Responsible>
+            <!--Optional:-->
+            <CustomerUser>?</CustomerUser>
+            <!--Optional:-->
+            <CustomerID>?</CustomerID>
+            <!--Optional:-->
+            <PendingTime>
+               <Year>?</Year>
+               <Month>?</Month>
+               <Day>?</Day>
+               <Hour>?</Hour>
+               <Minute>?</Minute>
+            </PendingTime>
+         </Ticket>
+         <!--Optional:-->
+         <Article>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ArticleTypeID>?</ArticleTypeID>
+            <!--Optional:-->
+            <ArticleType>?</ArticleType>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <SenderTypeID>?</SenderTypeID>
+            <!--Optional:-->
+            <SenderType>?</SenderType>
+            <!--Optional:-->
+            <From>?</From>
+            <Subject>?</Subject>
+            <Body>?</Body>
+            <!--このレベルでは次の２つの選択項目があります。-->
+            <!--Optional:-->
+            <ContentType>?</ContentType>
+            <Charset>?</Charset>
+            <MimeType>?</MimeType>
+            <!--Optional:-->
+            <HistoryType>?</HistoryType>
+            <!--Optional:-->
+            <HistoryComment>?</HistoryComment>
+            <!--Optional:-->
+            <AutoResponseType>?</AutoResponseType>
+            <!--Optional:-->
+            <TimeUnit>?</TimeUnit>
+            <!--Optional:-->
+            <NoAgentNotify>?</NoAgentNotify>
+            <!--Zero or more repetitions:-->
+            <ForceNotificationToUserID>?</ForceNotificationToUserID>
+            <!--Zero or more repetitions:-->
+            <ExcludeNotificationToUserID>?</ExcludeNotificationToUserID>
+            <!--Zero or more repetitions:-->
+            <ExcludeMuteNotificationToUserID>?</ExcludeMuteNotificationToUserID>
+         </Article>
+         <!--Zero or more repetitions:-->
+         <DynamicField>
+            <Name>?</Name>
+            <!--1 or more repetitions:-->
+            <Value>?</Value>
+         </DynamicField>
+         <!--Zero or more repetitions:-->
+         <Attachment>
+            <Content>cid:166861569966</Content>
+            <ContentType>?</ContentType>
+            <Filename>?</Filename>
+         </Attachment>
+      </TicketUpdate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-ticket-connector-operations-ticketget">
+                    <title>TicketGet(チケット取得)</title>
+                    <para>
+                        このオペレーションは全てのチケットの属性を得るために使用されます。（この属性は、動的フィールド、すべての記事、およびチケットに属する全ての添付を含みます。）
+                    </para>
+                    <para>可能な属性:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketGet>
+         <!--このレベルでは次の3つの必須選択項目があります。-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Optional:-->
+         <SessionID>?</SessionID>
+         <!--Optional:-->
+         <Password>?</Password>
+         <!--1 or more repetitions:-->
+         <TicketID>?</TicketID>
+         <!--Optional:-->
+         <DynamicFields>?</DynamicFields>
+         <!--Optional:-->
+         <Extended>?</Extended>
+         <!--Optional:-->
+         <AllArticles>?</AllArticles>
+         <!--Optional:-->
+         <ArticleSenderType>?</ArticleSenderType>
+         <!--Optional:-->
+         <ArticleOrder>?</ArticleOrder>
+         <!--Optional:-->
+         <ArticleLimit>?</ArticleLimit>
+         <!--Optional:-->
+         <Attachments>?</Attachments>
+      </TicketGet>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-ticket-connector-operations-ticketsearch">
+                    <title>TicketSearch(チケット検索)</title>
+                    <para>
+                        TicketSearchオペレーションは、事前定義された基準に一致するチケットIDのリストを返します。
+                    </para>
+                    <para>可能な属性:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketSearch>
+         <!--このレベルでは次の3つの必須選択項目があります。-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Optional:-->
+         <SessionID>?</SessionID>
+         <!--Optional:-->
+         <Password>?</Password>
+         <!--Optional:-->
+         <Limit>?</Limit>
+         <!--0回以上繰り返し:-->
+         <TicketNumber>?</TicketNumber>
+         <!--0回以上繰り返し:-->
+         <Title>?</Title>
+         <!--0回以上繰り返し:-->
+         <Queues>?</Queues>
+         <!--0回以上繰り返し:-->
+         <QueueIDs>?</QueueIDs>
+         <!--Optional:-->
+         <UseSubQueues>?</UseSubQueues>
+         <!--0回以上繰り返し:-->
+         <Types>?</Types>
+         <!--0回以上繰り返し:-->
+         <TypeIDs>?</TypeIDs>
+         <!--0回以上繰り返し:-->
+         <States>?</States>
+         <!--0回以上繰り返し:-->
+         <StateIDs>?</StateIDs>
+         <!--0回以上繰り返し:-->
+         <StateType>?</StateType>
+         <!--0回以上繰り返し:-->
+         <StateTypeIDs>?</StateTypeIDs>
+         <!--0回以上繰り返し:-->
+         <Priorities>?</Priorities>
+         <!--0回以上繰り返し:-->
+         <PriorityIDs>?</PriorityIDs>
+         <!--0回以上繰り返し:-->
+         <Services>?</Services>
+         <!--0回以上繰り返し:-->
+         <ServiceIDs>?</ServiceIDs>
+         <!--0回以上繰り返し:-->
+         <SLAs>?</SLAs>
+         <!--0回以上繰り返し:-->
+         <SLAIDs>?</SLAIDs>
+         <!--0回以上繰り返し:-->
+         <Locks>?</Locks>
+         <!--0回以上繰り返し:-->
+         <LockIDs>?</LockIDs>
+         <!--0回以上繰り返し:-->
+         <OwnerIDs>?</OwnerIDs>
+         <!--0回以上繰り返し:-->
+         <ResponsibleIDs>?</ResponsibleIDs>
+         <!--0回以上繰り返し:-->
+         <WatchUserIDs>?</WatchUserIDs>
+         <!--0回以上繰り返し:-->
+         <CustomerID>?</CustomerID>
+         <!--0回以上繰り返し:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--0回以上繰り返し:-->
+         <CreatedUserIDs>?</CreatedUserIDs>
+         <!--0回以上繰り返し:-->
+         <CreatedTypes>?</CreatedTypes>
+         <!--0回以上繰り返し:-->
+         <CreatedTypeIDs>?</CreatedTypeIDs>
+         <!--0回以上繰り返し:-->
+         <CreatedPriorities>?</CreatedPriorities>
+         <!--0回以上繰り返し:-->
+         <CreatedPriorityIDs>?</CreatedPriorityIDs>
+         <!--0回以上繰り返し:-->
+         <CreatedStates>?</CreatedStates>
+         <!--0回以上繰り返し:-->
+         <CreatedStateIDs>?</CreatedStateIDs>
+         <!--0回以上繰り返し:-->
+         <CreatedQueues>?</CreatedQueues>
+         <!--0回以上繰り返し:-->
+         <CreatedQueueIDs>?</CreatedQueueIDs>
+         <!--0回以上繰り返し:-->
+         <DynamicFields>
+            <!--このレベルでは次の6つの必須選択項目があります。-->
+            <!--Optional:-->
+            <Equals>?</Equals>
+            <!--Optional:-->
+            <Like>?</Like>
+            <!--Optional:-->
+            <GreaterThan>?</GreaterThan>
+            <!--Optional:-->
+            <GreaterThanEquals>?</GreaterThanEquals>
+            <!--Optional:-->
+            <SmallerThan>?</SmallerThan>
+            <!--Optional:-->
+            <SmallerThanEquals>?</SmallerThanEquals>
+         </DynamicFields>
+         <!--Optional:-->
+         <Ticketflag>
+            <!--Optional:-->
+            <Seen>?</Seen>
+         </Ticketflag>
+         <!--Optional:-->
+         <From>?</From>
+         <!--Optional:-->
+         <To>?</To>
+         <!--Optional:-->
+         <Cc>?</Cc>
+         <!--Optional:-->
+         <Subject>?</Subject>
+         <!--Optional:-->
+         <Body>?</Body>
+         <!--Optional:-->
+         <FullTextIndex>?</FullTextIndex>
+         <!--Optional:-->
+         <ContentSearch>?</ContentSearch>
+         <!--Optional:-->
+         <ConditionInline>?</ConditionInline>
+         <!--Optional:-->
+         <ArticleCreateTimeOlderMinutes>?</ArticleCreateTimeOlderMinutes>
+         <!--Optional:-->
+         <ArticleCreateTimeNewerMinutes>?</ArticleCreateTimeNewerMinutes>
+         <!--Optional:-->
+         <ArticleCreateTimeNewerDate>?</ArticleCreateTimeNewerDate>
+         <!--Optional:-->
+         <ArticleCreateTimeOlderDate>?</ArticleCreateTimeOlderDate>
+         <!--Optional:-->
+         <TicketCreateTimeOlderMinutes>?</TicketCreateTimeOlderMinutes>
+         <!--Optional:-->
+         <ATicketCreateTimeNewerMinutes>?</ATicketCreateTimeNewerMinutes>
+         <!--Optional:-->
+         <TicketCreateTimeNewerDate>?</TicketCreateTimeNewerDate>
+         <!--Optional:-->
+         <TicketCreateTimeOlderDate>?</TicketCreateTimeOlderDate>
+         <!--Optional:-->
+         <TicketChangeTimeOlderMinutes>?</TicketChangeTimeOlderMinutes>
+         <!--Optional:-->
+         <TicketChangeTimeNewerMinutes>?</TicketChangeTimeNewerMinutes>
+         <!--Optional:-->
+         <TicketChangeTimeNewerDate>?</TicketChangeTimeNewerDate>
+         <!--Optional:-->
+         <TicketChangeTimeOlderDate>?</TicketChangeTimeOlderDate>
+         <!--Optional:-->
+         <TicketCloseTimeOlderMinutes>?</TicketCloseTimeOlderMinutes>
+         <!--Optional:-->
+         <TicketCloseTimeNewerMinutes>?</TicketCloseTimeNewerMinutes>
+         <!--Optional:-->
+         <TicketCloseTimeNewerDate>?</TicketCloseTimeNewerDate>
+         <!--Optional:-->
+         <TicketCloseTimeOlderDate>?</TicketCloseTimeOlderDate>
+         <!--Optional:-->
+         <TicketPendingTimeOlderMinutes>?</TicketPendingTimeOlderMinutes>
+         <!--Optional:-->
+         <TicketPendingTimeNewerMinutes>?</TicketPendingTimeNewerMinutes>
+         <!--Optional:-->
+         <TicketPendingTimeNewerDate>?</TicketPendingTimeNewerDate>
+         <!--Optional:-->
+         <TicketPendingTimeOlderDate>?</TicketPendingTimeOlderDate>
+         <!--Optional:-->
+         <TicketEscalationTimeOlderMinutes>?</TicketEscalationTimeOlderMinutes>
+         <!--Optional:-->
+         <TTicketEscalationTimeNewerMinutes>?</TTicketEscalationTimeNewerMinutes>
+         <!--Optional:-->
+         <TicketEscalationTimeNewerDate>?</TicketEscalationTimeNewerDate>
+         <!--Optional:-->
+         <TicketEscalationTimeOlderDate>?</TicketEscalationTimeOlderDate>
+         <!--Optional:-->
+         <ArchiveFlags>?</ArchiveFlags>
+         <!--0回以上繰り返し:-->
+         <OrderBy>?</OrderBy>
+         <!--0回以上繰り返し:-->
+         <SortBy>?</SortBy>
+         <!--0回以上繰り返し:-->
+         <CustomerUserID>?</CustomerUserID>
+      </TicketSearch>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section id="Sgenericinterface-bundled-connectors-examples">
+        <title>サンプル:</title>
+        <section>
+            <title>ウェブサービス構成</title>
+            <para>
+                下記は基礎的ですが、すべてのチケット・コネクタ・オペレーションを使用するためのYAMLフォーマットによる完全なウェブサービス構成ファイルです。OTRSの中でそれを使用するために内容をコピーする必要があります。それをファイルへ保存して
+GenericTicketConnector.ymlと呼ばれるファイルを保存します。またそれを、概要画面から「ウェブサービスの追加」アクションをクリックすることによって管理者パネルのウェブサービス画面でOTRSへインポートします。そして追加画面で「ウェブサービスのインポート」アクションをクリックします。
+            </para>
+            <para>
+                <programlisting>
+                    <![CDATA[
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: 0
+Description: Ticket Connector Sample
+FrameworkVersion: 3.2.x CVS
+Provider:
+  Operation:
+    SessionCreate:
+      Description: Creates a Session
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Session::SessionCreate
+    TicketCreate:
+      Description: Creates a Ticket
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketCreate
+    TicketUpdate:
+      Description: Updates a Ticket
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketUpdate
+    TicketGet:
+      Description: Retrieve Ticket data
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketGet
+    TicketSearch:
+      Description: Search for Tickets
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketSearch
+  Transport:
+    Config:
+      MaxLength: 100000000
+      NameSpace: http://www.otrs.org/TicketConnector/
+    Type: HTTP::SOAP
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''
+                    ]]>
+                </programlisting>
+            </para>
+
+        <!-- This part is removed because Mapping Simple does not work with Keys inside other hashes
+            <note>
+
+                <para>
+                    It can be also possible to use the Mapping Simple module in order to specify
+                    different values or attribute names and covert them to the required values and
+                    attribute names. this settings can be done from the web interface or
+                    specified in the YAML file, here it is an example:
+                </para>
+            </note>
+            <example id='ticketcreate-operation-with-mapping'>
+                <title>TicketCreate operation using Mapping Simple </title>
+                <para>
+                    In the following example the MappingInbound configuration has been changed
+                    to convert the value "My State" to "open". Notice that this is only the
+                    configuration for TicketCreate operation and not for the complete web service.
+                </para>
+                <programlisting>
+                    <![CDATA[
+    TicketCreate:
+      Description: Creates a Ticket
+      MappingInbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Keep
+          KeyMapExact:
+            State: State
+          ValueMap:
+            State:
+              ValueMapExact:
+                My State: open
+          ValueMapDefault:
+            MapTo: ''
+            MapType: Keep
+        Type: Simple
+      MappingOutbound: {}
+      Type: Ticket::TicketCreate
+                    ]]>
+                </programlisting>
+            </example>
+ -->
+</section>
+        <section>
+            <title>パールSOAP依頼者</title>
+            <para>
+                次のコードは、一般インターフェース経由でOTRSに接続することができるパール・スクリプトです。チケット・コネクタによって提供されるオペレーションを行なうために、二つのパールCPANモジュール、SOAP::Lite
+および Data::Dumper
+を使用します。sciptを実行しようとする前にこれらのモジュールを使用するのにあなたの環境が利用可能であることを確かめてください。
+            </para>
+            <para>
+                <programlisting>
+                    <![CDATA[
+#!/usr/bin/perl -w
+# --
+# otrs.SOAPRequest.pl - sample to send a SOAP request to OTRS Generic Interface Ticket Connector
+# Copyright (C) 2001-2014 OTRS AG, http://otrs.com/
+# --
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# or see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+use strict;
+use warnings;
+
+# use ../ as lib location
+use File::Basename;
+use FindBin qw($RealBin);
+use lib dirname($RealBin);
+
+use SOAP::Lite;
+use Data::Dumper;
+
+# ---
+# Variables to be defined.
+
+# this is the URL for the web service
+# the format is
+# <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl/Webservice/<WEB_SERVICE_NAME>
+# or
+# <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl/WebserviceID/<WEB_SERVICE_ID>
+my $URL = 'http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnector';
+
+# this name space should match the specified name space in the SOAP transport for the web service.
+my $NameSpace = 'http://www.otrs.org/TicketConnector/';
+
+# this is operation to execute, it could be TicketCreate, TicketUpdate, TicketGet, TicketSearch
+# or SessionCreate. and they must to be defined in the web service.
+my $Operation = 'TicketCreate';
+
+# this variable is used to store all the parameters to be included on a request in XML format. Each
+# operation has a determined set of mandatory and non mandatory parameters to work correctly. Please
+# check the OTRS Admin Manual in order to get a complete list of parameters.
+my $XMLData = '
+<UserLogin>some user login</UserLogin>
+<Password>some password</Password>
+<Ticket>
+    <Title>some title</Title>
+    <CustomerUser>some customer user login</CustomerUser>
+    <Queue>some queue</Queue>
+    <State>some state</State>
+    <Priority>some priority</Priority>
+</Ticket>
+<Article>
+    <Subject>some subject</Subject>
+    <Body>some body</Body>
+    <ContentType>text/plain; charset=utf8</ContentType>
+</Article>
+';
+
+# ---
+
+# create a SOAP::Lite data structure from the provided XML data structure.
+my $SOAPData = SOAP::Data
+    ->type( 'xml' => $XMLData );
+
+my $SOAPObject = SOAP::Lite
+    ->uri($NameSpace)
+    ->proxy($URL)
+    ->$Operation($SOAPData);
+
+# check for a fault in the soap code.
+if ( $SOAPObject->fault ) {
+    print $SOAPObject->faultcode, " ", $SOAPObject->faultstring, "\n";
+}
+
+# otherwise print the results.
+else {
+
+    # get the XML response part from the SOAP message.
+    my $XMLResponse = $SOAPObject->context()->transport()->proxy()->http_response()->content();
+
+    # deserialize response (convert it into a perl structure).
+    my $Deserialized = eval {
+        SOAP::Deserializer->deserialize($XMLResponse);
+    };
+
+    # remove all the headers and other not needed parts of the SOAP message.
+    my $Body = $Deserialized->body();
+
+    # just output relevant data and no the operation name key (like TicketCreateResponse).
+    for my $ResponseKey ( keys %{$Body} ) {
+        print Dumper( $Body->{$ResponseKey} );
+    }
+}
+                    ]]>
+                </programlisting>
+            </para>
+        </section>
+    </section>
+</section>

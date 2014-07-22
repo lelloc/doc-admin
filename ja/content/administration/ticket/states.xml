@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="states">
+<title>チケットの状態</title>
+
+<section id="states-predefined">
+<title>事前定義された状態</title>
+
+<para>
+OTRSでは、事前定義されたチケット状態とタイプを変更または新規追加することができます。状態名と状態タイプという2つの属性が状態にとって重要です。
+</para>
+
+<para>
+OTRSのデフォルト状態は以下の通りです。「完了（成功）」（'closed successful'）、「完了（不成功）」（'closed
+unsuccessful'）、「結合済」（'merged'）、「新規」（'new'）、「対応中」（'open'）、「保留（自動完了＋）」（'pending
+auto close+'）、「保留（自動完了- 」（'pending auto close-'）、「保留（期限付）」（'pending
+reminder'）、「削除」（'removed'.）。
+</para>
+
+<section id="state-new">
+<title>「新規」（New）</title>
+<para>
+チケットは、受信Eメールから作成された時、通常この状態です。
+</para>
+</section>
+
+<section id="state-open">
+<title>対応中（open）</title>
+<para>
+これはキューと担当者に割り当てられたチケットのためのデフォルト状態です。
+</para>
+</section>
+
+<section id="state-pending-reminder">
+<title>保留（期限付）</title>
+<para>
+保留時間が終了すると、チケット所有者はチケットに関するリマインダーEメールを受信します。チケットがロックされていなければ、リマインダーはキュー中の全担当者へ送られます。リマインダーチケットは単に業務時間に送信され、チケット状態が担当者によって変更されるまで、24時間ごとに繰り返し送信されます。このステータスでのチケットによって費やされた時間は、さらにエスカレーション時間として追加計上されます。
+</para>
+</section>
+
+<section id="state-pending-autoclose-minus">
+<title>保留（自動完了-）</title>
+<para>
+保留時間が終了したらこの状態のチケットは「完了（不成功）」（'closed
+unsuccessful'）にセットされます。このステータスでのチケットによって費やされた時間は、さらにエスカレーション時間として追加計上されます。
+</para>
+</section>
+
+<section id="state-pending-autoclose-plus">
+<title>保留（自動完了＋）</title>
+<para>
+保留時間が終了したらこの状態のチケットは「完了（成功）」（'closed
+successful'）にセットされます。この状態のチケットに費やされた時間は、さらにエスカレーション時間として追加計上されます。
+</para>
+</section>
+
+<section id="state-merged">
+<title>結合済</title>
+<para>
+これは他のチケットと結合されたチケットの状態です。
+</para>
+</section>
+
+<section id="state-closed-successful">
+<title>完了（成功）</title>
+<para>
+これはうまく解決されたチケットの最終状態です。構成に依存しますが、一旦完了したチケットを再対応可能にも不可能にも構成可能です。
+</para>
+</section>
+
+<section id="state-closed-unsuccessful">
+<title>完了（不成功）</title>
+<para>
+これは解決できなかったチケット用の最終状態です。構成に依存しますが、一旦完了したチケットを再対応可能にも不可能にも構成可能です。
+</para>
+</section>
+
+</section>
+
+<section id="states-customizing">
+<title>状態のカスタマイズ</title>
+<para>
+すべての状態は名前(状態名)およびタイプ(状態タイプ)を持っています。管理者ページの状態のリンクをクリックし、新規状態を作るために「状態追加」ボタンを押します。新規状態の名前は自由に選ぶことができます。状態タイプはウェブインターフェース経由で変更することができません。新しいタイプの追加あるいは既存名の変更をしたければ、直接データベースを修正しなければなりません。デフォルト状態タイプは通常は修正されるべきではありません。というのも予測不能な結果が生じることがあるからです。例えば、エスカレーション計算およびunlock機能は、特定の状態タイプに基づきます。
+</para>
+
+<para>
+既存の状態名は変更することができます。あるいは、新規状態はこの画面から追加されます。「新規」状態が、ウェブインターフェース経由で変更されたなら、この変更も、構成ファイル
+<filename>Kernel/Config.pm</filename>またはSysConfigインターフェイス経由で構成変更されねばなりません。以下のスクリプトで指定された設定は、「新規」に変更された状態で、OTRSが確実に稼働するように変更されなければなりません。
+</para>
+
+<para>
+<programlisting>
+    [...]
+    # PostmasterDefaultState
+    # (新規チケットのデフォルト状態)  [default: new]
+    $Self-&gt;{PostmasterDefaultState} = 'new';
+
+    # CustomerDefaultState
+    # (新規顧客チケットのデフォルト状態)
+    $Self-&gt;{CustomerDefaultState} = 'new';
+    [...]
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:Kernel/Config.pmの設定修正</emphasis>
+</para>
+
+<para>
+万一新規状態タイプが加えられるならば、OTRSデータベースにあるthe
+ticket_state_typeテーブルは、下記のスクリプトで表示されるように、データベース・クライアント・プログラムで変更される必要があります。
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23 to server version: 5.0.16-Debian_1-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; insert into ticket_state_type (name,comments) values ('own','Own
+state type');
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:OTRSデータベースの修正</emphasis>
+</para>
+
+<para>
+あなたが今作成した新規状態タイプを使用することは可能である。状態がこの新規状態タイプとリンクされた後、OTRS構成も、さらに新規状態が使用可能であることを確実にするために変更されなければならない。SysConfigにて次のオプションを修正してください:
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneNew &gt;
+AgentTicketPhone###StateDefault </link> -新規電話チケットのために次のデフォルトの状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneNew &gt;
+AgentTicketPhone###StateType </link> - 新規電話チケットのために次の利用可能な状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewEmailNew &gt;
+AgentTicketEmail###StateDefault </link> - t新規Eメールのために次のデフォルトの状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewEmailNew &gt;
+AgentTicketEmail###StateType </link> -新規Eメールのために次の利用可能な状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_State">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneOutbound &gt;
+AgentTicketPhoneOutbound###State </link> - 新規電話記事のために次のデフォルトの状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneOutbound &gt;
+AgentTicketPhoneOutbound###StateType </link> - 新規電話記事のために次の利用可能な状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewMove:Ticket::DefaultNextMoveStateType">
+Ticket:Frontend::Agent::Ticket::ViewMove:Ticket::DefaultNextMoveStateType
+</link> - チケットを移動した後のデフォルトの次の状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewBounce:Ticket::Frontend::AgentTicketBounce_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBounce &gt; StateDefault </link> -
+チケット返送後、デフォルトの次の状態を定義すること
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewBounce:Ticket::Frontend::AgentTicketBounce_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBounce &gt; StateType </link> -
+返送画面中で次の利用可能な状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewBulk:Ticket::Frontend::AgentTicketBulk_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBulk &gt; StateDefault </link> -
+バルク・アクションでデフォルトの次の状態を定義すること
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewBulk:Ticket::Frontend::AgentTicketBulk_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBulk &gt; StateType </link> -
+バルク・アクションでデフォルトの次の利用可能な状態を定義すること
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewClose:Ticket::Frontend::AgentTicketClose_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewClose &gt; StateDefault </link> -
+チケットをクロースした後でデフォルトの次の状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewClose:Ticket::Frontend::AgentTicketClose_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewClose &gt; StateType </link> -
+クロース画面の中でデフォルトの次の利用可能な状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewCompose:Ticket::Frontend::AgentTicketCompose_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewCompose &gt; StateDefault </link>
+- 作成（返信）画面の中でデフォルトの次の状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewCompose:Ticket::Frontend::AgentTicketCompose_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewCompose &gt; StateType </link> -
+作成（返信）画面の中で利用可能な次の状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewForward:Ticket::Frontend::AgentTicketForward_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateDefault </link>
+- チケット転送後、次のデフォルトの状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewForward:Ticket::Frontend::AgentTicketForward_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateType </link> -
+転送画面で次の利用可能な状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewFreeText:Ticket::Frontend::AgentTicketFreeText_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateDefault </link>
+- 自由テキスト画面で次のデフォルトの状態を定義すること。
+</para>
+
+<para>
+<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewFreeText:Ticket::Frontend::AgentTicketFreeText_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateType </link> -
+自由テキスト画面で次の利用可能な状態を定義すること。
+</para>
+
+
+<para>
+<link linkend="Ticket:Core::PostMaster:PostmasterDefaultState"> Ticket -&gt;
+Core::PostMaster &gt; PostmasterDefaultState </link> -
+Eメールから作成されたチケットの状態を定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::PostMaster:PostmasterFollowUpState"> Ticket
+-&gt; Core::PostMaster &gt; PostmasterFollowUpState </link> -
+フォローアップを受信後、チケットの状態を定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::PostMaster:PostmasterFollowUpStateClosed">
+Ticket -&gt; Core::PostMaster &gt; PostmasterFollowUpStateClosed </link> -
+既にクロースされたチケットに関するフォローアップを受信後、チケットの状態を定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::Ticket:Ticket::ViewableStateType"> Ticket -&gt;
+Core::Ticket &gt; ViewableStateType </link> -
+例えばキュー概要のようにシステムでさまざまな場所で表示される状態タイプを定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::Ticket:Ticket::UnlockStateType"> Ticket -&gt;
+Core::Ticket &gt; UnlockStateType </link> - アンロックされたチケットに対して状態タイプを定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::Ticket:Ticket::PendingReminderStateType"> Ticket
+-&gt; Core::Ticket &gt; PendingReminderStateType </link> -
+リマインダーチケットに対して状態タイプを定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::Ticket:Ticket::PendingAutoStateType"> Ticket
+-&gt; Core::Ticket &gt; PendingAutoStateType </link> -
+保留中の自動チケットに対する状態タイプを定義すること。
+</para>
+
+<para>
+<link linkend="Ticket:Core::Ticket:Ticket::StateAfterPending"> Ticket ->
+Core::Ticket > StateAfterPending </link> -
+チケットが（設定した状態が失効した自動タイマーが保留になった後で）セットされた状態を定義すること。
+</para>
+
+</section>
+</section>

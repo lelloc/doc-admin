@@ -1,0 +1,1947 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="adminarea">
+<title>OTRSの管理者エリア</title>
+
+<section id="adminarea-general">
+<title>基礎</title>
+
+<para>
+次のシステム構成セッティングは、OTRS管理者が、OTRSウェブインターフェースの管理者ページへのアクセスをすることで利用可能です。それにより可能なことは、担当者、顧客、そしてキューの追加。チケットとEメールの構成、FAQやITSMなどさらに多くの追加のパッケージをインストールすることです。</para>
+
+<para>
+<emphasis>管理者</emphasis>グループのメンバーである担当者は、ナビゲーション・バー中の<emphasis>管理者</emphasis>リンクのクリックにより管理者エリアにアクセスすることができます(下記の図を参照)。十分に高いアクセス権のない担当者はこのリンクにアクセスすることができません。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>OTRS管理者画面</screeninfo> <graphic srccredit="管理者エリア -
+スクリーンショット" scale="40" fileref="screenshots/adminarea.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: OTRS管理者画面。</emphasis>
+</para>
+
+</section>
+
+<section id="adminarea-agents-groups-and-roles">
+<title>担当者、グループおよび役割</title>
+
+<section id="adminarea-agents">
+<title>担当者</title>
+
+<para>
+<emphasis>担当者</emphasis>のリンクをクリックし、OTRSの担当者管理画面にアクセスします(下記の図を参照)。管理者は担当者アカウントを追加、変更、非活性化することができます。更に、管理者は個々の担当者のインターフェースのための言語と通知に関する構成を含む担当者選好を管理することができます。
+</para>
+
+<note>
+<para>
+OTRSの担当者アカウントは非活性化されますが、ここでは削除はされません。非活性化は<emphasis>無効</emphasis>または<emphasis>無効-暫定</emphasis>のフラグを有効にセットするで実施されます。
+</para>
+</note>
+
+<para>
+<screenshot>
+<screeninfo>担当者管理</screeninfo> <graphic srccredit="管理者エリア 担当者管理 -
+スクリーンショット" scale="40" fileref="screenshots/admin-agents.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:担当者管理。</emphasis>
+</para>
+
+<para>
+担当者を登録するには図の中で示されるように、「担当者追加」ボタン上のクリックし、必要なデータを入力し、画面の最下部の送信（Submit）ボタンを押します。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者の追加</screeninfo> <graphic srccredit="管理者エリア 担当者管理 -
+スクリーンショット" scale="40" fileref="screenshots/add-agent.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:新規担当者の追加。</emphasis>
+</para>
+
+<para>
+新規担当者アカウントが作成された後、担当者に1つ以上のグループあるいは役割のメンバーを作るべきです。グループと役割に関する情報は本章の<link
+linkend="adminarea-groups">グループ</link> と<link
+linkend="adminarea-roles">役割</link>のセクションにおいて利用可能です。
+</para>
+
+</section>
+
+<section id="adminarea-groups">
+<title>グループ</title>
+
+<para>
+すべての担当者アカウントは少なくとも1つのグループあるいは役割に属するべきです。新規インストールでは、テーブル5-1に示されるように、利用可能な3つの事前定義されたグループがあります。
+</para>
+
+<para>
+<table id="table-of-groups-after-installation">
+<title>デフォルト・グループは新規のOTRSインストールで利用可能です</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>グループ</entry>
+        <entry>摘要</entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>admin</entry>
+        <entry>システムで管理業務を実行することができます。</entry>
+      </row>
+      <row>
+        <entry>stats</entry>
+        <entry>
+          OTRSのstatsモジュールにアクセスし、統計を生成する資格があります。
+        </entry>
+      </row>
+      <row>
+        <entry>users</entry>
+        <entry>
+          担当者は読み書きの権限を持って、このグループに属し、チケットシステムのすべての機能にアクセスすることができます
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+</para>
+
+<note>
+<para>
+新規のOTRSインストレーションでは、ユーザーズグループには最初にメンバーがありません。担当者"root@localhost"はデフォルトでadminとstatsのグループに属します。
+</para>
+</note>
+
+<para>
+管理者エリアの<emphasis>グループ</emphasis>リンクをクリックするとグループ管理ページ(下記の図を参照)にアクセスすることができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>グループ管理</screeninfo> <graphic srccredit="管理者エリア グループ管理 -
+スクリーンショット" scale="40" fileref="screenshots/admin-groups.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:グループ管理。</emphasis>
+</para>
+
+<note>
+<para>
+担当者でそうであるように、OTRSグループは非活性化することができますが削除はできません。非活性化は<emphasis>無効</emphasis>または<emphasis>無効-暫定</emphasis>のフラグを有効にセットするで実施されます。
+</para>
+</note>
+
+<para>
+担当者をグループに加えるかあるいはグループに属する担当者を変更するために、管理者ページから<emphasis>担当者リンク&lt;-&gt;
+グループ</emphasis>を使用することができます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者グループ管理</screeninfo> <graphic srccredit="管理者エリア グループと担当者
+- スクリーンショット" scale="40"
+fileref="screenshots/admin-agents-and-groups.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:グループ管理。</emphasis>
+</para>
+
+<para>
+システムでのすべてのグループおよび担当者の概要はこのページに表示されます。さらに、特定のエンティティ（実体）を検索するために利用可能なフィルタを使用することができます。担当者がメンバーであるグループを変更したい場合は、担当者の名前をクリックしてください(下記の図を参照)。グループに関連付けされた担当者を変更するためには、編集したいグループをクリックしてください(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者グループ管理</screeninfo> <graphic srccredit="管理者エリア グループと担当者
+- スクリーンショット" scale="40"
+fileref="screenshots/agent-group-relations.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:担当者が属するグループを変更。</emphasis>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者グループ管理</screeninfo> <graphic srccredit="管理者エリア グループと担当者
+- スクリーンショット" scale="40"
+fileref="screenshots/agent-group-relations2.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:特定のグループに属する担当者を変更。</emphasis>
+</para>
+
+<para>
+各グループはそれに関連した権限のセットを保持しています。そして各グループメンバー(担当者)は各々自分のためにこれらの権限の組み合わせを持つことができます。許可/権限のリストはテーブル5-2を御覧ください。
+</para>
+
+<para>
+<table id="table-of-group-permissions-after-installation">
+<title>OTRSグループと関連した権限</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>
+          権限
+        </entry>
+        <entry>
+          摘要
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>
+          ro
+        </entry>
+        <entry>
+          このグループのチケット、エントリー、キューへのRead onlyのアクセス
+        </entry>
+      </row>
+      <row>
+        <entry>
+          move into
+        </entry>
+        <entry>
+          このグループのエリア、キュー間におけるエントリーあるいはチケットの移動権限
+        </entry>
+      </row>
+      <row>
+        <entry>
+          create
+        </entry>
+        <entry>
+          このグループのエリアまたはキュー間におけるエントリーあるいはチケットの作成権限
+        </entry>
+      </row>
+      <row>
+        <entry>
+          owner
+        </entry>
+        <entry>
+          このグループのエリアまたはキュー間におけるエントリーあるいはチケットのオーナーの更新権限
+        </entry>
+      </row>
+      <row>
+        <entry>
+          優先度（priority）
+        </entry>
+        <entry>
+          このグループのエリアまたはキュー間におけるエントリーあるいはチケットの優先度の変更権限
+        </entry>
+      </row>
+      <row>
+        <entry>
+          rw
+        </entry>
+        <entry>
+          このグループのエリアまたはキュー間におけるエントリーあるいはチケットのフルのRead/Write権限
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+</para>
+
+<note>
+    <para>
+        デフォルトでは、キュー・ビューだけが担当者が<emphasis>rw</emphasis>
+アクセスを持っているキュー中のチケットをリストします。（たとえば担当者が引き続き処理する必要のあるチケット）この振る舞いを変更したければ、<link
+linkend="Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets
+</link>を<emphasis>「イエス」</emphasis>にセットすることができます。
+    </para>
+</note>
+ <para>すべての利用可能なパーミションはデフォルトで表示されるとは限りません。これらの追加のパーミションは加えることができます。</para>
+      <para>
+        <table id="table-of-group-additional-permissions">
+          <title>追加の許可グループ</title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>権限</entry>
+                <entry>摘要</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>stats</entry>
+                <entry>stats(統計)ページにアクセス権を与えます。</entry>
+              </row>
+              <row>
+                <entry>bounce（返送）</entry>
+                <entry>Eメールメッセージを送り返す権限（チケットズームの返送ボタンで）。</entry>
+              </row>
+              <row>
+                <entry>compose（作成）</entry>
+                <entry>チケットに対する回答を作成する権限。</entry>
+              </row>
+              <row>
+                <entry>customer（顧客）</entry>
+                <entry>チケットの顧客を変更する権限。</entry>
+              </row>
+              <row>
+                <entry>forward （転送）</entry>
+                <entry>メッセージを転送する権限(転送ボタンで)。</entry>
+              </row>
+              <row>
+                <entry>pending （保留）</entry>
+                <entry>チケットを保留にする権限。</entry>
+              </row>
+              <row>
+                <entry>phone （電話）</entry>
+                <entry>チケットに通話を追加する権限。</entry>
+              </row>
+              <row>
+                <entry>responsible （責任者）</entry>
+                <entry>チケットに対する責任担当者を変更する権限。</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+      <note>
+        <para>
+          これらの許可は<link
+linkend="Ticket::Core::Ticket::System::Permission">Ticket::Core::Ticket::System::Permission</link>の変更により加えることができます。
+        </para>
+      </note>
+</section>
+
+<section id="adminarea-roles">
+<title>役割</title>
+
+<para>
+Roles:"役割"は、強力な機能で、それにより非常にシンプルかつ迅速に多くの担当者のアクセス権を管理できます。それらは、多くの担当者、グループおよびキューを抱える大きく複雑なサポート・システムで特に役立ちます。下記の例でどのようなケースでご利用いただけば良いかを説明します。
+</para>
+
+<para>
+あなたのシステムが100人の担当者を持つと仮定します。90 of them with access to a single　queue called
+"support" where all support requests are
+handled.
+単一のキューにアクセスを持つ100人中90人は、全てのサポート依頼を取り扱う「サポート」と呼ばれるます。「サポート」キューは複数の副キューを含みます。残りの10人の担当者は、システムの全てのキューへアクセスする許可を持っています。この10人の担当者は、チケットを発行し、未対応のキューを見て、「ジャンク」キューへスパム・メッセージを移動させます。
+</para>
+
+<para>
+その会社は、何らかの製品を販売する新規部署を開設します。注文依頼、受注、注文確認あるいは支払などの処理が必要となるでしょう。そして、会社の担当者のうちの数人は、OTRSを使用して、これをすることになります。異なる担当者は、生成される新規のキューへのアクセスを得なければいけません。
+</para>
+
+<para>
+個々の担当者のためにアクセス権を手動で変更するのに長い時間がかかるので、異なるアクセスレベルを定義する”役割”を作成することができます。その後、担当者は、自動的に修正済のアクセス権を持つことにより、1つ以上の役割に加えることができます。新規担当者アカウントが作成される場合、さらに、このアカウントを1つ以上の役割に加えることは可能です。
+</para>
+
+<note>
+<para>
+複雑な組織を取り扱う場合、およびより大きなOTRSの導入を維持管理する場合、”役割”は実に有用です。しかしながら、適切な取扱いは必要です。グループ化する担当者と担当者への役割割り当てを混合することは、複雑なアクセス・コント役割・スキーム(その維持管理を理解するのは難しい)に役立ちます。役割だけを使用したく、管理者エリアにある担当者&lt;-&gt;グループオプションを不能にしたければ、SysConfigの中の<link
+linkend="Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>を修正することでそうすることができます。これが、グループに割り当てられた既存の担当者を除去するものではないこと、ご留意ください。
+</para>
+</note>
+
+<para>
+管理者ページの役割リンクをクリックすれば、役割管理セクション(下記の図を参照)にアクセスすることができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>役割管理</screeninfo> <graphic srccredit="管理者エリア 役割 -
+スクリーンショット" scale="40" fileref="screenshots/admin-roles.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:　役割管理。</emphasis>
+</para>
+
+<note>
+<para>
+担当者とグループでそうであったように、いったん作成された役割は、非活性化することができるが削除することができません。非活性化するためには、有効オプションで<emphasis>「無効」</emphasis>あるいは<emphasis>「無効-暫定」</emphasis>にセットするします。
+</para>
+</note>
+
+<para>
+システムでのすべての役割の概要が表示されます。役割設定を編集するためには、役割の名前をクリックしてください。新規のOTRSインストレーションでは、デフォルトで定義された役割はありません。役割を登録するためには、「役割追加」ボタンをクリックして、必要とされるデータを入力し、それを送信(Submit)して下さい(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>役割管理</screeninfo> <graphic srccredit="管理者エリア 役割 -
+スクリーンショット" scale="40" fileref="screenshots/add-role.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis> 図:役割の新規追加。</emphasis>
+</para>
+
+<para>
+システムですべての役割および担当者の概要を得るためには、管理者ページの役割リンク&lt;-&gt;
+担当者をクリックして下さい。さらに、特定の要素を見つけるためにフィルタを使用することができます。担当者に関連付けられた役割を変更したい場合は、担当者の名前をクリックしてください(下記の図を参照)。役割に関連付けられた担当者を変更するためには、あなたが編集したい役割をクリックしてください(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者役割管理</screeninfo> <graphic srccredit="管理者エリア 役割と担当者 -
+スクリーンショット" scale="40"
+fileref="screenshots/admin-roles-agents-relation.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：担当者と関連付けられた役割の変更</emphasis>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>担当者役割管理</screeninfo> <graphic srccredit="管理者エリア グループと担当者
+- スクリーンショット" scale="40"
+fileref="screenshots/admin-roles-agents-relation2.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：特別な役割と関連付けられた担当者の変更</emphasis>
+</para>
+
+<para>
+システムでのすべての役割およびグループの概要を得るためには、管理者ページのリンク・役割&lt;-&gt;グループをクリックしてください。図で表示されたと同様の画面が見えることでしょう。さらに、特定のエンティティ（実体）を見つけるためにフィルタを使用することができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>役割グループの管理</screeninfo> <graphic srccredit="管理者エリア 役割とグループ -
+スクリーンショット" scale="40"
+fileref="screenshots/admin-roles-groups.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>役割グループ関係の管理</emphasis>
+</para>
+
+<para>
+役割用の異なるアクセス権を定義するためには、役割またはグループの名前をクリックしてください(図5.13および5.14以下にそれぞれ参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>役割のためのグループ関係の変更</screeninfo> <graphic srccredit="管理者エリア 役割とグループ -
+スクリーンショット" scale="40"
+fileref="screenshots/groups-roles-relations.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: 役割のためのグループ関係の変更</emphasis>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>グループ用役割関係の変更</screeninfo> <graphic srccredit="管理者エリア 役割とグループ -
+スクリーンショット" scale="40"
+fileref="screenshots/groups-roles-relations2.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:　グループ用役割関係の変更</emphasis>
+</para>
+
+</section>
+
+</section>
+
+<section id="customers-and-groups">
+<title>顧客および顧客グループ</title>
+
+<section id="adminarea-customers">
+<title>顧客</title>
+
+<para>
+OTRSは、異なるタイプのユーザをサポートします。顧客リンク(ナビゲーション・バー、あるいは管理者ページから)を使用すると、顧客(下記の図を参照)のアカウントを管理することができます。顧客・インターフェース(customer.pl)経由でシステムにログインすることができます。このインターフェースを通って、あなたの顧客はチケットを作成することができるだけでなく、更新するために過去のチケットをレビューすることもできます。顧客はシステムでのチケット履歴を必要としていることを知ることは重要です。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>顧客管理</screeninfo> <graphic srccredit="「管理者エリア 顧客 -
+スクリーンショット」" scale="40" fileref="screenshots/admin-customer.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: 顧客管理</emphasis>
+</para>
+
+<para>
+登録した顧客を検索し顧客名をクリックすることで設定を編集できます。顧客のバックエンドを変更することもできます。詳細は<link
+linkend="external-backends">外部バックエンド</link>の章を参照下さい。
+</para>
+
+<para>
+新規顧客アカウントを作成するためには、「顧客追加」ボタンをクリックしてください(下記の図を参照)。フィールドのうちのいくつかは入力必須項目です。つまり、フィールドには値の入力が必要です。したがって、必須入力項目に入力漏れがあれば、赤でハイライトされます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>顧客管理</screeninfo> <graphic srccredit="管理者エリア 顧客 -
+スクリーンショット" scale="40" fileref="screenshots/add-customer.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: 顧客追加</emphasis>
+</para>
+
+<para>
+顧客はそれらのユーザー名とパスワードの提供されることでシステムにアクセスすることができます。CustomerIDはユーザと関連チケットを識別するためにシステムによって必要です。メール・アドレスがユニークな値であるので、それはIDとして使用することができます。
+</para>
+
+<note>
+<para>
+担当者、グループおよび役割でそうであったように、顧客は、システムから削除されません。単に、有効オプションが<emphasis>無効</emphasis>または<emphasis>無効-暫定</emphasis>に設定されることで非活性化されるだけです。
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-customers-groups">
+<title>顧客グループ</title>
+
+<para>
+顧客ユーザもグループに加えることができます。1つあるいは少数のキューへのアクセスと同じ会社の顧客を加えたければ、役立つでしょう。まず、<link
+linkend="adminarea-groups">グループ管理モジュール</link>によって、あなたの顧客が属するグループを作ってください。次に、<link
+linkend="adminarea-queue">キュー</link>を加えて、キューに新規グループを選んでください。
+</para>
+
+<para>
+次のステップは顧客グループ・サポートを活性化することです。これは管理SysConfigオプションから構成パラメタ：<link
+linkend="Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>でできます。パラメタ
+<link
+linkend="Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
+を使用すると、新規追加の顧客のためのデフォルト・グループを指定することができます。その結果、すべての新規アカウントはこれらのグループに自動的に加えられます。
+</para>
+
+<para>
+リンク"顧客&lt;-&gt; グループ" によって、異なるグループ(下記の図を参照)に属する顧客を管理できます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>顧客グループ管理</screeninfo> <graphic srccredit="管理者エリア 顧客グループ -
+スクリーンショット" scale="40"
+fileref="screenshots/admin-customer-groups.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:顧客グループ関係管理</emphasis>
+</para>
+
+<para>
+異なるグループを定義するために、顧客もその一部分であるべきです。対応する顧客名やグループをクリックします(図5.16および5.17以下にそれぞれ参照）。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>顧客用グループ関係の変更</screeninfo> <graphic srccredit="管理者エリア 顧客とグループ -
+スクリーンショット" scale="40"
+fileref="screenshots/groups-customers-relations.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:顧客用グループ関係の変更</emphasis>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>グループのための顧客関係の変更</screeninfo> <graphic srccredit="管理者エリア 顧客とグループ -
+スクリーンショット" scale="40"
+fileref="screenshots/groups-customers-relations2.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:グループのための顧客関係の変更</emphasis>
+</para>
+
+</section>
+
+</section>
+
+<section id="adminarea-queue">
+<title>キュー</title>
+
+<para>
+管理者ページをリンク「キュー」をクリックすると、システムの<link
+linkend="what-is-a-queue">キュー</link>を管理することができます(下記の図を参照)。新規OTRS装置では、4つのデフォルト・キューがあります:「未対応」、「ジャンク」、「その他」と「ポストマスター」。フィルタ規則が定義されなければ、受信メッセージはすべて「未対応の」キューに格納されるでしょう。「ジャンク」キューはスパム・メッセージを格納するために使用することができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>キュー管理</screeninfo> <graphic srccredit="管理者エリア キュー -
+スクリーンショット" scale="40" fileref="screenshots/admin-queue.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:キュー管理</emphasis>
+</para>
+
+<para>
+ここで、キュー(下記の図を参照)を加えて、それらを修正することができます。キューを使用するべきグループを指定することができます。さらに、既存のキューのサブキューとしてキューをセットすることができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>キュー管理</screeninfo> <graphic srccredit="「管理者エリア キュー -
+スクリーンショット」" scale="40" fileref="screenshots/add-queue.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:新規キューの追加</emphasis>
+</para>
+
+<para>
+キュー用のアンロック・タイムアウトを定義することができます。担当者がチケットをロックし、アンロックタイムアウトが過ぎる前に、それを完了しなければ、チケットが自動的にアンロックされ、他の担当者が継続して利用可能にされます。
+</para>
+
+<para>
+キュー・レベルに関連可能な3つのエスカレーション時間設定があります:
+</para>
+
+<itemizedlist>
+    <title>エスカレーション - 第1の応答時間</title>
+    <listitem>
+        <para>
+チケットの生成の後、顧客といかなるコミュニケーションも無く、定義された時間が失効した場合、Eメールであれ電話であれエスカレーションされます。
+        </para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>エスカレーション - 更新時間</title>
+    <listitem>
+        <para>
+Eメールあるいは顧客ポータル(それはチケットに記録される)のいずれかによって顧客フォローアップがある場合、エスカレーション更新時間はリセットされます。ここで定義された時間が失効するまでに顧客へのコンタクトがない場合、チケットはエスカレーションされます。
+        </para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>エスカレーション - 解決時間</title>
+    <listitem>
+        <para>
+ここで定義された時間が失効する前にチケットが完了（成功）しなかったら、チケットはエスカレーションされます。
+        </para>
+    </listitem>
+</itemizedlist>
+
+<para>
+「フォローアップの後のチケット・ロック」により、以下を定義できます。１．旧チケット・オーナーに対して「ロック」状態にセットすべきチケット。２．一旦完了してて、再度対応中となったチケットこれにより以前にそのチケットを扱った担当者が確実にフォローアップ・チケットが処理することができます。
+</para>
+
+<para>
+システム・アドレス用のパラメタは、このキューの送信チケットに使用されるメール・アドレスを特定します。Eメール返信のために、挨拶文と署名にキューを関連させることもできます。より多くの詳細情報に関しては、<link
+linkend="adminarea-emailaddresses">Eメール・アドレス</link>、<link
+linkend="adminarea-salutations">挨拶文</link>および<link
+linkend="adminarea-signatures"> 署名</link>のセクションを参照してください。
+</para>
+
+<note>
+<para>
+担当者でそうであるように、グループ、顧客、キューは削除できません。単に有効オプションを<emphasis>無効</emphasis>にあるいは<emphasis>無効-暫定</emphasis>にする設定によって非活性化するだけです。
+</para>
+</note>
+
+</section>
+
+
+<section id="adminarea-salutations-signatures-attachments-and-answers">
+<title>挨拶文、署名、添付およびテンプレート</title>
+
+<section id="adminarea-salutations">
+<title>挨拶文</title>
+
+<para>
+挨拶文はテンプレート用のテキスト・モジュールです。<link
+linkend="adminarea-queue">キュー</link>に関するセクションに述べられているように、挨拶文は1つ以上のキューにリンクすることができます。挨拶文は、挨拶文がリンクされて、返信されているキューからのチケットのみに使用されます。システムの異なる挨拶文を管理するためにには、管理者エリアの「挨拶文」リンクを使用してください(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>挨拶文管理</screeninfo> <graphic srccredit="管理者エリア 挨拶文 -
+スクリーンショット" scale="40" fileref="screenshots/admin-salutation.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:挨拶文管理</emphasis>
+</para>
+
+<para>
+デフォルト・インストレーションの後、利用可能な1つの挨拶文が既にあります、「システム標準挨拶文(en)」
+</para>
+
+<para>
+新規挨拶文を作成するには「挨拶文の追加」ボタンを押して、必要なデータを提供し、送信して(下記の図を参照)下さい
+</para>
+
+<para>
+<screenshot>
+<screeninfo>新規挨拶文の追加</screeninfo> <graphic srccredit="管理者エリア 挨拶文 -
+スクリーンショット" scale="40" fileref="screenshots/add-salutation.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:新規挨拶文の追加</emphasis>
+</para>
+
+<para>
+挨拶文の中で変数を使用することは可能です。チケットに応答する時、変数名はそれらの値と取り替えられるでしょう。
+</para>
+
+<para>
+テンプレートの中で使用することができる異なる変数は、挨拶文画面の下方部分にリストされます。例えばこれを使えば、チケット送信者の姓が変数&lt;OTRS_LAST_NAME&gt;
+が返信に含まれるでしょう。
+</para>
+
+<note>
+<para>
+他のOTRSの実体のように、挨拶文は削除できません。有効オプションを<emphasis>無効</emphasis>または<emphasis>無効-暫定</emphasis>にすることで不活性化されるだけです。
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-signatures">
+<title>署名</title>
+
+<para>
+テンプレート用の別のテキスト・モジュールは署名です。<link
+linkend="adminarea-queue">キュー</link>に関するセクションに述べられているように、署名はキューにリンクすることができます。署名が以前にキューにリンクされていれば、署名は単にテンプレート・テキストに追加されるだろうということに注意してください。管理者ページの「署名」リンクへのアクセスにより、システムでの署名を管理することができます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>署名管理</screeninfo> <graphic srccredit="「管理者エリア 署名 -
+スクリーンショット」" scale="40" fileref="screenshots/admin-signatures.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: 署名管理</emphasis>
+</para>
+
+<para>
+OTRSの新規インストール後、システムにはあらかじめ定義された署名：「システム標準署名(en)」が存在します。
+</para>
+
+<para>
+新規署名を作成するために、「署名の追加」ボタンを押して下さい。必要とされるデータを提供し、送信します(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>新規署名の追加</screeninfo> <graphic srccredit="管理者エリア 署名 -
+スクリーンショット" scale="40" fileref="screenshots/add-signature.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:新規署名の追加</emphasis>
+</para>
+
+<para>
+挨拶文のように、署名は、チケットに答える担当者の姓、名のような動的内容を含むことができます。またここで変数は、すべてのチケットに対して署名テキストのコンテンツを代替するために使用することができます。使う変数に関しては署名画面の下部をご覧ください。あなたが署名に例えば可変&lt;OTRS_LAST_NAME&gt;を含めば、チケットに答える担当者の姓は変数を代替します。
+</para>
+
+<note>
+<para>
+挨拶文でもそうであるように、署名も削除できません。有効オプションを<emphasis>無効</emphasis>または<emphasis>無効-一時的</emphasis>に設定してのみ非活性化することができます。
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-attachments">
+<title>添付</title>
+
+<para>
+さらに、任意に1つ以上の添付をテンプレートに加えることができます。テンプレートが選択されていれば、添付はメッセージ作成ウィンドウに付けられるでしょう。必要ならば、担当者は顧客のもとへそれを送る前に個々のテンプレートから添付を取り除くことができます。
+</para>
+
+<para>
+管理者ページの「添付」リンクによって、システムのデータベースに添付を読み込むすることができます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>テンプレート用添付の管理</screeninfo> <graphic srccredit="管理者エリア 添付 -
+スクリーンショット" scale="40" fileref="screenshots/admin-attachment.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:添付管理</emphasis>
+</para>
+
+<para>
+新規添付を作成するために、「添付追加」ボタンを押し、必要なデータを提供し、送信します(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>新規添付の追加</screeninfo> <graphic srccredit="管理者エリア 署名 -
+スクリーンショット" scale="40" fileref="screenshots/add-attachment.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:新規添付の追加</emphasis>
+</para>
+
+<para>
+添付が格納される場合、1つ以上のテンプレートにリンクすることができます。管理者ページ(下記の図を参照)のリンク「添付&lt;-&gt;
+テンプレート」をクリックして下さい。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>添付のテンプレートへのリンク</screeninfo> <graphic srccredit="管理者エリア 添付テンプレート
+- スクリーンショット" scale="40"
+fileref="screenshots/admin-attachment-template.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:添付のテンプレートへのリンク</emphasis>
+</para>
+
+<para>
+特定のテンプレートに、および逆に異なる添付を関連させるためには、対応するテンプレート名あるいは添付をクリックしてください(図5.27および5.28以下にそれぞれ参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>テンプレート用添付関連の変更</screeninfo> <graphic srccredit="管理者エリア テンプレートと添付
+- スクリーンショット" scale="40"
+fileref="screenshots/template-attachment-relations.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:テンプレート用添付関連の変更</emphasis>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>添付用テンプレート関連の変更</screeninfo> <graphic srccredit="管理者エリア テンプレートと添付
+- スクリーンショット" scale="40"
+fileref="screenshots/template-attachment-relations2.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:添付用テンプレート関連の変更</emphasis>
+</para>
+
+</section>
+
+<section id="adminarea-Templates">
+<title>テンプレート</title>
+
+<para>
+    チケット処理を促進し、かつ返答の外観を標準化するために、OTRSにテンプレートを定義することができます。テンプレートは1つ以上のキューにリンク、および逆リンクも可能です。
+</para>
+
+<para>
+    OTRSの異なる部分で使用される、異なる種類およびそれらのテンプレートがありますそれらはそれ自身の目的を持っていて、下記は可能なテンプレート・タイプのリストです。:
+</para>
+<itemizedlist mark="round">
+    <listitem>
+        <para>返答：Answer: チケット・応答として使用されるか返答します。</para>
+    </listitem>
+    <listitem>
+        <para>作成：Create: 新規電話かEメール・チケットの中で使用されます。</para>
+    </listitem>
+    <listitem>
+        <para>転送：Forward: 誰か他の人へ記事を転送するために使用されます。</para>
+    </listitem>
+    <listitem>
+        <para>電話：PhoneCall: 電話の着信および発信画面で使用されます。</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+    電話の受発信画面で使うためには、返答テンプレートは二つの方法でアクセス可能です。ひとつは、記事メニューでのチケット・ズーム画面から。もうひとつ、より素早い方法なら、状態ビューやチケット・ビューのようなチケット概要の大画面から。新規のOTRS導入に関しては、テンプレート「空の答え（empty
+answer）」がすべてのキューに対してデフォルトでセットされます。
+</para>
+
+<para>
+    転送テンプレートがキューに割り当てられ加えられるとすぐに、チケット・ズーム中の「転送」ボタン（通常は空のテキスト転送画面に導かれます）は選択コントロールに変化します。ひとつのテンプレートを選択することで「選択」は、転送テンプレートに情報を与えます。転送画面は、テンプレートテキストと添付で事前に情報を与えられ表示されます。（返答テンプレートでの「返答選択ボックス」と同様です。）
+</para>
+
+<para>
+    タイプ「作成」と「電話」のテンプレートを作成することは、　それぞれの画面の中の「テキスト・テンプレート」選択ボックス」を見えるようにします。リストにテンプレートを選択することは、「テキスト」と「添付」フィールド（テンプレートで利用可能ならば）にデータを追加することになるでしょう。テキストまたは添付で何からの以前の変更が、テンプレートを選択することで上書きされることに気づいて下さい。
+</para>
+
+<para>
+    管理者ページの「テンプレート」をクリックすれば、テンプレート管理画面が開きます。(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>テンプレート</screeninfo> <graphic srccredit="管理者エリア・テンプレート -
+スクリーンショット" scale="40" fileref="screenshots/admin-template.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:テンプレート管理</emphasis>
+</para>
+
+<para>
+    新規テンプレート(「テンプレート追加」ボタン上のクリック)を作成するためには、必要なデータ(確実に適切なテンプレート・タイプを選択すること)を提供して、送信下さい(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>テンプレート</screeninfo> <graphic srccredit="「管理者エリア テンプレート -
+スクリーンショット」" scale="40" fileref="screenshots/add-template.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:テンプレートの追加</emphasis>
+</para>
+
+<para>
+テンプレートを1つ以上のキューに追加/削除するためには、管理者ページの「テンプレート&lt;-&gt;
+キュー」リンクをクリックしてください(下記の図を参照)。さらに、特定の実体に関する情報を得るためにフィルタを使用することができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>テンプレート・キュー関係管理</screeninfo> <graphic srccredit="「管理者エリア テンプレート
+キュー - スクリーンショット」" scale="40"
+fileref="screenshots/admin-template-queue.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:テンプレート・キュー関係管理</emphasis>
+</para>
+
+<para>
+キューに、および逆に（and vice
+versa）利用可能になる、異なるテンプレートを定義するためには、対応するテンプレートかキューをクリックしてください(図5.32および5.33以下にそれぞれ参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>テンプレートのためのキュー関係の変更</screeninfo> <graphic srccredit="管理者エリア
+テンプレートとキュー - スクリーンショット" scale="40"
+fileref="screenshots/template-queue-relations.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:テンプレートのためのキュー関係の変更</emphasis>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>キューのためのテンプレート関係の変更</screeninfo> <graphic srccredit="管理者エリア
+テンプレートとキュー - スクリーンショット" scale="40"
+fileref="screenshots/template-queue-relations2.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:キューのためのテンプレート関係の変更</emphasis>
+</para>
+
+<para>
+    テンプレートを選択するとき追加の情報がテンプレート・テキストに追加できます。これはテンプレートのタイプに依存します：
+</para>
+<para>
+    しかしながら、「電話」とテンプレートの作成はテンプレート・テキストにいかなるコンテンツも追加しません。新規Eメールチケット画面はキューを追加し、そのキューは解決Eメール本文に署名を割り当てます。（この画面は署名を視覚化するための別のボックスを持ちます。）
+</para>
+<para>
+    返答テンプレートテキストは、選択された時、キューに関連づけられて挨拶文を含みます。　それからテンプレートはのテキスト、それから引用されたチケットのテキスト、そして最後はキューに関連付けられた署名も含みます。
+</para>
+<para>
+    転送テンプレートは返答テンプレートと同様ですが、それらは挨拶文部分を含みません。
+</para>
+
+</section>
+
+</section>
+
+<section id="adminarea-auto-responses">
+<title>自動応答</title>
+
+<para>
+OTRSは、特定のイベントが発生に応じて顧客へ自動応答を送信することを可能にします。それらのイベントとは、特定のキュー中のチケットの生成、チケットに関するフォローアップメッセージの受取、チケットの完了か拒否、等です。そのような応答を管理するためには、管理者ページ上でリンク「自動応答」をクリックしてください(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>自動応答管理</screeninfo> <graphic srccredit="管理者エリア 自動応答 -
+スクリーンショット" scale="40"
+fileref="screenshots/admin-autoresponse.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:自動応答管理</emphasis>
+</para>
+
+<para>
+自動応答を作成するために、「自動応答の追加」をボタンをクリックし、必要とされるデータを提供し、送信して下さい(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>自動応答の追加</screeninfo> <graphic srccredit="管理者エリア 自動応答 -
+スクリーンショット" scale="40" fileref="screenshots/add-autoresponse.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：自動応答の追加</emphasis>
+</para>
+
+<para>
+署名と挨拶文でそうであったように、自動応答の件名およびテキストは、変数によって生成することができます。例えば、自動応答の本文に可変[&lt;OTRS_CUSTOMER_EMAIL
+5&gt;]を挿入すれば、顧客メール・テキストの最初の5行が自動応答に挿入されるでしょう。図示された画面の一番下にて使用することができる有効な変数に関するより多くの詳細を見つけるでしょう。
+</para>
+
+<para>
+すべての自動返答ではそれをきっかけとすべきイベントを指定することができます。デフォルトのインストレーションの後で利用可能なシステム・イベントはテーブル5-3に述べられています。
+</para>
+
+<table id="table-of-autoanswer-types">
+<title>自動応答用イベント</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>
+          Name
+        </entry>
+        <entry>
+          摘要
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>
+          自動応答
+        </entry>
+        <entry>
+          あるキュー中のチケットの自動返答生成
+        </entry>
+      </row>
+      <row>
+        <entry>
+          自動応答/新規チケット
+        </entry>
+        <entry>
+          既に完了チケットへの返信。例えば顧客がそのチケットへ返信した場合
+        </entry>
+      </row>
+      <row>
+        <entry>
+          自動フォローアップ
+        </entry>
+        <entry>
+          チケットに対するフォローアップの受付
+        </entry>
+      </row>
+      <row>
+        <entry>
+          自動拒否
+        </entry>
+        <entry>
+          システムによって行われたチケットの自動拒否
+        </entry>
+      </row>
+      <row>
+        <entry>
+          自動削除
+        </entry>
+        <entry>
+          システムによって行われたチケットの削除
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+
+<note>
+<para>
+他のOTRSの実体と同様に、自動応答も単に非活性化されるだけであり、削除はできません。（有効オプションを<emphasis>無効</emphasis>または<emphasis>無効-暫定</emphasis>に設定することによって）
+</para>
+</note>
+
+<para>
+キューに対する自動応答を加えるためには、管理者ページ上で「自動応答&lt;-&gt;
+キュー」リンクを使用してください(下記の図を参照)。全てのシステム・イベントは全てのキューのためにリストされます。また、同じイベントを備えた自動応答はリストボックスによって選択するか、削除することができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>キュー自動応答関連の管理</screeninfo> <graphic srccredit="管理者エリア キュー -
+自動応答 - スクリーンショット" scale="40"
+fileref="screenshots/admin-autoresponse-queue.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:キュー自動応答関連の管理</emphasis>
+</para>
+
+<para>
+キューに利用可能になる異なる自動応答を定義するためには、対応するキュー名をクリックしてください(下記の図を参照)。さらに、既存の自動応答を編集することは可能です。それには「応答」をクリックして、「新規自動応答を編集」として同じやり方で編集してください。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>キュー用の自動応答関連の変更</screeninfo> <graphic srccredit="管理者エリア 自動応答とキュー
+- スクリーンショット" scale="40"
+fileref="screenshots/autoresponses-queues-relations.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:キュー用の自動応答関連の変更</emphasis>
+</para>
+
+</section>
+
+
+<section id="adminarea-emailaddresses">
+<title>Eメール・アドレス</title>
+
+<para>
+OTRSがEメールを送ることを可能にするために、システムによって使用されるために有効なEメール・アドレスを必要とします。多くのサポート・インストレーションはひとつ以上の使用する必要があるので、OTRSは複数ので稼働できます。キューは多くのEメール・アドレスにリンクすることができ、その逆も可です。キューが作成されると、キューから送信メッセージとして送信するEメール・アドレスは、セットされます。システムの全てのEメール・アドレスを管理するために、管理者ページから「Eメール・アドレス」リンクを使用してください(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>システム・Eメール・アドレス管理</screeninfo> <graphic srccredit="管理者エリア Eメール -
+スクリーンショット" scale="40" fileref="screenshots/admin-email.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:システム・Eメール・アドレス管理</emphasis>
+</para>
+
+<para>
+新規Eメールアドレス(下記の図を参照)を作れば、それとリンクされるキューかサブキューを選択することができます。このリンクでシステムは受信メッセージをソートすることが可能となります。正しいキューの中で　メールのTo;フィールドアドレスによりソートされます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>システム・メール・アドレスの追加</screeninfo> <graphic srccredit="「管理者エリア Eメール -
+スクリーンショット」" scale="40" fileref="screenshots/add-email.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:システム・メール・アドレスの追加</emphasis>
+</para>
+
+<note>
+<para>
+他のOTRSの実体と同様に、Eメール・アドレスも単に非活性化されるだけであり、削除はできません。（有効オプションを<emphasis>無効</emphasis>または<emphasis>無効-暫定</emphasis>に設定することによって）
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-notifications">
+<title>通知</title>
+
+<para>
+OTRSは、あるイベントの発生に基づいて担当者や顧客へ通知することが可能です。担当者は、<link
+linkend="user-preferences">選択（選好）</link> のリンク経由で自身への通知用のシステム・イベントを設定できます。
+</para>
+
+<para>
+管理者ページの「担当者通知」リンクによって、システムの通知を管理することができます(下記の図を参照)。ある通知だけをリストするためにフィルタを使用することができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>通知管理</screeninfo> <graphic srccredit="管理者エリア 通知 -
+スクリーンショット" scale="40"
+fileref="screenshots/admin-notification.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:通知管理</emphasis>
+</para>
+
+<para>
+件名および通知テキストをカスタマイズすることができます。リストから変更したい通知をクリックしてください(図を参照)。そうすれば、内容が編集用にロードされます。利用可能な言語の各々の同じ名前を持った通知があることをご留意ください。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>通知管理</screeninfo> <graphic srccredit="「管理者エリア 通知 -
+スクリーンショット」" scale="40"
+fileref="screenshots/customize-notification.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>通知のカスタマイズ</emphasis>
+</para>
+
+<para>
+署名と挨拶文でそうであるように、特殊変数の使用により、通知の内容を動的に作成することは可能です。図の中で示される画面最下部の変数のリストを見つけることができます。
+</para>
+
+<para>
+さらに、イベントに基づいた通知を作成することは可能です。誰がいつあなたにそのような通知を送信するか、を詳細に指定することができます、以下のような様々のパラメタから選択することができます:
+受信グループ, 担当者, 役割, Eメールアドレス, 通知契機イベントタイプ, チケットタイプ, 状態, 優先度, キュー, ロック, サービス,
+SLA, 等。
+</para>
+
+<para>
+すべてのイベントに基づいた通知のリストを見るためには、管理者ページ上でリンク「通知(イベント)」をクリックしてください(図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>通知管理に基づくイベント</screeninfo> <graphic srccredit="「管理者エリア
+イベントベースの通知 - スクリーンショット」" scale="40"
+fileref="screenshots/admin-notification-eventbased.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:通知管理に基づくイベント</emphasis>
+</para>
+
+<para>
+図の中で示されるように、追加ボタンをクリックすることにより新規通知を作成することができます(図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>通知管理に基づくイベントの登録</screeninfo> <graphic srccredit="管理者エリア
+イベントベースの通知 - スクリーンショット" scale="40"
+fileref="screenshots/admin-notification-eventbased-new.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: 通知管理に基づくイベントの登録</emphasis>
+</para>
+
+<para>
+図の中で示される画面の一番下にリストされた特殊変数の使用により、通知に基づいたイベント内容をダイナミックに作成することができることにご留意ください。
+</para>
+
+</section>
+
+<section id="adminarea-smime">
+<title>SMIME</title>
+
+<para>
+OTRSは、S/MIME
+エンコードされたメッセージの入信や送信Eメールへの署名を処理することができます。この機能を使用するには、それを活性化し、SysConfigの中のいくつかの<link
+linkend="Framework:Crypt::SMIME">構成パラメータ</link>を変更する必要があります。
+</para>
+
+<para>
+管理者ページの「S/MIME証明書」リンクによってS/MIME証明書を管理することができます(下記の図を参照)。証明書の追加及び削除、またSMIMEデータの検索もできます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>SMIME</screeninfo> <graphic srccredit="「管理者エリア SMIME -
+スクリーンショット」" scale="40" fileref="screenshots/admin-smime.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: S/MIME 管理</emphasis>
+</para>
+
+</section>
+
+<section id="adminarea-pgp">
+<title>PGP鍵</title>
+
+<para>
+OTRSは、PGP鍵を扱います、それによりメッセージを暗号化/解読し、かつ送信メッセージに署名することができます。この機能を使用するには、それを活性化し、SysConfigの中のいくつかの<link
+linkend="Framework:Crypt::PGP"> 構成パラメータ </link>を変更する必要があります。
+</para>
+
+<para>
+管理者ページの「PGP鍵」リンクによって、OTRS(例えば地方のOTRSユーザ、ウェブサーバ・ユーザ)(下記の図を参照)を備えたPGP鍵に使用されるものとするユーザのkey
+ringを管理することは可能です。キーと署名を加えること、削除することは可能です。また、key ring中のすべてのデータを捜すことができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>PGP鍵</screeninfo> <graphic srccredit="管理者エリア PGP -
+スクリーンショット" scale="40" fileref="screenshots/admin-pgp.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: PGP鍵 管理</emphasis>
+</para>
+
+</section>
+
+<section id="adminarea-status">
+<title>状態</title>
+
+<para>
+管理者ページの「状態」リンクによって、システムの中で使用したい異なるチケット状態を管理することができます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>チケット状態管理</screeninfo> <graphic srccredit="管理者エリア 状態 -
+スクリーンショット" scale="40" fileref="screenshots/admin-states.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:状態管理</emphasis>
+</para>
+
+<para>
+デフォルトの開始後、定義される「状態」がいくつかあります。
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+        完了（成功）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        完了（不成功）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        結合済
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        「新規」（new）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        対応中（open）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        保留（自動完了＋）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        保留（自動完了-）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        保留（期限付）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        削除済
+    </para>
+  </listitem>
+</itemizedlist>
+
+<para>
+全ての状態はタイプにリンクされます。それは新規状態が作成されならば指定されねばなりません。デフォルトの状態タイプは次の通りです。
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+        完了済
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        結合済
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        「新規」（new）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        対応中（open）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        保留（自動）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        保留（期限付）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+        削除済
+    </para>
+  </listitem>
+</itemizedlist>
+
+</section>
+
+
+<section id="adminarea-sysconfig">
+<title>SysConfig</title>
+
+<para>
+SysConfigのリンクは、多くのOTRSコンフィグレーション・オプションがメンテナンスされるセクションへと辿り着きます。
+</para>
+
+<para>
+管理者ページのSysConfigリンクは、システム構成用のグラフィカル・インターフェースをロードする(下記の図を参照)。
+現在の全ての設定を１ファイルにバックアップするように、システム用の自分の構成ファイルをアップロードすることができます。OTRSフレームワークおよびインストールされたアプリケーションの構成パラメタはほとんどすべて、このインターフェースを通って見て変更することができます。全ての構成パラメタがグループおよびサブグループへソートされるので、既存のパラメタの莫大な数によってすばやく閲覧することは可能です。さらに、構成パラメタのすべてによって全文検索を行なうことも可能です。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>システム構成(SysConfig)用のグラフィカル・インターフェース</screeninfo> <graphic srccredit="管理者エリア sysconfig
+- スクリーンショット" scale="40" fileref="screenshots/admin-sysconfig.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:システム構成(SysConfig)用のグラフィカル・インターフェース</emphasis>
+</para>
+
+<para>
+システム構成用のグラフィカル・インターフェースは、「ウェブインターフェースを通ってシステムを構成する」章に、より詳細に述べられています。
+</para>
+
+</section>
+
+<section id="adminarea-postmasterpop3-account">
+<title>Eメールアカウントの使用</title>
+
+<para>
+チケット・システムへ新規Eメールをトランスポート方法はいくつかあります。1つの方法は、ローカルのMTA、およびシステムにEメールを直接送るthe
+otrs.PostMaster.plスクリプトを使用することです。もうひとつの方法はウェブインターフェースを通って処理することができるEメールアカウントの使用です。管理者ページの「PostMasterメールアカウント」リンクは、メールアカウント用の管理コンソールをロードします(下記の図を参照)。OTRSはメール・プロトコル：POP3、POP3S、IMAPおよびIMAPS　をサポートします。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Eメールアカウント管理</screeninfo> <graphic srccredit="管理者エリア ポストマスター -
+スクリーンショット" scale="40" fileref="screenshots/admin-mailaccount.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: Eメールアカウント管理</emphasis>
+</para>
+
+<para>
+より詳細については、<link linkend="email-receiving-pop3">PostMasterメールアカウント</link>
+に関するセクションを参照してください。
+</para>
+
+</section>
+
+<section id="adminarea-postmasterfilter">
+<title>受信Eメール・メッセージのフィルタリング</title>
+
+<para>
+OTRSは、受信Eメール・メッセージのフィルタリング能力を持っています。例えば、指定されたキューに特定のEメールを自動的に入れるか、いくつかのメールのために特定の状態かチケット・タイプをセットすることが可能です。フィルタはすべての受信メールに適応します。管理者ページ上でリンク「PostMasterフィルタ」によってフィルタを管理することができます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>ポストマスター・フィルタ管理</screeninfo> <graphic srccredit="管理者エリア
+ポストマスター・フィルター - スクリーンショット" scale="40"
+fileref="screenshots/admin-postmasterfilter.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:ポストマスター・フィルタ管理</emphasis>
+</para>
+
+<para>
+フィルタは、Eメール上で実行される定義されたアクションのために、順番に合致しなければならない1つ以上の基準から成ります。フィルター基準は、本文にヘッダーあるいはEメールの本文のために定義できます。(例えば送信者アドレスや本文中の文字列などのような特定のヘッダー入力の検索)正規表現でさえ拡張パターン一致のために使用することができます。フィルタが一致する場合、GUIの中でX-OTRSヘッダーを使用して、フィールドをセットすることができます。OTRSでチケットかフォローアップ・メッセージを作成する時、これらの値が適用されるでしょう。テーブル5-4は異なるX-OTRSヘッダーおよびそれらの意味をリストします。
+</para>
+
+<para>
+さらに、フォローアップEメールに対して値をセットするために X-OTRS-FollowUp-*ヘッダーを使用することができます。
+</para>
+
+<table id="table-of-x-otrs-headers">
+<title>異なるX-OTRSヘッダーの機能</title>
+  <tgroup cols="3">
+    <thead>
+      <row>
+        <entry>
+          Name
+        </entry>
+        <entry>
+          可能な値
+        </entry>
+        <entry>
+          摘要
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>
+          X-OTRS-優先度:
+        </entry>
+        <entry>
+          1 極低い, 2 低い, 3 普通, 4 高い, 5 極高い
+        </entry>
+        <entry>
+          チケットの優先度を設定します。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-キュー:
+        </entry>
+        <entry>
+          システム内でのキュー名
+        </entry>
+        <entry>
+          チケットがソートされる場合、キューをセットします。もしX-OTRSヘッダーの中でセットされれば、特定のキューへチケットをソートしようとする他のすべてのフィルタ規則が無視されます。サブキューを使用する場合は、「Parent::Sub」としてそれを指定してください。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-ロック:
+        </entry>
+        <entry>
+            ロック、アンロック
+        </entry>
+        <entry>
+          チケットのロック状態を設定します
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-無視:
+        </entry>
+        <entry>
+          「はい」 あるいは 「真」
+        </entry>
+        <entry>
+          このX-OTRSヘッダーが「はい」にセットされれば、受信メッセージは完全に無視され、システムに配達されないでしょう。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-状態:
+        </entry>
+        <entry>
+          新規、対応中、完了（成功）、完了（不成功）...
+        </entry>
+        <entry>
+          チケットの次の状態を設定します
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-状態-保留時間:
+        </entry>
+        <entry>
+         例えば 2010-11-20 00:00:00
+        </entry>
+        <entry>
+            チケットの保留時間を設定します。（X-OTRS-Stateによって保留状態を送信もして下さい）電子メールの到着時刻に基づいて、「2010-11-20
+00:00:00」のような絶対日付あるいは相対日付を指定することができます。フォーム「+ $Number
+$Unit」を使用してください。ここで、「$Unit」は、's'の(秒)、「m」(分)、「h」(時間)あるいは「d」(日)です。1ユニットのみ指定することができます。有効な設定例:「+50s」(50秒でペンディング)、「+30m」(30分)、「+12d」(12日)。「+1d
+12h」のようなセッティングができないことに注意してください。その代わりに「+36h」を指定できます。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-タイプ:
+        </entry>
+        <entry>
+         デフォルト (あなたの実施したセットアップに依存します)
+        </entry>
+        <entry>
+          チケットタイプの設定 (Ticket::Type が活性化されていれば)。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-サービス:
+        </entry>
+        <entry>
+         （セットアップにもよりますが）
+        </entry>
+        <entry>
+          チケットのサービスを設定します。(Ticket::Service
+がアクティブならば)。サブキューを使用する場合は、&quot;Parent::Sub&quot; としてそれを指定してください。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-SLA:
+        </entry>
+        <entry>
+         （セットアップにもよりますが）
+        </entry>
+        <entry>
+          チケットのSLAを設定します。(Ticket::Service support がアクティブならば)。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-顧客ユーザ:
+        </entry>
+        <entry>
+          CustomerUser（顧客ユーザ）
+        </entry>
+        <entry>
+          チケット用顧客ユーザーを設定します。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-顧客番号:
+        </entry>
+        <entry>
+          CustomerNo（顧客番号）
+        </entry>
+        <entry>
+          このチケットの顧客IDを設定します。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-送信者タイプ：
+        </entry>
+        <entry>
+          担当者、システム、顧客
+        </entry>
+        <entry>
+          このチケット送信者のタイプを設定します。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-記事タイプ:
+        </entry>
+        <entry>
+          外部Eメール、内部Eメール、外部Eメール通知、内部Eメール通知、電話、ファックス、SMS,ウェブリクエスト、内部ノート、外部ノート、ノートレポート。
+        </entry>
+        <entry>
+          受信チケットの記事タイプを設定します。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-DynamicField-&lt;DynamicFieldName&gt;:
+        </entry>
+        <entry>
+          動的フィールドの構成に依存します（テキスト：ノートブック、日付：2010-11-20 00:00:00, Integer: 1)
+        </entry>
+        <entry>
+          摘要:動的フィールド&lt;DynamicFieldName&gt; でチケットの追加情報値を保存します。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-ループ:
+        </entry>
+        <entry>
+          真
+        </entry>
+        <entry>
+          このX-OTRSヘッダーが設定されたら、メッセージ送信者へ自動返信は配信されません。（メール・ループ保護のため）
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+
+<para>
+すべてのフィルタ・ルールに対して名前を指定するべきです。フィルター基準はセクション「フィルタ条件」の中で指定することができます。「ヘッダー1」、「ヘッダー2」あるいは、あなたが検索したいメッセージの部分等をリストボックスから選んでください。そしてあなたがフィルターしたい値を右側で指定して下さい。セクション「セット電子メール・ヘッダー」では、フィルタ規則が一致する場合、起きるアクションを選ぶことができます。X-OTRSヘッダーを選択し、かつ関連する値(下記の図を参照)をセットするために、「ヘッダー1」、「ヘッダー2」などを選択することができます。フィルタ規則はアルファベティカルに評価され、すべて実行されます。但し、「Stop
+after match」セッティングが規則のうちの1つで「はい」にセットされている場合を除きます。(この場合、残りのフィルタの評価は取り消されます。)
+</para>
+
+<para>
+<screenshot>
+<screeninfo>入信メッセージに対するフィルタ・ルールの追加</screeninfo> <graphic srccredit="管理者エリア
+ポストマスター・フィルター - スクリーンショット" scale="40"
+fileref="screenshots/add-postmasterfilter.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:PostMasterフィルタの追加</emphasis>
+</para>
+
+<example id="sort-mails-into-junk">
+<title>特定のキューの中へのスパム・メールのソート</title>
+
+<para>
+OTRSは、有用なフィルタ規則によってスパムと判定されたEメールを自動的に移動します。SpamAssassinのようなスパム検出ツールによって「ジャンク」キューへ移動します。SpamAssassinは「X-Spam-Flag」ヘッダーを全てのチェックしたメールに追加します。メールがスパムとして判定された場合、ヘッダーは「はい」にセットされます。したがって、フィルター条件は「X-Spam-Flag」が「Yes」になります。この基準でフィルタ規則を作成するために、例えば「spam-mails」として名前を挿入することができます。「フィルタ条件」のためのセクションでは、リストボックスあｋら「Header
+1」に対して「X-Spam-Flag」を選んでください。このヘッダーに見合う値として「はい」を挿入してください。今、フィルター条件は指定されます。スパム・メールがすべて「ジャンク」キューに入れられることを確認し、「Set
+Email Headers」のためのセクションで「Header
+1」のために入力した「X-OTRS-Queue:」を選択して下さい。このヘッダーの値として「ジャンク」を指定してください。最後に、システムでの新規メッセージを活性化する、新規フィルタ規則を追加して下さい。
+</para>
+</example>
+
+<para>
+追加モジュール(<link
+linkend="email-receiving-filter">受信メッセージのフィルタリング</link>をより明確にするために使用することができる)があります。より大きく、より複雑なシステムに対処する場合、これらのモジュールは有用かもしれません。
+</para>
+
+</section>
+
+
+<section id="adminarea-genericagent">
+<title>GenericAgentでの自動仕事の実行</title>
+
+<para>
+GenericAgent（一般担当者）はタスクを自動的に実行するツールです。「一般担当者」は例えば、チケットを完了したり、移動したり、エスカレートされたチケットに対して通知を送信したりできます。
+</para>
+
+<para>
+管理者ページ上でリンクGenericAgen（一般担当者）をクリックしてください(下記の図を参照)。システムでのすべての自動ジョブを備えたテーブルが表示されます。その後、これらのジョブは編集、手動で動作、または完全に削除することができます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>GenericAgent（一般担当者）のためのジョブ・リスト</screeninfo> <graphic srccredit="管理者エリア
+genericagent（一般担当者） - スクリーンショット" scale="40"
+fileref="screenshots/admin-genericagent.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: GenericAgentのためのジョブ・リスト</emphasis>
+</para>
+
+<para>
+    新規ジョブを作成するために「ジョブ追加」ボタンをクリックしてください。最初に名前を提供する必要があります。その後、ジョブがどのように実行されるか特定することができます:指定時刻で自動（cronjobのようにこのモードはチケット・フィルターによってすべてのチケットで作動します。）あるいは、チケット・イベンで自動（チケット・フィルターにマッチしていれば単一のチケットが変更された直後に）。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>GenericAgent（一般担当者）のためのジョブ作成</screeninfo> <graphic srccredit="「管理者エリア
+genericagent（一般担当者） - スクリーンショット」" scale="40"
+fileref="screenshots/add-genericagent-job.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: GenericAgentのためのジョブ作成</emphasis>
+</para>
+
+<para>
+    すべてのジョブについては、チケット・フィルタを指定することができるが、例えば、ある特定のキュー中ではチケット上でのみ作動します。フィルター条件はすべて、チケット上で実行されるジョブのために満たされなければならない。
+</para>
+<para>
+    すべてのジョブについては、チケット・フィルタを指定することができるが、例えば、ある特定のキュー中ではチケット上でのみ作動します。フィルター条件はすべて、チケット上で実行されるジョブのために満たされなければなりません。最後に、チケットは新規キューか状態のような様々なチケット・フィールドの設定により修正することができます。チケットにノートを付けるか、カスタマイズされたモジュールを実行することは可能です。さらに、データベースからチケットを削除するオプションがあります。これはシステムからの時代遅れのデータあるいは無効のデータを除去するのに有用になりえます。
+    <warning>
+        <para>チケットを削除する機能を使う場合、すべての影響を受けるチケットやそれらの添付ファイルはデータベースから取り除かれ復元することはできません。
+        </para>
+    </warning>
+</para>
+<para>
+    ジョブを編集した後に、OTRSは概要画面に戻ります。そこで、どんなジョブも手動で実行できる可能性があります。ジョブを実行することを選ぶならば、ジョブが実際に走っている時に全てのチケットが影響を受けることをまず最初に見ることでしょう。このリストは、あなたが意図通りにジョブが働いていることを確認するのに役立ちます。このポイントでは、これらのチケットにまだ変更は行なわれていません。あなたが画面を確認する場合のみ、ジョブが実行されます。
+</para>
+</section>
+
+<section id="adminarea-adminemail">
+<title>管理者Eメール</title>
+
+<para>
+OTRS管理者は特定のユーザあるいはグループへメッセージを送ることができます。管理者ページの「管理者通知」リンクでは、通知されるべき担当者とグループは選択可能な画面を開きます。（下図参照）
+</para>
+
+<para>
+<screenshot>
+<screeninfo>管理者通知</screeninfo> <graphic srccredit="管理者エリア Eメール -
+スクリーンショット" scale="40"
+fileref="screenshots/send-admin-notification.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:管理者通知</emphasis>
+</para>
+
+<para>
+通知文の送信者、件名、本文は指定可能です。担当者、グループ、およびメッセージを受け取るべき役割を選ぶこともできます。
+</para>
+
+</section>
+
+<section id="adminarea-session-management">
+<title>セッション管理</title>
+
+<para>
+管理者エリアの「セッション管理」リンクをクリックすれば、全ログインユーザとそのセッション詳細を見ることができます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>セッション管理</screeninfo> <graphic srccredit="管理者エリア セッション管理 -
+スクリーンショット" scale="40"
+fileref="screenshots/admin-sessionmanagement.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:セッション管理</emphasis>
+</para>
+
+<para>
+すべての活発なセッションについていくつかの統計が表示されます。例えば、担当者および顧客ユーザーのログイン数、アクティブ・セッション数。どの個々のセッションもリストの右側のこのセッションのをクリックすることにより削除(kill)することができます。さらに、あなたには、全てのセッションを削除（kill）オプションがあります。その場合、システムをオフラインで使うならばそれは有用になるでしょう。すべてのセッションの詳細情報はまた利用可能です(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>セッション詳細</screeninfo> <graphic srccredit="「管理者エリア セッション管理
+- スクリーンショット」" scale="40"
+fileref="screenshots/admin-session-details.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: セッション詳細</emphasis>
+</para>
+
+</section>
+
+<section id="adminarea-system-log">
+<title>システムログ</title>
+
+<para>
+管理者ページの「システムログ」リンクは、システムのログ・エントリーを表示します。最新を先頭にして年代を逆順にソートされます(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>システムログ</screeninfo> <graphic srccredit="管理者エリア
+syslog（シスログ） - スクリーンショット" scale="40"
+fileref="screenshots/admin-syslog.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図: システムログ</emphasis>
+</para>
+
+<para>
+ログの各ラインは、以下を含みます。タイム・スタンプ、ログ優先度、システム・コンポーネント及びログ・エントリー自体です。
+</para>
+
+<note>
+<para>
+システムログは、Linux / Unix systems上でのみウェブインターフェース経由で利用可能です。Windows
+systemsではテキストエディタでファイル：<filename>[install_dir]otrs\var\log\otrs.log</filename>.を開けると、ログを見ることができます。
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-selectbox">
+<title>SQLボックス経由でのSQLクエリー</title>
+
+<para>
+管理者ページの「SQLボックス」リンクから画面を開きます。画面では、OTRSデータベースでのテーブル・コンテンツをクエリーできます。(下記の図を参照)テーブルの内容を変更することは不可能で、「select」クエリーのみ許可されます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>SQLボックス</screeninfo> <graphic srccredit="管理者エリア
+selectbox（選択ボックス） - スクリーンショット" scale="40"
+fileref="screenshots/admin-selectbox.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:SQLボックス</emphasis>
+</para>
+
+</section>
+
+<section id="adminarea-package-manager">
+<title>パッケージ・マネージャー</title>
+
+<para>
+管理者ページ上で「パッケージ・マネージャー」リンクを使用すると、OTRSの機能性を拡張するパッケージをインストールし管理することができます(下記の図を参照)。OTRSリポジトリから利用可能な拡張に関する議論については、追加アプリケーションセクションを参照してください。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>パッケージ・マネージャー</screeninfo> <graphic srccredit="管理者エリア
+パッケージ・マネージャー - スクリーンショット" scale="40"
+fileref="screenshots/admin-packagemanager.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:パッケージ・マネージャ</emphasis>
+</para>
+
+<para>
+パッケージ・マネージャは、それらのバージョン番号と一緒に、サーバに現在インストールした OTRS addonパッケージを示します。
+</para>
+
+<para>オンライン・リポジトリ・セクション中のリポジトリの選択およびアップデート・リポジトリ情報ボタンのクリックにより、リモート・ホストからパッケージをインストールすることができます。利用可能なパッケージは対応するテーブルに表示されます。画面の右側は利用可能なパッケージを示します。パッケージをインストールするために、クリックする、の上で、インストールします。設置の後、パッケージはローカルのリポジトリ・セクションに表示されます。
+</para>
+
+<para>
+インストールされたパッケージをアップグレードするために、オンライン・リポジトリの利用可能なパッケージのリストは、ローカルにインストールされているものより高いバージョンがあるパッケージ用のアクション・カラムでアップグレードを表示します。ただUpgradeをクリックすれば、システムに新規パッケージ・バージョンをインストールするでしょう。
+</para>
+
+<para>
+OTRSシステムがインターネットに接続されないかのようないくつかの場合では、さらにローカル・ディスクにダウンロードしたパッケージをインストールすることができます。アクション・サイド・バー上の参照ボタンをクリックして、ディスク上のパッケージの.opmファイルを選択してください。Openをクリックしパッケージをインストールしてください。インストール完了後、パッケージはローカルのリポジトリ・セクションに表示されます。既にインストールされているパッケージの更新のために同じステップを使用することができます。
+</para>
+
+<para>
+特殊なケース、例えば、プロキシを使用するかあるいはローカル・リポジトリを使用するためにパッケージ・マネージャーを構成したいと思うかもしれません。<link
+linkend="Framework:Core::Package">Framework:Core::Package</link>の中で利用可能なオプションを見てください。
+</para>
+
+</section>
+
+<section id="adminarea-webservices">
+    <title>ウェブサービス</title>
+    <para>
+        Webサービスリンクはグラフィカル・インターフェースにつながっています。そこではウェブサービス（for the OTRS Generic
+Interface）が作成され維持されます。（下図参照）
+    </para>
+    <para>
+        <screenshot>
+<screeninfo>ウェブサービスのためのグラフィカル・インターフェース</screeninfo> <graphic srccredit="管理者エリア ウェブサービス -
+スクリーンショット" scale="40"
+fileref="screenshots/genericinterface-webservice-overview.png"></graphic></screenshot>
+    </para>
+    <para>
+        <emphasis>図: ウェブサービスのためのグラフィカル・インターフェース</emphasis>
+    </para>
+    <para>
+        ウェブサービス構成用のグラフィカル・インターフェースは、セクション<link
+linkend="webservice_gui">"Webサービス・グラフィカル・インターフェース"</link>に、より詳細に述べられています。
+    </para>
+</section>
+
+<section id="adminarea-dynamicfields">
+    <title>動的フィールド</title>
+    <para>
+        動的フィールドは、チケットと記事用のカスタムフィールドをセットアップし管理する場所です。（下記参照）
+    </para>
+    <para>
+        <screenshot>
+<screeninfo>動的フィールド概要画面</screeninfo> <graphic srccredit="「管理者エリア
+dynamicfields（動的フィールド） - スクリーンショット」" scale="40"
+fileref="screenshots/dynamicfields-overview-filled.png"></graphic></screenshot>
+    </para>
+    <para>
+        <emphasis>図: いくつかの動的フィールドを備えた動的フィールド概要画面</emphasis>
+    </para>
+    <para>
+        動的フィールド構成は、セクション<link
+linkend="dynamicfields-configuration">"動的フィールド構成"</link>に、より詳細に述べられています。
+    </para>
+    <para>
+        動的フィールドタイプにはそれぞれそれ自身の構成セッティングおよびしたがってそれ自身の構成画面があります。
+    </para>
+    <note>
+        <para>
+            OTRSフレームワークでは、動的フィールドはデフォルトでチケットと記事にリンクのみすることができます。しかし、それらは、他のオブジェクトまで同様に延長することができます。
+        </para>
+    </note>
+</section>
+
+</section>

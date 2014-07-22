@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id='configure-pgp'>
+<title>PGP鍵を備えた安全なEメール</title>
+
+<para>
+OTRSは、PGP鍵を備えた送信メッセージに署名するか暗号化する能力を持っています。更に、暗号化された受信メッセージは解読することができます。暗号化と解読はGPLツールGnuPGで実施されます。OTRSのためのセットアップGnuPGに、次のステップを行なわなければなりません。
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+    <listitem>
+    <para>
+    オペレーティング・システムのパッケージ・マネージャーによるGnuPGのインストール
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    OTRSで使うGnuPGを構成してください。GnuPGと秘密鍵のための必要なディレクトリを作成しなければなりません。シェルからユーザ「otrs」としてスクリプト中で下に示されるコマンドを実行しなければなりません。
+    </para>
+
+    <para>
+    <screen>
+    linux:~# su otrs
+    linux:/root$ cd
+    linux:~$ pwd
+    /opt/otrs
+    linux:~$ gpg --gen-key
+    gpg (GnuPG) 1.4.2; Copyright (C) 2005 Free Software Foundation, Inc.
+    This program comes with ABSOLUTELY NO WARRANTY.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions. See the file COPYING for details.
+
+    gpg: directory `/opt/otrs/.gnupg' created
+    gpg: new configuration file `/opt/otrs/.gnupg/gpg.conf' created
+    gpg: WARNING: options in `/opt/otrs/.gnupg/gpg.conf' are not yet active during t
+    his run
+    gpg: keyring `/opt/otrs/.gnupg/secring.gpg' created
+    gpg: keyring `/opt/otrs/.gnupg/pubring.gpg' created
+    Please select what kind of key you want:
+       (1) DSA and Elgamal (default)
+       (2) DSA (sign only)
+       (5) RSA (sign only)
+    Your selection? 1
+    DSA keypair will have 1024 bits.
+    ELG-E keys may be between 1024 and 4096 bits long.
+    What keysize do you want? (2048)
+    Requested keysize is 2048 bits
+    Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+    Key is valid for? (0)
+    Key does not expire at all
+    Is this correct? (y/N) y
+
+    You need a user ID to identify your key; the software constructs the user ID
+    from the Real Name, Comment and Email Address in this form:
+        "Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;"
+
+    Real name: Ticket System
+    Email address: support@example.com
+    Comment: Private PGP Key for the ticket system with address support@example.com
+    You selected this USER-ID:
+    "Ticket System (Private PGP Key for the ticket system with address support@examp
+    le.com) &lt;support@example.com&gt;"
+
+    Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+    You need a Passphrase to protect your secret key.
+
+    Passphrase: secret
+    Repeat passphrase: secret
+
+    We need to generate a lot of random bytes. It is a good idea to perform
+    some other action (type on the keyboard, move the mouse, utilize the
+    disks) during the prime generation; this gives the random number
+    generator a better chance to gain enough entropy.
+    ++++++++++.+++++++++++++++++++++++++....+++++.+++++...+++++++++++++++++++++++++.
+    +++++++++++++++++++++++++.+++++.+++++.+++++++++++++++++++++++++&gt;++++++++++&gt;+++++
+    .......&gt;+++++&lt;+++++................................+++++
+
+    Not enough random bytes available.  Please do some other work to give
+    the OS a chance to collect more entropy! (Need 280 more bytes)
+
+    ++++++++++.+++++..++++++++++..+++++....++++++++++++++++++++.+++++++++++++++.++++
+    ++++++++++++++++++++++++++.++++++++++.+++++++++++++++.++++++++++.+++++++++++++++
+    ..+++++&gt;.+++++....&gt;+++++........................................................
+    ...........................................................&gt;+++++&lt;+++++.........
+    .............+++++^^^
+    gpg: /opt/otrs/.gnupg/trustdb.gpg: trustdb created
+    gpg: key 7245A970 marked as ultimately trusted
+    public and secret key created and signed.
+
+    gpg: checking the trustdb
+    gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+    gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+    pub   1024D/7245A970 2006-02-03
+          Key fingerprint = 2ED5 BC36 D2B6 B055 7EE1  5833 1D7B F967 7245 A970
+     uid                  Ticket System (Private pgp key for ticket system with addre
+    ss support@example.com) &lt;support@example.com&gt;
+    sub   2048g/52B97069 2006-02-03
+
+    linux:~$
+    </screen>
+    </para>
+
+    <para>
+    <emphasis>スクリプト: GnuPGの構成</emphasis>
+    </para>
+
+    <para>
+        スクリプトの中で下に示されるように、デフォルト構成は、ほとんどの要求されるパラメタのために適用することができます。キーに指定された適切なパスワードで、key所有者に対する値だけを正確に入力しなければなりません。
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    OTRSはPGP鍵を使用する準備ができているようにならなければなりません。管理者コンソールから、SysConfigインターフェースを開いて「PGP鍵」を検索してください。検索結果からサブグループCrypt::PGPを選んでください。
+    </para>
+
+    <para>
+    PGP鍵設定画面では、PGP鍵はOTRS(第一のオプション)のために活性化されるべきです。さらに、gpgプログラムへのパスはセットされチェックされるべきです。
+    </para>
+
+    <para>
+    次の構成設定(PGP::Options)はさらに変わることを要求するかもしれません。このコンフィグ・セッティングによって、「otrs」ユーザによってgpgのすべての実行に使用されるパラメタは指定することができます。特に「otrs」ユーザのGnuPGのための構成ファイルのディレクトリは重要です。例<filename>/opt/otrs/.gnupg</filename>の中で、使用されます。このディレクトリは、PGP鍵構成以前に作成されました。
+    </para>
+
+    <para>
+        次の構成オプション(PGP::Key::Password)によって、キーIDのペアおよび自身の秘密鍵のパスワードを指定することは可能です、なぜなら、外部からのコミュニケーションパートナーチケットシステムに彼らのメッセージを暗号化と秘密鍵で書き込み、OTRSはそれらのメッセージをIDとパスワードをここで指定して解読するからです。
+    </para>
+
+    <para>
+    どのようにしてあなた自身の秘密鍵のIDを得ることができますか？あなた自身の秘密鍵のIDはすでにキー生成時に表示されています。（上記ステップ１をご覧ください）さらに、次のスクリプト中で指定されたコマンドがユーザ「otrs」として実行される場合、IDを得ることが可能です:
+    </para>
+
+    <para>
+    <screen>
+    linux:~# su otrs
+    linux:/root$ cd
+    linux:~$ pwd
+    /opt/otrs
+    linux:~$ gpg --list-keys
+    /opt/otrs/.gnupg/pubring.gpg
+    ----------------------------
+    pub   1024D/7245A970 2006-02-03
+    uid                  Ticket System (Private pgp key for ticket system with
+    address support@example.com) &lt;support@example.com&gt;
+    sub   2048g/52B97069 2006-02-03
+
+    linux:~$
+    </screen>
+    </para>
+
+    <para>
+    <emphasis>スクリプト:自分の秘密鍵のIDを得ること。</emphasis>
+    </para>
+
+    <para>
+    秘密鍵のIDは、「サブ」で始まるラインで見つけることができます。それは長さ8文字で16進法の文字列で上の例では「52B97069」です。チケットシステムでこのキー用に指定しなければならないパスワードは、キー生成中に与えられたのと同じです。
+    </para>
+
+    <para>
+    このデータが挿入された後、「アップデート」ボタンはセッティングを保存するために使用することができます。これでOTRSは暗号化されたメッセージを受け取り解読する準備ができています。
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    このデータが挿入された後、「アップデート」ボタンはセッティングを保存するために使用することができます。これでOTRSは暗号化されたメッセージを受け取り解読する準備ができています。
+    </para>
+
+    <para>
+    最初の方法は、顧客管理インターフェースで顧客の公開鍵を指定することです。
+    </para>
+
+    <para>
+    第2の方法は、PGP鍵設定(管理者ページから到達可能)によってキーを指定することです。この画面の右側のセクションにおいては、すでにインポート済の顧客の公開鍵が全て表示されます。PGP鍵がOTRSのために活性化され構成されたら、自分の公開鍵もそこにリストされるべきです。PGP鍵設定画面の左のエリアでキーを探せます。さらに、新規公開鍵はファイルからシステムへアップロードすることができます。
+    </para>
+
+    <para>
+    OTRSへインポートされる必要のある公開鍵を備えたファイルはGnuPGP互換性をもつキー・ファイルでなければなりません。ほとんどの場合、ファイルに格納されたキーは「ASCII
+armored key」です。OTRSはこのフォーマットを取り扱えます。
+    </para>
+    </listitem>
+</orderedlist>
+</para>
+</section>

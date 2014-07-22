@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="themes">
+<title>自分のテーマの作成</title>
+
+<para>
+OTRSウェブ・フロント・エンドの中で好きなレイアウトを使用するように自分のテーマを作成することができます。自分のテーマを作成するために、必要に応じた出力テンプレートをカスタマイズできます。
+</para>
+
+<para>
+出力テンプレートのシンタックスおよび構造についてはディベロッパー・マニュアル<ulink
+url="http://otrs.github.io/doc"><citetitle>http://otrs.github.io/doc</citetitle></ulink>でより多くの情報をご覧いただけます。（特に<ulink
+url="http://otrs.github.io/doc/manual/developer/3.3/en/html/TemplatingMechanism.html"><citetitle>テンプレート</citetitle></ulink>についての章の中で）
+</para>
+
+<para>
+例として、「Company」と呼ばれる新しいテーマを作成する次のステップを行なってください:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+    <listitem>
+    <para>
+    <filename>Kernel/Output/HTML/Company</filename> と呼ばれるディレクトリーを作成して
+<filename>Kernel/Output/HTML/Standard</filename>
+から　新規フォルダへあなたが変えたいと思う全てのファイルをコピーします。
+    </para>
+    <important><para>
+        実際に変更するファイルを上書きコピーしてください。OTRSは、自動的にスタンダード・テーマから見当たらないファイルを得るでしょう。これは後半の段階でアップグレードすることをより簡単にするでしょう。</para></important>
+</listitem>
+<listitem>
+    <para>
+    <filename>Kernel/Output/HTML/Company</filename>
+にファイルをカスタマイズします。お好きなようにレイアウトを変更します。
+    </para>
+</listitem>
+<listitem>
+    <para>
+    新しいテーマを活性化するためには、<link
+linkend="Framework:Core::Web:Frontend::Themes">Frontend::Themes</link>の下のSysConfigにそれらを加えてください。
+    </para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+新しいテーマは使用可能に違いありません。<link
+linkend="user-preferences">個人選択（選好）</link>ページによってそれを選択することができます。
+</para>
+
+<warning>
+<para>
+アップデート後にこれらの変更は失われるので、OTRSで送られたテーマ・ファイルを変更しないでください。上に記述されたステップを行なうことによりのみ自分のテーマを作成してください。
+</para>
+</warning>
+
+</section>

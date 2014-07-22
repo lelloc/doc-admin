@@ -1,0 +1,871 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="genericinterface-webservice-configuration">
+    <title>ウェブサービス構成</title>
+    <para>
+        その設計から、ウェブサービスは　単一のOTRSシステムから別のシステム（例えば、テストか開発環境からプロダクション・システムまで）まで　ポータブルになるように着想されました。したがって、それはデータベースからウェブサービス構成を抽出し、かつそれを別のものにインポートする、容易な方法を持つために必要でした。このタスクを遂行するために、一般インターフェースはウェブサービス構成基礎としてYAMLファイルを使用します。
+    </para>
+    <para>
+        なぜYAMLなのでしょう?　YAMLは人間が読み書きするのに優しいことを目指したマークアップ言語です(JSONより理解するほうが簡単です)。YAMLは数的タグのようなXMLが持ついくつかの制限を持ちません。それはオープンで標準化されており、全ウェブサービス構成を格納するほどに十分に完全です。
+    </para>
+    <note>
+        <para>
+            YAMLについてより知りたければ <ulink
+url="http://www.yaml.org/">http://www.yaml.org/</ulink> をご覧ください。
+        </para>
+    </note>
+    <para>
+        下記はYAMLフォーマットによるウェブサービス設定ファイル例です:
+    </para>
+    <para>
+        <programlisting><![CDATA[
+---
+Debugger:
+  DebugThreshold: debug
+Description: This an example of a web service configuration
+Provider:
+  Operation:
+    CloseIncident:
+      Description: This is a test operation
+      MappingInbound: {}
+      MappingOutbound: {}
+      RemoteSystemGuid: ''
+      Type: Test::Test
+    Test:
+      Description: This is a test operation
+      MappingInbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Keep
+          KeyMapExact:
+            Prio: Priority
+          ValueMap:
+            Priority:
+              ValueMapExact:
+                Critical: 5 Very High
+                Information: 1 Very Low
+                Warning: 3 Normal
+          ValueMapDefault:
+            MapTo: 3 Normal
+            MapType: MapTo
+        Type: Simple
+      MappingOutbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Ignore
+          KeyMapExact:
+            Priority: Prio
+          ValueMap:
+            Prio:
+              ValueMapExact:
+                1 Very Low: Information
+                3 Normal: Warning
+                5 Very High: Critical
+          ValueMapDefault:
+            MapTo: ''
+            MapType: Ignore
+        Type: Simple
+      Type: Test::Test
+  Transport:
+    Config:
+      MaxLength: 10000000
+      NameSpace: http://www.example.com/actions
+    Type: HTTP::SOAP
+RemoteSystem: remote.system.description.example.com
+Requester:
+  Invoker:
+    Test:
+      Description: This is a test invoker
+      Events:
+        - Asynchronous: 1
+          Event: TicketCreate
+        - Asynchronous: 0
+          Event: ArticleUpdate
+      MappingInbound:
+        Type: Simple
+      MappingOutbound:
+        Type: Simple
+      Type: Test::Test
+  Transport:
+    Config:
+      Authentication:
+        Password: '*******'
+        Type: BasicAuth
+        User: otrs
+      Encoding: utf-8
+      Endpoint: http://www.example.com:8080/endpoint
+      NameSpace: http://www.example.com/actions
+      SOAPAction: Yes
+      SOAPActionSeparator: '#'
+    Type: HTTP::SOAP
+            ]]>
+        </programlisting>
+    </para>
+    <section>
+        <title>
+            構成詳細
+        </title>
+        <section>
+            <title>
+                General
+            </title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        Description(摘要):ウェブサービスを記述する短いテキスト。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        RemoteSystem（リモート・システム）:リモート・システムの短い摘要。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Debugger(デバッガ）:デバッガ・セッティング用のコンテナ。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Provider(供給者):供給者セッティング用のコンテナ。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Requester(依頼者):依頼者セッティング用のコンテナ。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section>
+            <title>
+                デバッガ
+            </title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        デバッグ閾値：デバッガ・レベル
+                    </para>
+                    <itemizedlist mark="round">
+                        <title>
+                            Possible Values
+                        </title>
+                        <listitem>
+                            <para>
+                                debug(デバッグ): 全てのログはすべてデータベースに格納されます。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                info(情報): 情報、通知およびエラーレベルログはデータベースに格納されます。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                notice(通知): 通知、エラーレベルログデータベースに格納されます。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                error(エラー): エラーレベルログだけがデータベースに格納されます。
+                            </para>
+                        </listitem>
+
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section>
+            <title>供給者</title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        Operation(オペレーション): 各オペレーション設定用コンテナ。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Transport（トランスポート）: ネットワーク・トランスポート用コンテナ。
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <section>
+                <title>オペレーション</title>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>
+                            &lt;OperationName&gt;: オペレーション用のユニークな名前、それ自身のオペレーション設定用コンテナ(基数0..n,
+しかし重複しない).
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <section>
+                    <title>&lt;OperationName&gt;</title>
+                    <para>
+                        このセクションは、他のオペレーションがもっと含んでいるかもしれないタイ「Test::Test」、あるいは異なるセッティング、からのオペレーションに基づきます。
+                    </para>
+                    <itemizedlist mark="round">
+                        <listitem>
+                            <para>
+                                Description（摘要）:オペレーションを記述する短いテキスト。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                MappingInbound（マッピング・インバウンド）: 入信依頼データ用マッピング設定用コンテナ。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                MappingOutbound（マッピング・アウトバウンド）: 発信応答データ用マッピング用設定コンテナ。
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Type（タイプ）: Controller::Operation formatでのオペレーション・バックエンド。
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <section>
+                        <title>MappingInbound（マッピング・インバウンド）</title>
+                        <para>
+                            このセクションは、タイプ「Simple」からのマッピングに基づきます。他のマッピングはより多くの異なる設定を含みます。
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Config(構成): このマッピング設定用コンテナ。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Type（タイプ）: マッピング・バックエンド。
+                                </para>
+                            </listitem>
+
+                        </itemizedlist>
+                            <section>
+                                <title>Config</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            KeyMapDefault: マップ未設定キーのコンテナ
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            ValueMapDefault: 全てのマップ未設定の値の設定のコンテナ。
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            KeyMapExact: 全ての正確なキーマッピング (基数 0 .. 1)。
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            KeyMapRegEx: 全ての正規表現キーマッピング用コンテナ (基数 0 .. 1)。
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            ValueMap: 全ての値マッピング用コンテナ (基数 0 .. 1)。
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                                <section>
+                                    <title>
+                                        KeyMapDefault（マップ未設定キーのコンテナ）
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                MapTo: 使用される新しい値 (MapTypeがMapToにセットされた場合のみ適用可能)。
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                MapType: マッピング用規則。
+                                            </para>
+                                            <itemizedlist>
+                                                <title>Possible Values</title>
+                                                <listitem>
+                                                    <para>
+                                                        Keep（保持）: 変更なく終了。
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        Ignore（無視）: やめる
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        MapTo（マップトゥー）: MapTo値を変更
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </section>
+                                <section>
+                                    <title>
+                                        ValueMapDefault（値マップ・デフォルト）
+                                    </title>
+                                    <para>
+                                        KeyMapDefault（キーマップ・デフォルト）に似ています。
+                                    </para>
+                                </section>
+                                <section>
+                                    <title>
+                                        KeyMapExact（正確なキーマップ）
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                &lt;oldkey&gt;: &lt;newkey&gt; (基数 0 .. n 但し重複なく)。
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </section>
+                                <section>
+                                    <title>
+                                        KeyMapRegEx
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                &lt;oldkey(RegEx)&gt;: &lt;newkey&gt; (基数 0 .. n 但し重複なく)。
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </section>
+                                <section>
+                                    <title>
+                                        ValueMap
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                &lt;newkey&gt;: a container for value mappings for this new key （KeyMapExact
+and KeyMapRegExからの新規キーに依存する基数）
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>
+                                            &lt;newkey&gt;
+                                        </title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    ValueMapExact: 全ての性格な値マッピング用コンテナ (基数 0 .. 1)。
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ValueMapRegEx: 全ての正規表現値のマッピング用コンテナ(基数 0 .. 1)。
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>
+                                                valueMapExact
+                                            </title>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        &lt;oldvalue&gt;: &lt;newvalue&gt; (基数 0 .. n 但し重複なく)。
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                        <section>
+                                            <title>
+                                                ValueMapRegEx
+                                            </title>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        &lt;oldvalue(RegEx)&gt;: &lt;newvalue&gt; ( 基数 0 .. n 但し重複なく)。
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                    </section>
+                    <section>
+                        <title>MappingOutbound</title>
+                        <para>
+                            MappingInboundと同じ。
+                        </para>
+                    </section>
+                    <section>
+                        <title>トランスポート</title>
+                        <para>
+                            このセクションは、供給者ネットワーク・トランスポートHTTP::SOAPに基づきます。他のトランスポートはより多く異なるセッティングを含んでいるかもしれません。
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Config（構成）: 特定のネットワークトランスポート構成セッティング用のコンテナー。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Type: 供給者ネットワークトランスポートバックエンド。
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        <section>
+                            <title>Config</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        MaxLength: OTRSによってSOAPメッセージで読まれるバイトで最大の長さ。
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        NameSpace: すべてのオペレーションにこのウェブサービスが所有しているコンテキストを与えるURI。
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+        <section>
+            <title>依頼者</title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        Invoker（依頼アクション）: 各依頼アクション(Invokers)のセッティング用のコンテナ。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Transport(トランスポート): 依頼者ネットワーク・トランスポート設定用コンテナ。
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <section>
+                <title>依頼アクション(Invokers)</title>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>
+                            &lt;InvokerName&gt;: 依頼アクション用のユニーク名前。依頼アクションそれ自身の設定用コンテナ。(基数0..n 但し重複なく)
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <section>
+                    <title>&lt;InvokerName&gt;</title>
+                    <para>
+                        このセクションは、タイプ"Test::Test"からの依頼アクションに基づいています。他の依頼アクションはより多く異なる設定を含んでいるかもしれません。
+                    </para>
+                    <itemizedlist mark="round">
+                        <listitem>
+                            <para>
+                                Description（摘要）: 依頼アクションを記述する短いテキスト
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Events（イベント）: イベント・トリガー設定の未命名のリスト用コンテナ
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                MappingInbound（マッピング・インバウンド）: 入信応答データ用マッピング設定用コンテナ
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                MappingOutbound（マッピング・アウトバウンド）: 発信依頼データ用マッピング設定用コンテナ
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Type（タイプ）:  Controller::Invoker フォーマットでの依頼アクションのバックエンド
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <section>
+                        <title>イベント</title>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    <remark>リスト要素</remark>: (基数 0 .. n)
+                                </para>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            Asynchronous（非同期）: もし依頼アクションの実行がスケジューラに可能な値を委任するならセットします。
+                                        </para>
+                                        <itemizedlist mark="round">
+                                            <title>Possible Values</title>
+                                            <listitem>
+                                                <para>
+                                                    0: スケジューラで取扱い不能です。
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    1: スケジューラで取扱い可能です。
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Event（イベント）: イベント・。トリガー名。
+                                        </para>
+                                        <itemizedlist>
+                                            <title>Possible Values (チケットのイベント用の)</title>
+                                            <listitem>
+                                                <para>
+                                                    チケット作成
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketDelete (チケット削除)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketTitleUpdate (チケット・タイトル・更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketUnlockTimeoutUpdate (チケット・アンロック・タイムアウト更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketQueueUpdate (チケットキュー更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketTypeUpdate (チケット・タイプ・更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketServiceUpdate (チケットサービス更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketSLAUpdate (チケットSLA更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketCustomerUpdate (チケット顧客更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketFreeTextUpdate (チケットフリーテキスト更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketFreeTimeUpdate (チケットフリータイム更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketPendingTimeUpdate (チケット保留時間更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketLockUpdate (チケットロック更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketArchiveFlagUpdate (チケットアーカイブ更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketStateUpdate (チケット・状態・更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketOwnerUpdate (チケット所有者更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketResponsibleUpdate (チケット応答可能更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketPriorityUpdate (チケット優先権更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    HistoryAdd (履歴追加)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    HistoryDelete (履歴削除)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketAccountTime (チケットアカウント時間)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketMerge （チケット結合)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketSubscribe (チケット・登録)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketUnsubscribe (チケット・登録解除)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketFlagSet (チケットフラグセット)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketFlagDelete (チケットフラグ削除)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketSlaveLinkAdd (チケットスレーブリンク追加)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketSlaveLinkDelete (チケットスレーブリンク削除)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TicketMasterLinkDelete (チケットマスターリンク削除)
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <itemizedlist>
+                                            <title>Possible Values (for article events) (可能な値（記事イベントに関する）)</title>
+                                            <listitem>
+                                                <para>
+                                                    Article Events (記事イベント)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleCreate (記事作成)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleFreeTextUpdate (記事フリーテキスト更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleUpdate (記事更新)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleSend (記事送信)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleBounce (記事返答)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleAgentNotification (記事担当者通知)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleCustomerNotification (記事顧客通知)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleAutoResponse (記事自動返信)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleFlagSet (記事フラグセット)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleFlagDelete (記事フラグ削除)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleAgentNotification (記事担当者通知)
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ArticleCustomerNotification (記事顧客通知)
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </section>
+                    <section>
+                        <title>MappingInbound（マッピング・インバウンド）</title>
+                        <para>
+                            オペレーションMappingInboundと同じ
+                        </para>
+                    </section>
+                    <section>
+                        <title>MappingOutbound</title>
+                        <para>
+                            オペレーションMappingInboundと同じ。
+                        </para>
+                    </section>
+                    <section>
+                        <title>トランスポート</title>
+                        <para>
+                            このセクションは、依頼者ネットワーク・トランスポートHTTP::SOAPに基づきます。他のトランスポートはより多く異なる設定を含むかもしれません。
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Config（構成）: 特定のネットワークトランスポート構成セッティング用のコンテナー。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Type（タイプ）: 依頼者ネットワークトランスポートバックエンド
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        <section>
+                            <title>Config</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Authentication(認証): 認証セッティング用のコンテナ
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Encoding(エンコーディング): SOAPメッセージ・リクエスト符号化
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Endpoint(エンドポイント): OTRSリクエストを受け入れるリモート・サーバ・ウェブサービスのURI
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        NameSpace(名前空間): すべての依頼アクション(Invokers)にこのウェブサービスが所有しているコンテキストを与えるURI.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        SOAPAction(SOAPアクション): SOAPメッセージ(in "&lt;NameSpace&gt; &lt;Separator&gt;
+&lt;Action&gt;" format).の中の空か満たされたSOAPActionヘッダーを送ること。
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <title>Possible Values</title>
+                                        <listitem>
+                                            <para>
+                                                YES(はい): 埋まったSOAPActionヘッダーを送る。
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                No(いいえ): 空のSOAPActionヘッダーを送る
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        SOAPActionSeparator: to set the &lt;Separator&gt; of a filled SOAPAction
+header.
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <title>Possible Values</title>
+                                        <listitem>
+                                            <para>
+                                                '/': .netウェブサービスのために使用されます。
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                '#': すべての休息ウェブサービスのために使用されます。
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                            <section>
+                                <title>認証</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            User（ユーザ）: リモート・ウェブサービスにアクセスする特権ユーザー名
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Password（パスワード）: プレーンテキスト中の特権ユーザー用のパスワード
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Type（タイプ）: 認証のタイプ
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+    </section>
+</section>

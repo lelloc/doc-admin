@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<chapter id="performance-tuning">
+<title>パフォーマンス・チューニング</title>
+
+<abstract>
+<para>
+以下はOTRS導入のための強化テクニックのパフォーマンスのリストです。構成、コーディング、メモリー使用、その他を含みます。
+</para>
+</abstract>
+
+<section id="performance-tuning-otrs">
+<title>OTRS</title>
+<para>
+OTRSのパフォーマンスを改善するいくつかのオプションがあります。
+</para>
+
+<section id="performance-tuning-otrs-index">
+<title>TicketIndexModule</title>
+<para>
+チケット・インデックス用の2つのバックエンド・モジュールがあります:
+</para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem>
+<para>
+Kernel::System::Ticket::IndexAccelerator::RuntimeDB
+(default)を使うことで、チケット・テーブルから取り急ぎ見えるいくつかのキューを生成します。システム内で約60,000の対応中チケットを持つまではパフォーマンスに関するトラブルを抱えないでしょう。
+</para>
+</listitem>
+
+<listitem>
+<para>
+あなたが80,000以上の対応中チケットを持っている場合、Kernel::System::Ticket::IndexAccelerator::StaticDB(最も強力なモジュール)が使用されるべきです。それは余分なticket_indexテーブルを使用します。それはビューのように働きます。バックエンドを切り替えた後に最初のインデック作成を生成するために<filename>bin/otrs.RebuildTicketIndex.pl</filename>を使用してください。
+</para>
+</listitem>
+
+</itemizedlist>
+</para>
+
+<para>
+SysConfig経由でIndexAcceleratorを変更することができます。
+</para>
+
+</section>
+
+<section id="performance-tuning-otrs-storage">
+<title>TicketStorageModule（チケット・格納・モジュール）</title>
+<para>
+チケット・記事記憶装置用の2つの異なるバックエンド・モジュールがあります:
+</para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem>
+<para>
+付属などを格納するためにデータベースの中でKernel::System::Ticket::ArticleStorageDB(デフォルト)を形成してください。ノート:大きな組織でそれを使用しないでください。
+</para>
+<para>
+賛成意見:ウェブサーバー・ユーザが「otrs」ユーザでない場合は、ファイル許可問題を回避するためにこのモジュールを使用してください。
+</para>
+<para>
+反対意見:あなたのデータベースに添付ファイルをを格納することは望ましくありません。あなたのデータベースは大きなオブジェクトを格納できることに気を配って下さい。例えば8MBのオブジェクト(デフォルトは2MBです)を格納するために「set-variable
+= max_allowed_packet=8M」でMySQLを設定します。
+</para>
+</listitem>
+
+<listitem>
+<para>
+ローカルのファイルシステム上に添付ファイルなどを格納するためにKernel::System::Ticket::ArticleStorageFSを設定してください。
+</para>
+<para>
+賛成意見: 速いですね!
+</para>
+<para>
+反対意見:ウェブサーバ・ユーザは「otrs」ユーザであるべきです。さらに、多数のフロントエンドのサーバーを持つなら、、ファイルシステムがサーバー間で共有されることを確かめるべきです。NFS共有か可能ならSANかそれに類似のソリューションに置いて下さい。
+</para>
+</listitem>
+
+</itemizedlist>
+
+</para>
+
+<para>
+    取り急ぎ1つのバックエンドから別のバックエンドまで切り替えることができます。SysConfigの中のバックエンドを切り替えて、次に、コマンドライン・ユーティリティotrs.ArticleStorageSwitch.plを実行することができます。データベースからファイルシステムに記事をputするためです。ソースとバックエンドの目的地を指定するために「-s」と「-d」オプションを使うことができます。全プロセスを実行するには相当な時間がかかることにご注意ください。それは保持している記事数と可能なCPUパワー及びあるいはネットワーク能力に依存します。
+</para>
+
+<para>
+<programlisting>
+shell&gt; bin/otrs.ArticleStorageSwitch.pl -s ArticleStorageDB -d ArticleStorageFS
+</programlisting>
+</para>
+<para>
+<emphasis>スクリプト:記憶バックエンドをデータベースからファイルシステムまで切り替えること。</emphasis>
+</para>
+</section>
+
+<section>
+    <title>チケットのアーカイブに保管</title>
+
+    <para>
+        監査に耐えうるシステムとしてOTRSを使うならば、完了したチケットを削除することはよい考えとはいえません。そのため我々はチケットをアーカイブすることができる機能を実装しました。
+    </para>
+    <para>
+        監査に耐えうるシステムとしてOTRSを使うならば、完了したチケットを削除することはよい考えとはいえません。そのため我々はチケットをアーカイブすることができる機能を実装しました。ある基準とマッチするチケットは「アーカイブ済」としてマークすることができます。これらのチケットは、通常チケット検索、あるいは一般担当者ジョブを実行してもアクセスできません。OTRSを使う時は、「最新の」チケットのみを考慮に入れればよいのでシステムそれ自身は、もはや巨大な量のチケットを取り扱う必要はありません。これにより巨大なシステムでの巨大なパフォーマンスの利得が生まれることとなります。
+    </para>
+    <para>
+        アーカイブ機能を使用するには次のステップに従います:
+    </para>
+    <orderedlist>
+        <listitem>
+            <para>
+                SysConfigのアーカイブシステムを活性化します。
+            </para>
+            <para>
+                管理者ページで、SysConfigに行って、グループ・<literal>チケット</literal>を選択してください。<literal>Core::Ticket</literal>では、デフォルトで「no」にセットされるオプション<literal>Ticket::ArchiveSystem</literal>を見つけます。この設定を「yes」に変更し変更を保存します。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                GenericAgentジョブを定義する
+            </para>
+            <para>
+                管理者ページでGenericAgentを選択し新規ジョブをそこへ追加します。<orderedlist>
+                    <listitem>
+                        <para>
+                            ジョブ設定
+                        </para>
+                        <para>
+                            アーカイブに保管するジョブの名前を与え、この仕事を予定する適切なオプションを選択してください。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            チケット・フィルタ
+                        </para>
+                        <para>
+                            チケット・フィルタは選択された基準と一致するチケット検索です。完了した状態（数か月前に完了したた）のチケットのみをアーカイブするのは良い考えです。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            チケット・アクション
+                        </para>
+                        <para>
+                            このセクションでは、「選択したチケットをアーカイブ」「チケットをアーカイブ」とラベルしたフィールドをセットしてください。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            仕事を保存する
+                        </para>
+                        <para>
+                            ページの終わりに、仕事を保存するオプションを見つけるでしょう。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            影響を受けたチケット
+                        </para>
+                        <para>
+                            システムは、一般担当者のジョブを実行する時にアーカイブされる全てのチケットを表示します。
+                        </para>
+                    </listitem>
+                </orderedlist>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                チケット検索
+            </para>
+            <para>
+                チケットを検索する場合、システムはデフォルトでアーカイブに保管されないチケットを探索します。さらにアーカイブに保管されたチケットを捜したい場合は、検索基準を定義する時に単に「archive
+search」を加えてください。
+            </para>
+        </listitem>
+    </orderedlist>
+</section>
+
+</section>
+
+
+<section id="performance-tuning-database">
+<title>データベース</title>
+<para>
+DB発行は使用されているデータベースによって変わります。データベース管理者とデータベースかチェックのためのドキュメンテーションを研究してください。
+</para>
+
+<section id="performance-tuning-database-mysql">
+<title>MySQL</title>
+<para>
+MySQLテーブル・タイプMyISAM(デフォルトです)を使用し、テーブルの大部分を削除したならば、あるいは可変長列(VARCHAR、BLOBあるいはTEXTカラムがあるテーブル)でテーブルに多くの変更を加えていれば、「optimize（最適化）」コマンドでデータ・ファイル(テーブル)をフラグメンテーション解消しなければいけません。
+</para>
+<para>
+mysqldデーモンがCPU時間の多くを必要とする場合、テーブルの最適化を試みるべきです。-
+チケット、ticket_historyおよび記事(下記のスクリプトを参照)。
+</para>
+
+<para>
+<programlisting>
+shell$ mysql -u user -p database
+mysql$ optimize table ticket;
+mysql$ optimize table ticket_history;
+mysql$ optimize table article;
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:データ・ベース・テーブルの最適化。</emphasis>
+</para>
+
+</section>
+
+<section id="performance-tuning-database-postgresql">
+<title>PostgreSQL</title>
+<para>
+PostgreSQLは、PostgreSQLデータディレクトリのpostgresql.confファイルの修正により最適化されます。これをする方法についてのアドバイスについては、次の記事を参考文献としてください:
+</para>
+
+<para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+<citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
+</ulink>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+<citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
+</ulink>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+<citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
+</ulink>
+            </para>
+        </listitem>
+    </itemizedlist>
+</para>
+
+<para>
+パフォーマンスが不十分な場合、PostgreSQLパフォーマンス・メーリング・リスト( <ulink
+url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>
+)に参加しそこに質問をすることを提案します。PostgreSQLリスト上の人々は非常にフレンドリーで、おそらく助けてくれることでしょう。
+</para>
+</section>
+
+</section>
+
+<section id="performance-tuning-webserver">
+<title>ウェブサーバ</title>
+<para>
+mod_perl 2.0( <ulink
+url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
+)を使用するべきです。それは純粋なcgiよりはるかに速い(~ * 100)。しかし、それはより多くのRAMを必要とします。
+</para>
+
+<section id="performance-tuning-webserver-db">
+<title>事前に確立しているデータベース接続</title>
+<para>
+ウェブサーバのスタートアップに先んじてあらかじめデータベース接続を確立することができます。時間の節約になります(README.webserverを参照)。
+</para>
+</section>
+
+<section id="performance-tuning-webserver-startup">
+<title>プレインストールされたモジュール - startup.pl</title>
+<para>
+スタートアップ・スクリプト・スクリプト<filename>scripts/apache2-perl-startup.pl</filename>を使用して下さい。それはmod_perlウェブサーバ上の事前ロードされ、コンパイルされたPerlをより早くします。しかもより小さいメモリで。(README.webserverを参照)。
+</para>
+</section>
+<section id="performance-tuning-webserver-reload">
+<title>ディスク上で更新された時パール・モジュールをリロードします。</title>
+<para>
+Apache::Reloadはデフォルトでscripts/apache2-httpd.include.conf.の中で使用されます。それを不能にすれば8%のスピードアップとなります。しかし、もしOTRSパッケージマネージャからなんらかのモジュールを、あるいは
+SysConfig 中または
+Kernel/Config.pm.中でなんらかの値を、インストールしているならば、忘れてはいけないことは　ウェブサーバのリスタートです。重要:このことは、ウェブ・インターフェース経由でOTRSパッケージ・マネージャーを使用することができないことを意味します。コマンドラインから変数の
+- <filename>bin/otrs.PackageManager.pl</filename>をご利用下さい。
+</para>
+</section>
+
+<section id="performance-tuning-webserver-strategy">
+<title>正しい戦略の選択</title>
+<para>
+より大きな装置(例えば40人以上担当者または1,000枚/day以上の新しいチケット)を持っているなら、mod_perlユーザ・ガイド( <ulink
+url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>
+)の性能についての章を読むと良いでしょう。
+</para>
+</section>
+
+<section id="performance-tuning-webserver-gzip">
+<title>mod_gzip/mod_deflate</title>
+<para>
+帯域幅が小さい場合は、Apache2用のmod_deflateをご利用ください。45000のHTMLページを持っているなら、mod_gzip/mod_deflate　は約7000にそれを圧縮します。欠点は、これがサーバー側のロードを増加させるということです。
+</para>
+</section>
+
+</section>
+
+</chapter>

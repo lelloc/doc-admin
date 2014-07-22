@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="webservice_cli">
+    <title>ウェブサービス・コマンドライン・インターフェイス</title>
+    <para>
+        コマンドライン・インタフェース(CLI)はウェブサービスとジョブをする速い方法です。それは、基本操作を行なうために使用できるツールセットから成ります:
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    YAMLファイルに基づいてウェブサービスを作成、更新、読み込み、リスト、削除します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    フィルタオプションでデバッガログを読み込みます。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <para>
+            ウェブサービスと連動するするためにCLIを使用する必要はありません。管理者インターフェースへ統合された、ウェブサービスのすべての部分と相互作用する画面の完全セットがあります。このマニュアルに含まれたウェブサービスGUIセクションを読んでください。
+        </para>
+    </note>
+
+    <section id="webservice_cli_webserviceconfig">
+        <title>ウェブサービス構成</title>
+        <para>
+            「WebserviceConfig.pl」は基本的だが、速く、強力です、ウェブサービス構成で働くツールとして開発されました。次のアクションを実行できるようになります:
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        追加：構成ソースとしてYAMLファイルを使うウェブサービスを作成します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        更新：既存のウェブサービスを変更します。異なるまたは変更されたYAMLファイルを使って構成は変更可能です。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        読み込み：画面に表示されたウェブサービスの構成を入手します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        リスト:システムに登録されたですべてのウェブサービスの完全なリストを入手します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        削除:システムからウェブサービスを削除すること。このアクションは取消不能なので利用の際はご注意ください。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <warning>
+            <para>
+                ウェブサービスREADオペレーションは、プレインテキストとして画面にすべての構成を表示します。これには格納されたパスワードを含みます。これに注意して、必要とされる予防措置を講じてください!
+            </para>
+        </warning>
+        <para>
+            サンプル : 新規ウェブサービス構成の作成:
+        </para>
+        <para>
+            <screen>
+                shell> OTRS_HOME/bin/otrs.WebserviceConfig.pl -a write -n &lt;webservice_name&gt; -f /path/to/yaml/file
+            </screen>
+        </para>
+        <para>
+            さらに、次のオプションを備えた「otrs.WebserviceConfig.pl」を使用することができます:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <command>-a read -i &lt;webservice_id&gt;</command> -　格納された構成を読むこと。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a write -n &lt;webservice_name&gt; -f /path/to/yaml/file</command>
+- 新規ウェブサービスを作ること。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a write -i &lt;webservice_id&gt; -f /path/to/yaml/file</command> -
+ウェブサービスを更新すること。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a list</command> - 利用可能なウェブサービスをリストすること。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a delete -i &lt;webservice_id&gt;</command> - ウェブサービスを削除すること。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section id="webservice_cli_debugger">
+        <title>ウェブサービス・デバッガ</title>
+        <para>
+            コマンドライン・インタフェースによる別の利用可能なツールは"otrs.GenericInterfaceDebugRead.pl"
+スクリプトです。それはウェブサービス・デバッガ・ログエントリを検索するインターフェイスです。
+        </para>
+        <para>
+            サンプル: デバッガ・ログエントリの検索:
+        </para>
+        <para>
+            <screen>
+                shell> bin/otrs.GenericInterfaceDebugRead.pl
+            </screen>
+        </para>
+        <para>
+            <itemizedlist>
+                <para>
+                    オプションのパラメタは"otrs.GenericInterfaceDebugRead.pl"のために使用されます。
+                </para>
+                <listitem>
+                    <para>
+                        <command>-c</command> - コミュニケーションID(md5sumフォーマット)によってフィルタします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-t</command> - CommunicationType(「プロバイダー」あるいは「依頼者」)によってフィルタします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a</command> - 日付(その日、またはある日の後)によってフィルタします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-b</command> - 日付(その日、またはある日の後)によってフィルタします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-i</command> - IPアドレス(有効なIPv4かIPv6アドレス)によってフィルタします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-w</command> - ウェブサービスIDによってフィルタします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-d</command> - 詳細なコミュニケーション・データを含みます。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            サンプル: すべてのパラメタを備えたデバッガ・ログエントリを検索:
+        </para>
+        <para>
+            <screen>
+                shell> ./otrs.GenericInterfaceDebugRead.pl -c a7cc4d9f5c70387a9bfbe1351bc88966 -t Provider -a '2011-07-22 00:00:00' -b '2011-07-26 00:00:00' -i 127.0.0.1 -w 123 -d 1
+            </screen>
+        </para>
+        <note>
+            <para>
+                上記リストからフィルタ・オプションの少なくとも1つを含むことを強く推奨します。「-d」オプションが選択されている場合ならなおさらです。なぜなら多くの情報がデータベースから引き出され画面に表示されます。これは結果的に応答時間の低下を招き、実際に必要とする以上の過剰な情報になります。
+            </para>
+        </note>
+    </section>
+</section>

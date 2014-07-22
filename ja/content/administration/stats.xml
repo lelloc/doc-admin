@@ -1,0 +1,1093 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="statistic-module">
+<title>統計モジュール（Stats module）</title>
+
+<para>
+OTRS統計モジュールは、運用上の統計を追跡するための機能を保持し、OTRS使用量に関連したカスタムレポートを生成します。OTRSシステムは、様々な指標を示すレポートに言及するために用語「stat」を属に関して使用します。
+</para>
+
+<para>
+OTRS統計モジュールの適切な構成は多くの必要条件および考察に関連しています。これらは以下を含んでいます。様々な評価すべきOTRSモジュール、ユーザ許可設定、計算指標とそれらの複雑さのレベル、統計モジュールの構成の簡易化・軽減、計算の高速化・効率化、豊富な出力セットのサポート。
+</para>
+
+<para>
+統計要素(つまり特定の必要条件用の統計モジュールの機能性を補足するファイル)は、複雑な統計の計算のために統合することができます。
+</para>
+
+<section id="stats-usage" >
+<title>担当者によるモジュールの取り扱い</title>
+
+<para>
+担当者として署名すると、図中のように、ナビゲーション・バーは、様々なサブメニュー・オプションと共に、リンク「統計」を表示します。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>統計モジュール</screeninfo> <graphic
+fileref="screenshots/stats-menu.png" scale="40" srccredit="統計 - メニュー -
+スクリーンショット" /></screenshot>
+</para>
+
+<para>
+<emphasis>図:統計メニュー・オプション</emphasis>
+</para>
+
+<para>
+統計メニューの中で提供される異なるオプションは次のとおりである:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+            <emphasis>概要</emphasis>。異なる事前構成されたレポートのリストを示します。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>新規</emphasis>。rw権限を必要とします。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>インポート</emphasis>。rw権限を必要とします。
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<section id="stats-overview" >
+<title>概要</title>
+
+<para>
+ナビゲーション・バー中の「統計」リンクと、サブメニュー・リンクの「概要」を選択することで、概要画面を呼び出します。概要画面は、全ての事前定義された担当者が利用可能なレポートをのリストを表します(下記の図を参照)。
+
+</para>
+
+<para>
+<screenshot>
+<screeninfo>標準レポートの概要</screeninfo> <graphic
+fileref="screenshots/stats-overview.png" scale="40" srccredit="統計 - 概要 -
+スクリーンショット" /></screenshot>
+</para>
+
+<para>
+<emphasis>図:標準レポートの概要</emphasis>
+</para>
+
+<para>
+次の情報が概要にリストされたそれぞれの標準レポートのために提供される:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+            <emphasis>Stat#</emphasis>。ユニークなレポート番号。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>Title</emphasis>。レポートのタイトル。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>オブジェクト</emphasis>。オブジェクトは統計生成するために使用します。静的統計の場合には、動的オブジェクトがその生成に使用されないとともに、オブジェクトは表示されません。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>摘要：</emphasis>レポートの簡潔な記述。
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<para>
+統計モジュールがインストールされている場合、それはシステムへインポートされた少数のサンプルのレポートでプレインストールされたようになる。これらは概要ページのリストとして示されます。概要リストが単一のページを越えるものまで及ぶ場合、担当者は異なるページをブラウズすることができます。レポートのリストは、リスト中の希望のカラム・ヘッダーのクリックすることで、好みに応じてソートすることができます。特別のレポートを生成するためには、概要リスト中でレポートに関連したstat番号をクリックしてください。これによりレポート用の「ビュー」インターフェイスが表示されます。
+</para>
+
+</section>
+
+<section id="stats-viewing-generating">
+<title>レポートの生成と閲覧</title>
+
+<para>
+ビュー・ユーザ・インターフェースはstatの構成設定を提供します(下記の図を参照)。
+</para>
+
+<para>
+<screenshot id="stats-view-screenshot" >
+<screeninfo>統計ビュー（Stat view）</screeninfo> <graphic
+fileref="screenshots/stats-view.png" scale="40" srccredit="統計 - ビュー -
+スクリーンショット" /></screenshot>
+</para>
+
+<para>
+<emphasis>図:特定のレポートのビュー</emphasis>
+</para>
+
+<para>
+特定のレポート用構成設定は　ビュー画面の中のオプションの範囲の中で設定できます。レポート製作者あるいは適切な許可を持つ他の誰でも、設定を作ることができます。
+</para>
+
+<para>
+下記参照:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+        可能なアクション:
+        </para>
+
+        <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>概要に行ってください</emphasis>。レポートの概要リストにリンクしてください。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>編集</emphasis>。現在のレポート構造(必要なrw権)を編集してください。)。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>削除</emphasis>。現在のレポート(要求されるrw権)を削除してください。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>構成のエクスポート</emphasis>。ファイル・ダウンロード(必要なrw権)によって、レポート構成をエクスポートしてください。
+                </para>
+
+                <para>
+                    使用法:エクスポート・インポート機能で、テストシステム上でのレポートのテストと作成が便利になります。そしてそれに続く生産システムへの統合を容易にします。
+                </para>
+            </listitem>
+        </itemizedlist>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        レポート詳細:
+        </para>
+        <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Stat#</emphasis>。レポートの数。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Title</emphasis>。レポートのタイトル。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>オブジェクト</emphasis>。レポートの生成のために使用されたオブジェクト。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>摘要</emphasis>。レポートの目的を記載するための摘要。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>フォーマット</emphasis>。構成に依存しますが、次いずれかの出力フォーマットによるレポート出力フォーマット:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                        CSV。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        印刷。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・線。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・棒。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・横棒。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・点。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・点ー線。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・エリア。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        グラフ・パイ。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>グラフ化</emphasis>。グラフィック/図表用ピクセルでのサイズ。レポート構成が図表を許可する場合のみ、このオプションが与えられます。一般に使用可能なグラフィックのサイズはすべて　SysConfigの中のOTRS管理者によって構成されます。レポートを構成する一方で、担当者はあらかじめ適切なフォーマットをすべて選択することができます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>行の合計</emphasis>。レポートが、列(複数のセルが各行の合計を表している)によって修正されるかどうかを示します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>列の合計</emphasis>。レポートが、行(複数のセルが各列の合計を表している)によって修正されるかどうかを示します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>キャッシュ</emphasis>。生成されたレポートがファイルシステムにキャッシュされるかどうかを示します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>有効</emphasis>。どんな理由でもレポートを一時的に実行してはならない場合これは「無効」にセットすることができます。そうすると、パネルの右側底部にある「スタート」ボタンは、もはや表示されません。そのレポートはもはや生成することができません。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>作成済</emphasis>。レポートの生成時間。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>作成済</emphasis>。レポートを作成した担当者の名前。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>変更済</emphasis>。レポートが最後に修正された時刻による。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>変更済</emphasis>。レポートを最後に変更した担当者の名前による。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>X軸</emphasis>。この機能を使用すると、担当者はxとyの軸(OTRS管理者によって活性化された時だけ)を切り替えることができます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                レポート自体に関する情報は一般情報に続きます。2つの異なるレポート(あるいはstat)ビューがあります:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis>静的stat・ビュー</emphasis>。静的レポート生成者は、統計モジュールへ統合することができます(下記の図を参照)。
+                        </para>
+                        <para>
+                        <screenshot>
+<screeninfo>静的統計(stat)ビュー</screeninfo> <graphic
+fileref="screenshots/stats-view-static.png" scale="40" srccredit="静的統計ビュー -
+スクリーンショット" /></screenshot>
+                        </para>
+                        <para>
+                            <emphasis>図:静的レポートのビュー</emphasis>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>動的統計(stat)ビュー</emphasis>(上記の図を参照)。それらは2つの異なる方法で表示することができる:
+                        </para>
+                        <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>不変の設定</emphasis>。レポートの作成者は、このフィールドを変更する許可を持っていません。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>可変の設定</emphasis>。そのようなレポートの構成設定は担当者によって変更することができます。
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                </para>
+            </listitem>
+        </itemizedlist>
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<para>
+「スタート」ボタン(画面の底の)を押すことは、レポートを生成する最後のステップです。これら二つのボタンが表示されない理由の可能性は二つあります。:
+</para>
+
+<para>
+<orderedlist numeration="arabic" >
+    <listitem>
+        <para>
+        そのレポートは無効にセットされ、それゆえ非活性化されます。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        そのレポートはクリーンに構成されなかったため、まだ実行可能ではありません。この場合、必要な情報はOTRS通知セクション(ナビゲーション・バーより下の)で見つけることができます。
+        </para>
+    </listitem>
+</orderedlist>
+</para>
+
+<para>
+ビューページのセッティングが正しくない場合、「スタート」ボタンが押された後、このページは再び示されます。また、どの入力が正しくなかったかに関する情報は通知セクションの中で提供されます。
+</para>
+</section>
+
+<section id="stats-modify-new">
+<title>編集/新規</title>
+
+<para>
+書き込み権を持った担当者は、統計モジュールの編集ユーザ・インターフェースを呼び出すことにより、既存のレポート構成を編集することができます。一方、彼らは新規レポート作成できます。関連する画面に、次の方法で到達することができます:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+<listitem>
+    <para>
+    編集:統計ビュー中の「編集」ボタン経由
+    </para>
+</listitem>
+<listitem>
+    <para>
+    新規:ナビゲーション・バーからの統計メニュー中の「新規」リンク、あるいは概要ページからの「追加」ボタン経由。
+    </para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+統計は4ステップのウイザードで編集されます:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+<listitem>
+    <para>
+    一般的な仕様
+    </para>
+</listitem>
+<listitem>
+    <para>
+    X軸のための要素の定義
+    </para>
+</listitem>
+<listitem>
+    <para>
+    値系列の仕様
+    </para>
+</listitem>
+<listitem>
+    <para>
+    レポートを制限する(limit)ために制限(Restrictions)を選択
+    </para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+ステップ2から4は、動的統計を備えたレポートの生成にのみ必要とされます。静的統計のために単に一般情報(point 1)が必要です。
+</para>
+
+<para>
+ページを扱う方法に関する情報はヒント・パネル中のアクション・パネル以下にこれらの画面の各々の上で提供されます。
+</para>
+
+<para>
+正しくない入力が入力される場合、以前に処理されたユーザ・インターフェースは再び表示れ、それから正しくない入力に関する情報が表示されます。この情報はOTRS通知セクションで見つけることができます。現在の形式が正確に記入された後のみ、次の入力ユーザ・インターフェースが表示されます。
+</para>
+
+<para>
+<orderedlist numeration="arabic" >
+<listitem>
+    <para>
+        <emphasis>一般的な仕様</emphasis>。それは編集ウイザードの最初のページです(下記の図を参照)。
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>一般的な仕様</screeninfo> <graphic
+fileref="screenshots/stats-edit-general.png" scale="40" srccredit="統計 - 編集 -
+一般 - スクリーンショット" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>図:レポートの一般的な仕様の編集</emphasis>
+    </para>
+
+
+    <para>
+        図示した画面中で、編集することができる多くの共通の仕様および設定があります:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>タイトル</emphasis>。簡潔なやり方でstatの目的を反映するべきです。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>摘要</emphasis>。レポート定義、構成パラメータのタイプ等より多くの説明を含む情報。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>動的オブジェクト</emphasis>。OTRSインストレーションが様々な動的オブジェクトを提供する場合、それらのうちの1つを選ぶことができます。オブジェクトは、特定のモジュールの必要条件を満たします。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>静的ファイル</emphasis>。通常はこの選択は表示されません。なぜならどのレポートにもまだ割り当てられていない単なる静的ファイルは　まだ表示されないからです。しかしながら、「静的ファイル」が表示される場合、オプション・フィールドにチェックマークを付けるて、生成モード（動的オブジェクトまたはファイル付の静的オブジェクトで動的）を選択することは重要です。静的ファイルが選択されている場合、入力ユーザ・インターフェイス２から４は表示されません。静的ファイルはすべての必須の構成設定を含んでいないためです。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>許可設定</emphasis>。グループ（担当者も）の制限を緩和して下さい。その担当者が事前定義のレポートを後で閲覧し生成できるように。このように様々なレポートを、それらを必要とする異なる部署やワークグループに割り付けることができます。
+            </para>
+
+            <para>
+                例1:「統計」グループが選択されました。少なくとも「統計」グループのためのro権を持っているすべてのユーザは、そのレポートを見ることができます。この権限はデフォルトで利用可能です。
+            </para>
+
+            <para>
+                例2:「販売」という名のグループが選択されました。
+「販売」グループのためのro権を持ったユーザは、みなビュー・モードでstatを見て、それを生成することができます。しかしながら、そのレポートは他のユーザよっとビューできません。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>フォーマット</emphasis>。statの出力フォーマット:構成に依存しますが、ひとつのまたは複数の次のフォーマットを選択可能です。
+            </para>
+
+            <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        CSV。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        印刷。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・線
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・棒
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・横棒
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・点
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・点。線
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・エリア
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        グラフ・パイ
+                    </para>
+                </listitem>
+            </itemizedlist>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>グラフ化</emphasis>。ピクセル中の図表サイズを選択します。グラフ式の出力フォーマットが「フォーマット」の下で選ばれている場合のみ、この選択は必要です。一般に使用することができるグラフィックのサイズはすべてSysConfigにOTRS管理者によって定義されています。レポートを構成する場合、担当者はあらかじめ適切なフォーマットをすべて選択することができます。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>行の合計</emphasis>。レポートが列(複数のセルが各行の合計を含んでいる)によって修正されるかどうかを示します。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>列の合計</emphasis>。レポートが行(複数のセルが各列の合計を含んでいる)によって修正されるかどうかを示します。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>キャッシュ</emphasis>。生成されたレポートがファイルシステムでキャッシュとして保持されるべきかどうかを特定します。レポートが再び呼び出される場合、これは計算能力と時間を節約します。しかし、レポートの内容に変化がない場合、節約になるわけではありません。
+            </para>
+
+            <para>
+                レポートが時間指示値を含んでいない場合、あるいは時間指示値が将来を指す場合、自動的にキャッシングは防止されます。
+            </para>
+
+            <para>
+                キャッシュされたレポートが編集される場合、キャッシュされたデータはすべて削除されます。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                            <emphasis>有効</emphasis>。どんな理由でも事前構成されたレポートを一時的に実行してはならない場合、これは「無効」にセットすることができます。その後、右側パネル最下部の「スタート」ボタンは、もはや表示されません。そのレポートはもはや生成することができません。
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <emphasis>X軸のための要素の定義</emphasis>。それは、X軸の描写に使用された要素、あるいはX軸に適用されたカラム名の(テーブルが使用される場合)構成です(図を参照)。
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>X軸のための要素の定義</screeninfo> <graphic
+fileref="screenshots/stats-edit-xaxis.png" scale="40" srccredit="統計-編集-X軸 -
+スクリーンショット" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>図: X軸のための要素の定義</emphasis>
+    </para>
+
+    <para>
+    第一に、要素はオプション・フィールドを使用して選択されています。その後、要素の2つ以上の属性が選択されなければいけません。属性が選択されていない場合、属性はすべてレポートの構成の後に加えられたものを含めて使用されます。
+    </para>
+
+    <para>
+    「固定の」セッティングが無効になる場合、レポートを生成する担当者は「ビュー」ユーザ・インターフェース中のそれぞれの要素の属性を変更することができます。
+    </para>
+
+    <para>
+    期間と規模を述べなければならないとともに、時間的要因は異なります。要素のタイプおよび数は使用された動的オブジェクトに起因し、それに依存して変わります。
+    </para>
+
+    <para>
+    入力がすべて正確な場合、「次」ボタンは「値系列」フォームに向かいます。さらに、初めのセクションの編集に戻ることも可能です。
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <emphasis> 値系列の仕様</emphasis>
+    </para>
+
+    <para>
+    レポート構成の3番目のステップで、値系列は定義されます(下記の図を参照)。それらは、後で表のビュー内で個別のグラフあるいは様々なシリーズを形成するでしょう。
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>値系列の定義</screeninfo> <graphic
+fileref="screenshots/stats-edit-valueseries.png" scale="40" srccredit="統計 -
+編集 - 値系列 - スクリーンショット" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>図:値系列の定義</emphasis>
+    </para>
+
+    <para>
+    要素が選択されていれば、選ばれた属性はそれぞれ値系列に対応するでしょう(下記の例19-1を参照)。
+    </para>
+
+    <para>
+    <example id="stats-value-series-1">
+    <title>値系列の定義 - 1つの要素</title>
+
+    <para>
+    要素キュー:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            値系列１＝未対応
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            値系列２＝ジャンク
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            ....
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+    </example>
+    </para>
+
+    <para>
+    2つの要素が選択されている場合、最初の要素の選択された属性はそれぞれ、値系列を形成する第2の要素の属性と結合します(下記の例19-2を参照)。
+    </para>
+
+    <para>
+    <example id="stats-value-series-2" >
+    <title>値系列の定義 - 2つの要素 </title>
+
+    <para>
+    要素1 キュー、要素2 ステータス:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            Value chain 1 = 未対応 - 未完了
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Value series 2 = 未対応 - 完了（成功）
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Value series 3 = ジャンク - 未完了
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Value series 4 = ジャンク - 完了（成功）
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+    </example>
+    </para>
+
+    <para>
+    3つ以上の要素の選択は許可されません。
+    </para>
+
+    <para>
+    さらに、同じ条件は、「X軸」選択に関してと同様に、属性および「固定の」チェックボックスの選択に当てはまります:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            要素の属性が選択されていない場合、属性はすべてレポートの構成の後に加えられたものを含めて使用されます。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            「固定の」セッティングが無効の場合、レポートを生成する担当者はそれぞれの要素の属性を変更することができます。
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <emphasis>レポートへの制限の設定</emphasis>。これは構成の4番目と最終ステップです(下記の図を参照)。制限は、その結果を選択された基準に制限する役目をします。多くの場合では、制限は全くセット・アップされないかもしれません。
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>制限の定義</screeninfo> <graphic
+fileref="screenshots/stats-edit-restrictions.png" scale="40" srccredit="統計 -
+編集 - 制約 - スクリーンショット" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>図:制限の定義</emphasis>
+    </para>
+
+    <para>
+    制限がすべてセット・アップされた後、レポートの構成は「終了」ボタンを押すことにより完成します。
+    </para>
+</listitem>
+</orderedlist>
+</para>
+</section>
+
+<section id="stats-import">
+<title>インポート</title>
+
+<para>
+インポート・ユーザ・インターフェース(下記の図を参照)はナビゲーション・バー、リンク「統計」から選ぶことによりアクセスすることができ、「インポート。」(その後)一方、概要画面上でインポート・ボタンを押すことは同じ結果となります。レポートへの「rw」権は必須です。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>インポート・ユーザ・インターフェース</screeninfo> <graphic
+fileref="screenshots/stats-import.png" scale="40" srccredit="統計 - インポート -
+スクリーンショット" /></screenshot>
+</para>
+
+<para>
+    <emphasis>図:インポート・ユーザ・インターフェース</emphasis>
+</para>
+
+<para>
+非常で機能的なモジュールのエクスポート機能と結合した時、レポートのインポートはより円滑になります。統計は、テスト・システムに便利なように作成しテストし、次に、プロダクション・システムへインポートすることができます。
+</para>
+
+<para>
+インポートは容易なファイル・アップロードによってもたらされます。インポートレポートの「ビュー」ユーザ・インターフェースは自動的に後で開かれます。
+</para>
+</section>
+
+</section>
+
+<section id="stats-managing-the-module">
+<title>OTRS管理者による統計モジュールの管理</title>
+
+<para>
+このセクションでは、統計モジュールを取り扱うOTRS管理者のタスクおよび責任に関する情報を提供します。
+</para>
+
+<section id="stats-permissions" >
+<title>許可設定、グループ及びキュー</title>
+
+<para>
+統計モジュールがインストールされている場合、新規キューおよび(または)グループは作成されません。
+</para>
+
+<para>
+モジュール登録ではデフォルト設定で、すべての担当者に対して統計モジュールに「統計」グループ許可アクセスを与えます。
+</para>
+
+<para>
+許可設定による権限:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+            <emphasis>rw</emphasis>。統計とレポートを構成可能にします。
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>ro</emphasis>。あらかじめ形成された統計およびレポートを構成可能にします。
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<para>
+OTRS管理者は、以下のふたつを決定します。ひとつは、事前構成されたレポートを生成する許可を持つ担当者が、「統計」グループ中でro権を割り当てられるか、もうひとつは、それぞれのグループがSysConfigの中のモジュール登録で追加されるかどうかです。
+</para>
+</section>
+
+<section id="stats-sysconfig" >
+<title>SysConfig</title>
+
+<para>
+The SysConfig groups <link
+linkend="Framework:Core::Stats">Framework:Core::Stats</link>, <link
+linkend="Framework:Core::Stats::Graph">Framework:Core::Stats::Graph</link>
+and <link
+linkend="Framework:Frontend::Agent::Stats">Framework:Frontend::Agent::Stats</link>
+contain all configuration parameters for the basic set-up of the statistics
+module. Moreover, the configuration parameter <link
+linkend="Framework:Frontend::Agent::ModuleRegistration:Frontend::Module_AgentStats">$Self-&gt;{'Frontend::Module'}-&gt;{'AgentStats'}</link>
+controls the arrangement and registration of the modules and icons within
+the statistics module.
+</para>
+</section>
+
+</section>
+
+<section id="stats-managing-the-stats-module-by-the-sysadmin" >
+<title>システム管理者による統計モジュールの管理</title>
+
+<para>
+一般に、システム管理者は、統計モジュールのオペレーション、構成およびメンテナンスに必要とされません。しかしながら、この点に関してシステム管理者に若干の背景情報は与えられます。
+</para>
+
+<note>
+<para>
+ファイル・パスは、OTRSホームディレクトリー(ほとんどの場合
+<filename>/opt/otrs</filename>)のサブディレクトリを指します。
+</para>
+</note>
+
+<section id="stats-db-table" >
+<title>データベース・テーブル</title>
+
+<para>
+レポート構成はすべてXMLの中でインプリメントされ処理され、したがって、データベース・テーブル「xml_storage」に格納されます。その内容がxmlフォーマットで示される他のモジュールは同様にこのテーブルを使用します。
+</para>
+
+</section>
+
+<section id="stats-filelist" >
+<title>すべてのファイルのリスト</title>
+
+<para>
+以下は、統計モジュールが正確に動作するためにのに必須のファイルです:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+        <filename>Kernel/System/Stats.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Modules/AgentStats.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/System/CSV.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsOverview.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsDelete.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditSpecification.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditRestrictions.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditXaxis.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditValueSeries.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsImport.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsPrint.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsView.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/System/Stats/Dynamic/Ticket.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>bin/otrs.GenerateStats.pl</filename>
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+</section>
+
+<section id="stats-caching" >
+<title>キャッシング</title>
+
+<para>
+統計の結果がキャッシュされるかされないかは構成でセットアップされます。キャッシュ・レポート結果は、OTRSインストレーション(ほとんどの場合<filename>/opt/otrs/var/tmp</filename>)の<filename>var/tmp</filename>
+directoryでファイルとして格納されます。
+</para>
+
+<para>
+キャッシュ・統計は、「Stat」接頭辞によって認識することができます。
+</para>
+
+<para>
+データが失われるにしても、大きな被害を引き起こしません。次回レポートが呼び出される時には、統計モジュールはファイルを見つけることなく、新規レポートを生成するでしょう。もちろん、これは恐らく実行にもう少し長くかかるでしょう。
+</para>
+</section>
+
+<section id="stats-mkstats" >
+<title>otrs.GenerateStats.pl</title>
+
+<para>
+このファイルは<filename>bin</filename> directoryに保存されます。それは、コマンドライン中のレポートの生成に役立ちます。
+</para>
+
+<para>
+例として、次のスクリプトでコマンドライン呼び出しを参照してください。
+</para>
+
+<para>
+<programlisting>
+bin&gt; perl otrs.GenerateStats.pl -n 10004 -o /output/dir
+</programlisting>
+</para>
+
+<para>
+    <emphasis>スクリプト：コマンドラインからのレポートの生成</emphasis>
+</para>
+
+<para>
+統計構成「Stat# 10004」からのレポートは<filename>/output/dir</filename>
+ディレクトリー中でcsvとして生成され保存されます。
+</para>
+
+<para>
+生成されたレポートも、Eメールとして送ることができます。より多くの情報は、スクリプト中のコマンドで下に呼び出すことができます。
+</para>
+
+<para>
+<programlisting>
+bin> perl otrs.GenerateStats.pl --help
+</programlisting>
+</para>
+
+<para>
+    <emphasis>スクリプト:　otrs.GenerateStats.plファイルに関する情報の入手</emphasis>
+</para>
+
+</section>
+
+<section id="stats-cron" >
+<title>自動統計生成 - Cronジョブ</title>
+
+<para>
+統計モジュールに便利なGUIがあるため、通常はコマンドラインによってレポートを手動で生成しても意味をなしません。しかしながら、Cronジョブと結合した時、手動によるレポートの生成は意味をなします。
+</para>
+
+<para>
+次のシナリオを想像してください:毎月の1日目に、部長は先月のレポートを受け取りたい。cronジョブとコマンドラインの呼び出しを組み合わせることによって、レポートは、Eメールでそれらに自動的に送ることができます。
+</para>
+
+</section>
+
+<section id="stats-static" >
+<title>静的な統計</title>
+
+<para>
+統計モジュールは、静的統計の生成に役立ちます。全ての静的統計はそのコンテンツが正確に定義されているファイルに存在します。
+</para>
+
+<para>
+このように非常に複雑な統計が生成されます。そのデメリットはそれらが特に柔軟ではないことです。
+</para>
+
+<para>
+ファイルはディレクトリ<filename>Kernel/System/Stats/Static/</filename>　に保存されます。
+</para>
+</section>
+
+<section id="stats-using-old-stats" >
+<title>古い静的な統計の使用</title>
+
+<para>
+先のOTRSバージョン1.3および2.0は、既に統計/レポートの生成を促進しました。顧客の必要条件を満たすために特に開発されているOTRSバージョン1.3および2.0のための様々なレポートは、最近のOTRSバージョンの中でまた使用することができます。
+</para>
+
+<para>ただ、ファイルは、<filename>Kernel/System/Stats/</filename>
+のパスから<filename>Kernel/System/Stats/Static/</filename>
+のパスへ移動されなければいけません。さらに、「::Static」によってそれぞれのスクリプトのパッケージ名を修正しなければなりません。
+</para>
+
+<para>
+次の例は、最初のパスがどのように修正されるか示します。
+</para>
+
+<para>
+<programlisting>
+    package Kernel::System::Stats::AccountedTime;
+</programlisting>
+</para>
+
+<para>
+<programlisting>
+    package Kernel::System::Stats::Static::AccountedTime;
+</programlisting>
+</para>
+</section>
+
+<section id="stats-default-stats" >
+<title>Default stats（デフォルト統計）</title>
+
+<para>「わかり切ったことを最初からやり直すことは必ずしも必要だとは限りません...」
+</para>
+
+<para>
+統計モジュールは様々なデフォルトレポートを提供します。すべてのOTRSユーザに興味深いレポートは、統計モジュール・パッケージのデフォルトレポートセットに今後加えられるでしょう。デフォルトレポートは、<filename>scripts/test/sample/</filename>
+ディレクトリー中の統計モジュールxmlフォーマットで保存されます。
+</para>
+
+</section>
+
+</section>
+
+</section>

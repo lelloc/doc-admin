@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<section id="monitoring-tickets" >
+<title>チケット責任者とチケットの監視</title>
+
+<para>
+OTRS
+2.1からチケットの所有者に加えて、１チケットに対して１名の責任者を割り当てることが可能です。さらに、チケットと関係のある全ての活動はチケットの所有者以外の誰かに見られるようにできます。これらの2つの機能性は、チケット責任者（TicketResponsible）とチケット監視者（TicketWatcher）としてインプリメントされ、タスクの割り当ておよび階層的チーム構造内に働くことを手助けします。
+</para>
+
+<section id="ticket-responsible" >
+<title>チケット責任者</title>
+
+<para>
+チケット責任者の機能は、チケット所有者以外に担当者によってチケットの完全な処理を手助けします。したがってチケットをロックした担当者はそれをもう一人の担当者に渡すことができます。渡された担当者はチケットの所有者ではなく、顧客依頼に対する第二の返答者となります。依頼が取り扱われた後、最初の担当者は第2の担当者からチケット責任を譲り受けできます。
+</para>
+
+<para>
+構成パラメタ<link
+linkend="Ticket:Core::Ticket:Ticket::Responsible">Ticket::Responsible</link>にて、チケット責任者の機能を活性化することができます。これにより担当者インターフェイスにあるズームチケットのチケット活動メニューに、３つの新しいリンクが出現します。
+</para>
+
+<para>
+チケット責任者は、チケット内容を呼び出して割り当てることができます。そしてチケット活動メニュー「責任者」リンク（担当者インターフェイスにあるズームチケットにある）をクリックします。（下図参照）
+</para>
+
+<para>
+<screenshot>
+<screeninfo>チケットズーム画面での責任者変更</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/ticket-zoom-responsible.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:ズーム・ビューでのチケット責任者の変更</emphasis>
+</para>
+
+<para>
+「責任者」をクリックしたのちに、チケットの責任者変更ダイアログのポップアップが開きます。（下図参照）このダイアログは新規責任者の担当者へメッセージを送信するために使用することもできます。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>チケットの責任者を変更するポップ・アップ・ダイアログ。</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/ticket-responsible.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図：チケット責任者を変更するポップアップ・ダイアログ</emphasis>
+</para>
+
+<para>
+チケット責任者機能が活性化されるとすぐに、担当者が責任を負う全チケットのリストは、OTRS担当者インターフェイスの責任者ビューを通してアクセスできます。
+</para>
+
+</section>
+
+<section id="ticket-watcher">
+<title>チケットの監視</title>
+
+<para>
+OTRS2.1から　「チケット監視」機能を使えば　スーパバイザのような担当者を選ぶことにより、システム内の特定のチケットを処理することなく監視することができます。
+</para>
+
+<para>
+「チケット監視」機能は構成パラメタ <link
+linkend="Ticket:Core::TicketWatcher:Ticket::Watcher">Ticket::Watcher</link>
+で活性化されます。それはアクション・ツールバーに新しいリンクを追加します。<link
+linkend="Ticket:Core::TicketWatcher:Ticket::WatcherGroup">Ticket::WatcherGroup</link>を使ってチケットを監視する許可を持った1つ以上のユーザ・グループも定義することができます。
+</para>
+
+<para>
+チケットを見るためには、ズーム・ビューに行って、チケット活動メニュー中の「購読」リンクをクリックしてください(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>チケットズーム画面上の購読リンク</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40" fileref="screenshots/ticket-subscribe.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:ズーム・ビューでチケットを監視するために購読する</emphasis>
+</para>
+
+<para>
+もう特定のチケットを見たくない場合は、ズーム・ビューへ行き、チケット活動メニュー中の「購読しない」リンクをクリックします(下記の図を参照)。
+</para>
+
+<para>
+<screenshot>
+<screeninfo>ズーム・ビューでチケットの監視の登録解除</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/ticket-unsubscribe.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:ズーム・ビューでチケットの監視の登録解除</emphasis>
+</para>
+
+<para>
+監視中のすべてのチケットのリストは、チケット監視者機能が活性化されるとすぐに、OTRS担当者インターフェイス（下図参照）の監視ビュー経由でアクセス可能になりました
+</para>
+
+<para>
+<screenshot>
+<screeninfo>メールボックス：監視チケット</screeninfo> <graphic srccredit="index.pl -
+スクリーンショット" scale="40"
+fileref="screenshots/ticket-subscribe-mailbox.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:監視チケットビュー</emphasis>
+</para>
+</section>
+
+</section>

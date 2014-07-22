@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="email">
+<title>Eメールの送信/受信</title>
+
+<section id="email-sending">
+<title>Eメールの送信</title>
+
+<section id="email-sending-sendmail">
+<title>Sendmail(デフォルト)経由。</title>
+
+<para>
+OTRSは、<ulink url="http://www.sendmail.org/">Sendmail</ulink>、<ulink
+url="http://www.postfix.org/">Postfix</ulink>、<ulink
+url="http://www.qmail.org">Qmail</ulink>あるいは<ulink
+url="http://www.exim.org">Exim</ulink>によってEメールを送信することができます。デフォルト構成はsendmailを使用し使用開始時に即稼働します。
+</para>
+
+<para>
+グラフィカルな構成フロント・エンドによってsendmailの設定を構成することができます。(Framework::Core::Sendmail)
+</para>
+
+</section>
+
+<section id="email-sending-smtp">
+<title>SMTPサーバまたは smarthost経由。</title>
+
+<para>
+OTRSは、SMTP(<ulink url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail
+Transfer Protocol / RFC
+821</ulink>)か安全なSMTPによってEメールを送信できます。非UNIXプラットフォーム(例えばウィンドウズ)上でこれを使用したいと思うでしょう。
+</para>
+
+<para>
+SMTPサーバ設定はSysConfig(Framework::Core::Sendmail)で構成できますSMTPSがオプションとして利用できないなら、必要なパール・モジュールがないからです。その場合、指示に関しては「OTRSに必要なパール・モジュールのインスタレーション」を参照して下さい。
+</para>
+
+</section>
+
+</section>
+
+<section id="email-receiving">
+<title>Eメールの受信</title>
+
+<section id="email-receiving-pop3">
+<title>OTRS GUI OTRSで構成されたEメールアカウント</title>
+
+<para>
+OTRSは、POP3、POP3S、IMAPおよびIMAPSメールアカウントからEメールを受け取ることができます。
+</para>
+
+<para>
+管理者ページのPostMasterメールアカウント・リンク経由でメールアカウントを構成して下さい。
+</para>
+
+<para>
+新規メールアカウントが作成されることになっている場合(下記の図を参照)そのメールサーバ名、ログイン名およびパスワードが指定されなければいけません。また、POP3,
+POP3S, IMAP あるいは
+IMAPS等のようなメールサーバタイプを選択する必要があります。サーバー・タイプのオプションとして利用可能なものが見あたらなければ、システムに必要なPerlモジュールがないことがその理由です。その場合、指示に関しては<link
+linkend="installation-of-perl-modules">
+"OTRSに必要なパール・モジュールのインスタレーション"</link>を参照してください。</para>
+
+<para>
+<screenshot>
+<screeninfo>メールアカウントの追加。</screeninfo> <graphic srccredit="管理者ポストマスター -
+スクリーンショット" scale="40" fileref="screenshots/add-mailaccount.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>図:メールアカウントの追加。</emphasis>
+</para>
+
+<para>信頼済オプションの値にYesを選べば、受信メッセージに付けられたどんなX-OTRSヘッダーも評価され実行されます。X-OTRSヘッダーがチケットシステムの中のいくつかのアクションを実行することができるので既知の送信者だけに信頼済オプションをYesにセットするべきです。X-OTRSヘッダーはOTRSでは<link
+linkend="adminarea-postmasterfilter">フィルタ・モジュール</link>によって使用されます。X-OTRSヘッダーは、<link
+linkend="table-of-x-otrs-headers">このテーブルの中で</link>より詳細に説明されます。作成されたどんなpostmasterフィルタ規則も、信頼されたオプションのセッティングに関係なく実行されます。
+</para>
+
+<para>
+キューによってあるいは「To:」フィールドの内容によってソートする必要がある場合。受信メッセージの配信を制御することができます。送信フィールドについては「選択したキューによる送信」が選択されていていれば、全ての受信メッセージは指定のキューでソートされるでしょう。メールが送られたアドレスはこの場合無視されます。「email
+To:フィールドによる送信」が選択されていれば、受信メールのTo:フィールドにあるアドレスで、キューがリンクされているかどうかシステムはチェックします。　アドレスを管理者ページの<link
+linkend="adminarea-emailaddresses">Eメールアドレス管理</link>
+セクション中のキューにリンクすることができます。To:フィールドのアドレスがキューにリンクされていれば、新規メッセージはリンクされたキューへソートされます。To:フィールドのアドレスとキュー間でリンクが見つからない場合、メッセージはシステムの「未対応」キューに流れ込みます。それはデフォルトのインストレーションでは<link
+linkend="Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>です。
+</para>
+
+<para>
+メールアカウント用データはすべてOTRSデータベースの中で保存されます。<filename>otrs.PostMasterMailbox.pl</filename>
+スクリプト(OTRSインストレーションの<filename>bin</filename>ディレクトリーにあります)は、データベースの中で設定を使用し、メールを取って来ます。全てのメール設定が適切に動いているかどうかをチェックするために<filename>./bin/otrs.PostMasterMailbox.pl</filename>を手動で実行することができます。
+</para>
+
+<para>
+正常なインストレーションにおいては、<filename>postmaster_mailbox</filename>
+cronジョブによってメールが10分ごとに取って来られるでしょう。cronジョブの修正に関するさらに詳しい情報に関しては、<link
+linkend="cronjobs">"「OTRSのためにcronジョブをセット・アップする」"</link> セクションを参照してください。
+</para>
+
+<note>
+<para>
+メールを取って来る場合、OTRSはPOPかIMAPサーバーからメールを削除します。さらにサーバ上でコピーを保存するオプションはありません。サーバのコピーを保持したければ、メールサーバで転送規則を作成するとよいでしょう。詳細のためにメールサーバ・ドキュメンテーションを調べてください。
+</para>
+</note>
+</section>
+
+
+<section id="email-receiving-cmd">
+<title>コマンドライン・プログラムおよびprocmail経由(otrs.PostMaster.pl)</title>
+
+<para>
+OTRSにEメールを入れるためにメールアカウントを使用することができなければ、コマンドライン・プログラム
+<filename>bin/otrs.PostMaster.pl</filename>はその問題を解決するひとつの方法かもしれません。それはSTDIN経由でメールを取り、OTRSにそれらを直接送ります。それは、MDA(メール配信エージェント(例えばprocmail))がこのプログラムを実行すれば、EメールがOTRSシステムにおいて利用可能だろうということを意味します。
+</para>
+
+<para>
+MDAなしで
+<filename>bin/otrs.PostMaster.pl</filename>をテストするには、次のスクリプトのコマンドを実行してください。
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs# cd bin
+linux:/opt/otrs/bin# cat ../doc/sample_mails/test-email-1.box | ./otrs.PostMaster.pl
+linux:/opt/otrs/bin#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:MDAのないポストマスターのテスト</emphasis>
+</para>
+
+<para>
+EメールがQueueViewの中で表示される場合、あなたの設定は正しく動作しています。
+</para>
+
+<para>
+ProcmailはLinux環境中でとても普及しているEメール・フィルタです。ほとんどのシステムにそれがインストールされます。そうでなければ、<ulink
+url="http://www.procmail.org/"><citetitle>procmailホームページ</citetitle></ulink>を見てください。
+</para>
+
+<para>
+OTRS用にprocmailを構成するためには(sendmail、postfix、eximあるいはqmailといったprocmail構成のMTAに基づいた）、<filename>~otrs/.procmailrc.dist</filename>ファイルを使用して、<filename>.procmailrc</filename>にそれをコピーして、スクリプトのラインを下に加えてください。
+</para>
+
+<para>
+<programlisting>
+SYS_HOME=$HOME
+PATH=/bin:/usr/bin:/usr/local/bin
+# --
+# 全てのEメールをthe PostMaster processへPipe します。
+# --
+:0 :
+| $SYS_HOME/bin/otrs.PostMaster.pl
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:OTRSのためのprocmailの構成。</emphasis>
+</para>
+
+<para>
+localのOTRSユーザへ送られたEメールはすべて、<filename>bin/otrs.PostMaster.pl</filename>に送られ、QueueViewで表示されるでしょう。
+</para>
+
+</section>
+
+<section id="email-receiving-fetchmail">
+<title>otrs.PostMaster.plのためのPOP3, IMAPおよびfetchmailによるEメールの取得</title>
+
+<para>
+メールサーバから、POP3またはIMAPのメールボックス経由で、OTRSマシン/ローカルのOTRSアカウント、およびprocmailにEメールを受け取るために、<ulink
+url="http://fetchmail.berlios.de/">fetchmail</ulink>を使用します。
+</para>
+
+<note>
+<para>
+OTRSマシン上で作動してるSMTP構成が必要です。
+</para>
+</note>
+
+<para>
+OTRSのホームディレクトリーの中で<filename>.fetchmailrc.dist</filename>を使用し、必要に応じて<filename>.fetchmailrc</filename>.Modfiy/changeにそれをコピーすることができます。(下記の例7-1を参照)
+</para>
+
+<example id='fetchmailrc'>
+<title>.fetchmailrc</title>
+
+<para>
+<programlisting>
+#poll (mailserver) protocol POP3 user (user) password (password) is(localuser)
+poll mail.example.com protocol POP3 user joe password mama is otrs
+</programlisting>
+</para>
+
+</example>
+
+<para>
+.fetchmailrcを710("chmod 710.fetchmailrc")にセットすることを忘れないでください!
+</para>
+
+<para>
+上記の例7-1からの<filename>.fetchmailrc</filename>で、コマンド<command>fetchmail
+-a</command>が実行されれば、EメールはすべてローカルのOTRSアカウントへ転送されるでしょう。メールを規則的に取って来たい場合は、このコマンドでcronjobをセット・アップしてください。
+</para>
+</section>
+
+
+<section id="email-receiving-filter">
+<title>OTRS/PostMasterモジュール(より多く複雑な送信用の)によるフィルター/送信</title>
+
+<para>
+bin/otrs.PostMaster.plあるいはbin/otrs.PostMasterMailbox.plの方法を使用すれば、PostMasterフィルタ・モジュールを備えたX-OTRSヘッダー・エントリを挿入するか修正することができます。チケットシステムは、X-OTRSヘッダーによって、受信に対するいくつかのアクションを実行するか、特定のキューへそれらをソートするか、優先度を変更するか、あるいは例えば顧客IDを変更することができます。X-OTRSヘッダーに関してより多くの情報、OTRS管理者ページからの<link
+linkend="adminarea-postmasterpop3-account">「メールアカウントの追加」</link>に関するセクションにおいて利用可能です。
+</para>
+
+<para>
+いくつかのデフォルト・フィルタ・モジュールがあります:
+</para>
+
+<note>
+<para>
+ジョブ名 (e.g. $Self->{'PostMaster::PreFilterModule'}->{'JobName'})
+はユニークである必要があります。
+</para>
+</note>
+
+<para>
+ernel::System::PostMaster::Filter::Match　は、いくつかのEメールヘッダ(e.g. From, To,
+Subject, ...)をマッチさせるためのデフォルトモジュールです。　フィルタ規則がマッチすれば、それは新規Eメールヘッダ(例：
+X-OTRS-Ignore: yes or X-OTRSQueue:spam)にセットできます。例　7-2のジョブは
+<filename>Kernel/Config.pm</filename> に挿入可能です。
+</para>
+
+<example id='filter-module-match-example'>
+<title>フィルタ・モジュールのためのサンプルジョブ</title>
+
+<para>
+<programlisting>
+    # Job Name: 1-Match
+    # (noreply@からの全てのスパムEメールをブロックまたは無視)
+    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
+        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+        Match =&gt; {
+            From =&gt; 'noreply@',
+        },
+        Set =&gt; {
+            'X-OTRS-Ignore' =&gt; 'yes',
+        },
+    };
+    # Job Name: 2-Match
+    # (件名: **ORDER**かつsales@example.comからのEメールをソート)
+    # into queue 'Order')
+    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
+        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+        Match =&gt; {
+            To =&gt; 'sales@example.com',
+            Subject =&gt; '**ORDER**',
+        },
+        Set =&gt; {
+            'X-OTRS-Queue' =&gt; 'Order',
+        },
+    };
+</programlisting>
+</para>
+
+</example>
+
+<para>
+Kernel::System::PostMaster::Filter::CMDは外部コマンドにEメールを送る、デフォルト・モジュールです。出力はSTDOUTに与えられます、また、結果がTrueの場合、新規Eメール・ヘッダー(例えば、X-OTRS-Ignore:
+yes or X-OTRS-Queue:
+spam）をセットします。例7-3は　<filename>Kernel/Config.pm</filename>で使用することができます。
+</para>
+
+<example id='filter-module-cmd-example'>
+<title>フィルタ・モジュールのためのサンプル・ジョブ　Kernel::System::PostMaster::Filter::CMD</title>
+
+<para>
+<programlisting>
+    # Job Name: 5-SpamAssassin
+    # (SpamAssassin サンプルセットアップ, スパムメールを無視します)
+    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
+        Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
+        CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
+        Set =&gt; {
+            'X-OTRS-Ignore' =&gt; 'yes',
+        },
+    };
+</programlisting>
+</para>
+
+</example>
+
+<para>
+    Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognitionは、Eメールの件名、本文、または正規表現を使用する両方に、外部識別子を解析する可能性を加えるデフォルト・モジュールです。その後、それは定義された動的フィールドにこの値を格納します。Eメールが中へ入る時、OTRSは最初に外部識別子を検索し、1つ見つけると、あらかじめ定義された動的フィールドについてOTRSにクエリします。それは既存のチケットを見つければ、このチケットを更新するでしょう。そうでなければ、それは別々のフィールドに外部参照番号で新規チケットを作成するでしょう。
+</para>
+<para>
+    OTRS
+SysConfigは、異なる外部チケット番号を設定するために４つの異なる設定を既に供給していますより多くのセッティングが必要な場合、それらを手動で加える必要がある必要があります。次の例はSysConfig設定を拡張するために<filename>Kernel/Config.pm</filename>の中で使用することができます。
+</para>
+
+<example id='filter-module-externalticketrecognition-example'>
+    <title>
+        フィルター・モジュールのためのサンプル・ジョブKernel::System::PostMaster::Filter::ExternalTicketNumberRecognition
+    </title>
+
+<programlisting language="Perl"><![CDATA[
+    # Job Name: ExternalNumber
+# 外部チケット番号の認識では、<送信者>@externalticket.comのアドレス
+# からの入信Eメールの中の件名と本文インシデント<番号>をチェックします。
+# <番号>が見つかればそれは動的フィールド「ExternalNumber(外部番号)」
+# に保存されます。（管理者バネルで設定が必要）
+    $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition5'} =  {
+        'FromAddressRegExp' => '\\s*@externalticket.com',
+        'NumberRegExp'      => 'Incident-(\\d.*)',
+        'SearchInSubject'   => '1',
+        'SearchInBody'      => '1',
+        'TicketStateTypes'  => 'new;open'
+        'DynamicFieldName'  => 'ExternalNumber',
+        'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+        'Name'              => 'Test External Ticket Number',
+        'SenderType'        => 'system',
+    };
+    ]]></programlisting></example>
+
+<itemizedlist mark="round">
+    <para><emphasis>構成オプション</emphasis></para>
+    <listitem>
+        <para>FromAddressRegExp</para>
+        <para>
+            これはオプションの設定です。この「From:」アドレスと一致しているメールだけがこのフィルターで考慮されます。この設定を調整して、送信メール用外部システム利用を、送信者アドレスにすることができます。このアドレスが異なる場合、このオプションを空にすることができます。この場合、OTRSは送信者アドレスをチェックしません。
+        </para>
+    </listitem>
+    <listitem>
+        <para>NumberRegExp</para>
+        <para>
+            これは必須設定項目です。この設定は　件名またはチケットの本文からチケット番号を抽出するためにOTRSが使う正規表現を含みます。デフォルトの正規表現は　以下のような例の発生と一致するでしょう。例えば「Incident-12354」そしてその部分を動的フィールド中に括弧で挟む部分を置きます（ここでは「12354」）
+        </para>
+    </listitem>
+    <listitem>
+        <para>SearchInSubject</para>
+        <para>これが「1」にセットされる場合、Eメール件名はチケット番号を求めて検索されます。</para>
+    </listitem>
+    <listitem>
+        <para>SearchInBody</para>
+        <para>これが「1」にセットされる場合、Eメール本文はチケット番号を求めて検索されます。</para>
+    </listitem>
+    <listitem>
+        <para>TicketStateTypes（チケット・状態・タイプ）</para>
+        <para>
+            これはオプションの設定です。もし与えられれば、それは与えられた状態タイプの開いた外部チケットのみOTRSを検索するでしょう。状態タイプはセミコロンで分離されます。
+        </para>
+    </listitem>
+    <listitem>
+        <para>DynamicField</para>
+        <para>
+            これは必須の設定で、外部番号を保存するために使われている動的フィールドを定義します。(フィールド名はシステムに存在しなければいけないしかつ有効でなければなりません)
+        </para>
+    </listitem>
+    <listitem>
+        <para>SenderType</para>
+        <para>これは、OTRSで記事作成に使用される送信者タイプを定義します。</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+もちろん、自分のPostMasterフィルタ・モジュールを開発することも可能です。
+</para>
+
+</section>
+
+</section>
+
+</section>

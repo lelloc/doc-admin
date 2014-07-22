@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="backup-and-restore">
+<title>システムのバックアップ</title>
+
+<para>
+本章はバックアップとOTRSデータのリストアについて記述します。
+</para>
+
+<section id="backup">
+<title>バックアップ</title>
+
+<para>
+バックアップする2つのタイプのデータがあります:ひとつはアプリケーションファイル(例えば <filename>/opt/otrs</filename>
+の中のファイル)、もうひとつはデータベースに格納されたデータです。
+</para>
+
+<para>
+バックアップを単純化するために、スクリプト <filename>scripts/backup.pl</filename>
+はOTRSのインストレーションで含まれています。それは全てのインポートデータをバックアップするように走らせることができます。(下記のスクリプトを参照)。
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs# cd scripts/
+linux:/opt/otrs/scripts# ./backup.pl --help
+backup.pl &lt;Revision 1.1&gt; - backup script
+Copyright (c) 2001-2005 Martin Edenhofer &lt;martin@otrs.org&gt;
+usage: backup.pl -d /data_backup/ [-c bzip2|gzip] [-r 30] [-t nofullbackup]
+linux:/opt/otrs/scripts#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト：OTRSバックアップメカニズムに関するヘルプ</emphasis>
+</para>
+
+<para>
+バックアップを作成するために以下のスクリプトで指定したコマンドを実行します：
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs/scripts# ./backup.pl -d /backup/
+Backup /backup//2010-09-07_14-28/Config.tar.gz ... done
+Backup /backup//2010-09-07_14-28/Application.tar.gz ... done
+Dump MySQL rdbms ... done
+Compress SQL-file... done
+linux:/opt/otrs/scripts#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:バックアップの作成</emphasis>
+</para>
+
+<para>
+全てのデータはディレクトリ /backup/2010-09-07_14-28/　に格納されます。（下図参照）それに加えてデータはa .tar.gz
+fileに保存されます。
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs/scripts# ls /backup/2010-09-07_14-28/
+Application.tar.gz  Config.tar.gz  DatabaseBackup.sql.gz
+linux:/opt/otrs/scripts#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:バックアップ・ファイルのチェック。</emphasis>
+</para>
+
+</section>
+
+<section id="restore">
+<title>リストア</title>
+
+<para>
+バックアップをリストアするために、保存されたアプリケーション・データはインストレーション・ディレクトリ（例えば、<filename>/opt/otrs</filename>　）に書き戻されなければいけません。さらに、データベースをリストアしなければなりません。
+</para>
+
+<para>
+リストア・プロセスを簡素化するスクリプト scripts/restore.pl
+(下記のスクリプトを参照)は、OTRSの全ての出荷時に同梱され、MySQLとPostgreSQLをサポートします。
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs/scripts# ./restore.pl --help
+restore.pl &lt;Revision 1.1&gt; - restore script
+Copyright (c) 2001-2005 Martin Edenhofer &lt;martin@otrs.org&gt;
+usage: restore.pl -b /data_backup/&lt;TIME&gt;/ -d /opt/otrs/
+linux:/opt/otrs/scripts#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:リストア・メカニズムに関するヘルプ</emphasis>
+</para>
+
+<para>
+例えば保存されるデータ（例えば、ディレクトリー<filename>/backup/2010-09-07_14-28/</filename>の中にある）は、以下のスクリプトで指定されたコマンドでリストアすることができます。（OTRSは<filename>/opt/otrs</filename>にインストールされていると仮定します。）
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs/scripts# ./restore.pl -b /backup/2010-09-07_14-28 -d /opt/otrs/
+Restore /backup/2010-09-07_14-28//Config.tar.gz ...
+Restore /backup/2010-09-07_14-28//Application.tar.gz ...
+create MySQL
+decompresses SQL-file ...
+cat SQL-file into MySQL database
+compress SQL-file...
+linux:/opt/otrs/scripts#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:　OTRSデータのリストア</emphasis>
+</para>
+
+</section>
+
+</section>

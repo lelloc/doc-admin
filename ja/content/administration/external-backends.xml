@@ -1,0 +1,1115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+
+<section id="external-backends">
+<title>外部バックエンドの使用</title>
+
+<section id='customer-data'>
+<title>顧客情報</title>
+
+<para>
+OTRSは、ユーザー名、メール・アドレス、電話番号などのような多くの顧客情報属性で動作しています。これらの属性は担当者および顧客フロント・エンドの両方に表示され、顧客の認証に使用されます。
+</para>
+
+<para>
+OTRSの内に使用されるか表示された顧客情報は高度にカスタマイズ可能です。しかし次の情報は、顧客認証に常に必要とされます:
+</para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para>
+      User login（ユーザーログイン）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+      Email address（Eメールアドレス）
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+      Customer ID（顧客ID）
+    </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para>
+担当者インターフェースの顧客情報を表示したければ、次のSysConfigパラメタを使用して下さい。
+</para>
+
+<para>
+<programlisting>
+    # Ticket::Frontend::CustomerInfo*
+    # （作成（電話とEメール）、ズーム、キュービュー時に顧客情報を表示）
+    $Self->{'Ticket::Frontend::CustomerInfoCompose'} = 1;
+    $Self->{'Ticket::Frontend::CustomerInfoZoom'} = 1;
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト：SysConfig構成パラメタ</emphasis>
+</para>
+
+</section>
+
+<section id="customer-user-backend">
+<title>顧客ユーザ・バックエンド</title>
+
+<para>
+2つのタイプの顧客バックエンド、DBおよびLDAPを使用することができます。あなたが別の顧客バックエンド(例えばSAP)を既に持っていれば、それを使用するモジュールを書くことはもちろん可能です。
+</para>
+
+<section id='customer-backend-db'>
+<title>データベース(デフォルト)</title>
+
+<para>
+例11-1は、DB顧客バックエンドの構成を示します。それは、OTRSデータベースに保存された顧客情報を使用します。
+</para>
+
+<example id='db-customer-backend'>
+<title>DB顧客バックエンドの構成</title>
+
+<para>
+<programlisting>
+# CustomerUser (customer database backend and settings)
+$Self->{CustomerUser} = {
+    Name => 'Database Datasource',
+    Module => 'Kernel::System::CustomerUser::DB',
+    Params => {
+        # 外部データベースを使用したければ必要な設定を追加します。
+#            DSN => 'DBI:odbc:yourdsn',
+#            Type => 'mssql', # only for ODBC connections
+#            DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
+#            User => '',
+#            Password => '',
+            Table => 'customer_user',
+            # フロント・エンドがunicodeで顧客データベースサーバのcharsetが
+            # iso-8859-1である場合は、これらのオプションを使用して下さい。
+#           SourceCharset => 'iso-8859-1',
+#           DestCharset => 'utf-8',
+
+# CaseSensitive（大文字と小文字を区別せず評価するかどうかの指定値）は、
+# 大文字小文字の評価を鈍感に動かすためにSQLステートメントが
+# LOWER()関数呼び出しを必要とするかどうかをコントロールします。
+# これを1にセットすると、大きなデータベース上でパフォーマンスを
+# 劇的に改善するでしょう。
+            CaseSensitive => 0,
+        },
+# 顧客固有識別ID
+CustomerKey => 'login',
+
+# 顧客 #
+CustomerID => 'customer_id',
+CustomerValid => 'valid_id',
+    CustomerUserListFields => ['first_name', 'last_name', 'email'],
+    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['email'],
+    CustomerUserNameFields => ['title','first_name','last_name'],
+    CustomerUserEmailUniqCheck => 1,
+#    # 顧客パネルに自身のチケットを非表示とします, CompanyTicketsn#    CustomerUserExcludePrimaryCustomerID => 0,
+#    # 自動ログインを生成します
+#    AutoLoginCreation => 0,
+#    AutoLoginCreationPrefix => 'auto',
+#    # admin は顧客の選択（選好）を変更できます。
+#    AdminSetPreferences => 1,
+#    # キャッシュの生存時間（秒）- どのデータベース・クエリーのキャッシュでも
+#    CacheTTL => 0,
+#    # 読み取り専用のソース
+#    ReadOnly => 1,
+    Map => [
+        # ノート：ログイン、Eメールと顧客IDが必要！
+        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target
+        [ 'UserTitle',      'Title',      'title',      1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Firstname',  'first_name', 1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Lastname',   'last_name',  1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Username',   'login',      1, 1, 'var', '', 0 ],
+        [ 'UserPassword',   'Password',   'pw',         0, 0, 'var', '', 0 ],
+        [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '', 0 ],
+
+#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '$Env{"CGIHandle"}?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=$Data{"TicketID"}&amp;ArticleID=$Data{"ArticleID"}', 0 ],
+        [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 ],
+
+#        [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],
+        [ 'UserPhone',        'Phone',       'phone',        1, 0, 'var', '', 0 ],
+        [ 'UserFax',          'Fax',         'fax',          1, 0, 'var', '', 0 ],
+        [ 'UserMobile',       'Mobile',      'mobile',       1, 0, 'var', '', 0 ],
+        [ 'UserStreet',       'Street',      'street',       1, 0, 'var', '', 0 ],
+        [ 'UserZip',          'Zip',         'zip',          1, 0, 'var', '', 0 ],
+        [ 'UserCity',         'City',        'city',         1, 0, 'var', '', 0 ],
+        [ 'UserCountry',      'Country',     'country',      1, 0, 'var', '', 0 ],
+        [ 'UserComment',      'Comment',     'comments',     1, 0, 'var', '', 0 ],
+        [ 'ValidID',          'Valid',       'valid_id',     0, 1, 'int', '', 0 ],
+    ],
+    # デフォルトの選択
+    Selections => {
+        UserTitle => {
+            'Mr.' => 'Mr.',
+            'Mrs.' => 'Mrs.',
+        },
+    },
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+顧客情報をカスタマイズしたい場合は、カラム・ヘッダーを変更するか、あるいは新規ものをOTRSデータベース中のcustomer_userテーブルに加えてください。例として、下記のスクリプトは、room番号用の新規フィールドを加える方法を教えます。
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 116 to server version: 5.0.18-Debian_7-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; ALTER TABLE customer_user ADD room VARCHAR (250);
+Query OK, 1 rows affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:　roomフィールドのcustomer_userテーブルへの追加。</emphasis>
+</para>
+
+<para>
+次のスクリプトで示されるように、さて、新規カラムを<filename>Kernel/Config.pm</filename>中のMAP配列に追加してください。
+</para>
+
+<para>
+<programlisting>
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    [...]
+    [ 'UserRoom',      'Room',      'room',       0, 1, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:roomフィールドのKernel/Config.pmファイルへの追加。</emphasis>
+</para>
+
+<para>
+担当者インターフェースの顧客リンクによってこの顧客情報をすべて編集することも可能です。
+</para>
+
+<section id='multi-customer-ids-db'>
+<title>多数のID(会社チケット)を持った顧客</title>
+
+<para>
+顧客に1つを超える顧客IDを割り当てることは可能です。顧客が他の顧客のチケットへアクセスしなければならないならばこれは役立ちます。（例えば、スーパーバイザはアシスタントのチケットを見たい。）顧客が他の顧客のチケットへアクセスできるならば、OTRSの会社チケット機能が使われます。会社チケットは、顧客パネル中の「会社チケット」リンクによってアクセスすることができます。
+</para>
+
+<para>
+会社チケットを使用するために、顧客にとってアクセス可能であるべきIDを備えた新規カラムをOTRSデータベース中のcustomer_userテーブルに加えなければなりません(下記のスクリプトを参照)。
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 124 to server version: 5.0.18-Debian_7-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; ALTER TABLE customer_user ADD customer_ids VARCHAR (250);
+Query OK, 1 rows affected (0.02 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+    <emphasis>スクリプト: customer_idsフィールドのcustomer_userテーブルへの追加。</emphasis>
+</para>
+
+<para>
+スクリプトの中で下に示されるように、新規カラムを<filename>Kernel/Config.pm</filename>中のMAP配列に加えなければなりません。
+</para>
+
+<para>
+<programlisting>
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    [...]
+    [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト: UserCustomerIDsフィールドの Kernel/Config.pmファイル への追加。</emphasis>
+</para>
+
+<para>
+ここで、多数の顧客IDのための新規カラムは、顧客管理のためのセクションの中で担当者・インターフェース経由で編集することができます。
+</para>
+
+<para>
+顧客が他の顧客のチケットにアクセスすることを確実にするために、多数の顧客IDのための新規フィールドの中へのこれらの他のユーザのIDを追加します。セミコロンによって各IDを区切って下さい(下記の例11-2を参照)。
+</para>
+
+<example id='company-tickets-db'>
+<title>DBバックエンドを備えた会社チケットの使用</title>
+
+<para>
+顧客A、BおよびCはあなたのシステムに存在します。また、Aは顧客パネルからBとCのチケットにアクセスしたい。BとCは他のユーザのチケットにアクセスするべきではありません。
+</para>
+
+<para>
+このセットアップを実現するためには、上に記述されるような<filename>Kernel/Config.pm</filename>中のcustomer_userテーブルおよびMappingを変更してください。次に、担当者インターフェースあるいは管理者ページの顧客リンクから、顧客Aのための設定をロードしてください。設定が表示される場合、CustomerIDsのためのフィールドへ値「B;C;」を追加して下さい。
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+<section id='customer-backend-ldap'>
+<title>LDAP</title>
+
+<para>
+顧客情報を備えたLDAPディレクトリーを持っているならば、例11-3において示されるように、OTRSを備えた顧客バックエンドとしてそれを使用することができます。
+</para>
+
+<example id='ldap-customer-backend'>
+<title>LDAP顧客バックエンドの構成</title>
+
+<para>
+<programlisting>
+# CustomerUser
+# (顧客LDAPバックエンドとその設定)
+$Self->{CustomerUser} = {
+    Name => 'LDAP Data Source',
+    Module => 'Kernel::System::CustomerUser::LDAP',
+    Params => {
+        # ldap host
+        Host => 'bay.csuhayward.edu',
+        # ldap base dn
+        BaseDN => 'ou=seas,o=csuh',
+        # search scope (one|sub)
+        SSCOPE => 'sub',
+        # 次の記述は有効です。しかし、単に、匿名ユーザが
+        # LDAPツリーから読み込み許可を持っていない場合のみに必要です。
+        UserDN => '',
+        UserPw => '',
+        # 常にあるフィルタを各LDAPクエリに追加したい場合このオプションを使います。
+        # このオプション、例えば AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
+        AlwaysFilter => '',
+            # フロントエンドとLDAPの両方がunicodeなら、これを使います:
+            SourceCharset => 'utf-8',
+            DestCharset   => 'utf-8',
+            # フロントエンドがunicodeでLDAPサーバが
+            # iso-8859-1ならば、このオプションを使います。
+            # SourceCharset => 'iso-8859-1',
+            # DestCharset => 'utf-8',
+            # Net::LDAP new params (必要なら詳細はperldoc Net::LDAPを参照)
+            Params => {
+                port => 389,
+                timeout => 120,
+                async => 0,
+                version => 3,
+            },
+    },
+    # 顧客識別ID
+    CustomerKey => 'uid',
+    # 顧客 #
+    CustomerID => 'mail',
+    CustomerUserListFields => ['cn', 'mail'],
+    CustomerUserSearchFields => ['uid', 'cn', 'mail'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['mail'],
+    CustomerUserNameFields => ['givenname', 'sn'],
+    # 顧客パネルに自身のチケットを非表示, CompanyTickets
+    CustomerUserExcludePrimaryCustomerID => 0,
+    # 有効なユーザー用にLDAPフィルタを追加 (上級者向け設定)
+#    CustomerUserValidFilter => '(!(description=locked))',
+    # administrator は顧客選択（選好）を変更できません。
+    AdminSetPreferences => 0,
+#    # キャッシュ生存時間（秒） - cache any database queries
+#    CacheTTL => 0,
+    Map => [
+        # ノート：ログイン、Eメールと顧客IDは必須!
+        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+        [ 'UserTitle',      'Title',      'title',           1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Firstname',  'givenname',       1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Lastname',   'sn',              1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Username',   'uid',             1, 1, 'var', '', 0 ],
+        [ 'UserEmail',      'Email',      'mail',            1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'CustomerID', 'mail',            0, 1, 'var', '', 0 ],
+#        [ 'UserCustomerIDs', 'CustomerIDs', 'second_customer_ids', 1, 0, 'var', '', 0 ],
+        [ 'UserPhone',      'Phone',      'telephonenumber', 1, 0, 'var', '', 0 ],
+        [ 'UserAddress',    'Address',    'postaladdress',   1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Comment',    'description',     1, 0, 'var', '', 0 ],
+    ],
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+追加の顧客属性（マネージャーの名前、携帯電話番号あるいは部署のような）が、あなたのLDAPディレクトリーに格納されていて、この情報をOTRSに表示したいならば、次のスクリプトの中で示されるように、これらの属性へのエントリーを備えた<filename>Kernel/Config.pm</filename>
+中のMAP配列をただ拡張してください。
+</para>
+
+<para>
+<programlisting>
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    [...]
+    [ 'UserPhone',      'Phone',      'telephonenumber', 1, 0, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:新規フィールドのKernel/Config.pmファイルへの追加</emphasis>
+</para>
+
+
+<section id='multi-customer-ids-ldap'>
+<title>多数のID(会社チケット)を持った顧客</title>
+
+<para>
+LDAPバックエンドを使用する場合、顧客にひとつ以上の顧客IDを割り当てることが可能です。会社チケットを使用するために、新規フィールドを顧客によってアクセス可能なIDを含んでいるLDAPディレクトリーに加えなければなりません。
+</para>
+
+<para>
+LDAPディレクトリーの新規フィールドが作成されている場合、スクリプトの中で下に示されるように、新規エントリーを<filename>Kernel/Config.pm</filename>中のMAP配列に加えなければなりません。
+</para>
+
+<para>
+<programlisting>
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    [...]
+    [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:　新規フィールドのKernel/Config.pmファイルへのMaping</emphasis>
+</para>
+
+<para>
+複数の顧客IDのためのフィールドをLDAPディレクトリーで直接編集しなければなりません。OTRSはLDAPから単に読み込むだけで書き込むことはできません。
+</para>
+
+<para>
+顧客によって他の顧客のチケットにアクセスを保証するためには、そのチケットがあなたのLDAPディレクトリーの新規フィールドにアクセスされるべき顧客の顧客IDを加えてください。各IDはセミコロンで区切って下さい(下記の例11-4を参照)。
+</para>
+
+<example id='company-tickets-ldap'>
+<title>LDAPバックエンドを備えた会社チケットの使用</title>
+
+<para>
+顧客A、BおよびCはあなたのシステムに存在します。また、Aは顧客パネルからBとCのチケットにアクセスしたい。BとCは他のユーザのチケットにアクセスするべきではありません。
+</para>
+
+<para>
+このセットアップを実現するためには、上に記述されるような<filename>Kernel/Config.pm</filename>中のLDAPディレクトリーおよびMappingを変更してください。その後、CustomerIDsのためのフィールドへ値「B;
+C;」をあなたのLDAPディレクトリーの顧客Aのために追加して下さい。
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+<section id='multiple-customer-backends'>
+<title>OTRSでひとつ以上の顧客バックエンドを使用する</title>
+
+<para>
+あなたがOTRS(例えばLDAPおよびデータベース・バックエンド)と共に使用されるひとつ以上の顧客情報ソースを利用したければ、CustomerUser構成パラメタを「数」で(例えば「CustomerUser1」、「CustomerUser2」)拡張するべきです。(下記の例11-5を参照)。
+</para>
+
+<example id='multiple-customer-backend-example'>
+<title>OTRSでひとつ以上の顧客バックエンドを使用する</title>
+
+<para>
+以下は、OTRSでLDAPとデータベース顧客バックエンドの両方を使用する構成例です。
+</para>
+
+<para>
+<programlisting>
+# 1. Customer user backend: DB
+# (顧客データベース・バックグラウンドと設定)
+$Self->{CustomerUser1} = {
+    Name => 'Customer Database',
+    Module => 'Kernel::System::CustomerUser::DB',
+    Params => {
+        # 外部データベースを使用したければ
+        # 必要な設定を追加して下さい。
+#        DSN => 'DBI:odbc:yourdsn',
+#        Type => 'mssql', # only for ODBC connections
+#        DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
+#        User => '',
+#        Password => '',
+        Table => 'customer_user',
+    },
+    # customer unique id
+    CustomerKey => 'login',
+    # customer #
+    CustomerID => 'customer_id',
+    CustomerValid => 'valid_id',
+    CustomerUserListFields => ['first_name', 'last_name', 'email'],
+    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['email'],
+    CustomerUserNameFields => ['title','first_name','last_name'],
+    CustomerUserEmailUniqCheck => 1,
+#    # show not own tickets in customer panel, CompanyTickets
+#    CustomerUserExcludePrimaryCustomerID => 0,
+#    # generate auto logins
+#    AutoLoginCreation => 0,
+#    AutoLoginCreationPrefix => 'auto',
+#    # admin can change customer preferences
+#    AdminSetPreferences => 1,
+#    # cache time to live in sec. - cache any database queries
+#    CacheTTL => 0,
+#    # just a read only source
+#    ReadOnly => 1,
+    Map => [
+
+        # note: Login, Email and CustomerID needed!
+        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target
+        [ 'UserTitle',      'Title',      'title',        1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Firstname',  'first_name',   1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Lastname',   'last_name',    1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Username',   'login',        1, 1, 'var', '', 0 ],
+        [ 'UserPassword',   'Password',   'pw',           0, 0, 'var', '', 0 ],
+        [ 'UserEmail',      'Email',      'email',        1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'CustomerID', 'customer_id',  0, 1, 'var', '', 0 ],
+        [ 'UserPhone',      'Phone',      'phone',        1, 0, 'var', '', 0 ],
+        [ 'UserFax',        'Fax',        'fax',          1, 0, 'var', '', 0 ],
+        [ 'UserMobile',     'Mobile',     'mobile',       1, 0, 'var', '', 0 ],
+        [ 'UserStreet',     'Street',     'street',       1, 0, 'var', '', 0 ],
+        [ 'UserZip',        'Zip',        'zip',          1, 0, 'var', '', 0 ],
+        [ 'UserCity',       'City',       'city',         1, 0, 'var', '', 0 ],
+        [ 'UserCountry',    'Country',    'country',      1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Comment',    'comments',     1, 0, 'var', '', 0 ],
+        [ 'ValidID',        'Valid',      'valid_id',     0, 1, 'int', '', 0 ],
+    ],
+    # default selections
+    Selections => {
+        UserTitle => {
+            'Mr.' => 'Mr.',
+            'Mrs.' => 'Mrs.',
+        },
+    },
+};
+
+# 2. Customer user backend: LDAP
+# (customer ldap backend and settings)
+$Self->{CustomerUser2} = {
+    Name => 'LDAP Datasource',
+    Module => 'Kernel::System::CustomerUser::LDAP',
+    Params => {
+        # ldap host
+        Host => 'bay.csuhayward.edu',
+        # ldap base dn
+        BaseDN => 'ou=seas,o=csuh',
+        # search scope (one|sub)
+        SSCOPE => 'sub',
+#        # The following is valid but would only be necessary if the
+#        # anonymous user does NOT have permission to read from the LDAP tree
+        UserDN => '',
+        UserPw => '',
+        # in case you want to add always one filter to each ldap query, use
+        # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
+        AlwaysFilter => '',
+        # if both your frontend and your LDAP are unicode, use this:
+#        SourceCharset => 'utf-8',
+#        DestCharset   => 'utf-8',
+        # if your frontend is e. g. iso-8859-1 and the character set of your
+        # ldap server is utf-8, use these options:
+#        SourceCharset => 'utf-8',
+#        DestCharset => 'iso-8859-1',
+
+        # Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+        Params => {
+            port => 389,
+            timeout => 120,
+            async => 0,
+            version => 3,
+        },
+    },
+    # customer unique id
+    CustomerKey => 'uid',
+    # customer #
+    CustomerID => 'mail',
+    CustomerUserListFields => ['cn', 'mail'],
+    CustomerUserSearchFields => ['uid', 'cn', 'mail'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['mail'],
+    CustomerUserNameFields => ['givenname', 'sn'],
+    # show not own tickets in customer panel, CompanyTickets
+    CustomerUserExcludePrimaryCustomerID => 0,
+    # add a ldap filter for valid users (expert setting)
+#    CustomerUserValidFilter => '(!(description=locked))',
+    # admin can't change customer preferences
+    AdminSetPreferences => 0,
+    Map => [
+        # note: Login, Email and CustomerID needed!
+        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+        [ 'UserTitle',      'Title',      'title',           1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Firstname',  'givenname',       1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Lastname',   'sn',              1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Username',   'uid',             1, 1, 'var', '', 0 ],
+        [ 'UserEmail',      'Email',      'mail',            1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'CustomerID', 'mail',            0, 1, 'var', '', 0 ],
+#        [ 'UserCustomerIDs', 'CustomerIDs', 'second_customer_ids', 1, 0, 'var', '', 0 ],
+        [ 'UserPhone',      'Phone',      'telephonenumber', 1, 0, 'var', '', 0 ],
+        [ 'UserAddress',    'Address',    'postaladdress',   1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Comment',    'description',     1, 0, 'var', '', 0 ],
+    ],
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+10までの異なる顧客バックエンドを統合することは可能です。全ての顧客情報を見るか編集する(書き込みアクセス権限が可能と仮定して)ためにOTRSの中で顧客管理インターフェースを使用してください。
+</para>
+
+</section>
+
+<section id="dynamicfield-from-customeruser">
+    <title>動的フィールドにCustomerUserデータを格納すること</title>
+    <para>
+        顧客データを直接チケットの動的フィールドに格納することも時には役立つかもしれません。（例えばこのデータで特別な統計を作成するような目的で）
+    </para>
+    <para>
+        チケットが作成される場合、あるいはチケットの顧客が変更される場合、動的フィールド値がセットされます。動的フィールドの値は顧客データから得られます。これはすべてのバックエンドのために働きますが、特にLDAPバックエンドに役立ちます。
+    </para>
+    <para>
+        OTRSのこのオプション機能を活性化するために、以下の二つの設定を活性化して下さい。「Ticket::EventModulePost###930-DynamicFieldFromCustomerUser」および「DynamicFieldFromCustomerUser::Mapping」。後の設定では、CustomerUserフィールド入力がチケットのどの動的フィールドに格納しなければならないかの構成を含んでいます。フィールドはシステムの中にあるに違いありませんし、AgentTicketFreeTextのために可能になるに違いありません。そのゆえ、それらは手動でセットすることができます。それらはAgentTicketPhone、AgentTicketEmailおよびAgentTicketCustomerのために可能になってはなりません。もしそれらが可能ならば、それらは自動設定値に対して先行するでしょう。
+    </para>
+</section>
+
+</section>
+
+<section id="auth-backends">
+<title>担当者と顧客を認証するバックエンド</title>
+
+<para>
+OTRSは、異なるバックエンドに対する、担当者および顧客を認証するオプションを提示します。
+</para>
+
+<section id='agent-auth-backends'>
+<title>担当者のための認証バックエンド</title>
+
+<section id='agent-auth-backend-db'>
+<title>DB(デフォルト)</title>
+
+<para>
+担当者を認証するバックエンド、どれがデフォルトで使用されるかはOTRSデータベースです。担当者は管理者ページの<link
+linkend="adminarea-agents">担当者管理インターフェース</link>経由で追加・編集することができます(下記の例11-6を参照)。
+</para>
+
+<example id='configuration-agent-auth-backend-db'>
+<title>DBバックエンドに対する認証エージェント</title>
+
+<para>
+<programlisting>
+ $Self->{'AuthModule'} = 'Kernel::System::Auth::DB';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='agent-auth-backend-ldap'>
+<title>LDAP</title>
+
+<para>
+LDAPディレクトリが担当者データをすべて保存する場合、OTRSの中のユーザを認証するためにLDAPモジュールを使用することができます(下記の例11-7を参照)。このモジュールはLDAPツリーに対して単に読み込みアクセスを有しています。それは、<link
+linkend='adminarea-agents'>担当者管理インターフェース</link>経由で利用者データを編集することができないことを意味します。
+</para>
+
+<example id='configuration-agent-auth-backend-ldap'>
+<title>LDAPバックエンドに対する認証エージェント</title>
+
+<para>
+<programlisting>
+# これはLDAP認証バックエンド用サンプル構成です。
+# (Net::LDAPがインストール済であることを確認下さい。)
+$Self->{'AuthModule'} = 'Kernel::System::Auth::LDAP';
+$Self->{'AuthModule::LDAP::Host'} = 'ldap.example.com';
+$Self->{'AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
+$Self->{'AuthModule::LDAP::UID'} = 'uid';
+
+# ユーザがposixGroupで認証を許可されていることを確認します。
+# (例えばユーザはOTRSを利用するグループ xyz に属する必要があります。)
+$Self->{'AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+$Self->{'AuthModule::LDAP::AccessAttr'} = 'memberUid';
+# for ldap posixGroups objectclass (just uid)
+#  $Self->{'AuthModule::LDAP::UserAttr'} = 'UID';
+# for non ldap posixGroups objectclass (with full user dn)
+#  $Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
+
+# 次は有効です。しかし　匿名ユーザがLDAPツリーから
+# 読み込み許可を持たない場合のみ必要です。
+$Self->{'AuthModule::LDAP::SearchUserDN'} = '';
+$Self->{'AuthModule::LDAP::SearchUserPw'} = '';
+
+# 常にあるフィルタを各LDAPクエリに追加したい場合このオプションを使います。
+# たとえば AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
+$Self->{'AuthModule::LDAP::AlwaysFilter'} = '';
+
+# ログイン名のに接頭辞を追加したければ、このオプションを使います。
+# たとえばユーザがuserを使いたいが、LDAPにuser@domainが存在する場合。
+#    $Self->{'AuthModule::LDAP::UserSuffix'} = '@domain.com';
+
+# Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+$Self->{'AuthModule::LDAP::Params'} = {
+    port => 389,
+    timeout => 120,
+    async => 0,
+    version => 3,
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+スクリプトの中で下に示される構成パラメータは、ローカルのOTRSデータベースの中へのLDAPディレクトリーからの利用者データを同期させるために使用することができます。これは、LDAPサーバーにリクエストの数を減らし、OTRSでの認証の速度を向上させます。担当者が最初に認証する場合、データ同期は終っています。ローカルのOTRSデータベースへデータを同期することができますが、LDAPディレクトリーは認証のための最後の実体（インスタンス）です、したがって、LDAPツリー内の活性化されていないユーザは認証することができません。アカウント・データがOTRSデータベースに既に保存されている場合さえ。LDAPディレクトリーの担当者データは、OTRSのウェブインターフェース経由で編集することができません。したがって、LDAPツリーにデータを直接管理しなければなりません。
+</para>
+
+<para>
+<programlisting>
+# AuthModule用にAuthSyncBackend (AuthSyncModule)定義します。
+# キーが存在しそれが空ならば、Syncにならないでしょう。
+# サンプル値: AuthSyncBackend, AuthSyncBackend2
+$Self->{'AuthModule::UseSyncBackend'} = 'AuthSyncBackend';
+
+# LDAPに対する担当者データ sync
+$Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
+$Self->{'AuthSyncModule::LDAP::Host'} = 'ldap://ldap.example.com/';
+$Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=otrs, dc=org';
+$Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
+$Self->{'AuthSyncModule::LDAP::SearchUserDN'} = 'uid=sys, ou=user, dc=otrs, dc=org';
+$Self->{'AuthSyncModule::LDAP::SearchUserPw'} = 'some_pass';
+$Self->{'AuthSyncModule::LDAP::UserSyncMap'} = {
+    # DB -> LDAP
+    UserFirstname => 'givenName',
+    UserLastname  => 'sn',
+    UserEmail     => 'mail',
+};
+[...]
+
+# AuthSyncModule::LDAP::UserSyncInitialGroups
+# (最初の担当者のログインの初期の作成後に、rw許可を持つsync followingグループ）
+$Self->{'AuthSyncModule::LDAP::UserSyncInitialGroups'} = [
+    'users',
+];
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト：OTRSデータベースの中へのLDAPディレクトリーからの利用者データを同期させること。</emphasis>
+</para>
+
+</section>
+
+<section id='agent-auth-backend-httpbasic'>
+<title>担当者のためのHTTPBasicAuth</title>
+
+<para>
+すべての担当者のための「シングル・サインオン」解決を実行したければ、OTRSのためにHTTP基本認証(すべてのシステム用の)およびHTTPBasicAuthモジュールを使用することができます(下記の例11-8を参照)。
+</para>
+
+<example id='configuration-agent-auth-backend-htbasic'>
+<title>HTTPBasicを使用して、担当者を認証します。</title>
+
+<para>
+<programlisting>
+# これはapache ($ENV{REMOTE_USER})認証バックエンド用のサンプル構成です。
+# apache http-basic-authのシングル・サインオンを持ちたければそれを使います。
+$Self->{'AuthModule'} = 'Kernel::System::Auth::HTTPBasicAuth';
+
+# Note:
+#
+# このモジュールを使うなら、代替手段として次の構成設定を使うべきです。
+#（もしユーザがapache ($ENV{REMOTE_USER})として認証されていないならば）
+$Self->{LoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
+$Self->{LogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='agent-auth-backend-radius'>
+<title>Radius</title>
+
+<para>
+例11-9において示される構成パラメータは、Radiusサーバーに対する担当者を認証するために使用することができます。
+</para>
+
+<example id='configuration-agent-auth-backend-radius'>
+<title>Radiusバックエンドに対する担当者を認証します。</title>
+
+<para>
+<programlisting>
+# これは、radiusサーバに対するauth. agentsへのサンプル構成です。
+$Self->{'AuthModule'} = 'Kernel::System::Auth::Radius';
+$Self->{'AuthModule::Radius::Host'} = 'radiushost';
+$Self->{'AuthModule::Radius::Password'} = 'radiussecret';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+<section id="customer-auth-backends">
+<title>顧客のための認証バックエンド</title>
+
+<section id='customer-auth-backend-db'>
+<title>データベース(デフォルト)</title>
+
+<para>
+OTRSの中の顧客のための既定のユーザー認証バックエンドはOTRSデータベースです。このバックエンドで、顧客情報はすべて、OTRSのウェブインターフェース経由で編集することができます(下記の例11-10を参照)。
+</para>
+
+<example id='configuration-customer-auth-backend-db'>
+<title>DBバックエンドに対する顧客ユーザ認証</title>
+
+<para>
+<programlisting>
+# これはthe otrs dbに対する認証モジュールです。
+$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::DB';
+$Self->{'Customer::AuthModule::DB::Table'} = 'customer_user';
+$Self->{'Customer::AuthModule::DB::CustomerKey'} = 'login';
+$Self->{'Customer::AuthModule::DB::CustomerPassword'} = 'pw';
+#$Self->{'Customer::AuthModule::DB::DSN'} = "DBI:mysql:database=customerdb;host=customerdbhost";
+#$Self->{'Customer::AuthModule::DB::User'} = "some_user";
+#$Self->{'Customer::AuthModule::DB::Password'} = "some_password";
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='customer-auth-backend-ldap'>
+<title>LDAP</title>
+
+<para>
+すべての顧客データを備えたLDAPディレクトリーを持っていれば、OTRSへの顧客を認証するためにLDAPモジュールを使用することができます(下記の例11-11を参照)。このモジュールがLDAPバックエンドに対して単に読み取り専用アクセスをしているので、OTRSウェブインターフェース経由で顧客情報を編集することはできません。
+</para>
+
+<example id='configuration-customer-auth-backend-ldap'>
+<title>LDAPバックエンドに対する顧客ユーザ認証</title>
+
+<para>
+<programlisting>
+# これはLDAP認証バックエンド用サンプル構成です。
+# Net::LDAPがインストールされていることを確認下さい。）
+$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::LDAP';
+$Self->{'Customer::AuthModule::LDAP::Host'} = 'ldap.example.com';
+$Self->{'Customer::AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
+$Self->{'Customer::AuthModule::LDAP::UID'} = 'uid';
+
+# ユーザがposixGroupで認証することが可能かどうか確認します。
+#（例えばユーザはOTRSを使うにはグループ xyzに属する必要があります。）
+$Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+$Self->{'Customer::AuthModule::LDAP::AccessAttr'} = 'memberUid';
+# for ldap posixGroups objectclass (just uid)
+$Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'UID';
+# for non ldap posixGroups objectclass (full user dn)
+#$Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'DN';
+
+# 次は有効です。しかし　匿名ユーザがLDAPツリーから
+# 読み込み許可を持たない場合のみ必要です。
+$Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = '';
+$Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '';
+
+# 常にあるフィルタを各LDAPクエリに追加したい場合このオプションを使います
+# このオプションは例えば
+# AlwaysFilter => '(mail=*)' or AlwaysFilter =>
+'(objectclass=user)'です。
+$Self->{'Customer::AuthModule::LDAP::AlwaysFilter'} = '';
+
+# ログイン名のに接頭辞を追加したければ、このオプションを使います。
+# たとえばユーザがuserを使いたいが、LDAPにuser@domainが存在する場合。
+#$Self->{'Customer::AuthModule::LDAP::UserSuffix'} = '@domain.com';
+
+# Net::LDAP new params (if needed - for more info see perldoc Net::LDAP)
+$Self->{'Customer::AuthModule::LDAP::Params'} = {
+    port => 389,
+    timeout => 120,
+    async => 0,
+    version => 3,
+};
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='customer-auth-backend-httpbasic'>
+<title>顧客のためのHTTPBasicAuth</title>
+
+<para>
+全顧客ユーザに「シングル・サイン・オン」ソリューションを実行したければ、HTTPBasic認証（あなたの全てのシステムに対して）を使い、そしてOTRSのHTTPBasicAuthモジュールを使う（OTRSでログインが必要なくなります）。下記の例11-12を参照してください。
+</para>
+
+<example id='configuration-customer-auth-backend-htbasic'>
+<title>HTTPBasicを備えた顧客ユーザ認証</title>
+
+<para>
+<programlisting>
+# apache ($ENV{REMOTE_USER})認証バックエンド用のサンプル構成です。
+# apache http-basic-authのシングル・サインオンを
+# 持ちたければそれを使います。
+$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::HTTPBasicAuth';
+
+# ノート:
+# このモジュールを使うなら、代替手段として次の構成設定を使うべきです。
+# もしユーザがapache ($ENV{REMOTE_USER})として認証されていないならば
+$Self->{CustomerPanelLoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
+$Self->{CustomerPanelLogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='customer-auth-backend-radius'>
+<title>Radius</title>
+
+<para>
+例11-13において示される設定はRadiusサーバーに対するあなたの顧客を認証するために使用することができます。
+</para>
+
+<example id='configuration-customer-auth-backend-radius'>
+<title>Radiasのバックエンドに対する顧客ユーザ認証</title>
+
+<para>
+<programlisting>
+# これはRaduisサーバへの認証顧客へのサンプル構成です。
+$Self->{'Customer::AuthModule'} = 'Kernel::System::Auth::Radius';
+$Self->{'Customer::AuthModule::Radius::Host'} = 'radiushost';
+$Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+</section>
+
+<section id="customer-self-registration">
+<title>顧客自己登録のカスタマイズ</title>
+
+<para>
+新規顧客(customer.plパネルによってアクセス可能)のための自己登録をカスタマイズすることは可能です。新規の任意または必須フィールド（room番号、アドレスあるいは状態のような）を追加することができます。
+</para>
+
+<para>
+次の例は、顧客のroom番号を格納するためには、この場合どのように顧客データベースの中であなたが必須フィールドを指定することができるか示します。
+</para>
+
+<section id='customer-self-registration-dtl'>
+<title>ウェブインターフェースのカスタマイズ</title>
+
+<para>
+customer.plウェブインターフェースのroom番号用の新規フィールドを表示するために、このインターフェースのレイアウトの責任者である.dtlファイルを修正しなければなりません。80行目のまわりの新規フィールドを加えて、<filename>Kernel/Output/HTML/Standard/CustomerLogin.dtl</filename>ファイルを編集してください。(下記のスクリプトを参照)。
+</para>
+
+<para>
+<programlisting>
+[...]
+&lt;div class="NewLine"&gt;
+    &lt;label for="Room"&gt;$Text{"Room{CustomerUser}"}&lt;/label&gt;
+    &lt;input title="$Text{"Room Number"}" name="Room" type="text" id="UserRoom" maxlength="50" /&gt;
+&lt;/div&gt;
+[...]
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト:ウェブインターフェースでの新規フィールドの表示</emphasis>
+</para>
+
+</section>
+
+<section id="customer-self-registration-mapping">
+<title>顧客マッピング</title>
+
+<para>
+次のステップで、顧客マッピングはroom番号への新規エントリーで拡張しなければなりません。変更がアップデート後に失われないことを確実にするためには、<filename>Kernel/Config.pm</filename>
+に
+<filename>Kernel/Config/Defaults.pm</filename>からの「CustomerUser」設定を入れてください。スクリプト中で下に示されるように、MAP配列を変更して、新規room番号フィールドを追加してください。
+</para>
+
+<para>
+<programlisting>
+# CustomerUser
+# （顧客データベース・バックエンドと設定）
+$Self->{CustomerUser} = {
+    Name => 'Database Backend',
+    Module => 'Kernel::System::CustomerUser::DB',
+    Params => {
+       # 外部データベースを使いたければ、
+       # 必須設定を追加する必要があります。
+#        DSN => 'DBI:odbc:yourdsn',
+#        Type => 'mssql', # only for ODBC connections
+#        DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
+#        User => '',
+#        Password => '',
+        Table => 'customer_user',
+    },
+    # customer unique id
+    CustomerKey => 'login',
+    # customer #
+    CustomerID => 'customer_id',
+    CustomerValid => 'valid_id',
+    CustomerUserListFields => ['first_name', 'last_name', 'email'],
+#    CustomerUserListFields => ['login', 'first_name', 'last_name', 'customer_id', 'email'],
+    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['email'],
+    CustomerUserNameFields => ['title', 'first_name', 'last_name'],
+    CustomerUserEmailUniqCheck => 1,
+#    # 顧客パネルで自身のチケットではなく顧客チケットを表示します。
+#    CustomerUserExcludePrimaryCustomerID => 0,
+#    # 自動ログインを生成します。
+#    AutoLoginCreation => 0,
+#    AutoLoginCreationPrefix => 'auto',
+#    # 管理者は顧客の選択（選好）を変更できます。
+#    AdminSetPreferences => 1,
+#    # キャッシュが生存する秒数 - キャッシュ・データベース必須
+#    CacheTTL => 0,
+#    # 読み込み専用のソース
+#    ReadOnly => 1,
+    Map => [
+
+        # ノート：ログイン、Eメール、顧客IDは必要です！
+        # 変数、フロントエンド、保存場所、表示(1=常時,2=軽度)、必須、
+        # 保存タイプ、httpリンク、読み込み専用、httpリンク・ターゲット。
+        [ 'UserTitle',      'Title',      'title',       1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Firstname',  'first_name',  1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Lastname',   'last_name',   1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Username',   'login',       1, 1, 'var', '', 0 ],
+        [ 'UserPassword',   'Password',   'pw',          0, 0, 'var', '', 0 ],
+        [ 'UserEmail',      'Email',      'email',       1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 ],
+        [ 'UserPhone',      'Phone',      'phone',       1, 0, 'var', '', 0 ],
+        [ 'UserFax',        'Fax',        'fax',         1, 0, 'var', '', 0 ],
+        [ 'UserMobile',     'Mobile',     'mobile',      1, 0, 'var', '', 0 ],
+        [ 'UserRoom',       'Room',       'room',        1, 0, 'var', '', 0 ],
+        [ 'UserStreet',     'Street',     'street',      1, 0, 'var', '', 0 ],
+        [ 'UserZip',        'Zip',        'zip',         1, 0, 'var', '', 0 ],
+        [ 'UserCity',       'City',       'city',        1, 0, 'var', '', 0 ],
+        [ 'UserCountry',    'Country',    'country',     1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Comment',    'comments',    1, 0, 'var', '', 0 ],
+        [ 'ValidID',        'Valid',      'valid_id',    0, 1, 'int', '', 0 ],
+    ],
+    # default selections
+    Selections => {
+        UserTitle => {
+            'Mr.' => 'Mr.',
+            'Mrs.' => 'Mrs.',
+        },
+    },
+};
+</programlisting>
+</para>
+
+<para>
+<emphasis>スクリプト: マッピング配列の変更</emphasis>
+</para>
+
+</section>
+
+<section id="customer-self-registration-customer-table">
+<title>OTRS DBでcustomer_userテーブルのカスタマイズ</title>
+
+<para>
+最後のステップは、新しいroom番号カラムをOTRSデータベース中customer_userテーブルに追加することです(下記のスクリプトを参照)。このカラムでは、room番号へのエントリーは格納されます。
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6 to server version: 5.0.18-Debian_7-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; ALTER TABLE customer_user ADD room VARCHAR (200);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>スクリプト:新しいカラムをcustomer_userテーブルに追加</emphasis>
+</para>
+
+<para>
+room用の新規フィールドに入力されたら、顧客情報パネルに表示され、顧客・ユーザ管理画面にも表示されます。さらに、新しいアカウントを登録する場合、新しい顧客はroom番号を挿入しなければなりません。マイクロソフトのIISの上でOTRSを使用する場合、<filename>Config.pm</filename>の中で行なわれた変更を活性化するためにウェブサーバを再起動するべきです。
+</para>
+</section>
+
+</section>
+
+</section>
