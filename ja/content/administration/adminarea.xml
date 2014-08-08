@@ -116,7 +116,9 @@ linkend="adminarea-roles">役割</link>のセクションにおいて利用可�
 
 <note>
 <para>
-新規のOTRSインストレーションでは、ユーザーズグループには最初にメンバーがありません。担当者"root@localhost"はデフォルトでadminとstatsのグループに属します。
+In a brand new OTRS installation, the <emphasis>users</emphasis> group
+initially does not have any members. The agent 'root@localhost' belongs by
+default to the admin and stats groups.
 </para>
 </note>
 
@@ -349,7 +351,8 @@ linkend="Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUse
 </note>
 
 <para>
-管理者ページの役割リンクをクリックすれば、役割管理セクション(下記の図を参照)にアクセスすることができます。
+You can access the role management section (see Figure below ) by clicking
+the <emphasis>Roles</emphasis> link on the Admin page.
 </para>
 
 <para>
@@ -528,8 +531,8 @@ linkend="Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAl
 
 <para>
 <screenshot>
-<screeninfo>顧客グループ管理</screeninfo> <graphic srccredit="管理者エリア 顧客グループ -
-スクリーンショット" scale="40"
+<screeninfo>顧客グループ管理</screeninfo> <graphic srccredit=">Adminarea
+customer groups - screenshot" scale="40"
 fileref="screenshots/admin-customer-groups.png"></graphic></screenshot>
 </para>
 
@@ -996,8 +999,7 @@ fileref="screenshots/admin-autoresponse.png"></graphic></screenshot>
 </para>
 
 <para>
-署名と挨拶文でそうであったように、自動応答の件名およびテキストは、変数によって生成することができます。例えば、自動応答の本文に可変[&lt;OTRS_CUSTOMER_EMAIL
-5&gt;]を挿入すれば、顧客メール・テキストの最初の5行が自動応答に挿入されるでしょう。図示された画面の一番下にて使用することができる有効な変数に関するより多くの詳細を見つけるでしょう。
+署名と挨拶文でそうであったように、自動応答の件名およびテキストは、変数によって生成することができます。例えば、自動応答の本文に可変&lt;OTRS_CUSTOMER_EMAIL[5]&gt;を挿入すれば、顧客メール・テキストの最初の5行が自動応答に挿入されるでしょう。図示された画面の一番下にて使用することができる有効な変数に関するより多くの詳細を見つけるでしょう。
 </para>
 
 <para>
@@ -1412,7 +1414,9 @@ SysConfigのリンクは、多くのOTRSコンフィグレーション・オプ�
 </para>
 
 <para>
-システム構成用のグラフィカル・インターフェースは、「ウェブインターフェースを通ってシステムを構成する」章に、より詳細に述べられています。
+The graphical interface for system configuration is described in more detail
+in the chapter <link linkend="sysconfig"> "Configuring the system through
+the web interface"</link>.
 </para>
 
 </section>
@@ -1421,8 +1425,14 @@ SysConfigのリンクは、多くのOTRSコンフィグレーション・オプ�
 <title>Eメールアカウントの使用</title>
 
 <para>
-チケット・システムへ新規Eメールをトランスポート方法はいくつかあります。1つの方法は、ローカルのMTA、およびシステムにEメールを直接送るthe
-otrs.PostMaster.plスクリプトを使用することです。もうひとつの方法はウェブインターフェースを通って処理することができるEメールアカウントの使用です。管理者ページの「PostMasterメールアカウント」リンクは、メールアカウント用の管理コンソールをロードします(下記の図を参照)。OTRSはメール・プロトコル：POP3、POP3S、IMAPおよびIMAPS　をサポートします。
+There are several possibilities to transport new emails into the ticket
+system. One way is to use a local MTA and the <link
+linkend="email-receiving-cmd">otrs.PostMaster.pl script</link> that pipes
+the mails directly into the system. Another possibility is the use of mail
+accounts which can be administrated through the web interface. The
+"PostMaster Mail Accounts" link on the Admin page loads the management
+console for the mail accounts (see Figure below). OTRS supports the mail
+protocols: POP3, POP3S, IMAP and IMAPS.
 </para>
 
 <para>
@@ -1788,7 +1798,13 @@ fileref="screenshots/admin-sessionmanagement.png"></graphic></screenshot>
 </para>
 
 <para>
-すべての活発なセッションについていくつかの統計が表示されます。例えば、担当者および顧客ユーザーのログイン数、アクティブ・セッション数。どの個々のセッションもリストの右側のこのセッションのをクリックすることにより削除(kill)することができます。さらに、あなたには、全てのセッションを削除（kill）オプションがあります。その場合、システムをオフラインで使うならばそれは有用になるでしょう。すべてのセッションの詳細情報はまた利用可能です(下記の図を参照)。
+Some statistics about all active sessions are displayed, e.g. how many
+agents and customer users are logged in and the number of active
+sessions. Any individual session can be removed by clicking on the
+<emphasis>Kill this session</emphasis> link on the right-hand side of the
+list. You also have the option to <emphasis>Kill all sessions</emphasis>,
+which can be useful if you want to take the system offline. Detailed
+information for every session is available, too (see Figure below).
 </para>
 
 <para>
@@ -1859,7 +1875,11 @@ fileref="screenshots/admin-selectbox.png"></graphic></screenshot>
 <title>パッケージ・マネージャー</title>
 
 <para>
-管理者ページ上で「パッケージ・マネージャー」リンクを使用すると、OTRSの機能性を拡張するパッケージをインストールし管理することができます(下記の図を参照)。OTRSリポジトリから利用可能な拡張に関する議論については、追加アプリケーションセクションを参照してください。
+Using the "Package Manager" link on the Admin page, you can install and
+manage packages that extend the functionality of OTRS (see Figure
+below). See the <link linkend="application">Additional applications</link>
+section for a discussion on the extensions that are available from the OTRS
+repositories.
 </para>
 
 <para>
@@ -1877,15 +1897,32 @@ fileref="screenshots/admin-packagemanager.png"></graphic></screenshot>
 パッケージ・マネージャは、それらのバージョン番号と一緒に、サーバに現在インストールした OTRS addonパッケージを示します。
 </para>
 
-<para>オンライン・リポジトリ・セクション中のリポジトリの選択およびアップデート・リポジトリ情報ボタンのクリックにより、リモート・ホストからパッケージをインストールすることができます。利用可能なパッケージは対応するテーブルに表示されます。画面の右側は利用可能なパッケージを示します。パッケージをインストールするために、クリックする、の上で、インストールします。設置の後、パッケージはローカルのリポジトリ・セクションに表示されます。
+<para>You can install packages from a remote host by selecting the repository in
+the <emphasis>Online Repository</emphasis> section, and clicking the
+<emphasis>Update repository information</emphasis> button. The available
+packages are displayed in the corresponding table. The right side of the
+screen shows the available packages. To install a package, click on
+<emphasis>Install</emphasis>. After installation, the package is displayed
+in the <emphasis>Local Repository</emphasis> section.
 </para>
 
 <para>
-インストールされたパッケージをアップグレードするために、オンライン・リポジトリの利用可能なパッケージのリストは、ローカルにインストールされているものより高いバージョンがあるパッケージ用のアクション・カラムでアップグレードを表示します。ただUpgradeをクリックすれば、システムに新規パッケージ・バージョンをインストールするでしょう。
+To upgrade an installed package, the list of available packages in the
+online repository will show <emphasis>Upgrade</emphasis> in the Action
+column for any package that has a higher version than the one that is
+installed locally. Just click Upgrade and it will install the new package
+version on your system.
 </para>
 
 <para>
-OTRSシステムがインターネットに接続されないかのようないくつかの場合では、さらにローカル・ディスクにダウンロードしたパッケージをインストールすることができます。アクション・サイド・バー上の参照ボタンをクリックして、ディスク上のパッケージの.opmファイルを選択してください。Openをクリックしパッケージをインストールしてください。インストール完了後、パッケージはローカルのリポジトリ・セクションに表示されます。既にインストールされているパッケージの更新のために同じステップを使用することができます。
+In some cases, such as when your OTRS system is not connected to the
+Internet, you can also install those packages that you have downloaded to a
+local disk. Click the <emphasis>Browse</emphasis> button on the Actions side
+bar, and select the .opm file of the package on your disk. Click
+<emphasis>Open</emphasis> and then <emphasis>Install
+Package</emphasis>. After the installation has been completed, the package
+is displayed in the <emphasis>Local Repository</emphasis> section. You can
+use the same steps for updating a package that is already installed.
 </para>
 
 <para>

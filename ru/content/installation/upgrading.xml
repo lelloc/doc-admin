@@ -24,7 +24,6 @@ CentOS 6.
     </para>
 </note>
 
-
 <para>
     If you are running a lower version of OTRS you have to follow the upgrade
 path to 3.1 first
@@ -41,7 +40,16 @@ url="http://bugs.otrs.org/show_bug.cgi?id=6798">http://bugs.otrs.org/show_bug.cg
     Within a single minor version you can skip patch level releases if you want
 to upgrade. For instance you can upgrade directly from OTRS 3.3.1 to version
 3.3.4. If you need to do such a "patch level upgrade", you should skip steps
-9 and 13-17.
+9 and 13-16.
+</para>
+<para>
+    Please note that if you perform a patch level upgrade from OTRS 3.3.6 or
+earlier, you need to activate a new cron job that controls the scheduler
+process.  Please copy the file
+<filename>/opt/otrs/var/cron/scheduler_watchdog.dist</filename> to
+<filename>/opt/otrs/var/cron/scheduler_watchdog</filename> and update your
+crontab with <filename>/opt/otrs/bin/Cron.sh start</filename> (as "otrs"
+user, not root).
 </para>
 
   <orderedlist>
@@ -360,26 +368,6 @@ have made.
 Make sure to execute it as the OTRS system user! <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-            Activate OTRS Scheduler Service
-        </para>
-        <para>
-            This only applies if you did not previously configure the OTRS scheduler
-service.
-        </para>
-        <para>
-            OTRS comes with a scheduler service that is used to perform asynchronous
-tasks.
-        </para>
-        <para>
-            The OTRS RPMs will set up the Scheduler Service automatically.  If you
-install/update from source, you can install the service by copying the
-<filename>scripts/otrs-scheduler-linux</filename> file to
-<filename>/etc/init.d</filename> and giving it the appropriate permissions.
-This will make sure the scheduler service starts when the system starts up.
         </para>
       </listitem>
       <listitem>

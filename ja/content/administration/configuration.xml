@@ -18,12 +18,19 @@ OTRS構成ファイルはすべてディレクトリ<filename>Kernel</filename>�
 </para>
 
 <para>
-OTRSウェブインターフェースがアクセスされる場合、Kernel/Config/Files
-ディレクトリ中の全.xmlファイルは、アルファベティカルに解析され、中央のフレームワーク用の設定と追加のアプリケーションはロードされます。その後に、以下のフォルダにある諸ファイルの設定が評価されるでしょう。Kernel/Config/Files/ZZZAAuto.pm,
-Kernel/Config/Files/ZZZAuto.pm and
-Kernel/Config/Files/ZZZProcessManagement.pm
-(←存在する場合)これらのファイルはグラフィカル・インターフェースによってシステム構成キャッシングに使用され、手動で変更されるべきではありません。最後に、あなたの個々の設定および手動で変更された構成パラメータを含んでいるファイル
-Kernel/Config.pm が解析されるでしょう。この順に構成ファイルを読むことで、システムで使用されているあなたの特定の構成設定を確認できます。
+If the OTRS web interface is accessed, all .xml files in the
+<filename>Kernel/Config/Files</filename> directory are parsed in
+alphabetical order, and the settings for the central framework and
+additional applications will be loaded.  Afterwards, the settings in the
+files <filename>Kernel/Config/Files/ZZZAAuto.pm</filename>,
+<filename>Kernel/Config/Files/ZZZAuto.pm</filename> and
+<filename>Kernel/Config/Files/ZZZProcessManagement.pm</filename> (if it
+exists) will be evaluated.  These files are used by the graphical interface
+for system configuration caching and should never be changed manually.
+Lastly, the file <filename>Kernel/Config.pm</filename> that contains your
+individual settings and manually changed configuration parameters, will be
+parsed. Reading the configuration files in this order makes sure that your
+specific configuration settings are used by the system.
 </para>
 
 </section>
@@ -65,7 +72,7 @@ OTRSは、現在600以上の構成パラメタを持っていて、特定のも�
 
 <note>
 <para>
-セキュリティ上の理由で、データベース接続用の構成パラメタはSysConfigセクションの中で変更することができません。Kernel/Config.pmの中でそれらを手動でセットしなければならない。
+セキュリティ上の理由で、データベース接続用の構成パラメタはSysConfigセクションの中で変更することができません。<filename>Kernel/Config.pm</filename>の中でそれらを手動でセットしなければならない。
 </para>
 </note>
 

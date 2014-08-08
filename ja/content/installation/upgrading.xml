@@ -48,10 +48,10 @@ user, not root).
   <orderedlist>
       <listitem>
         <para>
-            Stop all relevant services.
+            全ての関連サービスを停止
         </para>
         <para>
-            e. g. (depends on used services): <screen>
+            例えば（使用中のサービスに依存しますが）：<screen>
 shell&gt; /etc/init.d/cron stop
 shell&gt; /etc/init.d/postfix stop
 shell&gt; /etc/init.d/apache stop
@@ -60,7 +60,7 @@ shell&gt; /etc/init.d/apache stop
       </listitem>
       <listitem>
         <para>
-            Backup everything below $OTRS_HOME (default: OTRS_HOME=/opt/otrs):
+            以下の全てをバックアップ $OTRS_HOME (default: OTRS_HOME=/opt/otrs):
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                 <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename></para></listitem>
@@ -72,25 +72,25 @@ shell&gt; /etc/init.d/apache stop
       </listitem>
       <listitem>
         <para>
-            Make sure that you have backed up everything ;-)
+            全てバックアップしたことを確認して下さい。
         </para>
       </listitem>
       <listitem>
         <para>
-            Setup new system (optional)
+            新規システム（オプション）のセットアップ
         </para>
         <para>
-            If possible, try this install on a separate machine for testing first.
+            可能ならばまずテスト用にこれを別マシンでインストールしてみて下さい。
         </para>
       </listitem>
       <listitem>
         <para>
-            Install the new release (tar or RPM).
+            新規リリースをインストール（tarまたはPRM)。
         </para>
          <itemizedlist>
           <listitem>
             <para>
-                With the tarball:
+                talballで：
             </para>
             <para>
                 <screen>
@@ -101,7 +101,7 @@ shell&gt; mv otrs-x.x.x otrs
                 </screen>
             </para>
             <para>
-                Restore old configuration files
+                旧構成ファイルをリストア
                 <itemizedlist>
                     <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                     <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename></para></listitem>
@@ -109,96 +109,85 @@ shell&gt; mv otrs-x.x.x otrs
                 </itemizedlist>
             </para>
             <para>
-                Restore TicketCounter.log
+                TicketCounter.logをリストア
             </para>
             <para>
-                In order to let OTRS continue with the correct ticket number, restore the
-<filename>TicketCounter.log</filename> to
-<filename>$OTRS_HOME/var/log/</filename> (default:
-<filename>OTRS_HOME=/opt/otrs</filename>). This is especially important if
-you use incremental ticketnumbers.
+                OTRSにてチケット番号を正確に継続させるために、<filename>$OTRS_HOME/var/log/</filename> (default:
+<filename>OTRS_HOME=/opt/otrs</filename>)に<filename>TicketCounter.log</filename>をリストアしてください。インクリメントのチケット番号を使用しているならば、特にこれは重要です。
             </para>
             <para>
-                Restore article data
+                記事データのリストア
             </para>
             <para>
-                If you configured OTRS to store article data in the filesystem you have to
-restore the <filename>article</filename> folder to
-<filename>$OTRS_HOME/var/</filename> (default:
-<filename>OTRS_HOME=/opt/otrs</filename>).
+                OTRSを構成し、ファイルシステムに記事データを格納するならば、<filename>$OTRS_HOME/var/</filename>
+(default:
+<filename>OTRS_HOME=/opt/otrs</filename>)に<filename>article</filename>フォルダーをリストアしなければなりません。
             </para>
           </listitem>
           <listitem>
             <para>
-                With the RPM: <screen>
+                RPMで：<screen>
 shell&gt; rpm -Uvh otrs-x.x.x.-01.rpm
                 </screen>
             </para>
             <para>
-                In this case the RPM update automatically restores the old configuration
-files.
+                この場合、RPMアップグレードは自動で旧構成ファイルをリストアします。
             </para>
           </listitem>
          </itemizedlist>
       </listitem>
       <listitem>
         <para>
-            Own themes
+            自身のテーマ
         </para>
         <para>
-            Note: The OTRS themes between 3.2 and 3.3 are NOT compatible, so don't use
-your old themes!
+            ノート: OTRSテーマの3.2と3.3は互換性がありません。だから旧テーマを使用しないで下さい。
         </para>
         <para>
-            Themes are located under $OTRS_HOME/Kernel/Output/HTML/*/*.dtl (default:
-OTRS_HOME=/opt/otrs).
+            テーマは $OTRS_HOME/Kernel/Output/HTML/*/*.dtl (default: OTRS_HOME=/opt/otrs)
+下にあります。
         </para>
         <para>
-            Please also note that dtl-Files must be in utf-8 from OTRS 3.3 on.
+            dtl-FilesはOTRS 3.3上ではutf-8でなければいけません。
         </para>
       </listitem>
       <listitem>
         <para>
-            Set file permissions.
+            ファイル権限を設定
         </para>
         <para>
-            If the tarball is used, execute: <screen>
+            talballを使用する場合は、システム設定に必要な権限で<screen>
 shell&gt; cd /opt/otrs/
 shell&gt; bin/otrs.SetPermissions.pl
-            </screen> with
-the permissions needed for your system setup.
+            </screen>を実行します。
         </para>
       </listitem>
       <listitem>
             <para>
-                Check needed Perl modules
+                必要な perlモジュールをチェックします。
             </para>
             <para>
-               Verify that all needed perl modules are installed on your system and install
-any modules that might be missing.  <screen>
+               システムに必要とされるperlモジュールがすべてインストールされ不足しているおそれのあるモジュールをインストールすることを確認してください。<screen>
 shell&gt; /opt/otrs/bin/otrs.CheckModules.pl
                </screen>
             </para>
       </listitem>
       <listitem>
         <para>
-            Schema update:
+            スキーマ・アップデート：
         </para>
         <para>
-             Note: new tables created in the MySQL UPGRADING process will be created with
-the default table storage engine set in your MySQL server.  In MySQL 5.5 the
-new default type is InnoDB.  If existing tables, e.g. "users", have the
-table storage engine, e.g. MyISAM, then an error will be displayed when
-creating the foreign key constraints.
+             ノート: MySQL
+UPGRADINGプロセスで作成された新しいテーブルは、MySQLサーバーで設定されたデフォルト・テーブル・ストレージ・エンジンで作成されます。MySQL
+5.5では、新しいデフォルト・タイプはInnoDBです。既存のテーブル(例えば「ユーザ」)にテーブル・ストレージ・エンジンがある場合（例えばMyISAM）外部キー制約を作成するとエラーが表示されます。
          </para>
          <para>
-            You have two options: (1) you can change the default storage engine of MySQL
-back to MyISAM so that new tables will have the same engine as the existing
-tables, or (2) change the existing tables to use InnoDB as storage engine.
+            2つのオプションがあります: (1)
+新規テーブルが既存テーブルと同じエンジンを持つように、MySQLのデフォルトのストレージ・エンジンをMyISAMに変更できます。あるいは (2)
+ストレージ・エンジンとしてInnoDBを使用する既存テーブルを変更します。
         </para>
         <para>
-            Any problems with regards to the storage engine will be reported by the
-otrs.CheckDB.pl script, so please run it to check for possible issues.
+            otrs.CheckDB.plスクリプトは、ストレージ・エンジンに関するどんな問題も報告するので、可能な問題をチェックするためにそれを実行してください。
         </para>
         <para>
             <screen>
@@ -223,19 +212,18 @@ $Self->{DatabasePostgresqlBefore82} = 1;
             </screen>
         </para>
         <para>
-            Run the migration script (as user 'otrs', NOT as root):
+            統合スクリプト（「root」としてではなくユーザ「otrs」として）を走らせます。
         </para>
         <para>
             <screen>
 shell&gt; scripts/DBUpdate-to-3.3.pl
-            </screen> Do not continue the upgrading process if
-this script does not work properly for you.  Otherwise data loss may occur.
+            </screen>
+このスクリプトが適切に動かない場合はアップグレードプロセスを継続しないで下さい。そうでなければデータを失いかねません。
         </para>
       </listitem>
       <listitem>
         <para>
-Refresh the configuration and delete caches. Please run (as user 'otrs', NOT
-as 'root'):
+構成をリフレッシュしてキャッシュを削除します。（「root」としてではなくユーザ「otrs」として）
         </para>
         <para>
             <screen>
@@ -246,26 +234,23 @@ shell&gt; bin/otrs.DeleteCache.pl
       </listitem>
       <listitem>
         <para>
-            Restart your services.
+            サービスの再起動
         </para>
         <para>
-            e. g. (depends on used services): <screen>
+            例えば（ご使用中のサービスによりますが）<screen>
 shell&gt; /etc/init.d/cron start
 shell&gt; /etc/init.d/postfix start
 shell&gt; /etc/init.d/apache start
-            </screen> Now
-you can log into your system.
+            </screen>今、システムにログインできます。
         </para>
       </listitem>
       <listitem>
-        <para>Check installed packages</para>
+        <para>インストール済のパッケージをチェック</para>
         <para>
-            In the package manager, check if all packages are still marked as correctly
-installed or if any require reinstallation or even a package upgrade.
+            パッケージ・マネージャでは全てのパッケージが正しくインストールされたとしてマークされているか、あるいはなんらかの再インストレーションあるいはパッケージ・アップグレードでさえ必要であるかをチェックします。
         </para>
         <para>
-            The following packages are automatically uninstalled after the upgrade
-process (if they where installed before):
+            以下のパッケージはアップグレード・プロセス後。自動的にアンインストールされます（先にインストール済ならば）
         </para>
         <itemizedlist>
             <listitem><para>OTRSPostMasterFilterExtensions</para></listitem>
@@ -278,7 +263,7 @@ process (if they where installed before):
             <listitem><para>OTRSMultiServiceSelect</para></listitem>
             <listitem><para>OTRSMultiQueueSelect</para></listitem>
             <listitem><para>OTRSDynamicFieldMultiLevelSelection</para></listitem>
-            <listitem><para>OTRSEventBasedTicketActions</para></listitem>
+            <listitem><para>OTRSDynamicFieldMultiLevelSelection</para></listitem>
             <listitem><para>OTRSTicketAclEditor</para></listitem>
             <listitem><para>OTRSCustomerProcessSelection</para></listitem>
             <listitem><para>OTRSACLExtensions</para></listitem>
@@ -289,81 +274,67 @@ process (if they where installed before):
       </listitem>
       <listitem>
         <para>
-            Check config settings of OTRSFreeTextFromCustomerUser
+            OTRSFreeTextFromCustomerUserの構成設定をチェックします。
         </para>
         <para>
-            Note: This only applies if you used the package OTRSFreeTextFromCustomerUser
-previously.
+            ノート: これは以前にOTRSFreeTextFromCustomerUser パッケージを使用した場合にだけ適用されます。
         </para>
         <para>
-            If you used this module previously, you need to reconfigure it.  The module
-is automatically uninstalled by the upgrading script as it is now a part of
-the OTRS framework.
+            このモジュールを以前に使用したならば、それを再構成する必要がああります。それが今OTRSフレームワークの一部であるように、モジュールはアップグレードするスクリプトによって自動的にアンインストールされます。
         </para>
         <para>
-            If you want to keep using it, please enable the setting
-"Ticket::EventModulePost###930-DynamicFieldFromCustomerUser" to activate
-this feature and configure the mapping in the setting
-"DynamicFieldFromCustomerUser::Mapping".
+            それを使用し続けたい場合は、この機能を活性化するために、設定
+"Ticket::EventModulePost###930-DynamicFieldFromCustomerUser" を有効にして下さい。そして設定
+"DynamicFieldFromCustomerUser::Mapping"でマッピングを構成して下さい。
         </para>
        </listitem>
        <listitem>
         <para>
-            Import your ACLs to the new ACL editor (optional)
+            ACLを新規ALCエディタ（オプション）へインポートします。
         </para>
         <para>
-            In OTRS 3.3, there is a graphical editor for ACLs in the administration
-interface. You will need to import your existing ACLs (e.g. in Config.pm or
-additional files) to the editor by using bin/otrs.ImportACLsFromConfig.pl in
-order to make them available in the editor. Please make sure to delete any
-ACLs from Config.pm (or other files) after successfully finishing the import
-procedure. Also you will need to use the deploy button in the ACL
-administration frontend in order to re-deploy the imported ACLs to your
-system.
+            OTRS
+3.3では、管理インターフェースにACL用グラフィカルなエディタがあります。エディタに既存のACLを利用可能にするために、それらを（例えばConfig.pmあるいは追加ファイル）をbin/otrs.ImportACLsFromConfig.pl
+を使用することによりエディタにインポートする必要があります。インポート手続きをうまく終了させた後では、必ずConfig.pm(または他のファイル)からいかなるACLも削除して下さい。さらに、システムにインポートしたACLを再度展開させるためにACL管理フロント・エンドの中で展開ボタンを使用する必要もあります。
         </para>
       </listitem>
       <listitem>
         <para>
-            Update your web server configuration
+            ウェブサーバ構成のアップデート
         </para>
         <para>
-            Note: this applies only if you use the Apache web server, and do not use the
-configuration file directly from the OTRS installation directory (e. g. with
-a symlink from the Apache configuration directory).
+            ノート:  Apacheウェブサーバを使用し、OTRSインストール・ディレクトリ(例えばApache
+構成ディレクトリからのシンボリックリンクで)から設定ファイルを直接使用しない場合のみ、これは当てはまります。
         </para>
         <para>
-            Please update the the Apache configuration file for OTRS as there have been
-several changes (see
-<filename>scripts/apache2-httpd.include.conf</filename>).
+            いくつかの変更をした時は、OTRS用Apache設定ファイルをアップデートして下さい。(
+<filename>scripts/apache2-httpd.include.conf</filename>を御覧ください)。
         </para>
       </listitem>
       <listitem>
         <para>
-            Update and activate cronjobs
+            活性化しているcronジョブのアップデート
         </para>
         <para>
-            There are several OTRS default cronjobs in $OTRS_HOME/var/cron/*.dist.  They
-can be activated by copying them without the ".dist" filename extension.  Do
-this to make sure you get the latest versions of the cronjobs and new
-cronjobs as well.  <screen><![CDATA[
-shell> cd var/cron
-shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
+            $OTRS_HOME/var/cron/*.distにいくつかのOTRSデフォルトのcronジョブがあります。それらは ".dist"
+のファイル拡張子なしでそれらをコピーすることで活性化することができますこれを実行する際は、新規cronjobsおよびcronjobsの最新バージョンの入手をご確認下さい。
+<screen><![CDATA[
+shell&gt; cd var/cron
+shell&gt; for foo in *.dist; do cp $foo `basename $foo .dist`; done
             ]]></screen>
 
         </para>
         <para>
-            Please check the copied files and re-apply any customizations that you might
-have made.
+            コピーされたファイルをチェックして、カスタマイゼーション済ならすべて再適用してください。
         </para>
         <para>
-            To schedule these cronjobs on your system, you can use the script Cron.sh.
-Make sure to execute it as the OTRS system user! <screen><![CDATA[
-shell> /opt/otrs/bin/Cron.sh start
+            システム上のこれらのcronジョブを予定するために、スクリプトCron.shを使用することができます。必ずOTRSシステム・ユーザとしてそれを実行してください!<screen><![CDATA[
+shell&gt; /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
       </listitem>
       <listitem>
-        <para>Well done!</para>
+        <para>お疲れ様でした！</para>
       </listitem>
   </orderedlist>
 </section>
