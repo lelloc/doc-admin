@@ -1,0 +1,984 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="otrs">
+<title>OTRS Help Desk</title>
+
+<abstract>
+    <para>
+        Este capitulo descreve as características do OTRS Help Desk (OTRS). Você irá
+encontrar informações a respeito das requisições de hardware e software para
+o OTRS. Adicionalmente, neste capitulo você irá aprender como obter suporte
+comercial para o OTRS, se você necessitar, e como contatar a comunidade.
+    </para>
+</abstract>
+
+<section id="otrs-basics">
+    <title>Fundamentos</title>
+
+    <para>
+        O OTRS Help Desk (OTRS) é uma aplicação web que é instalada em um servidor
+web e pode ser usada com um navegador
+    </para>
+    <para>
+        OTRS is separated into several components. The main component is the OTRS
+framework which contains all central functions for the application and the
+ticket system. It is possible to install additional applications such as
+OTRS::ITSM modules, integrations with Network Monitoring solutions, a
+knowledge base (FAQ), et cetera.
+    </para>
+</section>
+
+<section id="features-of-otrs">
+    <title>Características</title>
+
+    <para>
+        OTRS has many features. The following list gives an overview of the main
+features included in the OTRS framework.
+    </para>
+
+    <section>
+    <title>User interface</title>
+        <itemizedlist>
+          <listitem>
+            <para>
+                OTRS comes with separate, modern web interfaces for agents and customers.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                It can be used on any modern web browser, including mobile plaforms and is
+retina ready.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                The web interface can be customized with own themes and skins.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Powerful and customizable agent dashboard with personal ticket overviews and
+graphical statistics support.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                An extensible reporting engine provides various statistics and report
+scheduling options.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                With the ProcessManagement it is possible to define own ticket-based screens
+and processes (ticket workflows).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                OTRS has a built-in rights management that can be extended with fine-grained
+access control lists (ACLs).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Support for more than 30 languages and different time zones.
+            </para>
+          </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>Mail interface</title>
+        <itemizedlist>
+          <listitem>
+            <para>
+                Support for MIME emails with attachments.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Conversão automática de mensagens HTML para texto puro (maior segurança para
+conteúdo perigoso e habilita busca rápida).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Incoming mail can be filtered and pre-processed with complex rules, e.g. for
+spam messages or Queue distribution.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Support for PGP and S/MIME standards for key/certificate management and
+email processing.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Automatic responses, configurable for every queue.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Notificação por e-mail para agentes a respeito de novos tíquetes,
+acompanhamentos ou tíquetes desbloqueados
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                It is possible to define an own Ticket identifier to recognize follow-ups,
+e.g. Call#, Ticket# or Request#.  There are different ticket number
+generators (date-based, random etc.) and you can integrate your own as
+well.  Follow-ups can also be recognized by In-Reference-To headers or
+external ticket numbers.
+            </para>
+          </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>Tickets</title>
+        <itemizedlist>
+          <listitem>
+            <para>
+                OTRS uses Tickets to gather all external an internal communication that
+belongs together. These tickets are organized in Queues.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                There are many different ways of looking at the tickets in a system (based
+on Queues, Status, Escalation etc.) in different level of detail
+(small/medium/preview).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                The Ticket history records all changes to a ticket.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Tickets can be changed in many ways, such as replying, forwarding, bouncing,
+moving to another Queue, updating attributes (state, priority etc.), locking
+and accounting working time.  It is possible to modify many tickets at once
+(bulk action).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Pending time and escalation time / SLA management allow time-based
+scheduling and restrictions on tickets.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Tickets can be linked to other tickets or other objects such as FAQ entries.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Ações automáticas e temporizadas em tíquetes são possíveis com o
+"GenericAgent".
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                OTRS comes with a powerful search engine that allows complex and fulltext
+searches on tickets.
+            </para>
+          </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>System</title>
+        <itemizedlist>
+          <listitem>
+            <para>
+                OTRS runs on many operating systems (Linux, Solaris, AIX, FreeBSD, OpenBSD,
+Mac OS 10.x, Microsoft Windows) and supports several database systems for
+the central OTRS back-end (MySQL, PostgreSQL, Oracle, MSSQL).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                The core system can be extended by installing OTRS packages. There are many
+free packages (such as FAQ, OTRS::ITSM and others) as well as FeatureAddon
+packages that are available for service contract customers of the OTRS
+group.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Integration of external back-ends for the customer data, e.g. via AD,
+eDirectory or OpenLDAP.  Customers can authenticate via database, LDAP,
+HTTPAuth or Radius.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                With the GenericInterface it is easy to connect OTRS to other web services.
+Simple web services can be integrated without programming, complex scenarios
+with custom extensions.  The OTRS Ticket connector allows the creation,
+updating and searching of tickets, via web services from a third party
+application.
+            </para>
+          </listitem>
+        </itemizedlist>
+
+        <para>
+            Now let us look at the changes in recent versions of OTRS.
+        </para>
+    </section>
+
+    <section id="new-features-of-otrs-3.3">
+        <title>New features of OTRS 3.3</title>
+        <section>
+            <title>Productivity</title>
+            <itemizedlist>
+                <listitem><para>Dashboard ticket lists and regular ticket overviews can now be filtered by
+eligible ticket columns, and the shown coumns are configurable.</para></listitem>
+                <listitem><para>Ticket medium and preview overviews are now sortable.</para></listitem>
+                <listitem><para>Added a calendar widget for the dashboard that can show tickets as events.</para></listitem>
+                <listitem><para>Added new dashboard widget that shows in a matrix form the number of tickets
+per state and per queue.</para></listitem>
+                <listitem><para>Agents can now mark important articles.</para></listitem>
+                <listitem><para>A new tree selection widget makes working with tree data (queues, services
+etc.) much faster and easier.</para></listitem>
+                <listitem><para>Added support to search relative dates ( e.g. more than 1 month ago ) in
+Date and Date/Time dynamic fields.</para></listitem>
+                <listitem><para>It is now possible to specify templates (previously "standard responses")
+also for creation of new tickets and for ticket forwarding.</para></listitem>
+                <listitem><para>The list of available processes can now be filtered by ACLs.</para></listitem>
+                <listitem><para>Added support to initiate processes from Customer Interface.</para></listitem>
+                <listitem><para>In many places text is not shortened any more by a fixed number of
+characters ("Queue1..."), but instead by available screen estate. This makes
+it possible to see more information at once.</para></listitem>
+                <listitem><para>OTRS is now Retina-ready. Images have been adapted to match the higher
+resolutions and most of the image icons have been replaced by font
+characters from the FontAwesome webfont.</para></listitem>
+                <listitem><para>Added new feature "management dashboard". This makes it possible to display
+statistic charts in the dashboard. Please note that IE8 does not support
+this feature.</para></listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Working With External Systems</title>
+            <itemizedlist>
+                <listitem><para>OTRS can now use multiple customer company databases, thanks to Cyrille @
+belnet-ict.</para></listitem>
+                <listitem><para>OTRS can now automatically store customer user data in ticket dynamic fields
+for permanent storage in the ticket. This can be useful for reporting.</para></listitem>
+                <listitem><para>OTRS is now able correctly assign incoming emails to existing tickets based
+on ticket numbers from external systems.</para></listitem>
+                <listitem><para>OTRS can now fetch email also over POP3/TLS connections.</para></listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Installation &amp; Administration</title>
+            <itemizedlist>
+                <listitem><para>Web Installer now can setup OTRS on PostgreSQL, Oracle and SQL Server
+databases in addition to MySQL.</para></listitem>
+                <listitem><para>OTRS now has full support for MySQL 5.6.</para></listitem>
+                <listitem><para>Generic agent jobs can now be executed for configured ticket events.</para></listitem>
+                <listitem><para>The new graphical ACL editor makes ACL editing easier.</para></listitem>
+                <listitem><para>Postmaster filters can now use negated filter conditions, thanks to Renée
+Bäcker.</para></listitem>
+                <listitem><para>Postmaster filters can now specify relative pending dates and Owner /
+Responsible for new tickets based on incoming email data.</para></listitem>
+                <listitem><para>Customer and Agent passwords now can be encrypted using the strong bcrypt
+algorithm, which is better than SHA.</para></listitem>
+                <listitem><para>Many icons now use an icon font which makes it much easier to create custom
+skins with different base colors. This also improves overall performance
+through smaller amount of (image) files to load.</para></listitem>
+            </itemizedlist>
+        </section>
+    </section>
+
+    <section id="new-features-of-3.2">
+        <title>Novas características do OTRS 3.2</title>
+        <section>
+            <title>Mais focado no cliente</title>
+            <itemizedlist>
+                <listitem>
+                    <para>O novo "Customer Information Center" fornece uma grande visão do tipo painel
+de um cliente (empresa). Você pode ver
+                    <itemizedlist>
+                        <listitem><para>Tíquetes novos, escalonados, abertos e lembretes da empresa cliente. </para></listitem>
+                        <listitem><para>Usuários clientes (contatos) pertencente a esta empresa cliente, com a sua
+contagem de tíquetes individuais e atalhos para a criação de novos tíquetes
+para eles.</para></listitem>
+                        <listitem><para>Uma visão geral do status dos tíquetes da empresa cliente.</para></listitem>
+                    </itemizedlist>
+                    </para>
+                </listitem>
+                <listitem><para>O novo recurso "switch to customer" torna possível para um agente com as
+permissões necessárias olhar o painel dos clientes com os seus direitos.</para></listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Mais customizável</title>
+            <section>
+                <title>Administração do processo</title>
+                <itemizedlist>
+                    <listitem><para>A nova <link linkend="process-management"> administração de processos</link>
+torna possível representar processos dentro do OTRS</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Melhorias na interface do cliente</title>
+                <itemizedlist>
+                    <listitem><para>A interface web do cliente agora suporta completamente AJAX e ACL.</para></listitem>
+                    <listitem><para>Ela agora requer JavaScript e não pode mais ser usado com o Internet
+Explorer 6 ou versões anteriores.</para></listitem>
+                    <listitem><para>Na interface do cliente, agora você pode configurar um tipo padrão para
+novos tíquetes. Adicionalmente, agora você também esconder o tipo de tíquete
+e usar um valor padrão para todos os tíquetes criados pela interface do
+cliente.</para></listitem>
+                </itemizedlist>
+                </section>
+            <section>
+                <title>Melhorias na interface do agente</title>
+                <itemizedlist>
+                    <listitem><para>Agentes agora podem pesquisar tíquetes baseado no tempo de escalonamento.</para></listitem>
+                    <listitem><para>Nova opção para mostrar por padrão DynamicFields na pesquisa de tíquete.</para></listitem>
+                    <listitem><para>Otimizações de uso de tela nas telas do tíquete para evitar a rolagem em
+janelas pop-up. Para cada tela de tíquete, o tamanho do editor richtext
+agora pode ser configurado separadamente.</para></listitem>
+                    <listitem><para>Agora é possível mover tíquetes para outra fila de dentro dos diálogos
+TicketAction (TicketNote, TicketClose etc.) após ativar a opção de
+configuração. Isto é desligado por padrão.</para></listitem>
+                    <listitem><para>A busca de tíquete agora irá pular diretamente para a tela de zoom de
+tíquete se apenas um tíquete for encontrado.</para></listitem>
+                    <listitem><para>Nova habilidade de ocultar o Tipo de Artigo das telas
+TicketActionCommon-based o que pode ser uma ajuda para caber mais dados na
+tela do navegador.</para></listitem>
+                    <listitem><para>Existe um novo painel widget out-of-office que lista todos os colegas
+agentes que estão correntemente indisponíveis.</para></listitem>
+                    <listitem><para>O novo CKEditor 4 torna mais fácil e estável trabalhar com conteúdo rich
+text (tais como e-mails HTML).</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Melhorias na administração</title>
+                <itemizedlist>
+                    <listitem><para>Notificações baseadas em eventos podem agora ser enviadas apenas para tipos
+especificos de remetente de artigo.</para></listitem>
+                    <listitem><para>O mecanismo de Estatística no OTRS agora entende 'Semanas', em adição a
+dias, meses e anos.Isto concede a capacidade de, por exemplo, criar um
+relatório para  tíquetes 'criados na ultima semana', ou gerar um relatório
+que mostre tíquetes criados por fila por semana.</para></listitem>
+                    <listitem><para>È possível colocar arquivos DTL (modelo) customizados em
+<code>Custom/Kernel/Output/HTML</code>, de forma que eles sobre-escrevam os
+arquivos padrão DTL do sistema justo como isto já funciona para arquivos
+Perl.</para></listitem>
+                    <listitem><para>Em AdminSMIME agora é possível visualizar o conteúdo dos certificados de
+forma legível.</para></listitem>
+                    <listitem><para>SysConfig agora suporta configurações dos tipos Date e DateTime.</para></listitem>
+                </itemizedlist>
+            </section>
+        </section>
+        <section>
+            <title>Melhor escalabilidade</title>
+            <section>
+                <title>Melhoria no arquivamento do tíquete</title>
+                <itemizedlist>
+                    <listitem><para>Quando tíquetes são arquivados, a informação que o agente lê do tíquete e
+artigos pode ser removida, bem como as subscrições de agentes ao
+tíquete. Isto é ativo por padrão e ajuda a reduzir a quantidade de dados na
+base de dados em sistemas grandes com vários tíquetes e agentes.</para></listitem>
+                    <listitem><para>Há também um novo script para remover os dados existentes de tíquetes
+arquivados.</para></listitem>
+                    <listitem><para>Tíquetes arquivados agora são mostrados sempre como 'lido' pelo agente.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Melhorias de desempenho</title>
+                <itemizedlist>
+                    <listitem><para>O gerenciamento de sessão é de até 10 vezes mais rápido, especialmente com
+vários usuários ativos.</para></listitem>
+                    <listitem><para>Agora é possível limitar o número de agentes simultâneos e/ou usuários para
+evitar a sobrecarga da capacidade do servidor.</para></listitem>
+                    <listitem>
+                        <para>Recução significante no número de declarações executadas no banco de dados
+em visões gerais de tíquete e máscaras de tíquete no frontend de agente e
+cliente.
+                            <itemizedlist>
+                                <listitem><para>Isto irá reduzir a carga nos servidores de banco de dados, especialmente em
+sistemas grandes. Em alguns casos o OTRS irá tornar-se mais responsivo (se o
+sistema teve a velocidade diminuída pela carga do DB ou latência).</para></listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem><para>Performance melhorada na sincronização de usuários LADP.</para></listitem>
+                    <listitem><para>Performance de cache melhorado com muitos arquivos de cache.</para></listitem>
+                </itemizedlist>
+            </section>
+        </section>
+        <section>
+            <title>Maior interoperabilidade</title>
+            <section>
+                <title>Conector de FAQ para a GenericInterface</title>
+                <itemizedlist>
+                    <listitem><para>Agora é possível acessar os dados do módulo de FAQ (banco de dados de
+conhecimento do OTRS) pelo serviço web (GenericInterface). Isto pode ser
+útil para incorporar artigos de FAQ no site da sua empresa, por exemplo.</para></listitem>
+                </itemizedlist>
+            </section>
+        </section>
+    </section>
+
+    <section id="new-features-of-3.1">
+        <title>Novas características do OTRS 3.1</title>
+
+        <section>
+            <title>INTERFACE GENERICA (GI) - Uma estrutura de serviços da Web</title>
+            <itemizedlist>
+                <listitem>
+                    <para>A GI é uma estrutura flexível para permitir interconexões do serviço web do
+OTRS com aplicativos de terceiros.</para>
+                </listitem>
+                <listitem>
+                    <para>O OTRS pode agir de duas maneiras - como um provedor (servidor, solicitado
+pelo remoto) ou solicitador (cliente, solicitando remotamente).</para>
+                </listitem>
+                <listitem>
+                    <para>Conexões simples do serviço web podem ser criadas sem programação,
+configurando a Interface Genérica.</para>
+                </listitem>
+                <listitem>
+                    <para>Cenários complexos podem ser realizados conectando extensões personalizadas
+do OTRS que adicionam código perl a infraestrutura GI em diferentes camadas
+da arquitetura.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Conectores</emphasis> expõe partes do OTRS para serviços web de
+Interface Genérica. Por exemplo, um conector de tíquete expõe a função de
+criar/atualizar tíquete, de modo que elas podem ser usadas em um serviço Web
+independentemente de qual transporte de rede que é utilizado.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Um processo daemon de agendamento suporta o manuseio de eventos
+assíncronos. Isto é útil para assincronamente iniciar solicitações do
+serviço web do OTRS para outros sistemas, após as solicitações dos agentes
+terem sido respondidas (por exemplo, quando um tíquete foi criado). Caso
+contrário, ela poderia bloquear a resposta, resultando em tempos de resposta
+elevados para o agente.</para>
+                </listitem>
+            </itemizedlist>
+            <para>
+            Com a Interface Genérica novos serviços web podem ser facilmente
+configurados usando módulos existentes do OTRS, sem código adicional. Eles
+podem ser combinados para criar um novo serviço web. Quando configurando uma
+nova conexão do serviço web, o administrador tem que adicionar:
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>Um novo serviço web na GUI de administração</para>
+                </listitem>
+                <listitem>
+                    <para>O meta dado básico  (Transport type (SOAP), URL etc.) e</para>
+                </listitem>
+                <listitem>
+                    <para>Operações existentes (parte do conector) e especificar para cada operação
+como o dado deve ser mapeado (entrada e saída)</para>
+                </listitem>
+            </itemizedlist>
+            <para>
+            O depurador da Interface Genérica irá ajudar o administrador do OTRS a
+verificar como as solicitações estão chegando e como elas estão sendo
+manuseadas através das camadas diferentes.
+            </para>
+            <section>
+                <title>Características atuais</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Transportes de rede: SOAP/HTTP. Outros como REST e JSON são programados para
+serem adicionados no futuro dependendo da demanda dos clientes.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Mapeamento de dados configurável na Interface Gráfica do Usuário (GUI) para
+chave/valor com respeito aos dados de entrada e saída.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Depurador gráfico para verificar a configuração e o fluxo de informação dos
+serviços web configurados.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Um conector de tíquete permitindo o uso do OTRS como um serviço web para
+tratamento de tíquetes.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Características futuras</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Transportes de rede adicionais (REST, JSON).</para>
+                    </listitem>
+                    <listitem>
+                        <para>A GI irá substituir o iPhoneHandle como o backend para aplicações moveis.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Conectores adicionais serão adicionados para fornecer mais partes do OTRS
+para uso com o serviço web (por exemplo, permitir a criação, atualização ou
+deleção de agentes, usuários. serviços ou CIs).</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+
+        <section>
+            <title>CAMPOS DINAMICOS</title>
+            <para>O recurso DinamicFields substitui os campos existentes FreeText e FreeTime
+do tíquete e artigo com uma estrutura dinamica que permitirá também criar
+formulários personalizados no OTRS.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>Uma quantidade ilimitada de campos pode ser configurada usando uma interface
+grafica de usuário própria para administração.</para>
+                </listitem>
+                <listitem>
+                    <para>Os campos podem ter tipos diferentes que podem ser usados para ambos,
+tíquetes e artigos. Disponíveis por padrão são:</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Texto</para>
+                        </listitem>
+                        <listitem>
+                            <para>Texto com multiplas linhas</para>
+                        </listitem>
+                        <listitem>
+                            <para>Caixa de seleção</para>
+                        </listitem>
+                        <listitem>
+                            <para>Suspenso</para>
+                        </listitem>
+                        <listitem>
+                            <para>Multi seleção</para>
+                        </listitem>
+                        <listitem>
+                            <para>Data</para>
+                        </listitem>
+                        <listitem>
+                            <para>Data e hora</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Novos tipos de campos personalizados (por exemplo, campo  personalizado do
+tipo suspenso com uma fonte de dados externa) podem ser adicionados com
+pequeno esforço quando os campos são criados de uma forma modular plugável.</para>
+                </listitem>
+                <listitem>
+                    <para>O cenário futuro é, que campos dinâmicos podem ser utilizados por outros
+objetos além de tíquetes ou em módulos personalizados. Por exemplo, um
+modulo personalizado para manusear "ordens" no OTRS poderia usar campos
+dinâmicos para anexar propriedades/dados a estas ordens.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Um script de atualização do banco de dados irá transformar campos FreeText
+históricos e opções de configuração relacionadas em uma nova estrutura.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section>
+            <title>MELHORIAS NA GESTÃO DE  TÌQUETES</title>
+            <section>
+                <title>Criação de tíquetes melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Múltiplos endereços de e-mai podeml agora ser especificados como 'To:',
+'CC:' ou 'BCC:' quando criando um novo tíquete de telefone ou e-mail.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Suporte a chamada de telefone de entrada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Chamadas de telefone de entrada agora podem ser registradas dentro de um
+tíquete existente (até agora, apenas chamadas de saída eram registradas).</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Pré-visualização da visão panorâmica de tíquete melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Agora é possível excluir artigos de um determinado tipo de remetente (por
+exemplo, artigos de agentes internos) no SysConfig de serem mostrados no
+modo de pré-visualização da visão panorâmica.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Um determinado tipo de artigo pode ser configurado para exibir por padrao
+artigos deste tipo como expandidos quando a visão é acessada.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Movimentação de tíquete melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>A tela mostrada após a movimentação do tíquete é agora configuravel. As
+opções são visão zoom de tíquete (LastScreenView) ou a lista de tíquetes
+(LastScreenOverview).</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Ação em massa melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Com a nova ação em massa, e-mails de saída agora podem ser enviados de
+múltiplos tíquetes ao mesmo tempo. Como tíquetes podem ter filas diferentes,
+e cada uma destas filas pode ter modelos diferentes, saudações e
+assinaturas, estes não são usados em e-mails de ação em massa.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Uma ação em massa adicional permite configurar o tipo de tíquete para
+tíquetes selecionados.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Endereço de E-mail do Remetente de Rejeições Configurável</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>O recurso permite configurar um endereço de e-mail, em vez do endereço do
+administrador para rejeitar a criação de novos tíquetes por e-mail. Este
+recurso pode ser usado em todos os casos onde clientes não têm permissão
+para criar novos tíquetes por e-mail.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+
+        <section>
+            <title>AUTOMAÇÂO DE PROCESSO</title>
+            <section>
+                <title>Eventos de escalonamento adicionado</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>O OTRS irá agora criar eventos para cada um dos tipos de escalonamento
+disponíveis (resposta, atualização e resolução). Isto permite executar ações
+(tais como notificações) antes que o escalonamento ocorra, no momento que
+ele ocorre e no momento que o escalonamento termina.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Mecanismo de notificação melhorado</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Um novo modulo de notificação genérica permite ao administrador do OTRS
+definir mensagens que serão mostradas no frontend de web dos agentes e
+quando os agentes entram no sistema.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Calculo do tempo melhorado</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Todos os tipos de tempo serão agora calculados e baseados apenas no servidor
+de  aplicação resolvendo os problemas que eram causados por variações entre
+os horarios dos servidores de aplicação e de banco de dados.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>GenericAgent melhorado</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>O Agente Genérico agora pode filtrar por hora da mudança nos tíquetes.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Em adição, o Agente Genérico pode configurar o responsável pelo tíquete para
+tíquetes que correspondem.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+
+        <section>
+            <title>INTERFACE DO USUÀRIO, EDITOR RICH TEXT, CONJUNTO DE CARACTERES</title>
+            <section>
+                <title>Performance da interface do usuario melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>A velocidade de renderização e exibição do artigo foi melhorada, graças a
+Stelios Gikas &lt;stelios.gikas@noris.net&gt;!</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Atualização do Editor Rich Text</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Adicionado suporte ao IOS5.</para>
+                    </listitem>
+                    <listitem>
+                        <para>O bloco de citações pode ser deixado com a tecla enter.</para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Atualização do CKEditor 3.4 para CKEditor 3.6, assim melhorias referem-se
+aos lançamentos de <ulink
+url="http://ckeditor.com/blog/CKEditor_3.5_released">CKEditor 3.5</ulink>
+and <ulink url="http://ckeditor.com/blog/CKEditor_3.6_released">CKEditor
+3.6</ulink>.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Suporte ao IE9 melhorado.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Diálogos redimensionáveis.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Suporte Unicode - Codificações internas não-UTF8 retiradas</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>O UTF-8 agora é o único conjunto de caracteres interno permitido para o
+OTRS.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Todos os arquivos de linguagem agora são formatados em UTF-8, o que
+simplifica seu manuseio e futuras melhorias no mecanismo de tradução.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+        <section>
+            <title>DRIVER DE SUPORTE A BANCO DE DADOS</title>
+            <section>
+                <title>Compatibilidade do DRIVER PostgreSQL melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Adicionado suporte ao PostgreSQL 9.1.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Um novo driver legado agora está disponível para o PostgreSQL 8.1 ou versões
+anteriores.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Compatibilidade do DRIVER MS SQL melhorado</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>O driver MS SQL agora armazena dados binarios em VARBINARY ao invés do tipo
+TEXT obsoleto bem como NVARCHAR para armazenar seqüências de texto ao invés
+de VARCHAR (para suporte melhorado do Unicode).</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+        <section>
+            <title>INTEGRAÇÂO DE CORRESPONDENCIA</title>
+            <section>
+                <title>Manipulação de correspondência melhorada</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Quando conectando a contas de e-mail IMAP, agora é possível manipular e-mail
+de uma pasta especifica, diferente da pasta INBOX.</para>
+                    </listitem>
+                    <listitem>
+                        <para>O OTRS agora também pode conectar a servidores IMAP usando o Transport Layer
+Security (TLS), útil para os ambientes restritos modernos.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+    </section>
+</section>
+
+<section id="software-requirements">
+    <title>Requerimentos de hardware e software</title>
+
+    <para>
+    O OTRS pode ser instalado em vários sistemas operacionais diferentes. O OTRS
+pode rodar em Linux e em outros derivados do Unix (por exemplo, OpenBSD ou
+FreeBSD). Você pode também rodar ele no Microsoft Windows. O OTRS não possui
+requisitos de hardware excessivos. Recomendamos a utilização de uma maquina
+com no mínimo  uma CPU Xeon de 2 GHz ou comparável, 2 GB de RAM e 160 GB de
+disco rígido para uma configuração pequena.
+    </para>
+
+    <para>
+    Para executar OTRS você também vai precisar usar um servidor web e um
+servidor de banco de dados. Alem disto, você precisa instalar o Perl e/ou
+instalar alguns módulos Perl adicionais na maquina do OTRS. O servidor web e
+<application>Perl</application> tem que ser instalado na mesma maquina que o
+OTRS. O back-end de banco de dados pode ser instalado localmente ou em outra
+maquina.
+    </para>
+
+    <para>
+    Para o servidor web recomendamos usar o <application>Apache HTTP
+Server</application>, porque seu modulo mod_perl melhora muito a performance
+do OTRS. Alem disto, o OTRS pode ser executado em qualquer servidor web que
+possa executar scripts Perl.
+    </para>
+
+    <para>
+    Você pode implementar o OTRS em diferentes bases de dados. Você pode
+escolher entre <application>MySQL</application>,
+<application>PostgreSQL</application>, <application>Oracle</application>, ou
+<application>Microsoft SQL Server</application>. Se você usar o
+<application>MySQL</application> você tem a vantagem que a base de dados e
+algumas opções do sistema podem ser configurados durante a instalação,
+através de um front-end de web.
+    </para>
+
+    <para>
+    Para o <application>Perl</application>, recomendamos usar pelo menos a
+versão %.8.8. Você irá necessitarde alguns módulos adicionais que podem ser
+instalados tanto pelo shell do Perl e CPAN ou pelo administrador de pacotes
+do sistema operacional (<application>rpm</application>,
+<application>yast</application>, <application>apt-get</application>).
+    </para>
+
+    <para>Requerimentos de software</para>
+
+    <section id="perl-support">
+        <title>Suporte ao Perl</title>
+        <itemizedlist>
+        <listitem>
+            <para>Perl 5.10 or higher</para>
+        </listitem>
+        </itemizedlist>
+    </section>
+
+    <section id="webserver-support">
+        <title>Suporte a servidor web</title>
+        <itemizedlist>
+        <listitem>
+            <para>Apache2 + mod_perl2 or higher (recommended)</para>
+        </listitem>
+        <listitem>
+            <para>Servidor web com suporte CGI (CGI não é recomendado)</para>
+        </listitem>
+        <listitem>
+            <para>Microsoft Internet Information Server (IIS) 6 ou superior</para>
+        </listitem>
+        </itemizedlist>
+    </section>
+
+    <section id="database-support">
+        <title>Suporte a base de dados</title>
+
+        <itemizedlist>
+        <listitem>
+            <para>MySQL 4.1 ou superior</para>
+        </listitem>
+        <listitem>
+            <para>PostgreSQL 8.0 or higher (8.2 or higher recommended)</para>
+        </listitem>
+        <listitem>
+            <para>Oracle 10g ou superior</para>
+        </listitem>
+        <listitem>
+            <para>Microsoft SQL Server 2005 ou superior</para>
+        </listitem>
+        </itemizedlist>
+
+        <para>
+            A seção do manual sobre <link
+linkend="installation-of-perl-modules">instalação dos modulos Perl</link>
+descreve em maiores detalhes como você pode configurar aqueles que são
+necessários pelo OTRS.
+        </para>
+
+        <para>
+        Se você instalar um pacote binário do OTRS, que foi feito para o seu sistema
+operacional  (rpm, Windows-Installer), ou o pacote contem todos os módulos
+Perl necessários ou o gerenciador de pacotes do seu sistema deve tomar
+cuidado das dependências dos módulos Perl necessários.
+        </para>
+    </section>
+
+    <section id="webbrowser-support">
+        <title>Suporte a navegadores web</title>
+        <para>
+            To use OTRS, you'll be OK if you use a modern browser with JavaScript
+support enabled.  We do not support the following browsers:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>Internet Explorer before version 8</para>
+            </listitem>
+            <listitem>
+                <para>Firefox before version 10</para>
+            </listitem>
+            <listitem>
+                <para>Safari before version 5</para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            Recomendamos usar sempre a última versão do seu navegador, pois ele tem o
+melhor desempenho de renderização e JavaScript. Variações dramáticas de
+desempenho entre os navegadores utilizados podem ocorrer com dados grandes
+ou sistemas de grande porte. Estamos felizes em ajuda-lo nesta matéria.
+        </para>
+    </section>
+</section>
+
+<section id="community">
+    <title>Comunidade</title>
+
+    <para>
+    O OTRS tem uma grande comunidade de usuários. Usuários e desenvolvedores
+discutem o OTRS e trocam informação sobre problemas relacionados atravéz de
+<link linkend="additional-resources-mailinglists">listas de
+e-mail</link>. Você pode usar as listas de e-mail para discutir instalação,
+configuração uso, localização e desenvolvimento do OTRS. Você pode relatar
+erros de software em nosso <link
+linkend="additional-resources-bugtracking">sistema de rastreamento de
+erros</link>.
+    </para>
+
+    <para>
+    A página inicial da comunidade do OTRS é: <ulink
+url="http://www.otrs.com/open-source/"><citetitle>http://www.otrs.com/open-source/</citetitle></ulink>.
+    </para>
+</section>
+
+<section id="commercial-support-for-otrs">
+    <title>Professional Services for OTRS</title>
+
+    <para>
+        Whether you need help in configuring or customizing OTRS or you want to be
+on the safe side, don't hesitate to contact us: We offer a wide range of
+professional services such as world-wide enterprise support, consulting and
+engineering including process design, implementation, customization,
+application support, and fully managed service.
+    </para>
+    <para>
+        Our <ulink url="http://www.otrs.com/en/solutions/service-contracts/">Service
+Contracts</ulink> guarantee instant help and professional support as well as
+support assessment and last but not least free access to <ulink
+url="http://www.otrs.com/en/solutions/subscriptions/otrsfeatureadd-ons/">OTRS
+Feature Add-ons</ulink> - useful additional features for your OTRS.
+    </para>
+    <para>
+        <ulink url="http://www.otrs.com/">The OTRS Group</ulink> offers specific
+<ulink url="http://www.otrs.com/en/solutions/training/">training
+programs</ulink> in different countries.  You can either participate in one
+of our public OTRS Administrator trainings which take place regularly, or
+benefit from an inhouse training that covers all the specific needs of your
+company.
+    </para>
+
+</section>
+
+</section>

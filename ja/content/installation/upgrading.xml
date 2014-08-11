@@ -30,19 +30,16 @@
 url="http://bugs.otrs.org/show_bug.cgi?id=6798">http://bugs.otrs.org/show_bug.cgi?id=6798</ulink>を読んで下さい。
 </para>
 <para>
-    Within a single minor version you can skip patch level releases if you want
-to upgrade. For instance you can upgrade directly from OTRS 3.3.1 to version
-3.3.4. If you need to do such a "patch level upgrade", you should skip steps
-9 and 13-16.
+    単一の小さなバージョン内では、アップグレードしたければ、パッチ・レベル・リリースをスキップすることができます。例えば、OTRS
+3.3.1からバージョン3.3.4に直接アップグレードすることができます。そのような"パッチ・レベル・アップグレード"を行う必要があれば、ステップ9および13-16をスキップするべきです。
 </para>
 <para>
-    Please note that if you perform a patch level upgrade from OTRS 3.3.6 or
-earlier, you need to activate a new cron job that controls the scheduler
-process.  Please copy the file
-<filename>/opt/otrs/var/cron/scheduler_watchdog.dist</filename> to
-<filename>/opt/otrs/var/cron/scheduler_watchdog</filename> and update your
-crontab with <filename>/opt/otrs/bin/Cron.sh start</filename> (as "otrs"
-user, not root).
+    OTRS 3.3.6以前からのパッチ・レベル・アップグレードを行なうならば、
+スケジューラ・プロセスをコントロールする新規cronジョブを活性化する必要があることに注意してください。ファイル
+<filename>/opt/otrs/var/cron/scheduler_watchdog.dist</filename>
+を<filename>/opt/otrs/var/cron/scheduler_watchdog</filename>
+にコピーして<filename>/opt/otrs/bin/Cron.sh start</filename>
+でcrontabを更新して下さい(rootではなく"otrs" ユーザとして)。
 </para>
 
   <orderedlist>
@@ -205,11 +202,10 @@ shell&gt; cat scripts/DBUpdate-to-3.3.postgresql_before_8_2.sql | psql --set ON_
             </screen>
         </para>
         <para>
-            Note: If you use PostgreSQL 8.1 or earlier, you need to activate the new
-legacy driver for these older versions. Do this by adding a new line to your
-<filename>Kernel/Config.pm</filename> like this: <screen>
+            ノート:PostgreSQL
+8.1以前を使用する場合は、これらのより古いバージョン用の新しいレガシー・ドライバーを活性化する必要があります。そのためには、新規の１行を<screen>
 $Self->{DatabasePostgresqlBefore82} = 1;
-            </screen>
+            </screen>のような<filename>Kernel/Config.pm</filename>に追加します。
         </para>
         <para>
             統合スクリプト（「root」としてではなくユーザ「otrs」として）を走らせます。

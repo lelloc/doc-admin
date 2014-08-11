@@ -1,0 +1,797 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="installation-of-prepared-packages">
+<title>A maneira mais simples - Instalação de pacotes pré-compilados</title>
+
+<para>
+Se estiverem disponíveis para sua plataforma você deve usar pacotes
+pré-compilados para instalar o OTRS, uma vez que é o método mais simples e
+mais conveniente. Você pode encontrá-los na área de downloads em <ulink
+url="http://www.otrs.com"> <citetitle>http://www.otrs.com</citetitle>
+</ulink>.  As seções seguintes descrevem a instalação do OTRS com um pacote
+pré-compilado ou binário nos sistemas SUSE,  Red Hat e Microsoft
+Windows. Somente se você não conseguir usar os pacotes pré-compilados, por
+algum motivo você deve seguir o processo manual.
+</para>
+
+<section id="installation-on-suse">
+<title>Instalando o RPM em um servidor Linux SUSE</title>
+
+<para>
+Esta seção descreve a instalação do nosso pacote RPM em um servidor Linux
+SUSE. Nos testamos com todas as versões recentes do SLES e do
+openSUSE. Antes de iniciar a instalação, por favor visite <ulink
+url="http://www.otrs.com/downloads">
+<citetitle>http://www.otrs.com/downloads</citetitle> </ulink> e
+certifique-se de usar o pacote de RPM OTRS disponível mais recente.
+</para>
+
+<section id="suse-preparing-database-mysql">
+<title>Preparando o banco de dados para OTRS.</title>
+
+<para>
+Você pode usar o OTRS utilizando diferentes back-ends de banco de dados:
+<application>MySQL</application>, <application>PostgreSQL</application>,
+<application>Oracle</application> ou<application> Microsoft SQL
+Server</application>. O banco de dados mais popular para implantar o OTRS é
+o MySQL. Este capítulo mostra os passos que você precisa tomar para
+configurar o MySQL em um servidor baseado no SUSE. è claro que você pode
+instalar o banco de dados em um servidor dedicado se necessário para
+escalabilidade ou outros propósitos.
+</para>
+<note>
+    <para>
+        Se você seguir este capítulo em um openSUSE 12.3 e acima você realmente não
+irá instalar o <application>MySQL</application> mas ao invés o
+<application>MariaDB</application>, uma derivação do código MySQL compatível
+com o MySQL. Isto não é problema, ele irá tão bem (e até um pouco melhor em
+alguns pontos).
+    </para>
+</note>
+<para>
+    Instale o MySQL executando o seguinte comando como root:
+</para>
+
+<para>
+    <screen>
+        linux:~ # zypper install mysql perl-DBD-mysql
+    </screen>
+</para>
+
+<para>
+    Isto irá instalar o MySQL com as opções padrão em seu sistema. Você vai
+precisar de alterar os padrões, a fim de torná-lo adequado para o OTRS. Com
+um editor de texto abra o arquivo <filename>/etc/my.cnf</filename> e mude a
+linha com <command>max_allowed_packet</command> nela e adicione a linha
+abaixo, desta maneira:
+</para>
+
+<para>
+    <screen>
+        max_allowed_packet=20M
+        query_cache_size=32M
+    </screen>
+</para>
+
+<para>
+    Agora execute <command>rcmysql restart</command> para re-iniciar o servidor
+de banco de dados e ativar essas mudanças. Em seguida, execute
+<command>/usr/bin/mysql_secure_installation</command> e siga as instruções
+na tela para configurar a senha de root do banco de dados, remover o acesso
+anônimo e remover o banco de dados de teste. Por ultimo, execute
+<command>chkconfig -a mysql</command> para ter certeza que o mysql é
+automaticamente inicializado no momento da inicialização do servidor.
+</para>
+
+</section>
+
+<section id="suse-installing-rpm">
+    <title>Instalando o OTRS</title>
+<para>
+Instale com OTRS via linha de comando usando <command>zypper</command>. Isso
+também irá puxar algumas dependências como o servidor de web Apache e alguns
+módulos Perl. Certifique-se de que você copiou o arquivo RPM OTRS para o
+diretório atual.
+</para>
+<para>
+    <screen>
+otrs-sles:~ # zypper install otrs-3.3.*.rpm
+....
+Retrieving package otrs-3.3.3-01.noarch (1/26), 17.5 MiB (74.3 MiB unpacked)
+Installing: otrs-3.3.3-01 [done]
+Additional rpm output:
+Check OTRS user ... otrs added.
+
+Next steps:
+
+[start database and Apache]
+ Make sure your database is running and execute 'rcapache2 restart'.
+
+[install the OTRS database]
+ Use a webbrowser and open this link:
+ http://myserver.example.com/otrs/installer.pl
+
+[OTRS services]
+ Start OTRS 'rcotrs start-force' (rcotrs {start|stop|status|restart|start-force|                                                                                                                     stop-force}).
+
+((enjoy))
+
+ Your OTRS Team
+ http://otrs.org/
+
+otrs-sles:~ #
+    </screen>
+</para>
+
+<para>
+<emphasis>Script: Comando para instalar o OTRS.</emphasis>
+</para>
+
+<para>
+A instalação do OTRS esta feita. Inicie o seu servidor web para carregar as
+alterações específicas do OTRS em sua configuração, como mostrado no script
+abaixo. Também execute <command>chkconfig</command> para ter certeza que o
+OTRS é inicializado automaticamente quando o servidor for reinicializado.
+</para>
+
+<para>
+<screen>
+otrs-sles:~ # chkconfig -a apache2
+apache2                   0:off  1:off  2:off  3:on   4:off  5:on   6:off
+otrs-sles:~ # rcapache2 start
+Starting httpd2 (prefork) httpd2-prefork: Could not reliably determine the server's fully qualified domain name, using 10.x.x.x for ServerName
+                                                                                                                                                                                          done
+otrs-sles:~ #
+</screen>
+</para>
+
+<para>
+<emphasis>Script: Iniciando o servidor web.</emphasis>
+</para>
+
+</section>
+
+<section id="suse-installation-perl-modules">
+    <title>Instalação de módulos perl adicionais</title>
+    <para>O OTRS precisa de mais alguns módulos que podem ser instalados pelo
+RPM. Você pode fazer a pós instalação deles manualmente. Você pode verificar
+módulos que estão faltando, executando o
+<filename>bin/otrs.CheckModules.pl</filename> script localizado no diretório
+<filename>/opt/otrs</filename>. Alguns módulos são necessários apenas para
+funcionalidades opcionais, tais como comunicação com servidores IMAP(S) ou
+geração de PDF. No SLES você deve adicionar um repositório externo na
+configuração do zypper a fim de obter os módulos necessários para o seu
+sistema. Escolha o módulo necessário para a sua versão do sistema
+operacional a partir daqui: <ulink
+url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>.
+Adicione o repositório desta forma para o SLES 11 SP2:
+    </para>
+
+    <para>
+        <screen>
+            zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+        </screen>
+    </para>
+
+    <para>
+        No openSUSE 12.3 o repositório extra é apenas necessário para o modulo
+Mail::IMAPClient, que você apenas necessitará se você precisar coletar
+e-mail de um servidor IMAP seguro com TLS. A linha correspondente ficaria
+assim:
+    </para>
+    <para>
+        <screen>
+            zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
+        </screen>
+    </para>
+    <para>
+        A primeira vez que você usar o zypper depois de ter adicionado este
+repositório, você será solicitado a adicionar sua chave. Agora você pode
+instalar os módulos faltantes, como abaixo.
+    </para>
+    <para>
+        <screen>
+otrs-sles:/opt/otrs # zypper install -y "perl(YAML::LibYAML)"
+Refreshing service 'susecloud'.
+Retrieving repository 'perl' metadata [\]
+
+New repository or package signing key received:
+Key ID: DCCA98DDDCEF338C
+Key Name: devel:languages:perl OBS Project &lt;devel:languages:perl@build.opensuse.org&gt;
+Key Fingerprint: 36F0AC0BCA9D8AF2871703C5DCCA98DDDCEF338C
+Key Created: Wed Oct 10 22:04:18 2012
+Key Expires: Fri Dec 19 22:04:18 2014
+Repository: perl
+
+Do you want to reject the key, trust temporarily, or trust always? [r/t/a/?] (r): a
+Retrieving repository 'perl' metadata [done]
+Building repository 'perl' cache [done]
+Loading repository data...
+Reading installed packages...
+'perl(YAML::LibYAML)' not found in package names. Trying capabilities.
+Resolving package dependencies...
+
+The following NEW package is going to be installed:
+  perl-YAML-LibYAML
+
+The following package is not supported by its vendor:
+  perl-YAML-LibYAML
+
+Retrieving package perl-YAML-LibYAML-0.38-12.4.x86_64 (1/1), 75.0 KiB (196.0 KiB unpacked)
+Retrieving: perl-YAML-LibYAML-0.38-12.4.x86_64.rpm [done (55.7 KiB/s)]
+Installing: perl-YAML-LibYAML-0.38-12.4 [done]
+        </screen>
+    </para>
+
+<para>
+O passo seguinte consiste em configurar o OTRS usando o instalador web, como
+descrito <link linkend="web-installer">nesta seção</link>.
+</para>
+
+</section>
+
+</section>
+
+<section id="installation-on-centos">
+<title>Instalando o OTRS em um sistema Red Hat Enterprise Linux ou CentOS</title>
+
+<para>
+This section describes the installation of our RPM package on a Red Hat
+Enterprise Linux (RHEL) or CentOS server. For OTRS 3.3 and up, RHEL 6 or
+CentOS 6 is a requirement, version 5 is not supported. Before you start the
+installation, please visit <ulink url="http://www.otrs.com/downloads">
+<citetitle>http://www.otrs.com/downloads</citetitle> </ulink> and make sure
+you use the latest OTRS RPM package available.
+</para>
+
+<section id="rhel-preparing-database-mysql">
+<title>Preparando o banco de dados para OTRS.</title>
+
+<para>
+You can use OTRS using different database back-ends: MySQL, PostgreSQL,
+Oracle or Microsoft SQL Server. The most popular database to deploy OTRS on
+is MySQL.  This chapter shows the steps you need to take to configure MySQL
+on a RHEL-based server. Of course you can install the database on a
+dedicated database server if needed for scalability or other purposes.
+</para>
+
+<para>
+    Instale o MySQL executando o seguinte comando como root:
+</para>
+
+<para>
+    <screen>
+        [root@otrs-centos6 ~]# yum -y install mysql-server
+    </screen>
+</para>
+
+<para>
+    Isto irá instalar o MySQL com as opções padrão em seu sistema. Você vai
+precisar de alterar os padrões, a fim de torná-lo adequado para o OTRS. Com
+um editor de texto abra o arquivo <filename>/etc/my.cnf</filename> e
+adicione as próximas duas linhas abaixo da seção [mysqld].
+</para>
+
+<para>
+    <screen>
+        max_allowed_packet=20M
+        query_cache_size=32M
+    </screen>
+</para>
+
+<para>
+    Agora execute <command>rcmysql restart</command> para re-iniciar o servidor
+de banco de dados e ativar essas mudanças. Em seguida, execute
+<command>/usr/bin/mysql_secure_installation</command> e siga as instruções
+na tela para configurar a senha de root do banco de dados, remover o acesso
+anônimo e remover o banco de dados de teste. Por ultimo, execute
+<command>chkconfig -a mysql</command> para ter certeza que o mysql é
+automaticamente inicializado no momento da inicialização do servidor.
+</para>
+
+</section>
+
+<section id="rhel-installing-rpm">
+    <title>Instalando o OTRS</title>
+<para>
+Instale com OTRS via linha de comando usando <command>yum</command>. Isso
+também irá puxar algumas dependências como o servidor de web Apache e alguns
+módulos Perl. Certifique-se de que você copiou o arquivo RPM OTRS para o
+diretório atual.
+</para>
+<para>
+    <screen>
+[root@otrs-centos6 ~]# yum install --nogpgcheck otrs-3.3.*.rpm
+...
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch   Version                Repository       Size
+================================================================================
+Installing:
+ otrs                       noarch 3.3.3-01               /otrs-3.3.3-01.noarch
+                                                                           74 M
+Installing for dependencies:
+ apr                        x86_64 1.3.9-5.el6_2          updates         123 k
+ ...
+ procmail                   x86_64 3.22-25.1.el6          base            163 k
+
+Transaction Summary
+================================================================================
+Install      26 Package(s)
+
+Total size: 80 M
+Total download size: 6.0 M
+Installed size: 88 M
+Downloading Packages:
+(1/25): apr-1.3.9-5.el6_2.x86_64.rpm                     | 123 kB     00:00
+...
+(25/25): procmail-3.22-25.1.el6.x86_64.rpm               | 163 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           887 kB/s | 6.0 MB     00:06
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : apr-1.3.9-5.el6_2.x86_64                               1/26
+  ...
+  Installing : otrs-3.3.3-01.noarch                                   26/26
+Check OTRS user ... otrs added.
+
+Next steps:
+
+[httpd services]
+ Restart httpd 'service httpd restart'
+
+[install the OTRS database]
+ Make sure your database server is running.
+ Use a web browser and open this link:
+ http://myserver.example.com/otrs/installer.pl
+
+[OTRS services]
+ Start OTRS 'service otrs start' (service otrs {start|stop|status|restart).
+
+((enjoy))
+
+ Your OTRS Team
+
+Installed:
+  otrs.noarch 0:3.3.3-01
+
+Dependency Installed:
+  ...
+
+Complete!
+[root@otrs-centos6 ~]#
+    </screen>
+</para>
+
+<para>
+<emphasis>Script: Comando para instalar o OTRS.</emphasis>
+</para>
+
+<para>
+The OTRS installation is complete. Now you should make sure that Apache is
+started and that it starts whenever the server reboots.
+</para>
+
+<para>
+<screen>
+[root@otrs-centos6 ~]# chkconfig httpd on
+[root@otrs-centos6 ~]# service httpd start
+Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using 10.x.x.x for ServerName [  OK  ]
+[root@otrs-centos6 ~]#
+</screen>
+</para>
+
+<para>
+<emphasis>Script: Iniciando o servidor web.</emphasis>
+</para>
+
+</section>
+
+<section id="rhel-installation-perl-modules">
+    <title>Instalação de módulos perl adicionais</title>
+    <para>O OTRS precisa de mais alguns módulos que podem ser instalados pelo
+RPM. Você pode fazer a pós instalação deles manualmente. Você pode verificar
+módulos que estão faltando, executando o
+<filename>bin/otrs.CheckModules.pl</filename> script localizado no
+<filename>/opt/otrs</filename> diretório. Alguns módulos são necessários
+apenas para funcionalidade opcional, tais como comunicação com servidores
+IMAP (S) ou de geração de PDF. No Red Hat ou CentOS recomendamos a
+instalação desses módulos do repositório EPEL, repositório mantido pelo
+projeto Fedora, que oferece pacotes de alta qualidade para RHEL e
+derivados.Para mais informações verifique <ulink
+url="http://fedoraproject.org/wiki/EPEL">o site do EPEL</ulink>.
+    </para>
+
+    <para>
+        Se você está no RHEL 6 ou CentOS 6, você pode obter o pacote mais recente
+para EPEL <ulink
+url="http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html">deste
+site</ulink>. Você pode adicionar este repositório para o yum de uma só vez,
+copiando a URL RPM que você encontrar nesta página e executar o comando:
+    </para>
+
+    <para>
+        <screen>
+ [root@otrs-centos6 otrs]# yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+Loaded plugins: security
+Setting up Install Process
+epel-release-6-8.noarch.rpm                                   |  14 kB     00:00
+Examining /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm: epel-release-6-8.noarch
+Marking /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:6-8 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package             Arch          Version     Repository                       Size
+=====================================================================================
+Installing:
+ epel-release        noarch        6-8         /epel-release-6-8.noarch         22 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total size: 22 k
+Installed size: 22 k
+Downloading Packages:
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : epel-release-6-8.noarch                                           1/1
+  Verifying  : epel-release-6-8.noarch                                           1/1
+
+Installed:
+  epel-release.noarch 0:6-8
+
+Complete!
+[root@otrs-centos6 otrs]#
+        </screen>
+    </para>
+    <para>
+        A primeira vez que você usar o yum depois de ter adicionado este
+repositório, você será solicitado a adicionar sua chave. Agora você pode
+instalar os módulos faltantes, como abaixo.
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum -y install "perl(Text::CSV_XS)"
+Loaded plugins: security
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package perl-Text-CSV_XS.x86_64 0:0.85-1.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package                   Arch            Version               Repository     Size
+=====================================================================================
+Installing:
+ perl-Text-CSV_XS          x86_64          0.85-1.el6            epel           71 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total download size: 71 k
+Installed size: 154 k
+Downloading Packages:
+perl-Text-CSV_XS-0.85-1.el6.x86_64.rpm                        |  71 kB     00:00
+warning: rpmts_HdrFromFdno: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Importing GPG key 0x0608B895:
+ Userid : EPEL (6) &lt;epel@fedoraproject.org&gt;
+ Package: epel-release-6-8.noarch (@/epel-release-6-8.noarch)
+ From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+  Verifying  : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+
+Installed:
+  perl-Text-CSV_XS.x86_64 0:0.85-1.el6
+
+Complete!
+[root@otrs-centos6 otrs]#
+        </screen>
+    </para>
+
+<para>
+O passo seguinte consiste em configurar o OTRS usando o instalador web, como
+descrito <link linkend="web-installer">nesta seção</link>.
+</para>
+
+</section>
+
+<section id="rhel-installation-dbd-oracle">
+    <title>Installation of Oracle database driver on Red Hat / CentOS</title>
+    <para>
+        If you want to deploy OTRS on an Oracle database, you'll need to compile and
+install the <application>DBD::Oracle</application> database driver. This is
+slightly more complicated than installing any of the other packages; this is
+because Oracle is a proprietary database and Red Hat nor the CentOS project
+are allowed to distribute drivers in their RPM repositories.
+    </para>
+    <para>
+        First of all, we'd need to install <application>gcc</application>,
+<application>make</application> and <application>CPAN</application> so we
+can compile and install the driver. Below you see the command on CentOS; on
+other versions it might look a little different.
+    </para>
+
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum -y install gcc make "perl(CPAN)"
+        </screen>
+    </para>
+
+    <para>
+        The next step is to obtain and install the database client. For this you
+would need to sign up for a free account at the Oracle website.  You can
+download the drivers from this page: <ulink
+url="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html">
+http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html</ulink>
+Please choose the Linux x86 or x86-64 version corresponding to the
+architecture of your system. You can check this with the <command>uname
+-i</command>.  It is either 'x86_64' for x86-64 or 'i386' for x86.  You
+should download the packages 'Instant Client Package - Basic', 'Instant
+Client Package - SQL*Plus', and 'Instant Client Package - SDK'. Save them to
+a location on your disk.  Now as the root user you can install the packages
+using the following command:
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum install oracle-instantclient*
+        </screen>
+    </para>
+    <para>
+        After this you should set two environment variables and compile the
+DBD::Oracle driver. Again, perform these tasks as the root user. The steps
+are outlined below. Please note that for briefness some lines outputted by
+the commands have been removed.
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+[root@otrs-centos6 otrs]# export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+[root@otrs-centos6 otrs]# cpan
+cpan[1]> look DBD::Oracle
+...
+Fetching with LWP:
+  http://www.perl.org/CPAN/authors/id/P/PY/PYTHIAN/CHECKSUMS
+Checksum for /root/.cpan/sources/authors/id/P/PY/PYTHIAN/DBD-Oracle-1.62.tar.gz ok
+Scanning cache /root/.cpan/build for sizes
+DONE
+...
+Working directory is /root/.cpan/build/DBD-Oracle-1.62-ZH6LNy
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# perl Makefile.PL
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make install
+...
+cpan[2]> exit
+Terminal does not support GetHistory.
+Lockfile removed.
+        </screen>
+    </para>
+
+<para>
+Now you should edit the file Kernel/Config.pm to provide ORACLE_HOME.  The
+next step is to configure OTRS using the web installer, as described <link
+linkend="web-installer">in this section</link>.
+</para>
+
+</section>
+
+</section>
+
+<section id="installation-on-debian">
+<title>Installing OTRS on a Debian or Ubuntu system</title>
+<important>
+    <para>
+        Please install OTRS <link linkend="manual-installation-of-otrs">from
+source</link>, and do not use the OTRS packages that Debian/Ubuntu provides.
+    </para>
+</important>
+<para>
+    The installation of required Perl modules is easier if you use the available
+packages: <screen>
+apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl \
+    libnet-ldap-perl libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl \
+    libgd-text-perl libtext-csv-xs-perl libjson-xs-perl libgd-graph-perl libapache-dbi-perl
+    </screen>
+</para>
+</section>
+
+<section id="installation-on-windows">
+<title>Instalando o OTRS em um sistema Microsoft Windows</title>
+<section id="installation-on-windows-installer">
+<title>Using the Windows Installer</title>
+    <para>
+    Installing OTRS on a Microsoft Windows system is very easy. Download the
+latest installer for Win32 from <ulink url="http://www.otrs.com/try/">
+<citetitle>http://www.otrs.com/try/</citetitle> </ulink> and save the file
+to your local file system. Then simply double-click on the file to execute
+the installer, and follow the few installation steps to setup the system.
+The installation wizard will take care of installing all components for
+OTRS. The next step is to configure OTRS using the web installer, as
+described <link linkend="web-installer">in this section</link>.
+    </para>
+
+    <important>
+    <para>
+    The Windows installer for OTRS contains all needed components for OTRS,
+i.e. the <application>Apache</application> web server, the
+<application>MySQL</application> database server,
+<application>Perl</application> (with all needed modules) and
+<application>cron</application> for Windows.  However you can also use it to
+set up OTRS on the Microsoft IIS Web Server instead of on Apache. Also you
+can choose to not let it install the bundled MySQL, for instance if you want
+to deploy on a central MySQL database; a PostgreSQL database, on Microsoft
+SQL Server or on Oracle.
+    </para>
+    </important>
+</section>
+<section id="windows-installation-dbd-oracle">
+    <title>Installation of Oracle database driver on Windows</title>
+    <para>
+        If you install OTRS using the Windows Installer, it will automatically
+configure all Perl modules you will typically need.  There is one exception
+to this: if you need to deploy OTRS on an Oracle database, you'll need to
+post-install the Oracle driver.  This is needed because there is no open
+source driver for Oracle available; we are not allowed to redistribute it in
+the OTRS package.  There are two different perls you can use on Windows; you
+can choose the bundled Strawberry Perl, which is the default option and is
+recommended for proof-of-concept setups; or you can choose Active State perl
+which is a separate download and install. This last option is recommended
+for production setups.
+    </para>
+
+    <section id="windows-installation-dbd-oracle-activestate">
+        <title>Installation of DBD::Oracle on ActiveState Perl</title>
+        <para>
+            If you have installed ActiveState Perl it already comes with the Perl
+database driver <application>DBD::Oracle</application> only this should be
+linked to the Oracle C client.  OTRS only works on 32-bit ActiveState
+Perl. This means you should also download the 32-bit Oracle client.
+Navigate to the Oracle client web site <ulink
+url="http://www.oracle.com/technetwork/topics/winsoft-085727.html">
+<citetitle>Instant Client Downloads for Microsoft Windows
+(32-bit)</citetitle></ulink> and choose 'Instant Client Package -
+Basic'. You'll need to sign up for a free Oracle Web account in order to
+download the software. Extract the download, a zip file, to the root of your
+drive, for instance <filename>C:\instantclient_11_2</filename>.
+        </para>
+        <para>
+            Now you should add the client libraries to your path and set an environment
+variable; 'ORACLE_HOME'.  Navigate to Control Panel &gt; System and Security
+&gt; System, choose 'Advanced System Settings', click on 'New' under 'System
+variables', enter 'ORACLE_HOME' as Variable Name and use
+'C:\instantclient_11_2' as the Variable Value.  Select the 'PATH' variable,
+and append the directory 'C:\instantclient_11_2' to the path.  If you now
+start a new <application>cmd.exe</application> session and run the
+<application>otrs.CheckModules.pl</application> script located in the
+<application>OTRS</application> directory, you should see that the
+DBD::Oracle driver is successfully installed.  After this, you should
+restart the system in order for the other applications to detect the new
+environment variables.
+        </para>
+    </section>
+
+    <section id="windows-installation-dbd-oracle-strawberry">
+        <title>Installation of DBD::Oracle on Strawberry Perl</title>
+
+            <para>
+                In order to compile the DBD::Oracle module, you need to have installed the
+components of the OTRS web installer in a path without spaces. It should NOT
+be in <filename>C:\Program Files\OTRS</filename> but it should rather be in
+<filename>C:\OTRSComponents</filename> or similar.
+            </para>
+
+    <para>
+        On Strawberry Perl you should compile the Oracle driver manually.  The OTRS
+Windows Installer bundles 32-bit Strawberry Perl. This means you should also
+download the 32-bit Oracle client.  Navigate to the Oracle client web site
+<ulink url="http://www.oracle.com/technetwork/topics/winsoft-085727.html">
+<citetitle>Instant Client Downloads for Microsoft Windows
+(32-bit)</citetitle></ulink> and download the packages 'Instant Client
+Package - Basic', 'Instant Client Package - SQL*Plus', and 'Instant Client
+Package - SDK'. You'll need to sign up for a free Oracle Web account in
+order to download the software. Extract the downloads, all zip files, to the
+root of your drive, for instance <filename>C:\instantclient_11_2</filename>.
+    </para>
+    <para>
+        Now you should add the client libraries to your path and set an environment
+variable; 'ORACLE_HOME'.  Navigate to Control Panel &gt; System and Security
+&gt; System, choose 'Advanced System Settings', click on 'New' under 'System
+variables', enter 'ORACLE_HOME' as Variable Name and use
+'C:\instantclient_11_2' as the Variable Value.  Select the 'PATH' variable,
+and append the directory 'C:\instantclient_11_2' to the path.  After this,
+you should restart the system in order for the other applications to detect
+the new environment variables.
+    </para>
+    <para>
+        Now you can compile and install the DBD::Oracle module. For this, open a
+<application>cmd.exe</application> window, and start the cpan
+client. Download and extract DBD::Oracle via <command>look
+DBD::Oracle</command>, then type <command>perl Makefile.PL</command>,
+<command>dmake</command> and <command>dmake install</command>. Sample output
+is below.
+    </para>
+
+    <para>
+        <screen><![CDATA[
+C:\Users\max>cpan
+
+cpan shell -- CPAN exploration and modules installation (v1.9800)
+Enter 'h' for help.
+
+
+cpan> look DBD::Oracle
+Database was generated on Thu, 16 May 2013 14:52:41 GMT
+Running look for module 'DBD::Oracle'
+
+Trying to open a subshell in the build directory...
+....
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>perl Makefile.PL
+Using DBI 1.623 (for perl 5.016003 on MSWin32-x86-multi-thread) installed in C:/
+OTRSComponents/StrawberryPerl/perl/vendor/lib/auto/DBI/
+
+Configuring DBD::Oracle for perl 5.016003 on MSWin32 (MSWin32-x86-multi-thread)
+
+...
+Checking if your kit is complete...
+Looks good
+LD_RUN_PATH=c:/instantclient_11_2/lib:c:/instantclient_11_2/rdbms/lib
+Using DBD::Oracle 1.62.
+Using DBD::Oracle 1.62.
+Using DBI 1.623 (for perl 5.016003 on MSWin32-x86-multi-thread) installed in C:/
+OTRSComponents/StrawberryPerl/perl/vendor/lib/auto/DBI/
+Writing Makefile for DBD::Oracle
+Writing MYMETA.yml and MYMETA.json
+...
+
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>dmake
+... lots of output and compiler warnings ...
+
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>dmake install
+Files found in blib\arch: installing files in blib\lib into architecture depende
+nt library tree
+Installing C:\OTRSCO~1\StrawberryPerl\perl\site\lib\auto\DBD\Oracle\dbdimp.h
+...
+Appending installation info to C:\OTRSCO~1\StrawberryPerl\perl\lib/perllocal.pod
+
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>exit
+
+cpan> quit
+Lockfile removed.
+
+C:\Users\max>
+        ]]></screen>
+    </para>
+</section>
+    <section id="windows-installation-config-webinstaller">
+        <title>Configure OTRS using the Web Installer</title>
+        <para>
+            The web installer may be used to configure basic OTRS settings as described
+<link linkend="web-installer">in this section</link>.
+        </para>
+    </section>
+</section>
+</section>
+</section>
