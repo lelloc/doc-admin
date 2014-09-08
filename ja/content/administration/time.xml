@@ -9,28 +9,35 @@
 <title>業務時間、祝祭日とタイムゾーンの設定</title>
 
 <para>
-<link
-linkend="unlock-tickets">チケットの自動アンロック</link>やエスカレーションのようなOTRSのいくつかの機能は、業務時間、祝祭日及びタイムゾーンの適切な構成に依存しています。<link
-linkend="Framework:Core::Time">Framework &gt; Core::Time</link>にある<link
-linkend="sysconfig">SysConfigインターフェース</link>経由でこれらを定義することができます。異なる業務時間、祝祭日及びタイムゾーンを別々の「カレンダー」の異なるセットとして設定することも可能です。（
-<link linkend="Framework:Core::Time::Calendar9">Framework &gt;
-Core::Time::Calendar9</link>から<link
-linkend="Framework:Core::Time::Calendar1">Framework &gt;
-Core::Time::Calendar1</link> で）カレンダーは<link
-linkend="adminarea-queue">キュー設定</link>、あるいはSLAレベルで定義することができます。例えばこれはあなたがカレンダー（「標準」SLA用の5
-x 8
-業務時間）を指定できることを意味します。しかし「Support-USA」キュー用のカレンダーセットと同様に、「Support-Japan」キューよりも異なるタイムゾーンの窓で、あなたの「gold」SLA用の4
-x 27 をサポートする別々のカレンダーを作成します。OTRSは異なる99までのカレンダーを取り扱うことができます。
+Some functions in OTRS, like escalations and <link
+linkend="unlock-tickets">automatic unlocking of tickets</link>, depend on a
+proper configuration of business hours, time zones and holidays. You can
+define these via the <link linkend="sysconfig">SysConfig interface</link>,
+in <link linkend="ConfigReference_Framework:Core::Time">Framework &gt;
+Core::Time</link>.  You can also specify different sets of business hours,
+holidays and time zones as separate 'Calendars' in <link
+linkend="ConfigReference_Framework:Core::Time::Calendar1">Framework &gt;
+Core::Time::Calendar1</link> through <link
+linkend="ConfigReference_Framework:Core::Time::Calendar9">Framework &gt;
+Core::Time::Calendar9</link>. Calendars can be defined by <link
+linkend="adminarea-queue">queue settings</link>, or on SLA levels. This
+means that, for example, you can specify a calendar with 5 x 8 business
+hours for your 'standard' SLA, but create a separate calendar with 7 x 24
+support for your 'gold' SLA; as well as set a calendar for your
+'Support-USA' queue with a different time window than your 'Support-Japan'
+queue. OTRS can handle up to 99 different calendars.
 </para>
 
 <section id="TimeWorkingHours">
 <title>業務時間</title>
 
 <para>
-SysConfig内でシステムの業務時間を設定します。（<link
-linkend="Framework:Core::Time:TimeWorkingHours">Framework &gt;
-Core::Time::TimeWorkingHours</link>）またはカレンダー構成中のあなたの特定のカレンダーを設定します。OTRSは一時間の精度を取り扱うことができます。ボックス8,9,10...17にチェックマークを入れることは業務時間の
-8 AMから 6 PMに相当します。
+Set up the working hours for your system in SysConfig <link
+linkend="ConfigReference_Framework:Core::Time:TimeWorkingHours">Framework
+&gt; Core::Time::TimeWorkingHours</link>, or for your specific calendar in
+the calendar's configuration. OTRS can handle a granularity of one
+hour. Checking the marks in the boxes 8, 9, 10 ... 17 corresponds with
+business hours of 8 AM - 6 PM.
 </para>
 
 <para>
@@ -43,8 +50,10 @@ Core::Time::TimeWorkingHours</link>）またはカレンダー構成中のあな
 <title>固定の期日、祝祭日</title>
 
 <para>
-毎年ある、元日または独立記念日のような祝祭日は、<link
-linkend="Framework:Core::Time:TimeVacationDays">TimeVacationDays</link>、あるいはカレンダー1-9用の該当箇所の中で指定することができます。
+Holidays that are on a fixed date every year, such as New Year's Day or the
+Fourth of July, can be specified in <link
+linkend="ConfigReference_Framework:Core::Time:TimeVacationDays">TimeVacationDays</link>,
+or in the corresponding section for the calendars 1-9.
 </para>
 
 <para>
@@ -63,8 +72,9 @@ OTRS出荷のデフォルトで<emphasis>ドイツの</emphasis>祝祭日をイ�
 <title>TimeVacationDaysOneTime</title>
 
 <para>
-年1回の固定日を持たず、代わりに毎年変わるイースターのような休日は、<link
-linkend="Framework:Core::Time:TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>の中で指定することができます。
+Holidays such as Easter that do not have a yearly fixed date but instead
+vary each year, can be specified in <link
+linkend="ConfigReference_Framework:Core::Time:TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>.
 </para>
 
 <para>

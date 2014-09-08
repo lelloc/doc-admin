@@ -299,13 +299,12 @@ the permissions / rights is shown in Table 5-2.
 
 <note>
     <para>
-        По умолчанию, СписокОчередей (QueueView) отображает только заявки в
-очередях, к которым агент имеет права <emphasis>rw</emphasis>, т.е к
-заявкам, с которыми он должен работать. Если вы хотите изменить это
-поведение, вы можете установить параметр <link
-linkend="Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> в
-значение <emphasis>Да</emphasis>.
+        By default, the QueueView only lists tickets in queues that an agent has
+<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
+on. If you want to change this behaviour, you can set <link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
+<emphasis>Yes</emphasis>.
     </para>
 </note>
  <para>Not all available permissions are shown by default. These additional
@@ -334,7 +333,7 @@ permissions can be added.</para>
                 <entry>The right to compose an answer for a ticket.</entry>
               </row>
               <row>
-                <entry>customer</entry>
+                <entry>клиент</entry>
                 <entry>The right to change the customer of a ticket.</entry>
               </row>
               <row>
@@ -342,11 +341,11 @@ permissions can be added.</para>
                 <entry>The right to forward a messages (with the forward button).</entry>
               </row>
               <row>
-                <entry>pending</entry>
+                <entry>в ожидании</entry>
                 <entry>The right to set a ticket to pending.</entry>
               </row>
               <row>
-                <entry>phone</entry>
+                <entry>телефон</entry>
                 <entry>The right to add a phonecall to a ticket.</entry>
               </row>
               <row>
@@ -360,7 +359,7 @@ permissions can be added.</para>
       <note>
         <para>
           These permissions can be added by changing the <link
-linkend="Ticket::Core::Ticket::System::Permission">Ticket::Core::Ticket::System::Permission</link>
+linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permission</link>
         </para>
       </note>
 </section>
@@ -406,7 +405,7 @@ Agent to Group with Agent to Role mappings can make for a complex access
 control scheme, that is difficult to understand and maintain. If you wish to
 use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
 area, you can do so by modifying the <link
-linkend="Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
+linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
 in the SysConfig. Be aware that this won't remove already existing Agents to
 Group assignments!
 </para>
@@ -620,14 +619,13 @@ linkend="adminarea-groups">Модуль Управления Группами </
 </para>
 
 <para>
-Следующим шагом будет включение поддержки клиентов группы. Это можно сделать
-используя конфигурационный параметр <link
-linkend="Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>
-в SysConfig. Используя параметр <link
-linkend="Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
-можно указать группы по умолчанию, к которым будет принадлежать новый
-пользователь, таким образом каждая новая учетная запись будет добавлятся в
-эту группу.
+The next step is to activate the customer group support. This can be done
+with the configuration parameter <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>,
+from the Admin SysConfig option. Using the parameter <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
+you can specify the default groups for a newly added customer, so that every
+new account will be automatically added to these groups.
 </para>
 
 <para>
@@ -793,7 +791,7 @@ linkend="adminarea-signatures"> signatures</link>.
 
 
 <section id="adminarea-salutations-signatures-attachments-and-answers">
-<title>Salutations, signatures, attachments and templates</title>
+<title>Приветствия, подписи, вложения и шаблоны</title>
 
 <section id="adminarea-salutations">
 <title>Приветсвтия</title>
@@ -945,7 +943,7 @@ an individual template before sending it to the customer.
 
 <para>
 <screenshot>
-<screeninfo>Managing Attachments for Templates</screeninfo> <graphic srccredit="Adminarea
+<screeninfo>Управление Вложениями для Шаблонов</screeninfo> <graphic srccredit="Adminarea
 attachment - screenshot" scale="40"
 fileref="screenshots/admin-attachment.png"></graphic></screenshot>
 </para>
@@ -1018,7 +1016,7 @@ fileref="screenshots/template-attachment-relations2.png"></graphic></screenshot>
 </section>
 
 <section id="adminarea-Templates">
-<title>Templates</title>
+<title>Шаблоны</title>
 
 <para>
     To speed up ticket processing and to standardize the look of answers, you
@@ -1033,10 +1031,10 @@ template types:
 </para>
 <itemizedlist mark="round">
     <listitem>
-        <para>Answer: To be used as a ticket response or reply</para>
+        <para>Ответ: Будет использоваться в качестве ответа на заявку</para>
     </listitem>
     <listitem>
-        <para>Create: To be used in New Phone or Email ticket</para>
+        <para>Создать: Будет использоваться в качестве Телефонной Заявки или Email заявки</para>
     </listitem>
     <listitem>
         <para>Forward: To be used to forward an article to someone else</para>
@@ -1077,13 +1075,13 @@ management screen (see Figure below).
 
 <para>
 <screenshot>
-<screeninfo>Templates</screeninfo> <graphic srccredit="Adminarea
+<screeninfo>Шаблоны</screeninfo> <graphic srccredit="Adminarea
 template - screenshot" scale="40"
 fileref="screenshots/admin-template.png"></graphic></screenshot>
 </para>
 
 <para>
-<emphasis>Figure: Template management.</emphasis>
+<emphasis>Рисунок: Управление шаблонами.</emphasis>
 </para>
 
 <para>
@@ -1094,13 +1092,13 @@ it (see Figure below).
 
 <para>
 <screenshot>
-<screeninfo>Template</screeninfo> <graphic srccredit="Adminarea
+<screeninfo>Шаблон</screeninfo> <graphic srccredit="Adminarea
 template - screenshot" scale="40"
 fileref="screenshots/add-template.png"></graphic></screenshot>
 </para>
 
 <para>
-<emphasis>Figure: Adding a template.</emphasis>
+<emphasis>Рисунок: Добавление шаблона.</emphasis>
 </para>
 
 <para>
@@ -1495,8 +1493,8 @@ the screen shown in the Figure.
 <para>
 OTRS can process incoming S/MIME encoded messages and sign outgoing
 mails. Before this feature can be used, you need to activate it and change
-some <link linkend="Framework:Crypt::SMIME">configuration parameters</link>
-in the SysConfig.
+some <link linkend="ConfigReference_Framework:Crypt::SMIME">configuration
+parameters</link> in the SysConfig.
 </para>
 
 <para>
@@ -1523,8 +1521,9 @@ and also search through the SMIME data.
 <para>
 OTRS handles PGP keys, which allows you to encrypt/decrypt messages and to
 sign outgoing messages. Before this feature can be used, you need to
-activate it and change some <link linkend="Framework:Crypt::PGP">
-configuration parameters </link> in the SysConfig.
+activate it and change some <link
+linkend="ConfigReference_Framework:Crypt::PGP"> configuration parameters
+</link> in the SysConfig.
 </para>
 
 <para>
@@ -1736,7 +1735,7 @@ Accounts</link> for more details.
 </section>
 
 <section id="adminarea-postmasterfilter">
-<title>Filtering incoming email messages</title>
+<title>Фильтрация входящих почтовых сообщений</title>
 
 <para>
 OTRS has the capability to filter incoming email messages. For example, it
@@ -1874,7 +1873,7 @@ instead.
          по умолчанию (в зависимости от настроек)
         </entry>
         <entry>
-          Sets the type of a ticket (if Ticket::Type is activated).
+          Устанавливает тип заявки (если активировано Ticket::Type).
         </entry>
       </row>
       <row>
@@ -1991,7 +1990,7 @@ remaining filters is cancelled).
 
 <para>
 <screenshot>
-<screeninfo>Adding filter rules for incoming messages</screeninfo> <graphic srccredit="Adminarea
+<screeninfo>Добавление правил фильтрации для входящих сообщений</screeninfo> <graphic srccredit="Adminarea
 postmasterfilter - screenshot" scale="40"
 fileref="screenshots/add-postmasterfilter.png"></graphic></screenshot>
 </para>
@@ -2285,10 +2284,10 @@ use the same steps for updating a package that is already installed.
 </para>
 
 <para>
-В особых случаях, можно настроить Менеджер Пакетов, например, для
-испльзования прокси-сервера, или локального репозитория. перейдя по ссылке
-<link linkend="Framework:Core::Package">Framework:Core::Package</link>,
-просто посмотрите на имеющиеся варианты в файле SysConfig.
+In special cases, you might want to configure the Package Manager, e.g., to
+use a proxy or to use a local repository. Just take a look at the available
+options in SysConfig under <link
+linkend="ConfigReference_Framework:Core::Package">Framework:Core::Package</link>.
 </para>
 
 </section>
@@ -2324,7 +2323,7 @@ tickets and articles (see figure below).
     </para>
     <para>
         <screenshot>
-<screeninfo>Dynamic fields overview screen</screeninfo> <graphic srccredit="Adminarea
+<screeninfo>Обзор Динамических полей</screeninfo> <graphic srccredit="Adminarea
 dynamicfields - screenshot" scale="40"
 fileref="screenshots/dynamicfields-overview-filled.png"></graphic></screenshot>
     </para>

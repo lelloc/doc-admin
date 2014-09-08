@@ -9,23 +9,23 @@
 <title>Arbeitszeiten, Feiertage und Zeitzonen für das System festlegen</title>
 
 <para>
-Einige Funktionen in OTRS, wie <link linkend="unlock-tickets">das
-automatische Entsperren von Tickets</link>, setzen eine korrekte
-Konfiguration von Arbeitszeiten, Zeitzonen und Feiertagen voraus.  Sie
-können diese in der <link linkend="sysconfig"> SysConfig </link> definieren,
-in <link linkend="Framework:Core::Time">Framework &gt; Core::Time</link>.
-Ebenso können Sie verschiedene Typen von Arbeitszeiten, Feiertagen und
-Zeitzonen als separate "Kalender" in <link
-linkend="Framework:Core::Time::Calendar1">Framework >
-Core::Time::Calendar1</link> bis <link
-linkend="Framework:Core::Time::Calendar9">Framework >
-Core::Time::Calendar9</link> definieren.  Kalender können auf <link
-linkend="adminarea-queue">Queue</link>- oder SLA-Ebene definiert werden. Das
-heißt, dass Sie z. B. einen Kalender mit 5x8 Arbeitsstunden pro Woche für
-Ihren "Standard"-SLA definieren können, zusätzlich jedoch auch einen mit
-7x24 für Ihren "Gold"-SLA. Ebenso kann der Kalender für Ihre Queue
-"Support-USA" ein anderes Arbeitszeitfenster haben als ihre Queue
-"Support-Japan". OTRS kann bis zu 99 verschiedene Kalender verwalten.
+Some functions in OTRS, like escalations and <link
+linkend="unlock-tickets">automatic unlocking of tickets</link>, depend on a
+proper configuration of business hours, time zones and holidays. You can
+define these via the <link linkend="sysconfig">SysConfig interface</link>,
+in <link linkend="ConfigReference_Framework:Core::Time">Framework &gt;
+Core::Time</link>.  You can also specify different sets of business hours,
+holidays and time zones as separate 'Calendars' in <link
+linkend="ConfigReference_Framework:Core::Time::Calendar1">Framework &gt;
+Core::Time::Calendar1</link> through <link
+linkend="ConfigReference_Framework:Core::Time::Calendar9">Framework &gt;
+Core::Time::Calendar9</link>. Calendars can be defined by <link
+linkend="adminarea-queue">queue settings</link>, or on SLA levels. This
+means that, for example, you can specify a calendar with 5 x 8 business
+hours for your 'standard' SLA, but create a separate calendar with 7 x 24
+support for your 'gold' SLA; as well as set a calendar for your
+'Support-USA' queue with a different time window than your 'Support-Japan'
+queue. OTRS can handle up to 99 different calendars.
 </para>
 
 <section id="TimeWorkingHours">
@@ -33,9 +33,9 @@ Ihren "Standard"-SLA definieren können, zusätzlich jedoch auch einen mit
 
 <para>
 Set up the working hours for your system in SysConfig <link
-linkend="Framework:Core::Time:TimeWorkingHours">Framework &gt;
-Core::Time::TimeWorkingHours</link>, or for your specific calendar in the
-calendar's configuration. OTRS can handle a granularity of one
+linkend="ConfigReference_Framework:Core::Time:TimeWorkingHours">Framework
+&gt; Core::Time::TimeWorkingHours</link>, or for your specific calendar in
+the calendar's configuration. OTRS can handle a granularity of one
 hour. Checking the marks in the boxes 8, 9, 10 ... 17 corresponds with
 business hours of 8 AM - 6 PM.
 </para>
@@ -53,10 +53,10 @@ Eskalationszeit und der Zeit für die automatische Freigabe mit einbezogen.
 <title>Feiertage mit festem Datum</title>
 
 <para>
-Feiertage deren Datum jedes Jahr gleich ist, können dem System in <link
-linkend="Framework:Core::Time:TimeVacationDays"> TimeVacationDays </link>
-oder im entsprechenden Abschnitt in den Kalendern 1-9 bekannt gemacht
-werden.
+Holidays that are on a fixed date every year, such as New Year's Day or the
+Fourth of July, can be specified in <link
+linkend="ConfigReference_Framework:Core::Time:TimeVacationDays">TimeVacationDays</link>,
+or in the corresponding section for the calendars 1-9.
 </para>
 
 <para>
@@ -76,9 +76,9 @@ In OTRS sind die <emphasis>deutschen</emphasis> Feiertage voreingestellt.
 <title>TimeVacationDaysOneTime</title>
 
 <para>
-Freie oder Feiertage, für die sich jährlich das Datum ändert, können in
-<link linkend="Framework:Core::Time:TimeVacationDaysOneTime">
-TimeVacationDaysOneTime </link> angegeben werden.
+Holidays such as Easter that do not have a yearly fixed date but instead
+vary each year, can be specified in <link
+linkend="ConfigReference_Framework:Core::Time:TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>.
 </para>
 
 <para>

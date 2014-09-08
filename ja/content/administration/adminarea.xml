@@ -256,11 +256,12 @@ fileref="screenshots/agent-group-relations2.png"></graphic></screenshot>
 
 <note>
     <para>
-        デフォルトでは、キュー・ビューだけが担当者が<emphasis>rw</emphasis>
-アクセスを持っているキュー中のチケットをリストします。（たとえば担当者が引き続き処理する必要のあるチケット）この振る舞いを変更したければ、<link
-linkend="Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets
-</link>を<emphasis>「イエス」</emphasis>にセットすることができます。
+        By default, the QueueView only lists tickets in queues that an agent has
+<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
+on. If you want to change this behaviour, you can set <link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
+<emphasis>Yes</emphasis>.
     </para>
 </note>
  <para>すべての利用可能なパーミションはデフォルトで表示されるとは限りません。これらの追加のパーミションは加えることができます。</para>
@@ -313,8 +314,8 @@ Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets
       </para>
       <note>
         <para>
-          これらの許可は<link
-linkend="Ticket::Core::Ticket::System::Permission">Ticket::Core::Ticket::System::Permission</link>の変更により加えることができます。
+          These permissions can be added by changing the <link
+linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permission</link>
         </para>
       </note>
 </section>
@@ -343,8 +344,15 @@ handled.
 
 <note>
 <para>
-複雑な組織を取り扱う場合、およびより大きなOTRSの導入を維持管理する場合、”役割”は実に有用です。しかしながら、適切な取扱いは必要です。グループ化する担当者と担当者への役割割り当てを混合することは、複雑なアクセス・コント役割・スキーム(その維持管理を理解するのは難しい)に役立ちます。役割だけを使用したく、管理者エリアにある担当者&lt;-&gt;グループオプションを不能にしたければ、SysConfigの中の<link
-linkend="Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>を修正することでそうすることができます。これが、グループに割り当てられた既存の担当者を除去するものではないこと、ご留意ください。
+Roles are really useful when dealing with complex organizations and when
+maintaining larger OTRS installations. Proper care is advised though. Mixing
+Agent to Group with Agent to Role mappings can make for a complex access
+control scheme, that is difficult to understand and maintain. If you wish to
+use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
+area, you can do so by modifying the <link
+linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
+in the SysConfig. Be aware that this won't remove already existing Agents to
+Group assignments!
 </para>
 </note>
 
@@ -515,11 +523,13 @@ linkend="adminarea-queue">キュー</link>を加えて、キューに新規グ�
 </para>
 
 <para>
-次のステップは顧客グループ・サポートを活性化することです。これは管理SysConfigオプションから構成パラメタ：<link
-linkend="Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>でできます。パラメタ
-<link
-linkend="Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
-を使用すると、新規追加の顧客のためのデフォルト・グループを指定することができます。その結果、すべての新規アカウントはこれらのグループに自動的に加えられます。
+The next step is to activate the customer group support. This can be done
+with the configuration parameter <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>,
+from the Admin SysConfig option. Using the parameter <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
+you can specify the default groups for a newly added customer, so that every
+new account will be automatically added to these groups.
 </para>
 
 <para>
@@ -1228,9 +1238,10 @@ fileref="screenshots/admin-notification-eventbased-new.png"></graphic></screensh
 <title>SMIME</title>
 
 <para>
-OTRSは、S/MIME
-エンコードされたメッセージの入信や送信Eメールへの署名を処理することができます。この機能を使用するには、それを活性化し、SysConfigの中のいくつかの<link
-linkend="Framework:Crypt::SMIME">構成パラメータ</link>を変更する必要があります。
+OTRS can process incoming S/MIME encoded messages and sign outgoing
+mails. Before this feature can be used, you need to activate it and change
+some <link linkend="ConfigReference_Framework:Crypt::SMIME">configuration
+parameters</link> in the SysConfig.
 </para>
 
 <para>
@@ -1253,8 +1264,11 @@ linkend="Framework:Crypt::SMIME">構成パラメータ</link>を変更する必�
 <title>PGP鍵</title>
 
 <para>
-OTRSは、PGP鍵を扱います、それによりメッセージを暗号化/解読し、かつ送信メッセージに署名することができます。この機能を使用するには、それを活性化し、SysConfigの中のいくつかの<link
-linkend="Framework:Crypt::PGP"> 構成パラメータ </link>を変更する必要があります。
+OTRS handles PGP keys, which allows you to encrypt/decrypt messages and to
+sign outgoing messages. Before this feature can be used, you need to
+activate it and change some <link
+linkend="ConfigReference_Framework:Crypt::PGP"> configuration parameters
+</link> in the SysConfig.
 </para>
 
 <para>
@@ -1893,8 +1907,10 @@ OTRSシステムがインターネットに接続されないような場合、�
 </para>
 
 <para>
-特殊なケース、例えば、プロキシを使用するかあるいはローカル・リポジトリを使用するためにパッケージ・マネージャーを構成したいと思うかもしれません。<link
-linkend="Framework:Core::Package">Framework:Core::Package</link>の中で利用可能なオプションを見てください。
+In special cases, you might want to configure the Package Manager, e.g., to
+use a proxy or to use a local repository. Just take a look at the available
+options in SysConfig under <link
+linkend="ConfigReference_Framework:Core::Package">Framework:Core::Package</link>.
 </para>
 
 </section>
