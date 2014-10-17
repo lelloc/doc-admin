@@ -4,31 +4,31 @@
 <section id="scheduler">
     <title>Планировщик OTRS</title>
     <para>
-        The OTRS Scheduler is an independent system process that executes tasks in
-background. These kind of processes are know as <emphasis>daemons</emphasis>
-in Unix / Linux systems or as <emphasis>services</emphasis> on Windows
-environments. It is independent but that doesn't mean that the Scheduler
-does everything alone, it is fully integrated into OTRS and can use any OTRS
-module as needed to complete each task.
+        Планировщик OTRS/Scheduler это независимый системный процесс, котрый
+выполняет задания в фоновом режиме. Этот тип процессов известен как
+<emphasis>daemons</emphasis> в Unix / Linux системах или как
+<emphasis>services</emphasis> в Windows средах. Он независим, но это не
+означает, что Планировщик может существовать отдельно, он полностью
+интегрирован в OTRS и может использовать модули OTRS необходимые для его
+работы.
     </para>
 
     <para>
-        For sanity reasons the Scheduler process needs to be restarted from time to
-time. This is done automatically by the scheduler process itself once a day,
-but it can be adjusted as needed using the SysConfig by editing the
-"Scheduler::RestartAfterSeconds" setting.
+        По соображениям здравого смысла, Планировщик должен запускаться время от
+времени. Это выполняется автоматически раз в день, но может быть настроено
+при неоходимости в SysConfig редактированием параметра
+"Scheduler::RestartAfterSeconds".
     </para>
     <para>
-        The OTRS Scheduler is a fully automated process, the only needed human
-interaction is to check its status periodically and start or stop it as
-needed.
+        Планировщик OTRS является полностью автоматическим процессом, и
+взаимодействие с человеком состоит толко в том, чтобы периодически проверять
+его состояние, запускать или останавливать по мере необходимости.
     </para>
     <note>
         <para>
-            If the Scheduler is stopped for any reason, all pending tasks and new tasks
-registered when the Scheduler is stopped will be executed as soon as the
-Scheduler starts again (unless the tasks are set to be executed in the
-future).
+            Если Планировщик остановлен по какой либо причине, все отложенные задания
+зарегистрированные во время его простоя будут выполнены как только он будет
+запущен вновь (если только их запуск не предусмотрен позднее в будущем).
         </para>
     </note>
     <section id="scheduler-gui">
@@ -40,22 +40,23 @@ future).
         <section id="scheduler-gui-notify">
             <title>Планировщик Не Запускает Уведомления</title>
             <para>
-                There are two different types of notifications if the system detects that
-the scheduler is not running. This detection is based on the update
-frequency of the Scheduler process. If the difference between current time
-and the last process update time is 2 times the process update frequency a
-warning message will be displayed in the OTRS notification area. If it is
-over 4 times the process frequency then an alert will be displayed instead.
+                Есть два типа уведомлений, если система обнаруживает, что Планировщик не
+запущен. Они базируются на частоте обновления состояния процесса
+Планировщика. Если разница между текущим временем и временем последнего
+обновления состояния в 2 раза больше частоты обновления процесса,
+предупреждающее сообщение будет отображаться в OTRS области
+уведомлений. Если она больше в 4 раза, то, вместо предупреждения, будет
+отображаться тревожное сообщение.
             </para>
             <para>
                 Параметр Планировщика обновление времени может быть настроен с помощью
 параметра "Scheduler::PIDUpdateTime" в файле SysConfig.
             </para>
             <para>
-                If you see a warning message it is not always necessary to take an action,
-but it is highly recommended to check if the scheduler process is
-running. If you see an alert, then there is a high chance that the scheduler
-is in fact not running and should be started.
+                Если вы видите предупреждающее сообщение, необязательно сразу предпринимать
+какие-то действия, но настоятельно рекомендуется проверить, что процесс
+запущен. Если отображентся тревожное сообщение, велика вероятность, что
+Планировщик действительно не работает и его следует запустить.
             </para>
             <para>
                 По умолчанию Планировщик не запускает уведомлений, если есть действительный
@@ -80,16 +81,17 @@ fileref="screenshots/scheduler-notify.png"></graphic></screenshot>
         <section id="scheduler-gui-start">
             <title>Запуск Планировщика</title>
             <para>
-                By clicking on the Scheduler not running notification link (either warning
-or alert) a dialog box will open to let you start the Scheduler process
-again. The Scheduler can be started normally or forced to start, by clicking
-on the appropriate check box in the dialog.
+                При нажатии на уведомление о том, что Плпнировщик не запущен
+(предупреждающее или тревожное) откроется диалоговое окно, позволяющее
+стартовать Планировщик заново. Планировщик может быть запущен в нормальном
+или форсированном режиме, активированием соответствущего поля выбора в этом
+окне.
             </para>
             <note>
                 <para>
-                    A forced Scheduler start is only necessary if previous Scheduler process was
-terminated abnormally and the Process ID is still registered in the
-database.
+                    Форсированный старт Планировщика необходим только в случае ненормального
+завершения предыдущего процесса Планировщика и его Process ID уже занесен в
+базу данных.
                 </para>
                 <para>
                     Используйте инструменты командной строки, описанные ниже, чтобы иметь полный
@@ -116,27 +118,28 @@ fileref="screenshots/scheduler-start.png"></graphic></screenshot>
 регистрации процесса, который будет управлять операционной системой.
         </para>
         <para>
-            Included with OTRS there are two sets of CLI tools, one for Unix / Linux and
-another for Microsoft Windows.
+            В комплекте с OTRS есть два набора инструментов командной строки, один для
+операционной системы Unix / Linux, а другой для MS Windows.
         </para>
         <section id="scheduler-cli-linux">
             <title>Unix / Linux</title>
             <section id="scheduler-cli-linux-init">
-                <title>Scheduler init.d files</title>
+                <title>Файлы Init.d Планировщика</title>
                 <para>
-                    Init.d files are special scripts that are called by the operating system at
-startup and shutdown.
+                    Init.d файлы это специальные скрипты, которые вызываются операционной
+системой при старте и завершении работы.
                 </para>
                 <para>
-                    OTRS provides init.d scripts to start / stop the OTRS Scheduler process
-automatically by the operating system. These scripts are located under
+                    OTRS предлагает init.d скрипты для автоматического процесса Планировщика
+старта/завершения OTRS опреционной системой. Эти скрипты расположены в
 OTRS_HOME/scripts.
                 </para>
                 <para>
-                    The init.d scripts need to be copied to the correct location for your
-operating system. They need to have the proper permissions and some internal
-variables need to be set to work properly. If you used the OTRS RPMs to set
-up the system, this is taken care of automatically.
+                    Скрипты init.d должны быть скопированы в соответствующее место вашей
+операционной системы. Им должны быть даны соответствующие права и
+установлены значения некоторых внутренних переменных для правильной
+работы. Если вы использовали OTRS RPMs для установки системы, это будет
+сделано автоматически.
                 </para>
                 <itemizedlist mark="round">
                     <title>Init.d Скрипт Внутренних Переменных</title>
@@ -159,11 +162,12 @@ up the system, this is taken care of automatically.
                 </itemizedlist>
                 <note>
                     <para>
-                        Currently OTRS provides only init.d scripts for Linux platforms.
+                        В настоящее время OTRS предоставляет сценарии init.d только для
+Linux-платформ.
                     </para>
                 </note>
                 <table>
-                    <title>List of init scripts and supported Operating Systems</title>
+                    <title>Список init сценариев и поддерживаемых Операционных систем</title>
                     <tgroup cols="2">
                     <thead>
                         <row>
@@ -184,7 +188,7 @@ up the system, this is taken care of automatically.
                     </tgroup>
                 </table>
                 <example>
-                    <title>Example to start the OTRS Scheduler on linux</title>
+                    <title>Пример для запуска OTRS-Планировщика в linux</title>
                     <para>
                         <screen>
                             shell> /etc/init.d/otrs-scheduler-linux start
@@ -226,18 +230,18 @@ up the system, this is taken care of automatically.
                         </listitem>
                         <listitem>
                             <para>
-                                Execute the Scheduler init.d script to <emphasis>stop</emphasis> the
-Scheduler before the database process shuts down.
+                                Выполните скрипт init.d для <emphasis>остановки</emphasis> процесса
+Планировщика, до того как процес базы данных остановлен.
                             </para>
                         </listitem>
                     </itemizedlist>
                 </para>
                 <note>
                     <para>
-                        If you want the Scheduler to run at system startup, please read the
-documentation of the operating system to find out the right location to
-place the init.d scripts, how to configure them to run automatically and how
-to set the run order.
+                        Если вы желаете, чтобы Планировщик стартовал при загрузке системы,
+обратитесь к документации на операционную систему. Там вы найдете куда
+поместить скрипты init.d и как их настроить для автоматического старта, а
+также указать порядок их выполнения.
                     </para>
                 </note>
             </section>
@@ -302,12 +306,13 @@ to set the run order.
                 </example>
                 <note>
                     <para>
-                        Force stop the Scheduler is used remove the process ID from the database
-when the scheduler is not running and the process is still registered.
+                        Принудительная остановка Планировщика используется для удаления ID процесса
+из базы данных когда планировщик не работает и процесс остается
+зарегистрированным.
                     </para>
                     <para>
-                        Force start the Scheduler is used to start the Scheduler process if the
-scheduler is not running and the process is registered.
+                        Принудительный запуск Планировщика используется для старта его процесса,
+когда планировщик не работает и процесс зарегистрирован.
                     </para>
                     <para>
                         Force start or stop are only necessary if the start of the process is needed
@@ -323,11 +328,11 @@ entry in the database is discarded by normal start.
             <section id="scheduler-cli-windows-scm">
                 <title>Установщик Планировщика</title>
                 <para>
-                    On Windows, the OTRS Scheduler is registered as a Service via the Windows
-Service Control Manager (SCM). In order to have the OTRS Scheduler process
-to be controlled by the SCM is necessary to register this service.  If you
-used the Windows Installer this is taken care of by the installer, and there
-are no manual actions required.
+                    В Windows системах, Планировщик OTRS регистрируется как Сервис через Windows
+Service Control Manager (SCM). Чтобы этот процесс управлялся с помощью SCM
+необходимо зарегистрировать этот сервис. Если вы используете Windows
+Installer, он это сделает сам и никаких дополнительных ручных операций не
+требуется.
                 </para>
                 <para>
                     OTRS предоставляет сценарий
@@ -336,13 +341,14 @@ are no manual actions required.
                 </para>
                 <note>
                     <para>
-                        Registering and de-registering can only be performed by members of the
-Administrator group on Windows. You might need to right-click on cmd.exe and
-select 'Run as Administrator' before you can register the service correctly.
+                        Регистрация и разрегистрация может быть выполнена только членами группы
+Администратор в Windows. Чтобы правильно зарегистрировать сервис, сначала
+кликните правой кнопкой мыши на  cmd.exe и выберите "Запуск от имени
+Администратора"
                     </para>
                 </note>
                 <example>
-                    <title>Example to register the OTRS Scheduler as a Windows Service</title>
+                    <title>Пример регистрации Планировщика OTRS как сервиса Widows</title>
                     <para>
                         <screen>
                             shell> perl OTRS_HOME/bin/otrs.Scheduler4WinInstaller.pl -a install
@@ -373,9 +379,10 @@ SCM.
                     </listitem>
                 </itemizedlist>
                 <para>
-                    After installing into the Windows SCM the OTRS Scheduler process can be used
-like any other service on Windows. It can be started, stopped and restarted
-and can be configured to be started manually or automatic.
+                    После регистрации в Windows SCM процесс Планировщика OTRS может
+использоваться как любой другой сервис Windows. Его можно стартовать,
+останавливать, перезапускать, а также настроить его запуск вручную или
+автоматически.
                 </para>
                 <note>
                     <para>
@@ -392,11 +399,11 @@ Windows и Windows SCM.
 для управления процессом.
                 </para>
                 <para>
-                    Microsoft Windows uses the file
+                    Операционная система Windows использует файл
 <command>OTRS_HOME/bin/otrs.Scheduler4Win.pl</command>.
                 </para>
                 <example>
-                    <title>Example to start the OTRS Scheduler on Windows</title>
+                    <title>Пример запуска Планировщика OTRS в Windows</title>
                     <para>
                         <screen>
                             shell> OTRS_HOME/bin/otrs.Scheduler4Win.pl -a start
@@ -436,7 +443,7 @@ Windows и Windows SCM.
                     </listitem>
                 </itemizedlist>
                 <example>
-                    <title>Example to force stop the OTRS Scheduler on Windows</title>
+                    <title>Пример принудительной остановки Планировщика OTRS в Windows</title>
                     <para>
                         <screen>
                             shell> OTRS_HOME/bin/otrs.Scheduler4Win.pl -a stop -f 1
@@ -445,13 +452,14 @@ Windows и Windows SCM.
                 </example>
                 <note>
                     <para>
-                        Force stopping the Scheduler is used to remove the process ID from the
-database when the scheduler is not running and the process is still
-registered.
+                        Принудительная остановка Планировщика используется для удаления ID процесса
+из базы данных когда планировщик не работает и процесс остается
+зарегистрированным.
                     </para>
                     <para>
-                        Force starting the Scheduler is used to start the Scheduler process if the
-scheduler is not running and the process is still registered.
+                        Принудительный старт Планировщика используется для запуска  процесса
+Планировщика, если Планировщик не работает и его Process ID уже занесен в
+базу данных.
                     </para>
                     <para>
                         Force start or stop are only necessary if starting the process is needed to

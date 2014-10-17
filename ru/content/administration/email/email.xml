@@ -68,13 +68,14 @@ PostMaster" на странице администрирования.
 </para>
 
 <para>
-If a new mail account is to be created (see Figure below), then its mail
-server name, login name and password must be specified. Also, you need to
-select the mail server type, which can be POP3, POP3S, IMAP or IMAPS. If you
-don't see your server type available as an option, the required Perl modules
-are missing on your system. In that case, please refer to <link
-linkend="installation-of-perl-modules"> "Installation of Perl modules
-required for OTRS"</link> for instructions.</para>
+Если создан новый почтовый аккаунт/ящик (см. нижеприведенный сценарий), то
+нужно еще указать имя его почтового сервера, логин и пароль. Также,
+необходимо выбрать тип почтового сервера: POP3, POP3S, IMAP или IMAPS. Если
+в опциях не видно типа сервера, который нужно использовать, значит вы не
+установили в системе все необходимые Perl-модули. В таком случае, за более
+подробной информацией обратитесь к инструкции <link
+linkend="installation-of-perl-modules"> "Установка Perl-модулей, необходимых
+для работы OTRS"</link>.</para>
 
 <para>
 <screenshot>
@@ -99,20 +100,20 @@ linkend="table-of-x-otrs-headers">этой таблице</link>. Любые с�
 </para>
 
 <para>
-The distribution of incoming messages can be controlled if they need to be
-sorted by queue or by the content of the "To:" field. For the Dispatching
-field, if "Dispatching by selected queue" is selected, all incoming messages
-will be sorted into the specified queue. The address where the mail was sent
-to is disregarded in this case. If "Dispatching by email To: field" is
-selected, the system checks if a queue is linked with the address in the To:
-field of the incoming mail. You can link an address to a queue in the <link
-linkend="adminarea-emailaddresses">E-mail address management</link> section
-of the Admin page. If the address in the To: field is linked with a queue,
-the new message will be sorted into the linked queue. If no link is found
-between the address in the To: field and any queue, then the message flows
-into the "Raw" queue in the system, which is the <link
-linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>
-after a default installation.
+Можно контролировать распределением входящих сообщений, если они должны
+сортироваться по очередям или содержимому поля "Кому". Если для
+Диспетчеризации выбрана опция "Диспетчеризация по выбранной очереди", то все
+входящие сообщения будут отсортированы в указанной очереди. В таком случае
+адрес, с которого отправили сообщение не учитывается. Если для
+диспетчеризации выбрана опция "Диспетчеризация писем по полю Кому", система
+для входящих писем проверяет, связана ли эта очередь с адресом электронной
+почты в поле Кому. Перейдя по ссылке <link
+linkend="adminarea-emailaddresses">Управление E-mail-адресами</link> в
+Панели Администрирования, можно связать определенный адрес с очередью. Если
+не найдено никакой связи между адресом в поле "Кому" то сообщение будет
+сохранятся в системе в очереди "Raw" , которая задана в <link
+linkend="Ticket:Core::PostMaster:PostmasterDefaultQueue">
+PostmasterDefaultQueue </link> по умолчанию после установки системы.
 </para>
 
 <para>
@@ -374,15 +375,15 @@ it will update this ticket, otherwise it will create a new ticket with the
 external reference number in the separate field.
 </para>
 <para>
-    OTRS SysConfig already provide 4 different settings to setup different
-external ticket numbers.  If more settings are needed they need to need to
-be added manually. The following example can be used in
-<filename>Kernel/Config.pm</filename> to extend SysConfig settings.
+    OTRS SysConfig предлагает 4 разных варианта настройки внешних номеров
+заявки. Если требуются другие варианты, они должны быть добавлены
+вручную. Следующий пример может быть использован  для расширения имеющихся
+настроек в <filename>Kernel/Config.pm</filename>.
 </para>
 
 <example id='filter-module-externalticketrecognition-example'>
     <title>
-        Example job for the filter module
+        Пример задания для модуля фильтрации
 Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition
     </title>
 
@@ -409,50 +410,53 @@ Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition
     <listitem>
         <para>FromAddressRegExp</para>
         <para>
-            This is an optional setting. Only mails matching this "From:" address will
-be considered for this filter. You can adjust this setting to the sender
-address your external system uses for outgoing mails. In case this address
-can differ, you can set this option to empty. OTRS will in that case not
-check the sender address.
+            Это настройка необязательна. Только писма с заданным значением поля "From:"
+будут рассмотрены этим фильтром. Вы можете изменить эту настройку  на адрес
+отправителя вашей внешней системы, используемой для исходящей почты. В
+случае, если адреса различны, вы можете оставить этот параметр пустым. Тогда
+OTRS не будет проверять адрес отправителя.
         </para>
     </listitem>
     <listitem>
         <para>NumberRegExp</para>
         <para>
-            This is a mandatory setting. This setting contains the regular expression
-OTRS will use to extract the ticket number out of the subject and/or ticket
-body. The default regular expression will match occurrences of for example
-'Incident-12354' and will put the part between parentheses in the dynamic
-field field, in this case '12354'.
+            Этщт параметр обязателен. Он содержит регулярное выражение, которое OTRS
+будет использовать для извлечения номера заявки из темы и/или тела
+письма. Выражение по умолчанию будет проверять соответствие, например,
+'Incident-12354' и помещать часть значения между скобками в динамическое
+поле, в данном случае '12354'.
         </para>
     </listitem>
     <listitem>
         <para>SearchInSubject</para>
-        <para>If this is set to '1', the email subject is searched for a ticket number.</para>
+        <para>Если установлено в '1', в поле Тема письма будет осуществляться поиск номера
+заявки.</para>
     </listitem>
     <listitem>
         <para>SearchInBody</para>
-        <para>If this is set to '1', the email body is searched for a ticket number.</para>
+        <para>Если установлено в '1', поиск номера заявки будет осуществляться в тексте
+письма.</para>
     </listitem>
     <listitem>
         <para>TicketStateTypes</para>
         <para>
-            This is an optional setting. If given, it will search OTRS only for open
-external tickets of given state types. The state types are separated with
-semicolons.
+            Это необязательный параметр. Если задан, OTRS будет искать отерытые внешние
+заявки с заданными типами состояний. Типы состояний в списке разделяются
+точкой с запятой.
         </para>
     </listitem>
     <listitem>
         <para>DynamicField</para>
         <para>
-            This is a required setting. It defines the dynamic filed that is used to
-store the external number (the field name must exist in the system and has
-to be valid).
+            Обязательный параметр. Задает динамическое поле, используемое для хранения
+внешнего номера заявки (имя поля должно существовать в системе и быть
+действительным).
         </para>
     </listitem>
     <listitem>
         <para>SenderType</para>
-        <para>This defines the sender type used for the articles created in OTRS.</para>
+        <para>Этот параметр задает тип отправителя и используется при создании
+сообщений/заметок в OTRS.</para>
     </listitem>
 </itemizedlist>
 

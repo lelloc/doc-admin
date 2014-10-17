@@ -8,13 +8,14 @@
 <title>Einführung</title>
 
 <para>
-    From OTRS 2.0 on, Access Control Lists (ACLs) can be used to control access
-to tickets, modules, queues, etc., or to influence actions on tickets
-(closing, moving, etc.) in certain situations.  ACLs can be used to
-supplement the existing permission system of <link
-linkend="adminarea-roles">roles</link> and <link
-linkend="adminarea-groups">groups</link>. Using ACLs, rudimental workflows
-within the system can be mapped, based on ticket attributes.
+    Seit OTRS 2.0 können Access Control Lists (ACLs) verwendet werden, um den
+Zugriff auf Tickets, Module, Queues, usw. zu steuern bzw. um in bestimmten
+Situationen Aktionen auf Tickets (schließen, verschieben, usw.) zu
+beeinflussen. ACLs können als Ergänzung zum bestehenden Berechtigungssystem
+der <link linkend="adminarea-roles">Rollen</link> und <link
+linkend="adminarea-groups">Gruppen</link> verwendet werden. Mit ACLs lassen
+sich, basierend auf Ticket-Attributen, rudimentäre Workflows innerhalb des
+Systems abbilden.
 </para>
 
 <para>
@@ -28,7 +29,7 @@ settings.
 </section>
 
 <section>
-<title>Examples</title>
+<title>Beispiele</title>
 
 <para>
 <example id="acl-move">
@@ -58,21 +59,21 @@ ticket screen.
 <programlisting>
 # ticket acl
 $Self->{TicketAcl}->{'100-Example-ACL'} = {
-    # match properties
-    Properties => {
-        # current ticket match properties
-        Ticket => {
-            Queue => ['Raw'],
-            Priority => ['5 very high'],
-        }
-    },
-    # return possible options (white list)
-    Possible => {
-        # possible ticket options (white list)
-        Ticket => {
-            Queue => ['Alert'],
-        },
-    },
+# match properties
+Properties => {
+# current ticket match properties
+Ticket => {
+Queue => ['Raw'],
+Priority => ['5 very high'],
+}
+},
+# return possible options (white list)
+Possible => {
+# possible ticket options (white list)
+Ticket => {
+Queue => ['Alert'],
+},
+},
 };
 </programlisting></example>
 </para>
@@ -94,21 +95,21 @@ before the ticket is really updated in the database.
 <programlisting>
 # ticket acl
 $Self->{TicketAcl}->{'100-Example-ACL'} = {
-    # match properties
-    PropertiesDatabase => {
-        # current ticket match properties
-        Ticket => {
-            Queue => ['Raw'],
-            Priority => ['5 very high'],
-        }
-    },
-    # return possible options (white list)
-    Possible => {
-        # possible ticket options (white list)
-        Ticket => {
-            Queue => ['Alert'],
-        },
-    },
+# match properties
+PropertiesDatabase => {
+# current ticket match properties
+Ticket => {
+Queue => ['Raw'],
+Priority => ['5 very high'],
+}
+},
+# return possible options (white list)
+Possible => {
+# possible ticket options (white list)
+Ticket => {
+Queue => ['Alert'],
+},
+},
 };
 </programlisting></example>
 </para>
@@ -174,7 +175,7 @@ $Self->{TicketAcl}->{'101-Second-Example-ACL'} = {
 
 <para>
 <example id="acl-state" >
-<title>ACL removing always state closed successful.</title>
+<title>ACL entfernt immer den Status Erfolgreich geschlossen</title>
 
 <para>
     This example shows how it is possible to define negative filters (the state
@@ -234,11 +235,11 @@ $Self->{TicketAcl}->{'Only-Hardware-Services-for-HW-Queues'} = {
 </section>
 
 <section id="acl-reference">
-<title>Reference</title>
+<title>Referenz</title>
 
 <para>
-    In the example below there is a list of all parameters which can be used for
-ACLs.
+    In dem angehängten Beispiel finden Sie eine Liste aller Parameter, welche
+für ACLs verwendet werden können.
 </para>
 <para>
     Please see the <link linkend="process-management-acl">section on ACLs</link>
@@ -249,7 +250,7 @@ tickets.
 
 <para>
 <example>
-<title>Reference showing all possible important ACL settings.</title>
+<title>Die Liste zeigt alle möglichen und wichtigen ACL-Einstellungen</title>
 <programlisting>
 # ticket acl
 $Self->{TicketAcl}->{'200-ACL-Reference'} = {

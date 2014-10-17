@@ -3,7 +3,7 @@
 
 
 <section id="genericinterface-connectors">
-    <title>Connectors</title>
+    <title>Verbinder</title>
     <para>
         A Connector is in essence a set of actions that are either called Operations
 if OTRS acts as a web service provider or Invokers if OTRS acts as a web
@@ -35,7 +35,7 @@ used.
         <itemizedlist>
             <listitem>
                 <para>
-                    Session
+                    Sitzung
                 </para>
             </listitem>
             <listitem>
@@ -46,18 +46,18 @@ used.
         </itemizedlist>
 
         <section id="generic-session-connector">
-            <title>Session Connector</title>
+            <title>Session-Connector</title>
             <para>
                 This connector is capable to create a valid SessionID that can be used in
 any other operation.
             </para>
             <itemizedlist>
                 <para>
-                    Provides:
+                    Liefert:
                 </para>
                 <listitem>
                     <para>
-                        Operations:
+                        Operationen:
                     </para>
                     <itemizedlist>
                         <listitem>
@@ -69,7 +69,7 @@ any other operation.
                 </listitem>
             </itemizedlist>
             <section id="generic-session-connector-operations">
-                <title>Operations</title>
+                <title>Operationen</title>
                 <section id="generic-session-connector-operations-sessioncreate">
                     <title>SessionCreate</title>
                     <para>
@@ -84,7 +84,7 @@ the rest of the bundled operations are capable of accepting a valid
 SessionID as an authentication method.
                         </para>
                     </note>
-                    <para>Possible Attributes:</para>
+                    <para>Mögliche Attribute:</para>
                     <para>
                         <programlisting>
                             <![CDATA[
@@ -107,15 +107,16 @@ SessionID as an authentication method.
         <section id="generic-ticket-connector">
             <title>Ticket Connector</title>
             <para>
-                This connector supplies the basic functionality to interact with tickets
+                Dieser Connector liefert die Basisfunktionalität um mit Tickets zu
+interagieren.
             </para>
             <itemizedlist>
                 <para>
-                    Provides:
+                    Liefert:
                 </para>
                 <listitem>
                     <para>
-                        Operations:
+                        Operationen:
                     </para>
                     <itemizedlist>
                         <listitem>
@@ -142,7 +143,7 @@ SessionID as an authentication method.
                 </listitem>
             </itemizedlist>
             <section id="generic-ticket-connector-operations">
-                <title>Operations</title>
+                <title>Operationen</title>
                 <section id="generic-ticket-connector-operations-ticketcreate">
                     <title>TicketCreate</title>
                     <para>
@@ -150,7 +151,7 @@ SessionID as an authentication method.
 Article and can contain several attachments, all defined Dynamic Fields can
 be also set on TicketCreate operation.
                     </para>
-                    <para>Possible Attributes:</para>
+                    <para>Mögliche Attribute:</para>
                     <para>
                         <programlisting>
                             <![CDATA[
@@ -284,7 +285,7 @@ defined dynamic fields for the ticket and the new article.
                             It is not necessary to create a new article to modify a ticket attribute.
                         </para>
                     </note>
-                    <para>Possible Attributes:</para>
+                    <para>Mögliche Attribute:</para>
                     <para>
                         <programlisting>
                             <![CDATA[
@@ -420,7 +421,7 @@ defined dynamic fields for the ticket and the new article.
 dynamic fields, all articles and all of the attachments that belong to the
 ticket.
                     </para>
-                    <para>Possible Attributes:</para>
+                    <para>Mögliche Attribute:</para>
                     <para>
                         <programlisting>
                             <![CDATA[
@@ -461,182 +462,353 @@ ticket.
                         TicketSearch operation returns a list of Ticket IDs that matches a
 predefined criteria.
                     </para>
-                    <para>Possible Attributes:</para>
+                    <para>Mögliche Attribute:</para>
                     <para>
                         <programlisting>
                             <![CDATA[
-      <TicketSearch>
-         <!--You have a MANDATORY CHOICE of the next 3 items at this level-->
-         <!--Optional:-->
-         <UserLogin>?</UserLogin>
-         <!--Optional:-->
-         <CustomerUserLogin>?</CustomerUserLogin>
-         <!--Optional:-->
-         <SessionID>?</SessionID>
-         <!--Optional:-->
-         <Password>?</Password>
-         <!--Optional:-->
-         <Limit>?</Limit>
-         <!--Zero or more repetitions:-->
-         <TicketNumber>?</TicketNumber>
-         <!--Zero or more repetitions:-->
-         <Title>?</Title>
-         <!--Zero or more repetitions:-->
-         <Queues>?</Queues>
-         <!--Zero or more repetitions:-->
-         <QueueIDs>?</QueueIDs>
-         <!--Optional:-->
-         <UseSubQueues>?</UseSubQueues>
-         <!--Zero or more repetitions:-->
-         <Types>?</Types>
-         <!--Zero or more repetitions:-->
-         <TypeIDs>?</TypeIDs>
-         <!--Zero or more repetitions:-->
-         <States>?</States>
-         <!--Zero or more repetitions:-->
-         <StateIDs>?</StateIDs>
-         <!--Zero or more repetitions:-->
-         <StateType>?</StateType>
-         <!--Zero or more repetitions:-->
-         <StateTypeIDs>?</StateTypeIDs>
-         <!--Zero or more repetitions:-->
-         <Priorities>?</Priorities>
-         <!--Zero or more repetitions:-->
-         <PriorityIDs>?</PriorityIDs>
-         <!--Zero or more repetitions:-->
-         <Services>?</Services>
-         <!--Zero or more repetitions:-->
-         <ServiceIDs>?</ServiceIDs>
-         <!--Zero or more repetitions:-->
-         <SLAs>?</SLAs>
-         <!--Zero or more repetitions:-->
-         <SLAIDs>?</SLAIDs>
-         <!--Zero or more repetitions:-->
-         <Locks>?</Locks>
-         <!--Zero or more repetitions:-->
-         <LockIDs>?</LockIDs>
-         <!--Zero or more repetitions:-->
-         <OwnerIDs>?</OwnerIDs>
-         <!--Zero or more repetitions:-->
-         <ResponsibleIDs>?</ResponsibleIDs>
-         <!--Zero or more repetitions:-->
-         <WatchUserIDs>?</WatchUserIDs>
-         <!--Zero or more repetitions:-->
-         <CustomerID>?</CustomerID>
-         <!--Zero or more repetitions:-->
-         <CustomerUserLogin>?</CustomerUserLogin>
-         <!--Zero or more repetitions:-->
-         <CreatedUserIDs>?</CreatedUserIDs>
-         <!--Zero or more repetitions:-->
-         <CreatedTypes>?</CreatedTypes>
-         <!--Zero or more repetitions:-->
-         <CreatedTypeIDs>?</CreatedTypeIDs>
-         <!--Zero or more repetitions:-->
-         <CreatedPriorities>?</CreatedPriorities>
-         <!--Zero or more repetitions:-->
-         <CreatedPriorityIDs>?</CreatedPriorityIDs>
-         <!--Zero or more repetitions:-->
-         <CreatedStates>?</CreatedStates>
-         <!--Zero or more repetitions:-->
-         <CreatedStateIDs>?</CreatedStateIDs>
-         <!--Zero or more repetitions:-->
-         <CreatedQueues>?</CreatedQueues>
-         <!--Zero or more repetitions:-->
-         <CreatedQueueIDs>?</CreatedQueueIDs>
-         <!--Zero or more repetitions:-->
-         <DynamicFields>
-            <!--You have a MANDATORY CHOICE of the next 6 items at this level-->
-            <!--Optional:-->
-            <Equals>?</Equals>
-            <!--Optional:-->
-            <Like>?</Like>
-            <!--Optional:-->
-            <GreaterThan>?</GreaterThan>
-            <!--Optional:-->
-            <GreaterThanEquals>?</GreaterThanEquals>
-            <!--Optional:-->
-            <SmallerThan>?</SmallerThan>
-            <!--Optional:-->
-            <SmallerThanEquals>?</SmallerThanEquals>
-         </DynamicFields>
-         <!--Optional:-->
-         <Ticketflag>
-            <!--Optional:-->
-            <Seen>?</Seen>
-         </Ticketflag>
-         <!--Optional:-->
-         <From>?</From>
-         <!--Optional:-->
-         <To>?</To>
-         <!--Optional:-->
-         <Cc>?</Cc>
-         <!--Optional:-->
-         <Subject>?</Subject>
-         <!--Optional:-->
-         <Body>?</Body>
-         <!--Optional:-->
-         <FullTextIndex>?</FullTextIndex>
-         <!--Optional:-->
-         <ContentSearch>?</ContentSearch>
-         <!--Optional:-->
-         <ConditionInline>?</ConditionInline>
-         <!--Optional:-->
-         <ArticleCreateTimeOlderMinutes>?</ArticleCreateTimeOlderMinutes>
-         <!--Optional:-->
-         <ArticleCreateTimeNewerMinutes>?</ArticleCreateTimeNewerMinutes>
-         <!--Optional:-->
-         <ArticleCreateTimeNewerDate>?</ArticleCreateTimeNewerDate>
-         <!--Optional:-->
-         <ArticleCreateTimeOlderDate>?</ArticleCreateTimeOlderDate>
-         <!--Optional:-->
-         <TicketCreateTimeOlderMinutes>?</TicketCreateTimeOlderMinutes>
-         <!--Optional:-->
-         <ATicketCreateTimeNewerMinutes>?</ATicketCreateTimeNewerMinutes>
-         <!--Optional:-->
-         <TicketCreateTimeNewerDate>?</TicketCreateTimeNewerDate>
-         <!--Optional:-->
-         <TicketCreateTimeOlderDate>?</TicketCreateTimeOlderDate>
-         <!--Optional:-->
-         <TicketChangeTimeOlderMinutes>?</TicketChangeTimeOlderMinutes>
-         <!--Optional:-->
-         <TicketChangeTimeNewerMinutes>?</TicketChangeTimeNewerMinutes>
-         <!--Optional:-->
-         <TicketChangeTimeNewerDate>?</TicketChangeTimeNewerDate>
-         <!--Optional:-->
-         <TicketChangeTimeOlderDate>?</TicketChangeTimeOlderDate>
-         <!--Optional:-->
-         <TicketCloseTimeOlderMinutes>?</TicketCloseTimeOlderMinutes>
-         <!--Optional:-->
-         <TicketCloseTimeNewerMinutes>?</TicketCloseTimeNewerMinutes>
-         <!--Optional:-->
-         <TicketCloseTimeNewerDate>?</TicketCloseTimeNewerDate>
-         <!--Optional:-->
-         <TicketCloseTimeOlderDate>?</TicketCloseTimeOlderDate>
-         <!--Optional:-->
-         <TicketPendingTimeOlderMinutes>?</TicketPendingTimeOlderMinutes>
-         <!--Optional:-->
-         <TicketPendingTimeNewerMinutes>?</TicketPendingTimeNewerMinutes>
-         <!--Optional:-->
-         <TicketPendingTimeNewerDate>?</TicketPendingTimeNewerDate>
-         <!--Optional:-->
-         <TicketPendingTimeOlderDate>?</TicketPendingTimeOlderDate>
-         <!--Optional:-->
-         <TicketEscalationTimeOlderMinutes>?</TicketEscalationTimeOlderMinutes>
-         <!--Optional:-->
-         <TTicketEscalationTimeNewerMinutes>?</TTicketEscalationTimeNewerMinutes>
-         <!--Optional:-->
-         <TicketEscalationTimeNewerDate>?</TicketEscalationTimeNewerDate>
-         <!--Optional:-->
-         <TicketEscalationTimeOlderDate>?</TicketEscalationTimeOlderDate>
-         <!--Optional:-->
-         <ArchiveFlags>?</ArchiveFlags>
-         <!--Zero or more repetitions:-->
-         <OrderBy>?</OrderBy>
-         <!--Zero or more repetitions:-->
-         <SortBy>?</SortBy>
-         <!--Zero or more repetitions:-->
-         <CustomerUserID>?</CustomerUserID>
-      </TicketSearch>
+<TicketSearch>
+
+<!--You have a MANDATORY CHOICE of the next 3 items at this level-->
+
+<!--Optional:-->
+
+<UserLogin>?</UserLogin>
+
+<!--Optional:-->
+
+<CustomerUserLogin>?</CustomerUserLogin>
+
+<!--Optional:-->
+
+<SessionID>?</SessionID>
+
+<!--Optional:-->
+
+<Password>?</Password>
+
+<!--Optional:-->
+
+<Limit>?</Limit>
+
+<!--Zero or more repetitions:-->
+
+<TicketNumber>?</TicketNumber>
+
+<!--Zero or more repetitions:-->
+
+<Title>?</Title>
+
+<!--Zero or more repetitions:-->
+
+<Queues>?</Queues>
+
+<!--Zero or more repetitions:-->
+
+<QueueIDs>?</QueueIDs>
+
+<!--Optional:-->
+
+<UseSubQueues>?</UseSubQueues>
+
+<!--Zero or more repetitions:-->
+
+<Types>?</Types>
+
+<!--Zero or more repetitions:-->
+
+<TypeIDs>?</TypeIDs>
+
+<!--Zero or more repetitions:-->
+
+<States>?</States>
+
+<!--Zero or more repetitions:-->
+
+<StateIDs>?</StateIDs>
+
+<!--Zero or more repetitions:-->
+
+<StateType>?</StateType>
+
+<!--Zero or more repetitions:-->
+
+<StateTypeIDs>?</StateTypeIDs>
+
+<!--Zero or more repetitions:-->
+
+<Priorities>?</Priorities>
+
+<!--Zero or more repetitions:-->
+
+<PriorityIDs>?</PriorityIDs>
+
+<!--Zero or more repetitions:-->
+
+<Services>?</Services>
+
+<!--Zero or more repetitions:-->
+
+<ServiceIDs>?</ServiceIDs>
+
+<!--Zero or more repetitions:-->
+
+<SLAs>?</SLAs>
+
+<!--Zero or more repetitions:-->
+
+<SLAIDs>?</SLAIDs>
+
+<!--Zero or more repetitions:-->
+
+<Locks>?</Locks>
+
+<!--Zero or more repetitions:-->
+
+<LockIDs>?</LockIDs>
+
+<!--Zero or more repetitions:-->
+
+<OwnerIDs>?</OwnerIDs>
+
+<!--Zero or more repetitions:-->
+
+<ResponsibleIDs>?</ResponsibleIDs>
+
+<!--Zero or more repetitions:-->
+
+<WatchUserIDs>?</WatchUserIDs>
+
+<!--Zero or more repetitions:-->
+
+<CustomerID>?</CustomerID>
+
+<!--Zero or more repetitions:-->
+
+<CustomerUserLogin>?</CustomerUserLogin>
+
+<!--Zero or more repetitions:-->
+
+<CreatedUserIDs>?</CreatedUserIDs>
+
+<!--Zero or more repetitions:-->
+
+<CreatedTypes>?</CreatedTypes>
+
+<!--Zero or more repetitions:-->
+
+<CreatedTypeIDs>?</CreatedTypeIDs>
+
+<!--Zero or more repetitions:-->
+
+<CreatedPriorities>?</CreatedPriorities>
+
+<!--Zero or more repetitions:-->
+
+<CreatedPriorityIDs>?</CreatedPriorityIDs>
+
+<!--Zero or more repetitions:-->
+
+<CreatedStates>?</CreatedStates>
+
+<!--Zero or more repetitions:-->
+
+<CreatedStateIDs>?</CreatedStateIDs>
+
+<!--Zero or more repetitions:-->
+
+<CreatedQueues>?</CreatedQueues>
+
+<!--Zero or more repetitions:-->
+
+<CreatedQueueIDs>?</CreatedQueueIDs>
+
+<!--Zero or more repetitions:-->
+
+<DynamicFields>
+
+<!--You have a MANDATORY CHOICE of the next 6 items at this level-->
+
+<!--Optional:-->
+
+<Equals>?</Equals>
+
+<!--Optional:-->
+
+<Like>?</Like>
+
+<!--Optional:-->
+
+<GreaterThan>?</GreaterThan>
+
+<!--Optional:-->
+
+<GreaterThanEquals>?</GreaterThanEquals>
+
+<!--Optional:-->
+
+<SmallerThan>?</SmallerThan>
+
+<!--Optional:-->
+
+<SmallerThanEquals>?</SmallerThanEquals>
+
+</DynamicFields>
+
+<!--Optional:-->
+
+<Ticketflag>
+
+<!--Optional:-->
+
+<Seen>?</Seen>
+
+</Ticketflag>
+
+<!--Optional:-->
+
+<From>?</From>
+
+<!--Optional:-->
+
+<To>?</To>
+
+<!--Optional:-->
+
+<Cc>?</Cc>
+
+<!--Optional:-->
+
+<Subject>?</Subject>
+
+<!--Optional:-->
+
+<Body>?</Body>
+
+<!--Optional:-->
+
+<FullTextIndex>?</FullTextIndex>
+
+<!--Optional:-->
+
+<ContentSearch>?</ContentSearch>
+
+<!--Optional:-->
+
+<ConditionInline>?</ConditionInline>
+
+<!--Optional:-->
+
+<ArticleCreateTimeOlderMinutes>?</ArticleCreateTimeOlderMinutes>
+
+<!--Optional:-->
+
+<ArticleCreateTimeNewerMinutes>?</ArticleCreateTimeNewerMinutes>
+
+<!--Optional:-->
+
+<ArticleCreateTimeNewerDate>?</ArticleCreateTimeNewerDate>
+
+<!--Optional:-->
+
+<ArticleCreateTimeOlderDate>?</ArticleCreateTimeOlderDate>
+
+<!--Optional:-->
+
+<TicketCreateTimeOlderMinutes>?</TicketCreateTimeOlderMinutes>
+
+<!--Optional:-->
+
+<ATicketCreateTimeNewerMinutes>?</ATicketCreateTimeNewerMinutes>
+
+<!--Optional:-->
+
+<TicketCreateTimeNewerDate>?</TicketCreateTimeNewerDate>
+
+<!--Optional:-->
+
+<TicketCreateTimeOlderDate>?</TicketCreateTimeOlderDate>
+
+<!--Optional:-->
+
+<TicketChangeTimeOlderMinutes>?</TicketChangeTimeOlderMinutes>
+
+<!--Optional:-->
+
+<TicketChangeTimeNewerMinutes>?</TicketChangeTimeNewerMinutes>
+
+<!--Optional:-->
+
+<TicketChangeTimeNewerDate>?</TicketChangeTimeNewerDate>
+
+<!--Optional:-->
+
+<TicketChangeTimeOlderDate>?</TicketChangeTimeOlderDate>
+
+<!--Optional:-->
+
+<TicketCloseTimeOlderMinutes>?</TicketCloseTimeOlderMinutes>
+
+<!--Optional:-->
+
+<TicketCloseTimeNewerMinutes>?</TicketCloseTimeNewerMinutes>
+
+<!--Optional:-->
+
+<TicketCloseTimeNewerDate>?</TicketCloseTimeNewerDate>
+
+<!--Optional:-->
+
+<TicketCloseTimeOlderDate>?</TicketCloseTimeOlderDate>
+
+<!--Optional:-->
+
+<TicketPendingTimeOlderMinutes>?</TicketPendingTimeOlderMinutes>
+
+<!--Optional:-->
+
+<TicketPendingTimeNewerMinutes>?</TicketPendingTimeNewerMinutes>
+
+<!--Optional:-->
+
+<TicketPendingTimeNewerDate>?</TicketPendingTimeNewerDate>
+
+<!--Optional:-->
+
+<TicketPendingTimeOlderDate>?</TicketPendingTimeOlderDate>
+
+<!--Optional:-->
+
+<TicketEscalationTimeOlderMinutes>?</TicketEscalationTimeOlderMinutes>
+
+<!--Optional:-->
+
+<TTicketEscalationTimeNewerMinutes>?</TTicketEscalationTimeNewerMinutes>
+
+<!--Optional:-->
+
+<TicketEscalationTimeNewerDate>?</TicketEscalationTimeNewerDate>
+
+<!--Optional:-->
+
+<TicketEscalationTimeOlderDate>?</TicketEscalationTimeOlderDate>
+
+<!--Optional:-->
+
+<ArchiveFlags>?</ArchiveFlags>
+
+<!--Zero or more repetitions:-->
+
+<OrderBy>?</OrderBy>
+
+<!--Zero or more repetitions:-->
+
+<SortBy>?</SortBy>
+
+<!--Zero or more repetitions:-->
+
+<CustomerUserID>?</CustomerUserID>
+
+</TicketSearch>
                             ]]>
                         </programlisting>
                     </para>
@@ -645,9 +817,9 @@ predefined criteria.
         </section>
     </section>
     <section id="Sgenericinterface-bundled-connectors-examples">
-        <title>Examples:</title>
+        <title>Beispiele:</title>
         <section>
-            <title>Web Service Configuration</title>
+            <title>Webservice Konfiguration</title>
             <para>
                 The following is a basic but complete web service configuration file in YAML
 format to use all the Ticket Connector operations. In order to use it in
@@ -662,46 +834,46 @@ the add screen.
                     <![CDATA[
 ---
 Debugger:
-  DebugThreshold: debug
-  TestMode: 0
+DebugThreshold: debug
+TestMode: 0
 Description: Ticket Connector Sample
 FrameworkVersion: 3.2.x CVS
 Provider:
-  Operation:
-    SessionCreate:
-      Description: Creates a Session
-      MappingInbound: {}
-      MappingOutbound: {}
-      Type: Session::SessionCreate
-    TicketCreate:
-      Description: Creates a Ticket
-      MappingInbound: {}
-      MappingOutbound: {}
-      Type: Ticket::TicketCreate
-    TicketUpdate:
-      Description: Updates a Ticket
-      MappingInbound: {}
-      MappingOutbound: {}
-      Type: Ticket::TicketUpdate
-    TicketGet:
-      Description: Retrieve Ticket data
-      MappingInbound: {}
-      MappingOutbound: {}
-      Type: Ticket::TicketGet
-    TicketSearch:
-      Description: Search for Tickets
-      MappingInbound: {}
-      MappingOutbound: {}
-      Type: Ticket::TicketSearch
-  Transport:
-    Config:
-      MaxLength: 100000000
-      NameSpace: http://www.otrs.org/TicketConnector/
-    Type: HTTP::SOAP
+Operation:
+SessionCreate:
+Description: Creates a Session
+MappingInbound: {}
+MappingOutbound: {}
+Type: Session::SessionCreate
+TicketCreate:
+Description: Creates a Ticket
+MappingInbound: {}
+MappingOutbound: {}
+Type: Ticket::TicketCreate
+TicketUpdate:
+Description: Updates a Ticket
+MappingInbound: {}
+MappingOutbound: {}
+Type: Ticket::TicketUpdate
+TicketGet:
+Description: Retrieve Ticket data
+MappingInbound: {}
+MappingOutbound: {}
+Type: Ticket::TicketGet
+TicketSearch:
+Description: Search for Tickets
+MappingInbound: {}
+MappingOutbound: {}
+Type: Ticket::TicketSearch
+Transport:
+Config:
+MaxLength: 100000000
+NameSpace: http://www.otrs.org/TicketConnector/
+Type: HTTP::SOAP
 RemoteSystem: ''
 Requester:
-  Transport:
-    Type: ''
+Transport:
+Type: ''
                     ]]>
                 </programlisting>
             </para>

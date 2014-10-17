@@ -105,8 +105,7 @@ auf einer separaten Testmaschine.
 shell&gt; cd /opt
 shell&gt; mv otrs otrs-old
 shell&gt; tar -xzf otrs-x.x.x.tar.gz
-shell&gt; mv otrs-x.x.x otrs
-                </screen>
+shell&gt; mv otrs-x.x.x otrs</screen>
             </para>
             <para>
                 Wiederherstellen alter Konfiguration Dateien
@@ -172,8 +171,7 @@ OTRS_HOME=/opt/otrs).
         <para>
             wenn der Tarball benutzt wird, führen Sie <screen>
 shell&gt; cd /opt/otrs/
-shell&gt; bin/otrs.SetPermissions.pl
-            </screen> aus, um die Berechtigungen zu setzen, die für Ihr System benötigt
+shell&gt; bin/otrs.SetPermissions.pl</screen> aus, um die Berechtigungen zu setzen, die für Ihr System benötigt
 werden.
         </para>
       </listitem>
@@ -189,7 +187,7 @@ shell&gt; /opt/otrs/bin/otrs.CheckModules.pl</screen>
       </listitem>
       <listitem>
         <para>
-            Schema update:
+            Schema aktualisieren:
         </para>
         <para>
              Note: new tables created in the MySQL UPGRADING process will be created with
@@ -226,16 +224,14 @@ shell&gt; cat scripts/DBUpdate-to-3.3.postgresql_before_8_2.sql | psql --set ON_
             Note: If you use PostgreSQL 8.1 or earlier, you need to activate the new
 legacy driver for these older versions. Do this by adding a new line to your
 <filename>Kernel/Config.pm</filename> like this: <screen>
-$Self->{DatabasePostgresqlBefore82} = 1;
-            </screen>
+$Self->{DatabasePostgresqlBefore82} = 1;</screen>
         </para>
         <para>
             Führen Sie das Migrationsskript aus (als OTRS-Benutzer, nicht als root!):
         </para>
         <para>
             <screen>
-shell&gt; scripts/DBUpdate-to-3.3.pl
-            </screen> Do not continue the upgrading process if
+shell&gt; scripts/DBUpdate-to-3.3.pl</screen> Do not continue the upgrading process if
 this script does not work properly for you.  Otherwise data loss may occur.
         </para>
       </listitem>
@@ -316,7 +312,7 @@ this feature and configure the mapping in the setting
        </listitem>
        <listitem>
         <para>
-            Import your ACLs to the new ACL editor (optional)
+            Importieren Sie ihre ACLs in den neuen ACL-Editor (optional)
         </para>
         <para>
             In OTRS 3.3, there is a graphical editor for ACLs in the administration
@@ -331,7 +327,7 @@ system.
       </listitem>
       <listitem>
         <para>
-            Update your web server configuration
+            Aktualisieren der Webserver-Konfiguration
         </para>
         <para>
             Note: this applies only if you use the Apache web server, and do not use the
@@ -346,7 +342,7 @@ several changes (see
       </listitem>
       <listitem>
         <para>
-            Update and activate cronjobs
+            Aktualisieren und Aktivieren der Cronjobs
         </para>
         <para>
             There are several OTRS default cronjobs in $OTRS_HOME/var/cron/*.dist.  They

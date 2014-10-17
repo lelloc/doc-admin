@@ -9,10 +9,11 @@
 <title>Подготовка к установке из исходных кодов</title>
 
 <para>
-If you want to install OTRS from source, first download the source archive
-as .tar.gz, .tar.bz2, or .zip file from <ulink
-url="http://www.otrs.com/try/">
-<citetitle>http://www.otrs.com/try/</citetitle> </ulink>
+Если вы решили устанавливать OTRS из исходных кодов, перейдите по ссылке
+<ulink url="http://www.otrs.com/try/">
+<citetitle>http://www.otrs.com/try/</citetitle> </ulink> и загрузите архив с
+исходными кодами в любом удобном для вас формате: .tar.gz, .tar.bz2, или
+.zip
 </para>
 
 <para>
@@ -36,12 +37,12 @@ linux:/opt#
 </para>
 
 <para>
-OTRS should NOT be run with root rights. Next you should add a new user for
-OTRS. The home directory of this new user should be
-<filename>/opt/otrs</filename>. If your web server is not running with the
-same user rights as the new 'otrs' user, which is the case on most systems,
-you will need to add the new 'otrs' user to the group of the web server user
-(see Script below).
+OTRS не должен выполнятся с правами администратора root. На следующем шаге
+настройки OTRS необходимо добавить нового пользователя. Домашняя директория
+нового пользователя должна находится в каталоге
+<filename>/opt/otrs</filename>. Если веб-сервер не работает с теми правами
+что и новый пользователь 'otrs', а именно так и есть в большинстве систем,
+то его нужно добавить в группу пользователей веб-сервера (см Сценарий ниже).
 </para>
 
 <para>
@@ -59,11 +60,12 @@ Debian/Ubuntu=www-data)
 </para>
 
 <para>
-Next, you have to copy some sample configuration files. The system will
-later use the copied files. The files are located in
-<filename>/opt/otrs/Kernel</filename> and
-<filename>/opt/otrs/Kernel/Config</filename> and have the suffix .dist (see
-Script below).
+Затем нужно скопировать некоторые конфигурационные файлы, точнее
+демонстрационные копии конфигурационных файлов, которые позже будут
+использоваться системой. Файлы находятся в каталоге
+<filename>/opt/otrs/Kernel</filename> и
+<filename>/opt/otrs/Kernel/Config</filename> и имеют расширение .dist
+(см. Сценарий ниже).
 </para>
 
 <para>
@@ -116,22 +118,23 @@ of the web server user</replaceable> </arg></cmdsynopsis>
 <title>Установка Perl-модулей</title>
 
 <para>
-OTRS requires some additional Perl modules, as described in Table 3-1. If
-you install OTRS from source, you will need to install these modules
-manually.  This can be done either with the package manager of your Linux
-distribution (<application>yast</application>,
-<application>apt-get</application>) or, as described in this section,
-through the Perl shell and CPAN. If you're using ActiveState Perl, for
-instance on Windows, you could use PPM, the built-in Perl Package Manager.
-We recommend using your package manager if possible.
+Исходя из Таблицы 3-1. для работы OTRS необходимо установить некоторые
+дополнительные модули Perl­. При установке OTRS из исходных кодов, эти
+модули придется установить вручную. Конечно же это намного проще сделать
+используя менеджер пакетов, который прилагается к вашему Linux-дистрибутиву
+(<application>yast</application>, <application>apt-get</application>) или,
+как описано в этом разделе, использовать оболочку Perl shell и CPAN. Если вы
+используете ActiveState Perl, например, на Windows, то можно использовать
+PPM, встроенный менеджер пакетов Perl/Perl Package Manager. Мы рекомендуем
+использовать менеджер пакетов, если это возможно.
 </para>
 
 <para>
-You can verify which modules you need to install with
-<command>otrs.CheckModules.pl</command>.  This script is located in the
-<filename>bin</filename> directory, in the home directory of the 'otrs' user
-(see Script below).  Please note that some modules are optional.
-<screen>
+Используйте команду <command>otrs.CheckModules.pl</command>, чтобы
+проверить, какие модули необходимо установить. Этот сценарий находится в
+директории <filename>bin</filename> домашнего каталогоа пользователя 'otrs'
+(см. Сценарий ниже).
+Некоторые модули необязательны. <screen>
 linux:~# cd /opt/otrs/bin/
 linux:/opt/otrs/bin# ./otrs.CheckModules.pl
    o CGI..............................ok (v3.60)
@@ -151,13 +154,14 @@ linux:/opt/otrs/bin# ./otrs.CheckModules.pl
 </para>
 
 <para>
-You should strive to install the missing modules from your Linux
-distribution's package management system. By doing so, the packages will be
-automatically updated when new versions are available or when security
-issues are found. Please refer to your distribution's documentation on how
-to install additional packages. If the (correct version of) the module is
-not available from the package repositories, you can also install from CPAN,
-the Comprehensive Perl Archive Network.
+Для установки недостающих модулей старайтесь использовать менеджер
+управления пакетами, входящий в дистрибутив Linux. Таким образом, в случае
+выхода обновлений или новых решений по обеспечению большей безопасности,
+пакеты будут обновлятся автоматически. Чтобы узнать как установить
+дополнительные пакеты обратитесь к документации, которая поставляется вместе
+с дистрибутивом вашей операционной системы. Если модуль (соответствующая
+версия) не доступен из репозитория пакетов, его всегда можно установить
+используя CPAN, Comprehensive Perl Archive Network.
 </para>
 
 <para>
@@ -199,35 +203,30 @@ linux:/opt/otrs#
 <section id="web-server-configuration">
 <title>Настройка веб-сервера Apache</title>
 
-<para>First of all, you should install the Apache2 web server and mod_perl; you'd
-typically do this from your systems package manager.  Below you'll find the
-commands needed to set up Apache on the most popular Linux distributions.
+<para>Сначала, вы должны установить веб-сервер Apache2 и mod_perl; это обычно
+делается с помощью системного менеджера пакетов. Ниже вы найдете команды,
+необходимые для установки Apache на наиболее распостраненные дистрибутивы
+Linux.
 </para>
 
 <para>
   <screen>
 
-    # rhel / centos:
-    linux:# yum install httpd mod_perl
-
-    # suse:
-    linux:# zypper install apache2-mod_perl
-
-    # debian/ubuntu:
-    linux:# apt-get install apache2 libapache2-mod-perl2
-
-  </screen>
+# rhel / centos: linux:# yum install httpd mod_perl # suse: linux:# zypper install apache2-mod_perl # debian/ubuntu: linux:# apt-get install apache2 libapache-mod-perl2 </screen>
 </para>
 
 <para>
-To access the web interface of OTRS via a short URL, Alias and ScriptAlias
-entries are needed. Most <application>Apache</application> installations
-have a <filename>conf.d</filename> directory included. On Linux systems you
-can usually find this directory under <filename>/etc/apache</filename> or
-<filename>/etc/apache2</filename>. Log in as root, change to the
-<filename>conf.d</filename> directory and copy the appropriate template in
-<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename> to a file
-called <filename>otrs.conf</filename> in the Apache configuration directory.
+Для простого и удобного доступа к веб-интерфейсу OTRS через короткий адрес,
+нужно использовать Alias и ScriptAlias. Большинство установок
+<application>Apache</application> имеют директорию
+<filename>conf.d</filename>. Очень часто в Linux-системах эта директория
+находится в <filename>/etc/apache</filename> или
+<filename>/etc/apache2</filename>. Войдите в систему с правами
+администратора, затем перейдите в директорию <filename>conf.d</filename> и
+скопируйте соответствующий шаблон конфигурационного файла
+<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename> в файл
+<filename>otrs.conf</filename>, который находится в каталоге настроек
+Apache.
 </para>
 
 <para>
@@ -260,13 +259,11 @@ linux:/etc/apache2/conf.d#
 <title>Установка базы данных OTRS вручную.</title>
 
 <para>
-The recommended way to configure the database is to run the <link
-linkend="web-installer">Web Installer</link>. If you can't use this for some
-reason, you can also configure the database manually, as described in this
-chapter.  If you can't use the web installer to setup the OTRS database, you
-have to set it up manually. Scripts with the SQL statements to create and
-configure the database are located in <filename>scripts/database</filename>,
-in the home directory of the 'otrs' user (see Script below).
+Если вы не можете воспользоваться веб-инсталлятором для установки базы
+данных OTRS, то ее нужно установить вручную, как описано в этой
+главе. Сценарий с SQL-инструкциями для создания и настройки базы данных
+находится в директории <filename>scripts/database</filename> домашенего
+каталога пользователя 'otrs' (см. Сценарий ниже).
 </para>
 
 <para>
@@ -317,13 +314,13 @@ linux:/opt/otrs/scripts/database#
 </listitem>
 <listitem>
 <para>
-Inserting the initial system data: OTRS needs some initial system data to
-work properly (e.g. the different ticket states, ticket and notification
-types). Depending on the type of database that you are using, you will need
-to use one of the following files:
+Установка исходных данных системы: Чтобы OTRS работал должным образом,
+необходимо установить некоторые исходные системные данные (например
+различные состояния заявок, типы заявок и уведомлений). В зависимости от
+типа выбраной вами базы данных используйте один из следующих файлов
 <filename>otrs-initial_insert.mysql.sql</filename>,
 <filename>otrs-initial_insert.oracle.sql</filename>,
-<filename>otrs-initial_insert.postgresql.sql</filename> or
+<filename>otrs-initial_insert.postgresql.sql</filename> или
 <filename>otrs-initial_insert.mssql.sql </filename>.
 </para>
 </listitem>
@@ -349,12 +346,11 @@ otrs-schema-post.DatabaseType.sql (например
 </para>
 
 <para>
-If your database and the access rights are configured properly, you have to
-tell OTRS which database back-end you want to use and how the ticket system
-can connect to the database. Open the file
-<filename>Kernel/Config.pm</filename> located in the home directory of the
-'otrs' user, and change the parameters shown in the script below according
-to your needs.
+Если база данных и права доступа настроены правильно, то на следующем этапе
+ее нужно подключить к OTRS. Откройте файл
+<filename>Kernel/Config.pm</filename>, находящийся в домашнем каталоге
+пользователя 'otrs' и измените параметры в соответствии с вашими
+требованиями так, как это показанно в Сценарии ниже.
 </para>
 
 <para>
@@ -398,8 +394,9 @@ crontab-файл пользователя 'otrs'.
 </para>
 
 <para>
-All scripts with the cron jobs are located in <filename>var/cron</filename>,
-in the home directory of the 'otrs' user (see Script below).
+Все сценарии с cron jobs находятся в директории
+<filename>var/cron</filename> домашнего каталога пользователя 'otrs'
+(см. Сценарий ниже).
 </para>
 
 <para>
@@ -420,9 +417,9 @@ linux:/opt/otrs/var/cron#
 </para>
 
 <para>
-These scripts have a suffix of '.dist'. You should copy them to files with
-the suffix removed. If you use bash, you might want to use the command
-listed in Script below.
+Эти сценарии имеют расширение '.dist'. Их нужно скопировать в
+соответствующие файлы без расширения. Если вы работаете в оболочке bash, то
+можете воспользоваться командой из Сценария ниже.
 </para>
 
 <para>
@@ -442,8 +439,8 @@ linux:/opt/otrs/var/cron#
 </para>
 
 <para>
-<emphasis>Script: Copying and renaming all the files needed to create the
-cron jobs.</emphasis>
+<emphasis> Сценарий: Копирование и переименование всех файлов, необходимых
+для создания заданий планировщика задач - cron jobs.</emphasis>
 </para>
 
 <para>
@@ -566,10 +563,11 @@ cron jobs.</emphasis>
 </para>
 
 <para>
-To setup all cron jobs, the script <filename>bin/Cron.sh</filename> located
-in the home directory of the 'otrs' user can be used. When this script is
-executed, it needs a parameter to specify whether you want to install,
-remove, or reinstall the cron jobs. The following parameters can be used:
+Чтобы настроить все задания cron jobs используйте скрипт
+<filename>bin/Cron.sh</filename>, который находится в домашнем каталоге
+пользователя 'otrs'. При запуске, скрипту нужно передать один из трех
+параметров, указывающий на выполняемое действие: создание, удаление,
+переустановка заданий. Допустимы следующие параметры:
 </para>
 
 <para>
@@ -582,10 +580,12 @@ remove, or reinstall the cron jobs. The following parameters can be used:
 </para>
 
 <para>
-Because the cron jobs need to be installed in the crontab file of the 'otrs'
-user, you need to be logged in as 'otrs'. If you are logged in as root, you
-can switch to 'otrs' with the command <command>su otrs</command>. Execute
-the commands specified in Script below to install the cron jobs.
+Поскольку задания планировщика cron jobs должны быть установлены в
+crontab-файле пользователя 'otrs', то нужно залогиниться как пользователь
+'otrs'. Если вы вошли в систему как суперпользователь, с правами
+администратора, и хотите изменить пользователя - используйте команду
+<command>su otrs</command>. Для установки заданий cron jobs выполните
+команды приведенные в Сценарии ниже.
 </para>
 
 <warning>
@@ -735,17 +735,16 @@ linux:/opt/otrs/bin#
 </section>
 <section id="installation-scheduler">
 
-    <title>OTRS Scheduler Service</title>
+    <title>Планировщик OTRS</title>
     <para>
-        OTRS comes with a scheduler service that is used to perform asynchronous
-tasks.
+        Планировщик это отдельный процесс OTRS выполняющий асинхронные задания
     </para>
     <para>
-        The OTRS RPMs will set up the Scheduler Service automatically.  If you
-install from source, you can install the service by copying the
-<filename>scripts/otrs-scheduler-linux</filename> file to
-<filename>/etc/init.d</filename> and giving it the appropriate permissions.
-This will make sure the scheduler service starts when the system starts up.
+        При установке из OTRS RPM сервис Планировщика устанавливается
+автоматически. При установке из исходных кодов, его можно установить
+копированием <filename>scripts/otrs-scheduler-linux</filename> файла в
+<filename>/etc/init.d</filename> и назначив соответствующие права. Это
+обеспечит запуск сервиса Планировщика при старте системы.
     </para>
 </section>
 

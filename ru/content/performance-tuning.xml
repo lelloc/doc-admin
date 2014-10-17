@@ -7,15 +7,16 @@
 
 <abstract>
 <para>
-Presented below is a list of performance enhancing techniques for your OTRS
-installation, including configuration, coding, memory use, and more.
+Ниже представлен перечень различных техник, которые можно использовать для
+получения максимально возможной производительности системы OTRS: настройка,
+кодирование, использование памяти и многое другое.
 </para>
 </abstract>
 
 <section id="performance-tuning-otrs">
 <title>OTRS</title>
 <para>
-There are several options for improving OTRS performance.
+Есть несколько возможных вариантов улучшения производительности OTRS.
 </para>
 
 <section id="performance-tuning-otrs-index">
@@ -67,8 +68,9 @@ Kernel::System::Ticket::IndexAccelerator::StaticDB - один из самых м
 
 <listitem>
 <para>
-Configure Kernel::System::Ticket::ArticleStorageDB (default) to store
-attachments, etc., in the database. Note: Don't use it with large set ups.
+Задайте Kernel::System::Ticket::ArticleStorageDB (по умолчанию) для хранения
+вложений, и т.д. в базе данных. Примечание: Не используйте его для систем с
+большим объемом данных.
 </para>
 <para>
 Pro: Если пользователь вашего веб-сервера не является пользователем 'otrs',
@@ -92,10 +94,11 @@ Configure Kernel::System::Ticket::ArticleStorageFS для хранения вл�
 Pro: Это быстро!
 </para>
 <para>
-Con: Your web server user should be the 'otrs' user. Also, if you have
-multiple front-end servers, you should make sure the filesystem is shared
-between the servers. Place it on an NFS share or preferably a SAN or similar
-solution.
+Противопоказания: Пользователь веб-сервера должен быть пользователем
+'otrs'. Кроме того, если у вас есть несколько серверов, нужно убедиться в
+том, что файловая система разделяется между этими серверами. Так что
+разместите его на общедоступный NFS-ресурс или предпочтительнее SAN, или
+аналогичные решения.
 </para>
 </listitem>
 
@@ -104,14 +107,15 @@ solution.
 </para>
 
 <para>
-    Note: you can switch from one back-end to the other on the fly. You can
-switch the backend in the SysConfig, and then run the command line utility
-<filename>otrs.ArticleStorageSwitch.pl</filename> to put the articles from
-the database onto the filesystem or the other way around. You can use the
-<emphasis>-s</emphasis> and <emphasis>-d</emphasis> options to specify the
-source and destination back-ends. Please note that the entire process can
-take considerable time to run, depending on the number of articles you have
-and the available CPU power and/or network capacity.
+    Примечание: можно переключаться с одного бэк-енда на другой "на
+лету". Бэк-энды можно переключить в SysConfig и затем запустить в командной
+строке утилиту <filename>otrs.ArticleStorageSwitch.pl</filename>, чтобы
+внести статьи из базы данных в файловую систему и наоборот. Можно
+использовать опциии <emphasis>-s</emphasis> и <emphasis>-d</emphasis> для
+указания источника и конечного бэк-эенда. Обратите внимание, что весь
+процесс может занять много времени, в зависимости от количества
+статей/сообщений/заметок, которые у вас есть и доступной мощности процессора
+и/или пропускной способности сети.
 </para>
 
 <para>
@@ -134,12 +138,12 @@ shell> bin/otrs.ArticleStorageSwitch.pl -s ArticleStorageDB -d ArticleStorageFS
 реализовали функцию архивирования заявок.
     </para>
     <para>
-        Tickets that match certain criteria can be marked as "archived" These
-tickets are not accessed if you do a regular ticket search or run a Generic
-Agent job. The system itself does not have to deal with a huge amount of
-tickets any longer as only the "latest" tickets are taken into consideration
-when using OTRS. This can result in a huge performance gain on large
-systems.
+        Заявки, которые удовлетворяют определенным критериям, могут быть отмечены
+как "архивированные". При обычном поиске заявок или при поиске заявок с
+помощью задания Generic Agent, они будут недоступны. Сама собой система не
+будет иметь дела с огромным количеством заявок, до тех пор, пока не
+понадобится обратиться к "очень старой" заявке. Это приводит к огромному
+приросту производительности на больших системах.
     </para>
     <para>
         Для использования функции архивации выполните следующие действия:
@@ -238,10 +242,12 @@ systems.
 <section id="performance-tuning-database-mysql">
 <title>MySQL</title>
 <para>
-If you use the MySQL table type MyISAM (which is the default), and have
-deleted a large part of a table or if you have made many changes to a table
-with variable-length rows (tables that have VARCHAR, BLOB or TEXT columns),
-you must defragment the datafile (tables) with the "optimize" command.
+Если для MySQL-таблиц используется MyISAM (а по умолчанию так и есть) и из
+таблицы была удалена большая часть данных, или же производилось множество
+действий над таблицей, которая содержит строки переменной длины (таблицы,
+которые содержат поля типов  VARCHAR, BLOB или TEXT), то нужно
+дефрагментировать файл (таблицу), или другими словами выполнить команду
+"оптимизировать".
 </para>
 <para>
 Нужно попытаться сделать это, если сервер mysqld использует много
@@ -267,9 +273,9 @@ mysql$ optimize table article;
 <section id="performance-tuning-database-postgresql">
 <title>PostgreSQL</title>
 <para>
-PostgreSQL is best tuned by modifying the postgresql.conf file in your
-PostgreSQL data directory. For advice on how to do this, reference the
-following articles:
+PostgreSQL лучше настраивается путем изменений в файле postgresql.conf
+который находится в директории с установленным PostgreSQL. За советом, как
+это сделать, обратитесь к следующим статьям:
 </para>
 
 <para>
@@ -339,22 +345,23 @@ url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ul
 <section id="performance-tuning-webserver-reload">
 <title>Перезагрузка Perl-модулей во время обновления с диска</title>
 <para>
-By default Apache::Reload is used in
-scripts/apache2-httpd.include.conf. Disable it and you will get 8% more
-speed. But remember to restart the web server if you install any modules via
-the OTRS Package Manager, or any values in your SysConfig or in
-Kernel/Config.pm. Important: this would also mean you can't use the OTRS
-Package Manager via the web interface, you need to use the command line
-variant - <filename>bin/otrs.PackageManager.pl</filename>.
+По умолчанию Apachee::Reload используется в
+scripts/apache2-httpd.include.conf. Отключив его вы получите больше 8%
+прироста скорости. Не забудьте перезапустить веб-сервер, если устанавливаете
+модули через OTRS Package Manager, или устанавливаете любые значения в
+SysConfig или в Kernel/Config.pm. Важно: это также будет означать, что у вас
+не будет возможности использовать OTRS Package Manager через
+пользовательский веб-интерфейс. В таком случае необходимо воспользоваться
+командной строкой - <filename>bin/otrs.PackageManager.pl</filename>.
 </para>
 </section>
 
 <section id="performance-tuning-webserver-strategy">
 <title>Выбор Правильной Стратегии</title>
 <para>
-If you have a larger installation, e.g. over 1,000 new tickets per day and
-over 40 agents, it is a good idea to read the chapters on Performance of the
-mod_perl User's Guide ( <ulink
+Если у вас действительно большая система, более 1 000 новых заявок в день и
+больше 40 агентов, то советуем почитать статью "Производительность"  в
+Руковдстве пользователя по mod_perl  (<ulink
 url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>
 ).
 </para>

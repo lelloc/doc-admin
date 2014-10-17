@@ -43,8 +43,8 @@ OTRS работает с различными атрибутами данных 
 </para>
 
 <para>
-Use the following SysConfig parameters if you want to display customer
-information in your agent interface.
+Используйте следующие параметры SysConfig, если желаете отобразить
+информацию о клиенте в интерфейсе агента.
 </para>
 
 <para>
@@ -226,8 +226,8 @@ file.</emphasis>
 </para>
 
 <para>
-It is also possible to edit all of this customer information via the
-Customers link in the Agent interface.
+Всю эту информацию о клиенте можно также отредактировать воспользовавшись
+ссылкой Клиенты в интерфейсе агента.
 </para>
 
 <section id='multi-customer-ids-db'>
@@ -677,28 +677,28 @@ $Self->{CustomerUser2} = {
 </section>
 
 <section id="dynamicfield-from-customeruser">
-    <title>Storing CustomerUser data in dynamic fields</title>
+    <title>Сохранение информации о клиенте в динамических полях</title>
     <para>
-        Sometimes it can be useful to also store CustomerUser data directly in
-dynamic fields of a ticket, for example to create special statistics on this
-data.
+        Иногда бывает полезным также сохранить данные клиента заявки непосредственно
+в динамических полях заявки, для создания некоторых отчетов по этим
+данным. Например, по заявкам компании, когда клиент в течение отчетного
+периода перешел в другую компанию того же провайдера услуг техподдержки.
     </para>
     <para>
-        The dynamic field values are set when a ticket is created or when the
-customer of a ticket is changed.  The values of the dynamic fields are taken
-from the customer data.  This works for all backends, but is especially
-useful for LDAP-backends.
+        Динамические поля заполняются при создании заявки или когда клиент заявки
+изменяется. Значения полей берутся из данных клиента. Это работает для всех
+бэкендов, но наиболее полезно для LDAP-бэкендов.
     </para>
     <para>
-        To activate this optional feature of OTRS, please activate the settings
-"Ticket::EventModulePost###930-DynamicFieldFromCustomerUser" and
-"DynamicFieldFromCustomerUser::Mapping". The latter setting contains the
-configuration of which CustomerUser field entry should be stored in which
-ticket dynamic field. The fields must be present in the system and should be
-enabled for AgentTicketFreeText, so that they can be set manually. They
-mustn't be enabled for AgentTicketPhone, AgentTicketEmail and
-AgentTicketCustomer. If they were, they would have precedence over the
-automatically set values.
+        Для включения этой опции OTRS, активируйте параметр
+"Ticket::EventModulePost###930-DynamicFieldFromCustomerUser" и
+"DynamicFieldFromCustomerUser::Mapping". Последний параметр содержит
+настройку, какие поля данных клиента должны сохраняться в каждом из
+динамических полей. Поля должны быть заранее созданы в системе и включены в
+AgentTicketFreeText, так чтобы они были доступны для ручного заполнения. Они
+должны быть недоступны для ввода в AgentTicketPhone, AgentTicketEmail и
+AgentTicketCustomer, во избежание перекрытия автоматическии установленных
+значений.
     </para>
 </section>
 
@@ -802,16 +802,18 @@ $Self->{'AuthModule::LDAP::Params'} = {
 </example>
 
 <para>
-The configuration parameters shown in the script below can be used to
-synchronize the user data from your LDAP directory into your local OTRS
-database. This reduces the number of requests to your LDAP server and speeds
-up the authentication with OTRS. The data synchronization is done when the
-agent authenticates the first time. Although the data can be syncronized
-into the local OTRS database, the LDAP directory is the last instance for
-the authentication, so an inactive user in the LDAP tree can't authenticate
-to OTRS, even when the account data is already stored in the OTRS
-database. The agent data in the LDAP directory can't be edited via the web
-interface of OTRS, so the data has to be managed directly in the LDAP tree.
+Параметры конфигурации приведенные в сценарии приведенном ниже могут быть
+использованы для синхронизации пользовательских данных из LDAP-каталога в
+локальную базу данных OTRS. Это уменьшает количество запросов к LDAP-серверу
+и ускоряет проверку подлинности в OTRS. Синхронизация данных завершена,
+когда агент аутентифицируется впервые. Несмотря на то, что данные могут быть
+синхронизированны в локальной базе данных OTRS, LDAP-каталог является
+последней инстанцией для проверки подлинности пользователей, таким образом
+пользователи, не активные для дерева каталогов LDAP не могут пройти
+аутентификацию в OTRS, даже в том случае, когда данные о пользователе уже
+хранятся в базе данных OTRS. Данные агентов в LDAP-директории не могут быть
+отредактированы с помощью веб-интерфейса OTRS, так что управление данными
+должно осуществлятся непосредственно в дереве каталогов LDAP.
 </para>
 
 <para>
@@ -1239,12 +1241,11 @@ customer_user.</emphasis>
 </para>
 
 <para>
-Now the new field for the room should be displayed in the Customer
-Information panel if filled, and in the Customer User administration
-screens. Also, new customers should have to insert their room number if they
-register a new account. If you use OTRS on Microsoft IIS, you should restart
-the web server to activate the changes made in
-<filename>Config.pm</filename>.
+Теперь новое поле для номера комнаты должно отображатся в  панели информации
+о клиенте и экранах управления клиентами. Когда новые клиенты будут
+регистрировать аккаунт, им нужно будет вписать номер комнаты. Если для
+работы OTRS используется Microsoft IIS, то чтобы новые изменения вступили в
+силу в <filename>Config.pm</filename> нужно перезапустить веб-сервер.
 </para>
 </section>
 

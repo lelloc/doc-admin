@@ -8,22 +8,25 @@
 <title>Введение</title>
 
 <para>
-    From OTRS 2.0 on, Access Control Lists (ACLs) can be used to control access
-to tickets, modules, queues, etc., or to influence actions on tickets
-(closing, moving, etc.) in certain situations.  ACLs can be used to
-supplement the existing permission system of <link
-linkend="adminarea-roles">roles</link> and <link
-linkend="adminarea-groups">groups</link>. Using ACLs, rudimental workflows
-within the system can be mapped, based on ticket attributes.
+    Начиная с OTRS 2.0 и выше, Списки Контроля Доступа (Access Control Lists -
+ACLs) могут быть использованы для управления доступом к заявкам, модулям,
+очередям и т.д или для влияния действия по заявке (закрытие, перемещение и
+т.д) в определенных ситуациях. Списки прав доступа (ACLs) могут быть
+использованы в дополнение к существующей системе прав доступа на основе
+<link linkend="adminarea-roles">ролей</link> и <link
+linkend="adminarea-groups">групп</link>. Можно использовать ACLs, для
+настройки элементарных потоков работ/workflows на основе атрибутов заявки.
 </para>
 
 <para>
-    As yet, ACLs cannot be created using the <link
-linkend="adminarea-sysconfig">SysConfig interface</link>.  They must be
-directly entered into the <filename>Kernel/Config.pm</filename> file.  This
-chapter has some ACL examples which will walk you trough the process of
-defining ACL definitions, and a reference of all possible important ACL
-settings.
+    Списки прав доступа ACL не могут быть созданы используя <link
+linkend="adminarea-sysconfig">Интерфейс SysConfig</link>, а должны быть
+напрямую введены в файл <filename>Kernel/Config.pm</filename>. В этой главе
+приведены примеры в которых можно пройти процесс создания ACL и описание
+всех доступных параметров ACL. ПРИМЕЧАНИЕ: В настоящее время в текущей
+версии OTRS процесс создания ACL изменен. Доступен редактор ACL
+автоматизирующий процесс их создания и синхронизации <link
+linkend="adminarea-sysconfig">SysConfig interface</link>.
 </para>
 </section>
 
@@ -42,13 +45,13 @@ settings.
 использовать тщательно.
 </para>
 <para>
-    Secondly, you have a "Properties" section which is a filter for your
-tickets. All the criteria defined here will be applied to a ticket to
-determine if the ACL must be applied or not.  In our example, a ticket will
-match if it is in the queue "Raw" and has priority "5 very high".  This is
-also affected by changes in the form (e.g. if the ticket is the queue "raw"
-and had a priority "3 normal", but then priority drop-down is selected and
-the priority is changed now to "5 very high" will also match).
+    Во-вторых, существует секция "Properties", которая фильтрует заявки. Все
+условия/критерии, заданные здесь, будут проверяться для определения, должен
+ли ACL быть применен к ним, или нет. В нашем примере, проверяется, находится
+ли заявка в очереди "Raw" и имеет ли приоритет "5 very high".  Это также
+применимо к форме изменения заявки (например, если заявка в очереди "raw" и
+имеет приоритет  "3 normal", но, затем, приоритет изменяется на  "5 very
+high" выбором из выпадающего списка, то условие также будет верно).
 </para>
 <para>
     Наконец, раздел "Возможные" определяет изменения экрана. В нашем случае из
@@ -81,15 +84,16 @@ $Self->{TicketAcl}->{'100-Example-ACL'} = {
 <para>
 <example id="acl-move2">
 <title>
-    ACL allowing movement into a queue of only those tickets with ticket
-priority 5 stored in the database.
+    ACL позволяют перемещать в другие очереди только заявки с приоритетом 5, уже
+имеющиеся в базе данных.
 </title>
 
 <para>
-    This example is very similar to the last one, but in this case only tickets
-in the queue "Raw" and with a priority "5 very high", both stored in the
-database will match. This kind of ACLs does not consider changes in the form
-before the ticket is really updated in the database.
+    Этот пример очень похож на предыдущий, но в этом случае только заявки в
+очереди "Raw" и с приоритетом "5 very high", уже имеющиеся в базе данных
+будут соответствовать критерию. Такой тип ACL не учитывает изменения в
+формах изменения заявки, до того как заявка будет действительно обновлена в
+базе данных.
 </para>
 
 <programlisting>
@@ -121,10 +125,10 @@ $Self->{TicketAcl}->{'100-Example-ACL'} = {
 скрывают кнопку "закрыть".</title>
 
 <para>
-    Here you can see how a ticket field (state) can be filtered with more than
-one possible value to select from. It is also possible to limit the actions
-that can be executed for a certain ticket. In this case, the ticket cannot
-be closed.
+    Здесь вы можете увидеть как поле заявки (состояние), может проверяться на
+более чем возможное для ввода значение. Можно также ограничить возможные
+действия, выполняемые над конкретной заявкой. В этом случае, заявка не может
+быть закрыта.
 </para>
 
 <programlisting>
@@ -175,15 +179,16 @@ $Self->{TicketAcl}->{'101-Second-Example-ACL'} = {
 
 <para>
 <example id="acl-state" >
-<title>ACL removing always state closed successful.</title>
+<title>ACL удаляет навсегда возможность установить состояние "closed successful".</title>
 
 <para>
-    This example shows how it is possible to define negative filters (the state
-"closed successful" will be removed). You can also see that not defining
-match properties for a ticket will match any ticket, i. e. the ACL will
-always be applied. This may be useful if you want to hide certain values by
-default, and only enable them in special circumstances (e. g. if the agent
-is in a specific group).
+    Этот пример показывает как можно использовать "негативные" фильтры
+(состояние "closed successful"  будет удалено из списков выбора). Вы также
+можете видеть, что не заданные условия для "properties" для заявки будет
+означать, что оно верно для всех заявок, т.е. ACL применяется всегда. Это
+может быть полезно, если вы желаете скрыть определенные значения по
+умолчанию и допустить ввод других значений только в заданных обстоятельствах
+(например, если агент принадлежит определенной группе).
 </para>
 
 <programlisting>
@@ -242,10 +247,9 @@ $Self->{TicketAcl}->{'Only-Hardware-Services-for-HW-Queues'} = {
 быть использованы для списка прав доступа (ACLs).
 </para>
 <para>
-    Please see the <link linkend="process-management-acl">section on ACLs</link>
-in the <link linkend="process-management">ProcessManagement</link>
-documentation for a detailed descripton of how to use ACLs for process
-tickets.
+    Читайте  <link linkend="process-management-acl"> раздел про ACL </link> в
+документации <link linkend="process-management">ProcessManagement</link> с
+детальным описанием использования ACL для процессных заявок.
 </para>
 
 <para>
