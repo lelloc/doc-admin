@@ -2,13 +2,13 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
     <section id="genericinterface_communication_flow">
-        <title>Generic Interface Communication Flow</title>
+        <title>Generic Interface Kommunikationsfluss</title>
         <para>
-            The Generic Interface has a defined flow to perform actions as a provider
-and as a requester.
+            Das Generic Interface hat einen definierten Fluss um Aktionen als Provider
+und Requester auszuführen.
         </para>
         <para>
-            These flows are described below:
+            Diese Flüsse sind wie folgt beschrieben:
         </para>
 
         <section>
@@ -31,25 +31,27 @@ weiter.
                             </listitem>
                             <listitem>
                                 <para>
-                                    The provider module is in charge to execute and control these actions.
+                                    Die Provider-Modul ist für die Ausführung und Kontrolle dieser Maßnahmen
+vorhanden.
                                 </para>
                             </listitem>
                         </itemizedlist>
                     </listitem>
                     <listitem>
                         <para>
-                            Network Transport
+                            Netzwerk-Transport
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    The network transport module decodes the data payload and separates the
-operation name from the rest of the data.
+                                    Das Netzwerktransportmodul dekodiert den Daten-Payload und trennt den
+Operationsnamen aus dem Rest der Daten.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    The operation name and the operation data are returned to the provider.
+                                    Der Operationsname und die Betriebsdaten werden an den Provider
+zurückgegeben
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -61,7 +63,8 @@ operation name from the rest of the data.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Data as sent from the remote system (This is not a module-based layer).
+                                    Daten die vom Remote-System gesendet wurden (Das ist kein Modulbasierter
+Layer).
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -73,14 +76,14 @@ operation name from the rest of the data.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    The data is transformed from the External System format to the OTRS internal
-format as specified in the mapping configuration for this operation (Mapping
-for incoming request data).
+                                    Die Daten wird aus dem Fremdsystem-Format in das interne OTRS Format, wie in
+der Mapping-Konfiguration für diesen Vorgang (Mapping für eingehende
+Anforderungsdaten) spezifiziert, umgewandelt.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    The already transformed data is returned to the provider.
+                                    Die bereits transformierten Daten werden an den Provider zurückgegeben.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -92,8 +95,8 @@ for incoming request data).
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Data as transformed and prepared to be passed to the operation (This is not
-a module based layer).
+                                    Sobald die Daten, transformiert und aufbereitet wurden, werden diese an die
+Operation weitergeleitet. (Das ist kein Modulbasierter Layer).
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -164,7 +167,7 @@ mapping configuration (Mapping for outgoing response data).
                             </listitem>
                             <listitem>
                                 <para>
-                                    The already transformed data is returned to the provider.
+                                    Die bereits transformierten Daten werden an den Provider zurückgegeben.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -184,12 +187,12 @@ response.
                     </listitem>
                     <listitem>
                         <para>
-                            Network Transport
+                            Netzwerk-Transport
                         </para>
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    Receives the data already in the Remote System format.
+                                    Empfängt die Daten im Format des Remote-Systems.
                                 </para>
                             </listitem>
                             <listitem>
@@ -228,13 +231,13 @@ response.
                     <orderedlist>
                         <listitem>
                             <para>
-                                Event Trigger Handler
+                                Event-Trigger-Steuerungsprogramm
                             </para>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Based on the web service configuration determines if the request will be
-synchronous or asynchronous.
+                                        Basierend auf der Konfiguration des Webservices wird entschieden ob der
+Request synchron oder asynchron ist.
                                     </para>
                                     <itemizedlist mark="round">
                                         <listitem>
@@ -349,7 +352,7 @@ mapping configuration (Mapping for outgoing response data).
                         </listitem>
                         <listitem>
                             <para>
-                                Network Transport
+                                Netzwerk-Transport
                             </para>
                                 <itemizedlist mark="round">
                                     <listitem>
@@ -360,12 +363,12 @@ Remote System format from the requester.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Constructs a valid request for the network transport.
+                                            Konstruiert eine gültige Anfrage für die Netzwerkübertragung.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Sends the request to the remote system and waits for the response
+                                            Sendet die Anfrage zum Remote-System und wartet auf eine Antwort
                                         </para>
                                     </listitem>
                                 </itemizedlist>
@@ -373,7 +376,7 @@ Remote System format from the requester.
                     </orderedlist>
                 </section>
                 <section>
-                    <title>Remote Response:</title>
+                    <title>Remote Antwort:</title>
                     <orderedlist>
                         <listitem>
                             <para>
@@ -382,12 +385,12 @@ Remote System format from the requester.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Receives the response and decodes the data payload.
+                                        Empfängt die Antwort und dekodiert den Daten-Payload.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Returns the data to the requester.
+                                        Sendet die Daten zurück zu dem Requester.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -399,7 +402,7 @@ Remote System format from the requester.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Data as received from the Remote System
+                                        Daten, die vom Remote-System empfangen wurden
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -411,9 +414,9 @@ Remote System format from the requester.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    The data is transformed from the External System format to the OTRS internal
-format as specified in the mapping configuration for this operation (Mapping
-for incoming response data).
+                                    Die Daten wird aus dem Fremdsystem-Format in das interne OTRS Format, wie in
+der Mapping-Konfiguration für diesen Vorgang (Mapping für eingehende
+Anforderungsdaten) spezifiziert, umgewandelt.
                                 </para>
                             </listitem>
                             <listitem>
@@ -430,7 +433,8 @@ for incoming response data).
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Data as transformed and ready to be passed back to the requester.
+                                    Sobald die Daten, transformiert und aufbereitet wurden, werden diese an die
+Requester zurückgeschickt.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -442,32 +446,32 @@ for incoming response data).
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Receives return data.
+                                    Empfängt die zurückgegebenen Daten.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Handles the data as needed specifically by each Invoker (included error
-handling if any).
+                                    Verarbeitet die Daten als speziell von jedem Invoker benötigt werden
+(inklusive Fehlerbehandlung falls vorhanden).
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Return the Invoker result and data to the Requester.
+                                    Gibt  das Ergebnis und die Daten des Invokers an den Requester.
                                 </para>
                             </listitem>
                         </itemizedlist>
                     </listitem>
                     <listitem>
                         <para>
-                            Event Handler or Scheduler
+                            Event-Steuerungsprogramm oder Scheduler
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Receives the data from the Requester, in the case of the Scheduler this data
-might contain information to Re-Schedule the task immediately or in the
-future.
+                                    Empfängt die Daten vom Requester, im Falle des Schedulers beinhalten die
+Daten Informationen darüber ob der Task sofort oder in der Zukunft wieder
+ausgeführt werden soll.
                                 </para>
                             </listitem>
                         </itemizedlist>

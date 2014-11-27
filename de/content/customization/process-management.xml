@@ -6,10 +6,11 @@
     <section>
         <title>Einführung</title>
         <para>
-            This feature of OTRS allows you to model processes (work-flows) in the
-ticket system.  The basic idea is to be able to define recurring processes,
-and to delegate work items to different people, as well as leading the
-progress of a process in different directions based on certain criteria.
+            Diese Funktion erlaubt Ihnen in OTRS Prozesse (Work-Flows) zu
+modellieren. Die grundlegende Idee ist wiederkehrende Prozesse zu definieren
+und die Arbeit an verschiedene Personen zu delegieren, genauso um den
+Prozess in verschiedene Richtungen, basierend auf bestimmten Kriterien, zu
+führen.
         </para>
     </section>
     <section>
@@ -67,9 +68,9 @@ werden.
     <section>
         <title>Implementierung des Beispiels</title>
         <para>
-            If we assume that a ticket acts in this work-flow like an accompanying
-document that can receive change notes, we already have a clear picture of
-process tickets.
+            Wenn wir davon ausgehen, dass sich ein Ticket in diesem Work-Flow wie ein
+Begleitdokument verhält, das Veränderungen als Notizen empfängt, dann haben
+wir schon ein klares Bild der Prozess-Tickets.
         </para>
         <para>
             Nach der Analyse des Beispielprozesses, konnten wir folgende nötigen
@@ -85,15 +86,15 @@ Elemente identifizieren:
                 </listitem>
                 <listitem>
                     <para>
-                        Checks which can react to changed data automatically, let's call them
-<emphasis>Transitions</emphasis>,
+                        Kontrollen, die automatisch auf geänderte Daten reagieren kann, nennen wir
+sie <emphasis>Übergänge</emphasis>,
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        changes which can be applied to a process ticket after successful
-transitions of a process ticket, let's call them <emphasis>Transition
-Actions</emphasis>.
+                        Änderungen, die sich auf ein Prozess-Ticket nach erfolgreichem Übergang
+eines Prozess-Ticket angewendet werden können, nennen wir sie
+<emphasis>Übergangsaktionen</emphasis>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -106,26 +107,27 @@ könnte:
             <itemizedlist>
                 <listitem>
                     <para>
-                        A possibility to offer more than just one Activity Dialog to be available.
-In our example this is needed when the manager must have the choice between
-"Approve" and "Deny". Let's call this <emphasis>Activity</emphasis>.
+                        Eine Möglichkeit mehr als nur einen Aktivitätsdialog zur Verfügung
+zustellen. In unserem Beispiel ist das erforderlich, wenn die Führungskraft
+zwischen "Genehmigen" und "Ablehnen" zu entscheiden hat. Nennen wir sie
+<emphasis>Aktivität </emphasis>.
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
         <para>
-            Now, with Activities, Activity Dialogs, Transitions and Transition Actions
-we have the necessary tools to model the individual steps of our
-example. What's still missing is an area where for each work-flow the order
-of the steps can be specified. Let's call this
-<emphasis>Process</emphasis>. To be able to refer to all these entities
-later, we will assign to them an abbreviation in parentheses. This
-abbreviation is based on an internal identification mechanism called
-EntityIDs.
+            Mit Aktivitäten, Aktivitätsdialogen, Übergängen und Übergangsaktionen haben
+wir die notwendigen Werkzeuge, um die einzelnen Schritte unseres Beispiels
+zu modellieren. Was ist noch fehlt, ist ein Bereich, wo für jeden
+Arbeitsablauf die Reihenfolge der Schritte festgelegt wird. Nennen wir
+diesen <emphasis>Prozess</emphasis>. Um uns auf all diese Personen später
+beziehen zu können, werden wir ihnen in Klammern eine Abkürzung
+zuweisen. Diese Abkürzungen basieren auf einem internen
+Identifikations-Mechanismus namens EntityIDs.
         </para>
         <para>
-            The EntityIDs are conformed with one or two letters (depending on the
-process part or entity) and then a consecutive number, examples:
+            Die EntityIDs werden mit einem oder zwei Buchstaben (je nach Prozessteil)
+und einer fortlaufenden Nummer gebildet, Beispiel:
             <itemizedlist>
                 <listitem><para>Prozess: 'P1', 'P2' ... 'Pn'.</para></listitem>
                 <listitem><para>Aktivität: 'A1', 'A2' ... 'An'.</para></listitem>
@@ -399,21 +401,23 @@ und "Wert" in den DynamicField-Einstellungen
             </itemizedlist>
         </para>
         <para>
-             Now lets start with the real Process Management stuff. In the next step, we
-will define the individual entities that we need.
+             Fangen wir mit dem realen Prozessmanagement an. Im nächsten Schritt werden
+wir die einzelnen Objekte, die wir benötigen, definieren.
         </para>
         <section>
             <title>Prozess (als ein Container)</title>
             <para>
-                To create a new process is necessary to click on the "Process Management"
-link in the System Administration box in the Admin panel, this will lead to
-the Process Management Overview screen. After the creation of the process we
-can create all other entities (or process parts).
+                Um einen neuen Prozess zu erstellen ist es notwendig auf den Link "Prozess
+Management" in der Systemverwaltungs-Box im Admin-Menü zu klicken,
+anschließend gelangen wir zur Prozessmanagement-Übersicht. Nachdem der
+Prozess erstellt wurden, können wir alle anderen Objekte (oder Prozessteile)
+erstellen.
             </para>
             <note>
                 <para>
-                    Activities, Activity Dialogs, Transitions and Transition Actions defined in
-one process will be available for all the processes in the system.
+                    Aktivitäten, Aktivitätsdialoge, Übergänge und Übergangsaktionen die in einem
+Prozess definiert wurden, sind ebenfalls für alle anderen Prozesse im System
+verfügbar.
                 </para>
             </note>
             <para>
@@ -439,9 +443,9 @@ fileref="screenshots/pm-newprocess-button.png"></graphic></screenshot>
                 <emphasis>Abbildung.: Neuen Prozess hinzufügen.</emphasis>
             </para>
             <para>
-                Fill the process information,set Process Name and the Description, we will
-leave the process State as "inactive", until we finish all the tasks. Save
-the process.
+                Füllen Sie die Prozessinformationen aus, definieren Sie einen Prozessname
+und die Beschreibung für diesen Prozess, wir belassen den Prozessstatus auf
+"inaktiv", bis wir alle Aufgaben erledigt haben. Speichern Sie den Vorgang.
             </para>
             <para>
                 <screenshot>
@@ -456,11 +460,11 @@ fileref="screenshots/pm-newprocess-info.png"></graphic></screenshot>
         <section>
             <title>Aktivitäts-Dialoge</title>
                 <para>
-                    Click on the new process name in the Process Management Overview Screen,
-then in the "Available Process Elements" click in "Activity Dialogs" (this
-action will expand the activity dialog options and will collapse all others
-doing and accordion like effect), then click on "Create New Activity
-Dialog".
+                    Klicken Sie auf den neuen Prozessnamen in der
+Prozessmanagement-Übersichtsbild, dann in den "verfügbaren Prozess
+Elementen" klicken Sie auf "Activity Dialoge" (diese Aktion wird die
+möglichen Dialogoptionen erweitern), anschließend klicken Sie auf "Neuen
+Aktivitätsdialog erstellen".
                 </para>
                 <para>
                     <screenshot>
@@ -526,16 +530,16 @@ fields in the lines below are the Dynamic Fields that we define before.
                     <listitem>
                         <para>"Aufnahme der Nachfrage" (AD1)</para>
                         <para>
-                            An Activity Dialog that contains all the required fields for the data to be
-collected for the order (Title, Author and ISBN), and a Status field with
-the possibility to choose "Approval".
+                            Ein Aktivitätsdialog, welcher alle erforderlichen Felder für die Daten der
+Bestellung enthält (Titel, Autor und ISBN) und ein Statusfeld mit der
+Möglichkeit "Approval" zu wählen.
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Genehmigung verweigert" (AD2)</para>
                         <para>
-                            An Activity Dialog with a comment field (Article) and a Status field with
-the option "Approval denied".
+                            Ein Aktivitätsdialog mit einem Kommentarfeld (Artikel) und einem Statusfeld
+mit der Möglichkeit "Approval denied".
                         </para>
                     </listitem>
                     <listitem>
@@ -547,30 +551,30 @@ the option "Approval denied".
                     <listitem>
                         <para>"Bestellung abgelehnt" (AD4)</para>
                         <para>
-                            An activity dialog which makes it possible for purchasing to reject an
-impossible order (book out of stock). Here we also need a comment field and
-the Status field with the option "Order denied".
+                            Ein Aktivitsdialog, welcher es ermöglicht eine unmögliche Bestellung
+abzulehnen (Buch ist nicht auf Lager). Hier wird ebenfalls ein Kommentarfeld
+und ein Statusfeld mit der Option "Order denied" benötigt.
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Bestellung aufgegeben" (AD5)</para>
                         <para>
-                            An activity dialog with the fields Supplier, Price and Delivery date for
-purchasing and the Status field with the option "Order placed".
+                            Ein Aktivitätsdialog mit den Feldern Lieferant, Preis und Lieferdatum und
+dem Statusfeld mit der Option "Bestellung abgegeben".
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Sendung empfangen" (AD6)</para>
                         <para>
-                            An activity for the mail room with a field for the Date of receipt and the
-Status field with the option "Shipment received".
+                            Eine Aktivität für die Poststelle mit einem Feld für das Empfangsdatum und
+dem Statusfeld mit der Option "Bestellung empfangen".
                         </para>
                     </listitem>
                 </itemizedlist>
                 </para>
                 <para>
-                    To restrict the Status field for each activity dialog we need to add some
-ACLs in the Kernel/Config.pm or to a new perl file located in
+                    Um das Statusfeld zu beschränken, benötigen wir für jeden Aktivitätsdialog
+mindestens eine ACL in Kernel/Config.pm oder in einer neuen Perl-Datei in
 Kernel/Config/Files.
                 </para>
                 <para>
@@ -671,10 +675,11 @@ fileref="screenshots/pm-accordion-new-transition.png"></graphic></screenshot>
                     <emphasis>Abbildung: Neuen Übergang hinzufügen.</emphasis>
                 </para>
                 <para>
-                    In the opened popup screen fill the "Transition Name", then in the
-conditions, for this examples we will use just one condition and just one
-field, for both we can leave the Type of Linking as "and" and we will use
-the filed match type value as "String".
+                    In dem öffnenden Popup füllen Sie bitte den "Übergangsnamen" aus,
+anschließend tragen Sie die benötigten Zustände ein. In diesem Beispiel
+werden wir nur einen Zustand und nur ein Feld benutzen. Für diese beiden
+lassen für den Linktyp auf "and" und wir werden den Match-Type-Wert als
+"String" nutzen.
                 </para>
                 <para>
                     <screenshot>
@@ -754,14 +759,15 @@ fileref="screenshots/pm-accordion-new-transitionaction.png"></graphic></screensh
                     <emphasis>Abbildung: Erstelle neue Übergangsaktion.</emphasis>
                 </para>
                 <para>
-                    In the opened popup screen fill the "Transition Name", and the "Transition
-Action module" then add the required and optional parameter names and
-values.
+                    In dem öffnenden Popup füllen Sie bitte den "Übergangsnamen" und das
+"Übergangsaktionsmodul" aus, dann tragen Sie die benötigten und optionalen
+Parameternamen und Werte ein.
                 </para>
                 <para>
-                    All the Transition Action Modules are located in
-Kernel/System/ProcessManagement/TransitionAction and the following is the
-list of bundled Transition Actions included in this release
+                    Alle Übergangsaktionsmodule befinden sich in
+Kernel/System/ProcessManagement/TransitionAction und die folgende Liste
+zeigt Ihnen alle Übergangsaktionen die mit diesem Release ausgeliefert
+werden
                 </para>
                 <para>
                     <itemizedlist>
@@ -780,9 +786,9 @@ list of bundled Transition Actions included in this release
                     </itemizedlist>
                 </para>
                 <para>
-                    Each module has its own and different parameters.  Please review the <link
-linkend="available-transition-actions">module documentation</link> to learn
-all require and optional parameters.
+                    Jedes Modul hat seine eigenen und verschiedenen Parameter. Eine Übersicht
+aller benötigten und optionalen Parameter finden Sie unter <link
+linkend="available-transition-actions">Moduldokumentation</link>.
                 </para>
                 <para>
                     <screenshot>
@@ -877,9 +883,9 @@ angewandt wurde.
                 </itemizedlist>
                 </para>
                 <para>
-                    As you can see, there are places where the same Transition Actions should be
-executed. Therefore it is reasonable to make it possible to link Transition
-Actions freely with Transitions to be able to reuse them.
+                    Wie Sie sehen, gibt es Orte an denen gleiche Übergangsaktionen ausgeführt
+werden sollen. Deshalb ist es sinnvoll Übergangsaktionen frei mit Übergängen
+zu verknüpfen, um sie wiederverwenden zu können.
                 </para>
         </section>
         <section>
@@ -2589,8 +2595,8 @@ Match => '1',
                 <section>
                     <title>StateID</title>
                     <para>
-                        Example of a field name. The following ticket fields can be used:
-<screen>
+                        Beispiel für einen Feldnamen. Die folgenden Ticketfelder können verwendet
+werden: <screen>
     Title
     State
     StateID
@@ -2618,33 +2624,33 @@ Match => '1',
                         </screen>
                     </para>
                     <para>
-                        When testing a field with 'ID' (like SLAID), the database ID of the field
-will be used for testing, for other fields (like SLA) the actual value is
-used for testing.
+                        Beim Testen eines Feldes mit "ID" (wie SLAID), wird die Datenbank-ID des
+Feldes für die Prüfung verwendet werden, für andere Bereiche (wie SLA) wird
+der Ist-Wert für den Test verwendet.
                     </para>
                 </section>
                 <section>
                     <title>Typ</title>
                     <para>
-                        Determines the kind of field testing. Possible values:
+                        Bestimmt die Art der Feldtests. Mögliche Werte:
 
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'String': Compares the field value with the string specified in
-'Match'. Matches if they are exactly the same.
+                                    'String': Vergleicht den Feldwert mit der in 'Match' angegebene
+Zeichenfolge. Stimmt überein, wenn sie genau gleich sind.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Hash': Compares the field value (hash) with the hash specified in
-'Match'. All hash values must be the same.
+                                    'Hash': Vergleicht den Feldwert (Hash) mit dem in 'Match' angegebenen
+Hash. Alle Hash-Werte müssen identisch sein.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Array': Compares the field value (array) with the array specified in
-'Match'. Both lists must be the same.
+                                    'Array': Vergleicht den Wert des Feldes (Array) mit dem in 'Match'
+angegebene Array. Beide Listen müssen gleich sein.
                                 </para>
                             </listitem>
                             <listitem>
@@ -2795,8 +2801,8 @@ TransitionAction.
                 <section>
                     <title>TicketArticleCreate</title>
                     <para>
-                        Creates an article and can be used to create notes or email
-replies. Example:
+                        Erzeugt einen Artikel und wird verwendet um Notizen oder E-Mail Antworten
+erzeugen. Beispiel:
                     </para>
                     <para>
                         <screen><![CDATA[
@@ -2860,20 +2866,20 @@ Agent, System, Customer.
                         'Body' definiert den Artikelinhalt. Verpflichtend
                     </para>
                     <para>
-                        HistoryType defines the type of the history entry. Possible values: AddNote,
-ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent, EmailCustomer,
-EscalationResponseTimeNotifyBefore, EscalationResponseTimeStart,
-EscalationResponseTimeStop, EscalationSolutionTimeNotifyBefore,
-EscalationSolutionTimeStart, EscalationSolutionTimeStop,
-EscalationUpdateTimeNotifyBefore, EscalationUpdateTimeStart,
-EscalationUpdateTimeStop, FollowUp, Forward, Lock, LoopProtection, Merged,
-Misc, Move, NewTicket, OwnerUpdate, PhoneCallAgent, PhoneCallCustomer,
-PriorityUpdate, Remove, ResponsibleUpdate, SendAgentNotification,
-SendAnswer, SendAutoFollowUp, SendAutoReject, SendAutoReply,
-SendCustomerNotification, ServiceUpdate, SetPendingTime, SLAUpdate,
-StateUpdate, Subscribe, SystemRequest, TicketDynamicFieldUpdate,
-TicketLinkAdd, TicketLinkDelete, TimeAccounting, TypeUpdate, Unlock,
-Unsubscribe, WebRequestCustomer.
+                        Der Historientyp definiert den Typ des Historieneintrages. Mögliche Werte
+sind: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
+EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
                         'HistoryContent' definiert den Inhalt von Historieneinträgen.
@@ -3319,12 +3325,13 @@ and 'AD3' in our example. Then 'PossibleNot' will be applied and filter out
 that the user can use.
                 </para>
                 <para>
-                    If multiple ACL rules match, the intersection of all matching rules will be
-calculated to determine the possible Activity Dialogs. Example:
+                    Wenn mehrere ACL-Regeln übereinstimmen, wird der Durchschnitt aller
+passenden Regeln berechnet um die möglichen Aktivitätsdialoge zu
+bestimmen. Beispiel:
                 </para>
                 <para>
-                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
-'AD7'.  <screen>
+                    Konfigurierte Aktivitätsdialoge: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
+'AD7'. <screen>
 $Self->{TicketAcl}->{'001-ACL-Status'} = {
     Properties => {
         Ticket => {
@@ -3358,23 +3365,24 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
                     </screen>
                 </para>
                 <para>
-                    If a process ticket has the state 'new', is in the 'Raw' queue and has a
-priority '3 normal', then all three ACL rules will match.
+                    Wenn ein Prozessticket den Zustand "Neu" hat, in der "Raw"-Queue ist und
+eine Priorität "3 normal" hat, dann werden alle drei ACL-Regeln angewendet
+werden.
                 </para>
                 <para>
-                    The first rule reduces the Activity Dialogs from 'AD1', 'AD2', 'AD3', 'AD4',
-'AD5', 'AD6', 'AD7' to 'AD1', 'AD2', 'AD3', 'AD6', 'AD7' and forbids 'AD4'
-and 'AD5'.
+                    Die erste Regel reduziert die Aktivitätsdialoge von 'AD1', 'AD2', 'AD3',
+'AD4', 'AD5', 'AD6', 'AD7' to 'AD1', 'AD2', 'AD3', 'AD6', 'AD7' und
+verbietet 'AD4' and 'AD5'.
                 </para>
                 <para>
-                    The second rule will now further reduce the remaining Activity Dialogs.  In
-our example, 'AD2', 'AD3', 'AD7' will remain.
+                    Die zweite Regel reduziert die verbleibende Aktivitätsdialoge weiter. In
+unserem Beispiel werden 'AD2', 'AD3', 'AD 7' bleiben.
                 </para>
                 <para>
-                    Now the third rule will further reduce the list by 'PossibleNot'.  'AD3' is
-removed from the list. 'AD4' is not removed, since it was not on the list in
-the first place. At the end, 'AD2' and 'AD7' remain as possible Activity
-Dialogs that the user can utilize.
+                    Nun wird die dritte Regel die Liste durch 'PossibleNot' weiter
+reduzieren. 'AD3' wird von der Liste entfernt. 'AD4' wird nicht entfernt, da
+er in der Liste nicht an erster Stelle steht. Am Ende bleiben 'AD2' und 'AD
+7' als mögliche Aktivitätsdialoge, die der Benutzer verwenden kann.
                 </para>
                 <para>
                     It is also possible to limit the processes that can be displayed in the "New

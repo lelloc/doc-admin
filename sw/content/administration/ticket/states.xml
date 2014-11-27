@@ -1,0 +1,398 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="states">
+<title>Hali za Tiketi</title>
+
+<section id="states-predefined">
+<title>Hali zilizofasiliwa kabla</title>
+
+<para>
+OTRS inakuruhusu kubadilisha hali ya tiketi iliyofafanuliwa tayari na aina
+zake, au hata kuongeza mpya. Sifa mbili ni muhimu kwa ajili ya hali: jina la
+hali na aina ya hali.
+</para>
+
+<para>
+Hali chaguo-msingi ya OTRS ni: 'imefungwa kwa mafanikio', 'imefungwa pasipo
+mafanikio', 'unganishwa', 'mpya', 'wazi', 'inasubiri kufunga otomatiki+',
+'inasubiri kufunga otomatiki-', 'inasumbiri kikumbusho' na 'ondolewa'.
+</para>
+
+<section id="state-new">
+<title>Mpya</title>
+<para>
+Tiketi huwa katika hali hii kama zimetengenezwa kutoka kwenye barua pepe
+zinazoingia.
+</para>
+</section>
+
+<section id="state-open">
+<title>Wazi</title>
+<para>
+Hii ndio chaguo-msingi la hali ya tiketi zilizo chini ya foleni na wakala.
+</para>
+</section>
+
+<section id="state-pending-reminder">
+<title>Kikumbusho kinachosubiri</title>
+<para>
+Baada ya muda wa kusubiri kuisha, mmiliki wa tiketi atapokea kikumbusho cha
+barua pepe kuhusu tiketi. Kama tiketi haijafungwa, kikumbusho kitatumwa kwa
+mawakala wote kwenye foleni. Tiketi za ukumbusho zitatumwa tu katika masaa
+ya biashara, na kurudia kutumwa kila masaa 24 mpaka hali ya tiketi
+itakapobadilishwa na wakala. Muda uliotumika na tiketi katika hali hii
+utajumlishwa kwenye  mahesabu ya muda wa kupanda.
+</para>
+</section>
+
+<section id="state-pending-autoclose-minus">
+<title>Funga otomatiki inasubiri-</title>
+<para>
+Tiketi katika hali hii zitasetiwa kuwa "Hazijafungwa Kikamilifu" kama muda
+wa kusubiri umeisha. Muda uliotumiwa na tiketi katika hali hii utaongezwa
+kwenye mahesabu ya muda wa kupanda.
+</para>
+</section>
+
+<section id="state-pending-autoclose-plus">
+<title>Funga otomatiki inasubiri+</title>
+<para>
+Tiketi katika hali hii zitasetiwa kuwa "Zimefungwa Kikamilifu" kama muda wa
+kusubiri umeisha. Muda uliotumiwa na tiketi katika hali hii utaongezwa
+kwenye mahesabu ya muda wa kupanda.
+</para>
+</section>
+
+<section id="state-merged">
+<title>Unganishwa</title>
+<para>
+Hii ni hali ya tiketi zilizounganishwa na tiketi nyingine.
+</para>
+</section>
+
+<section id="state-closed-successful">
+<title>Imafungwa kwa Mafanikio</title>
+<para>
+Hii ni hali ya mwisho kwa tiketi ambazo zimesuluhishwa kwa
+mafanikio. Kutegemeana na usanidi wako, unaweza au usiweze kufungua upya
+tiketi zilizofungwa.
+</para>
+</section>
+
+<section id="state-closed-unsuccessful">
+<title>Imefungwa Pasipo Mafanikio</title>
+<para>
+Hii ni hali ya mwisho kwa tiketi ambazo HAZIJASULUHISHWA kwa
+mafanikio. Kutegemeana na usanidi wako, unaweza au usiweze kufungua upya
+tiketi zilizofungwa.
+</para>
+</section>
+
+</section>
+
+<section id="states-customizing">
+<title>Kugeuza hali kukufaa</title>
+<para>
+Kila hali ina jina (jina-la-hali) na aina (aina-ya-hali). Bofya kwenye
+kiungo <link linkend="adminarea-status">Hali</link> katika kurasa ya
+Msimamizi na kubonyeza kitufe "Ongeza hali" kutengeneza hali mpya. Unaweza
+kuchagua kwa uhuru jina la hali mpya. Aina ya hali haiwezi kubadilishwa
+kupitia kiolesura cha wavuti. Hifadhidata inabidi ibadilishwe moja kwa moja
+kama utataka kuongeza aina mpya au kubadilisha majina yaliyopo. Aina
+chaguo-msingi la hali halitakiwi kubadilishwa kwa kuwa inaweza kutoa majibu
+yasiyotabirika. Kwa mfano, mahesabu ya upandaji na kipengele cha kufungua
+kwa kutegemea aina maalumu ya hali.
+</para>
+
+<para>
+Jina la hali iliyopo tayari linaweza kubadilishwa, au hali mpya
+zilizoongezwa kupitia hii skrini. Kama hali "mpya" imebadilishwa kupitia
+hiki kiolesura cha tovuti, haya mabadiliko pia lazima yafanyiwe  usanidi
+kupitia faili la usanidi <filename>Kernel/Config.pm</filename> au kupitia
+kiolesura cha SysConfig. Mipangilio iliyowekwa bayana katika hati chini
+lazima ibadilishwe kuhakikisha OTRS inafanya kazi na hali iliyobadilishwa
+kwa ajili ya "mpya".
+</para>
+
+<para>
+<programlisting>
+    [...]
+    # PostmasterDefaultState
+    # (The default state of new tickets.) [default: new]
+    $Self-&gt;{PostmasterDefaultState} = 'new';
+
+    # CustomerDefaultState
+    # (default state of new customer tickets)
+    $Self-&gt;{CustomerDefaultState} = 'new';
+    [...]
+</programlisting>
+</para>
+
+<para>
+<emphasis>Hati: Kubadilisha mipangilio ya Kernel/Config.pm.</emphasis>
+</para>
+
+<para>
+Kama aina mpya ya hali inatakiwa kuongezwa, Jedwali la tiketi_hali_aina
+katika hifadhidata ya OTRS inahitaji kubadilishwa na programu ya hifadhidata
+ya mteja, kama ilivyoonyeshwa kwenye hati chini.
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23 to server version: 5.0.16-Debian_1-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; insert into ticket_state_type (name,comments) values ('own','Own
+state type');
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>Hati: Kurekebisha hifadhidata ya OTRS .</emphasis>
+</para>
+
+<para>
+Sasa inawezekana kutumia aina mpya za hali ulizotengeneza. Baada ya hali
+kuunganishwa na hii aina mpya ya hali, usanidi wa OTRS pia unatakiwa
+kunadilishwa kuhakikisha hali mpya inatumika. Badilisha machaguo yafuatayo
+tu kupitia SysConfig:
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_StateDefault">
+Tiketi-&gt; Mazingira ya mbele::Wakala::Tiketi::OnaSimuMpya &gt;
+WakalaTiketiSimu###HaliChaguo-msingi</link> - kufafanua chaguo-msingi la
+hali inayofuata ya tiketi mpya za simu.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaSimuMpya &gt;
+WakalaTiketiSimu###AinaHali</link> - kufafanua hali zitakazopatikana kwa
+tiketi mpya za simu.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_StateDefault">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaBaruapepeMpya &gt;
+TiketiBaruapepe###HaliChaguo-msingi</link> - kufafanua chaguo-msingi la hali
+inayofuata ya tiketi mpya za barua pepe.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaBaruapepeMpya &gt;
+WakalaTiketiBaruapepe###AinaHali</link> - kufafanua hali zinazofuata
+zitakazopatikana kwa tiketi mpya za barua pepe.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_State">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaSimuZinazotoka &gt;
+WakalaTiketiSimuZinazotoka###Hali</link> - kufafanua chaguo-msingi la hali
+inayofuata kwa makala mpya za simu.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_StateType">
+Tiketi -&gt;
+Mazingira ya mbele::Wakala::Tiketi::OnaSimuZinazotoka &gt;
+WakalaTiketiSimuZInazotoka###HaliAina</link> - kufafanua hali zinazofuata
+zitakazopatikana kwa makala mpya za simu.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:Ticket::Frontend::AgentTicketMove_State">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaHamisha &gt;
+WakalaTiketiHamisha###Hali</link> - kufafanua chaguo-msingi la hali
+inayofuata ya kuhamisha tiketi.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:Ticket::Frontend::AgentTicketMove_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaHamisha &gt;
+WakalaTiketiHamisha###HaliAina</link> - kufafanua hali zinazofuata
+zinazopatikana za kuhamisha tiketi.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:Ticket::Frontend::AgentTicketBounce_StateDefault">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaDunda&gt;
+HaliChaguo-msingi</link> - kufafanua chaguo-msingi la hali inayofuata baada
+ya tiketi kudunda.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:Ticket::Frontend::AgentTicketBounce_StateType">
+Tiketi -&gt; Mandhari ya mbele::Wakala::Tiketi::OnaDunda &gt;
+HaliAina</link> - kufafanua inayopatikana itakayofuata katika skrini ya
+kudunda.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:Ticket::Frontend::AgentTicketBulk_StateDefault">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaNyingi &gt;
+HaliChaguo-msingi </link> - kufafanua chaguo-msingi la hali inayofuata
+katika kitendocha mkupuo.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:Ticket::Frontend::AgentTicketBulk_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaNyingi &gt;
+HaliAina</link> - kufafanua hali zinazofuata zitakazopatikana katika skrini
+ya vitendo vya mkupuo.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:Ticket::Frontend::AgentTicketClose_StateDefault">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaFunga &gt;
+HaliChaguo-msingi </link> - kufafanua chaguo-msingi la hali inayofuata baada
+ya kufunga tiketi.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:Ticket::Frontend::AgentTicketClose_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaFunga &gt; HaliAina
+</link> - kufafanua hali zinazofuata zitakazopatikana katika skrini ya
+kufunga.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:Ticket::Frontend::AgentTicketCompose_StateDefault">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaTunga &gt;
+HaliChaguo-msingi </link> - kufafanua chaguo-msingi la hali inayofuata
+kwenye skrini ya Kutunga (jibu).
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:Ticket::Frontend::AgentTicketCompose_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaTunga &gt;
+HaliAina</link> - kufafanua hali zifuatazo zitakazopatikana kwenye skrini ya
+Kutunga (jibu).
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:Ticket::Frontend::AgentTicketForward_StateDefault">
+Tiketi -&gt; Mandhari ya mbele::Wakala::Tiketi::OnaMbele &gt;
+HaliChaguo-msingi </link> - kufafanua chaguo-msingi la hali inayofuata baada
+ya kupeleka mbele tiketi.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:Ticket::Frontend::AgentTicketForward_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaMbele &gt; HaliAina
+</link> - kufafanua hali zinazofuata zitakazopatikana kwenye skrini ya
+Kupeleka mbele..
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:Ticket::Frontend::AgentTicketFreeText_StateDefault">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaMbele &gt;
+HaliChaguo-msingi </link> - kufafanua chaguo-msingi la hali inayofuata ya
+tiketi katika skrini ya nakala huru.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:Ticket::Frontend::AgentTicketFreeText_StateType">
+Tiketi -&gt; Mazingira ya mbele::Wakala::Tiketi::OnaMbele &gt;
+HaliAina</link> - kufafanua kali zinazofuata zitakazopatikana katika skrini
+ya nakala huru.
+</para>
+
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultState">
+Tiketi-&gt; Kiini::MkuuWaPosta&gt; MkuuwapostaHaliChaguo-msingi</link> -
+kufafanua hali ya tiketi zilizotengenezwa kutoka kwenye barua pepe.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterFollowUpState">
+Tiketi-&gt; Kiini::MkuuWaPosta&gt; MkuuwapostaUfuatiliajiHali</link> -
+kufafanua hali ya tiketi baada ya ufuatiliaji kupokelewa.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterFollowUpStateClosed">
+Tiketi-&gt; Kiini::MkuuWaPosta&gt; MkuuwapostaUfuatiliajiHaliUmefungwa
+</link> - kufafanua hali ya tiketi baada ya ufuatiliaji wa tiketi
+iliyofungwa kupokelewa.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::ViewableStateType">
+Tiketi -&gt; Kiini::Tiketi &gt; AinaHaliInayoonekana </link> - kufafanua
+aina za hali ambazo zinaonyeshwa katika maeneo tofauti ya mfumo, kwa mfano
+katika Muonekanofoleni.
+</para>
+
+<para>
+<link linkend="ConfigReference_Ticket:Core::Ticket:Ticket::UnlockStateType">
+Tiketi-&gt; Kiini::Tiketi &gt; FunguaHaliAina </link> - kufafanua aina za
+hali kwa ajili ya tiketi zilizofunguliwa.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::PendingReminderStateType">
+Tiketi-&gt; Kiini::Tiketi&gt; KikumbushoKinachosubiriHaliAina </link> -
+kufafanua aina ya hali kwa ajili ya tiketi za kumbukumbu.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::PendingAutoStateType">
+Tiketi -&gt; Kiini::Tiketi &gt; KusubiriHaliOtomatikiAina </link> -
+kufafanua aina ya hali kwa ajili ya tiketi Otomatiki Zinazosubiri.
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::StateAfterPending">
+Tiketi -> Kiini::Tiketi> HaliBaadaKusubiri</link> - kufafanua hali tiketi
+imesetiwa baada ya muda Otomatiki wa Kusubiri wa hali iliyosanidiwa kuisha.
+</para>
+
+</section>
+</section>

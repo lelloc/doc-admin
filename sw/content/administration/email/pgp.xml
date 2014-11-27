@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id='configure-pgp'>
+<title>Linda barua pepe na PGP</title>
+
+<para>
+OTRS ina uwezo wa kusaini au kusimba fiche ujumbe unaotoka kwa PGP. Zaidi,
+ujumbe unaoingia ulio simbwa fiche unaweza kusimbua fiche. Kusimba na
+kusimbua fiche unafanyika na kifaa cha GPL GnuPG. Kuseti GnuPG kwa ajili ya
+OTRS, hatua zifwatazo inabidi zifanyike:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+    <listitem>
+    <para>
+    Sakinisha GnuPG, kupitia meneja kifurushi wa mfumo endeshi wako.
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    Sanidi GnuPG ili utumie pamoja na OTRS. Mipangilio orodha ya lazima ya GnuPG
+na ufunguo binafsi lazima vitengenezwe. Amri iliyoonyeshwa chini lazima
+itekelezwe kama mtumiaji 'otrs' kutoka kwenye sheli.
+    </para>
+
+    <para>
+    <screen>
+    linux:~# su otrs
+    linux:/root$ cd
+    linux:~$ pwd
+    /opt/otrs
+    linux:~$ gpg --gen-key
+    gpg (GnuPG) 1.4.2; Copyright (C) 2005 Free Software Foundation, Inc.
+    This program comes with ABSOLUTELY NO WARRANTY.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions. See the file COPYING for details.
+
+    gpg: directory `/opt/otrs/.gnupg' created
+    gpg: new configuration file `/opt/otrs/.gnupg/gpg.conf' created
+    gpg: WARNING: options in `/opt/otrs/.gnupg/gpg.conf' are not yet active during t
+    his run
+    gpg: keyring `/opt/otrs/.gnupg/secring.gpg' created
+    gpg: keyring `/opt/otrs/.gnupg/pubring.gpg' created
+    Please select what kind of key you want:
+       (1) DSA and Elgamal (default)
+       (2) DSA (sign only)
+       (5) RSA (sign only)
+    Your selection? 1
+    DSA keypair will have 1024 bits.
+    ELG-E keys may be between 1024 and 4096 bits long.
+    What keysize do you want? (2048)
+    Requested keysize is 2048 bits
+    Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+    Key is valid for? (0)
+    Key does not expire at all
+    Is this correct? (y/N) y
+
+    You need a user ID to identify your key; the software constructs the user ID
+    from the Real Name, Comment and Email Address in this form:
+        "Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;"
+
+    Real name: Ticket System
+    Email address: support@example.com
+    Comment: Private PGP Key for the ticket system with address support@example.com
+    You selected this USER-ID:
+    "Ticket System (Private PGP Key for the ticket system with address support@examp
+    le.com) &lt;support@example.com&gt;"
+
+    Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+    You need a Passphrase to protect your secret key.
+
+    Passphrase: secret
+    Repeat passphrase: secret
+
+    We need to generate a lot of random bytes. It is a good idea to perform
+    some other action (type on the keyboard, move the mouse, utilize the
+    disks) during the prime generation; this gives the random number
+    generator a better chance to gain enough entropy.
+    ++++++++++.+++++++++++++++++++++++++....+++++.+++++...+++++++++++++++++++++++++.
+    +++++++++++++++++++++++++.+++++.+++++.+++++++++++++++++++++++++&gt;++++++++++&gt;+++++
+    .......&gt;+++++&lt;+++++................................+++++
+
+    Not enough random bytes available.  Please do some other work to give
+    the OS a chance to collect more entropy! (Need 280 more bytes)
+
+    ++++++++++.+++++..++++++++++..+++++....++++++++++++++++++++.+++++++++++++++.++++
+    ++++++++++++++++++++++++++.++++++++++.+++++++++++++++.++++++++++.+++++++++++++++
+    ..+++++&gt;.+++++....&gt;+++++........................................................
+    ...........................................................&gt;+++++&lt;+++++.........
+    .............+++++^^^
+    gpg: /opt/otrs/.gnupg/trustdb.gpg: trustdb created
+    gpg: key 7245A970 marked as ultimately trusted
+    public and secret key created and signed.
+
+    gpg: checking the trustdb
+    gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+    gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+    pub   1024D/7245A970 2006-02-03
+          Key fingerprint = 2ED5 BC36 D2B6 B055 7EE1  5833 1D7B F967 7245 A970
+     uid                  Ticket System (Private pgp key for ticket system with addre
+    ss support@example.com) &lt;support@example.com&gt;
+    sub   2048g/52B97069 2006-02-03
+
+    linux:~$
+    </screen>
+    </para>
+
+    <para>
+    <emphasis>Hati: Kusanidi GnuPG.</emphasis>
+    </para>
+
+    <para>
+        Kama ilivyoonyeshwa kwenye hati chini, mipangilio chaguo-msingi inaweza
+kutumika kwa parameta nyingi zinazotakiwa. Thamani za mmiliki wa ufunguo tu
+ndio zinatakiwa kuingizwa kwa usahihi, na nywila sahihi kuwekwa kwa ajili ya
+funguo.
+    </para>
+    </listitem>
+    <listitem>
+
+    <para>
+    Kwenye skrini kwa ajili ya  mipangilio ya <link
+linkend="ConfigReference_Framework:Crypt::PGP">PGP</link>, PGP lazima
+iamilishwe kwa ajili ya OTRS (chaguo la kwanza). Pia, njia ya kwenda kwenye
+programu ya gpg lazima isetiwe na kukaguliwa.
+    </para>
+
+    <para>
+    Mpangilio unaofwata wa config  (PGP::Options) unaweza kuhitaji mabadiliko
+pia. Kupitia mpangilio huu wa config, parameta ambazo zinatumika kwa kila
+utekelezaji wa gpg kwa mtumiaji wa 'otrs' unaweza kuwekwa bayana. Hasa,
+mpangilio orodha wa mafaili ya config ya GnuPG ya mtumiaji wa 'otrs' ni
+muhimu. Kwenye mfano <filename>/opt/otrs/.gnupg</filename> imetumika. Huu
+mpangilio orodha ulitengenezwa mapema wakati wa usanidi wa PGP.
+    </para>
+
+    <para>
+        Kwa kupitia chaguo linalofwata la usanidi (PGP::Ufunguo::Nywila) inawezekana
+kubainisha jozi ya Vitambulisho vya funguo na nywila zake kwa ajili ya
+funguo binafsi. Kwa sababu mawasiliano ya wabia kutoka nje wanaandika kwenye
+mfumo wa tiketi na ujumbe wao kufanyiwa usimbaji fiche kwa kutumia funguo
+zako za umma, OTRS inaweza kusimbua fiche huu ujumbe kwa kutumia
+Kitambulisho/nywila zilizobainishwa hapa.
+    </para>
+
+    <para>
+    Jinsi ya kupata kitambulisho cha ufunguo wako binafsi? Kitambulisho cha
+ufunguo wako binafsi tayari kinaonyeshwa wakati wa uzalishaji funguo (ona
+hatua 1 hapo juu). Pia inawezekana kupata Kitambulisho kama amri
+itakayoonyeshwa kwenye hati ifuatayo itatekelezwa kama mtumiaji 'otrs':
+    </para>
+
+    <para>
+    <screen>
+    linux:~# su otrs
+    linux:/root$ cd
+    linux:~$ pwd
+    /opt/otrs
+    linux:~$ gpg --list-keys
+    /opt/otrs/.gnupg/pubring.gpg
+    ----------------------------
+    pub   1024D/7245A970 2006-02-03
+    uid                  Ticket System (Private pgp key for ticket system with
+    address support@example.com) &lt;support@example.com&gt;
+    sub   2048g/52B97069 2006-02-03
+
+    linux:~$
+    </screen>
+    </para>
+
+    <para>
+    <emphasis>Hati: Kupata Kitambulisho cha ufunguo wako binafsi.</emphasis>
+    </para>
+
+    <para>
+    Kitambulisho cha ufunguo binafsi kinaweza kupatikana katika mstari uanoanza
+na "sub". Ni tungo iliyo katika hexadecimal ambayo ina urefu wa herufi nane,
+katika mfano juu ni "52B97069". Nywila unayotakiwa kuweka bayana kwa ajili
+ya huu ufunguo katika mfumo wa tiketi ni sawa na uliotolewa wakati wa
+uzalishaji ufunguo.
+    </para>
+
+    <para>
+    Baada ya hii data kuingizwa, kitufe cha ku "sasisha" kinaweza kutumika
+kuhifadhi mipangilio. OTRS iko tayari kupokea na kusimbua fiche ujumbe
+uliofanyiwa usimbaji.
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    Hatimaye, agiza ufunguo wa umma wa mteja. Hii inahakikisha kwamba ujumbe
+uliofanyiwa usimbaji fiche unaweza kutumwa nje kwa huyu mteja. Kuna njia
+mbili za kuagiza ufunguo wa umma wa mteja.
+    </para>
+
+    <para>
+    Njia ya kwanza ni kubainisha ufunguo wa umma wa mteja katika kiolesura cha
+usimamizi wa mteja.
+    </para>
+
+    <para>
+    Njia ya pili ni kuweka bayana ufunguo kupitia mipangilio ya PGP, inafikika
+kutoka kwenye kurasa ya Msimamizi. Katika upande wa kulia wa hii skrini,
+funguo za umma za wateja zilizoagizwa kutoka nje zinaonyeshwa. Baada ya PGP
+kuamilishwa na kusanidiwa kwa ajili ya OTRS, funguo yako mwenyewe ya umma
+itaorodheshwa hapa. Kwenye upande wa kushoto wa skrini ya mipangilio ya PGP
+inawezekana kutafuta funguo. Pia ufunguo mpya wa umma unaweza kupakiwa
+kwenye mfumo kutoka kwenye faili.
+    </para>
+
+    <para>
+    Mafaili yenye ufunguo wa umma ambayo yanahitaji kuagizwa kwenye OTRS inabidi
+yawe tangamanifu na mafaili ya ufunguo ya GnuPGP. Katika kesi nyingi,
+ufunguo uliohifadhiwa katika faili ni "ufunguo unaolindwa na ASCII". OTRS
+inaweza kushughulika na umbizo hili.
+    </para>
+    </listitem>
+</orderedlist>
+</para>
+</section>

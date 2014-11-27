@@ -1,0 +1,808 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="installation-of-prepared-packages">
+<title>Njia rahisi - Usakinishaji wa vifurushi vilivyojengwa tayari</title>
+
+<para>
+Kama inapatikana kwenye jukwaa lako unatakiwa kutumia vifurushi ambavyo
+tayari vimetengenezwa kusakinisha OTRS, kwa kuwa ni njia rahisi na
+inayowezekana. Unaweza kuzipata kwenye eneo la kupakua katika <ulink
+url="http://www.otrs.com"> <citetitle>http://www.otrs.com</citetitle>
+</ulink>. Vifungu vifwatavyo vinafafanua usakinishaji wa OTRS kwa kutumia
+vifurushi vilivyotengenezwa tayari au jozi katika SUSE, Red Hat na mifumo ya
+Microsoft Windows. Kama tu hutaweza kutumia vifurushi vilivyotengenezwa
+tayari kwa sababu fulani ndio utafwata mchakato wa kawaida.
+</para>
+
+<section id="installation-on-suse">
+<title>Kusakinisha RPM katika seva ya Linux ya SUSE</title>
+
+<para>
+Hiki kifungu kinaelezea usakinishaji wa kifurushi chetu cha RPM katika seva
+ya SUSE Linux. Tumeijaribisha katika matoleo yote ya hivi karibuni ya SLES
+na openSUSE. Kabla hujaanza usakinishaji, tafadhali tembelea <ulink
+url="http://www.otrs.com/downloads">
+<citetitle>http://www.otrs.com/downloads</citetitle> </ulink> na hakikisha
+unatumia kifurushi cha hivi karibuni cha OTRS RPM kinachopatikana.
+</para>
+
+<section id="suse-preparing-database-mysql">
+<title>Kuandaa hifadhidata kwa ajili ya OTRS</title>
+
+<para>
+Unaweza kutumia OTRS katika mazingira ya nyuma tofauti ya hifadhidata:
+<application>MySQL</application>, <application>PostgreSQL</application>,
+<application>Oracle</application> au <application>Microsoft SQL
+Server</application>. Hifadhi data maarufu sana ya kuweka OTRS ni MySQL. Hii
+sura inaonyesha hatua unazotakiwa kuchukua kusanidi MySQL katika seva
+inayojikita kwenye SUSE. Bila shaka unaweza kusakinisha hifadhidata kwenye
+seva ya hifadhidata iliyojitolea kama ikihitajika kwa ajili ya mabadiliko
+kufanyika kiurahisi na sababu nyingine.
+</para>
+<note>
+    <para>
+        Kama ukifwatat sura hii katika openSUSE 12.3 na kuendelea hutaweza
+kusakinisha <application>MySQL</application> lakini
+<application>MariaDB</application> badala yake, uma wa MySQL tangamanifu
+wakanuni za MySQL. Hili sio tatizo, itafanya kazi vizuri tuu (na hata vizuri
+zaidi wakati mwingine).
+    </para>
+</note>
+<para>
+    Sakinisha MySQL kwa kutekeleza amri ifuatayo kama mzizi:
+</para>
+
+<para>
+    <screen>
+        linux:~ # zypper install mysql perl-DBD-mysql
+    </screen>
+</para>
+
+<para>
+    Hii itasakinisha MySQL na machaguo-msingi kwenye mfumo wako. Utahitaji
+kubadili machaguo-msingi ili kufanya iwe kwa ajili ya OTRS yako. Kwa kutumia
+kihariri nakala fungua faili <filename>/etc/my.cnf</filename> na badili
+mstari wenye <command>max_allowed_packet</command> ndani yake, na ongeza
+mstari hapa chini, kama hivi:
+</para>
+
+<para>
+    <screen>
+        max_allowed_packet=20M
+        query_cache_size=32M
+    </screen>
+</para>
+
+<para>
+    Sasa tekeleza <command>rcmysql restart</command> kuanzisha upya seva ya
+hifadhi data na kuamilisha mabadiliko haya. Kisha anzisha
+<command>/usr/bin/mysql_secure_installation</command> na fuata maelekezo ya
+kwenye skrini kuseti nywila mzizi ya hifadhidata, ondoa ufikivu bila jina na
+ondoa hifadhidata ya majaribio. Mwisho, anzisha <command>chkconfig -a
+mysql</command> ili kuhakikisha mysql inaanzishwa kiotomatiki muda seva
+inapoanza.
+</para>
+
+</section>
+
+<section id="suse-installing-rpm">
+    <title>Kusakinisha OTRS</title>
+<para>
+Sakinisha OTRS kupitia tungo amri kwa kutumia <command>zypper</command>. Hii
+pia itavuta utegemezi kama seva ya wavuti ya apache   na baadhi ya moduli za
+Perl. Hakikisha umenakili faili la OTRS RPM kwenda kwenye mpangilio orodha
+wa sasa.
+</para>
+<para>
+    <screen>
+otrs-sles:~ # zypper install otrs-3.3.*.rpm
+....
+Retrieving package otrs-3.3.3-01.noarch (1/26), 17.5 MiB (74.3 MiB unpacked)
+Installing: otrs-3.3.3-01 [done]
+Additional rpm output:
+Check OTRS user ... otrs added.
+
+Next steps:
+
+[start database and Apache]
+ Make sure your database is running and execute 'rcapache2 restart'.
+
+[install the OTRS database]
+ Use a webbrowser and open this link:
+ http://myserver.example.com/otrs/installer.pl
+
+[OTRS services]
+ Start OTRS 'rcotrs start-force' (rcotrs {start|stop|status|restart|start-force|                                                                                                                     stop-force}).
+
+((enjoy))
+
+ Your OTRS Team
+ http://otrs.org/
+
+otrs-sles:~ #
+    </screen>
+</para>
+
+<para>
+<emphasis>Hati: Amri ya kusakinisha OTRS.</emphasis>
+</para>
+
+<para>
+Usakinishaji wa OTRS umekamilika. Anzisha seva yako ya wavuti kupakia
+mabadiliko maalumu ya OTRS katika usanidi wake, kama ilivyoonyeshwa kwenye
+hati chini. Pia anzisha <command>chkconfig</command> kuhakikisha OTRS
+inaanzishwa kiotomatiki seva inapojiwasha upya.
+</para>
+
+<para>
+<screen>
+otrs-sles:~ # chkconfig -a apache2
+apache2                   0:off  1:off  2:off  3:on   4:off  5:on   6:off
+otrs-sles:~ # rcapache2 start
+Starting httpd2 (prefork) httpd2-prefork: Could not reliably determine the server's fully qualified domain name, using 10.x.x.x for ServerName
+                                                                                                                                                                                          done
+otrs-sles:~ #
+</screen>
+</para>
+
+<para>
+<emphasis>Hati: Kuanzisha seva ya wavuti.</emphasis>
+</para>
+
+</section>
+
+<section id="suse-installation-perl-modules">
+    <title>Kusakinisha moduli za perl za ziada.</title>
+    <para>OTRS inahitaji moduli zaidi ya zinazoweza kusakinishwa na RPM. Unaweza
+kuzisakinisha baadaye kwa mikono. Unaweza kukagua moduli gani hauna kwa
+kuanzisha hati <filename>bin/otrs.CheckModules.pl</filename> inayopatikana
+kwenye mpangilio orodha
+<filename>/opt/otrs</filename>. Baadhi ya moduli zinahitajika kwa ajili ya
+sifa za hiari tu, kama mawasiliano na seva ya(za) IMAP au uzalishaji wa
+PDF. Kwenye SLES unatakiwa kuongeza hifadhi ya nje kwenye usanidi wa zypper
+ili kupata moduli zinazohitajika kwa ajili ya mfumo wako. Chagua moduli
+inayohitajika na toleo lako la mfumo endeshi kutoka hapa: <ulink
+url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>.Ongeza
+hifadhi kama hii kwa ajili ya SLES 11 SP2:
+    </para>
+
+    <para>
+        <screen>
+            zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+        </screen>
+    </para>
+
+    <para>
+        Kwenye openSUSE 12.3 hifadhi ya ziada inahitajika kwa ajili ya moduli
+Mail::IMAPClient tu, kama utahitaji kama unahitaji kukusanya barua kutoka
+kwenye seva ya IMAP inayolindwa na TLS. Mstari husika utaonekana kama hivi:
+    </para>
+    <para>
+        <screen>
+            zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
+        </screen>
+    </para>
+    <para>
+        Mara ya kwanza unatumia zypper baada ya kuongeza hii hifadhi, utaombwa
+kuweka ufunguo wake. Sasa unaweza kusakinisha moduli zinazokosekana kama
+hapa chini.
+    </para>
+    <para>
+        <screen>
+otrs-sles:/opt/otrs # zypper install -y "perl(YAML::LibYAML)"
+Refreshing service 'susecloud'.
+Retrieving repository 'perl' metadata [\]
+
+New repository or package signing key received:
+Key ID: DCCA98DDDCEF338C
+Key Name: devel:languages:perl OBS Project &lt;devel:languages:perl@build.opensuse.org&gt;
+Key Fingerprint: 36F0AC0BCA9D8AF2871703C5DCCA98DDDCEF338C
+Key Created: Wed Oct 10 22:04:18 2012
+Key Expires: Fri Dec 19 22:04:18 2014
+Repository: perl
+
+Do you want to reject the key, trust temporarily, or trust always? [r/t/a/?] (r): a
+Retrieving repository 'perl' metadata [done]
+Building repository 'perl' cache [done]
+Loading repository data...
+Reading installed packages...
+'perl(YAML::LibYAML)' not found in package names. Trying capabilities.
+Resolving package dependencies...
+
+The following NEW package is going to be installed:
+  perl-YAML-LibYAML
+
+The following package is not supported by its vendor:
+  perl-YAML-LibYAML
+
+Retrieving package perl-YAML-LibYAML-0.38-12.4.x86_64 (1/1), 75.0 KiB (196.0 KiB unpacked)
+Retrieving: perl-YAML-LibYAML-0.38-12.4.x86_64.rpm [done (55.7 KiB/s)]
+Installing: perl-YAML-LibYAML-0.38-12.4 [done]
+        </screen>
+    </para>
+
+<para>
+Hatua inayofuata ni kusanidi OTRS kwa kutumia kisakinishi cha wavuti, kama
+ilivyoelezewa <link linkend="web-installer">katika kifungu hiki</link>.
+</para>
+
+</section>
+
+</section>
+
+<section id="installation-on-centos">
+<title>Kusakinisha OTRS katika mifumo endeshi ya Red Hat Enterprise Linux au CentOS
+system</title>
+
+<para>
+Hiki kifungu kinaelezea usakinishaji wa kifurushi chetu cha RPM kwenye seva
+ya Red Hat Enterprise Linux (RHEL) au CentOS. Kwa OTRS 3.3 na kuendelea,
+RHEL 6 au CentOS 6 inahitajika,  toleo la 5 halina msaada. Kabla ya kuanza
+usakinishaji, tafadhali tembelea <ulink url="http://www.otrs.com/downloads">
+<citetitle>http://www.otrs.com/downloads</citetitle> </ulink> na hakikisha
+unatumia kifurushi cha hivi karibuni cha OTRS RPM kinachopatikana.
+</para>
+
+<section id="rhel-preparing-database-mysql">
+<title>Kuandaa hifadhidata kwa ajili ya OTRS</title>
+
+<para>
+Unaweza kutumia OTRS kwa kutumia mazingira ya nyuma tofauti: MySQL,
+PostgreSQL, Oracle or Microsoft SQL Server. Hifadhidata maarufu kuweka
+kwenye OTRS ni MySQL. Hii sura inaonyesha hatua unazohitaji kupitia kusanidi
+MySQL kwenye seva ya RHEL. Bila shaka unaweza kusakinisha hifadhidata kwenye
+seva ya hifadhidata iliyojitolea kwa ajili ya kubadilisha kirahisi na sababu
+nyingine.
+</para>
+
+<para>
+    Sakinisha MySQL kwa kutekeleza amri ifuatayo kama mzizi:
+</para>
+
+<para>
+    <screen>
+        [root@otrs-centos6 ~]# yum -y install mysql-server
+    </screen>
+</para>
+
+<para>
+    Hii itasakinisha MySQL na machaguo-msingi kwenye mfumo wako. Utahitaji
+kubadili machaguo-msingi ili kufanya iwe kwa ajili ya OTRS yako. Kwa kutumia
+kihariri nakala fungua faili <filename>/etc/my.cnf</filename> na ongeza
+mistari miwili inayofwata chini ya kifungu  [mysqld]:
+</para>
+
+<para>
+    <screen>
+        max_allowed_packet=20M
+        query_cache_size=32M
+    </screen>
+</para>
+
+<para>
+    Sasa tekeleza <command>service mysqld start</command> kuanzisha upya seva ya
+hifadhidata na kuamilisha mabadiliko haya. Kisha anzisha
+<command>/usr/bin/mysql_secure_installation</command> na fuata maelekezo ya
+kwenye skrini kuseti nywila mzizi ya hifadhidata, kuondoa ufikivu bila jina
+na kuondoa hifadhidata ya majaribio. Mwisho, anzisha <command>chkconfig
+mysqld on</command> ili kuhakikisha mysql inaanza kiotomatiki muda seva
+inapoanza.
+</para>
+
+</section>
+
+<section id="rhel-installing-rpm">
+    <title>Kusakinisha OTRS</title>
+<para>
+Sakinisha OTRS kupitia tungo amri kwa kutumia <command>yum</command>. Hii
+pia itavuta utegemezi kama seva ya wavuti ya apache na baadhi ya moduli za
+Perl. Hakikisha umenakili faili la OTRS RPM kwenda kwenye mpangilio orodha
+wa sasa.
+</para>
+<para>
+    <screen>
+[root@otrs-centos6 ~]# yum install --nogpgcheck otrs-3.3.*.rpm
+...
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch   Version                Repository       Size
+================================================================================
+Installing:
+ otrs                       noarch 3.3.3-01               /otrs-3.3.3-01.noarch
+                                                                           74 M
+Installing for dependencies:
+ apr                        x86_64 1.3.9-5.el6_2          updates         123 k
+ ...
+ procmail                   x86_64 3.22-25.1.el6          base            163 k
+
+Transaction Summary
+================================================================================
+Install      26 Package(s)
+
+Total size: 80 M
+Total download size: 6.0 M
+Installed size: 88 M
+Downloading Packages:
+(1/25): apr-1.3.9-5.el6_2.x86_64.rpm                     | 123 kB     00:00
+...
+(25/25): procmail-3.22-25.1.el6.x86_64.rpm               | 163 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           887 kB/s | 6.0 MB     00:06
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : apr-1.3.9-5.el6_2.x86_64                               1/26
+  ...
+  Installing : otrs-3.3.3-01.noarch                                   26/26
+Check OTRS user ... otrs added.
+
+Next steps:
+
+[httpd services]
+ Restart httpd 'service httpd restart'
+
+[install the OTRS database]
+ Make sure your database server is running.
+ Use a web browser and open this link:
+ http://myserver.example.com/otrs/installer.pl
+
+[OTRS services]
+ Start OTRS 'service otrs start' (service otrs {start|stop|status|restart).
+
+((enjoy))
+
+ Your OTRS Team
+
+Installed:
+  otrs.noarch 0:3.3.3-01
+
+Dependency Installed:
+  ...
+
+Complete!
+[root@otrs-centos6 ~]#
+    </screen>
+</para>
+
+<para>
+<emphasis>Hati: Amri ya kusakinisha OTRS.</emphasis>
+</para>
+
+<para>
+Usakinishaji wa OTRS umekamilika. Sasa unatakiwa kuhakikisha kwamba Apache
+imeanzishwa na kwamba inaanza wakati wote seva inapojiwasha upya.
+</para>
+
+<para>
+<screen>
+[root@otrs-centos6 ~]# chkconfig httpd on
+[root@otrs-centos6 ~]# service httpd start
+Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using 10.x.x.x for ServerName [  OK  ]
+[root@otrs-centos6 ~]#
+</screen>
+</para>
+
+<para>
+<emphasis>Hati: Kuanzisha seva ya wavuti.</emphasis>
+</para>
+
+</section>
+
+<section id="rhel-installation-perl-modules">
+    <title>Kusakinisha moduli za perl za ziada.</title>
+    <para>OTRS inahitaji baadhi ya moduli zaidi ya zilizosakinishwa na RPM. Unaweza
+kuzisakinisha baadaye kwa mikono. Unaweza kuona moduli gani unakosa kwa
+kuanzisha hati <filename>bin/otrs.CheckModules.pl</filename> iliyopo kwenye
+mpangilio orodha <filename>/opt/otrs</filename>. Baadhi ya moduli
+zinahitajika tu kwa ajili ya sifa za hiari, kama mawasiliano na seva ya (za)
+IMAP au uzalishaji wa PDF. Kwenye Redhat au CentOS tunashauri kusakinisha
+hizi moduli kutoka kwenye hifadhi ya EPEL,  hifadhi inayodumishwa na mradi
+wa Fedora, ambayo inatoa vifurushi vya ubora wa juu kwa ajili ya RHEL na
+vipngele vyake. Kwa taarifa zaidi angalia <ulink
+url="http://fedoraproject.org/wiki/EPEL">tovuti ya EPEL </ulink>.
+    </para>
+
+    <para>
+        Kama uko kwenye RHEL 6 au CentOS 6, unaweza kupata kifurushi cha hivi
+karibuni kutoka <ulink
+url="http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html">tovuti
+hii</ulink>. Unaweza kuongeza hii hifadhi kwenye yum moja kwa moja kwa
+kunakili URL ya RPM utakayoikuta kwenye kurasa hii na kutekeleza hili agizo:
+    </para>
+
+    <para>
+        <screen>
+ [root@otrs-centos6 otrs]# yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+Loaded plugins: security
+Setting up Install Process
+epel-release-6-8.noarch.rpm                                   |  14 kB     00:00
+Examining /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm: epel-release-6-8.noarch
+Marking /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:6-8 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package             Arch          Version     Repository                       Size
+=====================================================================================
+Installing:
+ epel-release        noarch        6-8         /epel-release-6-8.noarch         22 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total size: 22 k
+Installed size: 22 k
+Downloading Packages:
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : epel-release-6-8.noarch                                           1/1
+  Verifying  : epel-release-6-8.noarch                                           1/1
+
+Installed:
+  epel-release.noarch 0:6-8
+
+Complete!
+[root@otrs-centos6 otrs]#
+        </screen>
+    </para>
+    <para>
+        Mara ya kwanza kutumia yum baada ya kuongeza hifadhi hii, utaombwa kuweka
+ufunguo wake. Sasa unaweza kusakinisha moduli zinazokosekana kama hapa
+chini:
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum -y install "perl(Text::CSV_XS)"
+Loaded plugins: security
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package perl-Text-CSV_XS.x86_64 0:0.85-1.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package                   Arch            Version               Repository     Size
+=====================================================================================
+Installing:
+ perl-Text-CSV_XS          x86_64          0.85-1.el6            epel           71 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total download size: 71 k
+Installed size: 154 k
+Downloading Packages:
+perl-Text-CSV_XS-0.85-1.el6.x86_64.rpm                        |  71 kB     00:00
+warning: rpmts_HdrFromFdno: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Importing GPG key 0x0608B895:
+ Userid : EPEL (6) &lt;epel@fedoraproject.org&gt;
+ Package: epel-release-6-8.noarch (@/epel-release-6-8.noarch)
+ From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+  Verifying  : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+
+Installed:
+  perl-Text-CSV_XS.x86_64 0:0.85-1.el6
+
+Complete!
+[root@otrs-centos6 otrs]#
+        </screen>
+    </para>
+
+<para>
+Hatua inayofuata ni kusanidi OTRS kwa kutumia kisakinishi cha wavuti, kama
+ilivyoelezewa <link linkend="web-installer">katika kifungu hiki</link>.
+</para>
+
+</section>
+
+<section id="rhel-installation-dbd-oracle">
+    <title>Usakinishaji wa kiendeshi cha hifadhidata ya Oracle kwenye Red Hat / CentOS</title>
+    <para>
+        Kama unataka kutumia OTRS kwenye hifadhidata Oracle, utahitaji
+kukusanya-zalisha na kusakinisha kiendeshi cha hifadhidata
+<application>DBD::Oracle</application>. Hii ni ngumu kidogo kusakinisha
+zaidi ya vifurushi vingine; hii ni kwasababu Oracle ni hifadhidata
+inayomilikiwa kibinafsi na si mradi wa Red Hat wala Centos unaruhusiwa
+kusambaza viendeshi katika hifadhi zao za RPM.
+    </para>
+    <para>
+        Kwanza kabisa tutahitaji kusakinisha <application>gcc</application>,
+<application>make</application> na <application>CPAN</application> ili
+tuweze kukusanya-zalisha na kusakinisha kiendeshi. Chini unaona amri katika
+CentOS; katika matoleo mengine inaweza kuonekana tofauti kidogo.
+    </para>
+
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum -y install gcc make "perl(CPAN)"
+        </screen>
+    </para>
+
+    <para>
+        Hatua inayofuata ni kupata na kusakinisha programu ya hifadhidata. Kwa hili
+utahitaji kujiunga kwa ajili ya akaunti ya bure katika tovuti ya
+Oracle. Unaweza kupakua viendeshi katika ukurasa huu: <ulink
+url="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html">
+http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html</ulink>
+Tafadhali chagua toleo la x86 au x86-64  la Linux kwa kutegemea na muundo wa
+mfumo wako. Unaweza kukagua hili kwa kutumia <command>uname -i</command>. Ni
+aidha 'x86_64' kwa ajili ya x86-64 au 'i386' kwa ajili ya x86. Unatakiwa
+kupakua vifurushi 'Instant Client Package - Basic', 'Instant Client Package
+- SQL*Plus', na 'Instant Client Package - SDK'. Zihifadhi mahali kwenye
+diski yako. Sasa kama mtumiaji mzizi unaweza kusakinisha vifurushi hivyo kwa
+kutumia amri ifuatayo:
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum install oracle-instantclient*
+        </screen>
+    </para>
+    <para>
+        Baada ya hii unatakiwa kuseti vishika nafasi vya mazingira viwili na
+kusanya-zalisha kiendeshi cha DBD::Oracle. Kwa mara nyingine, fanya kazi
+hizi kama mtumiaji mzizi. Hatua zimeorodheshwa chini. Tafadhali tambua kwa
+ajili ya ufupisho baadhi ya mistari iliyotolewa na amri imeondolewa.
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+[root@otrs-centos6 otrs]# export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+[root@otrs-centos6 otrs]# cpan
+cpan[1]> look DBD::Oracle
+...
+Fetching with LWP:
+  http://www.perl.org/CPAN/authors/id/P/PY/PYTHIAN/CHECKSUMS
+Checksum for /root/.cpan/sources/authors/id/P/PY/PYTHIAN/DBD-Oracle-1.62.tar.gz ok
+Scanning cache /root/.cpan/build for sizes
+DONE
+...
+Working directory is /root/.cpan/build/DBD-Oracle-1.62-ZH6LNy
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# perl Makefile.PL
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make install
+...
+cpan[2]> exit
+Terminal does not support GetHistory.
+Lockfile removed.
+        </screen>
+    </para>
+
+<para>
+Sasa unatakiwa kuhariri faili Kernel/Config.pm kutoa ORACLE_HOME. Hatua
+inayofuata ni kusanidi OTRS kwa kutumia kisakinishi cha tovuti, kama
+ilivyoelezewa  <link linkend="web-installer">katika hiki kifungu </link>.
+</para>
+
+</section>
+
+</section>
+
+<section id="installation-on-debian">
+<title>Kusakinisha OTRS kwenye mfumo wa Debian au Ubuntu</title>
+<important>
+    <para>
+        Tafadhali sakinisha OTRS <link linkend="manual-installation-of-otrs">kutoka
+kwenye chanzo</link>, na usitumie vifurushi vya OTRS ambavyo vinatolewa na
+Debian/Ubuntu.
+    </para>
+</important>
+<para>
+    Usakinishaji wa moduli za Perl zinazotakiwa ni rahisi zaidi kama ukitumia
+vifurushi vilivyopo: <screen>
+apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl \
+    libnet-ldap-perl libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl \
+    libgd-text-perl libtext-csv-xs-perl libjson-xs-perl libgd-graph-perl libapache-dbi-perl
+    </screen>
+</para>
+</section>
+
+<section id="installation-on-windows">
+<title>Kusakinisha OTRS kwenye mifumo ya Microsoft Windows </title>
+<section id="installation-on-windows-installer">
+<title>Kutumia Kisakinishi cha Windows</title>
+    <para>
+    Kusakinisha OTRS katika mfumo wa Microsoft Windows ni rahisi sana. Pakua
+kisakinishi cha hivi karibuni kwa ajili ya Win32 kutoka <ulink
+url="http://www.otrs.com/try/">
+<citetitle>http://www.otrs.com/try/</citetitle> </ulink> na hifadhi faili
+hilo kwenye mfumo wako wa ndani wa mafaili. Kisha kirahisi bofya mara mbili
+kwenye faili kutekeleza kisakinishi, na fuata hatua chache za usakinishaji
+kuseti mfumo. Sogora ya usakinishaji itashughulikia kusakinisha vijenzi
+vyote vya OTRS. Hatua inayofwata ni kusanidi OTRS kwa kutumia kisakinishi
+cha wavuti, kama ilivyoelezewa <link linkend="web-installer">katika kifungu
+hiki</link>.
+    </para>
+
+    <important>
+    <para>
+    Kisakinishi cha Windows cha OTRS kina vijenzi vyote vinavyohitajika kwa
+ajili ya OTRS, mf. seva ya wavuti ya <application>Apache</application>, seva
+ya hifadhidata ya <application>MySQL</application>,
+<application>Perl</application> (yenye moduli zote zinazohitajika) na
+<application>cron</application> kwa ajili ya Windows. Hata hivyo unaweza
+kuitumia kuseti OTRS kwenye Seva ya Wavuti ya Microsoft IIS badala ya
+Apache. Pia unaweza kuchagua kutoiruhusu kusakinisha MySQL iliyo kwenye
+furushi, kwa mfano unataka kutumia kwenye hifadhidata ya kati ya MySQL;
+hifadhidata ya PostgreSQL, kwenye Seva ya Microsoft SQL au kwenye Oracle.
+    </para>
+    </important>
+</section>
+<section id="windows-installation-dbd-oracle">
+    <title>Usakinishaji wa kiendeshi cha hifadhidata ya Oracle kwenye Windows</title>
+    <para>
+        Kama ukisakinisha OTRS kwa kutumia Kisakinishi cha Windows, ita sanidi
+moduli zote za Perl kiotomatiki ambazo utahitaji. Ila kama unahitaji kutumia
+OTRS katika hifadhidata ya Oracle, utahitaji kusakinisha kiendeshi cha
+Oracle baadaye. Hii inahitajika kwa sababu hakuna kiendeshi kutoka chanzo
+huru cha kwa ajili ya Oracle kinachopatikana; haturuhusiwi kukigawa upya
+katika kifurushi cha OTRS. Kuna perl za aina mbili ambazo tunaweza kutumia
+katika Windows; unaweza kuchagua Strawberry Perl, ambayo ni chaguo-msingi na
+inashauriwa mipangilio ya uthibitisho wa dhana; au unaweza kuchagua perl ya
+Hali Hai ambayo unapakua na kusakinisha kitofauti. Hili chaguo la mwisho
+linashuriwa kwa mipangilio ya uzalishaji.
+    </para>
+
+    <section id="windows-installation-dbd-oracle-activestate">
+        <title>Usakinishaji wa DBD::Oracle kwenye ActiveState Perl</title>
+        <para>
+            Kama umesakinisha ActiveState Perl tayari inakuja na kiendeshi cha
+hifadhidata cha Perl <application>DBD::Oracle</application> hii tu ndiyo
+inatakiwa iunganishwe na programu Oracle C. OTRS inafanya kazi kwenye
+ActiveState Perl ya biti 32 tu. Hii inamaanisha unatakiwa pia kupakua
+programu ya Oracle ya biti 32. Nenda kwenye tovuti ya programu ya
+Oracle<ulink
+url="http://www.oracle.com/technetwork/topics/winsoft-085727.html">
+<citetitle>Instant Client Downloads for Microsoft Windows
+(32-bit)</citetitle></ulink> na chagua 'Instant Client Package -
+Basic'. Itakubidi kujiandikisha akaunti ya bure ya Tovuti ya Oracle ili
+kupakua programu hiyo. Dondoa kilichopakuliwa, faili la zip, kwenda kwenye
+mzizi wa kiendeshi chako, kwa mfano
+<filename>C:\instantclient_11_2</filename>.
+        </para>
+        <para>
+            Sasa unatakiwa kuongeza maktaba za mteja kwenye njia yako na kuseti kishika
+nafasi cha mazingira;'ORACLE_NYUMBANI'. Nenda kwenye Paneli Dhibiti &gt;
+Mfumo na Ulinzi &gt; Mfumo, chagua 'Kiwango cha Juu cha Mipangilio ya
+Mfumo', bofya kwenye 'Mpya' chini ya 'Vishika nafasi vya mfumo' ingiza
+'ORACLE_NYUMBANI' kama Jina la Kishika nafasi na tumia
+'C:\instantclient_11_2'  kama Thamani ya Kishika nafasi. Chagua kishika
+nafasi cha 'NJIA', na ongeza mpangilio orodha 'C:\instantclient_11_2' kwenye
+njia. Kama sasa ukianzisha kipindi kipya cha
+<application>cmd.exe</application> na kuanzisha hati
+<application>otrs.CheckModules.pl</application> iliyo kwenye mpangilio
+orodha <application>OTRS</application>, unatakiwa kuona kwamba
+DBD::Kiendeshaji cha oracle kimesakinishwa kikamilifu. Baada ya hapa,
+unatakiwa kuanzisha upya mfumo ili programu-tumizi nyingine kutambua vishika
+nafasi vipya vya mazingira.
+        </para>
+    </section>
+
+    <section id="windows-installation-dbd-oracle-strawberry">
+        <title>Usakinishaji wa DBD::Oracle kwenye Strawberry Perl</title>
+
+            <para>
+                Ili kukusanya-zalisha moduli ya  DBD::Oracle, unahitaji kuwa umesakinisha
+vijenzi vya kisakinishi cha wavuti cha OTRS katika njia isiyokuwa na
+nafasi. HAITAKIWI kuwa katika <filename>C:\Program Files\OTRS</filename>
+lakini katika <filename>C:\OTRSComponents</filename> au inayofanana.
+            </para>
+
+    <para>
+        Katika Perl ya Strawbery unatakiwa kukusanya-zalisha kiendeshi cha Oracle
+kwa mikono. Kisakinishi cha windows cha OTRS kinakusanya Strawbery perl ya
+biti 32. Hii inamaanisha unatakiwa pia kupakua programu ya Oracle ya biti
+32. Nenda kwenye tovuti ya programu ya Oracle <ulink
+url="http://www.oracle.com/technetwork/topics/winsoft-085727.html">
+<citetitle>Instant Client Downloads for Microsoft Windows
+(32-bit)</citetitle></ulink> na pakua vifurushi 'Instant Client Package -
+Basic', 'Instant Client Package - SQL*Plus', na 'Instant Client Package -
+SDK'. Itabidi ufungue Akaunti ya tovuti ya Oracle ya bure ili kuoakua
+programu hiyo. Pata dondoo ya ulivyopakua, mafaili yote yaliyo kwenye zip,
+kwenda kwenye mzizi wa kiendeshi chako, kwa mfano
+<filename>C:\instantclient_11_2</filename>.
+    </para>
+    <para>
+        Sasa unatakiwa kuongeza maktaba za wateja kwenye njia yako na kuseti kishika
+nafasi cha mazingira;'ORACLE_NYUMBANI'. Nenda kwenye Paneli Dhibiti
+&gt;Mfumo na Usalama &gt; Mfumo, chagua 'Kiwango cha juu cha Mipangilio ya
+Mfumo', bofya kwenye 'Mpya' chini ya 'vishika nafasi vya Mfumo', ingiza
+'ORACLE_NYUMBANI' kama Jina la Kishika nafasi na tumia
+'C:\instantclient_11_2' kama Thamani ya Kishika nafasi. Chagua kishika
+nafasi 'NJIA', na ongeza mpangilio orodha 'C:\instantclient_11_2' kwenye
+njia. Baada ya hapa unatakiwa kuanzisha upya mfumo ili programu-tumizi
+nyingine kutambua vishika nafasi vipya vya mazingira.
+    </para>
+    <para>
+        Sasa unaweza kukusanya-zalisha na kusakinisha moduli ya DBD::Oracle. Kwa
+hii, fungua dirisha la <application>cmd.exe</application>, na anzisha
+programu ya cpan. Pakua na kupata dondoo ya DBD::Oracle kupitia
+<command>look DBD::Oracle</command>, kisha andika <command>perl
+Makefile.PL</command>, <command>dmake</command> na <command>dmake
+install</command>. Matokeo ya mfano yapo chini hapa.
+    </para>
+
+    <para>
+        <screen><![CDATA[
+C:\Users\max>cpan
+
+cpan shell -- CPAN exploration and modules installation (v1.9800)
+Enter 'h' for help.
+
+
+cpan> look DBD::Oracle
+Database was generated on Thu, 16 May 2013 14:52:41 GMT
+Running look for module 'DBD::Oracle'
+
+Trying to open a subshell in the build directory...
+....
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>perl Makefile.PL
+Using DBI 1.623 (for perl 5.016003 on MSWin32-x86-multi-thread) installed in C:/
+OTRSComponents/StrawberryPerl/perl/vendor/lib/auto/DBI/
+
+Configuring DBD::Oracle for perl 5.016003 on MSWin32 (MSWin32-x86-multi-thread)
+
+...
+Checking if your kit is complete...
+Looks good
+LD_RUN_PATH=c:/instantclient_11_2/lib:c:/instantclient_11_2/rdbms/lib
+Using DBD::Oracle 1.62.
+Using DBD::Oracle 1.62.
+Using DBI 1.623 (for perl 5.016003 on MSWin32-x86-multi-thread) installed in C:/
+OTRSComponents/StrawberryPerl/perl/vendor/lib/auto/DBI/
+Writing Makefile for DBD::Oracle
+Writing MYMETA.yml and MYMETA.json
+...
+
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>dmake
+... lots of output and compiler warnings ...
+
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>dmake install
+Files found in blib\arch: installing files in blib\lib into architecture depende
+nt library tree
+Installing C:\OTRSCO~1\StrawberryPerl\perl\site\lib\auto\DBD\Oracle\dbdimp.h
+...
+Appending installation info to C:\OTRSCO~1\StrawberryPerl\perl\lib/perllocal.pod
+
+C:\OTRSCO~1\StrawberryPerl\cpan\build\DBD-Oracle-1.62-kq6los>exit
+
+cpan> quit
+Lockfile removed.
+
+C:\Users\max>
+        ]]></screen>
+    </para>
+</section>
+    <section id="windows-installation-config-webinstaller">
+        <title>Sanidi OTRS kwa kutumia Kisakinishi cha Wavuti</title>
+        <para>
+            Kisakinishi cha tovuti kinaweza kutumika kusanidi mipangilio ya msingi ya
+OTRS kama ilivyoelezewa <link linkend="web-installer">katika kipengele
+hiki</link>.
+        </para>
+    </section>
+</section>
+</section>
+</section>

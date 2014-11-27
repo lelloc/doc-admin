@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="time">
+<title>Shughuli zinazoendana na muda</title>
+
+<section id="time-settings">
+<title>Kuseti masaa, sikuku na majira ya biashara</title>
+
+<para>
+Baadhi ya kazi katika OTRS, kama upandishaji na <link
+linkend="unlock-tickets">kufungua kiotomatiki tiketi</link>, inategemea
+kwenye usanidi sahihi wa masaa ya biashara, majira ya saa na
+sikukuu. Unaweza kufafanua hii kupitia <link linkend="sysconfig">Kiolesura
+cha SysConfig</link>, katika <link
+linkend="ConfigReference_Framework:Core::Time">Kiunzi &gt;
+Kiini::Muda</link>. Unaweza kuweka bayana seti tofauti za masaa ya kazi,
+sikukuu na majira ya saa kama 'Kalenda' tofauti katika <link
+linkend="ConfigReference_Framework:Core::Time::Calendar1">Kiunzi &gt;
+Kiini::Muda::Kalenda1</link> kupitia <link
+linkend="ConfigReference_Framework:Core::Time::Calendar9">Kiunzi &gt;
+Kiini::Muda::Kalenda9</link>. Kalenda zinaweza kufafanuliwa na <link
+linkend="adminarea-queue">mipangilio ya foleni</link>, au ngazi za SLA. Hii
+ina maanisha, kwa mfano, unaweza kuweka bayana kalenda yenye masaa ya
+biashara 5 x 8 kwa SLA yako ya 'Kawaida', lakini ukatengeneza kalenda
+tofauti ya msaada wa 7 x 24 kwa SLA zako za 'dhahabu'; na pia kuseti kalenda
+kwa ajili ya foleni yako ya 'Msaada-USA' yenye dirisha tofauti la muda
+tofauti na lile la foleni yako ya 'Msaada-Japan'. OTRS inaweza kushughulikia
+mpaka kalenda tofauti 99.
+</para>
+
+<section id="TimeWorkingHours">
+<title>Masaa ya Biashara</title>
+
+<para>
+Seti masaa ya kazi kwa ajili ya mfumo wako katika SysConfig <link
+linkend="ConfigReference_Framework:Core::Time:TimeWorkingHours">kiunzi&gt;
+Kiini::Muda::MudaMasaaYaKazi</link>, au kwa kalenda zako maalumu katika
+usanidi wa kalenda. OTRS inaweza kushughulikia muda wa saa moja. Kuweka
+alama katika visanduku 8, 9, 10 ... 17 inaendana na masaa ya kazi ya 8
+asubuhi - 6 alasiri.
+</para>
+
+<para>
+Katika masaa ya biashara tu ndio tiketi zinaweza kupanda, taarifa za tiketi
+zilizopandishwa na tiketi zinazosubiri zinatumwa, na tiketi zinafunguliwa.
+</para>
+</section>
+
+
+<section id="TimeVacationDays">
+<title>Sikukuu zenye tarehe za kudumu</title>
+
+<para>
+Sikukuu ambazo ziko kwenye tarehe funge kila mwaka, kama Mwaka mpya au
+tarehe nne ya Julai, zinaweza kubainishwa katika <link
+linkend="ConfigReference_Framework:Core::Time:TimeVacationDays">MudaSikukuuSiku</link>,
+au katika sehemu husika kwa ajili ya kalenda 1-9
+</para>
+
+<para>
+Tiketi hazitapandishwa wala kufunguliwa katika siku zilizofafanuliwa kama
+MudaSikuZaSikukuu.
+</para>
+
+<note>
+<para>
+Kwa chaguo-msingi OTRS inasafirishwa na sikukuu za
+<emphasis>German</emphasis> zimesakinishwa.
+</para>
+</note>
+
+</section>
+
+<section id="TimeVacationDaysOneTime">
+<title>MudaSikuZaSikukuuMaraMoja</title>
+
+<para>
+Sikuku kama Pasaka ambazo hazima tarehe maalumu ya mwaka lakini badala yake
+zinabadilika kila mwaka, zinaweza kubainishwa kwenye  <link
+linkend="ConfigReference_Framework:Core::Time:TimeVacationDaysOneTime">MudaSikuZaSikukuuMaraMoja</link>.
+</para>
+
+<para>
+Tiketi hazitapandishwa na hazitafunguliwa  katika tarehe zilizofafanuliwa
+katika MudaSikuZaSikukuuMaraMoja
+</para>
+
+<note>
+<para>
+OTRS haisafirishwi na sikukuu yoyote ya Wakati-Mmoja ikiwa
+imesakinishwa. Hii ina maanisha unatakiwa kuongeza sikukuu, kama Pasaka au
+Sikuku ya Shukrani, kwenye mfumo wakati wa kusanidi OTRS.
+</para>
+</note>
+
+</section>
+
+</section>
+
+<section id="unlock-tickets">
+<title>Ufunguaji Otomatiki</title>
+
+<para>
+Tiketi zilizofungwa zinaweza kufunguliwa kiotomatiki na mfumo. Hiki
+kipengele kinaweza kuwa cha muhimu, kwa mfano, wakala amefunga tiketi ambazo
+zinatakiwa kuchakatishwa, lakini hawezi kuzifanyia kazi kwa sababu fulani,
+tuseme yuko nje ya ofisi kwa dharura. Kipengele otomatiki cha kufungua
+kinafungua tiketi baada ya muda fulani kuhakikisha hakuna tiketi
+zilizofungwa zitakazosahaulika, hivyo kuruhusu mawakala wengine
+kuzichakatisha.
+</para>
+
+<para>
+Idadi ya muda kabla tiketi haijafunguliwa inaweza kuwekwa bayana katika
+<link linkend="adminarea-queue">mipangilio ya foleni</link> kwa kila
+foleni. Moduli <filename>bin/otrs.UnlockTickets.pl</filename>, ambayo
+inatekelezwa kwa kipindi fulani kama kazi ya mfumo iliyopangwa, inafanya
+ufunguaji otomatiki wa tiketi.
+</para>
+
+<para>
+Taarifa kuhusu tiketi zilizofunguliwa zinatumwa nje kwa wale mawakala wenye
+foleni zilizosetiwa tiketi zilizofunguliwa kwenye 'Foleni zangu', na wame
+amilisha taarifa kwenye tiketi zilizofunguliwa katika <link
+linkend="user-preferences">mapendeleo</link> yao binafsi.
+</para>
+
+<para>
+Tiketi zitafunguliwa kama masharti yote yafuatayo yamefikiwa:
+</para>
+
+<itemizedlist>
+<listitem>
+<para>
+Kuna <emphasis>muda wa mwisho wa kufungua</emphasis> umefafanuliwa kwenye
+foleni ambayo tiketi imo.
+</para>
+</listitem>
+<listitem>
+<para>
+Tiketi imesetiwa  kuwa <emphasis>imefungwa</emphasis>.
+</para>
+</listitem>
+<listitem>
+<para>
+Hali ya tiketi ni <emphasis>wazi</emphasis>.
+</para>
+</listitem>
+</itemizedlist>
+
+<para>
+Muda wa kufungua utasetiwa upya kama wakala akiongeza makala mpya ya nje
+kwenye tiketi. Inaweza kuwa ya aina yoyote kati ya zifuatazo:
+<emphasis>barua pepe-nje</emphasis>, <emphasis>simu</emphasis>,
+<emphasis>faksi</emphasis>, <emphasis>sms</emphasis>, au
+<emphasis>notisi-nje</emphasis>.
+</para>
+
+<para>
+Pia, kama makala ya mwisho katika tiketi imetengenezwa na wakala, na mteja
+akaongeza nyingine, aidha kwa kupitia majibu ya tovuti au barua pepe, muda
+wa kufungua utasetiwa upya.
+</para>
+
+<para>
+Tukio la mwisho ambalo lita seti upya muda wa kufungua ni pale tiketi
+imegawiwa kwa wakala mwingine.
+</para>
+
+</section>
+
+</section>

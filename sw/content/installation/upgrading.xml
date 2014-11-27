@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="upgrading">
+<title>Kuboresha kiunzi cha OTRS</title>
+<para>
+    Haya maelekezo ni kwa ajili ya watu wanaoboresha OTRS kutoka toleo la
+<emphasis>3.2</emphasis> kwenda <emphasis>3.3</emphasis>, na kuzitumia zote
+kwa ajili ya RPM na uboreshaji wa kanuni chanzo (tarball).
+</para>
+
+<note>
+    <para>
+        Tafadhali tambua OTRS 3.3 inahitaji japo toleo la 5.10.0 la perl. Hakikisha
+seva yako inatumia toleo hili kabla ya kupanga uboreshaji wako. Unaweza
+kukagua toleo na amri <command>perl -v</command> katika tungo
+amri. Usambazaji wa Linux unaojulikana ambao unatumia perl 5.8 na bado una
+msaada kwa muuzaji wake ni  Red Hat Enterprise Linux (RHEL) 5 na mwenzake
+CentOS 5. Kama upo kwenye moja wapo ya haya majukwaa na una mpango wa
+uboreshaji kwenda OTRS 3.3 pia unahitaji kupanga kuhamisha mfumo endeshi
+wako kwenda toleo lenye perl yenye msaada kama RHEL 6 or CentOS 6.
+    </para>
+</note>
+
+<para>
+    Kama unatumia toleo la nyuma la OTRS inabidi ufwate njia ya kusasisha kwenda
+kwenye 3.1 kwanza
+(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3 ...)! Unahitaji
+kufanya uboreshaji kamili kwenda kila toleo katikati, kujumuisha mabadiliko
+ya hifadhidata na kusasisha hati ya perl.
+</para>
+<para>
+    Tafadhali tambua ukioresha kutoka OTRS 2.2 au chini, unatakiwa kuchukua
+hatua ya ziada; tafadhali soma <ulink
+url="http://bugs.otrs.org/show_bug.cgi?id=6798">http://bugs.otrs.org/show_bug.cgi?id=6798</ulink>.
+</para>
+<para>
+    Ndani ya toleo dogo moja unaweza kuruka matoleo ya ngazi ya kiraka kama
+ukitaka kusasisha. Kwa mfano unaweza kuboresha moja kwa moja kutoka OTRS
+3.3.1 kwenda toleo 3.3.4. Kama unataka kufanya "uboreshaji ngazi ya kiraka",
+unatakiwa kuruka hatua 9 na 13-16.
+</para>
+<para>
+    Tafadhali tambua kama ukifanya usasishaji wa ngazi ya viraka kutoka OTRS
+3.3.6 au chini ya hapo, unahitaji kuamilisha kazi mpya ya mfumo iliyopangwa
+ambayo inadhibiti mchakato wa mratibu. Tafadhali nakili mafaili
+<filename>/opt/otrs/var/cron/scheduler_watchdog.dist</filename> kwenda
+<filename>/opt/otrs/var/cron/scheduler_watchdog</filename> na sasisha
+kichupo cha cron na <filename>/opt/otrs/bin/Cron.sh start</filename> (kama
+mtumiaji wa "otrs", sio mzizi).
+</para>
+
+  <orderedlist>
+      <listitem>
+        <para>
+            Sitisha huduma zote husika.
+        </para>
+        <para>
+            mf. (inategemeana na huduma zilizotumika): <screen>
+shell&gt; /etc/init.d/cron stop
+shell&gt; /etc/init.d/postfix stop
+shell&gt; /etc/init.d/apache stop
+            </screen>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Weka chelezo ya kila kitu chini ya $OTRS_HOME (chaguo-msingi:
+OTRS_HOME=/opt/otrs):
+            <itemizedlist>
+                <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
+                <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename></para></listitem>
+                <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
+                <listitem><para><filename>var/*</filename></para></listitem>
+                <listitem><para><filename>pia na hifadhidata</filename></para></listitem>
+            </itemizedlist>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Hakikisha umeweka cheleza ya kila kitu ;-)
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Anzisha mfumo mpya (hiari)
+        </para>
+        <para>
+            Kama inawezekana, jaribu usakinishaji huu kwenye mfumo tofauti kwanza kwa
+majaribio.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Sakinisha toleo jipya (tar au RPM).
+        </para>
+         <itemizedlist>
+          <listitem>
+            <para>
+                Na tarball:
+            </para>
+            <para>
+                <screen>
+shell&gt; cd /opt
+shell&gt; mv otrs otrs-old
+shell&gt; tar -xzf otrs-x.x.x.tar.gz
+shell&gt; mv otrs-x.x.x otrs
+                </screen>
+            </para>
+            <para>
+                Rejesha usanidi wa ma faili ya zamani
+                <itemizedlist>
+                    <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
+                    <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename></para></listitem>
+                    <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                Rudisha TicketCounter.log
+            </para>
+            <para>
+                Ili kuwezesha OTRS kuendelea na nambari ya tiketi sahihi, rudisha
+<filename>TicketCounter.log</filename> kuwa
+<filename>$OTRS_HOME/var/log/</filename> (chaguo-msingi:
+<filename>OTRS_HOME=/opt/otrs</filename>). Hii ni muhimu kama ukitumia
+nambari za tiketi zinazo ongezeka.
+            </para>
+            <para>
+                Rejesha data za makala
+            </para>
+            <para>
+                Kama ulisanidi OTRS kuhifadhi data za makala kwenye mfumo wa mafaili inabidi
+urudishe kabrasha la <filename>makala</filename> kuwa
+<filename>$OTRS_HOME/var/</filename>  (chaguo-msingi:
+<filename>OTRS_HOME=/opt/otrs</filename>).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                Na RPM: <screen>
+shell&gt; rpm -Uvh otrs-x.x.x.-01.rpm
+                </screen>
+            </para>
+            <para>
+                Kwa kesi hii usasishaji wa RPM unarudisha kiotomatiki mafaili ya usanidi ya
+zamani.
+            </para>
+          </listitem>
+         </itemizedlist>
+      </listitem>
+      <listitem>
+        <para>
+            Maudhui binafsi
+        </para>
+        <para>
+            Kumbuka: Maudhui ya OTRS kati ya 3.2 na 3.3 siyo tangamanifu, kwa hiyo
+usitumie maudhui ya zamani.
+        </para>
+        <para>
+            Mandhari yanapatikana chini ya $OTRS_HOME/Kernel/Output/HTML/*/*.dtl
+(chaguo-msingi: OTRS_HOME=/opt/otrs).
+        </para>
+        <para>
+            Tafadhali tambua pia mafaili ya dtl lazima yawe katika umbizo la utf-8
+kutoka OTRS 3.3 na kuendelea.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Seti ruhusa za mafaili.
+        </para>
+        <para>
+            Kama tarball imetumika, tekeleza: <screen>
+shell&gt; cd /opt/otrs/
+shell&gt; bin/otrs.SetPermissions.pl
+            </screen> kwa
+ruhusa zinazohitajika na mfumo wako.
+        </para>
+      </listitem>
+      <listitem>
+            <para>
+                Kagua moduli za Perl zinazohitajika
+            </para>
+            <para>
+               Hakikisha kwamba moduli zote za perl zinazohitajika zimesakinishwa kwenye
+mfumo wako na sakinisha moduli zozote ambazo zinakosekana.  <screen>
+shell&gt; /opt/otrs/bin/otrs.CheckModules.pl
+               </screen>
+            </para>
+      </listitem>
+      <listitem>
+        <para>
+            Sasisha mpango:
+        </para>
+        <para>
+             Kumbuka: majedwali mapya yanayotengenezwa katika mchakato wa KUBORESHA MySQL
+yatatengenezwa na jedwali injini la utunzaji la kawaida lililosetiwa katika
+seva ya MySQL. Katika MySQL 5.5 aina mpya ya chaguo-msingi ni InnoDB. Kama
+majedwali yaliyopo, mfano "watumiaji", yana injini ya uhifadhi wa jedwali,
+mfano. MyISAM, basi kosa litaonyeshwa wakati wa kutengeneza  vizuizi muhimu
+vya nje.
+         </para>
+         <para>
+            Una machaguo mawili: (1) unaweza kubadilisha injini chaguo-msingi ya
+uhifadhi ya MySQL kurudi kuwa ya MyISAM ili majedwali mapya yawe na injini
+sawa na majedwali yaliyopo, au (2) badili majedwali yaliyopo kutumia InnoDB
+kama injini ya uhifadhi.
+        </para>
+        <para>
+            Matatizo yoyote yanayohusiana na injini ya uhifadhi yataripotiwa kwa kutumia
+hati ya otrs.CheckDB.pl, kwa hiyo tafadhali anzisha kukagua kama kuna
+masuala yoyote.
+        </para>
+        <para>
+            <screen>
+shell&gt; cd /opt/otrs/
+
+# MySQL:
+shell&gt; bin/otrs.CheckDB.pl
+shell&gt; cat scripts/DBUpdate-to-3.3.mysql.sql | mysql -p -f -u root otrs
+
+# PostgreSQL 8.2+:
+shell&gt; cat scripts/DBUpdate-to-3.3.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
+
+# PostgreSQL, older versions:
+shell&gt; cat scripts/DBUpdate-to-3.3.postgresql_before_8_2.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
+            </screen>
+        </para>
+        <para>
+            Kumbuka: Kama ukitumia PostgreSQL 8.1 au toleo kabla ya hapo, unahitaji
+kuamilisha viendeshaji vipya vya urithi kwa matoleo haya ya zamani. Fanya
+hivi kwa kuongeza mstari mpya  kwa <filename>Kernel/Config.pm</filename>
+yako kama hivi: <screen>
+$Self->{DatabasePostgresqlBefore82} = 1;
+            </screen>
+        </para>
+        <para>
+            Anzisha hati ya uhamiaji (kama mtumiaji wa 'otrs', SIO kama mzizi):
+        </para>
+        <para>
+            <screen>
+shell&gt; scripts/DBUpdate-to-3.3.pl
+            </screen> Usiendelee na mchakato wa uboreshaji
+kama hii hati haifanyi kazi vizuri kwako. Lasivyo upotevu wa data unaweza
+kutokea.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+Onesha upya usanidi na futa hifadhi muda. Tafadhali anzisha (kama mntumiaji
+wa 'otrs' SIO kama 'mzizi'):
+        </para>
+        <para>
+            <screen>
+shell&gt; bin/otrs.RebuildConfig.pl
+shell&gt; bin/otrs.DeleteCache.pl
+            </screen>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Anzisha upya huduma zako.
+        </para>
+        <para>
+            mf. (inategemeana na huduma zilizotumika): <screen>
+shell&gt; /etc/init.d/cron start
+shell&gt; /etc/init.d/postfix start
+shell&gt; /etc/init.d/apache start
+            </screen> Sasa unaweza kuingia kwenye mfumo wako.
+        </para>
+      </listitem>
+      <listitem>
+        <para>Kagua vifurushi vilivyosakinishwa.</para>
+        <para>
+            Katika meneja kifurushi, kagua kama vifurushi vyote vina alama isemayo
+vimesakinishwa kwa usahihi au kama chochote kinahitaji usakinishaji mpya au
+hata uboreshaji wa kifurushi.
+        </para>
+        <para>
+            Vifurushi vifuatavyo vinasakinushwa kiotomatiki baada ya mchakato wa
+uboreshaji (kama zilisakinishwa kabla):
+        </para>
+        <itemizedlist>
+            <listitem><para>OTRSMkuuWaPostaChujaViendelezi</para></listitem>
+            <listitem><para>OTRSNakalaHuruKutokKwaMtejaMtumiaji </para></listitem>
+            <listitem><para>OTRSUtambuziNambariTiketiNje</para></listitem>
+            <listitem><para>OTRSDashibodiFoleniMapitio</para></listitem>
+            <listitem><para>OTRSMakalaMuhimu</para></listitem>
+            <listitem><para>OTRSMakalaMuhimuITSM</para></listitem>
+            <listitem><para>OTRSDashibodiTiketiKalenda</para></listitem>
+            <listitem><para>OTRSChaguaHudumaNyingi</para></listitem>
+            <listitem><para>OTRSChaguaFoleniNyingi</para></listitem>
+            <listitem><para>OTRSSehemuInayobadilikaUchaguziNgaziNyingi</para></listitem>
+            <listitem><para>OTRSVitendoTiketiVilivyojikitaTukio</para></listitem>
+            <listitem><para>OTRSTiketiAclMhariri</para></listitem>
+            <listitem><para>OTRSUchaguziMchakatoMteja</para></listitem>
+            <listitem><para>OTRSACLViendelezi</para></listitem>
+            <listitem><para>ViolezoVyaKawaidaVyaUjumlaVyaOTRS</para></listitem>
+            <listitem><para>OTRSTafutaSehemuTareheInayobadilikaIliyopanuliwa</para></listitem>
+            <listitem><para>OTRSDashibodiTiketiiMapitioVichujio</para></listitem>
+        </itemizedlist>
+      </listitem>
+      <listitem>
+        <para>
+            Kagua mipangilio ya usanidi wa OTRSNakalaHuruKutokKwaMtejaMtumiaji
+        </para>
+        <para>
+            Kumbuka: Hii itatumika kama umetumia kifurushi cha
+OTRSNakalaHuruKutokaKwaMtejaMtumiaji kabla.
+        </para>
+        <para>
+            Kama ulitumia moduli hii kabl, unahitaji kuisanidi upya. Moduli
+inasakinushwa kiotomatiki na hati ya uboreshaji  kwa kuwa sasa ni sehemu ya
+kiunzi cha OTRS.
+        </para>
+        <para>
+            Kama unataka kuendelea kuitumia, tafadhali wezesha mpangilio
+"Tiketi::TukioModuliTuma###930-SehemuInayobadilikaKutokakwaMtejaMtumiaji"
+kuamilisha sifa hii na fanya usanidi wa muunganiko katika mpangilio
+"SehemuInayobadilikaKutokaKwaMtejaMtumiaji::Kuunganisha"
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+            Agiza ACL zako kwenda kwenye kihariri cha ACL mpya (hiari)
+        </para>
+        <para>
+            Katika OTRS 3.3, kuna kihariri michoro kwa ajili ya ACL katika kiolesura cha
+usimamizi. Utahitaji kuagiza ACL zako zilizopo (mf. katika mafaili ya
+Config.pm au ya nyongeza) kwenda kwenye kihariri kwa kutumia
+bin/otrs.ImportACLsFromConfig.pl ili kufanya zipatikane kwenye
+kihariri. Tafadhali hakikisha unafuta ACL zote kutoka kwenye Config.pm (au
+mafaili mengine) baada ya kumaliza  kwa mafanikio mchakatowa kuagiza. Pia
+utahitaji kutumia kitufe cha kutumia katika mazingira ya mbele ya usimamizi
+wa ACL ili kutumia upya ACL zilizoagizwa kwenye mfumo wako.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Sasisha usanidi wako wa seva ya wavuti
+        </para>
+        <para>
+            Tambua: hii inafanya kazi kama ukitumia seva ya tovuti ya Apache, na
+usipotumia faili la usanidi moja kwa moja kutoka kwenye mpangilio orodha wa
+usanidi wa OTRS (mf. kwa symlink kutoka kwenye mpangilio orodha wa usanidi
+wa Apache) .
+        </para>
+        <para>
+            Tafadhali sasisha usanidi wa faili la Apache kwa ajili ya OTRS kwa kuwa
+kumekuwa na mabadiliko mengi (ona
+<filename>scripts/apache2-httpd.include.conf</filename>).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+            Sasisha na amilisha kazi za mfumo zilizopangwa
+        </para>
+        <para>
+            Kuna kazi tofauti za mfumo zilizopangwa chaguo-msingi za OTRS katika
+$OTRS_HOME/var/cron/*.dist. Zinaweza kuamilishwa kwa kuzinakili bila
+kiendelezi ".dist" cha jina la faili. Fanya hivi kuhakikisha unapata matoleo
+ya hivi karibuni ya kazi zilizopangwa za mfumo na matoleo mapya
+pia. <screen><![CDATA[
+shell> cd var/cron
+shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
+            ]]></screen>
+
+        </para>
+        <para>
+            Tafadhali kagua mafaili yaliyonakiliwa na kufanya upya mageuzi yoyote ya
+kukufaa ambayo uliwahi kufanya.
+        </para>
+        <para>
+            Kuweka ratiba ya hizi kazi za mfumo zilizopangwa kwenye mfumo wako, unaweza
+kutumia hati Cron.sh. Hakikisha unaitekeleza kama mtumiaji wa mfumo wa
+OTRS!<screen><![CDATA[
+shell> /opt/otrs/bin/Cron.sh start
+            ]]></screen>
+        </para>
+      </listitem>
+      <listitem>
+        <para>Umefanya vizuri!</para>
+      </listitem>
+  </orderedlist>
+</section>

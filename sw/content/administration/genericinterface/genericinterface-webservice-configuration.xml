@@ -1,0 +1,915 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="genericinterface-webservice-configuration">
+    <title>Usanidi wa Huduma za Tovuti</title>
+    <para>
+        Kutoka kwenye usanifu wake huduma za tovuti zilionekana kuweza kutumika
+kutoa mfumo mmoja wa OTRS kwenda mwingine, mf. kutoka kwenye mazingira ya
+majaribio au usanifu kwenda kwenye mazingira ya uzalishaji. Kwa hiyo
+ilihitajika kuwa na njia rahisi ya kupata usanidi wa huduma za tovuti kutoka
+kwenye hifadhidata, na kuhamishia kwenye nyingine. Kufanikisha kazi hii
+Kiolesura cha Ujumla kinatumia mafaili ya YAML kama msingi wa usanidi wa
+huduma za tovuti.
+    </para>
+    <para>
+        Kwanini YAML? YAML ni lugha ya dhulisho mabadiliko iliyoundwa kuwa rafiki
+kwa binadamu kuandika na kusoma (ni rahisi kuelewa zaidi ya JSON)  , haina
+baadhi ya vikwazo vya XML kama lebo za tarakimu, ni wazi, ya kawaida, na ni
+kamili zaidi kuhifadhi usanidi mzima wa huduma ya tovuti.
+    </para>
+    <note>
+        <para>
+            Kujifunza zaidi kuhusu YAML tafadhali tembelea <ulink
+url="http://www.yaml.org/">http://www.yaml.org/</ulink>.
+        </para>
+    </note>
+    <para>
+        ufuatao ni mfano wa usanidi wa huduma ya tovuti katika muundo wa YAML:
+    </para>
+    <para>
+        <programlisting><![CDATA[
+---
+Debugger:
+  DebugThreshold: debug
+Description: This an example of a web service configuration
+Provider:
+  Operation:
+    CloseIncident:
+      Description: This is a test operation
+      MappingInbound: {}
+      MappingOutbound: {}
+      RemoteSystemGuid: ''
+      Type: Test::Test
+    Test:
+      Description: This is a test operation
+      MappingInbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Keep
+          KeyMapExact:
+            Prio: Priority
+          ValueMap:
+            Priority:
+              ValueMapExact:
+                Critical: 5 Very High
+                Information: 1 Very Low
+                Warning: 3 Normal
+          ValueMapDefault:
+            MapTo: 3 Normal
+            MapType: MapTo
+        Type: Simple
+      MappingOutbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Ignore
+          KeyMapExact:
+            Priority: Prio
+          ValueMap:
+            Prio:
+              ValueMapExact:
+                1 Very Low: Information
+                3 Normal: Warning
+                5 Very High: Critical
+          ValueMapDefault:
+            MapTo: ''
+            MapType: Ignore
+        Type: Simple
+      Type: Test::Test
+  Transport:
+    Config:
+      MaxLength: 10000000
+      NameSpace: http://www.example.com/actions
+    Type: HTTP::SOAP
+RemoteSystem: remote.system.description.example.com
+Requester:
+  Invoker:
+    Test:
+      Description: This is a test invoker
+      Events:
+        - Asynchronous: 1
+          Event: TicketCreate
+        - Asynchronous: 0
+          Event: ArticleUpdate
+      MappingInbound:
+        Type: Simple
+      MappingOutbound:
+        Type: Simple
+      Type: Test::Test
+  Transport:
+    Config:
+      Authentication:
+        Password: '*******'
+        Type: BasicAuth
+        User: otrs
+      Encoding: utf-8
+      Endpoint: http://www.example.com:8080/endpoint
+      NameSpace: http://www.example.com/actions
+      SOAPAction: Yes
+      SOAPActionSeparator: '#'
+    Type: HTTP::SOAP
+            ]]>
+        </programlisting>
+    </para>
+    <section>
+        <title>
+            Undani wa Usanidi
+        </title>
+        <section>
+            <title>
+                Ujumla
+            </title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        Maelezo: nakala fupi inayoelezea huduma ya tovuti.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        MfumoMbali: maelezo mafupi ya Mfumo wa Mbali.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Anaye eua: chombo cha mipangilio ya anaye eua.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Mtoaji: chombo cha mipangilio ya mtoaji.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Muombaji: chombo cha mipangilio ya muombaji.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section>
+            <title>
+                Anaye eua
+            </title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        EuaKizingiti: Ngazi ya anaye eua
+                    </para>
+                    <itemizedlist mark="round">
+                        <title>
+                            Thamani ziwezekanazo
+                        </title>
+                        <listitem>
+                            <para>
+                                eua: batli zote zinahifadhiwa kwenye hifadhidata.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Taarifa: batli za tabaka la taarifa, notisi na kasoro ndio zinahifadhiwa
+katika hifadhidata.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                notisi: batli za tabaka la notisi na makosa ndio zinahifadhiwa kwenye
+hifadhidata.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                kosa: batli za tabaka la makosa tu ndio zinahifadhiwa kwenye hifadhidata.
+                            </para>
+                        </listitem>
+
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section>
+            <title>Mtoaji</title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        Operesheni: chombo kwa kila mipangilio ya operesheni.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Usafirishaji: chombo cha mipangilio ya mtoaji usafiri wa mtandao.
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <section>
+                <title>Operesheni</title>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>
+                            &lt;OperesheniJina&gt;: Jina la kipekee kwa operesheni, chombo cha
+mipangilio yake ya operesheni (nambari ya elementi 0..n, haitakiwi
+kujirudia).
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <section>
+                    <title>&lt;JinaOperesheni&gt;</title>
+                    <para>
+                        Hiki kifungu kinajikita katika operesheni kutoka aina "Test::Test"
+operesheni nyingine zinaweza kuwa na zaidi au mipangilio mingine.
+                    </para>
+                    <itemizedlist mark="round">
+                        <listitem>
+                            <para>
+                                Maelezo: nakala fupi inayoelezea operesheni.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                KuunganishaZinazoingia: chombo cha kuunganisha mipangilio ya data za maombi
+yanayoingia.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                KuunganishaZinazotoka: chombo cha kuunganisha mipangilio ya data za majibu
+yanayotoka.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Aina: mazingira ya nyuma ya operesheni, katika Mdhibiti::Umbizo la
+operesheni.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <section>
+                        <title>KuunganishaZinazoingia</title>
+                        <para>
+                            Kifungu hiki kinajikita katika miunganiko ya aina "Rahisi". Miunganiko
+mingine inaweza kuwa na mipangilio zaidi au tofauti.
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Usanidi: chombo cha kuunganisha mipangilio hii.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Aina: kuunganisha mazingira ya nyuma.
+                                </para>
+                            </listitem>
+
+                        </itemizedlist>
+                            <section>
+                                <title>Usanidi</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            UfunguoUnganishaChaguo-msingi: chombo cha mipangilio yote ya funguo
+isiyounganishwa.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            ThamaniUnganishaChaguo-msingi: chombo cha mipangilio ya thamani zote
+zisizounganishwa.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            FunguoUnganishaHalisi: chombo cha miunganiko yote halisi ya funguo (nambari
+ya elementi 0 .. 1)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            UfunguoUnganishaRegEx: chombo cha miunganiko yote ya semi za kawaida za
+ufunguo (nambari ya elementi 0 .. 1).
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            ThamaniUnganisha: chombo cha miunganiko yote ya thamani (nambari ya elementi
+0 .. 1).
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                                <section>
+                                    <title>
+                                        UfunguoUnganishaChaguo-msingi
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                UnganishaKwa: thamani mpya ya kutumika (inatumika pale tu UnganishaAina
+imesetiwa kuwa UnganishaKwa).
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                AinaRamani: sheria kwa ajili ya kuunganisha.
+                                            </para>
+                                            <itemizedlist>
+                                                <title>Thamani ziwezekanazo</title>
+                                                <listitem>
+                                                    <para>
+                                                        Weka: acha bila kubadilisha.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        Puuza: dondosha.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        UnganishaKwa: badilisha kwenda kwenye thamani UnganishaKwa.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </section>
+                                <section>
+                                    <title>
+                                        ThamaniUnganishaChaguo-msingi
+                                    </title>
+                                    <para>
+                                        Sawa sawa na UfunguoUnganishaChaguo-msingi.
+                                    </para>
+                                </section>
+                                <section>
+                                    <title>
+                                        UfunguoUnganishaHalisi
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                &lt;funguoyazamani&gt;: &lt;funguompya&gt; (nambari ya elementi 0 .. n
+haitakiwi kujirudia).
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </section>
+                                <section>
+                                    <title>
+                                        UfunguoUnganishaRegEx
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                &lt;ufunguozamani(RegEx)&gt;: &lt;ufunguompya&gt; ( nambari ya elementi 0
+.. n lakini hakuna kujirudia).
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </section>
+                                <section>
+                                    <title>
+                                        ThamaniUnganisha
+                                    </title>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                &lt;ufunguompya&gt;: chombo cha miunganiko ya thamani kwa hii funguo mpya
+(nambari ya elementi inategemeana na funguo mpya kutoka
+UfunguoUnganishaHalisi na UfunguoUnganishaRegEx).
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>
+                                            &lt;ufunguompya&gt;
+                                        </title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    ThamaniUnganishaHalisi: chombo cha miungamiko yote halisi (nambari ya
+elementi 0 .. 1).
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    ThamaniUnganishaRegEx: chombo cha uunganishaji wa thamani zote za semi za
+kawaida  (nambari ya elementi 0 .. 1).
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>
+                                                thamaniUnganishaHalisi
+                                            </title>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        &lt;thamaniyazamani&gt;: &lt;thamanimpya&gt; ( nambari ya elementi 0 .. n
+haitakiwi kujirudia).
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                        <section>
+                                            <title>
+                                                ThamaniUnganishaRegEx
+                                            </title>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        &lt;thamanizamani(RegEx)&gt;: &lt;thamanimpya&gt; ( nambari ya elementi 0
+.. n lakini isijirudie).
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                    </section>
+                    <section>
+                        <title>KuunganishaZinazotoka</title>
+                        <para>
+                            Sawa na KuunganishaZinazoingia
+                        </para>
+                    </section>
+                    <section>
+                        <title>Safirisha</title>
+                        <para>
+                            Hiki kifungu kimejikita kwenye usafirishaji mtandao wa HTTP::SOAP wa mtoaji,
+usafirishaji mwingine unaweza kuwa na mipangilio tofauti au zaidi.
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Config: chombo cha mipangilio yote maalumu ya usanidi wa usafirishaji wa
+mtandao.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Aina: mazingira ya nyuma ya mtoaji wa usafirishaji wa mtandao.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        <section>
+                            <title>Usanidi</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        KikomoUrefu: kikomo cha urefu wa kusomwa katika baiti kwenye ujumbe wa SOAP
+kwa OTRS.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        JinaNafasi: URI ambayo inatoa maudhui kwa operesheni zote zilizo kwenye
+huduma hii ya tovuti.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+        <section>
+            <title>Muombaji</title>
+            <itemizedlist mark="round">
+                <listitem>
+                    <para>
+                        Mchochezi: chombo cha mipangilio ya kila mchochezi.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Usafirishaji: chombo cha mipangilio ya muombaji wa usafiri wa mtandao.
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <section>
+                <title>Mchochezi</title>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>
+                            &lt;MchocheziJina&gt;: Jina la kipekee la mchochezi, chombo cha mipangilio
+yake ya mchochezi  (nambari ya elementi 0..n, haitakiwi kujirudia).
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <section>
+                    <title>&lt;MchocheziJina&gt;</title>
+                    <para>
+                        Hiki kifungu kinatokana na wachochezi wa aina "Jaribio::Jaribio" wachochezi
+wengine wanaweza kuwa na mipangilio tofauti.
+                    </para>
+                    <itemizedlist mark="round">
+                        <listitem>
+                            <para>
+                                Maelezo: nakala fupi inayoelezea mchochezi
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Matukio: chombo cha mipangilio ya vichochezi vya matukio visivyo na majina.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                KuunganishaZinazoingia: chombo cha kuunganisha mipangilio ya majibu ya data
+zinazoingia.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                KuunganishaZinazotoka: chombo cha kuunganisha mipangilio ya data za maombi
+yanayotoka.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Aina: mazingira ya nyuma ya mchochezi, katika Mdhibiti::Umbizo la mchochezi.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <section>
+                        <title>Matukio</title>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    <remark>Orodhesha Elementi</remark>: (nambari ya elementi 0 .. n)
+                                </para>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            Solandanifu: inaseti kama mchochezi ataachwa kuwa jukumu la Mratibu
+                                        </para>
+                                        <itemizedlist mark="round">
+                                            <title>Thamani ziwezekanazo</title>
+                                            <listitem>
+                                                <para>
+                                                    0: haijashughulikiwa na Mratibu.
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    1: imeshughulikiwa na Mratibu.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Tukio: jina la kichochezi cha tukio.
+                                        </para>
+                                        <itemizedlist>
+                                            <title>Thamani Ziwezekanazo (kwa matukio ya tiketi)</title>
+                                            <listitem>
+                                                <para>
+                                                    TengenezaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    FutaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaKichwaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiFunguaMudaWaMwishoSasisha
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaFoleniTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaAinaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaHudumaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaSLATiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaMtejaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaNakalaHuruTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaMudaHuruTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaMudaKusubiriTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaFungaTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiNyarakaBenderaSasisha
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaHaliTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaMmilikiTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiJukumuSasisha
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiKipaumbeleSasisha
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    OngezaHistoria
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    FutaHistoria
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiHesabuMuda
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MuunganikoTiketi
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiJiunge
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiJiondoe
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiBenderaSeti
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiBenderaFuta
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiMtumwaKiungoOngeza
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiMtumwaKiungoFuta
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TiketiMkuuKiungoFuta
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <itemizedlist>
+                                            <title>Thamani Ziwezekanazo (kwa matukio ya makala)</title>
+                                            <listitem>
+                                                <para>
+                                                    Matukio ya Makala
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TengenezaMakala
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaNakalaHuruMakala
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    SasishaMakala
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    TumaMakala
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaDunda
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaWakalaTaarifa
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaMtejaTaarifa
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaOtomatikiMajibu
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaBenderaSeti
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaBenderaFuta
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaWakalaTaarifa
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    MakalaMtejaTaarifa
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </section>
+                    <section>
+                        <title>KuunganishaZinazoingia</title>
+                        <para>
+                            Sawa na Operesheni KuunganishaZinazoingia
+                        </para>
+                    </section>
+                    <section>
+                        <title>KuunganishaZinazotoka</title>
+                        <para>
+                            Sawa na Operesheni KuunganishaZinazoingia.
+                        </para>
+                    </section>
+                    <section>
+                        <title>Safirisha</title>
+                        <para>
+                            Hiki kifungu kimejikita kwenye usafirishaji mtandao wa HTTP::SOAP wa
+muombaji, usafirishaji mwingine unawezakuwa na mipangilio tofauti au zaidi.
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Config: chombo cha mipangilio yote maalumu ya usanidi wa usafirishaji wa
+mtandao.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Aina: mazingira ya nyuma ya muombaji wa usafirishaji wa mtandao.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        <section>
+                            <title>Usanidi</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Uthibitisho: chombo cha mipangilio ya uthibitisho
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Usimbaji: ujumbe wa SOAP usimbaji maombi
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Pointiyamwisho: URI ya huduma ya tovuti ya Mfumo wa Mbali kukubali maombi ya
+OTRS
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        JinaNafasi: URI inayowapa maudhui wachochezi wote walio katika huduma hii ya
+wavuti.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        SOAPAction: kutuma kichwa cha SOAPAction kilicho tupu au kilichojazwa katika
+ujumbe wa SOAP (ndani ya "&lt;JinaNafasi&gt; &lt;Kigawanyo&gt;
+&lt;Kitendo&gt;" umbizo).
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <title>Thamani ziwezekanazo</title>
+                                        <listitem>
+                                            <para>
+                                                NDIYO: kutuma kichwa cha SOAPAction kilichojazwa.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Hapana: kutuma kichwa cha SOAPAction tupu.
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        SOAPActionSeparator: kuseti &lt;Kigawanyo&gt; cha kichwa cha SOAPAction
+iliyojazwa.
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <title>Thamani ziwezekanazo</title>
+                                        <listitem>
+                                            <para>
+                                                '/': inatumika kwa na huduma za tovuti za .net.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                '#': inatumika na huduma zote za tovuti zilizobaki.
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                            <section>
+                                <title>Uthibitisho</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            Mtumiaji: jina la mtumiaji lenye haki ambalo lina ufikivu kwa huduma ya
+mbali ya tovuti.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Nywila: nywila ya mtumiaji mwenye haki katika nakala wazi.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Aina: aina ya uthibitisho.
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+    </section>
+</section>

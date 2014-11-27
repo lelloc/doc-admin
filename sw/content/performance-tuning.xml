@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<chapter id="performance-tuning">
+<title>Kuboresha Utendaji</title>
+
+<abstract>
+<para>
+Inayoonyeshwa chini ni orodha ya mbinu za kuboresha utendaji wa usakinishaji
+wako wa OTRS, ikijumuisha usanidi, uandikaji kanuni, matumizi ya kumbukumbu,
+na mengine.
+</para>
+</abstract>
+
+<section id="performance-tuning-otrs">
+<title>OTRS</title>
+<para>
+Kuna njia tofauti za kuboresha utendaji wa OTRS.
+</para>
+
+<section id="performance-tuning-otrs-index">
+<title>ModuliKielelezoTiketi</title>
+<para>
+Kuna moduli mbili za mazingira ya nyuma ya kielelezo cha tiketi:
+</para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem>
+<para>
+Kwa kutumia Kernel::System::Ticket::IndexAccelerator::RuntimeDB
+(chaguo-msingi), zalisha kila muonekano moja kwa moja kutoka kwenye jedwali
+la tiketi. Hautakuwa na matatizo ya kiutendaji mpaka labda ukiwa na tiketi
+60,000 zilizofunguliwa kwenye mfumo wako.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Kiini::Mfumo::Tiketi::KielezoKiharakishi::DBTuli, moduli yenye nguvu
+kushinda zote, inatakiwa kutumika wakati una tiketi zilizo wazi zaidi ya
+80,000. Inatumia jedwali la ziada la tiketi_kielezo., ambayo inafanyakazi
+kama muonekano. Tumia <filename>bin/otrs.RebuildTicketIndex.pl</filename>
+kuzalisha kielezo kijenzi cha mwanzo baada ya kubadilisha mazingira ya
+nyuma.
+</para>
+</listitem>
+
+</itemizedlist>
+</para>
+
+<para>
+Unaweza kubadilisha IndexAccelerator kupitia SysConfig.
+</para>
+
+</section>
+
+<section id="performance-tuning-otrs-storage">
+<title>ModuliHifadhiTiketi</title>
+<para>
+Kuna moduli mbili tofauti za mazingira ya nyuma ya uhifadhi wa
+tiketi/makala:
+</para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem>
+<para>
+Sanidi Kernel::System::Ticket::ArticleStorageDB (chaguo-msingi) kuhifadhi
+viambatanishi, na kadh., katika hifadhidata. Tambua: Usitumie na mipangilio
+mkubwa.
+</para>
+<para>
+Faida: Kama mtumiaji wako wa seva ya tovuti siyo mtumiaji wa 'otrs', tumia
+hii moduli kuzuia matatizo ya ruhusa za faili.
+</para>
+<para>
+Hasara: Haishauriwi kuhifadhi viambatanisho kwenye hifadhidata yako. Chukua
+tahadhari kwamba hifadhidata yako inaweza kuhifadhi vitu vikubwa. Mf. Sanidi
+MySQL na "set-variable = max_allowed_packet=8M" kuhifadhi vitu vyenye 8 MB
+(chaguo msingi ni 2M).
+</para>
+</listitem>
+
+<listitem>
+<para>
+Sanidi Kernel::System::Ticket::ArticleStorageFS kuhifadhi viambatanishi na
+kadh. katika mfumo wa faili wa ndani. Tambua: Inashauriwa kwa mipangilio
+mikubwa
+</para>
+<para>
+Faida: Ni ya kasi!
+</para>
+<para>
+Hasara: Mtumiaji wako wa seva ya tovuti anatakiwa kuwa mtumiaji wa
+'otrs'. Pia, kama una seva za mazingira ya mbele zaidi ya moja, unatakiwa
+kuhakikisha mfumo wa faili unatumiwa kwa pamoja kati ya seva. Iweke kwenye
+ushirika wa NFS au kwa mapendeleo zaidi SAN au inayofanania.
+</para>
+</listitem>
+
+</itemizedlist>
+
+</para>
+
+<para>
+    Kumbuka: unaweza kubadilisha kutoka aina moja ya mazingira ya nyuma kwenda
+mengine kwa haraka, Unaweza kubadilisha mazingira ya nyuma katika SysConfig,
+baada ya hapo anzisha zana ya tungo amri
+<filename>otrs.ArticleStorageSwitch.pl</filename> ili kuweka makala kutoka
+kwenye hifadhidata kwenda kwenye mfumo wa mafaili na kinyume chake. Unaweza
+kutumia machaguo <emphasis>-s</emphasis> na <emphasis>-d</emphasis> kuweka
+bayana chanzo na kifikio cha mazingira ya nyuma. Tafadhali tambua mchakato
+mzima unaweza kutumia muda mwingi kufanyika, kutegemeana na idadi ya makala
+ulizonazo na uwezo wa kitengo kikuu cha uchakataji na/au uwezo wa mtandao.
+</para>
+
+<para>
+<programlisting>
+shell> bin/otrs.ArticleStorageSwitch.pl -s ArticleStorageDB -d ArticleStorageFS
+</programlisting>
+</para>
+<para>
+<emphasis>Hati: Kubadilisha mazingira ya nyuma ya hifadhi kutoka hifadhidata
+kuwa mfumo wa mafaili</emphasis>
+</para>
+</section>
+
+<section>
+    <title>Kuhifadhi Tiketi</title>
+
+    <para>
+        Kwa kuwa OTRS inaweza kutumika kama mfumo wa kuzuia ukaguzi, kufuta tiketi
+zilizofungwa inaweza kuwa sio wazo zuri. Kwa hiyo tumetengeneza kipengele
+kinachokuruhusu kuhifadhi tiketi kwenye nyaraka.
+    </para>
+    <para>
+        Tiketi zinazofanana na vigezo fulani zinaweza kuwekewa alama kama "zilizo
+kwenye nyaraka". Hizi tiketi haziwezi kupatikana kama ukifanya utafutaji
+tiketi wa kawaida au kuanzisha kazi ya Wakala wa Ujumla. Mfumo wenyewe
+hautahangaika na idadi kubwa yatiketi tena kwa sababu tiketi za hivi
+karibuni tu ndio zinatiliwa maanani na OTRS. Hii inaweza kuleta ufanisi
+mkubwa katika mifumo mikubwa.
+    </para>
+    <para>
+        Kutumia kipengele cha nyaraka fuata hatua zifuatazo kirahisi:
+    </para>
+    <orderedlist>
+        <listitem>
+            <para>
+                Amilisha mfumo wa nyaraka katika SysConfig
+            </para>
+            <para>
+                Katika kurasa ya msimamizi, nenda kwenye AysConfig na chagua
+<literal>Tiketi</literal> ya kundi hilo. Katika
+<literal>Kiini::Tiketi</literal> unakuta chaguo
+<literal>Tiketi::MfumoNyaraka</literal> ambao umesetiwa kuwa "hapana" kwa
+chaguo-msingi. Badilisha mpangilio huu kuwa "ndiyo" na hifadhi mabadiliko.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Fafanua kazi ya WakalaWaJumla
+            </para>
+            <para>
+                Kwenye kurasa ya Msimamizi, chagua WakalaUjumla na ongeza kazi mpya
+hapo. <orderedlist>
+                    <listitem>
+                        <para>
+                            Mpangilio wa kazi
+                        </para>
+                        <para>
+                            Toa jina kwa
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Chujio la Tiketi
+                        </para>
+                        <para>
+                            Vichujio vya tiketi vinatafuta tiketi ambazo zinafanana na kigezo
+kilichochaguliwa. Inaweza kuwa wazo zuri kuweka kwenye nyaraka zile tiketi
+zilizo kwenye hali iliyofungwa na zimefungwa miezi michache nyuma.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Kitendo cha Tiketi
+                        </para>
+                        <para>
+                            Katika kifungu hiki, seti sehemu yenye lebo"Hifadhi kwenye Nyaraka tiketi
+zilizochaguliwa" kuwa "hifadhi tiketi kwenye nyaraka".
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Hifadhi kazi
+                        </para>
+                        <para>
+                            Mwisho wa kurasa utapata chaguo la kuhifadhi kazi.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Tiketi zilizoathirika.
+                        </para>
+                        <para>
+                            Mfumo utaonyesha tiketi zote zitakazohifadhiwa kwenye nyaraka wakati wa
+kutekeleza kazi ya Wakala wa Ujumla.
+                        </para>
+                    </listitem>
+                </orderedlist>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Tafuta Tiketi
+            </para>
+            <para>
+                Ukitafuta tiketi, mfumo kwa kawaida unatafuta tiketi zisizo kwenye
+nyaraka. Kama ukitaka kutafuta tiketi za kwenye nyaraka pia, ongeza kirahisi
+"tafuta nyaraka" wakati wa kufafanua vigezo vya kutafuta.
+            </para>
+        </listitem>
+    </orderedlist>
+</section>
+
+</section>
+
+
+<section id="performance-tuning-database">
+<title>Hifadhidata</title>
+<para>
+Masula ya DB yanategemeanan na hifadhidata inayotumika. Jifunze kupitia
+nyaraka za hifadhidata yako au onana na msimamizi wa hifadhidata yako.
+</para>
+
+<section id="performance-tuning-database-mysql">
+<title>MySQL</title>
+<para>
+Kama ukitumia jedwali la MySQL la aina MyISAM (ambalo ni chaguo-msingi), na
+ukafuta sehemu kubwa ya jedwali au kama umefanya mabadiliko mengi kwenye
+jedwali yenye safu mlalo zenye urefu unaobadilika (majedwali yenye safuwima
+VARCHAR, BLOB na NAKALA), lazima uunganishe vipande vya faili la data
+(majedwali) kwa kutumia amri "sadifisha"
+</para>
+<para>
+Unatakiwa kujaribu hili kama mysqld daemon inahitaji sana kutoka kwenye muda
+wako wa CPU. Sadifisha majedwali - tiketi, tiketi_historia na makala (ona
+Hati chini).
+</para>
+
+<para>
+<programlisting>
+shell$ mysql -u user -p database
+mysql$ optimize table ticket;
+mysql$ optimize table ticket_history;
+mysql$ optimize table article;
+</programlisting>
+</para>
+
+<para>
+<emphasis>Hati: Kuongeza ufanisi wa majedwali msingi ya data.</emphasis>
+</para>
+
+</section>
+
+<section id="performance-tuning-database-postgresql">
+<title>PostgreSQL</title>
+<para>
+PostgreSQL inaboreshwa vizuri kwa kubadilisha faili postgresql.conf katika
+mpangilio orodha wako wa data wa  PostgreSQL . Kwa ushauri wa jinsi ya
+kufanya hii, rejea kwenye makala zifuatazo:
+</para>
+
+<para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+<citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
+</ulink>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+<citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
+</ulink>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+<citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
+</ulink>
+
+
+
+
+
+
+
+
+
+
+
+Type your translation here
+            </para>
+        </listitem>
+    </itemizedlist>
+</para>
+
+<para>
+Kama utendaji bado hauridhishi, tunashauri kwamba ujiunge na orodha ya
+watumiwa wa Utendaji wa PostgreSQL ( <ulink
+url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>
+), na kuuliza maswali hapo. Wahusika kwenye orodha ya  PostgreSQL wakarimu
+na wanaweza kusaidia.
+</para>
+</section>
+
+</section>
+
+<section id="performance-tuning-webserver">
+<title>Seva ya tovuti</title>
+<para>
+Bila shaka unatakiwa kutumia mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
+). Ina kasi zaidi  (~ * 100) zaidi ya cgi halisi. Lakini inahitaji RAM
+zaidi.
+</para>
+
+<section id="performance-tuning-webserver-db">
+<title>Miunganiko ya hifadhidata iliyotengenezwa.</title>
+<para>
+Una miunganiko ya hifadhidata imewekwa tayari wakati wauanzishwaji wa seva
+ya tovuti. Hii inaokoa muda (pitia README.webserver).
+</para>
+</section>
+
+<section id="performance-tuning-webserver-startup">
+<title>Moduli zilizopakiwa tayari -startup.pl</title>
+<para>
+Tumia hati ya uwashaji <filename>scripts/apache2-perl-startup.pl</filename>
+kwa ajili ya moduli za Perl ambazo tayari zimepakiwa/zimekusanywa-zalishwa
+katika seva yajo ya tovuti ya mod_perl kuwa ya kasi zaidi, kwa utumiaji
+mdogo wa kumbukumbu (ona README.webserver).
+</para>
+</section>
+<section id="performance-tuning-webserver-reload">
+<title>Pakia tena moduli za perl zinapo sasishwa kwnye diski</title>
+<para>
+Kwa kawaida Apache::Reload inatumika katika
+scripts/apache2-httpd.include.conf. Ilemaze na utapata ongezeko la kasi kwa
+8% zaidi. Lakini kumbuka kuanzisha upya seva ya tovuti kama ukisakinisha
+moduli zozote kupitia Meneja Kifurushi wa OTRS, au thamani zozote katika
+SysConfig yako  au katika Kernel/Config.pm. Muhimu: hii inamaanisha pia
+huwezi kutumia Meneja Kifurushi wa OTRS kupitia kiolesura cha tovuti,
+unahitaji kutumia lahaja ya tungo amri -
+<filename>bin/otrs.PackageManager.pl</filename>.
+</para>
+</section>
+
+<section id="performance-tuning-webserver-strategy">
+<title>Kuchagua mkakati sahihi</title>
+<para>
+Kama una usakinishaji mkubwa, mf. zaidi ya tiketi mpya 1,000 kwa siku na
+zaidi ya mawakala 40, ni wazo zuri kusoma sura kuhusu Utendaji katika
+Mwongozo wa Mtumiaji wa mod_perl  ( <ulink
+url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>
+).
+</para>
+</section>
+
+<section id="performance-tuning-webserver-gzip">
+<title>mod_gzip/mod_deflate</title>
+<para>
+Kama kipimo data chako ni kidogo, tumia mod_deflate kwa ajili ya
+Apache2. Kama una ukurasa wa html wenye 45k, mod_gzip/mod_deflate
+itaufinyaza kuwa takribani 7k. Hasara ni kwamba hii inaongeza mzigo kwenye
+upande wa seva.
+</para>
+</section>
+
+</section>
+
+</chapter>

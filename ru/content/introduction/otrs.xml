@@ -309,9 +309,10 @@ Renée Bäcker.</para></listitem>
 входящих email.</para></listitem>
                 <listitem><para>Пароли для Клиента и Агента теперь могут быть зашифрованы с помощью стойкого
 алгоритма bcrypt, который лучше SHA.</para></listitem>
-                <listitem><para>Many icons now use an icon font which makes it much easier to create custom
-skins with different base colors. This also improves overall performance
-through smaller amount of (image) files to load.</para></listitem>
+                <listitem><para>Сейчас многие значки теперь используют иконочный шрифт, который позволяет
+проще создавать различные обложки с различными основными цветами. Это также
+улучшает общую производительность за счет малого количества загружаемых
+файлов (картинок).</para></listitem>
             </itemizedlist>
         </section>
     </section>
@@ -404,10 +405,10 @@ DTL файлы как это уже работает для  Perl файлов.<
             <section>
                 <title>Улучшенная функция Архивирование Заявок</title>
                 <itemizedlist>
-                    <listitem><para>When tickets are archived, the information which agent read the ticket and
-articles can be removed, as well as the ticket subscriptions of agents. This
-is active by default and helps reduce the amount of data in the database on
-large systems with many tickets and agents.</para></listitem>
+                    <listitem><para>При архивации заявок, информация, прочтанная агентом и сообщения могут быть
+удалены, также как и информация о подписке агентов на заявки. Эта опция
+включена по умолчанию и позволяет уменьшить количество информации в базе
+данных в больших системах с множеством заявок и агентов.</para></listitem>
                     <listitem><para>Добавлен новый скрипт для удаления этих данных из существующих архивных
 заявок.</para></listitem>
                     <listitem><para>Архивные заявки теперь всегда отображается как "прочтенные" агентом.</para></listitem>
@@ -421,8 +422,8 @@ large systems with many tickets and agents.</para></listitem>
                     <listitem><para>Теперь можно задать лимит количества одновременно работающих агентов и/или
 клиентов во избежания перегрузки серверов.</para></listitem>
                     <listitem>
-                        <para>Significant reduction in the number of executed database statements in
-ticket overviews and ticket masks in agent and customer frontend.
+                        <para>Значительное снижение количества выполненных инструкций базы данных в
+обзорах заявок и шаблонов поиска заявок в и интерфейсах агента и клиента.
                             <itemizedlist>
                                 <listitem><para>Это позволит снизить загрузку сервера баз данных, особенно в больших
 системах. В ряде случаев OTRS стал заметно более "отзывчивым" (если система
@@ -473,25 +474,27 @@ Generic Interface, не требуя дополнительного програ
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>Connectors</emphasis> expose parts of OTRS to Generic Interface
-web services.For example, a ticket connector exposes the ticket
-create/update function, so that they can be used in a web service regardless
-which network transport is used.
+                        <emphasis>Connectors/Коннекторы</emphasis> представляют собой часть OTRS для
+веб-сервисов Generic Interface. Например, коннектор заявок представляет
+функцию создания/обновления заявок, таким образом они могут быть
+использованы в веб-сервисе в зависимости от используемого транспортного
+протокола.
                     </para>
                 </listitem>
                 <listitem>
-                    <para>A scheduler daemon process supports asynchronous event handling. This is
-useful to asynchronously start web service requests from OTRS to another
-system, after the agent''s request has been answered (e.g. when a ticket has
-been created). Otherwise, it might block the response, resulting in
-increased response times for the agent.</para>
+                    <para>Процесс демона планировщика поддерживает асинхронное управление
+событиями. Это полезно для асинхронного запуска запроса веб-сервиса от OTRS
+к другой системе, после того как запрос агента был выполнен (например, когда
+заявка была создана). Иначе, он может блокировать ответ, что приведет к
+увеличению времени ожидания ответа агентом.</para>
                 </listitem>
             </itemizedlist>
             <para>
-            With the Generic Interface, new web services can be configured easily by
-using existing OTRS modules, without additional code. They can be combined
-to create a new web service. When configuring a new web service connection,
-the administrator has to add:
+            С помощью Generic Interface можно легко настроить новые веб-сервисы с
+использованием существующих в системе OTRS модулей, без дополнительного
+программирования. Они могут быть настроены для создания новых
+веб-сервисов. При создании нового коннектора веб-сервиса, администратор
+должен добавить:
             </para>
             <itemizedlist>
                 <listitem>
@@ -593,10 +596,10 @@ FreeTime с динамической структурой для заявок и
 усилиями, поскольку поля создаются по модульному принципу.</para>
                 </listitem>
                 <listitem>
-                    <para>A future scenario is, that DynamicFields can be used for objects other than
-tickets or in custom modules. For example, a custom module adding objects to
-handle "orders" in OTRS could use the DynamicFields to attach
-properties/data to these orders.</para>
+                    <para>В будущем, динамические поля смогут использоваться для объектов, отличных от
+заявок или в пользовательских модулях. Например, пользовательский модуль
+добавляющий объекты для управления "заказами/нарядами", сможет использовать
+динамические поля для присоединения данных к этим заказам.</para>
                 </listitem>
                 <listitem>
                     <para>
@@ -671,10 +674,10 @@ properties/data to these orders.</para>
                 <title>Configurable Reject Sender Email Address</title>
                 <itemizedlist>
                     <listitem>
-                        <para>The feature allows configuring an email address instead of the administrator
-address to reject the creation of new tickets by email.  This feature can be
-used in all cases where customers are not allowed to create new tickets by
-email.</para>
+                        <para>Эта возможность позволяет подставить другой адрес почты вместо адреса
+администратора во избежание создания новых заявок через электронную
+почту. Она используется во всех случаях, когда не допускается создание
+клиентами заявок через электронную почту.</para>
                     </listitem>
                 </itemizedlist>
             </section>
@@ -686,10 +689,10 @@ email.</para>
                 <title>Добавлена эскалация событий</title>
                 <itemizedlist>
                     <listitem>
-                        <para>OTRS will now create events for each of the available escalation types
-(response, update and resolution). This allows performing actions (such as
-notifications) before the escalation occurs, in the moment it occurs, and in
-the moment that the escalation ends.</para>
+                        <para>OTRS теперь создает события для каждого доступного типа эскалации (время
+ответа, обновления и решения). Это позволяет выполнять действия (такие как
+уведомления) до наступления времени эскалации, в момент наступления и
+окончания времени эскалации.</para>
                     </listitem>
                 </itemizedlist>
             </section>
@@ -981,26 +984,29 @@ url="http://www.otrs.com/open-source/"><citetitle>http://www.otrs.com/open-sourc
     <title>Профессиональная поддержка OTRS</title>
 
     <para>
-        Whether you need help in configuring or customizing OTRS or you want to be
-on the safe side, don't hesitate to contact us: We offer a wide range of
-professional services such as world-wide enterprise support, consulting and
-engineering including process design, implementation, customization,
-application support, and fully managed service.
+        В случае потребности в помощи в конфигурировании или пользовательском
+изменении OTRS, а также обезопасить себя, не стесняйтесь обращаться к нам:
+мы предлагаем широкий набор профессиональных услуг, как то: глобальная
+поддержка предприятий, консультирование и проектирование, включающее дизайн
+системы, внедрение, доработку, поддержку приложений и полный сервис
+жизненного цикла.
     </para>
     <para>
-        Our <ulink url="http://www.otrs.com/en/solutions/service-contracts/">Service
-Contracts</ulink> guarantee instant help and professional support as well as
-support assessment and last but not least free access to <ulink
+        Наш <ulink
+url="http://www.otrs.com/en/solutions/service-contracts/">Сервисный
+котракт</ulink> гарантирует помощь и профессиональную поддержку и, наконец,
+не в последнюю очередь бесплатный доступ к <ulink
 url="http://www.otrs.com/en/solutions/subscriptions/otrsfeatureadd-ons/">OTRS
-Feature Add-ons</ulink> - useful additional features for your OTRS.
+Feature Add-ons/Дополнения к OTRS</ulink> - полезные дополнительные
+возможности для OTRS.
     </para>
     <para>
-        <ulink url="http://www.otrs.com/">The OTRS Group</ulink> offers specific
-<ulink url="http://www.otrs.com/en/solutions/training/">training
-programs</ulink> in different countries.  You can either participate in one
-of our public OTRS Administrator trainings which take place regularly, or
-benefit from an inhouse training that covers all the specific needs of your
-company.
+        <ulink url="http://www.otrs.com/">The OTRS Group</ulink> предлагает
+специальные <ulink
+url="http://www.otrs.com/en/solutions/training/">программы тренингов</ulink>
+в разных странах. Вы можете принять участие в одном из наших публичных OTRS
+Administrator тренингах, проводимых регулярно, или заказать обучение на
+территории вашей компании, с учетов всех ее особенностей.
     </para>
 
 </section>

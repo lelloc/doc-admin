@@ -5,9 +5,9 @@
 <section id="upgrading">
 <title>Upgrade des OTRS Frameworks</title>
 <para>
-    These instructions are for people upgrading OTRS from version
-<emphasis>3.2</emphasis> to <emphasis>3.3</emphasis>, and apply both for RPM
-and source code (tarball) upgrades.
+    Diese Hinweise sind für Leute gedacht, die von OTRS <emphasis>3.2</emphasis>
+auf <emphasis>3.3</emphasis> upgraden, und gilt für RPM-basierte und
+manuelle Upgrades (tarball).
 </para>
 
 <note>
@@ -25,31 +25,32 @@ CentOS 6.
 </note>
 
 <para>
-    If you are running a lower version of OTRS you have to follow the upgrade
-path to 3.1 first
-(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3 ...)! You need
-to perform a full upgrade to every version in between, including database
-changes and the upgrading perl script.
+    Wenn Sie eine ältere Version von OTRS einsetzen, müssen sie zuerst dem
+Upgrade-Pfad zur 3.1 folgen
+(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3 ...)! Sie müssen
+ein vollständiges Upgrade auf jede Zwischen-Version inklusive der
+Datenbankänderungen und der Perlskripte durchführen.
 </para>
 <para>
-    Please note that if you upgrade from OTRS 2.2 or earlier, you must take an
-extra step; please read <ulink
+    Bitte beachten Sie, falls Sie von OTRS 2.2 oder früher upgraden, müssen Sie
+einen extra Schritt durchführen; bitte lesen Sie dazu <ulink
 url="http://bugs.otrs.org/show_bug.cgi?id=6798">http://bugs.otrs.org/show_bug.cgi?id=6798</ulink>.
 </para>
 <para>
-    Within a single minor version you can skip patch level releases if you want
-to upgrade. For instance you can upgrade directly from OTRS 3.3.1 to version
-3.3.4. If you need to do such a "patch level upgrade", you should skip steps
-9 and 13-16.
+    Innerhalb einer Minor-Version können Sie einzelne Patch-Level-Versionen
+überspringen, falls Sie upgraden wollen. Beispielsweise können Sie direkt
+von OTRS 3.3.1 auf OTRS 3.3.4 upgraden. Wenn Sie so ein
+"Patch-Level-Upgrade" durchführen, können Sie Schritt 9 und 13-16-
+überspringen.
 </para>
 <para>
-    Please note that if you perform a patch level upgrade from OTRS 3.3.6 or
-earlier, you need to activate a new cron job that controls the scheduler
-process.  Please copy the file
-<filename>/opt/otrs/var/cron/scheduler_watchdog.dist</filename> to
-<filename>/opt/otrs/var/cron/scheduler_watchdog</filename> and update your
-crontab with <filename>/opt/otrs/bin/Cron.sh start</filename> (as "otrs"
-user, not root).
+    Bitte beachten Sie wenn Sie ein Upgrade von OTRS 3.3.6 oder früher
+durchführen, müssen Sie einen neuen Cronjob aktivieren, der den
+Scheduler-Prozess kontrolliert. Bitte kopieren Sie dazu die Datei
+<filename>/opt/otrs/var/cron/scheduler_watchdog.dist</filename> nach
+<filename>/opt/otrs/var/cron/scheduler_watchdog</filename> und aktualisieren
+Sie anschließend ihre Crontabs mit <filename>/opt/otrs/bin/Cron.sh
+start</filename> (als "otrs" user, nicht root).
 </para>
 
   <orderedlist>
@@ -84,7 +85,7 @@ shell&gt; /etc/init.d/apache stop
       </listitem>
       <listitem>
         <para>
-            Setup new system (optional)
+            Installieren eines neuen Systems (optional)
         </para>
         <para>
             Neues System aufsetzen (optional). Wenn möglich, installieren Sie zunächst
@@ -119,20 +120,20 @@ shell&gt; mv otrs-x.x.x otrs</screen>
                 Wiederherstellung TicketCounter.log
             </para>
             <para>
-                In order to let OTRS continue with the correct ticket number, restore the
-<filename>TicketCounter.log</filename> to
-<filename>$OTRS_HOME/var/log/</filename> (default:
-<filename>OTRS_HOME=/opt/otrs</filename>). This is especially important if
-you use incremental ticketnumbers.
+                Damit OTRS mit der richtigen Ticketnummer weiter arbeitet, stellen Sie die
+Datei <filename>TicketCounter.log</filename> in
+<filename>$OTRS_HOME/var/log/</filename> (Standard:
+<filename>OTRS_HOME=/opt/otrs</filename>) wieder her. Das ist vorallem dann
+wichtig, wenn Sie inkrementelle Ticketnummern verwenden.
             </para>
             <para>
                 Wiederherstellung article data
             </para>
             <para>
-                If you configured OTRS to store article data in the filesystem you have to
-restore the <filename>article</filename> folder to
-<filename>$OTRS_HOME/var/</filename> (default:
-<filename>OTRS_HOME=/opt/otrs</filename>).
+                Wenn Sie OTRS so konfiguriert haben, dass Artikeldaten im Dateisystem
+gespeichert werden, müssen Sie den Ordner <filename>article</filename> nach
+<filename>$OTRS_HOME/var/</filename> (Standard:
+<filename>OTRS_HOME=/opt/otrs</filename>) wiederherstellen.
             </para>
           </listitem>
           <listitem>
@@ -153,15 +154,15 @@ automatisch wieder her.
             Eigene Themes
         </para>
         <para>
-            Note: The OTRS themes between 3.2 and 3.3 are NOT compatible, so don't use
-your old themes!
+            Hinweis: Die OTRS-Themes von 3.2 sind NICHT zu 3.3 kompatibel, verwenden Sie
+ihre alten Themes daher nicht weiter!
         </para>
         <para>
-            Themes are located under $OTRS_HOME/Kernel/Output/HTML/*/*.dtl (default:
+            Themes befinden sich in /opt/otrs/Kernel/Output/HTML/*/*.dtl (Standard:
 OTRS_HOME=/opt/otrs).
         </para>
         <para>
-            Please also note that dtl-Files must be in utf-8 from OTRS 3.3 on.
+            Bitte beachten Sie das dtl-Dateien in UTF-8 sein müssen in OTRS 3.3.
         </para>
       </listitem>
       <listitem>
@@ -180,8 +181,8 @@ werden.
                 Überprüfung benötigter Perl Module
             </para>
             <para>
-               Verify that all needed perl modules are installed on your system and install
-any modules that might be missing.  <screen>
+               Versichern Sie sich dass alle benötigten Perl-Module auf Ihrem System
+installiert sind und installieren Sie alle Module die fehlen. <screen>
 shell&gt; /opt/otrs/bin/otrs.CheckModules.pl</screen>
             </para>
       </listitem>
@@ -217,8 +218,7 @@ shell&gt; cat scripts/DBUpdate-to-3.3.mysql.sql | mysql -p -f -u root otrs
 shell&gt; cat scripts/DBUpdate-to-3.3.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
 
 # PostgreSQL, older versions:
-shell&gt; cat scripts/DBUpdate-to-3.3.postgresql_before_8_2.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
-            </screen>
+shell&gt; cat scripts/DBUpdate-to-3.3.postgresql_before_8_2.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs</screen>
         </para>
         <para>
             Note: If you use PostgreSQL 8.1 or earlier, you need to activate the new
@@ -237,8 +237,8 @@ this script does not work properly for you.  Otherwise data loss may occur.
       </listitem>
       <listitem>
         <para>
-Refresh the configuration and delete caches. Please run (as user 'otrs', NOT
-as 'root'):
+Aktualisieren Sie die Konfiguration und löschen Sie die Caches. Bitte führen
+Sie folgendes aus (als Benutzer 'OTRS', NICHT als 'root'):
         </para>
         <para>
             <screen>

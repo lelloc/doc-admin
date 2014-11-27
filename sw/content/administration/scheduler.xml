@@ -1,0 +1,459 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="scheduler">
+    <title>Mratibu wa OTRS</title>
+    <para>
+        Mratibu wa OTRS ni mchakato huru wa mfumo ambao unachakatisha kazi katika
+mandharinyuma. Hizi aina za michakato zinajulikana kama
+<emphasis>daemons</emphasis> katika mifumo ya Unix / Linux au kama
+<emphasis>huduma</emphasis> kwenye mazingiro ya Window. Ni huru lakini hii
+haimaanishi kwamba Mratibu anafanya kila kitu mwenyewe, imeunganishwa
+kikamilifu na OTRS na inaweza kutumia moduli yoyote ya OTRS kama
+inavyohitajika kukamilisha kila kazi.
+    </para>
+
+    <para>
+        Kwa sababu za akili ya kawaida  mchakato wa Mratibu unahitaji kuanzishwa
+muda hadi muda. Hii inafanyika kiotomatiki na mchakato wa mratibu mwenyewe
+mara moja kwa siku, lakini inaweza kurekebishwa kama ikihitajika kwa kutumia
+SysConfig kwa kuhariri mpangilio "Mratibu::AnzishaupyaBaadaYaSekunde".
+    </para>
+    <para>
+        Mratibu wa OTRS ni mchakato otomatiki, binadamu anaingilia mchakato huu ili
+kuona hali yake mara kwa mara na kuanzisha au kusitisha mchakato.
+    </para>
+    <note>
+        <para>
+            Kama Mratibu akisitishwa kwa sababu yoyote, kazi zote zinazosubiri na mpya
+zilizosajiliwa wakati mratibu amesitishwa zitatekelezwa mara tu mratibu
+atakapoanzishwa tena (isipokuwa kama kazi zimesetiwa kutekelezwa hapo
+baadaye)
+        </para>
+    </note>
+    <section id="scheduler-gui">
+        <title>Kiolesura Michoro cha Mratibu</title>
+        <para>
+            Mratibu haonekani katika Kiolesura cha Michoro cha Mtumiaji hadi kisitishe
+kufanya kazi.
+        </para>
+        <section id="scheduler-gui-notify">
+            <title>Mratibu hatoi Taarfa</title>
+            <para>
+                Kuna taarifa za aina ambili tofauti kama mfumo ukitambua mratibu hafanyi
+kazi. Huu utambuzi unategemea ni mara ngapi usasishaji wa mchakato wa
+mratibu unafanyika. Kama tofauti kati ya muda wa sasa na muda wa mwisho wa
+usasishaji wa mchakato wa mwisho ni zaidi ya mara 2 ya usasishaji wa
+mchakato ujumbe wa onyo utaonyeshwa kwenye eneo la taarifa la OTRS . Kama ni
+zaidi ya mara 4 ya mchakato tahadhari itatolewa badala yake.
+            </para>
+            <para>
+                Muda wa kusasisha Mratibu wa mchakato unaweza kusanidiwa kupitia SysConfig
+kwenye mpangilio wa "Mratibu::PIDSasishaMuda".
+            </para>
+            <para>
+                Ukiona ujumbe wa onyo si lazima kuchukua hatua, lakini inashauriwa sana
+kukagua kama mratibu anafanya kazi. Kama ukiona tahadhari, basi kuna
+asilimia kubwa mratibu hafanyi kazi na inatakiwa kuanzishwa kwake.
+            </para>
+            <para>
+                Kwa kawaida taarifa ya Mratibu hafanyi kazi imewezeshwa, kama kuna huduma ya
+tovuti halali iliyosajiliwa katika hifadhidata, na inaonyeshwa kwa watumiaji
+wa kundi la "msimamizi" tu.
+            </para>
+            <para>
+                Kulemeza taarifa (haishauriwi) au kubadilisha au kuongeza makundi ya
+taarifa, tafadhali hariri mpangilio wa  "Mazingira ya
+mbele::ModuliTaarifa###800-Mratibu-Kagua" katika SysConfig.
+            </para>
+            <para>
+                <screenshot>
+<screeninfo>Taarifa za Mratibu</screeninfo> <graphic srccredit="scheduler
+notification - screenshot" scale="40"
+fileref="screenshots/scheduler-notify.png"></graphic></screenshot>
+            </para>
+            <para>
+                <emphasis>Umbo: Taarifa za mratibu.</emphasis>
+            </para>
+        </section>
+        <section id="scheduler-gui-start">
+            <title>Mratibu Kuanza</title>
+            <para>
+                Kwa ku bofya kiungo cha Mratibu hafanyi kazi (aidha onyo au tahadhari)
+kisanduku kidadisi kitafunguka kukuwezesha kuanza mchakato wa Mratibu
+tena. Mratibu anaweza kuanzishwa kwa kawaida au kwa lazima, kwa kubofya
+kwenye kisanduku tiki kinachohusika.
+            </para>
+            <note>
+                <para>
+                    Kuanzisha Mratibu kwa lazima inahitajika endapo mchakato uliopita wa Mratibu
+ulisitishwa kwa hali isiyokuwa ya kawaida na Kitambulisho cha Mchakato bado
+kimesajiliwa kwenye hifadhidata.
+                </para>
+                <para>
+                    Ili kuwa na udhibiti kamili wa Mratibu wa mchakato na kukagua hali yake
+halisi tafadhali tumia vifaa katika tungo amri kama ilivyoelezwa chini.
+                </para>
+            </note>
+            <para>
+                <screenshot>
+<screeninfo>Mratibu Kuanza</screeninfo> <graphic srccredit="scheduler start
+- screenshot" scale="40"
+fileref="screenshots/scheduler-start.png"></graphic></screenshot>
+            </para>
+            <para>
+                <emphasis>Umbo: Anzisha Mratibu.</emphasis>
+            </para>
+        </section>
+    </section>
+    <section id="scheduler-cli">
+        <title>Kiolesura cha Tungo Amri ya Mratibu</title>
+        <para>
+            Vifaa vya tungo amri ya Mratibu vinakuruhusu kudhibiti mchkato wa Mratibu
+(Kuanza / Kusitisha) au kuuliza hali yake. Pia kuna vifaa vya kusajili
+mchakato ili udhibitiwe na mfumo wa uendeshaji.
+        </para>
+        <para>
+            OTRS imejumuishwa na seti mbili za vifaa vya CLI, moja ya Unix / Linux na
+nyingine ya Microsoft Windows.
+        </para>
+        <section id="scheduler-cli-linux">
+            <title>Unix / Linux</title>
+            <section id="scheduler-cli-linux-init">
+                <title>Mafaili ya init.d ya mratibu</title>
+                <para>
+                    Mafaili ya init.d ni hati za kipekee ambazo huitwa na mfumo endeshi wakati
+wa kuanzisha na kuzima
+                </para>
+                <para>
+                    OTRS inatoa hati za init.d kuanza / kusitisha mchakato wa Mratibu wa OTRS
+kiotomatiki kwa kutumia mfumo wa uendeshaji. Hati hizo zinapatikana chini ya
+OTRS_NYUMBANI/hati.
+                </para>
+                <para>
+                    Hati za init.d zinahitaji kunakiliwa kwenda kwenye mahali sahihi kwa ajili
+ya mfumo endeshi wako. Zinahitaji kuwa na ruhusa sahihi na baadhi ya vishika
+nafasi vya ndani vinahitaji kusetiwa kufanya kazi vizuri. Kama ulitumia RPM
+za OTRS kuseti mfumo, hii inafanyika kiotomatiki.
+                </para>
+                <itemizedlist mark="round">
+                    <title>Init.d Vishika nafasi vya Ndani vya Hati</title>
+                    <listitem>
+                        <para>
+                            <command>OTRS_NYUMBANI</command> - njia kwenda kwenye usanidi wa OTRS yako.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>Mtumiaji</command> - jina la mtumiaji wa mchakato wa apache.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>Kundi</command> - jina la kudni la mtumiaji wa apache.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <note>
+                    <para>
+                        Kwa sasa OTRS inatoa hati za init.d tu kwa majukwaa ya Linux.
+                    </para>
+                </note>
+                <table>
+                    <title>Orodha ya hati za init.d na mifumo endeshi inayotumika nayo</title>
+                    <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Hati ya Init</entry>
+                            <entry>Mfumo endeshi unaokubalika</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>otrs-mratibu-linux</entry>
+                            <entry>Red Hat, Fedora, CentOS, SUSE, openSUSE, Debian, Ubuntu</entry>
+                        </row>
+                        <row>
+                            <entry>otrs-scheduler-gentoo-init.d, otrs-scheduler-gentoo-conf.d</entry>
+                            <entry>Gentoo</entry>
+                        </row>
+                    </tbody>
+                    </tgroup>
+                </table>
+                <example>
+                    <title>Mfano kuanzisha Mratibu wa OTRS kwenye linux</title>
+                    <para>
+                        <screen>
+                            shell> /etc/init.d/otrs-scheduler-linux start
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>Vitendo vilivyopo.</title>
+                    <listitem>
+                        <para>
+                            <command>anza</command> Kuanza mchakato wa Mratibu wa OTRS.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>sitisha</command> kusitisha mchakato wa Mratibu wa OTRS.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>anza upya</command> kuanza upya mchakato wa Mratibu wa OTRS.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>hali</command> kuuliza hali ya mchakato wa Mratibu wa OTRS.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    Mratibu anahitaji hifadhidata ipatikane kusajili kitambulisho chake cha
+Mchakato, kwasababu hii ni muhimu ku:
+                    <itemizedlist mark="round">
+                        <listitem>
+                            <para>
+                                Tekeleza hati ya init.d ya Mratibu ili  <emphasis>kuanza</emphasis> mchakato
+wa Mratibu baada ya mchakato wa hifadhidata kuamka na kuanza kazi.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Tekeleza hati ya init.d ya Mratibu ili  <emphasis>kusitisha</emphasis>
+mchakato wa Mratibu baada ya mchakato wa hifadhidata kuzimwa.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <note>
+                    <para>
+                        Ukitaka Mratibu afanye kazi wakati wa uwashaji wa Mfumo, tafadhali soma
+waraka wa mfumo endeshi kujua sehemu sahihi ya kuweka hati za init.d, jinsi
+ya kufanya usanidi ziweze kuanza kiotomatiki na kuseti oda yao ya kazi.
+                    </para>
+                </note>
+            </section>
+            <section id="scheduler-cli-linux-daemon">
+                <title>Faili la Daemon la Mratibu</title>
+                <para>
+                    Hii ni sehemu ya Mratibu inayobakia ikifanya kazi katika mazingira ya nyuma
+kukagua kazi za kutekeleza. Pia inatoa kazi za muhimu kudhibiti mchakato.
+                </para>
+                <para>
+                    Unix / Linux zote zinatumia faili
+<command>OTRS_HOME/bin/otrs.Scheduler.pl</command>.
+                </para>
+                <example>
+                    <title>Mfano Kuanza Mratibu wa OTRS</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler.pl -a start
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>Machaguo Yaliyopo</title>
+                    <listitem>
+                        <para>
+                            <command>-a </command> kitendo.
+                        </para>
+                        <itemizedlist mark="round">
+                            <title>Thamani ziwezekanazo</title>
+                            <listitem>
+                                <para>
+                                    <command>anza</command>-kuanza mchakato wa Mratibu.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>sitisha</command>- kusitisha mchakato wa Mratibu.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>hali</command>- kuuliza hali ya mchakato wa Mratibu.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>-f </command> kulazimisha kuanza au kusitisha mchakato wa Mratibu.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <example>
+                    <title>Mfano kulazimisha kusitisha Mratibu wa OTRS</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler.pl -a stop -f 1
+                        </screen>
+                    </para>
+                </example>
+                <note>
+                    <para>
+                        Kusitisha Mratibu kwa lazima inatumika kuondoa kitambulisho cha mchakato
+kutoka kwenye hifadhidata wakati mratibu hafanyi kazi na mchakato bado
+umesajiliwa.
+                    </para>
+                    <para>
+                        Kuanzisha Mratibu kwa lazima inatumika kuanza mchakato wa Mratibu kama
+mratibu hafanyi kazi na mchakato bado umesajiliwa.
+                    </para>
+                    <para>
+                        Kuanzisha au kusitisha kwa lazima ni muhimu kama kuanza kwa mchakato
+kunahitajika kufanyika kabla ya muda wa kusasisha mchakato haujaisha. La
+sivyo ingizo lilokwisha muda wake kwenye hifadhidata linapuuzwa na uanzaji
+wa kawaida.
+                    </para>
+                </note>
+            </section>
+        </section>
+
+       <section id="scheduler-cli-windows">
+            <title>Windows</title>
+            <section id="scheduler-cli-windows-scm">
+                <title>Kisanikishi cha Huduma za Mratibu</title>
+                <para>
+                    Katika Windows, Mratibu wa OTRS amesajiliwa kama mchakato kupitia Meneja
+Udhibiti wa Huduma wa Windows (SCM). Ili kuufanya mchakato wa Mratibu wa
+OTRS kudhibitiwa na SCM ni muhimu kuanzisha huduma hii. Kama ulitumia
+kisakinishi cha Windows hii itashughulikiwa na kisakinishi, na hakuna
+vitendo vinavyohitajika visivyokuwa vya otomatiki.
+                </para>
+                <para>
+                    OTRS inatoa hati
+<command>OTRS_HOME/bin/otrs.Scheduler4WinInstaller.pl</command> kusajili au
+kutosajili Mratibu wa OTRS kwenye SCM.
+                </para>
+                <note>
+                    <para>
+                        Kujisajili na kujiondoa vinaweza kufanywa na wanachama wa kundi la msimamizi
+katika Windows. Unaweza kuhitaji kubofya kulia katika cmd.exe na kuchagua
+'Anzisha kama Msimamizi' kabla ya kusajili huduma kwa usahihi.
+                    </para>
+                </note>
+                <example>
+                    <title>Mfano kusajili Mratibu wa OTRS kama Huduma ya Windows</title>
+                    <para>
+                        <screen>
+                            shell> perl OTRS_HOME/bin/otrs.Scheduler4WinInstaller.pl -a install
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>Machaguo Yaliyopo</title>
+                    <listitem>
+                        <para>
+                            <command>-a </command> kitendo.
+                        </para>
+                        <itemizedlist mark="round">
+                            <title>Thamani ziwezekanazo</title>
+                            <listitem>
+                                <para>
+                                    <command>sakinisha</command>- kusakinisha mchakato wa Mratibu kweye Windows.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>ondoa</command>- kuondoa mchakato wa Mratibu kutoka kwenye Windows.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    Baada ya usakinishaji kwenye Windows SCM mchakato wa Mratibu wa OTRS unaweza
+kutumika kama mchakato mwingine wowote katika Windows. Unaweza kuanzishwa,
+kusitishwa na kuanzishwa upya na inaweza kusanidiwa kuanzishwa kiotomatiki
+au kwa mikono.
+                </para>
+                <note>
+                    <para>
+                        Kujifunza zaidi kuhusu Huduma za Windows na Windows SCM tafadhali soma
+nyaraka ya Windows, na usaidizi wa kwenye mtandao wa Microsoft.
+                    </para>
+                </note>
+            </section>
+            <section id="scheduler-cli-linux-service">
+                <title>Faili la Huduma la Mratibu</title>
+                <para>
+                    Hii ni sehemu ya Mratibu inayobakia ikifanya kazi katika mazingira ya nyuma
+kukagua kazi za kutekeleza. Pia inatoa kazi za muhimu kudhibiti mchakato.
+                </para>
+                <para>
+                    Microsoft Windows inatumia faili
+<command>OTRS_HOME/bin/otrs.Scheduler4Win.pl</command>.
+                </para>
+                <example>
+                    <title>Mafano kuanza Mratibu wa OTRS kwenye Windows</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler4Win.pl -a start
+                        </screen>
+                    </para>
+                </example>
+                <itemizedlist mark="round">
+                    <title>Machaguo Yaliyopo</title>
+                    <listitem>
+                        <para>
+                            <command>-a </command> kitendo.
+                        </para>
+                        <itemizedlist mark="round">
+                            <title>Thamani ziwezekanazo</title>
+                            <listitem>
+                                <para>
+                                    <command>anza</command>-kuanza mchakato wa Mratibu.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>sitisha</command>- kusitisha mchakato wa Mratibu.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <command>hali</command>- kuuliza hali ya mchakato wa Mratibu.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>-f </command> kulazimisha kuanza au kusitisha mchakato wa Mratibu.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <example>
+                    <title>Mfano kulazimisha kusitisha Mratibu wa OTRS kwenye Windows</title>
+                    <para>
+                        <screen>
+                            shell> OTRS_HOME/bin/otrs.Scheduler4Win.pl -a stop -f 1
+                        </screen>
+                    </para>
+                </example>
+                <note>
+                    <para>
+                        Kusitisha Mratibu kwa lazima inatumika kuondoa kitambulisho cha mchakato
+kutoka kwenye hifadhidata wakati mratibu hafanyi kazi na mchakato bado
+umesajiliwa.
+                    </para>
+                    <para>
+                        Kuanzisha Mratibu kwa lazima inatumika kuanza mchakato wa Mratibu kama
+mratibu hafanyi kazi na mchakato bado umesajiliwa.
+                    </para>
+                    <para>
+                        Kuanzisha au kusitisha kwa lazima ni muhimu kama kuanza kwa mchakato
+kunahitajika kufanyika kabla ya muda wa kusasisha mchakato haujaisha. La
+sivyo ingizo lilokwisha muda wake kwenye hifadhidata linapuuzwa na uanzaji
+wa kawaida.
+                    </para>
+                </note>
+            </section>
+        </section>
+    </section>
+</section>

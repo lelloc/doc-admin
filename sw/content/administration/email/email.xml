@@ -1,0 +1,472 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="email">
+<title>Kutuma/Kupokea barua pepe</title>
+
+<section id="email-sending">
+<title>Kutuma barua pepe</title>
+
+<section id="email-sending-sendmail">
+<title>Kupitia TumaBaruapepe (chaguo-msingi)</title>
+
+<para>
+OTRS inaweza kutuma nje barua pepe kupitia <ulink
+url="http://www.sendmail.org/">Tumabarua</ulink>, <ulink
+url="http://www.postfix.org/">Postfix</ulink>, <ulink
+url="http://www.qmail.org">Qmail</ulink> or <ulink
+url="http://www.exim.org">Exim</ulink>). Usanidi chaguo-msingi ni kutumia
+Tumabarua na inatakiwa kufanya kazi nje-ya-boksi.
+</para>
+
+<para>
+Unaweza kusanidi mipangilio ya tumabarua kupitia mazingira ya mbele ya
+usanidi michoro (Kiunzi::Kiini::Tumabarua)
+</para>
+
+</section>
+
+<section id="email-sending-smtp">
+<title>Kupitia SMTP au smarthost</title>
+
+<para>
+OTRS inaweza kutuma barua pepe kupitia SMTP  (<ulink
+url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail Transfer Protocol / RFC
+821</ulink>) au SMTP iliyo salama. Utataka kutumia hii kwenye majukwaa
+yasiyo ya UNIX (mf. Windows).
+</para>
+
+<para>
+Mipangilio ya SMTP seva inaweza kusanidiwa kupitia SysConfig
+(Kiunzi::Kiini::Tumabarua). Kama huoni SMTP inayopatikana kama chaguo,
+moduli za perl zinazotakiwa hazipo. Katika kesi hiyo tafadhali tembelea
+<link linkend="installation-of-perl-modules">"Usakinishaji wa moduli za Perl
+zinazohitajika kwa aili ya OTRS"</link> kwa maelekezo.
+</para>
+
+</section>
+
+</section>
+
+<section id="email-receiving">
+<title>Kupokea barua pepe</title>
+
+<section id="email-receiving-pop3">
+<title>Akaunti za barua pepe zilizo sanidiwa kupitia kiolesura michoro cha mtumiaji
+cha OTRS.</title>
+
+<para>
+OTRS inaweza kupokea barua pepe kutoka akaunti za POP3, POP3S, IMAP, na
+IMAPS.
+</para>
+
+<para>
+Sanidi akaunti zako za posta kupitia kiungo cha Akaunti za Posta za
+MkuuWaPosta  kwenye ukurasa wa Msimamizi.
+</para>
+
+<para>
+Kama akaunti mpya ya barua inatakiwa kutengenezwa (ona Kielelezo chini),
+basi jina lake la seva ya barua, jina la kuingilia na nywila lazima ziwekwe
+bayana. Pia, unahitaji kuchagua aina ya seva ya barua, ambayo inaweza kuwa
+POP3, POP3S, IMAP au IMAPS. Kama huoni aina yako ya seva kuwepo kama chaguo,
+moduli za Perl zinazotakiwa hazipo katika mfumo wako. Katika kesi hiyo,
+tafadhali nenda kwenye <link linkend="installation-of-perl-modules">
+"Usakinishaji wa moduli za Perl zinazohitajika na OTRS"</link> kwa
+maelekezo. </para>
+
+<para>
+<screenshot>
+<screeninfo>Kuongeza akaunti ya barua pepe</screeninfo> <graphic srccredit="Adminarea
+postmaster - screenshot" scale="40"
+fileref="screenshots/add-mailaccount.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Umbo: Kuongeza akaunti ya barua pepe.</emphasis>
+</para>
+
+<para>Kama ukichagua Ndiyo kwa thamani ya chaguo linaloaminiwa, kichwa chochote
+cha X-OTRS kilichoambatanishwa na ujumbe unaoingia kinatathminiwa na
+kutekelezwa. Kwa sababu kichwa cha X-OTRS kinaweza kutekeleza baadhi ya
+vitendo katika mfumo wa tiketi, unatakiwa kuseti chaguo la kuamini kuwa
+Ndiyo kwa watumaji wanaojulikana tu. Vichwa vya OTRS vinatumika na <link
+linkend="adminarea-postmasterfilter">moduli ya kuchuja</link> katika
+OTRS. Vichwa vya OTRS vinaelezewa  <link
+linkend="table-of-x-otrs-headers">katika jedwali hili</link> kwa undani
+zaidi. Sheria zote za mkuu wa posta zilizotengenezwa zinatekelezwa, bila
+kujali mipangilio ya mchaguo linaloaminiwa.
+</para>
+
+<para>
+Usambazaji wa ujumbe unaoingia unaweza kudhibitiwa kama inahitajika kupangwa
+kwa foleni au kwa maudhui ya sehemu "Kwa:". Kwa sehemu ya kutuma, kama
+"Utumaji kwa foleni iliyochaguliwa" imechaguliwa, ujumbe unaoingia utapangwa
+kwenye foleni maalumu. Anuani ambako barua ilitumwa inapuuzwa kwa sasa. Kama
+"Utumaji kwa barua pepe sehemu Kwa: "  imechaguliwa, mfumo unakagua kama
+foleni imeunganishwa na anuani ya kwenye  sehemu Kwa: ya barua
+inayoingia. Unaweza kuunganisha anuani kwenye foleni katika kifungu cha
+<link linkend="adminarea-emailaddresses">Usimamizi wa anuani ya barua
+pepe</link> cha ukurasa wa Msimamizi. Kama anuani ya sehemu Kwa:
+imeunganishwa na foleni, ujumbe mpya utapangwa kwenye foleni
+zilizounganishwa. Kama hakuna kiungo kilichopatikana kati ya anuani kwenye
+sehemu Kwa: na foleni yoyote, basi ujumbe utaingia kwenye foleni "Mbichi"
+katika mfumo, ambayo ni <link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">FoleniChaguo-msingiYaMkuuwaposta
+</link> baada ya usakinishaji wa kawaida.
+</para>
+
+<para>
+Data zote za akaunti za barua zinahifadhiwa kwenye hifadhidata ya OTRS. Hati
+ya <filename>otrs.PostMasterMailbox.pl</filename>, ambayo inapatikana kwenye
+mpangilio orodha wa <filename>bin</filename> wa usakinishaji wa OTRS,
+inatumia mipangilio ya hifadhidata na kutafuta hiyo barua. Unaweza
+kutekeleza <filename>./bin/otrs.PostMasterMailbox.pl</filename> kwa mikono
+ili kukagua kama mipangilio yako yote ya barua inafanya kazi kwa usahihi.
+</para>
+
+<para>
+Katika usakinishaji wa kawaida, barua itatafutwa kila dakika 10 kwa kutumia
+kazi za mfumo zilizopangwa za <filename>postmaster_mailbox</filename>. Kwa
+taarifa zaidi kuhusu kuboresha kazi za mfumo zilizopangwa, tafadhali rejea
+kwenye kifungu <link linkend="cronjobs">"Kuanzisha kazi za mfumo
+zilizopangwa za OTRS"</link>
+</para>
+
+<note>
+<para>
+Wakati wa kutafuta barua pepe, OTRS inafuta barua hiyo kutoka kwenye seva ya
+POP au IMAP. Hakuna njia ya kuweka nakala kwenye seva. Kama unataka kubakiwa
+na nakala kwenye seva, unatakiwa utengeneze sheria za kupeleka mbele katika
+seva yako ya barua. Tafadhali tembelea nyaraka zako za seva ya barua kwa
+undani.
+</para>
+</note>
+</section>
+
+
+<section id="email-receiving-cmd">
+<title>Kupitia programu ya tungo amri na procmail (otrs.PostMaster.pl)</title>
+
+<para>
+Kama huwezi kutumia akaunti za barua kuingiza barua pepe kwenye OTRS,
+programu ya tungo amri <filename>bin/otrs.PostMaster.pl</filename>inaweza
+kuwa njia ya kutatua tatizo. Inazichukua barua kupitia STDIN na kuziingiza
+kwenye OTRS. Hii ina maanisha barua pepe zitapatikana kwenye mfumo wako wa
+OTRS kama MDA (wakala usambazaji wa barua mf. procmail) ikitekeleza programu
+hii.
+</para>
+
+<para>
+Kujaribu <filename>bin/otrs.PostMaster.pl</filename> bila MDA, tekeleza
+maagizo ya hati ifuatayo.
+</para>
+
+<para>
+<screen>
+linux:/opt/otrs# cd bin
+linux:/opt/otrs/bin# cat ../doc/sample_mails/test-email-1.box | ./otrs.PostMaster.pl
+linux:/opt/otrs/bin#
+</screen>
+</para>
+
+<para>
+<emphasis>Hati: Kujaribisha MkuuWaPosta bila MDA.</emphasis>
+</para>
+
+<para>
+Kama barua pepe imeonyeshwa kwenye MuonekanoFoleni, basi mpangilio wako
+unafanya kazi.
+</para>
+
+<para>
+Procmail ni kichujio cha barua pepe kinachojulikana sana katika mazingira ya
+Linux. Inasakinishwa katika mifumo mingi. Kama siyo, angalia katika <ulink
+url="http://www.procmail.org/"><citetitle>ukurasa wa nyumbani wa
+procmail</citetitle></ulink>.
+</para>
+
+<para>
+Kusanidi procmail kwa ajili ya OTRS (kutegemeana na MTA iliyosanidiwa na
+procmail kama sendmail, postfix, exim au qmail), tumia faili
+<filename>~otrs/.procmailrc.dist</filename> na nakili kwenda kwenye
+<filename>.procmailrc</filename> na ongeza mistari ya hati chini.
+</para>
+
+<para>
+<programlisting>
+SYS_HOME=$HOME
+PATH=/bin:/usr/bin:/usr/local/bin
+# --
+# Pipe all email into the PostMaster process.
+# --
+:0 :
+| $SYS_HOME/bin/otrs.PostMaster.pl
+</programlisting>
+</para>
+
+<para>
+<emphasis>Hati: Kusanidi procmail kwa ajili ya OTRS.</emphasis>
+</para>
+
+<para>
+Barua pepe zote zitakazotumwa kwenye OTRS ya ndani zitapelekwa kwenye
+<filename>bin/otrs.PostMaster.pl</filename> na kisha kuonyeshwa kwenye
+MuonekanoFoleni wako.
+</para>
+
+</section>
+
+<section id="email-receiving-fetchmail">
+<title>Kutafuta barua pepe kupitia POP3 au IMAP na kutafuta otrs.PostMaster.pl</title>
+
+<para>
+Ili kupata barua pepe kutoka kwenye seva yako ya barua, kupitia kikasha
+barua cha POP3 au IMAP, kwenda kwenye OTRS akaunti ya OTRS ya machine/local
+na kwenye procmail, tumia <ulink
+url="http://fetchmail.berlios.de/">tafutabarua</ulink>.
+</para>
+
+<note>
+<para>
+Usanidi wa SMTP unaofanya kazi unahitajika kwenye mashine ya OTRS.
+</para>
+</note>
+
+<para>
+Unaweza kutumia <filename>.fetchmailrc.dist</filename> katika mpangilio
+orodha wa nyumbani wa OTRS na kuunakili kwenda
+<filename>.fetchmailrc</filename>. Iboreshe/Ibadilishe kwa mahitaji yako
+(ona Mfano 7-1 chini).
+</para>
+
+<example id='fetchmailrc'>
+<title>.fetchmailrc</title>
+
+<para>
+<programlisting>
+#poll (mailserver) protocol POP3 user (user) password (password) is (localuser)
+poll mail.example.com protocol POP3 user joe password mama is otrs
+</programlisting>
+</para>
+
+</example>
+
+<para>
+Usisahau kuseti .fetchmailrc kuwa 710 ("chmod 710 .fetchmailrc")!
+</para>
+
+<para>
+Na <filename>.fetchmailrc</filename> kutoka kwenye Mfano 7-1 hapo juu, barua
+pepe zote zitapelekwa mbele kwenye akaunti ya ndani ya OTRS, kama agizo
+<command>fetchmail -a</command> limetekelezwa. Seti kazi ya mfumo
+iliyopangwa na agizo hili kama ukitaka kutafuta barua mara kwa mara.
+</para>
+</section>
+
+
+<section id="email-receiving-filter">
+<title>Kuchuja/kutuma kwa moduli za OTRS/MkuuWaPosta (kwa ajili ya utumaji
+changamano)</title>
+
+<para>
+Kama ukitumia njia ya bin/otrs.PostMaster.pl au
+bin/otrs.PostMasterMailbox.pl, unaweza kuingiza au kubadilisha maingizo ya
+vichwa vya X-OTRS kwa kutumia moduli za kuchuja za MkuuWaPosta. Na vichwa
+vya X-OTRS mfumo wa tiketi unaweza kutekeleza baadhi ya  vitendo kwa barua
+zinazoingia, kuzipanga kwenye foleni maalumu, kubadili kipaumbele au
+kubadili kitambulisho cha mteja, kwa mfano. Taarifa zaidi kuhusu vichwa vya
+X-OTRS zinapatikana katika kifungu kuhusu <link
+linkend="adminarea-postmasterpop3-account">kuongeza akaunti za
+barua</link>kutoka kwenye kurasa ya Msimamizi wa OTRS.
+</para>
+
+<para>
+Kuna baadhi ya moduli chaguo-msingi za kuchuja:
+</para>
+
+<note>
+<para>
+Jina la kazi
+(mf. $Self-&gt;{'MkuuWaPosta::ModuliUchujaji'}-&gt;{'JinaKazi'}) linahitaji
+kuwa la kipekee!
+</para>
+</note>
+
+<para>
+Kiini::Mfumo::MkuuWaPosta::Kichujio::Fananisha ni moduli chaguo-msingi kwa
+ajili ya kufananisha baadhi ya vichwa vya barua pepe (mf. Kutoka, Kwenda,
+Kichwa cha habari, ...). Inaweza kuseti vichwa vipya vya barua pepe
+(mf. X-OTRS-puuza:ndiyo au X-OTRS-Foleni:barua taka) kama sheria ya kuchuja
+imefanana. Kazi za Mfano 7-2 unaweza kuingizwa katika
+<filename>Kernel/Config.pm</filename>
+</para>
+
+<example id='filter-module-match-example'>
+<title>Kazi za mfano kwa moduli ya kuchuja
+Kiini::Mfumo::MkuuWaPosta::Kichujio::Fananisha</title>
+
+<para>
+<programlisting>
+    # Job Name: 1-Match
+    # (block/ignore all spam email with From: noreply@)
+    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
+        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+        Match =&gt; {
+            From =&gt; 'noreply@',
+        },
+        Set =&gt; {
+            'X-OTRS-Ignore' =&gt; 'yes',
+        },
+    };
+    # Job Name: 2-Match
+    # (sort emails with From: sales@example.com and Subject: **ORDER**
+    # into queue 'Order')
+    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
+        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+        Match =&gt; {
+            To =&gt; 'sales@example.com',
+            Subject =&gt; '**ORDER**',
+        },
+        Set =&gt; {
+            'X-OTRS-Queue' =&gt; 'Order',
+        },
+    };
+</programlisting>
+</para>
+
+</example>
+
+<para>
+Kiini::Mfumo::MkuuWaPosta::Chuja::CMD ni moduli chaguo-msingi ya kupeleka
+barua pepe kwenda kwenye amri ya nje. Matokeo yanapewa kwa STDOUT na kama
+majibu ni kweli, kisha seti kichwa kipya cha barua pepe (mf. X-OTRS-Puuza:
+ndiyo au X-OTRS-Foleni: barua taka). Mfano 7-3 unaweza kutumika katika
+<filename>Kernel/Config.pm</filename>
+</para>
+
+<example id='filter-module-cmd-example'>
+<title>Kazi ya mfano kwa moduli ya kuchuja Kiini::Mfumo::MkuuWaPosta::Kichujio::CMD</title>
+
+<para>
+<programlisting>
+    # Job Name: 5-SpamAssassin
+    # (SpamAssassin example setup, ignore spam emails)
+    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
+        Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
+        CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
+        Set =&gt; {
+            'X-OTRS-Ignore' =&gt; 'yes',
+        },
+    };
+</programlisting>
+</para>
+
+</example>
+
+<para>
+    Kiini::Mfumo::MkuuWaPosta::Chuja::UtambuziWaNambariYaTiketiYaNje ni moduli
+ya chaguo-msingi   ambayo inaongeza uwezekano wa kuchanganua vitambulishi
+vya nje, katika somo la barua pepe, kiini au zote kwa kutumia semi za
+kawaida. Kisha inahifadhi thamani hii katika sehemu inayobadilika
+iliyofafanuliwa. Pale barua pepe inapoingia, OTRS kwanza itatafuta
+kitambulishi cha nje na ikikipata  , uliza OTRS kuhusu sehemu inayobadilika
+iliyofafanuliwa kabla. Kama ikipata tiketi iliyopo, ita sasisha tiketi hii,
+la sivyo itatengeneza tiketi mpya yenye namba ya kumbukumbu ya nje katika
+sehemu tofauti.
+</para>
+<para>
+    OTRS SysConfig tayari inatoa mipangilio mi 4 tofauti kuseti namba za tiketi
+za nje. Kama mipangilio zaidi itahitajika itabidi iongezwe kwa mikono. Mfano
+ufuatao unaweza kutumika katika <filename>Kernel/Config.pm</filename>
+kuendeleza mipangilio ya SysConfig.
+</para>
+
+<example id='filter-module-externalticketrecognition-example'>
+    <title>
+        Kazi za mfano kwa moduli ya kuchuja
+Kiini::Mfumo::MkuuWaPosta::Chuja::UtambuziTiketiNambariNje
+    </title>
+
+<programlisting language="Perl"><![CDATA[
+    # Job Name: ExternalNumber
+    # External Ticket Number Reconition, check for Incident-<number> in incoming mails subject and
+    # body from the addeesses <sender>@externalticket.com, if number is found it will be stored in
+    # the dynamic field 'ExternalNumber' (that need to be setup in the Admin Panel).
+    $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition5'} =  {
+        'FromAddressRegExp' => '\\s*@externalticket.com',
+        'NumberRegExp'      => 'Incident-(\\d.*)',
+        'SearchInSubject'   => '1',
+        'SearchInBody'      => '1',
+        'TicketStateTypes'  => 'new;open'
+        'DynamicFieldName'  => 'ExternalNumber',
+        'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+        'Name'              => 'Test External Ticket Number',
+        'SenderType'        => 'system',
+    };
+    ]]></programlisting></example>
+
+<itemizedlist mark="round">
+    <para><emphasis>Machaguo ya Usanidi</emphasis></para>
+    <listitem>
+        <para>KutokaAnwaniRegExp</para>
+        <para>
+            Huu ni mpangilio wa hiari. Barua zinazofanana na hii anwani "Kutoka:" ndiyo
+zitatumika kwa kichujio hiki. Unaweza kubadilisha huu mpangilio kuwa anwani
+ya mtumaji mfumo wako wa nje inayotumia kwa ujumbe unaotoka. Ikiwa hii
+anwani ianatofautiana, unaweza kuseti hili chaguo kuwa tupu. OTRS kwa kesi
+hii haitakagua anwani ya mtumaji.
+        </para>
+    </listitem>
+    <listitem>
+        <para>NambaRegExp</para>
+        <para>
+            Huu ni mpangilio wa lazma. Huu mpangilio una semi za kawaida ambazo OTRS
+itatumia kupata nambari ya tiketi kutoka kwenye somo na/au kiini cha
+tiketi. Usemi wa kawaida utafanana na matukio ya  kwa mfano 'Tukio-12354'
+na itaweka sehemu iliyo kwenye mabano katika sehemu inayobadilika, kwa kesi
+hii '12354'.
+        </para>
+    </listitem>
+    <listitem>
+        <para>TafutaInSomo</para>
+        <para>Kama hii imesetiwa kuwa '1', mada ya barua pepe inatafutwa kwa ajili ya
+nambari ya tiketi.</para>
+    </listitem>
+    <listitem>
+        <para>Tafuta katika Kiini</para>
+        <para>Kama hii imesetiwa kuwa '1', kiini cha barua pepe kinatafutwa kwa ajili ya
+nambari ya tiketi.</para>
+    </listitem>
+    <listitem>
+        <para>TiketiHaliAina</para>
+        <para>
+            Huu ni mpangilio wa hiari. Kama imetolewa, itatafuta OTRS kwa ajili ya
+tiketi za nje zilizo wazi tu kwa aina fulani ya hali. Aina za hali
+zinagawanywa na nukta mkato.
+        </para>
+    </listitem>
+    <listitem>
+        <para>SehemuInayobadilika</para>
+        <para>
+            Huu ni mpangilio unaohitajika. Unafafanua sehemu inayobadilika ambayo
+inatumika kuhifadhi nambari ya nje (jina la sehemu lazima liwepo kwenye
+mfumo na inabidi liwe halali).
+        </para>
+    </listitem>
+    <listitem>
+        <para>AinaYaMtumaji</para>
+        <para>Hii inafafanua aina ya mtumaji wa makala zilizotengenezwa katika OTRS.</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+Pia inawezekana kutengeneza moduli zako za kuchuja za MkuuWaPosta.
+</para>
+
+</section>
+
+</section>
+
+</section>

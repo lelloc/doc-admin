@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="webservice_cli">
+    <title>Kiolesura cha Tungo Amri cha Huduma ya Tovuti.</title>
+    <para>
+        Kiolesura cha Tungo Amri (CLI) ni njia ya haraka ya kufanya kazi na huduma
+za tovuti. Ina seti ya vifaa ambavyo vinaweza kutumika kufanya kazi za
+msingi kama:
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Tengeneza, Sasisha, Soma, Orodhesha na Futa huduma za tovuti zenye msingi wa
+mafaili ya YAML.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Soma batli ya anaye eua, na machaguo ya kuchuja.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <para>
+            Huitaji kutumia CLI kufanya kazi na huduma za wavuti. Katika kiolesura cha
+Msimamizi kuna seti za skrini zilizounganishwa kwa ajili ya kuwasiliana na
+kila upande wa huduma za tovuti. Tafadhali soma GUI ya huduma za tovuti
+iliyojumuishwa kwenye mwongozo huu.
+        </para>
+    </note>
+
+    <section id="webservice_cli_webserviceconfig">
+        <title>Usanidi wa Huduma za Tovuti</title>
+        <para>
+             "WebserviceConfig.pl" ilitengenezwa ili kutengeneza kifaa cha msingi,
+lakini kirahisi na chenye nguvu cha kufanya kazi na usanidi wa huduma za
+tovuti. Inakupa uwezo wa kufanya vitendo vifuatavyo:
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Ongeza: kutengeneza huduma za tovuti kwa kutumia faili la YAML kama chanzo
+cha usanidi.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Sasisha: kubadilisha huduma ya tovuti iliyopo, usanidi unaweza kubadilishwa
+kwa kutumia faili la YAML tofauti au lililoboreshwa.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Soma: kupata usanidi wa huduma ya tovuti iliyopo kuonyeshwa kwenye skrini.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Orodha: kupata orodha nzima ya huduma za tovuti zilizosajiliwa kwenye mfumo.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Futa: kufuta huduma ya tovuti kutoka kwenye mfumo. Kuwa makini ukiitumia,
+kwa sababu kitendo hiki hakiwezi kubadilishwa.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <warning>
+            <para>
+                Operesheni ya huduma ya tovuti ya SOMA itaonyesha usanidi wote kama nakala
+wazi kwenye skrini, ikijumuisha nywila zilizohifadhiwa. Tafadhali kuwa macho
+na hili na chukua tahadhari.
+            </para>
+        </warning>
+        <para>
+            Mfano: Kutengeneza usanidi mpya wa huduma ya mtandao:
+        </para>
+        <para>
+            <screen>
+                shell> OTRS_HOME/bin/otrs.WebserviceConfig.pl -a write -n &lt;webservice_name&gt; -f /path/to/yaml/file
+            </screen>
+        </para>
+        <para>
+            Pia unaweza kutumia 'otrs.WebserviceConfig.pl' na machaguo yafuatayo:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <command>-a read -i &lt;webservice_id&gt;</command> - Kusoma usanidi
+uliohifadhiwa.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a write -n &lt;webservice_name&gt; -f /path/to/yaml/file</command>
+- Kutengeneza huduma mpya ya tovuti.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a write -i &lt;webservice_id&gt; -f /path/to/yaml/file</command> -
+Kusasisha huduma ya tovuti.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a list</command> - Kuorodhesha huduma za tovuti zinazopatikana.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a delete -i &lt;webservice_id&gt;</command> - Kufuta huduma ya
+tovuti.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section id="webservice_cli_debugger">
+        <title>Kieuaji cha Huduma ya Tovuti</title>
+        <para>
+            Kifaa kingine kinachopatikana kupitia kiolesura cha tungo amri ni hati ya
+"otrs.GenericInterfaceDebugRead.pl", ambacho ni kiolesura cha kutafuta
+mweuaji wa maingizo ya batli ya huduma ya tovuti.
+        </para>
+        <para>
+            Mfano: Kutafuta maingizo ya batli za anaye eua:
+        </para>
+        <para>
+            <screen>
+                shell> bin/otrs.GenericInterfaceDebugRead.pl
+            </screen>
+        </para>
+        <para>
+            <itemizedlist>
+                <para>
+                    Parameta za hiari zinaweza kutumika kwa ajili ya hati ya
+"otrs.GenericInterfaceDebugRead.pl":
+                </para>
+                <listitem>
+                    <para>
+                        <command>-c</command> - kuchuja Mawasiliano kwa Kitambulisho (muundo wa
+md5sum).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-t</command> - kuchuja kwa MawasilianoAina ('Mtoaji' or
+'Muombaji').
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a</command> - kuchuja kwa tarehe (Katika au Baada ya tarehe).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-b</command> - kuchuja kwa tarehe (Katika au Kabla ya tarehe).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-i</command> - kuchuja kwa anwani ya IP (lazima iwe anwani halisi
+ya IPV4 au IPV6).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-w</command> - kuchuja kwa Kitambulisho cha Huduma ya Tovuti.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-d</command> - kujumuisha data za mawasiliano kwa undani.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Mfano: Kutafuta maingizo ya anaye eua kwa kutumia parameta zote:
+        </para>
+        <para>
+            <screen>
+                shell> ./otrs.GenericInterfaceDebugRead.pl -c a7cc4d9f5c70387a9bfbe1351bc88966 -t Provider -a '2011-07-22 00:00:00' -b '2011-07-26 00:00:00' -i 127.0.0.1 -w 123 -d 1
+            </screen>
+        </para>
+        <note>
+            <para>
+                Inashauriwa sana kujumuisha japo moja ya machaguo ya kuchuja
+yaliyoorodheshwa juu, na zaidi kama chaguo "-d" limechaguliwa, kwa sababu
+taarifa <emphasis>nyingi </emphasis> zinaweza kupatikana kutoka kwenye
+hifadhidata na kuonyeshwa kwenye skrini, hii inaweza kupelekea muda wa
+majibu kuongezeka na taarifa zaidi ya zile unazohitaji.
+            </para>
+        </note>
+    </section>
+</section>
