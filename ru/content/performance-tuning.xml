@@ -231,21 +231,27 @@ shell> bin/otrs.ArticleStorageSwitch.pl -s ArticleStorageDB -d ArticleStorageFS
         <section id="performance-tuning-otrs-cache">
             <title>Кэш</title>
             <para>
-                OTRS кэширует большое количество временных данных в
-<filename>/opt/otrs/var/tmp</filename>. Убедитесь, что для этого
-используется высокопроизводительная файловая система/хранилище. Если вы
-располагаете достаточным количеством RAM, вы можете попробовать поместить
-эту папку в память, например:  <screen><![CDATA[
+                OTRS caches a lot of temporary data in
+<filename>/opt/otrs/var/tmp</filename>.  Please make sure that this uses a
+high performance file system/storage.  If you have enough RAM, you can also
+try to put this directory on a ramdisk like this: <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.CleanUp.pl
 shell> /opt/otrs/bin/otrs.DeleteCache.pl
 shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
 
 # add persistent mount point in /etc/fstab
-                ]]></screen> <note>
-Только помните, что это непостоянная память, которая затирается при
-перезагрузке сервера. Все ваши сеансы (если вы храните их в файловой
-системе) и данные кэша будут потеряны. </note> Вы также можете купить в OTRS
-Group решение - centralized memcached based Cache backend.
+                ]]></screen>
+            </para>
+            <note>
+                <para>
+                    Please note that this will be a non-permanent storage that will be lost on
+server reboot.  All your sessions (if you store them in the filesystem) and
+your cache data will be lost.
+                </para>
+            </note>
+            <para>
+                There is also a centralized memcached based Cache backend available for
+purchase from OTRS Group.
             </para>
         </section>
 
