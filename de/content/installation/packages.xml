@@ -68,8 +68,8 @@ this:
 
 <para>
     <screen>
-        max_allowed_packet = 16M
-        query_cache_size = 32M
+        max_allowed_packet=20M
+        query_cache_size=32M
     </screen>
 </para>
 
@@ -248,7 +248,7 @@ you use the latest OTRS RPM package available.
 You can use OTRS using different database back-ends: MySQL, PostgreSQL,
 Oracle or Microsoft SQL Server. The most popular database to deploy OTRS on
 is MySQL.  This chapter shows the steps you need to take to configure MySQL
-on a SUSE-based server. Of course you can install the database on a
+on a RHEL-based server. Of course you can install the database on a
 dedicated database server if needed for scalability or other purposes.
 </para>
 
@@ -271,7 +271,7 @@ lines under the [mysqld] section:
 
 <para>
     <screen>
-        max_allowed_packet=16M
+        max_allowed_packet=20M
         query_cache_size=32M
     </screen>
 </para>
@@ -513,29 +513,21 @@ The next step is to configure OTRS using the web installer, as described
 </section>
 
 <section id="installation-on-debian">
-<title>Installation von OTRS auf einem Debian-System</title>
-
+<title>Installing OTRS on a Debian or Ubuntu system</title>
+<important>
+    <para>
+        Please install OTRS <link linkend="manual-installation-of-otrs">from
+source</link>, and do not use the OTRS packages that Debian/Ubuntu provides.
+    </para>
+</important>
 <para>
-Im OTRS-Wiki finden Sie detaillierte Anweisungen für die Installation unter
-Debian: <ulink
-url="http://wiki.otrs.org/index.php?title=Installation_on_Debian_5.04_lenny">
-http://wiki.otrs.org/index.php?title=Installation_on_Debian_5.04_lenny
-</ulink>.
+    The installation of required Perl modules is easier if you use the available
+packages: <screen>
+apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl \
+    libnet-ldap-perl libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl \
+    libgd-text-perl libtext-csv-xs-perl libjson-xs-perl libgd-graph-perl libapache-dbi-perl
+    </screen>
 </para>
-
-</section>
-
-<section id="installation-on-ubuntu">
-<title>Installation von OTRS auf einem Ubuntu-System</title>
-
-<para>
-Im OTRS-Wiki finden Sie detaillierte Anweisungen für die Installation unter
-Ubuntu: <ulink
-url="http://wiki.otrs.org/index.php?title=Installation_on_Ubuntu_Lucid_Lynx_(10.4)">
-http://wiki.otrs.org/index.php?title=Installation_on_Ubuntu_Lucid_Lynx_(10.4)
-</ulink>.
-</para>
-
 </section>
 
 <section id="installation-on-windows">
@@ -544,9 +536,9 @@ http://wiki.otrs.org/index.php?title=Installation_on_Ubuntu_Lucid_Lynx_(10.4)
 <para>
 Installing OTRS on a Microsoft Windows system is very easy. Download the
 latest installer for Win32 from <ulink url="http://www.otrs.com/try/">
-<citetitle>http://www.otrs.com/try/</citetitle> </ulink> and save the
-file to your local file system. Then simply double-click on the file to
-execute the installer, and follow the few installation steps to setup the
+<citetitle>http://www.otrs.com/try/</citetitle> </ulink> and save the file
+to your local file system. Then simply double-click on the file to execute
+the installer, and follow the few installation steps to setup the
 system. After that you will be able to login as OTRS administrator and
 configure the system according to your needs. To log in as OTRS
 administrator use the user name 'root@localhost' and the default password

@@ -100,23 +100,20 @@ abgearbietet, egal welcher Wert für "Vertraut" ausgewählt wurde.
 </para>
 
 <para>
-Weiterhin können Sie die Verteilung der abgerufenen Mails durch die Angabe
-steuern, ob die neuen Nachrichten nach dem To-Feld oder nach der Queue im
-System einsortiert werden sollen. Wählen Sie "Verteilung nach ausgewählter
-Queue" aus, landen die abgerufenen Mails auf jeden Fall in der Queue, die
-zusätzlich in der dafür vorgesehenen Listbox angegeben werden kann. Dabei
-spielt keine Rolle, an welche Adresse die Mail geschickt wurde. Wählen Sie
-"Verteilung nach To: Feld" aus, wird überprüft, welcher Queue die Adresse
-zugeordnet ist, an die die abgerufene Mail gesendet wurde. Die Zuordnung
-einer Mailadresse zu einer Queue kann über die <link
-linkend="adminarea-emailaddresses">Mailadressen Verwaltung</link>
-vorgenommen werden. Existiert eine Zuordnung der Adresse im To: Feld zu
-einer Queue innerhalb des Systems, wird die abgerufene Nachricht in die
-entsprechende Queue einsortiert. Kann keine Zuordnung gefunden werden,
-landet das Ticket in der Standard-Queue des Systems (Raw), die mit Hilfe des
-Konfigurationsparameters <link
-linkend="Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>
-eingestellt werden kann.
+The distribution of incoming messages can be controlled if they need to be
+sorted by queue or by the content of the "To:" field. For the Dispatching
+field, if "Dispatching by selected queue" is selected, all incoming messages
+will be sorted into the specified queue. The address where the mail was sent
+to is disregarded in this case. If "Dispatching by email To: field" is
+selected, the system checks if a queue is linked with the address in the To:
+field of the incoming mail. You can link an address to a queue in the <link
+linkend="adminarea-emailaddresses">E-mail address management</link> section
+of the Admin page. If the address in the To: field is linked with a queue,
+the new message will be sorted into the linked queue. If no link is found
+between the address in the To: field and any queue, then the message flows
+into the "Raw" queue in the system, which is the <link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>
+after a default installation.
 </para>
 
 <para>

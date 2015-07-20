@@ -299,15 +299,69 @@ the permissions / rights is shown in Table 5-2.
 
 <note>
     <para>
-        По умолчанию, СписокОчередей (QueueView) отображает только заявки в
-очередях, к которым агент имеет права <emphasis>rw</emphasis>, т.е к
-заявкам, с которыми он должен работать. Если вы хотите изменить это
-поведение, вы можете установить параметр <link
-linkend="Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> в
-значение <emphasis>Да</emphasis>.
+        By default, the QueueView only lists tickets in queues that an agent has
+<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
+on. If you want to change this behaviour, you can set <link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
+<emphasis>Yes</emphasis>.
     </para>
 </note>
+ <para>Not all available permissions are shown by default. These additional
+permissions can be added.</para>
+      <para>
+        <table id="table-of-group-additional-permissions">
+          <title>Additional permission groups</title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Права</entry>
+                <entry>Описание</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>stats</entry>
+                <entry>Gives access to the stats page.</entry>
+              </row>
+              <row>
+                <entry>bounce</entry>
+                <entry>The right to bounce an email message (with bounce button in ticketZoom).</entry>
+              </row>
+              <row>
+                <entry>compose</entry>
+                <entry>The right to compose an answer for a ticket.</entry>
+              </row>
+              <row>
+                <entry>customer</entry>
+                <entry>The right to change the customer of a ticket.</entry>
+              </row>
+              <row>
+                <entry>forward</entry>
+                <entry>The right to forward a messages (with the forward button).</entry>
+              </row>
+              <row>
+                <entry>pending</entry>
+                <entry>The right to set a ticket to pending.</entry>
+              </row>
+              <row>
+                <entry>phone</entry>
+                <entry>The right to add a phonecall to a ticket.</entry>
+              </row>
+              <row>
+                <entry>responsible</entry>
+                <entry>The right to change the responsible agent for a ticket.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+      <note>
+        <para>
+          These permissions can be added by changing the <link
+linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permission</link>
+        </para>
+      </note>
 </section>
 
 <section id="adminarea-roles">
@@ -351,7 +405,7 @@ Agent to Group with Agent to Role mappings can make for a complex access
 control scheme, that is difficult to understand and maintain. If you wish to
 use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
 area, you can do so by modifying the <link
-linkend="Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
+linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
 in the SysConfig. Be aware that this won't remove already existing Agents to
 Group assignments!
 </para>
@@ -565,14 +619,13 @@ linkend="adminarea-groups">Модуль Управления Группами </
 </para>
 
 <para>
-Следующим шагом будет включение поддержки клиентов группы. Это можно сделать
-используя конфигурационный параметр <link
-linkend="Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>
-в SysConfig. Используя параметр <link
-linkend="Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
-можно указать группы по умолчанию, к которым будет принадлежать новый
-пользователь, таким образом каждая новая учетная запись будет добавлятся в
-эту группу.
+The next step is to activate the customer group support. This can be done
+with the configuration parameter <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>,
+from the Admin SysConfig option. Using the parameter <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
+you can specify the default groups for a newly added customer, so that every
+new account will be automatically added to these groups.
 </para>
 
 <para>
@@ -1384,8 +1437,8 @@ the screen shown in the Figure.
 <para>
 OTRS can process incoming S/MIME encoded messages and sign outgoing
 mails. Before this feature can be used, you need to activate it and change
-some <link linkend="Framework:Crypt::SMIME">configuration parameters</link>
-in the SysConfig.
+some <link linkend="ConfigReference_Framework:Crypt::SMIME">configuration
+parameters</link> in the SysConfig.
 </para>
 
 <para>
@@ -1412,8 +1465,9 @@ and also search through the SMIME data.
 <para>
 OTRS handles PGP keys, which allows you to encrypt/decrypt messages and to
 sign outgoing messages. Before this feature can be used, you need to
-activate it and change some <link linkend="Framework:Crypt::PGP">
-configuration parameters </link> in the SysConfig.
+activate it and change some <link
+linkend="ConfigReference_Framework:Crypt::PGP"> configuration parameters
+</link> in the SysConfig.
 </para>
 
 <para>
@@ -1866,9 +1920,10 @@ would like to search, and specify on the right side the values you wish to
 filter on. In the section "Set Email Headers", you can choose the actions
 that are triggered if the filter rules match. You can select for "Header 1",
 "Header 2" and so on to select the X-OTRS-Header and set the associated
-values (see Figure below).
-
-Filter rules are evaluated in alphabetical order, and are all executed except if the "Stop after match" setting has been set to "Yes" in one of the rule (in this case evaluation of the remaining filters is cancelled).
+values (see Figure below).  Filter rules are evaluated in alphabetical
+order, and are all executed except if the "Stop after match" setting has
+been set to "Yes" in one of the rule (in this case evaluation of the
+remaining filters is cancelled).
 </para>
 
 <para>
@@ -2148,10 +2203,10 @@ use the same steps for updating a package that is already installed.
 </para>
 
 <para>
-В особых случаях, можно настроить Менеджер Пакетов, например, для
-испльзования прокси-сервера, или локального репозитория. перейдя по ссылке
-<link linkend="Framework:Core::Package">Framework:Core::Package</link>,
-просто посмотрите на имеющиеся варианты в файле SysConfig.
+In special cases, you might want to configure the Package Manager, e.g., to
+use a proxy or to use a local repository. Just take a look at the available
+options in SysConfig under <link
+linkend="ConfigReference_Framework:Core::Package">Framework:Core::Package</link>.
 </para>
 
 </section>
