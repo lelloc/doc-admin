@@ -165,7 +165,15 @@ shell> apt-get install apache2 libapache2-mod-perl2
         </para>
 
         <para>
-        短いURL、エイリアスおよびScriptAliasエントリー経由でOTRSのウェブ・インターフェースにアクセスすることは必要です。ほとんどの<application>Apache</application>インストレーションは<filename>conf.d</filename>ディレクトリを含みます。Linuxシステムにおいては、通常<filename>/etc/apache</filename>あるいは<filename>/etc/apache2</filename>の下にこのディレクトリーを見つけることができます。rootとしてログインして、<filename>conf.d</filename>ディレクトリーを変更して、アパッチ構成ディレクトリー中の<filename>otrs.conf</filename>と呼ばれるファイルに<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename>の中の適切なテンプレートをコピーしてください。
+        To access the web interface of OTRS via a short URL, Alias and ScriptAlias
+entries are needed. Most <application>Apache</application> installations
+have a <filename>conf.d</filename> directory included. On Linux systems you
+can usually find this directory under <filename>/etc/apache</filename> or
+<filename>/etc/apache2</filename>. Log in as root, change to the
+<filename>conf.d</filename> directory and link the appropriate template in
+<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename> to a file
+called <filename>zzz_otrs.conf</filename> in the Apache configuration
+directory (to make sure it is loaded after the other configurations)..
         </para>
 
         <para>

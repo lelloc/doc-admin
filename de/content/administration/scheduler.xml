@@ -12,22 +12,23 @@ use any OTRS module as needed to complete each task.
     </para>
 
     <para>
-        For sanity reasons the Scheduler process needs to be restarted from time to
-time. This is done automatically by the scheduler process itself once a day,
-but it can be adjusted as needed using the SysConfig by editing the
-"Scheduler::RestartAfterSeconds" setting.
+        Aus Sicherheitsgründen muss der Scheduler-Prozess von Zeit zu Zeit neu
+gestartet werden. Dies wird automatisch vom Scheduler-Prozess einmal täglich
+ausgelöst, aber dieser Zeitraum kann nach eigenen Bedürfnissen angepasst
+werden, indem der Wert in der SysConfig "Scheduler::RestartAfterSeconds"
+bearbeitet wird.
     </para>
     <para>
-        The OTRS Scheduler is a fully automated process, the only needed human
-interaction is to check its status periodically and start or stop it as
-needed.
+        Der OTRS Scheduler ist ein vollautomatischer Dienst, der einzigste Eingriff
+durch einen Menschen erfolgtbeim periodischen Überprüfen des Status oder
+beim starten oder stoppen des Schedulers, sofern benötigt.
     </para>
     <note>
         <para>
-            If the Scheduler is stopped for any reason, all pending tasks and new tasks
-registered when the Scheduler is stopped will be executed as soon as the
-Scheduler starts again (unless the tasks are set to be executed in the
-future).
+            Wenn der Scheduler aus irgendwelchen Gründen gestoppt werden sollte, werden
+alle ausstehenden Tasks und alle neu hinzugefügten Tasks wieder ausgeführt,
+sobald der Scheduler erneut gestartet wurde (es sei denn die Tasks wurden
+geplant, dass sie in der Zukunft ausgeführt werden sollen).
         </para>
     </note>
     <section id="scheduler-gui">
@@ -51,10 +52,11 @@ over 4 times the process frequency then an alert will be displayed instead.
 Einstellung "Scheduler::PIDUpdateTime" konfiguriert werden
             </para>
             <para>
-                If you see a warning message it is not always necessary to take an action,
-but it is highly recommended to check if the scheduler process is
-running. If you see an alert, then there is a high chance that the scheduler
-is in fact not running and should be started.
+                Wenn Sie eine Warnung erhalten, ist es nicht immer notwendig eine Aktion
+durchzuführen, aber es wird empfohlen, dass Sie überprüfen, ob der Scheduler
+Prozess läuft. Wenn Sie einen Alarm-Benachrichtigung erhalten, dann ist es
+ziemlich wahrscheinlich, dass der Scheduler nicht läuft, und dass er
+gestartet werden sollte.
             </para>
             <para>
                 By default the Scheduler not running notification is enabled, if there is a
@@ -91,8 +93,9 @@ terminated abnormally and the Process ID is still registered in the
 database.
                 </para>
                 <para>
-                    To have full control of the Scheduler process and to check it real status
-please use the command line tools described below.
+                    Um vollen Zugriff auf den Scheduler Prozess zu erhalten und dessen echten
+Status zu überprüfen, nutzen Sie bitte die Kommandozeilen Tools, die weiter
+unten beschrieben werden.
                 </para>
             </note>
             <para>
@@ -114,19 +117,18 @@ fileref="screenshots/scheduler-start.png"></graphic></screenshot>
 process to be controlled by the operating system.
         </para>
         <para>
-            Included with OTRS there commandline interface (CLI) tools for the
-scheduler.
+            In OTRS enthalten sind auch Kommandozeilen Tools (CLI) für den Scheduler.
         </para>
         <section id="scheduler-cli-linux-init">
             <title>Scheduler init.d Dateien</title>
             <para>
-                Init.d files are special scripts that are called by the operating system at
-startup and shutdown.
+                Die Init.d Dateien sind spezielle Scripte, welche vom Betriebssystem beim
+Hoch- und Herunterfahren aufgerufen werden.
             </para>
             <para>
-                OTRS provides init.d scripts to start / stop the OTRS Scheduler process
-automatically by the operating system. These scripts are located under
-OTRS_HOME/scripts.
+                OTRS stellt init.d scripts zum automatischen starten / stoppen des OTRS
+Scheduler Prozesses durch das Betriebssystem zur Verfügung. Diese Scripte
+befinden sich unter OTRS_Home/scripts.
             </para>
             <para>
                 The init.d scripts need to be copied to the correct location for your
@@ -182,8 +184,7 @@ up the system, this is taken care of automatically.
                 <title>Ein Beispiel wie der OTRS Scheduler unter Linux gestartet wird.</title>
                 <para>
                     <screen>
-                        shell> /etc/init.d/otrs-scheduler-linux start
-                    </screen>
+shell> /etc/init.d/otrs-scheduler-linux start</screen>
                 </para>
             </example>
             <itemizedlist mark="round">
@@ -215,33 +216,35 @@ diesem Grund sind folgende Dinge notwendig:
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            Execute the Scheduler init.d script to <emphasis>start</emphasis> the
-Scheduler process after the database process is up and running.
+                            Führen Sie das Scheduler init.d Script aus, um den Scheduler Prozess zu
+<emphasis>starten</emphasis>, nachdem der Datenbank Prozess gestartet worden
+ist und läuft.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Execute the Scheduler init.d script to <emphasis>stop</emphasis> the
-Scheduler before the database process shuts down.
+                            Führen Sie das Scheduler init.d Script aus, um den Scheduler zu
+<emphasis>stoppen</emphasis>, bevor der Datenbank Prozess beendet wird.
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
             <note>
                 <para>
-                    If you want the Scheduler to run at system startup, please read the
-documentation of the operating system to find out the right location to
-place the init.d scripts, how to configure them to run automatically and how
-to set the run order.
+                    Wenn Sie wollen, dass der Scheduler beim Systemstart ausgeführt wird, lesen
+Sie bitte die Dokumentation zu ihrem Betriebssystem um den richtigen Ort zum
+hinterlegen der init.d Scripts herauszufinden, ebenso wie sie diese
+konfigurieren, dass sie automatisch starten und wie die Ausführungsordnung
+eingestellt wird.
                 </para>
             </note>
         </section>
         <section id="scheduler-cli-linux-daemon">
             <title>Zeitplaner-Hitergrunddatei</title>
             <para>
-                This is the part of the Scheduler that stays running in the background
-checking for tasks to execute. It also provides the main functions to
-control the process.
+                Das ist der Teil des Schedulers, der im Hintergrund weiterläuft und
+überprüft ob Tasks ausgeführt werden müssen. Er stellt außerdem die
+Hauptfunktionen zum Steuern des Prozesses zur Verfügung.
             </para>
             <para>
                 Alle Unix / Linux Betriebsysteme nutzen die Datei
