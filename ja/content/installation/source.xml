@@ -7,7 +7,7 @@
     <title>ソース（Linux,Unix)からのインストレーション</title>
 
     <section role="NotInToc">
-        <title>Step 1: Install .tar.gz</title>
+        <title>ステップ1：.tar.gzファイルのインストール</title>
         <para>
         If you want to install OTRS from source, first download the source archive
 as .tar.gz, .tar.bz2, or .zip file from <ulink
@@ -28,7 +28,7 @@ shell> mv otrs-x.x.x /opt/otrs
     </section>
 
     <section role="NotInToc" id="installation-of-perl-modules">
-        <title>Step 2: Install Additional Perl Modules</title>
+        <title>ステップ2：Perlモジュールの追加インストール</title>
         <para>
             Use the following script to get an overview of all installed and required
 cpan modules.  <screen><![CDATA[
@@ -102,7 +102,7 @@ depending on the special requirements of the target system.
     </section>
 
     <section role="NotInToc">
-        <title>Step 3: Create OTRS User</title>
+        <title>ステップ3：OTRSユーザーの作成</title>
         <para>
             Create user: <screen><![CDATA[
 shell> useradd -d /opt/otrs/ -c 'OTRS user' otrs
@@ -115,7 +115,7 @@ shell> usermod -G www otrs
     </section>
 
     <section role="NotInToc">
-        <title>Step 4: Activate Default Config Files</title>
+        <title>ステップ4：初期設定ファイルの有効化</title>
         <para>
             There are two OTRS config files bundled in $OTRS_HOME/Kernel/*.dist and
 $OTRS_HOME/Kernel/Config/*.dist. You must activate them by copying them
@@ -129,7 +129,7 @@ shell> cp Kernel/Config/GenericAgent.pm.dist Kernel/Config/GenericAgent.pm
     </section>
 
     <section role="NotInToc">
-        <title>Step 5: Check if all needed modules are installed</title>
+        <title>ステップ5：必須モジュールのインストール状況確認</title>
         <para>
             <screen><![CDATA[
 shell> perl -cw /opt/otrs/bin/cgi-bin/index.pl
@@ -146,7 +146,7 @@ modules are installed.
     </section>
 
     <section role="NotInToc" id="web-server-configuration">
-        <title>Step 6: Configuring the Apache web server</title>
+        <title>ステップ6：Apache Webサーバーの設定</title>
 
         <para>第一に、Apache2ウェブサーバおよびmod_perlをインストールするべきです;典型的にはシステム・パッケージ・マネージャーからこれをします。以下の、最も人気のあるLinuxディストリビューション上でApacheを設定するために必要なコマンドをご覧ください。
         </para>
@@ -187,7 +187,7 @@ systems you can start/restart your web server with the command
     </section>
 
     <section role="NotInToc">
-        <title>Step 7: File Permissions</title>
+        <title>ステップ7：ファイル権限</title>
         <para>
             File permissions need to be adjusted to allow OTRS to read and write files:
 <cmdsynopsis>
@@ -221,7 +221,7 @@ shell> bin/otrs.SetPermissions.pl --web-group=www-data
     </section>
 
     <section role="NotInToc" id="database-configuration">
-        <title>Step 8: Database Setup and Basic System Configuration</title>
+        <title>ステップ8：データベースのセットアップとシステムの基本設定</title>
         <para>
             Please use the web installer at <ulink
 url="http://yourhost/otrs/installer.pl">http://yourhost/otrs/installer.pl</ulink>
@@ -231,7 +231,7 @@ basic system settings such as email accounts.
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: First login</title>
+        <title>ステップ9：はじめてのログイン</title>
         <para>
             Now you are ready to login to your system at <ulink
 url="http://yourhost/otrs/index.pl">http://yourhost/otrs/index.pl</ulink>
@@ -244,7 +244,7 @@ root@localhost).
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: First email</title>
+        <title>ステップ10：はじめての電子メール</title>
         <para>
             To check email reception, you can pipe an email directly into
 <filename>/opt/otrs/bin/otrs.Postmaster.pl</filename>: <screen><![CDATA[
@@ -254,7 +254,7 @@ shell> cat /opt/otrs/doc/sample_mails/test-email-1.box | /opt/otrs/bin/otrs.Post
     </section>
 
     <section role="NotInToc" id="installation-source-cronjobs">
-        <title>Step 11: Cronjobs for the OTRS user</title>
+        <title>ステップ11：OTRSユーザーのcronジョブ</title>
         <para>
             There are several OTRS default cronjobs in
 <filename>/opt/otrs/var/cron/*.dist</filename>.  They can be activated by
@@ -279,7 +279,7 @@ scheduler_watchdog cronjob is activated.
     </section>
 
     <section role="NotInToc">
-        <title>Step 12: Further Information</title>
+        <title>ステップ12：その他の情報</title>
         <para>
             We advise you to read the OTRS <link
 linkend="performance-tuning">performance tuning chapter</link>.
