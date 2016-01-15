@@ -30,7 +30,7 @@ url="http://bugs.otrs.org/show_bug.cgi?id=6798">дополнительный ш�
     Within a single minor version you can skip patch level releases if you want
 to upgrade. For instance you can upgrade directly from OTRS 5 patchlevel 2
 to version 5 patchlevel 6. If you need to do such a "patch level upgrade",
-you should skip steps 6, 10, 11, 14 and 17.
+you should skip steps 6, 10, 11, 14, 17 and 18.
     </para>
 
     <para>
@@ -432,7 +432,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 16: Migrate custom perl based GenericAgent jobs (optional)</title>
+        <title>Step 16: Migrate custom Perl based GenericAgent jobs (optional)</title>
         <para>
             This is only relevant if you had any custom GenericAgent jobs in Perl OTRS 4
 configuration files such as
@@ -492,7 +492,19 @@ possible options and arguments will be shown by pressing TAB.
     </section>
 
     <section role="NotInToc">
-        <title>Step 18: Well done!</title>
+        <title>Step 18: Review ticket action screen configurations (optional)</title>
+        <para>
+            Some ticket action screens like "Note" had default subjects in OTRS 4
+(configurable via SysConfig,
+<literal>Ticket::Frontend::AgentTicketNote###Subject</literal> in this
+case). These default subjects have been removed to reduce the amount of
+potentially redundant/meaningless data. You might want to re-add them if
+they are mandatory for you.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>Step 19: Well done!</title>
         <para></para>
     </section>
 </section>

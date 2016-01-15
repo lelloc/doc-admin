@@ -21,8 +21,8 @@ Sendmail and should work out-of-the-box.
 </para>
 
 <para>
-Параметры sendmail можно настроить через графический веб-интерфейс для
-конфигурации (Framework::Core::Sendmail)
+You can configure the sendmail settings via the graphical configuration
+frontend (<literal>Framework::Core::Sendmail</literal>)
 </para>
 
 </section>
@@ -37,12 +37,11 @@ url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail Transfer Protocol / RFC
 </para>
 
 <para>
-Параметры настройки SMTP-сервера могут быть сконфигурированны через
-SysConfig (Framework::Core::Sendmail). Если у вас нету SMTPS в качестве
-опции, значит вы пропустили установку соответствующих Perl-модулей. В таком
-случае, обратитесь пожалуйста к этой <link
-linkend="installation-of-perl-modules">"Установка Perl-модулей необходимых
-для работы OTRS"</link> инструкции.
+The SMTP server settings can be configured via the SysConfig
+(<literal>Framework::Core::Sendmail</literal>). If you don't see SMTPS
+available as an option, the required Perl modules are missing. In that case,
+please refer to <link linkend="installation-of-perl-modules">"Installation
+of Perl modules required for OTRS"</link> for instructions.
 </para>
 
 </section>
@@ -135,8 +134,8 @@ OTRS Daemon.
 
 
 <section id="email-receiving-cmd">
-<title>Via Command Line Program and Procmail (<literal>otrs.Console.pl
-Maint::PostMaster::Read</literal>)</title>
+<title>Via Command Line Program and Procmail (<filename>otrs.Console.pl
+Maint::PostMaster::Read</filename>)</title>
 
 <para>
 If you cannot use mail accounts to get the email into OTRS, the command line
@@ -171,7 +170,7 @@ linux:/opt/otrs/bin#
 
 <example id='procmail-queue-routing'>
 
-<title>Routing via Procmail Using <literal>otrs.Console.pl</literal></title>
+<title>Routing via Procmail Using <filename>otrs.Console.pl</filename></title>
 
 <para>
 In order to route mails in a specific queue using otrs.Console.pl use the
@@ -185,7 +184,7 @@ following example.
 </para>
 
 <para>
-When sorting to a subqueue, you must seperate the parent and child queue
+When sorting to a subqueue, you must separate the parent and child queue
 "::".
 </para>
 
@@ -237,8 +236,8 @@ shown in your QueueView.
 </section>
 
 <section id="email-receiving-fetchmail">
-<title>Fetching emails via POP3 or IMAP and fetchmail for otrs.Console.pl
-Maint::PostMaster::Read</title>
+<title>Fetching emails via POP3 or IMAP and fetchmail for <filename>otrs.Console.pl
+Maint::PostMaster::Read</filename></title>
 
 <para>
 In order to get email from your mail server, via a POP3 or IMAP mailbox, to
@@ -271,8 +270,8 @@ poll mail.example.com protocol POP3 user joe password mama is otrs
 </example>
 
 <para>
-Don't forget to set the <filename>.fetchmailrc</filename> to 710 ("chmod 710
-.fetchmailrc")!
+Don't forget to set the <filename>.fetchmailrc</filename> to 710
+(<command>chmod 710 .fetchmailrc</command>)!
 </para>
 
 <para>
@@ -314,16 +313,16 @@ $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'JobName'}) должно быть
 </note>
 
 <para>
-Kernel::System::PostMaster::Filter::Match is a default module to match on
-some email header (e.g. From, To, Subject, ...). It can set new email
-headers (e.g. X-OTRS-Ignore: yes or X-OTRS-Queue: spam) if a filter rule
-matches. The jobs of the Example below can be inserted in
+<literal>Kernel::System::PostMaster::Filter::Match</literal> is a default
+module to match on some email header (e.g. From, To, Subject, ...). It can
+set new email headers (e.g. X-OTRS-Ignore: yes or X-OTRS-Queue: spam) if a
+filter rule matches. The jobs of the Example below can be inserted in
 <filename>Kernel/Config.pm</filename>
 </para>
 
 <example id='filter-module-match-example'>
-<title>Пример задания для модуля фильтрации
-Kernel::System::PostMaster::Filter::Match</title>
+<title>Example jobs for the filter module
+<literal>Kernel::System::PostMaster::Filter::Match</literal></title>
 
 <para>
 <programlisting>
@@ -357,11 +356,11 @@ Kernel::System::PostMaster::Filter::Match</title>
 </example>
 
 <para>
-Kernel::System::PostMaster::Filter::CMD is a default module to pipe the
-email into an external command. The output is given to STDOUT and if the
-result is true, then set new email header (e.g. X-OTRS-Ignore: yes or
-X-OTRS-Queue: spam). The Example below can be used in
-<filename>Kernel/Config.pm</filename>
+<literal>Kernel::System::PostMaster::Filter::CMD</literal> is a default
+module to pipe the email into an external command. The output is given to
+STDOUT and if the result is true, then set new email header
+(e.g. X-OTRS-Ignore: yes or X-OTRS-Queue: spam). The Example below can be
+used in <filename>Kernel/Config.pm</filename>
 </para>
 
 <example id='filter-module-cmd-example'>
@@ -384,9 +383,9 @@ X-OTRS-Queue: spam). The Example below can be used in
 </example>
 
 <para>
-    Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition is a
-default module that adds the possibility to parse external identifiers, in
-the email subject, the body or both using regular expressions. It then
+    <literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>
+is a default module that adds the possibility to parse external identifiers,
+in the email subject, the body or both using regular expressions. It then
 stores this value in a defined dynamic field. When an email comes in, OTRS
 will first search for an external identifier and when it finds one, query
 OTRS on the pre-defined dynamic field. If it finds an existing ticket, it
@@ -402,8 +401,8 @@ manually. The following example can be used in
 
 <example id='filter-module-externalticketrecognition-example'>
     <title>
-        Пример задания для модуля фильтрации
-Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition
+        Example job for the filter module
+<literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>
     </title>
 
 <programlisting language="Perl"><![CDATA[

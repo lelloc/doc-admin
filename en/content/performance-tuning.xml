@@ -26,13 +26,13 @@
 
                     <listitem>
                         <para>
-                        Using Kernel::System::Ticket::IndexAccelerator::RuntimeDB (default), generate each queue view on the fly from the ticket table. You will not have performance trouble until you have about 60,000 open tickets in your system.
+                        Using <literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal> (default), generate each queue view on the fly from the ticket table. You will not have performance trouble until you have about 60,000 open tickets in your system.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                        Kernel::System::Ticket::IndexAccelerator::StaticDB, the most powerful module, should be used when you have above 80,000 open tickets. It uses an extra ticket_index table, which works like a view. Use <filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename> for generating an initial index after switching backends.
+                        <literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal>, the most powerful module, should be used when you have above 80,000 open tickets. It uses an extra ticket_index table, which works like a view. Use <filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename> for generating an initial index after switching backends.
                         </para>
                     </listitem>
 
@@ -54,7 +54,7 @@
 
                 <listitem>
                 <para>
-                Configure Kernel::System::Ticket::ArticleStorageDB (default) to store attachments, etc., in the database. Note: Don't use it with large setups.
+                Configure <literal>Kernel::System::Ticket::ArticleStorageDB</literal> (default) to store attachments, etc., in the database. Note: Don't use it with large setups.
                 </para>
                 <para>
                 Pro: If your webserver user isn't the 'otrs' user, use this module to avoid file permission problems.
@@ -66,7 +66,7 @@
 
                 <listitem>
                 <para>
-                Configure Kernel::System::Ticket::ArticleStorageFS to store attachments etc. on the local file system. Note: Recommended for large setups.
+                Configure <literal>Kernel::System::Ticket::ArticleStorageFS</literal> to store attachments etc. on the local file system. Note: Recommended for large setups.
                 </para>
                 <para>
                 Pro: It is fast!
@@ -81,7 +81,7 @@
             </para>
 
             <para>
-                Note: you can switch from one back-end to the other on the fly. You can switch the backend in the SysConfig, and then run the command line utility <filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to put the articles from the database onto the filesystem or the other way around. You can use the <emphasis>--target</emphasis> options to specify the target back-ends. Please note that the entire process can take considerable time to run, depending on the number of articles you have and the available CPU power and/or network capacity.
+                Note: you can switch from one back-end to the other on the fly. You can switch the backend in the SysConfig, and then run the command line utility <filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to put the articles from the database onto the filesystem or the other way around. You can use the <emphasis>--target</emphasis> option to specify the target backend. Please note that the entire process can take considerable time to run, depending on the number of articles you have and the available CPU power and/or network capacity.
             </para>
 
             <para>
@@ -238,7 +238,7 @@ mysql> optimize table article;
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-            PostgreSQL is best tuned by modifying the postgresql.conf file in your PostgreSQL data directory. For advice on how to do this, reference the following articles:
+            PostgreSQL is best tuned by modifying the <filename>postgresql.conf</filename> file in your PostgreSQL data directory. For advice on how to do this, reference the following articles:
             </para>
 
             <para>

@@ -28,18 +28,18 @@
 
                     <listitem>
                         <para>
-                        Kernel::System::Ticket::IndexAccelerator::RuntimeDB (по умолчанию), "на
-лету" генерирует из таблицы заявок шаблон просмотра для каждой очереди. Пока
-в системе не больше 60, 000 открытых заявок, проблем с производительностью
-не будет.
+                        Using <literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal>
+(default), generate each queue view on the fly from the ticket table. You
+will not have performance trouble until you have about 60,000 open tickets
+in your system.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                        Kernel::System::Ticket::IndexAccelerator::StaticDB, the most powerful
-module, should be used when you have above 80,000 open tickets. It uses an
-extra ticket_index table, which works like a view. Use
+                        <literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal>, the
+most powerful module, should be used when you have above 80,000 open
+tickets. It uses an extra ticket_index table, which works like a view. Use
 <filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename>
 for generating an initial index after switching backends.
                         </para>
@@ -63,8 +63,9 @@ for generating an initial index after switching backends.
 
                 <listitem>
                 <para>
-                Configure Kernel::System::Ticket::ArticleStorageDB (default) to store
-attachments, etc., in the database. Note: Don't use it with large setups.
+                Configure <literal>Kernel::System::Ticket::ArticleStorageDB</literal>
+(default) to store attachments, etc., in the database. Note: Don't use it
+with large setups.
                 </para>
                 <para>
                 Pro: Если пользователь вашего веб-сервера не является пользователем 'otrs',
@@ -80,9 +81,9 @@ attachments, etc., in the database. Note: Don't use it with large setups.
 
                 <listitem>
                 <para>
-                Configure Kernel::System::Ticket::ArticleStorageFS для хранения вложений и
-т.д. в локальной файловой системе. Примечание: Рекомендовано при больших
-установках.
+                Configure <literal>Kernel::System::Ticket::ArticleStorageFS</literal> to
+store attachments etc. on the local file system. Note: Recommended for large
+setups.
                 </para>
                 <para>
                 Pro: Это быстро!
@@ -105,8 +106,8 @@ attachments, etc., in the database. Note: Don't use it with large setups.
 switch the backend in the SysConfig, and then run the command line utility
 <filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to
 put the articles from the database onto the filesystem or the other way
-around. You can use the <emphasis>--target</emphasis> options to specify the
-target back-ends. Please note that the entire process can take considerable
+around. You can use the <emphasis>--target</emphasis> option to specify the
+target backend. Please note that the entire process can take considerable
 time to run, depending on the number of articles you have and the available
 CPU power and/or network capacity.
             </para>
@@ -116,6 +117,11 @@ CPU power and/or network capacity.
 shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
                 ]]></screen> <emphasis>Script: Switching storage
 back-ends from database to filesystem.</emphasis>
+            </para>
+            <para>
+                If you want to keep old attachments in the database, you can activate the
+SysConfig option <literal>Ticket::StorageModule::CheckAllBackends</literal>
+to make sure OTRS will still find them.
             </para>
         </section>
 
@@ -290,9 +296,9 @@ mysql> optimize table article;
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-            PostgreSQL лучше настраивается путем изменений в файле postgresql.conf
-который находится в директории с установленным PostgreSQL. За советом, как
-это сделать, обратитесь к следующим статьям:
+            PostgreSQL is best tuned by modifying the
+<filename>postgresql.conf</filename> file in your PostgreSQL data
+directory. For advice on how to do this, reference the following articles:
             </para>
 
             <para>
