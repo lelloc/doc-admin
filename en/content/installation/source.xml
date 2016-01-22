@@ -41,16 +41,18 @@ o Date::Format.....................ok (v2.22)
 o Date::Pcalc......................ok (v1.2)
 ...
             ]]></screen>
+        </para>
 
-            <note>
-                <para>
-                    Please note that OTRS requires a working Perl installation with all "core" modules such as the module
-                    <literal>version</literal>. These modules are not explicitly checked by the script.
-                    You may need to install a <literal>perl-core</literal> package on some systems
-                    like RHEL that do not install the perl core packages by default.
-                </para>
-            </note>
+        <note>
+            <para>
+                Please note that OTRS requires a working Perl installation with all "core" modules such as the module
+                <literal>version</literal>. These modules are not explicitly checked by the script.
+                You may need to install a <literal>perl-core</literal> package on some systems
+                like RHEL that do not install the Perl core packages by default.
+            </para>
+        </note>
 
+        <para>
             To install missing Perl modules, you can:
         </para>
 
@@ -208,7 +210,7 @@ shell> apt-get install apache2 libapache2-mod-perl2
         </para>
 
         <para>
-            OTRS requires a few apache modules to be active for optimal operation. On most platforms you can make sure
+            OTRS requires a few Apache modules to be active for optimal operation. On most platforms you can make sure
             they are active via the tool <filename>a2enmod</filename>.
 
             <screen><![CDATA[
@@ -318,7 +320,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Cronjobs for the OTRS user</title>
+        <title>Step 11: Cron jobs for the OTRS user</title>
         <para>
             There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
             and their purpose is to make sure that the OTRS Daemon is running.
@@ -329,14 +331,14 @@ shell> cd /opt/otrs/var/cron
 shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
             ]]></screen>
 
-            To schedule these cronjobs on your system, you can use the script <filename>Cron.sh</filename>
+            To schedule these cron jobs on your system, you can use the script <filename>Cron.sh</filename>
             with the <literal>otrs</literal> user.
 
             <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
 
-            Stopping the cronjobs is also possible (useful for maintenance):
+            Stopping the cron jobs is also possible (useful for maintenance):
 
     <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh stop

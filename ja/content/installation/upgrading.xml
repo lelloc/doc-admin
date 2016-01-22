@@ -6,10 +6,7 @@
     <title>Upgrading OTRS from 4 to 5</title>
 
     <para>
-    These instructions are for people upgrading OTRS from <emphasis>4</emphasis>
-to <emphasis>5</emphasis> or from a <emphasis>5</emphasis> to a later
-patchlevel release <emphasis>5</emphasis> and applies both for RPM and
-source code (tarball) upgrades.
+    これらの手順は、OTRSを<emphasis>4</emphasis>から<emphasis>5</emphasis>へアップグレード、及び<emphasis>5</emphasis>以降のパッチレベルリリースの<emphasis>5</emphasis>へアップグレードする人々に向けた説明です。RPMとソースコード(tarball)のアップグレードの両方に適用されます。
     </para>
 
     <para>
@@ -40,13 +37,13 @@ you should skip steps 6, 10, 11, 14, 17 and 18.
         <title>Step 1: 関連するすべてのサービスを停止します。</title>
 
         <para>
-        Please make sure there are no more running services or cronjobs that try to
+        Please make sure there are no more running services or cron jobs that try to
 access OTRS.  This will depend on your service configuration, here is an
 example: <screen><![CDATA[
 shell> /etc/init.d/cron stop
 shell> /etc/init.d/postfix stop
 shell> /etc/init.d/apache stop
-            ]]></screen> Stop OTRS cronjobs and the
+            ]]></screen> Stop OTRS cron jobs and the
 scheduler or daemon (in this order) depending on the OTRS version you are
 updating from: <screen><![CDATA[
 shell> cd /opt/otrs/
@@ -257,11 +254,10 @@ data loss may occur.
     </section>
 
     <section role="NotInToc">
-        <title>Step 7: Refresh the configuration cache and delete caches</title>
+        <title>ステップ7: 設定キャッシュのリフレッシュと削除</title>
 
         <para>
-        Please run (as user <code>otrs</code>, <emphasis>not</emphasis> as
-<code>root</code>): <screen><![CDATA[
+        次のコマンドを実行します(<code>root</code>ユーザー<emphasis>でななく</emphasis>、<code>otrs</code>ユーザーで)。<screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/otrs.Console.pl Maint::Config::Rebuild
 shell> bin/otrs.Console.pl Maint::Cache::Delete
@@ -270,7 +266,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 8: Restart your services</title>
+        <title>ステップ8: サービスの再起動</title>
 
         <para>
         例えば（ご使用中のサービスによりますが）<screen><![CDATA[
@@ -282,12 +278,11 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: Check installed packages</title>
+        <title>ステップ9: インストール済みパッケージの確認</title>
 
         <note>
             <para>
-                The OTRS packages of 4 are NOT compatible with OTRS 5, so you have to
-perform a package upgrade!
+                OTRS 4用のパッケージ群はOTRS 5用のものと互換性がありませんので、アップグレードを行う必要があります。
             </para>
         </note>
         <para>
@@ -299,12 +294,11 @@ perform a package upgrade!
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: Configure NodeIDs (only for multi-frontend clustered setups)</title>
+        <title>ステップ10: ノードIDの設定(マルチフロントエンドによるクラスタ構成でのセットアップ時のみ)</title>
 
         <note>
             <para>
-                This step is only needed if you have a clustered setup with several frontend
-machines.
+                このステップはクラスタを構成するすべてのフロントエンドマシンでセットアップする必要があります。
             </para>
         </note>
         <para>
@@ -321,20 +315,20 @@ $Self->{'NodeID'} =  '2';   # assign a unique value for every frontend server
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Check follow-up detection configuration</title>
+        <title>ステップ11: フォローアップ検出設定の確認</title>
 
         <para>
             The follow-up detection settings were reorganized. Now OTRS searches by
 default in email subject and references to detect follow-ups. Please check
-in AdminSysConfig <literal>Ticket</literal> ->
+in AdminSysConfig <literal>Ticket</literal> -&gt;
 <literal>Core::PostMaster</literal> if you need to make any changes to the
-follow up detection configuration (for example to search in body,
+follow-up detection configuration (for example to search in body,
 attachments or raw email content).
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 12: Start the OTRS Daemon</title>
+        <title>ステップ12: OTRSデーモンの起動</title>
 
         <para>
             The new OTRS daemon is responsible for handling any asynchronous and
@@ -349,33 +343,33 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 13: Update and activate cronjobs</title>
+        <title>Step 13: Update and activate cron jobs</title>
 
         <para>
             There are two default OTRS cron files in
 <filename>/opt/otrs/var/cron/*.dist</filename>, and their purpose is to make
-sure that the OTRS Daemon is running.  They need to be be activated by
-copying them without the ".dist" filename extension.  <screen><![CDATA[
+sure that the OTRS Daemon is running.  They need to be activated by copying
+them without the ".dist" filename extension.  <screen><![CDATA[
 shell> cd /opt/otrs/var/cron
 shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
-            ]]></screen> To schedule these cronjobs on your system, you can
-use the script <filename>Cron.sh</filename> with the <literal>otrs</literal>
-user.  <screen><![CDATA[
+            ]]></screen> To schedule these cron jobs on your system, you can use the script
+<filename>Cron.sh</filename> with the <literal>otrs</literal> user.
+<screen><![CDATA[
 shell&gt; /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
         <para>
             Please note that if you had any custom cron jobs, you should consider moving
-them to SysConfig (<literal>Daemon</literal> ->
+them to SysConfig (<literal>Daemon</literal> -&gt;
 <literal>Daemon::SchedulerCronTaskManager::Task</literal>)  to have them
-executed by the OTRS daemon as well.  You might also need to adapt the
-commandlines because now most OTRS commands are managed by
+executed by the OTRS daemon as well.  You might also need to adapt your
+custom scripts, because now most OTRS commands are managed by
 <filename>bin/otrs.Console.pl</filename> instead of single scripts.
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 14: Review your ticket notifications</title>
+        <title>ステップ14: チケット通知の見直し</title>
         <para>
             With OTRS 5 ticket notifications are configured differently than in previous
 versions.  They are now part of the "Event Notifications" that were
@@ -402,10 +396,10 @@ and can now be controlled via the GUI for each notification separately.
     </section>
 
     <section role="NotInToc">
-        <title>Step 15: Update system registration (optional)</title>
+        <title>ステップ15: システム登録の更新(オプション)</title>
         <para>
             If the system is already registered with OTRS Group, it is strongly
-recommended to update the registration information at this time, this will
+recommended to update the registration information at this time. This will
 update the registered version of the system (among other changes) in the
 OTRS Group records, in order to get much accurate information from the cloud
 services.
@@ -427,13 +421,13 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 16: Migrate custom Perl based GenericAgent jobs (optional)</title>
+        <title>ステップ16: PerlベースのGenericAgentジョブの移行(オプション)</title>
         <para>
             This is only relevant if you had any custom GenericAgent jobs in Perl OTRS 4
 configuration files such as
 <filename>Kernel/Config/GenericAgent.pm</filename> that cannot be handled
 with the regular ticket notifications.  Such jobs now need to be registered
-as OTRS Daemon cron tasks in the SysConfig (<literal>Daemon</literal> ->
+as OTRS Daemon cron tasks in the SysConfig (<literal>Daemon</literal> -&gt;
 <literal>Daemon::SchedulerCronTaskManager::Task</literal>), in order to be
 executed on a regular basis.
         </para>
@@ -441,8 +435,8 @@ executed on a regular basis.
             There are 5 settings in the SysConfig prepared for this purpose
 (<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile1</literal>
 to
-<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile5</literal>),
-if more settings are needed they can be added in a custom SysConfig setting
+<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile5</literal>).
+If more settings are needed they can be added in a custom SysConfig setting
 file.
         </para>
         <para>
@@ -466,7 +460,7 @@ shell> bin/otrs.Console.pl Maint::GenericAgent::Run --help
     <section role="NotInToc">
         <title>Step 17: Setup bash autocompletion (optional)</title>
         <para>
-            All regular OTRS commandline operations now happen via the otrs Console
+            All regular OTRS command line operations now happen via the OTRS Console
 interface <filename>bin/otrs.Console.pl</filename>. This provides an auto
 completion for the bash shell which makes finding the right command and
 options much easier.

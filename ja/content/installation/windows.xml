@@ -96,7 +96,7 @@ packages provided by OTRS this is the case.
             </para>
         </section>
         <section id="enable-remote-access-for-the-linux-system">
-            <title>Enable remote access for the PostgreSQL database of target system</title>
+            <title>外部からのPostgreSQLアクセスを許可する</title>
             <para>
                 The OTSRCloneDB script will copy the database data over the network, so we
 need to enable remote access to the database. The setup is different for the
@@ -104,8 +104,7 @@ different databases, we will describe opening remote access for a PostgreSQL
 database here.
             </para>
             <para>
-                After logging into your target system via SSH you need to change into the
-postgresql directory:
+                対象のシステムにSSH経由でログインしたら、PostgreSQLのディレクトリに移動します。
             </para>
             <para>
                 <screen>
@@ -114,7 +113,7 @@ shell> vi postgresql.conf
                 </screen>
             </para>
             <para>
-                Add the following line at the end of the file:
+                次の行をファイルの末尾に追加します。
             </para>
             <para>
                 <screen>
@@ -122,7 +121,7 @@ listen_addresses = '*'
                 </screen>
             </para>
             <para>
-                Save the file.
+                ファイルを保存します。
             </para>
             <para>
                 <screen>
@@ -130,7 +129,7 @@ shell> vi pg_hba.conf
                 </screen>
             </para>
             <para>
-                Add the following line at the end of the file:
+                次の行をファイルの末尾に追加します。
             </para>
             <para>
                 <screen>
@@ -138,10 +137,10 @@ host all all  0.0.0.0/0 md5
                 </screen>
             </para>
             <para>
-                Save the file.
+                ファイルを保存します。
             </para>
             <para>
-                Restart your PostgreSQL server:
+                PostgreSQL サーバを再起動します。
             </para>
             <para>
                 <screen>
@@ -152,7 +151,7 @@ shell> service postgresql restart
         <section id="stop-all-otrs-services">
             <title>OTRSサービスを停止する</title>
             <para>
-                Stop all running services of your target system:
+                対象のシステムで稼働中の関連サービスをすべて停止します。
             </para>
             <para>
                 <screen>
@@ -167,8 +166,7 @@ shell> exit
             </para>
         </section>
         <section>
-            <title>Drop the existing database of your target system to have an empty database
-for the clone data</title>
+            <title>空のデータベース上にデータを複製するために、対象のシステム上に存在する既存のデータベースを破棄します。</title>
             <para>
                 The OTRSCloneDB script will not remove the data in the existing otrs
 database of the target system, so we need to do this manually:
@@ -179,7 +177,7 @@ shell> su - postgres
                 </screen>
             </para>
             <para>
-                Drop the existing otrs database: <screen>
+                既存のOTRSデータベースを破棄します。 <screen>
 shell> dropdb otrs
                 </screen>
             </para>
@@ -189,7 +187,7 @@ shell> createdb --owner=otrs --encoding=utf8 otrs
                 </screen>
             </para>
             <para>
-                Go back to root user: <screen>
+                rootユーザに戻ります。 <screen>
 shell> exit
                 </screen>
             </para>
@@ -224,13 +222,12 @@ fileref="screenshots/introduction/installation/win-gather-db-data-1.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                In our example:
+                この例では、次の文字列がそうです。
             </para>
             <para>
                 <screen>
 I88cm34A1B6xrl3
-                </screen> Write the password down on a piece of
-paper.
+                </screen> パスワードを紙などに控えておきます。
             </para>
         </section>
         <section id="clone-database-into-target-system">
@@ -454,7 +451,7 @@ listen_addresses = '*'
                 </screen>
             </para>
             <para>
-                Save the file.
+                ファイルを保存します。
             </para>
             <para>
                 <screen>
@@ -470,10 +467,10 @@ host all all  0.0.0.0/0 md5
                 </screen>
             </para>
             <para>
-                Save the file.
+                ファイルを保存します。
             </para>
             <para>
-                Restart your postgresql server
+                PostgreSQL サーバを再起動します。
             </para>
             <para>
                 <screen>
