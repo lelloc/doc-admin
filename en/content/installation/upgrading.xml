@@ -40,22 +40,34 @@
         <para>
         Please make sure there are no more running services or cron jobs that try to access OTRS.
         This will depend on your service configuration, here is an example:
+        </para>
 
+        <para>
             <screen><![CDATA[
 shell> /etc/init.d/cron stop
 shell> /etc/init.d/postfix stop
 shell> /etc/init.d/apache stop
             ]]></screen>
+        </para>
 
+        <para>
         Stop OTRS cron jobs and the scheduler or daemon (in this order) depending on the OTRS version
         you are updating from:
+        </para>
 
+        <para>
             <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/Cron.sh stop
 shell> bin/otrs.Scheduler.pl -a stop
             ]]></screen>
+        </para>
+
+        <para>
         or
+        </para>
+
+        <para>
             <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/Cron.sh stop
@@ -130,17 +142,24 @@ shell> mv otrs-x.x.x otrs
 
                 <para>
                 Please execute
+                </para>
 
+                <para>
                 <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/otrs.SetPermissions.pl
                 ]]></screen>
+                </para>
 
+                <para>
                 with the permissions needed for your system setup. For example:
+                </para>
 
+                <para>
                 <itemizedlist>
                 <listitem>
-                    <para>Web server which runs as the OTRS user:
+                    <para>Web server which runs as the OTRS user:</para>
+                    <para>
                 <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=otrs
                 ]]></screen>
@@ -149,7 +168,8 @@ shell> bin/otrs.SetPermissions.pl --web-group=otrs
 
 
                 <listitem>
-                    <para>Webserver with wwwrun user (e. g. SUSE):
+                    <para>Webserver with wwwrun user (e. g. SUSE):</para>
+                    <para>
                 <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
                 ]]></screen>
@@ -158,7 +178,8 @@ shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
 
 
                 <listitem>
-                    <para>Webserver with apache user (e. g. Red Hat, CentOS):
+                    <para>Webserver with apache user (e. g. Red Hat, CentOS):</para>
+                    <para>
                 <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=apache
                 ]]></screen>
@@ -167,7 +188,8 @@ shell> bin/otrs.SetPermissions.pl --web-group=apache
 
 
                 <listitem>
-                    <para>Webserver with www-data user (e. g. Debian, Ubuntu):
+                    <para>Webserver with www-data user (e. g. Debian, Ubuntu):</para>
+                    <para>
                 <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=www-data
                 ]]></screen>
@@ -185,7 +207,9 @@ shell> bin/otrs.SetPermissions.pl --web-group=www-data
             <screen><![CDATA[
 shell> rpm -Uvh otrs-x.x.x.-01.rpm
             ]]></screen>
+            </para>
 
+            <para>
             In this case the RPM update automatically restores the old configuration files and sets file permissions.
             </para>
         </section>
@@ -197,6 +221,8 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
         <para>
         Verify that all needed Perl modules are installed on your system and install
         any modules that might be missing.
+        </para>
+        <para>
         <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.CheckModules.pl
         ]]></screen>
@@ -227,13 +253,14 @@ shell> /opt/otrs/bin/otrs.CheckModules.pl
                 <para>
                     Any problems with regards to the storage engine will be reported by the
                     <filename>bin/otrs.Console.pl Maint::Database::Check</filename> command, so please run it to check for possible issues.
+                </para>
 
+                <para>
                     <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> cat scripts/DBUpdate-to-5.mysql.sql | mysql -p -f -u root otrs
 shell> bin/otrs.Console.pl Maint::Database::Check
                     ]]></screen>
-
                 </para>
 
             </section>
@@ -254,11 +281,15 @@ shell> cat scripts/DBUpdate-to-5.postgresql.sql | psql --set ON_ERROR_STOP=on --
 
             <para>
             Run the migration script (as user <code>otrs</code>, NOT as <code>root</code>):
+            </para>
 
+            <para>
             <screen><![CDATA[
 shell> scripts/DBUpdate-to-5.pl
             ]]></screen>
+            </para>
 
+            <para>
             Do not continue the upgrading process if this script did not work properly for you.
             Otherwise data loss may occur.
             </para>
@@ -270,7 +301,9 @@ shell> scripts/DBUpdate-to-5.pl
 
         <para>
         Please run (as user <code>otrs</code>, <emphasis>not</emphasis> as <code>root</code>):
+        </para>
 
+        <para>
         <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/otrs.Console.pl Maint::Config::Rebuild
@@ -284,13 +317,17 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
 
         <para>
         e. g. (depends on used services):
+        </para>
 
+        <para>
         <screen><![CDATA[
 shell> /etc/init.d/apache start
 shell> /etc/init.d/postfix start
 shell> /etc/init.d/cron start
         ]]></screen>
+        </para>
 
+        <para>
         Now you can log into your system.
         </para>
     </section>
@@ -306,6 +343,8 @@ shell> /etc/init.d/cron start
         <para>
             The following packages are automatically uninstalled after the upgrade process
             (if they where installed before):
+        </para>
+        <para>
             <itemizedlist>
                 <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
             </itemizedlist>
@@ -326,7 +365,8 @@ shell> /etc/init.d/cron start
             setups. If you have more than one machine, each machine needs to have this value set to a unique value
             between <literal>1</literal> and <literal>999</literal>. This configuration needs to be done in the file
             <filename>Kernel/Config.pm</filename>:
-
+        </para>
+        <para>
             <screen><![CDATA[
 $Self->{'NodeID'} =  '2';   # assign a unique value for every frontend server
             ]]></screen>
@@ -353,11 +393,12 @@ $Self->{'NodeID'} =  '2';   # assign a unique value for every frontend server
             What has been in cron file definitions previously is now handled by the OTRS daemon, which is
             now required to operate OTRS. The daemon also handles all GenericAgent jobs and must be started from
             the <literal>otrs</literal> user.
+        </para>
 
+        <para>
             <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Daemon.pl start
             ]]></screen>
-
         </para>
     </section>
 
@@ -368,15 +409,21 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
             There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
             and their purpose is to make sure that the OTRS Daemon is running.
             They need to be activated by copying them without the ".dist" filename extension.
+        </para>
 
+        <para>
             <screen><![CDATA[
 shell> cd /opt/otrs/var/cron
 shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
             ]]></screen>
+        </para>
 
+        <para>
             To schedule these cron jobs on your system, you can use the script <filename>Cron.sh</filename>
             with the <literal>otrs</literal> user.
+        </para>
 
+        <para>
             <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
@@ -459,6 +506,8 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
             <para>
                 To get more information about other parameters that can be used while running the
                 GenericAgent jobs, please execute:
+            </para>
+            <para>
                 <screen><![CDATA[
 shell> bin/otrs.Console.pl Maint::GenericAgent::Run --help
             ]]></screen>

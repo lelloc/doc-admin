@@ -407,10 +407,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         <section>
             <title>アクティビティ・ダイアログ</title>
                 <para>
-                    Click on the new process name in the Process Management Overview Screen,
-then in the "Available Process Elements" click in "Activity Dialogs" (this
-action will expand the activity dialog options and will collapse all others
-doing an accordion like effect), then click on "Create New Activity Dialog".
+                    プロセス・マネジメント概要画面にあるの新しいプロセス名をクリックします。それから「利用可能なプロセス構成要素」の中で「アクティビティ・ダイアログ」をクリックします。（このアクションはアクティビティ・ダイアログ・オプションを拡張し、他の全てを壊し押しつぶすでしょう。）次に「新しいアクティビティ・ダイアログを作成」をクリックします。
                 </para>
                 <para>
                     <figure>
@@ -421,13 +418,8 @@ fileref="screenshots/customization/pm-accordion-new-activitydialog.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    In the opened popup screen fill the "Activity dialog Name" as well as the
-"Description (short)" fields, for this example we will leave all other
-fields as the default, to assign fields to the Activity Dialog simple drag
-the required field from the "Available Fields" pool and drop into the
-"Assigned Fields" pool.  The order in the "Assigned Fields" pool is the
-order as the fields will have in the screen, to modify the order simply drag
-and drop the field within the pool to rearrange it in the correct place.
+                    「摘要（短）」フィールドと同様に、開いたポップ・アップ・画面に「アクティビティ・ダイアログ名」を
+記入します。この例では全ての他のフィールドをデフォルトのままにしておきます。アクティビティ・ダイアログにフィールドを指定するために、必要なフィールドを「利用可能なフィールド」プールから「指定されたフィールド」へドラッグします。「指定されたフィールド」プールの順序は　フィールドが画面にあるような順序です。プール内のフィールドをドラッグ＆ドロップして順序を変更し、正しい位置に再配置します。
                 </para>
                 <para>
                     <figure>
@@ -453,9 +445,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                     この例では、私たちは記事フィールドをコメントに使用します。しかし、別のオプションはTextAreaタイプ動的フィールドを作成できます。下記のラインの言及されたフィールドの残りは、私たちが事前に定義する動的フィールドです。
                 </para>
                 <para>
-                    Please be aware that in this screen all the Dynamic Fields has the prefix
-"DynamicField_" as in "DynamicField_Title". Do not confuse with the field
-"Title" that is the Ticket Title.
+                    この画面では動的フィールドは、「DynamicField_Title」の中に接頭辞「DynamicField_」を持つことにご留意願います。タイトルフィールドとチケット・タイトルとを混同しないようにして下さい。
                 </para>
                 <para>
                     次のアクティビティ・ダイアログを作成してください:
@@ -670,15 +660,12 @@ fileref="screenshots/customization/pm-accordion-new-transitionaction.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    In the opened popup screen fill the "Transition Action Name", and the
-"Transition Action module" then add the required and optional parameter
-names and values.
+                    開かれたポップ・アップ・画面の中で「推移名」および「推移アクション・モジュール」を記入して下さい。それから、必須及び任意のパラメタと値を追加して下さい。
                 </para>
                 <para>
-                    All the Transition Action Modules are located in
-<filename>Kernel/System/ProcessManagement/TransitionAction</filename> and
-the following is the list of bundled Transition Actions included in this
-release:
+                    全ての推移アクション・モジュールは、
+<filename>Kernel/System/ProcessManagement/TransitionAction</filename>
+に存在します。また、推移アクションと以下は下記は、バンドルされた推移アクションのリストで、このリリースに含まれます。
                 </para>
                 <para>
                     <itemizedlist>
@@ -2132,8 +2119,14 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    フィールド「記事」は特殊なケースです。それが「フィールド」構成の中にあれば、アクティビティ・ダイアログは件名フィールドおよび添付ファイル取扱い可能な機能を持った完全なリッチテキスト・エディターを内蔵します。その後、入力されたテキストは、記事としてチケットに加えられ、電子メールで送られます。サンプルの記事フィールド構成を見ましょう:
-<screen>
+                    The field "Article" is a special case. If it is present in a "Fields"
+configuration, the Activity Dialog will contain a complete Richtext editor
+with subject field and attachment handling. The entered text will then be
+added to the ticket as an article and sent by email. Let's see an example
+Article field configuration:
+                </para>
+                <para>
+                    <screen>
 Article => {
     DescriptionShort => 'ここにコメントを挿入して下さい',
     DescriptionLong => '',
@@ -2179,7 +2172,11 @@ Article => {
                             </listitem>
                             <listitem>
                                 <para>
-                                    '2': fフィールドは可視でかつ必須です。次のフィールドが単に不可視にも必須にもなりえます: <screen>
+                                    '2': field is visible and mandatory. The following fields can only be
+invisible or mandatory:
+                                </para>
+                                <para>
+                                    <screen>
     QueueID
     Queue
     State
@@ -2190,7 +2187,7 @@ Article => {
     PriorityID
     Type
     TypeID
-                                </screen>
+                                    </screen>
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2406,7 +2403,11 @@ Condition => {
                 <section>
                     <title>フィールド</title>
                     <para>
-                        その値がテストされるべき特別のフィールドを指定します。私たちの例から:<screen>
+                        Specifies the particular fields whose values should be tested. From our
+example:
+                    </para>
+                    <para>
+                        <screen>
 Fields => {
     StateID => {
         Type  => 'String',
@@ -2418,7 +2419,10 @@ Fields => {
                 <section>
                     <title>StateID</title>
                     <para>
-                        フィールド名の例。次のチケット・フィールドが使用されます。: <screen>
+                        Example of a field name. The following ticket fields can be used:
+                    </para>
+                    <para>
+                        <screen>
     Title
     State
     StateID
@@ -2495,7 +2499,10 @@ Fields => {
             <section>
                 <title>推移アクション構成</title>
                 <para>
-                    例を見ましょう:: <screen>
+                    サンプルを見ましょう:
+                </para>
+                <para>
+                    <screen>
 $Self->{'Process::TransitionAction'} = {
     'TA1' => {
         Name   => 'Queue Move',
@@ -2543,7 +2550,10 @@ user with the UserID 123 might have.
                 <title>推移アクション・モジュールの再使用</title>
                 <para>
                     To use Transition Action modules multiple times, just specify several
-Transition Actions in your configuration. Example: <screen>
+Transition Actions in your configuration. Example:
+                </para>
+                <para>
+                    <screen>
     $Self->{'Process::TransitionAction'} = {
         'TA1' => {
             Name   => 'Queue Move Junk',
@@ -2616,7 +2626,7 @@ $Self->{'Process::TransitionAction'} = {
             ArticleType      => 'note-internal',                                        # note-external|phone|fax|sms|...
                                                                                         #   excluding any email type
             SenderType       => 'agent',                                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType
+            ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
             Subject          => 'some short description',                               # required
             Body             => 'the message text',                                     # required
             HistoryType      => 'OwnerUpdate',                                          # EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
@@ -2738,7 +2748,7 @@ $Self->{'Process::TransitionAction'} = {
             ArticleType      => 'note-internal',                        # note-external|phone|fax|sms|...
                                                                         #   excluding any email type
             SenderType       => 'agent',                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType
+            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
             Subject          => 'some short description',               # required
             Body             => 'the message text',                     # required
             HistoryType      => 'OwnerUpdate',                          #
@@ -3293,7 +3303,11 @@ linkend="acl">ACLマニュアル</link>を調べてください:
                     複数のACL規則がマッチすればしたら、すべてのマッチング規則の共通部分は可能なアクティビティ・ダイアログを決定するために計算されます。例:
                 </para>
                 <para>
-                    設定されたアクティビティ・ダイアログ:「AD1」、「AD2」、「AD3」、「AD4」、「AD5」、「AD6」、「AD7」<screen>
+                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
+'AD7'.
+                </para>
+                <para>
+                    <screen>
 $Self->{TicketAcl}->{'001-ACL-Status'} = {
     Properties => {
         Ticket => {

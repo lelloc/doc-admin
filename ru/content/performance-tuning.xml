@@ -115,8 +115,11 @@ CPU power and/or network capacity.
             <para>
                 <screen><![CDATA[
 shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
-                ]]></screen> <emphasis>Script: Switching storage
-back-ends from database to filesystem.</emphasis>
+                ]]></screen>
+            </para>
+            <para>
+                <emphasis>Script: Switching storage back-ends from database to
+filesystem.</emphasis>
             </para>
             <para>
                 If you want to keep old attachments in the database, you can activate the
@@ -162,8 +165,10 @@ systems.
                         Определение работы GenericAgent
                     </para>
                     <para>
-                        В Панели Администратора выберите GenericAgent и добавьте новое задание
-(работу). <orderedlist>
+                        On the Admin page, select GenericAgent and add a new job there.
+                    </para>
+                    <para>
+                        <orderedlist>
                             <listitem>
                                 <para>
                                     Настройки Задания
@@ -227,11 +232,13 @@ systems.
         <section id="performance-tuning-otrs-cache">
             <title>Кэш</title>
             <para>
-                OTRS кэширует большое количество временных данных в
-<filename>/opt/otrs/var/tmp</filename>. Убедитесь, что для этого
-используется высокопроизводительная файловая система/хранилище. Если вы
-располагаете достаточным количеством RAM, вы также можете попробовать
-поместить эту папку в память, например: <screen><![CDATA[
+                OTRS caches a lot of temporary data in
+<filename>/opt/otrs/var/tmp</filename>.  Please make sure that this uses a
+high performance file system/storage.  If you have enough RAM, you can also
+try to put this directory on a ramdisk like this:
+            </para>
+            <para>
+                <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Console.pl Maint::Session::DeleteAll
 shell> /opt/otrs/bin/otrs.Console.pl Maint::Cache::Delete
 shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp

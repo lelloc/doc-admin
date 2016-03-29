@@ -113,8 +113,11 @@ CPU power and/or network capacity.
             <para>
                 <screen><![CDATA[
 shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
-                ]]></screen> <emphasis>Script: Switching storage
-back-ends from database to filesystem.</emphasis>
+                ]]></screen>
+            </para>
+            <para>
+                <emphasis>Script: Switching storage back-ends from database to
+filesystem.</emphasis>
             </para>
             <para>
                 If you want to keep old attachments in the database, you can activate the
@@ -159,8 +162,10 @@ steht. Ändern Sie diese auf "Ja" und speichern Sie die Änderung ab.
                         Anlegen eines GenericAgent-Jobs
                     </para>
                     <para>
-                        Wählen Sie im Administrationsbereich den "GenericAgent" aus und legen Sie
-dort einen neuen Job an. <orderedlist>
+                        On the Admin page, select GenericAgent and add a new job there.
+                    </para>
+                    <para>
+                        <orderedlist>
                             <listitem>
                                 <para>
                                     Job-Einstellungen
@@ -226,7 +231,10 @@ wollen, fügen Sie "Archivsuche" zu Ihren Suchkriterien hinzu.
                 OTRS caches a lot of temporary data in
 <filename>/opt/otrs/var/tmp</filename>.  Please make sure that this uses a
 high performance file system/storage.  If you have enough RAM, you can also
-try to put this directory on a ramdisk like this: <screen><![CDATA[
+try to put this directory on a ramdisk like this:
+            </para>
+            <para>
+                <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Console.pl Maint::Session::DeleteAll
 shell> /opt/otrs/bin/otrs.Console.pl Maint::Cache::Delete
 shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
