@@ -2,8 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
-<section id="time">
-<title>Time Related Functions</title>
+<section id="date-time">
+<title>Date and Time Related Functions</title>
 
 <section id="time-settings">
 <title>Arbeitszeiten, Feiertage und Zeitzonen für das System festlegen</title>
@@ -27,6 +27,22 @@ support for your 'gold' SLA; as well as set a calendar for your
 'Support-USA' queue with a different time window than your 'Support-Japan'
 queue. OTRS can handle up to 99 different calendars.
 </para>
+
+<section id="TimeZones">
+<title>Zeitzonen</title>
+
+<para>
+OTRS muss wissen, welche Zeitzone für die Speicherung von datum- und zeitrelevanten Daten in der Datenbank verwendet werden soll. Dies kann über <link linkend="ConfigReference_Framework:Core::Time:OTRSTimeZone">Framework &gt; Core::Time::OTRSTimeZone</link> konfiguriert werden.
+Die Voreinstellung ist UTC und wir empfehlen, dies für ein neu aufgesetztes OTRS beizubehalten. Falls Sie ein Upgrade von OTRS 5 oder früher machen, müssen Sie unbedingt darauf achten, eine Zeitzone zu wählen, die zu Ihrer vorherigen Einstellung passt. Andernfalls werden Daten mit verschiedenen Zeitzonen in der Datenbank gespeichert.
+Sobald Sie eine Zeitzone konfiguriert haben und erste Daten (Tickets, etc.) in OTRS gespeichert wurden, sollte die Zeitzone nicht mehr geändert werden, da Daten sonst mit unterschiedlichen Zeitzonen gespeichert werden.
+</para>
+
+<para>
+Sie können eine Standard-Zeitzone für neue Agenten und Kundenbenutzer über <link linkend="ConfigReference_Framework:Core::Time:UserDefaultTimeZone">Framework &gt; Core::Time::UserDefaultTimeZone</link> konfigurieren.
+Diese Zeitzone wird für alle Benutzer verwendet, die keine Zeitzone über ihre Benutzereinstellungen gesetzt haben.
+</para>
+
+</section>
 
 <section id="TimeWorkingHours">
 <title>Arbeitszeiten</title>
