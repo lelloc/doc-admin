@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
-"POT-Creation-Date: 2016-03-29 10:40+0200\n"
-"PO-Revision-Date: 2016-03-29 08:42+0000\n"
+"POT-Creation-Date: 2016-05-02 08:34+0200\n"
+"PO-Revision-Date: 2016-05-02 06:35+0000\n"
 "Last-Translator: Martin Gruner <martin.gruner@otrs.com>\n"
 "Language-Team: Swahili (http://www.transifex.com/otrs/OTRS/language/sw/)\n"
 "Language: sw\n"
@@ -6712,7 +6712,7 @@ msgid ""
 "\n"
 "            ForceNotificationToUserID   => [ 1, 43, 56 ],                               # if you want to force somebody\n"
 "            ExcludeNotificationToUserID => [ 43, 56 ],\n"
-"                 # if you want full exclude somebody from notfications,\n"
+"                 # if you want full exclude somebody from notifications,\n"
 "                 # will also be removed in To: line of article,\n"
 "                 # higher prio as ForceNotificationToUserID\n"
 "            ExcludeMuteNotificationToUserID => [ 43, 56 ],\n"
@@ -9112,6 +9112,8 @@ msgid ""
 "<emphasis>Script: Switching storage back-ends from database to filesystem.</"
 "emphasis>"
 msgstr ""
+"<emphasis>Hati: Kubadilisha mazingira ya nyuma ya hifadhi kutoka hifadhidata "
+"kuwa mfumo wa mafaili</emphasis>"
 
 #. type: Content of: <chapter><section><section><para>
 #: en/content/performance-tuning.xml:96
@@ -13478,7 +13480,7 @@ msgid ""
 "        [ 'UserPassword',   'Password',   'pw',         0, 0, 'var', '', 0 ],\n"
 "        [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '', 0 ],\n"
 "\n"
-"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '$Env{\"CGIHandle\"}?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=$Data{\"TicketID\"}&amp;ArticleID=$Data{\"ArticleID\"}', 0 ],\n"
+"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '[% Env(\"CGIHandle\") %]?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=[% Data.TicketID %]&amp;ArticleID=[% Data.ArticleID %]', 0 ],\n"
 "        [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 ],\n"
 "\n"
 "#        [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],\n"
@@ -14737,17 +14739,11 @@ msgstr ""
 msgid ""
 "[...]\n"
 "&lt;div class=\"NewLine\"&gt;\n"
-"    &lt;label for=\"Room\"&gt;$Text{\"Room{CustomerUser}\"}&lt;/label&gt;\n"
-"    &lt;input title=\"$Text{\"Room Number\"}\" name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
+"    &lt;label for=\"Room\"&gt;[% Translate(\"Room{CustomerUser}\") | html %]&lt;/label&gt;\n"
+"    &lt;input title=\"[% Translate(\"Room Number\") | html %]\" name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
 "&lt;/div&gt;\n"
 "[...]\n"
 msgstr ""
-"[...]\n"
-"&lt;div class=\"NewLine\"&gt;\n"
-"    &lt;label for=\"Room\"&gt;$Text{\"Room{CustomerUser}\"}&lt;/label&gt;\n"
-"    &lt;input title=\"$Text{\"Room Number\"}\" name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
-"&lt;/div&gt;\n"
-"[...]\n"
 
 #. type: Content of: <section><section><section><para>
 #: en/content/administration/external-backends.xml:1013
@@ -18548,11 +18544,9 @@ msgstr ""
 #: en/content/administration/dynamicfields-configuration.xml:235
 #: en/content/administration/dynamicfields-configuration.xml:391
 msgid ""
-"The use of $LQData{\"NameX\"} in the Set link value, where NameX is the name "
-"of the field, will add the field value as part of the link reference."
+"The use of [% Data.NameX | uri %] in the Set link value, where NameX is the "
+"name of the field, will add the field value as part of the link reference."
 msgstr ""
-"Matumizi ya $LQData{\"JinaX\"} katika thamani ya Seti kiungo, ambapo JinaX "
-"ni jina la sehemu, itaongeza sehemu hiyo kama sehemu ya marejeo ya kiungo."
 
 #. type: Content of: <section><section><para><figure><title>
 #: en/content/administration/dynamicfields-configuration.xml:244
@@ -18925,11 +18919,9 @@ msgstr ""
 #: en/content/administration/dynamicfields-configuration.xml:531
 #: en/content/administration/dynamicfields-configuration.xml:614
 msgid ""
-"The use of $LQData{\"NameX\"} in the Set link value, where NameX is the name "
-"of the field will add the field value as part of the link reference."
+"The use of [% Data.NameX | uri %] in the Set link value, where NameX is the "
+"name of the field will add the field value as part of the link reference."
 msgstr ""
-"Matumizi ya $LQData{\"JinaX\"} katika thamani ya Seti kiungo, ambapo JinaX "
-"ni jina la sehemu litaongeza sehemu hiyo kama sehemu ya marejeo ya kiungo."
 
 #. type: Content of: <section><section><para><figure><title>
 #: en/content/administration/dynamicfields-configuration.xml:540
@@ -19607,8 +19599,8 @@ msgstr "Data:"
 
 #. type: Content of: <section><section><example><para><itemizedlist><listitem><para><informaltable><tbody><tr><td>
 #: en/content/administration/dynamicfields-configuration.xml:1292
-msgid "$Env{\"UserDynamicField_Field1\"}"
-msgstr "$Env{\"MtumiajiSehemuInayobadilika_Sehemu1\"}"
+msgid "[% Env(\"UserDynamicField_Field1\") %]"
+msgstr ""
 
 #. type: Content of: <section><section><example><para><itemizedlist><listitem><para><informaltable><tbody><tr><td>
 #: en/content/administration/dynamicfields-configuration.xml:1295
@@ -25344,6 +25336,8 @@ msgid ""
 "The generated report can also be sent as an e-mail. More information can be "
 "called up with the command in the script below."
 msgstr ""
+"Ripoti iliyotengenezwa pia inaweza kutumwa kama barua pepe. Taarifa zaidi "
+"zinaweza patikana kwa agizo katika hati chini."
 
 #. type: CDATA
 #: en/content/administration/stats.xml:344
@@ -26557,7 +26551,7 @@ msgstr ""
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:161
 msgid ""
-"In the arey below the navigation bar, different system messages can be "
+"In the area below the navigation bar, different system messages can be "
 "shown. If you are logged in as the default OTRS administrator user, you get "
 "a red message warning you not to work using this system account."
 msgstr ""
@@ -27598,7 +27592,7 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/upgrading.xml:67
 msgid "or"
-msgstr ""
+msgstr "Au"
 
 #. type: CDATA
 #: en/content/installation/upgrading.xml:71
@@ -27875,8 +27869,8 @@ msgstr ""
 #. type: Content of: <section><section><section><para>
 #: en/content/installation/upgrading.xml:283
 msgid ""
-"Run the migration script (as user <code>otrs</code>, NOT as <code>root</"
-"code>):"
+"Run the migration script (as user <literal>otrs</literal>, NOT as "
+"<literal>root</literal>):"
 msgstr ""
 
 #. type: CDATA
@@ -27900,8 +27894,8 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/upgrading.xml:303
 msgid ""
-"Please run (as user <code>otrs</code>, <emphasis>not</emphasis> as "
-"<code>root</code>):"
+"Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as "
+"<literal>root</literal>):"
 msgstr ""
 
 #. type: CDATA
@@ -29243,6 +29237,9 @@ msgid ""
 "typically do this from your systems package manager.  Below you'll find the "
 "commands needed to set up Apache on the most popular Linux distributions."
 msgstr ""
+"Kwanza kabisa, unatakiwa kusanidi seva ya wavuti ya Apache2 na mod_perl; "
+"utafanya hivi kutoka kwenye meneja kifurushi. Hapa chini utakuta amri "
+"zinazohitajika kuseti Apache kwenye usambazaji wa Linux maarufu."
 
 #. type: CDATA
 #: en/content/installation/source.xml:210
@@ -29321,7 +29318,7 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:258
 msgid "<placeholder type=\"cmdsynopsis\" id=\"0\"/>"
-msgstr ""
+msgstr "<placeholder type=\"cmdsynopsis\" id=\"0\"/>"
 
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:272

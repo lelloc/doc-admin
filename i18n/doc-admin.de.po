@@ -12,7 +12,7 @@
 # Martin Gruner <martin.gruner@otrs.com>, 2014-2015
 # mathiasbraeunling <mathias.braeunling@otrs.com>, 2014
 # Matze208, 2015
-# Matthieu Dreistadt <matthieu@3-stadt.de>, 2016
+# 3Stadt <matthieu@3-stadt.de>, 2016
 # OliverR <oliver.roettges@otrs.com>, 2014
 # Patrick Pfeifer <pp@kraemer-automotive.com>, 2014
 # ru_otrs <robert.ullrich@otrs.com>, 2014-2016
@@ -24,8 +24,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
-"POT-Creation-Date: 2016-03-29 10:40+0200\n"
-"PO-Revision-Date: 2016-03-29 08:42+0000\n"
+"POT-Creation-Date: 2016-05-02 08:34+0200\n"
+"PO-Revision-Date: 2016-05-02 06:35+0000\n"
 "Last-Translator: Martin Gruner <martin.gruner@otrs.com>\n"
 "Language-Team: German (http://www.transifex.com/otrs/OTRS/language/de/)\n"
 "Language: de\n"
@@ -6765,7 +6765,7 @@ msgid ""
 "\n"
 "            ForceNotificationToUserID   => [ 1, 43, 56 ],                               # if you want to force somebody\n"
 "            ExcludeNotificationToUserID => [ 43, 56 ],\n"
-"                 # if you want full exclude somebody from notfications,\n"
+"                 # if you want full exclude somebody from notifications,\n"
 "                 # will also be removed in To: line of article,\n"
 "                 # higher prio as ForceNotificationToUserID\n"
 "            ExcludeMuteNotificationToUserID => [ 43, 56 ],\n"
@@ -9384,6 +9384,8 @@ msgid ""
 "<emphasis>Script: Switching storage back-ends from database to filesystem.</"
 "emphasis>"
 msgstr ""
+"<emphasis>Skript: Wechsel des TicketStorage-Backends von Datenbank zu "
+"Dateisystem.</emphasis>"
 
 #. type: Content of: <chapter><section><section><para>
 #: en/content/performance-tuning.xml:96
@@ -13630,7 +13632,7 @@ msgid ""
 "        [ 'UserPassword',   'Password',   'pw',         0, 0, 'var', '', 0 ],\n"
 "        [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '', 0 ],\n"
 "\n"
-"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '$Env{\"CGIHandle\"}?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=$Data{\"TicketID\"}&amp;ArticleID=$Data{\"ArticleID\"}', 0 ],\n"
+"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '[% Env(\"CGIHandle\") %]?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=[% Data.TicketID %]&amp;ArticleID=[% Data.ArticleID %]', 0 ],\n"
 "        [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 ],\n"
 "\n"
 "#        [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],\n"
@@ -13653,81 +13655,6 @@ msgid ""
 "    },\n"
 "};\n"
 msgstr ""
-"# CustomerUser (customer database backend and settings)\n"
-"$Self->{CustomerUser} = {\n"
-"    Name => 'Database Datasource',\n"
-"    Module => 'Kernel::System::CustomerUser::DB',\n"
-"    Params => {\n"
-"        # if you want to use an external database, add the required settings\n"
-"#            DSN => 'DBI:odbc:yourdsn',\n"
-"#            Type => 'mssql', # only for ODBC connections\n"
-"#            DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',\n"
-"#            User => '',\n"
-"#            Password => '',\n"
-"            Table => 'customer_user',\n"
-"\n"
-"            # CaseSensitive will control if the SQL statements need LOWER()\n"
-"            #   function calls to work case insensitively. Setting this to\n"
-"            #   1 will improve performance dramatically on large databases.\n"
-"            CaseSensitive => 0,\n"
-"        },\n"
-"# customer unique id\n"
-"CustomerKey => 'login',\n"
-"\n"
-"# customer #\n"
-"CustomerID => 'customer_id',\n"
-"CustomerValid => 'valid_id',\n"
-"    CustomerUserListFields => ['first_name', 'last_name', 'email'],\n"
-"    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],\n"
-"    CustomerUserSearchPrefix => '',\n"
-"    CustomerUserSearchSuffix => '*',\n"
-"    CustomerUserSearchListLimit => 250,\n"
-"    CustomerUserPostMasterSearchFields => ['email'],\n"
-"    CustomerUserNameFields => ['title','first_name','last_name'],\n"
-"    CustomerUserEmailUniqCheck => 1,\n"
-"#    # show not own tickets in customer panel, CompanyTickets\n"
-"#    CustomerUserExcludePrimaryCustomerID => 0,\n"
-"#    # generate auto logins\n"
-"#    AutoLoginCreation => 0,\n"
-"#    AutoLoginCreationPrefix => 'auto',\n"
-"#    # admin can change customer preferences\n"
-"#    AdminSetPreferences => 1,\n"
-"#    # cache time to live in sec. - cache any database queries\n"
-"#    CacheTTL => 0,\n"
-"#    # just a read only source\n"
-"#    ReadOnly => 1,\n"
-"    Map => [\n"
-"        # note: Login, Email and CustomerID needed!\n"
-"        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target\n"
-"        [ 'UserTitle',      'Title',      'title',      1, 0, 'var', '', 0 ],\n"
-"        [ 'UserFirstname',  'Firstname',  'first_name', 1, 1, 'var', '', 0 ],\n"
-"        [ 'UserLastname',   'Lastname',   'last_name',  1, 1, 'var', '', 0 ],\n"
-"        [ 'UserLogin',      'Username',   'login',      1, 1, 'var', '', 0 ],\n"
-"        [ 'UserPassword',   'Password',   'pw',         0, 0, 'var', '', 0 ],\n"
-"        [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '', 0 ],\n"
-"\n"
-"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '$Env{\"CGIHandle\"}?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=$Data{\"TicketID\"}&amp;ArticleID=$Data{\"ArticleID\"}', 0 ],\n"
-"        [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 ],\n"
-"\n"
-"#        [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],\n"
-"        [ 'UserPhone',        'Phone',       'phone',        1, 0, 'var', '', 0 ],\n"
-"        [ 'UserFax',          'Fax',         'fax',          1, 0, 'var', '', 0 ],\n"
-"        [ 'UserMobile',       'Mobile',      'mobile',       1, 0, 'var', '', 0 ],\n"
-"        [ 'UserStreet',       'Street',      'street',       1, 0, 'var', '', 0 ],\n"
-"        [ 'UserZip',          'Zip',         'zip',          1, 0, 'var', '', 0 ],\n"
-"        [ 'UserCity',         'City',        'city',         1, 0, 'var', '', 0 ],\n"
-"        [ 'UserCountry',      'Country',     'country',      1, 0, 'var', '', 0 ],\n"
-"        [ 'UserComment',      'Comment',     'comments',     1, 0, 'var', '', 0 ],\n"
-"        [ 'ValidID',          'Valid',       'valid_id',     0, 1, 'int', '', 0 ],\n"
-"    ],\n"
-"    # default selections\n"
-"    Selections => {\n"
-"        UserTitle => {\n"
-"            'Mr.' => 'Mr.',\n"
-"            'Mrs.' => 'Mrs.',\n"
-"        },\n"
-"    },\n"
-"};\n"
 
 #. type: Content of: <section><section><section><para>
 #: en/content/administration/external-backends.xml:161
@@ -15168,17 +15095,11 @@ msgstr ""
 msgid ""
 "[...]\n"
 "&lt;div class=\"NewLine\"&gt;\n"
-"    &lt;label for=\"Room\"&gt;$Text{\"Room{CustomerUser}\"}&lt;/label&gt;\n"
-"    &lt;input title=\"$Text{\"Room Number\"}\" name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
+"    &lt;label for=\"Room\"&gt;[% Translate(\"Room{CustomerUser}\") | html %]&lt;/label&gt;\n"
+"    &lt;input title=\"[% Translate(\"Room Number\") | html %]\" name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
 "&lt;/div&gt;\n"
 "[...]\n"
 msgstr ""
-"[...]\n"
-"&lt;div class=\"NewLine\"&gt;\n"
-"    &lt;label for=\"Room\"&gt;$Text{\"Room{CustomerUser}\"}&lt;/label&gt;\n"
-"    &lt;input title=\"$Text{\"Room Number\"}\" name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
-"&lt;/div&gt;\n"
-"[...]\n"
 
 #. type: Content of: <section><section><section><para>
 #: en/content/administration/external-backends.xml:1013
@@ -18939,11 +18860,9 @@ msgstr ""
 #: en/content/administration/dynamicfields-configuration.xml:235
 #: en/content/administration/dynamicfields-configuration.xml:391
 msgid ""
-"The use of $LQData{\"NameX\"} in the Set link value, where NameX is the name "
-"of the field, will add the field value as part of the link reference."
+"The use of [% Data.NameX | uri %] in the Set link value, where NameX is the "
+"name of the field, will add the field value as part of the link reference."
 msgstr ""
-"Das Verwenden von $LQData{\"NameX\"} im Wert, wobei NameX der Name des "
-"Feldes ist, wird den Feldwert als Teil des Links hinzufügen."
 
 #. type: Content of: <section><section><para><figure><title>
 #: en/content/administration/dynamicfields-configuration.xml:244
@@ -19320,11 +19239,9 @@ msgstr ""
 #: en/content/administration/dynamicfields-configuration.xml:531
 #: en/content/administration/dynamicfields-configuration.xml:614
 msgid ""
-"The use of $LQData{\"NameX\"} in the Set link value, where NameX is the name "
-"of the field will add the field value as part of the link reference."
+"The use of [% Data.NameX | uri %] in the Set link value, where NameX is the "
+"name of the field will add the field value as part of the link reference."
 msgstr ""
-"Das Verwenden von $LQData{\"NameX\"} im Wert, wobei NameX der Name des "
-"Feldes ist, wird den Feldwert als Teil des Links hinzufügen."
 
 #. type: Content of: <section><section><para><figure><title>
 #: en/content/administration/dynamicfields-configuration.xml:540
@@ -20005,8 +19922,8 @@ msgstr "Daten:"
 
 #. type: Content of: <section><section><example><para><itemizedlist><listitem><para><informaltable><tbody><tr><td>
 #: en/content/administration/dynamicfields-configuration.xml:1292
-msgid "$Env{\"UserDynamicField_Field1\"}"
-msgstr "$Env{\"UserDynamicField_Field1\"}"
+msgid "[% Env(\"UserDynamicField_Field1\") %]"
+msgstr ""
 
 #. type: Content of: <section><section><example><para><itemizedlist><listitem><para><informaltable><tbody><tr><td>
 #: en/content/administration/dynamicfields-configuration.xml:1295
@@ -25732,6 +25649,8 @@ msgid ""
 "The generated report can also be sent as an e-mail. More information can be "
 "called up with the command in the script below."
 msgstr ""
+"Ferner kann die generierte Statistik auch per Email versandt werden. Mehr "
+"Informationen erhält man wie im Skript geschildert."
 
 #. type: CDATA
 #: en/content/administration/stats.xml:344
@@ -26910,7 +26829,7 @@ msgstr ""
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:161
 msgid ""
-"In the arey below the navigation bar, different system messages can be "
+"In the area below the navigation bar, different system messages can be "
 "shown. If you are logged in as the default OTRS administrator user, you get "
 "a red message warning you not to work using this system account."
 msgstr ""
@@ -27852,7 +27771,7 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/upgrading.xml:67
 msgid "or"
-msgstr ""
+msgstr "oder"
 
 #. type: CDATA
 #: en/content/installation/upgrading.xml:71
@@ -28139,8 +28058,8 @@ msgstr "Schritt 6.2: Datenbank-Migrationsskript"
 #. type: Content of: <section><section><section><para>
 #: en/content/installation/upgrading.xml:283
 msgid ""
-"Run the migration script (as user <code>otrs</code>, NOT as <code>root</"
-"code>):"
+"Run the migration script (as user <literal>otrs</literal>, NOT as "
+"<literal>root</literal>):"
 msgstr ""
 
 #. type: CDATA
@@ -28164,8 +28083,8 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/upgrading.xml:303
 msgid ""
-"Please run (as user <code>otrs</code>, <emphasis>not</emphasis> as "
-"<code>root</code>):"
+"Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as "
+"<literal>root</literal>):"
 msgstr ""
 
 #. type: CDATA
@@ -29551,7 +29470,7 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:258
 msgid "<placeholder type=\"cmdsynopsis\" id=\"0\"/>"
-msgstr ""
+msgstr "<placeholder type=\"cmdsynopsis\" id=\"0\"/>"
 
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:272

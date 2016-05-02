@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-03-29 10:40+0200\n"
+"POT-Creation-Date: 2016-05-02 08:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4706,7 +4706,7 @@ msgid ""
 "            ForceNotificationToUserID   => [ 1, 43, 56 ],                               "
 "# if you want to force somebody\n"
 "            ExcludeNotificationToUserID => [ 43, 56 ],\n"
-"                 # if you want full exclude somebody from notfications,\n"
+"                 # if you want full exclude somebody from notifications,\n"
 "                 # will also be removed in To: line of article,\n"
 "                 # higher prio as ForceNotificationToUserID\n"
 "            ExcludeMuteNotificationToUserID => [ 43, 56 ],\n"
@@ -10518,9 +10518,10 @@ msgid ""
 "        [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '', 0 "
 "],\n"
 "\n"
-"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', "
-"'$Env{\"CGIHandle\"}?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=$Data{\"TicketID\"}&amp;ArticleID=$Data{\"ArticleID\"}', "
-"0 ],\n"
+"#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '[% "
+"Env(\"CGIHandle\") "
+"%]?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=[% Data.TicketID "
+"%]&amp;ArticleID=[% Data.ArticleID %]', 0 ],\n"
 "        [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 "
 "],\n"
 "\n"
@@ -11626,9 +11627,10 @@ msgstr ""
 msgid ""
 "[...]\n"
 "&lt;div class=\"NewLine\"&gt;\n"
-"    &lt;label for=\"Room\"&gt;$Text{\"Room{CustomerUser}\"}&lt;/label&gt;\n"
-"    &lt;input title=\"$Text{\"Room Number\"}\" name=\"Room\" type=\"text\" "
-"id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
+"    &lt;label for=\"Room\"&gt;[% Translate(\"Room{CustomerUser}\") | html "
+"%]&lt;/label&gt;\n"
+"    &lt;input title=\"[% Translate(\"Room Number\") | html %]\" "
+"name=\"Room\" type=\"text\" id=\"UserRoom\" maxlength=\"50\" /&gt;\n"
 "&lt;/div&gt;\n"
 "[...]\n"
 msgstr ""
@@ -14513,8 +14515,8 @@ msgstr ""
 #. type: Content of: <section><section><itemizedlist><listitem><note><para>
 #: en/content/administration/dynamicfields-configuration.xml:235 en/content/administration/dynamicfields-configuration.xml:391
 msgid ""
-"The use of $LQData{\"NameX\"} in the Set link value, where NameX is the name "
-"of the field, will add the field value as part of the link reference."
+"The use of [% Data.NameX | uri %] in the Set link value, where NameX is the "
+"name of the field, will add the field value as part of the link reference."
 msgstr ""
 
 #. type: Content of: <section><section><para><figure><title>
@@ -14816,8 +14818,8 @@ msgstr ""
 #. type: Content of: <section><section><itemizedlist><listitem><note><para>
 #: en/content/administration/dynamicfields-configuration.xml:531 en/content/administration/dynamicfields-configuration.xml:614
 msgid ""
-"The use of $LQData{\"NameX\"} in the Set link value, where NameX is the name "
-"of the field will add the field value as part of the link reference."
+"The use of [% Data.NameX | uri %] in the Set link value, where NameX is the "
+"name of the field will add the field value as part of the link reference."
 msgstr ""
 
 #. type: Content of: <section><section><para><figure><title>
@@ -15350,7 +15352,7 @@ msgstr ""
 
 #. type: Content of: <section><section><example><para><itemizedlist><listitem><para><informaltable><tbody><tr><td>
 #: en/content/administration/dynamicfields-configuration.xml:1292
-msgid "$Env{\"UserDynamicField_Field1\"}"
+msgid "[% Env(\"UserDynamicField_Field1\") %]"
 msgstr ""
 
 #. type: Content of: <section><section><example><para><itemizedlist><listitem><para><informaltable><tbody><tr><td>
@@ -21224,7 +21226,7 @@ msgstr ""
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:161
 msgid ""
-"In the arey below the navigation bar, different system messages can be "
+"In the area below the navigation bar, different system messages can be "
 "shown. If you are logged in as the default OTRS administrator user, you get "
 "a red message warning you not to work using this system account."
 msgstr ""
@@ -22372,8 +22374,8 @@ msgstr ""
 #. type: Content of: <section><section><section><para>
 #: en/content/installation/upgrading.xml:283
 msgid ""
-"Run the migration script (as user <code>otrs</code>, NOT as "
-"<code>root</code>):"
+"Run the migration script (as user <literal>otrs</literal>, NOT as "
+"<literal>root</literal>):"
 msgstr ""
 
 #. type: CDATA
@@ -22397,8 +22399,8 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/upgrading.xml:303
 msgid ""
-"Please run (as user <code>otrs</code>, <emphasis>not</emphasis> as "
-"<code>root</code>):"
+"Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as "
+"<literal>root</literal>):"
 msgstr ""
 
 #. type: CDATA
