@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="adminarea-agents-groups-and-roles">
+<title>服务人员、组和角色</title>
+
+<section id="adminarea-agents">
+<title>服务人员</title>
+
+<para>
+点击<emphasis>服务人员</emphasis>链接后，你就OTRS的服务人员管理窗口（如下图）。系统管理员可以添加、修改或‘去激活’服务人员帐户。此外还能管理服务人员的偏好设置包括个别服务人员界面的语言和通知设置。
+</para>
+
+<note>
+<para>
+一个OTRS服务人员帐户可以‘去激活’但不能删除。‘去激活’通过设置有效性标记为<emphasis>无效</emphasis>或<emphasis>临时无效</emphasis>来实现。
+</para>
+</note>
+
+<para>
+<figure>
+    <title>服务人员管理</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/admin-agents.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+要注册一个服务人员，点击“添加服务人员”按钮，输入必填数据并点击窗口底部的‘提交’按钮，如下图所示。
+</para>
+
+<para>
+<figure>
+    <title>添加一个新服务人员</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/add-agent.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+新的服务人员帐户创建后，你还设置服务人员到一个或多个组/角色。关于组和角色的信息在本章的<link
+linkend="adminarea-groups">组</link>和<link
+linkend="adminarea-roles">角色</link>部分。
+</para>
+
+</section>
+
+<section id="adminarea-groups">
+<title>组</title>
+
+<para>
+每个服务人员帐户应该至少属于一个组或角色。在一个全新安装的系统中，有三个预告定义的组可用，如表4-1所示。
+</para>
+
+<para>
+<table id="table-of-groups-after-installation">
+<title>全新安装OTRS可用的默认组</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>组</entry>
+        <entry>描述</entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>admin</entry>
+        <entry>允许执行系统中的管理任务。</entry>
+      </row>
+      <row>
+        <entry>stats</entry>
+        <entry>
+          有资格访问OTRS的统计模块并生成统计报表。
+        </entry>
+      </row>
+      <row>
+        <entry>users</entry>
+        <entry>
+          服务人员应该属于这个组且有读写权限。他们能访问工单系统的所有功能。
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+</para>
+
+<note>
+<para>
+在全新安装的OTRS中，<emphasis>users</emphasis>组初始没有任何成员。服务人员'root@localhost'默认属于‘admin’和‘stats’组。
+</para>
+</note>
+
+<para>
+你可以在系统管理区通过点击<emphasis>组</emphasis>链接访问组管理页面（见下图）
+</para>
+
+<para>
+<figure>
+    <title>组管理</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/admin-groups.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<note>
+<para>
+与服务人员一样，OTRS的组只能‘去激活’而不能删除。‘去激活’通过设置有效性标记为<emphasis>无效</emphasis>或<emphasis>临时无效</emphasis>来实现。
+</para>
+</note>
+
+<para>
+To add an agent to a group, or to change the agents who belong to a group,
+you can use the link <emphasis>Agents &lt;-&gt; Groups</emphasis> from the
+Admin page (see figure below).
+</para>
+
+<para>
+<figure>
+    <title>服务人员 &lt;-&gt; 组管理</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-agents-and-groups.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+系统中所有组和服务人员概览显示在这个页面上。你还可以使用过滤器来查找一个特定的条目。如果你想修改一个服务人员所属的组，只需点击服务人员的名称（见下图）。要修改一个组关联的服务人员，只需点击你想编辑的组（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>修改一个服务人员所属的组</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/agent-group-relations.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+<figure>
+    <title>修改一个组关联的服务人员</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/agent-group-relations2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+每个组都有一套相关的权限，每个组成员（服务人员）可能有这些权限的某种组合。权限清单如表4-2所示。
+</para>
+
+<para>
+<table id="table-of-group-permissions-after-installation">
+<title>OTRS组相关的权限</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>
+          权限
+        </entry>
+        <entry>
+          描述
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>
+          聊天观察者
+        </entry>
+        <entry>
+          服务人员可以在一个聊天中潜水（OTRS商业版功能）。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          聊天参与者
+        </entry>
+        <entry>
+          服务人员可以正常参与一个聊天（OTRS商业版功能）。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          聊天所有者
+        </entry>
+        <entry>
+          服务人员一个聊天的所有权限并能接受聊天请求（OTRS商业版功能）。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          ro-只读
+        </entry>
+        <entry>
+          对这个组的工单、记录和队列有只读访问权限。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          move into-转移到
+        </entry>
+        <entry>
+          在属于本组的队列或区域间转移工单或记录的权限。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          create-创建
+        </entry>
+        <entry>
+          在这个组的队列或区域中创建工单或记录的权限。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          owner-所有者
+        </entry>
+        <entry>
+          在本组的队列或区域中更新工单或记录的所有者的权限。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          priority-优先级
+        </entry>
+        <entry>
+          在本组的队列或区域中更改工单或记录的优先级的权限。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          rw-读写
+        </entry>
+        <entry>
+          对属于这个组的队列或区域的工单、记录和队列完全读写访问权限。
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+</para>
+
+<note>
+    <para>
+        队列视图默认只列出一个服务人员有<emphasis>rw-读写</emphasis>权限的队列中工单。如果你想改变这个情况，你可以设置选项 <link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> 为
+<emphasis>是</emphasis>。
+    </para>
+</note>
+ <para>默认情况下不会显示所有可用的权限。这些附加的权限可以添加。</para>
+      <para>
+        <table id="table-of-group-additional-permissions">
+          <title>附加的权限组</title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>权限</entry>
+                <entry>描述</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>stats</entry>
+                <entry>访问统计页面的权限</entry>
+              </row>
+              <row>
+                <entry>退回</entry>
+                <entry>退回一个邮件消息的权限（使用工单详情窗口的‘退回’按钮）。</entry>
+              </row>
+              <row>
+                <entry>编写</entry>
+                <entry>给一个工单编写答复的权限。</entry>
+              </row>
+              <row>
+                <entry>客户</entry>
+                <entry>变更一个工单的客户的权限。</entry>
+              </row>
+              <row>
+                <entry>转发</entry>
+                <entry>转发一个消息的权限（使用‘转发’按钮）。</entry>
+              </row>
+              <row>
+                <entry>挂起</entry>
+                <entry>设置一个工单为挂起状态的权限。</entry>
+              </row>
+              <row>
+                <entry>电话</entry>
+                <entry>添加一个电话沟通到工单的权限。</entry>
+              </row>
+              <row>
+                <entry>负责人</entry>
+                <entry>变更一个工单的负责人的权限。</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+      <note>
+        <para>
+          这些权限可以通过修改配置 <link
+linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permission</link>添加进来。
+        </para>
+      </note>
+</section>
+
+<section id="adminarea-roles">
+<title>角色</title>
+
+<para>
+角色是一个强大的功能，以一种非常简单、快速的方式管理大量服务人员的存取权限。在拥有大量服务人员、组和队列的大型、复杂的支持系统中特别有用。下面的例子解释了何时应该使用角色。
+</para>
+
+<para>
+假设你的系统有100个服务人员，其中有90个需要访问一个处理所有支持请求、叫“support”的队列。这个“support”队列包含多个子队列。其它的10个服务人员有访问系统所有队列的权限。这10个服务人员分派工单，关注‘raw’队列并转移垃圾消息到“junk”队列。
+</para>
+
+<para>
+公司现在设置了一个销售某些产品的新部门。必须处理订单请求和接受、订单确认、开帐单等事宜，假定公司的一部分服务人员使用OTRS来做这些事情。不同的服务人员需要能够访问必须创建的新队列。
+</para>
+
+<para>
+因为手动逐个修改服务人员的访问权限需要花费大量时间，可以创建角色来定义不同的访问级别。服务人员就可以添加到一个或多个角色中，然后他们的访问权限就自动修改了。如果创建了一个新的服务人员帐户，还能将这个帐户添加到一个或多个角色。
+</para>
+
+<note>
+<para>
+当处理复杂的组织结构和维护大型的OTRS安装时，角色才真正好用。可是建议要适当注意：混合了服务人员-组和服务人员-角色的映射可能造成复杂的访问控制方案，难于理解和维护。如果你想只使用角色并禁用系统管理区服务人员&lt;-&gt;组的选项，可以通过修改系统配置中的参数<link
+linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>来实现。要注意这不会移除已经存在的服务人员到组的分配！
+</para>
+</note>
+
+<para>
+You can access the role management section (see figure below) by clicking
+the <emphasis>Roles</emphasis> link on the Admin page.
+</para>
+
+<para>
+<figure>
+    <title>角色管理</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/admin-roles.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<note>
+<para>
+和服务人员、组一样，角色一旦创建就只能‘去激活’而不能删除。要‘去激活’，设置有效性选项为<emphasis>无效</emphasis>或<emphasis>临时无效</emphasis>。
+</para>
+</note>
+
+<para>
+显示了系统中所有角色的一个概览。要编辑角色的设置，点击角色的名称即可。在一个全新安装的OTRS系统中，默认没有定义任何角色。要注册一个，点击“添加角色”按钮，提供需要的数据并提交（如下图）。
+</para>
+
+<para>
+<figure>
+    <title>添加一个新的角色</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/add-role.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+要获得系统中所有角色和服务人员概览，在<link
+linkend="adminarea">系统管理页面</link>点击‘角色&lt;-&gt;服务人员’‘链接。你还可以使用过滤器来查找一个特定元素。如果你想修改一个服务人员关联的角色，只需点击这个服务人员的姓名（见下图）。要修改一个角色关联的服务人员，点击你想编辑的角色名称（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>修改一个服务人员关联的角色</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-roles-agents-relation.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+<figure>
+    <title>修改一个特定角色关联的服务人员</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-roles-agents-relation2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+要获得系统中所有角色和组的概览，在<link linkend="adminarea">系统管理页面</link>点击‘角色&lt;-&gt;组’
+链接。你会看到一个类似下图的窗口。你还可以使用过滤器来查找一个特定的条目。
+</para>
+
+<para>
+<figure>
+    <title>管理角色-组的关系</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-roles-groups.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+要定义一个角色的不同访问权限，点击一个角色或一个组名称（分别如图4.13和4.14所示）。
+</para>
+
+<para>
+<figure>
+    <title>修改一个角色的组关系</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-roles-relations.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+<figure>
+    <title>修改一个组的角色关系</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-roles-relations2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+</section>

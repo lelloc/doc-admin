@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="manual-installation-of-otrs">
+
+    <title>从源码安装OTRS（Linux、Unix）</title>
+
+    <section role="NotInToc">
+        <title>步骤1：安装 .tar.gz</title>
+        <para>
+        如果你要从源码安装OTRS，首先从网站<ulink
+url="http://www.otrs.com/try/">http://www.otrs.com/try/</ulink>下载 .tar.gz或
+.tar.bz2或 .zip格式的文件。
+        </para>
+
+        <para>
+        解包这个档案文件（例如使用<command>tar</command>）到<filename>/opt</filename>目录，并将目录otrs-x.x.x
+重命名为otrs（脚本如下）。
+        </para>
+
+        <para>
+        <screen><![CDATA[
+shell> tar xzf /tmp/otrs-x.x.x.tar.gz
+shell> mv otrs-x.x.x /opt/otrs
+        ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc" id="installation-of-perl-modules">
+        <title>步骤2：安装附加的Perl模块</title>
+        <para>
+            使用下面的脚本来得到所有已安装的和必需的CPAN模块概览。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> perl /opt/otrs/bin/otrs.CheckModules.pl
+o CGI..............................ok (v3.60)
+o Crypt::PasswdMD5.................ok (v1.3)
+o Crypt::SSLeay....................Not installed! (Optional - Required for Generic Interface SOAP SSL connections.)
+o CSS::Minifier....................ok (v0.01)
+o Date::Format.....................ok (v2.22)
+o Date::Pcalc......................ok (v1.2)
+...
+            ]]></screen>
+        </para>
+
+        <note>
+            <para>
+                请注意：OTRS需要一个安装了所有核心模块（如<literal>version</literal>）、能工作的Perl。这些模块不在脚本的检查范围，在某些系统上（如RHEL）默认没有安装这些核心模块，你可能需要安装一个<literal>perl-core</literal>软件包。
+            </para>
+        </note>
+
+        <para>
+            要安装缺失的Perl模块，你可以：
+        </para>
+
+        <section role="NotInToc">
+            <title>a) 通过你的Linux分支的软件包管理器来安装需要的软件包</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        对RedHat、CentOS、Fedora或兼容的系统：
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> yum install "perl(Digest::MD5)"
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        对SUSE Linux Enterprise Server、
+openSUSE或兼容的系统：首先确定模块的软件包名称。通常模块My::Module的软件包叫做“perl-My-Module”。
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> zypper search Digest::MD5
+                        ]]></screen>
+                    </para>
+                    <para>
+                        然后安装：
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> zypper install perl-Digest-MD5
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        对Debian、Ubuntu或兼容的系统：首先确定模块的软件包名称。通常模块My::Module的软件包叫做“libmy-module-perl”。
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> apt-cache search Digest::MD5
+                        ]]></screen>
+                    </para>
+                    <para>
+                        然后安装：
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> apt-get install libdigest-md5-perl
+                        ]]></screen>
+                    </para>
+                    <para>
+                        请注意：你可能在你的Linux分支的软件仓库中找不到所有的模块或模块所需的版本，在这种情况下你只能选择通过CPAN安装这些模块（如下）。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+        <section role="NotInToc">
+            <title>b) 通过CPAN Shell安装需要的Perl模块</title>
+            <para>
+                注意：如果是在Linux系统上，你要用超级用户（root)运行CPAN
+shell，因为这些模块需要由OTRS帐户和WEB服务器运行时使用的帐户共同访问。
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> perl -MCPAN -e shell;
+...
+install Digest::MD5
+install Crypt::PasswdMD5
+...
+                ]]></screen>
+            </para>
+            <para>
+                如果系统的某些特殊功能依赖于可选的模块，则脚本中列出的可选模块也应该安装上。
+            </para>
+        </section>
+
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤3：创建OTRS用户</title>
+        <para>
+            创建用户：
+        </para>
+        <para>
+            <screen><![CDATA[
+shell> useradd -d /opt/otrs/ -c 'OTRS user' otrs
+            ]]></screen>
+        </para>
+        <para>
+            将用户添加到WEB服务器所有组（如果WEB服务器不是以OTRS用户运行）：
+        </para>
+        <para>
+            <screen><![CDATA[
+shell> usermod -G www otrs
+(SUSE=www, Red Hat/CentOS/Fedora=apache, Debian/Ubuntu=www-data)
+            ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤4：激活默认的配置文件</title>
+        <para>
+            OTRS自带了两个配置文件：$OTRS_HOME/Kernel/*.dist和$OTRS_HOME/Kernel/Config/*.dist。你需要将它们复制为不带.dist扩展名的文件名来激活它们。
+        </para>
+        <para>
+            <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> cp Kernel/Config.pm.dist Kernel/Config.pm
+    ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤5：检查所有需要的模块是否都已安装</title>
+        <para>
+            <screen><![CDATA[
+shell> perl -cw /opt/otrs/bin/cgi-bin/index.pl
+/opt/otrs/bin/cgi-bin/index.pl syntax OK
+
+shell> perl -cw /opt/otrs/bin/cgi-bin/customer.pl
+/opt/otrs/bin/cgi-bin/customer.pl syntax OK
+
+shell> perl -cw /opt/otrs/bin/otrs.Console.pl
+/opt/otrs/bin/otrs.Console.pl syntax OK
+            ]]></screen>
+        </para>
+        <para>
+             “syntax OK”表示所有必须的模块都已安装。
+        </para>
+    </section>
+
+    <section role="NotInToc" id="web-server-configuration">
+        <title>步骤6：配置Apache WEB服务器</title>
+
+        <para>
+            首先，你得安装Apache2
+WEB服务器和mod_perl模块；一般都通过系统的软件包管理器来安装。下面你可以找到主流Linux分支安装Apache需要的命令。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+# rhel / centos:
+shell> yum install httpd mod_perl
+
+# suse:
+shell> zypper install apache2-mod_perl
+
+# debian/ubuntu:
+shell> apt-get install apache2 libapache2-mod-perl2
+        ]]></screen>
+        </para>
+
+        <para>
+            大部分的<application>Apache</application>安装都会包括一个<filename>conf.d</filename>目录。在Linux系统中这个目录一般在<filename>/etc/apache</filename>或<filename>/etc/apache2</filename>目录下。以root用户登录，进入<filename>conf.d</filename>目录，并在Apache配置目录创建一个到<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename>的软链接<filename>zzz_otrs.conf</filename>（确保载入其它配置之后再载入OTRS配置）。
+        </para>
+
+        <para>
+            OTRS需要激活一些Apache模块来达到最佳运行状态。在大多数平台上你可以通过<filename>a2enmod</filename>工具来确认已经激活了这些模块。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> a2enmod perl
+shell> a2enmod version
+shell> a2enmod deflate
+shell> a2enmod filter
+shell> a2enmod headers
+        ]]></screen>
+        </para>
+
+        <para>
+            现在你可以重启WEB服务器来载入新的配置设置了。在大多数系统你可以用<command>systemctl restart
+apache2.service</command>命令来重启Apache。
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤7：文件权限</title>
+        <para>
+            文件权限根据需要调整，以允许OTRS读取和写入文件：
+        </para>
+
+        <para>
+            <cmdsynopsis>
+<command>otrs.SetPermissions.pl</command> <arg choice='opt'>
+--otrs-user=<replaceable>OTRS用户，默认为'otrs'</replaceable> </arg> <arg
+choice='req'> --web-group= <replaceable>WEB服务器用户所属的组</replaceable> </arg></cmdsynopsis>
+        </para>
+
+        <para>
+            例如：
+        </para>
+
+        <para>
+            <itemizedlist>
+                <listitem><para>以OTRS用户运行WEB服务器：</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-user=otrs
+                ]]></screen>
+                </para></listitem>
+
+                <listitem><para>以wwwrun用户运行WEB服务器（如SUSE）：</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
+                ]]></screen>
+                </para></listitem>
+
+                <listitem><para>以apache用户运行WEB服务器（如Red Hat、CentOS）：</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=apache
+                ]]></screen>
+                </para></listitem>
+
+                <listitem><para>以www-data用户运行WEB服务器（如RDebian、 Ubuntu）：</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=www-data
+                ]]></screen>
+                </para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section role="NotInToc" id="database-configuration">
+        <title>步骤8：数据库设置和系统基本配置</title>
+        <para>
+            请使用WEB安装器<ulink
+url="http://yourhost/otrs/installer.pl">http://yourhost/otrs/installer.pl</ulink>（用你的OTRS主机名或IP地址替换“yourhost”）来设置数据库和系统基本配置如邮件帐户。
+        </para>
+        <note>
+            <para>
+                下面的推荐配置设置是针对MySQL的。请添加下列行到文件 <filename>/etc/my.cnf</filename> 的[mysqld]部分：
+            </para>
+            <para>
+                <screen><![CDATA[
+max_allowed_packet   = 20M
+query_cache_size     = 32M
+innodb_log_file_size = 256M
+                ]]></screen>
+            </para>
+        </note>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤9：首次登录</title>
+        <para>
+            现在你可以在地址：<ulink
+url="http://yourhost/otrs/index.pl">http://yourhost/otrs/index.pl</ulink>并输入在WEB安装器中配置的认证信息（用户：root@localhost）登录系统了。
+        </para>
+        <para>
+            通过本步骤，完成了系统的基本配置。
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤10：启动OTRS守护进程</title>
+
+        <para>
+            新的OTRS守护进程负责处理OTRS中的所有异步和循环任务。之前在cron文件中定义的自动任务现在都由OTRS守护进程处理。这个守护进程还处理所有的‘GenericAgent自动任务’任务，它必须以<literal>otrs</literal>用户运行。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/otrs.Daemon.pl start
+            ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤11：OTRS用户的Cron任务</title>
+        <para>
+            OTRS自带了两个不同的cron文件：<filename>/opt/otrs/var/cron/*.dist</filename>，它们的目的是确保OTRS守护正常运行。你需要将它们复制为不带.dist扩展名的文件名来激活它们。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> cd /opt/otrs/var/cron
+shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
+            ]]></screen>
+        </para>
+
+        <para>
+            要在系统中安排这些cron任务，你可以使用<literal>otrs</literal>运行脚本文件<filename>Cron.sh</filename>。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/Cron.sh start
+            ]]></screen>
+        </para>
+
+        <para>
+            还可以用这个脚本来停止cron任务（系统维护时有用）：
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/Cron.sh stop
+    ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤12：设置bash自动补齐（可选）</title>
+        <para>
+            所有的常规OTRS命令操作现在都通过OTRS控制台接口
+<filename>bin/otrs.Console.pl</filename>执行。它提供bash的自动补齐功能，在查找正确的命令和选项时更容易些。
+        </para>
+        <para>
+            你可以安装软件包<literal>bash-completion</literal>来激活bash的自动补齐功能。它能为<literal>otrs</literal>用户自动检测到并载入文件<filename>/opt/otrs/.bash_completion</filename>。
+        </para>
+        <para>
+            重启shell后，你可以在输入<filename>bin/otrs.Console.pl</filename>后按TAB键，就会显示所有可用的命令。如果你键入了命令的部分字符，按TAB键会列出所有匹配这些字符的命令。在输入完整的命令后，按TAB键会列出所有可用的选项和参数。
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>步骤13：进一步信息</title>
+        <para>
+            我们建议你参阅OTRS<link linkend="performance-tuning">性能调优章节</link>。
+        </para>
+        <para>
+            如果遇到了安装问题，你可以给我们的邮件列表otrs@otrs.org (http://lists.otrs.org/)发送一个消息。
+        </para>
+        <para>
+            你还可以请求OTRS集团帮助你规划或部署OTRS，或者检查你安装的OTRS系统。我们的<ulink
+url="http://www.otrs.com/en/services/">专业服务</ulink>就是用来帮助你更快地部署OTRS并从OTRS获得最大的收益。
+        </para>
+    </section>
+
+</section>

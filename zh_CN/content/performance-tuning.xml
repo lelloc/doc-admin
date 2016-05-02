@@ -1,0 +1,334 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<chapter id="performance-tuning">
+    <title>性能优化</title>
+
+    <abstract>
+    <para>
+    下面是OTRS安装（包括配置）、编码、内存使用及其它方面的性能增强技术的清单。
+    </para>
+    </abstract>
+
+    <section id="performance-tuning-otrs">
+        <title>OTRS</title>
+        <para>
+        提升OTRS性能有如下一些方法。
+        </para>
+
+        <section id="performance-tuning-otrs-index">
+            <title>TicketIndexModule 工单索引模块</title>
+            <para>
+                工单队列视图的索引有两个后端模块：
+
+                <itemizedlist>
+
+                    <listitem>
+                        <para>
+
+使用<literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal>（默认），从工单表中动态生成每个队列视图。除非你的系统有超过60000个处理中的工单，否则不会有性能问题。
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                        <literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal>，如果你有超过80000个处理中的工单则应使用这个强力的模块。它使用一个额外的ticket_index表（像视图一样工作）。当切换索引后端时，使用<filename>bin/otrs.Console.pl
+Maint::Ticket::QueueIndexRebuild</filename> 来初始化索引。
+                        </para>
+                    </listitem>
+
+                </itemizedlist>
+
+                你可以通过系统配置来修改参数IndexAccelerator的配置。
+            </para>
+
+        </section>
+
+        <section id="performance-tuning-otrs-storage">
+            <title>TicketStorageModule 工单存储模块</title>
+            <para>
+            存储工单/信件有两个不同后端模块：
+            </para>
+
+            <para>
+            <itemizedlist>
+
+                <listitem>
+                <para>
+                配置<literal>Kernel::System::Ticket::ArticleStorageDB</literal>（默认）在数据库中存储附件等。注意：不要在大型部署环境中使用这个配置。
+                </para>
+                <para>
+                赞成：如果你的WEB服务器不是以‘otrs'用户运行，使用这个模块可以避免文件权限问题。
+                </para>
+                <para>
+                反对：不建议将附件存储到数据库中。要小心你的数据库能否存储大型对象，例如：配置MySQL的参数“
+max_allowed_packet=8M”以存储8MB的对象（默认是2MB）。
+                </para>
+                </listitem>
+
+                <listitem>
+                <para>
+                配置<literal>Kernel::System::Ticket::ArticleStorageFS</literal>将附件等存储到本地文件系统。注意：推荐在大型部署环境中使用这个配置。
+                </para>
+                <para>
+                赞成：它很快！
+                </para>
+                <para>
+                反对：你的WEB服务器需要以‘otrs’用户运行。另外，如果你有多个前面服务器，应确保在所有服务器共享这个文件系统。将文件系统使用NFS共享或优先使用SAN或类似的解决方案。
+                </para>
+                </listitem>
+
+            </itemizedlist>
+
+            </para>
+
+            <para>
+                注意：你可以动态切换存储后端，切换后运行命令行工具<filename>bin/otrs.Console.pl
+Admin::Article::StorageSwitch</filename>来将文档从数据库放到文件系统中，或者从文件系统放到数据库中。你可以使用<emphasis>--target</emphasis>
+选项来指定目标后端。请注意：整个过程可能会花费相当长的时间，取决于你拥有文档的数量以及可用的CPU能力和/或网络带宽。
+            </para>
+
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
+                ]]></screen>
+            </para>
+            <para>
+                <emphasis>脚本: 切换存储后端，从数据库切换到文件系统。</emphasis>
+            </para>
+            <para>
+                如果你想在数据库中保持旧的附件，可以激活系统配置选项<literal>Ticket::StorageModule::CheckAllBackends</literal>，以确保OTRS仍然能够找到它们。
+            </para>
+        </section>
+
+        <section>
+            <title>归档工单</title>
+
+            <para>
+                由于OTRS可以作为审计证明系统，删除关闭的工单可能不是个好主意。因此我们提供了将关闭工单归档的功能。
+            </para>
+            <para>
+                匹配某个条件的工单可以标记为“已归档”。这些工单在使用常规的工单搜索或运行一个自动任务时无法访问。系统本身不再需要处理大量的工单，而只考虑‘最近’的工单就可以了。这在大型系统中能带来巨大的性能提升。
+            </para>
+            <para>
+                启用工单归档功能只需要下列简单的几步：
+            </para>
+            <orderedlist>
+                <listitem>
+                    <para>
+                        在系统配置中激活归档系统
+                    </para>
+                    <para>
+                        In the Admin page, go to SysConfig and select the group
+<literal>Ticket</literal>. In <literal>Core::Ticket</literal> you find the
+option <literal>Ticket::ArchiveSystem</literal> which is set to "no" by
+default. Change this setting to "yes" and save this change.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        定义一个自动任务
+                    </para>
+                    <para>
+                        在<link linkend="adminarea">系统管理页面</link>，选择‘GenericAgent自动任务’并添加一个新任务。
+                    </para>
+                    <para>
+                        <orderedlist>
+                            <listitem>
+                                <para>
+                                    任务设置
+                                </para>
+                                <para>
+                                    为归档任务提供一个名称，并选择合适的选项来计划这个任务。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    工单过滤
+                                </para>
+                                <para>
+                                    工单过滤器就是搜索匹配选定条件的工单。要只归档前几个月关闭的工单，使用过滤器也许是一个好主意。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    工单操作
+                                </para>
+                                <para>
+                                    在这部分设置标签为“归档选中的工单”字段为“archive tickets归档工单”。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    保存任务
+                                </para>
+                                <para>
+                                    在页面的结尾可以找到保存任务的按钮。
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    影响的工单
+                                </para>
+                                <para>
+                                    系统在执行这个自动任务时会显示所有要归档的工单。
+                                </para>
+                            </listitem>
+                        </orderedlist>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        工单搜索
+                    </para>
+                    <para>
+                        当你搜索工单时，系统默认搜索未归档的工单。如果你要同时搜索已归档的工单，仅需在定义搜索条件时添加‘归档搜索’即可。
+                    </para>
+                </listitem>
+            </orderedlist>
+        </section>
+        <section id="performance-tuning-otrs-cache">
+            <title>缓存</title>
+            <para>
+                OTRS在目录<filename>/opt/otrs/var/tmp</filename>下缓存大量的临时数据。请确保它使用了高性能的文件系统或存储。如果你有足够的内存，还可以尝试把这个目录放入内存盘，如下面这样：
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> /opt/otrs/bin/otrs.Console.pl Maint::Session::DeleteAll
+shell> /opt/otrs/bin/otrs.Console.pl Maint::Cache::Delete
+shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
+
+# 可在文件/etc/fstab中添加永久挂载点
+                ]]></screen>
+            </para>
+            <note>
+                <para>
+                    请注意：这个非永久存储会在服务器重启后丢失，所有的会话（如果你将它们存储在文件系统）和缓存数据都将丢失。
+                </para>
+            </note>
+            <para>
+                还有一种基于集中内存缓存的缓存后端可从OTRS集团购买。
+            </para>
+        </section>
+
+    </section>
+
+
+    <section id="performance-tuning-database">
+        <title>数据库</title>
+        <para>
+        你使用的数据库不同，数据库性能问题也不一样。学习你采用的数据库的相关文档，或与你的数据库管理员一起检查。
+        </para>
+
+        <section id="performance-tuning-database-mysql">
+            <title>MySQL</title>
+            <para>
+            如果你使用默认的MySQL表类型MyISAM，并且删除了大型表的一部分或对有变长行的表（有VARCHAR、BLOB、TEXT列的表）做了大量修改，你必须用“optimize”命令对表的数据文件做碎片整理。
+            </para>
+            <para>
+            如果mysqld进程占用了大量的CPU时间，你就应该尝试执行optimize，来优化ticket（工单）、ticket_history（工单历史）和article（信件）表（参阅下面的脚本）。
+            </para>
+
+            <para>
+            <screen><![CDATA[
+shell> mysql -u user -p database
+mysql> optimize table ticket;
+mysql> optimize table ticket_history;
+mysql> optimize table article;
+            ]]></screen>
+            </para>
+
+            <para>
+            <emphasis>脚本：优化数据库表。</emphasis>
+            </para>
+
+        </section>
+
+        <section id="performance-tuning-database-postgresql">
+            <title>PostgreSQL</title>
+            <para>
+            PostgreSQL最好通过修改数据目录下的<filename>postgresql.conf</filename>文件来调优。关于如何调优的建议，请参考下列文章：
+            </para>
+
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                        <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+<citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
+</ulink>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+<citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
+</ulink>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+<citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
+</ulink>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+
+            <para>
+            如果仍然对PostgreSQL性能不满意，我们建议你加入PostgreSQL性能邮件列表：<ulink
+url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>，并在那里提问。PostgreSQL邮件列表上的伙计们都非常友善，应能提供适合的帮助。
+            </para>
+        </section>
+
+    </section>
+
+    <section id="performance-tuning-webserver">
+        <title>WEB服务器</title>
+        <para>
+        毫无疑问你应该使用 mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
+)。它比纯cgi快了岂止100倍。但它需要更多的内存。
+        </para>
+
+        <section id="performance-tuning-webserver-db">
+            <title>预建立的数据库连接</title>
+            <para>
+            你可以在WEB服务器启动时就预建立的数据库连接。这可以节约时间（参阅WEB服务器的README文档）。
+            </para>
+        </section>
+
+        <section id="performance-tuning-webserver-startup">
+            <title>预装载的模块 - startup.pl</title>
+            <para>
+            在你的mod_perl
+WEB服务器上为预装载的/预编译的Perl模块使用启动脚本<filename>scripts/apache2-perl-startup.pl</filename>，仅需少量内存即可让WEB服务器更快（参阅WEB服务器的README文档）。
+            </para>
+        </section>
+        <section id="performance-tuning-webserver-reload">
+            <title>当磁盘文件更新时重载Perl模块</title>
+            <para>
+            <filename>scripts/apache2-httpd.include.conf</filename>文件中默认使用了Apache::Reload，禁用它可以得到8%的速度提升。但在通过OTRS软件包管理器安装任何模块后，或者你的系统配置或在文件<filename>Kernel/Config.pm</filename>中修改了任何值，记得重启WEB服务器。重要：这还意味着你不能通过WEB界面使用软件包管理器，你需要使用命令行方式-<filename>bin/otrs.PackageManager.pl</filename>。
+            </para>
+        </section>
+
+        <section id="performance-tuning-webserver-strategy">
+            <title>选择正确的策略</title>
+            <para>
+            如果你有一个大型安装，比如每天超过1000个新工单且超过40个服务人员，建议阅读mod_perl用户手册的性能章节（<ulink
+url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>）。
+            </para>
+        </section>
+
+        <section id="performance-tuning-webserver-gzip">
+            <title>mod_gzip/mod_deflate</title>
+            <para>
+            如果你的带宽较小，可在Apache2中使用mod_deflate模块。mod_gzip/mod_deflate能够一个45K的HTML页面压缩到约7K。缺点是这会增加WEB服务器端的负载。
+            </para>
+        </section>
+
+    </section>
+
+</chapter>

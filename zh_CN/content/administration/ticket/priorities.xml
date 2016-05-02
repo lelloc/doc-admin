@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="priorities">
+<title>工单优先级</title>
+
+<para>
+OTRS自带5个默认的优先级级别，可以通过系统管理页面的“优先级”链接修改。当创建优先级的定制列表时，请牢记它们在用户界面的优先级选择框中是按字母顺序排序的。此外，OTRS在队列视图中是通过优先级的数据库内部ID对工单排序的。
+</para>
+
+<note>
+<para>
+与OTRS其它条目一样，优先级不能删除，只能通过设置有效性标记为<emphasis>无效</emphasis>或<emphasis>临时无效</emphasis>来‘去激活’。
+</para>
+</note>
+
+<important>
+<para>
+如果添加了一个新的优先级或修改了一个已有的优先级，你还要修改系统配置中的一些值：
+</para>
+
+<itemizedlist>
+<listitem><para><link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultPriority">
+Ticket:Core::Postmaster::PostmasterDefaultPriority</link> - 定义所有进入邮件的默认优先级。</para></listitem>
+
+<listitem><para><link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_Priority">
+Ticket:Frontend::Agent:Ticket::ViewPhoneNew:Priority</link> -
+定义服务人员新建电话工单窗口的默认优先级。</para></listitem>
+
+<listitem><para><link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_Priority">
+Ticket:Frontend::Agent:Ticket::ViewEmailNew:Priority</link> -
+定义服务人员新建邮件工单窗口的默认优先级。</para></listitem>
+
+<listitem><para><link
+linkend="ConfigReference_Ticket:Frontend::Customer::Ticket::ViewNew:Ticket::Frontend::CustomerTicketMessage_PriorityDefault">
+Ticket:Frontend::Customer:Ticket::ViewNew:PriorityDefault</link> -
+定义客户联系人界面新建工单窗口的默认优先级。
+</para></listitem>
+</itemizedlist>
+
+</important>
+
+</section>

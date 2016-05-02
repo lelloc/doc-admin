@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id='configure-pgp'>
+<title>用PGP加密邮件</title>
+
+<para>
+OTRS能够使用PGP来签名或加密外发消息。此外，进入的加密消息能被解密。加密和解密都通过GPL工具GnuPG完成。要为OTRS设置GnuPG，需要执行以下步骤：
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+    <listitem>
+    <para>
+    通过操作系统的软件包管理器安装GnuPG。
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    配置GnuPG用于OTRS。必须创建GnuPG需要的目录和私有密钥。下面脚本中显示的命令必须以‘otrs’用户执行。
+    </para>
+
+    <para>
+    <screen>
+    linux:~# su otrs
+    linux:/root$ cd
+    linux:~$ pwd
+    /opt/otrs
+    linux:~$ gpg --gen-key
+    gpg (GnuPG) 1.4.2; Copyright (C) 2005 Free Software Foundation, Inc.
+    This program comes with ABSOLUTELY NO WARRANTY.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions. See the file COPYING for details.
+
+    gpg: directory `/opt/otrs/.gnupg' created
+    gpg: new configuration file `/opt/otrs/.gnupg/gpg.conf' created
+    gpg: WARNING: options in `/opt/otrs/.gnupg/gpg.conf' are not yet active during t
+    his run
+    gpg: keyring `/opt/otrs/.gnupg/secring.gpg' created
+    gpg: keyring `/opt/otrs/.gnupg/pubring.gpg' created
+    Please select what kind of key you want:
+       (1) DSA and Elgamal (default)
+       (2) DSA (sign only)
+       (5) RSA (sign only)
+    Your selection? 1
+    DSA keypair will have 1024 bits.
+    ELG-E keys may be between 1024 and 4096 bits long.
+    What keysize do you want? (2048)
+    Requested keysize is 2048 bits
+    Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+    Key is valid for? (0)
+    Key does not expire at all
+    Is this correct? (y/N) y
+
+    You need a user ID to identify your key; the software constructs the user ID
+    from the Real Name, Comment and Email Address in this form:
+        "Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;"
+
+    Real name: Ticket System
+    Email address: support@example.com
+    Comment: Private PGP Key for the ticket system with address support@example.com
+    You selected this USER-ID:
+    "Ticket System (Private PGP Key for the ticket system with address support@examp
+    le.com) &lt;support@example.com&gt;"
+
+    Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+    You need a Passphrase to protect your secret key.
+
+    Passphrase: secret
+    Repeat passphrase: secret
+
+    We need to generate a lot of random bytes. It is a good idea to perform
+    some other action (type on the keyboard, move the mouse, utilize the
+    disks) during the prime generation; this gives the random number
+    generator a better chance to gain enough entropy.
+    ++++++++++.+++++++++++++++++++++++++....+++++.+++++...+++++++++++++++++++++++++.
+    +++++++++++++++++++++++++.+++++.+++++.+++++++++++++++++++++++++&gt;++++++++++&gt;+++++
+    .......&gt;+++++&lt;+++++................................+++++
+
+    Not enough random bytes available.  Please do some other work to give
+    the OS a chance to collect more entropy! (Need 280 more bytes)
+
+    ++++++++++.+++++..++++++++++..+++++....++++++++++++++++++++.+++++++++++++++.++++
+    ++++++++++++++++++++++++++.++++++++++.+++++++++++++++.++++++++++.+++++++++++++++
+    ..+++++&gt;.+++++....&gt;+++++........................................................
+    ...........................................................&gt;+++++&lt;+++++.........
+    .............+++++^^^
+    gpg: /opt/otrs/.gnupg/trustdb.gpg: trustdb created
+    gpg: key 7245A970 marked as ultimately trusted
+    public and secret key created and signed.
+
+    gpg: checking the trustdb
+    gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+    gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
+    pub   1024D/7245A970 2006-02-03
+          Key fingerprint = 2ED5 BC36 D2B6 B055 7EE1  5833 1D7B F967 7245 A970
+     uid                  Ticket System (Private pgp key for ticket system with addre
+    ss support@example.com) &lt;support@example.com&gt;
+    sub   2048g/52B97069 2006-02-03
+
+    linux:~$
+    </screen>
+    </para>
+
+    <para>
+    <emphasis>脚本：配置GnuPG。</emphasis>
+    </para>
+
+    <para>
+        正如脚本中显示那样，大部分需要的参数使用默认设置即可。密钥所有者仅需正确输入这个密钥合适的密码就行。
+    </para>
+    </listitem>
+    <listitem>
+
+    <para>
+    在 <link
+linkend="ConfigReference_Framework:Crypt::PGP">PGP</link>设置窗口，PGP应该已激活（第一个选项）。另外还应该设置并检查gpg程序路径。
+    </para>
+
+    <para>
+    下一个配置设置（PGP::Options）可能也需要修改。通过这个配置设置，可以指定‘otrs’用户每次gpg执行时的参数。尤其是‘otrs’用户的GnuPG配置文件目录很重要。在示例中使用的是<filename>/opt/otrs/.gnupg</filename>目录，这个目录要在PGP配置过程之前创建。
+    </para>
+
+    <para>
+        通过下一个配置选项（PGP::Key::Password）可以指定密钥对的ID和它们私有密钥的密码。因为外部的通信伙伴用你的公钥加密写给工单系统的消息，OTRS就能使用在这里指定的ID/密码来解密这些消息。
+    </para>
+
+    <para>
+    如何取得你自己的私钥ID？你自己的私钥ID已经在生成密钥过程中显示过了（见前面的步骤1）。可以通过‘otrs’用户执行下面脚本中的命令来取得这个ID：
+    </para>
+
+    <para>
+    <screen>
+    linux:~# su otrs
+    linux:/root$ cd
+    linux:~$ pwd
+    /opt/otrs
+    linux:~$ gpg --list-keys
+    /opt/otrs/.gnupg/pubring.gpg
+    ----------------------------
+    pub   1024D/7245A970 2006-02-03
+    uid                  Ticket System (Private pgp key for ticket system with
+    address support@example.com) &lt;support@example.com&gt;
+    sub   2048g/52B97069 2006-02-03
+
+    linux:~$
+    </screen>
+    </para>
+
+    <para>
+    <emphasis>脚本：获取你自己的私钥ID。</emphasis>
+    </para>
+
+    <para>
+    私钥ID可以在以“sub”开头的行中找到，它是8个字符长度的十六进制字符串，在这个示例中它是“52B97069”。在OTRS中需要指定的密码就是在生成密钥时输入的密码。
+    </para>
+
+    <para>
+    在输入这些数据后，点击“更新”按钮来保存设置。OTRS现在就准备好接收和解密加密过的消息了。
+    </para>
+    </listitem>
+    <listitem>
+    <para>
+    最后，导入一个客户联系人的公钥。这确保可以给这个客户联系人发送加密消息。有两个方法来导入一个客户联系人的公钥。
+    </para>
+
+    <para>
+    第一个方法是在客户管理界面指定一个客户联系人的公钥。
+    </para>
+
+    <para>
+    第二个方法是从系统管理页面通过PGP设置指定公钥。在窗口右侧会显示所有已导入的客户联系人公钥。在激活了PGP且配置了OTRS的PGP后，你自己的公钥也应该在这里列出。在PGP设置窗口的左侧可以搜索密钥。此外，可以通过一个文件上传一个新的公钥。
+    </para>
+
+    <para>
+    需要导入到OTRS中公钥文件必须是GnuPGP兼容的密钥文件。大部分情况下，存储在一个文件中的密钥是“ASCII码封装的密钥”，OTRS能够处理这个格式。
+    </para>
+    </listitem>
+</orderedlist>
+</para>
+</section>
