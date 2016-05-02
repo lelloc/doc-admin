@@ -44,17 +44,36 @@ you should skip steps 6, 10, 11, 14, 17 and 18.
         <para>
         Please make sure there are no more running services or cron jobs that try to
 access OTRS.  This will depend on your service configuration, here is an
-example: <screen><![CDATA[
+example:
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /etc/init.d/cron stop
 shell> /etc/init.d/postfix stop
 shell> /etc/init.d/apache stop
-            ]]></screen> Stop OTRS cron jobs and the
-scheduler or daemon (in this order) depending on the OTRS version you are
-updating from: <screen><![CDATA[
+            ]]></screen>
+        </para>
+
+        <para>
+        Stop OTRS cron jobs and the scheduler or daemon (in this order) depending on
+the OTRS version you are updating from:
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/Cron.sh stop
 shell> bin/otrs.Scheduler.pl -a stop
-            ]]></screen> or <screen><![CDATA[
+            ]]></screen>
+        </para>
+
+        <para>
+        or
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/Cron.sh stop
 shell> bin/otrs.Daemon.pl stop
@@ -134,15 +153,26 @@ SysConfig.
                 <title>Установка прав доступа к файлам.</title>
 
                 <para>
-                Выполните  <screen><![CDATA[
+                Please execute
+                </para>
+
+                <para>
+                <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/otrs.SetPermissions.pl
-                ]]></screen>  с необходимыми для вашей
-системы правами. Например:
+                ]]></screen>
+                </para>
 
+                <para>
+                with the permissions needed for your system setup. For example:
+                </para>
+
+                <para>
                 <itemizedlist>
                 <listitem>
-                    <para>Web server работающий как пользователь OTRS: <screen><![CDATA[
+                    <para>Web server which runs as the OTRS user:</para>
+                    <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=otrs
                 ]]></screen>
                     </para>
@@ -150,7 +180,9 @@ shell> bin/otrs.SetPermissions.pl --web-group=otrs
 
 
                 <listitem>
-                    <para>Webserver с пользователем wwwrun (например в SUSE): <screen><![CDATA[
+                    <para>Webserver with wwwrun user (e. g. SUSE):</para>
+                    <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
                 ]]></screen>
                     </para>
@@ -158,7 +190,9 @@ shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
 
 
                 <listitem>
-                    <para>Webserver с пользователем apache (например, Red Hat, CentOS): <screen><![CDATA[
+                    <para>Webserver with apache user (e. g. Red Hat, CentOS):</para>
+                    <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=apache
                 ]]></screen>
                     </para>
@@ -166,7 +200,9 @@ shell> bin/otrs.SetPermissions.pl --web-group=apache
 
 
                 <listitem>
-                    <para>Webserver с пользователем www-data (например, Debian, Ubuntu): <screen><![CDATA[
+                    <para>Webserver with www-data user (e. g. Debian, Ubuntu):</para>
+                    <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=www-data
                 ]]></screen>
                     </para>
@@ -182,9 +218,12 @@ shell> bin/otrs.SetPermissions.pl --web-group=www-data
             <para>
             <screen><![CDATA[
 shell> rpm -Uvh otrs-x.x.x.-01.rpm
-            ]]></screen> В этом случае обновление из RPM
-автоматически восстанавливает старые конфигурационные файлы и устанавливает
-нужные права на файлы.
+            ]]></screen>
+            </para>
+
+            <para>
+            In this case the RPM update automatically restores the old configuration
+files and sets file permissions.
             </para>
         </section>
     </section>
@@ -194,7 +233,10 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
 
         <para>
         Verify that all needed Perl modules are installed on your system and install
-any modules that might be missing.  <screen><![CDATA[
+any modules that might be missing.
+        </para>
+        <para>
+        <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.CheckModules.pl
         ]]></screen>
         </para>
@@ -225,12 +267,15 @@ Maint::Database::MySQL::InnoDBMigration</command>.
                 <para>
                     Any problems with regards to the storage engine will be reported by the
 <filename>bin/otrs.Console.pl Maint::Database::Check</filename> command, so
-please run it to check for possible issues.  <screen><![CDATA[
+please run it to check for possible issues.
+                </para>
+
+                <para>
+                    <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> cat scripts/DBUpdate-to-5.mysql.sql | mysql -p -f -u root otrs
 shell> bin/otrs.Console.pl Maint::Database::Check
                     ]]></screen>
-
                 </para>
 
             </section>
@@ -250,12 +295,29 @@ shell> cat scripts/DBUpdate-to-5.postgresql.sql | psql --set ON_ERROR_STOP=on --
             <title>Шаг 6.2: Скрипт миграции БД</title>
 
             <para>
-            Выполните скрипт для миграции (как пользователь <code>otrs</code>, НЕ как
-<code>root</code>): <screen><![CDATA[
-shell> scripts/DBUpdate-to-5.pl
-            ]]></screen> Не продолжайте
-процесс обновления, если этот скрипт отрабатывает неправильно, по вашему
-мнению. Иначе, вы можете потерять данные.
+            Run the migration script (as user <literal>otrs</literal>, NOT as
+<literal>root</literal>):
+            </para>
+
+            <para>
+            <screen><![CDATA[
+shell> scripts/DBUpdate-to-6.pl
+            ]]></screen>
+            </para>
+
+            <para>
+                The script will ask you to set a time zone for OTRS. It is very important
+that you set the correct time zone (and keep it), otherwise date and time of
+data added after the upgrade (tickets, articles, etc.) wil be stored with a
+different time zone than your existing data, leading to inconsistent data.
+The script will suggest possible time zones based on your previous
+configuration. In case you are not sure or made a mistake, you can change
+the OTRS time zone after the upgrade via SysConfig setting OTRSTimeZone.
+            </para>
+
+            <para>
+            Do not continue the upgrading process if this script did not work properly
+for you.  Otherwise data loss may occur.
             </para>
         </section>
     </section>
@@ -264,8 +326,12 @@ shell> scripts/DBUpdate-to-5.pl
         <title>Step 7: Refresh the configuration cache and delete caches</title>
 
         <para>
-         Выполните (как пользователь <code>otrs</code>, <emphasis>не</emphasis> как
-<code>root</code>): <screen><![CDATA[
+        Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as
+<literal>root</literal>):
+        </para>
+
+        <para>
+        <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> bin/otrs.Console.pl Maint::Config::Rebuild
 shell> bin/otrs.Console.pl Maint::Cache::Delete
@@ -277,11 +343,19 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
         <title>Step 8: Restart your services</title>
 
         <para>
-        в т.ч. (зависящие от использующихся услуг): <screen><![CDATA[
+        e. g. (depends on used services):
+        </para>
+
+        <para>
+        <screen><![CDATA[
 shell> /etc/init.d/apache start
 shell> /etc/init.d/postfix start
 shell> /etc/init.d/cron start
-        ]]></screen> Теперь вы можете войти в систему.
+        ]]></screen>
+        </para>
+
+        <para>
+        Now you can log into your system.
         </para>
     </section>
 
@@ -297,6 +371,8 @@ perform a package upgrade!
         <para>
             Следующие пакеты будут автоматически деинсталлированы после процесса
 обновления (если были установлены ранее):
+        </para>
+        <para>
             <itemizedlist>
                 <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
             </itemizedlist>
@@ -319,7 +395,10 @@ does not need to be configured for single-frontend setups. If you have more
 than one machine, each machine needs to have this value set to a unique
 value between <literal>1</literal> and <literal>999</literal>. This
 configuration needs to be done in the file
-<filename>Kernel/Config.pm</filename>: <screen><![CDATA[
+<filename>Kernel/Config.pm</filename>:
+        </para>
+        <para>
+            <screen><![CDATA[
 $Self->{'NodeID'} =  '2';   # assign a unique value for every frontend server
             ]]></screen>
         </para>
@@ -346,10 +425,13 @@ attachments or raw email content).
 recurring tasks in OTRS.  What has been in cron file definitions previously
 is now handled by the OTRS daemon, which is now required to operate
 OTRS. The daemon also handles all GenericAgent jobs and must be started from
-the <literal>otrs</literal> user.  <screen><![CDATA[
+the <literal>otrs</literal> user.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Daemon.pl start
             ]]></screen>
-
         </para>
     </section>
 
@@ -360,12 +442,23 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
             There are two default OTRS cron files in
 <filename>/opt/otrs/var/cron/*.dist</filename>, and their purpose is to make
 sure that the OTRS Daemon is running.  They need to be activated by copying
-them without the ".dist" filename extension.  <screen><![CDATA[
+them without the ".dist" filename extension.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> cd /opt/otrs/var/cron
 shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
-            ]]></screen> To schedule these cron jobs on your system, you can use the script
+            ]]></screen>
+        </para>
+
+        <para>
+            To schedule these cron jobs on your system, you can use the script
 <filename>Cron.sh</filename> with the <literal>otrs</literal> user.
-<screen><![CDATA[
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
@@ -461,7 +554,10 @@ and save the changes.
         <note>
             <para>
                 To get more information about other parameters that can be used while
-running the GenericAgent jobs, please execute: <screen><![CDATA[
+running the GenericAgent jobs, please execute:
+            </para>
+            <para>
+                <screen><![CDATA[
 shell> bin/otrs.Console.pl Maint::GenericAgent::Run --help
             ]]></screen>
             </para>

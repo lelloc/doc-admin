@@ -32,7 +32,11 @@ shell> mv otrs-x.x.x /opt/otrs
         <title>Step 2: Install Additional Perl Modules</title>
         <para>
             Use the following script to get an overview of all installed and required
-CPAN modules.  <screen><![CDATA[
+CPAN modules.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> perl /opt/otrs/bin/otrs.CheckModules.pl
 o CGI..............................ok (v3.60)
 o Crypt::PasswdMD5.................ok (v1.3)
@@ -64,7 +68,10 @@ install the Perl core packages by default.
             <itemizedlist>
                 <listitem>
                     <para>
-                        For Red Hat, CentOS, Fedora or compatible systems: <screen><![CDATA[
+                        For Red Hat, CentOS, Fedora or compatible systems:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
 shell> yum install "perl(Digest::MD5)"
                         ]]></screen>
                     </para>
@@ -73,9 +80,18 @@ shell> yum install "perl(Digest::MD5)"
                     <para>
                         For SUSE Linux Enterprise Server, openSUSE or compatible systems: first
 determine the name of the package the module is shipped in.  Usually the
-package for My::Module would be called "perl-My-Module".  <screen><![CDATA[
+package for My::Module would be called "perl-My-Module".
+                    </para>
+                    <para>
+                        <screen><![CDATA[
 shell> zypper search Digest::MD5
-                        ]]></screen> Then install: <screen><![CDATA[
+                        ]]></screen>
+                    </para>
+                    <para>
+                        Then install:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
 shell> zypper install perl-Digest-MD5
                         ]]></screen>
                     </para>
@@ -84,15 +100,25 @@ shell> zypper install perl-Digest-MD5
                     <para>
                         For Debian, Ubuntu or compatible systems first determine the name of the
 package the module is shipped in.  Usually the package for My::Module would
-be called "libmy-module-perl".  <screen><![CDATA[
+be called "libmy-module-perl".
+                    </para>
+                    <para>
+                        <screen><![CDATA[
 shell> apt-cache search Digest::MD5
-                        ]]></screen> Then
-install: <screen><![CDATA[
+                        ]]></screen>
+                    </para>
+                    <para>
+                        Then install:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
 shell> apt-get install libdigest-md5-perl
-                        ]]></screen> Please note that it might be
-that you can't find all modules or their required versions in your
-distribution repository, in that case you might choose to install those
-modules via CPAN (see below).
+                        ]]></screen>
+                    </para>
+                    <para>
+                        Please note that it might be that you can't find all modules or their
+required versions in your distribution repository, in that case you might
+choose to install those modules via CPAN (see below).
                     </para>
                 </listitem>
             </itemizedlist>
@@ -102,14 +128,20 @@ modules via CPAN (see below).
             <para>
                 Note that when you're on Linux you should run CPAN as your superuser account
 because the modules should be accessible both by the OTRS account and the
-account under which the web server is running.  <screen><![CDATA[
+account under which the web server is running.
+            </para>
+            <para>
+                <screen><![CDATA[
 shell> perl -MCPAN -e shell;
 ...
 install Digest::MD5
 install Crypt::PasswdMD5
 ...
-                ]]></screen> Any optional modules listed by the script should be installed
-depending on the special requirements of the target system.
+                ]]></screen>
+            </para>
+            <para>
+                Any optional modules listed by the script should be installed depending on
+the special requirements of the target system.
             </para>
         </section>
 
@@ -118,10 +150,19 @@ depending on the special requirements of the target system.
     <section role="NotInToc">
         <title>Step 3: Create OTRS User</title>
         <para>
-            Create user: <screen><![CDATA[
+            Create user:
+        </para>
+        <para>
+            <screen><![CDATA[
 shell> useradd -d /opt/otrs/ -c 'OTRS user' otrs
-            ]]></screen> Add user to webserver group
-(if the webserver is not running as the OTRS user): <screen><![CDATA[
+            ]]></screen>
+        </para>
+        <para>
+            Add user to webserver group (if the webserver is not running as the OTRS
+user):
+        </para>
+        <para>
+            <screen><![CDATA[
 shell> usermod -G www otrs
 (SUSE=www, Red Hat/CentOS/Fedora=apache, Debian/Ubuntu=www-data)
             ]]></screen>
@@ -133,11 +174,13 @@ shell> usermod -G www otrs
         <para>
             There are two OTRS config files bundled in $OTRS_HOME/Kernel/*.dist and
 $OTRS_HOME/Kernel/Config/*.dist. You must activate them by copying them
-without the ".dist" filename extension.  <screen><![CDATA[
+without the ".dist" filename extension.
+        </para>
+        <para>
+            <screen><![CDATA[
 shell> cd /opt/otrs/
 shell> cp Kernel/Config.pm.dist Kernel/Config.pm
     ]]></screen>
-
         </para>
     </section>
 
@@ -153,8 +196,10 @@ shell> perl -cw /opt/otrs/bin/cgi-bin/customer.pl
 
 shell> perl -cw /opt/otrs/bin/otrs.Console.pl
 /opt/otrs/bin/otrs.Console.pl syntax OK
-            ]]></screen> "syntax OK" tells you all mandatory Perl
-modules are installed.
+            ]]></screen>
+        </para>
+        <para>
+            "syntax OK" tells you all mandatory Perl modules are installed.
         </para>
     </section>
 
@@ -165,7 +210,10 @@ modules are installed.
             First of all, you should install the Apache2 web server and mod_perl; you'd
 typically do this from your systems package manager.  Below you'll find the
 commands needed to set up Apache on the most popular Linux distributions.
-<screen><![CDATA[
+        </para>
+
+        <para>
+            <screen><![CDATA[
 # rhel / centos:
 shell> yum install httpd mod_perl
 
@@ -175,7 +223,6 @@ shell> zypper install apache2-mod_perl
 # debian/ubuntu:
 shell> apt-get install apache2 libapache2-mod-perl2
         ]]></screen>
-
         </para>
 
         <para>
@@ -192,7 +239,11 @@ directory (to make sure it is loaded after the other configurations).
         <para>
             OTRS requires a few Apache modules to be active for optimal operation. On
 most platforms you can make sure they are active via the tool
-<filename>a2enmod</filename>.  <screen><![CDATA[
+<filename>a2enmod</filename>.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> a2enmod perl
 shell> a2enmod version
 shell> a2enmod deflate
@@ -212,29 +263,46 @@ apache2.service</command>.
         <title>Step 7: File Permissions</title>
         <para>
             File permissions need to be adjusted to allow OTRS to read and write files:
-<cmdsynopsis>
+        </para>
+
+        <para>
+            <cmdsynopsis>
 <command>otrs.SetPermissions.pl</command> <arg choice='opt'> --otrs-user=
 <replaceable>OTRS user, defaults to 'otrs'</replaceable> </arg> <arg
 choice='req'> --web-group= <replaceable>group of the web server
-user</replaceable> </arg></cmdsynopsis> For example:
+user</replaceable> </arg></cmdsynopsis>
+        </para>
 
+        <para>
+            For example:
+        </para>
+
+        <para>
             <itemizedlist>
-                <listitem><para>Web server which runs as the OTRS user: <screen><![CDATA[
+                <listitem><para>Web server which runs as the OTRS user:</para>
+                <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-user=otrs
                 ]]></screen>
                 </para></listitem>
 
-                <listitem><para>Webserver with wwwrun user (e. g. SUSE): <screen><![CDATA[
+                <listitem><para>Webserver with wwwrun user (e. g. SUSE):</para>
+                <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
                 ]]></screen>
                 </para></listitem>
 
-                <listitem><para>Webserver with apache user (e. g. Red Hat, CentOS): <screen><![CDATA[
+                <listitem><para>Webserver with apache user (e. g. Red Hat, CentOS):</para>
+                <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=apache
                 ]]></screen>
                 </para></listitem>
 
-                <listitem><para>Webserver with www-data user (e. g. Debian, Ubuntu): <screen><![CDATA[
+                <listitem><para>Webserver with www-data user (e. g. Debian, Ubuntu):</para>
+                <para>
+                <screen><![CDATA[
 shell> bin/otrs.SetPermissions.pl --web-group=www-data
                 ]]></screen>
                 </para></listitem>
@@ -254,7 +322,10 @@ basic system settings such as email accounts.
             <para>
                 The following configuration settings are recommended for MySQL
 setups. Please add the following lines to <filename>/etc/my.cnf</filename>
-under the [mysqld] section: <screen><![CDATA[
+under the [mysqld] section:
+            </para>
+            <para>
+                <screen><![CDATA[
 max_allowed_packet   = 20M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
@@ -284,10 +355,13 @@ root@localhost).
 recurring tasks in OTRS.  What has been in cron file definitions previously
 is now handled by the OTRS daemon, which is now required to operate
 OTRS. The daemon also handles all GenericAgent jobs and must be started from
-the <literal>otrs</literal> user.  <screen><![CDATA[
+the <literal>otrs</literal> user.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Daemon.pl start
             ]]></screen>
-
         </para>
     </section>
 
@@ -297,15 +371,33 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
             There are two default OTRS cron files in
 <filename>/opt/otrs/var/cron/*.dist</filename>, and their purpose is to make
 sure that the OTRS Daemon is running.  They need to be be activated by
-copying them without the ".dist" filename extension.  <screen><![CDATA[
+copying them without the ".dist" filename extension.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> cd /opt/otrs/var/cron
 shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
-            ]]></screen> To schedule these cron jobs on your system, you can
-use the script <filename>Cron.sh</filename> with the <literal>otrs</literal>
-user.  <screen><![CDATA[
+            ]]></screen>
+        </para>
+
+        <para>
+            To schedule these cron jobs on your system, you can use the script
+<filename>Cron.sh</filename> with the <literal>otrs</literal> user.
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh start
-            ]]></screen> Stopping the cron jobs is also
-possible (useful for maintenance): <screen><![CDATA[
+            ]]></screen>
+        </para>
+
+        <para>
+            Stopping the cron jobs is also possible (useful for maintenance):
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh stop
     ]]></screen>
         </para>

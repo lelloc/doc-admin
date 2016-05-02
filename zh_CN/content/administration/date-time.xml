@@ -2,10 +2,10 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
-<section id="time">
-<title>时间相关的功能</title>
+<section id="da-tetime">
+<title>Date and Time Related Functions</title>
 
-<section id="time-settings">
+<section id="date-time-settings">
 <title>设置上班时间、假期和时区</title>
 
 <para>
@@ -20,6 +20,32 @@ linkend="ConfigReference_Framework:Core::Time::Calendar9">Framework &gt;
 Core::Time::Calendar9</link>。可以通过<link
 linkend="adminarea-queue">队列设置</link>来选择日历，或根据SLA级别来选择日历。举例来说，这意味着你可以为‘标准’SLA指定一个5X8上班时间的日历，为‘金牌’SLA创建一个7X24支持的单独日历；同样可以为‘支持-美国’队列设置一个日历，其时间窗口与‘支持-日本’队列的日历的时间窗口不同。OTRS可以处理多达99个不同的日历。
 </para>
+
+<section id="TimeZones">
+<title>Time zones</title>
+
+<para>
+OTRS needs to know which time zone should be used to store date and time
+related data in the database. You can set this in <link
+linkend="ConfigReference_Framework:Core::Time:OTRSTimeZone">Framework &gt;
+Core::Time::OTRSTimeZone</link>.  The default is UTC and if you set up a new
+OTRS it is strongly recommended to leave it at this. If you updated from an
+OTRS older than version 6, you must ensure that OTRSTimeZone is being set to
+a time zone that matches your previous setup. Otherwise new data will be
+stored with a different time zone than your existing data.  Once you decided
+on a time zone and data was stored (tickets, etc.), you shouldn't change the
+time zone anymore because otherwise you would end up with data stored in
+different time zones.
+</para>
+
+<para>
+You can set a default time zone for new agents and customer users via <link
+linkend="ConfigReference_Framework:Core::Time:UserDefaultTimeZone">Framework
+&gt; Core::Time::UserDefaultTimeZone</link>. This time zone will be used for
+all users that don't have selected a time zone in their preferences.
+</para>
+
+</section>
 
 <section id="TimeWorkingHours">
 <title>上班时间</title>

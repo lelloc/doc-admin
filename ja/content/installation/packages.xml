@@ -54,7 +54,11 @@ linux:~ # zypper install mysql perl-DBD-mysql
         This will install MySQL with the default options on your system. You'll need
 to change the defaults in order to make it suitable for OTRS. With a text
 editor open the file <filename>/etc/my.cnf</filename> and add following
-lines under the [mysqld] section: <screen><![CDATA[
+lines under the [mysqld] section:
+    </para>
+
+    <para>
+        <screen><![CDATA[
 max_allowed_packet   = 20M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
@@ -93,9 +97,12 @@ Check OTRS user ... otrs added.
 ...
 
 otrs-sles:~ #
-        ]]></screen> Now restart Apache with the command
-<command>systemctl restart apache2.service</command> to load the
-configuration changes for OTRS.
+        ]]></screen>
+    </para>
+
+    <para>
+        Now restart Apache with the command <command>systemctl restart
+apache2.service</command> to load the configuration changes for OTRS.
     </para>
     </section>
 
@@ -166,10 +173,18 @@ linkend="web-installer">このセクションで</link>記述されるように�
 
         <para>
             Now you can start the OTRS daemon and activate corresponding watchdog cron
-job (this must be done by the <literal>otrs</literal> user): <screen><![CDATA[
+job (this must be done by the <literal>otrs</literal> user):
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Daemon.pl start
 shell> /opt/otrs/bin/Cron.sh start
-            ]]></screen> That's it, congratulations!
+            ]]></screen>
+        </para>
+
+        <para>
+            That's it, congratulations!
         </para>
 
     </section>
@@ -198,12 +213,24 @@ dedicated database server if needed for scalability or other purposes.
     </para>
 
     <para>
-        Install MySQL by executing the following command as root: <screen><![CDATA[
+        rootとして次のコマンドを実行しMySQLをインストールします：
+    </para>
+
+    <para>
+        <screen><![CDATA[
 [root@otrs-centos6 ~]# yum -y install mysql-server
-        ]]></screen> This will install MySQL with the default options on
-your system. You'll need to change the defaults in order to make it suitable
-for OTRS. With a text editor open the file <filename>/etc/my.cnf</filename>
-and add following lines under the [mysqld] section: <screen><![CDATA[
+        ]]></screen>
+    </para>
+
+    <para>
+        This will install MySQL with the default options on your system. You'll need
+to change the defaults in order to make it suitable for OTRS. With a text
+editor open the file <filename>/etc/my.cnf</filename> and add following
+lines under the [mysqld] section:
+    </para>
+
+    <para>
+        <screen><![CDATA[
 max_allowed_packet   = 20M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
@@ -270,9 +297,12 @@ Check OTRS user ... otrs added.
 ...
 
 [root@otrs-centos6 ~]#
-        ]]></screen> Now restart Apache with the command
-<command>systemctl restart httpd.service</command> to load the configuration
-changes for OTRS.
+        ]]></screen>
+    </para>
+
+    <para>
+        Now restart Apache with the command <command>systemctl restart
+httpd.service</command> to load the configuration changes for OTRS.
     </para>
     </section>
 
@@ -390,10 +420,18 @@ linkend="web-installer">このセクションで</link>記述されるように�
 
         <para>
             Now you can start the OTRS daemon and activate corresponding watchdog cron
-job (this must be done by the <literal>otrs</literal> user): <screen><![CDATA[
+job (this must be done by the <literal>otrs</literal> user):
+        </para>
+
+        <para>
+            <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Daemon.pl start
 shell> /opt/otrs/bin/Cron.sh start
-            ]]></screen> That's it, congratulations!
+            ]]></screen>
+        </para>
+
+        <para>
+            That's it, congratulations!
         </para>
     </section>
 
@@ -479,11 +517,16 @@ linkend="manual-installation-of-otrs">ソースから</link>インストール�
         </para>
     </important>
     <para>
-        利用可能なパッケージを使用すれば、必要なPerlモジュールのインストールはより容易です: <screen><![CDATA[
-apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl \
-    libnet-ldap-perl libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl \
-    libgd-text-perl libtext-csv-xs-perl libjson-xs-perl libgd-graph-perl libapache-dbi-perl \
-    libxml-libxml-perl libxml-xslt-perl
+        The installation of required Perl modules is easier if you use the available
+packages:
+    </para>
+    <para>
+        <screen><![CDATA[
+apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl libnet-ldap-perl \
+    libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl libtext-csv-xs-perl \
+    libjson-xs-perl libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl libyaml-perl \
+    libarchive-zip-perl libcrypt-eksblowfish-perl libencode-hanextra-perl libmail-imapclient-perl \
+    libtemplate-perl
         ]]></screen>
     </para>
 </section>

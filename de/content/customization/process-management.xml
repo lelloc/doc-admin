@@ -2274,7 +2274,10 @@ DefaultValue => '2',
 configuration, the Activity Dialog will contain a complete Richtext editor
 with subject field and attachment handling. The entered text will then be
 added to the ticket as an article and sent by email. Let's see an example
-Article field configuration: <screen>
+Article field configuration:
+                </para>
+                <para>
+                    <screen>
 Article => {
 DescriptionShort => 'Please insert your comment here.',
 DescriptionLong => '',
@@ -2321,19 +2324,22 @@ diesem Fall gespeichert.
                             </listitem>
                             <listitem>
                                 <para>
-                                    '2': Das Feld ist sichtbar und verpflichtend. Die folgenden Felder können
-nur unsichtbar oder verpflichtend sein:
-<screen>
-QueueID
-Queue
-State
-StateID
-Lock
-LockID
-Priority
-PriorityID
-Type
-TypeID</screen>
+                                    '2': field is visible and mandatory. The following fields can only be
+invisible or mandatory:
+                                </para>
+                                <para>
+                                    <screen>
+    QueueID
+    Queue
+    State
+    StateID
+    Lock
+    LockID
+    Priority
+    PriorityID
+    Type
+    TypeID
+                                    </screen>
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2563,7 +2569,10 @@ Bedingung erfüllt ist.
                     <title>Felder</title>
                     <para>
                         Specifies the particular fields whose values should be tested. From our
-example: <screen>
+example:
+                    </para>
+                    <para>
+                        <screen>
 Fields => {
 StateID => {
 Type => 'String',
@@ -2574,8 +2583,10 @@ Match => '1',
                 <section>
                     <title>StateID</title>
                     <para>
-                        Beispiel für einen Feldnamen. Die folgenden Ticketfelder können verwendet
-werden: <screen>
+                        Example of a field name. The following ticket fields can be used:
+                    </para>
+                    <para>
+                        <screen>
     Title
     State
     StateID
@@ -2665,7 +2676,10 @@ changes.
             <section>
                 <title>Übergangs-Aktionen-Konfiguration</title>
                 <para>
-                    Hier sehen Sie ein Beispiel: <screen>
+                    Hier sehen Sie ein Beispiel:
+                </para>
+                <para>
+                    <screen>
 $Self->{'Process::TransitionAction'} = {
     'TA1' => {
         Name   => 'Queue Move',
@@ -2713,7 +2727,10 @@ user with the UserID 123 might have.
                 <title>Wiederverwendung von Übergangs-Aktionsmodulen</title>
                 <para>
                     To use Transition Action modules multiple times, just specify several
-Transition Actions in your configuration. Example: <screen>
+Transition Actions in your configuration. Example:
+                </para>
+                <para>
+                    <screen>
     $Self->{'Process::TransitionAction'} = {
         'TA1' => {
             Name   => 'Queue Move Junk',
@@ -2793,7 +2810,7 @@ $Self->{'Process::TransitionAction'} = {
             ArticleType      => 'note-internal',                                        # note-external|phone|fax|sms|...
                                                                                         #   excluding any email type
             SenderType       => 'agent',                                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType
+            ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
             Subject          => 'some short description',                               # required
             Body             => 'the message text',                                     # required
             HistoryType      => 'OwnerUpdate',                                          # EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
@@ -2809,7 +2826,7 @@ $Self->{'Process::TransitionAction'} = {
 
             ForceNotificationToUserID   => [ 1, 43, 56 ],                               # if you want to force somebody
             ExcludeNotificationToUserID => [ 43, 56 ],
-                 # if you want full exclude somebody from notfications,
+                 # if you want full exclude somebody from notifications,
                  # will also be removed in To: line of article,
                  # higher prio as ForceNotificationToUserID
             ExcludeMuteNotificationToUserID => [ 43, 56 ],
@@ -2924,7 +2941,7 @@ $Self->{'Process::TransitionAction'} = {
             ArticleType      => 'note-internal',                        # note-external|phone|fax|sms|...
                                                                         #   excluding any email type
             SenderType       => 'agent',                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType
+            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
             Subject          => 'some short description',               # required
             Body             => 'the message text',                     # required
             HistoryType      => 'OwnerUpdate',                          #
@@ -3513,8 +3530,11 @@ passenden Regeln berechnet um die möglichen Aktivitätsdialoge zu
 bestimmen. Beispiel:
                 </para>
                 <para>
-                    Konfigurierte Aktivitätsdialoge: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
-'AD7'. <screen>
+                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
+'AD7'.
+                </para>
+                <para>
+                    <screen>
 $Self->{TicketAcl}->{'001-ACL-Status'} = {
     Properties => {
         Ticket => {
