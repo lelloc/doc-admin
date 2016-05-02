@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="customers-and-groups">
+<title>客户与客户组</title>
+
+<section id="adminarea-customers">
+<title>客户</title>
+
+<para>
+OTRS支持不同类型的用户。使用“客户”链接（通过导航栏或<link
+linkend="adminarea">系统管理页面</link>），你可以管理你的客户联系人帐户（如下图），客户联系人用于通过客户界面（customer.pl）登录系统。你的客户联系人通过客户界面不仅能够创建工单，还能够回顾他们过去的工单以发起新的更新。重要的是要知道在系统的工单历史中需要一个客户联系人。
+</para>
+
+<para>
+<figure>
+    <title>客户管理</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/admin-customer.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+你可以搜索一个已注册的客户联系人，或者通过点击他们的姓名来编辑他们的设置。你还可以修改客户后端，进一步信息请参考 <link
+linkend="external-backends">外部后端</link>部分。
+</para>
+
+<para>
+要创建一个新的客户联系人帐户，点击“添加客户联系人”按钮（如下图）。一些字段是强制的，例如它们必须包含值，所以如果你将这些字段留空，就会用红色高亮显示错误信息。
+</para>
+
+<para>
+<figure>
+    <title>添加一个客户联系人</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/add-customer.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+客户联系人提供他们的用户名和密码后就能访问OTRS系统。系统需要CustomerID来识别客户联系人和关联的工单。因为邮件地址是唯一的值，可以用来作为CustomerID。
+</para>
+
+<note>
+<para>
+与服务人员、组和角色一样，客户联系人不能删除。只能通过设置有效性标记为<emphasis>无效</emphasis>或<emphasis>临时无效</emphasis>来‘去激活’。
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-customers-groups">
+<title>客户联系人组</title>
+
+<para>
+客户联系人还可以添加到一个组，如果你要添加同一个客户单位的联系人以访问一个或几个队列时有用。首先通过<link
+linkend="adminarea-groups">组管理模块</link>创建你的客户联系人所属的组。然后添加<link
+linkend="adminarea-queue">队列</link>并为此队列选择这个新的组。
+</para>
+
+<para>
+下一步是激活客户联系人组支持。这可以通过系统管理中的系统配置参数<link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>来实现。使用参数<link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>你可以指定一个新添加的客户联系人的默认组，以便每个新帐户会被自动添加到这些组中。
+</para>
+
+<para>
+通过“客户联系人&lt;-&gt;组” 链接你可以管理一个客户联系人要属于的不同组（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>客户联系人-组 关系管理</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-customer-groups.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+要给一个客户联系人定义不同的组或者给一个组分配不同的客户联系人，点击相应的客户联系人或组名称（分别如下图4.18和4.19）
+</para>
+
+<para>
+<figure>
+    <title>修改一个客户联系人的组</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-customers-relations.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+<figure>
+    <title>修改一个组的客户联系人</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-customers-relations2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+</section>

@@ -1,0 +1,486 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="installation-of-prepared-packages">
+<title>简单方法 - 预构建软件包安装</title>
+
+<para>
+    如果你使用的系统平台有OTRS预构建软件包，你就应该优先用它来安装，因为这是最简单、最便捷的方法。你可以在官网下载区<ulink
+url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">www.otrs.com</ulink>找到可用的预构建软件包。
+</para>
+
+<section id="installation-on-suse">
+    <title>在SUSE Linux服务器上安装RPM包</title>
+
+    <para>
+    本部分描述了在SUSE Linux服务器上安装RPM包。
+    </para>
+
+    <section id="suse-preparing-database-mysql">
+    <title>准备OTRS所需的数据库环境</title>
+
+    <para>
+    你可以使用不同的数据库后端：<application>MySQL</application>、<application>PostgreSQL</application>或<application>Oracle</application>。部署OTRS最流行的数据库是MySQL。本节描述了在基于SUSE的服务器上配置MySQL需要的步骤。当然如果你有伸缩性或其它方面的需要，也可以将数据库安装到一台单独的数据库服务器上。
+    </para>
+    <note>
+        <para>
+            如果你在openSUSE
+12.3以后的版本参照本节的步骤，实际上你不是安装<application>MySQL</application>而是<application>MariaDB</application>，一个与MySQL代码兼容的MySQL分支。这并没有任何问题，它可以同样工作得很好（在某些点上甚至更好那么一点点）。
+        </para>
+    </note>
+    <para>
+        以root用户执行下列的命令来安装MySQL：
+    </para>
+
+    <para>
+        <screen><![CDATA[
+linux:~ # zypper install mysql perl-DBD-mysql
+        ]]></screen>
+    </para>
+
+    <para>
+        这会按默认选项安装MySQL到系统中。你需要修改一些默认设置以便更适合OTRS运行。用文本编辑器打开文件<filename>/etc/my.cnf</filename>并添加下列行到[mysqld]节：
+    </para>
+
+    <para>
+        <screen><![CDATA[
+max_allowed_packet   = 20M
+query_cache_size     = 32M
+innodb_log_file_size = 256M
+        ]]></screen>
+    </para>
+
+    <para>
+        现在执行命令<command>systemctl restart
+mysql.service</command>来重启数据库服务器并激活刚才的修改内容。然后运行命令<command>/usr/bin/mysql_secure_installation</command>并根据窗口提示来设置数据库的root用户密码、移除匿名访问和移除test数据库。最后，运行命令<command>systemctl
+enable mysql.service</command>来确保MySQL在服务器启动后自动运行。
+    </para>
+
+    </section>
+
+    <section id="suse-installing-rpm">
+        <title>安装 OTRS</title>
+    <para>
+    使用<command>zypper</command>通过命令行来安装OTRS，它还会拉入一些依赖包如Apache
+WEB服务器和一些Perl模块。确保你已经将OTRS RPM文件复制到了当前目录。
+    </para>
+    <para>
+        <screen><![CDATA[
+otrs-sles:~ # zypper install otrs*.rpm
+....
+Retrieving package otrs-x.x.x-01.noarch (1/26), 17.5 MiB (74.3 MiB unpacked)
+Installing: otrs-x.x.x-01 [done]
+Additional rpm output:
+Check OTRS user ... otrs added.
+
+...
+
+otrs-sles:~ #
+        ]]></screen>
+    </para>
+
+    <para>
+        现在使用命令<command>systemctl restart
+apache2.service</command>重启Apache以便载入为OTRS修改的配置。
+    </para>
+    </section>
+
+    <section id="suse-installation-perl-modules">
+        <title>安装额外的perl模块</title>
+        <para>除了通过RPM包安装的Perl模块外，OTRS还需要一些其它的Perl模块，你可以手动安装。通过执行位于目录<filename>/opt/otrs</filename>下的文件<filename>bin/otrs.CheckModules.pl</filename>来检查缺失的模块。一些模块只是可选的功能才需要，比如与IMAP服务器通讯或生成PDF。在SLES上你需要添加外部软件仓库到zypper的配置中才能获得系统需要的模块。可从下面的网址下载与操作系统版本匹配的模块：
+<ulink
+url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+            ]]></screen>
+        </para>
+
+        <para>
+            在openSUSE
+12.3中只有Mail::IMAPClient才需要额外的软件仓库，这个模块只有当你要从用TLS加密的IMAP邮件服务器收取邮件时才需要。相应的命令行像这个样子：
+        </para>
+        <para>
+            <screen><![CDATA[
+zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
+            ]]></screen>
+        </para>
+        <para>
+            在添加了这个软件仓库后首次使用zypper时会提示添加它的密钥。现在你就可以像下面这样安装缺失的模块。
+        </para>
+        <para>
+            <screen><![CDATA[
+otrs-sles:/opt/otrs # zypper install -y "perl(YAML::LibYAML)"
+Refreshing service 'susecloud'.
+Retrieving repository 'perl' metadata [\]
+
+New repository or package signing key received:
+Key ID: DCCA98DDDCEF338C
+Key Name: devel:languages:perl OBS Project &lt;devel:languages:perl@build.opensuse.org&gt;
+Key Fingerprint: 36F0AC0BCA9D8AF2871703C5DCCA98DDDCEF338C
+Key Created: Wed Oct 10 22:04:18 2012
+Key Expires: Fri Dec 19 22:04:18 2014
+Repository: perl
+
+Do you want to reject the key, trust temporarily, or trust always? [r/t/a/?] (r): a
+Retrieving repository 'perl' metadata [done]
+Building repository 'perl' cache [done]
+Loading repository data...
+Reading installed packages...
+'perl(YAML::LibYAML)' not found in package names. Trying capabilities.
+Resolving package dependencies...
+
+The following NEW package is going to be installed:
+  perl-YAML-LibYAML
+
+The following package is not supported by its vendor:
+  perl-YAML-LibYAML
+
+Retrieving package perl-YAML-LibYAML-0.38-12.4.x86_64 (1/1), 75.0 KiB (196.0 KiB unpacked)
+Retrieving: perl-YAML-LibYAML-0.38-12.4.x86_64.rpm [done (55.7 KiB/s)]
+Installing: perl-YAML-LibYAML-0.38-12.4 [done]
+            ]]></screen>
+        </para>
+
+        <para>
+        下一步是使用WEB安装器来配置OTRS，其过程<link linkend="web-installer">本章另有描述</link>。
+        </para>
+
+        <para>
+            现在你可以启动OTRS守护进程并激活相应的监控此进程的cron任务（必须以<literal>otrs</literal>用户执行）：
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/otrs.Daemon.pl start
+shell> /opt/otrs/bin/Cron.sh start
+            ]]></screen>
+        </para>
+
+        <para>
+            就这样了，恭喜搞定！
+        </para>
+
+    </section>
+
+</section>
+
+<section id="installation-on-centos">
+    <title>在Red Hat Enterprise Linux或CentOS系统上安装OTRS</title>
+
+    <para>
+    本节描述了在Red Hat Enterprise Linux或CentOS系统上安装OTRS的过程。OTRS 3.3及后续版本需要RHEL
+6或CentOS 6，版本5不支持。
+    </para>
+
+    <section id="rhel-preparing-database-mysql">
+    <title>准备OTRS所需的数据库环境</title>
+
+    <para>
+    你可以使用不同的数据库后端：<application>MySQL</application>、<application>PostgreSQL</application>或<application>Oracle</application>。部署OTRS最流行的数据库是MySQL。本节描述了在基于RHEL的服务器上配置MySQL需要的步骤。当然如果你有伸缩性或其它方面的需要，也可以将数据库安装到一台单独的数据库服务器上。
+    </para>
+
+    <para>
+        以root用户执行下列的命令来安装MySQL：
+    </para>
+
+    <para>
+        <screen><![CDATA[
+[root@otrs-centos6 ~]# yum -y install mysql-server
+        ]]></screen>
+    </para>
+
+    <para>
+        这会按默认选项安装MySQL到系统中。你需要修改一些默认设置以便更适合OTRS运行。用文本编辑器打开文件<filename>/etc/my.cnf</filename>并添加下列行到[mysqld]节：
+    </para>
+
+    <para>
+        <screen><![CDATA[
+max_allowed_packet   = 20M
+query_cache_size     = 32M
+innodb_log_file_size = 256M
+        ]]></screen>
+    </para>
+
+    <para>
+        现在执行命令<command>systemctl start
+mysqld</command>来重启数据库服务器并激活刚才的修改内容。然后运行命令<command>/usr/bin/mysql_secure_installation</command>并根据窗口提示来设置数据库的root用户密码、移除匿名访问和移除test数据库。
+    </para>
+
+    </section>
+
+    <section id="rhel-installing-rpm">
+        <title>安装 OTRS</title>
+    <para>
+    使用<command>yum</command>通过命令行来安装OTRS，它还会拉入一些依赖包如Apache
+WEB服务器和一些Perl模块。确保你已经将OTRS RPM文件复制到了当前目录。
+    </para>
+    <para>
+        <screen><![CDATA[
+[root@otrs-centos6 ~]# yum install --nogpgcheck otrs-x.x.*.rpm
+...
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch   Version                Repository       Size
+================================================================================
+Installing:
+ otrs                       noarch x.x.x-01               /otrs-x.x.x-01.noarch
+                                                                           74 M
+Installing for dependencies:
+ apr                        x86_64 1.3.9-5.el6_2          updates         123 k
+ ...
+ procmail                   x86_64 3.22-25.1.el6          base            163 k
+
+Transaction Summary
+================================================================================
+Install      26 Package(s)
+
+Total size: 80 M
+Total download size: 6.0 M
+Installed size: 88 M
+Downloading Packages:
+(1/25): apr-1.3.9-5.el6_2.x86_64.rpm                     | 123 kB     00:00
+...
+(25/25): procmail-3.22-25.1.el6.x86_64.rpm               | 163 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           887 kB/s | 6.0 MB     00:06
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : apr-1.3.9-5.el6_2.x86_64                               1/26
+  ...
+  Installing : otrs-x.x.x-01.noarch                                   26/26
+Check OTRS user ... otrs added.
+
+...
+
+[root@otrs-centos6 ~]#
+        ]]></screen>
+    </para>
+
+    <para>
+        现在使用命令<command>systemctl restart
+httpd.service</command>重启Apache以载入为OTRS修改的配置。
+    </para>
+    </section>
+
+    <section id="rhel-installation-perl-modules">
+        <title>安装额外的perl模块</title>
+        <para>除了通过RPM包安装的Perl模块外，OTRS还需要一些其它的Perl模块，你可以手动安装。通过执行位于目录<filename>/opt/otrs</filename>下的文件<filename>bin/otrs.CheckModules.pl</filename>来检查缺失的模块。一些模块只是可选的功能才需要，比如与IMAP服务器通讯或生成PDF。在RedHat或CentOS上我们推荐从EPEL软件仓库安装这些模块，EPEL是由Fedora项目维护的一个软件仓库，为RHEL及其分支提供高质量的软件包。可在<ulink
+url="http://fedoraproject.org/wiki/EPEL">EPEL网站</ulink>上查看更多信息。
+        </para>
+
+        <para>
+            如果你使用的是RHEL 6或CentOS 6，你可以从<ulink
+url="http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html">这个网址</ulink>获得最新的EPEL软件包。你可以执行下面的命令添加EPEL软件仓库到yum源：
+        </para>
+
+        <para>
+            <screen><![CDATA[
+[root@otrs-centos6 otrs]# yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+Loaded plugins: security
+Setting up Install Process
+epel-release-6-8.noarch.rpm                                   |  14 kB     00:00
+Examining /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm: epel-release-6-8.noarch
+Marking /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:6-8 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package             Arch          Version     Repository                       Size
+=====================================================================================
+Installing:
+ epel-release        noarch        6-8         /epel-release-6-8.noarch         22 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total size: 22 k
+Installed size: 22 k
+Downloading Packages:
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : epel-release-6-8.noarch                                           1/1
+  Verifying  : epel-release-6-8.noarch                                           1/1
+
+Installed:
+  epel-release.noarch 0:6-8
+
+Complete!
+[root@otrs-centos6 otrs]#
+            ]]></screen>
+        </para>
+        <para>
+            添加这个软件仓库后首次使用yum，会提示你要添加它的密钥。现在你可以像下面这样安装缺失的模块了。
+        </para>
+        <para>
+            <screen><![CDATA[
+[root@otrs-centos6 otrs]# yum -y install "perl(Text::CSV_XS)"
+Loaded plugins: security
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package perl-Text-CSV_XS.x86_64 0:0.85-1.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package                   Arch            Version               Repository     Size
+=====================================================================================
+Installing:
+ perl-Text-CSV_XS          x86_64          0.85-1.el6            epel           71 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total download size: 71 k
+Installed size: 154 k
+Downloading Packages:
+perl-Text-CSV_XS-0.85-1.el6.x86_64.rpm                        |  71 kB     00:00
+warning: rpmts_HdrFromFdno: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Importing GPG key 0x0608B895:
+ Userid : EPEL (6) &lt;epel@fedoraproject.org&gt;
+ Package: epel-release-6-8.noarch (@/epel-release-6-8.noarch)
+ From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+  Verifying  : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+
+Installed:
+  perl-Text-CSV_XS.x86_64 0:0.85-1.el6
+
+Complete!
+[root@otrs-centos6 otrs]#
+            ]]></screen>
+        </para>
+
+        <para>
+        下一步是使用WEB安装器来配置OTRS，其过程<link linkend="web-installer">本章另有描述</link>。
+        </para>
+
+        <para>
+            现在你可以启动OTRS守护进程并激活相应的监控此进程的cron任务（必须以<literal>otrs</literal>用户执行）：
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/otrs.Daemon.pl start
+shell> /opt/otrs/bin/Cron.sh start
+            ]]></screen>
+        </para>
+
+        <para>
+            就这样了，恭喜搞定！
+        </para>
+    </section>
+
+    <section id="rhel-installation-dbd-oracle">
+        <title>在RedHat或CentOS上安装Oracle数据库驱动</title>
+        <para>
+            如果你想在ORACLE数据库上部署OTRS，你需要编译并安装
+<application>DBD::Oracle</application>数据库驱动。这比安装其它软件稍微复杂了一点儿；这是因为Oracle是一个私有数据库，RedHat或CentOS项目都不允许在他们的RPM软件仓库中分发这个驱动。
+        </para>
+        <para>
+            首先，我们需要安装<application>gcc</application>、<application>make</application>和<application>CPAN</application>，这样我们才能编译和安装这个驱动。你下面看到的命令适用于CentOS，其它的版本可能有一点点不同。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+[root@otrs-centos6 otrs]# yum -y install gcc make "perl(CPAN)"
+            ]]></screen>
+        </para>
+
+        <para>
+            下一步是获取并安装数据库客户端。你需要到Oracle官网注册一个免费帐号，从网页：<ulink
+url="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html">
+http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html</ulink>上可以下载客户端驱动。请选择对应的‘Linux
+x86 or x86-64’版本。你可以用命令<command>uname
+-i</command>检查架构，要么是'x86_64'，要么是'i386'即x86。你应该下载软件包'Instant Client Package -
+Basic'、'Instant Client Package - SQL*Plus'和'Instant Client Package -
+SDK'。将它们保存到磁盘的一个目录。现在用下面的命令来安装这些软件包：
+        </para>
+        <para>
+            <screen><![CDATA[
+[root@otrs-centos6 otrs]# yum install oracle-instantclient*
+            ]]></screen>
+        </para>
+        <para>
+            安装完成后你要设置两个环境变量并编译DBD::Oracle驱动。还是以root用户执行这些任务。步骤如下。请注意：命令输出结果被省略了一些行。
+        </para>
+        <para>
+            <screen><![CDATA[
+[root@otrs-centos6 otrs]# export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+[root@otrs-centos6 otrs]# export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+[root@otrs-centos6 otrs]# cpan
+cpan[1]> look DBD::Oracle
+...
+Fetching with LWP:
+  http://www.perl.org/CPAN/authors/id/P/PY/PYTHIAN/CHECKSUMS
+Checksum for /root/.cpan/sources/authors/id/P/PY/PYTHIAN/DBD-Oracle-1.62.tar.gz ok
+Scanning cache /root/.cpan/build for sizes
+DONE
+...
+Working directory is /root/.cpan/build/DBD-Oracle-1.62-ZH6LNy
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# perl Makefile.PL
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make install
+...
+cpan[2]> exit
+Terminal does not support GetHistory.
+Lockfile removed.
+            ]]></screen>
+        </para>
+
+    <para>
+    现在就该编辑文件<filename>Kernel/Config.pm</filename>来提供环境变量ORACLE_HOME了。下一步是使用WEB安装器来配置OTRS，其过程<link
+linkend="web-installer">本章另有描述</link>。
+    </para>
+
+    </section>
+
+</section>
+
+<section id="installation-on-debian">
+    <title>在Debian或Ubuntu系统上安装OTRS</title>
+    <important>
+        <para>
+            请<link
+linkend="manual-installation-of-otrs">从源码安装OTRS</link>，不要使用Debian或Ubuntu提供的OTRS软件包。
+        </para>
+    </important>
+    <para>
+        如果你使用现成的软件来安装Perl模块会更容易一些：
+    </para>
+    <para>
+        <screen><![CDATA[
+apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl libnet-ldap-perl \
+    libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl libtext-csv-xs-perl \
+    libjson-xs-perl libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl libyaml-perl \
+    libarchive-zip-perl libcrypt-eksblowfish-perl libencode-hanextra-perl libmail-imapclient-perl \
+    libtemplate-perl
+        ]]></screen>
+    </para>
+</section>
+
+</section>

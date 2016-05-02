@@ -1,0 +1,339 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="statistics-module">
+<title>统计</title>
+
+<para>
+OTRS统计模块支持跟踪操作的统计和生成定制的OTRS使用情况的报告的功能。OTRS系统使用“统计”术语一般指一个呈现各种指标的报表。
+</para>
+<note>
+    <para>
+        对<ulink url="https://www.otrs.com/solutions/"><emphasis role="bold">OTRS
+Business Solution™（OTRS商业版）</emphasis></ulink>
+的客户，还有一个专用的报表生成器可用。这里的“报表”指在一个PDF文档中数个统计的集合，可以轻松配置并自动生成和分发PDF文档。请在<ulink
+url="http://otrs.github.io/doc/manual/otrs-business-solution/stable/en/html/index.html"><emphasis
+role="bold">OTRS Business Solution™</emphasis>（OTRS商业版）手册</ulink>中查找更详细的信息。
+    </para>
+</note>
+
+<para>
+OTRS统计模块的合理配置与大量的需求和考量相关，包括评估多种OTRS模块、用户权限设置、计算指标及其复杂性级别、统计模块配置的易用性、计算的速度和效率以及支持一组丰富的输出变量。
+</para>
+
+<para>
+统计的元素如文件（增补了统计模块特定需求的功能）可以集成来计算复杂的统计数据。
+</para>
+
+<section id="stats-usage" >
+<title>统计配置和用法</title>
+
+<para>
+作为服务人员登录时，可以通过选择主菜单中的“报表”和“统计”来打开统计模块。
+</para>
+
+<section id="stats-overview" >
+    <title>概览</title>
+
+    <para>
+    从导航栏选择“统计”然后点击子菜单“概览”可以调出概览窗口。概览窗口提供了该服务人员能够使用的预配置报表的列表（见下图）。
+    </para>
+
+    <para>
+        <figure>
+            <title>标准统计概览</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-overview.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+    统计模块安装后，它预先加载了导入到系统中的一些示例统计，这些统计在概览窗口显示为一个列表。如果单个列表扩展为多面显示的列表，服务人员可以在不同的页面切换浏览。点击列表上期望排序的列标题，统计列表可以按期望排序。要生成一个特定的统计，在这个统计上点击“立即运行”链接即可。
+    </para>
+</section>
+
+<section id="stats-viewing-generating">
+    <title>生成统计</title>
+
+    <para>
+    查看统计界面提供了统计的配置设置（见下图）。
+    </para>
+
+    <para>
+        <figure>
+            <title>查看一个特定的统计。</title>
+<screenshot id="stats-view-screenshot" >
+<graphic fileref="screenshots/administration/stats/stats-view.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+    可以在编辑窗口设置一个特定统计有限的配置选项。统计创建者或其它有合适权限的人员可以编辑这些设置。
+    </para>
+
+    <para>
+    点击“立即运行”按钮（在窗口左侧）可以生成这个统计。
+    </para>
+</section>
+
+<section id="stats-modify-new">
+    <title>配置</title>
+
+    <para>
+    有写入权限的服务人员可以在统计模块的编辑界面编辑一个已有的报表配置。另外，他们也可以创建一个新的报表。
+    </para>
+
+    <para>
+    配置一个统计有4个可能的步骤：一般预设数据、配置X轴、配置Y轴和可能的报表数据过滤器（或限制）。让我们创建一个新的示例统计，在概览窗口点击“添加”按钮。我们的目标是获取每个队列（X轴）和每个状态（Y轴）有多少工单优先级是非常高的列表。
+    </para>
+
+    <para>
+        <figure>
+            <title>添加一个新的统计，第一步。</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/stats/stats-add-typeselection.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+        在开始页面我们必须选择要添加的统计的类型。有3个可用的类型：
+    </para>
+
+    <para>
+        <variablelist>
+            <varlistentry>
+                <term>动态矩阵统计</term>
+                <listitem>
+                    <para>
+                        这个类型的统计会生成一个计算值的矩阵（例如：月度和队列每天的新工单）。矩阵中所有的单元格值类型相同（数字、平均时间等等）。值通过系统中的条目（例如：工单）计算而来。一些矩阵统计支持一个汇总列和/或汇总行（只对某些数据有用）。
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>动态列表统计</term>
+                <listitem>
+                    <para>
+                        这种统计会生成一个表格，表格的每一行（不是单元格）代表系统中的一个实体（例如：一个工单），这一行的每列通常是可以配置的（X轴，见下）并包含这个对象的数据（例如：工单属性）。一列的所有单元格值的类型相同。
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>静态统计</term>
+                <listitem>
+                    <para>
+                        这种统计很少配置，通常用于非常特殊和/或复杂的计算。
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </para>
+    <para>
+        所以在本示例中让我们选择“动态矩阵”。然后在统计类型下会出现“一般设定”的配置。
+    </para>
+    <para>
+        <figure>
+            <title>添加一个新的统计，第二步。</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-add-general.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+    <para>
+        提供新统计的标题和描述后，我们必须选择要使用的统计后端。这是负责收集和分析统计数据的实际后端模块。在我们的例子中我们选择“TicketAccumulation（累积工单）”。
+    </para>
+    <para>
+        通过配置权限组，我们能够促进谁可以在后面查看和生成预配置的统计的组限制（也就是服务人员）。所以可以给需要统计的不同部门和工作组分配多个不同的统计。也可以将一个统计分配给多个组。
+    </para>
+    <para>
+        <example>
+            <title>默认统计权限组</title>
+            <para>
+                选择“stats”组，对“stats”组至少有‘只读’权限的用户均可查看这个报表。这个访问权限是默认可用的。
+            </para>
+        </example>
+    </para>
+    <para>
+        <example>
+            <title>定制统计权限组</title>
+            <para>
+                选择一个名为“sales”的组，对“sales”组有‘只读’权限的用户均可查看并生成这个报表。但是其它用户无法查看这个报表。
+            </para>
+        </example>
+    </para>
+    <para>
+        此外，还可以选择输出格式。在这里我们只需保持所有输出格式并在实际生成统计时再选择一个输出格式。现在让我们保存这个统计。
+    </para>
+    <para>
+        “保存”统计后会出现下一个窗口：配置X轴。点击“X轴”按钮，出现一个对话框，我们可以选择用于X轴的元素。在我们的例子中就是‘队列’：
+    </para>
+
+    <para>
+        <figure>
+            <title>配置一个统计的X轴。</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-config-xaxis.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+        通过在队列字段选择一些队列，我们可以随意地限制要显示的队列。通过复选框我们能够控制服务人员生成统计时是否可以修改选择的队列。我们保持默认并点击“保存”按钮。
+    </para>
+    <para>
+        现在我们可以通过相同的方法配置Y轴：选择‘状态’字段
+    </para>
+
+    <para>
+        <figure>
+            <title>配置一个统计的Y轴。</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-config-yaxis.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+        在这里可以选择一个或两个元素。一个元素时，元素的每个值就是Y轴的一个元素。如果选择了两个元素，它们的排列就是值系列（Y轴）的元素。例如你可以选择“状态”和“优先级”，结果元素就是“新建-1-非常低”、“新建-2-低”
+... “处理中-1-非常低”等等。让我们仅使用“状态”并点击“保存”。
+    </para>
+    <para>
+        现在最后一步，我们可以添加数据过滤器以便只统计属于某个客户某个优先级等条件的工单。我们添加一个‘非常高’优先级的工单过滤器：
+    </para>
+
+    <para>
+        <figure>
+            <title>配置一个统计的数据过滤器。</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-config-filter.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+        现在再次点击“保存”按钮，配置就完成了。
+    </para>
+    <para>
+        你可以已经注意到了，在配置对话框有一个统计预览区域，我们可以在这里检查配置设置的效果。
+    </para>
+
+    <para>
+        <figure>
+            <title>配置一个统计的数据过滤器。</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-config-preview.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <note>
+        <para>
+            请注意预览使用的是随机数据且没有考虑数据过滤器。
+        </para>
+    </note>
+
+    <para>
+        统计已经配置好了，点击“立即运行”按钮，我们能够进入查看窗口选择输出格式，统计可以用不同格式生成。
+    </para>
+</section>
+
+<section id="stats-import">
+    <title>导入</title>
+
+    <para>
+        可以通过点击统计概览窗口的“导入”按钮访问导入界面，需要统计模块的“读写”权限。
+    </para>
+
+    <para>
+        <figure>
+            <title>导入统计</title>
+<screenshot>
+<graphic fileref="screenshots/administration/stats/stats-import.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+    </para>
+
+    <para>
+        促进统计模块的报表导入与导出功能结合使用，是一个非常方便的功能。可以在测试系统中方便地创建和测试统计，然后导入到生产系统。
+    </para>
+</section>
+
+</section>
+
+<section id="stats-managing-the-module">
+    <title>统计系统管理员</title>
+
+    <para>
+    本部分提供系统管理员处理统计模块的任务和职责的信息。
+    </para>
+
+    <section id="stats-permissions" >
+        <title>权限设置、组和队列</title>
+
+        <para>
+            统计模块注册的默认配置给所有服务人员有“stats”组权限来访问统计模块。
+        </para>
+
+        <para>
+            根据权限设置的访问：
+
+            <itemizedlist>
+                <listitem><para><emphasis>rw（读写）</emphasis>，允许配置统计。</para></listitem>
+                <listitem><para><emphasis>ro（只读）</emphasis>，允许生成预先配置的统计。</para></listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            OTRS系统管理员决定是将有权限生成预先配置的报表服务人员分配“stats”组的‘只读’权限，还是将他们各自的组加入系统配置中的模块注册信息。
+        </para>
+    </section>
+
+    <section id="stats-sysconfig" >
+        <title>系统配置设置</title>
+        <para>
+        系统配置组<link
+linkend="ConfigReference_Framework:Core::Stats">Framework:Core::Stats</link>和<link
+linkend="ConfigReference_Framework:Frontend::Agent::Stats">Framework:Frontend::Agent::Stats</link>包含了所有的统计模块基本设置参数。此外，配置参数<link
+linkend="ConfigReference_Framework:Frontend::Agent::ModuleRegistration:Frontend::Module_AgentStatistics">$Self-&gt;{'Frontend::Module'}-&gt;{'AgentStats'}</link>控制统计模块内模块和图标的布局和注册信息。
+        </para>
+    </section>
+
+    <section id="statistics-generating-on-commandline" >
+        <title>用命令行生成统计</title>
+
+        <para>
+            可以在命令行执行命令<filename>bin/otrs.Console.pl
+Maint::Stats::Generate</filename>来生成统计。举个例子，查看下面脚本中的命令行调用。
+        </para>
+
+        <para>
+            <programlisting><![CDATA[
+shell> bin/otrs.Console.pl Maint::Stats::Generate --number 10004 --target-directory /tmp
+Generating statistic number 10004...
+  Writing file /tmp/List_of_the_most_time-consuming_tickets_Created_2015-09-08_14-51.csv.
+Done.
+            ]]></programlisting>
+        </para>
+
+        <para>
+            从统计配置“Stat#10004”生成报表并保存为一个CSV文件到<filename>/tmp</filename>目录。
+        </para>
+
+        <para>
+            生成的报表还可以作为邮件发送，可以执行下面脚本中的命令获取更多信息。
+        </para>
+
+        <para>
+            <programlisting><![CDATA[
+shell> bin/otrs.Console.pl Maint::Stats::Generate --help
+            ]]></programlisting>
+        </para>
+
+        <para>
+            通常通过命令行手动生成报表没有什么意义，因为统计模块有一个便利的图形界面。但是，结合一个cron任务来手动生成报表就有意义了。
+        </para>
+
+        <para>
+            想像下列场景:每月的第一天，部门领导要收到一份过去一月的报表。通过结合cron任务和命令行生成报表可以通过邮件自动将报表发送给他们。
+        </para>
+
+    </section>
+
+</section>
+
+</section>

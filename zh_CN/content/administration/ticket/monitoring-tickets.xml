@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<section id="monitoring-tickets" >
+<title>工单负责人 &amp; 工单关注</title>
+
+<para>
+从OTRS
+2.1开始，可以指定一个人来负责一个工单，除了它的所有者之外。另外，所有与工单相关联的活动都能被除了工单所有者之外的人关注。这两个功能被部署为TicketResponsible（工单负责人）和TicketWatcher（工单关注人），它们使任务分配更容易且更适合分层的团队架构。
+</para>
+
+<section id="ticket-responsible" >
+<title>工单负责人</title>
+
+<para>
+工单负责人功能使一个工单所有者之外的服务人员容易完成一个工单处理。这样一个锁定了一个工单的服务人员可以将工单传递给另一个不是工单所有者的服务人员，以便作为第二个响应客户请求的人员。在请求被处理完成后，第一个服务人员可以从第二个服务人员收回工单负责人。
+</para>
+
+<para>
+通过配置参数<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::Responsible">Ticket::Responsible</link>可以激活工单负责人功能。这会产生3个新的链接显示在服务人员界面工单详情窗口的菜单中。
+</para>
+
+<para>
+在服务人员界面工单详情窗口的菜单中点击“人员”-“负责人”链接可以指定工单负责人（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>在工单详情窗口变更一个工单的负责人</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/ticket/ticket-zoom-responsible.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+点击“负责人”后，会打开一个弹出窗口以变更处理该工单的负责人（见下图）。这个对话框还可以用来给新的负责人发送一个消息。
+</para>
+
+<para>
+<figure>
+    <title>变更一个工单的负责人的弹出对话框</title>
+<screenshot>
+<graphic fileref="screenshots/administration/ticket/ticket-responsible.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+一旦激活了工单负责人功能，就可以通过服务人员界面仪表板上各个小部件的“我负责的工单”视图查看一个服务人员负责的工单列表。
+</para>
+
+</section>
+
+<section id="ticket-watcher">
+<title>工单关注</title>
+
+<para>
+从OTRS 2.1开始，通过工单关注人功能，服务人员如主管可以关注系统中某些不是由他们处理的工单。
+</para>
+
+<para>
+工单关注人功能通过配置参数<link
+linkend="ConfigReference_Ticket:Core::TicketWatcher:Ticket::Watcher">Ticket::Watcher</link>激活，激活后会在操作菜单中添加一个新的链接。通过配置参数<link
+linkend="ConfigReference_Ticket:Core::TicketWatcher:Ticket::WatcherGroup">Ticket::WatcherGroup</link>还可以定义一个或多个有权关注工单的用户组。
+</para>
+
+<para>
+为了关注一个工单，进入该工单的详情窗口并点击菜单中的“关注”链接（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>在一个工单的详情窗口添加关注</title>
+<screenshot>
+<graphic fileref="screenshots/administration/ticket/ticket-subscribe.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+如果你不再关注一个特定的工单，进入它的详情窗口并点击菜单中的“取消关注”链接（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>在一个工单的详情窗口取消关注</title>
+<screenshot>
+<graphic fileref="screenshots/administration/ticket/ticket-unsubscribe.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+一旦激活了工单关注人功能，就可以通过服务人员界面仪表板上各个小部件的“我关注的工单”视图查看一个服务人员关注的工单列表。
+</para>
+
+<para>
+<figure>
+    <title>“我关注的工单”视图</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/ticket/ticket-subscribe-mailbox.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+</section>
+
+</section>

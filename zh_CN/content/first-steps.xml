@@ -1,0 +1,557 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<chapter id="first-steps">
+<title>OTRS第一步</title>
+
+<abstract>
+<para>
+本章的目的是提供OTRS简短的概述及其web界面的结构，介绍术语‘服务人员’、‘客户’和‘系统管理员’。还以OTRS系统管理员登录并仔细看看每个用户帐户可用的偏好设置。
+</para>
+</abstract>
+
+<section id="agent-interface">
+<title>服务人员WEB界面</title>
+
+<para>
+服务人员WEB界面允许服务人员答复客户请求、为客户或其它服务人员创建新工单、创建客户的电话工单、编写FAQ知识库条目、编辑客户信息数据等等。
+</para>
+
+<para>
+假设你的OTRS主机可以通过网址<ulink url="http://www.example.com/">
+<citetitle>http://www.example.com</citetitle>
+</ulink>访问，则可以在WEB浏览器中输入地址：<ulink
+url="http://www.example.com/otrs/index.pl">
+<citetitle>http://www.example.com/otrs/index.pl</citetitle>
+</ulink>访问OTRS登录窗口。
+</para>
+
+<para>
+<figure>
+    <title>服务人员界面登录窗口</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/login.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+<section id="customer-interface">
+<title>客户WEB界面</title>
+
+<para>
+在OTRS中客户有一个单独的WEB界面，可以创建新帐户、修改帐户设置、创建和编辑工单、查看他们创建的工单概览等等。
+</para>
+
+<para>
+继续上面的示例，通过在浏览器中输入网址<ulink url="http://www.example.com/otrs/customer.pl">
+<citetitle>http://www.example.com/otrs/customer.pl</citetitle>
+</ulink>即可访问客户登录窗口。
+</para>
+
+<para>
+<figure>
+    <title>客户界面登录窗口</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/customer-login.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+<section id="public-interface">
+<title>公共WEB界面</title>
+
+<para>
+作为服务人员和客户WEB界面的补充，OTRS还有一个访问FAQ知识库的公共WEB界面。FAQ知识库模块需要单独安装。它提供了到FAQ知识库系统的公共访问，并让来访者无需特别授权即可搜索FAQ知识库文章。
+</para>
+
+<para>
+在我们的示例中，可以通过网址<ulink url="http://www.example.com/otrs/faq.pl">
+<citetitle>http://www.example.com/otrs/faq.pl</citetitle> </ulink>或 <ulink
+url="http://www.example.com/otrs/public.pl">http://www.example.com/otrs/public.pl</ulink>。
+</para>
+
+<para>
+<figure>
+    <title>公共WEB界面</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/public-interface.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+<section id="first-login">
+<title>首次登录</title>
+
+<para>
+按<link linkend="agent-interface">服务人员界面
+</link>部分介绍的方法访问OTRS登录窗口。输入用户名和密码。因为系统刚安装完毕且还没有创建任何用户，首先以OTRS系统管理员登录，使用'root@localhost'作为用户名，密码是'root'。
+</para>
+
+<warning>
+<para>
+这个帐户数据在每个新安装的OTRS系统都是有效的。你应该尽快修改这个OTRS系统管理员的密码！可以通过OTRS系统管理员帐户的<link
+linkend="user-preferences">偏好设置</link>来修改密码。
+</para>
+</warning>
+
+<para>
+如果你不想以系统管理员登录，只需输入普通的服务人员帐户信息即可。
+</para>
+
+<para>
+如果你忘记了你的密码，可以向系统请求一个新密码。简单地点击登录按钮下方的‘忘记密码’链接，输入注册的邮件地址，并点击（请求新密码）提交按钮即可（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>请求新密码</title>
+<screenshot>
+<graphic
+fileref="screenshots/introduction/firststeps/request-new-password.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+<section id="gui-overview">
+<title>WEB界面概览</title>
+
+<para>
+一旦成功登录到系统中，首先看到的就是仪表板页面（见下图）。它显示了你锁定的工单，允许通过菜单直接访问队列视图、状态视图和升级视图，还保存了创建电话和邮件工单的选项。还提供了不同条件的工单快速汇总数。
+</para>
+
+<para>
+<figure>
+    <title>服务人员界面仪表板</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/first-screen.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+为了提高清晰度，通用WEB界面分成了不同的区域。每个页面的第一行显示一些通用信息比如退出按钮、标有锁定工单数的图标（可直接访问锁定的工单）、创建新的电话/邮件工单的链接等等。还有些图标可以进入队列视图、状态视图和升级视图。
+</para>
+
+<para>
+在这个图标行的下面就是导航栏。导航栏显示一个菜单，让你导航到系统中的不同区域或模块，及执行一些全局操作。点击‘仪表板’按钮就进入仪表板页面。如果你点击‘工单’按钮，会得到一个子菜单，让你切换工单的视图、创建一个新的电话/邮件工单或搜索一个特定的工单。点击‘统计’按钮后会提供一个菜单让你从已注册的统计概览中选择统计、创建一个新的统计或从已有文件中导入统计。‘客户’按钮让你进入客户管理窗口。通过点击‘系统管理’按钮，可能可以访问所有的系统管理员模块，允许你创建新的服务人员、队列等等。还有一个‘搜索’按钮用来搜索工单。
+</para>
+
+<para>
+如果还安装相关的模块如FAQ知识库或调查，还会显示访问这些模块的按钮。
+</para>
+
+<para>
+In the area below the navigation bar, different system messages can be
+shown. If you are logged in as the default OTRS administrator user, you get
+a red message warning you not to work using this system account.
+</para>
+
+<para>
+在你当前所在区域/模块的标题下面，有几个包含你正在操作的窗口的相关信息的子区域，每个子区域都在一个单独的盒子中。
+</para>
+
+<para>
+这些盒子包含了每个窗口的主要部分，通常它们显示为一个或几个列，每个盒子都储存当前窗口的相关信息，比如使用说明、建议、概述等等。还会显示执行每个窗口相关操作所需的表单或工具，比如添加/更新/删除记录、检查日志、修改配置设置等等。
+</para>
+
+<para>
+最后，在页面的底端，显示的是网站页脚（见下图）。它包含了直接访问OTRS官方网站的链接，或到页面顶端。
+</para>
+
+<para>
+一般地，图标行、导航栏和页脚在WEB界面的所有窗口都是相同的。
+</para>
+
+<para>
+<figure>
+    <title>页脚</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/footer.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+<section id="the-dashboard">
+<title>仪表板</title>
+
+<para>
+    仪表板是OTRS系统的主页，在这里你可以得到关于工单和工单活动的其它相关资料的概览。仪表板是一个服务人员日常工作的起点，默认展示各类工单的快速汇总（处于挂起、升级、新建和处理中状态的工单数），以及其它信息。
+</para>
+
+<para>
+    仪表板最重要的功能就是：它是完全可定制的。这意味着你可以根据需要配置每一个元素的显示或隐藏。甚至在当前列内随意调整各部分的位置，只需点击元素顶部并施动，然后放到任意位置即可。每个元素叫做“小部件”，OTRS系统有一些开箱即用的小部件，但是模块化的设计使得在仪表板中集成定制小部件很容易。
+</para>
+
+<para>
+    仪表板窗口被分成了两个主要的列，左边的列通常是你看到工单按状态分类的信息，如提醒、升级、新建和处理中。每个小部件上你可以过滤结果，以分别查看有权访问的所有工单、你锁定的工单、你所属队列中的工单以及其它过滤条件的结果。这个列中还有其它类型的小部件，都在下面介绍。
+</para>
+
+<para>
+    <figure>
+        <title>仪表板小部件</title>
+<screenshot>
+<graphic
+fileref="screenshots/introduction/firststeps/dashboard-left-column-widgets.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+    仪表板左边列的小部件。
+</para>
+<itemizedlist mark="round">
+    <listitem>
+        <para>工单列表小部件</para>
+        <para>
+            在这个类别下的小部件共享一些相同的整体行为、外观和感觉。这些小部件显示不同状态的工单列表。每个列表页面显示的工单数量可以在小部件设置（当你把鼠标移到到小部件的右上方时就会显示）里配置。这些小部件支持下面的过滤器：
+        </para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>我锁定的工单</para>
+                <para>被当前登录的服务人员锁定的工单。</para>
+            </listitem>
+            <listitem>
+                <para>我关注的工单</para>
+                <para>
+                    在当前登录的服务人员的关注清单中的工单，需要打开Ticket::Watcher设置才会显示。
+                </para>
+            </listitem>
+            <listitem>
+                <para>我负责的工单</para>
+                <para>
+                    当前登录的服务人员被设置为工单负责人的工单，需要打开Ticket::Responsible设置才会显示。
+                </para>
+            </listitem>
+            <listitem>
+                <para>我队列中的工单</para>
+                <para>
+                    服务人员在偏好设置中定义“我的队列”，在“我的队列”出现的队列中的工单。
+                </para>
+            </listitem>
+            <listitem>
+                <para>我服务的工单</para>
+                <para>
+                    服务人员在偏好设置中定义“我的服务”，关联了“我的服务”出现的服务的工单，并且服务人员需要对工单所在的队列至少有只读权限。
+                </para>
+            </listitem>
+            <listitem>
+                <para>所有的工单</para>
+                <para>
+                    这个服务人员能访问的所有工单。
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>这些小部件是：</para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>提醒的工单</para>
+                <para>被设置为挂起并且提醒时间已到的工单。</para>
+            </listitem>
+            <listitem>
+                <para>升级的工单</para>
+                <para>升级了的工单。</para>
+            </listitem>
+            <listitem>
+                <para>新的工单</para>
+                <para>状态为“新建”的工单。</para>
+            </listitem>
+            <listitem>
+                <para> 处理中/需要回复的工单</para>
+                <para>状态为“处理中”并且准备好处理的工单。</para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+    <listitem>
+        <para>事件日历</para>
+        <para>
+            在创建一个新工单后就定义了一个日历事件（对这个小部件而言），需要启用事件日历功能，并且还需要在工单创建窗口显示两个新的字段，一个是事件开始时间，另一个是事件结束时间，这两个时间用来确定事件的持续时间。
+        </para>
+        <para>
+            这个小部件包括下列视图：月、周和天。服务人员可能通过左右箭头按钮来滚动日历内容。
+        </para>
+        <para>
+            仅仅如前所述那样启用小部件还不够，还要添加一组工单的“日期/时间”动态字段到系统中（通过“系统管理”面板的‘动态字段’链接），并在系统配置中为这个小部件设置动态字段。既要配置创建工单窗口中显示动态字段，还要在工单创建窗口或任何其它操作窗口（如自定义字段窗口）填写它们的日期/时间值（日历事件的开始和结束时间）；如果你认为有必要，还需要配置为在工单详情窗口显示这些动态字段。
+        </para>
+        <para>
+            <figure>
+                <title>事件日历小部件</title>
+<screenshot>
+<graphic
+fileref="screenshots/introduction/firststeps/events-ticket-calendar.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+        </para>
+        <para>
+            这个小部件进一步的配置可以在系统配置的子组Frontend::Agent::Dashboard::EventsTicketCalendar中找到。
+        </para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>CalendarWidth 日历宽度</para>
+                <para>定义日历的宽度（%），默认为95%。</para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldStartTime 动态字段开始时间</para>
+                <para>定义开始时间的动态字段名称。</para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldEndTime 动态字段结束时间</para>
+                <para>定义结束时间的动态字段名称。</para>
+            </listitem>
+            <listitem>
+                <para>队列</para>
+                <para>
+                    只有在这个设置中指定的队列中的工单才会显示在事件日历中。
+                </para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldsForEvents 事件的动态字段</para>
+                <para>
+                    定义日历中事件信息窗口显示的动态字段。
+                </para>
+            </listitem>
+            <listitem>
+                <para>TicketFieldsForEvents 事件的工单属性</para>
+                <para>
+                    定义日历中事件信息窗口显示的工单属性。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+    <listitem>
+        <para>工单队列概览</para>
+        <para>
+            这个小部件显示一个计数矩阵，行代表队列，列代表工单数统计，每个单元格显示的是指定状态的工单在特定队列中的数量。
+        </para>
+        <para>
+            这个小部件还显示一个‘合计’行和一个‘合计’列，‘合计’行显示每个状态在所有队列中的汇总数，‘合计’列代表每个队列中各种状态的工单汇总数。
+        </para>
+        <para>
+            显示的队列和状态可以通过‘系统配置’修改。
+        </para>
+        <para>
+            点击小部件上的任何一个数字，都会打开一个工单搜索结果页面，以便让服务人员了解它们更详尽的概览。
+        </para>
+    </listitem>
+</itemizedlist>
+<para>
+    在仪表板的右边列放置了一个特殊的小部分，允许你控制这些小部件的显示或隐藏，这就是‘设置’小部件。点击它的顶部来展开区域，可以看到所有可用的小部件，如图所示。每个小部件的名称前有一个复选框。使用这些复选框来定义对应小部件在仪表板的可见性（未选中的小部件不会显示），在你定义完可见性选项后单击“保存设置”按钮来存储你的修改内容。这个小部件是固定在窗口中的，意即你不能拖放或关闭它。
+</para>
+
+<para>
+    <figure>
+        <title>仪表板设置</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/edit-settings.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+    仪表板小部件右边的列。
+</para>
+
+<itemizedlist mark="round">
+    <listitem>
+        <para>最近7天统计</para>
+        <para>
+            它用包括2条线的图形来显示最近7天的工单活动情况。一条线通常是绿色的，代表每天创建的工单数，另一条线通常是橙色的，代表每天关闭的工单数。
+        </para>
+    </listitem>
+    <listitem>
+        <para>即将发生的事件</para>
+        <para>
+            这里列出很快就要升级或已经升级的工单，这个小部件显示的信息很有帮助，因为你有机会知道哪些工单需要你特别注意，你也可以决定集中精力在哪个工单上，设置优先级或只是检查即将会发生的事。
+        </para>
+    </listitem>
+    <listitem>
+        <para>OTRS新闻</para>
+        <para>
+            关于OTRS活动的完整列表，关于新产品版本或补丁的重要信息。
+        </para>
+    </listitem>
+    <listitem>
+        <para>在线</para>
+        <para>
+            这里会显示一个关于当前登录的服务人员的汇总信息，还包括在线客户联系人，请注意这个小部件通常是隐藏着的，可以通过前面描述的‘设置’小部件来显示它。
+        </para>
+    </listitem>
+</itemizedlist>
+
+</section>
+
+<section id="what-is-a-queue">
+<title>一个队列是什么？</title>
+
+<para>
+在许多邮件系统中，所有消息流入一个收件箱文件（存储消息的地方）很常见。新消息附加到这个收件箱文件的后面。用于读写邮件的邮件客户端程序读取这个收件箱文件并将内容呈现给用户。
+</para>
+
+<para>
+OTRS中的队列在某种程序上就好比一个收件箱文件，因为它也能存储许多消息，一个队列还有一些超越收件箱文件的功能。作为一个OTRS服务人员或用户，你需要记住一个工单存储在哪个队列。服务人员能够处理或编辑一个队列中的工单，也能将工单从一个队列转移到另一个队列。但是他们为什么要转移工单？
+</para>
+
+<para>
+要解释得更实际些，想想Max公司的例子（在 <link
+linkend="basic-tts-example">一个工单系统的例子</link>。Max安装了OTRS来让他的团队为购买了公司录像机的客户提供更好的支持。
+</para>
+
+<para>
+在这个情况下一个队列就足够处理所有的请求了。但是，过了一段时间后，Max决定还要销售DVD录像机。现在客户不仅有关于录像机的问题，还有关于新产品的问题。越来越多的邮件进入到Max的OTRS系统的唯一队列中，很难对发生了什么有一个清晰的描述。
+</para>
+
+<para>
+Max决定重建他的支持系统，并添加了两个新的队列。所以现有使用了3个队列。到达工单系统的新消息都存储到原来名为“raw”的队列中。两个新的队列中，一个命名为“录像机”专门用来处理录像机的请求，另外一个命名为“DVD录像机”则专门用于DVD录像机的请求。
+</para>
+
+<para>
+Max要求Sandra关注“raw”队列，根据客户请求将消息分类（分派）到“录像机”或“DVD录像机”队列，John只能访问“录像机”队列，而Joe只能答复“DVD录像机”队列中的工单，Max能够编辑所有队列中的工单。
+</para>
+
+<para>
+OTRS支持对用户、组和角色的访问管理，很容易设置只能由某些用户帐户访问的队列。Max还可以使用另外一种方法来将请求分派到不同队列，那就是过滤器规则。否则如果使用了两个不同的邮件地址，Sandra只需要分派这些邮件到两个其它不能被自动分派的队列。
+</para>
+
+<para>
+将进入的消息分类到不同的队列有助于保持支持系统的结构化和整齐。因为你的服务人员被安排到不同的组中，有不同的队列访问权限，系统还能进一步优化。队列可以用来定义工作流程或创建一个公司的结构。例如Max可以部署另外一个叫“销售”的队列，包含“requests请求”、“offers报价”、“orders订单”、“billing开票”等子队列。这样一个队列结构可以帮助Max优化他的订单事务。
+</para>
+
+<para>
+改进的系统结构，例如通过合适的队列设计，可以带来明显的时间和成本节约。队列可以帮助优化你公司的流程。
+</para>
+</section>
+
+
+<section id="what-is-the-queue-overview">
+<title>队列概览是什么？</title>
+
+<para>
+队列概览提供了一个在其中存在工单且当前用户对其有RW权限的所有队列的视图。
+</para>
+
+<para>
+<figure>
+    <title>服务人员队列视图（默认）</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/agent-queue-view.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+队列概览提供了OTRS中日常工作的多种选项。第一个选项是‘我的队列’。在服务人员偏好设置中，或当登录为系统管理员时可以定义一个服务人员所属的多个队列。当访问‘工单’->‘队列视图’菜单时，所有的工单都会出现在这个默认视图。
+</para>
+
+<para>
+队列视图的第二个选项是一个向下导航到单独的队列和子队列，包含了在队列中的工单。
+</para>
+
+<para>
+在这两种类型的视图中，用户还能看到所有锁定的工单（这是默认的过滤器），或者所有可用的工单。工单必须是下面的可视状态类型才能在队列视图中显示：‘处理中’、‘新建’、‘挂起提醒’、‘挂起自动（等待成功/失败关闭）’。
+</para>
+
+<para>
+有可视警告信号可以帮助用户。
+</para>
+
+<para>
+<figure>
+    <title>服务人员队列视图的可视警告信号 </title>
+<screenshot>
+<graphic
+fileref="screenshots/introduction/firststeps/agent-queue-overview-visual-alarms.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<itemizedlist>
+    <title>可视警告信号</title>
+    <listitem>
+        <para>第1个高亮阶段：设置（一级）寿命时间（单位：分钟）来高亮显示包含未处理工单的队列。如上图中的“Raw”队列。</para>
+    </listitem>
+    <listitem>
+        <para>第2个高亮阶段：设置（一级）寿命时间（单位：分钟）来高亮显示包含未处理工单的队列。如上图中的“Postmaster”队列。</para>
+    </listitem>
+    <listitem>
+        <para>闪烁：为包含最老的工单的队列激活闪烁机制。不是所有浏览器都支持这个闪烁功能，不支持闪烁时会显示为红色，如上图中的“Junk”队列。</para>
+    </listitem>
+    <listitem>
+        <para>加粗：当前队列名称会被加粗显示，如上图中的“我的队列”。</para>
+    </listitem>
+</itemizedlist>
+</section>
+
+<section id="user-preferences">
+<title>用户偏好设置</title>
+<para>
+OTRS用户如客户联系人、服务人员和OTRS系统管理员可以按他们的需要配置帐户偏好设置。服务人员可以通过点击登录用户名（WEB界面右上角，如下图），客户联系人必须点击“偏好设置”链接（见下图）。
+</para>
+
+<para>
+<figure>
+    <title>服务人员的个人偏好设置</title>
+<screenshot>
+<graphic fileref="screenshots/introduction/firststeps/agent-preferences.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+一个服务人员可以配置3个类型的偏好设置：个人设置、邮件设置和其它设置。默认可用项如下：
+</para>
+
+<itemizedlist>
+    <title>个人设置</title>
+    <listitem>
+        <para>修改当前密码。</para>
+    </listitem>
+    <listitem>
+        <para>切换界面语言。</para>
+    </listitem>
+    <listitem>
+        <para>配置与激活"不在办公室"的时间。</para>
+    </listitem>
+    <listitem>
+        <para>修改前端界面主题。</para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>通知设置</title>
+    <listitem>
+        <para>选择你想要监控的队列到“我的队列”中。</para>
+    </listitem>
+    <listitem>
+        <para>选择你想要监控的服务到“我的服务”中。</para>
+    </listitem>
+    <listitem>
+        <para>配置你想要接收的工单通知（按传输方法）。</para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>其它设置</title>
+    <listitem>
+        <para>切换前端界面皮肤。</para>
+    </listitem>
+    <listitem>
+        <para>设置各种概览视图的刷新周期（仪表板、队列视图等等）。</para>
+    </listitem>
+    <listitem>
+        <para>配置创建新工单后显示的界面。</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+<figure>
+    <title>客户联系人的个人偏好设置</title>
+<screenshot>
+<graphic
+fileref="screenshots/introduction/firststeps/customer-preferences.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+一个客户联系人可以选择WEB界面的语言、设置工单概览的刷新周期和选择显示工单的最大数，还可以设置一个新的密码。
+</para>
+</section>
+
+</chapter>

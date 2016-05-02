@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="states">
+<title>工单状态</title>
+
+<section id="states-predefined">
+<title>预定义状态</title>
+
+<para>
+OTRS允许你修改预定义的工单状态和它们的类型，甚至添加新的状态。一个状态有两个重要属性：状态名称和状态类型。
+</para>
+
+<para>
+OTRS中默认状态有：‘成功关闭’、‘失败关闭’、‘已合并’、‘新建’、‘处理中’、‘挂起等待成功关闭’、‘挂起等待失败关闭’、‘挂起提醒’和‘已删除’。
+</para>
+
+<section id="state-new">
+<title>New（新建）</title>
+<para>
+从进入邮件创建的工单通常是这个状态。
+</para>
+</section>
+
+<section id="state-open">
+<title>Open（处理中）</title>
+<para>
+工单分配到队列和服务人员后的默认状态。
+</para>
+</section>
+
+<section id="state-pending-reminder">
+<title>Pending reminder（挂起提醒）</title>
+<para>
+在挂起时间过期后，工单所有者会收到一个关于该工单的提醒邮件。如果工单没有锁定，这个提醒会发送给队列中的所有服务人员。提醒工单只在上班时间发送，并每24小时重复发送直到服务人员修改工单状态为止。工单在这个状态期间消耗的时间会计入升级时间。
+</para>
+</section>
+
+<section id="state-pending-autoclose-minus">
+<title>Pending auto close-（挂起等待失败关闭）</title>
+<para>
+这个状态的工单如果挂起时间过期会被设置为“失败关闭”。工单在这个状态期间消耗的时间会计入升级时间。
+</para>
+</section>
+
+<section id="state-pending-autoclose-plus">
+<title>Pending auto close+（挂起等待成功关闭）</title>
+<para>
+这个状态的工单如果挂起时间过期会被设置为“成功关闭”。工单在这个状态期间消耗的时间会计入升级时间。
+</para>
+</section>
+
+<section id="state-merged">
+<title>Merged（已合并）</title>
+<para>
+这个状态表明该工单已与其它工单合并。
+</para>
+</section>
+
+<section id="state-closed-successful">
+<title>Closed Successful（成功关闭）</title>
+<para>
+这是已经成功解决了的工单的最终状态。取决于你的配置，可以或不可以重新处理已关闭的工单。
+</para>
+</section>
+
+<section id="state-closed-unsuccessful">
+<title>Closed Unsuccessful（失败关闭）</title>
+<para>
+这是没有成功解决的工单的最终状态。取决于你的配置，可以或不可以重新处理已关闭的工单。
+</para>
+</section>
+
+</section>
+
+<section id="states-customizing">
+<title>定制状态</title>
+<para>
+每个状态有一个名称（状态名称）和一个类型（状态类型）。在系统管理页面点击<link
+linkend="adminarea-states">状态</link>链接，并点击按钮“添加状态”来创建一个新的状态。你可以随意选择一个新状态的名称。不能通过WEB界面修改状态类型。如果你要添加新的状态类型或修改已有类型的名称必须通过数据库直接修改。通常不要修改默认的状态类型，因为这可能产生不可预知的结果。比如说，升级计算和解锁功能都是基于特定的状态类型。
+</para>
+
+<para>
+通过这个窗口可以修改已经存在的状态的名称或者添加新的状态。如果通过WEB界面修改了状态“新建”，这个修改还必须通过配置文件<filename>Kernel/Config.pm</filename>或通过系统配置界面进行配置。必须修改下面脚本中指定的设置以确保OTRS能使用“新建”状态的修改内容正常工作。
+</para>
+
+<para>
+<programlisting>
+    [...]
+    # PostmasterDefaultState
+    # (The default state of new tickets.) [default: new]
+    $Self-&gt;{PostmasterDefaultState} = 'new';
+
+    # CustomerDefaultState
+    # (default state of new customer tickets)
+    $Self-&gt;{CustomerDefaultState} = 'new';
+    [...]
+</programlisting>
+</para>
+
+<para>
+<emphasis>脚本：修改文件Kernel/Config.pm中的设置。</emphasis>
+</para>
+
+<para>
+如果要添加一个新的状态，需要使用一个数据库客户端修改OTRS数据库中的ticket_state_type表，如下面脚本所示。
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23 to server version: 5.0.16-Debian_1-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; insert into ticket_state_type (name,comments) values ('own','Own
+state type');
+Query OK, 1 row affected (0.00 sec)
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>脚本：修改OTRS数据库。</emphasis>
+</para>
+
+<para>
+现在就可以使用你刚刚创建的新状态类型了。在一个状态已经链接到这个新状态类型后，OTRS配置还必须修改以确保这个新状态可用。只需通过系统配置修改下面的选项即可：
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneNew &gt;
+AgentTicketPhone###StateDefault </link> - 定义新建电话工单默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:Ticket::Frontend::AgentTicketPhone_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneNew &gt;
+AgentTicketPhone###StateType </link> - 定义新建电话工单可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewEmailNew &gt;
+AgentTicketEmail###StateDefault </link> - 定义新建邮件工单默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:Ticket::Frontend::AgentTicketEmail_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewEmailNew &gt;
+AgentTicketEmail###StateType </link> - 定义新建邮件工单可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_State">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneOutbound &gt;
+AgentTicketPhoneOutbound###State </link> - 定义新建电话信件默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewPhoneOutbound &gt;
+AgentTicketPhoneOutbound###StateType </link> - 定义新建电话信件可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:Ticket::Frontend::AgentTicketMove_State">
+Ticket -&gt; Frontend::Agent::Ticket::ViewMove &gt; AgentTicketMove###State
+</link> - 定义转移一个工单默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:Ticket::Frontend::AgentTicketMove_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewMove &gt;
+AgentTicketMove###StateType </link> - 定义转移一个工单可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:Ticket::Frontend::AgentTicketBounce_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBounce &gt; StateDefault </link> -
+定义退回一个工单默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:Ticket::Frontend::AgentTicketBounce_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBounce &gt; StateType </link> -
+定义退回一个工单可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:Ticket::Frontend::AgentTicketBulk_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBulk &gt; StateDefault </link> -
+定义批量操作默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:Ticket::Frontend::AgentTicketBulk_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewBulk &gt; StateType </link> -
+定义批量操作窗口可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:Ticket::Frontend::AgentTicketClose_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewClose &gt; StateDefault </link> -
+定义关闭一个工单时默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:Ticket::Frontend::AgentTicketClose_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewClose &gt; StateType </link> -
+定义关闭工单窗口可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:Ticket::Frontend::AgentTicketCompose_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewCompose &gt; StateDefault </link>
+- 定义编写（答复）窗口默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:Ticket::Frontend::AgentTicketCompose_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewCompose &gt; StateType </link> -
+定义编写（答复）窗口可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:Ticket::Frontend::AgentTicketForward_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateDefault </link>
+- 定义工单转发窗口默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:Ticket::Frontend::AgentTicketForward_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateType </link> -
+定义工单转发窗口可用的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:Ticket::Frontend::AgentTicketFreeText_StateDefault">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateDefault </link>
+- 定义工单自定义窗口默认的下一状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:Ticket::Frontend::AgentTicketFreeText_StateType">
+Ticket -&gt; Frontend::Agent::Ticket::ViewForward &gt; StateType </link> -
+定义工单自定义窗口可用的下一状态。
+</para>
+
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultState">
+Ticket -&gt; Core::PostMaster &gt; PostmasterDefaultState </link> -
+定义从邮件创建的工单的状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterFollowUpState">
+Ticket -&gt; Core::PostMaster &gt; PostmasterFollowUpState </link> -
+定义收到一个跟进后的工单状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterFollowUpStateClosed">
+Ticket -&gt; Core::PostMaster &gt; PostmasterFollowUpStateClosed </link> -
+定义一个已关闭工单收到一个跟进后的工单状态。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::ViewableStateType">
+Ticket -&gt; Core::Ticket &gt; ViewableStateType </link> -
+定义在系统中各处显示的状态类型，例如在队列视图中。
+</para>
+
+<para>
+<link linkend="ConfigReference_Ticket:Core::Ticket:Ticket::UnlockStateType">
+Ticket -&gt; Core::Ticket &gt; UnlockStateType </link> - 定义解锁工单的状态类型。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::PendingReminderStateType">
+Ticket -&gt; Core::Ticket &gt; PendingReminderStateType </link> -
+定义提醒工单的状态类型。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::PendingAutoStateType">
+Ticket -&gt; Core::Ticket &gt; PendingAutoStateType </link> -
+定义挂起等待自动（成功/失败关闭）工单的状态类型。
+</para>
+
+<para>
+<link
+linkend="ConfigReference_Ticket:Core::Ticket:Ticket::StateAfterPending">
+Ticket -> Core::Ticket > StateAfterPending </link> -
+定义一个工单在挂起等待自动（成功/失败关闭）计时器过期后设置的状态。
+</para>
+
+</section>
+</section>
