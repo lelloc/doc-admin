@@ -2930,7 +2930,7 @@ $Self->{'Process::TransitionAction'} = {
             State         => 'new',              # or StateID => 5,
             CustomerID    => '123465',
             CustomerUser  => 'customer@example.com',
-            OwnerID       => 123,
+            OwnerID       => 'someuserlogin',    # or OwnerID => 123,
 
             # ticket optional:
             TN              => $TicketObject->TicketCreateNumber(), # optional
@@ -3012,7 +3012,8 @@ used in the new ticket.
                         'CustomerUser', имя входа/login клиента, назначаемый новой заявке.
                     </para>
                     <para>
-                        'OwnerID', ID агента, который будет новым владельцем заявки.
+                        'Owner' or 'OwnerID', specifies the login or id of the agent that will be
+the new ticket owner.
                     </para>
                     <para>
                         'TN', пользовательский номер новой заявки.

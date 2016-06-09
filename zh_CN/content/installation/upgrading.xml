@@ -412,6 +412,14 @@ shell> /opt/otrs/bin/Cron.sh start
             请注意：如果你有定制的cron任务，应该考虑将它们移到系统配置<literal>Daemon</literal> -&gt;
 <literal>Daemon::SchedulerCronTaskManager::Task</literal>中，以便由OTRS守护进程来统一执行。你可能还需要修改你的定制脚本，因为现在大部分OTRS命令都通过<filename>bin/otrs.Console.pl</filename>统一管理，而不是单个的脚本。
         </para>
+        <note>
+            <para>
+                The console command <literal>Dev::Code::Generate::ConsoleCommand</literal>
+can help to create new console commands for your custom scripts. This
+command creates a template where the script logic and its parameters can be
+adapted.
+            </para>
+        </note>
     </section>
 
     <section role="NotInToc">
