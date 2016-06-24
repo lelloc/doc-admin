@@ -88,14 +88,26 @@ apache2.service</command>重启Apache以便载入为OTRS修改的配置。
 
     <section id="suse-installation-perl-modules">
         <title>安装额外的perl模块</title>
-        <para>除了通过RPM包安装的Perl模块外，OTRS还需要一些其它的Perl模块，你可以手动安装。通过执行位于目录<filename>/opt/otrs</filename>下的文件<filename>bin/otrs.CheckModules.pl</filename>来检查缺失的模块。一些模块只是可选的功能才需要，比如与IMAP服务器通讯或生成PDF。在SLES上你需要添加外部软件仓库到zypper的配置中才能获得系统需要的模块。可从下面的网址下载与操作系统版本匹配的模块：
-<ulink
-url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>。
+        <para>
+            OTRS needs more modules than can be installed via the package manager per
+default. You can post-install them manually.  Running the
+<filename>otrs.CheckModules.pl</filename> script located at
+<filename>/opt/otrs/bin/</filename> will let you know which modules are
+missing, and must or can be installed.  Optional modules may include those
+needed for communication with MDAs via IMAP(S) or gernerating PDF output.
+        </para>
+        <para>
+            On SLES you shoud add an external repository in order to get missing
+modules.  Choose the repository needed for your OS version from here: <ulink
+url="http://download.opensuse.org/repositories/devel:/languages:/perl/">
+http://download.opensuse.org/repositories/devel:/languages:/perl/
+</ulink>. As an example, the repository for SLES 11 SP 3 would be added like
+this:
         </para>
 
         <para>
             <screen><![CDATA[
-zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP3 Perl
             ]]></screen>
         </para>
 
@@ -103,6 +115,7 @@ zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:
             在openSUSE
 12.3中只有Mail::IMAPClient才需要额外的软件仓库，这个模块只有当你要从用TLS加密的IMAP邮件服务器收取邮件时才需要。相应的命令行像这个样子：
         </para>
+
         <para>
             <screen><![CDATA[
 zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
@@ -276,8 +289,10 @@ url="http://fedoraproject.org/wiki/EPEL">EPEL网站</ulink>上查看更多信息
         </para>
 
         <para>
-            如果你使用的是RHEL 6或CentOS 6，你可以从<ulink
-url="http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html">这个网址</ulink>获得最新的EPEL软件包。你可以执行下面的命令添加EPEL软件仓库到yum源：
+            If you're on RHEL 6 or CentOS 6, you can get the latest package for EPEL
+from <ulink url="https://download.fedoraproject.org/pub/epel/6/i386/">this
+site</ulink>.  You can add this repository to yum it in one go by copying
+the RPM URL you find on this page and executing this command:
         </para>
 
         <para>
