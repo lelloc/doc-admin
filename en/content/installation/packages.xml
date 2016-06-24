@@ -95,16 +95,23 @@ otrs-sles:~ #
 
     <section id="suse-installation-perl-modules">
         <title>Installation of additional perl modules</title>
-        <para>OTRS needs some more modules than can be installed by the RPM. You can post-install them manually. You can check what modules you are
-            missing by running the <filename>bin/otrs.CheckModules.pl</filename> script located in the <filename>/opt/otrs</filename> directory.
-            Some modules are only needed for optional functionality, such as communication with IMAP(S) servers or PDF generation.
-            On SLES you should add an external repository to the zypper configuration in order to get the modules needed for your system.
-            Choose the module needed for your OS version from here: <ulink url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>. Add the repository like this for SLES 11 SP2:
+        <para>
+            OTRS needs more modules than can be installed via the package manager per default. You can post-install them manually.
+            Running the <filename>otrs.CheckModules.pl</filename> script located at
+            <filename>/opt/otrs/bin/</filename> will let you know which modules are missing, and must or can be installed.
+            Optional modules may include those needed for communication with MDAs via IMAP(S) or gernerating PDF output.
+        </para>
+        <para>
+            On SLES you shoud add an external repository in order to get missing modules.
+            Choose the repository needed for your OS version from here:
+            <ulink url="http://download.opensuse.org/repositories/devel:/languages:/perl/">
+                http://download.opensuse.org/repositories/devel:/languages:/perl/
+            </ulink>. As an example, the repository for SLES 11 SP 3 would be added like this:
         </para>
 
         <para>
             <screen><![CDATA[
-zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP3 Perl
             ]]></screen>
         </para>
 
@@ -112,6 +119,7 @@ zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:
             On openSUSE 12.3 the extra repository is only needed for the Mail::IMAPClient module, which you'd only need if you need to collect mails
             from an IMAP server secured with TLS. The corresponding line would look like this:
         </para>
+
         <para>
             <screen><![CDATA[
 zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
