@@ -207,10 +207,52 @@ shell> /opt/otrs/bin/Cron.sh start
     <title>Red Hat Enterprise Linux あるいは CentOS システムへのOTRSのインストール</title>
 
     <para>
-    This section describes the installation of our RPM package on a Red Hat
-Enterprise Linux (RHEL) or CentOS server. For OTRS 3.3 and up, RHEL 6 or
-CentOS 6 is a requirement, version 5 is not supported.
+        This section describes the installation of our RPM package on a Red Hat
+Enterprise Linux (RHEL) or CentOS server.
     </para>
+
+    <section>
+        <title>Preparation: Disable SELinux</title>
+        <note>
+            If your system uses SELinux, you should disable it, otherwise OTRS will not work correctly.
+        </note>
+        <para>
+            Here's how to disable SELinux for RHEL/CentOS/Fedora:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Configure SELINUX=disabled in the /etc/selinux/config file:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#       enforcing - SELinux security policy is enforced.
+#       permissive - SELinux prints warnings instead of enforcing.
+#       disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#       targeted - Targeted processes are protected,
+#       mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+            Reboot your system. After reboot, confirm that the getenforce command
+returns <literal>Disabled</literal>:
+                    </para>
+                    <para>
+                    <screen><![CDATA[
+shell> getenforce
+Disabled
+                        ]]></screen>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
 
     <section id="rhel-preparing-database-mysql">
     <title>OTRS用データベースの準備</title>
@@ -225,24 +267,25 @@ dedicated database server if needed for scalability or other purposes.
     </para>
 
     <para>
-        rootとして次のコマンドを実行しMySQLをインストールします：
+        Install MySQL (or MariaDB) by executing the following command as root:
     </para>
 
     <para>
         <screen><![CDATA[
-[root@otrs-centos6 ~]# yum -y install mysql-server
+shell> yum -y install mariadb-server
         ]]></screen>
     </para>
 
     <para>
         This will install MySQL with the default options on your system. You'll need
 to change the defaults in order to make it suitable for OTRS. With a text
-editor open the file <filename>/etc/my.cnf</filename> and add following
-lines under the [mysqld] section:
+editor create a new file <filename>/etc/my.cnf.d/zotrs.cnf</filename> with
+the following content:
     </para>
 
     <para>
         <screen><![CDATA[
+[mysqld]
 max_allowed_packet   = 20M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
@@ -250,7 +293,7 @@ innodb_log_file_size = 256M
     </para>
 
     <para>
-        Now execute <command>systemctl start mysqld</command> to re-start the
+        Now execute <command>systemctl start mariadb</command> to re-start the
 database server and activate these changes. Then run
 <command>/usr/bin/mysql_secure_installation</command> and follow the
 on-screen instructions to set a database root password, remove anonymous
@@ -269,7 +312,7 @@ directory.
     </para>
     <para>
         <screen><![CDATA[
-[root@otrs-centos6 ~]# yum install --nogpgcheck otrs-x.x.*.rpm
+shell> yum install --nogpgcheck otrs-x.x.*.rpm
 ...
 Dependencies Resolved
 
@@ -308,7 +351,7 @@ Check OTRS user ... otrs added.
 
 ...
 
-[root@otrs-centos6 ~]#
+shell>
         ]]></screen>
     </para>
 
@@ -327,52 +370,22 @@ url="http://fedoraproject.org/wiki/EPEL">the EPELウェブサイト</ulink>。
         </para>
 
         <para>
-            If you're on RHEL 6 or CentOS 6, you can get the latest package for EPEL
-from <ulink url="https://download.fedoraproject.org/pub/epel/6/i386/">this
+            If you're on RHEL 7 or CentOS 7, you can get the latest package for EPEL
+from <ulink url="https://download.fedoraproject.org/pub/epel/7/x86_64/">this
 site</ulink>.  You can add this repository to yum it in one go by copying
 the RPM URL you find on this page and executing this command:
         </para>
 
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-Loaded plugins: security
-Setting up Install Process
-epel-release-6-8.noarch.rpm                                   |  14 kB     00:00
-Examining /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm: epel-release-6-8.noarch
-Marking /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm to be installed
-Resolving Dependencies
---> Running transaction check
----> Package epel-release.noarch 0:6-8 will be installed
---> Finished Dependency Resolution
+shell> yum -y install http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 
-Dependencies Resolved
-
-=====================================================================================
- Package             Arch          Version     Repository                       Size
-=====================================================================================
-Installing:
- epel-release        noarch        6-8         /epel-release-6-8.noarch         22 k
-
-Transaction Summary
-=====================================================================================
-Install       1 Package(s)
-
-Total size: 22 k
-Installed size: 22 k
-Downloading Packages:
-Running rpm_check_debug
-Running Transaction Test
-Transaction Test Succeeded
-Running Transaction
-  Installing : epel-release-6-8.noarch                                           1/1
-  Verifying  : epel-release-6-8.noarch                                           1/1
+...
 
 Installed:
-  epel-release.noarch 0:6-8
+  epel-release.noarch 0:7-8
 
 Complete!
-[root@otrs-centos6 otrs]#
             ]]></screen>
         </para>
         <para>
@@ -380,49 +393,15 @@ Complete!
         </para>
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum -y install "perl(Text::CSV_XS)"
-Loaded plugins: security
-Setting up Install Process
-Resolving Dependencies
---> Running transaction check
----> Package perl-Text-CSV_XS.x86_64 0:0.85-1.el6 will be installed
---> Finished Dependency Resolution
+shell> yum -y install "perl(Text::CSV_XS)"
 
-Dependencies Resolved
-
-=====================================================================================
- Package                   Arch            Version               Repository     Size
-=====================================================================================
-Installing:
- perl-Text-CSV_XS          x86_64          0.85-1.el6            epel           71 k
-
-Transaction Summary
-=====================================================================================
-Install       1 Package(s)
-
-Total download size: 71 k
-Installed size: 154 k
-Downloading Packages:
-perl-Text-CSV_XS-0.85-1.el6.x86_64.rpm                        |  71 kB     00:00
-warning: rpmts_HdrFromFdno: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY
-Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-Importing GPG key 0x0608B895:
- Userid : EPEL (6) &lt;epel@fedoraproject.org&gt;
- Package: epel-release-6-8.noarch (@/epel-release-6-8.noarch)
- From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-Is this ok [y/N]: y
-Running rpm_check_debug
-Running Transaction Test
-Transaction Test Succeeded
-Running Transaction
-  Installing : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
-  Verifying  : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+...
 
 Installed:
   perl-Text-CSV_XS.x86_64 0:0.85-1.el6
 
 Complete!
-[root@otrs-centos6 otrs]#
+shell>
             ]]></screen>
         </para>
 
@@ -462,7 +441,7 @@ HatもCentOSもRPMレポジトリにドライバを配布することが許可�
 
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum -y install gcc make "perl(CPAN)"
+shell> yum -y install gcc make "perl(CPAN)"
             ]]></screen>
         </para>
 
@@ -478,7 +457,7 @@ SDK'。それらをディスクに保存してください。ここで、rootユ
         </para>
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum install oracle-instantclient*
+shell> yum install oracle-instantclient*
             ]]></screen>
         </para>
         <para>
@@ -486,9 +465,9 @@ SDK'。それらをディスクに保存してください。ここで、rootユ
         </para>
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# export ORACLE_HOME=/usr/lib/oracle/11.2/client64
-[root@otrs-centos6 otrs]# export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-[root@otrs-centos6 otrs]# cpan
+shell> export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+shell> export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+shell> cpan
 cpan[1]> look DBD::Oracle
 ...
 Fetching with LWP:

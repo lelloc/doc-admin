@@ -6,12 +6,55 @@
 
     <title>Installation From Source (Linux, Unix)</title>
 
+    <section role="NotInToc" id="installation-disable-selinux">
+        <title>Preparation: Disable SELinux</title>
+        <note>
+            If your system uses SELinux, you should disable it, otherwise OTRS will not work correctly.
+        </note>
+        <para>
+            Here's how to disable SELinux for RHEL/CentOS/Fedora:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Configure SELINUX=disabled in the /etc/selinux/config file:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#       enforcing - SELinux security policy is enforced.
+#       permissive - SELinux prints warnings instead of enforcing.
+#       disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#       targeted - Targeted processes are protected,
+#       mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+            Reboot your system. After reboot, confirm that the getenforce command
+returns <literal>Disabled</literal>:
+                    </para>
+                    <para>
+                    <screen><![CDATA[
+shell> getenforce
+Disabled
+                        ]]></screen>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
     <section role="NotInToc">
         <title>ステップ1：.tar.gzファイルのインストール</title>
         <para>
         If you want to install OTRS from source, first download the source archive
 as .tar.gz, .tar.bz2, or .zip file from <ulink
-url="http://www.otrs.com/try/">http://www.otrs.com/try/</ulink>
+url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">https://www.otrs.com/download-open-source-help-desk-software-otrs-free/</ulink>
         </para>
 
         <para>
