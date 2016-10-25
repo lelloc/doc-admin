@@ -2004,14 +2004,14 @@ $Self->{'Process'} = {
                     </screen>
                 </para>
                 <para>
-                    If a process ticket is in Activity 'A1', it has three possible ways to get to
-                    another Activity. In the Transitions 'T1' to 'T3', conditions are defined, that
+                    If a process ticket is in Activity <literal>A1</literal>, it has three possible ways to get to
+                    another Activity. In the Transitions <literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
                     a process ticket must fulfill to move (transit) to another Activity.
                 </para>
                 <para>
                     If in this case all the values of the process ticket and its dynamic fields that
-                    are needed for the Transition 'T2' are correct, the ticket will be moved from
-                    Activity 'A1' to 'A3'. After an ActivityDialog is submitted, or any other change
+                    are needed for the Transition <literal>T2</literal> are correct, the ticket will be moved from
+                    Activity <literal>A1</literal> to <literal>A3</literal>. After an ActivityDialog is submitted, or any other change
                     is made to a ticket, it will be checked for possible Transitions from the
                     current Activity. If multiple Transitions are possible, the first one will be
                     used (based on numerical sorting of the TransitionIDs).
@@ -2028,7 +2028,7 @@ $Self->{'Process'} = {
         <section>
             <title>Activity</title>
             <para>
-                An Activity contains one or more Activity Dialogs and models a 'step' in the
+                An Activity contains one or more Activity Dialogs and models a <literal>step</literal> in the
                 process. All Activity Dialogs of the current Activity are displayed in the ticket
                 zoom and can be used until the conditions of a Transition are fulfilled.
             </para>
@@ -2103,7 +2103,7 @@ $Self->{'Process::Activity'} =
                     Activity Dialog contains the list of Activity Dialogs which are available in
                     this Activity. All Activity Dialogs of the current Activity are displayed in
                     the ticket zoom. Their order is set by the order in the configuration, here
-                    'AD5' is shown before 'AD6' and 'AD1'.
+                    <literal>AD5</literal> is shown before <literal>AD6</literal> and <literal>AD1</literal>.
                 </para>
             </section>
         </section>
@@ -2261,13 +2261,11 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    The field "Article" is a special case. If it is present in a "Fields"
+                    The field <literal>Article</literal> is a special case. If it is present in a <literal>Fields</literal>
                     configuration, the Activity Dialog will contain a complete Richtext editor with
                     subject field and attachment handling. The entered text will then be added to
                     the ticket as an article and sent by email. Let's see an example Article field
                     configuration:
-                </para>
-                <para>
                     <screen>
 Article => {
     DescriptionShort => 'Please insert your comment here.',
@@ -2305,22 +2303,20 @@ Article => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    '0': field is invisible. This can be helpful if field values
+                                    <literal>0</literal>: field is invisible. This can be helpful if field values
                                     should automatically be set. The configured DefaultValue will be
                                     stored in this case.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '1': field is visible, but optional.
+                                    <literal>1</literal>: field is visible, but optional.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '2': field is visible and mandatory. The following fields can
+                                    <literal>2</literal>: field is visible and mandatory. The following fields can
                                     only be invisible or mandatory:
-                                </para>
-                                <para>
                                     <screen>
     QueueID
     Queue
@@ -2346,8 +2342,8 @@ Article => {
                 <section>
                     <title>DefaultValue</title>
                     <para>
-                        For fields with 'ID' (like QueueID, OwnerID), this refers to the database ID
-                        of the value. For other fields without 'ID' (like Queue, Owner), the
+                        For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers to the database ID
+                        of the value. For other fields without <literal>ID</literal> (like Queue, Owner), the
                         DefaultValue must contain the value itself. Example:
                     </para>
                     <para>
@@ -2509,18 +2505,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'and': This is the default. All conditions must be met for the
+                                    <literal>and</literal>: This is the default. All conditions must be met for the
                                     transition to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'or': At least one condition must match.
+                                    <literal>or</literal>: At least one condition must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': Exactly one condition must match, not more.
+                                    <literal>xor</literal>: Exactly one condition must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2541,18 +2537,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'and': This is the default. All field tests must match for this
+                                    <literal>and</literal>: This is the default. All field tests must match for this
                                     condition to match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'or': At least one field test must match.
+                                    <literal>or</literal>: At least one field test must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': Exactly one field test must match, not more.
+                                    <literal>xor</literal>: Exactly one field test must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2621,25 +2617,25 @@ Fields => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'String': Compares the field value with the string specified in
-                                    'Match'. Matches if they are exactly the same.
+                                    <literal>String</literal>: Compares the field value with the string specified in
+                                    <literal>Match</literal>. Matches if they are exactly the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Hash': Compares the field value (hash) with the hash specified
-                                    in 'Match'. All hash values must be the same.
+                                    <literal>Hash</literal>: Compares the field value (hash) with the hash specified
+                                    in <literal>Match</literal>. All hash values must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Array': Compares the field value (array) with the array
-                                    specified in 'Match'. Both lists must be the same.
+                                    <literal>Array</literal>: Compares the field value (array) with the array
+                                    specified in <literal>Match</literal>. Both lists must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Regex': The field value can be tested with a regular
+                                    <literal>Regex</literal>: The field value can be tested with a regular
                                     expression. It is important that 'Match' contains
                                     <emphasis>qr{}xms</emphasis> as a base condition. Between the
                                     braces the actual regular expression can be noted.
@@ -2647,7 +2643,7 @@ Fields => {
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Module': Allows you to use a perl module for condition
+                                    <literal>Module</literal>: Allows you to use a perl module for condition
                                     checking. If it returns 1, the check was positive. You can find
                                     an example module in
                                     <filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
@@ -2711,7 +2707,7 @@ $Self->{'Process::TransitionAction'} = {
                     impersonating the user with the given UserID.
                 </para>
                 <para>
-                    The use of UserID inside the "Config" parameter of a Transition Action is
+                    The use of UserID inside the <literal>Config</literal> parameter of a Transition Action is
                     accepted by all Transition Actions (since OTRS 3.2.4). In this example it could
                     be particularly important if the user that triggers the Transition does not have
                     permissions to move the ticket to the queue 'Junk', while the user with the
@@ -2745,9 +2741,9 @@ $Self->{'Process::TransitionAction'} = {
                     </screen>
                 </para>
                 <para>
-                    Here the same module is used to move a process ticket into the 'Raw' queue, and
+                    Here the same module is used to move a process ticket into the <literal>Raw</literal> queue, and
                     another time to move it into the junk queue. The Transition Action which must
-                    be used for a particular Transition is determined from the 'Path' setting of the
+                    be used for a particular Transition is determined from the <literal>Path</literal> setting of the
                     Process configuration.
                 </para>
             </section>
@@ -2779,11 +2775,11 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'MasterSlave' and 'Approved' are given as examples of DynamicField names.
-                        The values of the fields ('Master' and '1') will be set by this
+                        <literal>MasterSlave</literal> and <literal></literal> are given as examples of DynamicField names.
+                        The values of the fields (<literal>Master</literal> and <literal>1</literal>) will be set by this
                         TransitionAction.
                     </para>
                 </section>
@@ -2832,30 +2828,30 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction. It can be
+                        <literal>Name</literal> specifies the name of the configured TransitionAction. It can be
                         freely chosen, but should reflect the purpose of the configured action.
                     </para>
                     <para>
-                        'ArticleType' defines the type of the article to be created. Possible
+                        <literal>ArticleType</literal> defines the type of the article to be created. Possible
                         values: phone, fax, sms, webrequest, note-internal, note-external and
                         note-report.
                     </para>
                     <para>
-                        'SenderType' defines the sender type of the article. Possible values: agent,
+                        <literal>SenderType</literal> defines the sender type of the article. Possible values: agent,
                         system, customer.
                     </para>
                     <para>
-                        'ContentType' defines the content type of the article. Possible values:
-                        'text/plain; charset=ISO-8859-15' or any other valid charset and mime type.
+                        <literal>ContentType</literal> defines the content type of the article. Possible values:
+                        <literal>text/plain; charset=ISO-8859-15</literal> or any other valid charset and mime type.
                     </para>
                     <para>
-                        'Subject' defines the article title. Mandatory.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        'Body' defines the article content. Mandatory.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType' defines the type of the history entry. Possible values:
+                        <literal>HistoryType</literal> defines the type of the history entry. Possible values:
                         AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
                         EmailCustomer, EscalationResponseTimeNotifyBefore,
                         EscalationResponseTimeStart, EscalationResponseTimeStop,
@@ -2871,26 +2867,26 @@ $Self->{'Process::TransitionAction'} = {
                         Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        'HistoryComment' defines the content of the history entry.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        'From', 'To', 'Cc' and 'ReplyTo' take email addresses in the notation
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and <literal>ReplyTo</literal> take email addresses in the notation
                         specified above.
                     </para>
                     <para>
-                        'InReplyTo' and 'References' take email message IDs.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email message IDs.
                     </para>
                     <para>
-                        'NoAgentNotify' - if set to 1, the email notification of the Agent will not
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of the Agent will not
                         be sent.
                     </para>
                     <para>
-                        'AutoResponseType' can take the following values:
+                        <literal>AutoResponseType</literal> can take the following values:
                         auto follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'ForceNotificationToUserID', 'ExcludeNotificationToUserID',
-                        'ExcludeMuteNotificationToUserID' can take a list of UserIDs that are
+                        <literal>ForceNotificationToUserID</literal>, <literal>ExcludeNotificationToUserID</literal>,
+                        <literal>ExcludeMuteNotificationToUserID</literal> can take a list of UserIDs that are
                         either always notified, not notified or listed as notified but not actually
                         sent a notification email.
                     </para>
@@ -2970,66 +2966,66 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction. It can be
+                        <literal>Name</literal> specifies the name of the configured TransitionAction. It can be
                         freely chosen, but should reflect the purpose of the configured action.
                     </para>
                     <para>
-                        'Title' The ticket title.
+                        <literal>Title</literal> The ticket title.
                     </para>
                     <para>
-                        'Queue' or 'QueueID' specifies the name or id of the queue to be used in the
+                        <literal>Queue</literal> or <literal>QueueID</literal> specifies the name or id of the queue to be used in the
                         new ticket.
                     </para>
                     <para>
-                        'Lock' or 'LockID' sets the lock status of the ticket.
+                        <literal>Lock</literal> or <literal>LockID</literal> sets the lock status of the ticket.
                     </para>
                     <para>
-                        'Priority' or 'PriorityID' specifies the name or id of the priority to be
+                        <literal>Priority</literal> or <literal>PriorityID</literal> specifies the name or id of the priority to be
                         used in the new ticket.
                     </para>
                     <para>
-                        'State' or 'StateID' specifies the name or id of the state to be used in
+                        <literal>State</literal> or <literal>StateID</literal> specifies the name or id of the state to be used in
                         the new ticket.
                     </para>
                     <para>
-                        'CustomerID', the customer id to be set for the new ticket.
+                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
                     </para>
                     <para>
-                        'CustomerUser', the login of the customer that will be assigned in the
+                        <literal>CustomerUser</literal>, the login of the customer that will be assigned in the
                         ticket.
                     </para>
                     <para>
-                        'Owner' or 'OwnerID', specifies the login or id of the agent that will be the new ticket owner.
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the login or id the agent that will be the new ticket owner.
                     </para>
                     <para>
-                        'TN', custom number for the new ticket.
+                        <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
-                        'Type' or 'TypeID' specifies the name or id of the ticket type to be used in
+                        <literal>Type</literal> or <literal>TypeID</literal> specifies the name or id of the ticket type to be used in
                         the new ticket.
                     </para>
                     <para>
-                        'Service' or 'ServiceID' specifies the name or id of the service to be used in
+                        <literal>Service</literal> or <literal>ServiceID</literal> specifies the name or id of the service to be used in
                         the new ticket.
                     </para>
                     <para>
-                        'SLA' or 'SLAID' specifies the name or id of the SLA to be used in
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id of the SLA to be used in
                         the new ticket.
                     </para>
                     <para>
-                        'ResponsibleID', the ID of the agent that will be the new ticket responsible.
+                        <literal>ResponsibleID</literal>, the ID of the agent that will be the new ticket responsible.
                     </para>
                     <para>
-                        'PendingTime', a predefined date to set the Ticket Pending Times, when the
+                        <literal>PendingTime</literal>, a predefined date to set the Ticket Pending Times, when the
                         ticket state belongs to a pending state type.
                     </para>
                     <para>
-                        'PendingTimeDiff', a dynamically date (expressed in seconds from current
+                        <literal>PendingTimeDiff</literal>, a dynamically date (expressed in seconds from current
                         date/time) to set the Ticket Pending Times, when the  ticket state belongs
                         to a pending state type.
                     </para>
                     <para>
-                        'ArticleType' defines the type of the article to be created. Possible
+                        <literal>ArticleType</literal> defines the type of the article to be created. Possible
                         values: phone, fax, sms, webrequest, note-internal, note-external and
                         note-report.
                     </para>
@@ -3038,17 +3034,17 @@ $Self->{'Process::TransitionAction'} = {
                         system, customer.
                     </para>
                     <para>
-                        'ContentType' defines the content type of the article. Possible values:
-                        'text/plain; charset=ISO-8859-15' or any other valid charset and mime type.
+                        <literal>ContentType</literal>defines the content type of the article. Possible values:
+                        <literal>text/plain; charset=ISO-8859-15</literal> or any other valid charset and mime type.
                     </para>
                     <para>
-                        'Subject' defines the article title. Mandatory.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        'Body' defines the article content. Mandatory.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType' defines the type of the history entry. Possible values:
+                        <literal>HistoryType</literal> defines the type of the history entry. Possible values:
                         AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
                         EmailCustomer, EscalationResponseTimeNotifyBefore,
                         EscalationResponseTimeStart, EscalationResponseTimeStop,
@@ -3064,40 +3060,40 @@ $Self->{'Process::TransitionAction'} = {
                         Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        'HistoryComment' defines the content of the history entry.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        'From', 'To', 'Cc' and 'ReplyTo' take email addresses in the notation
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and <literal>ReplyTo</literal> take email addresses in the notation
                         specified above.
                     </para>
                     <para>
-                        'InReplyTo' and 'References' take email message IDs.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email message IDs.
                     </para>
                     <para>
-                        'NoAgentNotify' - if set to 1, the email notification of the Agent will not
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of the Agent will not
                         be sent.
                     </para>
                     <para>
-                        'AutoResponseType' can take the following values:
+                        <literal>AutoResponseType</literal> can take the following values:
                         auto follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'ForceNotificationToUserID', 'ExcludeNotificationToUserID',
-                        'ExcludeMuteNotificationToUserID' can take a list of UserIDs that are
+                        <literal>ForceNotificationToUserID</literal>, <literal>ExcludeNotificationToUserID</literal>,
+                        <literal>ExcludeMuteNotificationToUserID</literal> can take a list of UserIDs that are
                         either always notified, not notified or listed as notified but not actually
                         sent a notification email.
                     </para>
                     <para>
-                        'TimeUnit' the time invested in the current ticket article expressed in
+                        <literal>TimeUnit</literal> the time invested in the current ticket article expressed in
                         seconds, minutes, hours, etc.
                     </para>
                     <para>
-                        'DynamicField_NameX' where DynamicField_ is a required prefix and NameX is
+                        <literal>DynamicField_NameX</literal> where DynamicField_ is a required prefix and NameX is
                         the name of a Dynamic Field to be set in the new ticket (on ticket level,
                         not article levels).
                     </para>
                     <para>
-                        'LinkAs' to define the new ticket relation with originator ticket, from the
+                        <literal>LinkAs</literal> to define the new ticket relation with originator ticket, from the
                         new ticket point of view, for example Normal, Parent, Child etc.
                     </para>
                 </section>
@@ -3125,13 +3121,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'No' or 'CustomerID' set the Customer ID of the customer.
+                        <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID of the customer.
                     </para>
                     <para>
-                        'User' or 'CustomerUserID' set the Username of the customer.
+                        <literal>User</literal> or <literal>CustomerUserID</literal> set the Username of the customer.
                     </para>
                 </section>
 
@@ -3156,13 +3152,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Lock' defines the new lock of the process ticket.
+                        <literal>Lock</literal> defines the new lock of the process ticket.
                     </para>
                     <para>
-                        'LockID' defines the internal ID of the new lock.
+                        <literal>LockID</literal> defines the internal ID of the new lock.
                     </para>
                 </section>
 
@@ -3187,13 +3183,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Owner' specifies the login name of the new owner.
+                        <literal>Owner</literal> specifies the login name of the new owner.
                     </para>
                     <para>
-                        'OwnerID' specifies the internal ID of the new owner.
+                        <literal>OwnerID</literal> specifies the internal ID of the new owner.
                     </para>
                 </section>
 
@@ -3218,13 +3214,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Queue' specifies the name of the target queue.
+                        <literal>Queue</literal> specifies the name of the target queue.
                     </para>
                     <para>
-                        'QueueID' specifies the internal ID of the target queue.
+                        <literal>QueueID</literal> specifies the internal ID of the target queue.
                     </para>
                 </section>
 
@@ -3249,13 +3245,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Responsible' specifies the login name of the new responsible.
+                        <literal>Responsible</literal> specifies the login name of the new responsible.
                     </para>
                     <para>
-                        'ResponsibleID' specifies the internal ID of the new responsible.
+                        <literal>ResponsibleID</literal> specifies the internal ID of the new responsible.
                     </para>
                 </section>
 
@@ -3283,14 +3279,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Service' defines the new service of the process ticket. The full name is
+                        <literal>Service</literal> defines the new service of the process ticket. The full name is
                         required (e.g. GramdFatherService::FatherService::SonService ).
                     </para>
                     <para>
-                        'ServiceID' defines the internal ID of the new service.
+                        <literal>ServiceID</literal> defines the internal ID of the new service.
                     </para>
                 </section>
 
@@ -3318,13 +3314,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'SLA' defines the new service level agreement of the process ticket.
+                        <literal>SLA</literal> defines the new service level agreement of the process ticket.
                     </para>
                     <para>
-                        'SLAID' defines the internal ID of the new SLA.
+                        <literal>SLAID</literal> defines the internal ID of the new SLA.
                     </para>
                 </section>
 
@@ -3351,16 +3347,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'State' defines the new state of the process ticket.
+                        <literal>State</literal> defines the new state of the process ticket.
                     </para>
                     <para>
-                        'StateID' defines the internal ID of the new state.
+                        <literal>StateID</literal> defines the internal ID of the new state.
                     </para>
                     <para>
-                        'PendingTimeDiff' used only for pending type states, defines the time
+                        <literal>PendingTimeDiff</literal> used only for pending type states, defines the time
                         difference in seconds relative (relative to the Transition Action execution
                         time) to set ticket pending time (e.g. 3600 means that the pending time is
                         1hr after the Transition Action is executed).
@@ -3386,10 +3382,10 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Title' specifies the new title of the ticket.
+                        <literal>Title</literal> specifies the new title of the ticket.
                     </para>
                 </section>
 
@@ -3414,13 +3410,13 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Name' specifies the name of the configured TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        'Type' specifies the name of the ticket type.
+                        <literal>Type</literal> specifies the name of the ticket type.
                     </para>
                     <para>
-                        'TypeID' specifies the internal ID of the ticket type.
+                        <literal>TypeID</literal> specifies the internal ID of the ticket type.
                     </para>
                 </section>
             </section>
@@ -3498,19 +3494,19 @@ $Self->{TicketAcl}->{'001-ACL-ProcessProperties'} = {
                     possible Activity Dialogs that are offered to the user in the ticket zoom mask.
                 </para>
                 <para>
-                    'Possible' lists the Activity Dialogs that are allowed. The setting above will
-                    only allow 'AD1' and 'AD3' of the list of configured Activity Dialogs.
+                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The setting above will
+                    only allow <literal>AD1</literal> and <literal>AD3</literal> of the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    'PossibleNot' lists the Activity Dialogs that are not allowed. In the example
-                    above, the setting will remove 'AD3' from the list of configured Activity
+                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not allowed. In the example
+                    above, the setting will remove <literal>AD3</literal> from the list of configured Activity
                     Dialogs.
                 </para>
                 <para>
-                    If both 'Possible' and 'PossibleNot' are specified, the list of configured
-                    Activity Dialogs will first be filtered by 'Possible', leaving only 'AD1' and
-                    'AD3' in our example. Then 'PossibleNot' will be applied and filter out 'AD3',
-                    so that only 'AD1' remains and is shown as a possible Activity Dialog that the
+                    If both <literal>Possible</literal> and <literal>PossibleNot</literal> are specified, the list of configured
+                    Activity Dialogs will first be filtered by <literal>Possible</literal>, leaving only <literal>AD1</literal> and
+                    <literal>AD3</literal> in our example. Then <literal>PossibleNot</literal> will be applied and filter out <literal>AD3</literal>,
+                    so that only <literal>AD1</literal> remains and is shown as a possible Activity Dialog that the
                     user can use.
                 </para>
                 <para>
@@ -3518,7 +3514,7 @@ $Self->{TicketAcl}->{'001-ACL-ProcessProperties'} = {
                     calculated to determine the possible Activity Dialogs. Example:
                 </para>
                 <para>
-                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6', 'AD7'.
+                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3555,27 +3551,27 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
                     </screen>
                 </para>
                 <para>
-                    If a process ticket has the state 'new', is in the 'Raw' queue and has a
-                    priority '3 normal', then all three ACL rules will match.
+                    If a process ticket has the state <literal>new</literal>, is in the <literal>Raw</literal> queue and has a
+                    priority <literal>3 normal</literal>, then all three ACL rules will match.
                 </para>
                 <para>
-                    The first rule reduces the Activity Dialogs from 'AD1', 'AD2', 'AD3', 'AD4',
-                    'AD5', 'AD6', 'AD7' to 'AD1', 'AD2', 'AD3', 'AD6', 'AD7' and forbids 'AD4' and
-                    'AD5'.
+                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+                    <literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to <literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>, <literal>AD6</literal>, <literal>AD7</literal> and forbids <literal>AD4</literal> and
+                    <literal>AD5</literal>.
                 </para>
                 <para>
                     The second rule will now further reduce the remaining Activity Dialogs.
-                    In our example, 'AD2', 'AD3', 'AD7' will remain.
+                    In our example, <literal>AD2</literal>, <literal>AD3</literal>, <literal>AD7</literal> will remain.
                 </para>
                 <para>
-                    Now the third rule will further reduce the list by 'PossibleNot'.
-                    'AD3' is removed from the list. 'AD4' is not removed, since it was not on the
-                    list in the first place. At the end, 'AD2' and 'AD7' remain as possible Activity
+                    Now the third rule will further reduce the list by <literal>PossibleNot</literal>.
+                    <liteal>AD3</liteal> is removed from the list. <literal>AD4</literal> is not removed, since it was not on the
+                    list in the first place. At the end, <literal>AD2</literal> and <literal>AD7</literal> remain as possible Activity
                     Dialogs that the user can utilize.
                 </para>
                 <para>
-                    It is also possible to limit the processes that can be displayed in the "New
-                    process ticket" screen. The functionality is similar to limiting the
+                    It is also possible to limit the processes that can be displayed in the <literal>New
+                    process ticket</literal> screen. The functionality is similar to limiting the
                     Activity Dialogs with one exception: The ACLs could only be based on Users.
                 </para>
                 <para>See examples below:</para>
