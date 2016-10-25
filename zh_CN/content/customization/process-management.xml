@@ -2553,38 +2553,36 @@ $Self->{'Process::TransitionAction'} = {
                     <para>
                         <screen><![CDATA[
 $Self->{'Process::TransitionAction'} = {
-    'TA1' => {
-        Name   => 'Article Create Note Internal',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate',
-        Config => {
-            ArticleType      => 'note-internal',                                        # note-external|phone|fax|sms|...
-                                                                                        #   excluding any email type
-            SenderType       => 'agent',                                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
-            Subject          => 'some short description',                               # required
-            Body             => 'the message text',                                     # required
-            HistoryType      => 'OwnerUpdate',                                          # EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
-            HistoryComment   => 'Some free text!',
-            From             => 'Some Agent <email@example.com>',                       # not required but useful
-            To               => 'Some Customer A <customer-a@example.com>',             # not required but useful
-            Cc               => 'Some Customer B <customer-b@example.com>',             # not required but useful
-            ReplyTo          => 'Some Customer B <customer-b@example.com>',             # not required
-            InReplyTo        => '<asdasdasd.12@example.com>',                           # not required but useful
-            References       => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-            NoAgentNotify    => 0,                                                      # if you don't want to send agent notifications
-            AutoResponseType => 'auto reply',                                           # auto reject|auto follow up|auto reply/new ticket|auto remove
+   'TA1' => {
+       Name   => 'Article Create Note Internal',
+       Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate',
+       Config => {
+           ArticleType      => 'note-internal',                                        # note-external（备注-外部）|phone（电话）|fax（传真）|sms（短信）|...
+                                                                                       #   不包括任何电子邮件类型
+           SenderType       => 'agent',                                                # agent（服务人员）|system（系统）|customer（客户）
+           ContentType      => 'text/plain; charset=ISO-8859-15',                      # 或可选的字符集和MIME类型（如'text/html; charset=UTF-8'）
+           Subject          => 'some short description',                               # 必填项
+           Body             => 'the message text',                                     # 必填项
+           HistoryType      => 'OwnerUpdate',                                          # EmailCustomer（客户邮件）|Move（移动）|AddNote（添加备注）|PriorityUpdate（更新优先级）|WebRequestCustomer（客户网页请求）|...
+           HistoryComment   => 'Some free text!',
+           From             => 'Some Agent <email@example.com>',                       # 不是必填项但有用
+           To               => 'Some Customer A <customer-a@example.com>',             # 不是必填项但有用
+           Cc               => 'Some Customer B <customer-b@example.com>',             # 不是必填项但有用
+           ReplyTo          => 'Some Customer B <customer-b@example.com>',             # 不是必填项
+           InReplyTo        => '<asdasdasd.12@example.com>',                           # 不是必填项但有用
+           References       => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # 不是必填项但有用
+           NoAgentNotify    => 0,                                                      # 如果不想发送服务人员通知
+           AutoResponseType => 'auto reply',                                           # auto reject（自动拒绝）|auto follow up（自动跟进）|auto reply/new ticket（自动回复/新工单）|auto remove（自动移除）
 
-            ForceNotificationToUserID   => [ 1, 43, 56 ],                               # if you want to force somebody
-            ExcludeNotificationToUserID => [ 43, 56 ],
-                 # if you want full exclude somebody from notifications,
-                 # will also be removed in To: line of article,
-                 # higher prio as ForceNotificationToUserID
-            ExcludeMuteNotificationToUserID => [ 43, 56 ],
-                 # the same as ExcludeNotificationToUserID but only the
-                 # sending gets muted, agent will still shown in To:
-                 # line of article
-        },
-    },
+           ForceNotificationToUserID   => [ 1, 43, 56 ],                               # 如果想要强制给一些人员发送通知
+           ExcludeNotificationToUserID => [ 43, 56 ],
+                # 如果想要在发送通知时完全排除一些人员，
+                # 清单中的人员也会从信件的收件人中移除，
+                # 比ForceNotificationToUserID优先级高
+           ExcludeMuteNotificationToUserID => [ 43, 56 ],
+                # 与ExcludeNotificationToUserID相同，但是只有发送通知时移除，服务人员仍然会显示在信件的收件人中。
+       },
+   },
 };
                         ]]></screen>
                     </para>
@@ -2638,65 +2636,63 @@ charset=ISO-8859-15纯文本’或其它有效的字符集和MIME类型。
                         <screen><![CDATA[
 $Self->{'Process::TransitionAction'} = {
     'TA1' => {
-        Name   => 'Ticket Create',
+        Name   => '创建工单',
         Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate',
         Config => {
 
-            # ticket required:
-            Title         => 'Some Ticket Title',
-            Queue         => 'Raw',              # or QueueID => 123,
-            Lock          => 'unlock',
-            Priority      => '3 normal',         # or PriorityID => 2,
-            State         => 'new',              # or StateID => 5,
+            # 工单必填项：
+            Title         => '工单标题',
+            Queue         => 'Raw队列',              # 或队列ID QueueID => 123,
+            Lock          => '未锁定',
+            Priority      => '3-正常',         # 或优先级ID PriorityID => 2,
+            State         => '新建',              # 或状态ID StateID => 5,
             CustomerID    => '123465',
             CustomerUser  => 'customer@example.com',
-            OwnerID       => 'someuserlogin',    # or OwnerID => 123,
+            OwnerID       => 'someuserlogin',    # 或所有者ID OwnerID => 123,
 
-            # ticket optional:
-            TN              => $TicketObject->TicketCreateNumber(), # optional
-            Type            => 'Incident',            # or TypeID => 1, not required
-            Service         => 'Service A',           # or ServiceID => 1, not required
-            SLA             => 'SLA A',               # or SLAID => 1, not required
-            ResponsibleID   => 123,                   # not required
-            ArchiveFlag     => 'y',                   # (y|n) not required
-            PendingTime     => '2011-12-23 23:05:00', # optional (for pending states)
-            PendingTimeDiff => 123 ,                  # optional (for pending states)
+            # 工单可选项：
+            TN              => $TicketObject->TicketCreateNumber(), # 可选项
+            Type            => '故障',            # 或类型ID TypeID => 1, 不是必填项
+            Service         => '服务A',           # 或服务ID ServiceID => 1, 不是必填项
+            SLA             => 'SLA A',               # 或 SLAID => 1, 不是必填项
+            ResponsibleID   => 123,                   # 不是必填项
+            ArchiveFlag     => 'y',                   # (y|n) 不是必填项
+            PendingTime     => '2011-12-23 23:05:00', # 可选项 (用于挂起状态)
+            PendingTimeDiff => 123 ,                  # 可选项 (用于挂起状态)
 
-            # article required:
-            ArticleType      => 'note-internal',                        # note-external|phone|fax|sms|...
-                                                                        #   excluding any email type
-            SenderType       => 'agent',                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
-            Subject          => 'some short description',               # required
-            Body             => 'the message text',                     # required
-            HistoryType      => 'OwnerUpdate',                          #
-            EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
+            # 信件必填项:
+            ArticleType      => 'note-internal（备注-内部）',                        # note-external（备注-外部）|phone（电话）|fax（传真）|sms（短信）|...
+                                                                        #   不包括任何电子邮件类型
+            SenderType       => 'agent',                                # agent（服务人员）|system（系统）|customer（客户）
+            ContentType      => 'text/plain; charset=ISO-8859-15',      # 或可选的字符集和MIME类型（如'text/html; charset=UTF-8'）
+            Subject          => '一些简短描述',               # 必填项
+            Body             => '消息正文',                        # 必填项
+            HistoryType      => 'OwnerUpdate（更新所有者）',            #
+            EmailCustomer（客户邮件）|Move（移动）|AddNote（添加备注）|PriorityUpdate（更新优先级）|WebRequestCustomer（客户网页请求）|...
             HistoryComment   => 'Some free text!',
 
-            # article optional:
-            From             => 'Some Agent <email@example.com>',       # not required but useful
-            To               => 'Some Customer A <customer-a@example.com>', # not required but useful
-            Cc               => 'Some Customer B <customer-b@example.com>', # not required but useful
-            ReplyTo          => 'Some Customer B <customer-b@example.com>', # not required
-            MessageID        => '<asdasdasd.123@example.com>',          # not required but useful
-            InReplyTo        => '<asdasdasd.12@example.com>',           # not required but useful
-            References       => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-            NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
-            AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
+            #信件可选项:
+            From             => 'Some Agent <email@example.com>',       # 不是必填项但有用
+            To               => 'Some Customer A <customer-a@example.com>', # 不是必填项但有用
+            Cc               => 'Some Customer B <customer-b@example.com>', # 不是必填项但有用
+            ReplyTo          => 'Some Customer B <customer-b@example.com>', # 不是必填项
+            MessageID        => '<asdasdasd.123@example.com>',          # 不是必填项但有用
+            InReplyTo        => '<asdasdasd.12@example.com>',           # 不是必填项但有用
+            References       => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # 不是必填项但有用
+            NoAgentNotify    => 0,                                      # 如果不想发送服务人员通知
+            AutoResponseType => 'auto reply（自动回复）'                # auto reject（自动拒绝）|auto follow up（自动跟进）|auto reply/new ticket（自动回复/新工单）|auto remove（自动移除）
 
-            ForceNotificationToUserID   => [ 1, 43, 56 ],               # if you want to force somebody
-            ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notifications,
-                                                                        # will also be removed in To: line of article,
-                                                                        # higher prio as ForceNotificationToUserID
-            ExcludeMuteNotificationToUserID => [ 43,56 ],               # the same as ExcludeNotificationToUserID but only the
-                                                                        # sending gets muted, agent will still shown in To:
-                                                                        # line of article
+            ForceNotificationToUserID   => [ 1, 43, 56 ],               # 如果想要强制给一些人员发送通知
+            ExcludeNotificationToUserID => [ 43,56 ],                   # 如果想要在发送通知时完全排除一些人员，
+                                                                        # 清单中的人员也会从信件的收件人中移除，
+                                                                        # 比ForceNotificationToUserID优先级高
+            ExcludeMuteNotificationToUserID => [ 43,56 ],               # 与ExcludeNotificationToUserID相同，但是只有发送通知时移除，服务人员仍然会显示在信件的收件人中。
             TimeUnit                        => 123
 
-            # other:
+            # 其它:
             DynamicField_NameX => $Value,
-            LinkAs => $LinkType,                                        # Normal, Parent, Child, etc. (respective original ticket)
-            UserID => 123,                                              # optional, to override the UserID from the logged user
+            LinkAs => $LinkType,                                        # 普通、父、子等等（相对于原始工单）
+            UserID => 123,                                              # 可选，用于覆盖登录用户的UserID
         },
     },
 };
@@ -2727,8 +2723,7 @@ $Self->{'Process::TransitionAction'} = {
                         ‘CustomerUser客户联系人’，分配给工单的客户登录名。
                     </para>
                     <para>
-                        'Owner' or 'OwnerID', specifies the login or id of the agent that will be
-the new ticket owner.
+                        'Owner（所有者）'或 'OwnerID（所有者ID）'，指定新工单所有者的服务人员的登录名或ID。
                     </para>
                     <para>
                         ‘TN’，新工单的客户编号。
@@ -3303,6 +3298,33 @@ $Self->{TicketAcl}->{'202-ACL-Process'} = {
                     </screen>
                 </para>
             </section>
+        </section>
+    </section>
+    <section>
+        <title>导入样例流程</title>
+
+        <section>
+            <title>导入</title>
+            <para>
+                On the <emphasis>AdminProcessManagement</emphasis> screen you can find an
+<emphasis>Example process</emphasis> widget, where you can find best
+practice example processes. Currently, there is only <emphasis>Application
+for leave</emphasis> process available, but you can find additional example
+processes in the <emphasis role="bold">OTRS Business Solution™</emphasis>.
+
+            </para>
+            <para>
+                <figure>
+                    <title>Import example process widget</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-process-widget.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Select process from the drop-down menu and click on the <emphasis>Import
+example process</emphasis> button. After the process is imported, don't
+forget to deploy changes.
+            </para>
         </section>
     </section>
 </section>

@@ -267,8 +267,7 @@ shell> cat scripts/DBUpdate-to-5.postgresql.sql | psql --set ON_ERROR_STOP=on --
             <title>步骤6.2：数据库迁移脚本</title>
 
             <para>
-            Run the migration script (as user <literal>otrs</literal>, NOT as
-<literal>root</literal>):
+            运行迁移脚本（用<literal>otrs</literal>用户，而不是<literal>root</literal>用户）：
             </para>
 
             <para>
@@ -287,8 +286,7 @@ shell> scripts/DBUpdate-to-5.pl
         <title>步骤7：刷新配置缓存并删除缓存</title>
 
         <para>
-        Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as
-<literal>root</literal>):
+        请运行（用<literal>otrs</literal>用户，而<emphasis>不是</emphasis><literal>root</literal>用户）：
         </para>
 
         <para>
@@ -347,13 +345,8 @@ shell> /etc/init.d/cron start
             </para>
         </note>
         <para>
-            From OTRS 5 on, every frontend server needs to have its own unique
-<literal>NodeID</literal>.  This defaults to <literal>1</literal> and thus
-does not need to be configured for single-frontend setups. If you have more
-than one machine, each machine needs to have this value set to a unique
-value between <literal>1</literal> and <literal>999</literal>. This
-configuration needs to be done in the file
-<filename>Kernel/Config.pm</filename>:
+            从OTRS
+5开始，每个前端服务器需要有它自己唯一的<literal>NodeID</literal>（节点编号）。对单前端安装来说默认就是<literal>1</literal>，不需要配置。如果有多台主机，每台主机都需要设置这个唯一值，可为从<literal>1</literal>到<literal>999</literal>的任一值。这个配置在文件<filename>Kernel/Config.pm</filename>中。
         </para>
         <para>
             <screen><![CDATA[
@@ -366,8 +359,8 @@ $Self->{'NodeID'} =  '2';   # 为每个前端服务器分配一个唯一的值
         <title>步骤11：检查跟进检测配置</title>
 
         <para>
-            跟进检测设置被重新组织了。现在OTRS默认在邮件主题和引用内容中搜索来检测是否为跟进邮件。如果你想修改跟进检测设置（比如在正文、附件或所有邮件内容中搜索），请在系统管理的系统配置
-<literal>Ticket</literal> -&gt; <literal>Core::PostMaster</literal>
+            跟进检测设置被重新组织了。现在OTRS默认在邮件主题和引用内容中搜索来检测是否为跟进邮件。如果你想修改跟进检测设置（比如在正文、附件或原始邮件内容中搜索），请在系统管理的系统配置
+<literal>Ticket</literal> -&gt; <literal>Core::PostMaster</literal>中检查设置。
         </para>
     </section>
 
@@ -414,10 +407,7 @@ shell> /opt/otrs/bin/Cron.sh start
         </para>
         <note>
             <para>
-                The console command <literal>Dev::Code::Generate::ConsoleCommand</literal>
-can help to create new console commands for your custom scripts. This
-command creates a template where the script logic and its parameters can be
-adapted.
+                控制台命令<literal>Dev::Code::Generate::ConsoleCommand</literal>可以帮助创建新的控制台命令用来定制脚本。这个命令会创建一个模板，可以调整其中的脚本逻辑和相关参数。
             </para>
         </note>
     </section>

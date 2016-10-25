@@ -73,20 +73,9 @@ linkend="table-of-x-otrs-headers">这个表中</link>有详细解释。而创建
 </para>
 
 <para>
-The distribution of incoming messages can be controlled if they need to be
-sorted by queue or by the content of the "To:" field. For the Dispatching
-field, if "Dispatching by selected queue" is selected, all incoming messages
-will be sorted into the specified queue. The address where the mail was sent
-to is disregarded in this case. If "Dispatching by email To: field" is
-selected, the system checks if a queue is linked with the address in the To:
-field of the incoming mail. You can link an address to a queue in the <link
-linkend="adminarea-emailaddresses">E-mail address management</link> section
-of the Admin page. If the address in the To: field is linked with a queue,
-the new message will be sorted into the linked queue. If no link is found
-between the address in the To: field and any queue, then the message flows
-into the "Raw" queue in the system, which is the <link
-linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>
-after a default installation.
+如果进入消息需要按队列或按收件人内容分类，就可以控制它们的分配。对于Dispatching字段，如果选择了“按指定的队列”，所有进入的消息会按指定的队列分类，这种情况下邮件的收件人地址就会被忽略。如果选择了“按邮件收件人字段”，系统检查一个队列是否链接到进入邮件的收件人字段。可以在系统管理页面的<link
+linkend="adminarea-emailaddresses">邮件地址管理</link>中将一个地址链接到一个队列。如果收件人字段中的地址已经链接到一个队列，新消息就会分类到这个队列中。如果收件人字段中的地址没有链接到任何队列，则消息就会流入系统的“RAW（原始）”队列（这是默认安装后<link
+linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>参数设置）。
 </para>
 
 <para>
@@ -389,6 +378,34 @@ spam）。下面例子中的内容可以添加到文件<filename>Kernel/Config.p
     <listitem>
         <para>SenderType（发件人类型）</para>
         <para>这个参数定义OTRS中创建的用于信件的发件人类型。</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
+module that is capable to decrypt an encrypted incoming email message
+(S/MIME or PGP) placing the unencrypted message body in the email header
+X-OTRS-BodyDecrypted to be processed later.  Additionally it can also update
+the email body to the unencrypted version.
+</para>
+<para>
+    In order to decrypt the emails that system needs to be properly configured
+for S/MIME and or PGP and have the needed private keys to decrypt the
+information.
+</para>
+<para>
+    This module is disabled by default and it can be configured directly in the
+System Configuration in the Admin Panel
+</para>
+<itemizedlist mark="round">
+    <para><emphasis>配置选项</emphasis></para>
+    <listitem>
+        <para>StoreDecryptedBody</para>
+        <para>
+            Set this option to "1" to update the email body to the unencrypted version
+if the decryption was successful. Be aware that using this the emails will
+be stored unencrypted and there is no possible way to revert this action.
+        </para>
     </listitem>
 </itemizedlist>
 
