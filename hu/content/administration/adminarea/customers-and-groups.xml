@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="customers-and-groups">
+<title>Ügyfelek és ügyfélcsoportok</title>
+
+<section id="adminarea-customers">
+<title>Ügyfelek</title>
+
+<para>
+Az OTRS különféle típusú felhasználókat támogat. Az „Ügyfelek” hivatkozás
+használatával (a navigációs sávon vagy az adminisztrációs oldalon keresztül)
+kezelheti az ügyfelei fiókjait (lásd a lenti ábrát), hogy ki jelentkezhet be
+a rendszerre az ügyfélfelületen keresztül (customer.pl). Ezen felületen
+keresztül az ügyfelei nem csak jegyeket tudnak létrehozni, hanem
+áttekinthetik a korábbi jegyeiket is a frissítésekkel. Fontos tudnia, hogy
+egy ügyfélre van szükség a rendszeren lévő jegyelőzményekhez.
+</para>
+
+<para>
+<figure>
+    <title>Ügyfélkezelés</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/admin-customer.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+Rákereshet egy regisztrált ügyfélre, vagy szerkesztheti a beállításaikat a
+nevükre kattintva. Megvan az a lehetősége is, hogy megváltoztassa az ügyfél
+háttérprogramját. További információkért olvassa el a <link
+linkend="external-backends">külső háttérprogramokról</link> szóló fejezetet.
+</para>
+
+<para>
+Egy új ügyfélfiók létrehozásához kattintson az „Ügyfél hozzáadása” gombra
+(lásd a lenti ábrát). Néhány mező kötelező, azaz értéket kell tartalmazniuk,
+így ha azok egyikét üresen hagyja, akkor pirossal lesznek kiemelve.
+</para>
+
+<para>
+<figure>
+    <title>Egy ügyfél hozzáadása</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/add-customer.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+Az ügyfelek a felhasználónevük és jelszavuk megadásával férhetnek hozzá a
+rendszerhez. A rendszernek szüksége van az ügyfél-azonosítóra a felhasználó
+és a hozzárendelt jegyek azonosításához. Mivel az e-mail cím egyedi érték,
+használható azonosítóként.
+</para>
+
+<note>
+<para>
+Mint az ügyintézők, csoportok és szerepek esetén, az ügyfelek sem törölhetők
+a rendszerről, csak kikapcsolhatók az érvényesség lehetőség
+<emphasis>érvénytelen</emphasis> vagy <emphasis>átmenetileg
+érvénytelen</emphasis> értékre állításával.
+</para>
+</note>
+
+</section>
+
+<section id="adminarea-customers-groups">
+<title>Ügyfélcsoportok</title>
+
+<para>
+Az ügyfél-felhasználók is hozzáadhatók egy csoporthoz, amely akkor lehet
+hasznos, ha ugyanazon vállalat ügyfeleit szeretné hozzáadni egy vagy néhány
+várólistához való hozzáféréssel. A <link
+linkend="adminarea-groups">csoportkezelés modulon</link> keresztül először
+hozza létre a csoportot, amelyhez az ügyfelek tartozni fognak. Ezután adja
+hozzá a <link linkend="adminarea-queue">várólistákat</link>, és válassza ki
+az új csoportot a várólistákhoz.
+</para>
+
+<para>
+A következő lépés, hogy bekapcsolja az ügyfélcsoport támogatását. Ezt a
+<link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupSupport">CustomerGroupSupport</link>
+beállítási paraméterrel lehet megtenni az adminisztrációs rendszerbeállítás
+lehetőségből. A <link
+linkend="ConfigReference_Framework:Frontend::Customer:CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
+paraméter használatával megadhatja az alapértelmezett csoportokat egy
+újonnan hozzáadott ügyfélhez azért, hogy minden új fiók automatikusan
+hozzáadásra kerüljön ezekhez a csoportokhoz.
+</para>
+
+<para>
+Az „Ügyfelek &lt;-&gt; Csoportok” hivatkozáson keresztül kezelheti, hogy
+mely ügyfélnek kell a különböző csoportokhoz tartoznia (lásd a lenti ábrát).
+</para>
+
+<para>
+<figure>
+    <title>Ügyfél-csoport kapcsolatok kezelése</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-customer-groups.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+A különböző csoportok meghatározásához, amelyeknek egy ügyfél része kell
+hogy legyen, és fordítva, kattintson a megfelelő ügyfél felhasználónevére
+vagy a csoportra (lásd a lenti 4.18. és 4.19. ábrát ezzel kapcsolatban).
+</para>
+
+<para>
+<figure>
+    <title>Csoportkapcsolatok megváltoztatása egy ügyfélnél</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-customers-relations.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+<figure>
+    <title>Ügyfélkapcsolatok megváltoztatása egy csoportnál</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-customers-relations2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+</section>

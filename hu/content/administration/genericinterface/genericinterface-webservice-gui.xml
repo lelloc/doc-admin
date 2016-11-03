@@ -1,0 +1,1119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="webservice_gui">
+    <title>Webszolgáltatás grafikus felülete</title>
+    <para>
+        A webszolgáltatások grafikus felhasználói felülete (GUI) egy olyan eszköz,
+amely egy felhasználóbarát és kényelmes felületen teszi lehetővé összetett
+webszolgáltatás beállítások felépítését. Lehetővé teszi:
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Webszolgáltatások létrehozását és törlését.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Beállítások importálását és exportálását (YAML fájlformátumban) meglévő
+webszolgáltatásokhoz.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Régi beállítások megtekintését, visszaállítását és exportálását a meglévő
+webszolgáltatásokhoz a webszolgáltatás előzmények képernyőn.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Az összes kommunikációs napló követését minden webszolgáltatásnál a
+hibakereső képernyőn.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <section id="webservice_gui_overview">
+        <title>Webszolgáltatás áttekintés</title>
+        <para>
+            Az adminisztrációs felület fő képernyőjén (a Rendszeradminisztráció
+dobozban) lévő „Webszolgáltatások” hivatkozás vezet a webszolgáltatások
+áttekintő képernyőjéhez, ahol lehetősége van a webszolgáltatások
+beállításainak kezelésére. Hozzáadhat új webszolgáltatásokat vagy
+megváltoztathatja a meglévők beállításait erről a képernyőről.
+        </para>
+        <para>
+            Minden egyes webszolgáltatás beállítási képernyőnek egy „kenyérmorzsa”
+stílusú navigációs útvonala van a képernyő felső részén. Ez a navigációs
+útvonal azért hasznos, hogy pontosan tudjuk, hogy a webszolgáltatás
+beállításainak mely részén vagyunk, valamint bármikor lehetővé teszi a
+felhasználónak a beállítási folyamat bármely részére történő visszalépést
+(ez a művelet nem fog elmenteni semmilyen változtatást).
+        </para>
+        <note>
+            <para>
+                Egy új webszolgáltatás létrehozásához nyomja meg a „Webszolgáltatás
+hozzáadása” gombot, és adja meg a szükséges információkat.
+            </para>
+        </note>
+        <para>
+            <figure>
+                <title>Webszolgáltatások áttekintő</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-overview.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+        </para>
+    </section>
+
+    <section id="webservice_gui_add">
+        <title>Webszolgáltatás hozzáadása</title>
+        <para>
+            Az egyetlen kötelező mező ezen a részen a webszolgáltatás „neve”, amelynek
+egyedinek kell lennie a rendszeren, és nem lehet üresen hagyni. A többi
+mezők is szükségesek a beállításhoz, mint például a „Hibakereséséi
+küszöbszint” és az „Érvényesség”, de ezek a mezők már ki vannak töltve az
+alapértelmezett értékkel minden listánál.
+        </para>
+        <para>
+            A „Hibakeresési küszöbszint” alapértelmezett értéke a „Hibakeresés”. Ha
+ilyen módon állítjuk be, akkor az összes kommunikációs napló regisztrálva
+lesz az adatbázisban. Minden későbbi hibakeresési küszöbszint érték
+korlátozóbb és eldobja az annál alacsonyabb rendű kommunikációs naplókat,
+mint amely a rendszeren be van állítva.
+        </para>
+        <para>
+            <itemizedlist>
+                <title>A hibakeresési küszöbszint szintjei (az alacsonyabbtól a magasabbig)</title>
+                <listitem>
+                    <para>
+                        Hibakeresés
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Információ
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Értesítés
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Hiba
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Lehetséges a hálózati átviteli protokoll meghatározása is az „OTRS mint
+szolgáltató” és az „OTRS mint kérelmező” szakaszoknál.
+        </para>
+        <para>
+            Kattintson a „Mentés” gombra az új webszolgáltatás regisztrálásához az
+adatbázisba, vagy kattintson a „Mégse” gombra a művelet eldobásához. Most
+vissza fog térni a webszolgáltatás áttekintő képernyőjéhez.
+        </para>
+        <para>
+            Ha már rendelkezik egy YAML-formátumú webszolgáltatás beállítófájllal, akkor
+rákattinthat a „Webszolgáltatás importálása” gombra a képernyő bal
+oldalán. A webszolgáltatások importálásával kapcsolatos további
+információkért nézze meg a következő „Webszolgáltatás megváltoztatása”
+szakaszt.
+        </para>
+        <note>
+            <para>
+                Egy webszolgáltatás megváltoztatásához vagy további részletek hozzáadásához
+kattintson a webszolgáltatás nevére a webszolgáltatás áttekintő képernyőjén.
+            </para>
+        </note>
+        <para>
+            <figure>
+                <title>Webszolgáltatások hozzáadása</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-add.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+        </para>
+    </section>
+
+    <section id="webservice_gui_examples">
+        <title>Webszolgáltatás példa importálása</title>
+        <para>
+            Tudta, hogy léteznek elérhető példa webszolgáltatások az <ulink
+url="http://otrs.github.io/doc/manual/otrs-business-solution/stable/en/html/import-example-web-process.html">OTRS
+Business Solution™</ulink> csomagban?
+        </para>
+    </section>
+
+    <section id="webservice_gui_change">
+        <title>Webszolgáltatás megváltoztatása</title>
+        <para>
+            Ezen a képernyőn függvények teljes készlete van egy webszolgáltatás minden
+részének kezeléséhez. A bal oldalon a művelet oszlopban néhány gombot
+találhat, amelyek lehetővé teszik az összes lehetséges művelet végrehajtását
+egy webszolgáltatáson:
+        </para>
+        <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Webszolgáltatás klónozása.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Webszolgáltatás exportálása.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Webszolgáltatás importálása.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Beállítási előzmények.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Webszolgáltatás törlése.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Hibakereső.
+                </para>
+            </listitem>
+        </itemizedlist>
+        </para>
+        <note>
+            <para>
+                A „Beállítási előzmények” és a „Hibakereső” különböző képernyőkre fogja
+vezetni.
+            </para>
+        </note>
+
+        <section id="webservice-clone">
+            <title>Webszolgáltatás klónozása</title>
+            <para>
+                Egy webszolgáltatás klónozásához a „Webszolgáltatás klónozása” gombra kell
+kattintania. Egy párbeszédablak fog megjelenni, ahol használhatja az
+alapértelmezett nevet vagy beállíthat egy új nevet a (klónozott)
+webszolgáltatáshoz.
+            </para>
+            <note>
+                <para>
+                    <emphasis>Ne feledje</emphasis>, hogy a webszolgáltatás nevének egyedinek
+kell lennie a rendszeren belül.
+                </para>
+            </note>
+            <para>Kattintson a „Klónozás” gombra a webszolgáltatás klónjának létrehozásához
+vagy a „Mégse” gombra a párbeszédablak bezárásához.</para>
+            <para>
+                <figure>
+                    <title>Webszolgáltatás klónozása</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-clone.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+
+        <section id="webservice-export">
+            <title>Webszolgáltatás exportálása</title>
+            <para>
+                A „Webszolgáltatás exportálása” gomb lehetőséget ad a jelenlegi
+webszolgáltatás beállításainak kiírására egy YAML-fájlba, annak letöltésére
+és eltárolására a fájlrendszerén. Ez különösen akkor lehet hasznos, ha át
+szeretné költöztetni a webszolgáltatást az egyik kiszolgálóról a másikra,
+például a tesztkörnyezetből a produktív rendszerre.
+            </para>
+            <warning>
+                <para>
+                    A webszolgáltatás beállításaiban tárolt összes jelszó egyszerű szöveges
+formátumban lesz exportálva.
+                </para>
+            </warning>
+            <para>
+                Közvetlenül a „Webszolgáltatás exportálása” gombra kattintás után a
+böngészője mentési párbeszédablaka fog megjelenni, akárcsak amikor egy fájl
+letöltési hivatkozására kattint egy weboldalon.
+            </para>
+            <note>
+                <para>
+                    Az egyes operációs rendszereken minden böngészőnek saját mentési
+párbeszédablak képernyője és stílusa van. A böngészőtől és annak
+beállításától függően lehetséges, hogy nem jelenik meg párbeszédablak, és a
+fájl az alapértelmezett könyvtárba lesz elmentve a fájlrendszeren. Nézze meg
+a böngészője dokumentációját a konkrétabb utasításokért, ha szükséges.
+                </para>
+            </note>
+            <para>
+                <figure>
+                    <title>Webszolgáltatások exportálása</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-export.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+
+        <section id="webservice-import">
+            <title>Webszolgáltatás importálása</title>
+            <para>
+                Egy érvényes webszolgáltatás beállító YAML-fájl szükséges a webszolgáltatás
+importálása funkció használatához. Kattintson a „Webszolgáltatás
+importálása” gombra, és tallózzon rá a beállítófájlra vagy adja meg a teljes
+útvonalat a beviteli dobozban.
+            </para>
+            <para>
+                Kattintson az „Importálás” gombra egy új webszolgáltatás létrehozásához egy
+fájlból vagy a „Mégse” gombra a párbeszédablak bezárásához.
+            </para>
+            <note>
+                <para>
+                    A webszolgáltatás neve a beállítófájl nevéből lesz átvéve (például ha a fájl
+neve SajátWebszolgáltatás.yml, akkor a kapott webszolgáltatás
+SajátWebszolgáltatás elnevezésű lesz). Ha egy ugyanolyan nevű
+webszolgáltatás van regisztrálva a rendszeren, mint amilyet importálni
+szeretne, akkor a rendszer a webszolgáltatás megváltoztatása képernyőre
+fogja vezetni, hogy megváltoztathassa az importált webszolgáltatás nevét.
+                </para>
+            </note>
+            <para>
+                <figure>
+                    <title>Webszolgáltatások importálása</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-import.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+
+        <section id="webservice-history">
+            <title>Webszolgáltatás előzmények</title>
+            <para>
+                A webszolgáltatás beállításain végzett minden változtatás új bejegyzést hoz
+létre a webszolgáltatás előzményeiben (mint egy napló). A webszolgáltatás
+előzmények képernyő egy webszolgáltatás összes beállítási verziójának
+listáját jeleníti meg. A „Beállítási előzmények listája” részen lévő minden
+egyes sor (verzió) egy önálló módosítást képvisel a webszolgáltatás
+előzményeiben.
+            </para>
+            <para>
+                Kattintson a sorok egyikére a teljes beállítás megjelenítéséhez, ahogy az
+egy adott dátumkor vagy időpontban volt. A beállítás ennek a képernyőnek az
+„Előzményrészletek” szakaszában lesz megjelenítve. Itt is lehetősége van a
+kijelölt webszolgáltatás-beállítás verziójának exportálására vagy annak a
+verziónak a visszaállítására a jelenlegi webszolgáltatás beállításaiba.
+            </para>
+            <para>
+                A „Webszolgáltatás-beállítás exportálása” pontosan úgy viselkedik mint a
+webszolgáltatás megváltoztatásának képernyőjén lévő „Webszolgáltatás
+exportálása” funkció. További információkért nézze meg azt a szakaszt.
+            </para>
+            <para>
+                Ha a jelenlegi webszolgáltatásra történő váltás nem az elvárt módon működik,
+és nem könnyű a változtatásokat kézzel visszaállítani, akkor rákattinthat a
+„Webszolgáltatás-beállítás visszaállítása” gombra. Ez meg fog nyitni egy
+párbeszédablakot azt kérdezve, hogy biztos-e a webszolgáltatás-beállítás
+visszaállításában. Kattintson a „Webszolgáltatás-beállítás visszaállítása”
+gombra ezen a párbeszédablakon a jelenlegi beállítás lecseréléséhez a
+kijelölt verzióra, vagy kattintson a „Mégse” gombra a párbeszédablak
+bezárásához.
+            </para>
+            <warning>
+                <para>
+                    Ne feledje, hogy a webszolgáltatás beállításaiban tárolt összes jelszó
+egyszerű szöveges formátumban lesz exportálva.
+                </para>
+                <para>
+                    Legyen óvatos egy beállítás visszaállításakor, mert ez a folyamat
+visszafordíthatatlan.
+                </para>
+            </warning>
+            <para>
+                <figure>
+                    <title>Webszolgáltatás előzmények</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-history.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+
+        <section id="webservice-delete">
+            <title>Webszolgáltatás törlése</title>
+            <para>
+                Néha szükséges egy webszolgáltatást teljesen törölni. Ennek elvégzéséhez
+kattintson a „Webszolgáltatás törlése” gombra, és egy új párbeszédablak fog
+megjelenni egy megerősítés kéréséhez.
+            </para>
+            <para>
+                Kattintson a „Törlés” gombra a webszolgáltatás eltávolításának
+megerősítéséhez vagy a „Mégse” gombra a párbeszédablak bezárásához.
+            </para>
+            <warning>
+                <para>
+                    Egy webszolgáltatás törlése nem vonható vissza, ezért legyen óvatos egy
+webszolgáltatás törlésekor.
+                </para>
+             </warning>
+            <para>
+                <figure>
+                    <title>Webszolgáltatás törlése</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-delete.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+
+        <section id="webservice-debugger">
+            <title>Webszolgáltatás hibakereső</title>
+            <para>
+                A hibakereső tárolja egy webszolgáltatás naplóját. A hibakereső ablakban
+nyomon követheti az összes webszolgáltatás kommunikációt, mind a
+szolgáltató, mind a kérelmező típusokat.
+            </para>
+            <para>
+                Amikor ez a képernyő megjelenik, akkor a kéréslista elkezd betölteni. Miután
+a lista teljesen ki van töltve, akkor kiválaszthatja a sorok egyikét (amely
+egy kommunikációs sorozatot jelent) annak részleteinek ellenőrzéséhez. Ezek
+a részletek fognak megjelenni egy lenti dobozban.
+            </para>
+            <para>
+                A képernyő jobb oldalán lévő szűrő használatával szűkítheti a kommunikációs
+listát. A következőkre szűrhet:
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Kommunikáció típusa (szolgáltató vagy kérelmező)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Dátum: egy bizonyos dátum előtt és/vagy után
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        A távoli IP-cím
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Ezek bármilyen kombinációja
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                Miután a szűrőbeállítások beállításra kerültek, nyomja meg a „Frissítés”
+gombot, és egy új lista lesz megjelenítve a keresési feltétek szerint.
+            </para>
+            <note>
+                <para>
+                    A szűrőknél a keresési feltételektől függően az új lista eredmények nélkül
+is visszatérhet.
+                </para>
+            </note>
+            <para>
+                A képernyő bal oldalán a művelet oszlop alatt kiválaszthatja a „Vissza a
+webszolgáltatáshoz” lehetőséget, vagy törölheti a hibakereső naplóját a
+„Törlés” gomb megnyomásával. Ez egy párbeszédablakot fog megnyitni, amely
+arra kéri, hogy erősítse meg a napló törlését. Kattintson a „Törlés” gombra
+a párbeszédablakon a művelet végrehajtásához, vagy kattintson a „Mégse”
+gombra a párbeszédablak bezárásához.
+            </para>
+            <para>
+                A „Kérésrészletek” szakaszban láthatja a kijelölt kommunikáció összes
+részletét. Itt nyomon követheti a teljes folyamatot, és ellenőrizheti a
+lehetséges hibákat vagy jóváhagyhatja a sikeres válaszokat.
+            </para>
+            <para>
+                <figure>
+                    <title>Webszolgáltatás hibakereső</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-debugger.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+
+        <section id="webservice-configuration-change">
+            <title>Webszolgáltatás-beállítás megváltoztatása</title>
+            <para>
+                A webszolgáltatás megváltoztatása képernyőre visszatérve most át fogjuk
+tekinteni annak jobb oldalát. Itt lehetőségünk van a webszolgáltatás összes
+általános adatának módosítására, mint például név, leírás, hibakeresési
+küszöbszint, stb. Van itt további két szakasz is lent, amely lehetővé teszi
+számunkra bizonyos paraméterek módosítását az „OTRS mint szolgáltató” és az
+„OTRS mint kérelmező” kommunikációs típusoknál.
+            </para>
+            <para>
+                A webszolgáltatás beállítását el kell menteni minden egyes szinten. Ez azt
+jelenti, hogy ha egy beállítás megváltozik, akkor az egyéb, a beállítás
+mélyebb részeire mutató hivatkozások le lesznek tiltva arra kényszerítve
+Önt, hogy elmentse a jelenlegi beállítási szintet. A mentés után a letiltott
+hivatkozások ismét újra engedélyezve lesznek, lehetővé téve a beállítás
+folytatását.
+            </para>
+            <para>
+                Az „OTRS mint szolgáltató” szakasznál lehetséges a hálózati átviteli
+protokoll megadása vagy beállítása. Csak azok a hálózati átviteli
+háttérprogramok vannak megjelenítve a listában, amelyek regisztrálva
+vannak. A hálózati átvitel beállításához kattintson a „Beállítás”
+gombra. Lehetőség van új műveletek hozzáadásához is ebben a dobozban. Ehhez
+válassza ki az elérhető műveletek egyikét a „Művelet hozzáadása”
+listából. Ez a művelet beállítása képernyőre fogja vezetni. Az új művelet
+mentése után az a fenti táblázatban lesz felsorolva.
+            </para>
+            <para>
+                Az „OTRS mint kérelmező” nagyon hasonló az előzőhöz, de a „műveletek”
+helyett itt meghívókat adhat hozzá.
+            </para>
+            <para>
+                Kattintson a „Mentés” gombra a webszolgáltatás mentéséhez és a beállítás
+folytatásához, a „Mentés és befejezés” gombra a mentéshez és a
+webszolgáltatás áttekintő képernyőjéhez való visszatéréshez, vagy a „Mégse”
+gombra a jelenlegi beállítási szint változtatásainak eldobásához és a
+webszolgáltatás áttekintő képernyőjéhez való visszatéréshez.
+            </para>
+            <para>
+                <figure>
+                    <title>Webszolgáltatások megváltoztatása</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-change.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <note>
+                <para>
+                    A többi általános felület beállítási képernyőhöz hasonlóan - mint például a
+hálózati átvitel, művelet, meghívó és leképezés - a kezdeti beállítás
+(hozzáadás) képernyő csak két lehetőséget fog megjeleníteni: „Mentés” és
+„Mégse”. Ha a beállítást újra meglátogatja, akkor egy új „Mentés és
+befejezés” lehetőség fog megjelenni. Ennek a funkciónak a viselkedése
+lentebb van meghatározva.
+                </para>
+                <para>
+                    A „Mentés” el fogja tárolni a jelenlegi beállítási szintet az adatbázisban,
+és vissza fog térni az előző képernyőre a változtatások áttekintéséhez vagy
+a mélyebb beállítások konfigurálásához.
+                </para>
+                <para>
+                    A „Mentés és befejezés” el fogja tárolni a jelenlegi beállítási szintet az
+adatbázisban, és vissza fog térni az előző képernyőre a beállítási
+hierarchiában (a közvetlenül fölötte lévő beállítási szintre).
+                </para>
+                <para>
+                    A „Mégse” el fog dobni minden beállítási változtatást a jelenlegi beállítási
+szintnél, és vissza fog térni az előző képernyőre a beállítási
+hierarchiában.
+                </para>
+            </note>
+
+            <section id="webservice-provider-network-transport">
+                <title>Webszolgáltatás szolgáltatójának hálózati átvitele</title>
+                <para>
+                    A jövőben az elérhető hálózati átvitelek listája meg lesz növelve. Jelenleg
+csak a „HTTP::SOAP” és a „HTTP::REST” átvitelek érhetők el. Minden
+átvitelnek különböző beállítási lehetőségei vannak a beállításhoz, és
+különböző előtétprogram modulokat használhatnak azok beállításához.
+                </para>
+                <para>
+                    Nagyon egyszerű a „HTTP::SOAP” protokoll szolgáltatóként történő
+beállítása. Csak két beállítás van: „Névtér” és „Legnagyobb
+üzenethossz”. Ezek a mezők kötelezők. Az első egy URI a SOAP metódusokhoz
+történő környezet adásához csökkentve a félreérthetőséget, és a második egy
+olyan mező, ahol megadhatja a SOAP üzenetek legnagyobb méretét (bájtban),
+amelyet az OTRS fel fog dolgozni.
+                </para>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás szolgáltatójának hálózati átvitele (HTTP::SOAP)</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-provider-transport-soap.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    A „HTTP::REST” esetén a beállítás egy kissé bonyolultabb lehet, mivel az
+dinamikusan nő minden beállított műveletnél az „Útvonal leképezés a
+&lt;Műveletnév&gt; művelethez:” és az „Érvényes kérési módszerek a
+&lt;Műveletnév&gt; művelethez:” beállítások hozzáadásával a „Legnagyobb
+üzenethossz:” és az „Életben tartás küldése:” alapértelmezett átviteli
+beállításokhoz.
+                </para>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>Útvonal leképezés a „&lt;Műveletnév&gt;” művelethez:</para>
+                        <para>
+                            Ebben a beállításban egy erőforrás útvonala van beállítva. Ezt az útvonalat
+a webszolgáltatás igényei szerint kell meghatározni figyelembe véve, hogy az
+útvonal a HTTP kérési módszerrel együtt határozza meg a végrehajtandó
+általános felületi műveletet.
+                        </para>
+                        <para>
+                            Az útvonal tartalmazhat változókat „:&lt;Változónév&gt;” formájában. Minden
+útvonalszöveg, amely megfelel a változónév pozícióján, hozzá lesz adva a
+kérés hasznos terhéhez az ebben a beállításban meghatározott változónév
+használatával.
+                        </para>
+                        <para>
+                            Példák:
+                        </para>
+                        <itemizedlist mark="round">
+                            <para>
+                                Útvonal leképezés: /Eroforras
+                            </para>
+                            <listitem>
+                                <para>Érvényes kérések:</para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras?Param1=Egy
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Érvénytelen kérések:</para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/MasikEroforras
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/MasikEroforras?Param1=Egy
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        <itemizedlist mark="round">
+                            <para>
+                                Útvonal leképezés: /Eroforras/:ID
+                            </para>
+                            <listitem>
+                                <para>Érvényes kérések:</para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/1
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/1?Param1=Egy
+                                </para>
+                                <para>
+                                    Mindkét esetben az ID = 1 lesz elküldve a műveletnek a hasznos teher
+részeként. A második esetben a Param1 = Egy is hozzá lesz adva. A HTTP
+kérési módszertől függően egyéb paraméterek is hozzá lesznek adva, ha azok
+JSON szövegként érkeznek a kérés fejlécében.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Érvénytelen kérések:</para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras?Param1=Egy
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        <itemizedlist mark="round">
+                            <para>
+                                Útvonal leképezés: /Eroforras/EgyebEroforras/:ID/:Szin
+                            </para>
+                            <listitem>
+                                <para>Érvényes kérések:</para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/MasikEroforras/1/Piros
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/MasikEroforras/123/Kek?Param1=Egy
+                                </para>
+                                <para>
+                                    Az első példában ID = 1 és Szin = Piros, míg a másodikban ID = 123 és Szin =
+Kek.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Érvénytelen kérések:</para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/1
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/MasikEroforras/1
+                                </para>
+                                <para>
+                                    http://localhost/otrs/nph-genericinterface.pl/Webservice/Proba/Eroforras/MasikEroforras/1?Param1=Egy
+                                </para>
+                                <para>
+                                    Az első példában a „/MasikEroforras” útvonal része, valamint a :Szin változó
+hiányzik. A második példában csak a :Szin változó hiányzik.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>Érvényes kérési módszerek a „&lt;Műveletnév&gt;” művelethez:</para>
+                        <para>
+                            A HTTP kérési módszerek az útvonal leképezéssel együtt használandó művelet
+meghatározásához. Lehetséges lehetőségek: CONNECT, DELETE, GET, HEAD,
+OPTIONS, PATCH, POST, PUT és TRACE.
+                        </para>
+                        <para>
+                            Teljesen különböző műveletek is megoszthatják pontosan ugyanazt a leképezési
+útvonalat, de a kérési módszernek egyedinek kell lennie minden egyes
+műveletnél azért, hogy minden kérésnél helyesen meghatározható legyen a
+használandó művelet.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás szolgáltatójának hálózati átvitele (HTTP::REST)</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-provider-transport-rest.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+
+            <section id="webservice-operation">
+                <title>Webszolgáltatás művelete</title>
+                <para>
+                    Azokat a tevékenységeket, amelyeket akkor lehet végrehajtani, amikor az
+OTRS-t szolgáltatóként használja, „Művelteknek” hívják. Minden művelet egy
+vezérlőhöz tartozik. A vezérlők műveletek vagy meghívók
+gyűjteményei. Normális esetben az azonos vezérlőtől származó műveleteknek
+hasonló beállításokra van szükségük, és ugyanazon a beállítási
+párbeszédablakon osztoznak. Azonban az egyes műveleteknek lehetnek független
+beállítási párbeszédablakaik is, ha szükséges.
+                </para>
+                <para>
+                    A név, a leírás, a háttérprogram és a leképezések azok a mezők, amelyek
+normális esetben minden egyes műveletnél megjelennek, de egyéb speciális
+mezők jelenhetnek meg a nem alapértelmezett beállítási párbeszédablakokban,
+hogy teljesítsék a művelet különleges szükségleteit.
+                </para>
+                <para>
+                    Normális esetben két leképezés-beállítási szakasz van minden egyes
+műveletnél: egy a bejövő adatokhoz, és egy másik a kimenő
+adatokhoz. Különböző leképezési típusokat (háttérprogramokat) választhat
+minden egyes leképezési irányhoz, mivel a beállításaik függetlenek
+egymástól, valamint függetlenek a művelet háttérprogramjától is. A normál és
+leggyakoribb gyakorlat az, hogy a művelet ugyanazt a leképezési típust
+használja mindkét esetben (fordított beállítással). A teljes leképezési
+beállítás külön képernyőn végezhető el, amely a leképezési típustól függ.
+                </para>
+                <para>
+                    A művelet háttérprogramja előre ki van töltve és nem szerkeszthető. Akkor
+fogja látni ezt a paramétert, amikor kiválasztja a műveletet a
+webszolgáltatás szerkesztési képernyőjén. Ez a mező csak tájékoztató.
+                </para>
+                <para>
+                    A képernyő bal oldalán lévő művelet oszlopban a következő lehetőségei
+vannak: „Vissza a webszolgáltatáshoz” (az összes változtatás eldobása a
+legutóbbi mentés óta) és „Törlés”. Ha az utóbbira kattint, akkor egy
+párbeszédablak fog megnyílni, és azt fogja kérdezni, hogy el szeretné-e
+távolítani a műveletet. Kattintson a „Törlés” gombra a művelet és annak
+beállításai eltávolításának megerősítéséhez, vagy a „Mégse” gombra a törlés
+párbeszédablak bezárásához.
+                </para>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás művelete</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-operation.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+
+            <section id="webservice-requester-transport">
+                <title>Webszolgáltatás kérelmezőjének hálózati átvitele</title>
+                <para>
+                    A hálózati átvitel beállítása a kérelmezőnél hasonló a szolgáltatónál lévő
+beállításhoz. A kérelmező „HTTP::SOAP” hálózati átvitelénél több beállítandó
+mező található.
+                </para>
+                <para>
+                    A „Végpont” (a távoli rendszer webszolgáltatás felületének URI-ja a kérések
+fogadásához) és a „Névtér” mezőktől eltekintve, amelyek kötelező mezők, a
+következőket is megadhatja:
+                </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Kódolás (mint például utf-8, latin1, iso-8859-1, cp1250, stb.) a SOAP
+üzeneteknél.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            SOAPAction fejléc: ezt egy üres vagy kitöltött SOAPAction fejléc küldéséhez
+használhatja. Állítsa „Nem” értékre, és a SOAPAction fejléc a SOAP üzenetnél
+egy üres szöveg lesz, vagy állítsa „Igen” értékre a SOAP művelet
+Névtér#Művelet formában történő elküldéséhez, és határozza meg az
+elválasztót (tipikusan „/” a .Net webszolgáltatásoknál és „#” REST esetén).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Hitelesítés: a hitelesítési mechanizmus beállításához. Állítsa „-” értékre,
+hogy semmilyen hitelesítést se használjon, vagy válasszon egyet a listából,
+és meg fog jelenni a részletek mező.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <note>
+                    <para>
+                        Jelenleg csak a „BasicAuth” (HTTP) hitelesítési mechanizmus van
+megvalósítva. A távoli rendszer beállításától függően eldöntheti, hogy
+használja-e vagy sem. Ha használja, akkor meg kell adnia a felhasználónevet
+és jelszót a távoli rendszerhez való hozzáféréshez.
+                    </para>
+                </note>
+                <warning>
+                    <para>
+                        Ha a hitelesítéshez megad egy jelszót, akkor miután exportálja a
+webszolgáltatást egy YAML-fájlba, ez a jelszó fel lesz fedve, és egyszerű
+szöveges formátumban lesz kiírva a YAML-fájlon belül. Legyen tudatában
+ennek, és tegye meg az óvintézkedéseket, ha szükséges.
+                    </para>
+                </warning>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás kérelmezőjének hálózati átvitele (HTTP::SOAP)</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-requester-transport-soap.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    A HTTP::REST esetén ez a beállítás is dinamikusan nő a „Vezérlő leképezés a
+&lt;Meghívónév&gt; meghívóhoz:” és az „Érvényes kérési parancsok a
+&lt;Meghívónév&gt; meghívóhoz:” beállításoknak az egyes meghívásokhoz való
+hozzáadásától függően. A hitelesítés és az SSL beállítások hasonlóak a
+HTTP::SOAP szakaszban lévőkhöz.
+                </para>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>Gép</para>
+                        <para>
+                            A távoli rendszer gépneve vagy IP-címe és portja. Ha nincs port megadva,
+akkor a 80-as portot használja alapértelmezetten.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>Vezérlő leképezés a „&lt;Meghívónév&gt;” meghívóhoz:</para>
+                        <para>
+                            Ebben a beállításban egy erőforrás útvonala van beállítva. Ezt az útvonalat
+a távoli webszolgáltatás igényei szerint kell meghatározni, és követni kell
+annak meghatározását.
+                        </para>
+                        <para>
+                            Az útvonal tartalmazhat változókat „:&lt;Változónév&gt;” formájában. Minden
+változónév, amely illeszkedik az (elküldendő) jelenlegi adatokra, ki lesz
+cserélve a megfelelő adatértékkel. Ezek az illesztett változónevek és
+értékek el lesznek távolítva a jelenlegi adatokból. A HTTP kérési parancstól
+függően a megmaradó adatok elküldhetők JSON-szövegként a kérés törzsében,
+vagy lekérdezési paraméterekként az URI-n belül.
+                        </para>
+                        <para>
+                            Példák:
+                        </para>
+                        <para>
+                            A következő adatoknál: Valtozo1 = Egy, Valtozo2 = Kettő, Valtozo3 = Három és
+Valtozo4 = Négy.
+                        </para>
+                        <itemizedlist mark="round">
+                            <para>
+                                Vezérlő leképezés: /Eroforras
+                            </para>
+                            <listitem>
+                                <para>A cserék után:</para>
+                                <para>/Eroforras</para>
+                            </listitem>
+                            <listitem>
+                                <para>Megmaradó adatok:</para>
+                                <para> Valtozo1 = Egy, Valtozo2 = Kettő, Valtozo3 = Három és Valtozo4 = Négy</para>
+                            </listitem>
+                        </itemizedlist>
+                        <itemizedlist mark="round">
+                            <para>
+                                Vezérlő leképezés: /Eroforras/:Valtozo1
+                            </para>
+                            <listitem>
+                                <para>A cserék után:</para>
+                                <para>/Eroforras/Egy</para>
+                            </listitem>
+                            <listitem>
+                                <para>Megmaradó adatok:</para>
+                                <para> Valtozo2 = Kettő, Valtozo3 = Három és Valtozo4 = Négy</para>
+                            </listitem>
+                        </itemizedlist>
+                       <itemizedlist mark="round">
+                            <para>
+                                Vezérlő leképezés:
+/Eroforras/:Valtozo1?Param1=:Valtozo2&amp;Valtozo3=:Valtozo3
+                            </para>
+                            <listitem>
+                                <para>A cserék után:</para>
+                                <para>/Eroforras/Egy?Param1=Kettő&amp;Valtozo3=Három</para>
+                            </listitem>
+                            <listitem>
+                                <para>Megmaradó adatok:</para>
+                                <para>Valtozo4 = Négy</para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>Érvényes kérési parancsok a „&lt;Meghívónév&gt;” meghívóhoz:</para>
+                        <para>
+                            Ez határozza meg a használandó HTTP kérési módszert, a lehetséges
+lehetőségek: CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT és
+TRACE. Ha nincs parancs kiválasztva, akkor az alapértelmezett parancsot
+használja.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <itemizedlist mark="round">
+                    <listitem>
+                        <para>Alapértelmezett parancs</para>
+                        <para>
+                            Tartalékként van használva a meghatározott kérési parancs nélküli összes
+meghívónál.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás szolgáltatójának hálózati átvitele (HTTP::REST)</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-requester-transport-rest.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+
+            <section id="webservice-invoker">
+                <title>Webszolgáltatás meghívója</title>
+                <para>
+                    Azokat a tevékenységeket, amelyeket akkor lehet végrehajtani, amikor az
+OTRS-t kérelmezőként használja, „Meghívóknak” hívják. Minden meghívó egy
+vezérlőhöz tartozik (a vezérlők műveletek vagy meghívók
+gyűjteményei). Általában az azonos vezérlőtől származó meghívóknak hasonló
+beállításokra van szükségük, és ugyanazon a beállítási párbeszédablakokon
+osztoznak. Az egyes meghívóknak lehetnek független beállítási
+párbeszédablakaik is, ha szükséges.
+                </para>
+                <para>
+                    A név, a leírás, a háttérprogram és a leképezések azok a mezők, amelyek
+normális esetben minden egyes meghívónál megjelennek. Továbbá az
+eseményaktiválók listája és egyéb speciális mezők jelenhetnek meg a nem
+alapértelmezett beállítási párbeszédablakokban, hogy teljesítsék a meghívó
+speciális szükségleteit.
+                </para>
+                <para>
+                    Normális esetben két leképezés-beállítási szakasz van minden egyes
+meghívónál: egy a bejövő adatokhoz, és egy másik a kimenő
+adatokhoz. Különböző leképezési típusokat (háttérprogramokat) választhat
+minden egyes leképezési irányhoz, mivel a beállításaik függetlenek
+egymástól, valamint függetlenek a meghívó háttérprogramjától is. A normál és
+leggyakoribb gyakorlat az, hogy a meghívó ugyanazt a leképezési típust
+használja mindkét esetben, fordított beállítással. A teljes leképezési
+beállítás külön képernyőn végezhető el, amely a leképezési típustól függ.
+                </para>
+                <para>
+                    A meghívó háttérprogramja előre ki van töltve és nem szerkeszthető. Akkor
+fogja látni ezt a paramétert, amikor kiválasztja a meghívót a
+webszolgáltatás szerkesztési képernyőjén. Ez a mező csak tájékoztató.
+                </para>
+                <para>
+                    Az eseményaktiválók az OTRS-en belüli események, mint például
+„TicketCreate”, „ArticleSend”, stb. Ezek szerepelhetnek aktiválókként a
+meghívó végrehajtásához. Minden meghívónak legalább egy regisztrált
+eseményaktiválóval kell rendelkeznie, különben a meghívó hasznavehetetlen
+lesz, mert sosem lesz meghívva. Az eseményaktiválók aszinkron tulajdonsága
+határozza meg, hogy az OTRS folyamat fogja-e kezelni a meghívót, vagy hogy
+az OTRS démonra lesz-e delegálva.
+                </para>
+                <note>
+                    <para>
+                        Az OTRS démon egy külön folyamatkészlet, amely feladatokat hajt végre a
+háttérben. Ennek használatával maga az OTRS folyamat nem lesz érintett, ha a
+távoli rendszernek hosszú ideig tart válaszolni, ha nem érhető el, vagy
+hálózati problémák vannak. Ha nem használja az OTRS démont, akkor a
+webszolgáltatások használata lelassíthatja vagy válaszképtelenné teheti az
+OTRS keretrendszert. Ezért erősen ajánlott az aszinkron eseményaktiválók
+használata, amilyen gyakran csak lehetséges.
+                    </para>
+                </note>
+                <para>
+                    Egy eseményaktiváló hozzáadásához először válassza ki az eseménycsaládot az
+első listából, majd az eseménynevet a második listából, ezután állítsa be az
+aszinkron tulajdonságot (ha nincs bejelölve, akkor az azt jelenti, hogy az
+eseményaktiváló nem lesz aszinkron), és végül kattintson a plusz gombra. Egy
+új eseményaktiváló lesz létrehozva, és figyelni fog a meghívó
+„Eseményaktiválók” listáján.
+                </para>
+                <para>
+                    Egy eseményaktiváló törléséhez egyszerűen keresse meg a törlendő
+eseményaktiválót az „Eseményaktiválók” listájában, és kattintson a kuka
+ikonra a sor végén. Ez meg fog nyitni egy párbeszédablakot, amely azt
+kérdezi, hogy biztosan törölni szeretné-e az eseményaktiválót. Kattintson a
+„Törlés” gombra az eseményaktiváló eltávolításához a listából, vagy a
+„Mégse” gombra a párbeszédablak bezárásához.
+                </para>
+                <para>
+                    A képernyő bal oldalán lévő művelet oszlopban a következő lehetőségei
+vannak: „Vissza a webszolgáltatáshoz” (az összes változtatás eldobása a
+legutóbbi mentés óta) és „Törlés”. Ha az utóbbira kattint, akkor egy
+párbeszédablak fog felbukkanni, és azt fogja kérdezni, hogy el szeretné-e
+távolítani a meghívót. Kattintson a „Törlés” gombra a meghívó és annak
+beállításai eltávolításának megerősítéséhez, vagy a „Mégse” gombra a törlés
+párbeszédablak bezárásához.
+                </para>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás meghívója</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-invoker.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+
+            <section id="webservice-mapping">
+                <title>Webszolgáltatás leképezése</title>
+                <para>
+                    Vannak olyan esetek, ahol át kell alakítania az adatokat az egyik
+formátumról egy másik (adatszerkezet leképezése vagy megváltoztatása), mert
+normális esetben egy webszolgáltatást arra használnak, hogy kölcsönhatásba
+lépjen egy távoli rendszerrel, amely nagyon valószínű, hogy nem egy másik
+OTRS rendszer és/vagy nem tudja megérteni az OTRS adatszerkezeteit és
+értékeit. Ezekben az esetekben néhány vagy az összes adatot meg kell
+változtatni, és néha még az értékek (kulcsok) neveit is, vagy akár a teljes
+szerkezetet annak érdekében, hogy egyezzen a másik végen elvárt adatokkal. A
+feladat végrehajtásához van jelen az általános felület leképező rétege.
+                </para>
+                <para>
+                    Minden egyes távoli rendszernek saját adatszerkezete van, valamint
+lehetséges új leképezőmodulok létrehozása minden esetre (például van egy
+személyre szabott leképezőmodul az OTRS keretrendszerrel szállított SAP
+megoldáskezelőhöz), de ez nem mindig szükséges. A Mapping::Simple modulnak
+le kell fednie a leképezési szükségletek legtöbbjét.
+                </para>
+                <note>
+                    <para>
+                        Amikor a Mapping::Simple nem fedi le egy webszolgáltatás összes leképezési
+szükségletét, akkor létre kell hozni egy új leképezőmodult. Ha többet
+szeretne megtudni arról, hogy hogyan hozhatók létre új leképezőmodulok,
+akkor nézzen utána az OTRS fejlesztői kézikönyvében.
+                    </para>
+                </note>
+                <para>
+                    Ez a modul alkalmat ad arra, hogy alapértelmezett értékeket állítson be az
+egyes kulcsok vagy értékek leképezéséhez a teljes kommunikációs adatoknál.
+                </para>
+                <para>
+                    A képernyő elején egy általános szakaszt fog látni, ahol azokat az
+alapértelmezett szabályokat állíthatja be, amelyeket alkalmazni kell az
+összes leképezetlen kulcsnál és értéknél. Három lehetőség érhető el, ezek a
+lehetőségek vannak alább felsorolva:
+                </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Megtartás (változatlanul hagyás): semmilyen módon sem nyúl a kulcsokhoz vagy
+értékekhez.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Mellőzés (kulcs/érték pár eldobása): amikor ezt a kulcson alkalmazzák, akkor
+törli a kulcsot és az értéket, mert amikor egy kulcs törlődik, akkor annak
+következtében a hozzárendelt érték is törölve lesz. Amikor ezt az értéken
+alkalmazzák, akkor csak az érték törlődik megtartva a kulcsot, amely most
+már egy üres értékhez lesz hozzárendelve.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Leképezés (a megadott kulcs vagy érték használata alapértelmezettként): egy
+meghatározott leképezési szabály nélküli összes kulcs és/vagy érték ezt
+fogja alapértelmezettként használni. Amikor ezt a lehetőséget választja,
+akkor egy új szövegmező fog megjelenni az alapértelmezett beállításához.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    A „+” gombra kattintva az új kulcstérképnél egy új dobozt fog megjeleníteni
+egy egyedülálló leképezési beállításhoz. Annyi kulcsleképezést adhat hozzá,
+amennyi szükséges. Egyszerűen kattintson ismét a „+” gombra, és egy új
+leképezési doboz fog megjelenni a meglévő alatt. A leképezési dobozokból
+határozhat meg egy leképezést egy egyedüli kulcshoz a következő
+lehetőségekkel:
+                </para>
+                <para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                Pontos érték(ek): a régi kulcsszöveg meg lesz változtatva egy újra, ha a
+régi kulcs pontosan egyezik.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Reguláris kifejezés: a kulcsszöveg le lesz cserélve egy reguláris kifejezési
+szabályt követve.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <para>
+                    Az új értékleképezés „+” gombjának megnyomása egy új sort fog megjeleníteni
+egy értékleképezéshez. Itt is ugyanazokkal a lehetőségekkel lehetséges
+szabályok meghatározása az egyes leképezendő értékekhez mint a
+kulcsleképezésnél (pontos érték vagy reguláris kifejezés). Annyi értéket
+adhat a leképezéshez, amennyi szükséges, és ha törölni szeretné az
+egyiküket, akkor kattintson a „-” gombra az egyes leképezési értékek
+sorában.
+                </para>
+                <para>
+                    A teljes kulcsleképezési szakasz (doboz) törlése is lehetséges. Egyszerűen
+nyomja meg az egyes dobozok jobb felső sarkában található „-” gombot annál a
+doboznál, amelyet törölni szeretne.
+                </para>
+                <para>
+                    Ha egy teljes leképezési beállítás törlésére van szüksége: menjen vissza a
+megfelelő művelet vagy meghívó képernyőjére, keresse meg azt a leképezési
+irányt, amelyet korábban kiválasztott, és állítsa az értékét „-” értékre,
+majd mentse el a beállítást a változtatások alkalmazásához.
+                </para>
+                <para>
+                    <figure>
+                        <title>Webszolgáltatás leképezése</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-mapping.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+        </section>
+    </section>
+</section>

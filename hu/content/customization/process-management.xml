@@ -1,0 +1,3720 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="process-management" >
+<title>Folyamatkezelés</title>
+    <section>
+        <title>Bevezetés</title>
+        <para>
+            Az OTRS ezen szolgáltatása lehetővé teszi a folyamatok (munkafolyamatok)
+modellezését a jegyrendszerben. Az alapötlet az, hogy képes legyen
+meghatározni az ismétlődő folyamatokat, és delegálni a munkaelemeket
+különböző embereknek, valamint vezetni a folyamat előrehaladását különböző
+irányokba bizonyos feltételek alapján.
+        </para>
+    </section>
+    <section>
+        <title>Példafolyamat</title>
+        <para>
+            Nézzünk egy példát hogy meggyőzőbbé tegyük. Meg fogunk határozni egy
+könyvrendelési folyamatot:
+        </para>
+
+        <section>
+            <title>Az igény rögzítése</title>
+            <para>
+                Mielőtt megrendelésre kerülne, az irodalom iránti igényt egy alkalmazott
+rögzíteni fogja. A példánkban a következő könyv szükséges:
+            </para>
+            <para>
+                <screen>
+Cím: Folyamatkezelés kezdőknek
+Szerző: Thilo Knuppertz
+ISBN: 3527703713
+                </screen>
+            </para>
+        </section>
+
+        <section>
+            <title>Igazgató általi jóváhagyás</title>
+            <para>
+                A személyzeti részleg vezetőjének kell döntenie a megrendelésről. Elutasítás
+esetén az igazgatónak rögzítenie kell egy okot. Elfogadás esetén a
+megrendelés átadásra kerül a beszerzési osztálynak.
+            </para>
+        </section>
+
+        <section>
+            <title>Beszerzési osztály általi feldolgozás</title>
+            <para>
+                A beszerzésnek most az a feladata, hogy megtalálja, hogy a könyvet hol lehet
+a legjobb feltételekkel megrendelni. Ha nincs raktáron, akkor ez rögzíthető
+a megrendelésen. Sikeres megrendelés esetén a beszerzés rögzíteni fogja a
+beszállítót, az árat és a kézbesítés dátumát.
+            </para>
+        </section>
+
+        <section>
+            <title>Iktató általi feldolgozás</title>
+            <para>
+                A szállítmány meg fog érkezni a vállalathoz. A beérkező áruk részlege
+ellenőrzi a szállítmányt, és rögzíti a kézhezvétel dátumát. Most fogják
+értesíteni az alkalmazottat, hogy a megrendelése megérkezett és készen áll
+az átvételre.
+            </para>
+        </section>
+    </section>
+    <section>
+        <title>A példa megvalósítása</title>
+        <para>
+            Ha azt feltételezzük, hogy egy jegy ebben a munkafolyamatban egy olyan
+kísérődokumentumhoz hasonló szerepet tölt be, amely változásjegyzeteket
+fogadhat, akkor máris tiszta képet kapunk a folyamatjegyekről.
+        </para>
+        <para>
+            A példafolyamat elemzéséből a következő szükséges elemeket azonosíthatjuk:
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Lehetőségek adatok rögzítéséhez, hívjuk ezeket <emphasis>Tevékenység
+párbeszédeknek</emphasis>,
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Ellenőrzések, amelyek képesek automatikusan reagálni a megváltozott
+adatokra, hívjuk ezeket <emphasis>Átmeneteknek</emphasis>,
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Változások, amelyek egy folyamatjegyre alkalmazhatók egy folyamatjegy
+sikeres átmenetei után, hívjuk ezeket <emphasis>Átmenet
+műveleteknek</emphasis>.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Szükségünk van egy további elemre, amely talán nem annyira nyilvánvaló:
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Egy lehetőség, hogy egynél több Tevékenység párbeszédet ajánljon fel
+elérhetőnek. A példánkban ez akkor szükséges, amikor az igazgatónak döntenie
+kell az „Elfogadás” és az „Elutasítás” között. Hívjuk ezt
+<emphasis>Tevékenységnek</emphasis>.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Most a tevékenységekkel, tevékenység párbeszédekkel, átmenetekkel és átmenet
+műveletekkel rendelkezünk a szükséges eszközzel a példánk egyéni lépéseinek
+modellezéséhez. Ami még mindig hiányzik, az egy olyan terület, ahol az egyes
+munkafolyamatoknál a lépések sorrendje megadható. Hívjuk ezt
+<emphasis>Folyamatnak</emphasis>. Hogy később képesek legyünk ezekre az
+egyedekre hivatkozni, hozzájuk fogunk rendelni egy rövidítést zárójelben. Ez
+a rövidítés egy belső azonosítási mechanizmuson alapul, amelyet
+egyedazonosítóknak hívnak.
+        </para>
+        <para>
+            Az egyedazonosítók egy vagy több betűnek vannak megfeleltetve (a
+folyamatrésztől vagy egyedtől függően), és ezután egy folyamatosan növekvő
+szám következik. Példák:
+            <itemizedlist>
+                <listitem><para>Folyamat: „F1”, „F2” … „Fn”.</para></listitem>
+                <listitem><para>Tevékenység: „T1”, „T2” … „Tn”.</para></listitem>
+                <listitem><para>Tevékenység párbeszéd: „TP1”, „TP2” … „TPn”.</para></listitem>
+                <listitem><para>Átmenet: „A1”, „A2” … „An”.</para></listitem>
+                <listitem><para>Átmenet művelet: „AM1”, „AM2” … „AMn”.</para></listitem>
+            </itemizedlist>
+        </para>
+        <para>
+           A folyamat és annak részei létrehozása előtt a rendszer előkészítése
+szükséges. Szükségünk lesz néhány várólista, felhasználó és dinamikus mező
+meghatározására, valamint néhány rendszerbeállítási lehetőség beállítására.
+        </para>
+        <para>
+            Hozza létre a következő várólistákat:
+            <itemizedlist>
+                <listitem><para>Vezetőség</para></listitem>
+                <listitem><para>Alkalmazottak</para></listitem>
+                <listitem><para>Beszerzés</para></listitem>
+                <listitem><para>Postahivatal</para></listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Hozza létre a következő felhasználókat:
+            <itemizedlist>
+                <listitem><para>Igazgató</para></listitem>
+                <listitem><para>Alkalmazott</para></listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Hozza létre a következő dinamikus mezőket:
+            <itemizedlist>
+                <listitem>
+                    <para>Cím</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Cím</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Szöveg</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable>
+                </listitem>
+                <listitem>
+                    <para>Szerző</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Szerző</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Szöveg</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable>
+                </listitem>
+                <listitem>
+                    <para>ISBN</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>ISBN</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Szöveg</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable>
+                </listitem>
+                <listitem>
+                    <para>Állapot</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Állapot</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Legördülő</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                                <row>
+                                    <entry>Lehetséges értékek</entry>
+                                    <entry>
+                                        <itemizedlist>
+                                            <listitem><para>Jóváhagyás</para></listitem>
+                                            <listitem><para>Jóváhagyás megtagadva</para></listitem>
+                                            <listitem><para>Jóváhagyva</para></listitem>
+                                            <listitem><para>Rendelés megtagadva</para></listitem>
+                                            <listitem><para>Megrendelve</para></listitem>
+                                            <listitem><para>Szállítmány megérkezett</para></listitem>
+                                        </itemizedlist>
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable>
+                    <para>
+                        Megjegyzés: kérjük pontosan így használja ezeket a lehetséges értékeket a
+dinamikus mező beállításaiban lévő „Kulcs” és „Érték” esetén.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Beszállító</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Beszállító</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Szöveg</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                     </informaltable>
+                </listitem>
+                <listitem>
+                    <para>Ár</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Ár</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Szöveg</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                     </informaltable>
+                </listitem>
+                <listitem>
+                    <para>KezbesitesDatuma</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Kézbesítés dátuma</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Dátum</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                     </informaltable>
+                </listitem>
+                <listitem>
+                    <para>KezhezvetelDatuma</para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <tbody>
+                                <row>
+                                    <entry>Címke</entry><entry>Kézhezvétel dátuma</entry>
+                                </row>
+                                <row>
+                                    <entry>Típus</entry><entry>Dátum</entry>
+                                </row>
+                                <row>
+                                    <entry>Objektum</entry><entry>Jegy</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                     </informaltable>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Állítsa be a következő rendszerbeállítási lehetőségeket:
+            <itemizedlist>
+                <listitem><para>„Ticket::Responsible”: Igen</para></listitem>
+                <listitem>
+                    <para>
+                        „Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicFieldGroups”:
+                    </para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <thead>
+                                <row>
+                                    <entry><emphasis>Kulcs:</emphasis></entry>
+                                    <entry><emphasis>Tartalom:</emphasis></entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>Könyv</entry><entry>Cím, Szerző, ISBN</entry>
+                                </row>
+                                <row>
+                                    <entry>Általános</entry><entry>Állapot</entry>
+                                </row>
+                                <row>
+                                    <entry>Rendelés</entry>
+                                    <entry>Ár, Beszállító, KiszállításDátuma</entry>
+                                </row>
+                                <row>
+                                    <entry>Szállítmány</entry><entry>KezhezvetelDatuma</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable>
+                </listitem>
+                <listitem>
+                    <para>
+                        „Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField”:
+                    </para>
+                    <informaltable>
+                        <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+                            <thead>
+                                <row>
+                                    <entry><emphasis>Kulcs:</emphasis></entry>
+                                    <entry><emphasis>Tartalom:</emphasis></entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>Szerző</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>KezhezvetelDatuma</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>KezbesitesDatuma</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>ISBN</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>Ár</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>Állapot</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>Beszállító</entry><entry>1</entry>
+                                </row>
+                                <row>
+                                    <entry>Cím</entry><entry>1</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </informaltable>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+             Most kezdjük el a valódi folyamatkezelési dolgot. A következő lépésben meg
+fogjuk határozni azokat az egyéni egyedeket, amelyekre szükségünk van.
+        </para>
+        <section>
+            <title>Folyamat (mint egy konténer)</title>
+            <para>
+                Egy új folyamat létrehozásához a „Folyamatkezelés” hivatkozásra szükséges
+kattintani az adminisztrációs panelen lévő Rendszer adminisztráció
+dobozban. Ez a folyamatkezelés áttekintő képernyőjéhez fog vezetni. A
+folyamat létrehozása után létrehozhatjuk az összes többi egyedet (vagy
+folyamatrészt).
+            </para>
+            <note>
+                <para>
+                    Egy folyamatban meghatározott tevékenységek, tevékenység párbeszédek,
+átmenetek és átmenet műveletek elérhetők lesznek a rendszeren lévő összes
+folyamat számára.
+                </para>
+            </note>
+            <para>
+                <figure>
+                    <title>Az OTRS adminisztrációs képernyője - Rendszer adminisztráció</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-admin-sysadmin.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+
+            <para>
+                Kattintson az „Új folyamat létrehozása” műveletre a műveletek dobozban.
+            </para>
+            <para>
+                <figure>
+                    <title>Új folyamat létrehozása gomb</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-newprocess-button.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Töltse ki a folyamat információt, állítsa be a folyamat nevét és a
+leírást. A folyamat állapotát „inaktívon” fogjuk hagyni, amíg nem végzünk az
+összes feladattal. Mentse a folyamatot.
+            </para>
+            <para>
+                <figure>
+                    <title>Új folyamat hozzáadása</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-newprocess-info.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+        </section>
+        <section>
+            <title>Tevékenység párbeszédek</title>
+                <para>
+                    Kattintson az új folyamat nevére a folyamatkezelés áttekintő képernyőn, majd
+az „Elérhető folyamatelemek” dobozban kattintson a „Tevékenység párbeszédek”
+elemre (ez a művelet ki fogja nyitni a tevékenység párbeszéd lehetőségeit,
+és össze fogja csukni az összes többit egy harmonikaszerű hatást elvégezve),
+majd kattintson a „Új tevékenység párbeszéd létrehozása” gombra.
+                </para>
+                <para>
+                    <figure>
+                        <title>Új tevékenység párbeszéd létrehozása gomb</title>
+<screenshot>
+<graphic
+fileref="screenshots/customization/pm-accordion-new-activitydialog.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    A megnyílt felugró képernyőn töltse ki a „Tevékenység párbeszéd neve”,
+valamint a „Leírás (rövid)” mezőket. Ennél a példánál az összes többi mezőt
+az alapértelmezett értéken fogjuk hagyni, hogy a mezőket úgy rendeljük hozzá
+a tevékenység párbeszédhez, hogy egyszerűen megfogjuk a szükséges mezőket az
+„Elérhető mezők” tárolóból, és a „Hozzárendelt mezők” tárolóba ejtjük
+azokat. A „Hozzárendelt mezők” tárolóban lévő sorrend olyan, ahogy a mezők a
+képernyőn lesznek. A sorrend módosításához egyszerűen fogd és vidd
+módszerrel rendezze át a mezőt a tárolón belül a megfelelő helyre.
+                </para>
+                <para>
+                    <figure>
+                        <title>Új tevékenység párbeszéd hozzáadása</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-edit-activitydialog.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    Amint a mezők a „Hozzárendelt mezők” tárolóba lettek dobva, egy másik
+felugró ablak jelenik meg a mezővel kapcsolatos néhány részlettel. Meg
+fogjuk hagyni az alapértelmezett beállításokat, és csak a Bejegyzés mezőknél
+kell meggyőződnünk arról, hogy a Bejegyzéstípus mező „belső jegyzetre” van-e
+állítva.
+                </para>
+                <para>
+                    <figure>
+                        <title>Mezőrészletek szerkesztése (bejegyzés)</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-edit-field-article.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    Miután minden mező hozzárendelésre került, kattintson az elküldés gombra a
+fő felugró képernyőn a változtatások elmentéséhez.
+                </para>
+                <para>
+                    Ebben a példában a bejegyzés mezőt fogjuk megjegyzéshez használni, de egy
+másik lehetőség az lehet, hogy létrehoz egy szövegdoboz típusú dinamikus
+mezőt. A lenti sorokban említett többi mezők azok a dinamikus mezők,
+amelyeket korábban határoztunk meg.
+                </para>
+                <para>
+                    Legyen tudatában annak, hogy ezen a képernyőn az összes dinamikus mező a
+„DynamicField_” előtaggal rendelkezik, úgymint „DynamicField_Cim”. Ne
+tévessze össze a „Cím” mezővel, az a jegy címe.
+                </para>
+                <para>
+                    Hozza létre a következő tevékenység párbeszédeket:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>„Az igény rögzítése” (TP1)</para>
+                        <para>
+                            Egy olyan tevékenység párbeszéd, amely az összes szükséges mezőt tartalmazza
+a megrendeléshez összegyűjtendő adatokhoz (cím, szerző és ISBN), és egy
+állapot mezőt a „Jóváhagyás” kiválasztásához tartozó lehetőséggel.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jóváhagyás megtagadva” (TP2)</para>
+                        <para>
+                            Egy tevékenység párbeszéd egy megjegyzés mezővel (bejegyzés) és a
+„Jóváhagyás megtagadva” lehetőséggel rendelkező állapot mezővel.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jóváhagyva” (TP3)</para>
+                        <para>
+                            Itt csak az állapot mezőre van szükségünk a „Jóváhagyva” lehetőséggel.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Rendelés megtagadva” (TP4)</para>
+                        <para>
+                            Egy olyan tevékenység párbeszéd, amely lehetővé teszi a beszerzésnek egy
+lehetetlen rendelés visszautasítását (a könyv nincs raktáron). Itt is
+szükségünk van egy megjegyzés mezőre és az állapot mezőre a „Rendelés
+megtagadva” lehetőséggel.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Megrendelve” (TP5)</para>
+                        <para>
+                            Egy tevékenység párbeszéd a beszállító, ár és kézbesítés dátuma mezőkkel a
+beszerzéshez, és az állapot mező a „Megrendelve” lehetőséggel.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Szállítmány megérkezett” (TP6)</para>
+                        <para>
+                            Az iktató tevékenysége a kézhezvétel dátuma mezővel és az állapot mezővel a
+„Szállítmány megérkezett” lehetőséggel.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                </para>
+                <para>
+                    Az állapot mező korlátozásához minden tevékenység párbeszédnél hozzá kell
+adnunk néhány ACL-t a <filename>Kernel/Config.pm</filename> fájlban, vagy a
+<filename>Kernel/Config/Files</filename> helyen lévő új Perl fájlba.
+                </para>
+                <para>
+                    <screen>
+    $Self->{TicketAcl}->{'F1-TP1-1'} = {
+        Properties => {
+            Process => {
+                ActivityDialogEntityID => ['TP1'],
+            },
+        },
+        Possible => {
+            Ticket => {
+                DynamicField_Allapot => ['Jóváhagyás'],
+            },
+        },
+    };
+
+    $Self->{TicketAcl}->{'F1-TP2-1'} = {
+        Properties => {
+            Process => {
+                ActivityDialogEntityID => ['TP2'],
+            },
+        },
+        Possible => {
+            Ticket => {
+                DynamicField_Allapot => ['Jóváhagyás megtagadva'],
+            },
+        },
+    };
+
+    $Self->{TicketAcl}->{'F1-TP3-1'} = {
+        Properties => {
+            Process => {
+                ActivityDialogEntityID => ['TP3'],
+            },
+        },
+        Possible => {
+            Ticket => {
+                DynamicField_Allapot => ['Jóváhagyva'],
+            },
+        },
+    };
+
+    $Self->{TicketAcl}->{'F1-TP4-1'} = {
+        Properties => {
+            Process => {
+                ActivityDialogEntityID => ['TP4'],
+            },
+        },
+        Possible => {
+            Ticket => {
+                DynamicField_Allapot => ['Rendelés megtagadva'],
+            },
+        },
+    };
+
+    $Self->{TicketAcl}->{'F1-TP5-1'} = {
+        Properties => {
+            Process => {
+                ActivityDialogEntityID => ['TP5'],
+            },
+        },
+        Possible => {
+            Ticket => {
+                DynamicField_Allapot => ['Megrendelve'],
+            },
+        },
+    };
+
+    $Self->{TicketAcl}->{'F1-TP6-1'} = {
+        Properties => {
+            Process => {
+                ActivityDialogEntityID => ['TP6'],
+            },
+        },
+        Possible => {
+            Ticket => {
+                DynamicField_Allapot => ['Szállítmány megérkezett'],
+            },
+        },
+    };
+                    </screen>
+                </para>
+        </section>
+        <section>
+            <title>Átmenetek</title>
+                <para>
+                    Az „Elérhető folyamatelemek” dobozban kattintson az „Átmenetek” elemre, majd
+kattintson az „Új átmenet létrehozása” gombra.
+                </para>
+                <para>
+                    <figure>
+                        <title>Új átmenet létrehozása gomb</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-accordion-new-transition.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    A megnyílt felugró képernyőn töltse ki az „Átmenetnév” mezőt, majd a
+feltételekben ennél a példánál csak egy feltételt és csak egy mezőt fogunk
+használni. Mindkettőnél hagyhatjuk a kapcsolat típusát „és” értéken, és a
+mező illesztési típusát „Szöveg” értékként fogjuk használni.
+                </para>
+                <para>
+                    <figure>
+                        <title>Új átmenet hozzáadása</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-edit-transition.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    Miután minden feltétel be lett állítva, kattintson az elküldés gombra a
+változtatások mentéséhez.
+                </para>
+                <para>
+                    Hozza létre a következő átmeneteket:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>„Jóváhagyás” (A1)</para>
+                        <para>
+                            Egy olyan átmenet, amely azt ellenőrzi, hogy az állapot mező „Jóváhagyás”
+értékre van-e állítva.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jóváhagyás megtagadva” (A2)</para>
+                        <para>
+                            Egy olyan átmenet, amely azt ellenőrzi, hogy az állapot mező „Jóváhagyás
+megtagadva” értékre van-e állítva.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jóváhagyva” (A3)</para>
+                        <para>
+                            Egy olyan átmenet, amely azt ellenőrzi, hogy az állapot mező „Jóváhagyva”
+értékre van-e állítva.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Rendelés megtagadva” (A4)</para>
+                        <para>
+                            Egy olyan átmenet, amely azt ellenőrzi, hogy az állapot mező „Rendelés
+megtagadva” értékre van-e állítva.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Megrendelve” (A5)</para>
+                        <para>
+                            Egy olyan átmenet, amely azt ellenőrzi, hogy az állapot mező „Megrendelve”
+értékre van-e állítva.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Szállítmány megérkezett” (A6)</para>
+                        <para>
+                            Egy olyan átmenet, amely azt ellenőrzi, hogy az állapot mező „Szállítmány
+megérkezett” értékre van-e állítva.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                </para>
+        </section>
+        <section>
+            <title>Átmenet műveletek</title>
+                <para>
+                    Kattintson az „Átmenet műveletek” elemre az „Elérhető folyamatelemek”
+dobozban, majd kattintson az „Új átmenetművelet létrehozása” gombra.
+                </para>
+                <para>
+                    <figure>
+                        <title>Új átmenet művelet létrehozása gomb</title>
+<screenshot>
+<graphic
+fileref="screenshots/customization/pm-accordion-new-transitionaction.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    A megnyílt felugró képernyőn töltse ki az „Átmenet művelet neve” és az
+„Átmenet művelet modul” mezőket, majd adja hozzá a kötelező és opcionális
+paraméterneveket és értékeket.
+                </para>
+                <para>
+                    Az összes átmenet művelet modul a
+<filename>Kernel/System/ProcessManagement/TransitionAction</filename> helyen
+található, és az ebben a kiadásban lévő csomagolt átmenet műveletek listája
+a következő:
+                </para>
+                <para>
+                    <itemizedlist>
+                        <listitem><para>DynamicFieldSet</para></listitem>
+                        <listitem><para>TicketArticleCreate</para></listitem>
+                        <listitem><para>TicketCreate</para></listitem>
+                        <listitem><para>TicketCustomerSet</para></listitem>
+                        <listitem><para>TicketLockSet</para></listitem>
+                        <listitem><para>TicketOwnerSet</para></listitem>
+                        <listitem><para>TicketQueueSet</para></listitem>
+                        <listitem><para>TicketResponsibleSet</para></listitem>
+                        <listitem><para>TicketServiceSet</para></listitem>
+                        <listitem><para>TicketSLASet</para></listitem>
+                        <listitem><para>TicketStateSet</para></listitem>
+                        <listitem><para>TicketTitleSet</para></listitem>
+                        <listitem><para>TicketTypeSet</para></listitem>
+                    </itemizedlist>
+                </para>
+                <para>
+                    Minden modulnak megvannak a saját és különböző paraméterei. Nézze át a <link
+linkend="available-transition-actions">modul dokumentációját</link>, hogy
+megismerje az összes kötelező és opcionális paramétert.
+                </para>
+                <note>
+                    <para>
+                        Az OTRS 4.0.1 verziótól a paraméterek többé nem kötelezően rögzített
+értékek, hanem ehelyett örökölhetik az eredeti jegyből a következő formátum
+használatával: &lt;OTRS_Ticket_property&gt;.
+                    </para>
+                    <para>
+                        Az OTRS 4.0.6 verziótól az &lt;OTRS_TICKET_property&gt; formátum a most
+támogatott. A régi formátum még használható, de elavult, mivel dobva lesz a
+későbbi verziókból.
+                    </para>
+                </note>
+                <para>
+                    <figure>
+                        <title>Új átmenet művelet hozzáadása</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-edit-transitionaction.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    Miután minden paraméter és érték be lett állítva, kattintson az elküldés
+gombra a változtatások mentéséhez.
+                </para>
+                <para>
+                    Hozza létre a következő átmenet műveleteket:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>„Folyamatjegy áthelyezése a »Vezetőség« várólistába” (AM1)</para>
+                        <para>
+                            Ezt a műveletet akkor kellene végrehajtani, amikor a „Jóváhagyás” (A1)
+átmenet alkalmazzák.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jegyfelelős megváltoztatása »Igazgatóra«” (AM2)</para>
+                        <para>
+                            Akkor hajtódik végre, amikor a „Jóváhagyás” (A1) átmenet alkalmazzák.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Folyamatjegy áthelyezése az »Alkalmazottak« várólistába” (AM3)</para>
+                        <para>Akkor hajtódik végre, amikor:</para>
+                        <itemizedlist>
+                            <listitem><para>
+                                A „Jóváhagyás megtagadva” (A2) átmenetet alkalmazzák
+                            </para></listitem>
+                            <listitem><para>
+                                A „Rendelés megtagadva” (A4) átmenetet alkalmazzák
+                            </para></listitem>
+                            <listitem><para>
+                                A „Szállítmány megérkezett” (A6) átmenetet alkalmazzák
+                            </para></listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>„Jegyfelelős megváltoztatása »Alkalmazottra«” (AM4)</para>
+                        <para>Akkor hajtódik végre, amikor:</para>
+                        <itemizedlist>
+                            <listitem><para>
+                                A „Jóváhagyás megtagadva” (A2) átmenetet alkalmazzák
+                            </para></listitem>
+                            <listitem><para>
+                                A „Rendelés megtagadva” (A4) átmenetet alkalmazzák
+                            </para></listitem>
+                            <listitem><para>
+                                A „Szállítmány megérkezett” (A6) átmenetet alkalmazzák
+                            </para></listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>„Folyamatjegy áthelyezése a »Beszerzés« várólistába” (AM5)</para>
+                        <para>Akkor hajtódik végre, amikor a „Jóváhagyva” (A3) átmenet alkalmazzák.</para>
+                    </listitem>
+                    <listitem>
+                        <para>„Folyamatjegy áthelyezése a »Postahivatal« várólistába” (AM6)</para>
+                        <para>Akkor hajtódik végre, amikor a „Megrendelve” (A5) átmenet alkalmazzák.</para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jegy lezárása sikeresen” (AM7)</para>
+                        <para>Akkor hajtódik végre, amikor:</para>
+                        <itemizedlist>
+                            <listitem><para>
+                                A „Szállítmány megérkezett” (A6) átmenetet alkalmazzák
+                            </para></listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>„Jegy lezárása sikertelenül” (AM8)</para>
+                        <para>Akkor hajtódik végre, amikor:</para>
+                        <itemizedlist>
+                            <listitem><para>
+                                A „Jóváhagyás megtagadva” (A2) átmenetet alkalmazzák
+                            </para></listitem>
+                            <listitem><para>
+                                A „Rendelés megtagadva” (A4) átmenetet alkalmazzák
+                            </para></listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+                </para>
+                <para>
+                    Amint látja, vannak olyan helyek, ahol ugyanazt az átmenet műveletet kell
+végrehajtani. Ezért ésszerű lehetővé tenni az átmenet műveletek szabadon
+történő összekapcsolását az átmenetekkel, hogy képes legyen újrahasználni
+azokat.
+                </para>
+        </section>
+        <section>
+            <title>Tevékenységek</title>
+            <para>
+                Azt a megközelítést választottuk, hogy a tevékenységeket egy olyan kosárként
+lássuk, amely egy vagy több tevékenység párbeszédet tartalmazhat.
+            </para>
+            <para>
+                Kattintson a „Tevékenységek” elemre az „Elérhető folyamatelemek” dobozban,
+majd kattintson az „Új tevékenység létrehozása” gombra.
+            </para>
+            <para>
+                <figure>
+                    <title>Új tevékenység létrehozása gomb</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-accordion-new-activity.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                A megnyílt felugró képernyőn töltse ki a „Tevékenység neve” mezőt, majd
+húzza át a szükséges tevékenység párbeszédeket az „Elérhető tevékenység
+párbeszédek” tárolóból, és ejtse azokat a „Hozzárendelt tevékenység
+párbeszédek” tárolóba. Ezek a párbeszédablakok ugyanolyan sorrendben lesznek
+megjelenítve (a jegynagyítás képernyőn), mint ahogy ezen a képernyőn meg van
+határozva fentről lefelé, balról jobbra értelmezve.
+            </para>
+            <para>
+                Ez a sorrend különösen az első tevékenységben fontos, mivel az első
+tevékenység párbeszéd az egyetlen ennél a tevékenységnél, amely akkor
+jelenik meg, amikor a folyamat elindul.
+            </para>
+            <para>
+                Hozza létre a következő tevékenységeket:
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>„Igény rögzítése” (T1)</para>
+                        <para>Az „Igény rögzítése” (TP1) tevékenység párbeszédet tartalmazza</para>
+                    </listitem>
+                    <listitem>
+                        <para>„Jóváhagyás” (T2)</para>
+                        <para>
+                            A „Jóváhagyás megtagadva” (TP2), valamint a „Jóváhagyva” (TP3) tevékenység
+párbeszédeket tartalmazza
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Rendelés” (T3)</para>
+                        <para>
+                            A „Rendelés megtagadva” (TP4), valamint a „Megrendelve” (TP5) tevékenység
+párbeszédeket tartalmazza
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>„Beérkezés” (T4)</para>
+                        <para>A „Szállítmány megérkezett” (TP6) tevékenység párbeszédet tartalmazza</para>
+                    </listitem>
+                    <listitem>
+                        <para>„Folyamat befejezve” (T5): Ez egy lehetséges tevékenység párbeszédek nélküli
+tevékenység. A „Jóváhagyás megtagadva”, a „Rendelés megtagadva” vagy a
+„Szállítmány megérkezett” után lesz beállítva, és a folyamat végét
+ábrázolja.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                Most már világosan láthatjuk, hogy a tevékenységek egy folyamatjegy pontosan
+meghatározott állapotai. Egy sikeres átmenet után egy folyamatjegy az egyik
+tevékenységből a másikba kerül át.
+            </para>
+        </section>
+        <section>
+            <title>A könyvrendelési folyamat útvonala</title>
+            <para>
+                Fejezzük be a példánkat a kirakó utolsó hiányzó darabjával, a folyamattal
+mint a munkafolyamat leírójával. A mi esetünkben ez a teljes rendelési
+munkafolyamat. Egyéb folyamatok lehetnek az irodaszer rendelés vagy teljesen
+különböző folyamatok.
+            </para>
+            <para>
+                A folyamatnak van egy kezdőpontja, amely a kezdő tevékenységből és a kezdő
+tevékenység párbeszédből áll. Bármely új könyvrendelésnél a kezdő
+tevékenység párbeszéd (első tevékenység párbeszéd az első tevékenységnél) az
+első képernyő, amely meg lesz jelenítve. Ha ez be van fejezve és el van
+mentve, akkor a folyamatjegy létre lesz hozva, és követheti a beállított
+munkafolyamatot.
+            </para>
+            <para>
+                A folyamat tartalmazza az irányokat is ahhoz, hogy a folyamatjegy képes
+legyen mozogni a folyamaton keresztül. Hívjuk ezt „Útvonalnak”. Ez a kezdő
+tevékenységből, egy vagy több átmenetből (valószínűleg átmenet műveletekkel)
+és egyéb tevékenységekből áll.
+            </para>
+            <para>
+                Feltételezve, hogy a tevékenységek már hozzá lettek rendelve a tevékenység
+párbeszédeikhez, húzzon el egy tevékenységet a harmonikából (a képernyő bal
+oldali részén), és ejtse azt a vászonterületre (a folyamat-információk
+alá). Figyelje meg, hogy egy nyíl automatikusan elhelyezésre kerül a
+folyamat kezdetétől (zöld kör) a tevékenységhez. (Ez az első tevékenység, és
+annak első tevékenység párbeszéde az első képernyő, amely meg lesz
+jelenítve, amikor a folyamat elindul).
+            </para>
+            <para>
+                <figure>
+                    <title>Első tevékenység ráhúzása a vászonra</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-canvas-drag-activity.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Ezután húzzon egy másik tevékenységet is a vászonra. Most két tevékenységünk
+lesz a vásznon. Az első a kezdőponthoz kapcsolódik, és a másodiknak
+nincsenek kapcsolatai. Rámutathat az egérrel minden egyes tevékenységre a
+saját tevékenység párbeszédeik felfedéséhez.
+            </para>
+            <para>
+                <figure>
+                    <title>Második tevékenység ráhúzása a vászonra</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-canvas-drag-activity2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Ezután hozzuk létre az „útvonalat” (kapcsolatot) a két tevékenység
+között. Ehhez az átmeneteket fogjuk használni. Kattintson az átmenetekre a
+harmonikában, húzzon ki egy átmenetet, és ejtse le az első tevékenységen
+belül. Figyelje meg, hogy a tevékenység megváltoztatja a színét azt jelezve,
+hogy az átmenet csatolva lett. Amint az átmenet le lett ejtve, az átmenet
+nyilának végpontja el lesz helyezve a folyamat kezdőpontja mellett. Húzza el
+az átmenet nyilának végpontját, és ejtse le a másik tevékenységen belül a
+tevékenységek közötti kapcsolat létrehozásához.
+            </para>
+            <para>
+                <figure>
+                    <title>Egy átmenet ráhúzása a vászonra</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-canvas-drag-transition.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Most, hogy a műveletek közötti „útvonal” meghatározásra került, ezután hozzá
+kell rendelnünk az átmenet műveleteket az átmenethez. Kattintson duplán az
+átmenet címkéjére (a vásznon), amely meg fog nyitni egy új felugró ablakot.
+            </para>
+            <para>
+                <figure>
+                    <title>Tevékenységek összekötése átmenetek használatával</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-canvas-drag-transition2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Húzza el a szükséges átmenet műveleteket az elérhető átmenet műveletek
+tárolóból, és ejtse le azokat a hozzárendelt átmenet műveletek tárolóba,
+majd kattintson az elküldés gombra.
+            </para>
+            <para>
+                <figure>
+                    <title>Átmenet műveletek hozzárendelése</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-edit-path.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Ezután térjen vissza a fő folyamatszerkesztés képernyőhöz, és kattintson a
+vászon alatti mentés gombra az összes változtatás elmentéséhez.
+            </para>
+            <para>
+                Fejezze be az „útvonalat” a következő tevékenységek, átmenetek és átmenet
+műveletek hozzáadásával:
+            </para>
+            <para>Az igény rögzítése a „Jóváhagyásig”</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Kezdőpont: „Igény rögzítése” (T1) tevékenység</para>
+                    </listitem>
+                    <listitem>
+                        <para>Lehetséges átmenet: „Jóváhagyás (A1)”</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Ha ennek a tevékenységnek a feltétele teljesül, akkor a jegy át fog lépni a
+„Jóváhagyás” (T2) tevékenységbe
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Továbbá a következő átmenet műveletek lesznek végrehajtva:
+                                </para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>
+                                            „Folyamatjegy áthelyezése a »Vezetőség« várólistába” (AM1)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>„Jegyfelelős megváltoztatása »Igazgatóra«” (AM2)</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                Az „Igény rögzítése” (T1) tevékenység a folyamatjegy meghatározott lépése,
+ahol lehetőség van a „Jóváhagyás” (A1) átmenethez. Ha ezt alkalmazzák, akkor
+a jegy át fog lépni a következő „Jóváhagyás” (T2) tevékenységbe, és a
+„Folyamatjegy áthelyezése a »Vezetőség« várólistába” (AM1) és a „Jegyfelelős
+megváltoztatása »Igazgatóra«” (AM2) átmenet műveletek lesznek végrehajtva. A
+„Jóváhagyás” (T2) tevékenységben a „Jóváhagyás megtagadva” (TP2) és a
+„Jóváhagyva” (TP3) tevékenység párbeszédek lesznek elérhetők.
+            </para>
+            <para>Jóváhagyás</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Kezdőpont: „Jóváhagyás” (T2) tevékenység</para>
+                    </listitem>
+                    <listitem>
+                        <para>Lehetséges átmenetek:</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>„Jóváhagyás megtagadva” (A2)</para>
+                                    <itemizedlist>
+                                        <listitem>
+                                        <para>
+                                            Ha ez illeszkedik, akkor a folyamatjegy át fog lépni a „Folyamat befejezve”
+(T5) tevékenységbe.
+                                        </para>
+                                        </listitem>
+                                        <listitem>
+                                        <para>
+                                            Továbbá a következő átmenet műveletek lesznek végrehajtva:
+                                        </para>
+                                        <itemizedlist>
+                                        <listitem>
+                                            <para>
+                                                „Folyamatjegy áthelyezése az »Alkalmazottak« várólistába” (AM3)
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                „Jegyfelelős megváltoztatása »Alkalmazottra«” (AM4)
+                                             </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                „Jegy lezárása sikertelenül” (AM8)
+                                             </para>
+                                        </listitem>
+                                        </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                                <listitem>
+                                    <para>„Jóváhagyva” (A3)</para>
+                                    <itemizedlist>
+                                        <listitem>
+                                        <para>
+                                            Ha ez illeszkedik, akkor a folyamatjegy át fog lépni a „Rendelés” (T3)
+tevékenységbe.
+                                        </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Továbbá a következő átmenet művelet lesz végrehajtva:
+                                            </para>
+                                            <itemizedlist>
+                                            <listitem>
+                                                <para>
+                                                    „Folyamatjegy áthelyezése a »Beszerzés« várólistába” (AM5)
+                                                </para>
+                                            </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                Láthatjuk, hogy a jelenlegi tevékenységből, amely a folyamatjegy egy lépését
+határozza meg, egy vagy több lehetőség van az átmenethez, amelynek pontosan
+egy céltevékenysége van (és valószínűleg egy vagy több átmenet művelete).
+            </para>
+            <para>Rendelés</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Kezdőpont: „Rendelés” (T3) tevékenység</para>
+                    </listitem>
+                    <listitem>
+                        <para>Lehetséges átmenetek:</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>„Rendelés megtagadva” (A4)</para>
+                                    <itemizedlist>
+                                        <listitem>
+                                        <para>
+                                            Ha ez illeszkedik, akkor a folyamatjegy át fog lépni a „Folyamat befejezve”
+(T5) tevékenységbe.
+                                        </para>
+                                        </listitem>
+                                        <listitem>
+                                        <para>
+                                            Továbbá a következő átmenet műveletek lesznek végrehajtva:
+                                        </para>
+                                        <itemizedlist>
+                                        <listitem>
+                                            <para>
+                                                „Folyamatjegy áthelyezése az »Alkalmazottak« várólistába” (AM3)
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                „Jegyfelelős megváltoztatása »Alkalmazottra«” (AM4)
+                                             </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                „Jegy lezárása sikertelenül” (AM8)
+                                             </para>
+                                        </listitem>
+                                        </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                                <listitem>
+                                    <para>„Megrendelve” (A5)</para>
+                                    <itemizedlist>
+                                        <listitem>
+                                        <para>
+                                            Ha ez illeszkedik, akkor a folyamatjegy át fog lépni a „Beérkezés” (T4)
+tevékenységbe.
+                                        </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Továbbá a következő átmenet művelet lesz végrehajtva:
+                                            </para>
+                                            <itemizedlist>
+                                            <listitem>
+                                                <para>
+                                                    „Folyamatjegy áthelyezése a »Postahivatal« várólistába” (AM6)
+                                                </para>
+                                            </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>Beérkezés</para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Kezdőpont: „Beérkezés” (T4) tevékenység</para>
+                    </listitem>
+                    <listitem>
+                        <para>Lehetséges átmenetek:</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>„Szállítmány megérkezett” (A6)</para>
+                                    <itemizedlist>
+                                        <listitem>
+                                        <para>
+                                            Ha ez illeszkedik, akkor a folyamatjegy át fog lépni a „Folyamat befejezve”
+(T5) tevékenységbe.
+                                        </para>
+                                        </listitem>
+                                        <listitem>
+                                        <para>
+                                            Továbbá a következő átmenet műveletek lesznek végrehajtva:
+                                        </para>
+                                        <itemizedlist>
+                                        <listitem>
+                                            <para>
+                                                „Folyamatjegy áthelyezése az »Alkalmazottak« várólistába” (AM3)
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                „Jegyfelelős megváltoztatása »Alkalmazottra«” (AM4)
+                                             </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                „Jegy lezárása sikeresen” (AM7)
+                                             </para>
+                                        </listitem>
+                                        </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                A könyvrendelési folyamat teljes útvonala ezután így fog kinézni:
+            </para>
+            <para>
+                <figure>
+                    <title>A könyvrendelés teljes folyamatútvonala</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-edit-process.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Miután befejezte a folyamat útvonalát, kattintson a „Mentés” gombra a vászon
+alsó részén, majd ezután kattintson az „Összes folyamat szinkronizálása”
+gombra. Ez be fog gyűjteni minden folyamat-információt az adatbázisból, és
+előállít egy gyorsítótár fájlt (Perl nyelven). Ez a gyorsítótár fájl
+tulajdonképpen a folyamatok beállítása, amelyet a rendszer a folyamatjegyek
+létrehozásához vagy használatához fog használni.
+            </para>
+            <para>
+                A folyamatokon elvégzett bármilyen változtatás (a grafikus felületen) a
+gyorsítótár fájl újraszinkronizálását fogja igényelni azért, hogy a
+változást visszajuttassa a rendszerbe.
+            </para>
+            <para>
+                Lehetséges a teljes folyamat importálása is egy YAML-fájlból, de az
+importálás előtt továbbra is szükséges az összes dinamikus mező,
+felhasználó, várólista, stb. létrehozása, amelyek az egyes folyamatokhoz
+szükségesek.
+            </para>
+            <para>
+                Vegye figyelembe, hogy ha a folyamat ACL-ek használatát igényli, akkor
+azokat is kézzel szükséges beállítani.
+            </para>
+            <para>
+                A könyvrendelési folyamat példához a teljes YAML-fájl a következő:
+            </para>
+            <para>
+                <screen><![CDATA[
+---
+Activities:
+  T1:
+    ActivityDialogs:
+      - TP1
+    ChangeTime: 2012-11-23 14:49:22
+    Config:
+      ActivityDialog:
+        1: TP1
+    CreateTime: 2012-11-23 11:49:38
+    EntityID: T1
+    ID: 151
+    Name: Igény rögzítése
+  T2:
+    ActivityDialogs:
+      - TP2
+      - TP3
+    ChangeTime: 2012-12-13 00:55:12
+    Config:
+      ActivityDialog:
+        1: TP2
+        2: TP3
+    CreateTime: 2012-11-23 11:50:11
+    EntityID: T2
+    ID: 152
+    Name: Jóváhagyás
+  T3:
+    ActivityDialogs:
+      - TP4
+      - TP5
+    ChangeTime: 2012-11-23 18:12:14
+    Config:
+      ActivityDialog:
+        1: TP4
+        2: TP5
+    CreateTime: 2012-11-23 11:50:35
+    EntityID: T3
+    ID: 153
+    Name: Rendelés
+  T4:
+    ActivityDialogs:
+      - TP6
+    ChangeTime: 2012-11-23 18:12:35
+    Config:
+      ActivityDialog:
+        1: TP6
+    CreateTime: 2012-11-23 11:51:00
+    EntityID: T4
+    ID: 154
+    Name: Beérkezés
+  T5:
+    ActivityDialogs: []
+    ChangeTime: 2012-11-23 11:51:33
+    Config: {}
+    CreateTime: 2012-11-23 11:51:33
+    EntityID: T5
+    ID: 155
+    Name: Folyamat befejezve
+ActivityDialogs:
+  TP1:
+    ChangeTime: 2012-12-06 02:16:21
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: Az igény rögzítése
+      FieldOrder:
+        - DynamicField_Szerzo
+        - DynamicField_ISBN
+        - DynamicField_Cim
+        - DynamicField_Allapot
+      Fields:
+        DynamicField_Szerzo:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_ISBN:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Allapot:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Cim:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+      Interface:
+        - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: ''
+    CreateTime: 2012-11-23 14:34:43
+    EntityID: TP1
+    ID: 154
+    Name: Igény rögzítése
+  TP2:
+    ChangeTime: 2012-11-23 14:57:41
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: Jóváhagyás megtagadva
+      FieldOrder:
+        - Article
+        - DynamicField_Allapot
+      Fields:
+        Article:
+          Config:
+            ArticleType: note-internal
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Allapot:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+      Interface:
+        - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: Kérés megtagadása
+    CreateTime: 2012-11-23 14:36:39
+    EntityID: TP2
+    ID: 155
+    Name: Jóváhagyás megtagadva
+  TP3:
+    ChangeTime: 2012-12-14 03:14:23
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: Jóváhagyva
+      FieldOrder:
+        - DynamicField_Allapot
+      Fields:
+        DynamicField_Allapot:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+      Interface:
+        - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: Kérés jóváhagyása
+    CreateTime: 2012-11-23 14:37:35
+    EntityID: TP3
+    ID: 156
+    Name: Jóváhagyva
+  TP4:
+    ChangeTime: 2012-11-23 14:58:52
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: Rendelés megtagadva
+      FieldOrder:
+        - Article
+        - DynamicField_Allapot
+      Fields:
+        Article:
+          Config:
+            ArticleType: note-internal
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Allapot:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+      Interface:
+        - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: Rendelés visszautasítása
+    CreateTime: 2012-11-23 14:38:48
+    EntityID: TP4
+    ID: 157
+    Name: Rendelés megtagadva
+  TP5:
+    ChangeTime: 2012-12-06 02:20:12
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: Megrendelve
+      FieldOrder:
+        - DynamicField_KezbesitesDatuma
+        - DynamicField_Ar
+        - DynamicField_Beszallito
+        - DynamicField_Allapot
+      Fields:
+        DynamicField_KezbesitesDatuma:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Ar:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Allapot:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Beszallito:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+      Interface:
+        - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: Megrendelés
+    CreateTime: 2012-11-23 14:41:28
+    EntityID: TP5
+    ID: 158
+    Name: Megrendelve
+  TP6:
+    ChangeTime: 2012-11-23 14:42:43
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: Szállítmány megérkezett
+      FieldOrder:
+        - DynamicField_KeszhezvetelDatuma
+        - DynamicField_Allapot
+      Fields:
+        DynamicField_KezhezvetelDatuma:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+        DynamicField_Allapot:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: 1
+      Interface:
+        - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: ''
+    CreateTime: 2012-11-23 14:42:43
+    EntityID: TP6
+    ID: 159
+    Name: Szállítmány megérkezett
+Process:
+  Activities:
+    - T1
+    - T2
+    - T3
+    - T4
+    - T5
+  ChangeTime: 2012-12-06 02:31:59
+  Config:
+    Description: Egy könyv rendelésének folyamata.
+    Path:
+      T1:
+        A1:
+          ActivityEntityID: T2
+          TransitionAction:
+            - AM2
+            - AM1
+      T2:
+        A2:
+          ActivityEntityID: T5
+          TransitionAction:
+            - AM3
+            - AM4
+            - AM8
+        A3:
+          ActivityEntityID: T3
+          TransitionAction:
+            - AM5
+      T3:
+        A4:
+          ActivityEntityID: T5
+          TransitionAction:
+            - AM3
+            - AM4
+            - AM8
+        A5:
+          ActivityEntityID: T4
+          TransitionAction:
+            - AM6
+      T4:
+        A6:
+          ActivityEntityID: T5
+          TransitionAction:
+            - AM3
+            - AM4
+            - AM7
+      T5: {}
+    StartActivity: T1
+    StartActivityDialog: TP1
+  CreateTime: 2012-11-23 11:45:12
+  EntityID: F1
+  ID: 94
+  Layout:
+    T1:
+      left: 172
+      top: 63
+    T2:
+      left: 402
+      top: 156
+    T3:
+      left: 649
+      top: 255
+    T4:
+      left: 774
+      top: 391
+    T5:
+      left: 194
+      top: 410
+  Name: Könyvrendelés
+  State: Active
+  StateEntityID: S1
+  TransitionActions:
+    - AM1
+    - AM2
+    - AM3
+    - AM4
+    - AM8
+    - AM5
+    - AM3
+    - AM4
+    - AM8
+    - AM6
+    - AM3
+    - AM4
+    - AM7
+  Transitions:
+    - A1
+    - A2
+    - A3
+    - A4
+    - A5
+    - A6
+TransitionActions:
+  AM1:
+    ChangeTime: 2012-11-23 16:01:37
+    Config:
+      Config:
+        Queue: Vezetőség
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+    CreateTime: 2012-11-23 15:50:59
+    EntityID: AM1
+    ID: 61
+    Name: Folyamatjegy áthelyezése a „Vezetőség” várólistába
+  AM2:
+    ChangeTime: 2012-11-23 16:02:12
+    Config:
+      Config:
+        Responsible: Igazgató
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet
+    CreateTime: 2012-11-23 15:58:22
+    EntityID: AM2
+    ID: 62
+    Name: Jegyfelelős megváltoztatása „Igazgatóra”
+  AM3:
+    ChangeTime: 2012-11-24 14:27:02
+    Config:
+      Config:
+        Queue: Alkalmazottak
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+    CreateTime: 2012-11-23 16:02:54
+    EntityID: AM3
+    ID: 63
+    Name: Folyamatjegy áthelyezése az „Alkalmazottak” várólistába
+  AM4:
+    ChangeTime: 2012-11-23 16:04:06
+    Config:
+      Config:
+        Responsible: Alkalmazott
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet
+    CreateTime: 2012-11-23 16:04:06
+    EntityID: AM4
+    ID: 64
+    Name: Jegyfelelős megváltoztatása „Alkalmazottra”
+  AM5:
+    ChangeTime: 2012-12-06 02:18:34
+    Config:
+      Config:
+        Queue: Beszerzés
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+    CreateTime: 2012-11-23 16:04:54
+    EntityID: AM5
+    ID: 65
+    Name: Folyamatjegy áthelyezése a „Beszerzés” várólistába
+  AM6:
+    ChangeTime: 2012-12-06 02:18:48
+    Config:
+      Config:
+        Queue: Postahivatal
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+    CreateTime: 2012-11-23 16:06:20
+    EntityID: AM6
+    ID: 66
+    Name: Folyamatjegy áthelyezése a „Postahivatal” várólistába
+  AM7:
+    ChangeTime: 2012-12-06 02:29:55
+    Config:
+      Config:
+        State: closed successful
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketStateSet
+    CreateTime: 2012-12-06 02:29:27
+    EntityID: AM7
+    ID: 67
+    Name: Jegy lezárása sikeresen
+  AM8:
+    ChangeTime: 2012-12-06 02:31:12
+    Config:
+      Config:
+        State: closed unsuccessful
+      Module: Kernel::System::ProcessManagement::TransitionAction::TicketStateSet
+    CreateTime: 2012-12-06 02:31:12
+    EntityID: AM8
+    ID: 68
+    Name: Jegy lezárása sikertelenül
+Transitions:
+  A1:
+    ChangeTime: 2012-11-23 15:12:20
+    Config:
+      Condition:
+        1:
+          Fields:
+            DynamicField_Allapot:
+              Match: Jóváhagyás
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2012-11-23 11:53:52
+    EntityID: A1
+    ID: 94
+    Name: Jóváhagyás
+  A2:
+    ChangeTime: 2012-11-23 15:12:50
+    Config:
+      Condition:
+        1:
+          Fields:
+            DynamicField_Allapot:
+              Match: Jóváhagyás megtagadva
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2012-11-23 11:54:26
+    EntityID: A2
+    ID: 95
+    Name: Jóváhagyás megtagadva
+  A3:
+    ChangeTime: 2012-11-23 15:13:29
+    Config:
+      Condition:
+        1:
+          Fields:
+            DynamicField_Allapot:
+              Match: Jóváhagyva
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2012-11-23 11:54:54
+    EntityID: A3
+    ID: 96
+    Name: Jóváhagyva
+  A4:
+    ChangeTime: 2012-11-23 15:14:08
+    Config:
+      Condition:
+        1:
+          Fields:
+            DynamicField_Allapot:
+              Match: Rendelés megtagadva
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2012-11-23 11:55:25
+    EntityID: A4
+    ID: 97
+    Name: Rendelés megtagadva
+  A5:
+    ChangeTime: 2012-11-23 18:30:33
+    Config:
+      Condition:
+        1:
+          Fields:
+            DynamicField_Allapot:
+              Match: Megrendelve
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2012-11-23 11:56:15
+    EntityID: A5
+    ID: 98
+    Name: Megrendelve
+  A6:
+    ChangeTime: 2012-11-23 15:15:30
+    Config:
+      Condition:
+        1:
+          Fields:
+            DynamicField_Allapot:
+              Match: Szállítmány megérkezett
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2012-11-23 11:56:48
+    EntityID: A6
+    ID: 99
+    Name: Szállítmány megérkezett
+
+                ]]></screen>
+            </para>
+        </section>
+    </section>
+
+    <section>
+        <title>Folyamatbeállítás hivatkozás</title>
+
+        <section>
+            <title>Folyamat</title>
+            <para>
+                Egy folyamat egy munkafolyamat/folyamat útvonalát modellezi. Ezen az
+útvonalon az útvonalpontok tevékenységek vagy átmenetek lehetnek, ezekről
+majd később beszélünk.
+            </para>
+            <section>
+                <title>Folyamatbeállítás</title>
+                <para>
+                    A folyamatbeállítás a <filename>Kernel/Config.pm</filename> fájlban
+végezhető el, de erősen ajánlott egy új fájl létrehozása, mint például
+<filename>Kernel/Config/Files/MyProcess.pm</filename>. Figyeljen arra, hogy
+a grafikus felület a
+<filename>Kernel/Config/File/ZZZProcessManagement</filename> fájlt állítja
+elő, ezért kerülje el ennek a fájlnévnek a használatát, különben felül lesz
+írva, amikor a folyamatokat szinkronizálja. Nézzünk egy folyamatbeállítás
+példát (a folyamat gyorsítótár fájlból):
+                </para>
+                <para>
+                    <screen>
+$Self->{'Process'} = {
+    'F1' => {
+        Name                => 'Könyvrendelés',
+        CreateTime          => '16-02-2012 13:37:00',
+        CreateBy            => '1',
+        ChangeTime          => '17-02-2012 13:37:00',
+        ChangeBy            => '1',
+        State               => 'Active',
+        StartActivity       => 'T1',
+        StartActivityDialog => 'TP1',
+        Path => {
+            'T1' => {
+                'A1' => {
+                    ActivityEntityID => 'T2',
+                },
+            },
+            'T2' => {
+                'A2' =>  {
+                    ActivityEntityID => 'T3',
+                },
+            },
+        },
+    },
+    'F2' => {
+        Name                => 'IT-rendelés',
+        CreateTime          => '26-02-2012 13:37:00',
+        CreateBy            => '1',
+        ChangeTime          => '27-02-2012 13:37:00',
+        ChangeBy            => '1',
+        State               => 'Active',
+        StartActivity       => 'T2',
+        StartActivityDialog => 'TP2',
+        Path => {
+            'T2' => {
+                'A3' => {
+                    ActivityEntityID => 'T4',
+                },
+            },
+        },
+    }
+};
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Név</title>
+                <para>
+                    A folyamat neve, ezt az ügyintéző választhatja ki, amikor egy új
+folyamatjegyet hoz létre.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozás ideje (CreateTime)</title>
+                <para>
+                    Az időpont, amikor a folyamatot létrehozták.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozta (CreateBy)</title>
+                <para>
+                    A folyamatot létrehozó felhasználó felhasználó-azonosítója.
+                </para>
+            </section>
+            <section>
+                <title>Módosítás ideje (ChangeTime)</title>
+                <para>
+                    Az időpont, amikor a folyamatot megváltoztatták.
+                </para>
+            </section>
+            <section>
+                <title>Módosította (ChangeBy)</title>
+                <para>
+                    A felhasználó felhasználó-azonosítója, aki az utolsó változtatást végezte a
+folyamaton.
+                </para>
+            </section>
+            <section>
+                <title>Állapot (State)</title>
+                <para>
+                    Egy folyamat állapotát határozza meg. Lehetséges értékek:
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                „Aktív” („Active”): minden olyan folyamat, amely használható egy új
+folyamatjegyben.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                „Eltűnik” („FadeAway”): azok a folyamatok, amelyek többé nem választhatók új
+jegyekhez, de a meglévő jegyek még használhatják a folyamatot.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                „Inaktív” („Inactive”): kikapcsolt folyamatok, és nem használhatók új vagy
+meglévő jegyeknél.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </section>
+            <section>
+                <title>Kezdő tevékenység (StartActivity)</title>
+                <para>
+                    Egy új folyamatjegy létrehozásakor meg kell határozni egy kezdő
+tevékenységet. Amint a jegy létrejön, ez a tevékenység lesz beállítva, és az
+első átmenet ellenőrzések alapjaként lesz használva.
+                </para>
+            </section>
+            <section>
+                <title>Kezdő tevékenység párbeszéd (StartActivityDialog)</title>
+                <para>
+                    Új folyamatjegyeknél meg kell határozni egy kezdő tevékenység
+párbeszédet. Ez akkor lesz megjelenítve, amikor egy új folyamatjegyet hoznak
+létre (miután kiválasztották a folyamatot). Ezen a ponton a jegy még nem
+létezik, a kezdő tevékenység párbeszéd elküldése után lesz létrehozva.
+                </para>
+            </section>
+            <section>
+                <title>Útvonal (Path)</title>
+                <para>
+                    Az útvonal tartalmazza a tevékenységek szerkezetét és a köztük lévő
+lehetséges átmeneteket a jelenlegi folyamatnál. Valamint a tevékenység
+átmeneteket is, amelyek az átmenetkor következnek be. Ez szabályozza azt az
+utat, amelyet egy folyamatjegy megtehet. Példa:
+                </para>
+                <para>
+                    <screen>
+'T1' => {
+    'A1' => {
+        ActivityEntityID => 'T2',
+    },
+    'A2' => {
+        ActivityEntityID => 'T3',
+    },
+    'A3' => {
+        ActivityEntityID => 'T4',
+        TransitionAction => ['AM1', 'AM2'],
+    },
+},
+                    </screen>
+                </para>
+                <para>
+                    Ha egy folyamatjegy a „T1” tevékenységben van, akkor három lehetséges útja
+van, hogy eljusson egy másik tevékenységbe. Az „A1”-„A3” átmenetekben
+feltételek vannak meghatározva, amelyeket egy folyamatjegynek teljesítenie
+kell, hogy átlépjen (továbbítás) egy másik tevékenységbe.
+                </para>
+                <para>
+                    Ha ebben az esetben a folyamatjegy összes értéke és annak dinamikus mezői
+helyesek, amelyek szükségesek a „A2” átmenethez, akkor a jegy át lesz
+léptetve a „T1” tevékenységből a „T3” tevékenységbe. Miután egy tevékenység
+párbeszédet elküldtek, vagy bármilyen más változtatást hajtottak végre a
+jegyen, akkor ellenőrizve lesznek a lehetséges átmenetek a jelenlegi
+tevékenységből. Ha több átmenet is lehetséges, akkor az első lesz használva
+(az átmenet-azonosítók számszerű rendezése alapján).
+                </para>
+                <para>
+                    Lehetséges továbbá átmenet műveleteket rendelni az átmenetekhez az útvonal
+beállításaiban. Vannak olyan modulok, amelyek egy sikeres átmenet után
+lesznek végrehajtva. Ezeket tömbformában kell megadni, amint a példában is
+látható. A részletekről később fogunk beszélni.
+                </para>
+            </section>
+        </section>
+
+        <section>
+            <title>Tevékenység</title>
+            <para>
+                Egy tevékenység egy vagy több tevékenység párbeszédet tartalmaz, és egy
+„lépést” modellez a folyamatban. A jelenlegi tevékenység összes tevékenység
+párbeszéde meg lesz jelenítve a jegynagyításban, és addig használható, amíg
+egy átmenet feltételei nincsenek teljesítve.
+            </para>
+            <section>
+            <title>Tevékenységbeállítás</title>
+            <para>
+                Nézzünk egy tevékenységbeállítás példát:
+            </para>
+            <para>
+                <screen>
+$Self->{'Process::Activity'} =
+{
+    'T1' => {
+        Name       => '1. opcionális tevékenység',
+        CreateTime => '16-02-2012 13:37:00',
+        CreateBy   => '1',
+        ChangeTime => '17-02-2012 13:37:00',
+        ChangeBy   => '1',
+        ActivityDialog => {
+            1 => 'TP1',
+        },
+    },
+    'T2' => {
+        Name       => '2. opcionális tevékenység',
+        CreateTime => '16-02-2012 13:37:00',
+        CreateBy   => '1',
+        ChangeTime => '17-02-2012 13:37:00',
+        ChangeBy   => '1',
+        ActivityDialog => {
+            1 => 'TP5',
+            2 => 'TP6',
+            3 => 'TP1',
+        },
+    },
+};
+                </screen>
+            </para>
+            </section>
+            <section>
+                <title>Név</title>
+                <para>
+                    A tevékenység neve.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozás ideje (CreateTime)</title>
+                <para>
+                    Az időpont, amikor létrehozták.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozta (CreateBy)</title>
+                <para>
+                    A felhasználó felhasználó-azonosítója, aki a tevékenységet létrehozta.
+                </para>
+            </section>
+            <section>
+                <title>Módosítás ideje (ChangeTime)</title>
+                <para>
+                    A legutolsó időpont, amikor megváltoztatták.
+                </para>
+            </section>
+            <section>
+                <title>Módosította (ChangeBy)</title>
+                <para>
+                    A legutolsó felhasználó felhasználó-azonosítója, aki a tevékenységet
+megváltoztatta.
+                </para>
+            </section>
+            <section>
+                <title>Tevékenység párbeszéd (ActivityDialog)</title>
+                <para>
+                    A tevékenység párbeszéd azon tevékenység párbeszédek listáját tartalmazza,
+amelyek ebben a tevékenységben elérhetők. A jelenlegi tevékenység összes
+tevékenység párbeszéde meg fog jelenni a jegynagyításban. A sorrendjüket a
+beállításokban lévő sorrend állítja be. Itt a „TP5” a „TP6” és a „TP1” előtt
+jelenik meg.
+                </para>
+            </section>
+        </section>
+
+        <section>
+            <title>Tevékenység párbeszéd (ActivityDialog)</title>
+            <para>
+                A tevékenység párbeszéd egy különleges képernyő, és különböző
+tevékenységekben használható.
+            </para>
+            <section>
+                <title>Tevékenység párbeszéd beállítások</title>
+                <para>
+                    Nézzünk egy példabeállítást:
+                </para>
+                <para>
+                    <screen>
+$Self->{'Process::ActivityDialog'} = {
+    'TP1' => {
+        Name             => '1. opcionális tevékenység párbeszéd',
+        DescriptionShort => 'Alapvető információk',
+        DescriptionLong  => 'Szúrja be a szükséges alapvető információkat az IT-rendelésekhez',
+        CreateTime       => '28-02-2012 13:37:00',
+        CreateBy         => '1',
+        ChangeTime       => '29-02-2012 13:37:00',
+        ChangeBy         => '1',
+        Fields => {
+            PriorityID => {
+                DescriptionShort => 'Prioritás-azonosító',
+                DescriptionLong  => 'Itt adja meg a prioritást',
+                Display          => 2,
+            },
+        },
+        FieldOrder       => [ 'PriorityID' ],
+        SubmitAdviceText => 'Jegyzet: Ha elküldi az űrlapot…',
+        SubmitButtonText => 'Kérés küldése',
+    },
+    'TP2' => {
+        Name             => '2. opcionális tevékenység párbeszéd',
+        DescriptionShort => 'Alapvető információk',
+        DescriptionLong  => 'Szúrja be a szükséges alapvető információkat a könyvrendelésekhez',
+        CreateTime       => '28-02-2012 13:37:00',
+        CreateBy         => '1',
+        ChangeTime       => '29-02-2012 13:37:00',
+        ChangeBy         => '1',
+        Fields => {
+            StateID => {
+                DescriptionShort => 'Állapot-azonosító',
+                DescriptionLong  => 'Itt adja meg az állapotot',
+                Display          => 2,
+                DefaultValue     => '2',
+            },
+            Queue => {
+                DescriptionShort => 'Várólista-azonosító',
+                DescriptionLong  => 'Itt adja meg a várólistát',
+                Display          => 2,
+                DefaultValue     => 'Nyers',
+            },
+            Title => {
+                DescriptionShort => 'Cím',
+                DescriptionLong  => 'Itt adja meg a címet',
+                Display          => 1,
+                DefaultValue     => 'Alapértelmezett cím',
+            },
+            DynamicField_Szam => {
+                DescriptionShort    => 'Mennyiség',
+                DescriptionLong     => 'Itt adja meg a mennyiséget',
+                Display             => 2,
+                DefaultValue        => '4',
+            },
+        },
+        FieldOrder       => [ 'DynamicField_Szam', 'StateID', 'Queue', 'Title' ],
+        SubmitAdviceText => 'Jegyzet: Ha elküldi az űrlapot…',
+        SubmitButtonText => 'Kérés küldése',
+    },
+};
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Név</title>
+                <para>
+                    A tevékenység párbeszéd neve.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozás ideje (CreateTime)</title>
+                <para>
+                    Az időpont, amikor létrehozták.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozta (CreateBy)</title>
+                <para>
+                    A felhasználó felhasználó-azonosítója, aki a tevékenység párbeszédet
+létrehozta.
+                </para>
+            </section>
+            <section>
+                <title>Módosítás ideje (ChangeTime)</title>
+                <para>
+                    A legutolsó időpont, amikor megváltoztatták.
+                </para>
+            </section>
+            <section>
+                <title>Módosította (ChangeBy)</title>
+                <para>
+                    A legutolsó felhasználó felhasználó-azonosítója, aki a tevékenység
+párbeszédet megváltoztatta.
+                </para>
+            </section>
+            <section>
+                <title>Mezők (Fields)</title>
+                <para>
+                    Az összes olyan mezőt tartalmazza, amely megjeleníthető ebben a tevékenység
+párbeszédben. Jelenleg a következő mezők használhatók:
+                </para>
+                <para>
+                    <screen>
+    Title
+    State
+    StateID
+    Priority
+    PriorityID
+    Lock
+    LockID
+    Queue
+    QueueID
+    Customer
+    CustomerID
+    CustomerNo
+    CustomerUserID
+    Owner
+    OwnerID
+    Type
+    TypeID
+    SLA
+    SLAID
+    Service
+    ServiceID
+    Responsible
+    ResponsibleID
+    PendingTime
+    DynamicField_$FieldName  # minden dinamikus mezőnél
+                    </screen>
+                </para>
+                <para>
+                    Egy önálló mezőbeállítás példája:
+                </para>
+                <para>
+                    <screen>
+StateID => {
+    DescriptionShort => 'Állapot-azonosító',
+    DescriptionLong  => 'Itt adja meg az állapotot',
+    Display          => 2,
+    DefaultValue     => '2',
+},
+                    </screen>
+                </para>
+                <para>
+                    A „Bejegyzés” (Article) mező egy speciális eset. Ha jelen van a „Mezők”
+(Fields) beállításban, akkor a tevékenység párbeszéd egy teljes RichText
+szerkesztőt fog tartalmazni tárgymezővel és melléklet kezeléssel. A beírt
+szöveg ezután bejegyzésként lesz hozzáadva a jegyhez, és el lesz küldve
+e-mailben. Nézzünk egy bejegyzésmező beállítás példát:
+                </para>
+                <para>
+                    <screen>
+Article => {
+    DescriptionShort => 'Ide szúrja be a megjegyzését.',
+    DescriptionLong => '',
+    Display         => 1,
+    Config          => {
+        ArticleType  => 'note-internal',
+        LabelSubject => '',
+        LabelBody    => '',
+    },
+},
+                    </screen>
+                </para>
+                <para>
+                    Vessünk egy pillantást a mezőbeállítási lehetőségekre:
+                </para>
+                <section>
+                    <title>Rövid leírás (DescriptionShort)</title>
+                    <para>
+                        Nem kötelező rövid leírás, amely a cím mezővel együtt lesz megjelenítve.
+                    </para>
+                </section>
+                <section>
+                    <title>Hosszú leírás (DescriptionLong)</title>
+                    <para>
+                        Nem kötelező hosszabb mezőleírás, amely akkor jelenik meg, amikor az egér a
+mező fölött van. Például egy tanács arról, hogy hogyan kell kitölteni a
+mezőt.
+                    </para>
+                </section>
+                <section>
+                    <title>Megjelenítés (Display)</title>
+                    <para>
+                        Azt vezérli, hogy a mező megjelenjen-e és/vagy kötelező-e. Lehetséges
+értékek:
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    „0”: a mező láthatatlan. Ez akkor hasznos, ha a mező értékeit automatikusan
+kell kitölteni. A beállított alapértelmezett érték (DefaultValue) lesz
+eltárolva ebben az esetben.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „1”: a mező látható, de nem kötelező.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „2”: a mező látható és kötelező. A következő mezők csak láthatatlanok vagy
+kötelezőek lehetnek:
+                                </para>
+                                <para>
+                                    <screen>
+    QueueID
+    Queue
+    State
+    StateID
+    Lock
+    LockID
+    Priority
+    PriorityID
+    Type
+    TypeID
+                                    </screen>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        Ha a mezők nem kötelezőként vannak beállítva, és a felhasználó nem küld el
+semmilyen értéket sem, akkor az alapértelmezett érték lesz elmentve, amikor
+a felhasználó elküldi a tevékenység párbeszédet.
+                    </para>
+                </section>
+                <section>
+                    <title>Alapértelmezett érték (DefaultValue)</title>
+                    <para>
+                        Az „ID”-val rendelkező mezők (úgymint QueueID, OwnerID) az érték
+adatbázis-azonosítójára hivatkoznak. Az egyéb „ID” nélküli mezőknél (úgymint
+Queue, Owner) az alapértelmezett értéknek magát az értéket kell
+tartalmaznia. Példa:
+                    </para>
+                    <para>
+                        <screen>
+Queue => {
+    DescriptionShort => 'Várólista',
+    DescriptionLong  => 'Itt adja meg a várólistát',
+    Display          => 2,
+    DefaultValue     => 'Nyers',
+},
+                        </screen>
+                    </para>
+                </section>
+            </section>
+            <section>
+                <title>Mezősorrend (FieldOrder)</title>
+                <para>
+                    Itt van beállítva a mezők megjelenítési sorrendje. FONTOS: A láthatatlan
+mezőket is be kell állítani itt, mert csak a beállított mezők lesznek
+figyelembe véve mentéskor. Azok a mezők, amelyek nincsenek beállítva, nem
+lesznek mentve.
+                </para>
+            </section>
+            <section>
+                <title>Elküldés tanácsszöveg (SubmitAdviceText)</title>
+                <para>
+                    Nem kötelező szöveg, amely közvetlenül az elküldés gomb fölött lesz
+megjelenítve további segítséghez vagy tanácsszöveghez.
+                </para>
+            </section>
+            <section>
+                <title>Elküldés gomb szövege (SubmitButtonText)</title>
+                <para>
+                    Nem kötelező egyéni szöveg az elküldés gombhoz.
+                </para>
+            </section>
+        </section>
+
+        <section>
+            <title>Átmenet</title>
+            <para>
+                Egy átmenet dönti el a beállított feltételek alapján, hogy melyik útvonalat
+válassza a folyamatban, azaz egy folyamatjegy mely tevékenységhez léphet át.
+            </para>
+            <section>
+                <title>Átmenetbeállítások</title>
+                <para>
+                    Nézzünk egy példát:
+                </para>
+                <para>
+                    <screen>
+$Self->{'Process::Transition'} = {
+    'A1' => {
+        Name => '1. átmenet',
+        CreateTime => '14-03-2012 13:37:00', # opcionális
+        CreateBy   => '1',                   # opcionális
+        ChangeTime => '15-03-2012 13:37:00', # opcionális
+        ChangeBy   => '15-03-2012 13:37:00', # opcionális
+        Condition  => {
+            Cond1  => {
+                Fields => {
+                    StateID => {
+                        Type  => 'String',
+                        Match => '1',
+                    },
+                },
+            },
+        },
+    },
+    'A2' => {
+        Name       => '2. opcionális átmenet',
+        CreateTime => 'DATE',   # opcionális
+        CreateBy   => 'USERID', # opcionális
+        ChangeTime => 'DATE',   # opcionális
+        ChangeBy => 'USERID',   # opcionális
+        Condition => {
+            Cond1 => {
+                Queue               => 'Nyers',
+                DynamicField_Szin  => '2',
+                DynamicField_Szam => '1',
+            },
+        },
+    },
+};
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Név</title>
+                <para>
+                    Az átmenet neve.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozás ideje (CreateTime)</title>
+                <para>
+                    Az időpont, amikor létrehozták.
+                </para>
+            </section>
+            <section>
+                <title>Létrehozta (CreateBy)</title>
+                <para>
+                    A felhasználó felhasználó-azonosítója, aki az átmenetet létrehozta.
+                </para>
+            </section>
+            <section>
+                <title>Módosítás ideje (ChangeTime)</title>
+                <para>
+                    A legutolsó időpont, amikor megváltoztatták.
+                </para>
+            </section>
+            <section>
+                <title>Módosította (ChangeBy)</title>
+                <para>
+                    A legutolsó felhasználó felhasználó-azonosítója, aki az átmenetet
+megváltoztatta.
+                </para>
+            </section>
+            <section>
+                <title>Feltétel (Condition)</title>
+                <para>
+                    Az összes olyan feltételt tartalmazza, amely ennek az átmenetnek az életbe
+lépéséhez szükséges. Példa:
+                </para>
+                <para>
+                    <screen>
+Condition => {
+    Type  => 'and',
+    Felt1 => {
+        Type   => 'and',
+        Fields => {
+            StateID => {
+                Type  => 'String',
+                Match => '1',
+            },
+            DynamicField_Marka => {
+                Type  => 'String',
+                Match => 'VW',
+        },
+    },
+    Felt2 => {
+        Type => 'and',
+        Fields => {
+            Queue => {
+                Type  => 'String',
+                Match => 'Nyers',
+            },
+        },
+    },
+},
+                    </screen>
+                </para>
+                <para>
+                    Vessünk egy pillantást a feltételbeállításra részletesen.
+                </para>
+                <section>
+                    <title>Típus (Type) a „Condition” objektumban</title>
+                    <para>
+                        Annak a módját határozza meg, hogy a különböző feltételelemek hogyan
+kapcsolódnak egymáshoz. Lehetséges értékek:
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    „és” („and”): Ez az alapértelmezett. Az összes feltételek teljesülnie kell
+az átmenetnél az életbe lépéshez.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „vagy” („or”): Legalább egy feltételnek illeszkednie kell.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „kizáró vagy” („xor”): Pontosan egy feltételnek kell illeszkednie, nem
+többnek.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                </section>
+                <section>
+                    <title>Felt1</title>
+                    <para>
+                        Ez egy példafeltétel neve. Szabadon megválasztható. A feltételek a rendezett
+sorrendben lesznek kiértékelve.
+                    </para>
+                </section>
+                <section>
+                    <title>Típus (Type) a „Felt” objektumokban</title>
+                    <para>
+                        Annak a módját határozza meg, hogy a feltétel egyéni mezőpróbái hogyan
+kapcsolódnak egymáshoz. Lehetséges értékek:
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    „és” („and”): Ez az alapértelmezett. Az összes mezőpróbának illeszkednie
+kell ennél a feltételnél az illesztéshez.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „vagy” („or”): Legalább egy mezőpróbának illeszkednie kell.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „kizáró vagy” („xor”): Pontosan egy mezőpróbának kell illeszkednie, nem
+többnek.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                </section>
+                <section>
+                    <title>Mezők (Fields)</title>
+                    <para>
+                        Meghatározza azokat a különleges mezőket, amelyek értékeit meg kell
+vizsgálni. A példánkból:
+                    </para>
+                    <para>
+                        <screen>
+Fields => {
+    StateID => {
+        Type  => 'String',
+        Match => '1',
+    },
+                        </screen>
+                    </para>
+                </section>
+                <section>
+                    <title>Állapot-azonosító (StateID)</title>
+                    <para>
+                        Egy mezőnév példája. A következő jegymezők használhatók:
+                    </para>
+                    <para>
+                        <screen>
+    Title
+    State
+    StateID
+    Priority
+    PriorityID
+    Lock
+    LockID
+    Queue
+    QueueID
+    Customer
+    CustomerID
+    CustomerNo
+    CustomerUserID
+    Owner
+    OwnerID
+    Type
+    TypeID
+    SLA
+    SLAID
+    Service
+    ServiceID
+    Responsible
+    ResponsibleID
+    DynamicField_$FieldName # minden dinamikus mezőnél
+                        </screen>
+                    </para>
+                    <para>
+                        Az „ID”-val rendelkező mezők (úgymint SLAID) próbájakor a mező
+adatbázis-azonosítója lesz használva a próbánál. Az egyéb mezőknél (úgymint
+SLA) az aktuális érték lesz használva a próbánál.
+                    </para>
+                </section>
+                <section>
+                    <title>Típus</title>
+                    <para>
+                        Meghatározza a mezőpróba fajtáját. Lehetséges értékek:
+
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    „Szöveg” („String”): Összehasonlítja a mező értékét az „Illesztésben”
+(„Match”) megadott szöveggel. Akkor illeszkedik, ha pontosan ugyanazok.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „Kivonat” („Hash”): Összehasonlítja a mező értékét (hash) az „Illesztésben”
+(„Match”) megadott kivonattal. Minden kivonatértéknek meg kell egyeznie.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „Tömb” („Array”): Összehasonlítja a mező értékét (array) az „Illesztésben”
+(„Match”) megadott tömbbel. Mindkét listának meg kell egyeznie.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „Reguláris kifejezés” („Regex”): A mezőérték egy reguláris kifejezéssel is
+ellenőrizhető. Fontos, hogy az „Illesztés” („Match”) alapfeltételként a
+következőt tartalmazza: <emphasis>qr{}xms</emphasis>. A zárójelek között
+jegyezhető be az aktuális reguláris kifejezés.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    „Modul” („Module”): Lehetővé teszi egy Perl-modul használatát a feltétel
+ellenőrzéséhez. Ha a visszatérési értéke 1, akkor az ellenőrzés pozitív
+volt. Egy példamodul megtalálható a
+<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>
+fájlban.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                </section>
+            </section>
+        </section>
+
+        <section>
+            <title>Átmenet műveletek</title>
+            <para>
+                Az átmenet műveletek olyan műveletek, amelyek a sikeresen alkalmazott
+átmenetek után aktiválhatók (amikor egy folyamatjegy átlép az egyik
+tevékenységből egy másikba). Ezek az átmenet műveletek különböző
+változtatások végrehajtásához használhatók a jegyen, például a jegy
+várólistájának vagy tulajdonosának megváltoztatásához. Létrehozhatja a saját
+átmenet műveleteit is egyéb összetett változtatások végrehajtásához.
+            </para>
+            <section>
+                <title>Átmenet művelet beállításai</title>
+                <para>
+                    Nézzünk egy példát:
+                </para>
+                <para>
+                    <screen>
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Várólista-áthelyezés',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+        Config => {
+            Queue  => 'Szemét',
+            UserID => 123,
+        },
+    },
+};
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Név</title>
+                <para>
+                    Az átmenet művelet neve.
+                </para>
+            </section>
+            <section>
+                <title>Modul (Module)</title>
+                <para>
+                    Megadja a használandó Perl-modult.
+                </para>
+            </section>
+            <section>
+                <title>Beállítás (Config)</title>
+                <para>
+                    Ez a paraméter az összes olyan beállítást tartalmazza, amelyek szükségesek a
+modulhoz. A tartalma attól az adott átmenet művelet modultól függ, amelyet
+használnak. A részletekért nézze meg az egyes modulok dokumentációját. A mi
+példánkban csak a várólistát (Queue) kell megadni. Mindamellett a
+felhasználó-azonosító paramétert is elküldjük a UserID paraméter
+használatával. Az átmenet művelet a megadott felhasználó-azonosítóval
+rendelkező felhasználót megszemélyesítve lesz végrehajtva.
+                </para>
+                <para>
+                    A felhasználó-azonosító (UserID) használata egy átmenet művelet „Beállítás”
+(„Config”) paraméterén belül minden átmenet művelet által elfogadott (az
+OTRS 3.2.4 verziója óta). Ebben a példában ez különösen fontos lehet, ha az
+átmenetet aktiváló felhasználónak nincs jogosultsága a jegy áthelyezéséhez a
+„Szemét” várólistába, miközben az 123 felhasználó-azonosítóval rendelkező
+felhasználónak van.
+                </para>
+            </section>
+            <section>
+                <title>Átmenet művelet modulok újrahasználata</title>
+                <para>
+                    Az átmenet művelet modulok többszöri használatához egyszerűen adjon meg több
+átmenet műveletet a beállításokban. Példa:
+                </para>
+                <para>
+                    <screen>
+    $Self->{'Process::TransitionAction'} = {
+        'AM1' => {
+            Name   => 'Várólista-áthelyezés: Szemét',
+            Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+            Config => {
+                Queue => 'Szemét',
+            },
+        },
+        'AM2' => {
+            Name   => 'Várólista-áthelyezés: Nyers',
+            Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+            Config => {
+                Queue => 'Nyers',
+            },
+        },
+    };
+                    </screen>
+                </para>
+                <para>
+                    Itt ugyanazt a modult használják egy folyamatjegy áthelyezéséhez a „Nyers”
+várólistába, és egy másik alkalommal a „Szemét” várólistába való
+áthelyezéshez. Az az átmenet művelet, amelyet egy adott átmenetnél használni
+kell, a folyamat beállításainak „Útvonal” („Path”) beállításában van
+meghatározva.
+                </para>
+            </section>
+            <section id="available-transition-actions">
+                <title>Elérhető átmenet műveletek</title>
+                <para>
+                    Az OTRS számos átmenet művelettel jön, amelyek használhatók a
+folyamatokban. Itt találhatja meg a dokumentációjukat, és hogy hogyan
+szükséges beállítani azokat.
+                </para>
+
+                <section>
+                    <title>DynamicFieldSet</title>
+                    <para>
+                        Egy vagy több dinamikus mezőt állít be egy folyamatjegynél. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'TA1' => {
+        Name   => 'A „MasterSlave” dinamikus mező beállítása „Master” értékre és az „Approved” beállítása 1-re',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::DynamicFieldSet',
+        Config => {
+            MasterSlave => 'Master',
+            Approved    => '1',
+
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „MesterAlarendelt” és a „Jovahagyva” dinamikus mezőnév példaként vannak
+megadva. A mezők értékei („Mester” és „1”) lesznek beállítva ezzel az
+átmenet művelettel.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketArticleCreate</title>
+                    <para>
+                        Létrehoz egy bejegyzést, és használható jegyzetek vagy e-mail válaszok
+létrehozásához is. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Bejegyzés létrehozás belső jegyzet',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate',
+        Config => {
+            ArticleType      => 'note-internal',                                        # note-external|phone|fax|sms|...
+                                                                                        #   bármilyen e-mail típus kizárva
+            SenderType       => 'agent',                                                # agent|system|customer
+            ContentType      => 'text/plain; charset=ISO-8859-2',                      # vagy opcionális karakterkészlet és MIME-típus (például „text/html; charset=UTF-8”)
+            Subject          => 'valamilyen rövid leírás',                               # kötelező
+            Body             => 'az üzenet szövege',                                     # kötelező
+            HistoryType      => 'OwnerUpdate',                                          # EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
+            HistoryComment   => 'Valamilyen szabad szöveg!',
+            From             => 'Valamilyen Ügyintéző <email@pelda.hu>',                       # nem kötelező, de hasznos
+            To               => 'Valamilyen Ügyfél A <ugyfel-a@pelda.hu>',             # nem kötelező, de hasznos
+            Cc               => 'Valamilyen Ügyfél B <ugyfel-b@pelda.hu>',             # nem kötelező, de hasznos
+            ReplyTo          => 'Valamilyen Ügyfél B <ugyfel-b@pelda.hu>',             # nem kötelező
+            InReplyTo        => '<asdasdasd.12@pelda.hu>',                           # nem kötelező, de hasznos
+            References       => '<asdasdasd.1@pelda.hu> <asdasdasd.12@pelda.hu>',       # nem kötelező, de hasznos
+            NoAgentNotify    => 0,                                                      # ha nem szeretne ügyintézői értesítéseket küldeni
+            AutoResponseType => 'auto reply',                                           # auto reject|auto follow up|auto reply/new ticket|auto remove
+
+            ForceNotificationToUserID   => [ 1, 43, 56 ],                               # ha kényszeríteni szeretne valakit
+            ExcludeNotificationToUserID => [ 43, 56 ],
+                 # ha teljesen ki szeretne zárni valakit az értesítésekből,
+                 # el lesz távolítva a bejegyzés To: sorából is,
+                 # magasabb prioritás a ForceNotificationToUserID paraméternél
+            ExcludeMuteNotificationToUserID => [ 43, 56 ],
+                 # ugyanaz mint az ExcludeNotificationToUserID paraméternél,
+                 # de csak küldés lesz elnémítva, az ügyintéző még látható
+                 # lesz a bejegyzés To: sorában
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Name” adja meg a beállított átmenet művelet nevét. Szabadon
+megválasztható, de utalnia kell a beállított művelet céljára.
+                    </para>
+                    <para>
+                        Az „ArticleType” határozza meg a létrehozandó bejegyzés típusát. Lehetséges
+értékek: phone, fax, sms, webrequest, note-internal, note-external és
+note-report.
+                    </para>
+                    <para>
+                        A „SenderType” határozza meg a bejegyzés küldőjének típusát. Lehetséges
+értékek: agent, system, customer.
+                    </para>
+                    <para>
+                        A „ContentType” határozza meg a bejegyzés tartalomtípusát. Lehetséges
+értékek: „text/plain; charset=ISO-8859-2” vagy bármilyen egyéb
+karakterkódolás és MIME-típus.
+                    </para>
+                    <para>
+                        A „Subject” határozza meg a bejegyzés címét. Kötelező.
+                    </para>
+                    <para>
+                        A „Body” határozza meg a bejegyzés tartalmát. Kötelező.
+                    </para>
+                    <para>
+                        A „HistoryType” határozza meg az előzménybejegyzés típusát. Lehetséges
+értékek: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
+EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
+                    </para>
+                    <para>
+                        A „HistoryComment” határozza meg az előzménybejegyzés tartalmát.
+                    </para>
+                    <para>
+                        A „From”, a „To”, a „Cc” és a „ReplyTo” e-mail címeket fogad a fent megadott
+jelölés szerint.
+                    </para>
+                    <para>
+                        Az „InReplyTo” és a „References” e-mail üzenet-azonosítókat tartalmaznak.
+                    </para>
+                    <para>
+                        „NoAgentNotify” - ha 1-re van állítva, akkor az ügyintéző e-mail értesítései
+nem lesznek kiküldve.
+                    </para>
+                    <para>
+                        Az „AutoResponseType” a következő értékeket fogadhatja: auto follow up, auto
+reject, auto remove, auto reply, auto reply/new ticket.
+                    </para>
+                    <para>
+                        A „ForceNotificationToUserID”, az „ExcludeNotificationToUserID” és az
+„ExcludeMuteNotificationToUserID” olyan felhasználó-azonosítók listáját
+fogadhatja, amelyek mindig értesítettek, nem értesítettek vagy
+értesítettként felsoroltak, de valójában nincs értesítési e-mail kiküldve.
+                    </para>
+                </section>
+                <section>
+                    <title>TicketCreate</title>
+                    <para>
+                        Létrehoz egy jegyet egy bejegyzéssel. Az új jegy összekapcsolható egy
+folyamatjeggyel. Példa.
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Jegylétrehozás',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate',
+        Config => {
+
+            # a jegyhez kötelező:
+            Title         => 'Valamilyen jegycím',
+            Queue         => 'Nyers'             # vagy QueueID => 123,
+            Lock          => 'unlock',
+            Priority      => '3 normal',         # vagy PriorityID => 2,
+            State         => 'new',              # vagy StateID => 5,
+            CustomerID    => '123465',
+            CustomerUser  => 'ugyfel@pelda.hu',
+            OwnerID       => 'felhasználónév',   # vagy OwnerID => 123,
+
+            # a jegyhez opcionális:
+            TN              => $TicketObject->TicketCreateNumber(), # opcionális
+            Type            => 'Incident',            # vagy TypeID => 1, nem kötelező
+            Service         => 'Szolgáltatás A',      # vagy ServiceID => 1, nem kötelező
+            SLA             => 'SLA A',               # vagy SLAID => 1, nem kötelező
+            ResponsibleID   => 123,                   # nem kötelező
+            ArchiveFlag     => 'y',                   # (y|n) nem kötelező
+            PendingTime     => '2011-12-23 23:05:00', # opcionális (függőben lévő állapotoknál)
+            PendingTimeDiff => 123 ,                  # opcionális (függőben lévő állapotoknál)
+
+            # a bejegyzéshez kötelező:
+            ArticleType      => 'note-internal',                        # note-external|phone|fax|sms|...
+                                                                        #   bármilyen e-mail típus kizárva
+            SenderType       => 'agent',                                # agent|system|customer
+            ContentType      => 'text/plain; charset=ISO-8859-2',       # vagy opcionális karakterkészlet és MIME-típus (például „text/html; charset=UTF-8”)
+            Subject          => 'valamilyen rövid leírás',              # kötelező
+            Body             => 'az üzenet szövege',                    # kötelező
+            HistoryType      => 'OwnerUpdate',                          #
+            EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
+            HistoryComment   => 'Valamilyen szabad szöveg!',
+
+            # a bejegyzéshez opcionális:
+            From             => 'Valamilyen Ügyintéző <email@pelda.hu>',   # nem kötelező, de hasznos
+            To               => 'Valamilyen Ügyfél A <ugyfel-a@pelda.hu>', # nem kötelező, de hasznos
+            Cc               => 'Valamilyen Ügyfél B <ugyfel-b@pelda.hu>', # nem kötelező, de hasznos
+            ReplyTo          => 'Valamilyen Ügyfél B <ugyfel-b@pelda.hu>', # nem kötelező
+            MessageID        => '<asdasdasd.123@pelda.hu>',                # nem kötelező, de hasznos
+            InReplyTo        => '<asdasdasd.12@pelda.hu>',                 # nem kötelező, de hasznos
+            References       => '<asdasdasd.1@pelda.hu> <asdasdasd.12@pelda.hu>', # nem kötelező, de hasznos
+            NoAgentNotify    => 0,                                      # ha nem szeretne ügyintézői értesítéseket küldeni
+            AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
+
+            ForceNotificationToUserID   => [ 1, 43, 56 ],               # ha kényszeríteni szeretne valakit
+            ExcludeNotificationToUserID => [ 43,56 ],                   # ha teljesen ki szeretne zárni valakit az értesítésekből,
+                                                                        # el lesz távolítva a bejegyzés To: sorából is,
+                                                                        # magasabb prioritás a ForceNotificationToUserID paraméternél
+            ExcludeMuteNotificationToUserID => [ 43,56 ],               # ugyanaz mint az ExcludeNotificationToUserID paraméternél,
+                                                                        # de csak küldés lesz elnémítva, az ügyintéző még látható
+                                                                        # lesz a bejegyzés To: sorában
+            TimeUnit                        => 123
+
+            # egyéb:
+            DynamicField_NameX => $Value,
+            LinkAs => $LinkType,                                        # Normal, Parent, Child, stb. (megfelelő eredeti jegy)
+            UserID => 123,                                              # opcionális, a bejelentkezett felhasználó felhasználó-azonosítójának felülbírálásához
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Name” adja meg a beállított átmenet művelet nevét. Szabadon
+megválasztható, de utalnia kell a beállított művelet céljára.
+                    </para>
+                    <para>
+                        A „Title” a jegy címe.
+                    </para>
+                    <para>
+                        A „Queue” vagy a „QueueID”  adja meg az új jegyben használandó várólista
+nevét vagy azonosítóját.
+                    </para>
+                    <para>
+                        A „Lock” vagy a „LockID” állítja be a jegy zárolási állapotát.
+                    </para>
+                    <para>
+                        A „Priority” vagy a „PriorityID” adja meg az új jegyben használandó
+prioritás nevét vagy azonosítóját.
+                    </para>
+                    <para>
+                        A „State” vagy a „StateID” adja meg az új jegyben használandó állapot nevét
+vagy azonosítóját.
+                    </para>
+                    <para>
+                        A „CustomerID” az új jegynél beállítandó ügyfél-azonosító.
+                    </para>
+                    <para>
+                        A „CustomerUser” annak az ügyfélnek a bejelentkező neve, aki hozzá lesz
+rendelve a jegyben.
+                    </para>
+                    <para>
+                        Az „Owner” vagy az „OwnerID” határozza meg annak az ügyintézőnek a
+bejelentkezési nevét vagy azonosítóját, aki az új jegy tulajdonosa lesz.
+                    </para>
+                    <para>
+                        A „TN” egy egyéni szám az új jegyhez.
+                    </para>
+                    <para>
+                        A „Type” vagy a „TypeID” adja meg az új jegyben használandó jegytípus nevét
+vagy azonosítóját.
+                    </para>
+                    <para>
+                        A „Service” vagy a „ServiceID” adja meg az új jegyben használandó
+szolgáltatás nevét vagy azonosítóját.
+                    </para>
+                    <para>
+                        Az „SLA” vagy az „SLAID” adja meg az új jegyben használandó SLA nevét vagy
+azonosítóját.
+                    </para>
+                    <para>
+                        A „ResponsibleID” annak az ügyintézőnek az azonosítója, aki az új jegy
+felelőse lesz.
+                    </para>
+                    <para>
+                        A „PendingTime” egy előre meghatározott dátum a jegy függőben lévő időinek
+beállításához, amikor a jegyállapot egy függőben lévő állapottípushoz
+tartozik.
+                    </para>
+                    <para>
+                        A „PendingTimeDiff” egy dinamikus dátum (másodpercben kifejezve a jelenlegi
+dátumtól/időtől) a jegy függőben lévő időinek beállításához, amikor a
+jegyállapot egy függőben lévő állapottípushoz tartozik.
+                    </para>
+                    <para>
+                        Az „ArticleType” határozza meg a létrehozandó bejegyzés típusát. Lehetséges
+értékek: phone, fax, sms, webrequest, note-internal, note-external és
+note-report.
+                    </para>
+                    <para>
+                        A „SenderType” határozza meg a bejegyzés küldőjének típusát. Lehetséges
+értékek: agent, system, customer.
+                    </para>
+                    <para>
+                        A „ContentType” határozza meg a bejegyzés tartalomtípusát. Lehetséges
+értékek: „text/plain; charset=ISO-8859-2” vagy bármilyen egyéb
+karakterkódolás és MIME-típus.
+                    </para>
+                    <para>
+                        A „Subject” határozza meg a bejegyzés címét. Kötelező.
+                    </para>
+                    <para>
+                        A „Body” határozza meg a bejegyzés tartalmát. Kötelező.
+                    </para>
+                    <para>
+                        A „HistoryType” határozza meg az előzménybejegyzés típusát. Lehetséges
+értékek: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
+EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
+                    </para>
+                    <para>
+                        A „HistoryComment” határozza meg az előzménybejegyzés tartalmát.
+                    </para>
+                    <para>
+                        A „From”, a „To”, a „Cc” és a „ReplyTo” e-mail címeket fogad a fent megadott
+jelölés szerint.
+                    </para>
+                    <para>
+                        Az „InReplyTo” és a „References” e-mail üzenet-azonosítókat tartalmaznak.
+                    </para>
+                    <para>
+                        „NoAgentNotify” - ha 1-re van állítva, akkor az ügyintéző e-mail értesítései
+nem lesznek kiküldve.
+                    </para>
+                    <para>
+                        Az „AutoResponseType” a következő értékeket fogadhatja: auto follow up, auto
+reject, auto remove, auto reply, auto reply/new ticket.
+                    </para>
+                    <para>
+                        A „ForceNotificationToUserID”, az „ExcludeNotificationToUserID” és az
+„ExcludeMuteNotificationToUserID” olyan felhasználó-azonosítók listáját
+fogadhatja, amelyek mindig értesítettek, nem értesítettek vagy
+értesítettként felsoroltak, de valójában nincs értesítési e-mail kiküldve.
+                    </para>
+                    <para>
+                        A „TimeUnit” a jelenlegi jegybejegyzésbe fektetett idő másodpercben,
+percben, órában, stb. kifejezve.
+                    </para>
+                    <para>
+                        A „DynamicField_NevX” beállítandó az új jegyben, ahol a DynamicField_ egy
+kötelező előtag és a NevX a dinamikus mező neve (jegyszinten, nem bejegyzés
+szinteken).
+                    </para>
+                    <para>
+                        A „LinkAs” az új jegy kapcsolatának beállításához való a kezdeményező
+jeggyel az új jegy nézőpontjából, például: Normal, Parent, Child, stb.
+                    </para>
+                </section>
+                <section>
+                    <title>TicketCustomerSet</title>
+                    <para>
+                        Beállítja egy folyamatjegy ügyfelét. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Ügyfél beállítása a tesztelendő ügyfélhez',
+        Module => 'Kernel::System::Process::TransitionAction::TicketCustomerSet',
+        Config => {
+            No      => 'teszt',
+            User    => 'ugyfel-felhasznalo-123',
+            # vagy más szavakkal
+            # CustomerID     => 'ugyfel123',
+            # CustomerUserID => 'ugyfel-felhasznalo-123',
+
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „No” vagy a „CustomerID” állítja be az ügyfél ügyfél-azonosítóját.
+                    </para>
+                    <para>
+                        A „User” vagy a „CustomerUserID” állítja be az ügyfél felhasználónevét.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketLockSet</title>
+                    <para>
+                        Megváltoztatja egy folyamatjegy zárolását. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Zár beállítása zárra',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketLockSet',
+        Config => {
+            Lock   => 'lock',
+            # vagy
+            LockID => 2,
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „Lock” határozza meg a folyamatjegy új zárját.
+                    </para>
+                    <para>
+                        A „LockID” határozza meg az új zár belső azonosítóját.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketOwnerSet</title>
+                    <para>
+                        Megváltoztatja egy folyamatjegy tulajdonosát. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Tulajdonos beállítása: root@localhost',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketOwnerSet',
+        Config => {
+            Owner => 'root@localhost',
+            # vagy
+            OwnerID => 1,
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        Az „Owner” adja meg az új tulajdonos bejelentkezési nevét.
+                    </para>
+                    <para>
+                        Az „OwnerID” adja meg az új tulajdonos belső azonosítóját.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketQueueSet</title>
+                    <para>
+                        Áthelyezi a jegyet egy célvárólistába. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Várólistába mozgatás: Nyers',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+        Config => {
+            Queue => 'Nyers',
+            # vagy
+            # QueueID => '2',
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „Queue” adja meg a célvárólista nevét.
+                    </para>
+                    <para>
+                        A „QueueID” adja meg a célvárólista belső azonosítóját.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketResponsibleSet</title>
+                    <para>
+                        Megváltoztatja egy folyamatjegy felelősét. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Felelős beállítása: root@localhost',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet',
+        Config => {
+            Responsible => 'root@localhost',
+            # vagy
+            ResponsibleID => 1,
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „Responsible” adja meg az új felelős bejelentkezési nevét.
+                    </para>
+                    <para>
+                        A „ResponsibleID” adja meg az új felelős belső azonosítóját.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketServiceSet</title>
+                    <para>
+                        Hozzárendel egy szolgáltatást egy folyamatjegyhez. A jegynek rendelkeznie
+kell egy ügyféllel, és a szolgáltatásnak hozzárendelve kell lennie ahhoz az
+ügyfélhez. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Saját szolgáltatás beállítása',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketServiceSet',
+        Config => {
+            Service   => 'Saját szolgáltatás',
+            # vagy
+            ServiceID => 123,
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „Service” határozza meg a folyamatjegy új szolgáltatását. A teljes név
+kötelező (például
+NagypapaSzolgaltatas::ApaSzolgaltatas::GyermekSzolgaltatas).
+                    </para>
+                    <para>
+                        A „ServiceID” határozza meg az új szolgáltatás belső azonosítóját.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketSLASet</title>
+                    <para>
+                        Hozzárendel egy szolgáltatási szint megállapodást egy folyamatjegyhez. A
+jegynek rendelkeznie kell egy szolgáltatással, és az SLA-nak hozzárendelve
+kell lennie ahhoz a szolgáltatáshoz. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'TA1' => {
+        Name   => 'Saját SLA beállítása',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketSLASet',
+        Config => {
+            SLA   => 'Saját SLA',
+            # vagy
+            SLAID => 123,
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        Az „SLA” határozza meg a folyamatjegy új szolgáltatási szint megállapodását.
+                    </para>
+                    <para>
+                        Az „SLAID” határozza meg az új SLA belső azonosítóját.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketStateSet</title>
+                    <para>
+                        Megváltoztatja egy folyamatjegy állapotát. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Állapot megváltoztatása nyitottra',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketStateSet',
+        Config => {
+            State   => 'open',
+            # vagy
+            StateID => 4,
+
+            PendingTimeDiff => 123,
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „State” határozza meg a folyamatjegy új állapotát.
+                    </para>
+                    <para>
+                        A „StateID” határozza meg az új állapot belső azonosítóját.
+                    </para>
+                    <para>
+                        A „PendingTimeDiff” csak függőben lévő állapotoknál használható,
+meghatározza az időeltérést másodpercben, relatívan (az átmenet művelet
+végrehajtási idejétől relatívan) a beállított jegy várakozó idejétől
+(például a 3600 azt jelenti, hogy a várakozási idő 1 óra, miután az átmenet
+művelet végre lett hajtva).
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketTitleSet</title>
+                    <para>
+                        Beállítja egy folyamatjegy jegycímét. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Jegycím beállítása Jegycímre',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketTitleSet',
+        Config => {
+            Title => 'Jegycím',
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „Title” adja meg a jegy új címét.
+                    </para>
+                </section>
+
+                <section>
+                    <title>TicketTypeSet</title>
+                    <para>
+                        Beállítja egy folyamatjegy jegytípusát. Példa:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+$Self->{'Process::TransitionAction'} = {
+    'AM1' => {
+        Name   => 'Jegytípus beállítása alapértelmezettre',
+        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketTypeSet',
+        Config => {
+            Type     => 'alapértelmezett',
+            # vagy
+            # TypeID => '1',
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                    </para>
+                    <para>
+                        A „Type” adja meg a jegytípus nevét.
+                    </para>
+                    <para>
+                        A „TypeID” adja meg a jegytípus belső azonosítóját.
+                    </para>
+                </section>
+            </section>
+        </section>
+
+        <section id="process-management-acl">
+            <title>Hozzáférés-vezérlési listák (ACL-ek)</title>
+            <para>
+                ACL-ek segítségével korlátozhatja a kiválasztható értékeket a
+folyamatjegyekben. Nézze meg az <link linkend="acl-reference">ACL
+hivatkozás</link> szakaszt is a teljes jegy ACL szintaxisának leírásához.
+            </para>
+            <section>
+                <title>ACL-beállítások</title>
+                <para>
+                    ACL-eket csak a <filename>Kernel/Config.pm</filename> fájlban lehet
+meghatározni. Példa:
+                </para>
+                <para>
+                    <screen>
+$Self->{TicketAcl}->{'001-ACL-FolyamatTulajdonsagok'} = {
+    Properties => {
+        Process => {
+            ProcessEntityID        => ['F1'],
+            ActivityEntityID       => ['T1'],
+            ActivityDialogEntityID => ['TP1'],
+        }
+    },
+    Possible => {
+        ActivityDialog => ['TP1', 'TP3'],
+    },
+    PossibleNot => {
+        ActivityDialog => ['TP3'],
+    },
+};
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>001-ACL-FolyamatTulajdonsagok</title>
+                <para>
+                    Az ACL-szabály neve. További információkért az ACL-szabályokról úgy
+általában nézzen utána <link linkend="acl">az ACL-kézikönyvben</link>.
+                </para>
+            </section>
+            <section>
+                <title>Folyamat</title>
+                <para>
+                    Ez az a szakasz, amely annak ellenőrzéséhez használható, hogy egy ACL-t
+alkalmazni kell-e. Ha a megadott értékekkel rendelkezik, akkor a szabály
+alkalmazásra kerül. A következő értékek használhatók:
+                </para>
+                <section>
+                    <title>ProcessEntityID</title>
+                    <para>
+                        Egy folyamat azonosítója, amely a folyamat. Akkor illeszkedik, ha a jegy
+hozzá van rendelve ehhez a folyamathoz.
+                    </para>
+                </section>
+                <section>
+                    <title>ActivityEntityID</title>
+                    <para>
+                        A tevékenység azonosítója, amelyhez a folyamatjegy jelenleg hozzá van
+rendelve.
+                    </para>
+                </section>
+                <section>
+                    <title>ActivityDialogEntityID</title>
+                    <para>
+                        A tevékenység párbeszéd azonosítója, amely jelenleg nyitott egy
+folyamatjegynél.
+                    </para>
+                </section>
+            </section>
+            <section>
+                <title>Possible/PossibleNot tevékenység párbeszéd</title>
+                <para>
+                    Itt adhatja meg a tevékenység párbeszéd azonosítók listáját. Ez a lista
+fogja korlátozni a lehetséges tevékenység párbeszédeket, amelyeket
+felkínálnak a felhasználónak a jegynagyítás maszkban.
+                </para>
+                <para>
+                    A „Possible” sorolja fel azokat a tevékenység párbeszédeket, amelyek
+megengedettek. A fenti beállítás a beállított tevékenység párbeszédek
+listájának csak a „TP1” és a „TP3” elemét fogja engedélyezni.
+                </para>
+                <para>
+                    A „PossibleNot” sorolja fel azokat a tevékenység párbeszédeket, amelyek nem
+megengedettek. A fenti példában a beállítás el fogja távolítani a „TP3”
+elemet a beállított tevékenység párbeszédek listájából.
+                </para>
+                <para>
+                    A mind a „Possible”, mind a „PossibleNot” meg van adva, akkor a beállított
+tevékenység párbeszédek listáját először a „Possible” fogja szűrni, a
+példánkban csak a „TP1” és a „TP3” elemet meghagyva. Ezután a „PossibleNot”
+lesz alkalmazva, és kiszűri a „TP3” elemet azért, hogy csak a „TP1” maradjon
+meg, és jelenjen meg lehetséges tevékenység párbeszédként, amelyet a
+felhasználó használhat.
+                </para>
+                <para>
+                    Ha több ACL-szabály illeszkedik, akkor az összes illeszkedő szabály metszete
+lesz kiszámítva a lehetséges tevékenység párbeszédek
+meghatározásához. Példa:
+                </para>
+                <para>
+                    Beállított tevékenység párbeszédek: „TP1”, „TP2”, „TP3”, „TP4”, „TP5”,
+„TP6”, „TP7”.
+                </para>
+                <para>
+                    <screen>
+$Self->{TicketAcl}->{'001-ACL-Allapot'} = {
+    Properties => {
+        Ticket => {
+            Status => 'új',
+        }
+    },
+    Possible => {
+        ActivityDialog => ['TP1', 'TP2', 'TP3', 'TP6', 'TP7'],
+    },
+};
+$Self->{TicketAcl}->{'002-ACL-Varolista'} = {
+    Properties => {
+        Ticket => {
+            Queue => ['Nyers']
+        }
+    },
+    Possible => {
+        ActivityDialog => ['TP2', 'TP3', 'TP4', 'TP7'],
+    },
+};
+$Self->{TicketAcl}->{'003-ACL-Prioritas'} = {
+    Properties => {
+        Ticket => {
+            Priority => ['3 normal']
+        }
+    },
+    PossibleNot => {
+        ActivityDialog => ['TP3', 'TP4'],
+    },
+};
+                    </screen>
+                </para>
+                <para>
+                    Ha egy folyamatjegy „új” állapottal rendelkezik, a „Nyers” várólistában van
+és a prioritása „3 normál”, akkor mindhárom ACL-szabály illeszkedni fog.
+                </para>
+                <para>
+                    Az első szabály csökkenti a tevékenység párbeszédeket erről: „TP1”, „TP2”,
+„TP3”, „TP4”, „TP5”, „TP6”, „TP7" erre: „TP1”, „TP2”, „TP3”, „TP6”, „TP7”,
+és kitiltja a „TP4” és a „TP5” elemet.
+                </para>
+                <para>
+                    A második szabály most tovább fogja csökkenteni a megmaradt tevékenység
+párbeszédeket. A példánkban „TP2”, „TP3” és „TP7” fog megmaradni.
+                </para>
+                <para>
+                    Most a harmadik szabály fogja tovább csökkenteni a listát a „PossibleNot”
+által. A „TP3” eltávolításra kerül a listából. A „TP4” nincs eltávolítva,
+mivel nem volt a lista első helyén. Végül „TP2” és „TP7” marad meg
+lehetséges tevékenység párbeszédként, amelyeket a felhasználó felhasználhat.
+                </para>
+                <para>
+                    Lehetséges a korlátozni azokat a folyamatokat is, amelyek megjeleníthetők az
+„Új folyamatjegy” képernyőn. A funkcionalitás hasonló a tevékenység
+párbeszédek korlátozásához egy kivétellel: az ACL-ek csak a felhasználókon
+alapulhatnak.
+                </para>
+                <para>Nézze meg a lenti példákat:</para>
+                <para>
+                    <screen>
+$Self->{TicketAcl}->{'200-ACL-Folyamat'} = {
+    # illesztési tulajdonságok
+    Properties => {
+        User => {
+            UserID => [2, 3],
+        },
+    },
+    Possible => {
+       Process => ['F1', 'F2', 'F3'],
+    },
+    PossibleNot => {
+        Process => ['F4'],
+    },
+};
+                    </screen>
+                </para>
+                <para>
+                    <screen>
+$Self->{TicketAcl}->{'201-ACL-Folyamat'} = {
+    # illesztési tulajdonságok
+    Properties => {
+        User => {
+            Group_rw => [ 'Saját csoport' ],
+        },
+    },
+    Possible => {
+       Process => ['F1', 'F2', 'F3'],
+    },
+    PossibleNot => {
+        Process => ['F4'],
+    },
+};
+                    </screen>
+                </para>
+                <para>
+                    <screen>
+$Self->{TicketAcl}->{'202-ACL-Folyamat'} = {
+    # illesztési tulajdonságok
+    Properties => {
+        User => {
+            Role => [ 'Saját szerep' ],
+        },
+    },
+    Possible => {
+       Process => ['F1', 'F2', 'F3'],
+    },
+    PossibleNot => {
+        Process => ['F4'],
+    },
+};
+                    </screen>
+                </para>
+            </section>
+        </section>
+    </section>
+    <section>
+        <title>Példafolyamat importálása</title>
+
+        <section>
+            <title>Importálás</title>
+            <para>
+                Az <emphasis>AdminProcessManagement</emphasis> képernyőn található egy
+<emphasis>Példafolyamat</emphasis> felületi elem, ahol megtalálhatja a
+legjobb gyakorlatok szerinti példafolyamatokat. Jelenleg csak az
+<emphasis>Alkalmazás a kilépéshez</emphasis> folyamat érhető el, de további
+példafolyamatokat találhat az <emphasis role="bold">OTRS Business
+Solution™</emphasis> csomagban.
+
+            </para>
+            <para>
+                <figure>
+                    <title>Példafolyamat importálása felületi elem</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-process-widget.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Válasszon folyamatot a legördülő menüből, és kattintson a
+<emphasis>Példafolyamat importálása</emphasis> gombra. A folyamat
+importálása után ne felejtse el telepíteni a változtatásokat.
+            </para>
+        </section>
+    </section>
+</section>

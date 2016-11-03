@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="manual-installation-of-otrs">
+
+    <title>Telepítés forrásból (Linux, Unix)</title>
+
+    <section role="NotInToc" id="installation-disable-selinux">
+        <title>Előkészítés: SELinux letiltása</title>
+        <note>
+            <para>
+                Ha a rendszere SELinuxot használ, akkor le kell tiltania azt, különben az
+OTRS nem fog megfelelően működni.
+            </para>
+        </note>
+        <para>
+            Itt van, hogy hogyan lehet letiltani a SELinux használatát
+RHEL/CentOS/Fedora rendszereknél:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Állítson be SELINUX=disabled értéket az /etc/selinux/config fájlban:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#       enforcing - SELinux security policy is enforced.
+#       permissive - SELinux prints warnings instead of enforcing.
+#       disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#       targeted - Targeted processes are protected,
+#       mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+            Indítsa újra a rendszert. Újraindítás után ellenőrizze, hogy a getenforce
+parancs <literal>Disabled</literal> értéket ad-e vissza:
+                    </para>
+                    <para>
+                    <screen><![CDATA[
+shell> getenforce
+Disabled
+                        ]]></screen>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>1. lépés: a .tar.gz telepítése</title>
+        <para>
+        Ha forrásból szeretné telepíteni az OTRS-t, akkor először töltse le a
+forrásarchívumot .tar.gz, .tar.bz2 vagy .zip fájlként az <ulink
+url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">https://www.otrs.com/download-open-source-help-desk-software-otrs-free/</ulink>
+oldalról.
+        </para>
+
+        <para>
+        Bontsa ki az archívumot (például a <command>tar</command> használatával) az
+<filename>/opt</filename> könyvtárba, és nevezze át a könyvtárat otrs-x.x.x
+névről otrs névre (lást a lenti parancsfájlt).
+        </para>
+
+        <para>
+        <screen><![CDATA[
+shell> tar xzf /tmp/otrs-x.x.x.tar.gz
+shell> mv otrs-x.x.x /opt/otrs
+        ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc" id="installation-of-perl-modules">
+        <title>2. lépés: további Perl-modulok telepítése</title>
+        <para>
+            Használja a következő parancsfájlt, hogy áttekintést kapjon az összes
+telepített és szükséges CPAN-modulról.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> perl /opt/otrs/bin/otrs.CheckModules.pl
+o CGI..............................ok (v3.60)
+o Crypt::PasswdMD5.................ok (v1.3)
+o Crypt::SSLeay....................Not installed! (Optional - Required for Generic Interface SOAP SSL connections.)
+o CSS::Minifier....................ok (v0.01)
+o Date::Format.....................ok (v2.22)
+o Date::Pcalc......................ok (v1.2)
+...
+            ]]></screen>
+        </para>
+
+        <note>
+            <para>
+                Ne feledje, hogy az OTRS egy működő Perl telepítést igényel az összes
+„alapvető” modullal, mint például a <literal>version</literal> modul. Ezeket
+a modulokat kifejezetten nem ellenőrzi le a parancsfájl. Esetleg telepítenie
+kell egy <literal>perl-core</literal> csomagot néhány olyan rendszeren (mint
+például RHEL), amely alapértelmezetten nem telepíti az alapvető
+Perl-csomagokat.
+            </para>
+        </note>
+
+        <para>
+            A hiányzó Perl-modulok telepítéséhez a következőket teheti:
+        </para>
+
+        <section role="NotInToc">
+            <title>a) Telepítse a csomagokat a Linux disztribúció csomagkezelőjén keresztül</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Red Hat, CentOS, Fedora vagy ezekkel kompatibilis rendszereknél:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> yum install "perl(Digest::MD5)"
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        SUSE Linux Enterprise Server, openSUSE vagy ezekkel kompatibilis
+rendszereknél: először határozza meg a csomag nevét, amely a modult
+szállítja. Általában a Saját::Modul modulhoz tartozó csomagot
+„perl-Saját-Modul” néven hívják.
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> zypper search Digest::MD5
+                        ]]></screen>
+                    </para>
+                    <para>
+                        Ezután telepítse:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> zypper install perl-Digest-MD5
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Debian, Ubuntu vagy ezekkel kompatibilis rendszereknél először határozza meg
+a csomag nevét, amely a modult szállítja. Általában a Saját::Modul modulhoz
+tartozó csomagot „libsaját-modul-perl” néven hívják.
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> apt-cache search Digest::MD5
+                        ]]></screen>
+                    </para>
+                    <para>
+                        Ezután telepítse:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+shell> apt-get install libdigest-md5-perl
+                        ]]></screen>
+                    </para>
+                    <para>
+                        Vegye figyelembe, hogy előfordulhat, hogy nem található meg minden modul
+vagy azok szükséges verziói a disztribúció tárolójában. Ebben az esetben
+választhatja ezen modulok telepítését a CPAN-on keresztül (lásd alább).
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+        <section role="NotInToc">
+            <title>b) Telepítse a szükséges modulokat a CPAN parancsértelmezőn keresztül</title>
+            <para>
+                Ne feledje, hogy amikor Linux rendszeren van, akkor a CPAN-t a rendszergazda
+fiókkal kell futtatnia, mert a moduloknak hozzáférhetőnek kell lenniük mind
+az OTRS fióknak, mind annak a fióknak, amely alatt a webkiszolgáló fut.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> perl -MCPAN -e shell;
+...
+install Digest::MD5
+install Crypt::PasswdMD5
+...
+                ]]></screen>
+            </para>
+            <para>
+                A parancsfájl által felsorolt bármely opcionális modult a célrendszer
+speciális követelményeitől függően kell telepítenie.
+            </para>
+        </section>
+
+    </section>
+
+    <section role="NotInToc">
+        <title>3. lépés: OTRS felhasználó létrehozása</title>
+        <para>
+            Felhasználó létrehozása:
+        </para>
+        <para>
+            <screen><![CDATA[
+shell> useradd -d /opt/otrs -c 'OTRS user' otrs
+            ]]></screen>
+        </para>
+        <para>
+            Felhasználó hozzáadása a webkiszolgáló csoportjához (ha a webkiszolgáló nem
+az OTRS felhasználójaként fut):
+        </para>
+        <para>
+            <screen><![CDATA[
+shell> usermod -G www otrs
+(SUSE=www, Red Hat/CentOS/Fedora=apache, Debian/Ubuntu=www-data)
+            ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>4. lépés: alapértelmezett beállítófájlok bekapcsolása</title>
+        <para>
+            Két OTRS beállítófájl van az $OTRS_HOME/Kernel/*.dist és az
+$OTRS_HOME/Kernel/Config/*.dist fájlba csomagolva. Be kell kapcsolnia azokat
+a „.dist” fájlnév-kiterjesztés nélkül történő átmásolással.
+        </para>
+        <para>
+            <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> cp Kernel/Config.pm.dist Kernel/Config.pm
+    ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>5. lépés: annak ellenőrzése, hogy minden szükséges modul telepítve van-e</title>
+        <para>
+            <screen><![CDATA[
+shell> perl -cw /opt/otrs/bin/cgi-bin/index.pl
+/opt/otrs/bin/cgi-bin/index.pl syntax OK
+
+shell> perl -cw /opt/otrs/bin/cgi-bin/customer.pl
+/opt/otrs/bin/cgi-bin/customer.pl syntax OK
+
+shell> perl -cw /opt/otrs/bin/otrs.Console.pl
+/opt/otrs/bin/otrs.Console.pl syntax OK
+            ]]></screen>
+        </para>
+        <para>
+            A „syntax OK” azt mondja, hogy az összes kötelező Perl-modul telepítve van.
+        </para>
+    </section>
+
+    <section role="NotInToc" id="web-server-configuration">
+        <title>6. lépés: az Apache webkiszolgáló beállítása</title>
+
+        <para>
+            Mindenek előtt telepítenie kell az Apache2 webkiszolgálót és a mod_perl
+modult. Ezt jellemzően a rendszerek csomagkezelőjéből kellene megtenni. Lent
+fogja megtalálni az Apache beállításához szükséges parancsokat a
+legnépszerűbb Linux disztribúciókon.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+# rhel / centos:
+shell> yum install httpd mod_perl
+
+# suse:
+shell> zypper install apache2-mod_perl
+
+# debian/ubuntu:
+shell> apt-get install apache2 libapache2-mod-perl2
+        ]]></screen>
+        </para>
+
+        <para>
+            A legtöbb <application>Apache</application> telepítésnek van egy
+<filename>conf.d</filename> könyvtára mellékelve. Linux rendszereknél
+általában ez a könyvtár az <filename>/etc/apache</filename> vagy az
+<filename>/etc/apache2</filename> alatt található. Jelentkezzen be root
+felhasználóként, lépjen be a <filename>conf.d</filename> könyvtárba, és
+kapcsolja hozzá az
+<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename> fájlban
+található megfelelő sablont egy <filename>zzz_otrs.conf</filename> nevű
+fájlhoz az Apache beállítási könyvtárában (hogy meggyőződhessen arról, hogy
+betöltődik az egyéb beállítások után).
+        </para>
+
+        <para>
+            Az OTRS azt igényli, hogy néhány Apache modul be legyen kapcsolva az
+optimális működéshez. A legtöbb platformon az <filename>a2enmod</filename>
+eszközön keresztül győződhet meg arról, hogy azok be vannak-e kapcsolva.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> a2enmod perl
+shell> a2enmod version
+shell> a2enmod deflate
+shell> a2enmod filter
+shell> a2enmod headers
+        ]]></screen>
+        </para>
+
+        <para>
+            Most újraindíthatja a webkiszolgálót az új konfigurációs beállítások
+betöltéséhez. A legtöbb rendszeren ezt a <command>systemctl restart
+apache2.service</command> paranccsal teheti meg.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>7. lépés: fájljogosultságok</title>
+        <para>
+            A fájljogosultságokat be kell állítani, hogy az OTRS képes legyen olvasni és
+írni a fájlokat:
+        </para>
+
+        <para>
+            <cmdsynopsis>
+<command>otrs.SetPermissions.pl</command> <arg choice='opt'> --otrs-user=
+<replaceable>OTRS felhasználó, alapértelmezetten „otrs”</replaceable> </arg>
+<arg choice='req'> --web-group= <replaceable>a webkiszolgáló
+felhasználójának csoportja</replaceable> </arg></cmdsynopsis>
+        </para>
+
+        <para>
+            Például:
+        </para>
+
+        <para>
+            <itemizedlist>
+                <listitem><para>Olyan webkiszolgálónál, amely az OTRS felhasználóként fut:</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-user=otrs
+                ]]></screen>
+                </para></listitem>
+
+                <listitem><para>A wwwrun felhasználóval futó webkiszolgálónál (például SUSE):</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
+                ]]></screen>
+                </para></listitem>
+
+                <listitem><para>Apache felhasználóval futó webkiszolgálónál (például Red Hat, CentOS):</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=apache
+                ]]></screen>
+                </para></listitem>
+
+                <listitem><para>A www-data felhasználóval futó webkiszolgálónál (például Debian, Ubuntu):</para>
+                <para>
+                <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=www-data
+                ]]></screen>
+                </para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section role="NotInToc" id="database-configuration">
+        <title>8. lépés: adatbázis-beállítás és alapvető rendszerbeállítás</title>
+        <para>
+            Használja a <ulink
+url="http://sajatgep/otrs/installer.pl">http://sajátgép/otrs/installer.pl</ulink>
+címen elérhető webes telepítőt (cserélje ki a „sajátgépet” az OTRS
+gépnevével) az adatbázis beállításához és az alapvető
+rendszerbeállításokhoz, mint például az e-mail fiókok.
+        </para>
+        <note>
+            <para>
+                A következő konfigurációs beállítások ajánlottak a MySQL
+beállításokhoz. Adja hozzá a következő sorokat az
+<filename>/etc/my.cnf</filename> fájlba a [mysqld] szakasz alá:
+            </para>
+            <para>
+                <screen><![CDATA[
+max_allowed_packet   = 20M
+query_cache_size     = 32M
+innodb_log_file_size = 256M
+                ]]></screen>
+            </para>
+        </note>
+    </section>
+
+    <section role="NotInToc">
+        <title>9. lépés: első bejelentkezés</title>
+        <para>
+            Most már készen áll a rendszerre való bejelentkezéshez a <ulink
+url="http://sajatgep/otrs/index.pl">http://sajátgép/otrs/index.pl</ulink>
+címen a webes telepítőben beállított hitelesítési adatokkal (felhasználó:
+root@localhost).
+        </para>
+        <para>
+            Ezzel a lépéssel az alapvető rendszerbeállítás befejeződött.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>10. lépés: az OTRS démon elindítása</title>
+
+        <para>
+            Az új OTRS démon felelős bármely aszinkron és ismétlődő feladat kezelésénél
+az OTRS-ben. Amik korábban a cron-fájl meghatározásokban voltak, azokat most
+az OTRS démon kezeli, amely mostantól szükséges az OTRS működéséhez. A démon
+kezeli az összes általános ügyintéző feladatot is, és az
+<literal>otrs</literal> felhasználótól kell elindítani.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/otrs.Daemon.pl start
+            ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>11. lépés: cron-feladatok az OTRS felhasználóhoz</title>
+        <para>
+            Két alapértelmezett OTRS cron-file van az
+<filename>/opt/otrs/var/cron/*.dist</filename> fájlban, és a céljuk annak
+ellenőrzése, hogy az OTRS démon fut-e. Be kell kapcsolni ezeket a „.dist”
+fájlnévkiterjesztés nélkül történő lemásolásukkal.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> cd /opt/otrs/var/cron
+shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
+            ]]></screen>
+        </para>
+
+        <para>
+            Ezen cron-feladatok ütemezéséhez a rendszeren használhatja a
+<filename>Cron.sh</filename> parancsfájlt az <literal>otrs</literal>
+felhasználóval.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/Cron.sh start
+            ]]></screen>
+        </para>
+
+        <para>
+            A cron-feladatok leállítása is lehetséges (karbantartáskor hasznos):
+        </para>
+
+        <para>
+            <screen><![CDATA[
+shell> /opt/otrs/bin/Cron.sh stop
+    ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>12. lépés: bash automatikus kiegészítés beállítása (opcionális)</title>
+        <para>
+            Az összes szabályos OTRS parancssori művelet a
+<filename>bin/otrs.Console.pl</filename> OTRS konzolfelületen keresztül
+történik. Ez automatikus kiegészítést biztosít a bash parancsértelmezőhöz,
+amely sokkal könnyebben teszi megtalálhatóvá a helyes parancsot és a
+kapcsolókat.
+        </para>
+        <para>
+            A bash automatikus kiegészítését a <literal>bash-completion</literal> csomag
+telepítésével kapcsolhatja be. Ez automatikusan fel fogja ismerni és be
+fogja tölteni az <filename>/opt/otrs/.bash_completion</filename> fájlt az
+<literal>otrs</literal> felhasználónál.
+        </para>
+        <para>
+            A parancsértelmező újraindítása után egyszerűen nyomja meg a TAB billentyűt
+a <filename>bin/otrs.Console.pl</filename> parancsot követően, és fel fogja
+sorolni az összes elérhető parancsot. Ha begépeli a parancs nevének néhány
+karakterét, akkor a TAB billentyű meg fogja jeleníteni az összes egyező
+parancsot. Egy teljes parancs begépelése után az összes lehetséges kapcsoló
+és argumentum meg fog jelenni a TAB megnyomásával.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>13. lépés: további információk</title>
+        <para>
+            Azt tanácsoljuk, hogy olvassa el az OTRS <link
+linkend="performance-tuning">teljesítmény-hangolási fejezetét</link>.
+        </para>
+        <para>
+            Ha problémákkal szembesül a telepítésnél, akkor az otrs@otrs.org
+levelezőlistánkra küldhet üzenetet (http://lists.otrs.org/).
+        </para>
+        <para>
+            Kérdezhet az OTRS csoporttól is, hogy segítsenek az OTRS tervezésében vagy
+telepítésében, illetve nézzék át a telepített OTRS rendszert. A <ulink
+url="http://www.otrs.com/en/services/">professzionális
+szolgáltatásunkat</ulink> arra tervezték, hogy segítsen az OTRS gyorsabb
+telepítésében, és hogy a legtöbb hasznot hozza ki az OTRS-ből.
+        </para>
+    </section>
+
+</section>
