@@ -1,0 +1,1303 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+
+<section id="external-backends">
+<title>Külső háttérprogramok használata</title>
+
+<section id='customer-data'>
+<title>Ügyféladatok</title>
+
+<para>
+Az OTRS számos ügyféladat jellemzővel dolgozik, mint például felhasználónév,
+e-mail cím, telefonszám, stb. Ezek a jellemzők mind az ügyintézői, mind az
+ügyfél előtétprogramokon megjelennek, és az ügyfelek hitelesítéséhez is
+használják.
+</para>
+
+<para>
+Az OTRS-en belül használt vagy megjelenített ügyféladatok nagymértékben
+személyre szabhatók. A következő információkra azonban mindig szükség van az
+ügyfél hitelesítéséhez:
+</para>
+
+<para>
+<itemizedlist>
+  <listitem>
+    <para>
+      Felhasználói bejelentkezés
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+      E-mail cím
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+      Ügyfél-azonosító
+    </para>
+  </listitem>
+</itemizedlist>
+</para>
+
+<para>
+Használja a következő rendszerbeállítási paramétereket, ha
+ügyfélinformációkat szeretne megjeleníteni az ügyintéző felületen.
+</para>
+
+<para>
+<programlisting>
+    # Ticket::Frontend::CustomerInfo*
+    # (ügyfélinformációk megjelenítése az írás (telefon és e-mail),
+    # nagyítás és várólista nézeten
+    $Self->{'Ticket::Frontend::CustomerInfoCompose'} = 1;
+    $Self->{'Ticket::Frontend::CustomerInfoZoom'} = 1;
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Rendszerbeállítási konfigurációs
+paraméterek.</emphasis>
+</para>
+
+</section>
+
+<section id="customer-user-backend">
+<title>Ügyfél-felhasználó háttérprogram</title>
+
+<para>
+Kétféle típusú ügyfél-háttérprogramot használhat: DB és LDAP. Ha már van egy
+másik ügyfél-háttérprogramja (például SAP), természetesen lehetséges egy
+olyan modul írása, amely azt használja.
+</para>
+
+<section id='customer-backend-db'>
+<title>Adatbázis (alapértelmezett)</title>
+
+<para>
+A lenti példa egy olyan DB ügyfél-háttérprogram beállítását jeleníti meg,
+amely az OTRS adatbázisban tárolt ügyféladatokat használja.
+</para>
+
+<example id='db-customer-backend'>
+<title>Egy DB ügyfél-háttérprogram beállítása</title>
+
+<para>
+<programlisting>
+# CustomerUser (ügyféladatbázis háttérprogram és beállítások)
+$Self->{CustomerUser} = {
+    Name => 'Adatbázis adatforrás',
+    Module => 'Kernel::System::CustomerUser::DB',
+    Params => {
+        # ha egy külső adatbázis szeretne használni, akkor adja hozzá a szükséges beállításokat
+#            DSN => 'DBI:odbc:yourdsn',
+#            Type => 'mssql', # csak ODBC kapcsolatoknál
+#            DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
+#            User => '',
+#            Password => '',
+            Table => 'customer_user',
+
+            # A CaseSensitive azt fogja vezérelni, hogy az SQL-utasítások
+            #   igényelnek-e LOWER() függvényhívásokat a kis- és nagybetű-
+            #   érzéketlen működéshez. Ennek 1-re állítása drámaian növelni
+            #   fogja a teljesítményt nagy adatbázisoknál.
+             CaseSensitive => 0,
+        },
+# egyedi ügyfél-azonosító
+CustomerKey => 'login',
+
+# ügyfél #
+CustomerID => 'customer_id',
+CustomerValid => 'valid_id',
+    CustomerUserListFields => ['first_name', 'last_name', 'email'],
+    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['email'],
+    CustomerUserNameFields => ['title','first_name','last_name'],
+    CustomerUserEmailUniqCheck => 1,
+#    # a saját jegyeket nem jeleníti meg az ügyfélpanelen, CompanyTickets
+#    CustomerUserExcludePrimaryCustomerID => 0,
+#    # automatikus bejelentkezések előállítása
+#    AutoLoginCreation => 0,
+#    AutoLoginCreationPrefix => 'auto',
+#    # az adminisztrátor megváltoztathatja az ügyfél beállításait
+#    AdminSetPreferences => 1,
+#    # gyorsítótáridő élettartam másodpercben - bármely adatbázis-lekérdezés gyorsítótárazása
+#    CacheTTL => 0,
+#    # egy csak olvasható forrás
+#    ReadOnly => 1,
+    Map => [
+        # megjegyzés: a bejelentkezés, az e-mail és az ügyfélazonosító szükséges!
+        # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező, tárolótípus,
+        #   HTTP-hivatkozás, csak olvasható, HTTP-hivatkozás célja
+        [ 'UserTitle',      'Titulus',    'title',      1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Keresztnév', 'first_name', 1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Vezetéknév', 'last_name',  1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Felhasználó','login',      1, 1, 'var', '', 0 ],
+        [ 'UserPassword',   'Jelszó',     'pw',         0, 0, 'var', '', 0 ],
+        [ 'UserEmail',      'E-mail',     'email',      1, 1, 'var', '', 0 ],
+
+#        [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '[% Env("CGIHandle") %]?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=[% Data.TicketID %]&amp;ArticleID=[% Data.ArticleID %]', 0 ],
+        [ 'UserCustomerID', 'ÜgyfélID',   'customer_id', 0, 1, 'var', '', 0 ],
+
+#        [ 'UserCustomerIDs',  'ÜgyfélID-k',  'customer_ids', 1, 0, 'var', '', 0 ],
+        [ 'UserPhone',        'Telefon',     'phone',        1, 0, 'var', '', 0 ],
+        [ 'UserFax',          'Fax',         'fax',          1, 0, 'var', '', 0 ],
+        [ 'UserMobile',       'Mobil',       'mobile',       1, 0, 'var', '', 0 ],
+        [ 'UserStreet',       'Utca',        'street',       1, 0, 'var', '', 0 ],
+        [ 'UserZip',          'Irányítószám','zip',          1, 0, 'var', '', 0 ],
+        [ 'UserCity',         'Település',   'city',         1, 0, 'var', '', 0 ],
+        [ 'UserCountry',      'Ország',      'country',      1, 0, 'var', '', 0 ],
+        [ 'UserComment',      'Megjegyzés',  'comments',     1, 0, 'var', '', 0 ],
+        [ 'ValidID',          'Érvényes',    'valid_id',     0, 1, 'int', '', 0 ],
+    ],
+    # alapértelmezett kijelölések
+    Selections => {
+        UserTitle => {
+            'Mr.' => 'Mr.',
+            'Mrs.' => 'Mrs.',
+        },
+    },
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+Ha személyre szeretné szabni az ügyféladatokat, akkor változtassa meg az
+oszlopfejléceket vagy adjon hozzá újakat a customer_user táblához az OTRS
+adatbázisában. Példaként a lenti parancsfájl azt mutatja meg, hogy hogyan
+lehet új mezőt hozzáadni a szobaszámhoz.
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 116 to server version: 5.0.18-Debian_7-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; ALTER TABLE customer_user ADD room VARCHAR (250);
+Query OK, 1 rows affected (0.01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Egy „room” mező hozzáadása a customer_user
+táblához.</emphasis>
+</para>
+
+<para>
+Most adja hozzá az új oszlopot a <filename>Kernel/Config.pm</filename>
+fájlban lévő MAP tömbhöz, ahogy a következő parancsfájlban látható.
+</para>
+
+<para>
+<programlisting>
+    # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező,
+    #   tárolótípus, HTTP-hivatkozás, csak olvasható
+    [...]
+    [ 'UserRoom',      'Szoba',     'room',       0, 1, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Egy „room” mező hozzáadása a Kernel/Config.pm
+fájlhoz.</emphasis>
+</para>
+
+<para>
+Lehetséges az összes ügyfélinformáció szerkesztése az adminisztrációs
+felületen lévő Ügyfelek hivatkozáson keresztül is.
+</para>
+
+<section id='multi-customer-ids-db'>
+<title>Egy ügyfél több azonosítóval (vállalati jegyek)</title>
+
+<para>
+Lehetséges egynél több ügyfél-azonosítót hozzárendelni egy ügyfélhez. Ez
+akkor lehet hasznos, ha egy ügyfélnek hozzá kell férnie más ügyfelek
+jegyeihez, például egy felügyelő meg szeretné nézni az asszisztensei
+jegyeit. Ha egy ügyfél hozzáférhet egy másik ügyfél jegyeihez, akkor az OTRS
+vállalati jegy funkcióját használják. A vállalati jegyekhez az ügyfélpanelen
+lévő „Vállalati jegyek” hivatkozáson keresztül lehet hozzáférni.
+</para>
+
+<para>
+A vállalati jegyek használatához egy új oszlopot kell hozzáadni a
+customer_user táblához az OTRS adatbázisában azokkal az azonosítókkal,
+amelyeknek elérhetőnek kell lenniük egy ügyfélnél (lásd a lenti
+parancsfájlt).
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 124 to server version: 5.0.18-Debian_7-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; ALTER TABLE customer_user ADD customer_ids VARCHAR (250);
+Query OK, 1 rows affected (0.02 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+    <emphasis>Parancsfájl: Egy „customer_ids” mező hozzáadása a customer_user
+táblához.</emphasis>
+</para>
+
+<para>
+Most az új oszlopot hozzá kell adni a <filename>Kernel/Config.pm</filename>
+fájlban lévő MAP tömbhöz, ahogy a lenti parancsfájlban látható.
+</para>
+
+<para>
+<programlisting>
+    # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező,
+    #   tárolótípus, HTTP-hivatkozás, csak olvasható
+    [...]
+    [ 'UserCustomerIDs', 'ÜgyfélID-k', 'customer_ids', 1, 0, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Egy „UserCustomerIDs” mező hozzáadása a
+Kernel/Config.pm fájlhoz.</emphasis>
+</para>
+
+<para>
+Most az új oszlop a több ügyfél-azonosítónál az ügyintézői felületen
+keresztül szerkeszthető az ügyfélkezelésnél lévő szakaszban.
+</para>
+
+<para>
+Annak biztosításához, hogy egy ügyfél hozzá tudjon férni más ügyfelek
+jegyeihez, adja hozzá ezen egyéb felhasználók azonosítóit az új mezőbe a
+több ügyfélazonosítónál. Minden egyes azonosítót egy pontosvesszővel kell
+elválasztani (lásd a lenti példát).
+</para>
+
+<example id='company-tickets-db'>
+<title>Vállalati jegyek használata egy DB háttérprogrammal</title>
+
+<para>
+A, B és C ügyfelek léteznek a rendszeren, és A hozzáférést szeretne B és C
+jegyeihez az ügyfélpanelen keresztül. B és C ügyfélnek nem lehet hozzáférése
+az egyéb ügyfelek jegyeihez.
+</para>
+
+<para>
+Ezen beállítás megvalósításához változtassa meg a customer_user táblát és a
+<filename>Kernel/Config.pm</filename> fájlban lévő leképezést, ahogy fent le
+van írva. Ezután töltse be a beállításokat az A ügyfélhez az adminisztrációs
+felületen lévő „Ügyfelek” hivatkozáson keresztül vagy az adminisztrációs
+oldalon keresztül. Ha a beállítások megjelentek, akkor adja hozzá a mezőhöz
+az ügyfél-azonosítóknál a „B;C;” értékeket.
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+<section id='customer-backend-ldap'>
+<title>LDAP</title>
+
+<para>
+Ha egy LDAP könyvtára van az ügyféladatokkal, akkor használhatja azt
+ügyfél-háttérprogramként az OTRS-sel, amint a lenti példában látható.
+</para>
+
+<example id='ldap-customer-backend'>
+<title>Egy LDAP ügyfél-háttérprogram beállítása</title>
+
+<para>
+<programlisting>
+# CustomerUser
+# (ügyfél LDAP háttérprogram és beállítások)
+$Self->{CustomerUser} = {
+    Name => 'LDAP adatforrás',
+    Module => 'Kernel::System::CustomerUser::LDAP',
+    Params => {
+        # LDAP kiszolgáló
+        Host => 'bay.csuhayward.edu',
+        # LDAP bázis dn
+        BaseDN => 'ou=seas,o=csuh',
+        # keresési hatáskör (one|sub)
+        SSCOPE => 'sub',
+        # A következő érvényes, de csak akkor lenne szükséges, ha a névtelen
+        #   felhasználónak NEM lenne jogosultsága az LDAP-fából olvasni
+        UserDN => '',
+        UserPw => '',
+        # Abban az esetben, ha mindig egy szűrőt szeretne hozzáadni az egyes
+        #   LDAP lekérdezésekhez, akkor használja ezt a beállítást. Például:
+        #   AlwaysFilter => '(mail=*)' vagy AlwaysFilter => '(objectclass=user)'
+        AlwaysFilter => '',
+            # ha az LDAP-kiszolgáló karakterkészlete iso-8859-2, akkor használja ezt:
+#            SourceCharset => 'iso-8859-2',
+
+            # Net::LDAP új paraméterek (ha szükséges - további
+            #   információkért nézze meg: perldoc Net::LDAP)
+            Params => {
+                port => 389,
+                timeout => 120,
+                async => 0,
+                version => 3,
+            },
+    },
+    # egyedi ügyfél-azonosító
+    CustomerKey => 'uid',
+    # ügyfél #
+    CustomerID => 'mail',
+    CustomerUserListFields => ['cn', 'mail'],
+    CustomerUserSearchFields => ['uid', 'cn', 'mail'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['mail'],
+    CustomerUserNameFields => ['givenname', 'sn'],
+    # a saját jegyeket nem jeleníti meg az ügyfélpanelen, CompanyTickets
+    CustomerUserExcludePrimaryCustomerID => 0,
+    # egy LDAP-szűrő hozzáadása az érvényes felhasználókhoz (szakértő beállítások)
+#    CustomerUserValidFilter => '(!(description=locked))',
+    # az adminisztrátor nem változtathatja meg az ügyfél beállításait
+    AdminSetPreferences => 0,
+#    # gyorsítótáridő élettartam másodpercben - bármely adatbázis-lekérdezés gyorsítótárazása
+#    CacheTTL => 0,
+    Map => [
+        # megjegyzés: a bejelentkezés, az e-mail és az ügyfélazonosító kötelezők!
+        # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező, tárolótípus,
+        #   HTTP-hivatkozás, csak olvasható
+        [ 'UserTitle',      'Titulus',    'title',           1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Keresztnév', 'givenname',       1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Vezetéknév', 'sn',              1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Felhasználó','uid',             1, 1, 'var', '', 0 ],
+        [ 'UserEmail',      'E-mail',     'mail',            1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'ÜgyfélID',   'mail',            0, 1, 'var', '', 0 ],
+#        [ 'UserCustomerIDs', 'ÜgyfélID-k', 'second_customer_ids', 1, 0, 'var', '', 0 ],
+        [ 'UserPhone',      'Telefon',    'telephonenumber', 1, 0, 'var', '', 0 ],
+        [ 'UserAddress',    'Cím',        'postaladdress',   1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Megjegyzés', 'description',     1, 0, 'var', '', 0 ],
+    ],
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+Ha további ügyféljellemzők is vannak az LDAP könyvtárban tárolva, mint
+például igazgató neve, mobiltelefonszám vagy részleg, és ha ezeket az
+információkat szeretné megjeleníteni az OTRS-ben, akkor egyszerűen bővítse
+ki a <filename>Kernel/Config.pm</filename> fájlban lévő MAP tömböt ezeknek a
+jellemzőknek a bejegyzéseivel, amint a következő parancsfájlban látható.
+</para>
+
+<para>
+<programlisting>
+    # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező,
+    #   tárolótípus, HTTP-hivatkozás, csak olvasható
+    [...]
+    [ 'UserPhone',      'Telefon',    'telephonenumber', 1, 0, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Új mezők hozzáadása a Kernel/Config.pm
+fájlhoz.</emphasis>
+</para>
+
+
+<section id='multi-customer-ids-ldap'>
+<title>Egy ügyfél több azonosítóval (vállalati jegyek)</title>
+
+<para>
+Lehetséges egynél több ügyfél-azonosítót hozzárendelni egy ügyfélhez egy
+LDAP háttérprogram használatakor. A vállalati jegyek használatához egy új
+mezőt kell hozzáadni az LDAP könyvtárhoz, amely azokat az azonosítókat
+tartalmazza, amelyek hozzáférhetők az ügyfélnek.
+</para>
+
+<para>
+Ha az LDAP könyvtárban az új mező létrejött, akkor az új bejegyzést hozzá
+kell adni a <filename>Kernel/Config.pm</filename> fájlban lévő MAP tömbhöz,
+ahogy a lenti parancsfájlban látható.
+</para>
+
+<para>
+<programlisting>
+    # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező,
+    #   tárolótípus, HTTP-hivatkozás, csak olvasható
+    [...]
+    [ 'UserCustomerIDs', 'ÜgyfélID-k', 'customer_ids', 1, 0, 'var', '', 0 ],
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Új mezők leképezése a Kernel/Config.pm
+fájlhoz.</emphasis>
+</para>
+
+<para>
+A több ügyfél-azonosítónál lévő mezőt közvetlenül az LDAP könyvtárban kell
+szerkeszteni. Az OTRS csak olvasni tud az LDAP könyvtárból, írni nem tud
+bele.
+</para>
+
+<para>
+Hozzáférés biztosításához egy ügyfél számára más ügyfelek jegyeihez, adja
+hozzá azon ügyfelek ügyfél-azonosítóit az új mezőbe az LDAP könyvtárban,
+akik jegyeihez hozzá kell férni. Minden egyes azonosítót egy pontosvesszővel
+kell elválasztani (lásd a lenti példát).
+</para>
+
+<example id='company-tickets-ldap'>
+<title>Vállalati jegyek használata egy LDAP háttérprogrammal</title>
+
+<para>
+A, B és C ügyfelek léteznek a rendszeren, és A hozzáférést szeretne B és C
+jegyeihez az ügyfélpanelen keresztül. B és C ügyfélnek nem lehet hozzáférése
+az egyéb ügyfelek jegyeihez.
+</para>
+
+<para>
+Ezen beállítás megvalósításához változtassa meg az LDAP könyvtárat és a
+<filename>Kernel/Config.pm</filename> fájlban lévő leképezést, ahogy fent le
+van írva. Ezután adja hozzá a mezőhöz az ügyfél-azonosítóknál a „B;C;”
+értékeket az LDAP könyvtárban lévő A ügyfélhez.
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+<section id='multiple-customer-backends'>
+<title>Egynél több ügyfél-háttérprogram használata az OTRS-sel</title>
+
+<para>
+Ha az OTRS-sel használt egynél több ügyfél-adatforrást szeretne felhasználni
+(például egy LDAP és egy adatbázis háttérprogramot), akkor a CustomerUser
+beállítási paramétert ki kell bővítenie egy számmal, például
+„CustomerUser1”, „CustomerUser2” (lásd a lenti példát).
+</para>
+
+<example id='multiple-customer-backend-example'>
+<title>Egynél több ügyfél-háttérprogram használata az OTRS-sel</title>
+
+<para>
+A következő beállítási példa egy LDAP és egy adatbázis ügyfél-háttérprogram
+használatát mutatja meg az OTRS-sel.
+</para>
+
+<para>
+<programlisting>
+# 1. ügyfél-felhasználó háttérprogram: DB
+# (ügyféladatbázis háttérprogram és beállítások)
+$Self->{CustomerUser1} = {
+    Name => 'Ügyféladatbázis',
+    Module => 'Kernel::System::CustomerUser::DB',
+    Params => {
+        # ha egy külső adatbázis szeretne használni, akkor adja hozzá a szükséges beállításokat
+#        DSN => 'DBI:odbc:yourdsn',
+#        Type => 'mssql', # csak ODBC kapcsolatoknál
+#        DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
+#        User => '',
+#        Password => '',
+        Table => 'customer_user',
+    },
+    # egyedi ügyfél-azonosító
+    CustomerKey => 'login',
+    # ügyfél #
+    CustomerID => 'customer_id',
+    CustomerValid => 'valid_id',
+    CustomerUserListFields => ['first_name', 'last_name', 'email'],
+    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['email'],
+    CustomerUserNameFields => ['title','first_name','last_name'],
+    CustomerUserEmailUniqCheck => 1,
+#    # a saját jegyeket nem jeleníti meg az ügyfélpanelen, CompanyTickets
+#    CustomerUserExcludePrimaryCustomerID => 0,
+#    # automatikus bejelentkezések előállítása
+#    AutoLoginCreation => 0,
+#    AutoLoginCreationPrefix => 'auto',
+#    # az adminisztrátor megváltoztathatja az ügyfél beállításait
+#    AdminSetPreferences => 1,
+#    # gyorsítótáridő élettartam másodpercben - bármely adatbázis-lekérdezés gyorsítótárazása
+#    CacheTTL => 0,
+#    # egy csak olvasható forrás
+#    ReadOnly => 1,
+    Map => [
+
+        # megjegyzés: a bejelentkezés, az e-mail és az ügyfélazonosító szükséges!
+        # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező, tárolótípus,
+        #   HTTP-hivatkozás, csak olvasható, HTTP-hivatkozás célja
+        [ 'UserTitle',      'Titulus',     'title',        1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Keresztnév',  'first_name',   1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Vezetéknév',  'last_name',    1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Felhasználó', 'login',        1, 1, 'var', '', 0 ],
+        [ 'UserPassword',   'Jelszó',      'pw',           0, 0, 'var', '', 0 ],
+        [ 'UserEmail',      'E-mail',      'email',        1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'ÜgyfélID',    'customer_id',  0, 1, 'var', '', 0 ],
+        [ 'UserPhone',      'Telefon',     'phone',        1, 0, 'var', '', 0 ],
+        [ 'UserFax',        'Fax',         'fax',          1, 0, 'var', '', 0 ],
+        [ 'UserMobile',     'Mobil',       'mobile',       1, 0, 'var', '', 0 ],
+        [ 'UserStreet',     'Utca',        'street',       1, 0, 'var', '', 0 ],
+        [ 'UserZip',        'Irányítószám','zip',          1, 0, 'var', '', 0 ],
+        [ 'UserCity',       'Település',   'city',         1, 0, 'var', '', 0 ],
+        [ 'UserCountry',    'Ország',      'country',      1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Megjegyzés',  'comments',     1, 0, 'var', '', 0 ],
+        [ 'ValidID',        'Érvényes',    'valid_id',     0, 1, 'int', '', 0 ],
+    ],
+    # alapértelmezett kijelölések
+    Selections => {
+        UserTitle => {
+            'Mr.' => 'Mr.',
+            'Mrs.' => 'Mrs.',
+        },
+    },
+};
+
+# 2. ügyfél-felhasználó háttérprogram: LDAP
+# (ügyfél LDAP háttérprogram és beállítások)
+$Self->{CustomerUser2} = {
+    Name => 'LDAP adatforrás',
+    Module => 'Kernel::System::CustomerUser::LDAP',
+    Params => {
+        # LDAP kiszolgáló
+        Host => 'bay.csuhayward.edu',
+        # LDAP bázis dn
+        BaseDN => 'ou=seas,o=csuh',
+        # keresési hatáskör (one|sub)
+        SSCOPE => 'sub',
+        # A következő érvényes, de csak akkor lenne szükséges, ha a névtelen
+        #   felhasználónak NEM lenne jogosultsága az LDAP-fából olvasni
+        UserDN => '',
+        UserPw => '',
+        # Abban az esetben, ha mindig egy szűrőt szeretne hozzáadni az egyes
+        #   LDAP lekérdezésekhez, akkor használja ezt a beállítást. Például:
+        #   AlwaysFilter => '(mail=*)' vagy AlwaysFilter => '(objectclass=user)'
+        AlwaysFilter => '',
+        # ha az LDAP-kiszolgáló karakterkészlete iso-8859-2, akkor használja ezt:
+#        SourceCharset => 'iso-8859-2',
+
+        # Net::LDAP új paraméterek (ha szükséges - további
+        #   információkért nézze meg: perldoc Net::LDAP)
+        Params => {
+            port => 389,
+            timeout => 120,
+            async => 0,
+            version => 3,
+        },
+    },
+    # egyedi ügyfél-azonosító
+    CustomerKey => 'uid',
+    # ügyfél #
+    CustomerID => 'mail',
+    CustomerUserListFields => ['cn', 'mail'],
+    CustomerUserSearchFields => ['uid', 'cn', 'mail'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['mail'],
+    CustomerUserNameFields => ['givenname', 'sn'],
+    # a saját jegyeket nem jeleníti meg az ügyfélpanelen, CompanyTickets
+    CustomerUserExcludePrimaryCustomerID => 0,
+    # egy LDAP-szűrő hozzáadása az érvényes felhasználókhoz (szakértő beállítások)
+#    CustomerUserValidFilter => '(!(description=locked))',
+    # az adminisztrátor nem változtathatja meg az ügyfél beállításait
+    AdminSetPreferences => 0,
+    Map => [
+        # megjegyzés: a bejelentkezés, az e-mail és az ügyfélazonosító szükséges!
+        # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező, tárolótípus,
+        #   HTTP-hivatkozás, csak olvasható
+        [ 'UserTitle',      'Titulus',    'title',           1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Keresztnév', 'givenname',       1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Vezetéknév', 'sn',              1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Felhasználó','uid',             1, 1, 'var', '', 0 ],
+        [ 'UserEmail',      'E-mail',     'mail',            1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'ÜgyfélID',   'mail',            0, 1, 'var', '', 0 ],
+#        [ 'UserCustomerIDs', 'ÜgyfélID-k', 'second_customer_ids', 1, 0, 'var', '', 0 ],
+        [ 'UserPhone',      'Telefon',    'telephonenumber', 1, 0, 'var', '', 0 ],
+        [ 'UserAddress',    'Cím',        'postaladdress',   1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Megjegyzés', 'description',     1, 0, 'var', '', 0 ],
+    ],
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+Legfeljebb 10 különböző ügyfél-háttérprogram integrálása
+lehetséges. Használja az ügyfélkezelés felületet az OTRS-ben az összes
+ügyféladat megtekintéséhez vagy szerkesztéséhez (feltételezve, hogy az írási
+hozzáférés engedélyezve van).
+</para>
+
+</section>
+
+<section id="dynamicfield-from-customeruser">
+    <title>A CustomerUser adatainak tárolása dinamikus mezőkben</title>
+    <para>
+        Néha hasznos lehet a CustomerUser adatait közvetlenül egy jegy dinamikus
+mezőiben is eltárolni, például speciális statisztikák létrehozásához ezekről
+az adatokról.
+    </para>
+    <para>
+        A dinamikus mező értékei akkor lesznek beállítva, amikor egy jegy létrejön
+vagy amikor egy jegy ügyfelét megváltoztatják. A dinamikus mezők értékeit az
+ügyféladatokból veszik. Ez működik az összes háttérprogramnál, de különösen
+LDAP-háttérprogramoknál hasznos.
+    </para>
+    <para>
+        Az OTRS ezen opcionális funkciójának bekapcsolásához kapcsolja be a
+„Ticket::EventModulePost###930-DynamicFieldFromCustomerUser” és a
+„DynamicFieldFromCustomerUser::Mapping” beállításokat. Az utóbbi beállítás
+annak a beállítását tartalmazza, hogy melyik CustomerUser mezőbejegyzést
+kell eltárolni melyik jegy dinamikus mezőben. A mezőknek létezniük kell a
+rendszeren, és engedélyezve kell lenniük az AgentTicketFreeText számára
+azért, hogy beállíthassák kézzel. Tilos engedélyezve lenniük az
+AgentTicketPhone, az AgentTicketEmail és az AgentTicketCustomer számára. Ha
+engedélyezve lennének, akkor elsőbbséget élveznének az automatikusan
+beállított értékekkel szemben.
+    </para>
+</section>
+
+</section>
+
+<section id="auth-backends">
+<title>Háttérprogramok ügyintézők és ügyfelek hitelesítéséhez</title>
+
+<para>
+Az OTRS felkínálja az ügyintézők és az ügyfelek hitelesítésének lehetőségét
+különböző háttérprogramokkal.
+</para>
+
+<section id='agent-auth-backends'>
+<title>Hitelesítési háttérprogramok az ügyintézőkhöz</title>
+
+<section id='agent-auth-backend-db'>
+<title>DB (alapértelmezett)</title>
+
+<para>
+Az alapértelmezetten használt háttérprogram az ügyintézők hitelesítéséhez az
+OTRS adatbázis. Az ügyintézők az <link linkend="adminarea">adminisztrációs
+oldalon</link> lévő <link linkend="adminarea-agents">ügyintéző-kezelés
+felületen</link> keresztül adhatók hozzá és szerkeszthetők (lásd a lenti
+példát).
+</para>
+
+<example id='configuration-agent-auth-backend-db'>
+<title>Ügyintézők hitelesítése egy DB háttérprogrammal</title>
+
+<para>
+<programlisting>
+    $Self->{'AuthModule'} = 'Kernel::System::Auth::DB';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='agent-auth-backend-ldap'>
+<title>LDAP</title>
+
+<para>
+Ha egy LDAP könyvtár tárolja az összes ügyintézőadatát, akkor használhatja
+az LDAP-modult a felhasználók hitelesítéséhez az OTRS-ben (lásd a lenti
+példát). Ennek a modulnak csak olvasható hozzáférése van az LDAP-fához,
+amely azt jelenti, hogy nem tudja a felhasználói adatokat az <link
+linkend='adminarea-agents'>ügyintéző-kezelés felületen</link> keresztül
+szerkeszteni.
+</para>
+
+<example id='configuration-agent-auth-backend-ldap'>
+<title>Ügyintézők hitelesítése egy LDAP háttérprogrammal</title>
+
+<para>
+<programlisting>
+# Ez egy példa beállítás egy LDAP hitelesítés háttérprogramhoz.
+# (Győződjön meg arról, hogy a Net::LDAP telepítve van-e!)
+$Self->{'AuthModule'} = 'Kernel::System::Auth::LDAP';
+$Self->{'AuthModule::LDAP::Host'} = 'ldap.example.com';
+$Self->{'AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
+$Self->{'AuthModule::LDAP::UID'} = 'uid';
+
+# Annak ellenőrzése, hogy a felhasználó jogosult-e hitelesíteni egy
+# posixGroup csoportban (például a felhasználónak az XYZ csoportban
+# kell lennie az OTRS használatához).
+$Self->{'AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+$Self->{'AuthModule::LDAP::AccessAttr'} = 'memberUid';
+# az LDAP posixGroups objektumosztálynál (csak uid)
+#  $Self->{'AuthModule::LDAP::UserAttr'} = 'UID';
+# a nem LDAP posixGroups objektumosztálynál (teljes felhasználói dn-nel)
+#  $Self->{'AuthModule::LDAP::UserAttr'} = 'DN';
+
+# A következő érvényes, de csak akkor lenne szükséges, ha a névtelen
+# felhasználónak NEM lenne jogosultsága az LDAP-fából olvasni.
+$Self->{'AuthModule::LDAP::SearchUserDN'} = '';
+$Self->{'AuthModule::LDAP::SearchUserPw'} = '';
+
+# Abban az esetben, ha mindig egy szűrőt szeretne hozzáadni az egyes
+# LDAP lekérdezésekhez, akkor használja ezt a beállítást. Például:
+# AlwaysFilter => '(mail=*)' vagy AlwaysFilter => '(objectclass=user)'
+$Self->{'AuthModule::LDAP::AlwaysFilter'} = '';
+
+# Abban az esetben, ha egy utótagot szeretne hozzáadni az egyes
+# bejelentkezési nevekhez, akkor használhatja ezt a beállítást.
+# Például: a felhasználó csak a „user”-t szeretné használni, de
+# az LDAP könyvtárban „user@domain.com” létezik.
+#    $Self->{'AuthModule::LDAP::UserSuffix'} = '@domain.com';
+
+# Net::LDAP új paraméterek (ha szükséges - további információkért
+# nézze meg: perldoc Net::LDAP)
+$Self->{'AuthModule::LDAP::Params'} = {
+    port => 389,
+    timeout => 120,
+    async => 0,
+    version => 3,
+};
+</programlisting>
+</para>
+
+</example>
+
+<para>
+A lenti parancsfájlban látható beállítási paraméterek használhatók az LDAP
+könyvtárból származó felhasználói adatoknak a helyi OTRS adatbázisba történő
+szinkronizálásához. Ez csökkenti az LDAP-kiszolgálóhoz intézett kérések
+számát, és felgyorsítja az OTRS-sel történő hitelesítést. Az adatok
+szinkronizálása akkor van készen, amikor az ügyintéző bejelentkezik első
+alkalommal. Habár az adatok szinkronizálhatók a helyi OTRS adatbázisba, az
+LDAP könyvtár az utolsó példány a hitelesítésnél, így az LDAP-fában egy
+inaktív felhasználó nem tud hitelesíteni az OTRS-be akkor sem, ha a
+fiókadatok már el vannak tárolva az OTRS adatbázisában. Az ügyintéző adatai
+az LDAP könyvtárban nem szerkeszthetők az OTRS webes felületén keresztül,
+ezért az adatokat közvetlenül az LDAP-fában kell kezelni.
+</para>
+
+<para>
+<programlisting>
+# AuthSyncBackend (AuthSyncModule) meghatározása ehhez: AuthModule
+# ha ez a kulcs létezik és üres, akkor nem lesz szinkronizálva.
+# példa értékek: AuthSyncBackend, AuthSyncBackend2
+$Self->{'AuthModule::UseSyncBackend'} = 'AuthSyncBackend';
+
+# ügyintéző adatai az LDAP-pal való szinkronizáláshoz
+$Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
+$Self->{'AuthSyncModule::LDAP::Host'} = 'ldap://ldap.example.com/';
+$Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=otrs, dc=org';
+$Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
+$Self->{'AuthSyncModule::LDAP::SearchUserDN'} = 'uid=sys, ou=user, dc=otrs, dc=org';
+$Self->{'AuthSyncModule::LDAP::SearchUserPw'} = 'valamilyen_jelszo';
+$Self->{'AuthSyncModule::LDAP::UserSyncMap'} = {
+    # DB -> LDAP
+    UserFirstname => 'givenName',
+    UserLastname  => 'sn',
+    UserEmail     => 'mail',
+};
+[...]
+
+# AuthSyncModule::LDAP::UserSyncInitialGroups
+# (a következő csoport szinkronizálása írás-olvasás jogosultsággal az első
+# ügyintézői bejelentkezés kezdeti létrehozása után)
+$Self->{'AuthSyncModule::LDAP::UserSyncInitialGroups'} = [
+    'users',
+];
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Felhasználói adatok szinkronizálása az LDAP
+könyvtárból az OTRS adatbázisába.</emphasis>
+</para>
+
+<para>
+    Alternatívaként használhat LDAP csoportokat a csoporttagságok vagy szerepek
+meghatározásához az OTRS-ben. További információkért és példákért nézze meg
+a <filename>Kernel/Config/Defaults.pm</filename> fájlt. Itt egy példa az
+LDAP-ból az OTRS csoportokba történő szinkronizálásra.
+</para>
+
+<para>
+    <programlisting>
+# A csoportszinkronizálásokhoz szükséges jellemzők
+# (jellemző neve a csoportérték kulcshoz)
+$Self->{'AuthSyncModule::LDAP::AccessAttr'} = 'memberUid';
+# (a jellemző kiválasztása az UID/DN csoporttartalom típusához a teljes
+# LDAP-névnél)
+# $Self->{'AuthSyncModule::LDAP::UserAttr'} = 'UID';
+# $Self->{'AuthSyncModule::LDAP::UserAttr'} = 'DN';
+
+AuthSyncModule::LDAP::UserSyncGroupsDefinition
+# (Ha „LDAP” lett kiválasztva az AuthModule esetén, és LDAP csoportokat
+# szeretne szinkronizálni az OTRS csoportokkal, akkor határozza meg a
+# következőket.)
+$Self->{'AuthSyncModule::LDAP::UserSyncGroupsDefinition'} = {
+    # az LDAP csoportja
+    'cn=agent,o=otrs' => {
+        # OTRS csoport(ok)
+        'admin' => {
+            # jogosultság
+            rw => 1,
+            ro => 1,
+        },
+        'faq' => {
+            rw => 0,
+            ro => 1,
+        },
+    },
+    'cn=agent2,o=otrs' => {
+        'users' => {
+            rw => 1,
+            ro => 1,
+        },
+    }
+};
+    </programlisting>
+</para>
+
+</section>
+
+<section id='agent-auth-backend-httpbasic'>
+<title>HTTPBasicAuth az ügyintézőknél</title>
+
+<para>
+Ha egy „egyszeri bejelentkezés” megoldást szeretne megvalósítani az összes
+ügyintézőnél, akkor használhatja az alap HTTP hitelesítést (az összes
+rendszernél), és a HTTPBasicAuth modult az OTRS-nél (lásd a lenti példát).
+</para>
+
+<example id='configuration-agent-auth-backend-htbasic'>
+<title>Ügyintézők hitelesítése HTTPBasic használatával</title>
+
+<para>
+<programlisting>
+# Ez egy beállítási példa egy Apache ($ENV{REMOTE_USER}) hitelesítési
+# háttérprogramra. Akkor használja, ha egy egyszeres bejelentkezést
+# szeretne Apache http-basic-auth használatával.
+$Self->{'AuthModule'} = 'Kernel::System::Auth::HTTPBasicAuth';
+
+# Megjegyzés:
+#
+# Ha ezt a modult használja, akkor tartalékként használnia kell a
+# következő konfigurációs beállításokat, ha a felhasználó nincs
+# felhatalmazva az Apache ($ENV{REMOTE_USER}) változóban.
+$Self->{LoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
+$Self->{LogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='agent-auth-backend-radius'>
+<title>Radius</title>
+
+<para>
+A lenti példában látható beállítási paraméterek használhatók az ügyintézők
+hitelesítéséhez egy Radius-kiszolgálóval.
+</para>
+
+<example id='configuration-agent-auth-backend-radius'>
+<title>Ügyintézők hitelesítése egy Radius háttérprogrammal</title>
+
+<para>
+<programlisting>
+# Ez egy beállítási példa az ügyintézők hitelesítéséhez Radius-kiszolgálóval
+$Self->{'AuthModule'} = 'Kernel::System::Auth::Radius';
+$Self->{'AuthModule::Radius::Host'} = 'radius_kiszolgáló';
+$Self->{'AuthModule::Radius::Password'} = 'radius_titok';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+<section id="customer-auth-backends">
+<title>Hitelesítési háttérprogramok az ügyfelekhez</title>
+
+<section id='customer-auth-backend-db'>
+<title>Adatbázis (alapértelmezett)</title>
+
+<para>
+Az alapértelmezett felhasználó-hitelesítési háttérprogram az OTRS-ben az
+ügyfeleknél az OTRS adatbázis. Ezzel a háttérprogrammal az összes ügyféladat
+szerkeszthető az OTRS webes felületén keresztül (lásd a lenti példát).
+</para>
+
+<example id='configuration-customer-auth-backend-db'>
+<title>Ügyfél-felhasználó hitelesítése egy adatbázis háttérprogrammal</title>
+
+<para>
+<programlisting>
+# Ez a hitelesítő modul az OTRS adatbázissal
+$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::DB';
+$Self->{'Customer::AuthModule::DB::Table'} = 'customer_user';
+$Self->{'Customer::AuthModule::DB::CustomerKey'} = 'login';
+$Self->{'Customer::AuthModule::DB::CustomerPassword'} = 'pw';
+#$Self->{'Customer::AuthModule::DB::DSN'} = "DBI:mysql:database=customerdb;host=customerdbhost";
+#$Self->{'Customer::AuthModule::DB::User'} = "valamilyen_felhasználó";
+#$Self->{'Customer::AuthModule::DB::Password'} = "valamilyen_jelszó";
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='customer-auth-backend-ldap'>
+<title>LDAP</title>
+
+<para>
+Ha van egy olyan LDAP könyvtára, amely az összes ügyféladatot tartalmazza,
+akkor használhatja az LDAP-modult az ügyfelek hitelesítéséhez az OTRS-be
+(lásd a lenti példát). Mivel ennek a modulnak csak olvasási hozzáférése van
+az LDAP háttérprogramhoz, ezért nem lehetséges az ügyféladatokat az OTRS
+webes felületén keresztül szerkeszteni.
+</para>
+
+<example id='configuration-customer-auth-backend-ldap'>
+<title>Ügyfél-felhasználó hitelesítése egy LDAP háttérprogrammal</title>
+
+<para>
+<programlisting>
+# Ez egy példa beállítás egy LDAP hitelesítés háttérprogramhoz.
+# (Győződjön meg arról, hogy a Net::LDAP telepítve van-e!)
+$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::LDAP';
+$Self->{'Customer::AuthModule::LDAP::Host'} = 'ldap.example.com';
+$Self->{'Customer::AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
+$Self->{'Customer::AuthModule::LDAP::UID'} = 'uid';
+
+# Annak ellenőrzése, hogy a felhasználó jogosult-e hitelesíteni egy
+# posixGroup csoportban (például a felhasználónak az XYZ csoportban
+# kell lennie az OTRS használatához).
+$Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+$Self->{'Customer::AuthModule::LDAP::AccessAttr'} = 'memberUid';
+# az LDAP posixGroups objektumosztálynál (csak uid)
+$Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'UID';
+# a nem LDAP posixGroups objektumosztálynál (teljes felhasználói dn-nel)
+#$Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'DN';
+
+# A következő érvényes, de csak akkor lenne szükséges, ha a névtelen
+# felhasználónak NEM lenne jogosultsága az LDAP-fából olvasni.
+$Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = '';
+$Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '';
+
+# Abban az esetben, ha mindig egy szűrőt szeretne hozzáadni az egyes
+# LDAP lekérdezésekhez, akkor használja ezt a beállítást. Például:
+# AlwaysFilter => '(mail=*)' vagy AlwaysFilter => '(objectclass=user)'
+$Self->{'Customer::AuthModule::LDAP::AlwaysFilter'} = '';
+
+# Abban az esetben, ha egy utótagot szeretne hozzáadni az egyes
+# bejelentkezési nevekhez, akkor használhatja ezt a beállítást.
+# Például: a felhasználó csak a „user”-t szeretné használni, de
+# az LDAP könyvtárban „user@domain.com” létezik.
+#$Self->{'Customer::AuthModule::LDAP::UserSuffix'} = '@domain.com';
+
+# Net::LDAP új paraméterek (ha szükséges - további információkért
+# nézze meg: perldoc Net::LDAP)
+$Self->{'Customer::AuthModule::LDAP::Params'} = {
+    port => 389,
+    timeout => 120,
+    async => 0,
+    version => 3,
+};
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='customer-auth-backend-httpbasic'>
+<title>HTTPBasicAuth az ügyfeleknél</title>
+
+<para>
+Ha egy „egyszeri bejelentkezés” megoldást szeretne megvalósítani az összes
+ügyfél-felhasználónál, akkor használhatja az alap HTTPBasic hitelesítést (az
+összes rendszernél), és használja a HTTPBasicAuth modult az OTRS-nél (többé
+nem szükséges bejelentkezés az OTRS-sel). Lásd a lenti példát.
+</para>
+
+<example id='configuration-customer-auth-backend-htbasic'>
+<title>Ügyfél-felhasználó hitelesítése HTTPBasic használatával</title>
+
+<para>
+<programlisting>
+# Ez egy beállítási példa egy Apache ($ENV{REMOTE_USER}) hitelesítési
+# háttérprogramra. Akkor használja, ha egy egyszeres bejelentkezést
+# szeretne Apache http-basic-auth használatával.
+$Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::HTTPBasicAuth';
+
+# Megjegyzés:
+# Ha ezt a modult használja, akkor tartalékként használnia kell a
+# következő konfigurációs beállításokat, ha a felhasználó nem az
+# Apache ($ENV{REMOTE_USER}) változón keresztül jelentkezik be.
+$Self->{CustomerPanelLoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
+$Self->{CustomerPanelLogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+<section id='customer-auth-backend-radius'>
+<title>Radius</title>
+
+<para>
+A lenti példában látható beállítások használhatók az ügyfelek
+hitelesítéséhez egy Radius-kiszolgálóval.
+</para>
+
+<example id='configuration-customer-auth-backend-radius'>
+<title>Ügyfél-felhasználó hitelesítése egy Radius háttérprogrammal</title>
+
+<para>
+<programlisting>
+# Ez egy beállítási példa az ügyfelek hitelesítéséhez Radius-kiszolgálóval
+$Self->{'Customer::AuthModule'} = 'Kernel::System::Auth::Radius';
+$Self->{'Customer::AuthModule::Radius::Host'} = 'radius_kiszolgáló';
+$Self->{'Customer::AuthModule::Radius::Password'} = 'radius_titok';
+</programlisting>
+</para>
+
+</example>
+
+</section>
+
+</section>
+
+</section>
+
+<section id="customer-self-registration">
+<title>Az ügyfél saját regisztrációjának személyre szabása</title>
+
+<para>
+Lehetséges a saját regisztráció személyre szabása az új ügyfeleknél a
+customer.pl panelen keresztül történő hozzáféréskor. Új opcionális vagy
+kötelező mezők adhatók hozzá, mint például szobaszám, cím vagy állam.
+</para>
+
+<para>
+A következő példa azt mutatja be, hogy hogyan adhat meg egy kötelező mezőt
+az ügyféladatbázisban, ebben az esetben egy ügyfél szobaszámának
+eltárolásához.
+</para>
+
+<section id='customer-self-registration-dtl'>
+<title>A webes felület személyre szabása</title>
+
+<para>
+Az új mezőnek a customer.pl webes felületén való megjelenítéséhez a
+szobaszám esetén a .dtl fájlt kell módosítani, mivel ez a fájl felelős ezen
+a felületen az elrendezésért. Szerkessze a
+<filename>Kernel/Output/HTML/Standard/CustomerLogin.dtl</filename> fájlt,
+adja hozzá az új mezőt a 80. sor környékén (lásd a lenti parancsfájlt).
+</para>
+
+<para>
+<programlisting>
+[...]
+&lt;div class="NewLine"&gt;
+    &lt;label for="Room"&gt;[% Translate("Room{CustomerUser}") | html %]&lt;/label&gt;
+    &lt;input title="[% Translate("Room Number") | html %]" name="Room" type="text" id="UserRoom" maxlength="50" /&gt;
+&lt;/div&gt;
+[...]
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Egy új mező megjelenítése a webes
+felületen.</emphasis>
+</para>
+
+</section>
+
+<section id="customer-self-registration-mapping">
+<title>Ügyfélleképezés</title>
+
+<para>
+A következő lépésben az ügyfélleképezést kell kiterjeszteni egy új
+bejegyzéssel a szobaszámhoz. Annak biztosítására, hogy a változtatások ne
+vesszenek el egy frissítés után, helyezze át a „CustomerUser” beállításokat
+a <filename>Kernel/Config/Defaults.pm</filename> fájlból a
+<filename>Kernel/Config.pm</filename> fájlba. Most változtassa meg a MAP
+tömböt, és adja hozzá az új szobaszámot, amint a lenti parancsfájlban
+látható.
+</para>
+
+<para>
+<programlisting>
+# CustomerUser
+# (ügyféladatbázis háttérprogram és beállítások)
+$Self->{CustomerUser} = {
+    Name => 'Adatbázis adatforrás',
+    Module => 'Kernel::System::CustomerUser::DB',
+    Params => {
+        # ha egy külső adatbázis szeretne használni, akkor adja hozzá a
+        # szükséges beállításokat
+#        DSN => 'DBI:odbc:yourdsn',
+#        Type => 'mssql', # csak ODBC kapcsolatoknál
+#        DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
+#        User => '',
+#        Password => '',
+        Table => 'customer_user',
+    },
+    # egyedi ügyfél-azonosító
+    CustomerKey => 'login',
+    # ügyfél #
+    CustomerID => 'customer_id',
+    CustomerValid => 'valid_id',
+    CustomerUserListFields => ['first_name', 'last_name', 'email'],
+#    CustomerUserListFields => ['login', 'first_name', 'last_name', 'customer_id', 'email'],
+    CustomerUserSearchFields => ['login', 'last_name', 'customer_id'],
+    CustomerUserSearchPrefix => '',
+    CustomerUserSearchSuffix => '*',
+    CustomerUserSearchListLimit => 250,
+    CustomerUserPostMasterSearchFields => ['email'],
+    CustomerUserNameFields => ['title', 'first_name', 'last_name'],
+    CustomerUserEmailUniqCheck => 1,
+#    # a saját jegyeket nem jeleníti meg az ügyfélpanelen, CompanyTickets
+#    CustomerUserExcludePrimaryCustomerID => 0,
+#    # automatikus bejelentkezések előállítása
+#    AutoLoginCreation => 0,
+#    AutoLoginCreationPrefix => 'auto',
+#    # az adminisztrátor megváltoztathatja az ügyfél beállításait
+#    AdminSetPreferences => 1,
+#    # gyorsítótáridő élettartam másodpercben - bármely adatbázis-lekérdezés gyorsítótárazása
+#    CacheTTL => 0,
+#    # egy csak olvasható forrás
+#    ReadOnly => 1,
+    Map => [
+
+        # megjegyzés: a bejelentkezés, az e-mail és az ügyfélazonosító szükséges!
+        # változó, előtétprogram, tároló, látható (1=mindig,2=lite), kötelező, tárolótípus,
+        #   HTTP-hivatkozás, csak olvasható, HTTP-hivatkozás célja
+        [ 'UserTitle',      'Titulus',    'title',       1, 0, 'var', '', 0 ],
+        [ 'UserFirstname',  'Keresztnév', 'first_name',  1, 1, 'var', '', 0 ],
+        [ 'UserLastname',   'Vezetéknév', 'last_name',   1, 1, 'var', '', 0 ],
+        [ 'UserLogin',      'Felhasználó','login',       1, 1, 'var', '', 0 ],
+        [ 'UserPassword',   'Jelszó',     'pw',          0, 0, 'var', '', 0 ],
+        [ 'UserEmail',      'E-mail',     'email',       1, 1, 'var', '', 0 ],
+        [ 'UserCustomerID', 'ÜgyfélID',   'customer_id', 0, 1, 'var', '', 0 ],
+        [ 'UserPhone',      'Telefon',    'phone',       1, 0, 'var', '', 0 ],
+        [ 'UserFax',        'Fax',        'fax',         1, 0, 'var', '', 0 ],
+        [ 'UserMobile',     'Mobil',      'mobile',      1, 0, 'var', '', 0 ],
+        [ 'UserRoom',       'Szoba',      'room',        1, 0, 'var', '', 0 ],
+        [ 'UserStreet',     'Utca',       'street',      1, 0, 'var', '', 0 ],
+        [ 'UserZip',        'Irányítószám','zip',        1, 0, 'var', '', 0 ],
+        [ 'UserCity',       'Település',  'city',        1, 0, 'var', '', 0 ],
+        [ 'UserCountry',    'Ország',     'country',     1, 0, 'var', '', 0 ],
+        [ 'UserComment',    'Megjegyzés', 'comments',    1, 0, 'var', '', 0 ],
+        [ 'ValidID',        'Érvényes',   'valid_id',    0, 1, 'int', '', 0 ],
+    ],
+    # alapértelmezett kijelölések
+    Selections => {
+        UserTitle => {
+            'Mr.' => 'Mr.',
+            'Mrs.' => 'Mrs.',
+        },
+    },
+};
+</programlisting>
+</para>
+
+<para>
+<emphasis>Parancsfájl: A leképezési tömb megváltoztatása.</emphasis>
+</para>
+
+</section>
+
+<section id="customer-self-registration-customer-table">
+<title>A <literal>customer_user</literal> tábla személyre szabása az OTRS
+adatbázisban</title>
+
+<para>
+Az utolsó lépés az új szobaszám oszlopának hozzáadása a customer_user
+táblához az OTRS adatbázisában (lásd a lenti parancsfájlt). Ebben az
+oszlopban lesznek eltárolva az új szobaszámok bejegyzései.
+</para>
+
+<para>
+<screen>
+linux:~# mysql -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6 to server version: 5.0.18-Debian_7-log
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use otrs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; ALTER TABLE customer_user ADD room VARCHAR (200);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql&gt; quit
+Bye
+linux:~#
+</screen>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Egy új oszlop hozzáadása a customer_user
+táblához.</emphasis>
+</para>
+
+<para>
+Most már a szoba új mezőjének meg kell jelennie az ügyfélinformációs
+panelen, ha ki van töltve, és az ügyfél-felhasználó adminisztrációs
+képernyőkön. Az új ügyfeleknek is be kell szúrniuk a saját szobaszámukat, ha
+egy új fiókot regisztrálnak.
+</para>
+</section>
+
+</section>
+
+</section>

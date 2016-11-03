@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="adminarea-auto-responses">
+<title>Automatikus válaszok</title>
+
+<para>
+Az OTRS lehetővé teszi automatikus válaszok küldését az ügyfeleknek bizonyos
+események előfordulása alapján, mint például egy jegy létrehozása egy adott
+várólistában, egy nyomon követő üzenet nyugtája egy jegyre tekintettel, egy
+jegy lezárása vagy visszautasítása, stb. Az ilyen válaszok kezeléséhez
+kattintson az „Automatikus válaszok” hivatkozásra az adminisztrációs oldalon
+(lásd a lenti ábrát).
+</para>
+
+<para>
+<figure>
+    <title>Automatikus válaszkezelés</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-autoresponse.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+Egy automatikus válasz létrehozásához kattintson az „Automatikus válasz
+hozzáadása” gombra, adja meg a szükséges adatokat, és küldje be (lásd a
+lenti ábrát).
+</para>
+
+<para>
+<figure>
+    <title>Egy automatikus válasz hozzáadása</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/add-autoresponse.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+Az automatikus válaszok tárgya és szövege előállítható változókkal, akárcsak
+az aláírásokban és a megszólításokban. Például ha beszúrja az
+&lt;OTRS_CUSTOMER_EMAIL[5]&gt; változót az automatikus válasz törzsébe,
+akkor az ügyfél levélszövegének első 5 sora lesz beszúrva az automatikus
+válaszba. További részleteket fog találni a használható érvényes változókról
+az ábrán látható képernyő alján.
+</para>
+
+<para>
+Minden automatikus válasznál megadhatja azt az eseményt, amelynek aktiválnia
+kell azt. Azok a rendszeresemények vannak leírva a 4.4. táblázatban, amelyek
+egy alapértelmezett telepítés után elérhetők el.
+</para>
+
+<table id="table-of-autoanswer-types">
+<title>Események az automatikus válaszokhoz</title>
+  <tgroup cols="2">
+    <thead>
+      <row>
+        <entry>
+          Név
+        </entry>
+        <entry>
+          Leírás
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>
+          automatikus válasz
+        </entry>
+        <entry>
+          Egy jegy létrehozása egy bizonyos várólistában.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          automatikus válasz/új jegy
+        </entry>
+        <entry>
+          Egy már lezárt jegy újranyitása, például ha egy ügyfél válaszol egy ilyen
+jegyre.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          automatikus nyomon követés
+        </entry>
+        <entry>
+          Egy követés fogadása egy jegynél.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          automatikus elutasítás
+        </entry>
+        <entry>
+          Egy jegy automatikus elutasítása a rendszer által végrehajtva.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          automatikus eltávolítás
+        </entry>
+        <entry>
+          Egy jegy törlése a rendszer által végrehajtva.
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+
+<note>
+<para>
+Mint más OTRS egyedek esetén, az automatikus válaszok sem törölhetők, csak
+kikapcsolhatók az érvényesség lehetőség <emphasis>érvénytelen</emphasis>
+vagy <emphasis>átmenetileg érvénytelen</emphasis> értékre állításával.
+</para>
+</note>
+
+<para>
+Egy várólistához történő automatikus válasz hozzáadásához használja az
+„Automatikus válaszok &lt;-&gt; Várólisták” hivatkozást az adminisztrációs
+oldalon (lásd a lenti ábrát). Minden rendszerüzenet fel van sorolva minden
+várólistához, és egy automatikus válasz az ugyanolyan eseménnyel
+kiválasztható vagy eltávolítható egy listamezőn keresztül.
+</para>
+
+<para>
+<figure>
+    <title>Várólista &lt;-&gt; automatikus válasz kapcsolatok kezelése</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-autoresponse-queue.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+A különböző automatikus válaszok meghatározásához, amelyek elérhetők lesznek
+egy várólistánál, kattintson a megfelelő várólista nevére (lásd a lenti
+ábrát). Lehetséges egy meglévő automatikus válasz szerkesztése is. Ehhez
+kattintson a válaszra, és szerkessze egy új automatikus válasz
+szerkesztéséhez hasonló módon.
+</para>
+
+<para>
+<figure>
+    <title>Automatikus válasz kapcsolatok megváltoztatása egy várólistánál</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/autoresponses-queues-relations.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>

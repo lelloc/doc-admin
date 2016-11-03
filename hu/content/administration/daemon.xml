@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="daemon">
+    <title>Az OTRS démon</title>
+    <para>
+        Az OTRS démon rendszerfolyamatok független halmaza, amely a háttérben
+tervezi és hajtja végre a feladatokat ismétlődéses alapon, vagy események
+által aktiválva. Az OTRS démon alapvetően szükséges a helyes
+rendszerműködéshez.
+    </para>
+    <para>
+        Az OTRS előző verzióiban (3.1 és 4 között) létezett egy másik folyamat,
+amelyet OTRS ütemezőnek hívtak. Ez végezte a munka egy részét, amelyet az
+OTRS démon csinál az OTRS 5-ben. Ezt a régi folyamatot cseréli le az OTRS
+démon, amelyet az alapoktól újraírtak, hogy stabilabb, skálázhatóbb és
+robusztusabb legyen az elődjénél.
+    </para>
+    <para>
+        Az OTRS démon legfeljebb 10 feladatot képes egy időben kezelni, és képes
+együttműködni más OTRS démonokkal a különböző előtétprogram kiszolgálókon
+egy fürtözött környezetben.
+    </para>
+    <para>
+        Amikor üresjáratban van, akkor az OTRS démon öt folyamatból áll:
+        <itemizedlist mark="round">
+            <listitem>
+                <para>
+                    A fő démon (<filename>bin/otrs.Daemon.pl</filename>)
+                </para>
+                <para>
+                    Ez a folyamat felelős a többi gyermekdémon indításáért és folyamatos
+futtatásáért.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Feladatelvégző démon
+(<filename>Kernel/System/Daemon/DaemonModules/SchedulerTaskWorker.pm</filename>)
+                </para>
+                <para>
+                    Ez a démon hajtja végre a listáján lévő összes feladatot oly módon, hogy
+amely előbb került a listára, azt végzi el először. Képes egyidejű
+feladatokat kezelni saját gyermekfolyamatok létrehozásával, és a
+feladatlistát másodpercenként többször is ellenőrzi. A feladatlistát a
+feladatkezelő démonok, az eseménykezelők és a rendszer egyéb részei is
+feltölthetik.
+                </para>
+                <para>
+                    A fő küldetése a listán lévő összes feladat kezelése, amilyen gyorsan csak
+lehetséges.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Jövőbeli feladat kezelő démon
+(<filename>Kernel/System/Daemon/DaemonModules/SchedulerFutureTaskManager.pm</filename>)
+                </para>
+                <para>
+                    Ez a démon ellenőrzi az olyan nem ismétlődő feladatokat, amelyeket a
+jövőbeli lefuttatáshoz állítottak be (például amikor egy általános felület
+meghívó megpróbál elérni egy kiszolgálót, és nem tudja, akkor beállítható
+egy feladat a végrehajtás ütemezéséhez a következő 5 percben). A helyes
+időben elküldi a feladatot a feladatelvégző démonnak.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Cron-feladat kezelő démon
+(<filename>Kernel/System/Daemon/DaemonModules/SchedulerCronTaskManager.pm</filename>)
+                </para>
+                <para>
+                    Ez a démon számolja ki, hogy mikor van az összes ismétlődő feladat következő
+végrehajtási ideje (például egy gyorsítótárürítés heti egy alkalommal). Ezek
+a fajta feladatok a rendszerbeállításokban vannak megadva. Minden egyes
+feladatnál a megfelelő időben elküldi a szükséges információkat a
+feladatelvégző démonnak, hogy végrehajtsa azokat.
+                </para>
+                <note>
+                    <para>
+                        Ha egy feladatvégrehajtási idő meghatározása megváltozik a
+rendszerbeállításokban, akkor akár egy óráig is eltarthat, amíg a démon
+automatikusan átveszi a változást. Alternatívaként az OTRS démon újra is
+indítható, hogy azonnal alkalmazza a változást.
+                    </para>
+                </note>
+            </listitem>
+            <listitem>
+                <para>
+                    Általános ügyintéző feladat kezelő démon
+(<filename>Kernel/System/Daemon/DaemonModules/SchedulerGenericAgentTaskManager.pm</filename>)
+                </para>
+                <para>
+                    Ez a démon azokat az adatbázisban tárolt általános ügyintéző feladatokat
+olvassa be, amelyek rendelkeznek időütemezéssel (eldobva az összes egyéb
+olyan általános ügyintéző feladatot, amelyeket események jelöltek meg
+végrehajtásra). Amikor eljön az idő egy általános ügyintéző feladat
+futtatására, akkor elküldi a feladat információit a feladatelvégző démonnak
+a feladat kezeléséhez.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <para>
+            Az aktív folyamatok száma azon feladatok számától függ, amelyeket az OTRS
+démon egyidejűleg hajt végre egy időkeretben.
+        </para>
+    </note>
+    <para>
+        Alapértelmezetten az egyes démonok az összes hibaüzenetet az
+<filename>/opt/otrs/var/log/Daemon/*.log</filename> helyen található
+különálló fájlokba naplózzák. Ezek a naplók egy meghatározott ideig vannak
+megtartva a rendszeren. Ennek a viselkedésnek a megváltoztatásához és/vagy a
+nem hibaüzenetek naplózásához is, frissítse a <literal>Daemon</literal>
+-&gt; <literal>Core::Log</literal> helyen lévő rendszerbeállításokat.
+    </para>
+    <para>
+        Amikor egy feladatot valamilyen ok miatt nem sikerült sikeresen
+végrehajtani, akkor egy e-mail kerül kiküldésre egy előre meghatározott
+címzettnek jelentve a hibát. Az e-mail törzse tartalmazza a hibaüzeneteket
+és a visszakövetési információkat (ha elérhető).
+    </para>
+    <para>
+        Az OTRS démon egy automatizált folyamat, amely normális esetben nem igényel
+emberi beavatkozást. Azonban ha szükséges, akkor lehetőség van az
+állapotának lekérdezésére, valamint az elindítására és leállítására.
+    </para>
+    <para>
+        Hogy meggyőződhessen arról, hogy az OTRS démon fut, létezik egy
+cron-feladat, amely állandóan azt ellenőrzi, hogy a folyamat életben
+van-e. A fő démont úgy készítették fel, hogy még adatbázis-kapcsolat nélkül
+is működjön, így tökéletesen biztonságos, ha az azt elindító cron-feladat
+akár a rendszer elindulásánál lévő adatbázis-folyamat előtt hajtódik végre,
+valamint elviseli az adatbázis-szétkapcsolódásokat is.
+    </para>
+    <para>
+        Ha az OTRS démont valamilyen okból le kell állítani (például
+rendszerkarbantartás alatt), akkor az összes nem kezelt feladat el lesz
+mentve, és amint a folyamat ismét elindul, folytatja az összes függőben lévő
+feladattal. Az ismétlődő feladatoknál csak a feladat utolsó példányát fogja
+végrehajtani (ha annak határideje a leállás alatt volt).
+    </para>
+    <section id="daemon-gui">
+        <title>Az OTRS démon grafikus felülete</title>
+        <para>
+            Az OTRS démon nem látható az OTRS grafikus felhasználói felületén, hacsak le
+nem áll a futása.
+        </para>
+        <para>
+            Amikor a rendszer azt észleli, hogy az OTRS démon nem fut, akkor egy
+értesítés kerül megjelenítésre a felhasználók egy maghatározott csoportjának
+(alapértelmezetten az „admin” csoportnak).
+        </para>
+        <para>
+            Az értesítés letiltásához (nem ajánlott), az értesítési csoportok
+megváltoztatásához vagy hozzáadásához szerkessze a
+<literal>Frontend::NotifyModule###800-Daemon-Check</literal> beállítást a
+rendszerbeállításokban.
+        </para>
+        <para>
+            <figure>
+                <title>Démon értesítés</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/daemon-notify.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+        </para>
+        <para>
+            Az értesítésre kattintva a rendszer egy rátét ablakot jelenít meg, amely
+elmagyarázza azokat a lépéseket, amelyek az OTRS démon visszakapcsolásához
+és futtatásához szükségesek.
+        </para>
+        <para>
+            <figure>
+                <title>A démon indítása</title>
+<screenshot>
+<graphic fileref="screenshots/administration/adminarea/daemon-start.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+        </para>
+    </section>
+    <section id="daemon-cli">
+        <title>Az OTRS démon parancssori felülete</title>
+        <para>
+            Az OTRS démon parancssori eszközei lehetővé teszik a fő démon folyamat
+vezérlését (indítását és leállítását), vagy az állapotának
+lekérdezését. Vannak eszközök a másik négy gyermekdémonnal kapcsolatos
+részletesebb információk lekérdezéséhez is.
+        </para>
+        <section id="daemon-cli-main">
+            <title>Fő démon eszközök</title>
+            <para>
+                Az elindításhoz, a leállításhoz vagy a démonállapotok lekérdezéséhez a
+<filename>bin/otrs.Daemon.pl</filename> parancsfájl használható.
+            </para>
+            <example>
+                <title>Példa az OTRS démon indítására</title>
+                <para>
+                    <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> OTRS_HOME/bin/otrs.Daemon.pl start
+                    ]]></screen>
+                </para>
+            </example>
+            <itemizedlist mark="round">
+                <title>Elérhető kapcsolók</title>
+                    <listitem>
+                        <para>
+                            <command>start</command> - az OTRS démonfolyamat indításához.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>stop</command> - az OTRS démonfolyamat leállításához.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <command>status</command> - az OTRS démonfolyamat állapotának
+lekérdezéséhez.
+                        </para>
+                    </listitem>
+                   <listitem>
+                        <para>
+                            <command>start --debug</command> - az OTRS démonfolyamat indításához
+hibakereső módban.
+                        </para>
+                        <para>
+                            Ebben a módban minden démon különböző üzeneteket jelent azoktól a
+műveletektől függően, amelyek éppen végrehajtásra kerültek. Ez a mód nem
+ajánlott termelési környezeteknél.
+                        </para>
+                    </listitem>
+                   <listitem>
+                        <para>
+                            <command>stop --force</command> - az OTRS démonfolyamat leállításához,
+csökkentve a gyermekfolyamatok befejezésére való várakozást.
+                        </para>
+                        <para>
+                            Egy erőltetett leállítás 30 másodpercről (normál) 5 másodpercre (erőltetett)
+csökkenti azon idő hosszát, amíg a fő démon a többi gyermekfolyamat sikeres
+leállítására vár.
+                        </para>
+                    </listitem>
+             </itemizedlist>
+        </section>
+        <section id="daemon-cli-other">
+            <title>Egyéb démoneszközök</title>
+            <para>
+                Az olyan összes beállított gyermekdémon felsorolásához, amelyeket a fő
+démonnak el kell indítania és folyamatosan futtatnia kell, használja a
+következő konzolparancsot: <literal>Maint::Daemon::List</literal>.
+            </para>
+            <example>
+                <title>Példa az összes beállított démon felsorolására</title>
+                <para>
+                    <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.Console.pl Maint::Daemon::List
+                    ]]></screen>
+                </para>
+            </example>
+            <para>
+                Az összes démon részletes információinak felsorolásához használja a
+következő konzolparancsot: <literal>Maint::Daemon::Summary</literal>.
+            </para>
+            <example>
+                <title>Példa az összes démonfeladat összegzésére</title>
+                <para>
+                    <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.Console.pl Maint::Daemon::Summary
+                    ]]></screen>
+                </para>
+            </example>
+        </section>
+    </section>
+</section>

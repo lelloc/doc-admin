@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="adminarea-postmasterfilter">
+<title>Bejövő e-mail üzenetek szűrése</title>
+
+<para>
+Az OTRS rendelkezik a bejövő e-mail üzenetek szűrésének
+képességével. Például lehetséges bizonyos levelek automatikus elhelyezése
+egy adott várólistába, vagy egy adott állapot vagy jegytípus beállítása
+néhány levélnél. A szűrők minden bejövő levélre alkalmazzák. A szűrőket az
+adminisztrációs oldalon lévő „Levelezési szűrők” hivatkozáson keresztül
+kezelheti (lásd a lenti ábrát).
+</para>
+
+<para>
+<figure>
+    <title>Levelezési szűrőkezelés</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-postmasterfilter.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+Egy szűrő egy vagy több feltételből áll, amelyeknek teljesülniük kell azért,
+hogy a meghatározott művelet végrehajtásra kerüljön a levélen. A
+szűrőfeltételek meghatározhatók egy levél fejléceihez vagy a törzséhez,
+például adott fejlécbejegyzések keresése, úgymint egy küldő címe, vagy
+szövegeké a törzsben. Akár reguláris kifejezések is használhatók a
+kiterjesztett mintaillesztéshez. Ha a szűrő illeszkedik, akkor beállíthat
+mezőket az X-OTRS fejlécek használatával a grafikus felületen. Ezek az
+értékek lesznek alkalmazva a jegy létrehozásakor vagy a követő üzenetnél az
+OTRS-ben. A 4.5. táblázat a különböző X-OTRS fejléceket és a jelentésüket
+sorolja fel.
+</para>
+
+<note>
+<para>
+Használhatja az X-OTRS-FollowUp-* fejléceket is az értékek beállításához a
+követő leveleknél.
+</para>
+</note>
+
+<table id="table-of-x-otrs-headers">
+<title>A különböző X-OTRS-fejlécek funkciója</title>
+  <tgroup cols="3">
+    <thead>
+      <row>
+        <entry>
+          Név
+        </entry>
+        <entry>
+          Lehetséges értékek
+        </entry>
+        <entry>
+          Leírás
+        </entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+        <entry>
+          X-OTRS-Priority:
+        </entry>
+        <entry>
+          1 very low, 2 low, 3 normal, 4 high, 5 very high
+        </entry>
+        <entry>
+          Beállítja egy jegy prioritását.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-Queue:
+        </entry>
+        <entry>
+          Egy várólista neve a rendszeren.
+        </entry>
+        <entry>
+          Beállítja azt a várólistát, amelybe a jegyet rendezni kell. Ha be van
+állítva az X-OTRS fejléc, akkor minden egyéb szűrőszabály mellőzve lesz,
+amely megpróbál egy jegyet egy adott várólistába rendezni. Ha alvárólistát
+használ, akkor „Szülő::Al” formában adja meg.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-Lock:
+        </entry>
+        <entry>
+            lock, unlock
+        </entry>
+        <entry>
+          Beállítja egy jegy zárolt állapotát.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-Ignore:
+        </entry>
+        <entry>
+          Yes vagy True
+        </entry>
+        <entry>
+          Ha ez az X-OTRS fejléc „Yes” értékre van állítva, akkor a bejövő üzenet
+teljesen figyelmen kívül lesz hagyva, és sosem lesz kézbesítve a rendszerre.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-State:
+        </entry>
+        <entry>
+          new, open, closed successful, closed unsuccessful, …
+        </entry>
+        <entry>
+          Beállítja a jegy következő állapotát.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-State-PendingTime:
+        </entry>
+        <entry>
+         például 2010-11-20 00:00:00
+        </entry>
+        <entry>
+            Beállítja egy jegy várakozó idejét (függő állapotot az X-OTRS-State fejlécen
+keresztül is küldhet). Megadhat abszolút dátumokat, mint például „2010-11-20
+00:00:00”, vagy relatív dátumokat a levél beérkező idején
+alapulva. Használja a „+ $Szám $Mértékegység” alakot, ahol a $Mértékegység
+lehet „s” (másodperc), „m” (perc), „h” (óra) vagy „d” (nap). Csak egy
+mértékegység adható meg. Példák az érvényes beállításokra: „+50s” (50
+másodpercig függőben), „+30m” (30 perc), „+12d” (12 nap). Vegye figyelembe,
+hogy a „+1d 12h” jellegű beállítások nem lehetségesek. Inkább „+36h” értéket
+adjon meg helyette.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-Type:
+        </entry>
+        <entry>
+         alapértelmezett (a beállítástól függ)
+        </entry>
+        <entry>
+          Beállítja egy jegy típusát (ha a Ticket::Type be van kapcsolva).
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-Service:
+        </entry>
+        <entry>
+         (a beállítástól függ)
+        </entry>
+        <entry>
+          Beállítja egy jegy szolgáltatását (ha a Ticket::Service aktív). Ha egy
+alszolgáltatást szeretne megadni, akkor „Szülő::Al” formában kell megadnia.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-SLA:
+        </entry>
+        <entry>
+         (a beállítástól függ)
+        </entry>
+        <entry>
+          Beállítja egy jegy SLA-ját (ha a Ticket::Service támogatás aktív).
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-CustomerUser:
+        </entry>
+        <entry>
+          CustomerUser
+        </entry>
+        <entry>
+          Beállítja az ügyfél-felhasználót a jegynél.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-CustomerNo:
+        </entry>
+        <entry>
+          CustomerNo
+        </entry>
+        <entry>
+          Beállítja az ügyfél-azonosítót a jegynél.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-SenderType:
+        </entry>
+        <entry>
+          agent, system, customer
+        </entry>
+        <entry>
+          Beállítja a jegy küldőjének típusát.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-ArticleType:
+        </entry>
+        <entry>
+          email-external, email-internal, email-notification-ext,
+email-notification-int, phone, fax, sms, webrequest, note-internal,
+note-external, note-report
+        </entry>
+        <entry>
+          Beállítja a bejegyzés típusát a bejövő jegynél.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-DynamicField-&lt;DinamikusMezőNeve&gt;:
+        </entry>
+        <entry>
+          A dinamikus mező beállításától függ (Szöveg: Jegyzettömb, Dátum: 2010-11-20
+00:00:00, Egész: 1)
+        </entry>
+        <entry>
+          Egy további információs értéket ment el a jegyhez a
+&lt;DinamikusMezőNeve&gt; dinamikus mezőn.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-Loop:
+        </entry>
+        <entry>
+          True
+        </entry>
+        <entry>
+          Ha ez az X-OTRS fejléc be van állítva, akkor nem lesz automatikus válasz
+kézbesítve az üzenet küldőjének (levélhurok védelem).
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+</table>
+
+<para>
+Meg kell adnia egy nevet minden szűrőszabályhoz. A szűrőfeltételek a
+„Szűrőfeltétel” szakaszban adhatók meg. Válasszon a listamezőkön keresztül
+az „1. fejléc”, a „2. fejléc”, és így tovább esetén az üzenetek azon
+részeihez, ahol keresni szeretne, és a jobb oldalon adja meg azokat az
+értékeket, amelyekre szűrni kíván. Az „E-mail fejlécek beállítása”
+szakaszban  választhatja ki azokat a műveleteket, amelyek aktiválva lesznek,
+ha a szűrőszabályok illeszkednek. Kiválaszthatja az „1. fejléc”, a
+„2. fejléc”, és így tovább számára az X-OTRS fejléc kiválasztását és a
+hozzárendelt változók beállítását (lásd a lenti ábrát).
+</para>
+
+<para>
+A szűrőszabályok ábécé-sorrendben lesznek kiértékelve, és az összes
+végrehajtásra kerül, kivéve ha a „Leállítás találat után” beállítás „Igen”
+értékre lett állítva az egyik szabályban (ebben az esetben a hátralévő
+szűrők kiértékelése meg lesz szakítva).
+</para>
+
+<para>
+<figure>
+    <title>Egy levelezési szűrő hozzáadása</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/add-postmasterfilter.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<example id="sort-mails-into-junk">
+<title>SPAM-levelek kiválogatása egy adott várlistába</title>
+
+<para>
+Egy hasznos szűrőszabály lenne automatikusan megengedni az OTRS-nek egy
+levélszemét-felismerő eszköz használatával - mint például a SpamAssassin - a
+levélszemétként megjelölt levelek áthelyezését a „Szemét” várólistába. A
+SpamAssassin hozzáadja az „X-Spam-Flag” fejlécet minden ellenőrzött
+levélhez. Amikor a levél szemétként van megjelölve, akkor a fejléc „Yes”
+értékre van állítva. Így a szűrőszabály „X-Spam-Flag: Yes” lenne. Egy
+szűrőszabály létrehozásához ezzel a feltétellel beszúrhatja például a
+„spam-levelek” nevet. A „Szűrőszabályok” szakaszban válassza az
+„X-Spam-Flag:” lehetőséget az „1. fejléchez” a listamezőből. Szúrja be a
+„Yes” értéket ehhez a fejléchez. Most már a szűrőfeltétel meg van adva. Hogy
+meggyőződjön arról, hogy minden szemét levél a „Szemét” várólistába kerül
+elhelyezésre, válassza az „E-mail fejlécek beállítása” szakaszban az
+„X-OTRS-Queue:” bejegyzést az „1 fejléchez”. Adja meg a „Szemét” értéket
+ehhez a fejléchez. Végül az új szűrőszabály hozzáadásához kapcsolja be azt a
+rendszeren lévő új üzenetekhez.
+</para>
+</example>
+
+<para>
+Vannak további modulok, amelyek a <link
+linkend="email-receiving-filter">bejövő üzenetek szűréséhez</link>
+speciálisabban használhatók. Ezek a modulok akkor lehetnek hasznosak, amikor
+nagyobb, összetettebb rendszerekkel foglalkozik.
+</para>
+
+</section>
