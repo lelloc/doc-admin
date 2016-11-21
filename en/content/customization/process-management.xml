@@ -2266,6 +2266,8 @@ StateID => {
                     subject field and attachment handling. The entered text will then be added to
                     the ticket as an article and sent by email. Let's see an example Article field
                     configuration:
+                </para>
+                <para>
                     <screen>
 Article => {
     DescriptionShort => 'Please insert your comment here.',
@@ -2304,7 +2306,7 @@ Article => {
                             <listitem>
                                 <para>
                                     <literal>0</literal>: field is invisible. This can be helpful if field values
-                                    should automatically be set. The configured DefaultValue will be
+                                    should automatically be set. The configured <literal>DefaultValue</literal> will be
                                     stored in this case.
                                 </para>
                             </listitem>
@@ -2317,6 +2319,8 @@ Article => {
                                 <para>
                                     <literal>2</literal>: field is visible and mandatory. The following fields can
                                     only be invisible or mandatory:
+                                </para>
+                                <para>
                                     <screen>
     QueueID
     Queue
@@ -2344,7 +2348,7 @@ Article => {
                     <para>
                         For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers to the database ID
                         of the value. For other fields without <literal>ID</literal> (like Queue, Owner), the
-                        DefaultValue must contain the value itself. Example:
+                        <literal>DefaultValue</literal> must contain the value itself. Example:
                     </para>
                     <para>
                         <screen>
@@ -2636,7 +2640,7 @@ Fields => {
                             <listitem>
                                 <para>
                                     <literal>Regex</literal>: The field value can be tested with a regular
-                                    expression. It is important that 'Match' contains
+                                    expression. It is important that <literal>Match</literal> contains
                                     <emphasis>qr{}xms</emphasis> as a base condition. Between the
                                     braces the actual regular expression can be noted.
                                 </para>
@@ -2710,7 +2714,7 @@ $Self->{'Process::TransitionAction'} = {
                     The use of UserID inside the <literal>Config</literal> parameter of a Transition Action is
                     accepted by all Transition Actions (since OTRS 3.2.4). In this example it could
                     be particularly important if the user that triggers the Transition does not have
-                    permissions to move the ticket to the queue 'Junk', while the user with the
+                    permissions to move the ticket to the queue <literal>Junk</literal>, while the user with the
                     UserID 123 might have.
                 </para>
             </section>
@@ -2778,7 +2782,7 @@ $Self->{'Process::TransitionAction'} = {
                         <literal>Name</literal> specifies the name of the configured TransitionAction.
                     </para>
                     <para>
-                        <literal>MasterSlave</literal> and <literal></literal> are given as examples of DynamicField names.
+                        <literal>MasterSlave</literal> and <literal>Approved</literal> are given as examples of DynamicField names.
                         The values of the fields (<literal>Master</literal> and <literal>1</literal>) will be set by this
                         TransitionAction.
                     </para>
@@ -2995,7 +2999,7 @@ $Self->{'Process::TransitionAction'} = {
                         ticket.
                     </para>
                     <para>
-                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the login or id the agent that will be the new ticket owner.
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the login or id of the agent that will be the new ticket owner.
                     </para>
                     <para>
                         <literal>TN</literal>, custom number for the new ticket.
@@ -3034,7 +3038,7 @@ $Self->{'Process::TransitionAction'} = {
                         system, customer.
                     </para>
                     <para>
-                        <literal>ContentType</literal>defines the content type of the article. Possible values:
+                        <literal>ContentType</literal> defines the content type of the article. Possible values:
                         <literal>text/plain; charset=ISO-8859-15</literal> or any other valid charset and mime type.
                     </para>
                     <para>
