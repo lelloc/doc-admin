@@ -1,0 +1,480 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+    <section id="genericinterface_communication_flow">
+        <title>Általános felület kommunikációs folyamat</title>
+        <para>
+            Az általános felületnek meghatározott folyamata van a tevékenységek
+végrehajtásához szolgáltatóként és kérelmezőként.
+        </para>
+        <para>
+            Ezek a folyamatok vannak alább leírva:
+        </para>
+
+        <section>
+            <title>OTRS mint szolgáltató</title>
+            <section>
+                <title>
+                    Távoli kérés:
+                </title>
+                <orderedlist>
+                    <listitem>
+                        <para>
+                            HTTP-kérés
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Az OTRS fogadja a HTTP-kérést és továbbadja a rétegeken keresztül.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    A szolgáltató modul felelős ezen tevékenységek végrehajtásáért és
+vezérléséért.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Hálózati átvitel
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    A hálózati átvitel modul dekódolja az adat hasznos terhét, és elválasztja a
+művelet nevét az adat többi részétől.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    A művelet neve és a művelet adatai visszakerülnek a szolgáltatóhoz.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <remark>Külső adatok</remark>
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Az adatok, ahogy a távoli rendszer elküldte (ez nem egy modul alapú réteg).
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Leképezés
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Az adatok átalakításra kerülnek a külső rendszer formátumáról az OTRS belső
+formátumára, ahogy a leképezési beállításban meg van adva ennél a műveletnél
+(leképezés a bejövő kérés adataihoz).
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    A már átalakított adatok visszakerülnek a szolgáltatóhoz.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <remark>Belső adatok</remark>
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Az adatok, ahogy át lettek alakítva és elő lettek készítve a műveletnek való
+átadáshoz (ez nem egy modul alapú réteg).
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Művelet
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Fogadja és ellenőrzi az adatokat.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Felhasználói hozzáférés-vezérlést hajt végre.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Végrehajtja a műveletet.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </orderedlist>
+            </section>
+            <section>
+                <title>
+                    OTRS-válasz:
+                </title>
+                <orderedlist>
+                        <listitem>
+                            <para>
+                                Művelet
+                            </para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        Visszaadja az eredmény adatait a szolgáltatónak.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                    <listitem>
+                        <para>
+                            <remark>Belső adatok</remark>
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Az adatok, ahogy visszaadásra kerültek a műveletből.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Leképezés
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Az adatok visszaalakításra kerülnek a távoli rendszer formátumára, ahogy a
+leképezési beállításban meg van adva (leképezés a kimenő válasz adataihoz).
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    A már átalakított adatok visszakerülnek a szolgáltatóhoz.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <remark>Külső adatok</remark>
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Az adatok, ahogy át lettek alakítva és elő lettek készítve a hálózati
+átvitelhez való átadáshoz válaszként.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Hálózati átvitel
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Fogadja a már a távoli rendszer formátumában lévő adatokat.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Felépít egy érvényes választ ehhez a hálózati átviteltípushoz.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            HTTP-válasz
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    A válasz visszaküldésre kerül a webszolgáltatás kliensének.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Egy hiba esetén hibaválasz kerül elküldésre a távoli rendszernek (például
+SOAP-hiba, HTTP-hiba, stb.).
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </orderedlist>
+            </section>
+        </section>
+
+        <section>
+            <title>OTRS mint kérelmező</title>
+                <section>
+                    <title>OTRS-kérés:</title>
+                    <orderedlist>
+                        <listitem>
+                            <para>
+                                Esemény-aktiváló kezelő
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        A webszolgáltatás beállítása alapján meghatározza, hogy a kérés szinkron
+vagy aszinkron lesz-e.
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                Szinkron
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        Egy közvetlen hívás készül a kérelmezőhöz azért, hogy létrehozzon egy új
+kérést és továbbadja a rétegeken keresztül.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Aszinkron
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        Egy új általános felület (kérelmező) feladat létrehozása az OTRS ütemezőhöz
+(a kérés végrehajtását az ütemezőre delegálva a felhasználói élmény erősen
+növelhető, egyébként a kérés előkészítéséhez szükséges összes idő és a
+távoli végrehajtás hozzáadásra kerül az OTRS eseményekhez, amely aktiválja
+azokat a kéréseket).
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        A következő ciklusában az ütemező folyamat beolvassa az új feladatot, és
+létrehoz egy hívást a kérelmezőhöz, amely létre fog hozni egy új kérést, és
+azután továbbadja azt a rétegeken keresztül.
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Meghívó
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Fogadja az adatokat az eseményből.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Ellenőrzi a fogadott adatokat (ha szükséges).
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Meghívja a központi modulokat az adatok kiegészítéséhez (ha szükséges).
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Visszaadja a kért adatszerkezetet, vagy egy kommunikáció leállítása jelet
+küld a kérelmezőnek a kérés elegáns megszakításához.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <remark>Belső adatok</remark>
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Az adatok, ahogy a meghívó átadta (ez nem egy modul alapú réteg).
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Leképezés
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Az adatok átalakításra kerülnek a távoli rendszer formátumára, ahogy a
+leképezési beállításban meg van adva (leképezés a kimenő válasz adataihoz).
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        A már átalakított adatok visszakerülnek a kérelmezőhöz.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <remark>Külső adatok</remark>
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Az adatok, ahogy át lettek alakítva és elő lettek készítve a távoli
+rendszernek való küldéshez.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Hálózati átvitel
+                            </para>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            Fogadja a távoli művelet nevét és a már a távoli rendszer formátumára
+átalakított adatokat a kérelmezőtől.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Felépít egy érvényes kérést a hálózati átvitelhez.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Elküldi a kérést a távoli rendszernek, és várakozik a válaszra.
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                        </listitem>
+                    </orderedlist>
+                </section>
+                <section>
+                    <title>Távoli válasz:</title>
+                    <orderedlist>
+                        <listitem>
+                            <para>
+                                Hálózati átvitel
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Fogadja a választ és dekódolja az adat hasznos terhét.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        Visszaadja az adatokat a kérelmezőnek.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <remark>Külső adatok</remark>
+                            </para>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Az adatok, ahogy a távoli rendszerről érkeztek.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                    <listitem>
+                        <para>
+                            Leképezés
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Az adatok átalakításra kerülnek a külső rendszer formátumáról az OTRS belső
+formátumára, ahogy a leképezési beállításban meg van adva ennél a műveletnél
+(leképezés a bejövő válasz adataihoz).
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    A már átalakított adatok visszakerülnek a kérelmezőhöz.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <remark>Belső adatok</remark>
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Az adatok, ahogy át lettek alakítva és elkészültek visszaadásra a
+kérelmezőnek.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Meghívó
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Fogadja a visszaadott adatokat.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Kezeli az adatokat, ahogy minden egyes meghívónál speciálisan szükséges
+(beleértve a hibakezelést, ha van).
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Visszaadja a meghívó eredményét és adatait a kérelmezőnek.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Eseménykezelő vagy ütemező
+                        </para>
+                        <itemizedlist mark="round">
+                            <listitem>
+                                <para>
+                                    Fogadja az adatokat a kérelmezőtől. Az ütemező esetében ezek az adatok
+információkat tartalmazhatnak a feladat azonnali vagy jövőbeli
+újraütemezéséhez.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </orderedlist>
+            </section>
+        </section>
+    </section>

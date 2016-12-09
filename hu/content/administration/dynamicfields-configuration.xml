@@ -1,0 +1,1377 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="dynamicfields-configuration">
+    <title>Beállítás</title>
+    <para>
+        Alapértelmezetten egy tiszta OTRS telepítés nem tartalmaz semmilyen
+dinamikus mezőt sem. Ha ilyen mezők használatát tervezi a jegyekben vagy a
+bejegyzésekben, akkor létre kell hoznia dinamikus mezőket.
+    </para>
+    <para>
+        Egy dinamikus mező beállítása két részre van osztva. Egy új dinamikus mező
+hozzáadásához vagy egy meglévő kezeléséhez el kell navigálnia az
+adminisztrációs panel „Dinamikus mezők” hivatkozására. Egy dinamikus mező
+megjelenítéséhez, kötelező módon történő megjelenítéséhez vagy elrejtéséhez
+egy képernyőn, meg kell változtatnia az OTRS beállításait a
+„Rendszerbeállítások” képernyőn.
+    </para>
+
+    <section id="dynamicfields-configuration-add">
+        <title>Egy dinamikus mező hozzáadása</title>
+        <para>
+            Kattintson a navigációs sávon található „Adminisztráció” gombra, majd
+kattintson a képernyő alján közepén elhelyezkedő „Jegybeállítások” dobozon
+belül a „Dinamikus mezők” hivatkozásra. A dinamikus mezők áttekintője fog
+megjelenni az alábbiak szerint:
+        </para>
+        <para>
+            <screenshot>
+<screeninfo>Dinamikus mezők áttekintő képernyő, üres</screeninfo> <graphic
+fileref="screenshots/dynamicfields-overview-empty.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Dinamikus mezők áttekintő képernyő, üres.</emphasis>
+        </para>
+        <para>
+            Figyelje meg, hogy ez a képernyő meg fog változni, ahogy több dinamikus
+mezőt ad hozzá az eddig létrehozott dinamikus mezők listájához. Ez a
+képernyő már tartalmazhat néhány mezőt, ha a telepítés az OTRS egy régebbi
+verziójáról lett frissítve.
+        </para>
+        <para>
+            A képernyő bal oldalán az oldalsávban lévő Műveletek két lehetőséget írnak
+le: Jegy vagy Bejegyzés. Mindegyiknek megvan a saját legördülő dinamikus
+mezők választása.
+        </para>
+        <note>
+            <para>
+                Egy OTRS csomag telepítése több objektumot is hozzáadhat a Műveletek
+oldalsávhoz.
+            </para>
+        </note>
+        <itemizedlist>
+            <para>
+                Az általános eljárás egy dinamikus mező létrehozásához a következő:
+            </para>
+            <listitem>
+                <para>
+                    Kattintson a kívánt dinamikus mező objektum legördülő menüjére a Műveletek
+oldalsávban.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Kattintson arra a dinamikus mezőtípusra, amelyet hozzá szeretne adni a
+listából.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Töltse ki a beállításokat.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Mentse el.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            A beállítások párbeszédablakai a dinamikus mezőknél két részre vannak
+osztva. A felső szakasz közös az összes mezőnél, és az alsó rész különböző
+lehet az egyes dinamikus mezőtípusok esetén.
+        </para>
+
+        <itemizedlist>
+            <para>
+                Általános dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Név: kötelező, egyedi, csak betűk és számok engedélyezettek.
+                </para>
+                <para>
+                    Ez a mező belső neve, például egy mező megjelenítéséhez vagy elrejtéséhez
+használják egy képernyőn. Egy mezőnév bármilyen módosítása (nem ajánlott) a
+„Rendszerbeállítás” azon beállításainak kézi frissítését igényli, ahol a
+mezőre hivatkoznak.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Címke: kötelező.
+                </para>
+                <para>
+                    Ez a képernyőkön megjelenítendő mezőnév, és támogatja a fordításokat.
+                </para>
+                <note>
+                    <para>
+                        A címkefordításokat kézzel kell hozzáadni a nyelvi fordítások fájljaihoz.
+                    </para>
+                </note>
+            </listitem>
+            <listitem>
+                <para>
+                    Mezősorrend: kötelező.
+                </para>
+                <para>
+                    Azt a relatív sorrendet határozza meg, amelyben a mező megjelenítésre kerül
+a képernyőn. Alapértelmezetten minden új mező az utolsó pozíciót kapja. Egy
+változtatás ebben a beállításban érinteni fogja a többi létrehozott
+dinamikus mező sorrendjét is.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Érvényesség: kötelező.
+                </para>
+                <para>
+                    Egy érvénytelen dinamikus mező nem lesz megjelenítve egyik képernyőn sem,
+nem számít, hogy úgy lett beállítva, hogy meg legyen jelenítve.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Mezőtípus: kötelező, csak olvasható.
+                </para>
+                <para>
+                    Megjeleníti a jelenleg kiválasztott mezőtípust.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Objektumtípus: kötelező, csak olvasható.
+                </para>
+                <para>
+                    Megjeleníti a mező hatáskörét.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>
+                Minden egyes különleges mezőtípus beállításainak szemléltetéséhez néhány
+mező kerül hozzáadásra a példánkban. Ezekre az új mezőkre fogunk hivatkozni
+a későbbi szakaszokban.
+            </para>
+            <para>
+                A következő példáknál az összes dinamikus mező a Jegy objektumhoz lesz
+létrehozva. Ha a Bejegyzés objektumhoz szükséges egy dinamikus mezőt
+létrehozni, akkor a Bejegyzés legördülő listájából válassza ki a mezőt.
+            </para>
+        </note>
+
+        <table>
+            <caption>A következő mezők lesznek hozzáadva a rendszerhez:</caption>
+            <thead>
+                 <tr>
+                     <td>Név</td>
+                     <td>Címke</td>
+                     <td>Típus</td>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr>
+                     <td>Mezo1</td>
+                     <td>1. saját mező</td>
+                     <td>Szöveg</td>
+                 </tr>
+                 <tr>
+                     <td>Mezo2</td>
+                     <td>2. saját mező</td>
+                     <td>Szövegdoboz</td>
+                 </tr>
+                 <tr>
+                     <td>Mezo3</td>
+                     <td>3. saját mező</td>
+                     <td>Jelölőnégyzet</td>
+                 </tr>
+                 <tr>
+                     <td>Mezo4</td>
+                     <td>4. saját mező</td>
+                     <td>Legördülő</td>
+                 </tr>
+                 <tr>
+                     <td>Mezo5</td>
+                     <td>5. saját mező</td>
+                     <td>Többválasztós</td>
+                 </tr>
+                 <tr>
+                     <td>Mezo6</td>
+                     <td>5. saját mező</td>
+                     <td>Dátum</td>
+                 </tr>
+                 <tr>
+                     <td>Mezo7</td>
+                     <td>6. saját mező</td>
+                     <td>Dátum / Idő</td>
+                 </tr>
+             </tbody>
+        </table>
+    </section>
+
+    <section id="dynamicfields-configuration-text">
+        <title>Szöveg dinamikus mező beállítások</title>
+        <para>
+            A szöveg dinamikus mező egy egysoros szöveg tárolásához használható.
+        </para>
+        <itemizedlist>
+            <para>
+                Szöveg dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Alapértelmezett érték: opcionális.
+                </para>
+                <para>
+                    Ez az alapértelmezetten megjelenítendő érték a szerkesztési képernyőkön
+(mint például új telefonos jegy vagy jegyírás).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Hivatkozás megjelenítése: opcionális.
+                </para>
+                <para>
+                    Ha be van állítva, akkor a mezőérték egy kattintható hivatkozássá lesz
+átalakítva a megjelenítő képernyőknél (mint például jegynagyítás vagy az
+áttekintők).
+                </para>
+                <para>
+                    Például ha a „Hivatkozás megjelenítése” mező a „http://www.otrs.com” értékre
+van állítva, akkor a kitöltött értékre kattintva a böngésző meg fogja nyitni
+az OTRS weboldalát.
+                </para>
+                <note>
+                    <para>
+                        A [% Data.NévX | uri %] használata a Hivatkozás beállítása értékben, ahol
+NévX a mező neve, hozzá fogja adni a mezőértéket a hivatkozás részeként.
+                    </para>
+                </note>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Szöveg dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-text.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Szöveg dinamikus mező beállítások párbeszédablak.</emphasis>
+        </para>
+    </section>
+
+    <section id="dynamicfields-configuration-textarea">
+        <title>Szövegdoboz dinamikus mező beállítások</title>
+        <para>
+            A szövegdoboz dinamikus mező egy többsoros szöveg tárolásához használható.
+        </para>
+        <itemizedlist>
+            <para>
+                Szövegdoboz dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Sorok száma: opcionális, egész szám.
+                </para>
+                <para>
+                    A mező magasságának meghatározásához használható a szerkesztési képernyőkön
+(mint például új telefonos jegy vagy jegyírás).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Oszlopok száma: opcionális, egész szám.
+                </para>
+                <para>
+                    Ez az érték a mező szélességének meghatározásához használható a szerkesztési
+képernyőkön.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Alapértelmezett érték: opcionális.
+                </para>
+                <para>
+                    Ez az alapértelmezetten megjelenítendő érték a szerkesztési képernyőkön
+(többsoros szöveg is lehet).
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Szövegdoboz dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-textarea.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Szövegdoboz dinamikus mező beállítások
+párbeszédablak.</emphasis>
+        </para>
+    </section>
+
+    <section id="dynamicfields-configuration-checkbox">
+        <title>Jelölőnégyzet dinamikus mező beállítások</title>
+        <para>
+            A jelölőnégyzet dinamikus mező igaz vagy hamis érték tárolásához
+használható, amelyet egy bepipált vagy kitörölt jelölőnégyzet ábrázol.
+        </para>
+        <itemizedlist>
+            <para>
+                Jelölőnégyzet dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Alapértelmezett érték: kötelező.
+                </para>
+                <para>
+                    Ez az alapértelmezetten megjelenítendő érték a szerkesztési képernyőkön
+(mint például új telefonos jegy vagy jegyírás). Az alapértelmezett érték
+ennél a mezőnél zárt választás, amely Bejelölt vagy Kitörölt lehet.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Jelölőnégyzet dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-checkbox.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Jelölőnégyzet dinamikus mező beállítások
+párbeszédablak.</emphasis>
+        </para>
+
+    </section>
+
+    <section id="dynamicfields-configuration-dropdown">
+        <title>Legördülő dinamikus mező beállítások</title>
+        <para>
+            A legördülő dinamikus mező egy egyedüli érték tárolásához használható egy
+zárt listából.
+        </para>
+        <itemizedlist>
+            <para>
+                Legördülő dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Lehetséges értékek: kötelező.
+                </para>
+                <para>
+                    A kiválasztandó értékek listája. Ha használva van, akkor egy új értékhez
+szükséges a Kulcs (belső érték) és az Érték (megjelenített érték) megadása.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Alapértelmezett érték: opcionális.
+                </para>
+                <para>
+                    Ez az alapértelmezetten megjelenítendő érték a szerkesztési képernyőkön
+(mint például új telefonos jegy vagy jegyírás). Az alapértelmezett érték
+ennél a mezőnél a Lehetséges értékek által meghatározott zárt választás.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Üres érték hozzáadása: kötelező, (Igen / Nem).
+                </para>
+                <para>
+                    Ha ez a lehetőség be van kapcsolva, akkor egy további érték lesz
+meghatározva egy „-” karaktert megjelenítve a lehetséges értékek
+listájában. Ez a speciális érték belsőleg üres.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Lefordítható értékek: kötelező, (Igen / Nem).
+                </para>
+                <para>
+                    Ez a beállítás arra használható, hogy lefordíthatóként jelölje meg a mező
+lehetséges értékeit. Csak a megjelenített értékek lesznek lefordítva, a
+belső értékeket nem érinti. Az értékek fordítását kézzel kell hozzáadni a
+nyelvi fájlokhoz.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Hivatkozás megjelenítése: opcionális.
+                </para>
+                <para>
+                    Ha be van állítva, akkor a mezőérték egy kattintható hivatkozássá lesz
+átalakítva a megjelenítő képernyőknél (mint például jegynagyítás vagy az
+áttekintők).
+                </para>
+                <para>
+                    Például ha a „Hivatkozás megjelenítése” mező a „http://www.otrs.com” értékre
+van állítva, akkor a kitöltött értékre kattintva a böngésző meg fogja nyitni
+az OTRS weboldalát.
+                </para>
+                <note>
+                    <para>
+                        A [% Data.NévX | uri %] használata a Hivatkozás beállítása értékben, ahol
+NévX a mező neve, hozzá fogja adni a mezőértéket a hivatkozás részeként.
+                    </para>
+                </note>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Legördülő dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-dropdown.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Legördülő dinamikus mező beállítások
+párbeszédablak.</emphasis>
+        </para>
+    </section>
+
+    <section id="dynamicfields-configuration-multiselect">
+        <title>Többválasztós dinamikus mező beállítások</title>
+        <para>
+            A többválasztós dinamikus mező több érték tárolásához használható egy zárt
+listából.
+        </para>
+        <itemizedlist>
+            <para>
+                Többválasztós dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Lehetséges értékek: kötelező.
+                </para>
+                <para>
+                    A kiválasztható értékek listája. További listaelemek hozzáadásakor szükséges
+a Kulcs (belső érték) és az Érték (megjelenített érték) megadása.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Alapértelmezett érték: opcionális.
+                </para>
+                <para>
+                    Ez az alapértelmezetten megjelenítendő érték a szerkesztési képernyőkön
+(mint például új telefonos jegy vagy jegyírás). Az alapértelmezett érték
+ennél a mezőnél a Lehetséges értékek által meghatározott zárt választás.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Üres érték hozzáadása: kötelező, (Igen / Nem).
+                </para>
+                <para>
+                    Ha ez a lehetőség be van kapcsolva, akkor egy további érték lesz
+meghatározva egy „-” karaktert megjelenítve a lehetséges értékek
+listájában. Ez a speciális érték belsőleg üres.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Lefordítható értékek: kötelező, (Igen / Nem).
+                </para>
+                <para>
+                    Ez a beállítás arra használható, hogy lefordíthatóként jelölje meg a mező
+lehetséges értékeit. Csak a megjelenített értékek lesznek lefordítva, a
+belső értékeket nem érinti. Az értékek fordítását kézzel kell hozzáadni a
+nyelvi fájlokhoz.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Többválasztós dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-multiselect.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Többválasztós dinamikus mező beállítások
+párbeszédablak.</emphasis>
+        </para>
+    </section>
+
+    <section id="dynamicfields-configuration-date">
+        <title>Dátum dinamikus mező beállítások</title>
+        <para>
+            A dátum dinamikus mező egy dátumérték tárolásához használható (év, hónap és
+nap).
+        </para>
+        <itemizedlist>
+            <para>
+                Dátum dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Alapértelmezett dátumkülönbség: opcionális, egész szám.
+                </para>
+                <para>
+                    A jelenlegi dátum és a kijelölt dátum között alapértelmezetten
+megjelenítendő másodpercek száma (pozitív vagy negatív) a szerkesztési
+képernyőkön (mint például új telefonos jegy vagy jegyírás).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Éves időszak meghatározása: kötelező, (Igen / Nem).
+                </para>
+                <para>
+                    Egy meghatározott számú év beállításához használható a múltban és a jövőben
+az ennél a mezőnél kijelölt év jelenlegi dátuma alapján. Ha Igenre van
+állítva, akkor a következő beállítások érhetők el:
+                </para>
+                <para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                Elmúlt évek: opcionális, pozitív egész szám.
+                            </para>
+                            <para>
+                                Az elmúlt évek számát határozza meg a jelenlegi naptól az évválasztóban való
+megjelenítéshez a szerkesztési képernyőkön lévő dinamikus mezőnél.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Jövőbeli évek: opcionális, pozitív egész szám.
+                            </para>
+                            <para>
+                                A jövőbeli évek számát határozza meg a jelenlegi naptól az évválasztóban
+való megjelenítéshez a szerkesztési képernyőkön lévő dinamikus mezőnél.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Hivatkozás megjelenítése: opcionális.
+                </para>
+                <para>
+                    Ha be van állítva, akkor a mezőérték egy kattintható hivatkozássá lesz
+átalakítva a megjelenítő képernyőknél (mint például jegynagyítás vagy az
+áttekintők).
+                </para>
+                <para>
+                    Például ha a „Hivatkozás megjelenítése” mező a „http://www.otrs.com” értékre
+van állítva, akkor a kitöltött értékre kattintva a böngésző meg fogja nyitni
+az OTRS weboldalát.
+                </para>
+                <note>
+                    <para>
+                        A [% Data.NévX | uri %] használata a Hivatkozás beállítása értékben, ahol
+NévX a mező neve, hozzá fogja adni a mezőértéket a hivatkozás részeként.
+                    </para>
+                </note>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Dátum dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-date.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Dátum dinamikus mező beállítások párbeszédablak.</emphasis>
+        </para>
+    </section>
+
+    <section id="dynamicfields-configuration-datetime">
+        <title>Dátum / idő dinamikus mező beállítások</title>
+        <para>
+            A dátum / idő dinamikus mező egy dátum- és időérték tárolásához használható
+(év, hónap, nap, óra és perc).
+        </para>
+        <itemizedlist>
+            <para>
+                Dátum / idő dinamikus mező beállítások:
+            </para>
+            <listitem>
+                <para>
+                    Alapértelmezett dátumkülönbség: opcionális, egész szám.
+                </para>
+                <para>
+                    A jelenlegi dátum és a kijelölt dátum között alapértelmezetten
+megjelenítendő másodpercek száma (pozitív vagy negatív) a szerkesztési
+képernyőkön (mint például új telefonos jegy vagy jegyírás).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Éves időszak meghatározása: kötelező, (Igen / Nem).
+                </para>
+                <para>
+                    Egy meghatározott számú év beállításához használható a múltban és a jövőben
+az ennél a mezőnél kijelölt év jelenlegi dátuma alapján. Ha Igenre van
+állítva, akkor a következő beállítások érhetők el:
+                </para>
+                <para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                Elmúlt évek: opcionális, pozitív egész szám.
+                            </para>
+                            <para>
+                                Az elmúlt évek számát határozza meg a jelenlegi naptól az évválasztóban való
+megjelenítéshez a szerkesztési képernyőkön lévő dinamikus mezőnél.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                Jövőbeli évek: opcionális, pozitív egész szám.
+                            </para>
+                            <para>
+                                A jövőbeli évek számát határozza meg a jelenlegi naptól az évválasztóban
+való megjelenítéshez a szerkesztési képernyőkön lévő dinamikus mezőnél.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Hivatkozás megjelenítése: opcionális.
+                </para>
+                <para>
+                    Ha be van állítva, akkor a mezőérték egy kattintható hivatkozássá lesz
+átalakítva a megjelenítő képernyőknél (mint például jegynagyítás vagy az
+áttekintők).
+                </para>
+                <para>
+                    Például ha a „Hivatkozás megjelenítése” mező a „http://www.otrs.com” értékre
+van állítva, akkor a kitöltött értékre kattintva a böngésző meg fogja nyitni
+az OTRS weboldalát.
+                </para>
+                <note>
+                    <para>
+                        A [% Data.NévX | uri %] használata a Hivatkozás beállítása értékben, ahol
+NévX a mező neve, hozzá fogja adni a mezőértéket a hivatkozás részeként.
+                    </para>
+                </note>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <screenshot>
+<screeninfo>Dátum / idő dinamikus mező beállítások párbeszédablak</screeninfo> <graphic
+fileref="screenshots/dynamicfields-configuration-datetime.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Dátum / idő dinamikus mező beállítások
+párbeszédablak.</emphasis>
+        </para>
+    </section>
+
+    <section id="dynamicfields-configuration-edit">
+        <title>Egy dinamikus mező szerkesztése</title>
+        <para>
+            Egy kitöltött dinamikus mező áttekintő képernyőnek (az előző példákkal) így
+kell kinéznie:
+        </para>
+        <para>
+            <screenshot>
+<screeninfo>Mintaadatokkal kitöltött dinamikus mező áttekintő képernyő</screeninfo> <graphic
+fileref="screenshots/dynamicfields-overview-filled.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+        </para>
+        <para>
+            <emphasis>Ábra: Mintaadatokkal kitöltött dinamikus mező áttekintő
+képernyő.</emphasis>
+        </para>
+        <para>
+            Egy dinamikus mező megváltoztatásához vagy szerkesztéséhez rendelkeznie kell
+legalább egy meghatározott mezővel, ki kell választania egy már hozzáadott
+mezőt a dinamikus mezők áttekintő képernyőjéről, és módosítania kell a
+beállításait.
+        </para>
+        <note>
+            <para>
+                Nem minden dinamikus mező beállítás változtatható meg. A mezőtípus és az
+objektumtípus rögzítve van a mező választásától, és nem változtathatók meg.
+            </para>
+            <para>
+                Nem ajánlott megváltoztatni a mező belső nevét, de a címke bármikor
+megváltoztatható. Ha a belső név megváltozik, akkor az összes olyan
+„Rendszerbeállítás” beállításait, valamint a felhasználói beállításokat (ha
+meg van határozva) is frissíteni kell, amelyek arra a bizonyos mezőre
+hivatkoznak.
+            </para>
+        </note>
+    </section>
+
+    <section id="dynamicfields-configuration-show">
+        <title>Egy dinamikus mező megjelenítése egy képernyőn</title>
+        <para>
+            Egy dinamikus mező egy bizonyos képernyőn történő megjelenítéséhez két
+kötelező feltétel van:
+        </para>
+        <orderedlist>
+            <listitem>
+                <para>
+                    A dinamikus mezőnek érvényesnek kell lennie.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    A dinamikus mezőnek 1-re vagy 2-re állítva kell lennie a képernyő
+beállításában.
+                </para>
+            </listitem>
+        </orderedlist>
+        <itemizedlist>
+            <para>
+                Kövesse ezeket a lépéseket egy dinamikus mező megjelenítéséhez egy képernyőn
+            </para>
+            <listitem>
+                <para>
+                    Győződjön meg arról, hogy a dinamikus mező érvényesre van-e állítva. A mező
+érvényességét a dinamikus mező áttekintő képernyőjéről nézheti meg. Állítsa
+érvényesre a mező szerkesztésével, ha szükséges.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Nyissa meg a „Rendszerbeállításokat”, és válassza a „Ticket” lehetőséget a
+képernyő bal oldali részén elhelyezkedő Műveletek oldalsávban lévő legördülő
+listából.
+                </para>
+                <note>
+                    <para>
+                        Rákereshet a „DynamicField” kifejezésre is a fenti keresődobozban vagy
+közvetlenül a „sysconfig” kulcsra, ha már ismeri azt.
+                    </para>
+                </note>
+            </listitem>
+            <listitem>
+                <para>
+                    Találja meg a beállítás alcsoportot annál a képernyőnél, amelyet keres, és
+kattintson rá. Például: „Frontend::Agent::Ticket::ViewPhoneNew”.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Keresse meg azt a beállítást, amely „###DynamicField” végződésű. Például:
+„Ticket::Frontend::AgentTicketPhone###DynamicField”.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Ha a beállítás üres vagy nem rendelkezik a szükséges dinamikus mező nevével,
+akkor kattintson a „+” gombra egy új bejegyzés hozzáadásához. Például Kulcs:
+Mezo1, Tartalom: 1.
+                </para>
+                <para>
+                    Ha a beállítás már rendelkezik a felsorolt dinamikus mező nevével, akkor
+győződjön meg arról, hogy „1”-re legyen állítva a mező megjelenítéséhez vagy
+„2”-re a kötelezőként való megjelenítéshez.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Mentse el a beállítást a képernyő alján lévő „Frissítés” gombra kattintva,
+és navigáljon arra a képernyőre, ahol meg szeretné jeleníttetni a mezőt.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <section id="dynamicfields-configuration-show-examples">
+            <title>Példák megjelenítése</title>
+            <para>
+                Az alábbiak a „Rendszerbeállítás” konfigurációk példái dinamikus mezők
+megjelenítéséhez vagy elrejtéséhez különböző képernyőkön.
+            </para>
+            <para>
+                <example id="Field1-PhoneTicket-Normal">
+                    <title>Mezo1 bekapcsolása az új telefonos jegy képernyőn.</title>
+                    <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Csoport:</emphasis> Ticket
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Alcsoport:</emphasis> Frontend::Agent::Ticket::ViewPhoneNew
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Beállítás:</emphasis>
+Ticket::Frontend::AgentTicketPhone###DynamicField
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Érték:</emphasis>
+                                </para>
+                                <para>
+                                    <informaltable>
+                                        <thead>
+                                            <tr>
+                                                <td>Kulcs</td>
+                                                <td>Tartalom</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mezo1</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </informaltable>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        <screenshot>
+<screeninfo>Mezo1 az új telefonos jegy képernyőn.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-agentticketphone-field1.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+                    </para>
+                    <para>
+                        <emphasis>Ábra: Mezo1 az új telefonos jegy képernyőn.</emphasis>
+                    </para>
+                </example>
+            </para>
+            <para>
+                <example id="Field1-PhoneTicket-Mandatory">
+                    <title>Mezo1 bekapcsolása az új telefonos jegy képernyőn kötelezőként.</title>
+                    <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Csoport:</emphasis> Ticket
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Alcsoport:</emphasis> Frontend::Agent::Ticket::ViewPhoneNew
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Beállítás:</emphasis>
+Ticket::Frontend::AgentTicketPhone###DynamicField
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Érték:</emphasis>
+                                </para>
+                                <para>
+                                    <informaltable>
+                                        <thead>
+                                            <tr>
+                                                <td>Kulcs</td>
+                                                <td>Tartalom</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mezo1</td>
+                                                <td>2</td>
+                                            </tr>
+                                        </tbody>
+                                    </informaltable>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        <screenshot>
+<screeninfo>Mezo1 az új telefonos jegy képernyőn kötelezőként.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-agentticketphone-field1-mandatory.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
+                    </para>
+                    <para>
+                        <emphasis>Ábra: Mezo1 az új telefonos jegy képernyőn
+kötelezőként.</emphasis>
+                    </para>
+                </example>
+            </para>
+            <para>
+                <example id="AllFields-PhoneTicket">
+                    <title>Különféle mezők bekapcsolása az új telefonos jegy képernyőn.</title>
+                    <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Csoport:</emphasis> Ticket
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Alcsoport:</emphasis> Frontend::Agent::Ticket::ViewPhoneNew
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Beállítás:</emphasis>
+Ticket::Frontend::AgentTicketPhone###DynamicField
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Érték:</emphasis>
+                                </para>
+                                <para>
+                                    <informaltable>
+                                        <thead>
+                                            <tr>
+                                                <td>Kulcs</td>
+                                                <td>Tartalom</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mezo1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo2</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo3</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo4</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo5</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo6</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo7</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </informaltable>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        <screenshot>
+<screeninfo>Különféle mezők az új telefonos jegy képernyőn kötelezőként.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-agentticketphone-allfields.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
+                    </para>
+                    <para>
+                        <emphasis>Ábra: Különféle mezők az új telefonos jegy képernyőn
+kötelezőként.</emphasis>
+                    </para>
+                </example>
+            </para>
+            <para>
+                <example id="SomeFields-PhoneTicket">
+                    <title>Néhány mező kikapcsolása az új telefonos jegy képernyőn.</title>
+                    <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Csoport:</emphasis> Ticket
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Alcsoport:</emphasis> Frontend::Agent::Ticket::ViewPhoneNew
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Beállítás:</emphasis>
+Ticket::Frontend::AgentTicketPhone###DynamicField
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Érték:</emphasis>
+                                </para>
+                                <para>
+                                    <informaltable>
+                                        <thead>
+                                            <tr>
+                                                <td>Kulcs</td>
+                                                <td>Tartalom</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mezo1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo2</td>
+                                                <td>0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo3</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo4</td>
+                                                <td>0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo5</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo6</td>
+                                                <td>0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mezo7</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </informaltable>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        <screenshot>
+<screeninfo>Néhány kikapcsolt mező az új telefonos jegy képernyőn kötelezőként.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-agentticketphone-somefields.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
+                    </para>
+                    <para>
+                        <emphasis>Ábra: Néhány kikapcsolt mező az új telefonos jegy képernyőn
+kötelezőként.</emphasis>
+                    </para>
+                </example>
+            </para>
+            <para>
+                <example id="Field1-TicketZoom">
+                    <title>Mezo1 bekapcsolása a jegynagyítás képernyőn.</title>
+                    <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Csoport:</emphasis> Ticket
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Alcsoport:</emphasis> Frontend::Agent::Ticket::ViewZoom
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Beállítás:</emphasis>
+Ticket::Frontend::AgentTicketZoom###DynamicField
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Érték:</emphasis>
+                                </para>
+                                <para>
+                                    <informaltable>
+                                        <thead>
+                                            <tr>
+                                                <td>Kulcs</td>
+                                                <td>Tartalom</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mezo1</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </informaltable>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        <screenshot>
+<screeninfo>Mezo1 a jegynagyítás képernyőn.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-agentticketzoom-field1.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+                    </para>
+                    <para>
+                        <emphasis>Ábra: Mezo1 a jegynagyítás képernyőn.</emphasis>
+                    </para>
+                </example>
+            </para>
+            <para>
+                <example id="Field1-TicketOverviewSmall">
+                    <title>Mezo1 bekapcsolása a jegyáttekintő kis képernyőkön.</title>
+                    <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Csoport:</emphasis> Ticket
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Alcsoport:</emphasis> Frontend::Agent::TicketOverview
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Beállítás:</emphasis>
+Ticket::Frontend::OverviewSmall###DynamicField
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Érték:</emphasis>
+                                </para>
+                                <para>
+                                    <informaltable>
+                                        <thead>
+                                            <tr>
+                                                <td>Kulcs</td>
+                                                <td>Tartalom</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mezo1</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </informaltable>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <para>
+                        <screenshot>
+<screeninfo>Mezo1 a jegyáttekintő kis képernyőn.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-ticketoverviewsmall-field1.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
+                    </para>
+                    <para>
+                        <emphasis>Ábra: Mezo1 a jegyáttekintő kis képernyőn.</emphasis>
+                    </para>
+                    <para>
+                        Ez a beállítás a következő képernyőket érinti: eszkalációs nézet, zárolt
+nézet, várólista nézet, felelős nézet, állapot nézet, szolgáltatás nézet és
+megfigyelés nézet.
+                    </para>
+                </example>
+            </para>
+        </section>
+    </section>
+
+    <section id="dynamicfields-configuration-event-defaut">
+        <title>Egy alapértelmezett érték beállítása egy jegyesemény modullal</title>
+        <para>
+            Egy jegyesemény (például TicketCreate) aktiválhat egy bizonyos mezőnél
+beállított értéket, ha a mező még nem rendelkezik értékkel.
+        </para>
+        <note>
+            <para>
+                Ezen módszer használatával ez az alapértelmezett érték nem látható a
+szerkesztési képernyőn (például új telefonos jegy), mivel az érték a jegy
+létrehozása után lesz beállítva.
+            </para>
+        </note>
+        <para>
+            A funkció bekapcsolásához a következő beállítás engedélyezése szükséges:
+„Ticket::EventModulePost###TicketDynamicFieldDefault”.
+        </para>
+        <example id="Field1-EventDefault">
+            <title>Mezo1 bekapcsolása a jegylétrehozás eseménynél.</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis>Csoport:</emphasis> Ticket
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Alcsoport:</emphasis> Core::TicketDynamicFieldDefault
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Beállítás:</emphasis> Ticket::TicketDynamicFieldDefault###Element1
+                        </para>
+                        <note>
+                            <para>
+                                Ez a beállítás a 16 Ticket::TicketDynamicFieldDefault###Element beállítás
+bármelyikében bekapcsolható.
+                            </para>
+                            <para>
+                                Ha 16-nál több mezőt kellene beállítani, akkor egy egyéni XML-fájlt kell
+elhelyezni az $OTRS_HOME/Kernel/Config/files könyvtárban a funkció
+kiterjesztéséhez.
+                            </para>
+                        </note>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Érték:</emphasis>
+                        </para>
+                        <para>
+                            <informaltable>
+                                <thead>
+                                    <tr>
+                                        <td>Kulcs</td>
+                                        <td>Tartalom</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Event</td>
+                                        <td>TicketCreate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Név</td>
+                                        <td>Mezo1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td>egy új érték</td>
+                                    </tr>
+                                </tbody>
+                            </informaltable>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </example>
+    </section>
+
+    <section id="dynamicfields-configuration-preferences-defaut">
+        <title>Egy alapértelmezett érték beállítása felhasználói beállításokkal</title>
+        <para>
+            A dinamikus mező alapértelmezett értéke felülírható a felhasználói
+beállításokban tárolt felhasználó által meghatározott értékkel.
+        </para>
+        <para>
+            Ezen módszer használatával a mező alapértelmezett értéke lesz megjelenítve
+bármely olyan képernyőn, ahol a mező be van kapcsolva (ha a mezőnek még
+nincs különböző értéke).
+        </para>
+        <para>
+            A „PreferencesGroups###DynamicField” „Rendszerbeállítás” beállítás a
+„Frontend::Agent::Preferences” alcsoportban található. Ez a beállítás annak
+a példája, hogy hogyan hozható létre egy bejegyzés a felhasználói
+beállítások képernyőn egy kizárólagos dinamikus mező alapértelmezett
+értékének beállításához a kiválasztott felhasználónál. Ennek a beállításnak
+az a korlátozása, hogy csak egy dinamikus mező használatát engedi meg. Ha
+kettő vagy több mezőt fog használni ez a funkció, akkor egy egyéni
+XML-beállítófájl létrehozása szükséges az ehhez hasonló több beállítás
+hozzáadásához.
+        </para>
+        <note>
+            <para>
+                Ne feledje, hogy ha több beállítás kerül hozzáadásra egy új XML-fájlban,
+akkor minden egyes beállítás nevének egyedinek kell lennie a rendszeren és
+el kell térnie a „PreferencesGroups###DynamicField” névtől. Például:
+PreferencesGroups###101-DynamicField-Mezo1,
+PreferencesGroups###102-DynamicField-Mezo2, PreferencesGroups###Sajat-Mezo1,
+PreferencesGroups###Sajat-Mezo2, stb.
+            </para>
+        </note>
+        <example id="Field1-UserPreference">
+            <title>Mezo1 bekapcsolása a felhasználói beállításokban.</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis>Csoport:</emphasis> Ticket
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Alcsoport:</emphasis> Frontend::Agent::Preferences
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Beállítás:</emphasis> PreferencesGroups###101-DynamicField-Mezo1
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Érték:</emphasis>
+                        </para>
+                        <para>
+                            <informaltable>
+                                <thead>
+                                    <tr>
+                                        <td>Kulcs</td>
+                                        <td>Tartalom</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Event</td>
+                                        <td>TicketCreate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Active</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Block</td>
+                                        <td>Bevitel</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Column</td>
+                                        <td>Egyéb beállítások</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data:</td>
+                                        <td>[% Env("UserDynamicField_Field1") %]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Key:</td>
+                                        <td>1. saját mező</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Label:</td>
+                                        <td>Alapértelmezett érték ehhez: 1. saját mező</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module:</td>
+                                        <td>Kernel::Output::HTML::PreferencesGeneric</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PrefKey:</td>
+                                        <td>UserDynamicField_Mezo1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prio:</td>
+                                        <td>7000</td>
+                                    </tr>
+                                </tbody>
+                            </informaltable>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <screenshot>
+<screeninfo>Mezo1 a felhasználói beállítások képernyőn.</screeninfo> <graphic
+fileref="screenshots/dynamicfields-userpreferences.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
+            </para>
+            <para>
+                <emphasis>Ábra: Mezo1 a felhasználói beállítások képernyőn.</emphasis>
+            </para>
+        </example>
+    </section>
+</section>

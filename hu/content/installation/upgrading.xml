@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="upgrading">
+    <title>Az OTRS frissítése 3.3-ről 4-re</title>
+
+    <para>
+    Ezek az utasítások olyan embereknek szólnak, akik az OTRS-t a
+<emphasis>3.3</emphasis>-as verzióról a <emphasis>4</emphasis>-es verzióra
+frissítik, vagy egy <emphasis>4</emphasis>-es verzióról egy későbbi
+<emphasis>4</emphasis>-es javítócsomag szintű kiadásra, és ez vonatkozik az
+RPM és forráskód (tarball) frissítésekre is.
+    </para>
+
+    <para>
+    Ha az OTRS alacsonyabb verzióját futtatja, akkor először a 3.3 frissítési
+útvonalát kell követnie
+(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3)! Teljes
+frissítést kell végrehajtania minden köztes verzióhoz, beleértve az
+adatbázis változtatásokat és a Perl-parancsfájlok frissítését is.
+    </para>
+
+    <para>
+    Vegye figyelembe, hogy ha a 2.2-es OTRS-ről vagy korábbiról frissít, akkor
+<ulink url="http://bugs.otrs.org/show_bug.cgi?id=6798">egy további
+lépést</ulink> is kell tennie.
+    </para>
+
+    <para>
+    Egy önálló kisebb verzión belül kihagyhatja a hibajavító szintű kiadásokat,
+ha frissíteni szeretne. Például a 4-es verziójú OTRS 2. hibajavító
+verziójáról közvetlenül frissíthet a 4-es verzió 6. hibajavító
+verziójára. Ha egy ilyen „hibajavító szintű frissítést” kell elvégeznie,
+akkor ki kell hagynia a 6., 11., 13. és 14. lépéseket.
+    </para>
+
+    <para>
+    Nagyon ajánlott először egy próbafrissítést végrehajtani egy elkülönített
+tesztelési gépen.
+    </para>
+
+    <section role="NotInToc">
+        <title>1. lépés: minden fontos szolgáltatás leállítása</title>
+
+        <para>
+        Győződjön meg arról, hogy nincs-e több olyan futó szolgáltatás vagy
+cron-feladat, amely megpróbál hozzáférni az OTRS-hez. Ez a szolgáltatás
+beállításától fog függeni. Itt egy példa: <screen><![CDATA[
+shell> /etc/init.d/cron stop
+shell> /etc/init.d/postfix stop
+shell> /etc/init.d/apache stop
+            ]]></screen> Állítsa le az OTRS cron-feladatokat és az ütemezőt (ebben a
+sorrendben): <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/Cron.sh stop
+shell> bin/otrs.Scheduler.pl -a stop
+            ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>2. lépés: biztonsági mentés készítése az <filename>/opt/otrs/</filename>
+alatt mindenről</title>
+
+        <para>
+            <itemizedlist>
+                <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
+                <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename></para></listitem>
+                <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
+                <listitem><para><filename>var/*</filename></para></listitem>
+                <listitem><para>valamint az adatbázis</para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>3. lépés: győződjön meg arról, hogy mindent lementett-e ;-)</title>
+        <para></para>
+    </section>
+
+    <section role="NotInToc">
+    <title>4. lépés: az új kiadás telepítés (tar vagy RPM)</title>
+
+        <section role="NotInToc">
+        <title>4.1. lépés: tarball segítségével:</title>
+
+            <screen><![CDATA[
+shell> cd /opt
+shell> mv otrs otrs-old
+shell> tar -xzf otrs-x.x.x.tar.gz
+shell> mv otrs-x.x.x otrs
+            ]]></screen>
+
+            <section role="NotInToc">
+            <title>Régi beállítófájlok visszaállítása</title>
+
+                <para>
+                    <itemizedlist>
+                        <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
+                        <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename></para></listitem>
+                        <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
+                    </itemizedlist>
+                </para>
+            </section>
+
+            <section role="NotInToc">
+                <title>TicketCounter.log visszaállítása</title>
+
+                <para>
+                    Azért, hogy az OTRS a helyes jegyszámokkal mehessen tovább, állítsa vissza a
+<filename>TicketCounter.log</filename> fájlt az
+<filename>/opt/otrs/var/log/</filename> könyvtárba. Ez különösen fontos, ha
+növekvő jegyszámokat használ.
+                </para>
+            </section>
+
+            <section role="NotInToc">
+                <title>Bejegyzésadatok visszaállítása</title>
+
+                <para>
+                    Ha úgy állította be az OTRS-t, hogy a bejegyzésadatokat a fájlrendszeren
+tárolja, akkor vissza kell állítania az <filename>article</filename> mappát
+az <filename>/opt/otrs/var/</filename> mappába.
+                </para>
+            </section>
+
+            <section role="NotInToc">
+                <title>Fájljogosultságok beállítása</title>
+
+                <para>
+                Hajtsa végre a következő parancsot: <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.SetPermissions.pl
+                ]]></screen> a
+rendszerbeállításhoz szükséges jogosultságokkal. Például:
+
+                <itemizedlist>
+                <listitem>
+                    <para>Olyan webkiszolgálónál, amely az OTRS felhasználóként fut: <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=otrs
+                ]]></screen>
+                    </para>
+                </listitem>
+
+
+                <listitem>
+                    <para>A wwwrun felhasználóval futó webkiszolgálónál (például SUSE): <screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
+                ]]></screen>
+                    </para>
+                </listitem>
+
+
+                <listitem>
+                    <para>Apache felhasználóval futó webkiszolgálónál (például Red Hat, CentOS):
+<screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=apache
+                ]]></screen>
+                    </para>
+                </listitem>
+
+
+                <listitem>
+                    <para>A www-data felhasználóval futó webkiszolgálónál (például Debian, Ubuntu):
+<screen><![CDATA[
+shell> bin/otrs.SetPermissions.pl --web-group=www-data
+                ]]></screen>
+                    </para>
+                </listitem>
+                </itemizedlist>
+
+                </para>
+            </section>
+        </section>
+
+        <section role="NotInToc">
+            <title>4.2. lépés: RPM segítségével:</title>
+            <para>
+            <screen><![CDATA[
+shell> rpm -Uvh otrs-x.x.x.-01.rpm
+            ]]></screen> Ebben az esetben az RPM frissítés
+automatikusan visszaállítja a régi beállítófájlokat és beállítja a
+fájljogosultságokat.
+            </para>
+        </section>
+    </section>
+
+    <section role="NotInToc">
+        <title>5. lépés: a szükséges Perl-modulok ellenőrzése</title>
+
+        <para>
+        Ellenőrizze, hogy minden szükséges Perl-modul telepítve van-e a rendszerre,
+és telepítsen minden olyan modult, amely esetleg hiányzik. <screen><![CDATA[
+shell> /opt/otrs/bin/otrs.CheckModules.pl
+        ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>6. lépés: az adatbázis-változtatások alkalmazása</title>
+
+        <section role="NotInToc">
+            <title>6.1. lépés: adatbázisséma frissítése</title>
+
+            <section role="NotInToc">
+            <title>MySQL:</title>
+
+                <para>
+                Megjegyzés: a MySQL FRISSÍTÉSI folyamatában létrehozott új táblák a
+MySQL-kiszolgálón beállított alapértelmezett tábla tárolómotorral lesznek
+létrehozva. A MySQL 5.5-ös verziójában az <code>InnoDB</code> az új
+alapértelmezett típus. Ha a meglévő táblák, például a „users” a
+<code>MyISAM</code> tábla tárolómotorral rendelkeznek, akkor hiba lesz
+megjelenítve az idegen kulcs kényszereinek létrehozásakor.
+                </para>
+
+                <para>
+                Két lehetősége van: visszaváltoztathatja a MySQL alapértelmezett
+tárolómotorját <code>MyISAM</code> értékre azért, hogy az új tábláknak
+ugyanaz a tárolómotorjuk legyen mint a meglévő tábláknak, vagy változtassa
+meg a meglévő táblákat, hogy InnoDB-t használjanak tárolómotorként.
+                </para>
+
+                <para>
+                A tárolómotorra vonatkozó bármilyen problémát az
+<filename>otrs.CheckDB.pl</filename> parancsfájl fog jelenteni, ezért
+futtassa le a lehetséges problémák ellenőrzéséhez. <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.CheckDB.pl
+shell> cat scripts/DBUpdate-to-4.mysql.sql | mysql -p -f -u root otrs
+                ]]></screen>
+
+                </para>
+
+            </section>
+            <section role="NotInToc">
+                <title>PostgreSQL:</title>
+
+                <para>
+                <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> cat scripts/DBUpdate-to-4.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
+                ]]></screen>
+                </para>
+            </section>
+        </section>
+
+        <section role="NotInToc">
+            <title>6.2. lépés: adatbázis-költöztető parancsfájl</title>
+
+            <para>
+            Futtassa le a költöztető parancsfájlt (<code>otrs</code> felhasználóként, NE
+<code>root</code> felhasználóként): <screen><![CDATA[
+shell> scripts/DBUpdate-to-4.pl
+            ]]></screen> Ne
+folytassa a frissítési folyamatot, ha ez a parancsfájl nem működött
+megfelelően önnél. Egyébként adatvesztés fordulhat elő.
+            </para>
+        </section>
+    </section>
+
+    <section role="NotInToc">
+        <title>7. lépés: saját témák</title>
+
+        <para>
+        Megjegyzés: A 3.3-as OTRS témák NEM kompatibilisek az OTRS 4-es verziójával,
+ezért ne használja a régi témáit!
+        </para>
+
+        <para>
+        A témák az <filename>/opt/otrs/Kernel/Output/HTML/*/*.tt</filename> fájlok
+alatt találhatók.
+        </para>
+
+        <para>
+        Vegye figyelembe, hogy az OTRS 4 egy új sablonozó motorral érkezik a <ulink
+url="http://www.template-toolkit.org">Template::Toolkit</ulink> alapján. Az
+összes személyre szabott sablont át kell alakítani DTL-ről az új
+formátumra. A részletes utasításokért nézze meg <ulink
+url="http://otrs.github.io/doc/manual/developer/4.0/en/html/package-porting.html#package-porting-template-engine">a
+fejlesztői kézikönyvet</ulink>.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>8. lépés: a beállítási gyorsítótár frissítése és a gyorsítótárak törlése</title>
+
+        <para>
+        Futtassa le (<code>otrs</code> felhasználóként, <emphasis>ne</emphasis>
+<code>root</code> felhasználóként): <screen><![CDATA[
+shell> bin/otrs.RebuildConfig.pl
+shell> bin/otrs.DeleteCache.pl
+        ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>9. lépés: szolgáltatások újraindítása</title>
+
+        <para>
+        Például (a használt szolgáltatásoktól függően): <screen><![CDATA[
+shell> /etc/init.d/apache start
+shell> /etc/init.d/postfix start
+shell> /etc/init.d/cron start
+        ]]></screen> Most már bejelentkezhet a rendszerre.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>10. lépés: telepített csomagok ellenőrzése</title>
+
+        <note>
+            <para>
+                A 3.3-as OTRS csomagjai NEM kompatibilisek az OTRS 4-es verziójával, ezért
+végre kell hajtania egy csomagfrissítést!
+            </para>
+        </note>
+
+        <para>
+        A következő csomagok automatikusan el lesznek távolítva a frissítési
+folyamat után (ha korábban telepítve voltak):
+
+            <itemizedlist>
+                <listitem><para>OTRSGenericInterfaceREST</para></listitem>
+                <listitem><para>OTRSMyServices</para></listitem>
+                <listitem><para>OTRSStatsRestrictionByDateTimeDF</para></listitem>
+                <listitem><para>Support</para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>11. lépés: általános ügyintéző feladatok ellenőrzése</title>
+
+        <para>
+            Ha rendelkezik bármilyen olyan általános ügyintéző feladatokkal (vagy akár
+bármilyen egyedi fejlesztésekkel), amelyek automatikusan beállítják a
+ProcessID vagy az ActivityID dinamikus mezőket, akkor frissítenie kell
+ezeket, hogy az új hosszú EntityID-khoz állítsák be a mezőket, amelyeket a
+<filename>DBUpdate-to-4.pl</filename> állított elő.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>12. lépés: cron-feladatok frissítése és bekapcsolása</title>
+
+        <para>
+            Számos alapértelmezett OTRS cron-feladat van az
+<filename>/opt/otrs/var/cron/*.dist</filename> fájlokban. Ezek a „.dist”
+fájlnév-kiterjesztés nélkül történő átmásolással kapcsolhatók be. Tegye ezt
+meg, hogy meggyőződhessen arról, hogy beszerezte a cron-feladatok legújabb
+verzióit és az új cron-feladatokat is. <screen><![CDATA[
+shell> cd /opt/otrs/var/cron
+shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
+            ]]></screen>
+Ellenőrizze az átmásolt fájlokat, és alkalmazzon újra minden személyre
+szabást, amelyet esetleg elvégzett. Ezen cron-feladatok ütemezéséhez a
+rendszeren használhatja a <filename>Cron.sh</filename>
+parancsfájlt. Győződjön meg arról, hogy az <code>otrs</code> felhasználóként
+hajtja-e végre! <screen><![CDATA[
+shell> /opt/otrs/bin/Cron.sh start
+            ]]></screen>
+        </para>
+        <para>
+            Ez is az OTRS ütemező indítását fogja okozni.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>13. lépés: ügyfél-adatbázis beállításainak frissítése</title>
+
+        <para>
+        Ha külső ügyfél-adatbázist használ, és ez az adatbázis NEM biztosítja az
+OTRS-specifikus mezőket (create_time, create_by, change_time és change_by),
+akkor állítson be <code>ForeignDB => 1</code> értéket a
+<code>$Self->{CustomerUser}</code> és a
+<code>$Self->{CustomerCompany}</code> beállításoknál (lásd:
+<filename>Kernel/Config/Defaults.pm</filename>).
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>14. lépés: jegyindex újraépítése</title>
+
+        <para>
+        Futtassa le a <filename>bin/otrs.RebuildTicketIndex.pl</filename>
+parancsfájlt a jegyindex újbóli előállításához. Ez megtehető a háttérben a
+jegyszámok kiszámításához a várólista nézet képernyőknél. Most már
+használhatja is a rendszerét.
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>15. lépés: szép munka!</title>
+        <para></para>
+    </section>
+
+</section>

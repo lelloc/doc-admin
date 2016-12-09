@@ -1,0 +1,1265 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+
+<section id="genericinterface-connectors">
+    <title>Csatlakozók</title>
+    <para>
+        Egy csatlakozó lényegében olyan tevékenységek halmaza, amelyeket vagy
+műveleteknek hívnak, ha az OTRS egy webszolgáltatás szolgáltatójaként
+működik, vagy meghívóknak hívnak, ha az OTRS egy webszolgáltatás
+kérelmezőjeként működik. De tartalmazhat speciális leképezéseket vagy
+átviteleket is.
+    </para>
+    <para>
+        Egy csatlakozónak lehetnek csak műveletei, csak meghívói vagy mindkettő. Egy
+csatlakozó akár más csatlakozók részeit is használhatja, mint például a
+leképezések vagy átvitelek, ha azok nem sajátosak annál a csatlakozónál,
+amely megpróbálja megvalósítani azokat.
+    </para>
+    <para>
+        Más szavakkal egy csatlakozó nincs korlátozva csak a vezérlő rétegére, hanem
+kiterjeszthető az adatleképezés vagy a hálózati átvitel rétegekre is, ha
+szükséges.
+    </para>
+    <para>
+        Az általános felület moduláris tervezésének köszönhetően egy csatlakozó
+bővítményként látható. Ez azt jelenti, hogy csatlakozók hozzáadásával az
+általános felület képességei kiterjeszthetők a következők használatával:
+OTRS funkcióbővítmények, egyéni OTRS modulok, harmadik féltől származó
+modulok, és így tovább.
+    </para>
+
+    <section id="genericinterface-bundled-connectors">
+        <title>Csomagolt csatlakozók</title>
+        <para>
+            Az OTRS ezen verziója a következő csatlakozókat tartalmazza használatra
+készen.
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Munkamenet
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Jegy
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <section id="generic-session-connector">
+            <title>Munkamenet csatlakozó</title>
+            <para>
+                Ez a csatlakozó képes egy olyan érvényes munkamenet-azonosító létrehozására,
+amely bármely egyéb műveletben használható.
+            </para>
+            <itemizedlist>
+                <para>
+                    Biztosítja:
+                </para>
+                <listitem>
+                    <para>
+                        Műveletek:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                SessionCreate
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <section id="generic-session-connector-operations">
+                <title>Műveletek</title>
+                <section id="generic-session-connector-operations-sessioncreate">
+                    <title>SessionCreate</title>
+                    <para>
+                        Egy új érvényes munkamenet-azonosítót hoz létre egyéb műveletekben történő
+használatra más csatlakozókból, mint például TicketCreate.
+                    </para>
+                    <note>
+                        <para>
+                            A munkamenet-azonosító használatához egyéb műveletekben más csatlakozókból
+az szükséges, hogy a művelet megvalósítsa a munkamenet-azonosító szerinti
+hitelesítést. Az összes többi csomagolt művelet képes egy érvényes
+munkamenet-azonosító elfogadására hitelesítési módszerként.
+                        </para>
+                    </note>
+                    <para>Lehetséges jellemzők:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <SessionCreate>
+         <!--Ezen a szinten a következő 2 elem KÖTELEZŐ VÁLASZTÁSA van-->
+         <!--Választható:-->
+         <UserLogin>?</UserLogin>
+         <!--Választható:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Választható:-->
+         <Password>?</Password>
+      </SessionCreate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+            </section>
+        </section>
+
+        <section id="generic-ticket-connector">
+            <title>Jegy csatlakozó</title>
+            <para>
+                Ez a csatlakozó látja el az alapvető funkcionalitást a jegyekkel való
+kölcsönhatáshoz.
+            </para>
+            <itemizedlist>
+                <para>
+                    Biztosítja:
+                </para>
+                <listitem>
+                    <para>
+                        Műveletek:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                TicketCreate
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                TicketUpdate
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                TicketGet
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                TicketSearch
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <section id="generic-ticket-connector-operations">
+                <title>Műveletek</title>
+                <section id="generic-ticket-connector-operations-ticketcreate">
+                    <title>TicketCreate</title>
+                    <para>
+                        Egy felületet biztosít egy jegy létrehozásához az OTRS-ben. Egy jegynek
+tartalmaznia kell egy bejegyzést, és tartalmazhat néhány mellékletet,
+valamint az összes meghatározott dinamikus mező is beállítható a
+TicketCreate műveletnél.
+                    </para>
+                    <para>Lehetséges jellemzők:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketCreate>
+         <!--Ezen a szinten a következő 3 elem KÖTELEZŐ VÁLASZTÁSA van-->
+         <!--Választható:-->
+         <UserLogin>?</UserLogin>
+         <!--Választható:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Választható:-->
+         <SessionID>?</SessionID>
+         <!--Választható:-->
+         <Password>?</Password>
+         <Ticket>
+            <Title>?</Title>
+            <!--Ezen a szinten a következő 2 elem KÖTELEZŐ VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <QueueID>?</QueueID>
+            <!--Választható:-->
+            <Queue>?</Queue>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <TypeID>?</TypeID>
+            <!--Választható:-->
+            <Type>?</Type>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ServiceID>?</ServiceID>
+            <!--Választható:-->
+            <Service>?</Service>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <SLAID>?</SLAID>
+            <!--Választható:-->
+            <SLA>?</SLA>
+            <!--Ezen a szinten a következő 2 elem KÖTELEZŐ VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <StateID>?</StateID>
+            <!--Választható:-->
+            <State>?</State>
+            <!--Ezen a szinten a következő 2 elem KÖTELEZŐ VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <PriorityID>?</PriorityID>
+            <!--Választható:-->
+            <Priority>?</Priority>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <OwnerID>?</OwnerID>
+            <!--Választható:-->
+            <Owner>?</Owner>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ResponsibleID>?</ResponsibleID>
+            <!--Választható:-->
+            <Responsible>?</Responsible>
+            <CustomerUser>?</CustomerUser>
+            <!--Választható:-->
+            <CustomerID>?</CustomerID>
+            <!--Választható:-->
+            <PendingTime>
+               <Year>?</Year>
+               <Month>?</Month>
+               <Day>?</Day>
+               <Hour>?</Hour>
+               <Minute>?</Minute>
+            </PendingTime>
+         </Ticket>
+         <Article>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ArticleTypeID>?</ArticleTypeID>
+            <!--Választható:-->
+            <ArticleType>?</ArticleType>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <SenderTypeID>?</SenderTypeID>
+            <!--Választható:-->
+            <SenderType>?</SenderType>
+            <!--Választható:-->
+            <From>?</From>
+            <Subject>?</Subject>
+            <Body>?</Body>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ContentType>?</ContentType>
+            <Charset>?</Charset>
+            <MimeType>?</MimeType>
+            <!--Választható:-->
+            <HistoryType>?</HistoryType>
+            <!--Választható:-->
+            <HistoryComment>?</HistoryComment>
+            <!--Választható:-->
+            <AutoResponseType>?</AutoResponseType>
+            <!--Választható:-->
+            <TimeUnit>?</TimeUnit>
+            <!--Választható:-->
+            <NoAgentNotify>?</NoAgentNotify>
+            <!--Nulla vagy több ismétlés:-->
+            <ForceNotificationToUserID>?</ForceNotificationToUserID>
+            <!--Nulla vagy több ismétlés:-->
+            <ExcludeNotificationToUserID>?</ExcludeNotificationToUserID>
+            <!--Nulla vagy több ismétlés:-->
+            <ExcludeMuteNotificationToUserID>?</ExcludeMuteNotificationToUserID>
+         </Article>
+         <!--Nulla vagy több ismétlés:-->
+         <DynamicField>
+            <Name>?</Name>
+            <!--1 vagy több ismétlés:-->
+            <Value>?</Value>
+         </DynamicField>
+         <!--Nulla vagy több ismétlés:-->
+         <Attachment>
+            <Content>cid:61886944659</Content>
+            <ContentType>?</ContentType>
+            <Filename>?</Filename>
+         </Attachment>
+      </TicketCreate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-ticket-connector-operations-ticketupdate">
+                    <title>TicketUpdate</title>
+                    <para>
+                        A TicketUpdate művelet egy meglévő jegyből történő jellemzők módosításának
+vagy egy új bejegyzés hozzáadásának a képességét adja hozzá, beleértve a
+mellékleteket és minden dinamikus mezőt a jegynél és az új bejegyzésnél.
+                    </para>
+                    <note>
+                        <para>
+                            Nem szükséges egy új bejegyzést létrehozni egy jegyjellemző módosításához.
+                        </para>
+                    </note>
+                    <para>Lehetséges jellemzők:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketUpdate>
+         <!--Ezen a szinten a következő 3 elem KÖTELEZŐ VÁLASZTÁSA van-->
+         <!--Választható:-->
+         <UserLogin>?</UserLogin>
+         <!--Választható:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Választható:-->
+         <SessionID>?</SessionID>
+         <!--Választható:-->
+         <Password>?</Password>
+         <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+         <TicketID>?</TicketID>
+         <TicketNumber>?</TicketNumber>
+         <!--Választható:-->
+         <Ticket>
+            <!--Választható:-->
+            <Title>?</Title>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <QueueID>?</QueueID>
+            <!--Választható:-->
+            <Queue>?</Queue>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <TypeID>?</TypeID>
+            <!--Választható:-->
+            <Type>?</Type>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ServiceID>?</ServiceID>
+            <!--Választható:-->
+            <Service>?</Service>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <SLAID>?</SLAID>
+            <!--Választható:-->
+            <SLA>?</SLA>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <StateID>?</StateID>
+            <!--Választható:-->
+            <State>?</State>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <PriorityID>?</PriorityID>
+            <!--Választható:-->
+            <Priority>?</Priority>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <OwnerID>?</OwnerID>
+            <!--Választható:-->
+            <Owner>?</Owner>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ResponsibleID>?</ResponsibleID>
+            <!--Választható:-->
+            <Responsible>?</Responsible>
+            <!--Választható:-->
+            <CustomerUser>?</CustomerUser>
+            <!--Választható:-->
+            <CustomerID>?</CustomerID>
+            <!--Választható:-->
+            <PendingTime>
+               <Year>?</Year>
+               <Month>?</Month>
+               <Day>?</Day>
+               <Hour>?</Hour>
+               <Minute>?</Minute>
+            </PendingTime>
+         </Ticket>
+         <!--Választható:-->
+         <Article>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ArticleTypeID>?</ArticleTypeID>
+            <!--Választható:-->
+            <ArticleType>?</ArticleType>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <SenderTypeID>?</SenderTypeID>
+            <!--Választható:-->
+            <SenderType>?</SenderType>
+            <!--Választható:-->
+            <From>?</From>
+            <Subject>?</Subject>
+            <Body>?</Body>
+            <!--Ezen a szinten a következő 2 elem VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <ContentType>?</ContentType>
+            <Charset>?</Charset>
+            <MimeType>?</MimeType>
+            <!--Választható:-->
+            <HistoryType>?</HistoryType>
+            <!--Választható:-->
+            <HistoryComment>?</HistoryComment>
+            <!--Választható:-->
+            <AutoResponseType>?</AutoResponseType>
+            <!--Választható:-->
+            <TimeUnit>?</TimeUnit>
+            <!--Választható:-->
+            <NoAgentNotify>?</NoAgentNotify>
+            <!--Nulla vagy több ismétlés:-->
+            <ForceNotificationToUserID>?</ForceNotificationToUserID>
+            <!--Nulla vagy több ismétlés:-->
+            <ExcludeNotificationToUserID>?</ExcludeNotificationToUserID>
+            <!--Nulla vagy több ismétlés:-->
+            <ExcludeMuteNotificationToUserID>?</ExcludeMuteNotificationToUserID>
+         </Article>
+         <!--Nulla vagy több ismétlés:-->
+         <DynamicField>
+            <Name>?</Name>
+            <!--1 vagy több ismétlés:-->
+            <Value>?</Value>
+         </DynamicField>
+         <!--Nulla vagy több ismétlés:-->
+         <Attachment>
+            <Content>cid:166861569966</Content>
+            <ContentType>?</ContentType>
+            <Filename>?</Filename>
+         </Attachment>
+      </TicketUpdate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-ticket-connector-operations-ticketget">
+                    <title>TicketGet</title>
+                    <para>
+                        Ez a művelet egy jegy összes jellemzőjének lekéréséhez használható,
+beleértve a dinamikus mezőket, az összes bejegyzést és az összes
+mellékletet, amelyek a jegyhez tartoznak.
+                    </para>
+                    <para>Lehetséges jellemzők:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketGet>
+         <!--Ezen a szinten a következő 3 elem KÖTELEZŐ VÁLASZTÁSA van-->
+         <!--Választható:-->
+         <UserLogin>?</UserLogin>
+         <!--Választható:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Választható:-->
+         <SessionID>?</SessionID>
+         <!--Választható:-->
+         <Password>?</Password>
+         <!--1 vagy több ismétlés:-->
+         <TicketID>?</TicketID>
+         <!--Választható:-->
+         <DynamicFields>?</DynamicFields>
+         <!--Választható:-->
+         <Extended>?</Extended>
+         <!--Választható:-->
+         <AllArticles>?</AllArticles>
+         <!--Választható:-->
+         <ArticleSenderType>?</ArticleSenderType>
+         <!--Választható:-->
+         <ArticleOrder>?</ArticleOrder>
+         <!--Választható:-->
+         <ArticleLimit>?</ArticleLimit>
+         <!--Választható:-->
+         <Attachments>?</Attachments>
+         <!--Választható:-->
+         <HTMLBodyAsAttachment>?</HTMLBodyAsAttachment>
+      </TicketGet>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-ticket-connector-operations-ticketsearch">
+                    <title>TicketSearch</title>
+                    <para>
+                        A TicketSearch művelet azon jegyazonosítók listáját adja vissza, amelyek
+illeszkednek az előre meghatározott feltételekre.
+                    </para>
+                    <para>Lehetséges jellemzők:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketSearch>
+         <!--Ezen a szinten a következő 3 elem KÖTELEZŐ VÁLASZTÁSA van-->
+         <!--Választható:-->
+         <UserLogin>?</UserLogin>
+         <!--Választható:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Választható:-->
+         <SessionID>?</SessionID>
+         <!--Választható:-->
+         <Password>?</Password>
+         <!--Választható:-->
+         <Limit>?</Limit>
+         <!--Nulla vagy több ismétlés:-->
+         <TicketNumber>?</TicketNumber>
+         <!--Nulla vagy több ismétlés:-->
+         <Title>?</Title>
+         <!--Nulla vagy több ismétlés:-->
+         <Queues>?</Queues>
+         <!--Nulla vagy több ismétlés:-->
+         <QueueIDs>?</QueueIDs>
+         <!--Választható:-->
+         <UseSubQueues>?</UseSubQueues>
+         <!--Nulla vagy több ismétlés:-->
+         <Types>?</Types>
+         <!--Nulla vagy több ismétlés:-->
+         <TypeIDs>?</TypeIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <States>?</States>
+         <!--Nulla vagy több ismétlés:-->
+         <StateIDs>?</StateIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <StateType>?</StateType>
+         <!--Nulla vagy több ismétlés:-->
+         <StateTypeIDs>?</StateTypeIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <Priorities>?</Priorities>
+         <!--Nulla vagy több ismétlés:-->
+         <PriorityIDs>?</PriorityIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <Services>?</Services>
+         <!--Nulla vagy több ismétlés:-->
+         <ServiceIDs>?</ServiceIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <SLAs>?</SLAs>
+         <!--Nulla vagy több ismétlés:-->
+         <SLAIDs>?</SLAIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <Locks>?</Locks>
+         <!--Nulla vagy több ismétlés:-->
+         <LockIDs>?</LockIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <OwnerIDs>?</OwnerIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <ResponsibleIDs>?</ResponsibleIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <WatchUserIDs>?</WatchUserIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <CustomerID>?</CustomerID>
+         <!--Nulla vagy több ismétlés:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedUserIDs>?</CreatedUserIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedTypes>?</CreatedTypes>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedTypeIDs>?</CreatedTypeIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedPriorities>?</CreatedPriorities>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedPriorityIDs>?</CreatedPriorityIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedStates>?</CreatedStates>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedStateIDs>?</CreatedStateIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedQueues>?</CreatedQueues>
+         <!--Nulla vagy több ismétlés:-->
+         <CreatedQueueIDs>?</CreatedQueueIDs>
+         <!--Nulla vagy több ismétlés:-->
+         <DynamicFields>
+            <!--Ezen a szinten a következő 6 elem KÖTELEZŐ VÁLASZTÁSA van-->
+            <!--Választható:-->
+            <Equals>?</Equals>
+            <!--Választható:-->
+            <Like>?</Like>
+            <!--Választható:-->
+            <GreaterThan>?</GreaterThan>
+            <!--Választható:-->
+            <GreaterThanEquals>?</GreaterThanEquals>
+            <!--Választható:-->
+            <SmallerThan>?</SmallerThan>
+            <!--Választható:-->
+            <SmallerThanEquals>?</SmallerThanEquals>
+         </DynamicFields>
+         <!--Választható:-->
+         <Ticketflag>
+            <!--Választható:-->
+            <Seen>?</Seen>
+         </Ticketflag>
+         <!--Választható:-->
+         <From>?</From>
+         <!--Választható:-->
+         <To>?</To>
+         <!--Választható:-->
+         <Cc>?</Cc>
+         <!--Választható:-->
+         <Subject>?</Subject>
+         <!--Választható:-->
+         <Body>?</Body>
+         <!--Választható:-->
+         <FullTextIndex>?</FullTextIndex>
+         <!--Választható:-->
+         <ContentSearch>?</ContentSearch>
+         <!--Választható:-->
+         <ConditionInline>?</ConditionInline>
+         <!--Választható:-->
+         <ArticleCreateTimeOlderMinutes>?</ArticleCreateTimeOlderMinutes>
+         <!--Választható:-->
+         <ArticleCreateTimeNewerMinutes>?</ArticleCreateTimeNewerMinutes>
+         <!--Választható:-->
+         <ArticleCreateTimeNewerDate>?</ArticleCreateTimeNewerDate>
+         <!--Választható:-->
+         <ArticleCreateTimeOlderDate>?</ArticleCreateTimeOlderDate>
+         <!--Választható:-->
+         <TicketCreateTimeOlderMinutes>?</TicketCreateTimeOlderMinutes>
+         <!--Választható:-->
+         <ATicketCreateTimeNewerMinutes>?</ATicketCreateTimeNewerMinutes>
+         <!--Választható:-->
+         <TicketCreateTimeNewerDate>?</TicketCreateTimeNewerDate>
+         <!--Választható:-->
+         <TicketCreateTimeOlderDate>?</TicketCreateTimeOlderDate>
+         <!--Választható:-->
+         <TicketLastChangeTimeOlderMinutes>?</TicketLastChangeTimeOlderMinutes>
+         <!--Választható:-->
+         <TicketLastChangeTimeNewerMinutes>?</TicketLastChangeTimeNewerMinutes>
+         <!--Választható:-->
+         <TicketLastChangeTimeNewerDate>?</TicketLastChangeTimeNewerDate>
+         <!--Választható:-->
+         <TicketLastChangeTimeOlderDate>?</TicketLastChangeTimeOlderDate>
+         <!--Választható:-->
+         <TicketChangeTimeOlderMinutes>?</TicketChangeTimeOlderMinutes>
+         <!--Választható:-->
+         <TicketChangeTimeNewerMinutes>?</TicketChangeTimeNewerMinutes>
+         <!--Választható:-->
+         <TicketChangeTimeNewerDate>?</TicketChangeTimeNewerDate>
+         <!--Választható:-->
+         <TicketChangeTimeOlderDate>?</TicketChangeTimeOlderDate>
+         <!--Választható:-->
+         <TicketCloseTimeOlderMinutes>?</TicketCloseTimeOlderMinutes>
+         <!--Választható:-->
+         <TicketCloseTimeNewerMinutes>?</TicketCloseTimeNewerMinutes>
+         <!--Választható:-->
+         <TicketCloseTimeNewerDate>?</TicketCloseTimeNewerDate>
+         <!--Választható:-->
+         <TicketCloseTimeOlderDate>?</TicketCloseTimeOlderDate>
+         <!--Választható:-->
+         <TicketPendingTimeOlderMinutes>?</TicketPendingTimeOlderMinutes>
+         <!--Választható:-->
+         <TicketPendingTimeNewerMinutes>?</TicketPendingTimeNewerMinutes>
+         <!--Választható:-->
+         <TicketPendingTimeNewerDate>?</TicketPendingTimeNewerDate>
+         <!--Választható:-->
+         <TicketPendingTimeOlderDate>?</TicketPendingTimeOlderDate>
+         <!--Választható:-->
+         <TicketEscalationTimeOlderMinutes>?</TicketEscalationTimeOlderMinutes>
+         <!--Választható:-->
+         <TTicketEscalationTimeNewerMinutes>?</TTicketEscalationTimeNewerMinutes>
+         <!--Választható:-->
+         <TicketEscalationTimeNewerDate>?</TicketEscalationTimeNewerDate>
+         <!--Választható:-->
+         <TicketEscalationTimeOlderDate>?</TicketEscalationTimeOlderDate>
+         <!--Választható:-->
+         <ArchiveFlags>?</ArchiveFlags>
+         <!--Nulla vagy több ismétlés:-->
+         <OrderBy>?</OrderBy>
+         <!--Nulla vagy több ismétlés:-->
+         <SortBy>?</SortBy>
+         <!--Nulla vagy több ismétlés:-->
+         <CustomerUserID>?</CustomerUserID>
+      </TicketSearch>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section id="Sgenericinterface-bundled-connectors-examples">
+        <title>Példák:</title>
+        <section>
+            <title>Webszolgáltatás-beállítás</title>
+            <para>
+                A következő egy alap, de teljes webszolgáltatás beállítófájl YAML
+formátumban az összes jegy csatlakozó művelet használatához SOAP hálózati
+átvitellel. Azért, hogy használhassa az OTRS-ben, ki kell másolnia a
+tartalmát, el kell mentenie egy GenericTicketConnectorSOAP.yml nevű fájlba,
+és importálnia kell az OTRS-be az adminisztrációs panelen lévő
+Webszolgáltatások képernyőn a „Webszolgáltatás hozzáadása” gombra kattintva
+az áttekintő képernyőről, majd ezután a „Webszolgáltatás importálása” gombra
+kattintva a hozzáadás képernyőn.
+            </para>
+            <para>
+                <programlisting>
+                    <![CDATA[
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: 0
+Description: Jegy csatlakozó SOAP példa
+FrameworkVersion: 3.4.x git
+Provider:
+  Operation:
+    SessionCreate:
+      Description: Létrehoz egy munkamenetet
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Session::SessionCreate
+    TicketCreate:
+      Description: Létrehoz egy jegyet
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketCreate
+    TicketUpdate:
+      Description: Frissít egy jegyet
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketUpdate
+    TicketGet:
+      Description: Lekéri a jegyadatokat
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketGet
+    TicketSearch:
+      Description: Jegyek keresése
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketSearch
+  Transport:
+    Config:
+      MaxLength: 100000000
+      NameSpace: http://www.otrs.org/TicketConnector/
+    Type: HTTP::SOAP
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''
+                    ]]>
+                </programlisting>
+            </para>
+            <para>
+                Hasonló példát lehet készíteni a REST hálózati átvitelhez. A REST
+webszolgáltatások olyan HTTP műveleteket használnak, mint például „POST”,
+„GET”, „PUT”, „PATCH”, stb. Ezek a műveletek egy erőforrásnak hívott
+URI-útvonallal együtt határoznak meg egy OTRS általános felület műveletet
+vagy meghívót (a kommunikációs módszertől függően).
+            </para>
+            <para>
+                A következő példa a /Session erőforrást használja a SessionCreate
+műveletnél, a /Ticket erőforrást a TicketSearch és a TicketCreate
+műveleteknél, valamint a /Ticket/{TicketID} erőforrást a TicketGet és a
+TicketUpdate műveleteknél (ahol a {TicketID} egy jegy aktuális jegyazonosító
+értéke, például /Ticket/123). Azért, hogy használhassa az OTRS-ben, ki kell
+másolnia a tartalmát, el kell mentenie egy GenericTicketConnectorREST.yml
+nevű fájlba, és importálnia kell az OTRS-be az adminisztrációs panelen lévő
+Webszolgáltatások képernyőn a „Webszolgáltatás hozzáadása” gombra kattintva
+az áttekintő képernyőről, majd ezután a „Webszolgáltatás importálása” gombra
+kattintva a hozzáadás képernyőn.
+            </para>
+            <para>
+                <programlisting>
+                    <![CDATA[
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: Jegy csatlakozó REST példa
+FrameworkVersion: 3.4.x git
+Provider:
+  Operation:
+    SessionCreate:
+      Description: Létrehoz egy munkamenetet
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Session::SessionCreate
+    TicketCreate:
+      Description: Létrehoz egy jegyet
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketCreate
+    TicketGet:
+      Description: Lekéri a jegyadatokat
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketGet
+    TicketSearch:
+      Description: Jegyek keresése
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketSearch
+    TicketUpdate:
+      Description: Frissít egy jegyet
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketUpdate
+  Transport:
+    Config:
+      KeepAlive: ''
+      MaxLength: '100000000'
+      RouteOperationMapping:
+        SessionCreate:
+          RequestMethod:
+          - POST
+          Route: /Session
+        TicketCreate:
+          RequestMethod:
+          - POST
+          Route: /Ticket
+        TicketGet:
+          RequestMethod:
+          - GET
+          Route: /Ticket/:TicketID
+        TicketSearch:
+          RequestMethod:
+          - GET
+          Route: /Ticket
+        TicketUpdate:
+          RequestMethod:
+          - PATCH
+          Route: /Ticket/:TicketID
+    Type: HTTP::REST
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''
+                    ]]>
+                </programlisting>
+            </para>
+
+
+        <!-- This part is removed because Mapping Simple does not work with Keys inside other hashes
+            <note>
+
+                <para>
+                    It can be also possible to use the Mapping Simple module in order to specify
+                    different values or attribute names and covert them to the required values and
+                    attribute names. this settings can be done from the web interface or
+                    specified in the YAML file, here it is an example:
+                </para>
+            </note>
+            <example id='ticketcreate-operation-with-mapping'>
+                <title>TicketCreate operation using Mapping Simple </title>
+                <para>
+                    In the following example the MappingInbound configuration has been changed
+                    to convert the value "My State" to "open". Notice that this is only the
+                    configuration for TicketCreate operation and not for the complete web service.
+                </para>
+                <programlisting>
+                    <![CDATA[
+    TicketCreate:
+      Description: Creates a Ticket
+      MappingInbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Keep
+          KeyMapExact:
+            State: State
+          ValueMap:
+            State:
+              ValueMapExact:
+                My State: open
+          ValueMapDefault:
+            MapTo: ''
+            MapType: Keep
+        Type: Simple
+      MappingOutbound: {}
+      Type: Ticket::TicketCreate
+                    ]]>
+                </programlisting>
+            </example>
+ -->
+</section>
+        <section>
+            <title>Perl SOAP kérelmező</title>
+            <para>
+                A következő kód egy Perl-parancsfájl, amely képes kapcsolódni az OTRS-hez az
+általános felületen keresztül. Azért, hogy a jegy csatlakozó által
+biztosított műveleteket végrehajtsa, két Perl CPAN modult használ:
+SOAP::Lite és Data::Dumper. Győződjön meg arról, hogy a környezete képes
+ezen modulokat használni, mielőtt megpróbálná a parancsfájlt futtatni.
+            </para>
+            <para>
+                <programlisting>
+                    <![CDATA[
+#!/usr/bin/perl -w
+# --
+# otrs.SOAPRequest.pl - minta egy SOAP kérés küldéséhez az OTRS általános
+#                       felület jegy csatlakozójának
+# Copyright (C) 2001-2016 OTRS AG, http://otrs.com/
+# --
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+# or see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+use strict;
+use warnings;
+
+# A ../ használata a lib helyeként
+use File::Basename;
+use FindBin qw($RealBin);
+use lib dirname($RealBin);
+
+use SOAP::Lite;
+use Data::Dumper;
+
+# ---
+# Meghatározandó változók.
+
+# Ez az URL a webszolgáltatáshoz
+# A formátuma:
+# <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl/Webservice/<WEB_SERVICE_NAME>
+# vagy
+# <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl/WebserviceID/<WEB_SERVICE_ID>
+my $URL = 'http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnector';
+
+# Ennek a névtérnek egyeznie kell a SOAP-átvitelben megadott névtérrel a webszolgáltatásnál.
+my $NameSpace = 'http://www.otrs.org/TicketConnector/';
+
+# Ez a végrehajtandó művelet, amely lehet: TicketCreate, TicketUpdate, TicketGet, TicketSearch
+# vagy SessionCreate. És ezeket meg kell határozni a webszolgáltatásban.
+my $Operation = 'TicketCreate';
+
+# Ez a változó egy kérésnél felvenni kívánt összes paraméter tárolásához használható
+# XML-formátumban. Minden egyes műveletnek egy meghatározott kötelező és nem kötelező
+# paraméterek halmaza van a helyes működéshez. Nézze meg az OTRS adminisztrációs
+# kézikönyvet azért, hogy beszerezhesse a paraméterek teljes listáját.
+my $XMLData = '
+<UserLogin>valamilyen felhasználói bejelentkezés</UserLogin>
+<Password>valamilyen jelszó</Password>
+<Ticket>
+    <Title>valamilyen cím</Title>
+    <CustomerUser>valamilyen ügyfél-felhasználó bejelentkezés</CustomerUser>
+    <Queue>valamilyen várólista</Queue>
+    <State>valamilyen állapot</State>
+    <Priority>valamilyen prioritás</Priority>
+</Ticket>
+<Article>
+    <Subject>valamilyen tárgy</Subject>
+    <Body>valamilyen törzs</Body>
+    <ContentType>text/plain; charset=utf8</ContentType>
+</Article>
+';
+
+# ---
+
+# Egy SOAP::Lite adatszerkezet létrehozása a megadott XML-adatszerkezetből.
+my $SOAPData = SOAP::Data
+    ->type( 'xml' => $XMLData );
+
+my $SOAPObject = SOAP::Lite
+    ->uri($NameSpace)
+    ->proxy($URL)
+    ->$Operation($SOAPData);
+
+# Hiba keresése a SOAP-kódban.
+if ( $SOAPObject->fault ) {
+    print $SOAPObject->faultcode, " ", $SOAPObject->faultstring, "\n";
+}
+
+# Egyébként az eredmények kiírása.
+else {
+
+    # Az XML-válaszrész lekérése a SOAP-üzenetből.
+    my $XMLResponse = $SOAPObject->context()->transport()->proxy()->http_response()->content();
+
+    # A válasz visszaalakítása (átalakítás egy Perl-szerkezetre).
+    my $Deserialized = eval {
+        SOAP::Deserializer->deserialize($XMLResponse);
+    };
+
+    # Az összes fejléc és a SOAP-üzenet egyéb nem szükséges részeinek eltávolítása.
+    my $Body = $Deserialized->body();
+
+    # Csak a fontos adatok kiírása, és a műveletnév kulcsot nem (mint például
+    # TicketCreateResponse).
+    for my $ResponseKey ( keys %{$Body} ) {
+        print Dumper( $Body->{$ResponseKey} );
+    }
+}
+                    ]]>
+                </programlisting>
+            </para>
+        </section>
+        <section>
+            <title>Perl REST kérelmező</title>
+            <para>
+                A következő kód egy Perl-parancsfájl, amely képes kapcsolódni az OTRS-hez az
+általános felületen keresztül. Azért, hogy a jegy csatlakozó által
+biztosított műveleteket végrehajtsa, három Perl CPAN modult használ: JSON,
+REST::Client::Lite és Data::Dumper. Győződjön meg arról, hogy a környezete
+képes ezen modulokat használni, mielőtt megpróbálná a parancsfájlt futtatni.
+            </para>
+            <para>
+                <programlisting>
+                    <![CDATA[
+#!/usr/bin/perl
+# --
+# otrs.RESTRequest.pl - minta egy REST kérés küldéséhez az OTRS általános
+#                       felület jegy csatlakozójának
+# Copyright (C) 2001-2016 OTRS AG, http://otrs.com/
+# --
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+# or see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+use strict;
+use warnings;
+
+## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
+
+# A ../ használata a lib helyeként
+use File::Basename;
+use FindBin qw($RealBin);
+use lib dirname($RealBin);
+
+use JSON;
+use REST::Client;
+
+# ---
+# Meghatározandó változók.
+
+# Ez a HOST a webszolgáltatásnál. A formátum:
+# <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl
+my $Host = 'http://localhost/otrs/nph-genericinterface.pl';
+
+my $RestClient = REST::Client->new(
+    {
+        host => $Host,
+    }
+);
+
+# Ez a vezérlő és a kérés. A formátum:
+# /Webservice/<WEB_SERVICE_NAME>/<RESOURCE>/<REQUEST_VALUE>
+# vagy
+# /WebserviceID/<WEB_SERVICE_ID>/<RESOURCE>/<REQUEST_VALUE>
+# Ez a példa le fogja kérni a TicketID = 1 azonosítóval rendelkező jegyet.
+(<REQUEST_VALUE>)
+my $ControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket/1';
+
+my $Params = {
+    # egy érvényes ügyintézői bejelentkezéssel kell kitölteni
+    UserLogin     => "valamilyen felhasználói bejelentkezés",
+    # egy érvényes ügyintézői jelszóval kell kitölteni
+    Password      => "valamilyen felhasználói jelszó",
+    # elhagyható, ha 1-re van állítva, akkor a jegy dinamikus mezői fel lesznek véve a válaszba
+    DynamicFields => 1,
+    # elhagyható, ha 1-re van állítva, akkor az összes jegybejegyzés fel lesz véve a válaszba
+    AllArticles   => 1,
+        # Több lehetőség található a /Kernel/GenericInterface/Operation/Ticket/TicketGet.pm fájl
+    # Run() alrutin dokumentációjában.
+};
+
+my @RequestParam;
+
+# Minta webszolgáltatás-beállításként a TicketGet műveletnél GET HTTP metódust használ.
+# Minden egyéb paramétert URI lekérdezési paraméterként kell elküldeni.
+
+# ----
+# GET metódusnál
+my $QueryParams = $RestClient->buildQuery( %{ $Params } );
+
+$ControllerAndRequest .= $QueryParams;
+
+# A @RequestParam tömb a 0. pozícióban tárolja a vezérlőt és a kérést
+@RequestParam = ($ControllerAndRequest);
+
+$RestClient->GET(@RequestParam);
+# ----
+
+# # ----
+# # POST metódusnál
+# my $JSONParams = encode_json $Params;
+
+# # A @RequestParam tömb a 0. pozícióban tárolja a vezérlőt és a kérést
+# # az 1. pozícióban tárolja a JSON adatszöveget, amely elküldésre kerül
+# @RequestParam = (
+#   $ControllerAndRequest,
+#   $JSONParams
+# );
+
+# $RestClient->POST(@RequestParam);
+# # ----
+
+# Ha a gép nem érhető el, hibásan van beállítva vagy nem sikerül kiszolgálni a kért oldalt:
+my $ResponseCode = $RestClient->responseCode();
+if ( $ResponseCode ne '200' ) {
+    print "A kérés sikertelen, a válaszkód ez volt: $ResponseCode\n";
+    exit;
+}
+
+# Ha kérést helyesen válaszolták meg, akkor itt fogadunk egy JSON szöveget.
+my $ResponseContent = $RestClient->responseContent();
+
+my $Data = decode_json $ResponseContent;
+
+# Csak ki kell írni a visszaadott adatszerkezetet:
+use Data::Dumper;
+print "A válasz ez volt:\n";
+print Dumper($Data);
+
+                    ]]>
+                </programlisting>
+            </para>
+        </section>
+        <section>
+            <title>cURL példák a REST kérésekhez</title>
+            <para>
+                A fenti példára tekintettel egy REST beállításnál az általános jegy
+csatlakozóhoz a következőkkel rendelkezünk:
+            </para>
+            <para>
+                <command>A jegy létrehozásához:</command> POST metódus használata a /Ticket
+útvonalon.
+            </para>
+            <para>
+                <command>A jegy kereséséhez:</command> GET metódus használata a /Ticket
+útvonalon.
+            </para>
+            <para>
+                <command>A jegy frissítéséhez:</command> PATCH metódus használata a
+/Ticket/{TicketID} útvonalon (ahol a {TicketID} egy :TicketID által ábrázolt
+sablon az átvitel beállításában)
+            </para>
+            <para>
+                <command>A jegy lekéréséhez:</command> GET metódus használata a
+/Ticket/{TicketID} útvonalon (ahol a {TicketID} egy :TicketID által ábrázolt
+sablon az átvitel beállításában)
+            </para>
+            <section>
+                <title>Egy új jegy létrehozása</title>
+                <para>cURL parancs:</para>
+                <para>
+                    <screen>
+<![CDATA[
+shell> curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket?UserLogin=agent&Password=123" -H "Content-Type: application/json" -d "{\"Ticket\":{\"Title\":\"REST létrehozás próba\", \"Type\": \"Unclassified\", \"Queue\":\"Raw\",\"State\":\"open\",\"Priority\":\"3 normal\",\"CustomerUser\":\"customer\"},\"Article\":{\"Subject\":\"Rest létrehozás próba\",\"Body\":\"Ez csak egy próba\",\"ContentType\":\"text/plain; charset=utf8\"}}"  -X POST
+]]>
+                    </screen>
+                </para>
+                <para>Válasz:</para>
+                <para>
+                    <screen>
+{
+  "ArticleID":5484,
+  "TicketNumber":"1001936",
+  "TicketID":"1686"
+}
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Jegy részleteinek lekérése</title>
+                <para>cURL parancs:</para>
+                <para>
+                    <screen>
+<![CDATA[
+curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/1686?UserLogin=agent&Password=123"
+]]>
+                    </screen>
+                </para>
+                <para>Válasz:</para>
+                <para>
+                    <screen>
+{
+  "Ticket": [
+    {
+      "Age": 777,
+      "PriorityID": 3,
+      "ServiceID": "",
+      "Type": "Unclassified",
+      "Responsible": "root@localhost",
+      "StateID": 4,
+      "ResponsibleID": 1,
+      "ChangeBy": 2,
+      "EscalationTime": 0,
+      "Changed": "2014-06-30 19:08:14",
+      "OwnerID": 2,
+      "RealTillTimeNotUsed": 0,
+      "GroupID": 1,
+      "Owner": "agent",
+      "CustomerID": "OTRS",
+      "TypeID": 1,
+      "Created": "2014-06-30 19:08:12",
+      "Priority": "3 normal",
+      "UntilTime": 0,
+      "EscalationUpdateTime": 0,
+      "QueueID": 2,
+      "Queue": "Raw",
+      "State": "open",
+      "Title": "REST létrehozás próba",
+      "CreateBy": 2,
+      "TicketID": 1686,
+      "StateType": "open",
+      "EscalationResponseTime": 0,
+      "UnlockTimeout": 0,
+      "EscalationSolutionTime": 0,
+      "LockID": 1,
+      "TicketNumber": "1001936",
+      "ArchiveFlag": "n",
+      "Lock": "unlock",
+      "CreateTimeUnix": 1404173292,
+      "SLAID": "",
+      "CustomerUserID": "customer"
+    }
+  ]
+}
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Jegy frissítése</title>
+                <para>cURL parancs:</para>
+                <para>
+                    <screen>
+<![CDATA[
+curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket/1686?UserLogin=agent&Password=123" -H "Content-Type: application/json" -d "{\"Ticket\":{\"Queues\":\"Postmaster\"}}"  -X PATCH
+]]>
+                    </screen>
+                </para>
+                <para>Válasz:</para>
+                <para>
+                    <screen>
+{
+  "TicketNumber":"1001936",
+  "TicketID":"1686"
+}
+                    </screen>
+                </para>
+            </section>
+            <section>
+                <title>Jegyek keresése</title>
+                <para>cURL parancs:</para>
+                <para>
+                    <screen>
+<![CDATA[
+curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/Ticket?UserLogin=agent&Password=123&Queue=Postmaster"
+]]>
+                    </screen>
+                </para>
+                <para>Válasz:</para>
+                <para>
+                    <screen>
+{
+  "TicketID": [
+    "1686",
+    "102",
+    "100",
+    "1"
+  ]
+}
+                    </screen>
+                </para>
+            </section>
+
+        </section>
+    </section>
+</section>

@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="webservice_cli">
+    <title>Webszolgáltatás parancssori felülete</title>
+    <para>
+        A parancssori felület (CLI) a webszolgáltatásokkal végzett munka gyors
+módja. Olyan eszközök halmazából áll, amelyeket alapvető műveletek
+végrehajtásához lehet használni, úgymint:
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Webszolgáltatások létrehozása, frissítése, beolvasása és törlése YAML-fájlok
+alapján.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    A hibakereső naplójának olvasása szűrőlehetőségekkel.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <para>
+            Nem szükséges a parancssori felület használata a webszolgáltatásokkal
+végzett munkához. Az adminisztrációs felületbe integrálva képernyők teljes
+készlete létezik a webszolgáltatás minden részével való kapcsolatba
+lépéshez. Olvassa el ebben a kézikönyvben megtalálható webszolgáltatás
+grafikus felületéről szóló szakaszt.
+        </para>
+    </note>
+
+    <section id="webservice_cli_webserviceconfig">
+        <title>Webszolgáltatás-beállítás</title>
+        <para>
+            A „WebserviceConfig.pl” parancsfájlt azért fejlesztették ki, hogy alapvető,
+de gyors és hatékony eszközt hozzanak létre a webszolgáltatás beállításaival
+végzett munkához. A következő műveletek végrehajtásához ad képességet:
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Hozzáadás: webszolgáltatások létrehozásához egy YAML-fájl használatával
+beállítási forrásként.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Frissítés: egy meglévő webszolgáltatás megváltoztatásához. A beállítások egy
+eltérő vagy módosított YAML-fájl használatával változtathatók meg.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Beolvasás: a képernyőn megjelenített jelenlegi webszolgáltatás
+beállításainak lekéréséhez.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Listázás: a rendszeren regisztrált összes webszolgáltatás teljes listájának
+lekéréséhez.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Törlés: egy webszolgáltatás törléséhez a rendszerről. Legyen óvatos, amikor
+használja, mert ez a művelet nem vonható vissza.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <warning>
+            <para>
+                Egy webszolgáltatás READ művelete az összes beállítást egyszerű szövegként
+fogja megjeleníteni a képernyőn, beleértve az összes eltárolt jelszót
+is. Legyen tudatában ennek, és tegye meg a szükséges óvintézkedéseket!
+            </para>
+        </warning>
+        <para>
+            Példa: Egy új webszolgáltatás-beállítás létrehozása:
+        </para>
+        <para>
+            <screen>
+shell> OTRS_HOME/bin/otrs.WebserviceConfig.pl -a write -n &lt;webszolgáltatás_neve&gt; -f /útvonal/a/yaml/fájlhoz
+            </screen>
+        </para>
+        <para>
+            Az „otrs.WebserviceConfig.pl” parancsfájlt a következő kapcsolókkal is
+használhatja:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <command>-a read -i &lt;webszolgáltatás_azonosító&gt;</command> - Egy tárolt
+beállítás beolvasásához.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a write -n &lt;webszolgáltatás_neve&gt; -f
+/útvonal/a/yaml/fájlhoz</command> - Egy új webszolgáltatás létrehozásához.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a write -i &lt;webszolgáltatás_azonosító&gt; -f
+/útvonal/a/yaml/fájlhoz</command> - Egy webszolgáltatás frissítéséhez.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a list</command> - Az elérhető webszolgáltatások felsorolásához.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a delete -i &lt;webszolgáltatás_azonosító&gt;</command> - Egy
+webszolgáltatás törléséhez.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section id="webservice_cli_debugger">
+        <title>Webszolgáltatás hibakereső</title>
+        <para>
+            A parancssori felületen keresztül elérhető másik eszköz az
+„otrs.GenericInterfaceDebugRead.pl” parancsfájl, amely egy felület a
+webszolgáltatás hibakeresőjének naplóbejegyzéseiben való kereséshez.
+        </para>
+        <para>
+            Példa: Hibakereső naplóbejegyzések keresése:
+        </para>
+        <para>
+            <screen>
+                shell> bin/otrs.GenericInterfaceDebugRead.pl
+            </screen>
+        </para>
+        <para>
+            <itemizedlist>
+                <para>
+                    Opcionális paraméterek is használhatók az
+„otrs.GenericInterfaceDebugRead.pl” parancsfájlnál:
+                </para>
+                <listitem>
+                    <para>
+                        <command>-c</command> - a kommunikáció azonosítója (md5sum formátum)
+szerinti szűréshez.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-t</command> - a kommunikáció típusa („Szolgáltató” vagy
+„Kérelmező”) szerinti szűréshez.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-a</command> - dátum szerinti szűréshez (egy dátumkor vagy azután).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-b</command> - dátum szerinti szűréshez (egy dátumkor vagy
+azelőtt).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-i</command> - IP-cím szerinti szűréshez (érvényes IPv4 vagy IPv6
+címnek kell lennie).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-w</command> - webszolgáltatás azonosítója szerinti szűréshez.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <command>-d</command> - részletes kommunikációs adatok tartalmazásához.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Példa: Hibakereső naplóbejegyzések keresése az összes paraméterrel:
+        </para>
+        <para>
+            <screen>
+shell> ./otrs.GenericInterfaceDebugRead.pl -c a7cc4d9f5c70387a9bfbe1351bc88966 -t Provider -a '2011-07-22 00:00:00' -b '2011-07-26 00:00:00' -i 127.0.0.1 -w 123 -d 1
+            </screen>
+        </para>
+        <note>
+            <para>
+                Erősen ajánlott felvenni a fent felsorolt szűrőkapcsolók legalább egyikét,
+valamint még még többet, ha a „-d” kapcsoló van kiválasztva, mert
+<emphasis>nagyon sok</emphasis> információ kérhető le az adatbázisból, és
+jeleníthető meg a képernyőn. Ez lassú válaszidőket és sokkal több
+információt eredményezhet, mint amire valójában szüksége van.
+            </para>
+        </note>
+    </section>
+</section>

@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<chapter id="first-steps">
+<title>Az első lépések</title>
+
+<abstract>
+<para>
+Ennek a fejezetnek az a célja, hogy rövid áttekintést nyújtson az OTRS-ről
+és a webes felületének szerkezetéről. Bevezetésre kerülnek az „ügyintéző”,
+„ügyfél” és „adminisztrátor” kifejezések. Bejelentkezünk OTRS
+adminisztrátorként is, és közelebbi pillantást vetünk az összes fióknál
+elérhető felhasználó beállításokra.
+</para>
+</abstract>
+
+<section id="agent-interface">
+<title>Az ügyintéző webes felülete</title>
+
+<para>
+Az ügyintéző webes felülete lehetővé teszi az ügyintézőknek, hogy
+válaszoljanak az ügyfelek kéréseire, új jegyeket hozzanak létre az
+ügyfelekhez vagy más ügyintézőkhöz, jegyeket írjanak az ügyfelekkel történő
+telefonhívásokról, GyIK bejegyzéseket írjanak, ügyféladatokat szerkesszenek,
+stb.
+</para>
+
+<para>
+Feltételezve, hogy az OTRS gépe a <ulink url="http://www.pelda.hu/">
+<citetitle>http://www.pelda.hu</citetitle> </ulink> URL-en keresztül érhető
+el, akkor az OTRS bejelentkező képernyőjét a <ulink
+url="http://www.pelda.hu/otrs/index.pl">
+<citetitle>http://www.pelda.hu/otrs/index.pl</citetitle> </ulink> cím
+használatával lehet elérni egy webböngészőben (lásd a lenti ábrát).
+</para>
+
+<para>
+<screenshot>
+<screeninfo>index.pl - Ügyintéző bejelentkezési képernyő</screeninfo> <graphic srccredit="index.pl -
+screenshot" scale="40" fileref="screenshots/login.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Az ügyintézői felület bejelentkező képernyője.</emphasis>
+</para>
+
+</section>
+
+<section id="customer-interface">
+<title>Az ügyfél webes felülete</title>
+
+<para>
+Az ügyfeleknek különálló webes felületük van az OTRS-ben, amelyen keresztül
+új fiókokat hozhatnak létre, megváltoztathatják a fiókbeállításaikat,
+jegyeket hozhatnak létre és szerkeszthetik azokat, áttekintést kaphatnak
+azokról a jegyekről, amelyeket létrehoztak, stb.
+</para>
+
+<para>
+Folytatva a fenti példát, az ügyfél bejelentkező képernyője a <ulink
+url="http://www.pelda.hu/otrs/customer.pl">
+<citetitle>http://www.pelda.hu/otrs/customer.pl</citetitle> </ulink> URL
+használatával érhető el egy webböngészővel (lásd a lenti ábrát).
+</para>
+
+<para>
+<screenshot>
+<screeninfo>customer.pl - Ügyfél bejelentkezési képernyő</screeninfo> <graphic srccredit="customer.pl -
+screenshot" scale="40" fileref="screenshots/customer-login.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Az ügyfélfelület bejelentkező képernyője.</emphasis>
+</para>
+
+</section>
+
+<section id="public-interface">
+<title>Nyilvános webes felület</title>
+
+<para>
+Az ügyintézők és az ügyfelek webes felületén kívül az OTRS rendelkezik egy
+nyilvános webes felülettel is, amely a GyIK-modulon keresztül érhető el. Ezt
+a modult külön kell telepíteni. Nyilvános hozzáférést biztosít a GyIK
+rendszerhez, és lehetővé teszi a látogatók számára a GyIK bejegyzésekben
+való keresést mindenféle speciális meghatalmazás nélkül.
+</para>
+
+<para>
+A példánkban a nyilvános webes felület a következő URL-ek bármelyikén
+keresztül elérhető: <ulink url="http://www.pelda.hu/otrs/faq.pl">
+<citetitle>http://www.pelda.hu/otrs/faq.pl</citetitle> </ulink> , <ulink
+url="http://www.pelda.hu/otrs/public.pl">
+<citetitle>http://www.pelda.hu/otrs/public.pl</citetitle> </ulink>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>public.pl - Nyilvános webes felület</screeninfo> <graphic srccredit="public.pl -
+screenshot" scale="40" fileref="screenshots/public-interface.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Nyilvános webes felület.</emphasis>
+</para>
+
+</section>
+
+<section id="first-login">
+<title>Első bejelentkezés</title>
+
+<para>
+Nyissa meg a bejelentkezési képernyőt az <link
+linkend="agent-interface">ügyintéző webes felülete</link> szakaszban leírtak
+szerint. Adjon meg egy felhasználónevet és jelszót. Mivel a rendszer nemrég
+lett telepítve, és még nem lettek felhasználók létrehozva, először OTRS
+adminisztrátorként jelentkezzen be a „root@localhost” felhasználónévvel és a
+telepítő utolsó lépésében előállított jelszóval.
+</para>
+
+<warning>
+<para>
+Ezek a fiókadatok minden újonnan telepített OTRS rendszeren érvényesek. A
+lehető leggyorsabban meg kell változtatnia az OTRS adminisztrátor jelszavát!
+Ezt az OTRS adminisztrátori fiók <link
+linkend="user-preferences">beállítások</link> képernyőjén keresztül teheti
+meg.
+</para>
+</warning>
+
+<para>
+Amennyiben nem OTRS adminisztrátorként szeretne bejelentkezni, akkor adja
+meg a normál ügyintézői fiókjának felhasználónevét és jelszavát.
+</para>
+
+<para>
+Abban az esetben, ha elfelejtette a jelszavát, kérhet a rendszertől egy új
+jelszót. Egyszerűen nyomja meg a Bejelentkezés gomb alatti hivatkozást, adja
+meg a beviteli mezőben azt a felhasználónevet, amely az OTRS fiókjához van
+regisztrálva, és nyomja meg az Új jelszó kérése gombot (lásd az ábrát).
+</para>
+
+<para>
+<screenshot>
+<screeninfo>login.pl - Új jelszó kérése</screeninfo> <graphic srccredit="login.pl -
+screenshot" scale="40"
+fileref="screenshots/request-new-password.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Új jelszó kérése.</emphasis>
+</para>
+
+</section>
+
+<section id="gui-overview">
+<title>A webes felület - egy áttekintés</title>
+
+<para>
+Miután sikeresen bejelentkezett a rendszerbe, a Vezérlőpult oldal fog
+megjelenni (lásd a lenti ábrát). Megjeleníti a zárolt jegyeit, a menükön
+keresztül közvetlen hozzáférést tesz lehetővé a várólistához, az állapotok
+és az eszkalációs nézethez, valamint lehetőségeket nyújt új telefonos és
+e-mail jegyek létrehozásához is. A jegyek gyors összegzését is megjelenít
+különböző feltételek használatával.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Az első sikeres bejelentkezés utáni képernyő</screeninfo> <graphic srccredit="First screen -
+screenshot" scale="40" fileref="screenshots/first-screen.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Az ügyintézői felület vezérlőpultja.</emphasis>
+</para>
+
+<para>
+A jobb érthetőség kedvéért az általános webes felület különböző területekre
+van elkülönítve. Minden oldal felső sora néhány általános információt
+jelenít meg, mint például a kijelentkezés gomb, a zárolt jegyek számát
+felsoroló ikonok, amelyek közvetlen hozzáférést biztosítanak hozzájuk, új
+telefonos vagy e-mail jegy létrehozására mutató hivatkozások,
+stb. Megtalálhatók a várólista, állapotok és eszkalációs nézetekhez vezető
+ikonok is.
+</para>
+
+<para>
+Az ikonok sora alatt található a navigációs sáv. Egy menüt jelenít meg,
+amely a rendszer különböző területeire vagy moduljaira történő navigálást
+engedélyezi, lehetővé téve néhány globális művelet végrehajtását. A
+Vezérlőpult gombra kattintva a vezérlőpulthoz jut. Ha a Jegyek gombra
+kattint, akkor egy almenüt fog kapni a jegy nézetének megváltoztatásához, új
+jegy (telefonos vagy e-mail) létrehozásához vagy egy meghatározott jegy
+kereséséhez tartozó lehetőségekkel. A Statisztikák gomb egy olyan menüt
+jelenít meg, amely lehetővé teszi a regisztrált statisztikák áttekintőjéből
+történő választást, egy új létrehozását vagy egy meglévő importálását. Az
+Ügyfelek gomb az Ügyfélkezelés képernyőre vezet. Az Adminisztráció gombra
+kattintva férhet hozzá az összes adminisztrációs modulhoz, amelyek lehetővé
+teszik új ügyintézők, várólisták, stb. létrehozását. Van egy Keresés gomb is
+a jegyek kereséséhez.
+</para>
+
+<para>
+Amennyiben valamilyen kapcsolódó alkalmazás is telepítésre került, például
+GyIK vagy a Kérdőív, akkor az ezeket az alkalmazásokat elérő gombok is meg
+lesznek jelenítve.
+</para>
+
+<para>
+A navigációs sáv alatti vörös sáv különböző rendszerüzeneteket jelenít
+meg. Ha OTRS adminisztrátorként jelentkezett be, akkor figyelmeztető
+üzenetet fog kapni, hogy ne a rendszerfiók használatával dolgozzon.
+</para>
+
+<para>
+Annak a szakasznak a címe alatt, ahol jelenleg tartózkodik, számos alszakasz
+található elkülönített dobozokban, amelyek lényeges információkat
+tartalmaznak arról a képernyőről, amelyen dolgozik.
+</para>
+
+<para>
+Ezek a dobozok tartalmazzák az egyes képernyők fő részét, általában egy vagy
+több oszlopban megjelenítve. Minden egyes doboz lényeges információkat
+tárolhat a jelenlegi képernyőről, mint például utasítások, tanácsok,
+áttekintők, stb. Az egyes képernyőkhöz kapcsolódó művelet végrehajtásához
+szükséges űrlap vagy eszköz is megjelenik, mint például rekordok hozzáadása,
+frissítése vagy törlése, napló ellenőrzése, konfigurációs beállítások
+megváltoztatása, stb.
+</para>
+
+<para>
+Végül az oldal alján az oldal lábléce jelenik meg (lásd a lenti
+ábrát). Hivatkozásokat tartalmaz az OTRS hivatalos weboldalának közvetlen
+eléréséhez vagy az oldal tetejére ugráshoz.
+</para>
+
+<para>
+Normális esetben az ikonsor, a navigációs sáv és a lábléc ugyanaz a webes
+felület összes képernyőjén.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Lábléc</screeninfo> <graphic srccredit="Footer"
+scale="40" fileref="screenshots/footer.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Lábléc.</emphasis>
+</para>
+
+</section>
+
+<section id="the-dashboard">
+<title>A vezérlőpult</title>
+
+<para>
+    A vezérlőpult a rendszer főoldala, itt kaphat áttekintést a jegyekről és a
+jegytevékenységgel kapcsolatos egyéb dolgokról. Úgy gondolták, hogy ez
+legyen a kezdőpont egy ügyintéző napi munkájához. Azon jegyek gyors
+összegzését jeleníti meg az egyéb információk között alapértelmezetten,
+amelyek függőben vannak, eszkaláltak, újak és nyitottak.
+</para>
+
+<para>
+    A vezérlőpult egyik legfontosabb szolgáltatása, hogy teljesen személyre
+szabható. Ez azt jelenti, hogy minden részét úgy állíthatja be, ahogy csak
+szeretné, megjeleníthet vagy elrejthet elemeket. Lehetséges még ezen elemek
+áthelyezése is ugyanazon oszlopon belül az elem fejlécére kattintva és
+elhúzva, majd máshova ejtve azokat. Az egyes elemeket „felületi elemnek”
+hívják. A rendszer számos azonnal használható, kulcsrakész felületi elemmel
+rendelkezik, de a vezérlőpult képernyő moduláris felépítése elő van készítve
+egyéni felületi elemek könnyű integrálásához.
+</para>
+
+<para>
+    Ezen képernyő tartalma két főoszlopra rendezett. A bal oldali oszlopban
+normális esetben információkat láthat a jegyekről az állapotuk szerint
+osztályozva, mint például emlékeztető, eszkalált, új és nyitott. Ezen
+felületi elemek mindegyikén szűrheti a találatokat, hogy megtekinthesse az
+összes olyan jegyet, amelyhez hozzáférhet, azokat a jegyeket, amelyeket
+zárolt, azokat, amelyek az ügyintéző által meghatározott várólistákban
+találhatók egyéb szűrők között. Másfajta felületi elemek is vannak ebben az
+oszlopban, és ezek mind le vannak írva lentebb.
+</para>
+
+<para>
+    <screenshot>
+<screeninfo>Vezérlőpult felületi elemek</screeninfo> <graphic srccredit="Dashboard
+widgets" scale="40"
+fileref="screenshots/dashboard-left-column-widgets.png"></graphic></screenshot>
+</para>
+
+<para>
+    A bal oszlopban lévő vezérlőpult felületi elemek.
+</para>
+<itemizedlist mark="round">
+    <listitem>
+        <para>Jegylista felületi elemek</para>
+        <para>
+            Ezen kategória alatti felületi elemek átfogó viselkedést, megjelenést
+osztanak meg. Ezek a felületi elemek maghatározott állapotú jegyek listáját
+jelenítik meg. Az egyes listaoldalakon megjelenített jegyek mennyisége
+beállítható a felületi elem beállításainál (akkor jelenik meg, ha az
+egérmutatót a felületi elem jobb felső részére húzza). Ezek a felületi
+elemek a következő szűrőket támogatják:
+        </para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>Saját zárolt jegyek</para>
+                <para>Azok a jegyek, amelyeket a bejelentkezett ügyintéző zárolt.</para>
+            </listitem>
+            <listitem>
+                <para>Saját megfigyelt jegyek</para>
+                <para>
+                    Azok a jegyek, amelyek a bejelentkezett ügyintéző megfigyelési listáján
+vannak. A Ticket::Watcher beállítás bekapcsolását igényli a megjelenítéshez.
+                </para>
+            </listitem>
+            <listitem>
+                <para>Saját felelősségek</para>
+                <para>
+                    Azok a jegyek, amelyeknél a bejelentkezett ügyintéző felelősként van
+beállítva. A Ticket::Responsible beállítás bekapcsolása szükséges annak
+érdekében, hogy ez a szűrő látható legyen.
+                </para>
+            </listitem>
+            <listitem>
+                <para>Jegyek a várólistáimban</para>
+                <para>
+                    Azok a jegyek, amelyek olyan várólistákban vannak, amelyeket az ügyintéző
+„Saját várólistákként” határozott meg.
+                </para>
+            </listitem>
+            <listitem>
+                <para>Jegyek a szolgáltatásaimban</para>
+                <para>
+                    Azok a jegyek, amelyek olyan szolgáltatásokhoz vannak rendelve, amelyeket az
+ügyintéző „Saját szolgáltatásokként” határozott meg, és legalább csak
+olvasható jogosultságokkal rendelkező várólistákban vannak.
+                </para>
+            </listitem>
+            <listitem>
+                <para>Minden jegy</para>
+                <para>
+                    Az összes jegy, amelyhez az ügyintézőnek hozzáférése van.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>Ezek a felületi elemek a következők:</para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>Emlékeztető jegyek</para>
+                <para>Azok a jegyek, amelyek függőben lévőként vannak beállítva és az emlékeztető
+dátuma elérve.</para>
+            </listitem>
+            <listitem>
+                <para>Eszkalált jegyek</para>
+                <para>Azok a jegyek, amelyek eszkalálva vannak.</para>
+            </listitem>
+            <listitem>
+                <para>Új jegyek</para>
+                <para>Azok a jegyek, amelyeknek „Új” állapota van.</para>
+            </listitem>
+            <listitem>
+                <para> Nyitott jegyek / Válaszra várnak</para>
+                <para>Azok a jegyek, amelyeknek „Nyitott” állapota van és készen állnak a velük
+végzendő munkára.</para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+    <listitem>
+        <para>Események jegy naptár</para>
+        <para>
+            Egy naptáresemény (ennél a felületi elemnél) akkor van meghatározva, amikor
+egy új jegy létrejön. Az események jegy naptár szolgáltatásnak engedélyezve
+kell lennie, és két új mező megjelenítését igényli a jegylétrehozás
+képernyőkön: egyet az esemény kezdeti idejéhez és egy másikat a befejezési
+időhöz. Ezek az idők határozzák meg az esemény időtartamát.
+        </para>
+        <para>
+            Ez a felületi elem a következő nézeteket tartalmazza: havi, heti és napi. Az
+ügyintézők a jobbra és balra mutató nyilak használatával görgethetik az
+oldalakat.
+        </para>
+        <para>
+            Mint korábban említettük, kizárólag a felületi elem engedélyezése nem
+elegendő, a jegyek pár „Dátum/Idő” dinamikus mezőit is hozzá kell adni a
+rendszerhez (az „Adminisztrációs” panelen lévő dinamikus mezők hivatkozáson
+keresztül), és be kell állítani azokat a rendszerbeállításokban a felületi
+elemhez. Mindkét dinamikus mezőt be kell állítani, hogy meg legyen jelenítve
+a jegylétrehozás képernyőkön. Ki kell tölteni azokat a jegylétrehozás során
+vagy bármely más jegyművelet képernyőn (például szabad mezők) az időkeret
+leírásához a naptáreseménynél (kezdési és befejezési idő). A jegynagyítás
+képernyő is beállítható ezen dinamikus mezők megjelenítéséhez abban az
+esetben, ha azt szükségesnek tartja.
+        </para>
+        <para>
+            <screenshot>
+<screeninfo>Események jegy naptár felületi elem</screeninfo> <graphic srccredit="Footer"
+scale="40" fileref="screenshots/events-ticket-calendar.png"></graphic></screenshot>
+        </para>
+        <para>
+            Ezen felületi elem további beállításai megtalálhatók a
+„Frontend::Agent::Dashboard::EventsTicketCalendar” alcsoport alatt a
+rendszerbeállításokban:
+        </para>
+        <itemizedlist mark="round">
+            <listitem>
+                <para>CalendarWidth</para>
+                <para>Meghatározza a naptár szélességét százalékosan. Az alapértelmezett 95%.</para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldStartTime</para>
+                <para>Meghatározza a dinamikus mező nevét a kezdési időnél.</para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldEndTime</para>
+                <para>Meghatározza a dinamikus mező nevét a befejezési időnél.</para>
+            </listitem>
+            <listitem>
+                <para>Várólisták</para>
+                <para>
+                    Csak ebben a beállításban megadott várólistákban lévő jegyek lesznek
+figyelembe véve a naptár nézetben.
+                </para>
+            </listitem>
+            <listitem>
+                <para>DynamicFieldsForEvents</para>
+                <para>
+                    Meghatározza azokat a dinamikus mezőket, amelyek meg lesznek jelenítve a
+naptáresemény rátét ablakokban.
+                </para>
+            </listitem>
+            <listitem>
+                <para>TicketFieldsForEvents</para>
+                <para>
+                    Meghatározza azokat a jegyjellemzőket, amelyek meg lesznek jelenítve a
+naptáresemény rátét ablakokban.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </listitem>
+    <listitem>
+        <para>Jegyvárólista áttekintő</para>
+        <para>
+            Ez a felületi elem jelenik meg a jegyszám mátrixban, ahol a sorok a
+várólistákat ábrázolják, és az oszlopok a jegyállapotokat képviselik, végül
+minden egyes cella azon meghatározott állapotú jegyek számát jeleníti meg,
+amelyek az egyes várólistákhoz tartoznak.
+        </para>
+        <para>
+            A felületi elem egy összegző sort és egy összegző oszlopot is megjelenít. Az
+összegző sor jeleníti meg az összes jelenlévő várólistában található jegyek
+összegét, míg az összegző oszlop a jegyek összegét ábrázolja az egyes
+várólisták összes jelenlévő állapotánál.
+        </para>
+        <para>
+            A jelenlévő várólisták és állapotok a rendszerbeállításokon keresztül
+változtathatók meg.
+        </para>
+        <para>
+            A jegyszámok bármelyikére kattintva a jegykeresési eredmények oldal fog
+megnyílni, amely lehetővé teszi az ügyintézőknek, hogy részletesebb
+áttekintést kapjon róluk.
+        </para>
+    </listitem>
+</itemizedlist>
+<para>
+    A jobb oldali oszlopban egy speciális felületi elem található, amely
+lehetővé teszi a felületi elemek szabályozást, hogy mit szeretne
+megjeleníteni vagy elrejteni. Ez a beállítások felületi elem. Kattintson a
+fejlécére a szakasz kinyitásához és minden elérhető felületi elem
+megtekintéséhez, amint az ábrán látható. Minden felületi elem nevének van
+egy jelölőnégyzete. Ezen jelölőnégyzetek használatával határozható meg a
+felületi elemek láthatósága a vezérlőpulton (a nem bejelölt felületi elemek
+nem lesznek láthatók), miután meghatározta a láthatósági beállításokat, és
+rákattintott a „Mentés” gombra a változtatások eltárolásához. Ez a szakasz
+rögzítve van a képernyőn, ami azt jelenti, hogy nem tudja fogd és vidd módon
+áthelyezni vagy bezárni azt.
+</para>
+
+<para>
+    <screenshot>
+<screeninfo>A vezérlőpult beállításainak szerkesztése</screeninfo> <graphic srccredit="Dashboard
+settings" scale="40" fileref="screenshots/edit-settings.png"></graphic></screenshot>
+</para>
+
+<para>
+    <emphasis>Ábra: Vezérlőpult beállításai.</emphasis>
+</para>
+
+<para>
+    A jobb oszlopban lévő vezérlőpult felületi elemek.
+</para>
+
+<itemizedlist mark="round">
+    <listitem>
+        <para>7 napos statisztika</para>
+        <para>
+            A jegytevékenységek grafikonját jelenít meg az elmúlt 7 napról, amely 2
+vonalat tartalmaz. Az első - általában kék színű - ábrázolja a naponta
+létrehozott jegyek mennyiségét, és a második - általában narancs - ábrázolja
+a naponta lezárt jegyeket.
+        </para>
+    </listitem>
+    <listitem>
+        <para>Közelgő események</para>
+        <para>
+            A rövidesen eszkalálódó jegyek vagy a már eszkaláltak vannak itt
+felsorolva. Erről a felületi elemről érkező információk nagyon hasznosak,
+mivel esélyt kap arra, hogy tudjon azokról a jegyekről, amelyekre figyelnie
+kell, és eldöntheti, hogy melyikre szeretné összpontosítani az
+erőfeszítését, melyiknek adjon elsőbbséget vagy egyszerűen ellenőrizhesse,
+hogy melyik következik.
+        </para>
+    </listitem>
+    <listitem>
+        <para>OTRS hírek</para>
+        <para>
+            Egy teljes lista az OTRS tevékenységekről és nagyon fontos információk az új
+termékkiadásokról és hibajavításokról.
+        </para>
+    </listitem>
+    <listitem>
+        <para>Elérhető</para>
+        <para>
+            Itt jelenik meg egy összegzés a rendszerbe jelenleg bejelentkezett
+ügyintézőkről. Tartalmaz egy szakaszt az elérhető ügyfelekről is. Vegye
+figyelembe, hogy ez a felületi elem normális esetben el van rejtve, és a
+korábban bemutatott beállítások felületi elem használatával jelenítheti meg.
+        </para>
+    </listitem>
+</itemizedlist>
+
+</section>
+
+<section id="what-is-a-queue">
+<title>Mi az a várólista?</title>
+
+<para>
+Számos levelezőrendszernél gyakori, hogy minden levél egy beérkezett
+üzenetek fájlba kerül, ahol azok tárolva maradnak. Az új levelek a
+beérkezett üzenetek fájl végére lesznek hozzáfűzve. A levelezőkliens program
+szokta olvasni és írni a leveleket, beolvassa ezt a beérkezett üzenetek
+fájlt, és megjeleníti a tartalmat a felhasználónak.
+</para>
+
+<para>
+Az OTRS várólistája némileg hasonló egy beérkezett üzenetek fájlhoz, mivel
+ez is több üzenetet képes tárolni. Egy várólista olyan szolgáltatásokkal is
+rendelkezik, amelyek egy beérkezett üzenetek levélfájlon túl mutatnak. Egy
+OTRS ügyintézőként vagy felhasználóként valakinek emlékeznie kell arra, hogy
+melyik várólistában lett a jegy eltárolva. Az ügyintézők megnyithatják és
+szerkeszthetik a jegyeket egy várólistában, és át is helyezhetik a jegyeket
+egyik várólistából egy másikba. De miért akarnák áthelyezni a jegyeket?
+</para>
+
+<para>
+A gyakorlatiasabb magyarázathoz gondoljon vissza a <link
+linkend="basic-tts-example">jegyrendszer példájában</link> leírt Miksa
+vállalatának esetére. Miksa azért telepítette az OTRS programot, hogy
+lehetővé tegye a csapatának a vállalat videofelvevőket vásárló ügyfelei
+támogatásának jobb kezelését.
+</para>
+
+<para>
+Egyetlen, az összes kérést tartalmazó várólista elegendő ebben a
+helyzetben. Azonban egy idő múlva Miksa elhatározza, hogy DVD-felvevőket is
+árusítani fog. Most az ügyfeleknek nem csak a videofelvevőkkel kapcsolatban
+vannak kérdéseik, hanem az új termékről is. Egyre több levél érkezik Miksa
+OTRS-ének egyedüli várólistájába, és nehéz tiszta képet kapni arról, hogy mi
+is történik.
+</para>
+
+<para>
+Miksa elhatározza, hogy átalakítja a támogatási rendszerét, és két új
+várólistát ad hozzá. Így most három várólistát használnak. A jegyrendszerbe
+érkező új üzenetek a régi „nyers” elnevezésű várólistába vannak eltárolva. A
+két új várólista közül az egyik „videofelvevő” elnevezésű kizárólag a
+videofelvevő kérésekhez, míg a másik „DVD-felvevő” nevű kizárólag a
+DVD-felvevő kérésekhez van.
+</para>
+
+<para>
+Miksa arra kéri Szandrát, hogy figyelje a „nyers” várólistát, és rendezze
+(kézbesítse) az üzeneteket vagy a „videofelvevő”, vagy a „DVD-felvevő”
+várólistába az ügyfél kérésétől függően. Jánosnak csak a „videofelvevő”
+várólistához van hozzáférése, míg József csak a „DVD-felvevő” várólistában
+lévő jegyekre tud válaszolni. Miksa az összes várólistában képes a jegyeket
+szerkeszteni.
+</para>
+
+<para>
+Az OTRS támogatja a felhasználók, csoportok és szerepek
+hozzáférés-kezelését, és könnyű beállítani az olyan várólistákat, amelyek
+csak némely felhasználói fiókkal érhetők el. Miksa más módszert is
+használhat, hogy a kéréseit különböző várólistákba juttassa el:
+szűrőszabályokkal. Egyébként ha két különböző levelezési címet használnak,
+akkor Szandrának csak azokat a leveleket kell a két másik várólistába
+kézbesítenie, amelyeket nem lehet automatikusan kézbesíteni.
+</para>
+
+<para>
+A bejövő üzenetek különböző várólistákba való rendezése segít önnek a
+támogatási rendszert strukturáltan és rendezetten tartani. Mivel az
+ügyintézők különböző csoportokba vannak rendezve, amelyeknek különböző
+hozzáférési jogosultságaik vannak a várólistákra, ezért a rendszer még
+tovább optimalizálható. A várólisták használhatók munkafolyamatok
+meghatározásához vagy egy vállalat struktúrájának létrehozásához. Miksa
+megvalósíthat például egy másik „értékesítés” elnevezésű várólistát, amely a
+„kérések”, „ajánlatok”, „rendelések”, „számlázás”, stb. alvárólistákat
+tartalmazhatja. Egy ilyen várólista-szerkezet segíthet Miksának a rendelési
+tranzakcióit optimalizálni.
+</para>
+
+<para>
+A továbbfejlesztett rendszerstruktúrák - mint például a várólisták megfelelő
+tervezésén keresztül - jelentős idő és költségmegtakarításhoz vezethetnek. A
+várólisták segíthetnek a vállalatnál lévő folyamatokat optimalizálni.
+</para>
+</section>
+
+
+<section id="what-is-the-queue-overview">
+<title>Mi az a várólista áttekintő?</title>
+
+<para>
+A várólista áttekintő az összes várólista nézetét nyújtja, amelyekben jegyek
+vannak, és amelyekhez a felhasználó írási-olvasási jogosultsággal
+rendelkezik.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Várólista nézet (alapértelmezett) az ügyintézőknek</screeninfo> <graphic srccredit="index.pl -
+screenshot" scale="40" fileref="screenshots/agent-queue-view.png"></graphic></screenshot>
+</para>
+
+<para>
+A várólista áttekintő különböző lehetőségeket nyújt az OTRS-sel végzendő
+napi munkához. Ezek közül az első a Saját várólista. Az ügyintéző
+beállításaiban vagy amikor ügyintézőket adminisztrál, olyan várólisták
+halmaza határozható meg, amelyekhez az ügyintéző hozzárendelésre kerül, hogy
+dolgozzon bennük. Az összes jegy meg fog jelenni ebben az alapértelmezett
+nézetben, amikor megnyitja a Jegyek -> Várólista nézet menüt.
+</para>
+
+<para>
+A Várólista nézet által nyújtott második lehetőség egy lefúró navigáció a
+jegyeket tartalmazó egyéni várólistákba és alvárólistákba, hogy fel legyenek
+dolgozva.
+</para>
+
+<para>
+Mindkét nézettípusban a felhasználó rendelkezik azzal a hozzáadott
+képességgel is, hogy vagy megtekintse az összes zárolatlan jegyet (ez az
+alapértelmezett szűrő), vagy a felhasználó kiválaszthatja majd, hogy az
+összes elérhető jegyet lássa. A jegyeknek a megtekinthető állapottípusok
+egyikében kell lenniük, hogy megjelenjenek a várólista
+nézetben. Alapértelmezett ezek a következők: „nyitott, új, emlékeztető
+függőben, automatikusan függőben”.
+</para>
+
+<para>
+Ezek a látható riasztások a felhasználó támogatásához.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Ügyintéző várólista nézet látható riasztásai.</screeninfo> <graphic srccredit="index.pl -
+screenshot" scale="40"
+fileref="screenshots/agent-queue-overview-visual-alarms.png"></graphic></screenshot>
+</para>
+
+<itemizedlist>
+    <title>Látható riasztások</title>
+    <listitem>
+        <para>1. életkor kiemelése: Beállítja az életkort percben (első szint) a
+várólisták kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak. Fent a
+„Nyers” várólistán látható.</para>
+    </listitem>
+    <listitem>
+        <para>2. életkor kiemelése: Beállítja az életkort percben (második szint) a
+várólisták kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak. Fent a
+„Levelezés” várólistán látható.</para>
+    </listitem>
+    <listitem>
+        <para>Villogás: A legrégebbi jegyet tartalmazó várólista villogási mechanizmusát
+aktiválja. Nem minden böngészőben támogatott. Ebben az esetben pirosan fog
+megjelenni, amint fent a „Szemét” várólistán látható.</para>
+    </listitem>
+    <listitem>
+        <para>Félkövér: A jelenlegi várólista félkövér lesz, amint fent a „Saját
+várólistán” látható.</para>
+    </listitem>
+</itemizedlist>
+</section>
+
+<section id="user-preferences">
+<title>Felhasználó beállításai</title>
+<para>
+Az OTRS felhasználók (ügyfelek, ügyintézők és az OTRS adminisztrátor) a
+saját igényeik szerint állíthatják be a fiókjuk beállításait. Az ügyintéző a
+webes felület tetején lévő fogaskerék ikonra kattintva férhet hozzá a
+beállítási képernyőhöz (lásd a lenti ábrát), míg az ügyfeleknek a
+„Beállítások” hivatkozásra kell kattintaniuk (lásd a lenti ábrát).
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Ügyintézők fiókbeállítási képernyője</screeninfo> <graphic srccredit="index.pl -
+screenshot" scale="40"
+fileref="screenshots/agent-preferences.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Az ügyintéző személyes beállításai.</emphasis>
+</para>
+
+<para>
+Egy ügyintéző a beállítások 3 különböző kategóriáját állíthatja be:
+felhasználói profil, e-mail beállítások és egyéb beállítások. Az
+alapértelmezett lehetőségek a következők:
+</para>
+
+<itemizedlist>
+    <title>Felhasználói profil</title>
+    <listitem>
+        <para>A jelenlegi jelszó megváltoztatása.</para>
+    </listitem>
+    <listitem>
+        <para>A felhasználói felület nyelvének beállítása.</para>
+    </listitem>
+    <listitem>
+        <para>Az előtétprogram felszín váltása.</para>
+    </listitem>
+    <listitem>
+        <para>Az előtétprogram téma eltolása.</para>
+    </listitem>
+    <listitem>
+        <para>Az irodán kívüli idő bekapcsolása és beállítása.</para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>E-mail beállítások</title>
+    <listitem>
+        <para>Események kiválasztása, amelyek aktiválják az ügyintézőnek küldött e-mail
+értesítéseket.</para>
+    </listitem>
+</itemizedlist>
+
+<itemizedlist>
+    <title>Egyéb beállítások</title>
+    <listitem>
+        <para>Azon várólisták kiválasztása, amelyeket meg szeretne figyelni a „Saját
+várólistákban”.</para>
+    </listitem>
+    <listitem>
+        <para>Azon szolgáltatások kiválasztása, amelyeket meg szeretne figyelni a „Saját
+szolgáltatásokban”.</para>
+    </listitem>
+    <listitem>
+        <para>A frissítési időszak beállítása az áttekintőknél (vezérlőpult, zárolt nézet,
+várólista nézet).</para>
+    </listitem>
+    <listitem>
+        <para>Egy jegy létrehozása után megjelenítendő képernyő beállítása.</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+<screenshot>
+<screeninfo>Ügyfelek fiókbeállítási képernyője</screeninfo> <graphic srccredit="customer.pl -
+screenshot" scale="40"
+fileref="screenshots/customer-preferences.png"></graphic></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Az ügyfél személyes beállításai.</emphasis>
+</para>
+
+<para>
+Egy ügyfél kiválaszthatja a webes felület nyelvét, beállíthatja a frissítési
+időközt a jegyáttekintőnél, valamint kiválaszthatja a megjelenített jegyek
+legnagyobb mennyiségét. Lehetséges egy új jelszó beállítása is.
+</para>
+</section>
+
+</chapter>

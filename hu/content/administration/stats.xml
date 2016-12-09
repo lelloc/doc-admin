@@ -1,0 +1,1289 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="statistic-module">
+<title>Statisztikák modul</title>
+
+<para>
+Az OTRS statisztikák modulja tartalmazza a működési statisztikák követésének
+és az OTRS használatával kapcsolatos egyéni jelentések előállításának
+szolgáltatásait. Az OTRS rendszer általában a „stat” kifejezést használja
+egy különféle mutatókat bemutató jelentésre való hivatkozáshoz.
+</para>
+
+<para>
+Az OTRS statisztikák moduljának megfelelő beállítása a követelmények és
+megfontolások sokaságához van társítva. Ez a különféle kiértékelendő OTRS
+modulokat, felhasználói jogosultság-beállításokat, kiszámítandó mutatókat és
+azok bonyolultsági szintjeit, a statisztikák modul beállításainak
+könnyedségét, a számítások sebességét és hatékonyságát, valamint a kimeneti
+változatok gazdag halmazának támogatását tartalmazza.
+</para>
+
+<para>
+A statisztikai elemek, azaz olyan fájlok, amelyek bizonyos követelményeknél
+kiegészítik a statisztikák modul funkcionalitását, integrálhatók az
+összetett statisztikák kiszámításához.
+</para>
+
+<section id="stats-usage" >
+<title>A modul kezelése az ügyintéző által</title>
+
+<para>
+Amikor ügyintézőként jelentkezik be, akkor a navigációs sáv megjeleníti a
+„Statisztikák” hivatkozást különféle almenü lehetőségekkel, amint az ábrán
+látható.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>A statisztikák modul</screeninfo> <graphic
+fileref="screenshots/stats-menu.png" scale="40" srccredit="stats-menu -
+Screenshot" /></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: A statisztikák menü lehetőségei.</emphasis>
+</para>
+
+<para>
+A statisztikák menüben nyújtott különböző lehetőségek a következők:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+            <emphasis>Áttekintés</emphasis>. Különböző előre beállított jelentések
+listáját jeleníti meg.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>Új</emphasis>. Írás-olvasás jogokat igényel.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>Importálás</emphasis>. Írás-olvasás jogokat igényel.
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<section id="stats-overview" >
+<title>Áttekintés</title>
+
+<para>
+A navigációs sávon lévő „Statisztikák” hivatkozás, majd az „Áttekintő”
+almenü hivatkozás kiválasztása hívja meg az áttekintő képernyőt. Az
+áttekintő képernyő jeleníti meg az előre beállított jelentések listáját,
+amelyeket az ügyintéző használhat (lásd a lenti ábrát).
+
+</para>
+
+<para>
+<screenshot>
+<screeninfo>A szabványos jelentések áttekintése</screeninfo> <graphic
+fileref="screenshots/stats-overview.png" scale="40"
+srccredit="stats-overview - Screenshot" /></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: A szabványos jelentések áttekintése.</emphasis>
+</para>
+
+<para>
+A következő információk vannak megadva az áttekintőben felsorolt szabványos
+jelentések mindegyikénél:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+            <emphasis>Stat#</emphasis>. Egyedi jelentésszám.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>Cím</emphasis>. A jelentés címe.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>Objektum</emphasis>. A statisztika előállításához használt
+objektum. Egy statikus statisztika esetén nincs megjelenítve objektum, mivel
+nem használnak dinamikus objektumot annak előállításához.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>Leírás</emphasis>. A jelentés rövid leírása.
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<para>
+Amikor a statisztikák modul telepítve van, akkor az előre betöltve érkezik a
+rendszerbe importált néhány példajelentéssel. Ezek vannak megjelenítve az
+áttekintő oldalon egy listaként. Ha az áttekintő lista egy oldalnál
+nagyobbra bővül, akkor az ügyintéző tallózhat a különböző oldalak között. A
+jelentések listája igény szerint rendezhető a kívánt oszlopfejlécre
+kattintva a listában. Egy adott jelentés előállításához kattintson a
+jelentéshez rendelt statisztikaszámra az áttekintőlistában. Ez előhozza a
+jelentés „Nézet” felületét.
+</para>
+
+</section>
+
+<section id="stats-viewing-generating">
+<title>Jelentések előállítása és megtekintése</title>
+
+<para>
+A nézet felhasználói felületet biztosítja a statisztika konfigurációjának
+beállításait (lásd a lenti ábrát).
+</para>
+
+<para>
+<screenshot id="stats-view-screenshot" >
+<screeninfo>Statisztika nézet</screeninfo> <graphic
+fileref="screenshots/stats-view.png" scale="40" srccredit="stats-view -
+Screenshot" /></screenshot>
+</para>
+
+<para>
+<emphasis>Ábra: Egy adott jelentés megtekintése.</emphasis>
+</para>
+
+<para>
+Egy adott jelentés konfigurációs beállításai a nézet képernyőben lévő
+választási lehetőségeken belül állíthatók be. Vagy a jelentés létrehozója,
+vagy a megfelelő jogosultságokkal rendelkező bárki más elvégezheti a
+beállításokat.
+</para>
+
+<para>
+Az oldal a következőket jeleníti meg:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+        Lehetséges műveletek:
+        </para>
+
+        <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Ugrás az áttekintőhöz</emphasis>. Visszahivatkozás a jelentések
+áttekintő listájára.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Szerkesztés</emphasis>. A jelenlegi jelentés struktúrájának
+szerkesztése (írás-olvasás jogok szükségesek).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Törlés</emphasis>. A jelenlegi jelentés törlése (írás-olvasás
+jogok szükségesek).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Beállítás exportálása</emphasis>. Egy jelentés beállításának
+exportálása fájlletöltésen keresztül (írás-olvasás jogok szükségesek).
+                </para>
+
+                <para>
+                    Használat: Az exportálás és az importálás funkciók lehetővé teszik a
+jelentések kényelmes létrehozását és tesztelését a tesztrendszereken, és a
+későbbi könnyű integrációját a termelési rendszerre.
+                </para>
+            </listitem>
+        </itemizedlist>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        Jelentés részletei:
+        </para>
+        <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Stat#</emphasis>. A jelentés száma.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Cím</emphasis>. A jelentés címe.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Objektum</emphasis>. A jelentés előállításához használt objektum.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Leírás</emphasis>. A jelentés céljának leírása.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Formátum</emphasis>. A jelentés kimeneti formátuma, amely a
+beállítástól függően a következő kimeneti formátumok bármelyike lehet:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                        CSV.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Nyomtatás.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-vonalak.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-oszlopok.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-vízszintes-oszlopok.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-pontok.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-vonalak-pontok.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-terület.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                        Grafikon-torta.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Grafikonméret</emphasis>. A grafikon vagy diagram mérete
+képpontban. Ez a lehetőség csak akkor adott, amikor a jelentés beállítása
+lehetővé teszi a diagramokat. Az összes általában használható grafikai
+méretet az OTRS adminisztrátora állíthatja be a rendszerbeállításokban. Az
+ügyintézők ezután előre kiválaszthatják az összes fontos formátumot a
+jelentés beállítása közben.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Összegző sorok</emphasis>. Azt jelzi, hogy a jelentés ki van-e
+egészítve egy olyan oszloppal, amely cellái a megfelelő sorok összegét
+fejezik ki.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Összegző oszlopok</emphasis>. Azt jelzi, hogy a jelentés ki van-e
+egészítve egy olyan sorral, amely cellái a megfelelő oszlopok összegét
+fejezik ki.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Gyorsítótár</emphasis>. Azt jelzi, hogy az előállított jelentés
+használ-e gyorsítótárat a fájlrendszeren.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Érvényesség</emphasis>. Ez beállítható „érvénytelenre”, ha egy
+jelentést átmenetileg tilos futtatni valamilyen okból. A jobb oldali panel
+alján lévő „Kezdés” gomb ekkor többé nem jelenik meg. A jelentést többé nem
+lehet előállítani.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Létrehozva</emphasis>. A jelentés előállításának ideje.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Létrehozta</emphasis>. Annak az ügyintézőnek a neve, aki a
+jelentést létrehozta.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Módosítva</emphasis>. Az az időpont, amikor a jelentést utoljára
+módisították.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>Módosította</emphasis>. Annak az ügyintézőnek a neve, aki a
+jelentést utoljára módosította.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>X-tengely</emphasis>. Ennek a funkciónak a használatával az
+ügyintéző átválthatja az X és az Y tengelyeket (csak ha az OTRS
+adminisztrátor bekapcsolta).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                Az általános információkat magáról a jelentésről szóló információk
+követik. Két különböző jelentés (vagy statisztika) nézet van:
+                </para>
+                <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis>Statikus statisztika nézet</emphasis>. A statikus jelentés
+előállítók integrálhatók a statisztikák modulba (lásd a lenti ábrát).
+                        </para>
+                        <para>
+                        <screenshot>
+<screeninfo>Statikus statisztika nézet</screeninfo> <graphic
+fileref="screenshots/stats-view-static.png" scale="40"
+srccredit="stats-view-static - Screenshot" /></screenshot>
+                        </para>
+                        <para>
+                            <emphasis>Ábra: Egy statikus jelentés megtekintése.</emphasis>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>Dinamikus statisztika nézet</emphasis> (lásd a feni ábrát). Ezek
+két különböző módon jeleníthetők meg:
+                        </para>
+                        <para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>Megváltoztathatatlan beállítások</emphasis>. A jelentés
+szerzőjének nincs jogosultsága ezeket a mezőket módosítani.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Megváltoztatható beállítások</emphasis>. Az ilyen jelentések
+konfigurációs beállításait megváltoztathatja az ügyintéző.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                </para>
+            </listitem>
+        </itemizedlist>
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<para>
+A „Kezdés” gomb megnyomása (a képernyő alján) az utolsó lépés a jelentés
+előállításához. Két lehetséges oka van annak, ha ez a gomb nem jelenik meg:
+</para>
+
+<para>
+<orderedlist numeration="arabic" >
+    <listitem>
+        <para>
+        A jelentés érvénytelenre lett állítva, és ennek következtében ki lett
+kapcsolva.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        A jelentés nem lett tisztán beállítva, és emiatt még nem hajtható
+végre. Ebben az esetben a szükséges információk az OTRS értesítési
+szakaszában találhatók meg (a navigációs sáv alatt).
+        </para>
+    </listitem>
+</orderedlist>
+</para>
+
+<para>
+Ha a nézet oldalon lévő beállítások nem helyesek, akkor ismét ez az oldal
+jelenik meg a „Kezdés” gomb megnyomása után, valamint információkat
+szolgáltat az értesítési szakaszban arról, hogy mely beviteli mező volt
+helytelen.
+</para>
+</section>
+
+<section id="stats-modify-new">
+<title>Szerkesztés / új</title>
+
+<para>
+Az írási jogokkal rendelkező ügyintézők szerkeszthetik egy meglévő jelentés
+beállításait a statisztikák modul szerkesztés felhasználói felületének
+meghívásával. Alternatív esetben létrehozhatnak egy új jelentést is. A
+hozzárendelt képernyők a következő módon érhetők el:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+<listitem>
+    <para>
+    Szerkesztés: A statisztika nézeten lévő „Szerkesztés” gombon keresztül.
+    </para>
+</listitem>
+<listitem>
+    <para>
+    Új: A navigációs sávról elérhető Statisztikák menüben lévő „Új” hivatkozáson
+keresztül, vagy az áttekintő oldalról a „Hozzáadás” gombbal.
+    </para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+A statisztikák egy varázslóval szerkeszthetők négy lépésben:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+<listitem>
+    <para>
+    Általános specifikációk.
+    </para>
+</listitem>
+<listitem>
+    <para>
+    Az elem meghatározása az X-tengelyhez.
+    </para>
+</listitem>
+<listitem>
+    <para>
+    Az adatsorok specifikációja.
+    </para>
+</listitem>
+<listitem>
+    <para>
+    A megkötések kiválasztása a jelentés korlátozásához.
+    </para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+A 2. lépéstől a 4. lépésig csak a dinamikus statisztikákkal rendelkező
+jelentések előállításához szükségesek. Egy statikus statisztikához csak az
+általános információk (1. pont) szükségesek.
+</para>
+
+<para>
+Az oldal kezeléséről szóló információk ezen képernyők mindegyikén meg vannak
+adva a Műveletek panel alatt egy Tipp panelen.
+</para>
+
+<para>
+Ha helytelen bemenetek kerülnek megadásra, akkor az előzőleg feldolgozott
+felhasználói felület jelenik meg ismét a helytelen bevitellel kapcsolatos
+információkkal. Ezek az információk az OTRS értesítési szakaszában
+találhatók meg. A következő bemenet felhasználói felülete csak azután
+jelenik meg, miután a jelenlegi űrlap helyesen lett kitöltve.
+</para>
+
+<para>
+<orderedlist numeration="arabic" >
+<listitem>
+    <para>
+        <emphasis>Általános specifikációk</emphasis>. Ez a szerkesztési varázsló
+első oldala (lásd a lenti ábrát).
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>Általános specifikációk</screeninfo> <graphic
+fileref="screenshots/stats-edit-general.png" scale="40"
+srccredit="stats-edit-general - Screenshot" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>Ábra: Egy jelentés általános specifikációinak
+szerkesztése.</emphasis>
+    </para>
+
+
+    <para>
+        Az ábrán látható képernyőn nagyszámú közös specifikáció és beállítás
+található, amelyeket szerkeszteni lehet:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>Cím</emphasis>. Tükröznie kell tömören a statisztika célját.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Leírás</emphasis>. Több leíró információ a jelentés
+meghatározásáról, beállítási paramétereinek típusáról, stb.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Dinamikus objektum</emphasis>. Ha az OTRS telepítés különféle
+dinamikus objektumokat biztosít, akkor azok közül egy választható. Az
+objektumok megfelelnek bizonyos modulok követelményeinek.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Statikus fájl</emphasis>. Általában ez a választás nem látható,
+mivel csak azok a statikus fájlok vannak megjelenítve, amelyek még nincsenek
+hozzárendelve egyetlen jelentéshez sem. Ha a „Statikus fájl” meg van
+jelenítve, akkor is fontos a lehetőség mező bepipálása és egy előállítási
+mód kiválasztása (dinamikus egy dinamikus objektummal, vagy statikus egy
+fájllal). Ha egy statikus fájl kiválasztásra kerül, akkor a bemenet 2-től
+4-ig terjedő felhasználói felületei nem jelennek meg, mivel a statikus fájl
+tartalmazza az összes szükséges konfigurációs beállítást.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Jogosultsági beállítások</emphasis>. Azon csoportok (és
+következésképpen ügyintézők) korlátozásának megkönnyítése, akik később
+megtekinthetik és előállíthatják az előre beállított jelentéseket. Így a
+különféle jelentések hozzárendelhetők a különböző részlegekhez és
+munkacsoportokhoz, akiknek erre szüksége van. Lehetséges egy jelentést
+különféle csoportokhoz is rendelni.
+            </para>
+
+            <para>
+                1. példa: A „stats” csoport lett kiválasztva. A jelentés megtekinthető az
+összes olyan felhasználónak, akiknek legalább csak olvasható jogaik vannak a
+„stats” csoportnál. Ez a hozzáférés alapértelmezetten elérhető.
+            </para>
+
+            <para>
+                2. példa: Egy „értékesítés” nevű csoport lett kiválasztva. Az „értékesítés”
+csoportnál a csak olvasható jogokkal rendelkező összes felhasználó
+megtekintheti a statisztikát a nézet módban, és előállíthatja azt. Azonban a
+jelentés nem lesz elérhető megtekintésre a többi felhasználónak.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Formátum</emphasis>. A statisztika kimeneti formátuma: a
+beállítástól függően a következő formátumok közül egy vagy több választható
+ki:
+            </para>
+
+            <para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        CSV.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Nyomtatás.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-vonalak.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-oszlopok.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-vízszintes-oszlopok.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-pontok.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-vonalak-pontok.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-terület.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        grafikon-torta.
+                    </para>
+                </listitem>
+            </itemizedlist>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Grafikonméret</emphasis>. A diagram méretének kiválasztása
+képpontban. Ez a választás csak akkor szükséges, ha egy grafikus kimeneti
+formátum lett kiválasztva a „Formátum” alatt. Az összes általában használt
+grafikai méretet az OTRS adminisztrátora határozza meg a
+rendszerbeállításokban. A jelentés beállításakor az ügyintéző előre
+kiválaszthatja az összes fontos formátumot.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Összegző sorok</emphasis>. Azt jelzi, hogy a jelentés ki van-e
+egészítve egy olyan oszloppal, amely cellái a megfelelő sorok összegét
+tartalmazzák.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Összegző oszlopok</emphasis>. Azt jelzi, hogy a jelentés ki van-e
+egészítve egy olyan sorral, amely cellái a megfelelő oszlopok összegét
+tartalmazzák.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis>Gyorsítótár</emphasis>. Megadja, hogy az előállított jelentés
+használjon-e gyorsítótárat a fájlrendszeren. Ez számítási erőforrást és időt
+takarít meg, ha a jelentést újra meghívják, de csak akkor kell használni, ha
+a jelentés tartalma már nem változik.
+            </para>
+
+            <para>
+                A gyorsítótárazás automatikusan meg lesz akadályozva, ha a jelentés nem
+tartalmaz időmegjelölés értékeket, vagy ha egy időmegjelölés érték a jövőbe
+mutat.
+            </para>
+
+            <para>
+                Ha egy gyorsítótárazott jelentést szerkesztenek, akkor az összes
+gyorsítótárazott adat törlésre kerül.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                            <emphasis>Érvényesség</emphasis>. Ez beállítható „érvénytelenre”, ha egy
+előre beállított jelentést átmenetileg tilos futtatni valamilyen okból. A
+jobb oldali panel alján lévő „Kezdés” gomb ekkor többé nem jelenik meg. A
+jelentést többé nem lehet előállítani.
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <emphasis>Az elem meghatározása az X-tengelyhez</emphasis>. Ez az X-tengely
+ábrázolásánál használt elem, vagy ha táblákat használnak, akkor az
+X-tengelyre alkalmazott oszlop nevének beállítása (lásd az ábrát).
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>Az elem meghatározása az X-tengelyhez.</screeninfo> <graphic
+fileref="screenshots/stats-edit-xaxis.png" scale="40"
+srccredit="stats-edit-xaxis - Screenshot" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>Ábra: Az elem meghatározása az X-tengelyhez.</emphasis>
+    </para>
+
+    <para>
+    Mindenek előtt egy elem kerül kijelölésre a lehetőség mező
+használatával. Ezután az elem kettő vagy több jellemzőjét kell
+kiválasztani. Ha nem kerül jellemző kiválasztásra, akkor az összes jellemző
+használva lesz, beleértve azokat is, amelyek a jelentés beállítása után
+lesznek hozzáadva.
+    </para>
+
+    <para>
+    Ha a „Rögzített” beállítás le van tiltva, akkor a jelentést előállító
+ügyintéző megváltoztathatja a megfelelő elem jellemzőit a „Nézet”
+felhasználói felületen.
+    </para>
+
+    <para>
+    Az időszaktól és a skálától eltérő időelemeket fel kell tüntetni. Az elemek
+típusa és száma a használt dinamikus objektumtól és változattól származik
+attól függően.
+    </para>
+
+    <para>
+    Ha minden bemenet helyes, akkor a „Következő” gomb az „Adatsorok” űrlapra
+vezet. Lehetőség van a visszalépésre is a korábbi szakaszok szerkesztéséhez.
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <emphasis>Az adatsorok specifikációja</emphasis>.
+    </para>
+
+    <para>
+    A jelentés beállításának ebben a harmadik lépésében az adatsorok vannak
+meghatározva (lásd a lenti ábrát). Ezek fogják később megformázni az egyes
+grafikonokat vagy a különféle sorozatokat egy táblázatos nézeten belül.
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>Az adatsorok meghatározása</screeninfo> <graphic
+fileref="screenshots/stats-edit-valueseries.png" scale="40"
+srccredit="stats-edit-valueseries - Screenshot" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>Ábra: Az adatsorok meghatározása.</emphasis>
+    </para>
+
+    <para>
+    Ha egy elemet kiválasztanak, akkor minden egyes kiválasztott jellemző egy
+adatsornak fog megfelelni (lásd a lenti példát).
+    </para>
+
+    <para>
+    <example id="stats-value-series-1">
+    <title>Egy adatsor meghatározása - egy elem</title>
+
+    <para>
+    Elem várólista:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            1. adatsor = Raw
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            2. adatsor = Junk
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            …
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+    </example>
+    </para>
+
+    <para>
+    Ha két elemet választanak ki, akkor az első elem minden egyes kiválasztott
+jellemzője össze lesz kapcsolva a második elem egy jellemzőjével egy adatsor
+kialakításához (lásd a lenti példát).
+    </para>
+
+    <para>
+    <example id="stats-value-series-2" >
+    <title>Egy adatsor meghatározása - két elem </title>
+
+    <para>
+    1. elem várólista, 2. elem állapot:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            1. adatsor = Raw - nyitott
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            2. adatsor = Raw - sikeresen lezárva
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            3. adatsor = Junk - nyitott
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            4. adatsor = Junk - sikeresen lezárva
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+    </example>
+    </para>
+
+    <para>
+    Három vagy több elem kiválasztása nem engedélyezett.
+    </para>
+
+    <para>
+    Továbbá ugyanazokat a feltételeket alkalmazza a jellemzők kiválasztására és
+a „Rögzített” jelölőnégyzetre mint az „X-tengely” kiválasztására:
+    </para>
+
+    <para>
+    <itemizedlist>
+        <listitem>
+            <para>
+            Ha az elemnek nincsenek jellemzői kiválasztásra, akkor az összes jellemző
+használva lesz, beleértve azokat is, amelyek a jelentés beállítása után
+lesznek hozzáadva.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Ha a „Rögzített” beállítás le van tiltva, akkor a jelentést előállító
+ügyintéző megváltoztathatja a megfelelő elem jellemzőit.
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <emphasis>Megkötések beállítása a jelentéshez</emphasis>. Ez a beállítás
+negyedik, egyben utolsó lépése (lásd a lenti ábrát). A megkötések az
+eredmények korlátozását szolgálják a kiválasztott ismérvekre. Számos esetben
+egyáltalán nem lehet megkötéseket beállítani.
+    </para>
+
+    <para>
+    <screenshot>
+<screeninfo>Megkötések meghatározása</screeninfo> <graphic
+fileref="screenshots/stats-edit-restrictions.png" scale="40"
+srccredit="stats-edit-restrictions - Screenshot" /></screenshot>
+    </para>
+
+    <para>
+        <emphasis>Ábra: Megkötések meghatározása.</emphasis>
+    </para>
+
+    <para>
+    Miután az összes megkötés be lett állítva, a jelentés beállítása a
+„Befejezés” gomb megnyomásával fejezhető be.
+    </para>
+</listitem>
+</orderedlist>
+</para>
+</section>
+
+<section id="stats-import">
+<title>Importálás</title>
+
+<para>
+Az importálás felhasználói felülete (lásd a lenti ábrát) a „Statisztikák”,
+majd az „Importálás” hivatkozás választásával érhető el a navigációs
+sávról. Alternatívaként az áttekintő képernyőn lévő Importálás gomb
+megnyomása is ugyanazt az eredményt éri el. A jelentéshez „írás-olvasás”
+jogok szükségesek.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Az importálás felhasználói felülete</screeninfo> <graphic
+fileref="screenshots/stats-import.png" scale="40" srccredit="stats-import -
+Screenshot" /></screenshot>
+</para>
+
+<para>
+    <emphasis>Ábra: Az importálás felhasználói felülete.</emphasis>
+</para>
+
+<para>
+Megkönnyíti a jelentések importálását és nagyon hasznos funkcionalitás,
+amikor egyesítve van a modul exportálási funkciójával. A statisztikák
+kényelmesen létrehozhatók és tesztelhetők a tesztrendszereken, majd
+importálhatók a termelési rendszerre.
+</para>
+
+<para>
+Az importálás egy egyszerű fájlfeltöltéssel történik meg. Az importált
+jelentés „Nézet” felhasználói felülete azután automatikusan megnyílik.
+</para>
+</section>
+
+</section>
+
+<section id="stats-managing-the-module">
+<title>A statisztikák modul adminisztrációja az OTRS adminisztrátora által</title>
+
+<para>
+Ez a szakasz információkat nyújt a statisztikák modullal foglalkozó OTRS
+adminisztrátor feladatairól és felelősségeiről.
+</para>
+
+<section id="stats-permissions" >
+<title>Jogosultság-beállítások, csoportok és várólisták</title>
+
+<para>
+Nem lesznek új várólisták és/vagy csoportok létrehozva, amikor a
+statisztikák modul telepítésre kerül.
+</para>
+
+<para>
+A modul regisztrációjának alapértelmezett beállítása a „stats” csoportban
+lévő összes ügyintézőnek megadja a statisztikák modulhoz való hozzáférés
+jogosultságát.
+</para>
+
+<para>
+Hozzáférés a jogosultság-beállítások szerint:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+            <emphasis>írható-olvasható</emphasis>. Lehetővé teszi a statisztikák és
+jelentések beállítását.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            <emphasis>csak olvasható</emphasis>. Megakadályozza az előre beállított
+statisztikák és jelentések előállítását.
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+
+<para>
+Az OTRS adminisztrátor dönti el, hogy az előre beállított jelentések
+előállításához jogosultsággal rendelkező ügyintézőkhöz hozzá legyenek-e
+rendelve a csak olvasható jogok a „stats” csoportban, vagy hogy a megfelelő
+csoportok legyenek-e hozzáadva a modul regisztrációjához a
+rendszerbeállításokban.
+</para>
+</section>
+
+<section id="stats-sysconfig" >
+<title>Rendszerbeállítások</title>
+
+<para>
+A <link
+linkend="ConfigReference_Framework:Core::Stats">Framework:Core::Stats</link>,
+a <link
+linkend="ConfigReference_Framework:Core::Stats::Graph">Framework:Core::Stats::Graph</link>
+és a <link
+linkend="ConfigReference_Framework:Frontend::Agent::Stats">Framework:Frontend::Agent::Stats</link>
+rendszerbeállítás csoportok az összes beállítási paramétert tartalmazzák a
+statisztikák modul alap beállításához. Emellett a <link
+linkend="ConfigReference_Framework:Frontend::Agent::ModuleRegistration:Frontend::Module_AgentStats">$Self-&gt;{'Frontend::Module'}-&gt;{'AgentStats'}</link>
+beállítási paraméter vezérli a modulok és ikonok elrendezését és
+regisztrációját a statisztikák modulon belül.
+</para>
+</section>
+
+</section>
+
+<section id="stats-managing-the-stats-module-by-the-sysadmin" >
+<title>A statisztikák modul adminisztrációja a rendszer adminisztrátora által</title>
+
+<para>
+Általában nem szükséges rendszer adminisztrátor a statisztikák modul
+működtetéséhez, beállításához és karbantartásához. Azonban a rendszer
+adminisztrátornak egy kis háttérinformációt adunk ezen a ponton.
+</para>
+
+<note>
+<para>
+A fájlútvonalak az OTRS saját könyvtárának alkönyvtáraira hivatkoznak (a
+legtöbb esetben az <filename>/opt/otrs</filename> könyvtárra).
+</para>
+</note>
+
+<section id="stats-db-table" >
+<title>Adatbázis tábla</title>
+
+<para>
+Az összes jelentés beállításai XML-ben vannak megvalósítva és
+adminisztrálva, és emiatt az „xml_storage” adatbázis táblában vannak
+eltárolva. Az egyéb modulok is ezt a táblát használják, amelyek tartalma
+XML-formátumban van megadva.
+</para>
+
+</section>
+
+<section id="stats-filelist" >
+<title>Az összes fájl listája</title>
+
+<para>
+A következő fájlok szükségesek a statisztikák modul precíz működéséhez:
+</para>
+
+<para>
+<itemizedlist>
+    <listitem>
+        <para>
+        <filename>Kernel/System/Stats.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Modules/AgentStats.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/System/CSV.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsOverview.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsDelete.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditSpecification.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditRestrictions.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditXaxis.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsEditValueSeries.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsImport.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsPrint.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/Output/HTML/Standard/AgentStatsView.dtl</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>Kernel/System/Stats/Dynamic/Ticket.pm</filename>
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+        <filename>bin/otrs.GenerateStats.pl</filename>
+        </para>
+    </listitem>
+</itemizedlist>
+</para>
+</section>
+
+<section id="stats-caching" >
+<title>Gyorsítótárazás</title>
+
+<para>
+Az, hogy egy statisztika eredményei gyorsítótárazandók-e vagy sem, a
+beállításokban állítható be. A gyorsítótárazott jelentések eredményei
+fájlokként vannak tárolva az OTRS telepítésnek a
+<filename>var/tmp</filename> könyvtárában (a legtöbb esetben az
+<filename>/opt/otrs/var/tmp</filename> könyvtárban).
+</para>
+
+<para>
+A gyorsítótárazott statisztikák a „Stats” előtag alapján ismerhetők fel.
+</para>
+
+<para>
+Ha az adatok elvesznek, az nem okoz jelentős károkat. A jelentés következő
+meghívásának alkalmával a statisztikák modul többé nem fogja megtalálni a
+fájlt, és így egy új jelentést fog előállítani. Természetesen valószínűleg
+egy kicsit tovább fog tartani a futtatása.
+</para>
+</section>
+
+<section id="stats-mkstats" >
+<title>otrs.GenerateStats.pl</title>
+
+<para>
+Ez a fájl a <filename>bin</filename> könyvtárban van elmentve. Megkönnyíti a
+jelentés előállítását a parancssorból.
+</para>
+
+<para>
+Egy példaként nézze meg a parancssori hívást a következő parancsfájlban.
+</para>
+
+<para>
+<programlisting>
+bin> perl otrs.GenerateStats.pl -n 10004 -o /output/dir
+</programlisting>
+</para>
+
+<para>
+    <emphasis>Parancsfájl: Egy jelentés előállítása a parancssorból.</emphasis>
+</para>
+
+<para>
+A „Stat# 10004” statisztika beállításából származó jelentés CSV-fájlként
+lesz előállítva és elmentve a <filename>/output/dir</filename> könyvtárban.
+</para>
+
+<para>
+Az előállított jelentés elküldhető e-mailben is. További információk
+hívhatók elő a lenti parancsfájlban lévő paranccsal:
+</para>
+
+<para>
+<programlisting>
+bin> perl otrs.GenerateStats.pl --help
+</programlisting>
+</para>
+
+<para>
+    <emphasis>Parancsfájl: Információk beszerzése az otrs.GenerateStats.pl
+fájlról.</emphasis>
+</para>
+
+</section>
+
+<section id="stats-cron" >
+<title>Automatizált statisztika-előállítás - Cron-feladat</title>
+
+<para>
+Általában nincs értelme a jelentések kézi előállításának a parancssoron
+keresztül, mivel a statisztikák modul egy kényelmes grafikus felhasználói
+felülettel rendelkezik. Azonban a jelentések kézi előállítása értelmet nyer,
+amikor egy cron-feladattal egyesítik.
+</para>
+
+<para>
+Képzelje el a következő forgatókönyvet: Minden hónap első napján az
+osztályvezetők jelentést szeretnének kapni az előző hónapról. Egy
+cron-feladat és egy parancssori hívás egyesítésével a jelentések elküldhetők
+nekik automatikusan e-mailben.
+</para>
+
+</section>
+
+<section id="stats-static" >
+<title>Statikus statisztikák</title>
+
+<para>
+A statisztikák modul megkönnyíti a statikus statisztikák
+előállítását. Minden egyes statikus statisztikához létezik egy fájl,
+amelyben annak tartalma pontosan meg van határozva.
+</para>
+
+<para>
+Ily módon nagyon összetett statisztikák is előállíthatók. A hátránya az,
+hogy nem különösebben rugalmasak.
+</para>
+
+<para>
+A fájlok a <filename>Kernel/System/Stats/Static/</filename> könyvtárba
+vannak elmentve.
+</para>
+</section>
+
+<section id="stats-using-old-stats" >
+<title>Régi statikus statisztikák használata</title>
+
+<para>
+Az OTRS 1.3-as és 2.0-ás előzetes verziói már megkönnyítették a statisztikák
+/ jelentések előállítását. Az OTRS 1.3-as és 2.0-ás verzióinak különféle
+jelentései, amelyek speciálisan lettek kifejlesztve, hogy kielégítsék az
+ügyfelek követelményeit, használhatók az OTRS jelenlegi verzióiban is.
+</para>
+
+<para>A fájlokat pusztán csak át kell helyezni a
+<filename>Kernel/System/Stats/</filename> útvonalról a
+<filename>Kernel/System/Stats/Static/</filename> könyvtárba. Továbbá a
+megfelelő parancsfájl csomagnevét „::Static” névre kell módosítani.
+</para>
+
+<para>
+A következő példa azt mutatja be, hogy hogyan kell az első útvonalat
+módosítani.
+</para>
+
+<para>
+<programlisting>
+    package Kernel::System::Stats::AccountedTime;
+</programlisting>
+</para>
+
+<para>
+<programlisting>
+    package Kernel::System::Stats::Static::AccountedTime;
+</programlisting>
+</para>
+</section>
+
+<section id="stats-default-stats" >
+<title>Alapértelmezett statisztikák</title>
+
+<para>„Nem szükséges mindig újra feltalálni a kereket…”
+</para>
+
+<para>
+A statisztikák modul különféle alapértelmezett jelentéseket biztosít. Azok a
+jelentések, amelyek minden OTRS felhasználó számára érdekesek, a jövőben
+hozzá lesznek adva a statisztikák modul csomagjának alapértelmezett
+jelentéskészletéhez. Az alapértelmezett jelentések XML-formátumban vannak
+elmentve a statisztikák modulban a <filename>scripts/test/sample/</filename>
+könyvtárban.
+</para>
+
+</section>
+
+</section>
+
+</section>

@@ -1,0 +1,752 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="otrs">
+    <title>OTRS segélyszolgálat</title>
+
+    <abstract>
+        <para>
+            Ez a fejezet az OTRS segélyszolgálat (OTRS) szolgáltatásait írja
+le. Információkat fog találni az OTRS hardver- és szoftverkövetelményeiről,
+továbbá ebben a fejezetben fogja megismerni, hogy hogyan szerezhet
+kereskedelmi támogatást az OTRS-hez, szüksége van-e rá, és hogyan léphet
+kapcsolatba a közösséggel.
+        </para>
+    </abstract>
+
+    <section id="otrs-basics">
+        <title>Alapok</title>
+
+        <para>
+            Az OTRS segélyszolgálat (OTRS) egy olyan webalkalmazás, amelyet egy
+webkiszolgálóra telepítenek és egy webböngészővel használható.
+        </para>
+        <para>
+            Az OTRS számos összetevőre van bontva. A fő összetevő az OTRS keretrendszer,
+amely az összes központi funkciót tartalmazza az alkalmazáshoz és a
+jegyrendszerhez. Lehetséges további alkalmazások telepítése is, mint például
+az OTRS::ITSM modulok, integrációk a hálózati megfigyelési megoldásokkal,
+tudásbázis (GyIK), stb.
+        </para>
+    </section>
+
+    <section id="features-of-otrs">
+        <title>Szolgáltatások</title>
+
+        <para>
+            Az OTRS számos szolgáltatással rendelkezik. A következő lista áttekintést
+nyújt az OTRS keretrendszerben lévő fő szolgáltatásokról.
+        </para>
+
+        <section>
+        <title>Felhasználói felület</title>
+            <itemizedlist>
+              <listitem>
+                <para>
+                    Az OTRS különálló, modern webes felülettel érkezik az ügyintézők és az
+ügyfelek számára.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Használható bármilyen modern webböngészővel, beleértve a mobilos
+platformokat is, valamint készen áll a retina kijelzőkhöz.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A webes felület személyre szabható saját témákkal és felszínekkel.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Hatékony és személyre szabható ügyintézői vezérlőpult személyes
+jegyáttekintőkkel és grafikus statisztika támogatással.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Egy bővíthető jelentésmotor különféle statisztika és jelentés ütemezési
+lehetőséget biztosít.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A folyamatkezeléssel lehetőség van saját jegyalapú képernyőket és
+folyamatokat (jegy munkafolyamatokat) meghatározni.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Az OTRS beépített jogkezeléssel rendelkezik, amely részletes
+hozzáférés-vezérlési listákkal (ACL-ekkel) bővíthető.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Több mint 30 nyelv és különböző időzónák támogatása.
+                </para>
+              </listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Levelezési felület</title>
+            <itemizedlist>
+              <listitem>
+                <para>
+                    Mellékletekkel rendelkező MIME e-mailek támogatása.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A HTML automatikus átalakítása egyszerű szöveges üzenetekre (megnövelt
+biztonság az érzékeny tartalomhoz és gyorsabb keresés engedélyezése).
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A bejövő levél szűrhető és előfeldolgozható összetett szabályokkal, például
+levélszemét üzeneteknél vagy várólista elosztáshoz.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    PGP és S/MIME szabványok támogatása a kulcs/tanúsítvány kezelésnél és az
+e-mail feldolgozásnál.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Automatikus válaszok, amelyek minden várólistánál beállíthatók.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    E-mail értesítések az ügyintézőknek az új jegyekről, a követésekről vagy a
+feloldott jegyekről.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Lehetséges saját jegyazonosítót meghatározni a követések felismeréséhez,
+például Hívás#, Jegy# vagy Kérés#. Különböző jegyszám előállítók vannak
+(dátum alapú, véletlen, stb.), valamint integrálhatja a sajátját is. A
+követések felismerhetők az In-Reference-To fejlécekkel vagy külső
+jegyszámokkal is.
+                </para>
+              </listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Jegyek</title>
+            <itemizedlist>
+              <listitem>
+                <para>
+                    Az OTRS jegyeket használ az összes olyan külső vagy belső kommunikáció
+begyűjtéséhez, amelyek egymáshoz tartoznak. Ezek a jegyek várólistákba
+vannak szervezve.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Számos különböző módja van a jegyek keresésének a rendszeren (várólisták,
+állapotok, eszkaláció, stb. alapján) a részletek különböző szintjén
+(kicsi/közepes/előnézet).
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A jegyelőzmények minden változtatást rögzít egy jegyhez.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A jegyek több módon is megváltoztathatók, például válasszal, továbbítással,
+visszaküldéssel, áthelyezéssel egy másik várólistába, jellemzők
+frissítésével (állapot, prioritás, stb.), zárolással és munkaidő
+elszámolásával. Lehetséges egyszerre több jegyet módosítani (tömeges
+művelet).
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A várakozási idő és az eszkalációs idő / SLA-kezelés lehetővé teszi az
+időalapú ütemezést és a jegyekre történő korlátozást.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A jegyek összekapcsolhatók más jegyekkel vagy más objektumokkal, mint
+például GyIK bejegyzésekkel.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Automatikus és időzített műveletek lehetségesek a jegyeken az „Általános
+ügyintézővel”.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Az OTRS egy hatékony keresőmotorral érkezik, amely összetett és
+szabad-szavas kereséseket tesz lehetővé a jegyekben.
+                </para>
+              </listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Rendszer</title>
+            <itemizedlist>
+              <listitem>
+                <para>
+                    Az OTRS számos operációs rendszeren fut (Linux, Solaris, AIX, FreeBSD,
+OpenBSD, Mac OS 10.x), és különféle adatbázis-rendszereket támogat a
+központi OTRS háttérprogramnál (MySQL, PostgreSQL, Oracle, MSSQL).
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    A központi rendszer kiterjeszthető OTRS csomagok telepítésével. Számos
+ingyenes csomag létezik (úgymint FAQ, OTRS::ITSM és egyebek), valamint
+szolgáltatásbővítő csomagok, amelyek az OTRS csoport szolgáltatási
+szerződéses ügyfeleinek érhetők el.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Külső háttérprogramok integrációja az ügyféladatokhoz, például AD,
+eDirectory vagy OpenLDAP szolgáltatásokon keresztül. Az ügyfelek
+hitelesíthetők adatbázis, LDAP, HTTPAuth vagy Radius protokollokon
+keresztül.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                    Az általános felülettel könnyű az OTRS-t más webszolgáltatásokkal
+összekapcsolni. Egyszerű webszolgáltatások integrálhatók programozás, vagy
+egyéni kiterjesztésekkel rendelkező összetett forgatókönyvek nélkül. Az OTRS
+jegycsatlakozó lehetővé teszi jegyek létrehozását, frissítését és keresését
+egy harmadik fél által készített alkalmazásból származó webszolgáltatásokon
+keresztül.
+                </para>
+              </listitem>
+            </itemizedlist>
+
+            <para>
+                Most nézzük meg az OTRS legújabb verzióiban lévő változásokat.
+            </para>
+        </section>
+
+        <section id="new-features-of-otrs-4">
+            <title>Az OTRS 4 új szolgáltatásai</title>
+            <section>
+                <title>Termelékenység</title>
+                <itemizedlist>
+                    <listitem><para>Egy új letisztult lapos dizájn lett megvalósítva. </para></listitem>
+                    <listitem><para>Az ügyintézők most már közvetlenül tudnak válaszolni egy jegy jegyzetére. Az
+eredeti jegyzetek törzse idézve lesz az új jegyzetben. </para></listitem>
+                    <listitem><para>Az ügyintézők most már hasznosíthatják a sablonokat minden belső
+jegyzetekkel rendelkező képernyőn. </para></listitem>
+                    <listitem><para>A jegyművelet képernyők (mint például jegyzet, tulajdonos, stb.) most már
+anélkül teszik lehetővé a műveletek elvégzését, hogy mindig egy bejegyzést
+hoznának létre (beállítható).</para></listitem>
+                    <listitem><para>Új jegyáttekintő a „saját szolgáltatások” alapján, amelyre egy ügyintéző
+feliratkozhat. Az új jegyek és követések értesítési lehetőségei mostantól a
+„saját várólistákon”, a „saját szolgáltatásokon” vagy a kettő kombinációján
+alapulhatnak. </para></listitem>
+                    <listitem><para>Az OTRS most már meg tudja jeleníteni a bejegyzések ezreivel rendelkező
+jegyeket.</para></listitem>
+                    <listitem><para>Az elérhető ügyfelek listája a vezérlőpulton most már közvetlenül az
+ügyfélinformációs központra hivatkozik az ügyfélnél.</para></listitem>
+                    <listitem><para>Az ügyintézők most már tartósan átrendezhetik a főmenüjüket fogd és vidd
+módszerrel.</para></listitem>
+                    <listitem><para>Az ügyintézők és az ügyfelek most már kereshetnek jegyeket a melléklet neve
+szerint. </para></listitem>
+                    <listitem><para>Új vezérlőpult felületi elem a futó folyamatjegyeknél.</para></listitem>
+                    <listitem><para>Új keresési lehetőségek a jegy legutolsó módosítási idejénél.</para></listitem>
+                    <listitem><para>Új képernyő lett hozzáadva egy jegyen az olyan kimenő e-maileknél, amelyek
+nem válaszok.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Skálázhatóság és teljesítmény</title>
+                <itemizedlist>
+                    <listitem><para>Az OTRS 4 képes több egyidejű felhasználót/kérést kezelni ugyanazon a
+hardveren, és az egyes kérések válaszideje is rövidebb, különösen a sok
+adattal rendelkező oldalaknál.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Működés a külső rendszerekkel</title>
+                <itemizedlist>
+                    <listitem><para>Az általános felület most már támogatja a HTTP REST kéréseket is mint
+hálózati átviteli protokollokat.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Telepítés és adminisztráció</title>
+                <itemizedlist>
+                    <listitem><para>A levelezési szűrők többé nincsenek 4 találat/beállítás mezőre
+korlátozva. Mostantól egy beállítható mennyiségű mezője lehet
+(alapértelmezetten 12, legfeljebb 99).</para></listitem>
+                    <listitem><para>Egy új Ticket::MergeDynamicFields beállítási lehetőség lehetővé teszi annak
+megadását, hogy mely dinamikus mezőket kell egyesíteni, amikor egy jegyet
+egy másik jeggyel egyesítenek.</para></listitem>
+                    <listitem><para>Új lehetőségek lettek hozzáadva a szöveg típusú dinamikus mezők
+ellenőrzéséhez a (lefordított) hibaüzenetekhez kapcsolódó mintáknál, ha nem
+illeszkednek.</para></listitem>
+                    <listitem><para>Új lehetőségek lettek hozzáadva a dátum vagy dátum és idő típusú dinamikus
+mezők korlátozásához a jövőbeli vagy múltbeli dátumoknál.</para></listitem>
+                    <listitem><para>Az OTRS beállítható egy jegy automatikus feloldásához, ha bejegyzések
+kerülnek hozzáadásra és a tulajdonos irodán kívül van.</para></listitem>
+                    <listitem><para>Egy adott típus (például egyesített vagy eltávolított) kapcsolt jegyei most
+már elrejthetők egy rendszerbeállítási lehetőségen keresztül.</para></listitem>
+                    <listitem>
+                        <para>
+                            Az ACL-kezelés tovább lett fejlesztve következetesebbé téve és megkönnyítve
+a hibakeresést.
+                            <itemizedlist>
+                                <listitem><para>Új „PossibleAdd” ACL-lehetőség lett hozzáadva egy lehetséges listához
+történő elemek hozzáadásához visszaállítás nélkül (mint ahogy a „Possible”
+teszi).</para></listitem>
+                                <listitem><para>Új ACL értékmódosítók lettek hozzáadva minden ACL-részhez: [Not],
+[NotRegExp], [Notregexp].</para></listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            A folyamatkezelés tovább lett fejlesztve következetesebbé téve és
+megkönnyítve a hibakeresést.
+                            <itemizedlist>
+                                <listitem><para>Egy új GUID-alapú egyedelnevezési séma az OTRS folyamatbeállításnál lehetővé
+teszi a folyamatok biztonságos átvitelét az egyik rendszerről egy másikra az
+egyedek kettőzése nélkül.</para></listitem>
+                                <listitem><para>Új átmenet művelet lett hozzáadva egy új jegy létrehozásához.</para></listitem>
+                                <listitem><para>Hozzáadásra került egy lehetőség változó átmenet művelet jellemzők
+meghatározásához a jelenlegi folyamatjegy értékek alapján.</para></listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            A rendszerkarbantartási időszakok ütemezésének lehetősége elérhető az
+adminisztrációs felületen lévő rendszer adminisztráció panelről.
+                            <itemizedlist>
+                                <listitem><para>Egy bejövő rendszerkarbantartási időszakról szóló értesítés lesz
+megjelenítve egy kis (beállítható) idővel előre.</para></listitem>
+                                <listitem><para>Ha egy rendszerkarbantartás aktív, akkor egy erről szóló értesítés lesz
+megjelenítve az ügyintézői- és az ügyfélfelületen, és csak az adminisztrátor
+felhasználók tudnak bejelentkezni a rendszerre.</para></listitem>
+                                <listitem><para>Egy áttekintő képernyő tájékoztatja az adminisztrátorokat az aktív
+munkamenetekről, amelyek egy kattintással befejezhetők egyszerre vagy
+egyesével.</para></listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem><para>Hozzáadásra került egy lehetőség a rendszerbeállítás importálásának
+letiltásához a beállításokon keresztül.</para></listitem>
+                    <listitem><para>Hozzáadásra került az Apache MD5 mint egy új jelszókivonatoló háttérprogram,
+Norihiro Tanaka jóvoltából.</para></listitem>
+                    <listitem><para>Hozzáadásra került egy lehetőség az ügyfél önmaga regisztrációjának
+korlátozásához e-mail címek fehér vagy fekete listája által, Renée Bäcker
+jóvoltából.</para></listitem>
+                    <listitem><para>Új vezérlőpult modul lett hozzáadva, amely egy külső parancs kimenetét
+jeleníti meg, ib.pl jóvoltából.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Fejlesztés</title>
+                <itemizedlist>
+                    <listitem><para>Új hatékony sablonmotor a Template::Toolkit alapján.</para></listitem>
+                    <listitem><para>Egy központi objektumkezelő sokkal könnyebbé teszi a globális objektumok
+létrehozását és használatát (Moritz Lenz jóvoltából a noris hálózatról).</para></listitem>
+                    <listitem><para>Az OPM csomagformátumot kiterjesztették annak jelzéséhez, hogy egy csomag be
+lett olvasztva egy másik csomagba, lehetővé téve a csomagkezelőnek, hogy
+megfelelően kezelje ezt a helyzetet a csomag telepítésénél vagy
+frissítésénél.</para></listitem>
+                    <listitem><para>A gyorsítótárazás központosítva lett egyetlen globális gyorsítótár
+objektumba, amely memóriába történő gyorsítótárazást is végrehajt az összes
+adatnál.</para></listitem>
+                    <listitem><para>Hozzáadásra került egy gyorsítótár teljesítménytesztelő parancsfájl, ib.pl
+jóvoltából.</para></listitem>
+                </itemizedlist>
+            </section>
+        </section>
+
+        <section id="new-features-of-otrs-3.3">
+            <title>Az OTRS 3.3 új szolgáltatásai</title>
+            <section>
+                <title>Termelékenység</title>
+                <itemizedlist>
+                    <listitem><para>A vezérlőpult jegylistái és szokásos jegyáttekintői most már szűrhetők a
+megfelelő jegyoszlopokkal, és a megjelenített oszlopok beállíthatók.</para></listitem>
+                    <listitem><para>A jegy közepes és előnézet áttekintői mostantól rendezhetők.</para></listitem>
+                    <listitem><para>Hozzáadásra került egy naptár felületi elem a vezérlőpulthoz, amely a
+jegyeket eseményekként tudja megjeleníteni.</para></listitem>
+                    <listitem><para>Új vezérlőpult felületi elem lett hozzáadva, amely mátrix alakban jeleníti
+meg a jegyek számát állapotonként és várólistánként.</para></listitem>
+                    <listitem><para>Az ügyintézők most már meg tudják jelölni a fontos bejegyzéseket.</para></listitem>
+                    <listitem><para>Egy új fa kijelölés felületi elem gyorsabbá és könnyebbé teszi a faadatokkal
+való munkát (várólisták, szolgáltatások, stb.).</para></listitem>
+                    <listitem><para>Hozzáadásra került a relatív dátumok (például több mint 1 hónappal ezelőtt)
+keresésének támogatása a dátum és a dátum/idő dinamikus mezőkben.</para></listitem>
+                    <listitem><para>Mostantól lehetséges a sablonok megadása (korábban „szabványos válaszok”) az
+új jegyek létrehozásánál és a jegytovábbításnál is.</para></listitem>
+                    <listitem><para>Az elérhető folyamatok listája most már szűrhető ACL-ekkel.</para></listitem>
+                    <listitem><para>Hozzáadásra kerül az ügyfélfelületről történő folyamatok kezdeményezésének
+támogatása.</para></listitem>
+                    <listitem><para>Sok helyen a szöveg többé nincs lerövidítve egy rögzített számú karakterre
+(„Várólista1…”, hanem ehelyett kihasználja az elérhető képernyőterületet. Ez
+lehetővé teszi, hogy egyszerre több információt lásson.</para></listitem>
+                    <listitem><para>Az OTRS most már készen áll a retina-kijelzőkhöz. A képek úgy lettek
+igazítva, hogy illeszkedjenek a magasabb felbontásokhoz és a képes ikonok
+legtöbbje lecserélésre került a FontAwesome webes betűkészletben lévő betű
+karakterekre.</para></listitem>
+                    <listitem><para>Új „vezérlőpult-kezelés” funkció lett hozzáadva. Ez lehetővé teszi a
+statisztikai diagramok megjelenítését a vezérlőpulton. Vegye figyelembe,
+hogy az IE8 nem támogatja ezt a szolgáltatást.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Működés a külső rendszerekkel</title>
+                <itemizedlist>
+                    <listitem><para>Az OTRS most már képes több ügyfélcég adatbázist használni, Cyrille @
+belnet-ict jóvoltából.</para></listitem>
+                    <listitem><para>Az OTRS most már képes automatikusan eltárolni az ügyféladatokat a jegy
+dinamikus mezőiben a jegyben történő állandó tároláshoz. Ez hasznos lehet a
+jelentéseknél.</para></listitem>
+                    <listitem><para>Az OTRS most már képes a bejövő e-maileket helyesen hozzárendelni a meglévő
+jegyekhez a külső rendszerekből származó jegyszámok alapján.</para></listitem>
+                    <listitem><para>Az OTRS most már képes az e-mailt POP3/TLS kapcsolatokon keresztül is
+letölteni.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Telepítés és adminisztráció</title>
+                <itemizedlist>
+                    <listitem><para>A webes telepítő most már képes az OTRS beállítására PostgreSQL, Oracle és
+SQL-kiszolgáló adatbázisokon a MySQL adatbázis-kezelőn kívül.</para></listitem>
+                    <listitem><para>Az OTRS most már teljes támogatással rendelkezik a MySQL 5.6 verzióhoz.</para></listitem>
+                    <listitem><para>Az általános ügyintéző feladatok mostantól végrehajthatók a beállított
+jegyeseményeknél.</para></listitem>
+                    <listitem><para>Az új grafikus ACL-szerkesztő könnyebbé teszi az ACL szerkesztését.</para></listitem>
+                    <listitem><para>A levelezési szűrők most már képesek tagadott szűrőszabályokat használni,
+Renée Bäcker jóvoltából.</para></listitem>
+                    <listitem><para>A levelezési szűrők most már képesek relatív várakozási dátumok és
+tulajdonos vagy felelős megadására az új jegyeknél a bejövő e-mail adatai
+alapján.</para></listitem>
+                    <listitem><para>Az ügyfél és az ügyintéző jelszavai mostantól az erős bcrypt algoritmus
+használatával vannak titkosítva, amely jobb mint az SHA.</para></listitem>
+                    <listitem><para>Számos ikon mostantól egy ikon betűkészletet használ, amely sokkal könnyebbé
+teszi a különböző alapszínekkel rendelkező egyéni felszínek létrehozását. Ez
+javítja a összesített teljesítményt is a (kép) fájlok kisebb mennyiségének
+betöltésén keresztül.</para></listitem>
+                </itemizedlist>
+            </section>
+        </section>
+
+        <section id="new-features-of-3.2">
+            <title>Az OTRS 3.2 új szolgáltatásai</title>
+            <section>
+                <title>Több ügyfélközpontúság</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Az új „Ügyfélinformációs központ” egy nagyszerű vezérlőpult szerű nézetet
+biztosít egy ügyfélről (vállalatról). Megnézheti:
+                        <itemizedlist>
+                            <listitem><para>Az ügyfél cég eszkalált, emlékeztető, új és nyitott jegyeit.</para></listitem>
+                            <listitem><para>Az ehhez az ügyfél céghez tartozó ügyfél-felhasználókat (partnereket) az
+egyéni jegyszámukkal és gyors hivatkozásokkal a számukra létrehozandó új
+jegyekhez.</para></listitem>
+                            <listitem><para>Az ügyfél cég összesített jegyállapot nézetét.</para></listitem>
+                        </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem><para>Új „váltás az ügyfélre” funkció teszi lehetővé a szükséges jogosultságokkal
+rendelkező ügyintézőknek, hogy belenézzenek az ügyfél paneljébe a saját
+jogukkal.</para></listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Több személyre szabhatóság</title>
+                <section>
+                    <title>Folyamatkezelés</title>
+                    <itemizedlist>
+                        <listitem><para>Az új <link linkend="process-management">folyamatkezelés</link> lehetővé
+teszi a folyamatok ábrázolását az OTRS rendszeren belül.</para></listitem>
+                    </itemizedlist>
+                </section>
+                <section>
+                    <title>Az ügyfélfelület továbbfejlesztései</title>
+                    <itemizedlist>
+                        <listitem><para>Az ügyfél webes felülete most már teljesen támogatja az AJAX-ot és az
+ACL-eket.</para></listitem>
+                        <listitem><para>Mostantól JavaScriptet igényel és nem kompatibilis az Internet Explorer 6-os
+vagy korábbi verzióival.</para></listitem>
+                        <listitem><para>Az ügyfélfelületen most már beállíthatja az alapértelmezett jegytípust az új
+jegyekhez. Továbbá mostantól elrejtheti a jegytípust és egy alapértelmezett
+értéket használhat az ügyfelületen keresztül létrehozott összes jegynél.</para></listitem>
+                    </itemizedlist>
+                    </section>
+                <section>
+                    <title>Az ügyintézői felület továbbfejlesztései</title>
+                    <itemizedlist>
+                        <listitem><para>Az ügyintézők most már képesek az eszkalációs idő alapján jegyeket keresni.</para></listitem>
+                        <listitem><para>Új lehetőség a dinamikus mezők alapértelmezetten történő megjelenítéséhez a
+jegykeresésében.</para></listitem>
+                        <listitem><para>Képernyőhasználati optimalizációk a jegyképernyőkön a felugró ablakokban
+való görgetés elkerüléséhez. Minden egyes jegyképernyőnél a RichText
+szerkesztő mérete most már külön-külön beállítható.</para></listitem>
+                        <listitem><para>Mostantól lehetséges a jegyek áthelyezése egy másik várólistába a
+jegyművelet párbeszédablakokon belül (jegyjegyzet, jegylezárás, stb.) egy
+beállítási lehetőség bekapcsolása után. Ez alapértelmezetten ki van
+kapcsolva.</para></listitem>
+                        <listitem><para>A jegykeresés mostantól közvetlenül a jegynagyítás képernyőhöz fog ugrani,
+ha csak egy jegy található.</para></listitem>
+                        <listitem><para>Új képesség a bejegyzéstípus elrejtéséhez a TicketActionCommon alapú
+képernyőknél, amely hasznos lehet több adat igazításához a böngészőablakban.</para></listitem>
+                        <listitem><para>Van egy új irodán kívüli vezérlőpult felületi elem, amely a jelenleg nem
+elérhető ügyfélkollégát sorolja fel.</para></listitem>
+                        <listitem><para>Az új CKEditor 4 könnyebbé és stabilabbá teszi a RichText tartalommal (mint
+például HTML e-mailekkel) végzett munkát.</para></listitem>
+                    </itemizedlist>
+                </section>
+                <section>
+                    <title>Adminisztrációs továbbfejlesztések</title>
+                    <itemizedlist>
+                        <listitem><para>Az esemény alapú értesítések mostantól csak adott bejegyzésküldő típusoknál
+küldhetők ki.</para></listitem>
+                        <listitem><para>Az OTRS-ben lévő statisztikák motor most már érti a „hét” szót a napon,
+hónapon és éven felül. Ez adja meg például a „múlt héten létrehozott” jegyek
+jelentésének létrehozási képességét, vagy egy olyan jelentés előállítását,
+amely a várólistánként hetente létrehozott jegyeket jeleníti meg.</para></listitem>
+                        <listitem><para>Lehetséges személyre szabott DTL (sablon) fájlok elhelyezése a
+<code>Custom/Kernel/Output/HTML</code> fájlba azért, hogy felülbírálják a
+rendszer alapértelmezett DTL-fájljait, mint ahogy ez már a Perl-fájloknál
+működik.</para></listitem>
+                        <listitem><para>Az AdminSMIME képernyőn most már lehetséges az ember által olvasható
+tanúsítvány-tartalmak megjelenítése.</para></listitem>
+                        <listitem><para>A rendszerbeállítás mostantól támogatja a dátum és dátum/idő konfigurációs
+beállítás típusokat.</para></listitem>
+                    </itemizedlist>
+                </section>
+            </section>
+            <section>
+                <title>Jobb skálázhatóság</title>
+                <section>
+                    <title>Továbbfejlesztett jegyarchiválás</title>
+                    <itemizedlist>
+                        <listitem><para>Amikor jegyeket archiválnak, akkor eltávolítható az az információ, hogy mely
+ügyintéző olvassa a jegyet és a bejegyzéseket, valamint az ügyintézők
+jegyfeliratkozásai. Ez alapértelmezetten aktív, és segít csökkenteni az
+adatbázisban lévő adatok mennyiségét a sok jeggyel és ügyintézővel
+rendelkező nagy rendszereknél.</para></listitem>
+                        <listitem><para>Van egy új parancsfájl is ezen adatok eltávolításához a meglévő archivált
+jegyekből.</para></listitem>
+                        <listitem><para>Az archivált jegyek mostantól mindig az ügyintéző által „olvasottként”
+jelennek meg.</para></listitem>
+                    </itemizedlist>
+                </section>
+                <section>
+                    <title>Teljesítmény továbbfejlesztések</title>
+                    <itemizedlist>
+                        <listitem><para>A munkamenet-kezelés akár 10-szer gyorsabb, különösképpen sok aktív
+felhasználóval.</para></listitem>
+                        <listitem><para>Mostantól lehetséges az egyidejű ügyintézők és/vagy felhasználók korlátozása
+a kiszolgáló-kapacitás túlterhelésének elkerüléséhez.</para></listitem>
+                        <listitem>
+                            <para>Jelentős csökkentés a végrehajtott adatbázis-utasítások számában a
+jegyáttekintőkön és az ügyintézői és ügyfélfelületen lévő jegymaszkokban.
+                                <itemizedlist>
+                                    <listitem><para>Ez csökkenteni fogja az adatbázis-kiszolgálók terhelését, különösképpen nagy
+rendszereknél. Néhány esetben az OTRS láthatóan jobban válaszolóvá válik (ha
+a rendszer az adatbázis-terhelés vagy a késleltetés által lassult le).</para></listitem>
+                                </itemizedlist>
+                            </para>
+                        </listitem>
+                        <listitem><para>Az LDAP felhasználó-szinkronizáció teljesítménye továbbfejlesztésre került.</para></listitem>
+                        <listitem><para>A sok gyorsítótár fájllal rendelkező gyorsítótárazás teljesítménye
+továbbfejlesztésre került.</para></listitem>
+                    </itemizedlist>
+                </section>
+            </section>
+            <section>
+                <title>Több együttműködési képesség</title>
+                <section>
+                    <title>GyIK csatlakozó az általános felülethez</title>
+                    <itemizedlist>
+                        <listitem><para>Mostantól lehetséges a GyIK modul (OTRS tudás adatbázis) adatainak elérése
+egy webszolgáltatáson keresztül (GenericInterface). Ez például hasznos lehet
+a GyIK bejegyzések beágyazásához a vállalati weboldalra.</para></listitem>
+                    </itemizedlist>
+                </section>
+            </section>
+        </section>
+    </section>
+
+    <section id="software-requirements">
+        <title>Hardver- és szoftverkövetelmények</title>
+
+        <para>
+        Az OTRS számos különböző operációs rendszerre telepíthető. Az OTRS képes
+futni Linuxon és más UNIX-származékon (például OpenBSD vagy FreeBSD). Az
+OTRS-nek nincs túlságosan nagy hardverkövetelménye. Egy olyan gép
+használatát javasoljuk, amelyben legalább egy 2 GHz-es Xeon vagy ehhez
+hasonló processzor van, 2 GB RAM és 160 GB merevlemez egy kis beállításhoz.
+        </para>
+
+        <para>
+        Az OTRS futtatásához szüksége lesz egy webkiszolgáló és egy
+adatbázis-kiszolgáló használatára is. Ettől eltekintve telepítenie kell a
+Perl-csomagot és/vagy telepíteni kell néhány további Perl-modult az
+OTRS-gépre. A webkiszolgálót és a <application>Perl</application> csomagot
+ugyanarra a gépre kell telepíteni mint az OTRS-t. Az adatbázis háttérprogram
+telepíthető helyileg vagy egy távoli gépre.
+        </para>
+
+        <para>
+        A webkiszolgálóhoz az <application>Apache HTTP-kiszolgáló</application>
+használatát javasoljuk, mert annak mod_perl modulja nagymértékben javítja az
+OTRS teljesítményét. Ettől eltekintve az OTRS-nek futnia kell bármilyen
+webkiszolgálón, amely képes Perl-parancsfájlokat végrehajtani.
+        </para>
+
+        <para>
+        Az OTRS-t különböző adatbázisokra telepítheti. Választhat
+<application>MySQL</application>, <application>PostgreSQL</application>,
+<application>Oracle</application> vagy <application>Microsoft SQL
+Server</application> adatbázis-kiszolgálók közül. Ha
+<application>MySQL</application> adatbázis-kiszolgálót használ, akkor megvan
+az az előnye, hogy az adatbázis és néhány rendszerbeállítás a telepítés
+alatt beállítható a webes előtétprogramon keresztül.
+        </para>
+
+        <para>
+        A <application>Perl</application> csomaghoz szüksége lesz néhány további
+modulra, amelyek vagy a Perl-parancsértelmezővel és CPAN használatával, vagy
+az operációs rendszer csomagkezelőjén keresztül
+(<application>rpm</application>, <application>yast</application>,
+<application>apt-get</application>) telepíthetők.
+        </para>
+
+        <para>Szoftverkövetelmények</para>
+
+        <section id="perl-support">
+            <title>Perl támogatás</title>
+            <itemizedlist>
+            <listitem>
+                <para>Perl 5.10 vagy magasabb</para>
+            </listitem>
+            </itemizedlist>
+        </section>
+
+        <section id="webserver-support">
+            <title>Webkiszolgáló támogatás</title>
+            <itemizedlist>
+            <listitem>
+                <para>Apache2 + mod_perl2 vagy magasabb (ajánlott)</para>
+            </listitem>
+            <listitem>
+                <para>Webkiszolgáló CGI-támogatással (a CGI nem ajánlott)</para>
+            </listitem>
+            </itemizedlist>
+        </section>
+
+        <section id="database-support">
+            <title>Adatbázis támogatás</title>
+
+            <itemizedlist>
+            <listitem><para>MySQL 5.0 vagy magasabb</para></listitem>
+            <listitem><para>MariaDB</para></listitem>
+            <listitem><para>PostgreSQL 8.4 vagy magasabb</para></listitem>
+            <listitem><para>Oracle 10g vagy magasabb</para></listitem>
+            </itemizedlist>
+
+            <para>
+                A kézikönyvben a <link linkend="installation-of-perl-modules">Perl-modulok
+telepítéséről</link> szóló szakasz részletesebben leírja, hogy hogyan
+állíthatja be azokat, amelyek az OTRS-hez szükségesek.
+            </para>
+
+            <para>
+            Ha az OTRS olyan bináris csomagját telepíti, amely az operációs rendszeréhez
+lett lefordítva (rpm), akkor a csomag vagy tartalmazza az összes szükséges
+Perl-modult, vagy a rendszere csomagkezelőjének kell gondoskodnia a
+szükséges Perl-modulok függőségeiről.
+            </para>
+        </section>
+
+        <section id="webbrowser-support">
+            <title>Webböngésző támogatás</title>
+            <para>
+                Az OTRS használatához minden rendben lesz, ha egy JavaScript támogatással
+engedélyezett modern webböngészőt használ. Ezek a böngészők nem
+támogatottak:
+            </para>
+            <itemizedlist>
+                <listitem>
+                      <para>8-as verzió előtti Internet Explorer</para>
+                </listitem>
+                <listitem>
+                      <para>10-es verzió előtti Firefox</para>
+                </listitem>
+                <listitem>
+                      <para>5-ös verzió előtti Safari</para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                Azt ajánljuk, hogy mindig a legújabb verzióját használja a böngészőjének,
+mert annak van a legjobb JavaScript és megjelenítési teljesítménye. Drámai
+teljesítménybeli változatosság fordulhat elő a használt böngészők között
+nagy adatokkal vagy nagy rendszerekkel. Örömmel adunk tanácsot az adott
+ügyben.
+            </para>
+        </section>
+    </section>
+
+    <section id="community">
+        <title>Közösség</title>
+
+        <para>
+        Az OTRS nagy felhasználói közösséggel rendelkezik. Felhasználók és
+fejlesztők beszélgetnek az OTRS-ről és információkat cserélnek a kapcsolódó
+kérdésekről a <link linkend="additional-resources">levelezőlistákon</link>
+keresztül. Használhatja a levelezőlistákat a telepítéssel, beállítással,
+használattal, honosítással és az OTRS fejlesztésével kapcsolatos
+beszélgetésékhez. Szoftverhibákat jelenthet a <link
+linkend="additional-resources">hibakövető rendszerünkbe</link>.
+        </para>
+
+        <para>
+        Az OTRS közösség honlapja: <ulink
+url="http://www.otrs.com/open-source/"><citetitle>http://www.otrs.com/open-source/</citetitle></ulink>.
+        </para>
+    </section>
+
+    <section id="commercial-support-for-otrs">
+        <title>Az OTRS professzionális szolgáltatásai</title>
+
+        <para>
+            Az <ulink
+url="https://www.otrs.com/otrs-business-solution-improving-customer-service/">OTRS
+Business Solution</ulink>™ nyújtja a legjobb professzionális támogatást az
+OTRS csapattól, megbízható OTRS biztonsági és rendszeres ingyenes
+frissítésekkel, valamint <ulink
+url="https://www.otrs.com/otrs-business-solution-improving-customer-service/#OTRS-Business-Solution-Cloud-Services">további
+üzleti szolgáltatások kizárólagos készletével</ulink>, amelyet rugalmasan
+bekapcsolhat vagy kikapcsolhat a különböző telepítési forgatókönyvek
+szerint.
+        </para>
+        <para>
+            <ulink url="http://www.otrs.com/">Az OTRS csoport</ulink> különleges <ulink
+url="http://www.otrs.com/en/solutions/training/">képzési programokat</ulink>
+kínál különböző országokban. Részt vehet a nyilvános OTRS adminisztrátori
+képzéseink egyikén, amelyre rendszeresen sor kerül, vagy olyan házon belüli
+képzésben részesülhet, amely a vállalata összes különleges igényét lefedi.
+        </para>
+
+    </section>
+
+</section>

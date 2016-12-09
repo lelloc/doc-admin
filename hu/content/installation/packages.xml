@@ -1,0 +1,636 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="installation-of-prepared-packages">
+<title>Az egyszerű mód - előre lefordított csomagok telepítése</title>
+
+<para>
+Ha elérhető a platformjához, akkor használja az előre lefordított csomagokat
+az OTRS telepítéséhez, mivel ez a legegyszerűbb és a legkényelmesebb
+módszer. Ezek a <ulink url="http://www.otrs.com">http://www.otrs.com</ulink>
+címen lévő letöltési területen találhatók. A következő szakaszok az előre
+lefordított vagy bináris csomagokból történő OTRS telepítést írják le SUSE
+és Red Hat rendszereken. Ha valamilyen oknál fogva nem lenne képes használni
+az előre lefordított csomagokat, csak akkor kell a kézi folyamatot követnie.
+</para>
+
+<section id="installation-on-suse">
+<title>Az RPM telepítése egy SUSE Linux kiszolgálóra</title>
+
+<para>
+Ez a szakasz az RPM csomag telepítését írja le egy SUSE Linux
+kiszolgálóra. Kipróbáltuk az összes legutóbbi SLES és openSUSE
+verzióval. Mielőtt elkezdené a telepítést, látogassa meg a <ulink
+url="http://www.otrs.com/downloads">
+<citetitle>http://www.otrs.com/downloads</citetitle> </ulink> oldalt, és
+győződjön meg arról, hogy az elérhető legújabb OTRS RPM-csomagot használja.
+</para>
+
+<section id="suse-preparing-database-mysql">
+<title>Az adatbázis előkészítése az OTRS-hez</title>
+
+<para>
+Az OTRS-t különböző adatbázis háttérprogramokkal használhatja:
+<application>MySQL</application>, <application>PostgreSQL</application>,
+<application>Oracle</application> vagy <application>Microsoft SQL
+Server</application>. A legnépszerűbb adatbázis az OTRS telepítéséhez a
+MySQL. Ez a fejezet a MySQL beállításához szükséges lépések megtételét
+mutatja be egy SUSE-alapú kiszolgálón. Természetesen az adatbázist egy
+dedikált adatbázis-kiszolgálóra is telepítheti, ha a skálázhatóság vagy más
+célok miatt ez szükséges.
+</para>
+<note>
+    <para>
+        Ha ezt a fejezetet openSUSE 12.3 és újabb rendszereken követi, akkor
+tulajdonképpen nem a <application>MySQL</application> adatbázis-kiszolgálót
+fogja telepíteni, hanem a <application>MariaDB</application>-t, amely a
+MySQL kódjának egy MySQL-kompatibilis elágaztatása. Ez nem probléma, ez is
+ugyanúgy fog működni (sőt egy picit jobban is néhány ponton).
+    </para>
+</note>
+<para>
+    Telepítse a MySQL adatbázis-kiszolgálót a következő parancs
+rendszergazdaként való végrehajtásával:
+</para>
+
+<para>
+    <screen>
+        linux:~ # zypper install mysql perl-DBD-mysql
+    </screen>
+</para>
+
+<para>
+    Ez az alapértelmezett beállításokkal fogja telepíteni a MySQL-t a
+rendszerre. Meg kell változtatnia az alapértelmezéseket azért, hogy
+alkalmassá tegye az OTRS-hez. Egy szövegszerkesztővel nyissa meg az
+<filename>/etc/my.cnf</filename> fájlt, és változtassa meg a
+<command>max_allowed_packet</command> sort benne, és adjon hozzá egy sort
+alá, úgymint itt látható:
+</para>
+
+<para>
+    <screen>
+        max_allowed_packet=20M
+        query_cache_size=32M
+    </screen>
+</para>
+
+<para>
+    Most hajtsa végre a <command>rcmysql restart</command> parancsot az
+adatbázis-kiszolgáló újraindításához és a változtatások
+bekapcsolásához. Ezután futtassa a
+<command>/usr/bin/mysql_secure_installation</command> parancsot, és kövesse
+a képernyőn lévő utasításokat az adatbázis root jelszavának beállításához, a
+névtelen hozzáférés eltávolításához és a teszt adatbázis
+eltávolításához. Végül futtassa a <command>chkconfig -a mysql</command>
+parancsot azért, hogy meggyőződhessen arról, hogy a MySQL automatikusan
+elindul a kiszolgáló indításakor.
+</para>
+
+</section>
+
+<section id="suse-installing-rpm">
+    <title>Az OTRS telepítése</title>
+<para>
+Telepítse az OTRS-t parancssoron keresztül a <command>zypper</command>
+használatával. Ez le fog húzni néhány függőséget is, mint például az Apache
+webkiszolgáló és néhány Perl-modul. Győződjön meg arról, hogy átmásolta az
+OTRS RPM fájlt a jelenlegi könyvtárba.
+</para>
+<para>
+    <screen>
+otrs-sles:~ # zypper install otrs-3.3.*.rpm
+....
+Retrieving package otrs-3.3.3-01.noarch (1/26), 17.5 MiB (74.3 MiB unpacked)
+Installing: otrs-3.3.3-01 [done]
+Additional rpm output:
+Check OTRS user ... otrs added.
+
+Next steps:
+
+[start database and Apache]
+ Make sure your database is running and execute 'rcapache2 restart'.
+
+[install the OTRS database]
+ Use a webbrowser and open this link:
+ http://myserver.example.com/otrs/installer.pl
+
+[OTRS services]
+ Start OTRS 'rcotrs start-force' (rcotrs {start|stop|status|restart|start-force|                                                                                                                     stop-force}).
+
+((enjoy))
+
+ Your OTRS Team
+ http://otrs.org/
+
+otrs-sles:~ #
+    </screen>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Parancs az OTRS telepítéséhez.</emphasis>
+</para>
+
+<para>
+Az OTRS telepítése kész. Indítsa el a webkiszolgálót az OTRS-re jellemző
+változtatások betöltéséhez a beállításaiba, amint a lenti parancsfájlban
+látható. Futtassa le a <command>chkconfig</command> parancsot is hogy
+meggyőződhessen arról, hogy az OTRS automatikusan elindul-e, amikor a
+kiszolgáló újraindul.
+</para>
+
+<para>
+<screen>
+otrs-sles:~ # chkconfig -a apache2
+apache2                   0:off  1:off  2:off  3:on   4:off  5:on   6:off
+otrs-sles:~ # rcapache2 start
+Starting httpd2 (prefork) httpd2-prefork: Could not reliably determine the server's fully qualified domain name, using 10.x.x.x for ServerName
+                                                                                                                                                                                          done
+otrs-sles:~ #
+</screen>
+</para>
+
+<para>
+<emphasis>Parancsfájl: A webkiszolgáló indítása.</emphasis>
+</para>
+
+</section>
+
+<section id="suse-installation-perl-modules">
+    <title>További Perl-modulok telepítése</title>
+    <para>Az OTRS-nek szüksége van néhány modulra, amelyek az RPM által
+telepíthetők. Ezeket ezután telepítheti kézzel. Az
+<filename>/opt/otrs</filename> könyvtárban található
+<filename>bin/otrs.CheckModules.pl</filename> parancsfájl futtatásával
+ellenőrizheti, hogy mely modulok hiányoznak. Néhány modul csak olyan
+opcionális funkcionalitáshoz szükséges, mint például IMAP(S) kiszolgálókkal
+történő kommunikáció vagy PDF-előállítás. SLES rendszeren hozzá kell adnia
+egy további tárolót a zypper beállításaihoz azért, hogy beszerezze a
+rendszerhez szükséges modulokat. Válassza ki az operációs rendszer
+verziójához szükséges modult innen: <ulink
+url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>.
+Adja hozzá a tárolót, úgymint ezt a SLES 11 SP2 verzióhoz:
+    </para>
+
+    <para>
+        <screen>
+            zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+        </screen>
+    </para>
+
+    <para>
+        Az openSUSE 12.3-as verzióján a további tároló csak a Mail::IMAPClient
+modulhoz szükséges, amelyre csak akkor lehet szüksége, ha egy TLS-sel
+titkosított IMAP-kiszolgálóról kell a leveleket begyűjteni. A megfelelő sor
+ehhez hasonlóan nézhet ki:
+    </para>
+    <para>
+        <screen>
+            zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
+        </screen>
+    </para>
+    <para>
+        A zypper első alkalommal történő használatakor, miután hozzáadta ezt a
+tárolót, meg fogja kérni, hogy adja meg annak a kulcsát. Most már
+telepítheti a hiányzó modulokat, ahogy alább látható.
+    </para>
+    <para>
+        <screen>
+otrs-sles:/opt/otrs # zypper install -y "perl(YAML::LibYAML)"
+Refreshing service 'susecloud'.
+Retrieving repository 'perl' metadata [\]
+
+New repository or package signing key received:
+Key ID: DCCA98DDDCEF338C
+Key Name: devel:languages:perl OBS Project &lt;devel:languages:perl@build.opensuse.org&gt;
+Key Fingerprint: 36F0AC0BCA9D8AF2871703C5DCCA98DDDCEF338C
+Key Created: Wed Oct 10 22:04:18 2012
+Key Expires: Fri Dec 19 22:04:18 2014
+Repository: perl
+
+Do you want to reject the key, trust temporarily, or trust always? [r/t/a/?] (r): a
+Retrieving repository 'perl' metadata [done]
+Building repository 'perl' cache [done]
+Loading repository data...
+Reading installed packages...
+'perl(YAML::LibYAML)' not found in package names. Trying capabilities.
+Resolving package dependencies...
+
+The following NEW package is going to be installed:
+  perl-YAML-LibYAML
+
+The following package is not supported by its vendor:
+  perl-YAML-LibYAML
+
+Retrieving package perl-YAML-LibYAML-0.38-12.4.x86_64 (1/1), 75.0 KiB (196.0 KiB unpacked)
+Retrieving: perl-YAML-LibYAML-0.38-12.4.x86_64.rpm [done (55.7 KiB/s)]
+Installing: perl-YAML-LibYAML-0.38-12.4 [done]
+        </screen>
+    </para>
+
+<para>
+A következő lépés az OTRS beállítása a webes telepítő használatával, amint
+az <link linkend="web-installer">ebben a szakaszban</link> le van írva.
+</para>
+
+</section>
+
+</section>
+
+<section id="installation-on-centos">
+<title>Az OTRS telepítése Red Hat Enterprise Linux vagy CentOS rendszerre</title>
+
+<para>
+Ez a szakasz az RPM csomag telepítését írja le egy Red Hat Enterprise Linux
+(RHEL) vagy CentOS kiszolgálóra. Az OTRS 3.3 és újabb verzióinál RHEL 6 vagy
+CentOS 6 a követelmény, az 5-ös verzió nem támogatott. Mielőtt elkezdené a
+telepítést, látogassa meg a <ulink url="http://www.otrs.com/downloads">
+<citetitle>http://www.otrs.com/downloads</citetitle> </ulink> oldalt, és
+győződjön meg arról, hogy az elérhető legújabb OTRS RPM-csomagot használja.
+</para>
+
+<section id="rhel-preparing-database-mysql">
+<title>Az adatbázis előkészítése az OTRS-hez</title>
+
+<para>
+Az OTRS-t különböző adatbázis háttérprogramokkal használhatja:
+<application>MySQL</application>, <application>PostgreSQL</application>,
+<application>Oracle</application> vagy <application>Microsoft SQL
+Server</application>. A legnépszerűbb adatbázis az OTRS telepítéséhez a
+MySQL. Ez a fejezet a MySQL beállításához szükséges lépések megtételét
+mutatja be egy RHEL-alapú kiszolgálón. Természetesen az adatbázist egy
+dedikált adatbázis-kiszolgálóra is telepítheti, ha a skálázhatóság vagy más
+célok miatt ez szükséges.
+</para>
+
+<para>
+    Telepítse a MySQL adatbázis-kiszolgálót a következő parancs
+rendszergazdaként való végrehajtásával:
+</para>
+
+<para>
+    <screen>
+        [root@otrs-centos6 ~]# yum -y install mysql-server
+    </screen>
+</para>
+
+<para>
+    Ez az alapértelmezett beállításokkal fogja telepíteni a MySQL-t a
+rendszerre. Meg kell változtatnia az alapértelmezéseket azért, hogy
+alkalmassá tegye az OTRS-hez. Egy szövegszerkesztővel nyissa meg az
+<filename>/etc/my.cnf</filename> fájlt, és adja hozzá a következő két sort a
+[mysqld] szakasz alá:
+</para>
+
+<para>
+    <screen>
+        max_allowed_packet=20M
+        query_cache_size=32M
+    </screen>
+</para>
+
+<para>
+    Most hajtsa végre a <command>service mysqld start</command> parancsot az
+adatbázis-kiszolgáló újraindításához és a változtatások
+bekapcsolásához. Ezután futtassa a
+<command>/usr/bin/mysql_secure_installation</command> parancsot, és kövesse
+a képernyőn lévő utasításokat az adatbázis root jelszavának beállításához, a
+névtelen hozzáférés eltávolításához és a teszt adatbázis
+eltávolításához. Végül futtassa a <command>chkconfig mysqld on</command>
+parancsot azért, hogy meggyőződhessen arról, hogy a MySQL automatikusan
+elindul a kiszolgáló indításakor.
+</para>
+
+</section>
+
+<section id="rhel-installing-rpm">
+    <title>Az OTRS telepítése</title>
+<para>
+Telepítse az OTRS-t parancssoron keresztül a <command>yum</command>
+használatával. Ez le fog húzni néhány függőséget is, mint például az Apache
+webkiszolgáló és néhány Perl-modul. Győződjön meg arról, hogy átmásolta az
+OTRS RPM fájlt a jelenlegi könyvtárba.
+</para>
+<para>
+    <screen>
+[root@otrs-centos6 ~]# yum install --nogpgcheck otrs-3.3.*.rpm
+...
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch   Version                Repository       Size
+================================================================================
+Installing:
+ otrs                       noarch 3.3.3-01               /otrs-3.3.3-01.noarch
+                                                                           74 M
+Installing for dependencies:
+ apr                        x86_64 1.3.9-5.el6_2          updates         123 k
+ ...
+ procmail                   x86_64 3.22-25.1.el6          base            163 k
+
+Transaction Summary
+================================================================================
+Install      26 Package(s)
+
+Total size: 80 M
+Total download size: 6.0 M
+Installed size: 88 M
+Downloading Packages:
+(1/25): apr-1.3.9-5.el6_2.x86_64.rpm                     | 123 kB     00:00
+...
+(25/25): procmail-3.22-25.1.el6.x86_64.rpm               | 163 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           887 kB/s | 6.0 MB     00:06
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : apr-1.3.9-5.el6_2.x86_64                               1/26
+  ...
+  Installing : otrs-3.3.3-01.noarch                                   26/26
+Check OTRS user ... otrs added.
+
+Next steps:
+
+[httpd services]
+ Restart httpd 'service httpd restart'
+
+[install the OTRS database]
+ Make sure your database server is running.
+ Use a web browser and open this link:
+ http://myserver.example.com/otrs/installer.pl
+
+[OTRS services]
+ Start OTRS 'service otrs start' (service otrs {start|stop|status|restart).
+
+((enjoy))
+
+ Your OTRS Team
+
+Installed:
+  otrs.noarch 0:3.3.3-01
+
+Dependency Installed:
+  ...
+
+Complete!
+[root@otrs-centos6 ~]#
+    </screen>
+</para>
+
+<para>
+<emphasis>Parancsfájl: Parancs az OTRS telepítéséhez.</emphasis>
+</para>
+
+<para>
+Az OTRS telepítése befejeződött. Most meg kell győződnie arról, hogy az
+Apache elindult, és hogy elindul a kiszolgáló újraindításakor is.
+</para>
+
+<para>
+<screen>
+[root@otrs-centos6 ~]# chkconfig httpd on
+[root@otrs-centos6 ~]# service httpd start
+Starting httpd: httpd: Could not reliably determine the server's fully qualified domain name, using 10.x.x.x for ServerName [  OK  ]
+[root@otrs-centos6 ~]#
+</screen>
+</para>
+
+<para>
+<emphasis>Parancsfájl: A webkiszolgáló indítása.</emphasis>
+</para>
+
+</section>
+
+<section id="rhel-installation-perl-modules">
+    <title>További Perl-modulok telepítése</title>
+    <para>Az OTRS-nek szüksége van néhány modulra, amelyek az RPM által
+telepíthetők. Ezeket ezután telepítheti kézzel. Az
+<filename>/opt/otrs</filename> könyvtárban található
+<filename>bin/otrs.CheckModules.pl</filename> parancsfájl futtatásával
+ellenőrizheti, hogy mely modulok hiányoznak. Néhány modul csak olyan
+opcionális funkcionalitáshoz szükséges, mint például IMAP(S) kiszolgálókkal
+történő kommunikáció vagy PDF-előállítás. Red Hat vagy CentOS rendszeren
+ezen modulok telepítését az EPEL tárolóból javasoljuk, amely a Fedora
+projekt által karbantartott tároló, és kiváló minőségű csomagokat biztosít a
+RHEL és származékai számára. További információkért nézze meg <ulink
+url="http://fedoraproject.org/wiki/EPEL">az EPEL weboldalát</ulink>.
+    </para>
+
+    <para>
+        Ha RHEL 6 vagy CentOS 6 rendszereken van, akkor <ulink
+url="http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html">erről
+az oldalról</ulink> szerezheti be a legújabb csomagot az EPEL-hez. Egyúttal
+hozzáadhatja ezt a tárolót a yum programhoz az ezen az oldalon talált RPM
+URL másolásával és a következő parancs végrehajtásával:
+    </para>
+
+    <para>
+        <screen>
+ [root@otrs-centos6 otrs]# yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+Loaded plugins: security
+Setting up Install Process
+epel-release-6-8.noarch.rpm                                   |  14 kB     00:00
+Examining /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm: epel-release-6-8.noarch
+Marking /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:6-8 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package             Arch          Version     Repository                       Size
+=====================================================================================
+Installing:
+ epel-release        noarch        6-8         /epel-release-6-8.noarch         22 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total size: 22 k
+Installed size: 22 k
+Downloading Packages:
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : epel-release-6-8.noarch                                           1/1
+  Verifying  : epel-release-6-8.noarch                                           1/1
+
+Installed:
+  epel-release.noarch 0:6-8
+
+Complete!
+[root@otrs-centos6 otrs]#
+        </screen>
+    </para>
+    <para>
+        A yum első alkalommal történő használatakor, miután hozzáadta ezt a tárolót,
+meg fogja kérni, hogy adja meg annak a kulcsát. Most már telepítheti a
+hiányzó modulokat, ahogy alább látható.
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum -y install "perl(Text::CSV_XS)"
+Loaded plugins: security
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package perl-Text-CSV_XS.x86_64 0:0.85-1.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================
+ Package                   Arch            Version               Repository     Size
+=====================================================================================
+Installing:
+ perl-Text-CSV_XS          x86_64          0.85-1.el6            epel           71 k
+
+Transaction Summary
+=====================================================================================
+Install       1 Package(s)
+
+Total download size: 71 k
+Installed size: 154 k
+Downloading Packages:
+perl-Text-CSV_XS-0.85-1.el6.x86_64.rpm                        |  71 kB     00:00
+warning: rpmts_HdrFromFdno: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Importing GPG key 0x0608B895:
+ Userid : EPEL (6) &lt;epel@fedoraproject.org&gt;
+ Package: epel-release-6-8.noarch (@/epel-release-6-8.noarch)
+ From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+  Verifying  : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+
+Installed:
+  perl-Text-CSV_XS.x86_64 0:0.85-1.el6
+
+Complete!
+[root@otrs-centos6 otrs]#
+        </screen>
+    </para>
+
+<para>
+A következő lépés az OTRS beállítása a webes telepítő használatával, amint
+az <link linkend="web-installer">ebben a szakaszban</link> le van írva.
+</para>
+
+</section>
+
+<section id="rhel-installation-dbd-oracle">
+    <title>Oracle adatbázis-illesztőprogram telepítése Red Hat / CentOS rendszerre</title>
+    <para>
+        Ha az OTRS-t egy Oracle adatbázisra szeretné telepíteni, akkor a
+<application>DBD::Oracle</application> adatbázis-illesztőprogram
+lefordítására és telepítésére lesz szüksége. Ez némileg bonyolultabb bármely
+egyéb csomagok telepítésénél. Ez azért van, mert az Oracle egy
+szabadalomvédett adatbázis, és sem a Red Hat, sem a CentOS projekt nem
+jogosult az illesztőprogramok terjesztésére az RPM-tárolóikban.
+    </para>
+    <para>
+        Mindenek előtt telepítenünk kellene a <application>gcc</application>, a
+<application>make</application> és a <application>CPAN</application>
+programokat, hogy le tudjuk fordítani és telepíteni tudjuk az
+illesztőprogramot. Alább láthatja a CentOS rendszeren szükséges
+parancsot. Más verzióknál egy kicsit másképp nézhet ki.
+    </para>
+
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum -y install gcc make "perl(CPAN)"
+        </screen>
+    </para>
+
+    <para>
+        A következő lépés az adatbáziskliens beszerzése és telepítése. Ehhez
+regisztrálnia kellene egy ingyenes fiókot az Oracle weboldalán. Az
+illesztőprogramokat erről az oldalról töltheti le: <ulink
+url="http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html">http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html</ulink>.
+Válassza ki a rendszere architektúrájának megfelelő Linux x86 vagy x86-64
+verziót. Ezt az <command>uname -i</command> paranccsal ellenőrizheti. Ez
+vagy „x86_64” az x86-64 verzióhoz, vagy „i386” az x86-hoz. Le kell töltenie
+az „Instant Client Package - Basic”, az „Instant Client Package - SQL*Plus”
+és az „Instant Client Package - SDK” csomagokat. Mentse el ezeket valahova a
+lemezen. Most a root felhasználóként telepítheti a csomagokat a következő
+parancs használatával:
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# yum install oracle-instantclient*
+        </screen>
+    </para>
+    <para>
+        Ezután be kell állítania két környezeti változót, és le kell fordítania a
+DBD::Oracle illesztőprogramot. Ezeket a feladatokat ismét a root
+felhasználóként hajtsa végre. A lépéseket az alábbiakban ismertetjük. Vegye
+figyelembe, hogy a rövidség miatt a parancsok által kiírt sorok egy része
+eltávolításra került.
+    </para>
+    <para>
+        <screen>
+[root@otrs-centos6 otrs]# export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+[root@otrs-centos6 otrs]# export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+[root@otrs-centos6 otrs]# cpan
+cpan[1]> look DBD::Oracle
+...
+Fetching with LWP:
+  http://www.perl.org/CPAN/authors/id/P/PY/PYTHIAN/CHECKSUMS
+Checksum for /root/.cpan/sources/authors/id/P/PY/PYTHIAN/DBD-Oracle-1.62.tar.gz ok
+Scanning cache /root/.cpan/build for sizes
+DONE
+...
+Working directory is /root/.cpan/build/DBD-Oracle-1.62-ZH6LNy
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# perl Makefile.PL
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make
+...
+[root@localhost DBD-Oracle-1.62-ZH6LNy]# make install
+...
+cpan[2]> exit
+Terminal does not support GetHistory.
+Lockfile removed.
+        </screen>
+    </para>
+
+<para>
+Most szerkesztenie kell a Kernel/Config.pm fájlt az ORACLE_HOME
+megadásához. A következő lépés az OTRS beállítása a webes telepítő
+használatával, amint az <link linkend="web-installer">ebben a
+szakaszban</link> le van írva.
+</para>
+
+</section>
+
+</section>
+
+<section id="installation-on-debian">
+<title>Az OTRS telepítése Debian vagy Ubuntu rendszerre</title>
+<important>
+    <para>
+        Az OTRS programot <link
+linkend="manual-installation-of-otrs">forrásból</link> telepítse, és ne
+használja azokat az OTRS csomagokat, amelyeket a Debian/Ubuntu biztosít.
+    </para>
+</important>
+<para>
+    A szükséges Perl modulok telepítése egyszerűbb, ha az elérhető csomagokat
+használja: <screen>
+apt-get install libapache2-mod-perl2 libdbd-mysql-perl libtimedate-perl libnet-dns-perl \
+    libnet-ldap-perl libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl \
+    libgd-text-perl libtext-csv-xs-perl libjson-xs-perl libgd-graph-perl libapache-dbi-perl
+    </screen>
+</para>
+</section>
+
+</section>

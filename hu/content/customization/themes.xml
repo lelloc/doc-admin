@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<section id="themes">
+<title>Saját témák létrehozása</title>
+
+<para>
+Létrehozhatja a saját témáit, így oly módon használhatja az elrendezést az
+OTRS webes előtétprogramján, ahogy csak szeretné. Saját témák létrehozásához
+személyre kell szabnia a sablonok kimenetét az igényei szerint.
+</para>
+
+<para>
+A kimeneti sablonok szintaxisának és szerkezetének további információi
+megtalálhatók a <ulink
+url="http://otrs.github.io/doc"><citetitle>http://otrs.github.io/doc</citetitle></ulink>
+címen elérhető fejlesztői kézikönyvben, különösen a <ulink
+url="http://otrs.github.io/doc/manual/developer/3.3/en/html/TemplatingMechanism.html"><citetitle>sablonok</citetitle></ulink>
+fejezetben.
+</para>
+
+<para>
+Példaként hajtsa végre a következő lépéseket egy új „Vállalat” nevű téma
+létrehozásához:
+</para>
+
+<para>
+<orderedlist numeration="arabic">
+    <listitem>
+    <para>
+    Hozzon létre egy <filename>Kernel/Output/HTML/Company</filename> nevű
+könyvtárat, és másoljon át a
+<filename>Kernel/Output/HTML/Standard</filename> mappából minden olyan fájlt
+az új mappába, amelyet meg szeretne változtatni.
+    </para>
+    <important><para>
+        Csak azokat a fájlokat másolja át, amelyeket ténylegesen megváltoztatott. Az
+OTRS automatikusan be fogja szerezni a hiányzó fájlokat a szabványos
+témából. Ez sokkal könnyebbé fogja tenni a későbbiekben a frissítést.</para></important>
+</listitem>
+<listitem>
+    <para>
+    Szabja személyre a <filename>Kernel/Output/HTML/Company</filename>
+könyvtárban lévő fájlokat, és változtassa meg az elrendezést az igényei
+szerint.
+    </para>
+</listitem>
+<listitem>
+    <para>
+    Az új téma aktiválásához adja hozzá azokat a rendszerbeállításokban a <link
+linkend="ConfigReference_Framework:Core::Web:Frontend::Themes">Frontend::Themes</link>
+alá.
+    </para>
+</listitem>
+</orderedlist>
+</para>
+
+<para>
+Most az új témának használhatónak kell lennie. A <link
+linkend="user-preferences">személyes beállítások</link> oldalon keresztül
+tudja kiválasztani.
+</para>
+
+<warning>
+<para>
+Ne változtassa meg az OTRS-sel szállított témafájlokat, mivel azok a
+változtatások el fognak veszni egy frissítés után. Csak a fent leírt lépések
+végrehajtásával hozzon létre saját témákat.
+</para>
+</warning>
+
+</section>
