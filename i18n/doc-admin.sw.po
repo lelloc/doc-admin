@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
-"POT-Creation-Date: 2016-10-25 13:32+0200\n"
-"PO-Revision-Date: 2016-10-25 11:34+0000\n"
+"POT-Creation-Date: 2017-01-13 13:06+0100\n"
+"PO-Revision-Date: 2017-01-13 12:08+0000\n"
 "Last-Translator: Martin Gruner <martin.gruner@otrs.com>\n"
 "Language-Team: Swahili (http://www.transifex.com/otrs/OTRS/language/sw/)\n"
 "Language: sw\n"
@@ -1710,7 +1710,9 @@ msgstr ""
 #: en/content/administration/email/smime.xml:98
 #: en/content/administration/email/smime.xml:145
 #: en/content/administration/email/smime.xml:197
-#: en/content/administration/ticket/states.xml:110
+#: en/content/administration/email/smime.xml:282
+#: en/content/administration/email/smime.xml:310
+#: en/content/administration/ticket/states.xml:117
 #: en/content/administration/backup-and-restore.xml:24
 #: en/content/administration/backup-and-restore.xml:43
 #: en/content/administration/backup-and-restore.xml:62
@@ -8087,10 +8089,12 @@ msgstr ""
 "\"ConfigReference_Framework:Core::Web:Frontend::Themes\">Mazingira ya mbele::"
 "Mandhari</link>."
 
-#. type: Content of: <section><para>
+#. type: Content of: <section><section><para>
 #: en/content/customization/themes.xml:22 en/content/performance-tuning.xml:130
 #: en/content/administration/email/pgp.xml:13
 #: en/content/administration/email/smime.xml:41
+#: en/content/administration/email/smime.xml:251
+#: en/content/administration/email/smime.xml:265
 msgid "<placeholder type=\"orderedlist\" id=\"0\"/>"
 msgstr "<placeholder type=\"orderedlist\" id=\"0\"/>"
 
@@ -8440,7 +8444,7 @@ msgstr ""
 #: en/content/administration/email/email.xml:237
 #: en/content/administration/email/email.xml:275
 #: en/content/administration/email/email.xml:310
-#: en/content/administration/ticket/states.xml:88
+#: en/content/administration/ticket/states.xml:95
 #: en/content/administration/genericinterface/genericinterface-connectors.xml:87
 #: en/content/administration/genericinterface/genericinterface-connectors.xml:153
 #: en/content/administration/genericinterface/genericinterface-connectors.xml:290
@@ -9836,13 +9840,9 @@ msgstr "<placeholder type=\"table\" id=\"0\"/>"
 #. type: Content of: <section><section><note><para>
 #: en/content/administration/adminarea/agents-groups-roles.xml:90
 msgid ""
-"In a brand new OTRS installation, the <emphasis>users</emphasis> group "
-"initially does not have any members. The agent 'root@localhost' belongs by "
-"default to the admin and stats groups."
+"In a brand new OTRS installation, the agent 'root@localhost' belongs by "
+"default to the admin, stats and users groups."
 msgstr ""
-"Katika usakinishaji mpya wa OTRS, kundi la <emphasis>watumiaji</emphasis> "
-"halina mwanachama yoyote mwanzoni . Wakala 'root@localhost' ni mwanachama wa "
-"makundi msimaizi na takwimu kwa chaguo-msingi."
 
 #. type: Content of: <section><section><para>
 #: en/content/administration/adminarea/agents-groups-roles.xml:95
@@ -11765,8 +11765,8 @@ msgstr ""
 msgid ""
 "Since OTRS 5S Email transport contains security options for each "
 "notification, that includes signing and encrypting possibilities with PGP "
-"and SMIME and the opportunity to decide what to do in case of missing key or "
-"certificate."
+"and S/MIME and the opportunity to decide what to do in case of missing key "
+"or certificate."
 msgstr ""
 
 #. type: Content of: <section><title>
@@ -15766,8 +15766,8 @@ msgstr ""
 #. type: Content of: <section><section><section><para>
 #: en/content/administration/email/email.xml:384
 msgid ""
-"In order to decrypt the emails that system needs to be properly configured "
-"for S/MIME and or PGP and have the needed private keys to decrypt the "
+"In order to decrypt the emails the system needs to be properly configured "
+"for S/MIME and/or PGP and have the needed private keys to decrypt the "
 "information."
 msgstr ""
 
@@ -15775,7 +15775,7 @@ msgstr ""
 #: en/content/administration/email/email.xml:388
 msgid ""
 "This module is disabled by default and it can be configured directly in the "
-"System Configuration in the Admin Panel"
+"System Configuration in the Admin Panel."
 msgstr ""
 
 #. type: Content of: <section><section><section><itemizedlist><listitem><para>
@@ -16743,145 +16743,141 @@ msgstr ""
 #: en/content/administration/email/smime.xml:245
 msgid ""
 "It is possible to use a Customer User Backed (such as LDAP) as the source of "
-"public S/MIME certificates, this certificates could be imported into the "
+"public S/MIME certificates. This certificates could be imported into the "
 "system and be displayed in <link linkend=\"adminarea-smime\">S/MIME "
 "configuration on the OTRS Admin page</link> and they can be used from OTRS "
 "to send encrypted emails to the customers."
 msgstr ""
 
-#. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:250
-msgid "Enable 'SMIME' in SysConfig"
+#. type: Content of: <section><section><para>
+#: en/content/administration/email/smime.xml:248
+msgid "In order to enable this feature is needed to:"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:251
-msgid "Enable 'SMIME::FetchFromCustomer' in sysConfig"
+#: en/content/administration/email/smime.xml:252
+msgid "Enable <literal>SMIME</literal> in SysConfig"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:254
+#: en/content/administration/email/smime.xml:253
+msgid "Enable <literal>SMIME::FetchFromCustomer</literal> in SysConfig"
+msgstr ""
+
+#. type: Content of: <section><section><para><orderedlist><listitem><para>
+#: en/content/administration/email/smime.xml:256
 msgid ""
 "Configure a customer user backend to provide the attribute "
-"'UserSMIMECertificate' with the customer user S/MIME certificate (there is "
-"an example for LDAP customer user mapping in $OTRS_HOME/Kernel/Config/"
-"Defaults.pm)."
+"<literal>UserSMIMECertificate</literal> with the customer user S/MIME "
+"certificate (there is an example for LDAP customer user mapping in <filename>"
+"$OTRS_HOME/Kernel/Config/Defaults.pm</filename>)."
 msgstr ""
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/email/smime.xml:248
-msgid ""
-"In order to enable this feature is needed to: <placeholder type=\"orderedlist"
-"\" id=\"0\"/>"
+#: en/content/administration/email/smime.xml:262
+msgid "This feature can be used in three different ways:"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:264
+#: en/content/administration/email/smime.xml:268
 msgid "Incoming Emails:"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:267
+#: en/content/administration/email/smime.xml:271
 msgid ""
-"A dedicated Postmaster filter ('PostMaster::PreFilterModule###000-"
-"SMIMEFetchFromCustomer' in SysConfig) will extract the email address of each "
-"incoming email and will try to find the email address is the list of "
-"customers, if found it will try get the S/MIME certificate from customer "
-"user attributes, if a certificate is found it will try to import it (unless "
-"it was already imported)."
+"A dedicated Postmaster filter (<literal>PostMaster::PreFilterModule###000-"
+"SMIMEFetchFromCustomer</literal> in SysConfig) will extract the email "
+"address of each incoming email and will try to find the email address is the "
+"list of customers. If found it will try get the S/MIME certificate from "
+"customer user attributes. If a certificate is found it will try to import it "
+"(unless it was already imported)."
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:272
+#: en/content/administration/email/smime.xml:276
 msgid "Specific email address or all customers:"
 msgstr ""
 
+#. type: Content of: <section><section><para><orderedlist><listitem><para>
+#: en/content/administration/email/smime.xml:279
+msgid ""
+"The console command <literal>Maint::SMIME::CustomerCertificate::Fetch</"
+"literal> can be used to import the S/MIME certificate of one customer email "
+"address as:"
+msgstr ""
+
 #. type: CDATA
-#: en/content/administration/email/smime.xml:276
+#: en/content/administration/email/smime.xml:282
 #, no-wrap
 msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --email customer@example.com\n"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:275
-msgid ""
-"The console command 'Maint::SMIME::CustomerCertificate::Fetch' can be used "
-"to import the S/MIME certificate of one customer email address as: "
-"<placeholder type=\"screen\" id=\"0\"/>"
-msgstr ""
-
-#. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:281
+#: en/content/administration/email/smime.xml:287
 msgid ""
 "In this case the console command will try to match the supplied email "
-"address with one of the customer users, if found it will try add to the "
+"address with one of the customer users. If found it will try add to the "
 "system the S/MIME certificate found in customer user properties (if the "
 "certificate is not already added)."
 msgstr ""
 
 #. type: CDATA
-#: en/content/administration/email/smime.xml:285
+#: en/content/administration/email/smime.xml:291
 #, no-wrap
 msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --add-all\n"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:284
+#: en/content/administration/email/smime.xml:290
 msgid ""
 "The same console command can be used to import the S/MIME certificates of "
-"all customer users (limited to 'CustomerUserSearchListLimit' property from "
-"the customer user backend). This option is discouraged specially for systems "
-"with a large number of customer users as it might require too much time to "
-"execute and depending on the limit it might be possible that not all "
-"customer certificates will be fetch, execute the console command in this "
-"mode as: <placeholder type=\"screen\" id=\"0\"/>"
+"all customer users (limited to <literal>CustomerUserSearchListLimit</"
+"literal> property from the customer user backend). This option is "
+"discouraged specially for systems with a large number of customer users as "
+"it might require too much time to execute and depending on the limit it "
+"might be possible that not all customer certificates will be fetch. Execute "
+"the console command in this mode as: <placeholder type=\"screen\" id=\"0\"/>"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:290
+#: en/content/administration/email/smime.xml:296
 msgid ""
 "For this option the console command will query the customer user backends to "
 "get all possible customers and for each it will check if there is a S/MIME "
-"certificate, if a certificate it found, it will try to add it to the system "
+"certificate. If a certificate is found, it will try to add it to the system "
 "(if the certificate is not already added)."
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:295
+#: en/content/administration/email/smime.xml:301
 msgid "Renew existing certificates:"
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:298
+#: en/content/administration/email/smime.xml:304
 msgid ""
-"Another console command 'Maint::SMIME::CustomerCertificate::renew' can be "
-"used to check for all the existing certificates in the system, this verifies "
-"that the existing certificates from customer users matches the ones that are "
-"retrieved by the customer user properties, any new certificate in the "
-"customer user backend will be added into the system (no certificates are "
-"deleted in this process)."
-msgstr ""
-
-#. type: CDATA
-#: en/content/administration/email/smime.xml:302
-#, no-wrap
-msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew\n"
+"Another console command <literal>Maint::SMIME::CustomerCertificate::Renew</"
+"literal> can be used to check for all existing certificates in the system. "
+"This verifies that the existing certificates from customer users matches the "
+"ones that are retrieved by the customer user properties. Any new certificate "
+"in the customer user backend will be added into the system (no certificates "
+"are deleted in this process)."
 msgstr ""
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:301
+#: en/content/administration/email/smime.xml:307
 msgid ""
 "This console command is executed once a day by the OTRS daemon automatically "
-"with the task 'Daemon::SchedulerCronTaskManager::"
-"Task###RenewCustomerSMIMECertificates' (as seen in SysConfig), but it can be "
-"also executed manually on demand as: <placeholder type=\"screen\" id=\"0\"/>"
+"with the task <literal>Daemon::SchedulerCronTaskManager::"
+"Task###RenewCustomerSMIMECertificates</literal> (as seen in SysConfig), but "
+"it can be also executed manually on demand as:"
 msgstr ""
 
-#. type: Content of: <section><section><para>
-#: en/content/administration/email/smime.xml:260
-msgid ""
-"This feature can be used in three different ways: <placeholder type="
-"\"orderedlist\" id=\"0\"/>"
+#. type: CDATA
+#: en/content/administration/email/smime.xml:310
+#, no-wrap
+msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew\n"
 msgstr ""
 
 #. type: Content of: <section><title>
@@ -17446,11 +17442,26 @@ msgstr "Hii ni hali ya tiketi zilizounganishwa na tiketi nyingine."
 
 #. type: Content of: <section><section><section><title>
 #: en/content/administration/ticket/states.xml:62
+msgid "Removed"
+msgstr ""
+
+#. type: Content of: <section><section><section><para>
+#: en/content/administration/ticket/states.xml:64
+msgid ""
+"This is the state for tickets that have been removed by the customer. "
+"Tickets will not really be deleted, they are just no longer shown as open. "
+"In order to enable this state in the customer interface you need to add the "
+"state type \"removed\" to the sysconfig setting \"Ticket::Frontend::"
+"CustomerTicketZoom###StateType\"."
+msgstr ""
+
+#. type: Content of: <section><section><section><title>
+#: en/content/administration/ticket/states.xml:69
 msgid "Closed Successful"
 msgstr "Imafungwa kwa Mafanikio"
 
 #. type: Content of: <section><section><section><para>
-#: en/content/administration/ticket/states.xml:64
+#: en/content/administration/ticket/states.xml:71
 msgid ""
 "This is the end state for tickets that have been successfully resolved. "
 "Depending on your configuration, you may or may not be able to reopen closed "
@@ -17461,12 +17472,12 @@ msgstr ""
 "zilizofungwa."
 
 #. type: Content of: <section><section><section><title>
-#: en/content/administration/ticket/states.xml:69
+#: en/content/administration/ticket/states.xml:76
 msgid "Closed Unsuccessful"
 msgstr "Imefungwa Pasipo Mafanikio"
 
 #. type: Content of: <section><section><section><para>
-#: en/content/administration/ticket/states.xml:71
+#: en/content/administration/ticket/states.xml:78
 msgid ""
 "This is the end state for tickets that have NOT been successfully resolved. "
 "Depending on your configuration, you may or may not be able to reopen closed "
@@ -17477,12 +17488,12 @@ msgstr ""
 "zilizofungwa."
 
 #. type: Content of: <section><section><title>
-#: en/content/administration/ticket/states.xml:78
+#: en/content/administration/ticket/states.xml:85
 msgid "Customizing states"
 msgstr "Kugeuza hali kukufaa"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:80
+#: en/content/administration/ticket/states.xml:87
 msgid ""
 "Every state has a name (state-name) and a type (state-type). Click on the "
 "<link linkend=\"adminarea-states\">States</link> link on the Admin page and "
@@ -17496,7 +17507,7 @@ msgid ""
 msgstr ""
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:84
+#: en/content/administration/ticket/states.xml:91
 msgid ""
 "The name of an already existing state can be changed, or new states added "
 "through this screen. If the state \"new\" has been changed via the web "
@@ -17514,7 +17525,7 @@ msgstr ""
 "kwa ajili ya \"mpya\"."
 
 #. type: Content of: <section><section><para><programlisting>
-#: en/content/administration/ticket/states.xml:89
+#: en/content/administration/ticket/states.xml:96
 #, no-wrap
 msgid ""
 "    [...]\n"
@@ -17538,12 +17549,12 @@ msgstr ""
 "    [...]\n"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:102
+#: en/content/administration/ticket/states.xml:109
 msgid "<emphasis>Script: Modifying the Kernel/Config.pm settings.</emphasis>"
 msgstr "<emphasis>Hati: Kubadilisha mipangilio ya Kernel/Config.pm.</emphasis>"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:106
+#: en/content/administration/ticket/states.xml:113
 msgid ""
 "If a new state type should be added, the ticket_state_type table in the OTRS "
 "database needs to be modified with a database client program, as shown in "
@@ -17554,7 +17565,7 @@ msgstr ""
 "ya mteja, kama ilivyoonyeshwa kwenye hati chini."
 
 #. type: Content of: <section><section><para><screen>
-#: en/content/administration/ticket/states.xml:111
+#: en/content/administration/ticket/states.xml:118
 #, no-wrap
 msgid ""
 "linux:~# mysql -p\n"
@@ -17598,12 +17609,12 @@ msgstr ""
 "linux:~#\n"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:134
+#: en/content/administration/ticket/states.xml:141
 msgid "<emphasis>Script: Modifying the OTRS database.</emphasis>"
 msgstr "<emphasis>Hati: Kurekebisha hifadhidata ya OTRS .</emphasis>"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:138
+#: en/content/administration/ticket/states.xml:145
 msgid ""
 "Now it is possible to use the new state type you just created. After a state "
 "has been linked with this new state type, the OTRS configuration also has to "
@@ -17616,7 +17627,7 @@ msgstr ""
 "tu kupitia SysConfig:"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:142
+#: en/content/administration/ticket/states.xml:149
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:"
 "Ticket::Frontend::AgentTicketPhone_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17630,7 +17641,7 @@ msgstr ""
 "simu."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:148
+#: en/content/administration/ticket/states.xml:155
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:"
 "Ticket::Frontend::AgentTicketPhone_StateType\"> Ticket -&gt; Frontend::"
@@ -17643,7 +17654,7 @@ msgstr ""
 "kufafanua hali zitakazopatikana kwa tiketi mpya za simu."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:154
+#: en/content/administration/ticket/states.xml:161
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:"
 "Ticket::Frontend::AgentTicketEmail_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17657,7 +17668,7 @@ msgstr ""
 "barua pepe."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:160
+#: en/content/administration/ticket/states.xml:167
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:"
 "Ticket::Frontend::AgentTicketEmail_StateType\"> Ticket -&gt; Frontend::"
@@ -17671,7 +17682,7 @@ msgstr ""
 "zitakazopatikana kwa tiketi mpya za barua pepe."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:166
+#: en/content/administration/ticket/states.xml:173
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::"
 "ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_State\"> Ticket "
@@ -17686,7 +17697,7 @@ msgstr ""
 "inayofuata kwa makala mpya za simu."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:172
+#: en/content/administration/ticket/states.xml:179
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::"
 "ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_StateType\"> "
@@ -17702,7 +17713,7 @@ msgstr ""
 "zitakazopatikana kwa makala mpya za simu."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:178
+#: en/content/administration/ticket/states.xml:185
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:"
 "Ticket::Frontend::AgentTicketMove_State\"> Ticket -&gt; Frontend::Agent::"
@@ -17715,7 +17726,7 @@ msgstr ""
 "kufafanua chaguo-msingi la hali inayofuata ya kuhamisha tiketi."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:184
+#: en/content/administration/ticket/states.xml:191
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:"
 "Ticket::Frontend::AgentTicketMove_StateType\"> Ticket -&gt; Frontend::Agent::"
@@ -17728,7 +17739,7 @@ msgstr ""
 "- kufafanua hali zinazofuata zinazopatikana za kuhamisha tiketi."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:190
+#: en/content/administration/ticket/states.xml:197
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:"
 "Ticket::Frontend::AgentTicketBounce_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17741,7 +17752,7 @@ msgstr ""
 "chaguo-msingi la hali inayofuata baada ya tiketi kudunda."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:196
+#: en/content/administration/ticket/states.xml:203
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:"
 "Ticket::Frontend::AgentTicketBounce_StateType\"> Ticket -&gt; Frontend::"
@@ -17754,7 +17765,7 @@ msgstr ""
 "inayopatikana itakayofuata katika skrini ya kudunda."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:202
+#: en/content/administration/ticket/states.xml:209
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:"
 "Ticket::Frontend::AgentTicketBulk_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17767,7 +17778,7 @@ msgstr ""
 "chaguo-msingi la hali inayofuata katika kitendocha mkupuo."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:208
+#: en/content/administration/ticket/states.xml:215
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:"
 "Ticket::Frontend::AgentTicketBulk_StateType\"> Ticket -&gt; Frontend::Agent::"
@@ -17780,7 +17791,7 @@ msgstr ""
 "zinazofuata zitakazopatikana katika skrini ya vitendo vya mkupuo."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:214
+#: en/content/administration/ticket/states.xml:221
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:"
 "Ticket::Frontend::AgentTicketClose_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17793,7 +17804,7 @@ msgstr ""
 "chaguo-msingi la hali inayofuata baada ya kufunga tiketi."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:220
+#: en/content/administration/ticket/states.xml:227
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:"
 "Ticket::Frontend::AgentTicketClose_StateType\"> Ticket -&gt; Frontend::"
@@ -17806,7 +17817,7 @@ msgstr ""
 "zinazofuata zitakazopatikana katika skrini ya kufunga."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:226
+#: en/content/administration/ticket/states.xml:233
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:"
 "Ticket::Frontend::AgentTicketCompose_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17819,7 +17830,7 @@ msgstr ""
 "kufafanua chaguo-msingi la hali inayofuata kwenye skrini ya Kutunga (jibu)."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:232
+#: en/content/administration/ticket/states.xml:239
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:"
 "Ticket::Frontend::AgentTicketCompose_StateType\"> Ticket -&gt; Frontend::"
@@ -17832,7 +17843,7 @@ msgstr ""
 "zifuatazo zitakazopatikana kwenye skrini ya Kutunga (jibu)."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:238
+#: en/content/administration/ticket/states.xml:245
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:"
 "Ticket::Frontend::AgentTicketForward_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17845,7 +17856,7 @@ msgstr ""
 "kufafanua chaguo-msingi la hali inayofuata baada ya kupeleka mbele tiketi."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:244
+#: en/content/administration/ticket/states.xml:251
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:"
 "Ticket::Frontend::AgentTicketForward_StateType\"> Ticket -&gt; Frontend::"
@@ -17858,7 +17869,7 @@ msgstr ""
 "zinazofuata zitakazopatikana kwenye skrini ya Kupeleka mbele.."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:250
+#: en/content/administration/ticket/states.xml:257
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:"
 "Ticket::Frontend::AgentTicketFreeText_StateDefault\"> Ticket -&gt; Frontend::"
@@ -17872,7 +17883,7 @@ msgstr ""
 "huru."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:256
+#: en/content/administration/ticket/states.xml:263
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:"
 "Ticket::Frontend::AgentTicketFreeText_StateType\"> Ticket -&gt; Frontend::"
@@ -17885,7 +17896,7 @@ msgstr ""
 "zinazofuata zitakazopatikana katika skrini ya nakala huru."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:263
+#: en/content/administration/ticket/states.xml:270
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::PostMaster:"
 "PostmasterDefaultState\"> Ticket -&gt; Core::PostMaster &gt; "
@@ -17898,7 +17909,7 @@ msgstr ""
 "zilizotengenezwa kutoka kwenye barua pepe."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:269
+#: en/content/administration/ticket/states.xml:276
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::PostMaster:"
 "PostmasterFollowUpState\"> Ticket -&gt; Core::PostMaster &gt; "
@@ -17911,7 +17922,7 @@ msgstr ""
 "ufuatiliaji kupokelewa."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:275
+#: en/content/administration/ticket/states.xml:282
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::PostMaster:"
 "PostmasterFollowUpStateClosed\"> Ticket -&gt; Core::PostMaster &gt; "
@@ -17924,7 +17935,7 @@ msgstr ""
 "ya ufuatiliaji wa tiketi iliyofungwa kupokelewa."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:281
+#: en/content/administration/ticket/states.xml:288
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::ViewableStateType"
 "\"> Ticket -&gt; Core::Ticket &gt; ViewableStateType </link> - to define the "
@@ -17937,7 +17948,7 @@ msgstr ""
 "katika Muonekanofoleni."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:287
+#: en/content/administration/ticket/states.xml:294
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::UnlockStateType"
 "\"> Ticket -&gt; Core::Ticket &gt; UnlockStateType </link> - to define the "
@@ -17948,7 +17959,7 @@ msgstr ""
 "za hali kwa ajili ya tiketi zilizofunguliwa."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:293
+#: en/content/administration/ticket/states.xml:300
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::"
 "PendingReminderStateType\"> Ticket -&gt; Core::Ticket &gt; "
@@ -17961,7 +17972,7 @@ msgstr ""
 "ya tiketi za kumbukumbu."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:299
+#: en/content/administration/ticket/states.xml:306
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::"
 "PendingAutoStateType\"> Ticket -&gt; Core::Ticket &gt; PendingAutoStateType "
@@ -17973,7 +17984,7 @@ msgstr ""
 "tiketi Otomatiki Zinazosubiri."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:305
+#: en/content/administration/ticket/states.xml:312
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::StateAfterPending"
 "\"> Ticket -> Core::Ticket > StateAfterPending </link> - to define the state "
@@ -20430,7 +20441,7 @@ msgstr ""
 msgid ""
 "Did you know there are example web services available in the <ulink url="
 "\"http://otrs.github.io/doc/manual/otrs-business-solution/stable/en/html/"
-"import-example-web-process.html\">OTRS Business Solution™</ulink>?"
+"import-example-web-service.html\">OTRS Business Solution™</ulink>?"
 msgstr ""
 
 #. type: Content of: <section><section><title>
@@ -26652,13 +26663,8 @@ msgid ""
 "interface\">Agent web interface </link>. Enter a user name and password. "
 "Since the system has just been installed and no users have yet been created, "
 "login as OTRS administrator first, using 'root@localhost' for username and "
-"'root' for password."
+"the generated password in the last step of the installer."
 msgstr ""
-"Fikia kwenye skrini ya kuingia kama ilivyoelezewa katika kifungu  <link "
-"linkend=\"agent-interface\">Kiolesura cha tovuti cha wakala</link>. Ingiza "
-"jina ka mtumiaji na nywila. Kwa kuwa mfumo ndio kwanza umesakinishwa na "
-"hakuna mtumiaji aliyetengenezwa, ingia kama msimamizi wa OTRS kwanza, kwa "
-"kutumia  'root@localhost' kama jina la mtumiaji na 'root' kama nywila."
 
 #. type: Content of: <chapter><section><warning><para>
 #: en/content/first-steps.xml:109
@@ -26676,19 +26682,17 @@ msgstr ""
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:114
 msgid ""
-"If you don't want to login as OTRS administrator, just enter the user name "
+"If you don't want to login as OTRS administrator, just enter the username "
 "and password for your normal agent account."
 msgstr ""
-"Kama hutaki kuingia kama msimamizi wa OTRS, ingiza jina la mtumiaji na "
-"nywila za akaunti yako ya kawaida ya wakala."
 
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:118
 msgid ""
 "In case you have forgotten your password, you can request the system for a "
-"new password. Simply press the link below the Login button, enter the mail "
-"address that is registered for your OTRS account into the input field, and "
-"press the Submit button (see figure)."
+"new password. Simply press the link below the Login button, enter the "
+"username that is registered for your OTRS account into the input field, and "
+"press the Request New Password button (see figure)."
 msgstr ""
 
 #. type: Content of: <chapter><section><para><figure><title>
@@ -26822,8 +26826,8 @@ msgstr ""
 #: en/content/first-steps.xml:173
 msgid ""
 "Finally at the bottom of the page, the site footer is displayed (see figure "
-"below). It contains links to directly access the OTRS official web site, or "
-"go to the Top of the page."
+"below). It contains a link to directly access the OTRS official web site, or "
+"switch to mobile mode."
 msgstr ""
 
 #. type: Content of: <chapter><section><para>
@@ -27563,12 +27567,9 @@ msgstr "Wakala Foleni Ona kengele zinazoonekana."
 #: en/content/first-steps.xml:528
 msgid ""
 "<graphic fileref=\"screenshots/introduction/firststeps/agent-queue-overview-"
-"visual-alarms.png\" scalefit=\"1\" width=\"100%\" contentdepth=\"100%\"></"
+"visual-alarms.gif\" scalefit=\"1\" width=\"100%\" contentdepth=\"100%\"></"
 "graphic>"
 msgstr ""
-"<graphic fileref=\"screenshots/introduction/firststeps/agent-queue-overview-"
-"visual-alarms.png\" scalefit=\"1\" width=\"100%\" contentdepth=\"100%\"></"
-"graphic>"
 
 #. type: Content of: <chapter><section><itemizedlist><title>
 #: en/content/first-steps.xml:534
@@ -27625,9 +27626,9 @@ msgstr ""
 msgid ""
 "OTRS users such as customers, agents and the OTRS administrator can "
 "configure their account preferences as per their needs. Agent can access the "
-"configuration screen by clicking on their login name at the top right corner "
-"of the web interface (see figure below), and customers must click on the "
-"\"Preferences\" link (see figure below)."
+"configuration screen by clicking on the gear icon at the top of the web "
+"interface (see figure below), and customers must click on the \"Preferences"
+"\" link (see figure below)."
 msgstr ""
 
 #. type: Content of: <chapter><section><para><figure><title>
@@ -29587,8 +29588,8 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:355
 msgid ""
-"Please use the web installer at <ulink url=\"http://yourhost/otrs/installer."
-"pl\">http://yourhost/otrs/installer.pl</ulink> (replace \"yourhost\" with "
+"Please use the web installer at <ulink url=\"http://localhost/otrs/installer."
+"pl\">http://localhost/otrs/installer.pl</ulink> (replace \"localhost\" with "
 "your OTRS hostname) to setup your database and basic system settings such as "
 "email accounts."
 msgstr ""
@@ -29609,8 +29610,8 @@ msgstr ""
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:375
 msgid ""
-"Now you are ready to login to your system at <ulink url=\"http://yourhost/"
-"otrs/index.pl\">http://yourhost/otrs/index.pl</ulink> with the credentials "
+"Now you are ready to login to your system at <ulink url=\"http://localhost/"
+"otrs/index.pl\">http://localhost/otrs/index.pl</ulink> with the credentials "
 "you configured in the web installer (User: root@localhost)."
 msgstr ""
 
@@ -29679,7 +29680,8 @@ msgstr ""
 #: en/content/installation/source.xml:461
 msgid ""
 "If you encounter problems with the installation, you can send a message to "
-"our mailing list otrs@otrs.org (http://lists.otrs.org/)."
+"our mailing list otrs@otrs.org (<ulink url=\"http://lists.otrs.org/\">http://"
+"lists.otrs.org/</ulink>)."
 msgstr ""
 
 #. type: Content of: <section><section><para>
@@ -30219,7 +30221,7 @@ msgstr ""
 #: en/content/installation/windows.xml:292
 #, no-wrap
 msgid ""
-"shell> perl otrs.OTRSCloneDB.pl\n"
+"shell> perl otrs.CloneDB.pl\n"
 "                "
 msgstr ""
 
@@ -30261,7 +30263,7 @@ msgstr ""
 #: en/content/installation/windows.xml:314
 #, no-wrap
 msgid ""
-"shell> perl otrs.OTRSCloneDB.pl -n\n"
+"shell> perl otrs.CloneDB.pl -n\n"
 "                "
 msgstr ""
 
@@ -30290,7 +30292,7 @@ msgstr ""
 #: en/content/installation/windows.xml:330
 #, no-wrap
 msgid ""
-"shell> perl otrs.OTRSCloneDB.pl -r\n"
+"shell> perl otrs.CloneDB.pl -r\n"
 "                "
 msgstr ""
 

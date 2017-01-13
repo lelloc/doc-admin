@@ -4,12 +4,12 @@
 #
 # Translators:
 # Balázs Úr <urbalazs@gmail.com>, 2014-2016
-# Martin Gruner <martin.gruner@otrs.com>, 2016
+# Martin Gruner <martin.gruner@otrs.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
-"POT-Creation-Date: 2016-10-25 13:32+0200\n"
-"PO-Revision-Date: 2016-11-03 10:37+0000\n"
+"POT-Creation-Date: 2017-01-13 13:06+0100\n"
+"PO-Revision-Date: 2017-01-13 12:12+0000\n"
 "Last-Translator: Martin Gruner <martin.gruner@otrs.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/otrs/OTRS/language/hu/)\n"
 "Language: hu\n"
@@ -1925,7 +1925,9 @@ msgstr ""
 #: en/content/administration/email/smime.xml:98
 #: en/content/administration/email/smime.xml:145
 #: en/content/administration/email/smime.xml:197
-#: en/content/administration/ticket/states.xml:110
+#: en/content/administration/email/smime.xml:282
+#: en/content/administration/email/smime.xml:310
+#: en/content/administration/ticket/states.xml:117
 #: en/content/administration/backup-and-restore.xml:24
 #: en/content/administration/backup-and-restore.xml:43
 #: en/content/administration/backup-and-restore.xml:62
@@ -8721,10 +8723,12 @@ msgstr ""
 "linkend=\"ConfigReference_Framework:Core::Web:Frontend::Themes\">Frontend::"
 "Themes</link> alá."
 
-#. type: Content of: <section><para>
+#. type: Content of: <section><section><para>
 #: en/content/customization/themes.xml:22 en/content/performance-tuning.xml:130
 #: en/content/administration/email/pgp.xml:13
 #: en/content/administration/email/smime.xml:41
+#: en/content/administration/email/smime.xml:251
+#: en/content/administration/email/smime.xml:265
 msgid "<placeholder type=\"orderedlist\" id=\"0\"/>"
 msgstr "<placeholder type=\"orderedlist\" id=\"0\"/>"
 
@@ -9172,7 +9176,7 @@ msgstr ""
 #: en/content/administration/email/email.xml:237
 #: en/content/administration/email/email.xml:275
 #: en/content/administration/email/email.xml:310
-#: en/content/administration/ticket/states.xml:88
+#: en/content/administration/ticket/states.xml:95
 #: en/content/administration/genericinterface/genericinterface-connectors.xml:87
 #: en/content/administration/genericinterface/genericinterface-connectors.xml:153
 #: en/content/administration/genericinterface/genericinterface-connectors.xml:290
@@ -10934,13 +10938,11 @@ msgstr "<placeholder type=\"table\" id=\"0\"/>"
 #. type: Content of: <section><section><note><para>
 #: en/content/administration/adminarea/agents-groups-roles.xml:90
 msgid ""
-"In a brand new OTRS installation, the <emphasis>users</emphasis> group "
-"initially does not have any members. The agent 'root@localhost' belongs by "
-"default to the admin and stats groups."
+"In a brand new OTRS installation, the agent 'root@localhost' belongs by "
+"default to the admin, stats and users groups."
 msgstr ""
-"Egy teljesen új OTRS telepítésben a <emphasis>users</emphasis> csoportnak "
-"kezdetben nincsen egyetlen tagja sem. A „root@localhost” ügyintéző "
-"alapértelmezetten az admin és a stats csoportokhoz tartozik."
+"Egy teljesen új OTRS telepítésben a „root@localhost” ügyintéző "
+"alapértelmezetten az admin, a stats és a users csoportokhoz tartozik."
 
 #. type: Content of: <section><section><para>
 #: en/content/administration/adminarea/agents-groups-roles.xml:95
@@ -13050,10 +13052,10 @@ msgstr ""
 msgid ""
 "Since OTRS 5S Email transport contains security options for each "
 "notification, that includes signing and encrypting possibilities with PGP "
-"and SMIME and the opportunity to decide what to do in case of missing key or "
-"certificate."
+"and S/MIME and the opportunity to decide what to do in case of missing key "
+"or certificate."
 msgstr ""
-"Az OTRS 5S óta az e-mail átvitel biztonsági beállításokat tartalmaz minden "
+"Az OTRS 5s óta az e-mail átvitel biztonsági beállításokat tartalmaz minden "
 "olyan értesítéshez, amely PGP és S/MIME aláírási és titkosítási "
 "lehetőségeket tartalmaz, valamint annak eldöntésének a lehetőségét, hogy mit "
 "kell tenni hiányzó kulcs vagy tanúsítvány esetén."
@@ -17915,8 +17917,8 @@ msgstr ""
 #. type: Content of: <section><section><section><para>
 #: en/content/administration/email/email.xml:384
 msgid ""
-"In order to decrypt the emails that system needs to be properly configured "
-"for S/MIME and or PGP and have the needed private keys to decrypt the "
+"In order to decrypt the emails the system needs to be properly configured "
+"for S/MIME and/or PGP and have the needed private keys to decrypt the "
 "information."
 msgstr ""
 "Az e-mailek visszafejtésének érdekében a rendszer megfelelő beállítása "
@@ -17927,7 +17929,7 @@ msgstr ""
 #: en/content/administration/email/email.xml:388
 msgid ""
 "This module is disabled by default and it can be configured directly in the "
-"System Configuration in the Admin Panel"
+"System Configuration in the Admin Panel."
 msgstr ""
 "Ez a modul alapértelmezetten le van tiltva, és közvetlenül az "
 "adminisztrációs panelen lévő rendszerbeállításokban állítható be."
@@ -18919,7 +18921,7 @@ msgstr "S/MIME tanúsítványok lekérése az ügyfél-felhasználó háttérpro
 #: en/content/administration/email/smime.xml:245
 msgid ""
 "It is possible to use a Customer User Backed (such as LDAP) as the source of "
-"public S/MIME certificates, this certificates could be imported into the "
+"public S/MIME certificates. This certificates could be imported into the "
 "system and be displayed in <link linkend=\"adminarea-smime\">S/MIME "
 "configuration on the OTRS Admin page</link> and they can be used from OTRS "
 "to send encrypted emails to the customers."
@@ -18931,26 +18933,31 @@ msgstr ""
 "megjelenítve, illetve használhatók az OTRS-ből titkosított e-mailek "
 "küldéséhez az ügyfeleknek."
 
+#. type: Content of: <section><section><para>
+#: en/content/administration/email/smime.xml:248
+msgid "In order to enable this feature is needed to:"
+msgstr "A funkció engedélyezéséhez a következőkre van szüksége:"
+
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:250
-msgid "Enable 'SMIME' in SysConfig"
+#: en/content/administration/email/smime.xml:252
+msgid "Enable <literal>SMIME</literal> in SysConfig"
 msgstr ""
 "Engedélyezze az <literal>SMIME</literal> beállítást a rendszerbeállításokban"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:251
-msgid "Enable 'SMIME::FetchFromCustomer' in sysConfig"
+#: en/content/administration/email/smime.xml:253
+msgid "Enable <literal>SMIME::FetchFromCustomer</literal> in SysConfig"
 msgstr ""
 "Engedélyezze az <literal>SMIME::FetchFromCustomer</literal> beállítást a "
 "rendszerbeállításokban"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:254
+#: en/content/administration/email/smime.xml:256
 msgid ""
 "Configure a customer user backend to provide the attribute "
-"'UserSMIMECertificate' with the customer user S/MIME certificate (there is "
-"an example for LDAP customer user mapping in $OTRS_HOME/Kernel/Config/"
-"Defaults.pm)."
+"<literal>UserSMIMECertificate</literal> with the customer user S/MIME "
+"certificate (there is an example for LDAP customer user mapping in <filename>"
+"$OTRS_HOME/Kernel/Config/Defaults.pm</filename>)."
 msgstr ""
 "Állítson be egy ügyfél-felhasználó háttérprogramot a "
 "<literal>UserSMIMECertificate</literal> attribútum megadásához az ügyfél-"
@@ -18959,28 +18966,24 @@ msgstr ""
 "fájlban)."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/email/smime.xml:248
-msgid ""
-"In order to enable this feature is needed to: <placeholder type=\"orderedlist"
-"\" id=\"0\"/>"
-msgstr ""
-"A funkció engedélyezéséhez a következőkre van szüksége: <placeholder type="
-"\"orderedlist\" id=\"0\"/>"
+#: en/content/administration/email/smime.xml:262
+msgid "This feature can be used in three different ways:"
+msgstr "Ez a funkció három különböző módon használható:"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:264
+#: en/content/administration/email/smime.xml:268
 msgid "Incoming Emails:"
 msgstr "Bejövő e-mailek:"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:267
+#: en/content/administration/email/smime.xml:271
 msgid ""
-"A dedicated Postmaster filter ('PostMaster::PreFilterModule###000-"
-"SMIMEFetchFromCustomer' in SysConfig) will extract the email address of each "
-"incoming email and will try to find the email address is the list of "
-"customers, if found it will try get the S/MIME certificate from customer "
-"user attributes, if a certificate is found it will try to import it (unless "
-"it was already imported)."
+"A dedicated Postmaster filter (<literal>PostMaster::PreFilterModule###000-"
+"SMIMEFetchFromCustomer</literal> in SysConfig) will extract the email "
+"address of each incoming email and will try to find the email address is the "
+"list of customers. If found it will try get the S/MIME certificate from "
+"customer user attributes. If a certificate is found it will try to import it "
+"(unless it was already imported)."
 msgstr ""
 "Egy dedikált levelezési szűrő (<literal>PostMaster::PreFilterModule###000-"
 "SMIMEFetchFromCustomer</literal> a rendszerbeállításokban) ki fogja bontani "
@@ -18991,32 +18994,32 @@ msgstr ""
 "lett már importálva)."
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:272
+#: en/content/administration/email/smime.xml:276
 msgid "Specific email address or all customers:"
 msgstr "Adott e-mail cím vagy az összes ügyfél:"
 
+#. type: Content of: <section><section><para><orderedlist><listitem><para>
+#: en/content/administration/email/smime.xml:279
+msgid ""
+"The console command <literal>Maint::SMIME::CustomerCertificate::Fetch</"
+"literal> can be used to import the S/MIME certificate of one customer email "
+"address as:"
+msgstr ""
+"A <literal>Maint::SMIME::CustomerCertificate::Fetch</literal> parancssori "
+"parancs használható egy ügyfél e-mail címe S/MIME tanúsítványának "
+"importálásához a következőképpen:"
+
 #. type: CDATA
-#: en/content/administration/email/smime.xml:276
+#: en/content/administration/email/smime.xml:282
 #, no-wrap
 msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --email customer@example.com\n"
 msgstr "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --email customer@example.com\n"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:275
-msgid ""
-"The console command 'Maint::SMIME::CustomerCertificate::Fetch' can be used "
-"to import the S/MIME certificate of one customer email address as: "
-"<placeholder type=\"screen\" id=\"0\"/>"
-msgstr ""
-"A <literal>Maint::SMIME::CustomerCertificate::Fetch</literal> parancssori "
-"parancs használható egy ügyfél e-mail címe S/MIME tanúsítványának "
-"importálásához a következőképpen: <placeholder type=\"screen\" id=\"0\"/>"
-
-#. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:281
+#: en/content/administration/email/smime.xml:287
 msgid ""
 "In this case the console command will try to match the supplied email "
-"address with one of the customer users, if found it will try add to the "
+"address with one of the customer users. If found it will try add to the "
 "system the S/MIME certificate found in customer user properties (if the "
 "certificate is not already added)."
 msgstr ""
@@ -19027,21 +19030,21 @@ msgstr ""
 "hozzáadva)."
 
 #. type: CDATA
-#: en/content/administration/email/smime.xml:285
+#: en/content/administration/email/smime.xml:291
 #, no-wrap
 msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --add-all\n"
 msgstr "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --add-all\n"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:284
+#: en/content/administration/email/smime.xml:290
 msgid ""
 "The same console command can be used to import the S/MIME certificates of "
-"all customer users (limited to 'CustomerUserSearchListLimit' property from "
-"the customer user backend). This option is discouraged specially for systems "
-"with a large number of customer users as it might require too much time to "
-"execute and depending on the limit it might be possible that not all "
-"customer certificates will be fetch, execute the console command in this "
-"mode as: <placeholder type=\"screen\" id=\"0\"/>"
+"all customer users (limited to <literal>CustomerUserSearchListLimit</"
+"literal> property from the customer user backend). This option is "
+"discouraged specially for systems with a large number of customer users as "
+"it might require too much time to execute and depending on the limit it "
+"might be possible that not all customer certificates will be fetch. Execute "
+"the console command in this mode as: <placeholder type=\"screen\" id=\"0\"/>"
 msgstr ""
 "Ugyanaz a parancssori parancs használható az összes ügyfél-felhasználó S/"
 "MIME tanúsítványának importálásához is (a "
@@ -19054,11 +19057,11 @@ msgstr ""
 "\"screen\" id=\"0\"/>"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:290
+#: en/content/administration/email/smime.xml:296
 msgid ""
 "For this option the console command will query the customer user backends to "
 "get all possible customers and for each it will check if there is a S/MIME "
-"certificate, if a certificate it found, it will try to add it to the system "
+"certificate. If a certificate is found, it will try to add it to the system "
 "(if the certificate is not already added)."
 msgstr ""
 "Ehhez a beállításhoz a parancssori parancs le fogja kérdezni az ügyfél-"
@@ -19068,19 +19071,19 @@ msgstr ""
 "a tanúsítvány még nem lett hozzáadva)."
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:295
+#: en/content/administration/email/smime.xml:301
 msgid "Renew existing certificates:"
 msgstr "Meglévő tanúsítványok megújítása:"
 
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:298
+#: en/content/administration/email/smime.xml:304
 msgid ""
-"Another console command 'Maint::SMIME::CustomerCertificate::renew' can be "
-"used to check for all the existing certificates in the system, this verifies "
-"that the existing certificates from customer users matches the ones that are "
-"retrieved by the customer user properties, any new certificate in the "
-"customer user backend will be added into the system (no certificates are "
-"deleted in this process)."
+"Another console command <literal>Maint::SMIME::CustomerCertificate::Renew</"
+"literal> can be used to check for all existing certificates in the system. "
+"This verifies that the existing certificates from customer users matches the "
+"ones that are retrieved by the customer user properties. Any new certificate "
+"in the customer user backend will be added into the system (no certificates "
+"are deleted in this process)."
 msgstr ""
 "Egy másik parancssori parancs (<literal>Maint::SMIME::CustomerCertificate::"
 "Renew</literal>) használható az összes meglévő tanúsítvány ellenőrzéséhez a "
@@ -19090,34 +19093,25 @@ msgstr ""
 "bármely új tanúsítvány hozzá lesz adva a rendszerhez (ebben a folyamatban "
 "tanúsítvány nem kerül törlésre)."
 
-#. type: CDATA
-#: en/content/administration/email/smime.xml:302
-#, no-wrap
-msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew\n"
-msgstr "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew\n"
-
 #. type: Content of: <section><section><para><orderedlist><listitem><para>
-#: en/content/administration/email/smime.xml:301
+#: en/content/administration/email/smime.xml:307
 msgid ""
 "This console command is executed once a day by the OTRS daemon automatically "
-"with the task 'Daemon::SchedulerCronTaskManager::"
-"Task###RenewCustomerSMIMECertificates' (as seen in SysConfig), but it can be "
-"also executed manually on demand as: <placeholder type=\"screen\" id=\"0\"/>"
+"with the task <literal>Daemon::SchedulerCronTaskManager::"
+"Task###RenewCustomerSMIMECertificates</literal> (as seen in SysConfig), but "
+"it can be also executed manually on demand as:"
 msgstr ""
 "Ezt a parancssori parancsot az OTRS démon naponta egyszer automatikusan "
 "végrehajtja a <literal>Daemon::SchedulerCronTaskManager::"
 "Task###RenewCustomerSMIMECertificates</literal> feladattal (ahogy a "
 "rendszerbeállításokban látható), de igény szerint végrehajtható kézzel is a "
-"következőképpen: <placeholder type=\"screen\" id=\"0\"/>"
+"következőképpen:"
 
-#. type: Content of: <section><section><para>
-#: en/content/administration/email/smime.xml:260
-msgid ""
-"This feature can be used in three different ways: <placeholder type="
-"\"orderedlist\" id=\"0\"/>"
-msgstr ""
-"Ez a funkció három különböző módon használható: <placeholder type="
-"\"orderedlist\" id=\"0\"/>"
+#. type: CDATA
+#: en/content/administration/email/smime.xml:310
+#, no-wrap
+msgid "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew\n"
+msgstr "shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew\n"
 
 #. type: Content of: <section><title>
 #: en/content/administration/time.xml:6
@@ -19428,7 +19422,7 @@ msgstr ""
 "PDF:PDF::PageSize\">PDF::PageSize</link> paramétert az előállított PDF-fájl "
 "szabványos oldalméretének meghatározásához (DIN-A4 vagy Letter), valamint a "
 "<link linkend=\"ConfigReference_Framework:Core::PDF:PDF::MaxPages\">PDF::"
-"MaxPages</link> paramétert is az oldalak legnagyobb számának megadásához egy "
+"MaxPage</link> paramétert is az oldalak legnagyobb számának megadásához egy "
 "PDF-fájlnál, amely akkor hasznos, ha egy felhasználó véletlenül hatalmas "
 "kimeneti fájlt állítana elő."
 
@@ -19727,11 +19721,26 @@ msgstr ""
 
 #. type: Content of: <section><section><section><title>
 #: en/content/administration/ticket/states.xml:62
+msgid "Removed"
+msgstr ""
+
+#. type: Content of: <section><section><section><para>
+#: en/content/administration/ticket/states.xml:64
+msgid ""
+"This is the state for tickets that have been removed by the customer. "
+"Tickets will not really be deleted, they are just no longer shown as open. "
+"In order to enable this state in the customer interface you need to add the "
+"state type \"removed\" to the sysconfig setting \"Ticket::Frontend::"
+"CustomerTicketZoom###StateType\"."
+msgstr ""
+
+#. type: Content of: <section><section><section><title>
+#: en/content/administration/ticket/states.xml:69
 msgid "Closed Successful"
 msgstr "Sikeresen lezárva"
 
 #. type: Content of: <section><section><section><para>
-#: en/content/administration/ticket/states.xml:64
+#: en/content/administration/ticket/states.xml:71
 msgid ""
 "This is the end state for tickets that have been successfully resolved. "
 "Depending on your configuration, you may or may not be able to reopen closed "
@@ -19742,12 +19751,12 @@ msgstr ""
 "jegyek újranyitására."
 
 #. type: Content of: <section><section><section><title>
-#: en/content/administration/ticket/states.xml:69
+#: en/content/administration/ticket/states.xml:76
 msgid "Closed Unsuccessful"
 msgstr "Sikertelenül lezárva"
 
 #. type: Content of: <section><section><section><para>
-#: en/content/administration/ticket/states.xml:71
+#: en/content/administration/ticket/states.xml:78
 msgid ""
 "This is the end state for tickets that have NOT been successfully resolved. "
 "Depending on your configuration, you may or may not be able to reopen closed "
@@ -19758,12 +19767,12 @@ msgstr ""
 "lehetősége a lezárt jegyek újranyitására."
 
 #. type: Content of: <section><section><title>
-#: en/content/administration/ticket/states.xml:78
+#: en/content/administration/ticket/states.xml:85
 msgid "Customizing states"
 msgstr "Állapotok személyre szabása"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:80
+#: en/content/administration/ticket/states.xml:87
 msgid ""
 "Every state has a name (state-name) and a type (state-type). Click on the "
 "<link linkend=\"adminarea-states\">States</link> link on the Admin page and "
@@ -19787,7 +19796,7 @@ msgstr ""
 "a feloldási funkció bizonyos állapottípusokon alapul."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:84
+#: en/content/administration/ticket/states.xml:91
 msgid ""
 "The name of an already existing state can be changed, or new states added "
 "through this screen. If the state \"new\" has been changed via the web "
@@ -19805,7 +19814,7 @@ msgstr ""
 "működjön a „new” megváltoztatott állapotával."
 
 #. type: Content of: <section><section><para><programlisting>
-#: en/content/administration/ticket/states.xml:89
+#: en/content/administration/ticket/states.xml:96
 #, no-wrap
 msgid ""
 "    [...]\n"
@@ -19829,13 +19838,13 @@ msgstr ""
 "    [...]\n"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:102
+#: en/content/administration/ticket/states.xml:109
 msgid "<emphasis>Script: Modifying the Kernel/Config.pm settings.</emphasis>"
 msgstr ""
 "<emphasis>Parancsfájl: A Kernel/Config.pm beállítások módosítása.</emphasis>"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:106
+#: en/content/administration/ticket/states.xml:113
 msgid ""
 "If a new state type should be added, the ticket_state_type table in the OTRS "
 "database needs to be modified with a database client program, as shown in "
@@ -19846,7 +19855,7 @@ msgstr ""
 "programmal, amint a lenti parancsfájlban látható."
 
 #. type: Content of: <section><section><para><screen>
-#: en/content/administration/ticket/states.xml:111
+#: en/content/administration/ticket/states.xml:118
 #, no-wrap
 msgid ""
 "linux:~# mysql -p\n"
@@ -19890,12 +19899,12 @@ msgstr ""
 "linux:~#\n"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:134
+#: en/content/administration/ticket/states.xml:141
 msgid "<emphasis>Script: Modifying the OTRS database.</emphasis>"
 msgstr "<emphasis>Parancsfájl: Az OTRS adatbázis módosítása.</emphasis>"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:138
+#: en/content/administration/ticket/states.xml:145
 msgid ""
 "Now it is possible to use the new state type you just created. After a state "
 "has been linked with this new state type, the OTRS configuration also has to "
@@ -19909,7 +19918,7 @@ msgstr ""
 "rendszerbeállításokon keresztül:"
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:142
+#: en/content/administration/ticket/states.xml:149
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:"
 "Ticket::Frontend::AgentTicketPhone_StateDefault\"> Ticket -&gt; Frontend::"
@@ -19923,7 +19932,7 @@ msgstr ""
 "jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:148
+#: en/content/administration/ticket/states.xml:155
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewPhoneNew:"
 "Ticket::Frontend::AgentTicketPhone_StateType\"> Ticket -&gt; Frontend::"
@@ -19936,7 +19945,7 @@ msgstr ""
 "elérhető következő állapotok meghatározásához az új telefonos jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:154
+#: en/content/administration/ticket/states.xml:161
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:"
 "Ticket::Frontend::AgentTicketEmail_StateDefault\"> Ticket -&gt; Frontend::"
@@ -19949,7 +19958,7 @@ msgstr ""
 "az alapértelmezett következő állapot meghatározásához az új e-mail jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:160
+#: en/content/administration/ticket/states.xml:167
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewEmailNew:"
 "Ticket::Frontend::AgentTicketEmail_StateType\"> Ticket -&gt; Frontend::"
@@ -19962,7 +19971,7 @@ msgstr ""
 "elérhető következő állapotok meghatározásához az új e-mail jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:166
+#: en/content/administration/ticket/states.xml:173
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::"
 "ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_State\"> Ticket "
@@ -19977,7 +19986,7 @@ msgstr ""
 "állapot meghatározásához az új telefonos bejegyzéseknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:172
+#: en/content/administration/ticket/states.xml:179
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::"
 "ViewPhoneOutbound:Ticket::Frontend::AgentTicketPhoneOutbound_StateType\"> "
@@ -19992,7 +20001,7 @@ msgstr ""
 "állapotok meghatározásához az új telefonos bejegyzéseknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:178
+#: en/content/administration/ticket/states.xml:185
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:"
 "Ticket::Frontend::AgentTicketMove_State\"> Ticket -&gt; Frontend::Agent::"
@@ -20005,7 +20014,7 @@ msgstr ""
 "következő állapot meghatározásához egy jegy áthelyezésénél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:184
+#: en/content/administration/ticket/states.xml:191
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewMove:"
 "Ticket::Frontend::AgentTicketMove_StateType\"> Ticket -&gt; Frontend::Agent::"
@@ -20018,7 +20027,7 @@ msgstr ""
 "következő állapotok meghatározásához egy jegy áthelyezésénél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:190
+#: en/content/administration/ticket/states.xml:197
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:"
 "Ticket::Frontend::AgentTicketBounce_StateDefault\"> Ticket -&gt; Frontend::"
@@ -20031,7 +20040,7 @@ msgstr ""
 "következő állapot meghatározásához egy jegy visszaküldése után."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:196
+#: en/content/administration/ticket/states.xml:203
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBounce:"
 "Ticket::Frontend::AgentTicketBounce_StateType\"> Ticket -&gt; Frontend::"
@@ -20044,7 +20053,7 @@ msgstr ""
 "állapotok meghatározásához a visszaküldés képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:202
+#: en/content/administration/ticket/states.xml:209
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:"
 "Ticket::Frontend::AgentTicketBulk_StateDefault\"> Ticket -&gt; Frontend::"
@@ -20057,7 +20066,7 @@ msgstr ""
 "következő állapot meghatározásához egy tömeges műveletben."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:208
+#: en/content/administration/ticket/states.xml:215
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewBulk:"
 "Ticket::Frontend::AgentTicketBulk_StateType\"> Ticket -&gt; Frontend::Agent::"
@@ -20070,7 +20079,7 @@ msgstr ""
 "meghatározásához a tömeges művelet képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:214
+#: en/content/administration/ticket/states.xml:221
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:"
 "Ticket::Frontend::AgentTicketClose_StateDefault\"> Ticket -&gt; Frontend::"
@@ -20083,7 +20092,7 @@ msgstr ""
 "következő állapot meghatározásához egy jegy lezárása után."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:220
+#: en/content/administration/ticket/states.xml:227
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewClose:"
 "Ticket::Frontend::AgentTicketClose_StateType\"> Ticket -&gt; Frontend::"
@@ -20096,7 +20105,7 @@ msgstr ""
 "állapotok meghatározásához a lezárás képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:226
+#: en/content/administration/ticket/states.xml:233
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:"
 "Ticket::Frontend::AgentTicketCompose_StateDefault\"> Ticket -&gt; Frontend::"
@@ -20109,7 +20118,7 @@ msgstr ""
 "következő állapot meghatározásához az írás (válasz) képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:232
+#: en/content/administration/ticket/states.xml:239
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewCompose:"
 "Ticket::Frontend::AgentTicketCompose_StateType\"> Ticket -&gt; Frontend::"
@@ -20122,7 +20131,7 @@ msgstr ""
 "állapotok meghatározásához az írás (válasz) képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:238
+#: en/content/administration/ticket/states.xml:245
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:"
 "Ticket::Frontend::AgentTicketForward_StateDefault\"> Ticket -&gt; Frontend::"
@@ -20135,7 +20144,7 @@ msgstr ""
 "következő állapot meghatározásához egy jegy továbbítása után."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:244
+#: en/content/administration/ticket/states.xml:251
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewForward:"
 "Ticket::Frontend::AgentTicketForward_StateType\"> Ticket -&gt; Frontend::"
@@ -20148,7 +20157,7 @@ msgstr ""
 "állapotok meghatározásához a továbbítás képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:250
+#: en/content/administration/ticket/states.xml:257
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:"
 "Ticket::Frontend::AgentTicketFreeText_StateDefault\"> Ticket -&gt; Frontend::"
@@ -20162,7 +20171,7 @@ msgstr ""
 "képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:256
+#: en/content/administration/ticket/states.xml:263
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Frontend::Agent::Ticket::ViewFreeText:"
 "Ticket::Frontend::AgentTicketFreeText_StateType\"> Ticket -&gt; Frontend::"
@@ -20175,7 +20184,7 @@ msgstr ""
 "állapotok meghatározásához a szabad szöveg képernyőn."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:263
+#: en/content/administration/ticket/states.xml:270
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::PostMaster:"
 "PostmasterDefaultState\"> Ticket -&gt; Core::PostMaster &gt; "
@@ -20188,7 +20197,7 @@ msgstr ""
 "állapotának meghatározásához."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:269
+#: en/content/administration/ticket/states.xml:276
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::PostMaster:"
 "PostmasterFollowUpState\"> Ticket -&gt; Core::PostMaster &gt; "
@@ -20201,7 +20210,7 @@ msgstr ""
 "miután egy követés érkezett."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:275
+#: en/content/administration/ticket/states.xml:282
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::PostMaster:"
 "PostmasterFollowUpStateClosed\"> Ticket -&gt; Core::PostMaster &gt; "
@@ -20214,7 +20223,7 @@ msgstr ""
 "meghatározásához, miután egy követés érkezett egy már lezárt jegynél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:281
+#: en/content/administration/ticket/states.xml:288
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::ViewableStateType"
 "\"> Ticket -&gt; Core::Ticket &gt; ViewableStateType </link> - to define the "
@@ -20227,7 +20236,7 @@ msgstr ""
 "rendszeren, például a várólista nézetben."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:287
+#: en/content/administration/ticket/states.xml:294
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::UnlockStateType"
 "\"> Ticket -&gt; Core::Ticket &gt; UnlockStateType </link> - to define the "
@@ -20238,7 +20247,7 @@ msgstr ""
 "állapottípusok meghatározásához a feloldott jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:293
+#: en/content/administration/ticket/states.xml:300
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::"
 "PendingReminderStateType\"> Ticket -&gt; Core::Ticket &gt; "
@@ -20251,7 +20260,7 @@ msgstr ""
 "emlékeztető jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:299
+#: en/content/administration/ticket/states.xml:306
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::"
 "PendingAutoStateType\"> Ticket -&gt; Core::Ticket &gt; PendingAutoStateType "
@@ -20263,7 +20272,7 @@ msgstr ""
 "jegyeknél."
 
 #. type: Content of: <section><section><para>
-#: en/content/administration/ticket/states.xml:305
+#: en/content/administration/ticket/states.xml:312
 msgid ""
 "<link linkend=\"ConfigReference_Ticket:Core::Ticket:Ticket::StateAfterPending"
 "\"> Ticket -> Core::Ticket > StateAfterPending </link> - to define the state "
@@ -22796,11 +22805,11 @@ msgstr "Webszolgáltatás példa importálása"
 msgid ""
 "Did you know there are example web services available in the <ulink url="
 "\"http://otrs.github.io/doc/manual/otrs-business-solution/stable/en/html/"
-"import-example-web-process.html\">OTRS Business Solution™</ulink>?"
+"import-example-web-service.html\">OTRS Business Solution™</ulink>?"
 msgstr ""
 "Tudta, hogy léteznek elérhető példa webszolgáltatások az <ulink url=\"http://"
-"otrs.github.io/doc/manual/otrs-business-solution/stable/en/html/import-"
-"example-web-process.html\">OTRS Business Solution™</ulink> csomagban?"
+"otrs.github.io/doc/manual/otrs-business-solution/stable/hu/html/import-"
+"example-web-service.html\">OTRS Business Solution™</ulink> csomagban?"
 
 #. type: Content of: <section><section><title>
 #: en/content/administration/genericinterface/genericinterface-webservice-gui.xml:146
@@ -30329,13 +30338,14 @@ msgid ""
 "interface\">Agent web interface </link>. Enter a user name and password. "
 "Since the system has just been installed and no users have yet been created, "
 "login as OTRS administrator first, using 'root@localhost' for username and "
-"'root' for password."
+"the generated password in the last step of the installer."
 msgstr ""
 "Nyissa meg a bejelentkezési képernyőt az <link linkend=\"agent-interface"
 "\">ügyintéző webes felülete</link> szakaszban leírtak szerint. Adjon meg egy "
 "felhasználónevet és jelszót. Mivel a rendszer nemrég lett telepítve, és még "
 "nem lettek felhasználók létrehozva, először OTRS adminisztrátorként "
-"jelentkezzen be a „root@localhost” felhasználónévvel és a „root” jelszóval."
+"jelentkezzen be a „root@localhost” felhasználónévvel és a telepítő utolsó "
+"lépésében előállított jelszóval."
 
 #. type: Content of: <chapter><section><warning><para>
 #: en/content/first-steps.xml:109
@@ -30353,7 +30363,7 @@ msgstr ""
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:114
 msgid ""
-"If you don't want to login as OTRS administrator, just enter the user name "
+"If you don't want to login as OTRS administrator, just enter the username "
 "and password for your normal agent account."
 msgstr ""
 "Amennyiben nem OTRS adminisztrátorként szeretne bejelentkezni, akkor adja "
@@ -30363,14 +30373,14 @@ msgstr ""
 #: en/content/first-steps.xml:118
 msgid ""
 "In case you have forgotten your password, you can request the system for a "
-"new password. Simply press the link below the Login button, enter the mail "
-"address that is registered for your OTRS account into the input field, and "
-"press the Submit button (see figure)."
+"new password. Simply press the link below the Login button, enter the "
+"username that is registered for your OTRS account into the input field, and "
+"press the Request New Password button (see figure)."
 msgstr ""
 "Abban az esetben, ha elfelejtette a jelszavát, kérhet a rendszertől egy új "
 "jelszót. Egyszerűen nyomja meg a Bejelentkezés gomb alatti hivatkozást, adja "
-"meg a beviteli mezőben azt az e-mail címet, amely az OTRS fiókjához van "
-"regisztrálva, és nyomja meg az Elküld gombot (lásd az ábrát)."
+"meg a beviteli mezőben azt a felhasználónevet, amely az OTRS fiókjához van "
+"regisztrálva, és nyomja meg az Új jelszó kérése gombot (lásd az ábrát)."
 
 #. type: Content of: <chapter><section><para><figure><title>
 #: en/content/first-steps.xml:123
@@ -30522,12 +30532,12 @@ msgstr ""
 #: en/content/first-steps.xml:173
 msgid ""
 "Finally at the bottom of the page, the site footer is displayed (see figure "
-"below). It contains links to directly access the OTRS official web site, or "
-"go to the Top of the page."
+"below). It contains a link to directly access the OTRS official web site, or "
+"switch to mobile mode."
 msgstr ""
 "Végül az oldal alján az oldal lábléce jelenik meg (lásd a lenti ábrát). "
 "Hivatkozásokat tartalmaz az OTRS hivatalos weboldalának közvetlen eléréséhez "
-"vagy az oldal tetejére ugráshoz."
+"vagy a mobil módra váltáshoz."
 
 #. type: Content of: <chapter><section><para>
 #: en/content/first-steps.xml:177
@@ -31318,12 +31328,9 @@ msgstr "Ügyintéző várólista nézet látható riasztásai."
 #: en/content/first-steps.xml:528
 msgid ""
 "<graphic fileref=\"screenshots/introduction/firststeps/agent-queue-overview-"
-"visual-alarms.png\" scalefit=\"1\" width=\"100%\" contentdepth=\"100%\"></"
+"visual-alarms.gif\" scalefit=\"1\" width=\"100%\" contentdepth=\"100%\"></"
 "graphic>"
 msgstr ""
-"<graphic fileref=\"screenshots/introduction/firststeps/agent-queue-overview-"
-"visual-alarms.png\" scalefit=\"1\" width=\"100%\" contentdepth=\"100%\"></"
-"graphic>"
 
 #. type: Content of: <chapter><section><itemizedlist><title>
 #: en/content/first-steps.xml:534
@@ -31380,14 +31387,14 @@ msgstr "Felhasználó beállításai"
 msgid ""
 "OTRS users such as customers, agents and the OTRS administrator can "
 "configure their account preferences as per their needs. Agent can access the "
-"configuration screen by clicking on their login name at the top right corner "
-"of the web interface (see figure below), and customers must click on the "
-"\"Preferences\" link (see figure below)."
+"configuration screen by clicking on the gear icon at the top of the web "
+"interface (see figure below), and customers must click on the \"Preferences"
+"\" link (see figure below)."
 msgstr ""
 "Az OTRS felhasználók (ügyfelek, ügyintézők és az OTRS adminisztrátor) a "
 "saját igényeik szerint állíthatják be a fiókjuk beállításait. Az ügyintéző a "
-"webes felület jobb felső sarkában lévő felhasználónevére kattintva férhet "
-"hozzá a beállítási képernyőhöz (lásd a lenti ábrát), míg az ügyfeleknek a "
+"webes felület tetején lévő fogaskerék ikonra kattintva férhet hozzá a "
+"beállítási képernyőhöz (lásd a lenti ábrát), míg az ügyfeleknek a "
 "„Beállítások” hivatkozásra kell kattintaniuk (lásd a lenti ábrát)."
 
 #. type: Content of: <chapter><section><para><figure><title>
@@ -33908,15 +33915,15 @@ msgstr "8. lépés: adatbázis-beállítás és alapvető rendszerbeállítás"
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:355
 msgid ""
-"Please use the web installer at <ulink url=\"http://yourhost/otrs/installer."
-"pl\">http://yourhost/otrs/installer.pl</ulink> (replace \"yourhost\" with "
+"Please use the web installer at <ulink url=\"http://localhost/otrs/installer."
+"pl\">http://localhost/otrs/installer.pl</ulink> (replace \"localhost\" with "
 "your OTRS hostname) to setup your database and basic system settings such as "
 "email accounts."
 msgstr ""
-"Használja a <ulink url=\"http://sajatgep/otrs/installer.pl\">http://sajátgép/"
-"otrs/installer.pl</ulink> címen elérhető webes telepítőt (cserélje ki a "
-"„sajátgépet” az OTRS gépnevével) az adatbázis beállításához és az alapvető "
-"rendszerbeállításokhoz, mint például az e-mail fiókok."
+"Használja a <ulink url=\"http://localhost/otrs/installer.pl\">http://"
+"localhost/otrs/installer.pl</ulink> címen elérhető webes telepítőt (cserélje "
+"ki a „localhost” nevet az OTRS gépnevével) az adatbázis beállításához és az "
+"alapvető rendszerbeállításokhoz, mint például az e-mail fiókok."
 
 #. type: Content of: <section><section><note><para>
 #: en/content/installation/source.xml:359
@@ -33937,13 +33944,14 @@ msgstr "9. lépés: első bejelentkezés"
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:375
 msgid ""
-"Now you are ready to login to your system at <ulink url=\"http://yourhost/"
-"otrs/index.pl\">http://yourhost/otrs/index.pl</ulink> with the credentials "
+"Now you are ready to login to your system at <ulink url=\"http://localhost/"
+"otrs/index.pl\">http://localhost/otrs/index.pl</ulink> with the credentials "
 "you configured in the web installer (User: root@localhost)."
 msgstr ""
 "Most már készen áll a rendszerre való bejelentkezéshez a <ulink url=\"http://"
-"sajatgep/otrs/index.pl\">http://sajátgép/otrs/index.pl</ulink> címen a webes "
-"telepítőben beállított hitelesítési adatokkal (felhasználó: root@localhost)."
+"localhost/otrs/index.pl\">http://localhost/otrs/index.pl</ulink> címen a "
+"webes telepítőben beállított hitelesítési adatokkal (felhasználó: "
+"root@localhost)."
 
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:378
@@ -34020,10 +34028,12 @@ msgstr ""
 #: en/content/installation/source.xml:461
 msgid ""
 "If you encounter problems with the installation, you can send a message to "
-"our mailing list otrs@otrs.org (http://lists.otrs.org/)."
+"our mailing list otrs@otrs.org (<ulink url=\"http://lists.otrs.org/\">http://"
+"lists.otrs.org/</ulink>)."
 msgstr ""
 "Ha problémákkal szembesül a telepítésnél, akkor az otrs@otrs.org "
-"levelezőlistánkra küldhet üzenetet (http://lists.otrs.org/)."
+"levelezőlistánkra küldhet üzenetet (<ulink url=\"http://lists.otrs.org/"
+"\">http://lists.otrs.org/</ulink>)."
 
 #. type: Content of: <section><section><para>
 #: en/content/installation/source.xml:465
@@ -34673,10 +34683,10 @@ msgstr "Futtassa a OTRSCloneDB parancsfájlt:"
 #: en/content/installation/windows.xml:292
 #, no-wrap
 msgid ""
-"shell> perl otrs.OTRSCloneDB.pl\n"
+"shell> perl otrs.CloneDB.pl\n"
 "                "
 msgstr ""
-"shell> perl otrs.OTRSCloneDB.pl\n"
+"shell> perl otrs.CloneDB.pl\n"
 "                "
 
 #. type: Content of: <section><section><section><para>
@@ -34723,10 +34733,10 @@ msgstr ""
 #: en/content/installation/windows.xml:314
 #, no-wrap
 msgid ""
-"shell> perl otrs.OTRSCloneDB.pl -n\n"
+"shell> perl otrs.CloneDB.pl -n\n"
 "                "
 msgstr ""
-"shell> perl otrs.OTRSCloneDB.pl -n\n"
+"shell> perl otrs.CloneDB.pl -n\n"
 "                "
 
 #. type: Content of: <section><section><section><para><figure><title>
@@ -34754,10 +34764,10 @@ msgstr "Indítsa el az adatbázis klónozását és szorítson, hogy sikerüljö
 #: en/content/installation/windows.xml:330
 #, no-wrap
 msgid ""
-"shell> perl otrs.OTRSCloneDB.pl -r\n"
+"shell> perl otrs.CloneDB.pl -r\n"
 "                "
 msgstr ""
-"shell> perl otrs.OTRSCloneDB.pl -r\n"
+"shell> perl otrs.CloneDB.pl -r\n"
 "                "
 
 #. type: Content of: <section><section><section><para>
