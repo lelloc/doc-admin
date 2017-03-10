@@ -1885,16 +1885,19 @@ $Self->{'Process'} = {
                     </screen>
                 </para>
                 <para>
-                    プロセス・チケットがアクティビティ('A1')にある場合、それには別の活動に到着する3つの可能な方法がある。推移(「T1」)に、「T3」に、条件は定義され、プロセス・チケットは別のアクティビティへの遷移を完了しなければならない。
+                    If a process ticket is in Activity <literal>A1</literal>, it has three
+possible ways to get to another Activity. In the Transitions
+<literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
+a process ticket must fulfill to move (transit) to another Activity.
                 </para>
                 <para>
                     If in this case all the values of the process ticket and its dynamic fields
-that are needed for the Transition 'T2' are correct, the ticket will be
-moved from Activity 'A1' to 'A3'. After an ActivityDialog is submitted, or
-any other change is made to a ticket, it will be checked for possible
-Transitions from the current Activity. If multiple Transitions are possible,
-the first one will be used (based on numerical sorting of the
-TransitionIDs).
+that are needed for the Transition <literal>T2</literal> are correct, the
+ticket will be moved from Activity <literal>A1</literal> to
+<literal>A3</literal>. After an ActivityDialog is submitted, or any other
+change is made to a ticket, it will be checked for possible Transitions from
+the current Activity. If multiple Transitions are possible, the first one
+will be used (based on numerical sorting of the TransitionIDs).
                 </para>
                 <para>
                     さらに、パス設定中の推移に推移アクションを割り当てることは可能です。これらは成功した推移の後に実行されるモジュールである。それらは例でのような配列形式で指定しなければならない。詳細は後述します。
@@ -1905,7 +1908,10 @@ TransitionIDs).
         <section>
             <title>アクティビティ</title>
             <para>
-                アクティビティは1つ以上のアクティビティ・ダイアログを含んでおり、プロセスの「ステップ」をモデル化します。現在のアクティビティの全てのアクティビティダイアログはチケット・ズームで表示され、推移の条件が満たされるまで使用することができます。
+                An Activity contains one or more Activity Dialogs and models a
+<literal>step</literal> in the process. All Activity Dialogs of the current
+Activity are displayed in the ticket zoom and can be used until the
+conditions of a Transition are fulfilled.
             </para>
             <section>
             <title>アクティビティ構成</title>
@@ -1975,7 +1981,11 @@ $Self->{'Process::Activity'} =
             <section>
                 <title>ActivityDialog（アクティビティ・ダイアログ）</title>
                 <para>
-                    アクティビティダイアログは、このアクティビティにおいて利用可能なアクティビティ・ダイアログのリストを含んでいます。現在のアクティビティの全てのアクティビティ・ダイアログはチケット・ズームで表示されます。それらの順序は、構成の中の順序でここでセットされます「AD5」は「AD6」および「AD1」の前に示されます。
+                    Activity Dialog contains the list of Activity Dialogs which are available in
+this Activity. All Activity Dialogs of the current Activity are displayed in
+the ticket zoom. Their order is set by the order in the configuration, here
+<literal>AD5</literal> is shown before <literal>AD6</literal> and
+<literal>AD1</literal>.
                 </para>
             </section>
         </section>
@@ -2132,11 +2142,11 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    The field "Article" is a special case. If it is present in a "Fields"
-configuration, the Activity Dialog will contain a complete Richtext editor
-with subject field and attachment handling. The entered text will then be
-added to the ticket as an article and sent by email. Let's see an example
-Article field configuration:
+                    The field <literal>Article</literal> is a special case. If it is present in
+a <literal>Fields</literal> configuration, the Activity Dialog will contain
+a complete Richtext editor with subject field and attachment handling. The
+entered text will then be added to the ticket as an article and sent by
+email. Let's see an example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2174,19 +2184,20 @@ Article => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    '0':
-フィールドは不可視です。フィールド値が自動的にセットならより便利でしょう。構成されたDefaultValueはこのケースでは格納されるでしょう。
+                                    <literal>0</literal>: field is invisible. This can be helpful if field
+values should automatically be set. The configured
+<literal>DefaultValue</literal> will be stored in this case.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '1' :フィールドは可視ですが任意です。
+                                    <literal>1</literal>: field is visible, but optional.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '2': field is visible and mandatory. The following fields can only be
-invisible or mandatory:
+                                    <literal>2</literal>: field is visible and mandatory. The following fields
+can only be invisible or mandatory:
                                 </para>
                                 <para>
                                     <screen>
@@ -2212,7 +2223,10 @@ invisible or mandatory:
                 <section>
                     <title>DefaultValue（デフォルト値）</title>
                     <para>
-                        「ID'」(QueueID、OwnerIDのように)を備えたフィールドに関して、これは、値のデータベースIDを参照します。'ID'(キュー、オーナーのように)のない他のフィールドについては、DefaultValueは値自体を含んでいなければいけません。例:
+                        For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers
+to the database ID of the value. For other fields without
+<literal>ID</literal> (like Queue, Owner), the
+<literal>DefaultValue</literal> must contain the value itself. Example:
                     </para>
                     <para>
                         <screen>
@@ -2368,17 +2382,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'and': これはデフォルトです。推移が有効になるために条件をすべて満たさなければなりません。
+                                    <literal>and</literal>: This is the default. All conditions must be met for
+the transition to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'or': 少なくとも1つの条件は一致しなければいけません。
+                                    <literal>or</literal>: At least one condition must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': 1つの条件のみ一致しなければいけません。
+                                    <literal>xor</literal>: Exactly one condition must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2397,17 +2412,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'and': これはデフォルトです。全てのフィールド・テスト条件をすべて満たさなければなりません。
+                                    <literal>and</literal>: This is the default. All field tests must match for
+this condition to match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'or': 少なくとも1つの条件は一致しなければいけません。
+                                    <literal>or</literal>: At least one field test must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': 1つの条件のみ一致しなければいけません。
+                                    <literal>xor</literal>: Exactly one field test must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2474,28 +2490,36 @@ Fields => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    「String」: フィールド値を「Match」で指定されたStringと比較します。それらが正確に同じである場合マッチします。
+                                    <literal>String</literal>: Compares the field value with the string
+specified in <literal>Match</literal>. Matches if they are exactly the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    「ハッシュ(Hush)」:フィールド値(ハッシュ)を「Match」で指定されたハッシュと比較します。ハッシュ値はすべて同じでなければいけない。
+                                    <literal>Hash</literal>: Compares the field value (hash) with the hash
+specified in <literal>Match</literal>. All hash values must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    「配列(array)」:フィールド値(配列)を「Match」で指定された配列と比較します。両方のリストは同じでなければならない。
+                                    <literal>Array</literal>: Compares the field value (array) with the array
+specified in <literal>Match</literal>. Both lists must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    「Regex:」:フィールド値は正規表現でテストすることができます。「Match」が基本的条件として<emphasis>qr{}xms</emphasis>を含むことは重要です。{}間に、実際の正規表現を記述することができます。
+                                    <literal>Regex</literal>: The field value can be tested with a regular
+expression. It is important that <literal>Match</literal> contains
+<emphasis>qr{}xms</emphasis> as a base condition. Between the braces the
+actual regular expression can be noted.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    「モジュール:」:条件チェックのためにperlモジュールを使用することができます。チェックが1を返すならば、チェックは成功です。<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
-でサンプル・モジュールを見つけることができます。
+                                    <literal>Module</literal>: Allows you to use a perl module for condition
+checking. If it returns 1, the check was positive. You can find an example
+module in
+<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2552,11 +2576,12 @@ sending UserID parameter, by using the UserID parameter. The transition
 action will be executed impersonating the user with the given UserID.
                 </para>
                 <para>
-                    The use of UserID inside the "Config" parameter of a Transition Action is
-accepted by all Transition Actions (since OTRS 3.2.4). In this example it
-could be particularly important if the user that triggers the Transition
-does not have permissions to move the ticket to the queue 'Junk', while the
-user with the UserID 123 might have.
+                    The use of UserID inside the <literal>Config</literal> parameter of a
+Transition Action is accepted by all Transition Actions (since OTRS
+3.2.4). In this example it could be particularly important if the user that
+triggers the Transition does not have permissions to move the ticket to the
+queue <literal>Junk</literal>, while the user with the UserID 123 might
+have.
                 </para>
             </section>
             <section>
@@ -2586,7 +2611,11 @@ Transition Actions in your configuration. Example:
                     </screen>
                 </para>
                 <para>
-                    ここで、同じモジュールは、「未対応」キューにプロセス・チケット移動するために、そしてある時はジャンクキューへそれを移動するために、使用されます。特別の推移に使用されることが求められる推移アクションは、プロセス構成の「パス」設定から決定されます。
+                    Here the same module is used to move a process ticket into the
+<literal>Raw</literal> queue, and another time to move it into the junk
+queue. The Transition Action which must be used for a particular Transition
+is determined from the <literal>Path</literal> setting of the Process
+configuration.
                 </para>
             </section>
             <section id="available-transition-actions">
@@ -2616,11 +2645,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「MasterSlave」と「Approved：承認済」は DynamicField名のサンプルを付与されます。フィールド値 (「Master'」and
-「1」) はこの推移アクションによってセットされます。
+                        <literal>MasterSlave</literal> and <literal>Approved</literal> are given as
+examples of DynamicField names.  The values of the fields
+(<literal>Master</literal> and <literal>1</literal>) will be set by this
+TransitionAction.
                     </para>
                 </section>
 
@@ -2668,28 +2700,34 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。それは自由に選ぶことができますが、設定されたアクションの目的を反映するべきです。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        「ArticleType」は、作成される記事のタイプを定義します。可能な値:電話、ファックス、sms、webrequest、ノート内部、ノート外部およびノート報告書。
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
-                        'SenderType' defines the sender type of the article. Possible values: agent,
-system, customer.
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
                     </para>
                     <para>
-                        「ContentType」は、記事のコンテンツ・タイプを定義します。可能な値:'プレインテキスト;charset=ISO-8859-15'又は他の有効なcharsetとMIMEタイプ。
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        「Subject」は記事タイトルを定義します。必須項目。
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        「Body」は記事内容を定義します。必須項目。
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType' defines the type of the history entry. Possible values:
-AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
-EmailCustomer, EscalationResponseTimeNotifyBefore,
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
 EscalationResponseTimeStart, EscalationResponseTimeStop,
 EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
 EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
@@ -2703,24 +2741,31 @@ TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
 TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        「HistoryComment」は、履歴エントリーの内容を定義します。
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        上で指定した表記法で'From', 'To', 'Cc' and 'ReplyTo'はEメール・アドレスをとります。
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        「InReplyTo」および「References」はEメール・メッセージIDをとります。
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        「NoAgentNotify」-1にセットされれば、担当者への電子メール通知は送られません。
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        「AutoResponseType」は次の値をとることができます:自動フォローアップ、自動拒否、自動削除、自動応答、自動返答/新規チケット。
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'ForceNotificationToUserID',
-'ExcludeNotificationToUserID','ExcludeMuteNotificationToUserID'
-は、ユーザーIDのリストをとることができます。そのリストとは、「常に通知」、「非通知」、または「通知されるが実際には通知メールを送らない、です。
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                 </section>
                 <section>
@@ -2745,7 +2790,7 @@ $Self->{'Process::TransitionAction'} = {
             State         => 'new',              # or StateID => 5,
             CustomerID    => '123465',
             CustomerUser  => 'customer@example.com',
-            OwnerID       => 123,
+            OwnerID       => 'someuserlogin',    # or OwnerID => 123,
 
             # ticket optional:
             TN              => $TicketObject->TicketCreateNumber(), # optional
@@ -2798,83 +2843,91 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。それは自由に選ぶことができますが、設定されたアクションの目的を反映するべきです。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        'Title' The ticket title.
+                        <literal>Title</literal> The ticket title.
                     </para>
                     <para>
-                        'Queue' or 'QueueID' specifies the name or id of the queue to be used in the
-new ticket.
+                        <literal>Queue</literal> or <literal>QueueID</literal> specifies the name or
+id of the queue to be used in the new ticket.
                     </para>
                     <para>
-                        'Lock' or 'LockID' sets the lock status of the ticket.
+                        <literal>Lock</literal> or <literal>LockID</literal> sets the lock status of
+the ticket.
                     </para>
                     <para>
-                        'Priority' or 'PriorityID' specifies the name or id of the priority to be
-used in the new ticket.
+                        <literal>Priority</literal> or <literal>PriorityID</literal> specifies the
+name or id of the priority to be used in the new ticket.
                     </para>
                     <para>
-                        'State' or 'StateID' specifies the name or id of the state to be used in the
-new ticket.
+                        <literal>State</literal> or <literal>StateID</literal> specifies the name or
+id of the state to be used in the new ticket.
                     </para>
                     <para>
-                        'CustomerID', the customer id to be set for the new ticket.
+                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
                     </para>
                     <para>
-                        'CustomerUser', the login of the customer that will be assigned in the
-ticket.
+                        <literal>CustomerUser</literal>, the login of the customer that will be
+assigned in the ticket.
                     </para>
                     <para>
-                        'OwnerID', the ID of the agent that will be the new ticket owner.
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the
+login or id of the agent that will be the new ticket owner.
                     </para>
                     <para>
-                        'TN', custom number for the new ticket.
+                        <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
-                        'Type' or 'TypeID' specifies the name or id of the ticket type to be used in
-the new ticket.
+                        <literal>Type</literal> or <literal>TypeID</literal> specifies the name or
+id of the ticket type to be used in the new ticket.
                     </para>
                     <para>
-                        'Service' or 'ServiceID' specifies the name or id of the service to be used
-in the new ticket.
+                        <literal>Service</literal> or <literal>ServiceID</literal> specifies the
+name or id of the service to be used in the new ticket.
                     </para>
                     <para>
-                        'SLA' or 'SLAID' specifies the name or id of the SLA to be used in the new
-ticket.
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id
+of the SLA to be used in the new ticket.
                     </para>
                     <para>
-                        'ResponsibleID', the ID of the agent that will be the new ticket
-responsible.
+                        <literal>ResponsibleID</literal>, the ID of the agent that will be the new
+ticket responsible.
                     </para>
                     <para>
-                        'PendingTime', a predefined date to set the Ticket Pending Times, when the
-ticket state belongs to a pending state type.
+                        <literal>PendingTime</literal>, a predefined date to set the Ticket Pending
+Times, when the ticket state belongs to a pending state type.
                     </para>
                     <para>
-                        'PendingTimeDiff', a dynamically date (expressed in seconds from current
-date/time) to set the Ticket Pending Times, when the ticket state belongs to
-a pending state type.
+                        <literal>PendingTimeDiff</literal>, a dynamically date (expressed in seconds
+from current date/time) to set the Ticket Pending Times, when the ticket
+state belongs to a pending state type.
                     </para>
                     <para>
-                        「ArticleType」は、作成される記事のタイプを定義します。可能な値:電話、ファックス、sms、webrequest、ノート内部、ノート外部およびノート報告書。
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
                         「SenderType」は送り手タイプの記事を定義します。可能な値:担当者、システム、顧客。
                     </para>
                     <para>
-                        「ContentType」は、記事のコンテンツ・タイプを定義します。可能な値:'プレインテキスト;charset=ISO-8859-15'又は他の有効なcharsetとMIMEタイプ。
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        「Subject」は記事タイトルを定義します。必須項目。
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        「Body」は記事内容を定義します。必須項目。
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType' defines the type of the history entry. Possible values:
-AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
-EmailCustomer, EscalationResponseTimeNotifyBefore,
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
 EscalationResponseTimeStart, EscalationResponseTimeStop,
 EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
 EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
@@ -2888,37 +2941,45 @@ TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
 TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        「HistoryComment」は、履歴エントリーの内容を定義します。
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        上で指定した表記法で'From', 'To', 'Cc' and 'ReplyTo'はEメール・アドレスをとります。
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        「InReplyTo」および「References」はEメール・メッセージIDをとります。
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        「NoAgentNotify」-1にセットされれば、担当者への電子メール通知は送られません。
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        「AutoResponseType」は次の値をとることができます:自動フォローアップ、自動拒否、自動削除、自動応答、自動返答/新規チケット。
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'ForceNotificationToUserID',
-'ExcludeNotificationToUserID','ExcludeMuteNotificationToUserID'
-は、ユーザーIDのリストをとることができます。そのリストとは、「常に通知」、「非通知」、または「通知されるが実際には通知メールを送らない、です。
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                     <para>
-                        'TimeUnit' the time invested in the current ticket article expressed in
-seconds, minutes, hours, etc.
+                        <literal>TimeUnit</literal> the time invested in the current ticket article
+expressed in seconds, minutes, hours, etc.
                     </para>
                     <para>
-                        'DynamicField_NameX' where DynamicField_ is a required prefix and NameX is
-the name of a Dynamic Field to be set in the new ticket (on ticket level,
-not article levels).
+                        <literal>DynamicField_NameX</literal> where DynamicField_ is a required
+prefix and NameX is the name of a Dynamic Field to be set in the new ticket
+(on ticket level, not article levels).
                     </para>
                     <para>
-                        'LinkAs' to define the new ticket relation with originator ticket, from the
-new ticket point of view, for example Normal, Parent, Child etc.
+                        <literal>LinkAs</literal> to define the new ticket relation with originator
+ticket, from the new ticket point of view, for example Normal, Parent, Child
+etc.
                     </para>
                 </section>
                 <section>
@@ -2945,13 +3006,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'No' or 'CustomerID' set the Customer ID of the customer.
+                        <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID
+of the customer.
                     </para>
                     <para>
-                        'User' or 'CustomerUserID' set the Username of the customer.
+                        <literal>User</literal> or <literal>CustomerUserID</literal> set the
+Username of the customer.
                     </para>
                 </section>
 
@@ -2976,13 +3040,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Lock」は、プロセス・チケットの新しいロックを定義します。
+                        <literal>Lock</literal> defines the new lock of the process ticket.
                     </para>
                     <para>
-                        「LockID」は、新しいロックの内部IDを定義します。
+                        <literal>LockID</literal> defines the internal ID of the new lock.
                     </para>
                 </section>
 
@@ -3007,13 +3072,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Owner」は、新しい所有者のログイン名を指定します。
+                        <literal>Owner</literal> specifies the login name of the new owner.
                     </para>
                     <para>
-                        「OwnerID」は、新しい所有者の内部IDを指定します。
+                        <literal>OwnerID</literal> specifies the internal ID of the new owner.
                     </para>
                 </section>
 
@@ -3038,13 +3104,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Queue」は、対象のキューの名前を指定します。
+                        <literal>Queue</literal> specifies the name of the target queue.
                     </para>
                     <para>
-                        「QueueID」は、対象のキューの内部IDを指定します。
+                        <literal>QueueID</literal> specifies the internal ID of the target queue.
                     </para>
                 </section>
 
@@ -3069,13 +3136,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Responsible」は、新しい責任者のログイン名を指定します。
+                        <literal>Responsible</literal> specifies the login name of the new
+responsible.
                     </para>
                     <para>
-                        「ResponsibleID」は新しい責任者の内部IDを指定します。
+                        <literal>ResponsibleID</literal> specifies the internal ID of the new
+responsible.
                     </para>
                 </section>
 
@@ -3100,13 +3170,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Service」は、プロセス・チケットの新しいサービスを定義します。姓名は必要です(例えばGramdFatherService::FatherService::SonService)。
+                        <literal>Service</literal> defines the new service of the process
+ticket. The full name is required
+(e.g. GramdFatherService::FatherService::SonService ).
                     </para>
                     <para>
-                        「ServiceID」は、新しいサービスの内部IDを定義します。
+                        <literal>ServiceID</literal> defines the internal ID of the new service.
                     </para>
                 </section>
 
@@ -3131,13 +3204,15 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「SLA」は、プロセス・チケットの新しいサービスレベル合意を定義します。
+                        <literal>SLA</literal> defines the new service level agreement of the
+process ticket.
                     </para>
                     <para>
-                        「SLAID」は、新しいSLAの内部IDを定義します。
+                        <literal>SLAID</literal> defines the internal ID of the new SLA.
                     </para>
                 </section>
 
@@ -3164,16 +3239,20 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「State」は、プロセス・チケットの新しい状態を定義します。
+                        <literal>State</literal> defines the new state of the process ticket.
                     </para>
                     <para>
-                        「StateID」は、新しい状態の内部IDを定義します。
+                        <literal>StateID</literal> defines the internal ID of the new state.
                     </para>
                     <para>
-                        Typeの状態が保留の時のみ使用する「PendingTimeDiff」は、チケットのの保留時間を設定するために（例えば保留時間3600は、推移アクションの実行後、一時間を意味します）、秒単位での時差（推移アクション実行時間に関連して）を定義します。
+                        <literal>PendingTimeDiff</literal> used only for pending type states,
+defines the time difference in seconds relative (relative to the Transition
+Action execution time) to set ticket pending time (e.g. 3600 means that the
+pending time is 1hr after the Transition Action is executed).
                     </para>
                 </section>
 
@@ -3196,10 +3275,11 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Title」は、チケットの新しいタイトルを指定します。
+                        <literal>Title</literal> specifies the new title of the ticket.
                     </para>
                 </section>
 
@@ -3224,13 +3304,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        「Name」は、設定された推移アクション名前を指定します。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        「Type」は、チケット・タイプの名前を指定します。
+                        <literal>Type</literal> specifies the name of the ticket type.
                     </para>
                     <para>
-                        「TypeID」は、チケット・タイプの内部IDを指定します。
+                        <literal>TypeID</literal> specifies the internal ID of the ticket type.
                     </para>
                 </section>
             </section>
@@ -3304,20 +3385,31 @@ linkend="acl">ACLマニュアル</link>を調べてください:
                     ここでは、アクティビティ・ダイアログIDのリストを指定することができます。このリストは、チケット・ズーム・マスク中のユーザに提示される可能なアクティビティ・ダイアログを制限するでしょう。
                 </para>
                 <para>
-                    「Possible（可能）」は、許可されるアクティビティ・ダイアログをリストします。上記のセッティングは、設定されたアクティビティ・ダイアログのリストの「AD1」および「AD3」のみを許可するでしょう。
+                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The
+setting above will only allow <literal>AD1</literal> and
+<literal>AD3</literal> of the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    「PossibleNot（不可能）」は、許可されないアクティビティ・ダイアログをリストします。上記の例において、セッティングは設定されたアクティビティ・ダイアログのリストから「AD3」を取り除くでしょう。
+                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not
+allowed. In the example above, the setting will remove
+<literal>AD3</literal> from the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    「可能」と「不可能」の両方が指定されれば、設定されたアクティビティ・ダイアログのリストはまず「可能」でフィルタされます。サンプルではAD1とAD3のみそのまま残してあります。つぎに「不可能」が適用されます。「AD3」はフィルタで除外され、それゆえに「AD1」のみが残り、ユーザが使える可能なアクティビティ・ダイアログとして表示されます。
+                    If both <literal>Possible</literal> and <literal>PossibleNot</literal> are
+specified, the list of configured Activity Dialogs will first be filtered by
+<literal>Possible</literal>, leaving only <literal>AD1</literal> and
+<literal>AD3</literal> in our example. Then <literal>PossibleNot</literal>
+will be applied and filter out <literal>AD3</literal>, so that only
+<literal>AD1</literal> remains and is shown as a possible Activity Dialog
+that the user can use.
                 </para>
                 <para>
                     複数のACL規則がマッチすればしたら、すべてのマッチング規則の共通部分は可能なアクティビティ・ダイアログを決定するために計算されます。例:
                 </para>
                 <para>
-                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
-'AD7'.
+                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>,
+<literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>,
+<literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3354,22 +3446,36 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
                     </screen>
                 </para>
                 <para>
-                    プロセス・チケットが状態「new」を持ち、それが「未対応」キューにあり優先度「3 普通」を持つならば、その後、すべてのACL規則がマッチします。
+                    If a process ticket has the state <literal>new</literal>, is in the
+<literal>Raw</literal> queue and has a priority <literal>3 normal</literal>,
+then all three ACL rules will match.
                 </para>
                 <para>
-                    第一のルールはアクティビティ・ダイアログを 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
-'AD7'から'AD1', 'AD2', 'AD3', 'AD6', 'AD7' に減らし、'AD4' and 'AD5'を禁止します。
+                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>,
+<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to
+<literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD6</literal>, <literal>AD7</literal> and forbids
+<literal>AD4</literal> and <literal>AD5</literal>.
                 </para>
                 <para>
-                    第二のルールはさらに残っているアクティビティ・ダイアログを減らし、ここでの例の'AD2','AD3', 'AD7'が残ります。。
+                    The second rule will now further reduce the remaining Activity Dialogs.  In
+our example, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD7</literal> will remain.
                 </para>
                 <para>
-                    3番目の規則は、さらに「不可能」によってリストを縮小するでしょう。「AD3」はリストから取り除かれます。それがリストの第一位に載っていなかったので、「AD4」は削除されません。最後に、「AD2」および「AD7」は、ユーザが利用することができる可能なアクティビティ・ダイアログとして残ります。
+                    Now the third rule will further reduce the list by
+<literal>PossibleNot</literal>.  <literal>AD3</literal> is removed from the
+list. <literal>AD4</literal> is not removed, since it was not on the list in
+the first place. At the end, <literal>AD2</literal> and
+<literal>AD7</literal> remain as possible Activity Dialogs that the user can
+utilize.
                 </para>
                 <para>
-                    It is also possible to limit the processes that can be displayed in the "New
-process ticket" screen. The functionality is similar to limiting the
-Activity Dialogs with one exception: The ACLs could only be based on Users.
+                    It is also possible to limit the processes that can be displayed in the
+<literal>New process ticket</literal> screen. The functionality is similar
+to limiting the Activity Dialogs with one exception: The ACLs could only be
+based on Users.
                 </para>
                 <para>以下のサンプルを御覧ください。</para>
                 <para>
@@ -3427,6 +3533,34 @@ $Self->{TicketAcl}->{'202-ACL-Process'} = {
                     </screen>
                 </para>
             </section>
+        </section>
+    </section>
+    <section>
+        <title>Import ready-to-run process</title>
+
+        <section>
+            <title>インポート</title>
+            <para>
+                On the <emphasis>AdminProcessManagement</emphasis> screen you can find an
+<emphasis>Ready-to-run Processes</emphasis> widget, where you can find best
+practice ready-to-run processes. Currently, there is only an
+<emphasis>Application for leave</emphasis> process available, but you can
+find additional ready-to-run processes in the <emphasis role="bold">OTRS
+Business Solution™</emphasis>.
+
+            </para>
+            <para>
+                <figure>
+                    <title>Import Ready-to-run Processes widget</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-process-widget.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Select process from the drop-down menu and click on the <emphasis>Import
+ready-to-run process</emphasis> button. After the process is imported, don't
+forget to deploy changes.
+            </para>
         </section>
     </section>
 </section>

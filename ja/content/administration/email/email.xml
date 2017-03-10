@@ -99,7 +99,7 @@ of the Admin page. If the address in the To: field is linked with a queue,
 the new message will be sorted into the linked queue. If no link is found
 between the address in the To: field and any queue, then the message flows
 into the "Raw" queue in the system, which is the <link
-linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">PostmasterDefaultQueue</link>
+linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
 after a default installation.
 </para>
 
@@ -442,6 +442,34 @@ manually. The following example can be used in
     <listitem>
         <para>SenderType</para>
         <para>これは、OTRSで記事作成に使用される送信者タイプを定義します。</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
+module that is capable to decrypt an encrypted incoming email message
+(S/MIME or PGP) placing the unencrypted message body in the email header
+X-OTRS-BodyDecrypted to be processed later.  Additionally it can also update
+the email body to the unencrypted version.
+</para>
+<para>
+    In order to decrypt the emails the system needs to be properly configured
+for S/MIME and/or PGP and have the needed private keys to decrypt the
+information.
+</para>
+<para>
+    This module is disabled by default and it can be configured directly in the
+System Configuration in the Admin Panel.
+</para>
+<itemizedlist mark="round">
+    <para><emphasis>構成オプション</emphasis></para>
+    <listitem>
+        <para>StoreDecryptedBody</para>
+        <para>
+            Set this option to "1" to update the email body to the unencrypted version
+if the decryption was successful. Be aware that using this the emails will
+be stored unencrypted and there is no possible way to revert this action.
+        </para>
     </listitem>
 </itemizedlist>
 

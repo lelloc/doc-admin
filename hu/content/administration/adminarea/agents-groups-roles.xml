@@ -35,9 +35,9 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-Egy ügyintéző regisztrálásához kattintson az „Ügyintéző hozzáadása” gombra,
-adja meg a szükséges adatokat, és nyomja meg a képernyő alján lévő Elküld
-gombot, amint az ábrán látható.
+To register an agent, click on the <literal>Add agent</literal> button,
+enter the required data and press the Submit button at the bottom of the
+screen, as shown in Figure.
 </para>
 
 <para>
@@ -103,9 +103,8 @@ jogosultságokkal. Ezután férhetnek hozzá a jegyrendszer összes funkciójáh
 
 <note>
 <para>
-Egy teljesen új OTRS telepítésben a <emphasis>users</emphasis> csoportnak
-kezdetben nincsen egyetlen tagja sem. A „root@localhost” ügyintéző
-alapértelmezetten az admin és a stats csoportokhoz tartozik.
+In a brand new OTRS installation, the agent 'root@localhost' belongs by
+default to the admin, stats and users groups.
 </para>
 </note>
 
@@ -284,14 +283,12 @@ lévő jegyekre vagy bejegyzésekre, amelyek ehhez a csoporthoz tartoznak.
 
 <note>
     <para>
-        Alapértelmezetten a várólista nézet csak azokban a várólistákban lévő
-jegyeket sorolja fel, amelyhez egy ügyintézőnek <emphasis>írható,
-olvasható</emphasis> hozzáférése van, azaz azokat a jegyeket, amelyeken az
-ügyintézőnek dolgoznia kell. Ha meg szeretné változtatni ezt a viselkedést,
-akkor állítsa át a <link
-linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link>
-beállítást <emphasis>Igen</emphasis> értékre.
+        By default, the QueueView only lists tickets in queues that an agent has
+<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
+on. If you want to change this behaviour, you can set <link
+linkend="ConfigReference_Setting_Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
+<emphasis>Yes</emphasis>.
     </para>
 </note>
  <para>Nem minden elérhető jogosultság van megjelenítve alapértelmezetten. Ezek a
@@ -346,9 +343,8 @@ jegynagyításon).</entry>
       </para>
       <note>
         <para>
-          Ezek a jogosultságok a <link
-linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permission</link>
-beállítás megváltoztatásával adhatók hozzá.
+          These permissions can be added by changing the <link
+linkend="ConfigReference_Setting_System::Permission">System::Permission</link>
         </para>
       </note>
 </section>
@@ -393,17 +389,15 @@ hozzáadása egy vagy több szerephez is.
 
 <note>
 <para>
-A szerepek akkor hasznosak igazán, amikor bonyolult szervezetekkel
-foglalkozik, és amikor nagyobb OTRS telepítéseket tart karban. A megfelelő
-óvatosság mégis ajánlott. Az ügyintéző csoportra és az ügyintéző szerepre
-történő leképezésének keverése olyan bonyolult hozzáférés-vezérlési sémát
-eredményezhet, amelyet nehéz megérteni és karbantartani. Ha csak szerepeket
-kíván használni, és le szeretné tiltani az Ügyintézők &lt;-&gt; Csoportok
-lehetőséget az adminisztrátori területen, akkor ezt a <link
-linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
-beállítás módosításával teheti meg a rendszer beállításaiban. Legyen
-tisztában azzal, hogy ez nem fogja eltávolítani a már meglévő ügyintézők -
-csoport hozzárendeléseket!
+Roles are really useful when dealing with complex organizations and when
+maintaining larger OTRS installations. Proper care is advised though. Mixing
+Agent to Group with Agent to Role mappings can make for a complex access
+control scheme, that is difficult to understand and maintain. If you wish to
+use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
+area, you can do so by modifying the <link
+linkend="ConfigReference_Setting_Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
+in the SysConfig. Be aware that this won't remove already existing Agents to
+Group assignments!
 </para>
 </note>
 
@@ -431,11 +425,11 @@ lehetőséget <emphasis>érvénytelen</emphasis> vagy <emphasis>átmenetileg
 </note>
 
 <para>
-A rendszeren lévő összes szerep áttekintése van megjelenítve. Egy szerep
-beállításainak szerkesztéséhez kattintson a szerep nevére. Egy friss, új
-OTRS telepítésben alapértelmezetten nincsenek szerepek meghatározva. Egy
-szerep regisztrálásához kattintson a „Szerep hozzáadása” gombra, adja meg a
-szükséges adatokat, és küldje be (lásd a lenti ábrát).
+An overview of all roles in the system is displayed. To edit a role's
+settings, click on the role's name. In a fresh new OTRS installation, there
+are no roles defined by default. To register one, click on the <literal>Add
+role</literal> button, provide the needed data and submit it (see figure
+below).
 </para>
 
 <para>

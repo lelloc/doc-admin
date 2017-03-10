@@ -27,7 +27,9 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-要注册一个服务人员，点击“添加服务人员”按钮，输入必填数据并点击窗口底部的‘提交’按钮，如下图所示。
+To register an agent, click on the <literal>Add agent</literal> button,
+enter the required data and press the Submit button at the bottom of the
+screen, as shown in Figure.
 </para>
 
 <para>
@@ -87,7 +89,8 @@ linkend="adminarea-roles">角色</link>部分。
 
 <note>
 <para>
-在全新安装的OTRS中，<emphasis>users</emphasis>组初始没有任何成员。服务人员'root@localhost'默认属于‘admin’和‘stats’组。
+In a brand new OTRS installation, the agent 'root@localhost' belongs by
+default to the admin, stats and users groups.
 </para>
 </note>
 
@@ -244,10 +247,12 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 
 <note>
     <para>
-        队列视图默认只列出一个服务人员有<emphasis>rw-读写</emphasis>权限的队列中工单。如果你想改变这个情况，你可以设置选项 <link
-linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> 为
-<emphasis>是</emphasis>。
+        By default, the QueueView only lists tickets in queues that an agent has
+<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
+on. If you want to change this behaviour, you can set <link
+linkend="ConfigReference_Setting_Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
+<emphasis>Yes</emphasis>.
     </para>
 </note>
  <para>默认情况下不会显示所有可用的权限。这些附加的权限可以添加。</para>
@@ -300,8 +305,8 @@ Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> 为
       </para>
       <note>
         <para>
-          这些权限可以通过修改配置 <link
-linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permission</link>添加进来。
+          These permissions can be added by changing the <link
+linkend="ConfigReference_Setting_System::Permission">System::Permission</link>
         </para>
       </note>
 </section>
@@ -327,8 +332,15 @@ linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">System::Permiss
 
 <note>
 <para>
-当处理复杂的组织结构和维护大型的OTRS安装时，角色才真正好用。可是建议要适当注意：混合了服务人员-组和服务人员-角色的映射可能造成复杂的访问控制方案，难于理解和维护。如果你想只使用角色并禁用系统管理区服务人员&lt;-&gt;组的选项，可以通过修改系统配置中的参数<link
-linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>来实现。要注意这不会移除已经存在的服务人员到组的分配！
+Roles are really useful when dealing with complex organizations and when
+maintaining larger OTRS installations. Proper care is advised though. Mixing
+Agent to Group with Agent to Role mappings can make for a complex access
+control scheme, that is difficult to understand and maintain. If you wish to
+use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
+area, you can do so by modifying the <link
+linkend="ConfigReference_Setting_Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
+in the SysConfig. Be aware that this won't remove already existing Agents to
+Group assignments!
 </para>
 </note>
 
@@ -352,7 +364,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </note>
 
 <para>
-显示了系统中所有角色的一个概览。要编辑角色的设置，点击角色的名称即可。在一个全新安装的OTRS系统中，默认没有定义任何角色。要注册一个，点击“添加角色”按钮，提供需要的数据并提交（如下图）。
+An overview of all roles in the system is displayed. To edit a role's
+settings, click on the role's name. In a fresh new OTRS installation, there
+are no roles defined by default. To register one, click on the <literal>Add
+role</literal> button, provide the needed data and submit it (see figure
+below).
 </para>
 
 <para>

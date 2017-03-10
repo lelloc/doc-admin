@@ -88,14 +88,26 @@ apache2.service</command>重启Apache以便载入为OTRS修改的配置。
 
     <section id="suse-installation-perl-modules">
         <title>安装额外的perl模块</title>
-        <para>除了通过RPM包安装的Perl模块外，OTRS还需要一些其它的Perl模块，你可以手动安装。通过执行位于目录<filename>/opt/otrs</filename>下的文件<filename>bin/otrs.CheckModules.pl</filename>来检查缺失的模块。一些模块只是可选的功能才需要，比如与IMAP服务器通讯或生成PDF。在SLES上你需要添加外部软件仓库到zypper的配置中才能获得系统需要的模块。可从下面的网址下载与操作系统版本匹配的模块：
-<ulink
-url="http://download.opensuse.org/repositories/devel:/languages:/perl/">http://download.opensuse.org/repositories/devel:/languages:/perl/</ulink>。
+        <para>
+            OTRS needs more modules than can be installed via the package manager per
+default. You can post-install them manually.  Running the
+<filename>otrs.CheckModules.pl</filename> script located at
+<filename>/opt/otrs/bin/</filename> will let you know which modules are
+missing, and must or can be installed.  Optional modules may include those
+needed for communication with MDAs via IMAP(S) or gernerating PDF output.
+        </para>
+        <para>
+            On SLES you shoud add an external repository in order to get missing
+modules.  Choose the repository needed for your OS version from here: <ulink
+url="http://download.opensuse.org/repositories/devel:/languages:/perl/">
+http://download.opensuse.org/repositories/devel:/languages:/perl/
+</ulink>. As an example, the repository for SLES 11 SP 3 would be added like
+this:
         </para>
 
         <para>
             <screen><![CDATA[
-zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP2 Perl
+zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/SLE_11_SP3 Perl
             ]]></screen>
         </para>
 
@@ -103,6 +115,7 @@ zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:
             在openSUSE
 12.3中只有Mail::IMAPClient才需要额外的软件仓库，这个模块只有当你要从用TLS加密的IMAP邮件服务器收取邮件时才需要。相应的命令行像这个样子：
         </para>
+
         <para>
             <screen><![CDATA[
 zypper ar -f -n perl http://download.opensuse.org/repositories/devel:/languages:/perl/openSUSE_12.3/ Perl
@@ -172,9 +185,55 @@ shell> /opt/otrs/bin/Cron.sh start
     <title>在Red Hat Enterprise Linux或CentOS系统上安装OTRS</title>
 
     <para>
-    本节描述了在Red Hat Enterprise Linux或CentOS系统上安装OTRS的过程。OTRS 3.3及后续版本需要RHEL
-6或CentOS 6，版本5不支持。
+        This section describes the installation of our RPM package on a Red Hat
+Enterprise Linux (RHEL) or CentOS server.
     </para>
+
+    <section>
+        <title>Preparation: Disable SELinux</title>
+        <note>
+            <para>
+                If your system uses SELinux, you should disable it, otherwise OTRS will not
+work correctly.
+            </para>
+        </note>
+        <para>
+            Here's how to disable SELinux for RHEL/CentOS/Fedora:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Configure SELINUX=disabled in the /etc/selinux/config file:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#       enforcing - SELinux security policy is enforced.
+#       permissive - SELinux prints warnings instead of enforcing.
+#       disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#       targeted - Targeted processes are protected,
+#       mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+            Reboot your system. After reboot, confirm that the getenforce command
+returns <literal>Disabled</literal>:
+                    </para>
+                    <para>
+                    <screen><![CDATA[
+shell> getenforce
+Disabled
+                        ]]></screen>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
 
     <section id="rhel-preparing-database-mysql">
     <title>准备OTRS所需的数据库环境</title>
@@ -184,21 +243,25 @@ shell> /opt/otrs/bin/Cron.sh start
     </para>
 
     <para>
-        以root用户执行下列的命令来安装MySQL：
+        Install MySQL (or MariaDB) by executing the following command as root:
     </para>
 
     <para>
         <screen><![CDATA[
-[root@otrs-centos6 ~]# yum -y install mysql-server
+shell> yum -y install mariadb-server
         ]]></screen>
     </para>
 
     <para>
-        这会按默认选项安装MySQL到系统中。你需要修改一些默认设置以便更适合OTRS运行。用文本编辑器打开文件<filename>/etc/my.cnf</filename>并添加下列行到[mysqld]节：
+        This will install MySQL with the default options on your system. You'll need
+to change the defaults in order to make it suitable for OTRS. With a text
+editor create a new file <filename>/etc/my.cnf.d/zotrs.cnf</filename> with
+the following content:
     </para>
 
     <para>
         <screen><![CDATA[
+[mysqld]
 max_allowed_packet   = 20M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
@@ -206,8 +269,11 @@ innodb_log_file_size = 256M
     </para>
 
     <para>
-        现在执行命令<command>systemctl start
-mysqld</command>来重启数据库服务器并激活刚才的修改内容。然后运行命令<command>/usr/bin/mysql_secure_installation</command>并根据窗口提示来设置数据库的root用户密码、移除匿名访问和移除test数据库。
+        Now execute <command>systemctl start mariadb</command> to re-start the
+database server and activate these changes. Then run
+<command>/usr/bin/mysql_secure_installation</command> and follow the
+on-screen instructions to set a database root password, remove anonymous
+access and remove the test database.
     </para>
 
     </section>
@@ -220,7 +286,7 @@ WEB服务器和一些Perl模块。确保你已经将OTRS RPM文件复制到了�
     </para>
     <para>
         <screen><![CDATA[
-[root@otrs-centos6 ~]# yum install --nogpgcheck otrs-x.x.*.rpm
+shell> yum install --nogpgcheck otrs-x.x.*.rpm
 ...
 Dependencies Resolved
 
@@ -259,7 +325,7 @@ Check OTRS user ... otrs added.
 
 ...
 
-[root@otrs-centos6 ~]#
+shell>
         ]]></screen>
     </para>
 
@@ -276,50 +342,22 @@ url="http://fedoraproject.org/wiki/EPEL">EPEL网站</ulink>上查看更多信息
         </para>
 
         <para>
-            如果你使用的是RHEL 6或CentOS 6，你可以从<ulink
-url="http://download.fedoraproject.org/pub/epel/6/i386/repoview/epel-release.html">这个网址</ulink>获得最新的EPEL软件包。你可以执行下面的命令添加EPEL软件仓库到yum源：
+            If you're on RHEL 7 or CentOS 7, you can get the latest package for EPEL
+from <ulink url="https://download.fedoraproject.org/pub/epel/7/x86_64/">this
+site</ulink>.  You can add this repository to yum it in one go by copying
+the RPM URL you find on this page and executing this command:
         </para>
 
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum -y install http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-Loaded plugins: security
-Setting up Install Process
-epel-release-6-8.noarch.rpm                                   |  14 kB     00:00
-Examining /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm: epel-release-6-8.noarch
-Marking /var/tmp/yum-root-7jrJef/epel-release-6-8.noarch.rpm to be installed
-Resolving Dependencies
---> Running transaction check
----> Package epel-release.noarch 0:6-8 will be installed
---> Finished Dependency Resolution
+shell> yum -y install http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 
-Dependencies Resolved
-
-=====================================================================================
- Package             Arch          Version     Repository                       Size
-=====================================================================================
-Installing:
- epel-release        noarch        6-8         /epel-release-6-8.noarch         22 k
-
-Transaction Summary
-=====================================================================================
-Install       1 Package(s)
-
-Total size: 22 k
-Installed size: 22 k
-Downloading Packages:
-Running rpm_check_debug
-Running Transaction Test
-Transaction Test Succeeded
-Running Transaction
-  Installing : epel-release-6-8.noarch                                           1/1
-  Verifying  : epel-release-6-8.noarch                                           1/1
+...
 
 Installed:
-  epel-release.noarch 0:6-8
+  epel-release.noarch 0:7-8
 
 Complete!
-[root@otrs-centos6 otrs]#
             ]]></screen>
         </para>
         <para>
@@ -327,49 +365,15 @@ Complete!
         </para>
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum -y install "perl(Text::CSV_XS)"
-Loaded plugins: security
-Setting up Install Process
-Resolving Dependencies
---> Running transaction check
----> Package perl-Text-CSV_XS.x86_64 0:0.85-1.el6 will be installed
---> Finished Dependency Resolution
+shell> yum -y install "perl(Text::CSV_XS)"
 
-Dependencies Resolved
-
-=====================================================================================
- Package                   Arch            Version               Repository     Size
-=====================================================================================
-Installing:
- perl-Text-CSV_XS          x86_64          0.85-1.el6            epel           71 k
-
-Transaction Summary
-=====================================================================================
-Install       1 Package(s)
-
-Total download size: 71 k
-Installed size: 154 k
-Downloading Packages:
-perl-Text-CSV_XS-0.85-1.el6.x86_64.rpm                        |  71 kB     00:00
-warning: rpmts_HdrFromFdno: Header V3 RSA/SHA256 Signature, key ID 0608b895: NOKEY
-Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-Importing GPG key 0x0608B895:
- Userid : EPEL (6) &lt;epel@fedoraproject.org&gt;
- Package: epel-release-6-8.noarch (@/epel-release-6-8.noarch)
- From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-Is this ok [y/N]: y
-Running rpm_check_debug
-Running Transaction Test
-Transaction Test Succeeded
-Running Transaction
-  Installing : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
-  Verifying  : perl-Text-CSV_XS-0.85-1.el6.x86_64                                1/1
+...
 
 Installed:
   perl-Text-CSV_XS.x86_64 0:0.85-1.el6
 
 Complete!
-[root@otrs-centos6 otrs]#
+shell>
             ]]></screen>
         </para>
 
@@ -405,7 +409,7 @@ shell> /opt/otrs/bin/Cron.sh start
 
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum -y install gcc make "perl(CPAN)"
+shell> yum -y install gcc make "perl(CPAN)"
             ]]></screen>
         </para>
 
@@ -420,7 +424,7 @@ SDK'。将它们保存到磁盘的一个目录。现在用下面的命令来安�
         </para>
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# yum install oracle-instantclient*
+shell> yum install oracle-instantclient*
             ]]></screen>
         </para>
         <para>
@@ -428,9 +432,9 @@ SDK'。将它们保存到磁盘的一个目录。现在用下面的命令来安�
         </para>
         <para>
             <screen><![CDATA[
-[root@otrs-centos6 otrs]# export ORACLE_HOME=/usr/lib/oracle/11.2/client64
-[root@otrs-centos6 otrs]# export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-[root@otrs-centos6 otrs]# cpan
+shell> export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+shell> export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+shell> cpan
 cpan[1]> look DBD::Oracle
 ...
 Fetching with LWP:

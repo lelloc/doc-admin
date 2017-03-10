@@ -6,12 +6,58 @@
 
     <title>从源码安装OTRS（Linux、Unix）</title>
 
+    <section role="NotInToc" id="installation-disable-selinux">
+        <title>Preparation: Disable SELinux</title>
+        <note>
+            <para>
+                If your system uses SELinux, you should disable it, otherwise OTRS will not
+work correctly.
+            </para>
+        </note>
+        <para>
+            Here's how to disable SELinux for RHEL/CentOS/Fedora:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Configure SELINUX=disabled in the /etc/selinux/config file:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#       enforcing - SELinux security policy is enforced.
+#       permissive - SELinux prints warnings instead of enforcing.
+#       disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#       targeted - Targeted processes are protected,
+#       mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+            Reboot your system. After reboot, confirm that the getenforce command
+returns <literal>Disabled</literal>:
+                    </para>
+                    <para>
+                    <screen><![CDATA[
+shell> getenforce
+Disabled
+                        ]]></screen>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
     <section role="NotInToc">
         <title>步骤1：安装 .tar.gz</title>
         <para>
-        如果你要从源码安装OTRS，首先从网站<ulink
-url="http://www.otrs.com/try/">http://www.otrs.com/try/</ulink>下载 .tar.gz或
-.tar.bz2或 .zip格式的文件。
+        If you want to install OTRS from source, first download the source archive
+as .tar.gz, .tar.bz2, or .zip file from <ulink
+url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">https://www.otrs.com/download-open-source-help-desk-software-otrs-free/</ulink>
         </para>
 
         <para>
@@ -141,7 +187,7 @@ install Crypt::PasswdMD5
         </para>
         <para>
             <screen><![CDATA[
-shell> useradd -d /opt/otrs/ -c 'OTRS user' otrs
+shell> useradd -d /opt/otrs -c 'OTRS user' otrs
             ]]></screen>
         </para>
         <para>
@@ -285,8 +331,10 @@ shell> bin/otrs.SetPermissions.pl --web-group=www-data
     <section role="NotInToc" id="database-configuration">
         <title>步骤8：数据库设置和系统基本配置</title>
         <para>
-            请使用WEB安装器<ulink
-url="http://yourhost/otrs/installer.pl">http://yourhost/otrs/installer.pl</ulink>（用你的OTRS主机名或IP地址替换“yourhost”）来设置数据库和系统基本配置如邮件帐户。
+            Please use the web installer at <ulink
+url="http://localhost/otrs/installer.pl">http://localhost/otrs/installer.pl</ulink>
+(replace "localhost" with your OTRS hostname) to setup your database and
+basic system settings such as email accounts.
         </para>
         <note>
             <para>
@@ -305,8 +353,10 @@ innodb_log_file_size = 256M
     <section role="NotInToc">
         <title>步骤9：首次登录</title>
         <para>
-            现在你可以在地址：<ulink
-url="http://yourhost/otrs/index.pl">http://yourhost/otrs/index.pl</ulink>并输入在WEB安装器中配置的认证信息（用户：root@localhost）登录系统了。
+            Now you are ready to login to your system at <ulink
+url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink>
+with the credentials you configured in the web installer (User:
+root@localhost).
         </para>
         <para>
             通过本步骤，完成了系统的基本配置。
@@ -381,7 +431,9 @@ shell> /opt/otrs/bin/Cron.sh stop
             我们建议你参阅OTRS<link linkend="performance-tuning">性能调优章节</link>。
         </para>
         <para>
-            如果遇到了安装问题，你可以给我们的邮件列表otrs@otrs.org (http://lists.otrs.org/)发送一个消息。
+            If you encounter problems with the installation, you can send a message to
+our mailing list otrs@otrs.org (<ulink
+url="http://lists.otrs.org/">http://lists.otrs.org/</ulink>).
         </para>
         <para>
             你还可以请求OTRS集团帮助你规划或部署OTRS，或者检查你安装的OTRS系统。我们的<ulink

@@ -225,8 +225,9 @@ linkend="adminarea-smime">“S/MIME证书”</link>链接。如果在OTRS中还�
 </para>
 
 <para>
-通过系统配置组<link
-linkend="ConfigReference_Framework:Crypt::SMIME">"Crypt::SMIME"</link>，你还可以启用并配置通用S/MIME支持。
+With the SysConfig group <link
+linkend="ConfigReference_Section_Core::Crypt::SMIME">"Crypt::SMIME"</link>,
+you can also enable and configure the general S/MIME support.
 </para>
 
 <para>
@@ -242,5 +243,117 @@ linkend="adminarea-smime">S/MIME证书</link>链接中执行。在这里，你�
 显然，所有通信伙伴的S/MIME公钥也可以通过<link
 linkend="adminarea-customers">客户联系人管理工具</link>导入。
 </para>
+
+<section id="SMIMEFetchFromCustomer">
+    <title>Fetch S/MIME Certificates from Customer User Backends</title>
+    <para>
+        It is possible to use a Customer User Backed (such as LDAP) as the source of
+public S/MIME certificates. This certificates could be imported into the
+system and be displayed in <link linkend="adminarea-smime">S/MIME
+configuration on the OTRS Admin page</link> and they can be used from OTRS
+to send encrypted emails to the customers.
+    </para>
+    <para>
+        In order to enable this feature is needed to:
+    </para>
+    <para>
+        <orderedlist numeration="arabic">
+            <listitem><para>Enable <literal>SMIME</literal> in SysConfig</para></listitem>
+            <listitem><para>Enable <literal>SMIME::FetchFromCustomer</literal> in SysConfig</para></listitem>
+            <listitem>
+                <para>
+                    Configure a customer user backend to provide the attribute
+<literal>UserSMIMECertificate</literal> with the customer user S/MIME
+certificate (there is an example for LDAP customer user mapping in
+<filename>$OTRS_HOME/Kernel/Config/Defaults.pm</filename>).
+                </para>
+            </listitem>
+        </orderedlist>
+    </para>
+    <para>
+        This feature can be used in three different ways:
+    </para>
+    <para>
+        <orderedlist numeration="arabic">
+            <listitem>
+                <para>
+                    Incoming Emails:
+                </para>
+                <para>
+                    A dedicated Postmaster filter
+(<literal>PostMaster::PreFilterModule###000-SMIMEFetchFromCustomer</literal>
+in SysConfig) will extract the email address of each incoming email and will
+try to find the email address is the list of customers. If found it will try
+get the S/MIME certificate from customer user attributes. If a certificate
+is found it will try to import it (unless it was already imported).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Specific email address or all customers:
+                </para>
+                <para>
+                    The console command
+<literal>Maint::SMIME::CustomerCertificate::Fetch</literal> can be used to
+import the S/MIME certificate of one customer email address as:
+                </para>
+                <para>
+                    <screen><![CDATA[
+shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --email customer@example.com
+                    ]]></screen>
+                </para>
+                <para>
+                    In this case the console command will try to match the supplied email
+address with one of the customer users. If found it will try add to the
+system the S/MIME certificate found in customer user properties (if the
+certificate is not already added).
+                </para>
+                <para>
+                    The same console command can be used to import the S/MIME certificates of
+all customer users (limited to
+<literal>CustomerUserSearchListLimit</literal> property from the customer
+user backend). This option is discouraged specially for systems with a large
+number of customer users as it might require too much time to execute and
+depending on the limit it might be possible that not all customer
+certificates will be fetch. Execute the console command in this mode as:
+<screen><![CDATA[
+shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --add-all
+                    ]]></screen>
+                </para>
+                <para>
+                    For this option the console command will query the customer user backends to
+get all possible customers and for each it will check if there is a S/MIME
+certificate. If a certificate is found, it will try to add it to the system
+(if the certificate is not already added).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Renew existing certificates:
+                </para>
+                <para>
+                    Another console command
+<literal>Maint::SMIME::CustomerCertificate::Renew</literal> can be used to
+check for all existing certificates in the system. This verifies that the
+existing certificates from customer users matches the ones that are
+retrieved by the customer user properties. Any new certificate in the
+customer user backend will be added into the system (no certificates are
+deleted in this process).
+                </para>
+                <para>
+                    This console command is executed once a day by the OTRS daemon automatically
+with the task
+<literal>Daemon::SchedulerCronTaskManager::Task###RenewCustomerSMIMECertificates</literal>
+(as seen in SysConfig), but it can be also executed manually on demand as:
+                </para>
+                <para>
+                    <screen><![CDATA[
+shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Renew
+                    ]]></screen>
+                </para>
+            </listitem>
+        </orderedlist>
+    </para>
+</section>
 
 </section>

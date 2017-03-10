@@ -3,17 +3,21 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="upgrading">
-    <title>升级OTRS版本（从4到5）</title>
+    <title>Upgrading OTRS from 5 to 6</title>
 
     <para>
-    这些说明适用于想升级OTRS版本的人群，从<emphasis>4</emphasis>到 <emphasis>5</emphasis>或从
-<emphasis>5</emphasis>到版本<emphasis>5</emphasis>最近的补丁集。
+    These instructions are for people upgrading OTRS from <emphasis>5</emphasis>
+to <emphasis>6</emphasis> or from a <emphasis>5</emphasis> to a later
+patchlevel release <emphasis>5</emphasis> and applies both for RPM and
+source code (tarball) upgrades.
     </para>
 
     <para>
-    如果你正运行在一个低版本的OTRS上，首先需要按如下升级顺序先升级到OTRS
-4：1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4！
-在每个版本间需要执行完全升级，包括修改数据库和升级的Perl脚本。
+    If you are running a lower version of OTRS you have to follow the upgrade
+path to 5 first
+(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4->5)! You need
+to perform a full upgrade to every version in between, including database
+changes and the upgrading Perl script.
     </para>
 
     <para>
@@ -22,9 +26,18 @@ url="http://bugs.otrs.org/show_bug.cgi?id=6798">执行额外的步骤</ulink>。
     </para>
 
     <para>
-    在大版本内你可以跳过小版本升级，比如你可以直接从OTRS 5
-补丁级别2直接升级到版本5补丁级别6。如果你只是升级补丁级别，可以跳过步骤6、10、11、14、17和18。
+    Within a single minor version you can skip patch level releases if you want
+to upgrade. For instance you can upgrade directly from OTRS 6 patchlevel 2
+to version 6 patchlevel 6. If you need to do such a "patch level upgrade",
+you should skip steps 6 and XXXXX.
     </para>
+
+    <warning>
+        <para>
+            Please note that you need at least Perl 5.16 to run OTRS 6. If your system
+has an older Perl version, you need to update it first before updating OTRS.
+        </para>
+    </warning>
 
     <para>
     强烈建议在一台独立的测试主机上先进行升级测试。
@@ -127,6 +140,21 @@ shell> mv otrs-x.x.x otrs
                 <para>
                     如果你配置OTRS将信件数据存储在文件系统，你必须恢复<filename>article</filename>目录到<filename>/opt/otrs/var/</filename>或在系统配置中指定的目录。
                 </para>
+            </section>
+
+
+            <section role="NotInToc">
+                <title>Restore already installed default statistics</title>
+
+                <para>
+                    If you have additional packages with default statistics you have to restore
+the stats xml files with the suffix <filename>*.installed</filename> to
+<filename>/opt/otrs/var/stats</filename>.
+                </para>
+                <screen><![CDATA[
+shell> cd OTRS-BACKUP/var/stats
+shell> cp *.installed /opt/otrs/var/stats
+                ]]></screen>
             </section>
 
             <section role="NotInToc">
@@ -245,7 +273,7 @@ Maint::Database::Check</filename>，所以请运行这个命令来检查可能�
                 <para>
                     <screen><![CDATA[
 shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-5.mysql.sql | mysql -p -f -u root otrs
+shell> cat scripts/DBUpdate-to-6.mysql.sql | mysql -p -f -u root otrs
 shell> bin/otrs.Console.pl Maint::Database::Check
                     ]]></screen>
                 </para>
@@ -257,7 +285,7 @@ shell> bin/otrs.Console.pl Maint::Database::Check
                 <para>
                 <screen><![CDATA[
 shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-5.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
+shell> cat scripts/DBUpdate-to-6.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
                 ]]></screen>
                 </para>
             </section>
@@ -280,11 +308,12 @@ shell> scripts/DBUpdate-to-6.pl
             <para>
                 The script will ask you to set a time zone for OTRS. It is very important
 that you set the correct time zone (and keep it), otherwise date and time of
-data added after the upgrade (tickets, articles, etc.) wil be stored with a
+data added after the upgrade (tickets, articles, etc.) will be stored with a
 different time zone than your existing data, leading to inconsistent data.
 The script will suggest possible time zones based on your previous
 configuration. In case you are not sure or made a mistake, you can change
-the OTRS time zone after the upgrade via SysConfig setting OTRSTimeZone.
+the OTRS time zone after the upgrade via SysConfig setting
+<literal>OTRSTimeZone</literal>.
             </para>
 
             <para>
@@ -335,57 +364,32 @@ shell> /etc/init.d/cron start
 
         <note>
             <para>
-                OTRS 4的软件包与OTRS 5不兼容，所以你还需要升级软件包！
+                The OTRS packages of 5 are NOT compatible with OTRS 6, so you have to
+perform a package upgrade!
             </para>
         </note>
+
+    <!--
         <para>
-            下列软件会在升级过程中自动卸载（如果之前安装了的话）：
+
+            The following packages are automatically uninstalled after the upgrade process
+            (if they where installed before):
         </para>
         <para>
             <itemizedlist>
                 <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
             </itemizedlist>
         </para>
-    </section>
+        -->
+</section>
 
     <section role="NotInToc">
-        <title>步骤10：配置NodeID（仅适用于多前端的群集安装）</title>
-
-        <note>
-            <para>
-                这一步仅在你有多台前端主机的群集安装时才需要。
-            </para>
-        </note>
-        <para>
-            From OTRS 5 on, every frontend server needs to have its own unique
-<literal>NodeID</literal>.  This defaults to <literal>1</literal> and thus
-does not need to be configured for single-frontend setups. If you have more
-than one machine, each machine needs to have this value set to a unique
-value between <literal>1</literal> and <literal>999</literal>. This
-configuration needs to be done in the file
-<filename>Kernel/Config.pm</filename>:
-        </para>
-        <para>
-            <screen><![CDATA[
-$Self->{'NodeID'} =  '2';   # 为每个前端服务器分配一个唯一的值
-            ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤11：检查跟进检测配置</title>
+        <title>步骤10：启动OTRS守护进程</title>
 
         <para>
-            跟进检测设置被重新组织了。现在OTRS默认在邮件主题和引用内容中搜索来检测是否为跟进邮件。如果你想修改跟进检测设置（比如在正文、附件或所有邮件内容中搜索），请在系统管理的系统配置
-<literal>Ticket</literal> -&gt; <literal>Core::PostMaster</literal>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤12：启动OTRS守护进程</title>
-
-        <para>
-            新的OTRS守护进程负责处理OTRS中的所有异步和循环任务。之前在cron文件中定义的自动任务现在都由OTRS守护进程处理。这个守护进程还处理所有的‘GenericAgent自动任务’任务，它必须以<literal>otrs</literal>用户运行。
+            The OTRS daemon is responsible for handling any asynchronous and recurring
+tasks in OTRS.  The daemon also handles all GenericAgent jobs and must be
+started from the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -396,7 +400,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>步骤13：升级和激活cron任务</title>
+        <title>Step 11: Update and activate cron jobs</title>
 
         <para>
             在<filename>/opt/otrs/var/cron/*.dist</filename>有两个默认的cron文件，它们的目的是确保OTRS守护进程正常运行。它们需要复制为没有“.dist”扩展名的新文件来激活。
@@ -418,30 +422,10 @@ shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
-        <para>
-            请注意：如果你有定制的cron任务，应该考虑将它们移到系统配置<literal>Daemon</literal> -&gt;
-<literal>Daemon::SchedulerCronTaskManager::Task</literal>中，以便由OTRS守护进程来统一执行。你可能还需要修改你的定制脚本，因为现在大部分OTRS命令都通过<filename>bin/otrs.Console.pl</filename>统一管理，而不是单个的脚本。
-        </para>
     </section>
 
     <section role="NotInToc">
-        <title>步骤14：回顾你的工单通知</title>
-        <para>
-            在OTRS
-5中工单通知配置与之前的版本不一样。它们现在是“事件通知”（以前的版本也有）的一部分（现在被称为“工单通知”）。你原有的工单通知已经迁移到工单通知列表中，但没有激活。你还会接收到新的默认工单通知（默认激活的）。
-        </para>
-        <para>
-            如果你没有修改老版本中的工单通知你就不需要再做任何事情。如果你做了本地的修改或翻译，可有两个选择：a)
-你可以迁移你的修改内容到新的工单通知（推荐），或b)你可以不激活新的通知并重新激活老版本的通知。
-        </para>
-        <para>
-            还要检查升级通知收件人设置，看看是否匹配你的期望值（工单在其队列中服务人员 vs
-拥有读取权限的所有服务人员）。这个设置之前是通过文件<filename>Kernel/Config/GenericAgent.pm</filename>（现已废弃）来配置的，现在可以通过图形界面中每个通知类型单独控制。
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤15：升级系统注册（可选）</title>
+        <title>Step 12: Update system registration (optional)</title>
         <para>
             如果系统已经注册到OTRS集团，强烈推荐这个时候更新注册信息。这将在OTRS集团的记录中更新注册的版本信息及其它变化了的信息，以便从云服务中获得更准确的信息。
         </para>
@@ -459,55 +443,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>步骤16：迁移基于Perl的定制自动任务（可选）</title>
-        <para>
-            这一步仅与你有任何定制的自动任务使用了OTRS
-4的Perl配置文件如<filename>Kernel/Config/GenericAgent.pm</filename>有关，这些任务不再能由定期的工单通知处理。这些任务现在需要在系统配置（<literal>Daemon</literal>
--&gt;
-<literal>Daemon::SchedulerCronTaskManager::Task</literal>）中注册为OTRS守护进程的cron任务，以便能够定期执行。
-        </para>
-        <para>
-            在系统配置中为此准备了5个设置参数（<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile1</literal>到<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile5</literal>）。如果还不够，可以添加到一个定制的系统配置文件中。
-        </para>
-        <para>
-            请用&lt;ModuleName&lt;替换包含定制的自动任务的配置文件名，如用<literal>Kernel::Config::GenericAgent</literal>替换<filename>Kernel/Config/GenericAgent.pm</filename>，按以前的执行周期设置计划时间，选中这个参数（激活）并保存修改。
-        </para>
-        <note>
-            <para>
-                要获取关于运行自动任务参数的更多信息，请执行以下语句：
-            </para>
-            <para>
-                <screen><![CDATA[
-shell> bin/otrs.Console.pl Maint::GenericAgent::Run --help
-            ]]></screen>
-            </para>
-        </note>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤17：设置bash自动补齐功能（可选）</title>
-        <para>
-            所有的常规OTRS命令操作现在都通过OTRS控制台接口
-<filename>bin/otrs.Console.pl</filename>执行。它提供bash的自动补齐功能，在查找正确的命令和选项时更容易些。
-        </para>
-        <para>
-            你可以安装软件包<literal>bash-completion</literal>来激活bash的自动补齐功能。它能为<literal>otrs</literal>用户自动检测到并载入文件<filename>/opt/otrs/.bash_completion</filename>。
-        </para>
-        <para>
-            重启shell后，你可以在输入<filename>bin/otrs.Console.pl</filename>后按TAB键，就会显示所有可用的命令。如果你键入了命令的部分字符，按TAB键会列出所有匹配这些字符的命令。在输入完整的命令后，按TAB键会列出所有可用的选项和参数。
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤18：回顾工单操作窗口配置（可选）</title>
-        <para>
-            一些工单操作窗口比如“备注”在OTRS
-4中有默认的主题（‘备注’的默认主题可通过系统配置参数<literal>Ticket::Frontend::AgentTicketNote###Subject</literal>设置）。这些默认的主题已经被移除了，以便减少潜在的冗余或无意义的数据。如果这些对你很重要，可以重新添加。
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤19：搞定！</title>
+        <title>Step 13: Well done!</title>
         <para></para>
     </section>
 </section>

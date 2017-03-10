@@ -6,13 +6,58 @@
 
     <title>Installation From Source (Linux, Unix)</title>
 
+    <section role="NotInToc" id="installation-disable-selinux">
+        <title>Preparation: Disable SELinux</title>
+        <note>
+            <para>
+                If your system uses SELinux, you should disable it, otherwise OTRS will not
+work correctly.
+            </para>
+        </note>
+        <para>
+            Here's how to disable SELinux for RHEL/CentOS/Fedora:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Configure SELINUX=disabled in the /etc/selinux/config file:
+                    </para>
+                    <para>
+                        <screen><![CDATA[
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#       enforcing - SELinux security policy is enforced.
+#       permissive - SELinux prints warnings instead of enforcing.
+#       disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#       targeted - Targeted processes are protected,
+#       mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+                        ]]></screen>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+            Reboot your system. After reboot, confirm that the getenforce command
+returns <literal>Disabled</literal>:
+                    </para>
+                    <para>
+                    <screen><![CDATA[
+shell> getenforce
+Disabled
+                        ]]></screen>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
     <section role="NotInToc">
         <title>Шаг 1: Установите .tar.gz</title>
         <para>
-        Если вы решили устанавливать OTRS из исходных кодов, перейдите по ссылке
-<ulink url="http://www.otrs.com/try/">http://www.otrs.com/try/</ulink> и
-загрузите архив с исходными кодами в любом удобном для вас формате: .tar.gz,
-.tar.bz2, или .zip
+        If you want to install OTRS from source, first download the source archive
+as .tar.gz, .tar.bz2, or .zip file from <ulink
+url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">https://www.otrs.com/download-open-source-help-desk-software-otrs-free/</ulink>
         </para>
 
         <para>
@@ -155,7 +200,7 @@ the special requirements of the target system.
         </para>
         <para>
             <screen><![CDATA[
-shell> useradd -d /opt/otrs/ -c 'OTRS user' otrs
+shell> useradd -d /opt/otrs -c 'OTRS user' otrs
             ]]></screen>
         </para>
         <para>
@@ -314,10 +359,10 @@ shell> bin/otrs.SetPermissions.pl --web-group=www-data
     <section role="NotInToc" id="database-configuration">
         <title>Шаг 8: Настройка СУБД и базовые настройки системы</title>
         <para>
-            Используйте веб установщик <ulink
-url="http://yourhost/otrs/installer.pl">http://yourhost/otrs/installer.pl</ulink>
-(замените "yourhost" именем вашего OTRS хоста) для установки вашей СУБД и
-выполнения базовых настроек системы, таких как почтовые учетные записи.
+            Please use the web installer at <ulink
+url="http://localhost/otrs/installer.pl">http://localhost/otrs/installer.pl</ulink>
+(replace "localhost" with your OTRS hostname) to setup your database and
+basic system settings such as email accounts.
         </para>
         <note>
             <para>
@@ -338,9 +383,10 @@ innodb_log_file_size = 256M
     <section role="NotInToc">
         <title>Шаг 9: Первый вход в систему</title>
         <para>
-            Теперь вы готов ко входу в систему по ссылке <ulink
-url="http://yourhost/otrs/index.pl">http://yourhost/otrs/index.pl</ulink> с
-учетной записью созданной в веб установщике (пользователь: root@localhost).
+            Now you are ready to login to your system at <ulink
+url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink>
+with the credentials you configured in the web installer (User:
+root@localhost).
         </para>
         <para>
             На этом, начальная установка системы закончена.
@@ -433,8 +479,9 @@ possible options and arguments will be shown by pressing TAB.
 настройки производительности</link>.
         </para>
         <para>
-            При обнаружении проблем при установке, вы можете послать сообщение на наш
-otrs@otrs.org (http://lists.otrs.org/).
+            If you encounter problems with the installation, you can send a message to
+our mailing list otrs@otrs.org (<ulink
+url="http://lists.otrs.org/">http://lists.otrs.org/</ulink>).
         </para>
         <para>
             Вы, также, можете послать запрос в OTRS Group на помощь в планировании или

@@ -1997,19 +1997,19 @@ Mpito. Hii inadhibiti mwelekeo ambao tiketi ya mchakato itachukua. Mfano:
                     </screen>
                 </para>
                 <para>
-                    Kama tiketi ya mchakato iko kwenye shughuli 'A1', ina njia tatu
-zinazowezekana kwenda kwenye Shughuli nyingine. Kwenye Mapito 'T1' kwenda
-'T3', masharti yamefafanuliwa, ambayo tiketi ya mchakato inabidi iyatimize
-ili ihamie kwenye Shughuli nyingine.
+                    If a process ticket is in Activity <literal>A1</literal>, it has three
+possible ways to get to another Activity. In the Transitions
+<literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
+a process ticket must fulfill to move (transit) to another Activity.
                 </para>
                 <para>
                     If in this case all the values of the process ticket and its dynamic fields
-that are needed for the Transition 'T2' are correct, the ticket will be
-moved from Activity 'A1' to 'A3'. After an ActivityDialog is submitted, or
-any other change is made to a ticket, it will be checked for possible
-Transitions from the current Activity. If multiple Transitions are possible,
-the first one will be used (based on numerical sorting of the
-TransitionIDs).
+that are needed for the Transition <literal>T2</literal> are correct, the
+ticket will be moved from Activity <literal>A1</literal> to
+<literal>A3</literal>. After an ActivityDialog is submitted, or any other
+change is made to a ticket, it will be checked for possible Transitions from
+the current Activity. If multiple Transitions are possible, the first one
+will be used (based on numerical sorting of the TransitionIDs).
                 </para>
                 <para>
                     Kwa nyongeza, inawezekana kugawia Vitendo vya Mpito kwa Mapito katika
@@ -2023,10 +2023,10 @@ mfano, tutaongelea kwa undani baadaye.
         <section>
             <title>Shughuli</title>
             <para>
-                Shughuli ina Maongezi ya Shughuli ya aina moja au zaidi na inatengeneza
-'hatua' katika mchakato. Maongezi ya Shughuli yote ya Shughuli ya sasa
-yanaonyeshwa katika kuza tiketi na inaweza kutumika mpaka masharti ya Mpito
-yatimizwe.
+                An Activity contains one or more Activity Dialogs and models a
+<literal>step</literal> in the process. All Activity Dialogs of the current
+Activity are displayed in the ticket zoom and can be used until the
+conditions of a Transition are fulfilled.
             </para>
             <section>
             <title>Sanidi ya shughuli</title>
@@ -2096,10 +2096,11 @@ $Self->{'Process::Activity'} =
             <section>
                 <title>MaongeziShughuli</title>
                 <para>
-                    Maongezi ya Shughuli yana orodha ya maongezi ya shughuli ambayo yanapatikana
-katika hii shughuli. Maongezi yote ya Shughuli ya sasa yanaonekana katika
-Kuza tiketi. Oda yao inasetiwa na  oda ya kwenye sanidi, hapa 'AD5'
-inaonyeshwa kabla ya 'AD6' na 'AD1'.
+                    Activity Dialog contains the list of Activity Dialogs which are available in
+this Activity. All Activity Dialogs of the current Activity are displayed in
+the ticket zoom. Their order is set by the order in the configuration, here
+<literal>AD5</literal> is shown before <literal>AD6</literal> and
+<literal>AD1</literal>.
                 </para>
             </section>
         </section>
@@ -2258,11 +2259,11 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    The field "Article" is a special case. If it is present in a "Fields"
-configuration, the Activity Dialog will contain a complete Richtext editor
-with subject field and attachment handling. The entered text will then be
-added to the ticket as an article and sent by email. Let's see an example
-Article field configuration:
+                    The field <literal>Article</literal> is a special case. If it is present in
+a <literal>Fields</literal> configuration, the Activity Dialog will contain
+a complete Richtext editor with subject field and attachment handling. The
+entered text will then be added to the ticket as an article and sent by
+email. Let's see an example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2301,20 +2302,20 @@ juu ya eneo, kwa mfano ushauri wa jinsi ya kujaza eneo.
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    '0': sehemu haionekani. Hii inakuwa na manufaa kama thamani za sehemu
-zinatakiwa kusetiwa kiotomatiki. ThamaniChaguo-msingi iliyosanidiwa
-itahifadhiwa katika kesi hii.
+                                    <literal>0</literal>: field is invisible. This can be helpful if field
+values should automatically be set. The configured
+<literal>DefaultValue</literal> will be stored in this case.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '1': sehemu inaonekana, lakini ni ya hiari.
+                                    <literal>1</literal>: field is visible, but optional.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '2': field is visible and mandatory. The following fields can only be
-invisible or mandatory:
+                                    <literal>2</literal>: field is visible and mandatory. The following fields
+can only be invisible or mandatory:
                                 </para>
                                 <para>
                                     <screen>
@@ -2342,10 +2343,10 @@ yanawasilishwa na mtumiaji.
                 <section>
                     <title>ThamaniChaguo-msingi</title>
                     <para>
-                        Kwa sehemu zenye 'Kitambulisho' (kama KitambulishoChaFoleni,
-KitambulishoChaMmiliki), hii inamaanisha Kitambulisho cha hifadhidata ya
-thamani. Kwa sehemu nyingine zisizo na 'Kitambulisho' (kama Foleni,
-Mmiliki), ThamaniChaguo-msingi lazima iwe na thamani yenyewe. Mfano:
+                        For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers
+to the database ID of the value. For other fields without
+<literal>ID</literal> (like Queue, Owner), the
+<literal>DefaultValue</literal> must contain the value itself. Example:
                     </para>
                     <para>
                         <screen>
@@ -2508,18 +2509,18 @@ ziwezekanazo:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'na': Hili ni chaguo-msingi. Masharti yote lazima yafikiwe ili mpito
-ufanyike.
+                                    <literal>and</literal>: This is the default. All conditions must be met for
+the transition to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'au': Angalau sharti moja lilingane.
+                                    <literal>or</literal>: At least one condition must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': Lazima sharti moja tu lifanane, siyo zaidi.
+                                    <literal>xor</literal>: Exactly one condition must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2540,18 +2541,18 @@ sharti. Thamani ziwezekanazo:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'na': Hili ni chaguo-msingi. Vipimo vya maeneo yote lazima vifanane ili
-sharti lilingane.
+                                    <literal>and</literal>: This is the default. All field tests must match for
+this condition to match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'or' Angalau kipimo kimoja cha sehemu kifanane
+                                    <literal>or</literal>: At least one field test must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': Lazima jatribio moja la eneo lifanane sio zaidi.
+                                    <literal>xor</literal>: Exactly one field test must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2621,34 +2622,35 @@ majaribio.
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'Tungo': Inalinganisha thamani ya sehemu na tungo iliyobainishwa katika
-'Lingana'. Zinalingana kama ziko sawa kabisa.
+                                    <literal>String</literal>: Compares the field value with the string
+specified in <literal>Match</literal>. Matches if they are exactly the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Hash': Inafananisha thamani ya sehemu (hash) na hash iliyobainishwa kwenye
-'Fananisha'. Thamani zote za hash lazima ziwe sawa.
+                                    <literal>Hash</literal>: Compares the field value (hash) with the hash
+specified in <literal>Match</literal>. All hash values must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Mkusanyiko': Inalinganisha thamani ya sehemu (mkusanyiko) na mkusanyiko
-uliobainishwa kwenye 'Lingana'. Orodha zote mbili lazima ziwe sawa.
+                                    <literal>Array</literal>: Compares the field value (array) with the array
+specified in <literal>Match</literal>. Both lists must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Regex': Thamani ya sehemu inaweza kujaribiwa na usemi wa kawaida. Nimuhimu
-kwamba 'Fanana' ina <emphasis>qr{}xms</emphasis> kama sharti la
-msingi. Katikati ya mabano semi ya kawaida halisi inaweza kuandikwa.
+                                    <literal>Regex</literal>: The field value can be tested with a regular
+expression. It is important that <literal>Match</literal> contains
+<emphasis>qr{}xms</emphasis> as a base condition. Between the braces the
+actual regular expression can be noted.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Moduli': Inakuruhusu kutumia moduli ya Perl kwa ajili ya kukagua
-masharti. Kama ikirudisha 1, ukaguzi ulikua chanya. Unaweza kupata moduli ya
-mfano kwenye
+                                    <literal>Module</literal>: Allows you to use a perl module for condition
+checking. If it returns 1, the check was positive. You can find an example
+module in
 <filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
                                 </para>
                             </listitem>
@@ -2711,11 +2713,12 @@ sending UserID parameter, by using the UserID parameter. The transition
 action will be executed impersonating the user with the given UserID.
                 </para>
                 <para>
-                    The use of UserID inside the "Config" parameter of a Transition Action is
-accepted by all Transition Actions (since OTRS 3.2.4). In this example it
-could be particularly important if the user that triggers the Transition
-does not have permissions to move the ticket to the queue 'Junk', while the
-user with the UserID 123 might have.
+                    The use of UserID inside the <literal>Config</literal> parameter of a
+Transition Action is accepted by all Transition Actions (since OTRS
+3.2.4). In this example it could be particularly important if the user that
+triggers the Transition does not have permissions to move the ticket to the
+queue <literal>Junk</literal>, while the user with the UserID 123 might
+have.
                 </para>
             </section>
             <section>
@@ -2745,10 +2748,11 @@ Transition Actions in your configuration. Example:
                     </screen>
                 </para>
                 <para>
-                    Hapa moduli ile ile inatumika kuhamisha tiketi ya mchakato kwenda kwenye
-foleni 'Mbichi', na wakati mwingine kuhamisha kwenda kwenye foleni
-taka. Kitendo cha Mpito ambacho lazima kitumike kwa Mpito fulani
-kinajulikana kutoka kwenye mpangilio wa 'Njia' ya usanidi wa Mchakato.
+                    Here the same module is used to move a process ticket into the
+<literal>Raw</literal> queue, and another time to move it into the junk
+queue. The Transition Action which must be used for a particular Transition
+is determined from the <literal>Path</literal> setting of the Process
+configuration.
                 </para>
             </section>
             <section id="available-transition-actions">
@@ -2780,12 +2784,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'MkuuMtumwa' na 'Kubaliwa' inatolewa kama mifano ya majina ya
-SehemuZinazobadilika. Thamani za sehemu ('Mkuu' na '1') itasetiwa na
-KitendoChaMpito hiki.
+                        <literal>MasterSlave</literal> and <literal>Approved</literal> are given as
+examples of DynamicField names.  The values of the fields
+(<literal>Master</literal> and <literal>1</literal>) will be set by this
+TransitionAction.
                     </para>
                 </section>
 
@@ -2834,33 +2840,34 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa. Inachaguliwa
-kwa uhuru, lakini inatakiwa kuakisi maana ya kitendo kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        'Aina ya Makala' inafafanua aina ya makala itakayotengenezwa. Thamani
-ziwezekanazo: simu, faksi, ujumbe mfupi wa maneno, notisi-ndani, notisi-nje,
-na notisi-ripoti.
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
-                        'SenderType' defines the sender type of the article. Possible values: agent,
-system, customer.
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
                     </para>
                     <para>
-                        'AinaMaudhui' inafafanua aina ya maudhui ya makala. Thamani ziwezekanazo:
-'nakala/ghafi; seti kibambo=ISO-8859-15' au seti kibambo nyingine yoyote
-halali na aina ya mime.
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        'Somo' inafafanua mada ya makala. Lazima.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        'Kiini' inafafanua maudhui ya makala. Lazima.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType' defines the type of the history entry. Possible values:
-AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
-EmailCustomer, EscalationResponseTimeNotifyBefore,
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
 EscalationResponseTimeStart, EscalationResponseTimeStop,
 EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
 EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
@@ -2874,31 +2881,31 @@ TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
 TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        'HistoriaMaoni' inafafanua maudhui ya ingizo la historia.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        'Kutoka','Kwa','Nakala' na 'JibuKwa' peleka anuani za barua pepe kwenye
-nukuu zilizobainishwa juu.
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        'KatikaMajibuKwa' na 'Marejeo' chukua Vitambulisho vya ujumbe wa barua pepe.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        'HakunaWakalaArifu'-kama imesetiwa kuwa 1, taarifa ya barua pepe ya Wakala
-haitatumwa.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        'MajibuAinaOtomatiki' inaweza kuchukua thamani zifuatazo: ufwatiliaji
-otomatiki, ukataaji otomatiki, uondoaji otomatiki, majibu otomatiki, majibu
-otomatiki/tiketi mpya.
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'LazimishaTaarifaKwaKitambulichoChaMtumiaji',
-'TenganishaTaarifaKwaKitambulishoChamtumiaji',
-'TenganishaNyamazishaTaarifaKwaKitambulishoChaMtumiaji' zinaweza kuchukua
-orodha ya Vitambulisho vya Watumiaji ambao aidha wanapata taarifa kila
-wakati, hawapati taarifa au wanawekwa kwenye orodha kama wanapata taarifa
-lakini hawapati barua pepe ya taarifa.
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                 </section>
                 <section>
@@ -2923,7 +2930,7 @@ $Self->{'Process::TransitionAction'} = {
             State         => 'new',              # or StateID => 5,
             CustomerID    => '123465',
             CustomerUser  => 'customer@example.com',
-            OwnerID       => 123,
+            OwnerID       => 'someuserlogin',    # or OwnerID => 123,
 
             # ticket optional:
             TN              => $TicketObject->TicketCreateNumber(), # optional
@@ -2976,89 +2983,92 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa. Inachaguliwa
-kwa uhuru, lakini inatakiwa kuakisi maana ya kitendo kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        'Title' The ticket title.
+                        <literal>Title</literal> The ticket title.
                     </para>
                     <para>
-                        'Queue' or 'QueueID' specifies the name or id of the queue to be used in the
-new ticket.
+                        <literal>Queue</literal> or <literal>QueueID</literal> specifies the name or
+id of the queue to be used in the new ticket.
                     </para>
                     <para>
-                        'Lock' or 'LockID' sets the lock status of the ticket.
+                        <literal>Lock</literal> or <literal>LockID</literal> sets the lock status of
+the ticket.
                     </para>
                     <para>
-                        'Priority' or 'PriorityID' specifies the name or id of the priority to be
-used in the new ticket.
+                        <literal>Priority</literal> or <literal>PriorityID</literal> specifies the
+name or id of the priority to be used in the new ticket.
                     </para>
                     <para>
-                        'State' or 'StateID' specifies the name or id of the state to be used in the
-new ticket.
+                        <literal>State</literal> or <literal>StateID</literal> specifies the name or
+id of the state to be used in the new ticket.
                     </para>
                     <para>
-                        'CustomerID', the customer id to be set for the new ticket.
+                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
                     </para>
                     <para>
-                        'CustomerUser', the login of the customer that will be assigned in the
-ticket.
+                        <literal>CustomerUser</literal>, the login of the customer that will be
+assigned in the ticket.
                     </para>
                     <para>
-                        'OwnerID', the ID of the agent that will be the new ticket owner.
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the
+login or id of the agent that will be the new ticket owner.
                     </para>
                     <para>
-                        'TN', custom number for the new ticket.
+                        <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
-                        'Type' or 'TypeID' specifies the name or id of the ticket type to be used in
-the new ticket.
+                        <literal>Type</literal> or <literal>TypeID</literal> specifies the name or
+id of the ticket type to be used in the new ticket.
                     </para>
                     <para>
-                        'Service' or 'ServiceID' specifies the name or id of the service to be used
-in the new ticket.
+                        <literal>Service</literal> or <literal>ServiceID</literal> specifies the
+name or id of the service to be used in the new ticket.
                     </para>
                     <para>
-                        'SLA' or 'SLAID' specifies the name or id of the SLA to be used in the new
-ticket.
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id
+of the SLA to be used in the new ticket.
                     </para>
                     <para>
-                        'ResponsibleID', the ID of the agent that will be the new ticket
-responsible.
+                        <literal>ResponsibleID</literal>, the ID of the agent that will be the new
+ticket responsible.
                     </para>
                     <para>
-                        'PendingTime', a predefined date to set the Ticket Pending Times, when the
-ticket state belongs to a pending state type.
+                        <literal>PendingTime</literal>, a predefined date to set the Ticket Pending
+Times, when the ticket state belongs to a pending state type.
                     </para>
                     <para>
-                        'PendingTimeDiff', a dynamically date (expressed in seconds from current
-date/time) to set the Ticket Pending Times, when the ticket state belongs to
-a pending state type.
+                        <literal>PendingTimeDiff</literal>, a dynamically date (expressed in seconds
+from current date/time) to set the Ticket Pending Times, when the ticket
+state belongs to a pending state type.
                     </para>
                     <para>
-                        'Aina ya Makala' inafafanua aina ya makala itakayotengenezwa. Thamani
-ziwezekanazo: simu, faksi, ujumbe mfupi wa maneno, notisi-ndani, notisi-nje,
-na notisi-ripoti.
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
                         Aina Ya Mtumaji inafafanua aina ya mtumaji wa makala. Thamani ziwezekanazo:
 wakala, mfumo, mteja.
                     </para>
                     <para>
-                        'AinaMaudhui' inafafanua aina ya maudhui ya makala. Thamani ziwezekanazo:
-'nakala/ghafi; seti kibambo=ISO-8859-15' au seti kibambo nyingine yoyote
-halali na aina ya mime.
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        'Somo' inafafanua mada ya makala. Lazima.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        'Kiini' inafafanua maudhui ya makala. Lazima.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType' defines the type of the history entry. Possible values:
-AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
-EmailCustomer, EscalationResponseTimeNotifyBefore,
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
 EscalationResponseTimeStart, EscalationResponseTimeStop,
 EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
 EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
@@ -3072,44 +3082,45 @@ TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
 TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        'HistoriaMaoni' inafafanua maudhui ya ingizo la historia.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        'Kutoka','Kwa','Nakala' na 'JibuKwa' peleka anuani za barua pepe kwenye
-nukuu zilizobainishwa juu.
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        'KatikaMajibuKwa' na 'Marejeo' chukua Vitambulisho vya ujumbe wa barua pepe.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        'HakunaWakalaArifu'-kama imesetiwa kuwa 1, taarifa ya barua pepe ya Wakala
-haitatumwa.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        'MajibuAinaOtomatiki' inaweza kuchukua thamani zifuatazo: ufwatiliaji
-otomatiki, ukataaji otomatiki, uondoaji otomatiki, majibu otomatiki, majibu
-otomatiki/tiketi mpya.
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'LazimishaTaarifaKwaKitambulichoChaMtumiaji',
-'TenganishaTaarifaKwaKitambulishoChamtumiaji',
-'TenganishaNyamazishaTaarifaKwaKitambulishoChaMtumiaji' zinaweza kuchukua
-orodha ya Vitambulisho vya Watumiaji ambao aidha wanapata taarifa kila
-wakati, hawapati taarifa au wanawekwa kwenye orodha kama wanapata taarifa
-lakini hawapati barua pepe ya taarifa.
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                     <para>
-                        'TimeUnit' the time invested in the current ticket article expressed in
-seconds, minutes, hours, etc.
+                        <literal>TimeUnit</literal> the time invested in the current ticket article
+expressed in seconds, minutes, hours, etc.
                     </para>
                     <para>
-                        'DynamicField_NameX' where DynamicField_ is a required prefix and NameX is
-the name of a Dynamic Field to be set in the new ticket (on ticket level,
-not article levels).
+                        <literal>DynamicField_NameX</literal> where DynamicField_ is a required
+prefix and NameX is the name of a Dynamic Field to be set in the new ticket
+(on ticket level, not article levels).
                     </para>
                     <para>
-                        'LinkAs' to define the new ticket relation with originator ticket, from the
-new ticket point of view, for example Normal, Parent, Child etc.
+                        <literal>LinkAs</literal> to define the new ticket relation with originator
+ticket, from the new ticket point of view, for example Normal, Parent, Child
+etc.
                     </para>
                 </section>
                 <section>
@@ -3136,13 +3147,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'No' or 'CustomerID' set the Customer ID of the customer.
+                        <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID
+of the customer.
                     </para>
                     <para>
-                        'User' or 'CustomerUserID' set the Username of the customer.
+                        <literal>User</literal> or <literal>CustomerUserID</literal> set the
+Username of the customer.
                     </para>
                 </section>
 
@@ -3167,14 +3181,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Funga' inafafanua ufungaji mpya wa tiketi ya mchakato.
+                        <literal>Lock</literal> defines the new lock of the process ticket.
                     </para>
                     <para>
-                        'Kitambulisho cha Funga' inafafanua kitambulisho cha ndani cha ufungaji
-mpya.
+                        <literal>LockID</literal> defines the internal ID of the new lock.
                     </para>
                 </section>
 
@@ -3199,14 +3213,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Mmiliki' inaweka bayana jina la kuingia la mmiliki mpya.
+                        <literal>Owner</literal> specifies the login name of the new owner.
                     </para>
                     <para>
-                        'Kitambulisho cha Mmiliki' inaweka bayana kitambulisho cha ndani cha mmiliki
-mpya.
+                        <literal>OwnerID</literal> specifies the internal ID of the new owner.
                     </para>
                 </section>
 
@@ -3231,14 +3245,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Foleni' inaweka bayana jina la foleni lengwa.
+                        <literal>Queue</literal> specifies the name of the target queue.
                     </para>
                     <para>
-                        'Kitambulisho cha Foleni' inaweka bayana kitambulisho cha ndani cha foleni
-lengwa.
+                        <literal>QueueID</literal> specifies the internal ID of the target queue.
                     </para>
                 </section>
 
@@ -3263,14 +3277,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Mhusika' inaweka bayana jina la kuingia la mhusika mpya.
+                        <literal>Responsible</literal> specifies the login name of the new
+responsible.
                     </para>
                     <para>
-                        'Kitambulisho cha Mhusika' inaweka bayana kitambulisho cha ndani cha mhusika
-mpya.
+                        <literal>ResponsibleID</literal> specifies the internal ID of the new
+responsible.
                     </para>
                 </section>
 
@@ -3296,14 +3312,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Huduma' inafafanua huduma mpya ya tiketi ya mchakato. Jina kamili
-linahitajika (mf. HudumaBabu::HudumaBaba::HudumaMtoto ).
+                        <literal>Service</literal> defines the new service of the process
+ticket. The full name is required
+(e.g. GramdFatherService::FatherService::SonService ).
                     </para>
                     <para>
-                        'Kitambulisho cha Huduma' inafafanua kitambulisho cha ndani cha huduma mpya.
+                        <literal>ServiceID</literal> defines the internal ID of the new service.
                     </para>
                 </section>
 
@@ -3329,13 +3347,15 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'SLA' inafafanua makubaliano ya ngazi ya huduma mpya ya mchakato wa tiketi.
+                        <literal>SLA</literal> defines the new service level agreement of the
+process ticket.
                     </para>
                     <para>
-                        'Kitambulisho cha SLA' inafafanua kitambulisho cha ndani cha SLA mpya.
+                        <literal>SLAID</literal> defines the internal ID of the new SLA.
                     </para>
                 </section>
 
@@ -3362,20 +3382,20 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Hali' inafafanua hali mpya ya tiketi ya mchakato.
+                        <literal>State</literal> defines the new state of the process ticket.
                     </para>
                     <para>
-                        'Kitanbulisho cha Hali' inafafanua kitambulisho cha ndani cha hali mpya.
+                        <literal>StateID</literal> defines the internal ID of the new state.
                     </para>
                     <para>
-                        'MudaKusubiriTofauti' inatumika kwa ajili ya aina za hali za kusubiri tu,
-inafafanua utofauti wa muda katika sekunde yenye uhusiano (yenye uhusiano na
-muda wa utekelezaji wa Kitendo cha Mpito) na muda wa kusubiri wa tiketi
-uliosetiwa (mf. 3600 inamaanisha muda wa kusubiri ni lisaa 1 baada ya
-Kitendo cha Mpito kutekelezwa).
+                        <literal>PendingTimeDiff</literal> used only for pending type states,
+defines the time difference in seconds relative (relative to the Transition
+Action execution time) to set ticket pending time (e.g. 3600 means that the
+pending time is 1hr after the Transition Action is executed).
                     </para>
                 </section>
 
@@ -3398,10 +3418,11 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Kichwa cha Habari" kinaweka bayana kichwa cha habari kipya cha tiketi.
+                        <literal>Title</literal> specifies the new title of the ticket.
                     </para>
                 </section>
 
@@ -3426,14 +3447,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        'Jina' inaweka bayana jina la KitendoChaMpito kilicho sanidiwa.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Aina' inaweka bayana jina la aina ya tiketi.
+                        <literal>Type</literal> specifies the name of the ticket type.
                     </para>
                     <para>
-                        'Kitambulisho cha Aina' inaweka bayana kitambulisho cha ndani cha aina ya
-tiketi.
+                        <literal>TypeID</literal> specifies the internal ID of the ticket type.
                     </para>
                 </section>
             </section>
@@ -3515,21 +3536,23 @@ Shughuli. Hii orodha itaweka ukomo wa Maongezi ya Shughuli ambayo yanaweza
 kugawiwa kwa mtumijai katika barakoa ya kuza tiketi.
                 </para>
                 <para>
-                    'Inawezekana' inaorodhesha Maongezi ya Shughuli ambayo
-yanaruhusiwa. Mpangilio hapo juu utaruhusu 'AD1' na 'AD3' tu kati ya orodha
-ya Maongezi ya Shughuli yaliyosanidiwa.
+                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The
+setting above will only allow <literal>AD1</literal> and
+<literal>AD3</literal> of the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    'InawezekanaHapana' inaorodhesha Maongezi ya Shughuli ambayo
-hayaruhusiwi. Katika mfano hapo juu, mpangilio utaondoa 'AD3' kutoka kwenye
-orodha ya Maongezi ya Shughuli yaliyosanidiwa.
+                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not
+allowed. In the example above, the setting will remove
+<literal>AD3</literal> from the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    Kama zote 'Inawezekana' na 'InawezekanaHapana' zimewekwa bayana, orodha ya
-Maongezi ya Shughuli yatachujwa kwanza na 'Inawezekana', na kuacha 'AD1' na
-'AD3' tu katika mfano wetu. Kisha 'InawezekanaHapana' itafanyika na kuchuja
-'AD3', ili 'AD1' pekee ibaki na inaonyeshwa kama Maongezi ya Shughuli
-yanayowezekana ambayo mtumiaji anaweza kutumia.
+                    If both <literal>Possible</literal> and <literal>PossibleNot</literal> are
+specified, the list of configured Activity Dialogs will first be filtered by
+<literal>Possible</literal>, leaving only <literal>AD1</literal> and
+<literal>AD3</literal> in our example. Then <literal>PossibleNot</literal>
+will be applied and filter out <literal>AD3</literal>, so that only
+<literal>AD1</literal> remains and is shown as a possible Activity Dialog
+that the user can use.
                 </para>
                 <para>
                     Kama sheria zaidi ya moja za ACL zimefanana, muunganiko wa sheria zote
@@ -3537,8 +3560,9 @@ zinazofanana utatafutwa kutengeneza Maongezi ya Shughuli
 yanayowezekana. Mfano:
                 </para>
                 <para>
-                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
-'AD7'.
+                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>,
+<literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>,
+<literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3575,28 +3599,36 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
                     </screen>
                 </para>
                 <para>
-                    Kama tiketi ya mchakato ina hali 'mpya', iko kwenye foleni 'Mbichi' na ina
-kipaumbele '3 kawaida', basi sheria zote tatu za ACL zitafanana nayo.
+                    If a process ticket has the state <literal>new</literal>, is in the
+<literal>Raw</literal> queue and has a priority <literal>3 normal</literal>,
+then all three ACL rules will match.
                 </para>
                 <para>
-                    Sheria ya kwanza inapunguza Maongezi ya Shughuli kutoka 'AD1', 'AD2', 'AD3',
-'AD4', 'AD5', 'AD6', 'AD7' to 'AD1', 'AD2', 'AD3', 'AD6', 'AD7' na inakataza
-'AD4' na 'AD5'.
+                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>,
+<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to
+<literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD6</literal>, <literal>AD7</literal> and forbids
+<literal>AD4</literal> and <literal>AD5</literal>.
                 </para>
                 <para>
-                    Sheria ya pili itapunguza zaidi Maongezi ya Shughuli yaliyobaki. Katika
-mfano wetu, 'AD2', 'AD3', 'AD7' zitabaki.
+                    The second rule will now further reduce the remaining Activity Dialogs.  In
+our example, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD7</literal> will remain.
                 </para>
                 <para>
-                    Sasa sheria ya tatu itapunguza zaidi orodha kwa 'InawezekanaHapana'. 'AD3'
-inaondolewa kutoka kwenye orodha. 'AD4' haiondolewi, kwa kuwa haikuwa kwenye
-orodha tangu mwanzo. Mwishoni, 'AD2' na 'AD7' zitabaki kama Maongezi ya
-Shughuli yanayowezekana ambayo mtumiaji anaweza kutumia.
+                    Now the third rule will further reduce the list by
+<literal>PossibleNot</literal>.  <literal>AD3</literal> is removed from the
+list. <literal>AD4</literal> is not removed, since it was not on the list in
+the first place. At the end, <literal>AD2</literal> and
+<literal>AD7</literal> remain as possible Activity Dialogs that the user can
+utilize.
                 </para>
                 <para>
-                    It is also possible to limit the processes that can be displayed in the "New
-process ticket" screen. The functionality is similar to limiting the
-Activity Dialogs with one exception: The ACLs could only be based on Users.
+                    It is also possible to limit the processes that can be displayed in the
+<literal>New process ticket</literal> screen. The functionality is similar
+to limiting the Activity Dialogs with one exception: The ACLs could only be
+based on Users.
                 </para>
                 <para>Ona mifano chini:</para>
                 <para>
@@ -3654,6 +3686,34 @@ $Self->{TicketAcl}->{'202-ACL-Process'} = {
                     </screen>
                 </para>
             </section>
+        </section>
+    </section>
+    <section>
+        <title>Import ready-to-run process</title>
+
+        <section>
+            <title>Agiza</title>
+            <para>
+                On the <emphasis>AdminProcessManagement</emphasis> screen you can find an
+<emphasis>Ready-to-run Processes</emphasis> widget, where you can find best
+practice ready-to-run processes. Currently, there is only an
+<emphasis>Application for leave</emphasis> process available, but you can
+find additional ready-to-run processes in the <emphasis role="bold">OTRS
+Business Solution™</emphasis>.
+
+            </para>
+            <para>
+                <figure>
+                    <title>Import Ready-to-run Processes widget</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-process-widget.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Select process from the drop-down menu and click on the <emphasis>Import
+ready-to-run process</emphasis> button. After the process is imported, don't
+forget to deploy changes.
+            </para>
         </section>
     </section>
 </section>

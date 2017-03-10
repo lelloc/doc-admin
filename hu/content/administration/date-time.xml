@@ -6,7 +6,7 @@
 <title>Date and Time Related Functions</title>
 
 <section id="date-time-settings">
-<title>Kuseti masaa, sikuku na majira ya biashara</title>
+<title>Nyitvatartási idők, munkaszüneti napok és időzónák beállítása</title>
 
 <para>
 Some functions in OTRS, like escalations and <link
@@ -55,7 +55,7 @@ zone in their preferences.
 </section>
 
 <section id="TimeWorkingHours">
-<title>Masaa ya Biashara</title>
+<title>Nyitvatartási idők</title>
 
 <para>
 Set up the working hours for your system in SysConfig <link
@@ -66,14 +66,15 @@ handle a granularity of one hour. Checking the marks in the boxes 8, 9, 10
 </para>
 
 <para>
-Katika masaa ya biashara tu ndio tiketi zinaweza kupanda, taarifa za tiketi
-zilizopandishwa na tiketi zinazosubiri zinatumwa, na tiketi zinafunguliwa.
+Csak nyitvatartási idő alatt eszkalálódhatnak jegyek, csak ekkor küldhetők
+értesítések az eszkalált és függőben lévő jegyekhez, és csak ekkor oldhatók
+fel jegyek.
 </para>
 </section>
 
 
 <section id="TimeVacationDays">
-<title>Fixed Date Holidays</title>
+<title>Rögzített dátumú munkaszüneti napok</title>
 
 <para>
 Holidays that are on a fixed date every year, such as New Year's Day or the
@@ -83,21 +84,21 @@ or in the corresponding section for the calendars 1-9.
 </para>
 
 <para>
-Tiketi hazitapandishwa wala kufunguliwa katika siku zilizofafanuliwa kama
-MudaSikuZaSikukuu.
+A jegyek nem lesznek sem eszkalálva, sem feloldva a TimeVacationDays
+beállításban meghatározott dátumokon.
 </para>
 
 <note>
 <para>
-Kwa chaguo-msingi OTRS inasafirishwa na sikukuu za
-<emphasis>German</emphasis> zimesakinishwa.
+Alapértelmezetten az OTRS a <emphasis>német</emphasis> munkaszüneti napokkal
+telepítve érkezik.
 </para>
 </note>
 
 </section>
 
 <section id="TimeVacationDaysOneTime">
-<title>Floating Holidays</title>
+<title>Mozgó munkaszüneti napok</title>
 
 <para>
 Holidays such as Easter that do not have a yearly fixed date but instead
@@ -106,15 +107,16 @@ linkend="ConfigReference_Setting_TimeVacationDaysOneTime">TimeVacationDaysOneTim
 </para>
 
 <para>
-Tiketi hazitapandishwa na hazitafunguliwa  katika tarehe zilizofafanuliwa
-katika MudaSikuZaSikukuuMaraMoja
+A jegyek nem lesznek eszkalálva és nem lesznek feloldva a
+TimeVacationDaysOneTime beállításban meghatározott dátumokon.
 </para>
 
 <note>
 <para>
-OTRS haisafirishwi na sikukuu yoyote ya Wakati-Mmoja ikiwa
-imesakinishwa. Hii ina maanisha unatakiwa kuongeza sikukuu, kama Pasaka au
-Sikuku ya Shukrani, kwenye mfumo wakati wa kusanidi OTRS.
+Az OTRS nem szállít semmilyen előre telepített egyszeri munkaszüneti napot
+sem. Ez azt jelenti, hogy hozzá kell adnia a rendszerhez az ilyen
+munkaszüneti napokat - mint például a húsvétot vagy a pünkösdöt - az OTRS
+beállításakor.
 </para>
 </note>
 
@@ -123,73 +125,75 @@ Sikuku ya Shukrani, kwenye mfumo wakati wa kusanidi OTRS.
 </section>
 
 <section id="unlock-tickets">
-<title>Ufunguaji Otomatiki</title>
+<title>Automatizált feloldás</title>
 
 <para>
-Tiketi zilizofungwa zinaweza kufunguliwa kiotomatiki na mfumo. Hiki
-kipengele kinaweza kuwa cha muhimu, kwa mfano, wakala amefunga tiketi ambazo
-zinatakiwa kuchakatishwa, lakini hawezi kuzifanyia kazi kwa sababu fulani,
-tuseme yuko nje ya ofisi kwa dharura. Kipengele otomatiki cha kufungua
-kinafungua tiketi baada ya muda fulani kuhakikisha hakuna tiketi
-zilizofungwa zitakazosahaulika, hivyo kuruhusu mawakala wengine
-kuzichakatisha.
+A zárolt jegyeket automatikusan fel tudja oldani a rendszer. Ez a
+szolgáltatás akkor lehet hasznos, ha például egy ügyintéző olyan jegyeket
+zárolt, amelyeket fel kellene dolgozni, de valamilyen okból nem dolgozik
+velük, mondjuk mert irodán kívül van egy vészhelyzetben. Az automatizált
+feloldási szolgáltatás egy megadott idő után feloldja a jegyeket annak
+biztosítása érdekében, hogy a zárolt jegyek ne legyenek elfelejtve, ezáltal
+lehetővé téve a többi ügyintézőnek azok feldolgozását.
 </para>
 
 <para>
-The amount of time before a ticket is unlocked can be specified in the <link
-linkend="adminarea-queue">queue settings</link> for every queue. The command
-<filename>bin/otrs.Console.pl Maint::Ticket::Unlock</filename>, which is
-executed periodically as a cron job, performs the automated unlocking of
-tickets.
+Egy jegy feloldása előtti időmennyiség a <link
+linkend="adminarea-queue">várólista beállításaiban</link> adható meg minden
+egyes várólistánál. A <filename>bin/otrs.Console.pl
+Maint::Ticket::Unlock</filename> parancs végzi el a jegyek automatizált
+feloldását, amely időszakosan egy cron-feladatként kerül végrehajtásra.
 </para>
 
 <para>
-Taarifa kuhusu tiketi zilizofunguliwa zinatumwa nje kwa wale mawakala wenye
-foleni zilizosetiwa tiketi zilizofunguliwa kwenye 'Foleni zangu', na wame
-amilisha taarifa kwenye tiketi zilizofunguliwa katika <link
-linkend="user-preferences">mapendeleo</link> yao binafsi.
+A feloldott jegyekről csak azoknak az ügyintézőknek lesznek értesítések
+kiküldve, akiknek a „Saját várólistáiba” be van állítva a feloldott
+jegyekkel rendelkező várólista, és akik bekapcsolták a feloldott jegyekről
+szóló értesítést a személyes <link
+linkend="user-preferences">beállításaikban</link>.
 </para>
 
 <para>
-Tiketi zitafunguliwa kama masharti yote yafuatayo yamefikiwa:
+A jegyek akkor lesznek feloldva, ha a következő feltételek mindegyike
+teljesül:
 </para>
 
 <itemizedlist>
 <listitem>
 <para>
-Kuna <emphasis>muda wa mwisho wa kufungua</emphasis> umefafanuliwa kwenye
-foleni ambayo tiketi imo.
+Meg van határozva egy <emphasis>feloldási időkorlát</emphasis> annál a
+várólistánál, amelyben a jegy található.
 </para>
 </listitem>
 <listitem>
 <para>
-Tiketi imesetiwa  kuwa <emphasis>imefungwa</emphasis>.
+A jegy <emphasis>zároltra</emphasis> van állítva.
 </para>
 </listitem>
 <listitem>
 <para>
-Hali ya tiketi ni <emphasis>wazi</emphasis>.
+A jegy állapota <emphasis>nyitott</emphasis>.
 </para>
 </listitem>
 </itemizedlist>
 
 <para>
-Muda wa kufungua utasetiwa upya kama wakala akiongeza makala mpya ya nje
-kwenye tiketi. Inaweza kuwa ya aina yoyote kati ya zifuatazo:
-<emphasis>barua pepe-nje</emphasis>, <emphasis>simu</emphasis>,
-<emphasis>faksi</emphasis>, <emphasis>sms</emphasis>, au
-<emphasis>notisi-nje</emphasis>.
+A feloldási időzítő akkor lesz visszaállítva, ha egy ügyintéző egy új külső
+bejegyzést ad hozzá a jegyhez. Ez a következő típusok bármelyike lehet:
+<emphasis>email-external</emphasis>, <emphasis>phone</emphasis>,
+<emphasis>fax</emphasis>, <emphasis>sms</emphasis> vagy
+<emphasis>note-external</emphasis>.
 </para>
 
 <para>
-Pia, kama makala ya mwisho katika tiketi imetengenezwa na wakala, na mteja
-akaongeza nyingine, aidha kwa kupitia majibu ya tovuti au barua pepe, muda
-wa kufungua utasetiwa upya.
+Ha a jegyben lévő utolsó bejegyzést egy ügyintéző hozta létre, és egy ügyfél
+egy másikat ad hozzá vagy a weben keresztül, vagy egy e-mailre történő
+válaszként, akkor is vissza lesz állítva a feloldási időzítő.
 </para>
 
 <para>
-Tukio la mwisho ambalo lita seti upya muda wa kufungua ni pale tiketi
-imegawiwa kwa wakala mwingine.
+Az utolsó olyan esemény, amely vissza fogja állítani a feloldási időzítőt,
+akkor lesz, amikor a jegy egy másik ügyintézőhöz kerül hozzárendelésre.
 </para>
 
 </section>

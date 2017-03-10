@@ -94,21 +94,20 @@ kujali mipangilio ya mchaguo linaloaminiwa.
 </para>
 
 <para>
-Usambazaji wa ujumbe unaoingia unaweza kudhibitiwa kama inahitajika kupangwa
-kwa foleni au kwa maudhui ya sehemu "Kwa:". Kwa sehemu ya kutuma, kama
-"Utumaji kwa foleni iliyochaguliwa" imechaguliwa, ujumbe unaoingia utapangwa
-kwenye foleni maalumu. Anuani ambako barua ilitumwa inapuuzwa kwa sasa. Kama
-"Utumaji kwa barua pepe sehemu Kwa: "  imechaguliwa, mfumo unakagua kama
-foleni imeunganishwa na anuani ya kwenye  sehemu Kwa: ya barua
-inayoingia. Unaweza kuunganisha anuani kwenye foleni katika kifungu cha
-<link linkend="adminarea-emailaddresses">Usimamizi wa anuani ya barua
-pepe</link> cha ukurasa wa Msimamizi. Kama anuani ya sehemu Kwa:
-imeunganishwa na foleni, ujumbe mpya utapangwa kwenye foleni
-zilizounganishwa. Kama hakuna kiungo kilichopatikana kati ya anuani kwenye
-sehemu Kwa: na foleni yoyote, basi ujumbe utaingia kwenye foleni "Mbichi"
-katika mfumo, ambayo ni <link
-linkend="ConfigReference_Ticket:Core::PostMaster:PostmasterDefaultQueue">FoleniChaguo-msingiYaMkuuwaposta
-</link> baada ya usakinishaji wa kawaida.
+The distribution of incoming messages can be controlled if they need to be
+sorted by queue or by the content of the "To:" field. For the Dispatching
+field, if "Dispatching by selected queue" is selected, all incoming messages
+will be sorted into the specified queue. The address where the mail was sent
+to is disregarded in this case. If "Dispatching by email To: field" is
+selected, the system checks if a queue is linked with the address in the To:
+field of the incoming mail. You can link an address to a queue in the <link
+linkend="adminarea-emailaddresses">E-mail address management</link> section
+of the Admin page. If the address in the To: field is linked with a queue,
+the new message will be sorted into the linked queue. If no link is found
+between the address in the To: field and any queue, then the message flows
+into the "Raw" queue in the system, which is the <link
+linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
+after a default installation.
 </para>
 
 <para>
@@ -475,6 +474,34 @@ mfumo na inabidi liwe halali).
     <listitem>
         <para>AinaYaMtumaji</para>
         <para>Hii inafafanua aina ya mtumaji wa makala zilizotengenezwa katika OTRS.</para>
+    </listitem>
+</itemizedlist>
+
+<para>
+    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
+module that is capable to decrypt an encrypted incoming email message
+(S/MIME or PGP) placing the unencrypted message body in the email header
+X-OTRS-BodyDecrypted to be processed later.  Additionally it can also update
+the email body to the unencrypted version.
+</para>
+<para>
+    In order to decrypt the emails the system needs to be properly configured
+for S/MIME and/or PGP and have the needed private keys to decrypt the
+information.
+</para>
+<para>
+    This module is disabled by default and it can be configured directly in the
+System Configuration in the Admin Panel.
+</para>
+<itemizedlist mark="round">
+    <para><emphasis>Machaguo ya Usanidi</emphasis></para>
+    <listitem>
+        <para>StoreDecryptedBody</para>
+        <para>
+            Set this option to "1" to update the email body to the unencrypted version
+if the decryption was successful. Be aware that using this the emails will
+be stored unencrypted and there is no possible way to revert this action.
+        </para>
     </listitem>
 </itemizedlist>
 

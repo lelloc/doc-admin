@@ -3,20 +3,20 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="upgrading">
-    <title>Upgrading OTRS from 4 to 5</title>
+    <title>Upgrading OTRS from 5 to 6</title>
 
     <para>
-    These instructions are for people upgrading OTRS from <emphasis>4</emphasis>
-to <emphasis>5</emphasis> or from a <emphasis>5</emphasis> to a later
+    These instructions are for people upgrading OTRS from <emphasis>5</emphasis>
+to <emphasis>6</emphasis> or from a <emphasis>5</emphasis> to a later
 patchlevel release <emphasis>5</emphasis> and applies both for RPM and
 source code (tarball) upgrades.
     </para>
 
     <para>
     If you are running a lower version of OTRS you have to follow the upgrade
-path to 4 first
-(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4)! You need to
-perform a full upgrade to every version in between, including database
+path to 5 first
+(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4->5)! You need
+to perform a full upgrade to every version in between, including database
 changes and the upgrading Perl script.
     </para>
 
@@ -28,10 +28,17 @@ url="http://bugs.otrs.org/show_bug.cgi?id=6798">http://bugs.otrs.org/show_bug.cg
 
     <para>
     Within a single minor version you can skip patch level releases if you want
-to upgrade. For instance you can upgrade directly from OTRS 5 patchlevel 2
-to version 5 patchlevel 6. If you need to do such a "patch level upgrade",
-you should skip steps 6, 10, 11, 14, 17 and 18.
+to upgrade. For instance you can upgrade directly from OTRS 6 patchlevel 2
+to version 6 patchlevel 6. If you need to do such a "patch level upgrade",
+you should skip steps 6 and XXXXX.
     </para>
+
+    <warning>
+        <para>
+            Please note that you need at least Perl 5.16 to run OTRS 6. If your system
+has an older Perl version, you need to update it first before updating OTRS.
+        </para>
+    </warning>
 
     <para>
     Es wird empfohlen zuerst ein Test-Update auf einem seperaten Testsystem
@@ -145,6 +152,21 @@ restore the <filename>article</filename> folder to
 <filename>/opt/otrs/var/</filename> or the folder specified in the
 SysConfig.
                 </para>
+            </section>
+
+
+            <section role="NotInToc">
+                <title>Restore already installed default statistics</title>
+
+                <para>
+                    If you have additional packages with default statistics you have to restore
+the stats xml files with the suffix <filename>*.installed</filename> to
+<filename>/opt/otrs/var/stats</filename>.
+                </para>
+                <screen><![CDATA[
+shell> cd OTRS-BACKUP/var/stats
+shell> cp *.installed /opt/otrs/var/stats
+                ]]></screen>
             </section>
 
             <section role="NotInToc">
@@ -271,7 +293,7 @@ please run it to check for possible issues.
                 <para>
                     <screen><![CDATA[
 shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-5.mysql.sql | mysql -p -f -u root otrs
+shell> cat scripts/DBUpdate-to-6.mysql.sql | mysql -p -f -u root otrs
 shell> bin/otrs.Console.pl Maint::Database::Check
                     ]]></screen>
                 </para>
@@ -283,7 +305,7 @@ shell> bin/otrs.Console.pl Maint::Database::Check
                 <para>
                 <screen><![CDATA[
 shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-5.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
+shell> cat scripts/DBUpdate-to-6.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
                 ]]></screen>
                 </para>
             </section>
@@ -306,11 +328,12 @@ shell> scripts/DBUpdate-to-6.pl
             <para>
                 The script will ask you to set a time zone for OTRS. It is very important
 that you set the correct time zone (and keep it), otherwise date and time of
-data added after the upgrade (tickets, articles, etc.) wil be stored with a
+data added after the upgrade (tickets, articles, etc.) will be stored with a
 different time zone than your existing data, leading to inconsistent data.
 The script will suggest possible time zones based on your previous
 configuration. In case you are not sure or made a mistake, you can change
-the OTRS time zone after the upgrade via SysConfig setting OTRSTimeZone.
+the OTRS time zone after the upgrade via SysConfig setting
+<literal>OTRSTimeZone</literal>.
             </para>
 
             <para>
@@ -362,68 +385,32 @@ shell> /etc/init.d/cron start
 
         <note>
             <para>
-                The OTRS packages of 4 are NOT compatible with OTRS 5, so you have to
+                The OTRS packages of 5 are NOT compatible with OTRS 6, so you have to
 perform a package upgrade!
             </para>
         </note>
+
+    <!--
         <para>
-            Die folgenden Pakete werden nach einem Upgrade automatisch deinstalliert
-(wenn sie zuvor installiert waren):
+
+            The following packages are automatically uninstalled after the upgrade process
+            (if they where installed before):
         </para>
         <para>
             <itemizedlist>
                 <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
             </itemizedlist>
         </para>
-    </section>
+        -->
+</section>
 
     <section role="NotInToc">
-        <title>Step 10: Configure NodeIDs (only for multi-frontend clustered setups)</title>
-
-        <note>
-            <para>
-                This step is only needed if you have a clustered setup with several frontend
-machines.
-            </para>
-        </note>
-        <para>
-            From OTRS 5 on, every frontend server needs to have its own unique
-<literal>NodeID</literal>.  This defaults to <literal>1</literal> and thus
-does not need to be configured for single-frontend setups. If you have more
-than one machine, each machine needs to have this value set to a unique
-value between <literal>1</literal> and <literal>999</literal>. This
-configuration needs to be done in the file
-<filename>Kernel/Config.pm</filename>:
-        </para>
-        <para>
-            <screen><![CDATA[
-$Self->{'NodeID'} =  '2';   # assign a unique value for every frontend server
-            ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 11: Check follow-up detection configuration</title>
+        <title>Step 10: Start the OTRS Daemon</title>
 
         <para>
-            The follow-up detection settings were reorganized. Now OTRS searches by
-default in email subject and references to detect follow-ups. Please check
-in AdminSysConfig <literal>Ticket</literal> -&gt;
-<literal>Core::PostMaster</literal> if you need to make any changes to the
-follow-up detection configuration (for example to search in body,
-attachments or raw email content).
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 12: Start the OTRS Daemon</title>
-
-        <para>
-            The new OTRS daemon is responsible for handling any asynchronous and
-recurring tasks in OTRS.  What has been in cron file definitions previously
-is now handled by the OTRS daemon, which is now required to operate
-OTRS. The daemon also handles all GenericAgent jobs and must be started from
-the <literal>otrs</literal> user.
+            The OTRS daemon is responsible for handling any asynchronous and recurring
+tasks in OTRS.  The daemon also handles all GenericAgent jobs and must be
+started from the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -434,7 +421,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 13: Update and activate cron jobs</title>
+        <title>Step 11: Update and activate cron jobs</title>
 
         <para>
             There are two default OTRS cron files in
@@ -460,45 +447,10 @@ shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
-        <para>
-            Please note that if you had any custom cron jobs, you should consider moving
-them to SysConfig (<literal>Daemon</literal> -&gt;
-<literal>Daemon::SchedulerCronTaskManager::Task</literal>)  to have them
-executed by the OTRS daemon as well.  You might also need to adapt your
-custom scripts, because now most OTRS commands are managed by
-<filename>bin/otrs.Console.pl</filename> instead of single scripts.
-        </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 14: Review your ticket notifications</title>
-        <para>
-            With OTRS 5 ticket notifications are configured differently than in previous
-versions.  They are now part of the "Event Notifications" that were
-previously available as well (now called just "Ticket Notifications"). Your
-existing ticket notifications have been migrated into the list of ticket
-notifications, but deactivated. You have also received the new default
-ticket notifications, active by default.
-        </para>
-        <para>
-            In case you did not modify the old ticket notifications you don't have to do
-anything. If you have made local modifications or translations, you have two
-choices: a) you can migrate your modifications to the new ticket
-notifications (recommended) or b) you can deactivate the new notifications
-and activate the old notifications again.
-        </para>
-        <para>
-            Please also review the escalation notification recipient settings and see if
-they match with your expectations (agents who have the ticket in one of
-their custom queues vs. all agents with read permissions).  This was
-configured via a setting in the file
-<filename>Kernel/Config/GenericAgent.pm</filename> (now obsolete) previously
-and can now be controlled via the GUI for each notification separately.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 15: Update system registration (optional)</title>
+        <title>Step 12: Update system registration (optional)</title>
         <para>
             If the system is already registered with OTRS Group, it is strongly
 recommended to update the registration information at this time. This will
@@ -523,82 +475,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 16: Migrate custom Perl based GenericAgent jobs (optional)</title>
-        <para>
-            This is only relevant if you had any custom GenericAgent jobs in Perl OTRS 4
-configuration files such as
-<filename>Kernel/Config/GenericAgent.pm</filename> that cannot be handled
-with the regular ticket notifications.  Such jobs now need to be registered
-as OTRS Daemon cron tasks in the SysConfig (<literal>Daemon</literal> -&gt;
-<literal>Daemon::SchedulerCronTaskManager::Task</literal>), in order to be
-executed on a regular basis.
-        </para>
-        <para>
-            There are 5 settings in the SysConfig prepared for this purpose
-(<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile1</literal>
-to
-<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile5</literal>).
-If more settings are needed they can be added in a custom SysConfig setting
-file.
-        </para>
-        <para>
-            Please replace "&lt;ModuleName&gt;" with the file that contains the custom
-GenericAgent jobs configuration,
-e.g. <literal>Kernel::Config::GenericAgent</literal> for the file:
-<filename>Kernel/Config/GenericAgent.pm</filename>, set the schedule to
-match the periodicity as it was executed before, mark the setting as active
-and save the changes.
-        </para>
-        <note>
-            <para>
-                To get more information about other parameters that can be used while
-running the GenericAgent jobs, please execute:
-            </para>
-            <para>
-                <screen><![CDATA[
-shell> bin/otrs.Console.pl Maint::GenericAgent::Run --help
-            ]]></screen>
-            </para>
-        </note>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 17: Setup bash autocompletion (optional)</title>
-        <para>
-            All regular OTRS command line operations now happen via the OTRS Console
-interface <filename>bin/otrs.Console.pl</filename>. This provides an auto
-completion for the bash shell which makes finding the right command and
-options much easier.
-        </para>
-        <para>
-            You can activate the bash autocompletion by installing the package
-<literal>bash-completion</literal>.  It will automatically detect and load
-the file <filename>/opt/otrs/.bash_completion</filename> for the
-<literal>otrs</literal> user.
-        </para>
-        <para>
-            After restarting your shell, you can just type
-<filename>bin/otrs.Console.pl</filename> followed by TAB, and it will list
-all available commands. If you type a few characters of the command name,
-TAB will show all matching commands. After typing a complete command, all
-possible options and arguments will be shown by pressing TAB.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 18: Review ticket action screen configurations (optional)</title>
-        <para>
-            Some ticket action screens like "Note" had default subjects in OTRS 4
-(configurable via SysConfig,
-<literal>Ticket::Frontend::AgentTicketNote###Subject</literal> in this
-case). These default subjects have been removed to reduce the amount of
-potentially redundant/meaningless data. You might want to re-add them if
-they are mandatory for you.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 19: Well done!</title>
+        <title>Step 13: Well done!</title>
         <para></para>
     </section>
 </section>

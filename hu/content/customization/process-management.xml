@@ -2021,19 +2021,19 @@ utat, amelyet egy folyamatjegy megtehet. Példa:
                     </screen>
                 </para>
                 <para>
-                    Ha egy folyamatjegy a „T1” tevékenységben van, akkor három lehetséges útja
-van, hogy eljusson egy másik tevékenységbe. Az „A1”-„A3” átmenetekben
-feltételek vannak meghatározva, amelyeket egy folyamatjegynek teljesítenie
-kell, hogy átlépjen (továbbítás) egy másik tevékenységbe.
+                    If a process ticket is in Activity <literal>A1</literal>, it has three
+possible ways to get to another Activity. In the Transitions
+<literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
+a process ticket must fulfill to move (transit) to another Activity.
                 </para>
                 <para>
-                    Ha ebben az esetben a folyamatjegy összes értéke és annak dinamikus mezői
-helyesek, amelyek szükségesek a „A2” átmenethez, akkor a jegy át lesz
-léptetve a „T1” tevékenységből a „T3” tevékenységbe. Miután egy tevékenység
-párbeszédet elküldtek, vagy bármilyen más változtatást hajtottak végre a
-jegyen, akkor ellenőrizve lesznek a lehetséges átmenetek a jelenlegi
-tevékenységből. Ha több átmenet is lehetséges, akkor az első lesz használva
-(az átmenet-azonosítók számszerű rendezése alapján).
+                    If in this case all the values of the process ticket and its dynamic fields
+that are needed for the Transition <literal>T2</literal> are correct, the
+ticket will be moved from Activity <literal>A1</literal> to
+<literal>A3</literal>. After an ActivityDialog is submitted, or any other
+change is made to a ticket, it will be checked for possible Transitions from
+the current Activity. If multiple Transitions are possible, the first one
+will be used (based on numerical sorting of the TransitionIDs).
                 </para>
                 <para>
                     Lehetséges továbbá átmenet műveleteket rendelni az átmenetekhez az útvonal
@@ -2047,10 +2047,10 @@ látható. A részletekről később fogunk beszélni.
         <section>
             <title>Tevékenység</title>
             <para>
-                Egy tevékenység egy vagy több tevékenység párbeszédet tartalmaz, és egy
-„lépést” modellez a folyamatban. A jelenlegi tevékenység összes tevékenység
-párbeszéde meg lesz jelenítve a jegynagyításban, és addig használható, amíg
-egy átmenet feltételei nincsenek teljesítve.
+                An Activity contains one or more Activity Dialogs and models a
+<literal>step</literal> in the process. All Activity Dialogs of the current
+Activity are displayed in the ticket zoom and can be used until the
+conditions of a Transition are fulfilled.
             </para>
             <section>
             <title>Tevékenységbeállítás</title>
@@ -2121,11 +2121,11 @@ megváltoztatta.
             <section>
                 <title>Tevékenység párbeszéd (ActivityDialog)</title>
                 <para>
-                    A tevékenység párbeszéd azon tevékenység párbeszédek listáját tartalmazza,
-amelyek ebben a tevékenységben elérhetők. A jelenlegi tevékenység összes
-tevékenység párbeszéde meg fog jelenni a jegynagyításban. A sorrendjüket a
-beállításokban lévő sorrend állítja be. Itt a „TP5” a „TP6” és a „TP1” előtt
-jelenik meg.
+                    Activity Dialog contains the list of Activity Dialogs which are available in
+this Activity. All Activity Dialogs of the current Activity are displayed in
+the ticket zoom. Their order is set by the order in the configuration, here
+<literal>AD5</literal> is shown before <literal>AD6</literal> and
+<literal>AD1</literal>.
                 </para>
             </section>
         </section>
@@ -2286,11 +2286,11 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    A „Bejegyzés” (Article) mező egy speciális eset. Ha jelen van a „Mezők”
-(Fields) beállításban, akkor a tevékenység párbeszéd egy teljes RichText
-szerkesztőt fog tartalmazni tárgymezővel és melléklet kezeléssel. A beírt
-szöveg ezután bejegyzésként lesz hozzáadva a jegyhez, és el lesz küldve
-e-mailben. Nézzünk egy bejegyzésmező beállítás példát:
+                    The field <literal>Article</literal> is a special case. If it is present in
+a <literal>Fields</literal> configuration, the Activity Dialog will contain
+a complete Richtext editor with subject field and attachment handling. The
+entered text will then be added to the ticket as an article and sent by
+email. Let's see an example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2331,20 +2331,20 @@ mezőt.
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    „0”: a mező láthatatlan. Ez akkor hasznos, ha a mező értékeit automatikusan
-kell kitölteni. A beállított alapértelmezett érték (DefaultValue) lesz
-eltárolva ebben az esetben.
+                                    <literal>0</literal>: field is invisible. This can be helpful if field
+values should automatically be set. The configured
+<literal>DefaultValue</literal> will be stored in this case.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „1”: a mező látható, de nem kötelező.
+                                    <literal>1</literal>: field is visible, but optional.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „2”: a mező látható és kötelező. A következő mezők csak láthatatlanok vagy
-kötelezőek lehetnek:
+                                    <literal>2</literal>: field is visible and mandatory. The following fields
+can only be invisible or mandatory:
                                 </para>
                                 <para>
                                     <screen>
@@ -2372,10 +2372,10 @@ a felhasználó elküldi a tevékenység párbeszédet.
                 <section>
                     <title>Alapértelmezett érték (DefaultValue)</title>
                     <para>
-                        Az „ID”-val rendelkező mezők (úgymint QueueID, OwnerID) az érték
-adatbázis-azonosítójára hivatkoznak. Az egyéb „ID” nélküli mezőknél (úgymint
-Queue, Owner) az alapértelmezett értéknek magát az értéket kell
-tartalmaznia. Példa:
+                        For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers
+to the database ID of the value. For other fields without
+<literal>ID</literal> (like Queue, Owner), the
+<literal>DefaultValue</literal> must contain the value itself. Example:
                     </para>
                     <para>
                         <screen>
@@ -2538,19 +2538,18 @@ kapcsolódnak egymáshoz. Lehetséges értékek:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    „és” („and”): Ez az alapértelmezett. Az összes feltételek teljesülnie kell
-az átmenetnél az életbe lépéshez.
+                                    <literal>and</literal>: This is the default. All conditions must be met for
+the transition to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „vagy” („or”): Legalább egy feltételnek illeszkednie kell.
+                                    <literal>or</literal>: At least one condition must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „kizáró vagy” („xor”): Pontosan egy feltételnek kell illeszkednie, nem
-többnek.
+                                    <literal>xor</literal>: Exactly one condition must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2571,19 +2570,18 @@ kapcsolódnak egymáshoz. Lehetséges értékek:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    „és” („and”): Ez az alapértelmezett. Az összes mezőpróbának illeszkednie
-kell ennél a feltételnél az illesztéshez.
+                                    <literal>and</literal>: This is the default. All field tests must match for
+this condition to match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „vagy” („or”): Legalább egy mezőpróbának illeszkednie kell.
+                                    <literal>or</literal>: At least one field test must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „kizáró vagy” („xor”): Pontosan egy mezőpróbának kell illeszkednie, nem
-többnek.
+                                    <literal>xor</literal>: Exactly one field test must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2652,37 +2650,36 @@ SLA) az aktuális érték lesz használva a próbánál.
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    „Szöveg” („String”): Összehasonlítja a mező értékét az „Illesztésben”
-(„Match”) megadott szöveggel. Akkor illeszkedik, ha pontosan ugyanazok.
+                                    <literal>String</literal>: Compares the field value with the string
+specified in <literal>Match</literal>. Matches if they are exactly the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „Kivonat” („Hash”): Összehasonlítja a mező értékét (hash) az „Illesztésben”
-(„Match”) megadott kivonattal. Minden kivonatértéknek meg kell egyeznie.
+                                    <literal>Hash</literal>: Compares the field value (hash) with the hash
+specified in <literal>Match</literal>. All hash values must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „Tömb” („Array”): Összehasonlítja a mező értékét (array) az „Illesztésben”
-(„Match”) megadott tömbbel. Mindkét listának meg kell egyeznie.
+                                    <literal>Array</literal>: Compares the field value (array) with the array
+specified in <literal>Match</literal>. Both lists must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „Reguláris kifejezés” („Regex”): A mezőérték egy reguláris kifejezéssel is
-ellenőrizhető. Fontos, hogy az „Illesztés” („Match”) alapfeltételként a
-következőt tartalmazza: <emphasis>qr{}xms</emphasis>. A zárójelek között
-jegyezhető be az aktuális reguláris kifejezés.
+                                    <literal>Regex</literal>: The field value can be tested with a regular
+expression. It is important that <literal>Match</literal> contains
+<emphasis>qr{}xms</emphasis> as a base condition. Between the braces the
+actual regular expression can be noted.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    „Modul” („Module”): Lehetővé teszi egy Perl-modul használatát a feltétel
-ellenőrzéséhez. Ha a visszatérési értéke 1, akkor az ellenőrzés pozitív
-volt. Egy példamodul megtalálható a
-<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>
-fájlban.
+                                    <literal>Module</literal>: Allows you to use a perl module for condition
+checking. If it returns 1, the check was positive. You can find an example
+module in
+<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2745,12 +2742,12 @@ használatával. Az átmenet művelet a megadott felhasználó-azonosítóval
 rendelkező felhasználót megszemélyesítve lesz végrehajtva.
                 </para>
                 <para>
-                    A felhasználó-azonosító (UserID) használata egy átmenet művelet „Beállítás”
-(„Config”) paraméterén belül minden átmenet művelet által elfogadott (az
-OTRS 3.2.4 verziója óta). Ebben a példában ez különösen fontos lehet, ha az
-átmenetet aktiváló felhasználónak nincs jogosultsága a jegy áthelyezéséhez a
-„Szemét” várólistába, miközben az 123 felhasználó-azonosítóval rendelkező
-felhasználónak van.
+                    The use of UserID inside the <literal>Config</literal> parameter of a
+Transition Action is accepted by all Transition Actions (since OTRS
+3.2.4). In this example it could be particularly important if the user that
+triggers the Transition does not have permissions to move the ticket to the
+queue <literal>Junk</literal>, while the user with the UserID 123 might
+have.
                 </para>
             </section>
             <section>
@@ -2780,11 +2777,11 @@ felhasználónak van.
                     </screen>
                 </para>
                 <para>
-                    Itt ugyanazt a modult használják egy folyamatjegy áthelyezéséhez a „Nyers”
-várólistába, és egy másik alkalommal a „Szemét” várólistába való
-áthelyezéshez. Az az átmenet művelet, amelyet egy adott átmenetnél használni
-kell, a folyamat beállításainak „Útvonal” („Path”) beállításában van
-meghatározva.
+                    Here the same module is used to move a process ticket into the
+<literal>Raw</literal> queue, and another time to move it into the junk
+queue. The Transition Action which must be used for a particular Transition
+is determined from the <literal>Path</literal> setting of the Process
+configuration.
                 </para>
             </section>
             <section id="available-transition-actions">
@@ -2816,12 +2813,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „MesterAlarendelt” és a „Jovahagyva” dinamikus mezőnév példaként vannak
-megadva. A mezők értékei („Mester” és „1”) lesznek beállítva ezzel az
-átmenet művelettel.
+                        <literal>MasterSlave</literal> and <literal>Approved</literal> are given as
+examples of DynamicField names.  The values of the fields
+(<literal>Master</literal> and <literal>1</literal>) will be set by this
+TransitionAction.
                     </para>
                 </section>
 
@@ -2870,33 +2869,34 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Name” adja meg a beállított átmenet művelet nevét. Szabadon
-megválasztható, de utalnia kell a beállított művelet céljára.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        Az „ArticleType” határozza meg a létrehozandó bejegyzés típusát. Lehetséges
-értékek: phone, fax, sms, webrequest, note-internal, note-external és
-note-report.
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
-                        A „SenderType” határozza meg a bejegyzés küldőjének típusát. Lehetséges
-értékek: agent, system, customer.
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
                     </para>
                     <para>
-                        A „ContentType” határozza meg a bejegyzés tartalomtípusát. Lehetséges
-értékek: „text/plain; charset=ISO-8859-2” vagy bármilyen egyéb
-karakterkódolás és MIME-típus.
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        A „Subject” határozza meg a bejegyzés címét. Kötelező.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        A „Body” határozza meg a bejegyzés tartalmát. Kötelező.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        A „HistoryType” határozza meg az előzménybejegyzés típusát. Lehetséges
-értékek: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
-EmailCustomer, EscalationResponseTimeNotifyBefore,
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
 EscalationResponseTimeStart, EscalationResponseTimeStop,
 EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
 EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
@@ -2910,28 +2910,31 @@ TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
 TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        A „HistoryComment” határozza meg az előzménybejegyzés tartalmát.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        A „From”, a „To”, a „Cc” és a „ReplyTo” e-mail címeket fogad a fent megadott
-jelölés szerint.
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        Az „InReplyTo” és a „References” e-mail üzenet-azonosítókat tartalmaznak.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        „NoAgentNotify” - ha 1-re van állítva, akkor az ügyintéző e-mail értesítései
-nem lesznek kiküldve.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        Az „AutoResponseType” a következő értékeket fogadhatja: auto follow up, auto
-reject, auto remove, auto reply, auto reply/new ticket.
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        A „ForceNotificationToUserID”, az „ExcludeNotificationToUserID” és az
-„ExcludeMuteNotificationToUserID” olyan felhasználó-azonosítók listáját
-fogadhatja, amelyek mindig értesítettek, nem értesítettek vagy
-értesítettként felsoroltak, de valójában nincs értesítési e-mail kiküldve.
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                 </section>
                 <section>
@@ -3009,91 +3012,92 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Name” adja meg a beállított átmenet művelet nevét. Szabadon
-megválasztható, de utalnia kell a beállított művelet céljára.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        A „Title” a jegy címe.
+                        <literal>Title</literal> The ticket title.
                     </para>
                     <para>
-                        A „Queue” vagy a „QueueID”  adja meg az új jegyben használandó várólista
-nevét vagy azonosítóját.
+                        <literal>Queue</literal> or <literal>QueueID</literal> specifies the name or
+id of the queue to be used in the new ticket.
                     </para>
                     <para>
-                        A „Lock” vagy a „LockID” állítja be a jegy zárolási állapotát.
+                        <literal>Lock</literal> or <literal>LockID</literal> sets the lock status of
+the ticket.
                     </para>
                     <para>
-                        A „Priority” vagy a „PriorityID” adja meg az új jegyben használandó
-prioritás nevét vagy azonosítóját.
+                        <literal>Priority</literal> or <literal>PriorityID</literal> specifies the
+name or id of the priority to be used in the new ticket.
                     </para>
                     <para>
-                        A „State” vagy a „StateID” adja meg az új jegyben használandó állapot nevét
-vagy azonosítóját.
+                        <literal>State</literal> or <literal>StateID</literal> specifies the name or
+id of the state to be used in the new ticket.
                     </para>
                     <para>
-                        A „CustomerID” az új jegynél beállítandó ügyfél-azonosító.
+                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
                     </para>
                     <para>
-                        A „CustomerUser” annak az ügyfélnek a bejelentkező neve, aki hozzá lesz
-rendelve a jegyben.
+                        <literal>CustomerUser</literal>, the login of the customer that will be
+assigned in the ticket.
                     </para>
                     <para>
-                        Az „Owner” vagy az „OwnerID” határozza meg annak az ügyintézőnek a
-bejelentkezési nevét vagy azonosítóját, aki az új jegy tulajdonosa lesz.
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the
+login or id of the agent that will be the new ticket owner.
                     </para>
                     <para>
-                        A „TN” egy egyéni szám az új jegyhez.
+                        <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
-                        A „Type” vagy a „TypeID” adja meg az új jegyben használandó jegytípus nevét
-vagy azonosítóját.
+                        <literal>Type</literal> or <literal>TypeID</literal> specifies the name or
+id of the ticket type to be used in the new ticket.
                     </para>
                     <para>
-                        A „Service” vagy a „ServiceID” adja meg az új jegyben használandó
-szolgáltatás nevét vagy azonosítóját.
+                        <literal>Service</literal> or <literal>ServiceID</literal> specifies the
+name or id of the service to be used in the new ticket.
                     </para>
                     <para>
-                        Az „SLA” vagy az „SLAID” adja meg az új jegyben használandó SLA nevét vagy
-azonosítóját.
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id
+of the SLA to be used in the new ticket.
                     </para>
                     <para>
-                        A „ResponsibleID” annak az ügyintézőnek az azonosítója, aki az új jegy
-felelőse lesz.
+                        <literal>ResponsibleID</literal>, the ID of the agent that will be the new
+ticket responsible.
                     </para>
                     <para>
-                        A „PendingTime” egy előre meghatározott dátum a jegy függőben lévő időinek
-beállításához, amikor a jegyállapot egy függőben lévő állapottípushoz
-tartozik.
+                        <literal>PendingTime</literal>, a predefined date to set the Ticket Pending
+Times, when the ticket state belongs to a pending state type.
                     </para>
                     <para>
-                        A „PendingTimeDiff” egy dinamikus dátum (másodpercben kifejezve a jelenlegi
-dátumtól/időtől) a jegy függőben lévő időinek beállításához, amikor a
-jegyállapot egy függőben lévő állapottípushoz tartozik.
+                        <literal>PendingTimeDiff</literal>, a dynamically date (expressed in seconds
+from current date/time) to set the Ticket Pending Times, when the ticket
+state belongs to a pending state type.
                     </para>
                     <para>
-                        Az „ArticleType” határozza meg a létrehozandó bejegyzés típusát. Lehetséges
-értékek: phone, fax, sms, webrequest, note-internal, note-external és
-note-report.
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
                         A „SenderType” határozza meg a bejegyzés küldőjének típusát. Lehetséges
 értékek: agent, system, customer.
                     </para>
                     <para>
-                        A „ContentType” határozza meg a bejegyzés tartalomtípusát. Lehetséges
-értékek: „text/plain; charset=ISO-8859-2” vagy bármilyen egyéb
-karakterkódolás és MIME-típus.
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        A „Subject” határozza meg a bejegyzés címét. Kötelező.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        A „Body” határozza meg a bejegyzés tartalmát. Kötelező.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        A „HistoryType” határozza meg az előzménybejegyzés típusát. Lehetséges
-értékek: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate, EmailAgent,
-EmailCustomer, EscalationResponseTimeNotifyBefore,
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
 EscalationResponseTimeStart, EscalationResponseTimeStop,
 EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
 EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
@@ -3107,41 +3111,45 @@ TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
 TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        A „HistoryComment” határozza meg az előzménybejegyzés tartalmát.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        A „From”, a „To”, a „Cc” és a „ReplyTo” e-mail címeket fogad a fent megadott
-jelölés szerint.
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        Az „InReplyTo” és a „References” e-mail üzenet-azonosítókat tartalmaznak.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        „NoAgentNotify” - ha 1-re van állítva, akkor az ügyintéző e-mail értesítései
-nem lesznek kiküldve.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        Az „AutoResponseType” a következő értékeket fogadhatja: auto follow up, auto
-reject, auto remove, auto reply, auto reply/new ticket.
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        A „ForceNotificationToUserID”, az „ExcludeNotificationToUserID” és az
-„ExcludeMuteNotificationToUserID” olyan felhasználó-azonosítók listáját
-fogadhatja, amelyek mindig értesítettek, nem értesítettek vagy
-értesítettként felsoroltak, de valójában nincs értesítési e-mail kiküldve.
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                     <para>
-                        A „TimeUnit” a jelenlegi jegybejegyzésbe fektetett idő másodpercben,
-percben, órában, stb. kifejezve.
+                        <literal>TimeUnit</literal> the time invested in the current ticket article
+expressed in seconds, minutes, hours, etc.
                     </para>
                     <para>
-                        A „DynamicField_NevX” beállítandó az új jegyben, ahol a DynamicField_ egy
-kötelező előtag és a NevX a dinamikus mező neve (jegyszinten, nem bejegyzés
-szinteken).
+                        <literal>DynamicField_NameX</literal> where DynamicField_ is a required
+prefix and NameX is the name of a Dynamic Field to be set in the new ticket
+(on ticket level, not article levels).
                     </para>
                     <para>
-                        A „LinkAs” az új jegy kapcsolatának beállításához való a kezdeményező
-jeggyel az új jegy nézőpontjából, például: Normal, Parent, Child, stb.
+                        <literal>LinkAs</literal> to define the new ticket relation with originator
+ticket, from the new ticket point of view, for example Normal, Parent, Child
+etc.
                     </para>
                 </section>
                 <section>
@@ -3168,13 +3176,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „No” vagy a „CustomerID” állítja be az ügyfél ügyfél-azonosítóját.
+                        <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID
+of the customer.
                     </para>
                     <para>
-                        A „User” vagy a „CustomerUserID” állítja be az ügyfél felhasználónevét.
+                        <literal>User</literal> or <literal>CustomerUserID</literal> set the
+Username of the customer.
                     </para>
                 </section>
 
@@ -3199,13 +3210,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „Lock” határozza meg a folyamatjegy új zárját.
+                        <literal>Lock</literal> defines the new lock of the process ticket.
                     </para>
                     <para>
-                        A „LockID” határozza meg az új zár belső azonosítóját.
+                        <literal>LockID</literal> defines the internal ID of the new lock.
                     </para>
                 </section>
 
@@ -3230,13 +3242,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        Az „Owner” adja meg az új tulajdonos bejelentkezési nevét.
+                        <literal>Owner</literal> specifies the login name of the new owner.
                     </para>
                     <para>
-                        Az „OwnerID” adja meg az új tulajdonos belső azonosítóját.
+                        <literal>OwnerID</literal> specifies the internal ID of the new owner.
                     </para>
                 </section>
 
@@ -3261,13 +3274,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „Queue” adja meg a célvárólista nevét.
+                        <literal>Queue</literal> specifies the name of the target queue.
                     </para>
                     <para>
-                        A „QueueID” adja meg a célvárólista belső azonosítóját.
+                        <literal>QueueID</literal> specifies the internal ID of the target queue.
                     </para>
                 </section>
 
@@ -3292,13 +3306,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „Responsible” adja meg az új felelős bejelentkezési nevét.
+                        <literal>Responsible</literal> specifies the login name of the new
+responsible.
                     </para>
                     <para>
-                        A „ResponsibleID” adja meg az új felelős belső azonosítóját.
+                        <literal>ResponsibleID</literal> specifies the internal ID of the new
+responsible.
                     </para>
                 </section>
 
@@ -3325,15 +3342,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „Service” határozza meg a folyamatjegy új szolgáltatását. A teljes név
-kötelező (például
-NagypapaSzolgaltatas::ApaSzolgaltatas::GyermekSzolgaltatas).
+                        <literal>Service</literal> defines the new service of the process
+ticket. The full name is required
+(e.g. GramdFatherService::FatherService::SonService ).
                     </para>
                     <para>
-                        A „ServiceID” határozza meg az új szolgáltatás belső azonosítóját.
+                        <literal>ServiceID</literal> defines the internal ID of the new service.
                     </para>
                 </section>
 
@@ -3360,13 +3378,15 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        Az „SLA” határozza meg a folyamatjegy új szolgáltatási szint megállapodását.
+                        <literal>SLA</literal> defines the new service level agreement of the
+process ticket.
                     </para>
                     <para>
-                        Az „SLAID” határozza meg az új SLA belső azonosítóját.
+                        <literal>SLAID</literal> defines the internal ID of the new SLA.
                     </para>
                 </section>
 
@@ -3393,20 +3413,20 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „State” határozza meg a folyamatjegy új állapotát.
+                        <literal>State</literal> defines the new state of the process ticket.
                     </para>
                     <para>
-                        A „StateID” határozza meg az új állapot belső azonosítóját.
+                        <literal>StateID</literal> defines the internal ID of the new state.
                     </para>
                     <para>
-                        A „PendingTimeDiff” csak függőben lévő állapotoknál használható,
-meghatározza az időeltérést másodpercben, relatívan (az átmenet művelet
-végrehajtási idejétől relatívan) a beállított jegy várakozó idejétől
-(például a 3600 azt jelenti, hogy a várakozási idő 1 óra, miután az átmenet
-művelet végre lett hajtva).
+                        <literal>PendingTimeDiff</literal> used only for pending type states,
+defines the time difference in seconds relative (relative to the Transition
+Action execution time) to set ticket pending time (e.g. 3600 means that the
+pending time is 1hr after the Transition Action is executed).
                     </para>
                 </section>
 
@@ -3429,10 +3449,11 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „Title” adja meg a jegy új címét.
+                        <literal>Title</literal> specifies the new title of the ticket.
                     </para>
                 </section>
 
@@ -3457,13 +3478,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        A „Név” („Name”) adja meg a beállított átmenet művelet nevét.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        A „Type” adja meg a jegytípus nevét.
+                        <literal>Type</literal> specifies the name of the ticket type.
                     </para>
                     <para>
-                        A „TypeID” adja meg a jegytípus belső azonosítóját.
+                        <literal>TypeID</literal> specifies the internal ID of the ticket type.
                     </para>
                 </section>
             </section>
@@ -3546,22 +3568,23 @@ fogja korlátozni a lehetséges tevékenység párbeszédeket, amelyeket
 felkínálnak a felhasználónak a jegynagyítás maszkban.
                 </para>
                 <para>
-                    A „Possible” sorolja fel azokat a tevékenység párbeszédeket, amelyek
-megengedettek. A fenti beállítás a beállított tevékenység párbeszédek
-listájának csak a „TP1” és a „TP3” elemét fogja engedélyezni.
+                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The
+setting above will only allow <literal>AD1</literal> and
+<literal>AD3</literal> of the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    A „PossibleNot” sorolja fel azokat a tevékenység párbeszédeket, amelyek nem
-megengedettek. A fenti példában a beállítás el fogja távolítani a „TP3”
-elemet a beállított tevékenység párbeszédek listájából.
+                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not
+allowed. In the example above, the setting will remove
+<literal>AD3</literal> from the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    A mind a „Possible”, mind a „PossibleNot” meg van adva, akkor a beállított
-tevékenység párbeszédek listáját először a „Possible” fogja szűrni, a
-példánkban csak a „TP1” és a „TP3” elemet meghagyva. Ezután a „PossibleNot”
-lesz alkalmazva, és kiszűri a „TP3” elemet azért, hogy csak a „TP1” maradjon
-meg, és jelenjen meg lehetséges tevékenység párbeszédként, amelyet a
-felhasználó használhat.
+                    If both <literal>Possible</literal> and <literal>PossibleNot</literal> are
+specified, the list of configured Activity Dialogs will first be filtered by
+<literal>Possible</literal>, leaving only <literal>AD1</literal> and
+<literal>AD3</literal> in our example. Then <literal>PossibleNot</literal>
+will be applied and filter out <literal>AD3</literal>, so that only
+<literal>AD1</literal> remains and is shown as a possible Activity Dialog
+that the user can use.
                 </para>
                 <para>
                     Ha több ACL-szabály illeszkedik, akkor az összes illeszkedő szabály metszete
@@ -3569,8 +3592,9 @@ lesz kiszámítva a lehetséges tevékenység párbeszédek
 meghatározásához. Példa:
                 </para>
                 <para>
-                    Beállított tevékenység párbeszédek: „TP1”, „TP2”, „TP3”, „TP4”, „TP5”,
-„TP6”, „TP7”.
+                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>,
+<literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>,
+<literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3607,29 +3631,36 @@ $Self->{TicketAcl}->{'003-ACL-Prioritas'} = {
                     </screen>
                 </para>
                 <para>
-                    Ha egy folyamatjegy „új” állapottal rendelkezik, a „Nyers” várólistában van
-és a prioritása „3 normál”, akkor mindhárom ACL-szabály illeszkedni fog.
+                    If a process ticket has the state <literal>new</literal>, is in the
+<literal>Raw</literal> queue and has a priority <literal>3 normal</literal>,
+then all three ACL rules will match.
                 </para>
                 <para>
-                    Az első szabály csökkenti a tevékenység párbeszédeket erről: „TP1”, „TP2”,
-„TP3”, „TP4”, „TP5”, „TP6”, „TP7" erre: „TP1”, „TP2”, „TP3”, „TP6”, „TP7”,
-és kitiltja a „TP4” és a „TP5” elemet.
+                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>,
+<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to
+<literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD6</literal>, <literal>AD7</literal> and forbids
+<literal>AD4</literal> and <literal>AD5</literal>.
                 </para>
                 <para>
-                    A második szabály most tovább fogja csökkenteni a megmaradt tevékenység
-párbeszédeket. A példánkban „TP2”, „TP3” és „TP7” fog megmaradni.
+                    The second rule will now further reduce the remaining Activity Dialogs.  In
+our example, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD7</literal> will remain.
                 </para>
                 <para>
-                    Most a harmadik szabály fogja tovább csökkenteni a listát a „PossibleNot”
-által. A „TP3” eltávolításra kerül a listából. A „TP4” nincs eltávolítva,
-mivel nem volt a lista első helyén. Végül „TP2” és „TP7” marad meg
-lehetséges tevékenység párbeszédként, amelyeket a felhasználó felhasználhat.
+                    Now the third rule will further reduce the list by
+<literal>PossibleNot</literal>.  <literal>AD3</literal> is removed from the
+list. <literal>AD4</literal> is not removed, since it was not on the list in
+the first place. At the end, <literal>AD2</literal> and
+<literal>AD7</literal> remain as possible Activity Dialogs that the user can
+utilize.
                 </para>
                 <para>
-                    Lehetséges a korlátozni azokat a folyamatokat is, amelyek megjeleníthetők az
-„Új folyamatjegy” képernyőn. A funkcionalitás hasonló a tevékenység
-párbeszédek korlátozásához egy kivétellel: az ACL-ek csak a felhasználókon
-alapulhatnak.
+                    It is also possible to limit the processes that can be displayed in the
+<literal>New process ticket</literal> screen. The functionality is similar
+to limiting the Activity Dialogs with one exception: The ACLs could only be
+based on Users.
                 </para>
                 <para>Nézze meg a lenti példákat:</para>
                 <para>
@@ -3690,30 +3721,30 @@ $Self->{TicketAcl}->{'202-ACL-Folyamat'} = {
         </section>
     </section>
     <section>
-        <title>Példafolyamat importálása</title>
+        <title>Import ready-to-run process</title>
 
         <section>
             <title>Importálás</title>
             <para>
-                Az <emphasis>AdminProcessManagement</emphasis> képernyőn található egy
-<emphasis>Példafolyamat</emphasis> felületi elem, ahol megtalálhatja a
-legjobb gyakorlatok szerinti példafolyamatokat. Jelenleg csak az
-<emphasis>Alkalmazás a kilépéshez</emphasis> folyamat érhető el, de további
-példafolyamatokat találhat az <emphasis role="bold">OTRS Business
-Solution™</emphasis> csomagban.
+                On the <emphasis>AdminProcessManagement</emphasis> screen you can find an
+<emphasis>Ready-to-run Processes</emphasis> widget, where you can find best
+practice ready-to-run processes. Currently, there is only an
+<emphasis>Application for leave</emphasis> process available, but you can
+find additional ready-to-run processes in the <emphasis role="bold">OTRS
+Business Solution™</emphasis>.
 
             </para>
             <para>
                 <figure>
-                    <title>Példafolyamat importálása felületi elem</title>
+                    <title>Import Ready-to-run Processes widget</title>
 <screenshot>
 <graphic fileref="screenshots/customization/pm-process-widget.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                Válasszon folyamatot a legördülő menüből, és kattintson a
-<emphasis>Példafolyamat importálása</emphasis> gombra. A folyamat
-importálása után ne felejtse el telepíteni a változtatásokat.
+                Select process from the drop-down menu and click on the <emphasis>Import
+ready-to-run process</emphasis> button. After the process is imported, don't
+forget to deploy changes.
             </para>
         </section>
     </section>

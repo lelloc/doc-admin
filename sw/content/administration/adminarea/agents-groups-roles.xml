@@ -33,9 +33,9 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-Kusajili wakala, bofya kwenye kitufe cha "Ongeza wakala", ingiza data
-inayotakiwa na bonyeza kitufe cha Wasilisha upande wa chini wa skrini, kama
-ilivyoonyeshwa kwenye Kielelezo.
+To register an agent, click on the <literal>Add agent</literal> button,
+enter the required data and press the Submit button at the bottom of the
+screen, as shown in Figure.
 </para>
 
 <para>
@@ -100,9 +100,8 @@ kuandika. Wanaweza kufikia programu-tumizi zote za mfumo wa tiketi.
 
 <note>
 <para>
-Katika usakinishaji mpya wa OTRS, kundi la <emphasis>watumiaji</emphasis>
-halina mwanachama yoyote mwanzoni . Wakala 'root@localhost' ni mwanachama wa
-makundi msimaizi na takwimu kwa chaguo-msingi.
+In a brand new OTRS installation, the agent 'root@localhost' belongs by
+default to the admin, stats and users groups.
 </para>
 </note>
 
@@ -276,13 +275,12 @@ yaliyopo kwenye hili kundi.
 
 <note>
     <para>
-        Kwa chaguo-msingi, MuonekanoWaFoleni unaorodhesha tiketi katika foleni pale
-wakala ana ufikivu wa <emphasis>kusoma na kuandika</emphasis>, ikimaanisha
-tiketi ambazo wakala anahitaji kuzifanyia kazi. Ukitaka kubadilisha hii
-tabia, unaweza kuseti <link
-linkend="ConfigReference_Ticket:Frontend::Agent::Ticket::ViewQueue:Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Tiketi::Mazingirayambele::WakalaTiketiFoleni###OnaTiketiZoteZinazowezekana</link>
-kwa <emphasis>Ndiyo</emphasis>.
+        By default, the QueueView only lists tickets in queues that an agent has
+<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
+on. If you want to change this behaviour, you can set <link
+linkend="ConfigReference_Setting_Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
+<emphasis>Yes</emphasis>.
     </para>
 </note>
  <para>Sio ruhusa zote zinazopatikana zinaonyeshwa kwa chaguo-msingi. Hizi ruhusa
@@ -337,8 +335,8 @@ Kuzatiketi).</entry>
       </para>
       <note>
         <para>
-          Hizi ruhusa zinaweza kuongezwa kwa kubadilisha <link
-linkend="ConfigReference_Ticket:Core::Ticket:System::Permission">Mfumo::Ruhusa</link>
+          These permissions can be added by changing the <link
+linkend="ConfigReference_Setting_System::Permission">System::Permission</link>
         </para>
       </note>
 </section>
@@ -381,15 +379,15 @@ moja au zaidi.
 
 <note>
 <para>
-Majukumu ni muhimu ukihusika na mashirika makubwa na ukisimamia usakinishaji
-mkubwa wa OTRS. Umakini mkubwa unashauriwa. Kuchanganya miunganiko ya Wakala
-kwa Kundi na Wakala kwa Jukumu unaweza kutengeneza mpango mgumu wa kudhibiti
-ufikivu, ambao ni mgumu kuelewa na kudumisha. Kama ukiamua kutumia majukumu
-tu na kulemaza Mawakala &lt;-&gt; chaguo la Makundi kwenye eneo la
-Msimamizi, unaweza kufanya hiyo kwa kurekebisha <link
-linkend="ConfigReference_Framework:Frontend::Admin::ModuleRegistration:Frontend::Module_AdminUserGroup">Mazingira
-ya mbele::Moduli###MsimamiziMtumiajiKundi</link> katika SysConfig. Fahamu
-hii haitaondoa kazi zilizopo za Mawakala kwa Makundi!
+Roles are really useful when dealing with complex organizations and when
+maintaining larger OTRS installations. Proper care is advised though. Mixing
+Agent to Group with Agent to Role mappings can make for a complex access
+control scheme, that is difficult to understand and maintain. If you wish to
+use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
+area, you can do so by modifying the <link
+linkend="ConfigReference_Setting_Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
+in the SysConfig. Be aware that this won't remove already existing Agents to
+Group assignments!
 </para>
 </note>
 
@@ -417,8 +415,9 @@ kulemazwa na si kufutwa. Kulemaza, seti chaguo Halali kuwa
 <para>
 An overview of all roles in the system is displayed. To edit a role's
 settings, click on the role's name. In a fresh new OTRS installation, there
-are no roles defined by default. To register one, click on the "Add role"
-button, provide the needed data and submit it (see figure below).
+are no roles defined by default. To register one, click on the <literal>Add
+role</literal> button, provide the needed data and submit it (see figure
+below).
 </para>
 
 <para>

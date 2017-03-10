@@ -3,22 +3,21 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="upgrading">
-    <title>Az OTRS frissítése 4-ről 5-re</title>
+    <title>Upgrading OTRS from 5 to 6</title>
 
     <para>
-    Ezek az utasítások olyan embereknek szólnak, akik az OTRS-t a
-<emphasis>4</emphasis>-es verzióról az <emphasis>5</emphasis>-ös verzióra
-frissítik, vagy egy <emphasis>5</emphasis>-ös verzióról egy későbbi
-<emphasis>5</emphasis>-ös javítócsomag szintű kiadásra, és ez vonatkozik az
-RPM és forráskód (tarball) frissítésekre is.
+    These instructions are for people upgrading OTRS from <emphasis>5</emphasis>
+to <emphasis>6</emphasis> or from a <emphasis>5</emphasis> to a later
+patchlevel release <emphasis>5</emphasis> and applies both for RPM and
+source code (tarball) upgrades.
     </para>
 
     <para>
-    Ha az OTRS alacsonyabb verzióját futtatja, akkor először a 4-re történő
-frissítési útvonalat kell követnie
-(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4)! Teljes
-frissítést kell végrehajtania minden köztes verzióhoz, beleértve az
-adatbázis változtatásokat és a Perl-parancsfájlok frissítését is.
+    If you are running a lower version of OTRS you have to follow the upgrade
+path to 5 first
+(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4->5)! You need
+to perform a full upgrade to every version in between, including database
+changes and the upgrading Perl script.
     </para>
 
     <para>
@@ -28,12 +27,18 @@ lépést</ulink> is kell tennie.
     </para>
 
     <para>
-    Egy önálló kisebb verzión belül kihagyhatja a hibajavító szintű kiadásokat,
-ha frissíteni szeretne. Például az 5-ös verziójú OTRS 2. hibajavító
-verziójáról közvetlenül frissíthet az 5-ös verzió 6. hibajavító
-verziójára. Ha egy ilyen „hibajavító szintű frissítést” kell elvégeznie,
-akkor ki kell hagynia a 6., 10., 11., 14., 17. és 18. lépéseket.
+    Within a single minor version you can skip patch level releases if you want
+to upgrade. For instance you can upgrade directly from OTRS 6 patchlevel 2
+to version 6 patchlevel 6. If you need to do such a "patch level upgrade",
+you should skip steps 6 and XXXXX.
     </para>
+
+    <warning>
+        <para>
+            Please note that you need at least Perl 5.16 to run OTRS 6. If your system
+has an older Perl version, you need to update it first before updating OTRS.
+        </para>
+    </warning>
 
     <para>
     Nagyon ajánlott először egy próbafrissítést végrehajtani egy elkülönített
@@ -148,6 +153,21 @@ tárolja, akkor vissza kell állítania az <filename>article</filename> mappát
 az <filename>/opt/otrs/var/</filename> mappába, vagy a
 rendszerbeállításokban megadott mappába.
                 </para>
+            </section>
+
+
+            <section role="NotInToc">
+                <title>Restore already installed default statistics</title>
+
+                <para>
+                    If you have additional packages with default statistics you have to restore
+the stats xml files with the suffix <filename>*.installed</filename> to
+<filename>/opt/otrs/var/stats</filename>.
+                </para>
+                <screen><![CDATA[
+shell> cd OTRS-BACKUP/var/stats
+shell> cp *.installed /opt/otrs/var/stats
+                ]]></screen>
             </section>
 
             <section role="NotInToc">
@@ -275,7 +295,7 @@ jelenteni, ezért futtassa le a lehetséges problémák ellenőrzéséhez.
                 <para>
                     <screen><![CDATA[
 shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-5.mysql.sql | mysql -p -f -u root otrs
+shell> cat scripts/DBUpdate-to-6.mysql.sql | mysql -p -f -u root otrs
 shell> bin/otrs.Console.pl Maint::Database::Check
                     ]]></screen>
                 </para>
@@ -287,7 +307,7 @@ shell> bin/otrs.Console.pl Maint::Database::Check
                 <para>
                 <screen><![CDATA[
 shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-5.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
+shell> cat scripts/DBUpdate-to-6.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
                 ]]></screen>
                 </para>
             </section>
@@ -303,8 +323,19 @@ felhasználóként, NE <literal>root</literal> felhasználóként):
 
             <para>
             <screen><![CDATA[
-shell> scripts/DBUpdate-to-5.pl
+shell> scripts/DBUpdate-to-6.pl
             ]]></screen>
+            </para>
+
+            <para>
+                The script will ask you to set a time zone for OTRS. It is very important
+that you set the correct time zone (and keep it), otherwise date and time of
+data added after the upgrade (tickets, articles, etc.) will be stored with a
+different time zone than your existing data, leading to inconsistent data.
+The script will suggest possible time zones based on your previous
+configuration. In case you are not sure or made a mistake, you can change
+the OTRS time zone after the upgrade via SysConfig setting
+<literal>OTRSTimeZone</literal>.
             </para>
 
             <para>
@@ -356,70 +387,32 @@ shell> /etc/init.d/cron start
 
         <note>
             <para>
-                A 4-es OTRS csomagjai NEM kompatibilisek az OTRS 5-ös verziójával, ezért
-végre kell hajtania egy csomagfrissítést!
+                The OTRS packages of 5 are NOT compatible with OTRS 6, so you have to
+perform a package upgrade!
             </para>
         </note>
+
+    <!--
         <para>
-            A következő csomagok automatikusan el lesznek távolítva a frissítési
-folyamat után (ha korábban telepítve voltak):
+
+            The following packages are automatically uninstalled after the upgrade process
+            (if they where installed before):
         </para>
         <para>
             <itemizedlist>
                 <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
             </itemizedlist>
         </para>
-    </section>
+        -->
+</section>
 
     <section role="NotInToc">
-        <title>10. lépés: csomópont-azonosítók beállítása (csak több előtétprogramos
-fürtözött beállításoknál)</title>
-
-        <note>
-            <para>
-                Ez a lépés csak akkor szükséges, ha fürtözött beállítással rendelkezik több
-előtétprogram géppel.
-            </para>
-        </note>
-        <para>
-            Az OTRS 5-től kezdve minden egyes előtétprogram kiszolgálónak saját egyedi
-<literal>NodeID</literal> értékének kell lennie. Az alapértelmezett érték
-<literal>1</literal>, és így nem szükséges beállítani egyedülálló
-előtétprogram beállításoknál. Ha egynél több gépe van, akkor minden egyes
-gépnek be kell állítani ezt az értéket egy egyedi értékre
-<literal>1</literal> és <literal>999</literal> között. Ezt a beállítást a
-<filename>Kernel/Config.pm</filename> fájlban kell elvégezni:
-        </para>
-        <para>
-            <screen><![CDATA[
-$Self->{'NodeID'} =  '2';   # egyedi érték hozzárendelése minden előtétprogram kiszolgálóhoz
-            ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>11. lépés: követőfelismerési beállítás ellenőrzése</title>
+        <title>10. lépés: az OTRS démon elindítása</title>
 
         <para>
-            A követőfelismerési beállítások átszervezésre kerültek. Az OTRS most
-alapértelmezetten az e-mail tárgya és a hivatkozások alapján keres a követők
-felismeréséhez. Ellenőrizze a <literal>Ticket</literal> -&gt;
-<literal>Core::PostMaster</literal> adminisztrátori rendszerbeállításban,
-hogy szükséges-e valamilyen változtatást elvégeznie a követőfelismerési
-beállításon (például a törzsben, a mellékletekben vagy a nyers e-mail
-tartalomban történő kereséshez).
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>12. lépés: az OTRS démon elindítása</title>
-
-        <para>
-            Az új OTRS démon felelős bármely aszinkron és ismétlődő feladat kezelésénél
-az OTRS-ben. Amik korábban a cron-fájl meghatározásokban voltak, azokat most
-az OTRS démon kezeli, amely mostantól szükséges az OTRS működéséhez. A démon
-kezeli az összes általános ügyintéző feladatot is, és az
-<literal>otrs</literal> felhasználótól kell elindítani.
+            The OTRS daemon is responsible for handling any asynchronous and recurring
+tasks in OTRS.  The daemon also handles all GenericAgent jobs and must be
+started from the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -430,7 +423,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>13. lépés: cron-feladatok frissítése és bekapcsolása</title>
+        <title>Step 11: Update and activate cron jobs</title>
 
         <para>
             Két alapértelmezett OTRS cron-file van az
@@ -457,56 +450,10 @@ felhasználóval.
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
-        <para>
-            Ne feledje, hogy ha bármilyen egyéni cron-feladata volt, akkor meg kellene
-fontolnia azok áthelyezését a rendszerbeállításokba
-(<literal>Daemon</literal> -&gt;
-<literal>Daemon::SchedulerCronTaskManager::Task</literal>), hogy azokat is
-az OTRS démon futtassa. Esetleg szükséges lehet az egyéni parancsfájlok
-átdolgozása is, mert mostantól a legtöbb OTRS parancsot a
-<filename>bin/otrs.Console.pl</filename> parancsfájl kezel az egyedüli
-parancsfájlok helyett.
-        </para>
-        <note>
-            <para>
-                A <literal>Dev::Code::Generate::ConsoleCommand</literal> parancssori
-utasítás segíthet egy új parancssori utasítás létrehozásában az egyéni
-parancsfájljaihoz. Ez a parancs egy sablont hoz létre, ahol a parancsfájl
-logikája és annak paraméterei hozzáigazíthatók.
-            </para>
-        </note>
     </section>
 
     <section role="NotInToc">
-        <title>14. lépés: a jegyértesítések átnézése</title>
-        <para>
-            Az OTRS 5-tel a jegyértesítések eltérően vannak beállítva mint a korábbi
-verziókban. Ezek mostantól az „Esemény értesítések” részei, amelyek korábban
-is elérhetőek voltak (most egyszerűen „Jegyértesítéseknek” hívják). A
-meglévő jegyértesítései át lettek költöztetve a jegyértesítések listájába,
-de ki vannak kapcsolva. Megkapta az új alapértelmezett jegyértesítéseket is,
-amelyek alapértelmezetten be vannak kapcsolva.
-        </para>
-        <para>
-            Abban az esetben, ha nem módosította a régi jegyértesítéseket, nem kell
-semmit sem tennie. Ha helyi módosításokat vagy fordításokat csinált, akkor
-két választása van: a) átköltöztetheti a módosításait az új
-jegyértesítésekbe (ez az ajánlott), vagy b) kikapcsolhatja az új
-értesítéseket, és újra bekapcsolhatja a régi értesítéseket.
-        </para>
-        <para>
-            Nézze át az eszkalációs értesítés címzett beállításait is, és nézze meg,
-hogy megfelelnek-e az elvárásainak (ügyintézők, akik rendelkeznek a jeggyel
-az egyéni várólistájuk egyikében kontra összes ügyintéző olvasási
-jogosultságokkal). Ez korábban a (most elavult)
-<filename>Kernel/Config/GenericAgent.pm</filename> fájlban lévő beállításon
-keresztül volt beállítva, és mostantól a grafikus felhasználói felületen
-keresztül vezérelhető külön-külön minden egyes értesítésnél.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>15. lépés: rendszerregisztráció frissítése (opcionális)</title>
+        <title>Step 12: Update system registration (optional)</title>
         <para>
             Ha a rendszer már regisztrálva van az OTRS csoporttal, akkor most erősen
 ajánlott a regisztrációs információk frissítése. Ez frissíteni fogja a
@@ -531,89 +478,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>16. lépés: egyéni Perl alapú általános ügyintéző feladatok költöztetése
-(opcionális)</title>
-        <para>
-            Ez csak akkor fontos, ha valamilyen egyéni általános ügyintéző feladata volt
-az olyan OTRS 4 Perl beállítófájlokban (mint például
-<filename>Kernel/Config/GenericAgent.pm</filename>), amelyeket nem lehet a
-szabályos jegyértesítésekkel kezelni. Az ilyen feladatokat most OTRS démon
-cron-feladatokként kell regisztrálni a rendszerbeállításokban
-(<literal>Daemon</literal> -&gt;
-<literal>Daemon::SchedulerCronTaskManager::Task</literal>) azért, hogy
-rendszeresen végrehajtásra kerüljenek.
-        </para>
-        <para>
-            A rendszerbeállításokban 5 beállítás van előkészítve erre a célra
-(<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile1</literal>
--
-<literal>Daemon::SchedulerCronTaskManager::Task###GenericAgentFile5</literal>).
-Ha több beállítás szükséges, akkor azok egy egyéni rendszerbeállítási
-beállítófájlban adhatók hozzá.
-        </para>
-        <para>
-            Cserélje ki „&lt;modulnevet&gt;” azzal a fájllal, amely az egyéni általános
-ügyintéző feladatok beállításait tartalmazza, például
-<literal>Kernel::Config::GenericAgent</literal> a
-<filename>Kernel/Config/GenericAgent.pm</filename> fájl esetén, állítsa be
-az ütemezést, hogy egyezzen azzal az időszakossággal, ahogy korábban végre
-volt hajtva, jelölje meg a beállítást aktívként, és mentse el a
-változtatásokat.
-        </para>
-        <note>
-            <para>
-                További információkért a többi olyan paraméterrel kapcsolatban, amelyek az
-általános ügyintéző feladatok futtatása közben használhatók, hajtsa végre a
-következő parancsot:
-            </para>
-            <para>
-                <screen><![CDATA[
-shell> bin/otrs.Console.pl Maint::GenericAgent::Run --help
-            ]]></screen>
-            </para>
-        </note>
-    </section>
-
-    <section role="NotInToc">
-        <title>17. lépés: bash automatikus kiegészítés beállítása (opcionális)</title>
-        <para>
-            Az összes szabályos OTRS parancssori művelet mostantól a
-<filename>bin/otrs.Console.pl</filename> OTRS konzolfelületen keresztül
-történik. Ez automatikus kiegészítést biztosít a bash parancsértelmezőhöz,
-amely sokkal könnyebben teszi megtalálhatóvá a helyes parancsot és a
-kapcsolókat.
-        </para>
-        <para>
-            A bash automatikus kiegészítését a <literal>bash-completion</literal> csomag
-telepítésével kapcsolhatja be. Ez automatikusan fel fogja ismerni és be
-fogja tölteni az <filename>/opt/otrs/.bash_completion</filename> fájlt az
-<literal>otrs</literal> felhasználónál.
-        </para>
-        <para>
-            A parancsértelmező újraindítása után egyszerűen nyomja meg a TAB billentyűt
-a <filename>bin/otrs.Console.pl</filename> parancsot követően, és fel fogja
-sorolni az összes elérhető parancsot. Ha begépeli a parancs nevének néhány
-karakterét, akkor a TAB billentyű meg fogja jeleníteni az összes egyező
-parancsot. Egy teljes parancs begépelése után az összes lehetséges kapcsoló
-és argumentum meg fog jelenni a TAB megnyomásával.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>18. lépés: a jegyművelet képernyő beállításainak átnézése (opcionális)</title>
-        <para>
-            Néhány jegyművelet képernyőnek (mint például a „Jegyzet”) alapértelmezett
-tárgya volt az OTRS 4-ben (ebben az esetben a
-<literal>Ticket::Frontend::AgentTicketNote###Subject</literal>
-rendszerbeállításon keresztül állítható be). Ezek az alapértelmezett tárgyak
-eltávolításra kerültek a potenciálisan redundáns vagy értelmetlen adatok
-mennyiségének csökkentéséhez. Érdemes újra hozzáadni azokat, ha kötelezőek
-az Ön számára.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>19. lépés: szép munka!</title>
+        <title>Step 13: Well done!</title>
         <para></para>
     </section>
 </section>

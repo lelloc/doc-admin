@@ -1831,10 +1831,19 @@ $Self->{'Process'} = {
                     </screen>
                 </para>
                 <para>
-                    如果一个流程工单在活动 'A1'，它有三个可能的路径来获得另一活动。在转换'T1'到'T3'，定义了流程工单必须满足移动（转换）到另一活动的条件。
+                    If a process ticket is in Activity <literal>A1</literal>, it has three
+possible ways to get to another Activity. In the Transitions
+<literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
+a process ticket must fulfill to move (transit) to another Activity.
                 </para>
                 <para>
-                    如果在这个案例中流程工单的所有值和转换'T2'所需的动态字段都是正确的，这个工单就会从活动'A1'移动到'A3'。在提交了一个活动对话框之后，或者工单有了其它任何修改，工单会从当前活动检查可能的转换。如果有多个可能的转换，就使用第一个（基于TransitionID的数字排序）。
+                    If in this case all the values of the process ticket and its dynamic fields
+that are needed for the Transition <literal>T2</literal> are correct, the
+ticket will be moved from Activity <literal>A1</literal> to
+<literal>A3</literal>. After an ActivityDialog is submitted, or any other
+change is made to a ticket, it will be checked for possible Transitions from
+the current Activity. If multiple Transitions are possible, the first one
+will be used (based on numerical sorting of the TransitionIDs).
                 </para>
                 <para>
                     此外，还可以在路径配置中给转换分配转换操作。这些转换操作就是在成功转换后执行的模块。在示例流程中它们用数组表单方式分配，我们会在后面讨论这些细节。
@@ -1845,7 +1854,10 @@ $Self->{'Process'} = {
         <section>
             <title>活动</title>
             <para>
-                一个活动包含一个或多个活动对话框并模拟流程中的一个‘步骤’。当前活动的所有活动对话框都会在工单详情窗口中显示，直到一个转换条件满足后才能使用它们。
+                An Activity contains one or more Activity Dialogs and models a
+<literal>step</literal> in the process. All Activity Dialogs of the current
+Activity are displayed in the ticket zoom and can be used until the
+conditions of a Transition are fulfilled.
             </para>
             <section>
             <title>活动配置</title>
@@ -1915,7 +1927,11 @@ $Self->{'Process::Activity'} =
             <section>
                 <title>活动对话框</title>
                 <para>
-                    活动对话框包含了这个活动的可用活动对话框列表。当前活动的所有活动对话框都会显示在工单详情窗口中。它们显示的顺序在配置中设置，在这里'AD5'显示在'AD6'和'AD1'的前面。
+                    Activity Dialog contains the list of Activity Dialogs which are available in
+this Activity. All Activity Dialogs of the current Activity are displayed in
+the ticket zoom. Their order is set by the order in the configuration, here
+<literal>AD5</literal> is shown before <literal>AD6</literal> and
+<literal>AD1</literal>.
                 </para>
             </section>
         </section>
@@ -2072,7 +2088,11 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    “信件”字段是一个特殊的例子。如果它出现在一个‘字段’配置中，活动对话框将包含一个完整的富文本编辑器，拥有主题字段并能处理附件。输入的文本会作为信件添加到工单并通过邮件发送。让我们看看信件字段配置的一个例子：
+                    The field <literal>Article</literal> is a special case. If it is present in
+a <literal>Fields</literal> configuration, the Activity Dialog will contain
+a complete Richtext editor with subject field and attachment handling. The
+entered text will then be added to the ticket as an article and sent by
+email. Let's see an example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2110,17 +2130,20 @@ Article => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    ‘0’：字段不可见。这在自动设置字段值时有用。这种情况下会保存配置的默认值。
+                                    <literal>0</literal>: field is invisible. This can be helpful if field
+values should automatically be set. The configured
+<literal>DefaultValue</literal> will be stored in this case.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    ‘1’：字段可见，但是可选的。
+                                    <literal>1</literal>: field is visible, but optional.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    ‘2’：字段可见，且是必填的。下列的字段只能为不可见或必填：
+                                    <literal>2</literal>: field is visible and mandatory. The following fields
+can only be invisible or mandatory:
                                 </para>
                                 <para>
                                     <screen>
@@ -2146,7 +2169,10 @@ Article => {
                 <section>
                     <title>默认值</title>
                     <para>
-                        对于有‘ID’的字段（如QueueID、OwnerID），默认值是这个字段在数据库中的ID。对于其它没有‘ID’的字段（如队列、所有者），默认值必须包含这个字段自己的值。例如：
+                        For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers
+to the database ID of the value. For other fields without
+<literal>ID</literal> (like Queue, Owner), the
+<literal>DefaultValue</literal> must contain the value itself. Example:
                     </para>
                     <para>
                         <screen>
@@ -2301,17 +2327,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    ‘与’：这是默认类型。要使转换生效必须满足所有的条件。
+                                    <literal>and</literal>: This is the default. All conditions must be met for
+the transition to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    ‘或’：至少需要满足一个条件。
+                                    <literal>or</literal>: At least one condition must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    ‘异或’：必须恰好满足一个条件，不能满足多个条件。
+                                    <literal>xor</literal>: Exactly one condition must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2330,17 +2357,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    ‘与’：这是默认类型。这个条件内的所有字段测试结果必须都匹配。
+                                    <literal>and</literal>: This is the default. All field tests must match for
+this condition to match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    ‘或’：至少需要匹配一个字段。
+                                    <literal>or</literal>: At least one field test must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    ‘异或’：必须恰好匹配一个字段的测试结果，不能匹配多个。
+                                    <literal>xor</literal>: Exactly one field test must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2406,27 +2434,36 @@ Fields => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    ‘String字符串’：比较字段值和在'Match'中指定的字符串，如果完全相同就是匹配的。
+                                    <literal>String</literal>: Compares the field value with the string
+specified in <literal>Match</literal>. Matches if they are exactly the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Hash哈希'：比较字段值的哈希值和在'Match'中指定的哈希值。所有的哈希值必须一致才是匹配的。
+                                    <literal>Hash</literal>: Compares the field value (hash) with the hash
+specified in <literal>Match</literal>. All hash values must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Array数组'：比较字段值的数组和在'Match'中指定的数组。两个数据的清单值必须一致才是匹配的。
+                                    <literal>Array</literal>: Compares the field value (array) with the array
+specified in <literal>Match</literal>. Both lists must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Regex正则表达式'：使用一个正则表达式来测试字段值，重点注意的是'Match'包含<emphasis>qr{}xms</emphasis>作为基本条件。实际的正则表达式是在大括号中间。
+                                    <literal>Regex</literal>: The field value can be tested with a regular
+expression. It is important that <literal>Match</literal> contains
+<emphasis>qr{}xms</emphasis> as a base condition. Between the braces the
+actual regular expression can be noted.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Module模块'：允许你使用一个Perl模块来进行条件检查。如果模块返回1，检查是匹配的。你可以在文件<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>中找到一个示例模块。
+                                    <literal>Module</literal>: Allows you to use a perl module for condition
+checking. If it returns 1, the check was positive. You can find an example
+module in
+<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2478,8 +2515,12 @@ $Self->{'Process::TransitionAction'} = {
                     这个参数包含模块所需的所有设置。它的内容取决于使用的特定的转换操作模块。请参阅单独的模块文档以了解详细信息。在我们的示例中，只是必须指定队列。不过我们还需发送UserID参数。转换操作将使用给定的UserID来模拟用户执行。
                 </para>
                 <para>
-                    转换操作在“配置”参数中UserID的用法可在所有的转换操作中使用（从OTRS
-3.2.4版本之后）。在本示例中特别重要的是触发转换操作的用户（也就是UserID为123的用户）有没有移动工单到队列'Junk'的权限。
+                    The use of UserID inside the <literal>Config</literal> parameter of a
+Transition Action is accepted by all Transition Actions (since OTRS
+3.2.4). In this example it could be particularly important if the user that
+triggers the Transition does not have permissions to move the ticket to the
+queue <literal>Junk</literal>, while the user with the UserID 123 might
+have.
                 </para>
             </section>
             <section>
@@ -2508,7 +2549,11 @@ $Self->{'Process::TransitionAction'} = {
                     </screen>
                 </para>
                 <para>
-                    这里使用了同一个模块来移到一个流程工单到队列'Raw'，还有移到队列'junk'。一个特定转换使用的转换操作由流程配置中的‘路径’设置来确定。
+                    Here the same module is used to move a process ticket into the
+<literal>Raw</literal> queue, and another time to move it into the junk
+queue. The Transition Action which must be used for a particular Transition
+is determined from the <literal>Path</literal> setting of the Process
+configuration.
                 </para>
             </section>
             <section id="available-transition-actions">
@@ -2538,10 +2583,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘MasterSlave主从’和‘Approved通过审批’就像动态字段名称一样指定，这个转换操作设置它们的值为（'Master' 和 '1'）。
+                        <literal>MasterSlave</literal> and <literal>Approved</literal> are given as
+examples of DynamicField names.  The values of the fields
+(<literal>Master</literal> and <literal>1</literal>) will be set by this
+TransitionAction.
                     </para>
                 </section>
 
@@ -2589,44 +2638,72 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定这个转换操作的名称。可以随意选择，但名称最好能体现转换操作的用途。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        ‘ArticleType信件类型’定义创建的信件的类型。可能的值有：电话、传真、短信、WEB请求、备注-内部、备注-外部和备注-报告。
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
-                        ‘SenderType发件人类型’定义信件发件人的类型。可能的值有：服务人员、系统、客户。
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
                     </para>
                     <para>
-                        ‘ContentType内容类型’定义信件的内容类型。可能的值有：‘text/plain;
-charset=ISO-8859-15纯文本’或其它有效的字符集和MIME类型。
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        ‘Subject主题’定义信件主题，必填。
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        ‘Body正文’定义信件的内容，必填。
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        ‘HistoryType历史类型’定义历史条目的类型。可能的值有：添加备注、归档标志更新、退回、客户更新、服务人员邮件、客户邮件、升级响应时间通知之前、升级响应时间通知开始、升级响应时间结束、升级解决时间通知之前、升级解决时间通知开始、升级解决时间结束、升级更新时间之前、升级更新时间开始、升级更新时间结束、跟进、转发、锁定、循环保护、合并、杂项、转换、新工单、所有者更新、服务人员电话、客户电话、优先级更新、移除、负责人更新、发送服务人员通知、发送答复、发送自动跟进、发送自动拒绝、发送自动回复、发送客户通知、服务更新、设置挂起时间、SLA更新、状态更新、关注、系统请求、工单动态字段更新、添加工单链接、删除工单链接、工时管理、类型更新、解锁、取消关注、客户WEB请求。
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        ‘HistoryComment历史注释’定义历史条目的内容。
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        'From发件人'、 'To收件人'、 'Cc抄送' 和 'ReplyTo回复'使用上面指定格式的邮件地址。
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        ‘InReplyTo作为答复’和‘References参考’使用邮件消息ID。
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        ‘NoAgentNotify无服务人员通知’-如果设置为1，不会发送服务人员的邮件通知。
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        ‘AutoResponseType自动响应类型’可以使用下列的值：自动跟进、自动拒绝、自动移除、自动回复、自动回复/新工单。
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        ‘ForceNotificationToUserID强制发送通知给UserID’、‘ExcludeNotificationToUserID为UserID排除通知’、‘ExcludeMuteNotificationToUserID为UserID排除静音通知’可以使用的UserID列表，给这些UserID的用户要么始终发送通知、不发送通知，要么加入发送清单但并不发送通知邮件。
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                 </section>
                 <section>
@@ -2650,7 +2727,7 @@ $Self->{'Process::TransitionAction'} = {
             State         => 'new',              # or StateID => 5,
             CustomerID    => '123465',
             CustomerUser  => 'customer@example.com',
-            OwnerID       => 123,
+            OwnerID       => 'someuserlogin',    # or OwnerID => 123,
 
             # ticket optional:
             TN              => $TicketObject->TicketCreateNumber(), # optional
@@ -2703,98 +2780,143 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定这个转换操作的名称。可以随意选择，但名称最好能体现转换操作的用途。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        ‘Title标题’工单的标题。
+                        <literal>Title</literal> The ticket title.
                     </para>
                     <para>
-                        ‘Queue队列’或‘QueueID’指定用于新工单的队列名称或ID。
+                        <literal>Queue</literal> or <literal>QueueID</literal> specifies the name or
+id of the queue to be used in the new ticket.
                     </para>
                     <para>
-                        ‘Lock锁定’或‘LockID’设置工单的锁定状态。
+                        <literal>Lock</literal> or <literal>LockID</literal> sets the lock status of
+the ticket.
                     </para>
                     <para>
-                        ‘Priority优先级’或‘PriorityID’在新工单中指定优先级的名称或ID。
+                        <literal>Priority</literal> or <literal>PriorityID</literal> specifies the
+name or id of the priority to be used in the new ticket.
                     </para>
                     <para>
-                        ‘State状态’或‘StateID’在新工单中指定状态的名称或ID。
+                        <literal>State</literal> or <literal>StateID</literal> specifies the name or
+id of the state to be used in the new ticket.
                     </para>
                     <para>
-                        ‘CustomerID客户ID’，为新工单设置客户ID。
+                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
                     </para>
                     <para>
-                        ‘CustomerUser客户联系人’，分配给工单的客户登录名。
+                        <literal>CustomerUser</literal>, the login of the customer that will be
+assigned in the ticket.
                     </para>
                     <para>
-                        ‘OwnerID’，新工单所有者的服务人员ID。
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the
+login or id of the agent that will be the new ticket owner.
                     </para>
                     <para>
-                        ‘TN’，新工单的客户编号。
+                        <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
-                        ‘Type类型’或‘TypeID’，指定用于新工单的工单类型名称或ID。
+                        <literal>Type</literal> or <literal>TypeID</literal> specifies the name or
+id of the ticket type to be used in the new ticket.
                     </para>
                     <para>
-                        ‘Service服务’或‘ServiceID’，指定用于新工单的服务名称或ID。
+                        <literal>Service</literal> or <literal>ServiceID</literal> specifies the
+name or id of the service to be used in the new ticket.
                     </para>
                     <para>
-                        ‘SLA’或‘SLAID’，指定用于新工单的SLA名称或ID。
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id
+of the SLA to be used in the new ticket.
                     </para>
                     <para>
-                        ‘ResponsibleID负责人ID’，新工单负责人的服务人员ID。
+                        <literal>ResponsibleID</literal>, the ID of the agent that will be the new
+ticket responsible.
                     </para>
                     <para>
-                        ‘PendingTime挂起时间’，预先定义的当工单状态属于一种挂起状态类型时工单的挂起时间。
+                        <literal>PendingTime</literal>, a predefined date to set the Ticket Pending
+Times, when the ticket state belongs to a pending state type.
                     </para>
                     <para>
-                        ‘PendingTimeDiff挂起时间差’，当工单状态属于一种挂起状态类型时，给工单挂起时间设置一个动态时间（从当前时间按秒表示）。
+                        <literal>PendingTimeDiff</literal>, a dynamically date (expressed in seconds
+from current date/time) to set the Ticket Pending Times, when the ticket
+state belongs to a pending state type.
                     </para>
                     <para>
-                        ‘ArticleType信件类型’定义创建的信件的类型。可能的值有：电话、传真、短信、WEB请求、备注-内部、备注-外部和备注-报告。
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
                         ‘SenderType发件人类型’定义信件的发件人类型，可能的值有：服务人员、系统、客户。
                     </para>
                     <para>
-                        ‘ContentType内容类型’定义信件的内容类型。可能的值有：‘text/plain;
-charset=ISO-8859-15纯文本’或其它有效的字符集和MIME类型。
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        ‘Subject主题’定义信件主题，必填。
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        ‘Body正文’定义信件的内容，必填。
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        ‘HistoryType历史类型’定义历史条目的类型。可能的值有：添加备注、归档标志更新、退回、客户更新、服务人员邮件、客户邮件、升级响应时间通知之前、升级响应时间通知开始、升级响应时间结束、升级解决时间通知之前、升级解决时间通知开始、升级解决时间结束、升级更新时间之前、升级更新时间开始、升级更新时间结束、跟进、转发、锁定、循环保护、合并、杂项、转换、新工单、所有者更新、服务人员电话、客户电话、优先级更新、移除、负责人更新、发送服务人员通知、发送答复、发送自动跟进、发送自动拒绝、发送自动回复、发送客户通知、服务更新、设置挂起时间、SLA更新、状态更新、关注、系统请求、工单动态字段更新、添加工单链接、删除工单链接、工时管理、类型更新、解锁、取消关注、客户WEB请求。
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        ‘HistoryComment历史注释’定义历史条目的内容。
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        'From发件人'、 'To收件人'、 'Cc抄送' 和 'ReplyTo回复'使用上面指定格式的邮件地址。
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        ‘InReplyTo作为答复’和‘References参考’使用邮件消息ID。
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        ‘NoAgentNotify无服务人员通知’-如果设置为1，不会发送服务人员的邮件通知。
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        ‘AutoResponseType自动响应类型’可以使用下列的值：自动跟进、自动拒绝、自动移除、自动回复、自动回复/新工单。
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        ‘ForceNotificationToUserID强制发送通知给UserID’、‘ExcludeNotificationToUserID为UserID排除通知’、‘ExcludeMuteNotificationToUserID为UserID排除静音通知’可以使用的UserID列表，给这些UserID的用户要么始终发送通知、不发送通知，要么加入发送清单但并不发送通知邮件。
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                     <para>
-                        ‘时间单位’花费在当前工单信件上的时间，按秒、分钟或小时等表示。
+                        <literal>TimeUnit</literal> the time invested in the current ticket article
+expressed in seconds, minutes, hours, etc.
                     </para>
                     <para>
-                        ‘DynamicField_NameX’这里DynamicField_是必需的前缀，NameX是在新工单（在工单级而不是信件级）设置的动态字段的名称。
+                        <literal>DynamicField_NameX</literal> where DynamicField_ is a required
+prefix and NameX is the name of a Dynamic Field to be set in the new ticket
+(on ticket level, not article levels).
                     </para>
                     <para>
-                        ‘LinkAs链接为’用来定义新工单与原始工单的关系，从新工单角度看，有普通（链接）、父（链接）、子（链接）等等。
+                        <literal>LinkAs</literal> to define the new ticket relation with originator
+ticket, from the new ticket point of view, for example Normal, Parent, Child
+etc.
                     </para>
                 </section>
                 <section>
@@ -2821,13 +2943,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘No编号’或‘CustomerID客户ID’设置客户ID。
+                        <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID
+of the customer.
                     </para>
                     <para>
-                        ‘User用户’或‘CustomerUserID客户联系人ID’设置客户的（登录）用户名。
+                        <literal>User</literal> or <literal>CustomerUserID</literal> set the
+Username of the customer.
                     </para>
                 </section>
 
@@ -2852,13 +2977,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Lock锁定’定义流程新的锁定状态。
+                        <literal>Lock</literal> defines the new lock of the process ticket.
                     </para>
                     <para>
-                        ‘LockID’定义新锁定状态的内部ID号。
+                        <literal>LockID</literal> defines the internal ID of the new lock.
                     </para>
                 </section>
 
@@ -2883,13 +3009,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Owner所有者’指定新所有者的登录名。
+                        <literal>Owner</literal> specifies the login name of the new owner.
                     </para>
                     <para>
-                        ‘OwnerID’指定新所有者的内部ID号。
+                        <literal>OwnerID</literal> specifies the internal ID of the new owner.
                     </para>
                 </section>
 
@@ -2914,13 +3041,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Queue队列’指定目标队列的名称。
+                        <literal>Queue</literal> specifies the name of the target queue.
                     </para>
                     <para>
-                        ‘QueueID队列ID’指定目标队列的内部ID号。
+                        <literal>QueueID</literal> specifies the internal ID of the target queue.
                     </para>
                 </section>
 
@@ -2945,13 +3073,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Responsible负责人’指定新负责人的登录名。
+                        <literal>Responsible</literal> specifies the login name of the new
+responsible.
                     </para>
                     <para>
-                        ‘ResponsibleID负责人ID’指定新负责人的内部ID。
+                        <literal>ResponsibleID</literal> specifies the internal ID of the new
+responsible.
                     </para>
                 </section>
 
@@ -2976,13 +3107,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Service服务’定义流程工单的新服务。需要服务的全名（如GramdFatherService::FatherService::SonService）。
+                        <literal>Service</literal> defines the new service of the process
+ticket. The full name is required
+(e.g. GramdFatherService::FatherService::SonService ).
                     </para>
                     <para>
-                        ‘ServiceID服务ID’定义新服务的内部ID号。
+                        <literal>ServiceID</literal> defines the internal ID of the new service.
                     </para>
                 </section>
 
@@ -3007,13 +3141,15 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘SLA’定义流程工单新的服务级别协议。
+                        <literal>SLA</literal> defines the new service level agreement of the
+process ticket.
                     </para>
                     <para>
-                        ‘SLAID’定义新SLA的内部ID号。
+                        <literal>SLAID</literal> defines the internal ID of the new SLA.
                     </para>
                 </section>
 
@@ -3040,16 +3176,20 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘State状态’定义流程工单新的状态。
+                        <literal>State</literal> defines the new state of the process ticket.
                     </para>
                     <para>
-                        ‘StateID’定义新状态的内部ID号。
+                        <literal>StateID</literal> defines the internal ID of the new state.
                     </para>
                     <para>
-                        ‘PendingTimeDiff挂起时间差’仅用于挂起类型的状态，定义相对时间差秒数（相对于转换操作的执行时间）以便设置工单挂起时间，例如3600意味着挂起时间是在转换操作执行后的1小时。
+                        <literal>PendingTimeDiff</literal> used only for pending type states,
+defines the time difference in seconds relative (relative to the Transition
+Action execution time) to set ticket pending time (e.g. 3600 means that the
+pending time is 1hr after the Transition Action is executed).
                     </para>
                 </section>
 
@@ -3072,10 +3212,11 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Title标题’指定工单的新标题。
+                        <literal>Title</literal> specifies the new title of the ticket.
                     </para>
                 </section>
 
@@ -3100,13 +3241,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        ‘Name名称’指定配置的转换操作的名称。
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        ‘Type类型’指定工单类型的名称。
+                        <literal>Type</literal> specifies the name of the ticket type.
                     </para>
                     <para>
-                        ‘TypeID’指定工单类型的内部ID。
+                        <literal>TypeID</literal> specifies the internal ID of the ticket type.
                     </para>
                 </section>
             </section>
@@ -3179,21 +3321,31 @@ $Self->{TicketAcl}->{'001-ACL-ProcessProperties'} = {
                     在这里你可以指定活动对话框ID清单。这个清单限制了在工单详情窗口提供给用户的可用活动对话框。
                 </para>
                 <para>
-                    ‘Possible 可能的’列出允许的活动对话框。上面示例的设置在配置的活动对话框清单中仅允许'AD1'和'AD3'。
+                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The
+setting above will only allow <literal>AD1</literal> and
+<literal>AD3</literal> of the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    ‘PossibleNot 不可能的’列出不允许的活动对话框。在上面的示例中，这个设置从配置的活动对话框清单中移除'AD3'。
+                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not
+allowed. In the example above, the setting will remove
+<literal>AD3</literal> from the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    如果同时指定了‘Possible可能的’和‘PossibleNot
-不可能的’，配置的活动对话框将首先用‘Possible可能的’过滤，在我们的示例中仅留下'AD1'和'AD3'。然后应用‘PossibleNot
-不可能的’，过滤掉'AD3'，所以最终只有'AD1'保留下来，显示为用户能够使用的可用活动对话框。
+                    If both <literal>Possible</literal> and <literal>PossibleNot</literal> are
+specified, the list of configured Activity Dialogs will first be filtered by
+<literal>Possible</literal>, leaving only <literal>AD1</literal> and
+<literal>AD3</literal> in our example. Then <literal>PossibleNot</literal>
+will be applied and filter out <literal>AD3</literal>, so that only
+<literal>AD1</literal> remains and is shown as a possible Activity Dialog
+that the user can use.
                 </para>
                 <para>
                     如果匹配了多个ACL规则，则计算所有匹配规则的交集来确定可能的活动对话框。例如：
                 </para>
                 <para>
-                    配置的活动对话框：'AD1'、'AD2'、 'AD3'、 'AD4'、 'AD5'、 'AD6'、'AD7'。
+                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>,
+<literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>,
+<literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3230,21 +3382,36 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
                     </screen>
                 </para>
                 <para>
-                    如果一个流程工单的状态为‘new新建’、在‘Raw’队列且优先级为‘3 - 正常’，则会匹配所有的3条ACL规则。
+                    If a process ticket has the state <literal>new</literal>, is in the
+<literal>Raw</literal> queue and has a priority <literal>3 normal</literal>,
+then all three ACL rules will match.
                 </para>
                 <para>
-                    第一条规则减少活动对话框，从'AD1'、'AD2'、 'AD3'、 'AD4'、 'AD5'、 'AD6'、'AD7'变成了'AD1'、'AD2'、
-'AD3'、 'AD6'、'AD7'，禁用了'AD4'和'AD5'。
+                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>,
+<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to
+<literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD6</literal>, <literal>AD7</literal> and forbids
+<literal>AD4</literal> and <literal>AD5</literal>.
                 </para>
                 <para>
-                    第二条规则会进一步减少剩余的活动对话框。在我们的示例中，仅存'AD2'、 'AD3'、'AD7'。
+                    The second rule will now further reduce the remaining Activity Dialogs.  In
+our example, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD7</literal> will remain.
                 </para>
                 <para>
-                    现在第三条规则通过'PossibleNot
-不可能的'会进一步减少这个清单。从清单中移除'AD3'。没有移除'AD4'，因为它并没有在先前的清单中。最终，'AD2'和AD7'保留为用户能够使用的可用活动对话框。
+                    Now the third rule will further reduce the list by
+<literal>PossibleNot</literal>.  <literal>AD3</literal> is removed from the
+list. <literal>AD4</literal> is not removed, since it was not on the list in
+the first place. At the end, <literal>AD2</literal> and
+<literal>AD7</literal> remain as possible Activity Dialogs that the user can
+utilize.
                 </para>
                 <para>
-                    还可以限制能够显示在“新流程工单”窗口的流程。这个功能与限制活动对话框类似，除了一点：ACL只能基于用户。
+                    It is also possible to limit the processes that can be displayed in the
+<literal>New process ticket</literal> screen. The functionality is similar
+to limiting the Activity Dialogs with one exception: The ACLs could only be
+based on Users.
                 </para>
                 <para>查看下面的示例：</para>
                 <para>
@@ -3302,6 +3469,34 @@ $Self->{TicketAcl}->{'202-ACL-Process'} = {
                     </screen>
                 </para>
             </section>
+        </section>
+    </section>
+    <section>
+        <title>Import ready-to-run process</title>
+
+        <section>
+            <title>导入</title>
+            <para>
+                On the <emphasis>AdminProcessManagement</emphasis> screen you can find an
+<emphasis>Ready-to-run Processes</emphasis> widget, where you can find best
+practice ready-to-run processes. Currently, there is only an
+<emphasis>Application for leave</emphasis> process available, but you can
+find additional ready-to-run processes in the <emphasis role="bold">OTRS
+Business Solution™</emphasis>.
+
+            </para>
+            <para>
+                <figure>
+                    <title>Import Ready-to-run Processes widget</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-process-widget.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Select process from the drop-down menu and click on the <emphasis>Import
+ready-to-run process</emphasis> button. After the process is imported, don't
+forget to deploy changes.
+            </para>
         </section>
     </section>
 </section>

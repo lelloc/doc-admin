@@ -2012,19 +2012,19 @@ $Self->{'Process'} = {
                     </screen>
                 </para>
                 <para>
-                    Если процессная заявка в состоянии Activity 'A1', она имеет три возможных
-пути перехода к другой Активности. Для Переходов от 'T1' до 'T3' заданы
-условия, которые процессная заявка должна выполнить для перехода (transit) к
-следующей Активности.
+                    If a process ticket is in Activity <literal>A1</literal>, it has three
+possible ways to get to another Activity. In the Transitions
+<literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
+a process ticket must fulfill to move (transit) to another Activity.
                 </para>
                 <para>
                     If in this case all the values of the process ticket and its dynamic fields
-that are needed for the Transition 'T2' are correct, the ticket will be
-moved from Activity 'A1' to 'A3'. After an ActivityDialog is submitted, or
-any other change is made to a ticket, it will be checked for possible
-Transitions from the current Activity. If multiple Transitions are possible,
-the first one will be used (based on numerical sorting of the
-TransitionIDs).
+that are needed for the Transition <literal>T2</literal> are correct, the
+ticket will be moved from Activity <literal>A1</literal> to
+<literal>A3</literal>. After an ActivityDialog is submitted, or any other
+change is made to a ticket, it will be checked for possible Transitions from
+the current Activity. If multiple Transitions are possible, the first one
+will be used (based on numerical sorting of the TransitionIDs).
                 </para>
                 <para>
                     Дополнительно, имеется возможность назначить Действия Переходов при
@@ -2038,10 +2038,10 @@ TransitionIDs).
         <section>
             <title>Активность</title>
             <para>
-                Активность содержит один или более Диалог Активности и представляет собой
-этап Процесса. Все Диалоги Активности отображаются на экране подробного
-просмотра заявки TicketZoom и используются, пока условия Перехода
-выполняются.
+                An Activity contains one or more Activity Dialogs and models a
+<literal>step</literal> in the process. All Activity Dialogs of the current
+Activity are displayed in the ticket zoom and can be used until the
+conditions of a Transition are fulfilled.
             </para>
             <section>
             <title>Настройка Активности</title>
@@ -2111,10 +2111,11 @@ $Self->{'Process::Activity'} =
             <section>
                 <title>ActivityDialog</title>
                 <para>
-                    Раздел Диалог Активности содержит список Диалогов доступных для этой
-Активности. Все Диалоги текущей Активности отображаются в TicketZoom. Их
-порядок задается при настройке, в данном случае, 'AD5' отображается до 'AD6'
-и 'AD1'.
+                    Activity Dialog contains the list of Activity Dialogs which are available in
+this Activity. All Activity Dialogs of the current Activity are displayed in
+the ticket zoom. Their order is set by the order in the configuration, here
+<literal>AD5</literal> is shown before <literal>AD6</literal> and
+<literal>AD1</literal>.
                 </para>
             </section>
         </section>
@@ -2273,11 +2274,11 @@ StateID => {
                     </screen>
                 </para>
                 <para>
-                    The field "Article" is a special case. If it is present in a "Fields"
-configuration, the Activity Dialog will contain a complete Richtext editor
-with subject field and attachment handling. The entered text will then be
-added to the ticket as an article and sent by email. Let's see an example
-Article field configuration:
+                    The field <literal>Article</literal> is a special case. If it is present in
+a <literal>Fields</literal> configuration, the Activity Dialog will contain
+a complete Richtext editor with subject field and attachment handling. The
+entered text will then be added to the ticket as an article and sent by
+email. Let's see an example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2317,20 +2318,20 @@ Article => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    "0": поле не отображается. Это может быть полезно, если значения полей
-заносятся автоматически. В этом случае будет использовано значение, заданное
-по умолчанию .
+                                    <literal>0</literal>: field is invisible. This can be helpful if field
+values should automatically be set. The configured
+<literal>DefaultValue</literal> will be stored in this case.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    "1": поле отображается, но заполнение его необязательно.
+                                    <literal>1</literal>: field is visible, but optional.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    '2': field is visible and mandatory. The following fields can only be
-invisible or mandatory:
+                                    <literal>2</literal>: field is visible and mandatory. The following fields
+can only be invisible or mandatory:
                                 </para>
                                 <para>
                                     <screen>
@@ -2358,10 +2359,10 @@ invisible or mandatory:
                 <section>
                     <title>Значение по умолчанию</title>
                     <para>
-                        Для полей с суффиксом "ID" (таких как QueueID, OwnerID), система использует
-идентификатор в базе данных в качестве значения. Для других полей без "ID"
-(таких как Queue, Owner), значение по умолчанию должно содержать собственно
-значение. Например:
+                        For fields with <literal>ID</literal> (like QueueID, OwnerID), this refers
+to the database ID of the value. For other fields without
+<literal>ID</literal> (like Queue, Owner), the
+<literal>DefaultValue</literal> must contain the value itself. Example:
                     </para>
                     <para>
                         <screen>
@@ -2522,18 +2523,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    "and": Умалчиваемое значение. Все условия должны быть верны для выполнения
-Перехода.
+                                    <literal>and</literal>: This is the default. All conditions must be met for
+the transition to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    "or"/"или": хотябы одно из условий должно быть верно.
+                                    <literal>or</literal>: At least one condition must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    "xor": должно быть верным не более одного условия.
+                                    <literal>xor</literal>: Exactly one condition must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2554,18 +2555,18 @@ Condition => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'and': по умолчанию. Все проверяемые поля должны удовлетворять условию,
-чтобы результат был - "верно".
+                                    <literal>and</literal>: This is the default. All field tests must match for
+this condition to match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'or': хотя бы одно из полей должно удовлетворять условию.
+                                    <literal>or</literal>: At least one field test must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'xor': не более одного поля должно соответствовать условию.
+                                    <literal>xor</literal>: Exactly one field test must match, not more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2634,34 +2635,35 @@ Fields => {
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    'String/Строка': Сравнивает значение поля со строкой заданной в
-'Match'. Верно, если их значения полностью совпадают.
+                                    <literal>String</literal>: Compares the field value with the string
+specified in <literal>Match</literal>. Matches if they are exactly the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Hash': Сравнивает значение поля (hash)  со значением hash заданным в
-'Match'. Все значения должны совпадать.
+                                    <literal>Hash</literal>: Compares the field value (hash) with the hash
+specified in <literal>Match</literal>. All hash values must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Array/Список': Сравнивает значение поля (array) со списком, заданным в
-'Match'. Оба списка должны быть одинаковы.
+                                    <literal>Array</literal>: Compares the field value (array) with the array
+specified in <literal>Match</literal>. Both lists must be the same.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Regex': Значение поля проверяется с помощью регулярного выражения. Важным
-является, что 'Match' содержит <emphasis>qr{}xms</emphasis> как базовое
-условие. Между скобками может быть записано реальное регулярное выражение.
+                                    <literal>Regex</literal>: The field value can be tested with a regular
+expression. It is important that <literal>Match</literal> contains
+<emphasis>qr{}xms</emphasis> as a base condition. Between the braces the
+actual regular expression can be noted.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    'Module': Позволяет использовать perl модуль для проверки условия. Он
-возвращает, в качестве результата 1, результат проверки верен. Пример модуля
-можно найти в
+                                    <literal>Module</literal>: Allows you to use a perl module for condition
+checking. If it returns 1, the check was positive. You can find an example
+module in
 <filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
                                 </para>
                             </listitem>
@@ -2724,11 +2726,12 @@ sending UserID parameter, by using the UserID parameter. The transition
 action will be executed impersonating the user with the given UserID.
                 </para>
                 <para>
-                    The use of UserID inside the "Config" parameter of a Transition Action is
-accepted by all Transition Actions (since OTRS 3.2.4). In this example it
-could be particularly important if the user that triggers the Transition
-does not have permissions to move the ticket to the queue 'Junk', while the
-user with the UserID 123 might have.
+                    The use of UserID inside the <literal>Config</literal> parameter of a
+Transition Action is accepted by all Transition Actions (since OTRS
+3.2.4). In this example it could be particularly important if the user that
+triggers the Transition does not have permissions to move the ticket to the
+queue <literal>Junk</literal>, while the user with the UserID 123 might
+have.
                 </para>
             </section>
             <section>
@@ -2758,10 +2761,11 @@ Transition Actions in your configuration. Example:
                     </screen>
                 </para>
                 <para>
-                    Здесь, один и тот же модуль используется для передачи процессной заявки в
-очередь "Raw", и в другой раз для перемещения в очередь "junk". Действие
-Перехода, используемое для конкретного Перехода определяется в параметре
-"Path" настроек Процесса.
+                    Here the same module is used to move a process ticket into the
+<literal>Raw</literal> queue, and another time to move it into the junk
+queue. The Transition Action which must be used for a particular Transition
+is determined from the <literal>Path</literal> setting of the Process
+configuration.
                 </para>
             </section>
             <section id="available-transition-actions">
@@ -2793,12 +2797,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Главный/Подчиненный' и 'Утверждение' даны как пример имен динамических
-полей. Значения полей ("Главный" и "1") будут установлены этим Действием
-Перехода.
+                        <literal>MasterSlave</literal> and <literal>Approved</literal> are given as
+examples of DynamicField names.  The values of the fields
+(<literal>Master</literal> and <literal>1</literal>) will be set by this
+TransitionAction.
                     </para>
                 </section>
 
@@ -2847,69 +2853,72 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя настраиваемого Действия Перехода. Его можно выбрать
-произвольно, но желательно, чтобы оно отражало цель действия.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        "Тип заметки/сообщения" задает тип создаваемой заметки. Возможные значения:
-phone, fax, sms, webrequest, note-internal, note-external and note-report.
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
-                        'SenderType' задает тип отправителя для заметки/сообщения. Возможные
-значения: агент, система, клиент.
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
                     </para>
                     <para>
-                        "ContentType"/"Тип содержания" задает тип содержимого
-заметки/сообщения. Возможные значения:  'text/plain; charset=ISO-8859-15'
-или любой другая допустимая кодировка или mime тип.
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        Тема - задает заголовок сообщения/заметки. Обязательна.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        "Тело" - задает содержимое сообщения/заметки. Указывать обязательно.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType/Тип записи Истории' задает типы/названия записей истории
-заявки.  Возможные значения: AddNote, ArchiveFlagUpdate, Bounce,
-CustomerUpdate, EmailAgent, EmailCustomer,
-EscalationResponseTimeNotifyBefore, EscalationResponseTimeStart,
-EscalationResponseTimeStop, EscalationSolutionTimeNotifyBefore,
-EscalationSolutionTimeStart, EscalationSolutionTimeStop,
-EscalationUpdateTimeNotifyBefore, EscalationUpdateTimeStart,
-EscalationUpdateTimeStop, FollowUp, Forward, Lock, LoopProtection, Merged,
-Misc, Move, NewTicket, OwnerUpdate, PhoneCallAgent, PhoneCallCustomer,
-PriorityUpdate, Remove, ResponsibleUpdate, SendAgentNotification,
-SendAnswer, SendAutoFollowUp, SendAutoReject, SendAutoReply,
-SendCustomerNotification, ServiceUpdate, SetPendingTime, SLAUpdate,
-StateUpdate, Subscribe, SystemRequest, TicketDynamicFieldUpdate,
-TicketLinkAdd, TicketLinkDelete, TimeAccounting, TypeUpdate, Unlock,
-Unsubscribe, WebRequestCustomer.
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        "HistoryComment" описывает содержимое записи истории.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        "От", "Кому", "Копия" и "Ответить" задает адреса электронной почты с учетом
-правил, указанных выше.
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        'InReplyTo' и 'References' получает идентификаторы/IDs сообщений.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        "NoAgentNotify"/Не иформировать агента - если установлено в "1", уведомление
-агенту посылаться не будет.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        "AutoResponseType"/"Тип автоответа" - может принимать следующие значения:
-auto follow up/автоотклик, auto reject/автоотказ, auto remove/автоудаление,
-auto reply/автоответ, auto reply/new ticket/автоответ-новая заявка.
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'ForceNotificationToUserID', 'ExcludeNotificationToUserID',
-'ExcludeMuteNotificationToUserID' может содержать список UserIDs, которые
-либо всегда оповешаются, не оповещаются, либо  помечаются как оповещенные,
-но на самом деле им не отправлено уведомление по электронной почте.
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                 </section>
                 <section>
@@ -2934,7 +2943,7 @@ $Self->{'Process::TransitionAction'} = {
             State         => 'new',              # or StateID => 5,
             CustomerID    => '123465',
             CustomerUser  => 'customer@example.com',
-            OwnerID       => 123,
+            OwnerID       => 'someuserlogin',    # or OwnerID => 123,
 
             # ticket optional:
             TN              => $TicketObject->TicketCreateNumber(), # optional
@@ -2987,138 +2996,144 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя настраиваемого Действия Перехода. Его можно выбрать
-произвольно, но желательно, чтобы оно отражало цель действия.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction. It can be freely chosen, but should reflect the purpose of
+the configured action.
                     </para>
                     <para>
-                        'Название' Название заявки.
+                        <literal>Title</literal> The ticket title.
                     </para>
                     <para>
-                        'Queue' или 'QueueID' задает имя или идентификатор очереди для использования
-в новой заявке.
+                        <literal>Queue</literal> or <literal>QueueID</literal> specifies the name or
+id of the queue to be used in the new ticket.
                     </para>
                     <para>
-                        'Lock' или 'LockID' задает статус блокировки для заявки.
+                        <literal>Lock</literal> or <literal>LockID</literal> sets the lock status of
+the ticket.
                     </para>
                     <para>
-                        'Priority' or 'PriorityID' specifies the name or id of the priority to be
-used in the new ticket.
+                        <literal>Priority</literal> or <literal>PriorityID</literal> specifies the
+name or id of the priority to be used in the new ticket.
                     </para>
                     <para>
-                        'State' или 'StateID' задает состояние или его идентификатор для
-использования в новой заявке.
+                        <literal>State</literal> or <literal>StateID</literal> specifies the name or
+id of the state to be used in the new ticket.
                     </para>
                     <para>
-                        'CustomerID', идентификатор клиента/компании клиента для указания в новой
-заявке.
+                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
                     </para>
                     <para>
-                        'CustomerUser', имя входа/login клиента, назначаемый новой заявке.
+                        <literal>CustomerUser</literal>, the login of the customer that will be
+assigned in the ticket.
                     </para>
                     <para>
-                        'OwnerID', ID агента, который будет новым владельцем заявки.
+                        <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the
+login or id of the agent that will be the new ticket owner.
                     </para>
                     <para>
-                        'TN', пользовательский номер новой заявки.
+                        <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
-                        'Type' или 'TypeID' задает название или id типа заявки для использования в
-новой заявке.
+                        <literal>Type</literal> or <literal>TypeID</literal> specifies the name or
+id of the ticket type to be used in the new ticket.
                     </para>
                     <para>
-                        Service' или 'ServiceID' задает название или id Сервиса для использования в
-новой заявке.
+                        <literal>Service</literal> or <literal>ServiceID</literal> specifies the
+name or id of the service to be used in the new ticket.
                     </para>
                     <para>
-                        'SLA' or 'SLAID' specifies the name or id of the SLA to be used in the new
-ticket.
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id
+of the SLA to be used in the new ticket.
                     </para>
                     <para>
-                        'ResponsibleID', ID агента, назначаемого ответственным за новую заявку.
+                        <literal>ResponsibleID</literal>, the ID of the agent that will be the new
+ticket responsible.
                     </para>
                     <para>
-                        'PendingTime', a predefined date to set the Ticket Pending Times, when the
-ticket state belongs to a pending state type.
+                        <literal>PendingTime</literal>, a predefined date to set the Ticket Pending
+Times, when the ticket state belongs to a pending state type.
                     </para>
                     <para>
-                        'PendingTimeDiff', a dynamically date (expressed in seconds from current
-date/time) to set the Ticket Pending Times, when the ticket state belongs to
-a pending state type.
+                        <literal>PendingTimeDiff</literal>, a dynamically date (expressed in seconds
+from current date/time) to set the Ticket Pending Times, when the ticket
+state belongs to a pending state type.
                     </para>
                     <para>
-                        "Тип заметки/сообщения" задает тип создаваемой заметки. Возможные значения:
-phone, fax, sms, webrequest, note-internal, note-external and note-report.
+                        <literal>ArticleType</literal> defines the type of the article to be
+created. Possible values: phone, fax, sms, webrequest, note-internal,
+note-external and note-report.
                     </para>
                     <para>
                         Тип отправителя задает тип отправителя для заметки/сообщения. Возможные
 значения: агент, система, клиент.
                     </para>
                     <para>
-                        "ContentType"/"Тип содержания" задает тип содержимого
-заметки/сообщения. Возможные значения:  'text/plain; charset=ISO-8859-15'
-или любой другая допустимая кодировка или mime тип.
+                        <literal>ContentType</literal> defines the content type of the
+article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
+or any other valid charset and mime type.
                     </para>
                     <para>
-                        Тема - задает заголовок сообщения/заметки. Обязательна.
+                        <literal>Subject</literal> defines the article title. Mandatory.
                     </para>
                     <para>
-                        "Тело" - задает содержимое сообщения/заметки. Указывать обязательно.
+                        <literal>Body</literal> defines the article content. Mandatory.
                     </para>
                     <para>
-                        'HistoryType/Тип записи Истории' задает типы/названия записей истории
-заявки.  Возможные значения: AddNote, ArchiveFlagUpdate, Bounce,
-CustomerUpdate, EmailAgent, EmailCustomer,
-EscalationResponseTimeNotifyBefore, EscalationResponseTimeStart,
-EscalationResponseTimeStop, EscalationSolutionTimeNotifyBefore,
-EscalationSolutionTimeStart, EscalationSolutionTimeStop,
-EscalationUpdateTimeNotifyBefore, EscalationUpdateTimeStart,
-EscalationUpdateTimeStop, FollowUp, Forward, Lock, LoopProtection, Merged,
-Misc, Move, NewTicket, OwnerUpdate, PhoneCallAgent, PhoneCallCustomer,
-PriorityUpdate, Remove, ResponsibleUpdate, SendAgentNotification,
-SendAnswer, SendAutoFollowUp, SendAutoReject, SendAutoReply,
-SendCustomerNotification, ServiceUpdate, SetPendingTime, SLAUpdate,
-StateUpdate, Subscribe, SystemRequest, TicketDynamicFieldUpdate,
-TicketLinkAdd, TicketLinkDelete, TimeAccounting, TypeUpdate, Unlock,
-Unsubscribe, WebRequestCustomer.
+                        <literal>HistoryType</literal> defines the type of the history
+entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
+EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
+EscalationResponseTimeStart, EscalationResponseTimeStop,
+EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
+EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
+EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
+Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
+PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
+ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
+SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
+SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
+TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
+TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
                     </para>
                     <para>
-                        "HistoryComment" описывает содержимое записи истории.
+                        <literal>HistoryComment</literal> defines the content of the history entry.
                     </para>
                     <para>
-                        "От", "Кому", "Копия" и "Ответить" задает адреса электронной почты с учетом
-правил, указанных выше.
+                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
+<literal>ReplyTo</literal> take email addresses in the notation specified
+above.
                     </para>
                     <para>
-                        'InReplyTo' и 'References' получает идентификаторы/IDs сообщений.
+                        <literal>InReplyTo</literal> and <literal>References</literal> take email
+message IDs.
                     </para>
                     <para>
-                        "NoAgentNotify"/Не иформировать агента - если установлено в "1", уведомление
-агенту посылаться не будет.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
+the Agent will not be sent.
                     </para>
                     <para>
-                        "AutoResponseType"/"Тип автоответа" - может принимать следующие значения:
-auto follow up/автоотклик, auto reject/автоотказ, auto remove/автоудаление,
-auto reply/автоответ, auto reply/new ticket/автоответ-новая заявка.
+                        <literal>AutoResponseType</literal> can take the following values: auto
+follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
                     </para>
                     <para>
-                        'ForceNotificationToUserID', 'ExcludeNotificationToUserID',
-'ExcludeMuteNotificationToUserID' может содержать список UserIDs, которые
-либо всегда оповешаются, не оповещаются, либо  помечаются как оповещенные,
-но на самом деле им не отправлено уведомление по электронной почте.
+                        <literal>ForceNotificationToUserID</literal>,
+<literal>ExcludeNotificationToUserID</literal>,
+<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
+UserIDs that are either always notified, not notified or listed as notified
+but not actually sent a notification email.
                     </para>
                     <para>
-                        'TimeUnit/Единицы времени' - время, потраченное на текущее действие по
-заявке, выраженное секундах, минутах, часах,  и т. д.
+                        <literal>TimeUnit</literal> the time invested in the current ticket article
+expressed in seconds, minutes, hours, etc.
                     </para>
                     <para>
-                        'DynamicField_NameX' where DynamicField_ is a required prefix and NameX is
-the name of a Dynamic Field to be set in the new ticket (on ticket level,
-not article levels).
+                        <literal>DynamicField_NameX</literal> where DynamicField_ is a required
+prefix and NameX is the name of a Dynamic Field to be set in the new ticket
+(on ticket level, not article levels).
                     </para>
                     <para>
-                        'LinkAs/Связать как' для определения отношения к оригинальной заявке, с
-точки зрения новой заявки, например, Normal/Обычная, Parent/Родитель,
-Child/Потомок и т. д.
+                        <literal>LinkAs</literal> to define the new ticket relation with originator
+ticket, from the new ticket point of view, for example Normal, Parent, Child
+etc.
                     </para>
                 </section>
                 <section>
@@ -3145,13 +3160,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'No' или 'CustomerID' задает Customer ID клиента.
+                        <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID
+of the customer.
                     </para>
                     <para>
-                        'User' или 'CustomerUserID' задает имя пользователя клиента.
+                        <literal>User</literal> or <literal>CustomerUserID</literal> set the
+Username of the customer.
                     </para>
                 </section>
 
@@ -3176,13 +3194,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        'Lock/Блокировка' - задает новый статус блокировки для процессной заявки.
+                        <literal>Lock</literal> defines the new lock of the process ticket.
                     </para>
                     <para>
-                        'LockID' задает внутренний ID нового статуса блокировки.
+                        <literal>LockID</literal> defines the internal ID of the new lock.
                     </para>
                 </section>
 
@@ -3207,13 +3226,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Owner"/"Владелец" - задает логин нового владельца.
+                        <literal>Owner</literal> specifies the login name of the new owner.
                     </para>
                     <para>
-                        "OwnerID" задает внутренний ID нового владельца.
+                        <literal>OwnerID</literal> specifies the internal ID of the new owner.
                     </para>
                 </section>
 
@@ -3238,13 +3258,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Queue" задает имя очереди для перемещения.
+                        <literal>Queue</literal> specifies the name of the target queue.
                     </para>
                     <para>
-                        "QueueID" задает внутренний ID для очереди для перемещения.
+                        <literal>QueueID</literal> specifies the internal ID of the target queue.
                     </para>
                 </section>
 
@@ -3269,13 +3290,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Responsible" задает логин нового ответственного.
+                        <literal>Responsible</literal> specifies the login name of the new
+responsible.
                     </para>
                     <para>
-                        "ResponsibleID" задает внутренний ID нового ответственного.
+                        <literal>ResponsibleID</literal> specifies the internal ID of the new
+responsible.
                     </para>
                 </section>
 
@@ -3301,14 +3325,16 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Service" задает новый сервис для процессной заявки. Требуется задать полное
-имя сервиса (например, GrandFatherService::FatherService::SonService ).
+                        <literal>Service</literal> defines the new service of the process
+ticket. The full name is required
+(e.g. GramdFatherService::FatherService::SonService ).
                     </para>
                     <para>
-                        "ServiceID" задает внутренний ID нового сервиса.
+                        <literal>ServiceID</literal> defines the internal ID of the new service.
                     </para>
                 </section>
 
@@ -3334,13 +3360,15 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "SLA" задает новое соглашение об уровне сервиса для процессной заявки.
+                        <literal>SLA</literal> defines the new service level agreement of the
+process ticket.
                     </para>
                     <para>
-                        "SLAID" задает внутренний ID новогоSLA.
+                        <literal>SLAID</literal> defines the internal ID of the new SLA.
                     </para>
                 </section>
 
@@ -3367,20 +3395,20 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "State" задает новое состояние процессной заявки.
+                        <literal>State</literal> defines the new state of the process ticket.
                     </para>
                     <para>
-                        "StateID" задает внутренний ID нового состояния.
+                        <literal>StateID</literal> defines the internal ID of the new state.
                     </para>
                     <para>
-                        "PendingTimeDiff" используется только для состояний с ожиданием, задает
-относительную разность в секундах (относительно заданного времени выполнения
-Действия Перехода) для установки времени ожидания для заявки (например, 3600
-означает что устанавливается ожидание в 1 час после заданного времени
-выполнения Действия Перехода).
+                        <literal>PendingTimeDiff</literal> used only for pending type states,
+defines the time difference in seconds relative (relative to the Transition
+Action execution time) to set ticket pending time (e.g. 3600 means that the
+pending time is 1hr after the Transition Action is executed).
                     </para>
                 </section>
 
@@ -3403,10 +3431,11 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Title" задает новую тему заявки.
+                        <literal>Title</literal> specifies the new title of the ticket.
                     </para>
                 </section>
 
@@ -3431,13 +3460,14 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        "Имя" задает имя конфигурируемого Действия Перехода.
+                        <literal>Name</literal> specifies the name of the configured
+TransitionAction.
                     </para>
                     <para>
-                        "Type"/"Тип" - задает название типа заявки.
+                        <literal>Type</literal> specifies the name of the ticket type.
                     </para>
                     <para>
-                        "TypeID" задает внутренний ID для типа заявки.
+                        <literal>TypeID</literal> specifies the internal ID of the ticket type.
                     </para>
                 </section>
             </section>
@@ -3519,27 +3549,32 @@ linkend="acl">the ACL manual</link>.
 при просмотре заявки.
                 </para>
                 <para>
-                    "Possible" показывает список допустимых Диалогов Активности. Установка выше,
-допускает только 'AD1' и 'AD3' из списка заданных Диалогов Активности.
+                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The
+setting above will only allow <literal>AD1</literal> and
+<literal>AD3</literal> of the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    'PossibleNot' отображает список недозволенных Диалогов Активности. В примере
-выше, настройка удаляет 'AD3' из списка заданных Диалогов Активности.
+                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not
+allowed. In the example above, the setting will remove
+<literal>AD3</literal> from the list of configured Activity Dialogs.
                 </para>
                 <para>
-                    Если оба 'Possible' и 'PossibleNot' заданы, список заданных Диалогов
-Активности сначала фильтруется используя 'Possible', оставляя 'AD1' и 'AD3'
-в нашем примере. Затем применяется фильтр 'PossibleNot', который удаляет
-'AD3', оставляя таким образом только 'AD1', как доступный пользователю для
-использования Диалог Активности.
+                    If both <literal>Possible</literal> and <literal>PossibleNot</literal> are
+specified, the list of configured Activity Dialogs will first be filtered by
+<literal>Possible</literal>, leaving only <literal>AD1</literal> and
+<literal>AD3</literal> in our example. Then <literal>PossibleNot</literal>
+will be applied and filter out <literal>AD3</literal>, so that only
+<literal>AD1</literal> remains and is shown as a possible Activity Dialog
+that the user can use.
                 </para>
                 <para>
                     Если множество правил ACL удовлетворяются, их пересечение будет вычислено
 для определения доступных Диалогов Активности. Пример:
                 </para>
                 <para>
-                    Configured Activity Dialogs: 'AD1', 'AD2', 'AD3', 'AD4', 'AD5', 'AD6',
-'AD7'.
+                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>,
+<literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>,
+<literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3576,28 +3611,36 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
                     </screen>
                 </para>
                 <para>
-                    Если заявка имеет состояние 'new', находится в очереди 'Raw' и имеет
-приоритет '3 normal', то все три правила ACL будут удовлетворяться.
+                    If a process ticket has the state <literal>new</literal>, is in the
+<literal>Raw</literal> queue and has a priority <literal>3 normal</literal>,
+then all three ACL rules will match.
                 </para>
                 <para>
-                    Первое правило сокращает список Диалогов Активности с 'AD1', 'AD2', 'AD3',
-'AD4', 'AD5', 'AD6', 'AD7' до 'AD1', 'AD2', 'AD3', 'AD6', 'AD7' и запрещает
-'AD4' and 'AD5'.
+                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>,
+<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to
+<literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD6</literal>, <literal>AD7</literal> and forbids
+<literal>AD4</literal> and <literal>AD5</literal>.
                 </para>
                 <para>
-                    Второе правило еще сокращает список оставшихся Диалогов Активности. В нашем
-примере, остаются 'AD2', 'AD3', 'AD7'.
+                    The second rule will now further reduce the remaining Activity Dialogs.  In
+our example, <literal>AD2</literal>, <literal>AD3</literal>,
+<literal>AD7</literal> will remain.
                 </para>
                 <para>
-                    Третье правило еще более сокращает список с помощью 'PossibleNot'. 'AD3'
-удаляется из списка. 'AD4' не будет удален, т.к. он не на первом месте в
-списке. И, наконец, 'AD2' и 'AD7' останутся, как доступные для выбора
-пользователем Диалоги Активности.
+                    Now the third rule will further reduce the list by
+<literal>PossibleNot</literal>.  <literal>AD3</literal> is removed from the
+list. <literal>AD4</literal> is not removed, since it was not on the list in
+the first place. At the end, <literal>AD2</literal> and
+<literal>AD7</literal> remain as possible Activity Dialogs that the user can
+utilize.
                 </para>
                 <para>
-                    It is also possible to limit the processes that can be displayed in the "New
-process ticket" screen. The functionality is similar to limiting the
-Activity Dialogs with one exception: The ACLs could only be based on Users.
+                    It is also possible to limit the processes that can be displayed in the
+<literal>New process ticket</literal> screen. The functionality is similar
+to limiting the Activity Dialogs with one exception: The ACLs could only be
+based on Users.
                 </para>
                 <para>Смотрите примеры ниже:</para>
                 <para>
@@ -3655,6 +3698,34 @@ $Self->{TicketAcl}->{'202-ACL-Process'} = {
                     </screen>
                 </para>
             </section>
+        </section>
+    </section>
+    <section>
+        <title>Import ready-to-run process</title>
+
+        <section>
+            <title>Импорт</title>
+            <para>
+                On the <emphasis>AdminProcessManagement</emphasis> screen you can find an
+<emphasis>Ready-to-run Processes</emphasis> widget, where you can find best
+practice ready-to-run processes. Currently, there is only an
+<emphasis>Application for leave</emphasis> process available, but you can
+find additional ready-to-run processes in the <emphasis role="bold">OTRS
+Business Solution™</emphasis>.
+
+            </para>
+            <para>
+                <figure>
+                    <title>Import Ready-to-run Processes widget</title>
+<screenshot>
+<graphic fileref="screenshots/customization/pm-process-widget.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+            </para>
+            <para>
+                Select process from the drop-down menu and click on the <emphasis>Import
+ready-to-run process</emphasis> button. After the process is imported, don't
+forget to deploy changes.
+            </para>
         </section>
     </section>
 </section>
