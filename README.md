@@ -43,6 +43,19 @@ the configuration parameter reference. If you only see these link validity error
 everything should be fine.
 
 
+Generating Translation Sources Manually
+---------------------------------------
+
+If you add any new files, make sure to include them in `po4a.conf`.
+
+Then you can run
+```
+po4a -v -k0 /path/to/doc-admin/po4a.conf
+```
+
+The command will generate files for all supported languages.
+
+
 Translating the Sources
 -----------------------
 
