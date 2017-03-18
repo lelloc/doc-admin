@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
+<!-- nofilter(TidyAll::Plugin::OTRS::Common::Origin) -->
 
 <section id="genericinterface-connectors">
     <title>Connectors</title>
@@ -454,6 +455,8 @@
          <!--Optional:-->
          <Attachments>?</Attachments>
          <!--Optional:-->
+         <GetAttachmentContents>?</GetAttachmentContents>
+         <!--Optional:-->
          <HTMLBodyAsAttachment>?</HTMLBodyAsAttachment>
       </TicketGet>
                             ]]>
@@ -549,7 +552,8 @@
          <!--Zero or more repetitions:-->
          <CreatedQueueIDs>?</CreatedQueueIDs>
          <!--Zero or more repetitions:-->
-         <DynamicFields>
+         <DynamicField>
+            <Name>?<Name>
             <!--You have a MANDATORY CHOICE of the next 6 items at this level-->
             <!--Optional:-->
             <Equals>?</Equals>
@@ -563,7 +567,7 @@
             <SmallerThan>?</SmallerThan>
             <!--Optional:-->
             <SmallerThanEquals>?</SmallerThanEquals>
-         </DynamicFields>
+         </DynamicField>
          <!--Optional:-->
          <Ticketflag>
             <!--Optional:-->
@@ -860,7 +864,7 @@ Requester:
 #!/usr/bin/perl -w
 # --
 # otrs.SOAPRequest.pl - sample to send a SOAP request to OTRS Generic Interface Ticket Connector
-# Copyright (C) 2001-2016 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -979,7 +983,7 @@ else {
 #!/usr/bin/perl
 # --
 # otrs.RESTRequest.pl - sample to send a REST request to OTRS Generic Interface Ticket Connector
-# Copyright (C) 2001-2016 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
