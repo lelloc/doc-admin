@@ -120,17 +120,15 @@ CustomerValid => 'valid_id',
 #    ReadOnly => 1,
     Map => [
         # note: Login, Email and CustomerID needed!
-        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target
+        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target, link class(es)
         [ 'UserTitle',      'Title',      'title',      1, 0, 'var', '', 0 ],
         [ 'UserFirstname',  'Firstname',  'first_name', 1, 1, 'var', '', 0 ],
         [ 'UserLastname',   'Lastname',   'last_name',  1, 1, 'var', '', 0 ],
         [ 'UserLogin',      'Username',   'login',      1, 1, 'var', '', 0 ],
         [ 'UserPassword',   'Password',   'pw',         0, 0, 'var', '', 0 ],
         [ 'UserEmail',      'Email',      'email',      1, 1, 'var', '', 0 ],
-
-#        [ 'UserEmail',      'Email', 'email',           1, 1, 'var', '[% Env("CGIHandle") %]?Action=AgentTicketCompose&amp;ResponseID=1&amp;TicketID=[% Data.TicketID %]&amp;ArticleID=[% Data.ArticleID %]', 0 ],
+#        [ 'UserEmail',      Translatable('Email'), 'email',           1, 1, 'var', '[% Env("CGIHandle") %]?Action=AgentTicketCompose;ResponseID=1;TicketID=[% Data.TicketID | uri %];ArticleID=[% Data.ArticleID | uri %]', 0, '', 'AsPopup OTRSPopup_TicketAction' ],
         [ 'UserCustomerID', 'CustomerID', 'customer_id', 0, 1, 'var', '', 0 ],
-
 #        [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],
         [ 'UserPhone',        'Phone',       'phone',        1, 0, 'var', '', 0 ],
         [ 'UserFax',          'Fax',         'fax',          1, 0, 'var', '', 0 ],
@@ -141,6 +139,9 @@ CustomerValid => 'valid_id',
         [ 'UserCountry',      'Country',     'country',      1, 0, 'var', '', 0 ],
         [ 'UserComment',      'Comment',     'comments',     1, 0, 'var', '', 0 ],
         [ 'ValidID',          'Valid',       'valid_id',     0, 1, 'int', '', 0 ],
+
+        # Dynamic field example
+#        [ 'DynamicField_Name_X', undef, 'Name_X', 0, 0, 'dynamic_field', undef, 0, undef, undef, ],
     ],
     # default selections
     Selections => {
@@ -193,7 +194,7 @@ linux:~#
 
 <para>
 <programlisting>
-    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target, link class(es)
     [...]
     [ 'UserRoom',      'Room',      'room',       0, 1, 'var', '', 0 ],
 </programlisting>
@@ -206,6 +207,16 @@ linux:~#
 <para>
 担当者インターフェースの顧客リンクによってこの顧客情報をすべて編集することも可能です。
 </para>
+
+<note>
+    <para>
+        Please note that you may omit <literal>http-link-target</literal> and
+<literal>link class</literal> keys in map array elements, if they are not to
+be used. These keys add <literal>target=""</literal> and
+<literal>class=""</literal> attributes to the HTTP link element,
+respectively. They are ignored if <literal>http-link</literal> is not set.
+    </para>
+</note>
 
 <section id='multi-customer-ids-db'>
 <title>Customer with Multiple IDs (Company Tickets)</title>
@@ -252,7 +263,7 @@ linux:~#
 
 <para>
 <programlisting>
-    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target, link class(es)
     [...]
     [ 'UserCustomerIDs', 'CustomerIDs', 'customer_ids', 1, 0, 'var', '', 0 ],
 </programlisting>
@@ -352,7 +363,7 @@ $Self->{CustomerUser} = {
 #    CacheTTL => 0,
     Map => [
         # note: Login, Email and CustomerID are mandatory!
-        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+        # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target, link class(es)
         [ 'UserTitle',      'Title',      'title',           1, 0, 'var', '', 0 ],
         [ 'UserFirstname',  'Firstname',  'givenname',       1, 1, 'var', '', 0 ],
         [ 'UserLastname',   'Lastname',   'sn',              1, 1, 'var', '', 0 ],
@@ -377,7 +388,7 @@ $Self->{CustomerUser} = {
 
 <para>
 <programlisting>
-    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly
+    # var, frontend, storage, shown (1=always,2=lite), required, storage-type, http-link, readonly, http-link-target, link class(es)
     [...]
     [ 'UserPhone',      'Phone',      'telephonenumber', 1, 0, 'var', '', 0 ],
 </programlisting>
@@ -1006,11 +1017,15 @@ $Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
 次の例は、顧客のroom番号を格納するためには、この場合どのように顧客データベースの中であなたが必須フィールドを指定することができるか示します。
 </para>
 
-<section id='customer-self-registration-dtl'>
+<section id='customer-self-registration-tt'>
 <title>Customizing the Web Interface</title>
 
 <para>
-customer.plウェブインターフェースのroom番号用の新規フィールドを表示するために、このインターフェースのレイアウトの責任者である.dtlファイルを修正しなければなりません。80行目のまわりの新規フィールドを加えて、<filename>Kernel/Output/HTML/Standard/CustomerLogin.dtl</filename>ファイルを編集してください。(下記のスクリプトを参照)。
+To display the new field for the room number in the customer.pl web
+interface, the .tt file responsible for the layout in this interface has to
+be modified. Edit the
+<filename>Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt</filename>
+file, adding the new field around line 130 (see Script below).
 </para>
 
 <para>

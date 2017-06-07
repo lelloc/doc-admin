@@ -350,6 +350,7 @@ linkend="process-management-acl">访问控制列表（ACL）部分</link>。
 # ticket acl
 $Self->{TicketAcl}->{'200-ACL-Reference'} = {
     # match properties (current values from the form)
+    # 匹配属性（窗口中的当前值）
     Properties => {
 
         # the used frontend module
@@ -357,7 +358,7 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             Action => ['AgentTicketPhone', 'AgentTicketEmail'],
         },
 
-        # the logged in agent
+        # the logged in agent登录的服务人员
         User => {
             UserLogin => ['some login'],
             Group_rw => [
@@ -369,7 +370,7 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         },
 
-        # the logged in customer
+        # the logged in customer登录的客户
         CustomerUser => {
             UserLogin => ['some login'],
             UserCustomerID => ['some customer id'],
@@ -379,14 +380,14 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         },
 
-        # process properties
+        # process properties流程属性
         Process => {
             ProcessEntityID        => ['Process-9c378d7cc59f0fce4cee7bb9995ee3eb'],         # the Process that the current ticket is part of
             ActivityEntityID       => ['Activity-f8b2fdebe54eeb7b147a5f8e1da5e35c'],        # the current Activity of the ticket
             ActivityDialogEntityID => ['ActivityDialog-aff0ae05fe6803f38de8fff6cf33b7ce'],  # the current ActivityDialog that the Agent/Customer is using
         },
 
-        # ticket properties
+        # ticket properties工单属性
         Queue => {
             Name     => ['Raw'],
             QueueID  => ['some id'],
@@ -445,16 +446,17 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         },
         DynamicField => {
-            # Names must be in DynamicField_&lt;field_name&gt; format.
+            # Names must be in DynamicField_&lt;field_name&gt; format.名称必须是DynamicField_&lt;field_name&gt;格式。
             # Values in [ ... ] must always be the untranslated internal data keys
             #   specified in the dynamic field definition and
             #   not the data values shown to the user.
+            #[...]中括号里的值必须是没有翻译的定义动态字段的内部数据，而不是显示给用户看的数据。
             DynamicField_Field1          => ['some value'],
             DynamicField_OtherField      => ['some value'],
             DynamicField_TicketFreeText2 => ['some value'],
             # ...
         },
-        # alternatively, ticket properties can be specified in the ticket hash
+        # alternatively, ticket properties can be specified in the ticket hash或者，可以用工单哈希表来指定工单属性
         Ticket => {
             Queue                => ['Raw'],
             State                => ['new', 'open'],
@@ -469,15 +471,15 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
         },
     },
 
-    # match properties (existing values from the database)
+    # match properties (existing values from the database)匹配属性（数据库中存在的值）
     PropertiesDatabase => {
-        # See section "Properties", the same config can be used here.
+        # See section "Properties", the same config can be used here.参阅“Properties”部分，那里的配置完全适用于此处。
         # ...
     }
 
-    # reset possible options (white list)
+    # reset possible options (white list)重置可用的选项（白名单）
     Possible => {
-        # possible ticket options (white list)
+        # possible ticket options (white list)可用的选项（白名单）
         Ticket => {
             Queue => ['Hotline', 'Coordination'],
             State => ['some state'],
@@ -492,12 +494,13 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
 
         # Limit the number of possible ActivityDialogs the Agent/Customer
         #   can use in a process ticket.
+        #限制服务人员/客户联系人在一个流程工单中可用的活动对话框数量
         ActivityDialog => ['AD1', 'AD3'],
 
-        # Limit the number of possible Processes that can be started
+        # Limit the number of possible Processes that can be started限制能启动的可用流程数量
         Process => ['Process-9c378d7cc59f0fce4cee7bb9995ee3eb', 'Process-12345678901234567890123456789012'],
 
-        # possible action options (white list)
+        # possible action options (white list)可用的操作选项（白名单）
         Action => [
             'AgentTicketBounce',
             'AgentTicketPhone'.      # only used to show/hide the Split action
@@ -505,14 +508,14 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         ],
     },
-    # add options (white list)
+    # add options (white list)添加选项（白名单）
     PossibleAdd => {
-        # See section "Possible"
+        # See section "Possible"参阅“Possible”部分
         # ...
     },
-    # remove options (black list)
+    # remove options (black list)移除选项（黑名单）
     PossibleNot => {
-        # See section "Possible"
+        # See section "Possible"参阅“Possible”部分
         # ...
     },
 };

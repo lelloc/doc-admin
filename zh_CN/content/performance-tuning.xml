@@ -6,89 +6,206 @@
     <title>性能优化</title>
 
     <abstract>
-    <para>
-    下面是OTRS安装（包括配置）、编码、内存使用及其它方面的性能增强技术的清单。
-    </para>
+        <para>
+            下面是OTRS安装（包括配置）、编码、内存使用及其它方面的性能增强技术的清单。
+        </para>
     </abstract>
 
     <section id="performance-tuning-otrs">
         <title>OTRS</title>
         <para>
-        提升OTRS性能有如下一些方法。
+            提升OTRS性能有如下一些方法。
         </para>
 
         <section id="performance-tuning-otrs-index">
             <title>TicketIndexModule 工单索引模块</title>
             <para>
                 工单队列视图的索引有两个后端模块：
-
-                <itemizedlist>
-
-                    <listitem>
-                        <para>
-
-使用<literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal>（默认），从工单表中动态生成每个队列视图。除非你的系统有超过60000个处理中的工单，否则不会有性能问题。
-                        </para>
-                    </listitem>
-
-                    <listitem>
-                        <para>
-                        <literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal>，如果你有超过80000个处理中的工单则应使用这个强力的模块。它使用一个额外的ticket_index表（像视图一样工作）。当切换索引后端时，使用<filename>bin/otrs.Console.pl
-Maint::Ticket::QueueIndexRebuild</filename> 来初始化索引。
-                        </para>
-                    </listitem>
-
-                </itemizedlist>
-
-                你可以通过系统配置来修改参数IndexAccelerator的配置。
             </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will generate each queue view on the fly
+from the ticket table. You will not have performance trouble until you have
+about 60,000 open tickets in your system.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            The most powerful module, should be used when you have above 80,000 open
+tickets. It uses an extra <literal>ticket_index</literal> table, which will
+be populated with keywords based on ticket data. Use
+<filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename>
+for generating an initial index after switching backends.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <para>
+                You can change the used IndexAccelerator module via SysConfig.
+            </para>
+        </section>
 
+        <section id="performance-tuning-otrs-search">
+            <title>SearchIndexModule</title>
+            <para>
+                This module helps to extend your articles full-text search (From, To, Cc,
+Subject and Body search).  There are two backend modules for the search
+index:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will will do full-text searches on live data
+(it works fine for up to 50,000 tickets).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            This module will strip all articles and build an index after article
+creation, increasing performance of full-text searches up to 50%.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <para>
+                You can change the used SearchIndexModule via SysConfig.
+            </para>
+            <para>
+                To create an initial index, use <filename>bin/otrs.Console.pl
+Maint::Ticket::FulltextIndexRebuild</filename>.
+            </para>
+            <para>
+                For StaticDB module, there are some options available for fine tuning:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Attribute</literal></term>
+                    <listitem>
+                        <para>
+                            The attribute "WordCountMax" defines the maximum of words which will be
+processed to build up the index. For example only the first 1000 words of an
+article body are stored in the article search index. The attributes
+"WordLengthMin" and "WordLengthMax" are used as word length boundaries. Only
+words with a length between these two values are stored in the article
+search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Filters</literal></term>
+                    <listitem>
+                        <para>
+                            There are three default filters defined:
+                        </para>
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    The first filter strips out special chars like: <literal>, &amp; &lt; &gt; ?
+" ! * | ; [ ] ( ) + $ ^=</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The second filter strips out words which begin or ends with one of following
+chars: <literal>' : .</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The third filter strips out words which do not contain a word-character:
+<literal>a-z, A-Z, 0-9, _</literal>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::StopWords</literal></term>
+                    <listitem>
+                        <para>
+                            There are so-called stop-words defined for some languages. These stop-words
+will be skipped while creating the search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
         </section>
 
         <section id="performance-tuning-otrs-storage">
             <title>TicketStorageModule 工单存储模块</title>
             <para>
-            存储工单/信件有两个不同后端模块：
+                存储工单/信件有两个不同后端模块：
             </para>
-
-            <para>
-            <itemizedlist>
-
-                <listitem>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageDB</literal></term>
+                    <listitem>
+                        <para>
+                            This default module will store attachments in the database.
+                        </para>
+                        <note>
+                            <para>
+                                Don't use it with large setups.
+                            </para>
+                        </note>
+                        <para>
+                            Pro: If your web server isn't running under 'otrs' user, use this module to
+avoid file permission problems.
+                        </para>
+                        <para>
+                            Con: It is not advisable to store attachments in your database. Take care
+that your database is able to store large objects. I.e.: configure MySQL
+with <literal>set-variable = max_allowed_packet=8M</literal> to store 8 MB
+objects (the default is 2M).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageFS</literal></term>
+                    <listitem>
+                        <para>
+                            Use this module to store attachments on the local file system.
+                        </para>
+                        <note>
+                            <para>
+                                Recommended for large setups.
+                            </para>
+                        </note>
+                        <para>
+                            赞成：它很快！
+                        </para>
+                        <para>
+                            Con: Your web server should run under the 'otrs' user. Also, if you have
+multiple front-end servers, you must make sure the filesystem is shared
+between the servers. Place it on an NFS share or preferably a SAN or similar
+solution.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <note>
                 <para>
-                配置<literal>Kernel::System::Ticket::ArticleStorageDB</literal>（默认）在数据库中存储附件等。注意：不要在大型部署环境中使用这个配置。
+                    You can switch from one back-end to the other on the fly. You can switch the
+backend in the SysConfig, and then run the command line utility
+<filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to
+put the articles from the database onto the filesystem or the other way
+around. You can use the <emphasis>--target</emphasis> option to specify the
+target backend. Please note that the entire process can take considerable
+time to run, depending on the number of articles you have and the available
+CPU power and/or network capacity.
                 </para>
-                <para>
-                赞成：如果你的WEB服务器不是以‘otrs'用户运行，使用这个模块可以避免文件权限问题。
-                </para>
-                <para>
-                反对：不建议将附件存储到数据库中。要小心你的数据库能否存储大型对象，例如：配置MySQL的参数“
-max_allowed_packet=8M”以存储8MB的对象（默认是2MB）。
-                </para>
-                </listitem>
-
-                <listitem>
-                <para>
-                配置<literal>Kernel::System::Ticket::ArticleStorageFS</literal>将附件等存储到本地文件系统。注意：推荐在大型部署环境中使用这个配置。
-                </para>
-                <para>
-                赞成：它很快！
-                </para>
-                <para>
-                反对：你的WEB服务器需要以‘otrs’用户运行。另外，如果你有多个前面服务器，应确保在所有服务器共享这个文件系统。将文件系统使用NFS共享或优先使用SAN或类似的解决方案。
-                </para>
-                </listitem>
-
-            </itemizedlist>
-
-            </para>
-
-            <para>
-                注意：你可以动态切换存储后端，切换后运行命令行工具<filename>bin/otrs.Console.pl
-Admin::Article::StorageSwitch</filename>来将文档从数据库放到文件系统中，或者从文件系统放到数据库中。你可以使用<emphasis>--target</emphasis>
-选项来指定目标后端。请注意：整个过程可能会花费相当长的时间，取决于你拥有文档的数量以及可用的CPU能力和/或网络带宽。
-            </para>
-
+            </note>
             <para>
                 <screen><![CDATA[
 shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
@@ -103,21 +220,23 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
         </section>
 
         <section>
-            <title>归档工单</title>
+            <title>Archiving Tickets</title>
 
             <para>
-                由于OTRS可以作为审计证明系统，删除关闭的工单可能不是个好主意。因此我们提供了将关闭工单归档的功能。
+                As OTRS can be used as an audit-proof system, deleting closed tickets may
+not be a good idea. Therefore we implemented a feature that allows you to
+archive tickets.
             </para>
             <para>
                 匹配某个条件的工单可以标记为“已归档”。这些工单在使用常规的工单搜索或运行一个自动任务时无法访问。系统本身不再需要处理大量的工单，而只考虑‘最近’的工单就可以了。这在大型系统中能带来巨大的性能提升。
             </para>
             <para>
-                启用工单归档功能只需要下列简单的几步：
+                To use the archive feature simply follow these steps:
             </para>
             <orderedlist>
                 <listitem>
                     <para>
-                        在系统配置中激活归档系统
+                        Activate the archive system in SysConfig
                     </para>
                     <para>
                         在系统管理页面中，进入系统管理后选择<literal>Ticket（工单）</literal>组，在<literal>Core::Ticket</literal>中找到选项<literal>Ticket::ArchiveSystem</literal>，默认设置为“否”。修改这个选项为“是”并保存。
@@ -188,7 +307,10 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
         <section id="performance-tuning-otrs-cache">
             <title>缓存</title>
             <para>
-                OTRS在目录<filename>/opt/otrs/var/tmp</filename>下缓存大量的临时数据。请确保它使用了高性能的文件系统或存储。如果你有足够的内存，还可以尝试把这个目录放入内存盘，如下面这样：
+                OTRS caches a lot of temporary data in
+<filename>/opt/otrs/var/tmp</filename>. Please make sure that this uses a
+high performance file system/storage. If you have enough RAM, you can also
+try to put this directory on a ramdisk like this:
             </para>
             <para>
                 <screen><![CDATA[
@@ -201,11 +323,14 @@ shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
             </para>
             <note>
                 <para>
-                    请注意：这个非永久存储会在服务器重启后丢失，所有的会话（如果你将它们存储在文件系统）和缓存数据都将丢失。
+                    Please note that this will be a non-permanent storage that will be lost on
+server reboot. All your sessions (if you store them in the filesystem) and
+your cache data will be lost.
                 </para>
             </note>
             <para>
-                还有一种基于集中内存缓存的缓存后端可从OTRS集团购买。
+                There is also a centralized memcached based cache backend available for
+purchase from OTRS Group.
             </para>
         </section>
 
@@ -215,18 +340,17 @@ shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
     <section id="performance-tuning-database">
         <title>数据库</title>
         <para>
-        你使用的数据库不同，数据库性能问题也不一样。学习你采用的数据库的相关文档，或与你的数据库管理员一起检查。
+            你使用的数据库不同，数据库性能问题也不一样。学习你采用的数据库的相关文档，或与你的数据库管理员一起检查。
         </para>
 
         <section id="performance-tuning-database-mysql">
             <title>MySQL</title>
             <para>
-            如果你使用默认的MySQL表类型MyISAM，并且删除了大型表的一部分或对有变长行的表（有VARCHAR、BLOB、TEXT列的表）做了大量修改，你必须用“optimize”命令对表的数据文件做碎片整理。
+                如果你使用默认的MySQL表类型MyISAM，并且删除了大型表的一部分或对有变长行的表（有VARCHAR、BLOB、TEXT列的表）做了大量修改，你必须用“optimize”命令对表的数据文件做碎片整理。
             </para>
             <para>
-            如果mysqld进程占用了大量的CPU时间，你就应该尝试执行optimize，来优化ticket（工单）、ticket_history（工单历史）和article（信件）表（参阅下面的脚本）。
+                如果mysqld进程占用了大量的CPU时间，你就应该尝试执行optimize，来优化ticket（工单）、ticket_history（工单历史）和article（信件）表（参阅下面的脚本）。
             </para>
-
             <para>
             <screen><![CDATA[
 shell> mysql -u user -p database
@@ -235,48 +359,48 @@ mysql> optimize table ticket_history;
 mysql> optimize table article;
             ]]></screen>
             </para>
-
             <para>
-            <emphasis>脚本：优化数据库表。</emphasis>
+                <emphasis>脚本：优化数据库表。</emphasis>
             </para>
-
         </section>
 
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-            PostgreSQL最好通过修改数据目录下的<filename>postgresql.conf</filename>文件来调优。关于如何调优的建议，请参考下列文章：
+                PostgreSQL最好通过修改数据目录下的<filename>postgresql.conf</filename>文件来调优。关于如何调优的建议，请参考下列文章：
             </para>
-
             <para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                        <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+                            <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
 <citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
-
             <para>
-            如果仍然对PostgreSQL性能不满意，我们建议你加入PostgreSQL性能邮件列表：<ulink
-url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>，并在那里提问。PostgreSQL邮件列表上的伙计们都非常友善，应能提供适合的帮助。
+                If performance is still not satisfactory, we suggest that you join the
+PostgreSQL Performance mailing list ( <ulink
+url="http://www.postgresql.org/community/lists/">
+<citetitle>http://www.postgresql.org/community/lists/</citetitle> </ulink>
+), and ask questions there. The folks on the PostgreSQL list are very
+friendly and can probably help.
             </para>
         </section>
 
@@ -285,44 +409,66 @@ url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/commu
     <section id="performance-tuning-webserver">
         <title>WEB服务器</title>
         <para>
-        毫无疑问你应该使用 mod_perl 2.0 ( <ulink
-url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
-)。它比纯cgi快了岂止100倍。但它需要更多的内存。
+            Of course you should use mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/">
+<citetitle>http://perl.apache.org/</citetitle> </ulink> ). It's much faster
+(~ *100) than pure CGI, but it needs more RAM.
         </para>
 
         <section id="performance-tuning-webserver-db">
             <title>预建立的数据库连接</title>
             <para>
-            你可以在WEB服务器启动时就预建立的数据库连接。这可以节约时间（参阅WEB服务器的README文档）。
+                You can have the database connections pre-established on startup of the web
+server. This saves time (see <filename>README.webserver</filename>).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-startup">
             <title>预装载的模块 - startup.pl</title>
             <para>
-            在你的mod_perl
-WEB服务器上为预装载的/预编译的Perl模块使用启动脚本<filename>scripts/apache2-perl-startup.pl</filename>，仅需少量内存即可让WEB服务器更快（参阅WEB服务器的README文档）。
+                Use the startup script <filename>scripts/apache2-perl-startup.pl</filename>
+for preloaded/precompiled Perl modules on your mod_perl webserver to be
+faster, with a smaller memory footprint (see
+<filename>README.webserver</filename>).
             </para>
         </section>
         <section id="performance-tuning-webserver-reload">
             <title>当磁盘文件更新时重载Perl模块</title>
             <para>
-            <filename>scripts/apache2-httpd.include.conf</filename>文件中默认使用了Apache::Reload，禁用它可以得到8%的速度提升。但在通过OTRS软件包管理器安装任何模块后，或者你的系统配置或在文件<filename>Kernel/Config.pm</filename>中修改了任何值，记得重启WEB服务器。重要：这还意味着你不能通过WEB界面使用软件包管理器，你需要使用命令行方式-<filename>bin/otrs.PackageManager.pl</filename>。
+                By default Apache::Reload is used in
+<filename>scripts/apache2-httpd.include.conf</filename>. Disable it and you
+will get 8% more speed. But remember to restart the web server if you
+install any modules via the OTRS Package Manager, or any values in your
+SysConfig or in <filename>Kernel/Config.pm</filename>.
             </para>
+            <important>
+                <para>
+                    This would also mean you can't use the OTRS Package Manager via the web
+interface, you will need to use the console commands:
+<filename>bin/otrs.Console.pl Admin::Package::*</filename>.
+                </para>
+            </important>
         </section>
 
         <section id="performance-tuning-webserver-strategy">
             <title>选择正确的策略</title>
             <para>
-            如果你有一个大型安装，比如每天超过1000个新工单且超过40个服务人员，建议阅读mod_perl用户手册的性能章节（<ulink
-url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>）。
+                If you have a larger installation, e.g. over 1,000 new tickets per day and
+over 40 agents, it is a good idea to read the chapters on Performance of the
+mod_perl User's Guide ( <ulink
+url="http://perl.apache.org/docs/2.0/user/index.html">
+<citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle>
+</ulink> ).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-gzip">
             <title>mod_gzip/mod_deflate</title>
             <para>
-            如果你的带宽较小，可在Apache2中使用mod_deflate模块。mod_gzip/mod_deflate能够一个45K的HTML页面压缩到约7K。缺点是这会增加WEB服务器端的负载。
+                If your bandwidth is small, use <literal>mod_deflate</literal> for
+Apache2. If you have an html page with 45k,
+<literal>mod_gzip</literal>/<literal>mod_deflate</literal> compresses it to
+about 7k. The drawback is that this increases the load on the server side.
             </para>
         </section>
 

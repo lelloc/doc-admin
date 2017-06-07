@@ -382,29 +382,22 @@ spam）。下面例子中的内容可以添加到文件<filename>Kernel/Config.p
 </itemizedlist>
 
 <para>
-    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
-module that is capable to decrypt an encrypted incoming email message
-(S/MIME or PGP) placing the unencrypted message body in the email header
-X-OTRS-BodyDecrypted to be processed later.  Additionally it can also update
-the email body to the unencrypted version.
+    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal>是用来解密传入的
+(S/MIME或
+PGP)加密过的电子邮件消息的默认模块，它将未加密的消息正文放置在邮件头X-OTRS-BodyDecrypted中供以后处理。此外它还可以更新电子邮件正文为未加密版本。
 </para>
 <para>
-    In order to decrypt the emails the system needs to be properly configured
-for S/MIME and/or PGP and have the needed private keys to decrypt the
-information.
+    要对电子邮件进行解密，系统需要正确地配置 S/MIME 和/或 PGP ，并且有解密信息所需的私钥。
 </para>
 <para>
-    This module is disabled by default and it can be configured directly in the
-System Configuration in the Admin Panel.
+    本模块默认是禁用的，可以直接在系统管理面板的系统配置中进行配置。
 </para>
 <itemizedlist mark="round">
     <para><emphasis>配置选项</emphasis></para>
     <listitem>
         <para>StoreDecryptedBody</para>
         <para>
-            Set this option to "1" to update the email body to the unencrypted version
-if the decryption was successful. Be aware that using this the emails will
-be stored unencrypted and there is no possible way to revert this action.
+            设置本选项为“1”来更新邮件正文为未加密的版本（如果成功解密）。注意使用此选项后电子邮件将存储为未加密格式且无法还原此操作。
         </para>
     </listitem>
 </itemizedlist>

@@ -51,6 +51,10 @@ innodb_log_file_size = 256M
         ]]></screen>
     </para>
 
+    <note>
+        <para>Please note that OTRS requires utf8 as database storage encoding.</para>
+    </note>
+
     <para>
         现在执行命令<command>systemctl restart
 mysql.service</command>来重启数据库服务器并激活刚才的修改内容。然后运行命令<command>/usr/bin/mysql_secure_installation</command>并根据窗口提示来设置数据库的root用户密码、移除匿名访问和移除test数据库。最后，运行命令<command>systemctl
@@ -260,6 +264,10 @@ innodb_log_file_size = 256M
 mariadb</command>来重启数据库服务器并激活刚才的修改内容。然后运行命令<command>/usr/bin/mysql_secure_installation</command>，并按照屏幕上的指令来设置数据库的root密码、移除匿名访问及删除test数据库。
     </para>
 
+    <note>
+        <para>Please note that OTRS requires utf8 as database storage encoding.</para>
+    </note>
+
     </section>
 
     <section id="rhel-installing-rpm">
@@ -326,10 +334,8 @@ url="http://fedoraproject.org/wiki/EPEL">EPEL网站</ulink>上查看更多信息
         </para>
 
         <para>
-            If you're on RHEL 7 or CentOS 7, you can get the latest package for EPEL
-from <ulink url="https://download.fedoraproject.org/pub/epel/7/x86_64/">this
-site</ulink>.  You can add this repository to yum it in one go by copying
-the RPM URL you find on this page and executing this command:
+            如果你使用的是RHEL 7或CentOS 7，你可以从<ulink
+url="https://download.fedoraproject.org/pub/epel/7/x86_64/">这个网址</ulink>获得最新的EPEL软件包。你可以执行下面的命令添加EPEL软件仓库到yum源：
         </para>
 
         <para>
@@ -444,6 +450,10 @@ Lockfile removed.
     现在就该编辑文件<filename>Kernel/Config.pm</filename>来提供环境变量ORACLE_HOME了。下一步是使用WEB安装器来配置OTRS，其过程<link
 linkend="web-installer">本章另有描述</link>。
     </para>
+
+    <note>
+        <para>Please note that OTRS requires utf8 as database storage encoding.</para>
+    </note>
 
     </section>
 

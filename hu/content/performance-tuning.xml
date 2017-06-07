@@ -6,115 +6,208 @@
     <title>Teljesítmény hangolás</title>
 
     <abstract>
-    <para>
-    Az alábbiakban kerül bemutatásra a teljesítményfokozó technikák listája az
+        <para>
+            Az alábbiakban kerül bemutatásra a teljesítményfokozó technikák listája az
 OTRS telepítéshez, beleértve a beállítást, kódolást, memóriahasználatot és a
 továbbiakat.
-    </para>
+        </para>
     </abstract>
 
     <section id="performance-tuning-otrs">
         <title>OTRS</title>
         <para>
-        Számos lehetőség van az OTRS teljesítményének javítására.
+            Számos lehetőség van az OTRS teljesítményének javítására.
         </para>
 
         <section id="performance-tuning-otrs-index">
             <title>TicketIndexModule</title>
             <para>
                 Két háttérprogram modul létezik az indexhez a jegy várólista nézeténél:
-
-                <itemizedlist>
-
-                    <listitem>
-                        <para>
-                        A <literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal>
-(alapértelmezett) használatával minden egyes várólista nézetet röptében
-állít elő a jegytáblából. Nem lesz teljesítmény problémája, amíg nincs
-körülbelül 60.000 nyitott jegye a rendszeren.
-                        </para>
-                    </listitem>
-
-                    <listitem>
-                        <para>
-                        A legerőteljesebb modult, a
-<literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal> modult
-kell használnia, amikor körülbelül 80.000 nyitott jegye van. Ez egy további
-ticket_index táblát használ, amely úgy működik mint egy nézet. Használja a
-<filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename>
-parancsfájlt egy kezdeti index előállításához a háttérprogramok átkapcsolása
-után.
-                        </para>
-                    </listitem>
-
-                </itemizedlist>
-
-                Az IndexAccelerator beállítását a rendszerbeállításokban változtathatja meg.
             </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will generate each queue view on the fly
+from the ticket table. You will not have performance trouble until you have
+about 60,000 open tickets in your system.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            The most powerful module, should be used when you have above 80,000 open
+tickets. It uses an extra <literal>ticket_index</literal> table, which will
+be populated with keywords based on ticket data. Use
+<filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename>
+for generating an initial index after switching backends.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <para>
+                You can change the used IndexAccelerator module via SysConfig.
+            </para>
+        </section>
 
+        <section id="performance-tuning-otrs-search">
+            <title>SearchIndexModule</title>
+            <para>
+                This module helps to extend your articles full-text search (From, To, Cc,
+Subject and Body search).  There are two backend modules for the search
+index:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will will do full-text searches on live data
+(it works fine for up to 50,000 tickets).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            This module will strip all articles and build an index after article
+creation, increasing performance of full-text searches up to 50%.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <para>
+                You can change the used SearchIndexModule via SysConfig.
+            </para>
+            <para>
+                To create an initial index, use <filename>bin/otrs.Console.pl
+Maint::Ticket::FulltextIndexRebuild</filename>.
+            </para>
+            <para>
+                For StaticDB module, there are some options available for fine tuning:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Attribute</literal></term>
+                    <listitem>
+                        <para>
+                            The attribute "WordCountMax" defines the maximum of words which will be
+processed to build up the index. For example only the first 1000 words of an
+article body are stored in the article search index. The attributes
+"WordLengthMin" and "WordLengthMax" are used as word length boundaries. Only
+words with a length between these two values are stored in the article
+search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Filters</literal></term>
+                    <listitem>
+                        <para>
+                            There are three default filters defined:
+                        </para>
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    The first filter strips out special chars like: <literal>, &amp; &lt; &gt; ?
+" ! * | ; [ ] ( ) + $ ^=</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The second filter strips out words which begin or ends with one of following
+chars: <literal>' : .</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The third filter strips out words which do not contain a word-character:
+<literal>a-z, A-Z, 0-9, _</literal>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::StopWords</literal></term>
+                    <listitem>
+                        <para>
+                            There are so-called stop-words defined for some languages. These stop-words
+will be skipped while creating the search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
         </section>
 
         <section id="performance-tuning-otrs-storage">
             <title>TicketStorageModule</title>
             <para>
-            Két különböző háttérprogram modul létezik a jegy vagy bejegyzés tárolásához:
+                Két különböző háttérprogram modul létezik a jegy vagy bejegyzés tárolásához:
             </para>
-
-            <para>
-            <itemizedlist>
-
-                <listitem>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageDB</literal></term>
+                    <listitem>
+                        <para>
+                            This default module will store attachments in the database.
+                        </para>
+                        <note>
+                            <para>
+                                Don't use it with large setups.
+                            </para>
+                        </note>
+                        <para>
+                            Pro: If your web server isn't running under 'otrs' user, use this module to
+avoid file permission problems.
+                        </para>
+                        <para>
+                            Con: It is not advisable to store attachments in your database. Take care
+that your database is able to store large objects. I.e.: configure MySQL
+with <literal>set-variable = max_allowed_packet=8M</literal> to store 8 MB
+objects (the default is 2M).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageFS</literal></term>
+                    <listitem>
+                        <para>
+                            Use this module to store attachments on the local file system.
+                        </para>
+                        <note>
+                            <para>
+                                Recommended for large setups.
+                            </para>
+                        </note>
+                        <para>
+                            Előnye: Gyors!
+                        </para>
+                        <para>
+                            Con: Your web server should run under the 'otrs' user. Also, if you have
+multiple front-end servers, you must make sure the filesystem is shared
+between the servers. Place it on an NFS share or preferably a SAN or similar
+solution.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <note>
                 <para>
-                Állítsa be a <literal>Kernel::System::Ticket::ArticleStorageDB</literal>
-modult (alapértelmezett) a mellékletek, stb. adatbázisban történő
-tárolásához. Megjegyzés: ne használja nagy beállításokkal.
+                    You can switch from one back-end to the other on the fly. You can switch the
+backend in the SysConfig, and then run the command line utility
+<filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to
+put the articles from the database onto the filesystem or the other way
+around. You can use the <emphasis>--target</emphasis> option to specify the
+target backend. Please note that the entire process can take considerable
+time to run, depending on the number of articles you have and the available
+CPU power and/or network capacity.
                 </para>
-                <para>
-                Előnye: Ha a webkiszolgáló felhasználója nem az „otrs” felhasználó, akkor
-ezen modul használata elkerüli a fájljogosultsági problémákat.
-                </para>
-                <para>
-                Hátránya: Nem tanácsos a mellékleteket adatbázisban tárolni. Ügyeljen arra,
-hogy az adatbázis képes legyen nagy objektumokat tárolni. Például állítsa be
-a „set-variable = max_allowed_packet=8M” MySQL beállítást 8 MB méretű
-objektumok tárolásához (az alapértelmezett 2M).
-                </para>
-                </listitem>
-
-                <listitem>
-                <para>
-                Állítsa be a <literal>Kernel::System::Ticket::ArticleStorageFS</literal>
-modult a mellékletek, stb. helyi fájlrendszeren történő
-tárolásához. Megjegyzés: ajánlott nagy beállításoknál.
-                </para>
-                <para>
-                Előnye: Gyors!
-                </para>
-                <para>
-                Hátránya: A webkiszolgáló felhasználójának az „otrs” felhasználónak kell
-lennie. Ezenfelül ha több előtétprogram kiszolgálója van, akkor meg kell
-győződnie arról, hogy a fájlrendszer meg van-e osztva a kiszolgálók
-között. Helyezze azt egy NFS megosztásra vagy inkább egy SAN vagy hasonló
-megoldásra.
-                </para>
-                </listitem>
-
-            </itemizedlist>
-
-            </para>
-
-            <para>
-                Megjegyzés: Átkapcsolhat röptében az egyik háttérprogramról egy másikra. A
-háttérprogramot a rendszerbeállításokban kapcsolhatja át, és azután futtassa
-le a <filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename>
-parancssori segédprogramot a bejegyzések átrakásához az adatbázisból a
-fájlrendszerre vagy fordítva. A <emphasis>--target</emphasis> kapcsolót
-használhatja a cél háttérprogram megadásához. Vegye figyelembe, hogy a
-teljes folyamat futtatása számottevő ideig eltarthat a meglévő bejegyzések
-számától és az elérhető processzorteljesítménytől és/vagy hálózati
-kapacitástól függően.
-            </para>
-
+            </note>
             <para>
                 <screen><![CDATA[
 shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
@@ -239,11 +332,10 @@ keresési feltételeket határoz meg.
         <section id="performance-tuning-otrs-cache">
             <title>Gyorsítótár</title>
             <para>
-                Az OTRS rengeteg átmeneti adatot gyorsítótáraz az
-<filename>/opt/otrs/var/tmp</filename> könyvtárban. Győződjön meg arról,
-hogy ez egy nagy teljesítményű fájlrendszert és tárolót használ-e. Ha
-elegendő RAM van a gépben, akkor megpróbálhatja ezt a könyvtárat egy
-memórialemezre áttenni ehhez hasonlóan:
+                OTRS caches a lot of temporary data in
+<filename>/opt/otrs/var/tmp</filename>. Please make sure that this uses a
+high performance file system/storage. If you have enough RAM, you can also
+try to put this directory on a ramdisk like this:
             </para>
             <para>
                 <screen><![CDATA[
@@ -256,14 +348,14 @@ shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
             </para>
             <note>
                 <para>
-                    Ne feledje, hogy ez egy nem állandó tároló, amely el fog veszi a kiszolgáló
-újraindításakor. Az összes munkamenete (ha a fájlrendszeren tárolja azokat)
-és a gyorsítótárazott adatok el fognak veszni.
+                    Please note that this will be a non-permanent storage that will be lost on
+server reboot. All your sessions (if you store them in the filesystem) and
+your cache data will be lost.
                 </para>
             </note>
             <para>
-                Elérhető egy központosított memcached alapú gyorsítótár háttérprogram is,
-amely megvásárolható az OTRS csoporttól.
+                There is also a centralized memcached based cache backend available for
+purchase from OTRS Group.
             </para>
         </section>
 
@@ -273,7 +365,7 @@ amely megvásárolható az OTRS csoporttól.
     <section id="performance-tuning-database">
         <title>Adatbázis</title>
         <para>
-        Az adatbázis-problémák a használt adatbázis szerint változnak. Tanulmányozza
+            Az adatbázis-problémák a használt adatbázis szerint változnak. Tanulmányozza
 az adatbázisa dokumentációját, vagy nézzék meg az adatbázis
 adminisztrátorral.
         </para>
@@ -281,18 +373,17 @@ adminisztrátorral.
         <section id="performance-tuning-database-mysql">
             <title>MySQL</title>
             <para>
-            Ha MyISAM típusú MySQL táblát használ (amely az alapértelmezett), és egy
+                Ha MyISAM típusú MySQL táblát használ (amely az alapértelmezett), és egy
 tábla nagy részét törölte, vagy ha sok változtatást végzett egy változó
 hosszúságú sorokkal rendelkező táblán (olyan táblákon, amelyeknek VARCHAR,
 BLOB vagy TEXT oszlopaik vannak), akkor töredezettség-mentesítenie kell az
 adatfájlt (táblákat) az „optimize” paranccsal.
             </para>
             <para>
-            Ezt akkor kell megpróbálnia, ha a mysqld démonnak hatalmas processzoridőre
+                Ezt akkor kell megpróbálnia, ha a mysqld démonnak hatalmas processzoridőre
 van szüksége. Optimalizálja a következő táblákat: ticket, ticket_history és
 article (lásd a lenti parancsfájlt).
             </para>
-
             <para>
             <screen><![CDATA[
 shell> mysql -u user -p database
@@ -301,55 +392,51 @@ mysql> optimize table ticket_history;
 mysql> optimize table article;
             ]]></screen>
             </para>
-
             <para>
-            <emphasis>Parancsfájl: Adatbázistáblák optimalizálása.</emphasis>
+                <emphasis>Parancsfájl: Adatbázistáblák optimalizálása.</emphasis>
             </para>
-
         </section>
 
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-            A PostgreSQL legjobban a PostgreSQL adatkönyvtárában lévő
+                A PostgreSQL legjobban a PostgreSQL adatkönyvtárában lévő
 <filename>postgresql.conf</filename> fájl módosításával hangolható. Ha
 tanácsot szeretne, hogy hogyan kell ezt megtenni, nézze meg a következő
 cikkeket:
             </para>
-
             <para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                        <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+                            <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
 <citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
-
             <para>
-            Ha teljesítmény még mindig nem kielégítő, akkor azt javasoljuk, hogy
-csatlakozzon a PostgreSQL (angol nyelvű) teljesítmény levelezőlistájához
-(<ulink
-url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>),
-és ott tegye fel a kérdéseit. A PostgreSQL listán lévő emberek nagyon
-barátságosak és valószínűleg tudnak segíteni.
+                If performance is still not satisfactory, we suggest that you join the
+PostgreSQL Performance mailing list ( <ulink
+url="http://www.postgresql.org/community/lists/">
+<citetitle>http://www.postgresql.org/community/lists/</citetitle> </ulink>
+), and ask questions there. The folks on the PostgreSQL list are very
+friendly and can probably help.
             </para>
         </section>
 
@@ -358,61 +445,66 @@ barátságosak és valószínűleg tudnak segíteni.
     <section id="performance-tuning-webserver">
         <title>Webkiszolgáló</title>
         <para>
-        Természetesen a mod_perl 2.0 (<ulink
-url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>)
-modult kell használnia. Sokkal gyorsabb (~ * 100) mint a puszta CGI. De több
-RAM-ot igényel.
+            Of course you should use mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/">
+<citetitle>http://perl.apache.org/</citetitle> </ulink> ). It's much faster
+(~ *100) than pure CGI, but it needs more RAM.
         </para>
 
         <section id="performance-tuning-webserver-db">
             <title>Előre kiépített adatbázis-kapcsolatok</title>
             <para>
-            Az adatbázis-kapcsolatok előre kiépíthetők a webkiszolgáló indításakor. Ez
-időt spórol (lásd: README.webserver).
+                You can have the database connections pre-established on startup of the web
+server. This saves time (see <filename>README.webserver</filename>).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-startup">
             <title>Előre betöltött modulok - startup.pl</title>
             <para>
-            Használja a <filename>scripts/apache2-perl-startup.pl</filename> indítási
-parancsfájlt az előre betöltött vagy előre lefordított Perl-modulokhoz a
-mod_perl webkiszolgálón, hogy gyorsabb legyen és kisebb memórialábnyommal
-rendelkezzen (lásd: README.webserver).
+                Use the startup script <filename>scripts/apache2-perl-startup.pl</filename>
+for preloaded/precompiled Perl modules on your mod_perl webserver to be
+faster, with a smaller memory footprint (see
+<filename>README.webserver</filename>).
             </para>
         </section>
         <section id="performance-tuning-webserver-reload">
             <title>Perl-modulok újratöltése, amikor frissülnek a lemezen</title>
             <para>
-            Alapértelmezetten az Apache::Reload van használatban a
-<filename>scripts/apache2-httpd.include.conf</filename> fájlban. Tiltsa ezt
-le, és 8%-kal nagyobb sebessége lesz. De ne felejtse el újraindítani a
-webkiszolgálót, ha valamilyen modult telepít az OTRS csomagkezelőjén
-keresztül, vagy valamilyen értéket megváltoztat a rendszerbeállításokban
-vagy a <filename>Kernel/Config.pm</filename> fájlban. Fontos: ez azt is
-jelentené, hogy nem tudja az OTRS csomagkezelőt a webes felületen keresztül
-használni, hanem a parancssori változatot kell használnia -
-<filename>bin/otrs.PackageManager.pl</filename>.
+                By default Apache::Reload is used in
+<filename>scripts/apache2-httpd.include.conf</filename>. Disable it and you
+will get 8% more speed. But remember to restart the web server if you
+install any modules via the OTRS Package Manager, or any values in your
+SysConfig or in <filename>Kernel/Config.pm</filename>.
             </para>
+            <important>
+                <para>
+                    This would also mean you can't use the OTRS Package Manager via the web
+interface, you will need to use the console commands:
+<filename>bin/otrs.Console.pl Admin::Package::*</filename>.
+                </para>
+            </important>
         </section>
 
         <section id="performance-tuning-webserver-strategy">
             <title>A megfelelő stratégia választása</title>
             <para>
-            Ha nagyobb telepítéssel rendelkezik (például 1000-nél több új jegy naponta
-és több mint 40 ügyintéző), akkor jó ötlet a mod_perl felhasználói
-útmutatójában a teljesítményről szóló fejezet elolvasása (<ulink
-url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>).
+                If you have a larger installation, e.g. over 1,000 new tickets per day and
+over 40 agents, it is a good idea to read the chapters on Performance of the
+mod_perl User's Guide ( <ulink
+url="http://perl.apache.org/docs/2.0/user/index.html">
+<citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle>
+</ulink> ).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-gzip">
             <title>mod_gzip/mod_deflate</title>
             <para>
-            Ha kicsi a sávszélessége, akkor használja a mod_deflate modult az Apache2
-webkiszolgálóhoz. Ha van egy 45 kB méretű HTML-oldala, akkor a
-mod_gzip/mod_deflate nagyjából 7 kB méretűre tömöríti össze. Ennek az a
-hátránya, hogy megnöveli a kiszolgáló oldali terhelést.
+                If your bandwidth is small, use <literal>mod_deflate</literal> for
+Apache2. If you have an html page with 45k,
+<literal>mod_gzip</literal>/<literal>mod_deflate</literal> compresses it to
+about 7k. The drawback is that this increases the load on the server side.
             </para>
         </section>
 
