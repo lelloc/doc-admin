@@ -64,20 +64,7 @@ shell> /etc/init.d/apache stop
         </para>
 
         <para>
-        Stop OTRS cron jobs and the scheduler or daemon (in this order) depending on the OTRS version
-        you are updating from:
-        </para>
-
-        <para>
-            <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/Cron.sh stop
-shell> bin/otrs.Scheduler.pl -a stop
-            ]]></screen>
-        </para>
-
-        <para>
-        or
+        Stop OTRS cron jobs and the daemon (in this order):
         </para>
 
         <para>
@@ -90,29 +77,26 @@ shell> bin/otrs.Daemon.pl stop
     </section>
 
     <section role="NotInToc">
-        <title>Step 2: Backup everything below <filename>/opt/otrs/</filename></title>
+        <title>Step 2: Backup files and database</title>
 
         <para>
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename> (only for reference, this file is not needed any more)</para></listitem>
                 <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>as well as the database</para></listitem>
             </itemizedlist>
         </para>
+        <warning>
+            <para>Don't proceed without a complete backup of your system.</para>
+        </warning>
     </section>
 
     <section role="NotInToc">
-        <title>Step 3: Make sure that you have backed up everything ;-)</title>
-        <para></para>
-    </section>
-
-    <section role="NotInToc">
-    <title>Step 4: Install the new release (tar or RPM)</title>
+    <title>Step 3: Install the new release (tar or RPM)</title>
 
         <section role="NotInToc">
-        <title>Step 4.1: With the tarball:</title>
+        <title>Step 3.1: With the tarball:</title>
 
             <screen><![CDATA[
 shell> cd /opt
@@ -158,7 +142,7 @@ shell> cp *.installed /opt/otrs/var/stats
                 <title>Set file permissions</title>
 
                 <para>
-                Please execute
+                    Please execute the following command as root user to set the file and directory permissions for OTRS:
                 </para>
 
                 <para>
@@ -169,57 +153,13 @@ shell> bin/otrs.SetPermissions.pl
                 </para>
 
                 <para>
-                with the permissions needed for your system setup. For example:
-                </para>
-
-                <para>
-                <itemizedlist>
-                <listitem>
-                    <para>Web server which runs as the OTRS user:</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=otrs
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>Webserver with wwwrun user (e. g. SUSE):</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>Webserver with apache user (e. g. Red Hat, CentOS):</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=apache
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>Webserver with www-data user (e. g. Debian, Ubuntu):</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=www-data
-                ]]></screen>
-                    </para>
-                </listitem>
-                </itemizedlist>
-
+                    It will try to detect the correct user and group settings needed for your setup.
                 </para>
             </section>
         </section>
 
         <section role="NotInToc">
-            <title>Step 4.2: With the RPM:</title>
+            <title>Step 3.2: With the RPM:</title>
             <para>
             <screen><![CDATA[
 shell> rpm -Uvh otrs-x.x.x.-01.rpm
@@ -233,7 +173,7 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
     </section>
 
     <section role="NotInToc">
-        <title>Step 5: Check needed Perl modules</title>
+        <title>Step 4: Check needed Perl modules</title>
 
         <para>
         Verify that all needed Perl modules are installed on your system and install
@@ -247,96 +187,32 @@ shell> /opt/otrs/bin/otrs.CheckModules.pl
     </section>
 
     <section role="NotInToc">
-        <title>Step 6: Apply the database changes</title>
-
-        <section role="NotInToc">
-            <title>Step 6.1: Database schema update</title>
-
-            <section role="NotInToc">
-            <title>MySQL:</title>
-
-                <note>
-                    <para>
-                        Note: new tables created in the MySQL UPGRADING process will be created with the
-                        default table storage engine set in your MySQL server.
-                        In MySQL 5.5 the new default type is <literal>InnoDB</literal>.
-                        If existing tables, e.g. "users", have the table storage engine e.g. <literal>MyISAM</literal>,
-                        then an error will be displayed when creating the foreign key constraints.
-                        In this case we recommend to switch all tables to <literal>InnoDB</literal> with the console command
-                        <command>bin/otrs.Console.pl Maint::Database::MySQL::InnoDBMigration</command>.
-                    </para>
-                </note>
-
-                <para>
-                    Any problems with regards to the storage engine will be reported by the
-                    <filename>bin/otrs.Console.pl Maint::Database::Check</filename> command, so please run it to check for possible issues.
-                </para>
-
-                <para>
-                    <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-6.mysql.sql | mysql -p -f -u root otrs
-shell> bin/otrs.Console.pl Maint::Database::Check
-                    ]]></screen>
-                </para>
-
-            </section>
-            <section role="NotInToc">
-                <title>PostgreSQL:</title>
-
-                <para>
-                <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-6.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
-                ]]></screen>
-                </para>
-            </section>
-        </section>
-
-        <section role="NotInToc">
-            <title>Step 6.2: Database migration script</title>
-
-            <para>
-            Run the migration script (as user <literal>otrs</literal>, NOT as <literal>root</literal>):
-            </para>
-
-            <para>
-            <screen><![CDATA[
-shell> scripts/DBUpdate-to-6.pl
-            ]]></screen>
-            </para>
-
-            <para>
-                The script will ask you to set a time zone for OTRS. It is very important that you set
-                the correct time zone (and keep it), otherwise date and time of data added after the upgrade (tickets, articles, etc.) will be stored with a different time zone than your existing data, leading to inconsistent data.
-                The script will suggest possible time zones based on your previous configuration. In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade via SysConfig setting <literal>OTRSTimeZone</literal>.
-            </para>
-
-            <para>
-            Do not continue the upgrading process if this script did not work properly for you.
-            Otherwise data loss may occur.
-            </para>
-        </section>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 7: Refresh the configuration cache and delete caches</title>
+        <title>Step 5: Apply the database and configuration changes</title>
 
         <para>
-        Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as <literal>root</literal>):
+            Please run the migration script (as user <literal>otrs</literal>, NOT as <literal>root</literal>):
         </para>
 
         <para>
         <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.Console.pl Maint::Config::Rebuild
-shell> bin/otrs.Console.pl Maint::Cache::Delete
+shell> scripts/DBUpdate-to-6.pl
         ]]></screen>
+        </para>
+
+        <para>
+            The script will ask you to set a time zone for OTRS. It is very important that you set
+            the correct time zone (and keep it), otherwise date and time of data added after the upgrade (tickets, articles, etc.) will be stored with a different time zone than your existing data, leading to inconsistent data.
+            The script will suggest possible time zones based on your previous configuration. In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade via SysConfig setting <literal>OTRSTimeZone</literal>.
+        </para>
+
+        <para>
+            Do not continue the upgrading process if this script did not work properly for you.
+            Otherwise data loss may occur.
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 8: Restart your services</title>
+        <title>Step 6: Restart your services</title>
 
         <para>
         e. g. (depends on used services):
@@ -356,7 +232,7 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: Check installed packages</title>
+        <title>Step 7: Check installed packages</title>
 
         <note>
             <para>
@@ -377,7 +253,7 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: Start the OTRS Daemon</title>
+        <title>Step 8: Start the OTRS Daemon</title>
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring tasks in OTRS.
@@ -393,7 +269,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Update and activate cron jobs</title>
+        <title>Step 9: Update and activate cron jobs</title>
 
         <para>
             There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
@@ -421,7 +297,7 @@ shell> /opt/otrs/bin/Cron.sh start
     </section>
 
     <section role="NotInToc">
-        <title>Step 12: Update system registration (optional)</title>
+        <title>Step 10: Update system registration (optional)</title>
         <para>
             If the system is already registered with OTRS Group, it is strongly recommended to update
             the registration information at this time. This will update the registered version of
@@ -444,7 +320,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 13: Well done!</title>
+        <title>Step 11: Well done!</title>
         <para></para>
     </section>
 </section>
