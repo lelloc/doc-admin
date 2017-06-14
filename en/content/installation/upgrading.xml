@@ -39,7 +39,7 @@
 
     <warning>
         <para>
-            Only applicable for PostgreSQL based installations: please note that you need at least PostgreSQL 9.2 to run OTRS 6. If your system has an older PostgreSQL version, you need to update it first before updating OTRS.
+            For PostgreSQL based installations: please note that you need at least PostgreSQL 9.2 to run OTRS 6. If your system has an older PostgreSQL version, you need to update it first before updating OTRS.
         </para>
     </warning>
 
@@ -173,21 +173,7 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
     </section>
 
     <section role="NotInToc">
-        <title>Step 4: Check needed Perl modules</title>
-
-        <para>
-        Verify that all needed Perl modules are installed on your system and install
-        any modules that might be missing.
-        </para>
-        <para>
-        <screen><![CDATA[
-shell> /opt/otrs/bin/otrs.CheckModules.pl
-        ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 5: Apply the database and configuration changes</title>
+        <title>Step 4: Run the migration script</title>
 
         <para>
             Please run the migration script (as user <literal>otrs</literal>, NOT as <literal>root</literal>):
@@ -200,19 +186,25 @@ shell> scripts/DBUpdate-to-6.pl
         </para>
 
         <para>
-            The script will ask you to set a time zone for OTRS. It is very important that you set
+            This script will perform many checks on your system and give you advice on how to install missing Perl modules etc., if that is required.
+        </para>
+
+        <para>
+            The migration script will ask you to set a time zone for OTRS. It is very important that you set
             the correct time zone (and keep it), otherwise date and time of data added after the upgrade (tickets, articles, etc.) will be stored with a different time zone than your existing data, leading to inconsistent data.
             The script will suggest possible time zones based on your previous configuration. In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade via SysConfig setting <literal>OTRSTimeZone</literal>.
         </para>
 
-        <para>
-            Do not continue the upgrading process if this script did not work properly for you.
-            Otherwise data loss may occur.
-        </para>
+        <warning>
+            <para>
+                Do not continue the upgrading process if this script did not work properly for you.
+                Otherwise data loss may occur.
+            </para>
+        </warning>
     </section>
 
     <section role="NotInToc">
-        <title>Step 6: Restart your services</title>
+        <title>Step 5: Restart your services</title>
 
         <para>
         e. g. (depends on used services):
@@ -232,7 +224,7 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 7: Check installed packages</title>
+        <title>Step 6: Check installed packages</title>
 
         <note>
             <para>
@@ -253,7 +245,7 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 8: Start the OTRS Daemon</title>
+        <title>Step 7: Start the OTRS Daemon</title>
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring tasks in OTRS.
@@ -269,7 +261,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: Update and activate cron jobs</title>
+        <title>Step 8: Update and activate cron jobs</title>
 
         <para>
             There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
@@ -297,7 +289,7 @@ shell> /opt/otrs/bin/Cron.sh start
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: Update system registration (optional)</title>
+        <title>Step 9: Update system registration (optional)</title>
         <para>
             If the system is already registered with OTRS Group, it is strongly recommended to update
             the registration information at this time. This will update the registered version of
@@ -320,7 +312,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Well done!</title>
+        <title>Step 10: Well done!</title>
         <para></para>
     </section>
 </section>
