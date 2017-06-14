@@ -176,7 +176,7 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
         <title>Step 4: Run the migration script</title>
 
         <para>
-            Please run the migration script (as user <literal>otrs</literal>, NOT as <literal>root</literal>):
+            Please run the migration script (as the <literal>otrs</literal> user, NOT as <literal>root</literal>):
         </para>
 
         <para>
@@ -225,23 +225,23 @@ shell> /etc/init.d/cron start
 
     <section role="NotInToc">
         <title>Step 6: Check installed packages</title>
-
         <note>
             <para>
-                The OTRS packages of 5 are NOT compatible with OTRS 6, so you have to perform a package upgrade!
+                The OTRS 5 packages are NOT compatible with OTRS 6, so you have to perform a package upgrade!
             </para>
         </note>
-        <!--
         <para>
-            The following packages are automatically uninstalled after the upgrade process
-            (if they where installed before):
+            The following packages are automatically uninstalled after the upgrade process (if they where installed
+            before):
         </para>
         <para>
             <itemizedlist>
-                <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
+                <listitem><para>OTRSAppointmentCalendar</para></listitem>
             </itemizedlist>
+            <!--
+                TODO: Verify and extend the list of merged packages.
+            -->
         </para>
-        -->
     </section>
 
     <section role="NotInToc">
@@ -249,8 +249,7 @@ shell> /etc/init.d/cron start
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring tasks in OTRS.
-            The daemon also handles all GenericAgent jobs and must be started from
-            the <literal>otrs</literal> user.
+            The daemon also handles all GenericAgent jobs and must be started as the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -278,7 +277,7 @@ shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
 
         <para>
             To schedule these cron jobs on your system, you can use the script <filename>Cron.sh</filename>
-            with the <literal>otrs</literal> user.
+            as the <literal>otrs</literal> user.
         </para>
 
         <para>
