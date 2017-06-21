@@ -203,15 +203,13 @@ emails.
       </row>
       <row>
         <entry>
-          X-OTRS-ArticleType:
+          X-OTRS-IsVisibleForCustomer:
         </entry>
         <entry>
-          email-external, email-internal, email-notification-ext,
-email-notification-int, phone, fax, sms, webrequest, note-internal,
-note-external, note-report
+          0, 1
         </entry>
         <entry>
-          Устанавливает тип статьи для входящих заявок.
+          Controls if the article is shown in the customer interface.
         </entry>
       </row>
       <row>
@@ -237,6 +235,19 @@ note-external, note-report
         <entry>
           Если этот X-OTRS заголовок установлен, то отправителю сообщение
 недоставляется ни одного автоматического ответа (защита от зацыкливания).
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-FollowUp-State-Keep:
+        </entry>
+        <entry>
+          0, 1
+        </entry>
+        <entry>
+          If this X-OTRS header is set, the incoming follow-up message will not change
+the ticket state.  For this purpose the header can be customized in the
+sysconfig using option 'KeepStateHeader'.
         </entry>
       </row>
     </tbody>

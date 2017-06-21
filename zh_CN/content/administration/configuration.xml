@@ -9,15 +9,48 @@
 <title>OTRS 配置文件</title>
 
 <para>
-OTRS的所有配置文件都保存在目录<filename>Kernel</filename>及其子目录中。除了<filename>Kernel/Config.pm</filename>外无需手动修改任何其它文件，因为其它的文件在系统升级时会被覆盖。只需从其它文件将配置参数复制到<filename>Kernel/Config.pm</filename>并按你的需求修改即可，这个文件在升级过程中永远不会被改动，所以你的手动配置是安全的。
+All OTRS configuration files are stored in the directory
+<filename>Kernel</filename> and in its subdirectories. There is no need to
+manually change any other file than <filename>Kernel/Config.pm</filename>,
+because the rest of the files will be changed when the system gets
+upgraded. Just copy the configuration parameters from other files into
+<filename>Kernel/Config.pm</filename> and change them as per your
+needs. This file will never be touched during the upgrade process, so your
+manual changes are safe.
 </para>
 
 <para>
-在目录<filename>Kernel/Config/Files</filename>中有一些其它文件，在访问OTRS登录页面时解析。如果安装了附加的应用模块如FAQ知识库或文件管理器，这些模块的配置文件也放在这个目录中。
+The configuration can be rebuilt either manually by executing <literal>perl
+bin/otrs.Console.pl Maint::Config::Rebuild</literal> or automatically by the
+installer, package operations (install, upgrade, reinstall and uninstall),
+etc. All <filename>.xml</filename> files located in
+<filename>Kernel/Config/Files/XML/</filename> are parsed and their content
+is transferred to the OTRS database. Most of the .xml files which are part
+of this directory by default belong to OTRS Free, but OTRS Free Features
+such as FAQ or Survey (or any other OTRS extension) will add their own
+configuration files to this directory aswell.
 </para>
 
 <para>
-如果访问OTRS的WEB界面，目录<filename>Kernel/Config/Files</filename>下的所有.xml文件按字母顺序被解析，并载入中央框架和附加应用模块的设置。然后评估<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>、<filename>Kernel/Config/Files/ZZZAuto.pm</filename>和<filename>Kernel/Config/Files/ZZZProcessManagement.pm</filename>（如果有）中的设置。这些文件用于图形界面的系统配置缓存，永远不要手动修改。最后解析<filename>Kernel/Config.pm</filename>，它包含了你的独特设置和手动修改的配置参数。
+To apply any sort of changes to the configuration, it is necessary to deploy
+them. The deployment process will extract all settings and the according
+values from the OTRS database, convert them to a format that OTRS can
+understand naturally and put them into
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>.
+</para>
+
+<para>
+If the OTRS web interface is accessed, the settings contained in the files
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>,
+<filename>Kernel/Config/Files/ZZZACL.pm</filename> (if existing),
+<filename>Kernel/Config/Files/ZZZProcessManagement.pm</filename> (if
+existing) and any other custom .pm file will be evaluated
+alphabetically. These files are used by the graphical user interface for
+caching purposes and should never be changed manually. Lastly, the file
+<filename>Kernel/Config.pm</filename> that contains your individual settings
+and manually changed configuration parameters will be parsed. Reading the
+configuration files in this order makes sure that your specific
+configuration settings are considered correctly by the system.
 </para>
 
 </section>
@@ -26,37 +59,88 @@ OTRS的所有配置文件都保存在目录<filename>Kernel</filename>及其子�
 <title>通过WEB界面配置系统</title>
 
 <para>
-从OTRS
-2.0开始，近乎所有的中央框架或附加应用模块的配置参数都可以通过系统配置图形界面轻松修改。以OTRS系统管理员登录，并在系统管理页面点击系统配置链接以执行新的配置工具（见下图）。
-</para>
-
-<para>
 <figure>
     <title>系统配置的图形界面</title>
 <screenshot>
-<graphic fileref="screenshots/administration/adminarea/admin-sysconfig.png"
+<graphic
+fileref="screenshots/administration/adminarea/admin-systemconfiguration.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-OTRS当前已经有超过600个配置参数，可以通过不同的方法来快速访问一个特定的配置参数。使用全文搜索，可以使用一个或多个关键词扫描所有的配置参数，全文搜索不光搜索配置参数名称，还会搜索参数的描述文字。这样即使不知道名称也能轻松查找一个配置参数。
+OTRS Free currently brings more than 1700 configuration settings, and there
+are different ways to quickly access a specific one. With the full text
+search, all configuration settings can be scanned for one or more
+keywords. The full text search not only searches through the names of the
+configuration settings, but also the descriptions and values. This allows an
+element to be found easily even if its name is unknown.
 </para>
 
 <para>
-此外，所有的配置参数存储在主组和子组中。主组代表配置参数所属的应用模块如“框架”就是OTRS核心框架、“Ticket”就是工单系统、“FAQ”就是FAQ知识库系统等等。从主组列表中选择了应用模块后，点击右侧的子组名即可访问子组中的所有配置参数。
+Furthermore, each configuration setting is classified by a category and a
+navigation group. Navigation groups are individual elements in the main
+navigation tree. By selecting one of these navigation entries, all settings
+assigned to the selected group will be shown. As long as no extensions are
+installed, the category selection is automatically hidden, but as soon as a
+package is installed which brings its own configuration settings (such as
+FAQ or Survey), the category selection will be revealed. Selecting a
+category makes the main navigation tree show only the navigation groups
+belonging to the selected category.
 </para>
 
 <para>
-每个配置参数都可以通过一个复选框来打开或关闭。如果该参数被关闭，系统就会忽略这个参数或使用一个默认值。还可以通过重置链接将修改过的配置参数改回系统默认值。‘更新’按钮将所有更改内容提交到系统配置参数。
+All configuration settings are shown as readonly by default. To edit a
+setting, click the "Edit this setting" button that appears on hovering your
+mouse cursor over a setting. Once edit mode has been entered, changes made
+to the fields from within the setting can be saved by clicking the save
+button on the right (or by hitting the enter key on your keyboard). If a
+setting is currently edited by another administrator, it is not possible to
+get access to the edit mode for that setting until the other administrator
+finished their work. Editing can be cancelled by clicking the cancel button
+on the right or hitting the "Escape" key on your keyboard. When editing is
+cancelled, all changes made during the current editing session are
+discarded.
 </para>
 
 <para>
-如果你要保存所有你修改过的系统配置，比如要快速设置一个新安装的系统，你可以使用“导入配置”按钮，它会创建一个.pm文件。要恢复你自己的设置，只需点击“导入配置”并选择之前创建的.pm文件即可。
+Clicking the setting name or the menu icon on the the top right of each
+setting will reveal a menu with some more options (e.g. enable/disabled a
+setting, reset a settings values to their defaults, copy a direct link to a
+setting or add a setting to a list of favorites for quick access).
+</para>
+
+<para>
+To bring changes into effect, a deployment has to be started. The system
+configuration deployment screen shows a list of the settings which are to be
+deployed. Clicking the arrow icon on the top left of each setting or in the
+outer "Changes Overview" box will show a one to one comparison between the
+settings current state (which is about to be deployed) and the previous (or
+default) state.
+</para>
+
+<para>
+<figure>
+    <title>System configuration deployment</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-systemconfigurationdeployment.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+If you would like to save all the changes you made to your systems
+configuration (for example to quickly set up a new instance) you can use the
+"Export settings" button, which will provide a .yml file for downloading. To
+restore your own settings, use "Import settings" and select the .yml file
+you have created before.
 </para>
 
 <note>
 <para>
-出于安全原因，数据库连接的配置参数不能在系统配置图形界面修改。它们必须在文件<filename>Kernel/Config.pm</filename>中手动设置。
+For security reasons, the configuration settings for the database connection
+cannot be changed in the graphical user interface of the system
+connfiguration. These have to be set manually in
+<filename>Kernel/Config.pm</filename>.
 </para>
 </note>
 

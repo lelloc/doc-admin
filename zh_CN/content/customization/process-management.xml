@@ -434,8 +434,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    将选择的字段拖入"分配的字段"池后，会弹出另一个窗口，显示该字段详细信息，保留默认选项即可，接着将信件字段的信件类型(ArticleType)字段设置为
-"备注-内部"。
+                    As soon as the fields are dropped into the "Assigned Fields" pool another
+popup screen is shown with some details about the field, we will leave the
+default options and only for Article fields we should make sure that the
+CommunicationChannel field is set to "Internal" and that the
+IsVisibleForCustomer is not active.
                 </para>
                 <para>
                     <figure>
@@ -1172,7 +1175,7 @@ Activities:
     CreateTime: 2012-11-23 11:49:38
     EntityID: A1
     ID: 151
-    Name: 记录需求
+    Name: Recording the demand
   A2:
     ActivityDialogs:
       - AD2
@@ -1185,7 +1188,7 @@ Activities:
     CreateTime: 2012-11-23 11:50:11
     EntityID: A2
     ID: 152
-    Name: 审批
+    Name: Approval
   A3:
     ActivityDialogs:
       - AD4
@@ -1198,7 +1201,7 @@ Activities:
     CreateTime: 2012-11-23 11:50:35
     EntityID: A3
     ID: 153
-    Name: 采购
+    Name: Order
   A4:
     ActivityDialogs:
       - AD6
@@ -1209,7 +1212,7 @@ Activities:
     CreateTime: 2012-11-23 11:51:00
     EntityID: A4
     ID: 154
-    Name: 即将到达
+    Name: Incoming
   A5:
     ActivityDialogs: []
     ChangeTime: 2012-11-23 11:51:33
@@ -1217,13 +1220,13 @@ Activities:
     CreateTime: 2012-11-23 11:51:33
     EntityID: A5
     ID: 155
-    Name: 流程结束
+    Name: Process complete
 ActivityDialogs:
   AD1:
     ChangeTime: 2012-12-06 02:16:21
     Config:
       DescriptionLong: ''
-      DescriptionShort: 记录需求
+      DescriptionShort: Recoding the demand
       FieldOrder:
         - DynamicField_Author
         - DynamicField_ISBN
@@ -1259,19 +1262,20 @@ ActivityDialogs:
     CreateTime: 2012-11-23 14:34:43
     EntityID: AD1
     ID: 154
-    Name: 记录需求
+    Name: Recording the demand
   AD2:
     ChangeTime: 2012-11-23 14:57:41
     Config:
       DescriptionLong: ''
-      DescriptionShort: 审批拒绝
+      DescriptionShort: Approval denied
       FieldOrder:
         - Article
         - DynamicField_Status
       Fields:
         Article:
           Config:
-            ArticleType: note-internal
+            CommunicationChannel:  'Internal'
+            IsVisibleForCustomer: '0'
           DefaultValue: ''
           DescriptionLong: ''
           DescriptionShort: ''
@@ -1286,7 +1290,7 @@ ActivityDialogs:
       Permission: ''
       RequiredLock: 0
       SubmitAdviceText: ''
-      SubmitButtonText: 拒绝请求
+      SubmitButtonText: Deny Request
     CreateTime: 2012-11-23 14:36:39
     EntityID: AD2
     ID: 155
@@ -1295,7 +1299,7 @@ ActivityDialogs:
     ChangeTime: 2012-12-14 03:14:23
     Config:
       DescriptionLong: ''
-      DescriptionShort: 通过审批
+      DescriptionShort: Approved
       FieldOrder:
         - DynamicField_Status
       Fields:
@@ -1309,23 +1313,24 @@ ActivityDialogs:
       Permission: ''
       RequiredLock: 0
       SubmitAdviceText: ''
-      SubmitButtonText: 同意请求
+      SubmitButtonText: Approve Request
     CreateTime: 2012-11-23 14:37:35
     EntityID: AD3
     ID: 156
-    Name: 通过审批
+    Name: Approved
   AD4:
     ChangeTime: 2012-11-23 14:58:52
     Config:
       DescriptionLong: ''
-      DescriptionShort: 采购拒绝
+      DescriptionShort: Order rejected
       FieldOrder:
         - Article
         - DynamicField_Status
       Fields:
         Article:
           Config:
-            ArticleType: note-internal
+            CommunicationChannel:  'Internal'
+            IsVisibleForCustomer: '0'
           DefaultValue: ''
           DescriptionLong: ''
           DescriptionShort: ''
@@ -1340,16 +1345,16 @@ ActivityDialogs:
       Permission: ''
       RequiredLock: 0
       SubmitAdviceText: ''
-      SubmitButtonText: 拒绝采购
+      SubmitButtonText: Reject Order
     CreateTime: 2012-11-23 14:38:48
     EntityID: AD4
     ID: 157
-    Name: 采购拒绝
+    Name: Order rejected
   AD5:
     ChangeTime: 2012-12-06 02:20:12
     Config:
       DescriptionLong: ''
-      DescriptionShort: 生成订单
+      DescriptionShort: Order placed
       FieldOrder:
         - DynamicField_DeliveryDate
         - DynamicField_Price
@@ -1385,12 +1390,12 @@ ActivityDialogs:
     CreateTime: 2012-11-23 14:41:28
     EntityID: AD5
     ID: 158
-    Name: 生成订单
+    Name: Order placed
   AD6:
     ChangeTime: 2012-11-23 14:42:43
     Config:
       DescriptionLong: ''
-      DescriptionShort: 货品到达
+      DescriptionShort: Shipment received
       FieldOrder:
         - DynamicField_DateOfReceipt
         - DynamicField_Status
@@ -1414,7 +1419,7 @@ ActivityDialogs:
     CreateTime: 2012-11-23 14:42:43
     EntityID: AD6
     ID: 159
-    Name: 货品到达
+    Name: Shipment received
 Process:
   Activities:
     - A1
@@ -1424,7 +1429,7 @@ Process:
     - A5
   ChangeTime: 2012-12-06 02:31:59
   Config:
-    Description: 采购一本书的流程
+    Description: The process to order a book
     Path:
       A1:
         T1:
@@ -1483,7 +1488,7 @@ Process:
     A5:
       left: 194
       top: 410
-  Name: 书籍采购
+  Name: Book ordering
   State: Active
   StateEntityID: S1
   TransitionActions:
@@ -1517,62 +1522,62 @@ TransitionActions:
     CreateTime: 2012-11-23 15:50:59
     EntityID: TA1
     ID: 61
-    Name: 将工单转入‘管理’队列”
+    Name: Move the process ticket into the "Management" queue
   TA2:
     ChangeTime: 2012-11-23 16:02:12
     Config:
       Config:
-        Responsible: 经理
+        Responsible: manager
       Module: Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet
     CreateTime: 2012-11-23 15:58:22
     EntityID: TA2
     ID: 62
-    Name: 变更工单负责人为‘经理’
+    Name: Change ticket responsible to "manager"
   TA3:
     ChangeTime: 2012-11-24 14:27:02
     Config:
       Config:
-        Queue: 员工
+        Queue: Employees
       Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
     CreateTime: 2012-11-23 16:02:54
     EntityID: TA3
     ID: 63
-    Name: 将工单转入‘经理’队列”
+    Name: Move the process ticket into the "Employees" queue
   TA4:
     ChangeTime: 2012-11-23 16:04:06
     Config:
       Config:
-        Responsible: 员工
+        Responsible: Employee
       Module: Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet
     CreateTime: 2012-11-23 16:04:06
     EntityID: TA4
     ID: 64
-    Name: 变更工单负责人为‘员工’
+    Name: Change ticket responsible to "Employee"
   TA5:
     ChangeTime: 2012-12-06 02:18:34
     Config:
       Config:
-        Queue: 采购
+        Queue: Purchasing
       Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
     CreateTime: 2012-11-23 16:04:54
     EntityID: TA5
     ID: 65
-    Name: 将工单转入‘采购’队列”
+    Name: Move process ticket into the "Purchasing" queue
   TA6:
     ChangeTime: 2012-12-06 02:18:48
     Config:
       Config:
-        Queue: 邮局
+        Queue: Post office
       Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
     CreateTime: 2012-11-23 16:06:20
     EntityID: TA6
     ID: 66
-    Name: 将工单转入‘邮局’队列”
+    Name: Move process ticket into the "Post office" queue
   TA7:
     ChangeTime: 2012-12-06 02:29:55
     Config:
       Config:
-        State: 成功关闭
+        State: closed successful
       Module: Kernel::System::ProcessManagement::TransitionAction::TicketStateSet
     CreateTime: 2012-12-06 02:29:27
     EntityID: TA7
@@ -1587,7 +1592,7 @@ TransitionActions:
     CreateTime: 2012-12-06 02:31:12
     EntityID: TA8
     ID: 68
-    Name: 工单失败关闭
+    Name: Close ticket unsuccessfully
 Transitions:
   T1:
     ChangeTime: 2012-11-23 15:12:20
@@ -1626,14 +1631,14 @@ Transitions:
         1:
           Fields:
             DynamicField_Status:
-              Match: 通过审批
+              Match: Approved
               Type: String
           Type: and
       ConditionLinking: and
     CreateTime: 2012-11-23 11:54:54
     EntityID: T3
     ID: 96
-    Name: 通过审批
+    Name: Approved
   T4:
     ChangeTime: 2012-11-23 15:14:08
     Config:
@@ -1641,7 +1646,7 @@ Transitions:
         1:
           Fields:
             DynamicField_Status:
-              Match: 采购拒绝
+              Match: Order denied
               Type: String
           Type: and
       ConditionLinking: and
@@ -1656,14 +1661,14 @@ Transitions:
         1:
           Fields:
             DynamicField_Status:
-              Match: 生成订单
+              Match: Order placed
               Type: String
           Type: and
       ConditionLinking: and
     CreateTime: 2012-11-23 11:56:15
     EntityID: T5
     ID: 98
-    Name: 生成订单
+    Name: Order placed
   T6:
     ChangeTime: 2012-11-23 15:15:30
     Config:
@@ -1671,14 +1676,14 @@ Transitions:
         1:
           Fields:
             DynamicField_Status:
-              Match: 货品到达
+              Match: Shipment received
               Type: String
           Type: and
       ConditionLinking: and
     CreateTime: 2012-11-23 11:56:48
     EntityID: T6
     ID: 99
-    Name: 货品到达
+    Name: Shipment received
 
                 ]]></screen>
             </para>
@@ -2091,8 +2096,8 @@ StateID => {
                     The field <literal>Article</literal> is a special case. If it is present in
 a <literal>Fields</literal> configuration, the Activity Dialog will contain
 a complete Richtext editor with subject field and attachment handling. The
-entered text will then be added to the ticket as an article and sent by
-email. Let's see an example Article field configuration:
+entered text will then be added to the ticket as an article. Let's see an
+example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2101,7 +2106,8 @@ Article => {
     DescriptionLong => '',
     Display         => 1,
     Config          => {
-        ArticleType  => 'note-internal',
+        CommunicationChannel => 'Internal'
+        IsVisibleForCustomer => '0'
         LabelSubject => '',
         LabelBody    => '',
     },
@@ -2597,17 +2603,36 @@ TransitionAction.
                 <section>
                     <title>TicketArticleCreate工单信件创建</title>
                     <para>
-                        创建一个信件，并用于创建备注或邮件回复。
+                        Creates an article, the %DataPayload parameters depends on the given
+communication channel, by default <literal>Internal</literal> is
+used. Example:
                     </para>
                     <para>
                         <screen><![CDATA[
 $Self->{'Process::TransitionAction'} = {
     'TA1' => {
-        Name   => 'Article Create Note Internal',
+        Name   => 'Article Create Note',
         Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate',
         Config => {
-            ArticleType      => 'note-internal',                                        # note-external|phone|fax|sms|...
-                                                                                        #   excluding any email type
+
+        Config                   => {
+            SenderType           => 'agent',            # (required) agent|system|customer
+            IsVisibleForCustomer => 1,                  # 0 or 1
+            CommunicationChannel => 'Internal',         # Internal|Phone|Email|..., default: Internal
+
+            %DataPayload,                               # some parameters depending of each communication channel
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        The following is the %DataPayload for MIME based Communication channels
+(<literal>Email</literal>,<literal>Internal</literal> and
+<literal>Phone</literal>).
+                    </para>
+                    <para>
+                        <screen><![CDATA[
             SenderType       => 'agent',                                                # agent|system|customer
             ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
             Subject          => 'some short description',                               # required
@@ -2623,33 +2648,37 @@ $Self->{'Process::TransitionAction'} = {
             NoAgentNotify    => 0,                                                      # if you don't want to send agent notifications
             AutoResponseType => 'auto reply',                                           # auto reject|auto follow up|auto reply/new ticket|auto remove
 
-            ForceNotificationToUserID   => [ 1, 43, 56 ],                               # if you want to force somebody
-            ExcludeNotificationToUserID => [ 43, 56 ],
+            ForceNotificationToUserID   => '1,43,56',                                    # if you want to force somebody
+            ExcludeNotificationToUserID => '43,56',
                  # if you want full exclude somebody from notifications,
                  # will also be removed in To: line of article,
                  # higher prio as ForceNotificationToUserID
-            ExcludeMuteNotificationToUserID => [ 43, 56 ],
+            ExcludeMuteNotificationToUserID => '43,56',
                  # the same as ExcludeNotificationToUserID but only the
                  # sending gets muted, agent will still shown in To:
                  # line of article
-        },
-    },
-};
                         ]]></screen>
                     </para>
+
                     <para>
                         <literal>Name</literal> specifies the name of the configured
 TransitionAction. It can be freely chosen, but should reflect the purpose of
 the configured action.
                     </para>
                     <para>
-                        <literal>ArticleType</literal> defines the type of the article to be
-created. Possible values: phone, fax, sms, webrequest, note-internal,
-note-external and note-report.
-                    </para>
-                    <para>
                         <literal>SenderType</literal> defines the sender type of the
 article. Possible values: agent, system, customer.
+                    </para>
+
+                    <para>
+                        <literal>IsVisibleForCustomer</literal> defines if the article should be
+displayed in the customer interface.
+                    </para>
+                    <para>
+                        <literal>CommunicationChannel</literal> defines the type of the article to
+be created. Possible values: <literal>Email</literal>,
+<literal>Internal</literal> and <literal>Phone</literal>, this list could be
+extended by installing new communication channels via an OTRS Package.
                     </para>
                     <para>
                         <literal>ContentType</literal> defines the content type of the
@@ -2740,34 +2769,13 @@ $Self->{'Process::TransitionAction'} = {
             PendingTimeDiff => 123 ,                  # optional (for pending states)
 
             # article required:
-            ArticleType      => 'note-internal',                        # note-external|phone|fax|sms|...
-                                                                        #   excluding any email type
-            SenderType       => 'agent',                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
-            Subject          => 'some short description',               # required
-            Body             => 'the message text',                     # required
-            HistoryType      => 'OwnerUpdate',                          #
-            EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
-            HistoryComment   => 'Some free text!',
+            SenderType           => 'agent',           # agent|system|customer
+            CommunicationChannel => 'Internal'         # Internal|Phone|Email|..., default: Internal
+            IsVisibleForCustomer => '0'
+
+            %DataPayload,                             # some parameters depending of each communication channel
 
             # article optional:
-            From             => 'Some Agent <email@example.com>',       # not required but useful
-            To               => 'Some Customer A <customer-a@example.com>', # not required but useful
-            Cc               => 'Some Customer B <customer-b@example.com>', # not required but useful
-            ReplyTo          => 'Some Customer B <customer-b@example.com>', # not required
-            MessageID        => '<asdasdasd.123@example.com>',          # not required but useful
-            InReplyTo        => '<asdasdasd.12@example.com>',           # not required but useful
-            References       => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-            NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
-            AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
-
-            ForceNotificationToUserID   => [ 1, 43, 56 ],               # if you want to force somebody
-            ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notifications,
-                                                                        # will also be removed in To: line of article,
-                                                                        # higher prio as ForceNotificationToUserID
-            ExcludeMuteNotificationToUserID => [ 43,56 ],               # the same as ExcludeNotificationToUserID but only the
-                                                                        # sending gets muted, agent will still shown in To:
-                                                                        # line of article
             TimeUnit                        => 123
 
             # other:
@@ -2842,67 +2850,24 @@ Times, when the ticket state belongs to a pending state type.
 from current date/time) to set the Ticket Pending Times, when the ticket
 state belongs to a pending state type.
                     </para>
+
+
                     <para>
-                        <literal>ArticleType</literal> defines the type of the article to be
-created. Possible values: phone, fax, sms, webrequest, note-internal,
-note-external and note-report.
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
+                    </para>
+
+                    <para>
+                        <literal>IsVisibeforCustomers</literal> defines if the article should be
+displayed in the customer interface.
                     </para>
                     <para>
-                        ‘SenderType发件人类型’定义信件的发件人类型，可能的值有：服务人员、系统、客户。
+                        <literal>CommunicationChannel</literal> defines the type of the article to
+be created. Possible values: Email, Internal and Phone, this list could be
+extended by installing new communication channels via an OTRS Package.
                     </para>
                     <para>
-                        <literal>ContentType</literal> defines the content type of the
-article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
-or any other valid charset and mime type.
-                    </para>
-                    <para>
-                        <literal>Subject</literal> defines the article title. Mandatory.
-                    </para>
-                    <para>
-                        <literal>Body</literal> defines the article content. Mandatory.
-                    </para>
-                    <para>
-                        <literal>HistoryType</literal> defines the type of the history
-entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
-EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
-EscalationResponseTimeStart, EscalationResponseTimeStop,
-EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
-EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
-EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
-Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
-PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
-ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
-SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
-SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
-TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
-TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
-                    </para>
-                    <para>
-                        <literal>HistoryComment</literal> defines the content of the history entry.
-                    </para>
-                    <para>
-                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
-<literal>ReplyTo</literal> take email addresses in the notation specified
-above.
-                    </para>
-                    <para>
-                        <literal>InReplyTo</literal> and <literal>References</literal> take email
-message IDs.
-                    </para>
-                    <para>
-                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
-the Agent will not be sent.
-                    </para>
-                    <para>
-                        <literal>AutoResponseType</literal> can take the following values: auto
-follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
-                    </para>
-                    <para>
-                        <literal>ForceNotificationToUserID</literal>,
-<literal>ExcludeNotificationToUserID</literal>,
-<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
-UserIDs that are either always notified, not notified or listed as notified
-but not actually sent a notification email.
+                        Please check the additional parameters for different article channels.
                     </para>
                     <para>
                         <literal>TimeUnit</literal> the time invested in the current ticket article
@@ -2917,6 +2882,14 @@ prefix and NameX is the name of a Dynamic Field to be set in the new ticket
                         <literal>LinkAs</literal> to define the new ticket relation with originator
 ticket, from the new ticket point of view, for example Normal, Parent, Child
 etc.
+                    </para>
+                    <para>
+                        OTRS smart tags like &lt;OTRS_CUSTOMER_BODY&gt; or
+&lt;OTRS_CUSTOMER_REALNAME&gt; are now supported in the Transition Action
+"TicketCreate".  Those smart tags could be used to create a new ticket and
+insert data from the process ticket to this child ticket.  The usage of the
+OTRS smart tags is identical to the text templates in "Ticket
+Notifications".
                     </para>
                 </section>
                 <section>

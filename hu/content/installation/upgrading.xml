@@ -40,8 +40,16 @@ has an older Perl version, you need to update it first before updating OTRS.
         </para>
     </warning>
 
+    <warning>
+        <para>
+            For PostgreSQL based installations: please note that you need at least
+PostgreSQL 9.2 to run OTRS 6. If your system has an older PostgreSQL
+version, you need to update it first before updating OTRS.
+        </para>
+    </warning>
+
     <para>
-    Nagyon ajánlott először egy próbafrissítést végrehajtani egy elkülönített
+        Nagyon ajánlott először egy próbafrissítést végrehajtani egy elkülönített
 tesztelési gépen.
     </para>
 
@@ -63,20 +71,7 @@ shell> /etc/init.d/apache stop
         </para>
 
         <para>
-        Állítsa le az OTRS cron-feladatokat és az ütemezőt vagy a démont (ebben a
-sorrendben) annak az OTRS verziójától függően, amelyről frissít:
-        </para>
-
-        <para>
-            <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/Cron.sh stop
-shell> bin/otrs.Scheduler.pl -a stop
-            ]]></screen>
-        </para>
-
-        <para>
-        vagy
+        Stop OTRS cron jobs and the daemon (in this order):
         </para>
 
         <para>
@@ -89,31 +84,26 @@ shell> bin/otrs.Daemon.pl stop
     </section>
 
     <section role="NotInToc">
-        <title>2. lépés: biztonsági mentés készítése az <filename>/opt/otrs/</filename>
-alatt mindenről</title>
+        <title>Step 2: Backup files and database</title>
 
         <para>
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename> (csak hivatkozásként,
-erre a fájlra többé nincs szükség)</para></listitem>
                 <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>valamint az adatbázis</para></listitem>
             </itemizedlist>
         </para>
+        <warning>
+            <para>Don't proceed without a complete backup of your system.</para>
+        </warning>
     </section>
 
     <section role="NotInToc">
-        <title>3. lépés: győződjön meg arról, hogy mindent lementett-e ;-)</title>
-        <para></para>
-    </section>
-
-    <section role="NotInToc">
-    <title>4. lépés: az új kiadás telepítés (tar vagy RPM)</title>
+    <title>Step 3: Install the new release (tar or RPM)</title>
 
         <section role="NotInToc">
-        <title>4.1. lépés: tarball segítségével:</title>
+        <title>Step 3.1: With the tarball:</title>
 
             <screen><![CDATA[
 shell> cd /opt
@@ -130,17 +120,6 @@ shell> mv otrs-x.x.x otrs
                         <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                         <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
                     </itemizedlist>
-                </para>
-            </section>
-
-            <section role="NotInToc">
-                <title>TicketCounter.log visszaállítása</title>
-
-                <para>
-                    Azért, hogy az OTRS a helyes jegyszámokkal mehessen tovább, állítsa vissza a
-<filename>TicketCounter.log</filename> fájlt az
-<filename>/opt/otrs/var/log/</filename> könyvtárba. Ez különösen fontos, ha
-növekvő jegyszámokat használ.
                 </para>
             </section>
 
@@ -174,7 +153,8 @@ shell> cp *.installed /opt/otrs/var/stats
                 <title>Fájljogosultságok beállítása</title>
 
                 <para>
-                Hajtsa végre a következő parancsot:
+                    Please execute the following command as root user to set the file and
+directory permissions for OTRS:
                 </para>
 
                 <para>
@@ -185,57 +165,14 @@ shell> bin/otrs.SetPermissions.pl
                 </para>
 
                 <para>
-                a rendszerbeállításhoz szükséges jogosultságokkal. Például:
-                </para>
-
-                <para>
-                <itemizedlist>
-                <listitem>
-                    <para>Olyan webkiszolgálónál, amely az OTRS felhasználóként fut:</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=otrs
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>A wwwrun felhasználóval futó webkiszolgálónál (például SUSE):</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>Apache felhasználóval futó webkiszolgálónál (például Red Hat, CentOS):</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=apache
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>A www-data felhasználóval futó webkiszolgálónál (például Debian, Ubuntu):</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=www-data
-                ]]></screen>
-                    </para>
-                </listitem>
-                </itemizedlist>
-
+                    It will try to detect the correct user and group settings needed for your
+setup.
                 </para>
             </section>
         </section>
 
         <section role="NotInToc">
-            <title>4.2. lépés: RPM segítségével:</title>
+            <title>Step 3.2: With the RPM:</title>
             <para>
             <screen><![CDATA[
 shell> rpm -Uvh otrs-x.x.x.-01.rpm
@@ -250,120 +187,45 @@ beállítófájlokat és beállítja a fájljogosultságokat.
     </section>
 
     <section role="NotInToc">
-        <title>5. lépés: a szükséges Perl-modulok ellenőrzése</title>
+        <title>Step 4: Run the migration script</title>
 
         <para>
-        Ellenőrizze, hogy minden szükséges Perl-modul telepítve van-e a rendszerre,
-és telepítsen minden olyan modult, amely esetleg hiányzik.
+            Please run the migration script (as the <literal>otrs</literal> user, NOT as
+<literal>root</literal>):
         </para>
+
         <para>
         <screen><![CDATA[
-shell> /opt/otrs/bin/otrs.CheckModules.pl
+shell> scripts/DBUpdate-to-6.pl
         ]]></screen>
         </para>
-    </section>
 
-    <section role="NotInToc">
-        <title>6. lépés: az adatbázis-változtatások alkalmazása</title>
+        <para>
+            This script will perform many checks on your system and give you advice on
+how to install missing Perl modules etc., if that is required.
+        </para>
 
-        <section role="NotInToc">
-            <title>6.1. lépés: adatbázisséma frissítése</title>
-
-            <section role="NotInToc">
-            <title>MySQL:</title>
-
-                <note>
-                    <para>
-                        Megjegyzés: a MySQL FRISSÍTÉSI folyamatában létrehozott új táblák a
-MySQL-kiszolgálón beállított alapértelmezett tábla tárolómotorral lesznek
-létrehozva. A MySQL 5.5-ös verziójában az <literal>InnoDB</literal> az új
-alapértelmezett típus. Ha a meglévő táblák, például a „users” a
-<literal>MyISAM</literal> tábla tárolómotorral rendelkeznek, akkor hiba lesz
-megjelenítve az idegen kulcs kényszereinek létrehozásakor. Ebben az esetben
-azt ajánljuk, hogy állítsa át az összes táblát <literal>InnoDB</literal>
-tárolómotorra a <command>bin/otrs.Console.pl
-Maint::Database::MySQL::InnoDBMigration</command> konzolparanccsal.
-                    </para>
-                </note>
-
-                <para>
-                    A tárolómotorra vonatkozó bármilyen problémát a
-<filename>bin/otrs.Console.pl Maint::Database::Check</filename> parancs fog
-jelenteni, ezért futtassa le a lehetséges problémák ellenőrzéséhez.
-                </para>
-
-                <para>
-                    <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-6.mysql.sql | mysql -p -f -u root otrs
-shell> bin/otrs.Console.pl Maint::Database::Check
-                    ]]></screen>
-                </para>
-
-            </section>
-            <section role="NotInToc">
-                <title>PostgreSQL:</title>
-
-                <para>
-                <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-6.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
-                ]]></screen>
-                </para>
-            </section>
-        </section>
-
-        <section role="NotInToc">
-            <title>6.2. lépés: adatbázis-költöztető parancsfájl</title>
-
-            <para>
-            Futtassa le a költöztető parancsfájlt (<literal>otrs</literal>
-felhasználóként, NE <literal>root</literal> felhasználóként):
-            </para>
-
-            <para>
-            <screen><![CDATA[
-shell> scripts/DBUpdate-to-6.pl
-            ]]></screen>
-            </para>
-
-            <para>
-                The script will ask you to set a time zone for OTRS. It is very important
-that you set the correct time zone (and keep it), otherwise date and time of
-data added after the upgrade (tickets, articles, etc.) will be stored with a
-different time zone than your existing data, leading to inconsistent data.
-The script will suggest possible time zones based on your previous
-configuration. In case you are not sure or made a mistake, you can change
-the OTRS time zone after the upgrade via SysConfig setting
+        <para>
+            The migration script will ask you to set a time zone for OTRS. It is very
+important that you set the correct time zone (and keep it), otherwise date
+and time of data added after the upgrade (tickets, articles, etc.) will be
+stored with a different time zone than your existing data, leading to
+inconsistent data.  The script will suggest possible time zones based on
+your previous configuration. In case you are not sure or made a mistake, you
+can change the OTRS time zone after the upgrade via SysConfig setting
 <literal>OTRSTimeZone</literal>.
-            </para>
+        </para>
 
+        <warning>
             <para>
-            Ne folytassa a frissítési folyamatot, ha ez a parancsfájl nem működött
+                Ne folytassa a frissítési folyamatot, ha ez a parancsfájl nem működött
 megfelelően önnél. Egyébként adatvesztés fordulhat elő.
             </para>
-        </section>
+        </warning>
     </section>
 
     <section role="NotInToc">
-        <title>7. lépés: a beállítási gyorsítótár frissítése és a gyorsítótárak törlése</title>
-
-        <para>
-        Futtassa le (<literal>otrs</literal> felhasználóként,
-<emphasis>ne</emphasis> <literal>root</literal> felhasználóként):
-        </para>
-
-        <para>
-        <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.Console.pl Maint::Config::Rebuild
-shell> bin/otrs.Console.pl Maint::Cache::Delete
-        ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>8. lépés: szolgáltatások újraindítása</title>
+        <title>Step 5: Restart your services</title>
 
         <para>
         Például (a használt szolgáltatásoktól függően):
@@ -383,36 +245,35 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>9. lépés: telepített csomagok ellenőrzése</title>
-
+        <title>Step 6: Check installed packages</title>
         <note>
             <para>
-                The OTRS packages of 5 are NOT compatible with OTRS 6, so you have to
-perform a package upgrade!
+                The OTRS 5 packages are NOT compatible with OTRS 6, so you have to perform a
+package upgrade!
             </para>
         </note>
-
-    <!--
         <para>
-
-            The following packages are automatically uninstalled after the upgrade process
-            (if they where installed before):
+            A következő csomagok automatikusan el lesznek távolítva a frissítési
+folyamat után (ha korábban telepítve voltak):
         </para>
         <para>
             <itemizedlist>
-                <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
+                <listitem><para>OTRSAppointmentCalendar</para></listitem>
             </itemizedlist>
-        </para>
-        -->
-</section>
+
+        <!--
+                TODO: Verify and extend the list of merged packages.
+            -->
+</para>
+    </section>
 
     <section role="NotInToc">
-        <title>10. lépés: az OTRS démon elindítása</title>
+        <title>Step 7: Start the OTRS Daemon</title>
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring
 tasks in OTRS.  The daemon also handles all GenericAgent jobs and must be
-started from the <literal>otrs</literal> user.
+started as the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -423,7 +284,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Update and activate cron jobs</title>
+        <title>Step 8: Update and activate cron jobs</title>
 
         <para>
             Két alapértelmezett OTRS cron-file van az
@@ -440,9 +301,8 @@ shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
         </para>
 
         <para>
-            Ezen cron-feladatok ütemezéséhez a rendszeren használhatja a
-<filename>Cron.sh</filename> parancsfájlt az <literal>otrs</literal>
-felhasználóval.
+            To schedule these cron jobs on your system, you can use the script
+<filename>Cron.sh</filename> as the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -453,7 +313,7 @@ shell> /opt/otrs/bin/Cron.sh start
     </section>
 
     <section role="NotInToc">
-        <title>Step 12: Update system registration (optional)</title>
+        <title>Step 9: Update system registration (optional)</title>
         <para>
             Ha a rendszer már regisztrálva van az OTRS csoporttal, akkor most erősen
 ajánlott a regisztrációs információk frissítése. Ez frissíteni fogja a
@@ -478,7 +338,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 13: Well done!</title>
+        <title>Step 10: Well done!</title>
         <para></para>
     </section>
 </section>

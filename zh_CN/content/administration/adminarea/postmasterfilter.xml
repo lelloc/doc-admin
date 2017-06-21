@@ -183,13 +183,13 @@ $Unit”，$Unit可以为‘s’（秒）、‘m’（分）、‘h’（小时�
       </row>
       <row>
         <entry>
-          X-OTRS-ArticleType:
+          X-OTRS-IsVisibleForCustomer:
         </entry>
         <entry>
-          email-external（邮件-外部）、email-internal（邮件-内部）、email-notification-ext（邮件通知-外部）、email-notification-int（邮件通知-内部）、phone（电话）、fax（传真）、sms（短信）、webrequest（WEB请求）、note-internal（备注-内部）、note-external（备注-外部）、note-report（备注-报告）
+          0, 1
         </entry>
         <entry>
-          设置即将进入工单的信件类型。
+          Controls if the article is shown in the customer interface.
         </entry>
       </row>
       <row>
@@ -213,6 +213,19 @@ Dynamic Field.
         </entry>
         <entry>
           如果设置了这个X-OTRS头，就不会给消息的发件人发送自动答复（邮件循环保护）。
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-FollowUp-State-Keep:
+        </entry>
+        <entry>
+          0, 1
+        </entry>
+        <entry>
+          If this X-OTRS header is set, the incoming follow-up message will not change
+the ticket state.  For this purpose the header can be customized in the
+sysconfig using option 'KeepStateHeader'.
         </entry>
       </row>
     </tbody>

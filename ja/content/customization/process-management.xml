@@ -437,7 +437,11 @@ and drop the field within the pool to rearrange it in the correct place.
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    フィールドが「指定されたフィールド」プールにドロップされるとすぐに、別のポップ・アップ・画面が開き、フィールドに関するいくつかの詳細が表示されます。デフォルト・オプションはそのままとして、また記事フィールドのみに関しては、記事タイプ・フィールドが「ノート内部：（note-internal）」にセットされることを確かめねばなりません。
+                    As soon as the fields are dropped into the "Assigned Fields" pool another
+popup screen is shown with some details about the field, we will leave the
+default options and only for Article fields we should make sure that the
+CommunicationChannel field is set to "Internal" and that the
+IsVisibleForCustomer is not active.
                 </para>
                 <para>
                     <figure>
@@ -1317,7 +1321,8 @@ ActivityDialogs:
       Fields:
         Article:
           Config:
-            ArticleType: note-internal
+            CommunicationChannel:  'Internal'
+            IsVisibleForCustomer: '0'
           DefaultValue: ''
           DescriptionLong: ''
           DescriptionShort: ''
@@ -1371,7 +1376,8 @@ ActivityDialogs:
       Fields:
         Article:
           Config:
-            ArticleType: note-internal
+            CommunicationChannel:  'Internal'
+            IsVisibleForCustomer: '0'
           DefaultValue: ''
           DescriptionLong: ''
           DescriptionShort: ''
@@ -2145,17 +2151,18 @@ StateID => {
                     The field <literal>Article</literal> is a special case. If it is present in
 a <literal>Fields</literal> configuration, the Activity Dialog will contain
 a complete Richtext editor with subject field and attachment handling. The
-entered text will then be added to the ticket as an article and sent by
-email. Let's see an example Article field configuration:
+entered text will then be added to the ticket as an article. Let's see an
+example Article field configuration:
                 </para>
                 <para>
                     <screen>
 Article => {
-    DescriptionShort => 'ここにコメントを挿入して下さい',
+    DescriptionShort => 'Please insert your comment here.',
     DescriptionLong => '',
     Display         => 1,
     Config          => {
-        ArticleType  => 'note-internal',
+        CommunicationChannel => 'Internal'
+        IsVisibleForCustomer => '0'
         LabelSubject => '',
         LabelBody    => '',
     },
@@ -2659,17 +2666,36 @@ TransitionAction.
                 <section>
                     <title>TicketArticleCreate（チケット記事の作成）</title>
                     <para>
-                        記事を作成し、ノートあるいは電子メール返答を作成するために使用することができます。例:
+                        Creates an article, the %DataPayload parameters depends on the given
+communication channel, by default <literal>Internal</literal> is
+used. Example:
                     </para>
                     <para>
                         <screen><![CDATA[
 $Self->{'Process::TransitionAction'} = {
     'TA1' => {
-        Name   => 'Article Create Note Internal',
+        Name   => 'Article Create Note',
         Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate',
         Config => {
-            ArticleType      => 'note-internal',                                        # note-external|phone|fax|sms|...
-                                                                                        #   excluding any email type
+
+        Config                   => {
+            SenderType           => 'agent',            # (required) agent|system|customer
+            IsVisibleForCustomer => 1,                  # 0 or 1
+            CommunicationChannel => 'Internal',         # Internal|Phone|Email|..., default: Internal
+
+            %DataPayload,                               # some parameters depending of each communication channel
+        },
+    },
+};
+                        ]]></screen>
+                    </para>
+                    <para>
+                        The following is the %DataPayload for MIME based Communication channels
+(<literal>Email</literal>,<literal>Internal</literal> and
+<literal>Phone</literal>).
+                    </para>
+                    <para>
+                        <screen><![CDATA[
             SenderType       => 'agent',                                                # agent|system|customer
             ContentType      => 'text/plain; charset=ISO-8859-15',                      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
             Subject          => 'some short description',                               # required
@@ -2685,33 +2711,37 @@ $Self->{'Process::TransitionAction'} = {
             NoAgentNotify    => 0,                                                      # if you don't want to send agent notifications
             AutoResponseType => 'auto reply',                                           # auto reject|auto follow up|auto reply/new ticket|auto remove
 
-            ForceNotificationToUserID   => [ 1, 43, 56 ],                               # if you want to force somebody
-            ExcludeNotificationToUserID => [ 43, 56 ],
+            ForceNotificationToUserID   => '1,43,56',                                    # if you want to force somebody
+            ExcludeNotificationToUserID => '43,56',
                  # if you want full exclude somebody from notifications,
                  # will also be removed in To: line of article,
                  # higher prio as ForceNotificationToUserID
-            ExcludeMuteNotificationToUserID => [ 43, 56 ],
+            ExcludeMuteNotificationToUserID => '43,56',
                  # the same as ExcludeNotificationToUserID but only the
                  # sending gets muted, agent will still shown in To:
                  # line of article
-        },
-    },
-};
                         ]]></screen>
                     </para>
+
                     <para>
                         <literal>Name</literal> specifies the name of the configured
 TransitionAction. It can be freely chosen, but should reflect the purpose of
 the configured action.
                     </para>
                     <para>
-                        <literal>ArticleType</literal> defines the type of the article to be
-created. Possible values: phone, fax, sms, webrequest, note-internal,
-note-external and note-report.
-                    </para>
-                    <para>
                         <literal>SenderType</literal> defines the sender type of the
 article. Possible values: agent, system, customer.
+                    </para>
+
+                    <para>
+                        <literal>IsVisibleForCustomer</literal> defines if the article should be
+displayed in the customer interface.
+                    </para>
+                    <para>
+                        <literal>CommunicationChannel</literal> defines the type of the article to
+be created. Possible values: <literal>Email</literal>,
+<literal>Internal</literal> and <literal>Phone</literal>, this list could be
+extended by installing new communication channels via an OTRS Package.
                     </para>
                     <para>
                         <literal>ContentType</literal> defines the content type of the
@@ -2803,34 +2833,13 @@ $Self->{'Process::TransitionAction'} = {
             PendingTimeDiff => 123 ,                  # optional (for pending states)
 
             # article required:
-            ArticleType      => 'note-internal',                        # note-external|phone|fax|sms|...
-                                                                        #   excluding any email type
-            SenderType       => 'agent',                                # agent|system|customer
-            ContentType      => 'text/plain; charset=ISO-8859-15',      # or optional Charset & MimeType (e.g. 'text/html; charset=UTF-8')
-            Subject          => 'some short description',               # required
-            Body             => 'the message text',                     # required
-            HistoryType      => 'OwnerUpdate',                          #
-            EmailCustomer|Move|AddNote|PriorityUpdate|WebRequestCustomer|...
-            HistoryComment   => 'Some free text!',
+            SenderType           => 'agent',           # agent|system|customer
+            CommunicationChannel => 'Internal'         # Internal|Phone|Email|..., default: Internal
+            IsVisibleForCustomer => '0'
+
+            %DataPayload,                             # some parameters depending of each communication channel
 
             # article optional:
-            From             => 'Some Agent <email@example.com>',       # not required but useful
-            To               => 'Some Customer A <customer-a@example.com>', # not required but useful
-            Cc               => 'Some Customer B <customer-b@example.com>', # not required but useful
-            ReplyTo          => 'Some Customer B <customer-b@example.com>', # not required
-            MessageID        => '<asdasdasd.123@example.com>',          # not required but useful
-            InReplyTo        => '<asdasdasd.12@example.com>',           # not required but useful
-            References       => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-            NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
-            AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
-
-            ForceNotificationToUserID   => [ 1, 43, 56 ],               # if you want to force somebody
-            ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notifications,
-                                                                        # will also be removed in To: line of article,
-                                                                        # higher prio as ForceNotificationToUserID
-            ExcludeMuteNotificationToUserID => [ 43,56 ],               # the same as ExcludeNotificationToUserID but only the
-                                                                        # sending gets muted, agent will still shown in To:
-                                                                        # line of article
             TimeUnit                        => 123
 
             # other:
@@ -2905,67 +2914,24 @@ Times, when the ticket state belongs to a pending state type.
 from current date/time) to set the Ticket Pending Times, when the ticket
 state belongs to a pending state type.
                     </para>
+
+
                     <para>
-                        <literal>ArticleType</literal> defines the type of the article to be
-created. Possible values: phone, fax, sms, webrequest, note-internal,
-note-external and note-report.
+                        <literal>SenderType</literal> defines the sender type of the
+article. Possible values: agent, system, customer.
+                    </para>
+
+                    <para>
+                        <literal>IsVisibeforCustomers</literal> defines if the article should be
+displayed in the customer interface.
                     </para>
                     <para>
-                        「SenderType」は送り手タイプの記事を定義します。可能な値:担当者、システム、顧客。
+                        <literal>CommunicationChannel</literal> defines the type of the article to
+be created. Possible values: Email, Internal and Phone, this list could be
+extended by installing new communication channels via an OTRS Package.
                     </para>
                     <para>
-                        <literal>ContentType</literal> defines the content type of the
-article. Possible values: <literal>text/plain; charset=ISO-8859-15</literal>
-or any other valid charset and mime type.
-                    </para>
-                    <para>
-                        <literal>Subject</literal> defines the article title. Mandatory.
-                    </para>
-                    <para>
-                        <literal>Body</literal> defines the article content. Mandatory.
-                    </para>
-                    <para>
-                        <literal>HistoryType</literal> defines the type of the history
-entry. Possible values: AddNote, ArchiveFlagUpdate, Bounce, CustomerUpdate,
-EmailAgent, EmailCustomer, EscalationResponseTimeNotifyBefore,
-EscalationResponseTimeStart, EscalationResponseTimeStop,
-EscalationSolutionTimeNotifyBefore, EscalationSolutionTimeStart,
-EscalationSolutionTimeStop, EscalationUpdateTimeNotifyBefore,
-EscalationUpdateTimeStart, EscalationUpdateTimeStop, FollowUp, Forward,
-Lock, LoopProtection, Merged, Misc, Move, NewTicket, OwnerUpdate,
-PhoneCallAgent, PhoneCallCustomer, PriorityUpdate, Remove,
-ResponsibleUpdate, SendAgentNotification, SendAnswer, SendAutoFollowUp,
-SendAutoReject, SendAutoReply, SendCustomerNotification, ServiceUpdate,
-SetPendingTime, SLAUpdate, StateUpdate, Subscribe, SystemRequest,
-TicketDynamicFieldUpdate, TicketLinkAdd, TicketLinkDelete, TimeAccounting,
-TypeUpdate, Unlock, Unsubscribe, WebRequestCustomer.
-                    </para>
-                    <para>
-                        <literal>HistoryComment</literal> defines the content of the history entry.
-                    </para>
-                    <para>
-                        <literal>From</literal>, <literal>To</literal>, <literal>Cc</literal> and
-<literal>ReplyTo</literal> take email addresses in the notation specified
-above.
-                    </para>
-                    <para>
-                        <literal>InReplyTo</literal> and <literal>References</literal> take email
-message IDs.
-                    </para>
-                    <para>
-                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
-the Agent will not be sent.
-                    </para>
-                    <para>
-                        <literal>AutoResponseType</literal> can take the following values: auto
-follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
-                    </para>
-                    <para>
-                        <literal>ForceNotificationToUserID</literal>,
-<literal>ExcludeNotificationToUserID</literal>,
-<literal>ExcludeMuteNotificationToUserID</literal> can take a list of
-UserIDs that are either always notified, not notified or listed as notified
-but not actually sent a notification email.
+                        Please check the additional parameters for different article channels.
                     </para>
                     <para>
                         <literal>TimeUnit</literal> the time invested in the current ticket article
@@ -2980,6 +2946,14 @@ prefix and NameX is the name of a Dynamic Field to be set in the new ticket
                         <literal>LinkAs</literal> to define the new ticket relation with originator
 ticket, from the new ticket point of view, for example Normal, Parent, Child
 etc.
+                    </para>
+                    <para>
+                        OTRS smart tags like &lt;OTRS_CUSTOMER_BODY&gt; or
+&lt;OTRS_CUSTOMER_REALNAME&gt; are now supported in the Transition Action
+"TicketCreate".  Those smart tags could be used to create a new ticket and
+insert data from the process ticket to this child ticket.  The usage of the
+OTRS smart tags is identical to the text templates in "Ticket
+Notifications".
                     </para>
                 </section>
                 <section>

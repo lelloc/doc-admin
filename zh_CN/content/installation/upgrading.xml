@@ -39,8 +39,16 @@ has an older Perl version, you need to update it first before updating OTRS.
         </para>
     </warning>
 
+    <warning>
+        <para>
+            For PostgreSQL based installations: please note that you need at least
+PostgreSQL 9.2 to run OTRS 6. If your system has an older PostgreSQL
+version, you need to update it first before updating OTRS.
+        </para>
+    </warning>
+
     <para>
-    强烈建议在一台独立的测试主机上先进行升级测试。
+        强烈建议在一台独立的测试主机上先进行升级测试。
     </para>
 
     <section role="NotInToc">
@@ -59,19 +67,7 @@ shell> /etc/init.d/apache stop
         </para>
 
         <para>
-        取决于从个哪个版本升级，按以下顺序停止OTRS CRON计划任务或守护进程：
-        </para>
-
-        <para>
-            <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/Cron.sh stop
-shell> bin/otrs.Scheduler.pl -a stop
-            ]]></screen>
-        </para>
-
-        <para>
-        或
+        Stop OTRS cron jobs and the daemon (in this order):
         </para>
 
         <para>
@@ -84,29 +80,26 @@ shell> bin/otrs.Daemon.pl stop
     </section>
 
     <section role="NotInToc">
-        <title>步骤2：备份<filename>/opt/otrs/</filename>下面的所有内容</title>
+        <title>Step 2: Backup files and database</title>
 
         <para>
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                <listitem><para><filename>Kernel/Config/GenericAgent.pm</filename>（仅供参考，这个文件不再需要）</para></listitem>
                 <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>当然还有数据库</para></listitem>
             </itemizedlist>
         </para>
+        <warning>
+            <para>Don't proceed without a complete backup of your system.</para>
+        </warning>
     </section>
 
     <section role="NotInToc">
-        <title>步骤3：确保你已经备份了所有需要备份的 ;-)</title>
-        <para></para>
-    </section>
-
-    <section role="NotInToc">
-    <title>步骤4：安装新版本（源码或RPM包）</title>
+    <title>Step 3: Install the new release (tar or RPM)</title>
 
         <section role="NotInToc">
-        <title>步骤4.1：使用源码：</title>
+        <title>Step 3.1: With the tarball:</title>
 
             <screen><![CDATA[
 shell> cd /opt
@@ -123,14 +116,6 @@ shell> mv otrs-x.x.x otrs
                         <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                         <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
                     </itemizedlist>
-                </para>
-            </section>
-
-            <section role="NotInToc">
-                <title>恢复TicketCounter.log</title>
-
-                <para>
-                    为了让OTRS继续使用正确的工单编号，恢复文件<filename>TicketCounter.log</filename>到目录<filename>/opt/otrs/var/log/</filename>。这对于使用自动增长的工单编号特别有用。
                 </para>
             </section>
 
@@ -161,7 +146,8 @@ shell> cp *.installed /opt/otrs/var/stats
                 <title>设置文件权限</title>
 
                 <para>
-                请执行
+                    Please execute the following command as root user to set the file and
+directory permissions for OTRS:
                 </para>
 
                 <para>
@@ -172,57 +158,14 @@ shell> bin/otrs.SetPermissions.pl
                 </para>
 
                 <para>
-                参数为你的系统设置需要的权限。例如：
-                </para>
-
-                <para>
-                <itemizedlist>
-                <listitem>
-                    <para>以OTRS用户运行WEB服务器：</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=otrs
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>以wwwrun用户运行WEB服务器（如SUSE）：</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>以apache用户运行WEB服务器（如Red Hat、CentOS）：</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=apache
-                ]]></screen>
-                    </para>
-                </listitem>
-
-
-                <listitem>
-                    <para>以www-data用户运行WEB服务器（如RDebian、 Ubuntu）：</para>
-                    <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=www-data
-                ]]></screen>
-                    </para>
-                </listitem>
-                </itemizedlist>
-
+                    It will try to detect the correct user and group settings needed for your
+setup.
                 </para>
             </section>
         </section>
 
         <section role="NotInToc">
-            <title>步骤4.2：使用RPM包：</title>
+            <title>Step 3.2: With the RPM:</title>
             <para>
             <screen><![CDATA[
 shell> rpm -Uvh otrs-x.x.x.-01.rpm
@@ -236,111 +179,44 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
     </section>
 
     <section role="NotInToc">
-        <title>步骤5：检查所需的Perl模块</title>
+        <title>Step 4: Run the migration script</title>
 
         <para>
-        验证所有需要的Perl模块都已经安装到系统中，并安装可能缺失的模块。
+            Please run the migration script (as the <literal>otrs</literal> user, NOT as
+<literal>root</literal>):
         </para>
+
         <para>
         <screen><![CDATA[
-shell> /opt/otrs/bin/otrs.CheckModules.pl
-        ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤6：应用数据库修改</title>
-
-        <section role="NotInToc">
-            <title>步骤6.1：数据库schema升级</title>
-
-            <section role="NotInToc">
-            <title>MySQL：</title>
-
-                <note>
-                    <para>
-                        注意：在MySQL升级过程中会在默认的表存储引擎创建新表。在MySQL 5.5中，新的默认存储引擎是
-<literal>InnoDB</literal>。如果现有的表如‘users’表的表存储引擎是<literal>MyISAM</literal>，则在创建外键约束时会报错。在这种情况下，我们推荐将所有的表切换到<literal>InnoDB</literal>引擎，可通过执行命令行脚本切换：<command>bin/otrs.Console.pl
-Maint::Database::MySQL::InnoDBMigration</command>。
-                    </para>
-                </note>
-
-                <para>
-                    任何与存储引擎相关的问题都可以通过命令检查出来：<filename>bin/otrs.Console.pl
-Maint::Database::Check</filename>，所以请运行这个命令来检查可能的问题。
-                </para>
-
-                <para>
-                    <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-6.mysql.sql | mysql -p -f -u root otrs
-shell> bin/otrs.Console.pl Maint::Database::Check
-                    ]]></screen>
-                </para>
-
-            </section>
-            <section role="NotInToc">
-                <title>PostgreSQL：</title>
-
-                <para>
-                <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> cat scripts/DBUpdate-to-6.postgresql.sql | psql --set ON_ERROR_STOP=on --single-transaction otrs otrs
-                ]]></screen>
-                </para>
-            </section>
-        </section>
-
-        <section role="NotInToc">
-            <title>步骤6.2：数据库迁移脚本</title>
-
-            <para>
-            Run the migration script (as user <literal>otrs</literal>, NOT as
-<literal>root</literal>):
-            </para>
-
-            <para>
-            <screen><![CDATA[
 shell> scripts/DBUpdate-to-6.pl
-            ]]></screen>
-            </para>
-
-            <para>
-                The script will ask you to set a time zone for OTRS. It is very important
-that you set the correct time zone (and keep it), otherwise date and time of
-data added after the upgrade (tickets, articles, etc.) will be stored with a
-different time zone than your existing data, leading to inconsistent data.
-The script will suggest possible time zones based on your previous
-configuration. In case you are not sure or made a mistake, you can change
-the OTRS time zone after the upgrade via SysConfig setting
-<literal>OTRSTimeZone</literal>.
-            </para>
-
-            <para>
-            如果这个脚本运行不正常，请不要继续升级，否则可能丢失数据。
-            </para>
-        </section>
-    </section>
-
-    <section role="NotInToc">
-        <title>步骤7：刷新配置缓存并删除缓存</title>
-
-        <para>
-        Please run (as user <literal>otrs</literal>, <emphasis>not</emphasis> as
-<literal>root</literal>):
-        </para>
-
-        <para>
-        <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.Console.pl Maint::Config::Rebuild
-shell> bin/otrs.Console.pl Maint::Cache::Delete
         ]]></screen>
         </para>
+
+        <para>
+            This script will perform many checks on your system and give you advice on
+how to install missing Perl modules etc., if that is required.
+        </para>
+
+        <para>
+            The migration script will ask you to set a time zone for OTRS. It is very
+important that you set the correct time zone (and keep it), otherwise date
+and time of data added after the upgrade (tickets, articles, etc.) will be
+stored with a different time zone than your existing data, leading to
+inconsistent data.  The script will suggest possible time zones based on
+your previous configuration. In case you are not sure or made a mistake, you
+can change the OTRS time zone after the upgrade via SysConfig setting
+<literal>OTRSTimeZone</literal>.
+        </para>
+
+        <warning>
+            <para>
+                如果这个脚本运行不正常，请不要继续升级，否则可能丢失数据。
+            </para>
+        </warning>
     </section>
 
     <section role="NotInToc">
-        <title>步骤8：重启服务</title>
+        <title>Step 5: Restart your services</title>
 
         <para>
         例如（取决于使用的服务，可能有差异）：
@@ -360,36 +236,34 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>步骤9：检查安装的软件包</title>
-
+        <title>Step 6: Check installed packages</title>
         <note>
             <para>
-                The OTRS packages of 5 are NOT compatible with OTRS 6, so you have to
-perform a package upgrade!
+                The OTRS 5 packages are NOT compatible with OTRS 6, so you have to perform a
+package upgrade!
             </para>
         </note>
-
-    <!--
         <para>
-
-            The following packages are automatically uninstalled after the upgrade process
-            (if they where installed before):
+            下列软件会在升级过程中自动卸载（如果之前安装了的话）：
         </para>
         <para>
             <itemizedlist>
-                <listitem><para>OTRSGenericInterfaceMappingXSLT</para></listitem>
+                <listitem><para>OTRSAppointmentCalendar</para></listitem>
             </itemizedlist>
-        </para>
-        -->
-</section>
+
+        <!--
+                TODO: Verify and extend the list of merged packages.
+            -->
+</para>
+    </section>
 
     <section role="NotInToc">
-        <title>步骤10：启动OTRS守护进程</title>
+        <title>Step 7: Start the OTRS Daemon</title>
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring
 tasks in OTRS.  The daemon also handles all GenericAgent jobs and must be
-started from the <literal>otrs</literal> user.
+started as the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -400,7 +274,7 @@ shell> /opt/otrs/bin/otrs.Daemon.pl start
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Update and activate cron jobs</title>
+        <title>Step 8: Update and activate cron jobs</title>
 
         <para>
             在<filename>/opt/otrs/var/cron/*.dist</filename>有两个默认的cron文件，它们的目的是确保OTRS守护进程正常运行。它们需要复制为没有“.dist”扩展名的新文件来激活。
@@ -414,7 +288,8 @@ shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
         </para>
 
         <para>
-            要在系统中安排这些cron任务，你可以使用<literal>otrs</literal>运行脚本文件<filename>Cron.sh</filename>。
+            To schedule these cron jobs on your system, you can use the script
+<filename>Cron.sh</filename> as the <literal>otrs</literal> user.
         </para>
 
         <para>
@@ -425,7 +300,7 @@ shell> /opt/otrs/bin/Cron.sh start
     </section>
 
     <section role="NotInToc">
-        <title>Step 12: Update system registration (optional)</title>
+        <title>Step 9: Update system registration (optional)</title>
         <para>
             如果系统已经注册到OTRS集团，强烈推荐这个时候更新注册信息。这将在OTRS集团的记录中更新注册的版本信息及其它变化了的信息，以便从云服务中获得更准确的信息。
         </para>
@@ -443,7 +318,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 13: Well done!</title>
+        <title>Step 10: Well done!</title>
         <para></para>
     </section>
 </section>

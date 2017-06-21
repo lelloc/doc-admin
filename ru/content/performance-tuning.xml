@@ -6,112 +6,208 @@
     <title>Настройка Производительности</title>
 
     <abstract>
-    <para>
-    Ниже представлен перечень различных техник, которые можно использовать для
+        <para>
+            Ниже представлен перечень различных техник, которые можно использовать для
 получения максимально возможной производительности системы OTRS: настройка,
 кодирование, использование памяти и многое другое.
-    </para>
+        </para>
     </abstract>
 
     <section id="performance-tuning-otrs">
         <title>OTRS</title>
         <para>
-        Есть несколько возможных вариантов улучшения производительности OTRS.
+            Есть несколько возможных вариантов улучшения производительности OTRS.
         </para>
 
         <section id="performance-tuning-otrs-index">
             <title>TicketIndexModule</title>
             <para>
                 There are two backend modules for the index for the ticket queue view:
-
-                <itemizedlist>
-
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal></term>
                     <listitem>
                         <para>
-                        Using <literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal>
-(default), generate each queue view on the fly from the ticket table. You
-will not have performance trouble until you have about 60,000 open tickets
-in your system.
+                            This is the default option, and will generate each queue view on the fly
+from the ticket table. You will not have performance trouble until you have
+about 60,000 open tickets in your system.
                         </para>
                     </listitem>
-
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal></term>
                     <listitem>
                         <para>
-                        <literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal>, the
-most powerful module, should be used when you have above 80,000 open
-tickets. It uses an extra ticket_index table, which works like a view. Use
+                            The most powerful module, should be used when you have above 80,000 open
+tickets. It uses an extra <literal>ticket_index</literal> table, which will
+be populated with keywords based on ticket data. Use
 <filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename>
 for generating an initial index after switching backends.
                         </para>
                     </listitem>
-
-                </itemizedlist>
-
-                Вы можете изменить IndexAccelerator через SysConfig.
+                </varlistentry>
+            </variablelist>
+            <para>
+                You can change the used IndexAccelerator module via SysConfig.
             </para>
+        </section>
 
+        <section id="performance-tuning-otrs-search">
+            <title>SearchIndexModule</title>
+            <para>
+                This module helps to extend your articles full-text search (From, To, Cc,
+Subject and Body search).  There are two backend modules for the search
+index:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will will do full-text searches on live data
+(it works fine for up to 50,000 tickets).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            This module will strip all articles and build an index after article
+creation, increasing performance of full-text searches up to 50%.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <para>
+                You can change the used SearchIndexModule via SysConfig.
+            </para>
+            <para>
+                To create an initial index, use <filename>bin/otrs.Console.pl
+Maint::Ticket::FulltextIndexRebuild</filename>.
+            </para>
+            <para>
+                For StaticDB module, there are some options available for fine tuning:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Attribute</literal></term>
+                    <listitem>
+                        <para>
+                            The attribute "WordCountMax" defines the maximum of words which will be
+processed to build up the index. For example only the first 1000 words of an
+article body are stored in the article search index. The attributes
+"WordLengthMin" and "WordLengthMax" are used as word length boundaries. Only
+words with a length between these two values are stored in the article
+search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Filters</literal></term>
+                    <listitem>
+                        <para>
+                            There are three default filters defined:
+                        </para>
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    The first filter strips out special chars like: <literal>, &amp; &lt; &gt; ?
+" ! * | ; [ ] ( ) + $ ^=</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The second filter strips out words which begin or ends with one of following
+chars: <literal>' : .</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The third filter strips out words which do not contain a word-character:
+<literal>a-z, A-Z, 0-9, _</literal>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::StopWords</literal></term>
+                    <listitem>
+                        <para>
+                            There are so-called stop-words defined for some languages. These stop-words
+will be skipped while creating the search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
         </section>
 
         <section id="performance-tuning-otrs-storage">
             <title>TicketStorageModule</title>
             <para>
-            Существует два различных хранилица для хранения заявок/статей:
+                Существует два различных хранилица для хранения заявок/статей:
             </para>
-
-            <para>
-            <itemizedlist>
-
-                <listitem>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageDB</literal></term>
+                    <listitem>
+                        <para>
+                            This default module will store attachments in the database.
+                        </para>
+                        <note>
+                            <para>
+                                Don't use it with large setups.
+                            </para>
+                        </note>
+                        <para>
+                            Pro: If your web server isn't running under 'otrs' user, use this module to
+avoid file permission problems.
+                        </para>
+                        <para>
+                            Con: It is not advisable to store attachments in your database. Take care
+that your database is able to store large objects. I.e.: configure MySQL
+with <literal>set-variable = max_allowed_packet=8M</literal> to store 8 MB
+objects (the default is 2M).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageFS</literal></term>
+                    <listitem>
+                        <para>
+                            Use this module to store attachments on the local file system.
+                        </para>
+                        <note>
+                            <para>
+                                Recommended for large setups.
+                            </para>
+                        </note>
+                        <para>
+                            Pro: Это быстро!
+                        </para>
+                        <para>
+                            Con: Your web server should run under the 'otrs' user. Also, if you have
+multiple front-end servers, you must make sure the filesystem is shared
+between the servers. Place it on an NFS share or preferably a SAN or similar
+solution.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <note>
                 <para>
-                Configure <literal>Kernel::System::Ticket::ArticleStorageDB</literal>
-(default) to store attachments, etc., in the database. Note: Don't use it
-with large setups.
-                </para>
-                <para>
-                Pro: Если пользователь вашего веб-сервера не является пользователем 'otrs',
-используйте этот модуль, чтобы избежать проблем с правами доступа.
-                </para>
-                <para>
-                Противопоказания: Не совсем целесообразно хранить вложения в базе
-данных. Будьте осторожны, при храненении больших объектов. Настройте
-конфигурационный параметр MySQL "set-variable=max_allowed_packet=8M"  для
-хранения объектов размером 8 MB (по умолчанию это 2M).
-                </para>
-                </listitem>
-
-                <listitem>
-                <para>
-                Configure <literal>Kernel::System::Ticket::ArticleStorageFS</literal> to
-store attachments etc. on the local file system. Note: Recommended for large
-setups.
-                </para>
-                <para>
-                Pro: Это быстро!
-                </para>
-                <para>
-                Противопоказания: Пользователь веб-сервера должен быть пользователем
-'otrs'. Кроме того, если у вас есть несколько серверов, нужно убедиться в
-том, что файловая система разделяется между этими серверами. Так что
-разместите его на общедоступный NFS-ресурс или предпочтительнее SAN, или
-аналогичные решения.
-                </para>
-                </listitem>
-
-            </itemizedlist>
-
-            </para>
-
-            <para>
-                Note: you can switch from one back-end to the other on the fly. You can
-switch the backend in the SysConfig, and then run the command line utility
+                    You can switch from one back-end to the other on the fly. You can switch the
+backend in the SysConfig, and then run the command line utility
 <filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to
 put the articles from the database onto the filesystem or the other way
 around. You can use the <emphasis>--target</emphasis> option to specify the
 target backend. Please note that the entire process can take considerable
 time to run, depending on the number of articles you have and the available
 CPU power and/or network capacity.
-            </para>
-
+                </para>
+            </note>
             <para>
                 <screen><![CDATA[
 shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorageFS
@@ -233,8 +329,8 @@ systems.
             <title>Кэш</title>
             <para>
                 OTRS caches a lot of temporary data in
-<filename>/opt/otrs/var/tmp</filename>.  Please make sure that this uses a
-high performance file system/storage.  If you have enough RAM, you can also
+<filename>/opt/otrs/var/tmp</filename>. Please make sure that this uses a
+high performance file system/storage. If you have enough RAM, you can also
 try to put this directory on a ramdisk like this:
             </para>
             <para>
@@ -248,13 +344,13 @@ shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
             </para>
             <note>
                 <para>
-                    Не забывайте, что это не постоянное хранилище, данные в котором будут
-потеряны после перезагрузки сервера. Все ваши сеансы (если вы их храните в
-файловой системе) и данные в кэше будут утрачены.
+                    Please note that this will be a non-permanent storage that will be lost on
+server reboot. All your sessions (if you store them in the filesystem) and
+your cache data will be lost.
                 </para>
             </note>
             <para>
-                There is also a centralized memcached based Cache backend available for
+                There is also a centralized memcached based cache backend available for
 purchase from OTRS Group.
             </para>
         </section>
@@ -265,14 +361,14 @@ purchase from OTRS Group.
     <section id="performance-tuning-database">
         <title>База данных</title>
         <para>
-        Решения зависят от используемой базы данных. Изучайте документацию к
+            Решения зависят от используемой базы данных. Изучайте документацию к
 используемой базе данных или же обратитесь за помощью к администратору.
         </para>
 
         <section id="performance-tuning-database-mysql">
             <title>MySQL</title>
             <para>
-            Если для MySQL-таблиц используется MyISAM (а по умолчанию так и есть) и из
+                Если для MySQL-таблиц используется MyISAM (а по умолчанию так и есть) и из
 таблицы была удалена большая часть данных, или же производилось множество
 действий над таблицей, которая содержит строки переменной длины (таблицы,
 которые содержат поля типов  VARCHAR, BLOB или TEXT), то нужно
@@ -280,11 +376,10 @@ purchase from OTRS Group.
 "оптимизировать".
             </para>
             <para>
-            Нужно попытаться сделать это, если сервер mysqld использует много
+                Нужно попытаться сделать это, если сервер mysqld использует много
 процессорного времени. Оптимизация таблиц ticket_history и article (см
 Сценарий ниже).
             </para>
-
             <para>
             <screen><![CDATA[
 shell> mysql -u user -p database
@@ -293,54 +388,50 @@ mysql> optimize table ticket_history;
 mysql> optimize table article;
             ]]></screen>
             </para>
-
             <para>
-            <emphasis>Сценарий: Оптимизация таблиц базы данных.</emphasis>
+                <emphasis>Сценарий: Оптимизация таблиц базы данных.</emphasis>
             </para>
-
         </section>
 
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-            PostgreSQL is best tuned by modifying the
+                PostgreSQL is best tuned by modifying the
 <filename>postgresql.conf</filename> file in your PostgreSQL data
 directory. For advice on how to do this, reference the following articles:
             </para>
-
             <para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                        <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+                            <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
 <citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
-
             <para>
-            Если производительность остается на неудовлетворительном уровне, мы
-предлагаем вам присоединится к спискам рассылки "PostgreSQL Performance"  (
-<ulink
-url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>
-) и задавать вопросы именно там. Люди в этом списке рассылке очень
-дружелюбны а всегада постараются вам помочь.
+                If performance is still not satisfactory, we suggest that you join the
+PostgreSQL Performance mailing list ( <ulink
+url="http://www.postgresql.org/community/lists/">
+<citetitle>http://www.postgresql.org/community/lists/</citetitle> </ulink>
+), and ask questions there. The folks on the PostgreSQL list are very
+friendly and can probably help.
             </para>
         </section>
 
@@ -349,61 +440,66 @@ url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/commu
     <section id="performance-tuning-webserver">
         <title>Веб-сервер</title>
         <para>
-        Конечно же нужно использовать mod_perl 2.0 ( <ulink
-url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
-). Он быстрее (~ * 100) чем "чистый" cgi. Но он требует больше оперативной
-памяти (RAM).
+            Of course you should use mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/">
+<citetitle>http://perl.apache.org/</citetitle> </ulink> ). It's much faster
+(~ *100) than pure CGI, but it needs more RAM.
         </para>
 
         <section id="performance-tuning-webserver-db">
             <title>Предустановленное соединение с базой данных</title>
             <para>
-            При запуске веб-сервера можно иметь заранее установленное соединение с базой
-данных. Такой подход существенно сэкономит время (см. README.webserver).
+                You can have the database connections pre-established on startup of the web
+server. This saves time (see <filename>README.webserver</filename>).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-startup">
             <title>Предварительно загруженные модули  - startup.pl</title>
             <para>
-            Чтобы все работало быстрее и занимало меньше памяти используйте сценарий
-запуска <filename>scripts/apache2-perl-startup.pl</filename> для
-предварительной загрузки/компиляции Perl модулей на сервере с mod_perl
-(см. README.webserver).
+                Use the startup script <filename>scripts/apache2-perl-startup.pl</filename>
+for preloaded/precompiled Perl modules on your mod_perl webserver to be
+faster, with a smaller memory footprint (see
+<filename>README.webserver</filename>).
             </para>
         </section>
         <section id="performance-tuning-webserver-reload">
             <title>Перезагрузка Perl-модулей во время обновления с диска</title>
             <para>
-            By default Apache::Reload is used in
+                By default Apache::Reload is used in
 <filename>scripts/apache2-httpd.include.conf</filename>. Disable it and you
 will get 8% more speed. But remember to restart the web server if you
 install any modules via the OTRS Package Manager, or any values in your
-SysConfig or in <filename>Kernel/Config.pm</filename>. Important: this would
-also mean you can't use the OTRS Package Manager via the web interface, you
-need to use the command line variant -
-<filename>bin/otrs.PackageManager.pl</filename>.
+SysConfig or in <filename>Kernel/Config.pm</filename>.
             </para>
+            <important>
+                <para>
+                    This would also mean you can't use the OTRS Package Manager via the web
+interface, you will need to use the console commands:
+<filename>bin/otrs.Console.pl Admin::Package::*</filename>.
+                </para>
+            </important>
         </section>
 
         <section id="performance-tuning-webserver-strategy">
             <title>Выбор Правильной Стратегии</title>
             <para>
-            Если у вас действительно большая система, более 1 000 новых заявок в день и
-больше 40 агентов, то советуем почитать статью "Производительность"  в
-Руковдстве пользователя по mod_perl  (<ulink
-url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>
-).
+                If you have a larger installation, e.g. over 1,000 new tickets per day and
+over 40 agents, it is a good idea to read the chapters on Performance of the
+mod_perl User's Guide ( <ulink
+url="http://perl.apache.org/docs/2.0/user/index.html">
+<citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle>
+</ulink> ).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-gzip">
             <title>mod_gzip/mod_deflate</title>
             <para>
-            Используйте mod_deflate для Apache2, если у вас "слабая" полоса пропускания
-. При загрузке html-страницы размером в 45к, mod_gzip/mod_deflate сожмет ее
-и страница будет занимать около 7к. Недостатком такого подхода является
-дополнительная нагрузка на сервер.
+                If your bandwidth is small, use <literal>mod_deflate</literal> for
+Apache2. If you have an html page with 45k,
+<literal>mod_gzip</literal>/<literal>mod_deflate</literal> compresses it to
+about 7k. The drawback is that this increases the load on the server side.
             </para>
         </section>
 

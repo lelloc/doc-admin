@@ -2,6 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 
+
+<!-- nofilter(TidyAll::Plugin::OTRS::Common::Origin) -->
 <section id="genericinterface-connectors">
     <title>Viunganishi</title>
     <para>
@@ -141,6 +143,11 @@ kukubali Kitambulisho cha Kipindi halali kama njia ya uthibitisho.
                                 TafutaTiketi
                             </para>
                         </listitem>
+                        <listitem>
+                            <para>
+                                TicketHistoryGet
+                            </para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
@@ -227,9 +234,10 @@ TiketiTengeneza.
          <Article>
             <!--You have a CHOICE of the next 2 items at this level-->
             <!--Optional:-->
-            <ArticleTypeID>?</ArticleTypeID>
-            <!--Optional:-->
-            <ArticleType>?</ArticleType>
+            <CommunicationChannelID>?</CommunicationChannelID>
+            <!--Optional: Possible values Email, Internal or Phone-->
+            <CommunicationChannel>?</CommunicationChannel>
+            <IsVisibleForCustomer>?</IsVisibleForCustomer>
             <!--You have a CHOICE of the next 2 items at this level-->
             <!--Optional:-->
             <SenderTypeID>?</SenderTypeID>
@@ -371,9 +379,10 @@ mpya.
          <Article>
             <!--You have a CHOICE of the next 2 items at this level-->
             <!--Optional:-->
-            <ArticleTypeID>?</ArticleTypeID>
-            <!--Optional:-->
-            <ArticleType>?</ArticleType>
+            <CommunicationChannelID>?</CommunicationChannelID>
+            <!--Optional: Possible values Email, Internal or Phone-->
+            <CommunicationChannel>?</CommunicationChannel>
+            <IsVisibleForCustomer>?</IsVisibleForCustomer>
             <!--You have a CHOICE of the next 2 items at this level-->
             <!--Optional:-->
             <SenderTypeID>?</SenderTypeID>
@@ -458,6 +467,8 @@ zinazobadilika, makala zote na viambatanisho vyote ambavyo ni vya tiketi.
          <ArticleLimit>?</ArticleLimit>
          <!--Optional:-->
          <Attachments>?</Attachments>
+         <!--Optional:-->
+         <GetAttachmentContents>?</GetAttachmentContents>
          <!--Optional:-->
          <HTMLBodyAsAttachment>?</HTMLBodyAsAttachment>
       </TicketGet>
@@ -554,7 +565,8 @@ zinafanana na kigezo kilichofafanuliwa.
          <!--Zero or more repetitions:-->
          <CreatedQueueIDs>?</CreatedQueueIDs>
          <!--Zero or more repetitions:-->
-         <DynamicFields>
+         <DynamicField>
+            <Name>?<Name>
             <!--You have a MANDATORY CHOICE of the next 6 items at this level-->
             <!--Optional:-->
             <Equals>?</Equals>
@@ -568,7 +580,7 @@ zinafanana na kigezo kilichofafanuliwa.
             <SmallerThan>?</SmallerThan>
             <!--Optional:-->
             <SmallerThanEquals>?</SmallerThanEquals>
-         </DynamicFields>
+         </DynamicField>
          <!--Optional:-->
          <Ticketflag>
             <!--Optional:-->
@@ -659,10 +671,35 @@ zinafanana na kigezo kilichofafanuliwa.
                         </programlisting>
                     </para>
                 </section>
+                <section id="generic-ticket-connector-operations-tickethistoryget">
+                    <title>TicketHistoryGet</title>
+                    <para>
+                        This operation is used to get all the history entries of a ticket including
+the
+                    </para>
+                    <para>Sifa ziwezekanazo:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <TicketGet>
+         <!--You have a MANDATORY CHOICE of the next 2 items at this level-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <SessionID>?</SessionID>
+         <!--Optional:-->
+         <Password>?</Password>
+         <!--1 or more repetitions:-->
+         <TicketID>?</TicketID>
+      </TicketGet>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
             </section>
         </section>
     </section>
-    <section id="Sgenericinterface-bundled-connectors-examples">
+    <section id="genericinterface-bundled-connectors-examples">
         <title>Mifano:</title>
         <section>
             <title>Usanidi wa Huduma za Tovuti</title>
@@ -711,6 +748,11 @@ Provider:
       MappingInbound: {}
       MappingOutbound: {}
       Type: Ticket::TicketSearch
+    TicketHistoryGet:
+      Description: Retrieves history of a Ticket
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketHistoryGet
   Transport:
     Config:
       MaxLength: 100000000
@@ -777,6 +819,11 @@ Provider:
       MappingInbound: {}
       MappingOutbound: {}
       Type: Ticket::TicketUpdate
+    TicketHistoryGet:
+      Description: Retrieves history of a Ticket
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketHistoryGet
   Transport:
     Config:
       KeepAlive: ''
@@ -802,6 +849,10 @@ Provider:
           RequestMethod:
           - PATCH
           Route: /Ticket/:TicketID
+        TicketHistoryGet:
+          RequestMethod:
+          - GET
+          Route: /TicketHistory/:TicketID
     Type: HTTP::REST
 RemoteSystem: ''
 Requester:
@@ -989,7 +1040,6 @@ modules before you try to run the script.
                     <![CDATA[
 #!/usr/bin/perl
 # --
-# otrs.RESTRequest.pl - sample to send a REST request to OTRS Generic Interface Ticket Connector
 # Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
@@ -999,17 +1049,18 @@ modules before you try to run the script.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 # or see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 use strict;
 use warnings;
+use utf8;
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
 
@@ -1021,9 +1072,6 @@ use lib dirname($RealBin);
 use JSON;
 use REST::Client;
 
-# ---
-# Variables to be defined
-
 # This is the HOST for the web service the format is:
 # <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl
 my $Host = 'http://localhost/otrs/nph-genericinterface.pl';
@@ -1034,72 +1082,227 @@ my $RestClient = REST::Client->new(
     }
 );
 
-# This is the Controller and Request the format is:
+# These are the Controllers and Providers the format is:
 # /Webservice/<WEB_SERVICE_NAME>/<RESOURCE>/<REQUEST_VALUE>
 # or
 # /WebserviceID/<WEB_SERVICE_ID>/<RESOURCE>/<REQUEST_VALUE>
+#
+# See the documentation on how to setup Providers.
+#
 # This example will retrieve the Ticket with the TicketID = 1 (<REQUEST_VALUE>)
-my $ControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket/1';
+my $GetControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket/1';
 
-my $Params = {
-    UserLogin     => "some user login",       # to be filled with valid agent login
-    Password      => "some user password",    # to be filled with valid agent password
-    DynamicFields => 1,                       # optional, if set to 1,
-                                              # ticket dynamic fields included in response
-    AllArticles   => 1,                       # optional, if set to 1,
-                                              # all ticket articles are included in response
-                                              # more options to be found in
-         # /Kernel/GenericInterface/Operation/Ticket/TicketGet.pm's
-         # Run() subroutine documentation.
+# This example is the base URL for Ticket Create
+my $CreateControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket';
+
+# This example will update the Ticket with the TicketID = 1 (<REQUEST_VALUE>)
+my $UpdateControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket/1';
+
+# This is the base URL for Ticket Search
+my $SearchControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket';
+
+# This is the base URL for Ticket history with the TicketID = 1 (<REQUEST_VALUE>)
+my $HistoryControllerAndRequest = '/Webservice/GenericTicketConnectorREST/TicketHistory/1';
+
+# TicketGet Example
+# See the documentation of OTRSGenericInterfaceREST on how to setup
+#   - webservice
+#   - transport
+#   - operations
+my $GetParams = {
+    UserLogin => "some agent user login",       # to be filled with valid agent login
+    Password  => "some agent user password",    # to be filled with valid agent password
 };
 
-my @RequestParam;
+# Build GetParams as part of the URL for REST-GET requests
+my $QueryParams = $RestClient->buildQuery( %{$GetParams} );
+$GetControllerAndRequest .= $QueryParams;
 
-# As sample web service configuration for TicketGet uses HTTP method GET all other parameters needs
-# to be sent as URI query parameters
+$RestClient->GET($GetControllerAndRequest);
 
-# ----
-# For GET method
-my $QueryParams = $RestClient->buildQuery( %{ $Params } );
+my $GetResponseCode = $RestClient->responseCode();
 
-$ControllerAndRequest .= $QueryParams;
+if ( $GetResponseCode ne '200' ) {
+    print "Get request failed, response code was: $GetResponseCode\n";
+}
+else {
 
-# The @RequestParam array on position 0 holds controller and request
-@RequestParam = ($ControllerAndRequest);
+    # If the request was answered correctly, we receive a JSON string here.
+    my $ResponseContent = $RestClient->responseContent();
 
-$RestClient->GET(@RequestParam);
-# ----
+    my $Data = decode_json $ResponseContent;
 
-# # ----
-# # For POST method
-# my $JSONParams = encode_json $Params;
+    # Just to print out the returned Data structure:
+    use Data::Dumper;
+    print "Get response was:\n";
+    print Dumper($Data);
 
-# # The @RequestParam array on position 0 holds controller and request
-# # on position 1 it holds the JSON data string that gets posted
-# @RequestParam = (
-#   $ControllerAndRequest,
-#   $JSONParams
-# );
-
-# $RestClient->POST(@RequestParam);
-# # ----
-
-# If the host isn't reachable, wrong configured or couldn't serve the requested page:
-my $ResponseCode = $RestClient->responseCode();
-if ( $ResponseCode ne '200' ) {
-    print "Request failed, response code was: $ResponseCode\n";
-    exit;
 }
 
-# If the request was answered correctly, we receive a JSON string here.
-my $ResponseContent = $RestClient->responseContent();
+# TicketSearch Example
+# See the documentation of OTRSGenericInterfaceREST on how to setup
+#   - webservice
+#   - transport
+#   - operations
+my $SearchParams = {
+    UserLogin => "some agent user login",       # to be filled with valid agent login
+    Password  => "some agent user password",    # to be filled with valid agent password
+    Queues    => ['Raw'],
+};
 
-my $Data = decode_json $ResponseContent;
+# Build SearchParams as part of the URL for REST-GET requests
+$QueryParams = $RestClient->buildQuery( %{$SearchParams} );
+$SearchControllerAndRequest .= $QueryParams;
 
-# Just to print out the returned Data structure:
-use Data::Dumper;
-print "Response was:\n";
-print Dumper($Data);
+$RestClient->GET($SearchControllerAndRequest);
+
+# If the host isn't reachable, wrong configured or couldn't serve the requested page:
+my $SearchResponseCode = $RestClient->responseCode();
+
+if ( $SearchResponseCode ne '200' ) {
+    print "Search request failed, response code was: $SearchResponseCode\n";
+}
+else {
+
+    # If the request was answered correctly, we receive a JSON string here.
+    my $ResponseContent = $RestClient->responseContent();
+
+    my $Data = decode_json $ResponseContent;
+
+    # Just to print out the returned Data structure:
+    use Data::Dumper;
+    print "Search Response was:\n";
+    print Dumper($Data);
+
+}
+
+# TicketCreate Example
+# See the documentation of OTRSGenericInterfaceREST on how to setup
+# - webservice
+# - transport
+# - operations
+my $CreateOrUpdateParams = {
+    UserLogin => "some agent user login",       # to be filled with valid agent login
+    Password  => "some agent user password",    # to be filled with valid agent password
+    Ticket    => {
+        Title        => 'some ticket title',
+        Queue        => 'Raw',
+        Lock         => 'unlock',
+        Type         => 'Unclassified',
+        State        => 'new',
+        Priority     => '3 normal',
+        Owner        => 'some agent user login',
+        CustomerUser => 'customer-1',
+    },
+    Article => {
+        Subject     => 'some subject',
+        Body        => 'some body',
+        ContentType => 'text/plain; charset=utf8',
+    },
+};
+
+my $CreateJSONParams = encode_json $CreateOrUpdateParams;
+
+my @CreateRequestParam = (
+    $CreateControllerAndRequest,
+    $CreateJSONParams
+);
+
+# We have to use REST-POST requests in order to send UserLogin and Password correctly
+# though other REST methods would fit better.
+$RestClient->POST(@CreateRequestParam);
+
+# If the host isn't reachable, wrong configured or couldn't serve the requested page:
+my $CreateResponseCode = $RestClient->responseCode();
+
+if ( $CreateResponseCode ne '200' ) {
+    print "Create request failed, response code was: $CreateResponseCode\n";
+}
+else {
+
+    # If the request was answered correctly, we receive a JSON string here.
+    my $ResponseContent = $RestClient->responseContent();
+
+    my $Data = decode_json $ResponseContent;
+
+    # Just to print out the returned Data structure:
+    use Data::Dumper;
+    print "Create Response was:\n";
+    print Dumper($Data);
+
+}
+
+# TicketUpdate Example
+# See the documentation of OTRSGenericInterfaceREST on how to setup
+#   - webservice
+#   - transport
+#   - operations
+my $UpdateJSONParams = encode_json $CreateOrUpdateParams;
+
+my @UpdateRequestParam = (
+    $UpdateControllerAndRequest,
+    $UpdateJSONParams
+);
+
+# We have to use REST-PATCH requests in order to send UserLogin and Password correctly
+# though other REST methods would fit better.
+$RestClient->PATCH(@UpdateRequestParam);
+
+# If the host isn't reachable, wrong configured or couldn't serve the requested page:
+my $UpdateResponseCode = $RestClient->responseCode();
+if ( $UpdateResponseCode ne '200' ) {
+    print "Update request failed, response code was: $UpdateResponseCode\n";
+}
+else {
+
+    # If the request was answered correctly, we receive a JSON string here.
+    my $ResponseContent = $RestClient->responseContent();
+
+    my $Data = decode_json $ResponseContent;
+
+    # Just to print out the returned Data structure:
+    use Data::Dumper;
+    print "Update response was:\n";
+    print Dumper($Data);
+
+}
+
+# TicketHistoryGet Example
+# See the documentation of OTRSGenericInterfaceREST on how to setup
+#   - webservice
+#   - transport
+#   - operations
+my $HistoryParams = {
+    UserLogin => "some agent user login",       # to be filled with valid agent login
+    Password  => "some agent user password",    # to be filled with valid agent password
+    TicketID  => [1],
+};
+
+# Build SearchParams as part of the URL for REST-GET requests
+$QueryParams = $RestClient->buildQuery( %{$HistoryParams} );
+$HistoryControllerAndRequest .= $QueryParams;
+
+$RestClient->GET($HistoryControllerAndRequest);
+
+# If the host isn't reachable, wrong configured or couldn't serve the requested page:
+my $HistoryResponseCode = $RestClient->responseCode();
+
+if ( $HistoryResponseCode ne '200' ) {
+    print "History request failed, response code was: $HistoryResponseCode\n";
+}
+else {
+
+    # If the request was answered correctly, we receive a JSON string here.
+    my $ResponseContent = $RestClient->responseContent();
+
+    my $Data = decode_json $ResponseContent;
+
+    # Just to print out the returned Data structure:
+    use Data::Dumper;
+    print "History Response was:\n";
+    print Dumper($Data);
+
+}
 
                     ]]>
                 </programlisting>
@@ -1127,6 +1330,12 @@ transport configuration)
 (where {TicketID} is a template represented by :TicketID in the transport
 configuration)
             </para>
+            <para>
+                <command>For Ticket History Get: </command>use GET method on
+/TicketHistory/{TicketID} path (where {TicketID} is a template represented
+by :TicketID in the transport configuration)
+            </para>
+
             <section>
                 <title>Create a New Ticket</title>
                 <para>cURL Command:</para>
@@ -1251,7 +1460,45 @@ curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConn
                     </screen>
                 </para>
             </section>
-
+            <section>
+                <title>Get Ticket History Details</title>
+                <para>cURL Command:</para>
+                <para>
+                    <screen>
+<![CDATA[
+curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorREST/TicketHistory/1686?UserLogin=agent&Password=123"
+]]>
+                    </screen>
+                </para>
+                <para>Response:</para>
+                <para>
+                    <screen>
+{
+  "TicketHistory":[
+    {
+      "History":[
+        {
+          "CreateBy":1,
+          "HistoryType":"NewTicket",
+          "TicketID":"1",
+          "CreateTime":"2017-06-08 22:44:48",
+          "TypeID":1,
+          "OwnerID":1,
+          "QueueID":1,
+          "Name":"New Ticket [2015071510123456] created.",
+          "StateID":1,
+          "PriorityID":3,
+          "ArticleID":"1",
+          "HistoryTypeID":1
+        }
+      ],
+      "TicketID":"1"
+    }
+  ]
+}
+                    </screen>
+                </para>
+            </section>
         </section>
     </section>
 </section>

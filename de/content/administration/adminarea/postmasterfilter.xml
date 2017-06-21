@@ -204,15 +204,13 @@ ist).
       </row>
       <row>
         <entry>
-          X-OTRS-ArticleType:
+          X-OTRS-IsVisibleForCustomer:
         </entry>
         <entry>
-          email-external, email-internal, email-notification-ext,
-email-notification-int, phone, fax, sms, webrequest, note-internal,
-note-external, note-report
+          0, 1
         </entry>
         <entry>
-          Legt den Typ des Artikles für das eingehende Ticket fest.
+          Controls if the article is shown in the customer interface.
         </entry>
       </row>
       <row>
@@ -238,6 +236,19 @@ Dynamic Field.
         <entry>
           Ist dieser X-OTRS-Header gesetzt, wird keine automatische Antwort an den
 Absender des neuen Tickets geschickt, z. B. um Mailschleifen zu vermeiden.
+        </entry>
+      </row>
+      <row>
+        <entry>
+          X-OTRS-FollowUp-State-Keep:
+        </entry>
+        <entry>
+          0, 1
+        </entry>
+        <entry>
+          If this X-OTRS header is set, the incoming follow-up message will not change
+the ticket state.  For this purpose the header can be customized in the
+sysconfig using option 'KeepStateHeader'.
         </entry>
       </row>
     </tbody>

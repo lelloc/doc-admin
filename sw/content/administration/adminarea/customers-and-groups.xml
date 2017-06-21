@@ -2,78 +2,108 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
-<section id="customers-and-groups">
-<title>Wateja na Makundi ya Wateja</title>
+<section id="customer-users-and-customers">
+<title>Customers Users and Customers</title>
 
-<section id="adminarea-customers">
-<title>Wateja</title>
+<section id="adminarea-customer-users">
+<title>Customer Users</title>
 
 <para>
-OTRS supports different types of users. Using the link "Customers" (via the
-navigation bar, or the Admin page), you can manage the accounts of your
-customers (see figure below), who can log into the system via the Customers
-interface (customer.pl). Through this interface, your customers can not only
-create tickets but also review their past tickets for new updates. It is
-important to know that a customer is needed for the ticket history in the
-system.
+OTRS supports different types of users. Using the link "Customer Users" (via
+the navigation bar, or the Admin page), you can manage the accounts of your
+customer users (see figure below), who can log into the system via the
+Customer Users interface (customer.pl). Through this interface, your
+customers can not only create tickets but also review their past tickets for
+new updates. It is important to know that a customer user is needed for the
+ticket history in the system.
 </para>
 
 <para>
 <figure>
-    <title>Usimamizi wa Mteja</title>
+    <title>Customer User management</title>
 <screenshot>
 <graphic fileref="screenshots/administration/adminarea/admin-customer.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-Unaweza kutafuta mteja aliyesajiliwa, au kuhariri miangilio yake kwa kubofya
-jina lake. Pia una uwezo wa kubadilisha mazingira ya nyuma ya mteja, kwa
-maelezo zaidi tafadhali rejea kwenye sura kuhusu <link
-linkend="external-backends">mazingira ya nyuma ya nje</link>.
+You can search for a registered customer user, or edit their settings by
+clicking on their name. You also have the possibility to change the customer
+back-end, for further information please refer to the chapter about <link
+linkend="external-backends">external back-ends</link>.
 </para>
 
 <para>
-To create a new customer account, click on the "Add customer" button (see
-figure below). Some of the fields are mandatory, i.e., they have to contain
-values, so if you leave one of those empty, it will be highlighted in red.
+To create a new customer user account, click on the "Add customer user"
+button (see figure below). Some of the fields are mandatory, i.e., they have
+to contain values, so if you leave one of those empty, it will be
+highlighted in red.
 </para>
 
 <para>
 <figure>
-    <title>Adding a customer</title>
+    <title>Adding a customer user</title>
 <screenshot>
 <graphic fileref="screenshots/administration/adminarea/add-customer.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-Wateja wanaweza kufikia mfumo kwa kutoa jina la mtumiaji na
-nywila. Kitambulisho cha Mteja kinahitajika na mfumo kutambua mtumiaji na
-tiketi zinazohusika. Kwa kuwa anwani ya barua pepe ni ya kipekee, inaweza
-kutumika kama kitambulisho.
+Customer Users can access the system by providing their username and
+password. The CustomerID is needed by the system to identify the user and
+associated tickets. Since the email address is a unique value, it can be
+used as the ID.
+</para>
+
+<para>
+With the configuration parameter <link
+linkend="ConfigReference_Setting_AdminCustomerUser::UseAutoComplete">AdminCustomerUser::UseAutoComplete</link>
+in the Admin SysConfig the autocomplete field can be activated for the
+customer ID selection in the customer user add or edit screen.
 </para>
 
 <note>
 <para>
-Kama ilivyo kwa mawakala, makundi na majukumu, wateja hawawezi kufutwa
-kwenye mfumo, wanaweza kulemazwa kwa kuseti chaguo Halali kuwa
-<emphasis>batili</emphasis> au <emphasis>batili-kwa muda</emphasis>.
+As with agents, groups and roles, customer users can not be deleted from the
+system, only deactivated by setting the Valid option to
+<emphasis>invalid</emphasis> or <emphasis>invalid-temporarily</emphasis>.
 </para>
 </note>
 
 </section>
 
-<section id="adminarea-customers-groups">
-<title>Makundi ya Wateja</title>
+<section id="adminarea-customer-users-customers-relation">
+    <title>Customer Users &lt;-&gt; Customers Relations</title>
+    <para>
+        Customer users can be assigned to multiple customers (and vice-versa) using
+the link "Customer Users &lt;-&gt; Customers" on the admin page. In addition
+to their own (primary) customer, they will be linked to any other customer
+for which there is a defined relation.
+    </para>
+    <para>
+        This gives them access to tickets of customer users from these customers.
+    </para>
+
+    <para>
+    <figure>
+        <title>Customer Users-Customers relations management</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-customer-users-customers.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+    </para>
+</section>
+
+<section id="adminarea-customer-users-groups">
+<title>Customer Users &lt;-&gt; Groups</title>
 
 <para>
-Wateja watumiaji wanaweza pia kuongezwa kwenye kundi, ambayo itakuwa na
-manufaa kama ukitaka kuongeza wateja wa kampuni moja wenye ufikivu kwa
-foleni moja ua zaidi. Kwanza tengeneza kundi ambalo wateja wako watakuwa
-wanachama, kupitia <link linkend="adminarea-groups">Moduli ya kusimamia
-kundi</link>. Kisha ongeza <link linkend="adminarea-queue">foleni</link> na
-chagua kundi jipya la foleni.
+Customer users can also be added to a group, which can be useful if you want
+to add customer users of the same company with access to one or a few
+queues. First create the group to which your customer users will belong, via
+the <link linkend="adminarea-groups">Group management module</link>. Then
+add the <link linkend="adminarea-queue">queues</link> and select the new
+group for the queues.
 </para>
 
 <para>
@@ -82,8 +112,111 @@ with the configuration parameter <link
 linkend="ConfigReference_Setting_CustomerGroupSupport">CustomerGroupSupport</link>,
 from the Admin SysConfig option. Using the parameter <link
 linkend="ConfigReference_Setting_CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
-you can specify the default groups for a newly added customer, so that every
-new account will be automatically added to these groups.
+you can specify the default groups for a newly added customer user, so that
+every new account will be automatically added to these groups.
+</para>
+
+<para>
+Through the link "Customer Users &lt;-&gt; Groups" you can manage which
+customer shall belong to the different groups (see figure below).
+</para>
+
+<para>
+<figure>
+    <title>Customer Users-Group relations management</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/admin-customer-user-groups.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+To define the different groups a customer should be part of and vice versa,
+click on the corresponding customer username or group (see below the Figures
+4.18 and 4.19, respectively).
+</para>
+
+<para>
+<figure>
+    <title>Change Group relations for a Customer User</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-customer-users-relations.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+<para>
+<figure>
+    <title>Change Customer user relations for a Group</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/groups-customer-users-relations2.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+</para>
+
+</section>
+
+<section id="adminarea-customers-groups">
+<title>Customers &lt;-&gt; Groups</title>
+
+<para>
+Customers can also be added to a group, which can be useful if you don't
+want to add group relations to every single customer user. First create the
+group to which your customers will belong, via the <link
+linkend="adminarea-groups">Group management module</link>. Then add the
+<link linkend="adminarea-queue">queues</link> and select the new group for
+the queues.
+</para>
+
+<para>
+The next step is to activate the customer group support. This can be done
+with the configuration parameter <link
+linkend="ConfigReference_Setting_CustomerGroupSupport">CustomerGroupSupport</link>,
+from the Admin SysConfig option. Using the parameter <link
+linkend="ConfigReference_Setting_CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
+you can specify the default groups for a newly added customers, so that
+every new customer will be automatically added to these groups. Available
+permission levels can be changed via configuration.
+</para>
+
+<para>
+Assigned permissions will be shared among all customer users of this
+customer, so permissions don't have to be given individually to every
+customer user (although this is still possible if required).
+</para>
+
+<para>
+Different contexts of permission assignment are available, which will
+determine how thepermissions are inherited by customer users.
+</para>
+
+<para>
+    The following contexts are available:
+</para>
+<para>
+    <itemizedlist>
+        <listitem>
+            <para>Same Customer</para>
+            <para>
+                Group permissions will be inherited by all customer users of this
+customer. This provides them with access to tickets of all customer users
+from the this customer if they are located in a queue that's assigned to
+this group.
+            </para>
+        </listitem>
+        <listitem>
+            <para>Other Customers</para>
+            <para>
+                Group permissions will be inherited by all customer users of this
+customer. This provides them with access to tickets of all customer users
+from other customers if they are located in a queue that's assigned to this
+group and if the other customer also has permissions to this group.
+            </para>
+            <para>
+                Access is limited to the level the customer user of a ticket has.
+            </para>
+        </listitem>
+    </itemizedlist>
 </para>
 
 <para>
@@ -93,7 +226,7 @@ shall belong to the different groups (see figure below).
 
 <para>
 <figure>
-    <title>Customer-Group relations management</title>
+    <title>Customers-Group relations management</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-customer-groups.png"
@@ -108,7 +241,7 @@ click on the corresponding customer username or group (see below the Figures
 
 <para>
 <figure>
-    <title>Badilisha mahusiano ya Makundi kwa Mteja</title>
+    <title>Change Group relations for a Customer User</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/groups-customers-relations.png"
@@ -117,13 +250,493 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 
 <para>
 <figure>
-    <title>Badilisha mahusiano ya Mteja kwa Kundi</title>
+    <title>Change Customer user relations for a Group</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/groups-customers-relations2.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
+</section>
+
+<section id="adminarea-customer-permission-functionality-explained">
+<title>Customer permission functionality explained</title>
+
+<para>
+    Access to tickets on the customer interface with enabled group support is
+mostly evaluated by a combination of group and individual (customer/customer
+user based)  permission. Only if both criteria are met, specific access is
+granted.
+</para>
+<para>
+    If the resulting access is 'rw', a customer user can view and modify a
+ticket, if the access is 'ro' only viewing is possible.
+</para>
+<para>
+    For ticket creation only the group permissions are used and a customer user
+can create tickets for all queues with 'rw' permissions (unless restricted
+otherwise, e.g. ACL or 'CustomerPanelOwnSelection').
+</para>
+<para>
+    Group permissions are additive (meaning that only one method needs to grant
+permissions)  and the following possibilities are taken into account:
+</para>
+<para>
+    <itemizedlist>
+        <listitem><para>Customer user default groups via SysConfig setting</para></listitem>
+        <listitem>
+            <para>
+                Groups assigned to the customer user via 'Customer Users &lt;-&gt;
+Customers' admin frontend
+            </para>
+        </listitem>
+        <listitem><para>Customer default groups via SysConfig setting</para></listitem>
+        <listitem>
+            <para>
+                Groups assigned to the customer via 'Customers &lt;-&gt; Groups' admin
+frontend
+            </para>
+        </listitem>
+    </itemizedlist>
+</para>
+<para>
+    For the methods above, all customers related to a customer user are
+used. This includes the 'primary' customer (selected in 'Customer User'
+admin frontend), additional customers (added in 'Customer Users &lt;-&gt;
+Customers' admin frontend) and other customer that might exist in the
+backend.
+</para>
+<para>
+    Individual permission checks require one of the following conditions to be
+met:
+</para>
+<para>
+    <itemizedlist>
+        <listitem><para>Ticket is assigned to the customer user</para></listitem>
+        <listitem>
+            <para>
+                Ticket is assigned to a customer that the customer user is related to (as
+explained above)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Ticket is assigned to a customer with group permissions for the ticket queue
+while a customer related to the customer user has 'Other Customers'
+permission to the same group
+            </para>
+        </listitem>
+    </itemizedlist>
+</para>
+<para>
+    An example for the last item to clarify the functionality:
+</para>
+<para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                Ticket is assigned to customer user 'Arvid Karlsson' with related customer
+'Ericsson AB'
+            </para>
+        </listitem>
+        <listitem><para>Ticket is located in queue 'Support Sweden'</para></listitem>
+        <listitem><para>Queue 'Support Sweden' is in group 'support-se'</para></listitem>
+        <listitem>
+            <para>
+                Customer 'Ericsson AB' has 'Same Customer' context 'rw' permission to group
+'support-se'
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Logged in customer user is 'Barry Smith' which is related to customer
+'Farmers Inc.'
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Customer 'Farmers Inc.' has 'Same Customer' context 'ro' permission to group
+'support-se'
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Now, if Customer 'Farmers Inc.' is given 'Other Customers' context 'ro'
+permission to group 'support-se', Barry Smith will be able to view the
+ticket
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                In order for Barry to modify the ticket, 'rw' permission is required for
+both 'Same Customer' and 'Other Customers' context
+            </para>
+        </listitem>
+    </itemizedlist>
+</para>
+
+</section>
+
+<section id="adminarea-customer-multi-tier-relationship-usage-example">
+    <title>Multi-Tier Customer Relationship Usage/Setup Example</title>
+    <para>
+        In this example we will create a multi-tier customer structure with
+resulting ticket permissions. To get the same results you will need a
+relatively clean system without many customizations.
+    </para>
+    <para>
+        First, create following customers through 'Admin &gt; Customers' frontend.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem><para>CustomerID: de, Customer: Graubrot AG </para></listitem>
+            <listitem><para>CustomerID: mx, Customer: Hernandez SA </para></listitem>
+            <listitem><para>CustomerID: se, Customer: Ericsson AB </para></listitem>
+            <listitem><para>CustomerID: us, Customer: Farmers Inc. </para></listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Next, create the following customer users through 'Admin &gt; Customer
+Users' frontend and assign them to the already created customers. Use any
+valid email addresses for Email field.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Firstname: Arvid, Lastname: Karlsson, Username: ak, CustomerID: Ericsson AB
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Firstname: Barry, Lastname: Smith, Username: bs, CustomerID: Farmers Inc.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Firstname: Christian, Lastname: Müller, Username: cm, CustomerID: Graubrot
+AG
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Firstname: Diego, Lastname: Garcia, Username: dg, CustomerID: Hernandez SA
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Then, go to 'Admin &gt; Groups' frontend and add the following as new
+groups.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem><para>faq-amer</para></listitem>
+            <listitem><para>faq-emea</para></listitem>
+            <listitem><para>support-de</para></listitem>
+            <listitem><para>support-mx</para></listitem>
+            <listitem><para>support-se</para></listitem>
+            <listitem><para>support-us</para></listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Then, go to 'Admin &gt; Queues' and add corresponding queues which will use
+previously created groups. For the System address you can use any available.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem><para>Name: FAQ Germany, Group: faq-emea</para></listitem>
+            <listitem><para>Name: FAQ Mexico, Group: faq-amer</para></listitem>
+            <listitem><para>Name: FAQ Sweden, Group: faq-emea</para></listitem>
+            <listitem><para>Name: FAQ USA, Group: faq-amer</para></listitem>
+            <listitem><para>Name: Support Germany, Group: support-de</para></listitem>
+            <listitem><para>Name: Support Mexico, Group: support-mx</para></listitem>
+            <listitem><para>Name: Support Sweden, Group: support-se</para></listitem>
+            <listitem><para>Name: Support USA, Group: support-us</para></listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Go to 'Admin &gt; Customer Users &lt;-&gt; Customers' frontend and assign
+select customer users to other customers.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>Arvid Karlsson</para>
+                <para>de Graubrot AG -&gt; active {1}</para>
+            </listitem>
+            <listitem>
+                <para>Diego Garcia</para>
+                <para>se Ericsson AB, us Farmers Inc. -&gt; active {2}</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Additionally, go to 'Admin &gt; Customer Users &lt;-&gt; Groups' frontend
+and assign a single customer user direct access to a group.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>Diego Garcia</para>
+                <para>faq-emea -&gt; rw {3}</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Now, go to 'Admin &gt; Customers &lt;-&gt; Groups' frontend and assign
+customers to groups according to the matrix below. Be sure to select proper
+permission level for each group and company.
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>de Graubrot AG</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Same Customer {4}</para>
+                        <para>faq-amer -&gt; ro</para>
+                        <para>faq-emea -&gt; ro</para>
+                        <para>support-de -&gt; rw</para>
+                        <para>support-mx -&gt; ro</para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+            <listitem>
+                <para>mx Hernandex SA</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Same Customer {5}</para>
+                        <para>faq-amer -&gt; ro</para>
+                        <para>faq-emea -&gt; ro</para>
+                        <para>support-de -&gt; ro</para>
+                        <para>support-mx -&gt; rw</para>
+                    </listitem>
+                    <listitem>
+                        <para>Other Customers {6}</para>
+                        <para>
+                            support-de -&gt; rw (this is intentional to demonstrate limitation to base
+permissions)
+                        </para>
+                        <para>support-mx -&gt; rw</para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+            <listitem>
+                <para>se Ericsson AB</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Same Customer {7}</para>
+                        <para>faq-amer -&gt; ro</para>
+                        <para>faq-emea -&gt; ro</para>
+                        <para>support-se -&gt; rw</para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+            <listitem>
+                <para>us Farmers Inc.</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Same Customer {8}</para>
+                        <para>faq-amer -&gt; ro</para>
+                        <para>faq-emea -&gt; ro</para>
+                        <para>support-us -&gt; rw</para>
+                    </listitem>
+                    <listitem>
+                        <para>Other Customers {9}</para>
+                        <para>faq-amer -&gt; ro</para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        For reference, please consult image below where all relationships are drawn
+as lines: <screenshot>
+<graphic
+fileref="screenshots/administration/adminarea/multi-tier-customer-relationshop-usage-example.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
+    </para>
+    <para>
+        Finally, let's create some tickets. Go to 'New phone ticket' frontend and
+create tickets, one each per customer user and queue (32 in total). By the
+way, this is possible in the agent frontend as the customer group
+restrictions are only active on the customer frontend.
+    </para>
+    <para>
+        For checking resulting access to the tickets, you can easily switch between
+the customer users by activating <literal>SwitchToCustomer</literal> option
+in SysConfig. Then just go to 'Admin &gt; Customer Users' and click on
+corresponding 'Switch to customer' link next to the user's name.
+    </para>
+    <para>
+        You will be immediately logged in as that customer user and you can visit
+'Tickets &gt; Company Tickets' screen for checking the ticket access. It
+should conform to the matrix below. Click on a ticket to check if
+corresponding permission level is honored: for 'ro' permission level you
+should not see the 'Reply' button.
+    </para>
+    <para>
+        This is the expected result for each customer user. The marker '{0}' refers
+to the location above where the corresponding setting was taken (this shows
+why the access is granted).
+    </para>
+    <para>
+        Resulting access for customer user Arvid Karlsson
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>Queue FAQ Germany: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ Mexico: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ Sweden: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ USA: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue Support Germany: rw (via {1-&gt;6}) + Christian's Tickets rw (via {1})
+                </para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Mexico: -</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue Support Sweden: rw (via {7}) + Christian's Tickets rw (via {1})
+                </para>
+            </listitem>
+            <listitem>
+                <para>Queue Support USA: -</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Resulting access for customer user Barry Smith
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>Queue FAQ Germany: ro (via {8})</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue FAQ Mexico: ro (via {8}) + Arvid's, Christian's, Diego's Tickets ro
+(via {9})
+                </para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ Sweden: ro (via {8})</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue FAQ USA: ro (via {8}) + Arvid's, Christian's, Diego's Tickets ro (via
+{9})
+                </para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Germany: -</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Mexico: -</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Sweden: -</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support USA: rw (via {8})</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Resulting access for customer user Christian Müller
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>Queue FAQ Germany: ro (via {4})</para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ Mexico: ro (via {4})</para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ Sweden: ro (via {4})</para>
+            </listitem>
+            <listitem>
+                <para>Queue FAQ USA: ro (via {4})</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Germany: rw (via {4})</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Mexico: ro (via {4})</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support Sweden: -</para>
+            </listitem>
+            <listitem>
+                <para>Queue Support USA: -</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Resulting access for customer user Diego Garcia
+    </para>
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Queue FAQ Germany: rw (via {3}) + Arvid's, Barry's Tickets rw (via {2})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue FAQ Mexico: ro (via {5}) + Arvid's, Barry's Tickets ro (via {2}) +
+Christian's Tickets ro (via {2-&gt;9})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue FAQ Sweden: rw (via {3}) + Arvid's, Barry's Tickets rw (via {2})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue FAQ USA: ro (via {5}) + Arvid's, Barry's Tickets ro (via {2}) +
+Christian's Tickets ro (via {2-&gt;9})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue Support Germany: ro (via {5}) + Arvid's, Barry's Tickets ro (via {2})
++ Christian's Tickets ro (via {6})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue Support Mexico: rw (via {5}) + Arvid's, Barry's, Tickets rw (via {2})
++ Christian's Tickets rw (via {6})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue Support Sweden: rw (via {2-&gt;4}) + Arvid's, Barry's Tickets rw (via
+{2})
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Queue Support USA: rw (via {2-&gt;5}) + Arvid's, Barry's Tickets rw (via
+{2})
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
 </section>
 
 </section>
