@@ -195,6 +195,45 @@ shell> scripts/DBUpdate-to-6.pl
             The script will suggest possible time zones based on your previous configuration. In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade via SysConfig setting <literal>OTRSTimeZone</literal>.
         </para>
 
+        <para>
+            Following optional arguments are available for the migration script:
+        </para>
+
+        <variablelist>
+            <varlistentry>
+                <term><literal>--non-interactive</literal></term>
+                <listitem>
+                    <para>
+                        Skip interactive input and display manual steps needed after script has been executed.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><literal>--timing</literal></term>
+                <listitem>
+                    <para>
+                        Show how much time has been consumed by each task during script execution.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><literal>--verbose</literal></term>
+                <listitem>
+                    <para>
+                        Show detailed output for migration steps, not just those that fail.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+
+        <note>
+            <para>
+                In case of large system migration, it is recommended to use the <literal>--non-interective</literal>
+                switch, since waiting for any user input might prolong the process unnecessarily. After the execution,
+                output from the script can be inspected for any manual changes that still need to be done.
+            </para>
+        </note>
+
         <warning>
             <para>
                 Do not continue the upgrading process if this script did not work properly for you.
