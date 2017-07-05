@@ -48,7 +48,7 @@
     </para>
 
     <section role="NotInToc">
-        <title>Step 1: Stop all relevant services</title>
+        <title>Step 1: Stop all relevant services and the OTRS Daemon</title>
 
         <para>
         Please make sure there are no more running services or cron jobs that try to access OTRS.
@@ -246,7 +246,7 @@ shell> scripts/DBUpdate-to-6.pl
         <title>Step 5: Restart your services</title>
 
         <para>
-        e. g. (depends on used services):
+            This will depend on your service configuration, here is an example:
         </para>
 
         <para>
@@ -258,7 +258,7 @@ shell> /etc/init.d/cron start
         </para>
 
         <para>
-        Now you can log into your system.
+            Now you can log into your system. Please note that the OTRS Daemon is started only in a later step.
         </para>
     </section>
 
@@ -284,50 +284,23 @@ shell> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 7: Start the OTRS Daemon</title>
+        <title>Step 7: Start the OTRS Daemon and cron job</title>
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring tasks in OTRS.
-            The daemon also handles all GenericAgent jobs and must be started as the <literal>otrs</literal> user.
+            The daemon and its keepalive cron job must be started as the <literal>otrs</literal> user.
         </para>
 
         <para>
             <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.Daemon.pl start
-            ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 8: Update and activate cron jobs</title>
-
-        <para>
-            There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
-            and their purpose is to make sure that the OTRS Daemon is running.
-            They need to be activated by copying them without the ".dist" filename extension.
-        </para>
-
-        <para>
-            <screen><![CDATA[
-shell> cd /opt/otrs/var/cron
-shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
-            ]]></screen>
-        </para>
-
-        <para>
-            To schedule these cron jobs on your system, you can use the script <filename>Cron.sh</filename>
-            as the <literal>otrs</literal> user.
-        </para>
-
-        <para>
-            <screen><![CDATA[
 shell> /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: Update system registration (optional)</title>
+        <title>Step 8: Update system registration (optional)</title>
         <para>
             If the system is already registered with OTRS Group, it is strongly recommended to update
             the registration information at this time. This will update the registered version of
@@ -350,7 +323,7 @@ shell> bin/otrs.Console.pl Maint::Cache::Delete
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: Well done!</title>
+        <title>Step 9: Well done!</title>
         <para></para>
     </section>
 </section>
