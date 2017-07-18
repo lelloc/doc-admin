@@ -18,6 +18,29 @@ elérhető felhasználó beállításokra.
 <section id="agent-interface">
 <title>Az ügyintéző webes felülete</title>
 
+    <note>
+        <para>
+            Mielőtt első alkalommal jelentkezne be, fontolja meg a HTTPS bekapcsolását a
+webkiszolgálón annak érdekében, hogy az OTRS biztonságos alkalmazásként
+legyen kiszolgálva SSL/TLS protokollokon keresztül. A részletes
+utasításokhoz olvassa el a webkiszolgáló (például Apache2) dokumentációját,
+hogy hogyan kell ezt elvégezni.
+        </para>
+        <para>
+            Miután bekapcsolta a HTTPS-t, állítsa a <literal>HttpType</literal>
+konfigurációs beállítást <emphasis>https</emphasis> értékre a <link
+linkend="adminarea-sysconfig">rendszerbeállításokban</link>. Ez fogja azt
+biztosítani, hogy az OTRS összes belső hivatkozása valóban HTTPS-t
+használjon.
+        </para>
+        <para>
+            A helyes gyakorlat az, hogy az összes HTTP-forgalmat is átirányítja HTTPS-re
+abban az esetben, ha valaki egy nem biztonságos hivatkozáson keresztül
+próbálja meg elérni az OTRS-t. Ezt a webkiszolgáló beállítási szintjén kell
+megtenni a legjobb hatás érdekében.
+        </para>
+    </note>
+
 <para>
 Az ügyintéző webes felülete lehetővé teszi az ügyintézőknek, hogy
 válaszoljanak az ügyfelek kéréseire, új jegyeket hozzanak létre az
@@ -27,18 +50,18 @@ stb.
 </para>
 
 <para>
-Feltételezve, hogy az OTRS gépe a <ulink url="http://www.pelda.hu/">
-<citetitle>http://www.pelda.hu</citetitle> </ulink> URL-en keresztül érhető
-el, akkor az OTRS bejelentkező képernyőjét a <ulink
-url="http://www.pelda.hu/otrs/index.pl">
-<citetitle>http://www.pelda.hu/otrs/index.pl</citetitle> </ulink> cím
-használatával lehet elérni egy webböngészőben (lásd a lenti ábrát).
+Feltételezve, hogy az OTRS gépe a <ulink
+url="http://www.example.com/"><citetitle>http://www.example.com</citetitle></ulink>
+URL-en keresztül érhető el, akkor az OTRS bejelentkező képernyőjét a <ulink
+url="http://www.example.com/otrs/index.pl"><citetitle>http://www.example.com/otrs/index.pl</citetitle></ulink>
+cím használatával lehet elérni egy webböngészőben (lásd a lenti ábrát).
 </para>
 
 <para>
 <screenshot>
-<screeninfo>index.pl - Ügyintéző bejelentkezési képernyő</screeninfo> <graphic srccredit="index.pl -
-screenshot" scale="40" fileref="screenshots/login.png"></graphic></screenshot>
+<screeninfo>index.pl - Ügyintéző bejelentkezési képernyő</screeninfo> <graphic
+fileref="screenshots/login.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -59,15 +82,15 @@ azokról a jegyekről, amelyeket létrehoztak, stb.
 
 <para>
 Folytatva a fenti példát, az ügyfél bejelentkező képernyője a <ulink
-url="http://www.pelda.hu/otrs/customer.pl">
-<citetitle>http://www.pelda.hu/otrs/customer.pl</citetitle> </ulink> URL
-használatával érhető el egy webböngészővel (lásd a lenti ábrát).
+url="http://www.example.com/otrs/customer.pl"><citetitle>http://www.example.com/otrs/customer.pl</citetitle></ulink>
+URL használatával érhető el egy webböngészővel (lásd a lenti ábrát).
 </para>
 
 <para>
 <screenshot>
-<screeninfo>customer.pl - Ügyfél bejelentkezési képernyő</screeninfo> <graphic srccredit="customer.pl -
-screenshot" scale="40" fileref="screenshots/customer-login.png"></graphic></screenshot>
+<screeninfo>customer.pl - Ügyfél bejelentkezési képernyő</screeninfo> <graphic
+fileref="screenshots/customer-login.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -89,16 +112,17 @@ való keresést mindenféle speciális meghatalmazás nélkül.
 
 <para>
 A példánkban a nyilvános webes felület a következő URL-ek bármelyikén
-keresztül elérhető: <ulink url="http://www.pelda.hu/otrs/faq.pl">
-<citetitle>http://www.pelda.hu/otrs/faq.pl</citetitle> </ulink> , <ulink
-url="http://www.pelda.hu/otrs/public.pl">
-<citetitle>http://www.pelda.hu/otrs/public.pl</citetitle> </ulink>
+keresztül elérhető: <ulink
+url="http://www.example.com/otrs/faq.pl"><citetitle>http://www.example.com/otrs/faq.pl</citetitle></ulink>,
+<ulink
+url="http://www.example.com/otrs/public.pl"><citetitle>http://www.example.com/otrs/public.pl</citetitle></ulink>
 </para>
 
 <para>
 <screenshot>
-<screeninfo>public.pl - Nyilvános webes felület</screeninfo> <graphic srccredit="public.pl -
-screenshot" scale="40" fileref="screenshots/public-interface.png"></graphic></screenshot>
+<screeninfo>public.pl - Nyilvános webes felület</screeninfo> <graphic
+fileref="screenshots/public-interface.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -143,9 +167,9 @@ regisztrálva, és nyomja meg az Új jelszó kérése gombot (lásd az ábrát).
 
 <para>
 <screenshot>
-<screeninfo>login.pl - Új jelszó kérése</screeninfo> <graphic srccredit="login.pl -
-screenshot" scale="40"
-fileref="screenshots/request-new-password.png"></graphic></screenshot>
+<screeninfo>login.pl - Új jelszó kérése</screeninfo> <graphic
+fileref="screenshots/request-new-password.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -168,8 +192,9 @@ különböző feltételek használatával.
 
 <para>
 <screenshot>
-<screeninfo>Az első sikeres bejelentkezés utáni képernyő</screeninfo> <graphic srccredit="First screen -
-screenshot" scale="40" fileref="screenshots/first-screen.png"></graphic></screenshot>
+<screeninfo>Az első sikeres bejelentkezés utáni képernyő</screeninfo> <graphic
+fileref="screenshots/first-screen.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -243,8 +268,9 @@ felület összes képernyőjén.
 
 <para>
 <screenshot>
-<screeninfo>Lábléc</screeninfo> <graphic srccredit="Footer"
-scale="40" fileref="screenshots/footer.png"></graphic></screenshot>
+<screeninfo>Lábléc</screeninfo> <graphic
+fileref="screenshots/footer.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -288,9 +314,9 @@ oszlopban, és ezek mind le vannak írva lentebb.
 
 <para>
     <screenshot>
-<screeninfo>Vezérlőpult felületi elemek</screeninfo> <graphic srccredit="Dashboard
-widgets" scale="40"
-fileref="screenshots/dashboard-left-column-widgets.png"></graphic></screenshot>
+<screeninfo>Vezérlőpult felületi elemek</screeninfo> <graphic
+fileref="screenshots/dashboard-left-column-widgets.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -399,8 +425,9 @@ esetben, ha azt szükségesnek tartja.
         </para>
         <para>
             <screenshot>
-<screeninfo>Események jegy naptár felületi elem</screeninfo> <graphic srccredit="Footer"
-scale="40" fileref="screenshots/events-ticket-calendar.png"></graphic></screenshot>
+<screeninfo>Események jegy naptár felületi elem</screeninfo> <graphic
+fileref="screenshots/events-ticket-calendar.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
         </para>
         <para>
             Ezen felületi elem további beállításai megtalálhatók a
@@ -484,8 +511,9 @@ rögzítve van a képernyőn, ami azt jelenti, hogy nem tudja fogd és vidd mód
 
 <para>
     <screenshot>
-<screeninfo>A vezérlőpult beállításainak szerkesztése</screeninfo> <graphic srccredit="Dashboard
-settings" scale="40" fileref="screenshots/edit-settings.png"></graphic></screenshot>
+<screeninfo>A vezérlőpult beállításainak szerkesztése</screeninfo> <graphic
+fileref="screenshots/edit-settings.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -635,8 +663,9 @@ rendelkezik.
 
 <para>
 <screenshot>
-<screeninfo>Várólista nézet (alapértelmezett) az ügyintézőknek</screeninfo> <graphic srccredit="index.pl -
-screenshot" scale="40" fileref="screenshots/agent-queue-view.png"></graphic></screenshot>
+<screeninfo>Várólista nézet (alapértelmezett) az ügyintézőknek</screeninfo> <graphic
+fileref="screenshots/agent-queue-view.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -670,9 +699,9 @@ Ezek a látható riasztások a felhasználó támogatásához.
 
 <para>
 <screenshot>
-<screeninfo>Ügyintéző várólista nézet látható riasztásai.</screeninfo> <graphic srccredit="index.pl -
-screenshot" scale="40"
-fileref="screenshots/agent-queue-overview-visual-alarms.png"></graphic></screenshot>
+<screeninfo>Ügyintéző várólista nézet látható riasztásai.</screeninfo> <graphic
+fileref="screenshots/agent-queue-overview-visual-alarms.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
 </para>
 
 <itemizedlist>
@@ -711,9 +740,9 @@ beállítási képernyőhöz (lásd a lenti ábrát), míg az ügyfeleknek a
 
 <para>
 <screenshot>
-<screeninfo>Ügyintézők fiókbeállítási képernyője</screeninfo> <graphic srccredit="index.pl -
-screenshot" scale="40"
-fileref="screenshots/agent-preferences.png"></graphic></screenshot>
+<screeninfo>Ügyintézők fiókbeállítási képernyője</screeninfo> <graphic
+fileref="screenshots/agent-preferences.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -774,9 +803,9 @@ várólista nézet).</para>
 
 <para>
 <screenshot>
-<screeninfo>Ügyfelek fiókbeállítási képernyője</screeninfo> <graphic srccredit="customer.pl -
-screenshot" scale="40"
-fileref="screenshots/customer-preferences.png"></graphic></screenshot>
+<screeninfo>Ügyfelek fiókbeállítási képernyője</screeninfo> <graphic
+fileref="screenshots/customer-preferences.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
