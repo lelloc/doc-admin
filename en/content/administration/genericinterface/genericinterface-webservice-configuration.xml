@@ -88,6 +88,15 @@ Requester:
       Description: This is a test invoker
       Events:
         - Asynchronous: 1
+        Condition:
+          Condition:
+            '1':
+              Fields:
+                Queue:
+                  Match: Raw
+                  Type: String
+              Type: and
+          ConditionLinking: and
           Event: TicketCreate
         - Asynchronous: 0
           Event: ArticleUpdate
@@ -564,6 +573,13 @@ Requester:
                                     </listitem>
                                     <listitem>
                                         <para>
+                                            Condition: Container for event conditions to trigger the
+                                            invoker, if there are no conditions, event will always
+                                            trigger the invoker.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
                                             Event: the name of the event trigger.
                                         </para>
                                         <itemizedlist>
@@ -756,6 +772,117 @@ Requester:
                                 </itemizedlist>
                             </listitem>
                         </itemizedlist>
+                        <section>
+                            <title>Condition</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Condition: Container to actual event conditions.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        ConditionLinking: Defines how multiple condition
+                                        interacts with each other.
+                                    </para>
+                                    <itemizedlist>
+                                        <title>Possible Values (for condition linking)</title>
+                                        <listitem><para>and</para></listitem>
+                                        <listitem><para>or</para></listitem>
+                                        <listitem><para>xor</para></listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                            <section>
+                                <title>Condition -&gt; Condition</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            &lt;ConditionName&gt;: Container for the condition
+                                            elements.
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                                <section>
+                                    <title>&lt;ConditionName&gt;</title>
+                                    <para>
+                                        Unique name for the condition within the invoker and event
+                                        the GUI assigns consecutive integer condition names starting
+                                        from 1.
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                Fields: Container for field conditions.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Type: Define how multiple fields interact within its
+                                                condition.
+                                            </para>
+                                            <itemizedlist>
+                                                <title>Possible Values (for condition linking)</title>
+                                                <listitem><para>and</para></listitem>
+                                                <listitem><para>or</para></listitem>
+                                                <listitem><para>xor</para></listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>Fields</title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    &lt;FieldName&gt;: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>&lt;FieldName&gt;</title>
+                                            <para>
+                                                The name of a field from the event object (e.g.
+                                                for Ticket Events, the fields could be Queue
+                                                Priority Type, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        Match: The value to match from the selected
+                                                        against the event object using the
+                                                        Type modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        Type: Modifier to the Match value.
+                                                    </para>
+                                                    <itemizedlist>
+                                                        <title>Possible Values (for type modifier)</title>
+                                                        <listitem>
+                                                            <para>
+                                                                String: Direct compare between object field value and <literal>Match</literal> value.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                Regexp: Compare object field value with the regular expression defined in the <literal>Match</literal> value.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                Module: Use the module defined in the <literal>Match</literal> with
+                                                                the object data.
+                                                            </para>
+                                                        </listitem>
+                                                    </itemizedlist>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
                     </section>
                     <section>
                         <title>MappingInbound</title>

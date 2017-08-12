@@ -909,9 +909,11 @@
                     Event triggers are events within OTRS such as "TicketCreate", "ArticleSend",
                     etc. These can act as triggers to execute the invoker. Each invoker needs to
                     have at least one event trigger registered, or the invoker will be useless,
-                    because it will never be called. The asynchronous property of the event triggers
-                    define if the OTRS process will handle the invoker or if it will be delegated to
-                    the OTRS Daemon.
+                    because it will never be called. Additionally a set of rules (conditions) for
+                    each event can be defined to have more control over the triggering of the events,
+                    This rules depends on the data of the object associated with the event.
+                    The asynchronous property of the event triggers define if the OTRS process will
+                    handle the invoker or if it will be delegated to the OTRS Daemon.
                 </para>
                 <note>
                     <para>
@@ -929,6 +931,11 @@
                     unchecked means that the event trigger will not be asynchronous) and finally
                     click on the plus button. A new event trigger will be created and it will be
                     listed on the invoker "Event Triggers" list.
+                </para>
+                <para>
+                    From the "Event Triggers" list each events shows if it contains conditions or not.
+                    The edit button next to the condition property allows to add or edit the current
+                    conditions of the event.
                 </para>
                 <para>
                     To delete an Event trigger, simply locate the event trigger to be deleted in the
@@ -949,6 +956,53 @@
                         <title>Web service invoker</title>
                         <screenshot>
                              <graphic fileref="screenshots/administration/genericinterface/genericinterface-webservice-invoker.png" scalefit="1" width="100%" contentdepth="100%"></graphic>
+                        </screenshot>
+                    </figure>
+                </para>
+            </section>
+
+            <section id="webservice-invoker-event">
+                <title>Web Service Invoker Event</title>
+                <para>
+                    Sometimes defining an event to trigger an invoker could result in many
+                    unnecessary or wrong request to a remote server. Event conditions could be set
+                    to restrict the triggering of the invoker in such cases.
+                </para>
+                <para>
+                    To access the event settings screen where the conditions can be defined is
+                    necessary to be in the invoker screen and from there click on the edit icon next
+                    to the condition status on the event where this conditions should take effect.
+                </para>
+                <para>
+                    Within the event settings screen in the action bar there is a button to go back
+                    to the invoker screen as well as a button to remove all the event conditions.
+                    By default the screen is pre-populated with the first condition. Update the
+                    Type of linkings between conditions if more than one condition is planned,
+                    then change the Type of linking from 'Condition 1' if more than one field is
+                    planned. Both linking fields accepts 'and' 'or' or 'xor' as values.
+                </para>
+                <para>
+                    Fill the Field name, set the matching type (String for exact match, Regexp for
+                    regular expression or Validation Module) and set Value to match (in case of
+                    Validation Module the full class name like:
+                    Kernel::GenericInterface::Event::Validation::ValidateDemo).
+                </para>
+                <para>
+                    To add more fields to the condition, click on the '+' button in the fields
+                    header. To remove a field, click on the '-' button in the field row. It is
+                    necessary to keep at least one field per condition.
+                </para>
+                <para>
+                    To add more conditions clock on the button below the last condition box.
+                    To remove remove a condition, click on the '-' button in the condition header.
+                    It is necessary to keep at least one condition in the set. To remove all
+                    conditions use the button in the sidebar.
+                </para>
+                <para>
+                    <figure>
+                        <title>Web service invoker event</title>
+                        <screenshot>
+                             <graphic fileref="screenshots/administration/genericinterface/genericinterface-webservice-invoker-event.png" scalefit="1" width="100%" contentdepth="100%"></graphic>
                         </screenshot>
                     </figure>
                 </para>
