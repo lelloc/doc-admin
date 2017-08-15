@@ -3,49 +3,45 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="upgrading">
-    <title>Upgrading OTRS from 5 to 6</title>
+    <title>Upgrading OTRS</title>
 
-    <para>
-    These instructions are for people upgrading OTRS from <emphasis>5</emphasis> to <emphasis>6</emphasis>
-    or from a <emphasis>5</emphasis> to a later patchlevel release <emphasis>5</emphasis> and applies both for RPM
-    and source code (tarball) upgrades.
-    </para>
-
-    <para>
-    If you are running a lower version of OTRS you have to follow the upgrade path
-    to 5 first (1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4->5)!
-    You need to perform a full upgrade to every version in between, including
-    database changes and the upgrading Perl script.
-    </para>
-
-    <para>
-    Please note that if you upgrade from OTRS 2.2 or earlier, you have to
-    take <ulink url="http://bugs.otrs.org/show_bug.cgi?id=6798">an extra step</ulink>.
-    </para>
-
-    <para>
-    Within a single minor version you can skip patch level releases if you want to
-    upgrade. For instance you can upgrade directly from OTRS 6 patchlevel 2 to version
-    6 patchlevel 6. If you need to do such a "patch level upgrade", you should skip steps
-    6 and XXXXX.
-    </para>
-
-    <warning>
+    <note>
         <para>
-            Please note that you need at least Perl 5.16 to run OTRS 6. If your system has an older Perl version,
-            you need to update it first before updating OTRS.
+            It is highly recommended to perform a test update on a separate testing machine first.
         </para>
-    </warning>
+    </note>
 
-    <warning>
-        <para>
-            For PostgreSQL based installations: please note that you need at least PostgreSQL 9.2 to run OTRS 6. If your system has an older PostgreSQL version, you need to update it first before updating OTRS.
-        </para>
-    </warning>
-
-    <para>
-        It is highly recommended to perform a test update on a separate testing machine first.
-    </para>
+    <variablelist>
+        <varlistentry>
+            <term>Upgrading from an earlier version of OTRS 6</term>
+            <listitem>
+                <para>
+                    You can upgrade directly from any previous to the latest available patch level release.
+                </para>
+            </listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>Upgrading from OTRS 5</term>
+            <listitem>
+                <para>
+                    You can upgrade from any OTRS 5 patch level to the latest available OTRS 6 patch level release.
+                </para>
+            </listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>Upgrading from OTRS 4 or earlier</term>
+            <listitem>
+                <warning>
+                    <para>
+                        You cannot upgrade from OTRS 4 or earlier directly to OTRS 6.
+                        Instead, full updates to all available minor versions have to be made sequentially instead.
+                        For example, if you come from OTRS 3.0, you first have to perform a full update to OTRS 3.1,
+                        then to 3.2, 3.3, 4, 5 and finally to OTRS 6.
+                    </para>
+                </warning>
+            </listitem>
+        </varlistentry>
+    </variablelist>
 
     <section role="NotInToc">
         <title>Step 1: Stop all relevant services and the OTRS Daemon</title>
@@ -57,9 +53,9 @@
 
         <para>
             <screen><![CDATA[
-shell> /etc/init.d/cron stop
-shell> /etc/init.d/postfix stop
-shell> /etc/init.d/apache stop
+root> /etc/init.d/cron stop
+root> /etc/init.d/postfix stop
+root> /etc/init.d/apache stop
             ]]></screen>
         </para>
 
@@ -69,9 +65,9 @@ shell> /etc/init.d/apache stop
 
         <para>
             <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/Cron.sh stop
-shell> bin/otrs.Daemon.pl stop
+otrs> cd /opt/otrs/
+otrs> bin/Cron.sh stop
+otrs> bin/otrs.Daemon.pl stop
             ]]></screen>
         </para>
     </section>
@@ -99,10 +95,10 @@ shell> bin/otrs.Daemon.pl stop
         <title>Step 3.1: With the tarball:</title>
 
             <screen><![CDATA[
-shell> cd /opt
-shell> mv otrs otrs-old
-shell> tar -xzf otrs-x.x.x.tar.gz
-shell> mv otrs-x.x.x otrs
+root> cd /opt
+root> mv otrs otrs-old
+root> tar -xzf otrs-x.x.x.tar.gz
+root> mv otrs-x.x.x otrs
             ]]></screen>
 
             <section role="NotInToc">
@@ -133,8 +129,8 @@ shell> mv otrs-x.x.x otrs
                     If you have additional packages with default statistics you have to restore the stats xml files with the suffix <filename>*.installed</filename> to <filename>/opt/otrs/var/stats</filename>.
                 </para>
                 <screen><![CDATA[
-shell> cd OTRS-BACKUP/var/stats
-shell> cp *.installed /opt/otrs/var/stats
+root> cd OTRS-BACKUP/var/stats
+root> cp *.installed /opt/otrs/var/stats
                 ]]></screen>
             </section>
 
@@ -147,8 +143,8 @@ shell> cp *.installed /opt/otrs/var/stats
 
                 <para>
                 <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.SetPermissions.pl
+root> cd /opt/otrs/
+root> bin/otrs.SetPermissions.pl
                 ]]></screen>
                 </para>
 
@@ -162,12 +158,12 @@ shell> bin/otrs.SetPermissions.pl
             <title>Step 3.2: With the RPM:</title>
             <para>
             <screen><![CDATA[
-shell> rpm -Uvh otrs-x.x.x.-01.rpm
+root> rpm -Uvh otrs-x.x.x.-01.rpm
             ]]></screen>
             </para>
 
             <para>
-            In this case the RPM update automatically restores the old configuration files and sets file permissions.
+                In this case the RPM update automatically restores the old configuration files and sets file permissions.
             </para>
         </section>
     </section>
@@ -176,61 +172,28 @@ shell> rpm -Uvh otrs-x.x.x.-01.rpm
         <title>Step 4: Run the migration script</title>
 
         <para>
-            Please run the migration script (as the <literal>otrs</literal> user, NOT as <literal>root</literal>):
-        </para>
-
-        <para>
         <screen><![CDATA[
-shell> scripts/DBUpdate-to-6.pl
+otrs> scripts/DBUpdate-to-6.pl
         ]]></screen>
         </para>
 
         <para>
-            This script will perform many checks on your system and give you advice on how to install missing Perl modules etc., if that is required.
+            This script will perform many checks on your system and give you advice on how to install
+            missing Perl modules etc., if that is required. If all checks succeeded, the neccessary migration steps
+            will be performed. Please also run this script in case of patch level updates.
         </para>
-
-        <para>
-            The migration script will ask you to set a time zone for OTRS. It is very important that you set
-            the correct time zone (and keep it), otherwise date and time of data added after the upgrade (tickets, articles, etc.) will be stored with a different time zone than your existing data, leading to inconsistent data.
-            The script will suggest possible time zones based on your previous configuration. In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade via SysConfig setting <literal>OTRSTimeZone</literal>.
-        </para>
-
-        <para>
-            Following optional arguments are available for the migration script:
-        </para>
-
-        <variablelist>
-            <varlistentry>
-                <term><literal>--non-interactive</literal></term>
-                <listitem>
-                    <para>
-                        Skip interactive input and display manual steps needed after script has been executed.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><literal>--timing</literal></term>
-                <listitem>
-                    <para>
-                        Show how much time has been consumed by each task during script execution.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><literal>--verbose</literal></term>
-                <listitem>
-                    <para>
-                        Show detailed output for migration steps, not just those that fail.
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
 
         <note>
             <para>
-                In case of large system migration, it is recommended to use the <literal>--non-interactive</literal>
-                switch, since waiting for any user input might prolong the process unnecessarily. After the execution,
-                output from the script can be inspected for any manual changes that still need to be done.
+                The migration script will ask you to set a time zone for OTRS if needed. It is very important that you set
+                the correct time zone (and keep it), otherwise date and time of data added after the upgrade
+                (tickets, articles, etc.) will be stored with a different time zone than your existing data,
+                leading to inconsistent data.
+            </para>
+            <para>
+                The script will suggest possible time zones based on your previous configuration.
+                In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade
+                via SysConfig setting <literal>OTRSTimeZone</literal>.
             </para>
         </note>
 
@@ -251,9 +214,9 @@ shell> scripts/DBUpdate-to-6.pl
 
         <para>
         <screen><![CDATA[
-shell> /etc/init.d/apache start
-shell> /etc/init.d/postfix start
-shell> /etc/init.d/cron start
+root> /etc/init.d/apache start
+root> /etc/init.d/postfix start
+root> /etc/init.d/cron start
         ]]></screen>
         </para>
 
@@ -264,22 +227,20 @@ shell> /etc/init.d/cron start
 
     <section role="NotInToc">
         <title>Step 6: Check installed packages</title>
-        <note>
-            <para>
-                The OTRS 5 packages are NOT compatible with OTRS 6, so you have to perform a package upgrade!
-            </para>
-        </note>
         <para>
-            The following packages are automatically uninstalled after the upgrade process (if they where installed
-            before):
+            The OTRS 5 packages are NOT compatible with OTRS 6 and have to be updated.
+        </para>
+        <para>
+            The following packages are automatically uninstalled during the upgrade process, if they where installed
+            before:
         </para>
         <para>
             <itemizedlist>
                 <listitem><para>OTRSAppointmentCalendar</para></listitem>
+                <listitem><para>OTRSTicketNumberCounterDatabase</para></listitem>
+                <listitem><para>OTRSAdvancedTicketSplit</para></listitem>
+                <listitem><para>OTRSGenericInterfaceInvokerEventFilter</para></listitem>
             </itemizedlist>
-            <!--
-                TODO: Verify and extend the list of merged packages.
-            -->
         </para>
     </section>
 
@@ -293,8 +254,8 @@ shell> /etc/init.d/cron start
 
         <para>
             <screen><![CDATA[
-shell> /opt/otrs/bin/otrs.Daemon.pl start
-shell> /opt/otrs/bin/Cron.sh start
+otrs> /opt/otrs/bin/otrs.Daemon.pl start
+otrs> /opt/otrs/bin/Cron.sh start
             ]]></screen>
         </para>
     </section>
@@ -304,26 +265,21 @@ shell> /opt/otrs/bin/Cron.sh start
         <para>
             If the system is already registered with OTRS Group, it is strongly recommended to update
             the registration information at this time. This will update the registered version of
-            the system (among other changes) in the OTRS Group records, in order to get much accurate
-            information from the cloud services.
+            the system (among other changes) in the OTRS Group records, to help with solving issues that
+            could potentially be caused by the upgrade.
         </para>
         <para>
             If you don't update the registration information manually, it will be done automatically
-            on a regular basis, but this could happen some hours or days after. During this
-            period it might be possible to get wrong information from cloud services like
-            <emphasis role="bold">OTRS Business Solution™</emphasis> updates.
+            on a regular basis, but this could happen some hours or days later. During this
+            period it might be possible to get wrong information from cloud services like the
+            <emphasis role="bold">OTRS Business Solution™</emphasis> availability check.
         </para>
         <para>
             <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.Console.pl Maint::Registration::UpdateSend --force
-shell> bin/otrs.Console.pl Maint::Cache::Delete
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Console.pl Maint::Registration::UpdateSend --force
+otrs> bin/otrs.Console.pl Maint::Cache::Delete
             ]]></screen>
         </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 9: Well done!</title>
-        <para></para>
     </section>
 </section>
