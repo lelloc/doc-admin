@@ -186,21 +186,22 @@ otrs> scripts/DBUpdate-to-6.pl
         <note>
             <para>
                 The migration script will ask you to set a time zone for OTRS if needed. It is very important that you set
-                the correct time zone (and keep it), otherwise date and time of data added after the upgrade
-                (tickets, articles, etc.) will be stored with a different time zone than your existing data,
-                leading to inconsistent data.
+                the correct time zone (<literal>OTRSTimeZone</literal>) for data storage and keep it,
+                otherwise date and time of data added after the upgrade (tickets, articles, etc.) will be stored
+                with a different time zone than your pre-existing data, leading to inconsistent output.
             </para>
             <para>
-                The script will suggest possible time zones based on your previous configuration.
-                In case you are not sure or made a mistake, you can change the OTRS time zone after the upgrade
-                via SysConfig setting <literal>OTRSTimeZone</literal>.
+                For new systems, using <literal>UTC</literal> is recommended, as users can have different personal
+                time zones for working with the OTRS application. For existing, migrated systems, a different
+                <literal>OTRSTimeZone</literal> should be used if the underlying operating system is not configured to
+                <literal>UTC</literal> or if OTRS previously used a time offset.
             </para>
         </note>
 
         <warning>
             <para>
                 Do not continue the upgrading process if this script did not work properly for you.
-                Otherwise data loss may occur.
+                Otherwise malfunction or data loss may occur.
             </para>
         </warning>
     </section>
