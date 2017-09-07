@@ -138,7 +138,8 @@ root> cp *.installed /opt/otrs/var/stats
                 <title>Set file permissions</title>
 
                 <para>
-                    Please execute the following command as root user to set the file and directory permissions for OTRS:
+                    Please execute the following command as root user to set the file and directory permissions for OTRS.
+                    It will try to detect the correct user and group settings needed for your setup.
                 </para>
 
                 <para>
@@ -146,10 +147,6 @@ root> cp *.installed /opt/otrs/var/stats
 root> cd /opt/otrs/
 root> bin/otrs.SetPermissions.pl
                 ]]></screen>
-                </para>
-
-                <para>
-                    It will try to detect the correct user and group settings needed for your setup.
                 </para>
             </section>
         </section>
@@ -161,7 +158,6 @@ root> bin/otrs.SetPermissions.pl
 root> rpm -Uvh otrs-x.x.x.-01.rpm
             ]]></screen>
             </para>
-
             <para>
                 In this case the RPM update automatically restores the old configuration files and sets file permissions.
             </para>
@@ -229,7 +225,7 @@ root> /etc/init.d/cron start
     <section role="NotInToc">
         <title>Step 6: Check installed packages</title>
         <para>
-            The OTRS 5 packages are NOT compatible with OTRS 6 and have to be updated.
+            Packages for OTRS 5 are NOT compatible with OTRS 6 and have to be updated.
         </para>
         <para>
             The following packages are automatically uninstalled during the upgrade process, if they where installed
@@ -261,26 +257,4 @@ otrs> /opt/otrs/bin/Cron.sh start
         </para>
     </section>
 
-    <section role="NotInToc">
-        <title>Step 8: Update system registration (optional)</title>
-        <para>
-            If the system is already registered with OTRS Group, it is strongly recommended to update
-            the registration information at this time. This will update the registered version of
-            the system (among other changes) in the OTRS Group records, to help with solving issues that
-            could potentially be caused by the upgrade.
-        </para>
-        <para>
-            If you don't update the registration information manually, it will be done automatically
-            on a regular basis, but this could happen some hours or days later. During this
-            period it might be possible to get wrong information from cloud services like the
-            <emphasis role="bold">OTRS Business Solution™</emphasis> availability check.
-        </para>
-        <para>
-            <screen><![CDATA[
-otrs> cd /opt/otrs/
-otrs> bin/otrs.Console.pl Maint::Registration::UpdateSend --force
-otrs> bin/otrs.Console.pl Maint::Cache::Delete
-            ]]></screen>
-        </para>
-    </section>
 </section>
