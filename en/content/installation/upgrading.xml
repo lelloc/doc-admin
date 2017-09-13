@@ -168,13 +168,7 @@ root> rpm -Uvh otrs-x.x.x.-01.rpm
         <title>Step 4: Run the migration script</title>
 
         <para>
-        <screen><![CDATA[
-otrs> scripts/DBUpdate-to-6.pl
-        ]]></screen>
-        </para>
-
-        <para>
-            This script will perform many checks on your system and give you advice on how to install
+            The upgrade script will perform many checks on your system and give you advice on how to install
             missing Perl modules etc., if that is required. If all checks succeeded, the neccessary migration steps
             will be performed. Please also run this script in case of patch level updates.
         </para>
@@ -193,6 +187,13 @@ otrs> scripts/DBUpdate-to-6.pl
                 <literal>UTC</literal> or if OTRS previously used a time offset.
             </para>
         </note>
+
+        <para>
+        <screen><![CDATA[
+otrs> cd /opt/otrs/
+otrs> scripts/DBUpdate-to-6.pl
+        ]]></screen>
+        </para>
 
         <warning>
             <para>
@@ -223,22 +224,19 @@ root> /etc/init.d/cron start
     </section>
 
     <section role="NotInToc">
-        <title>Step 6: Check installed packages</title>
+        <title>Step 6: Update installed packages</title>
+        <note>
+            <para>
+                Packages for OTRS 5 are compatible with OTRS 6 and have to be updated.
+            </para>
+        </note>
         <para>
-            Packages for OTRS 5 are NOT compatible with OTRS 6 and have to be updated.
+            You can use the following command to update all installed packages:
         </para>
-        <para>
-            The following packages are automatically uninstalled during the upgrade process, if they where installed
-            before:
-        </para>
-        <para>
-            <itemizedlist>
-                <listitem><para>OTRSAppointmentCalendar</para></listitem>
-                <listitem><para>OTRSTicketNumberCounterDatabase</para></listitem>
-                <listitem><para>OTRSAdvancedTicketSplit</para></listitem>
-                <listitem><para>OTRSGenericInterfaceInvokerEventFilter</para></listitem>
-            </itemizedlist>
-        </para>
+        <screen><![CDATA[
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
+        ]]></screen>
     </section>
 
     <section role="NotInToc">
@@ -251,8 +249,9 @@ root> /etc/init.d/cron start
 
         <para>
             <screen><![CDATA[
-otrs> /opt/otrs/bin/otrs.Daemon.pl start
-otrs> /opt/otrs/bin/Cron.sh start
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Daemon.pl start
+otrs> bin/Cron.sh start
             ]]></screen>
         </para>
     </section>
