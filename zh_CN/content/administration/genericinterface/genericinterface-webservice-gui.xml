@@ -112,11 +112,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     </section>
 
     <section id="webservice_gui_examples">
-        <title>Web Service Example Import</title>
+        <title>导入WEB服务样例</title>
         <para>
-            Did you know there are example web services available in the <ulink
+            在  <ulink
 url="http://otrs.github.io/doc/manual/otrs-business-solution/stable/en/html/import-example-web-service.html">OTRS
-Business Solution™</ulink>?
+Business Solution™</ulink>中有可用的示例Web服务，你知道吗？
         </para>
     </section>
 
@@ -693,7 +693,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </itemizedlist>
                 <para>
                     <figure>
-                        <title>Web service requester network transport (HTTP::REST)</title>
+                        <title>WEB服务请求者网络传输（HTTP::REST）</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/genericinterface/genericinterface-webservice-requester-transport-rest.png"
@@ -716,7 +716,15 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                     操作后端是预先选择的，不能编辑。如果在WEB服务编辑窗口选择了该调用程序你就会看到这个参数。这个字段仅用于提供信息。
                 </para>
                 <para>
-                    事件触发器是OTRS中的事件比如“工单创建”、“信件发送”等等。这些事件可以作为执行调用程序的触发器。每个调用程序需要注册至少一个事件触发器，否则调用程序就没用，因为它永远不会被调用。事件触发器的异步属性定义是由OTRS进程处理这个调用程序还是委托给OTRS守护进程处理。
+                    Event triggers are events within OTRS such as "TicketCreate", "ArticleSend",
+etc. These can act as triggers to execute the invoker. Each invoker needs to
+have at least one event trigger registered, or the invoker will be useless,
+because it will never be called. Additionally a set of rules (conditions)
+for each event can be defined to have more control over the triggering of
+the events, This rules depends on the data of the object associated with the
+event.  The asynchronous property of the event triggers define if the OTRS
+process will handle the invoker or if it will be delegated to the OTRS
+Daemon.
                 </para>
                 <note>
                     <para>
@@ -725,6 +733,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </note>
                 <para>
                     要添加一个事件触发器，首先从第一个列表中选择事件家族，然后从第二个列表中选择事件名称，然后设置异步属性（未选中即意味着事件触发器不是异步的），最后点击“+”按钮。就会创建一个新的事件触发器，会在调用程序的“事件触发器”列表中列出。
+                </para>
+                <para>
+                    From the "Event Triggers" list each events shows if it contains conditions
+or not.  The edit button next to the condition property allows to add or
+edit the current conditions of the event.
                 </para>
                 <para>
                     要删除一个事件触发器，简单定位到“事件触发器”列表中要删除的事件触发器，点击行尾的“垃圾桶”图标即可。这会打开一个对话框问你是否确认删除该事件触发器，点击“删除”从列表中删除这个事件触发器，或“取消”关闭对话框。
@@ -738,6 +751,55 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <screenshot>
 <graphic
 fileref="screenshots/administration/genericinterface/genericinterface-webservice-invoker.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+
+            <section id="webservice-invoker-event">
+                <title>Web Service Invoker Event</title>
+                <para>
+                    Sometimes defining an event to trigger an invoker could result in many
+unnecessary or wrong request to a remote server. Event conditions could be
+set to restrict the triggering of the invoker in such cases.
+                </para>
+                <para>
+                    To access the event settings screen where the conditions can be defined is
+necessary to be in the invoker screen and from there click on the edit icon
+next to the condition status on the event where this conditions should take
+effect.
+                </para>
+                <para>
+                    Within the event settings screen in the action bar there is a button to go
+back to the invoker screen as well as a button to remove all the event
+conditions.  By default the screen is pre-populated with the first
+condition. Update the Type of linkings between conditions if more than one
+condition is planned, then change the Type of linking from 'Condition 1' if
+more than one field is planned. Both linking fields accepts 'and' 'or' or
+'xor' as values.
+                </para>
+                <para>
+                    Fill the Field name, set the matching type (String for exact match, Regexp
+for regular expression or Validation Module) and set Value to match (in case
+of Validation Module the full class name like:
+Kernel::GenericInterface::Event::Validation::ValidateDemo).
+                </para>
+                <para>
+                    To add more fields to the condition, click on the '+' button in the fields
+header. To remove a field, click on the '-' button in the field row. It is
+necessary to keep at least one field per condition.
+                </para>
+                <para>
+                    To add more conditions clock on the button below the last condition box.  To
+remove remove a condition, click on the '-' button in the condition header.
+It is necessary to keep at least one condition in the set. To remove all
+conditions use the button in the sidebar.
+                </para>
+                <para>
+                    <figure>
+                        <title>Web service invoker event</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/genericinterface/genericinterface-webservice-invoker-event.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
             </section>

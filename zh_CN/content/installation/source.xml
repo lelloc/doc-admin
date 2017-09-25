@@ -7,19 +7,18 @@
     <title>从源码安装OTRS（Linux、Unix）</title>
 
     <section role="NotInToc" id="installation-disable-selinux">
-        <title>Preparation: Disable SELinux</title>
+        <title>准备：禁用SELinux</title>
         <note>
             <para>
-                If your system uses SELinux, you should disable it, otherwise OTRS will not
-work correctly.
+                如果你的系统使用了SELinux，你需要禁用它，否则OTRS无法正常工作。
             </para>
         </note>
         <para>
-            Here's how to disable SELinux for RHEL/CentOS/Fedora:
+            下面是如何在RHEL/CentOS/Fedora中禁用SELinux：
             <itemizedlist>
                 <listitem>
                     <para>
-                        Configure SELINUX=disabled in the /etc/selinux/config file:
+                        在文件/etc/selinux/config中配置SELINUX=disabled
                     </para>
                     <para>
                         <screen><![CDATA[
@@ -38,8 +37,7 @@ SELINUXTYPE=targeted
                 </listitem>
                 <listitem>
                     <para>
-            Reboot your system. After reboot, confirm that the getenforce command
-returns <literal>Disabled</literal>:
+            重启系统。重启后确认命令getenforce返回为<literal>Disabled</literal>：
                     </para>
                     <para>
                     <screen><![CDATA[
@@ -55,9 +53,9 @@ Disabled
     <section role="NotInToc">
         <title>步骤1：安装 .tar.gz</title>
         <para>
-        If you want to install OTRS from source, first download the source archive
-as .tar.gz, .tar.bz2, or .zip file from <ulink
-url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">https://www.otrs.com/download-open-source-help-desk-software-otrs-free/</ulink>
+        如果你要从源码安装OTRS，首先从<ulink
+url="https://www.otrs.com/download-open-source-help-desk-software-otrs-free/">https://www.otrs.com/download-open-source-help-desk-software-otrs-free/</ulink>下载.tar.gz、.tar.bz2或
+.zip格式的源文件。
         </para>
 
         <para>
@@ -76,7 +74,7 @@ shell> mv otrs-x.x.x /opt/otrs
     <section role="NotInToc" id="installation-of-perl-modules">
         <title>步骤2：安装附加的Perl模块</title>
         <para>
-            使用下面的脚本来得到所有已安装的和必需的CPAN模块概览。
+            使用下面的脚本来得到所有已安装的和必需的CPAN模块概览。 
         </para>
 
         <para>
@@ -191,7 +189,7 @@ shell> useradd -d /opt/otrs -c 'OTRS user' otrs
             ]]></screen>
         </para>
         <para>
-            将用户添加到WEB服务器所有组（如果WEB服务器不是以OTRS用户运行）：
+            将用户添加到WEB服务器所有组（如果WEB服务器不是以OTRS用户运行）： 
         </para>
         <para>
             <screen><![CDATA[
@@ -331,10 +329,8 @@ shell> bin/otrs.SetPermissions.pl --web-group=www-data
     <section role="NotInToc" id="database-configuration">
         <title>步骤8：数据库设置和系统基本配置</title>
         <para>
-            Please use the web installer at <ulink
-url="http://localhost/otrs/installer.pl">http://localhost/otrs/installer.pl</ulink>
-(replace "localhost" with your OTRS hostname) to setup your database and
-basic system settings such as email accounts.
+            请使用WEB安装器 <ulink
+url="http://localhost/otrs/installer.pl">http://localhost/otrs/installer.pl</ulink>（用你的OTRS主机名或IP地址替换“localhost”）来设置数据库和系统基本配置如邮件帐户。
         </para>
         <note>
             <para>
@@ -349,17 +345,15 @@ innodb_log_file_size = 256M
             </para>
         </note>
         <note>
-            <para>Please note that OTRS requires utf8 as database storage encoding.</para>
+            <para>请注意，OTRS需要utf8作为数据库存储编码。</para>
         </note>
     </section>
 
     <section role="NotInToc">
         <title>步骤9：首次登录</title>
         <para>
-            Now you are ready to login to your system at <ulink
-url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink>
-with the credentials you configured in the web installer (User:
-root@localhost).
+            现在你可以在 <ulink
+url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink>登录系统了，使用在WEB安装程序中配置的认证信息（用户：root@localhost）。
         </para>
         <para>
             通过本步骤，完成了系统的基本配置。
@@ -434,9 +428,8 @@ shell> /opt/otrs/bin/Cron.sh stop
             我们建议你参阅OTRS<link linkend="performance-tuning">性能调优章节</link>。
         </para>
         <para>
-            If you encounter problems with the installation, you can send a message to
-our mailing list otrs@otrs.org (<ulink
-url="http://lists.otrs.org/">http://lists.otrs.org/</ulink>).
+            如果安装遇到了问题，你可以给我们的邮件列表otrs@otrs.org(<ulink
+url="http://lists.otrs.org/">http://lists.otrs.org/</ulink>)发送一个消息。
         </para>
         <para>
             你还可以请求OTRS集团帮助你规划或部署OTRS，或者检查你安装的OTRS系统。我们的<ulink

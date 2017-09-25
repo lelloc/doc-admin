@@ -282,31 +282,34 @@ administration tool</link> as well.
 <section id="SMIMEFetchFromCustomer">
     <title>S/MIME tanúsítványok lekérése az ügyfél-felhasználó háttérprogramokból</title>
     <para>
-        It is possible to use a Customer User Backed (such as LDAP) as the source of
-public S/MIME certificates. This certificates could be imported into the
-system and be displayed in <link linkend="adminarea-smime">S/MIME
-configuration on the OTRS Admin page</link> and they can be used from OTRS
-to send encrypted emails to the customers.
+        Lehetséges egy ügyfél-felhasználó háttérprogram (mint például az LDAP)
+használata a nyilvános S/MIME tanúsítványok forrásaként. Ezek a
+tanúsítványok importálhatók a rendszerre, és az <link
+linkend="adminarea-smime">OTRS adminisztrációs oldalán lévő S/MIME
+beállításban</link> lesznek megjelenítve, illetve használhatók az OTRS-ből
+titkosított e-mailek küldéséhez az ügyfeleknek.
     </para>
     <para>
-        In order to enable this feature is needed to:
+        A funkció engedélyezéséhez a következőkre van szüksége:
     </para>
     <para>
         <orderedlist numeration="arabic">
-            <listitem><para>Enable <literal>SMIME</literal> in SysConfig</para></listitem>
-            <listitem><para>Enable <literal>SMIME::FetchFromCustomer</literal> in SysConfig</para></listitem>
+            <listitem><para>Engedélyezze az <literal>SMIME</literal> beállítást a rendszerbeállításokban</para></listitem>
+            <listitem><para>Engedélyezze az <literal>SMIME::FetchFromCustomer</literal> beállítást a
+rendszerbeállításokban</para></listitem>
             <listitem>
                 <para>
-                    Configure a customer user backend to provide the attribute
-<literal>UserSMIMECertificate</literal> with the customer user S/MIME
-certificate (there is an example for LDAP customer user mapping in
-<filename>$OTRS_HOME/Kernel/Config/Defaults.pm</filename>).
+                    Állítson be egy ügyfél-felhasználó háttérprogramot a
+<literal>UserSMIMECertificate</literal> attribútum megadásához az
+ügyfél-felhasználó S/MIME tanúsítványával (van egy példa az LDAP
+ügyfél-felhasználó leképezéshez az
+<filename>$OTRS_HOME/Kernel/Config/Defaults.pm</filename> fájlban).
                 </para>
             </listitem>
         </orderedlist>
     </para>
     <para>
-        This feature can be used in three different ways:
+        Ez a funkció három különböző módon használható:
     </para>
     <para>
         <orderedlist numeration="arabic">
@@ -315,12 +318,14 @@ certificate (there is an example for LDAP customer user mapping in
                     Bejövő e-mailek:
                 </para>
                 <para>
-                    A dedicated Postmaster filter
+                    Egy dedikált levelezési szűrő
 (<literal>PostMaster::PreFilterModule###000-SMIMEFetchFromCustomer</literal>
-in SysConfig) will extract the email address of each incoming email and will
-try to find the email address is the list of customers. If found it will try
-get the S/MIME certificate from customer user attributes. If a certificate
-is found it will try to import it (unless it was already imported).
+a rendszerbeállításokban) ki fogja bontani minden egyes bejövő levél e-mail
+címét, és meg fogja próbálni megkeresni az e-mail címet az ügyfelek
+listájában. Ha megtalálta, akkor meg fogja próbálni lekérni az S/MIME
+tanúsítványt az ügyfél-felhasználó attribútumaiból. Ha található
+tanúsítvány, akkor meg fogja próbálni importálni azt (hacsak nem lett már
+importálva).
                 </para>
             </listitem>
             <listitem>
@@ -328,9 +333,9 @@ is found it will try to import it (unless it was already imported).
                     Adott e-mail cím vagy az összes ügyfél:
                 </para>
                 <para>
-                    The console command
-<literal>Maint::SMIME::CustomerCertificate::Fetch</literal> can be used to
-import the S/MIME certificate of one customer email address as:
+                    A <literal>Maint::SMIME::CustomerCertificate::Fetch</literal> parancssori
+parancs használható egy ügyfél e-mail címe S/MIME tanúsítványának
+importálásához a következőképpen:
                 </para>
                 <para>
                     <screen><![CDATA[
@@ -338,28 +343,30 @@ shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fet
                     ]]></screen>
                 </para>
                 <para>
-                    In this case the console command will try to match the supplied email
-address with one of the customer users. If found it will try add to the
-system the S/MIME certificate found in customer user properties (if the
-certificate is not already added).
+                    Ebben az esetben a parancssori parancs meg fogja próbálni ráilleszteni a
+megadott e-mail címet az ügyfél-felhasználók egyikére. Ha megtalálta, akkor
+meg fogja próbálni hozzáadni a rendszerhez az ügyfél-felhasználó
+tulajdonságaiban talált S/MIME tanúsítványt (ha a tanúsítvány még nem lett
+hozzáadva).
                 </para>
                 <para>
-                    The same console command can be used to import the S/MIME certificates of
-all customer users (limited to
-<literal>CustomerUserSearchListLimit</literal> property from the customer
-user backend). This option is discouraged specially for systems with a large
-number of customer users as it might require too much time to execute and
-depending on the limit it might be possible that not all customer
-certificates will be fetch. Execute the console command in this mode as:
-<screen><![CDATA[
+                    Ugyanaz a parancssori parancs használható az összes ügyfél-felhasználó
+S/MIME tanúsítványának importálásához is (a
+<literal>CustomerUserSearchListLimit</literal> tulajdonságra korlátozva az
+ügyfél-felhasználó háttérprogramból). Ez a beállítás kifejezetten a
+nagyszámú ügyfél-felhasználóval rendelkező rendszereknek kedvez, mivel túl
+sok időt venne igénybe a végrehajtás, és a korláttól függően lehetőség van
+arra, hogy ne az összes ügyféltanúsítvány legyen lekérve. Ebben a módban a
+következőképpen hajtsa végre a parancssori parancsot: <screen><![CDATA[
 shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --add-all
                     ]]></screen>
                 </para>
                 <para>
-                    For this option the console command will query the customer user backends to
-get all possible customers and for each it will check if there is a S/MIME
-certificate. If a certificate is found, it will try to add it to the system
-(if the certificate is not already added).
+                    Ehhez a beállításhoz a parancssori parancs le fogja kérdezni az
+ügyfél-felhasználó háttérprogramokat az összes lehetséges ügyfél
+lekéréséhez, és minden egyes ügyfélnél ellenőrizni fogja, hogy van-e S/MIME
+tanúsítványa. Ha található tanúsítvány, akkor meg fogja próbálni hozzáadni a
+rendszerhez (ha a tanúsítvány még nem lett hozzáadva).
                 </para>
             </listitem>
             <listitem>
@@ -367,19 +374,20 @@ certificate. If a certificate is found, it will try to add it to the system
                     Meglévő tanúsítványok megújítása:
                 </para>
                 <para>
-                    Another console command
-<literal>Maint::SMIME::CustomerCertificate::Renew</literal> can be used to
-check for all existing certificates in the system. This verifies that the
-existing certificates from customer users matches the ones that are
-retrieved by the customer user properties. Any new certificate in the
-customer user backend will be added into the system (no certificates are
-deleted in this process).
+                    Egy másik parancssori parancs
+(<literal>Maint::SMIME::CustomerCertificate::Renew</literal>) használható az
+összes meglévő tanúsítvány ellenőrzéséhez a rendszeren. Ez azt ellenőrzi,
+hogy az ügyfél-felhasználóktól származó meglévő tanúsítványok egyeznek-e
+azzal, amely az ügyfél-felhasználó tulajdonságaival lett lekérve. Az
+ügyfél-felhasználó háttérprogramban lévő bármely új tanúsítvány hozzá lesz
+adva a rendszerhez (ebben a folyamatban tanúsítvány nem kerül törlésre).
                 </para>
                 <para>
-                    This console command is executed once a day by the OTRS daemon automatically
-with the task
+                    Ezt a parancssori parancsot az OTRS démon naponta egyszer automatikusan
+végrehajtja a
 <literal>Daemon::SchedulerCronTaskManager::Task###RenewCustomerSMIMECertificates</literal>
-(as seen in SysConfig), but it can be also executed manually on demand as:
+feladattal (ahogy a rendszerbeállításokban látható), de igény szerint
+végrehajtható kézzel is a következőképpen:
                 </para>
                 <para>
                     <screen><![CDATA[

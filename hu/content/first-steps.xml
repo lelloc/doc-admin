@@ -18,6 +18,30 @@ elérhető felhasználó beállításokra.
 <section id="agent-interface">
 <title>Az ügyintéző webes felülete</title>
 
+    <note>
+        <para>
+            Before logging on for the first time, please consider activating the HTTPS
+on your web server in order for OTRS to be served as a secure app over
+SSL/TLS protocol. For detailed instructions on how to do this, please
+consult the documentation of your web server (e.g. Apache2).
+        </para>
+        <para>
+            After you activate HTTPS, please set the configuration option
+<literal>HttpType</literal> to <emphasis>https</emphasis> in <link
+linkend="adminarea-systemconfiguration">SysConfig</link>. This will make
+sure that all internal links in OTRS are indeed using HTTPS.
+        </para>
+        <para>
+            Good practice is to also redirect all HTTP traffic to HTTPS, in case someone
+tries to access the OTRS via an insecure link. This should be done on web
+server configuration level for maximum effect. However, in case this is not
+possible, you can set <literal>HTTPSForceRedirect</literal> to
+<emphasis>Yes</emphasis> in <link
+linkend="adminarea-systemconfiguration">SysConfig</link> to do it on
+application level.
+        </para>
+    </note>
+
 <para>
 Az ügyintéző webes felülete lehetővé teszi az ügyintézőknek, hogy
 válaszoljanak az ügyfelek kéréseire, új jegyeket hozzanak létre az
@@ -27,12 +51,11 @@ stb.
 </para>
 
 <para>
-Feltételezve, hogy az OTRS gépe a <ulink url="http://www.pelda.hu/">
-<citetitle>http://www.pelda.hu</citetitle> </ulink> URL-en keresztül érhető
-el, akkor az OTRS bejelentkező képernyőjét a <ulink
-url="http://www.pelda.hu/otrs/index.pl">
-<citetitle>http://www.pelda.hu/otrs/index.pl</citetitle> </ulink> cím
-használatával lehet elérni egy webböngészőben (lásd a lenti ábrát).
+Feltételezve, hogy az OTRS gépe a <ulink
+url="http://www.example.com/"><citetitle>http://www.example.com</citetitle></ulink>
+URL-en keresztül érhető el, akkor az OTRS bejelentkező képernyőjét a <ulink
+url="http://www.example.com/otrs/index.pl"><citetitle>http://www.example.com/otrs/index.pl</citetitle></ulink>
+cím használatával lehet elérni egy webböngészőben (lásd a lenti ábrát).
 </para>
 
 <para>
@@ -57,9 +80,8 @@ azokról a jegyekről, amelyeket létrehoztak, stb.
 
 <para>
 Folytatva a fenti példát, az ügyfél bejelentkező képernyője a <ulink
-url="http://www.pelda.hu/otrs/customer.pl">
-<citetitle>http://www.pelda.hu/otrs/customer.pl</citetitle> </ulink> URL
-használatával érhető el egy webböngészővel (lásd a lenti ábrát).
+url="http://www.example.com/otrs/customer.pl"><citetitle>http://www.example.com/otrs/customer.pl</citetitle></ulink>
+URL használatával érhető el egy webböngészővel (lásd a lenti ábrát).
 </para>
 
 <para>
@@ -85,10 +107,10 @@ való keresést mindenféle speciális meghatalmazás nélkül.
 
 <para>
 A példánkban a nyilvános webes felület a következő URL-ek bármelyikén
-keresztül elérhető: <ulink url="http://www.pelda.hu/otrs/faq.pl">
-<citetitle>http://www.pelda.hu/otrs/faq.pl</citetitle> </ulink> , <ulink
-url="http://www.pelda.hu/otrs/public.pl">
-<citetitle>http://www.pelda.hu/otrs/public.pl</citetitle> </ulink>
+keresztül elérhető: <ulink
+url="http://www.example.com/otrs/faq.pl"><citetitle>http://www.example.com/otrs/faq.pl</citetitle></ulink>
+, <ulink
+url="http://www.example.com/otrs/public.pl"><citetitle>http://www.example.com/otrs/public.pl</citetitle></ulink>
 </para>
 
 <para>
@@ -105,11 +127,12 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <title>Első bejelentkezés</title>
 
 <para>
-Access the login screen as described in the section <link
-linkend="agent-interface">Agent web interface </link>. Enter a user name and
-password. Since the system has just been installed and no users have yet
-been created, login as OTRS administrator first, using 'root@localhost' for
-username and the generated password in the last step of the installer.
+Nyissa meg a bejelentkezési képernyőt az <link
+linkend="agent-interface">ügyintéző webes felülete</link> szakaszban leírtak
+szerint. Adjon meg egy felhasználónevet és jelszót. Mivel a rendszer nemrég
+lett telepítve, és még nem lettek felhasználók létrehozva, először OTRS
+adminisztrátorként jelentkezzen be a „root@localhost” felhasználónévvel és a
+telepítő utolsó lépésében előállított jelszóval.
 </para>
 
 <warning>
@@ -123,15 +146,15 @@ meg.
 </warning>
 
 <para>
-If you don't want to login as OTRS administrator, just enter the username
-and password for your normal agent account.
+Amennyiben nem OTRS adminisztrátorként szeretne bejelentkezni, akkor adja
+meg a normál ügyintézői fiókjának felhasználónevét és jelszavát.
 </para>
 
 <para>
-In case you have forgotten your password, you can request the system for a
-new password. Simply press the link below the Login button, enter the
-username that is registered for your OTRS account into the input field, and
-press the Request New Password button (see figure).
+Abban az esetben, ha elfelejtette a jelszavát, kérhet a rendszertől egy új
+jelszót. Egyszerűen nyomja meg a Bejelentkezés gomb alatti hivatkozást, adja
+meg a beviteli mezőben azt a felhasználónevet, amely az OTRS fiókjához van
+regisztrálva, és nyomja meg az Új jelszó kérése gombot (lásd az ábrát).
 </para>
 
 <para>
@@ -221,9 +244,9 @@ megváltoztatása, stb.
 </para>
 
 <para>
-Finally at the bottom of the page, the site footer is displayed (see figure
-below). It contains a link to directly access the OTRS official web site, or
-switch to mobile mode.
+Végül az oldal alján az oldal lábléce jelenik meg (lásd a lenti
+ábrát). Hivatkozásokat tartalmaz az OTRS hivatalos weboldalának közvetlen
+eléréséhez vagy a mobil módra váltáshoz.
 </para>
 
 <para>
@@ -305,31 +328,31 @@ elemek a következő szűrőket támogatják:
             <listitem>
                 <para>Saját megfigyelt jegyek</para>
                 <para>
-                    Azok a jegyek, amelyek a bejelentkezett ügyintéző megfigyelési listáján
-vannak. A Ticket::Watcher beállítás bekapcsolását igényli a megjelenítéshez.
+                    The tickets that the logged agent has in his/her watched list, requires
+<literal>Ticket::Watcher</literal> setting to be turned on to be displayed.
                 </para>
             </listitem>
             <listitem>
                 <para>Saját felelősségek</para>
                 <para>
-                    Azok a jegyek, amelyeknél a bejelentkezett ügyintéző felelősként van
-beállítva. A Ticket::Responsible beállítás bekapcsolása szükséges annak
-érdekében, hogy ez a szűrő látható legyen.
+                    The tickets that the logged agent is set as responsible,
+<literal>Ticket::Responsible</literal> setting is required to be turned on
+in order to make this filter visible.
                 </para>
             </listitem>
             <listitem>
                 <para>Jegyek a várólistáimban</para>
                 <para>
-                    Azok a jegyek, amelyek olyan várólistákban vannak, amelyeket az ügyintéző
-„Saját várólistákként” határozott meg.
+                    The tickets that are on queues where the agent define as <emphasis>My
+Queues</emphasis>.
                 </para>
             </listitem>
             <listitem>
                 <para>Jegyek a szolgáltatásaimban</para>
                 <para>
-                    Azok a jegyek, amelyek olyan szolgáltatásokhoz vannak rendelve, amelyeket az
-ügyintéző „Saját szolgáltatásokként” határozott meg, és legalább csak
-olvasható jogosultságokkal rendelkező várólistákban vannak.
+                    The tickets that are assigned to services where the agent define as
+<emphasis>My Services</emphasis> and are on queues with at least read-only
+permissions.
                 </para>
             </listitem>
             <listitem>
@@ -352,12 +375,12 @@ dátuma elérve.</para>
             </listitem>
             <listitem>
                 <para>Új jegyek</para>
-                <para>Azok a jegyek, amelyeknek „Új” állapota van.</para>
+                <para>Tickets that have state <emphasis>New</emphasis>.</para>
             </listitem>
             <listitem>
                 <para> Nyitott jegyek / Válaszra várnak</para>
-                <para>Azok a jegyek, amelyeknek „Nyitott” állapota van és készen állnak a velük
-végzendő munkára.</para>
+                <para>Tickets that have state <emphasis>Open</emphasis> and are ready for work
+with them.</para>
             </listitem>
         </itemizedlist>
     </listitem>
@@ -396,9 +419,9 @@ fileref="screenshots/introduction/firststeps/events-ticket-calendar.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Ezen felületi elem további beállításai megtalálhatók a
-„Frontend::Agent::Dashboard::EventsTicketCalendar” alcsoport alatt a
-rendszerbeállításokban:
+            Further configurations for this widget could be found under the
+<literal>Frontend::Agent::Dashboard::EventsTicketCalendar</literal> SubGroup
+in the SysConfig:
         </para>
         <itemizedlist mark="round">
             <listitem>
@@ -462,17 +485,14 @@ megnyílni, amely lehetővé teszi az ügyintézőknek, hogy részletesebb
     </listitem>
 </itemizedlist>
 <para>
-    A jobb oldali oszlopban egy speciális felületi elem található, amely
-lehetővé teszi a felületi elemek szabályozást, hogy mit szeretne
-megjeleníteni vagy elrejteni. Ez a beállítások felületi elem. Kattintson a
-fejlécére a szakasz kinyitásához és minden elérhető felületi elem
-megtekintéséhez, amint az ábrán látható. Minden felületi elem nevének van
-egy jelölőnégyzete. Ezen jelölőnégyzetek használatával határozható meg a
-felületi elemek láthatósága a vezérlőpulton (a nem bejelölt felületi elemek
-nem lesznek láthatók), miután meghatározta a láthatósági beállításokat, és
-rákattintott a „Mentés” gombra a változtatások eltárolásához. Ez a szakasz
-rögzítve van a képernyőn, ami azt jelenti, hogy nem tudja fogd és vidd módon
-áthelyezni vagy bezárni azt.
+    In the right column is located a special widget that allow you to control
+the widgets you want to show or hide. This is the Settings widget. Click on
+it's header to expand the section and see all available widgets, as shown in
+Figure. Each widget name has a checkbox. Use this checkboxes to define the
+visibility of the widgets in the dashboard (unchecked widgets will not be
+shown) after you define the visibility options and click on
+<emphasis>Save</emphasis> for storing your changes.  This section is fixed
+on the screen, this means you can't drag and drop it, or close it.
 </para>
 
 <para>
@@ -633,12 +653,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-A várólista áttekintő különböző lehetőségeket nyújt az OTRS-sel végzendő
-napi munkához. Ezek közül az első a Saját várólista. Az ügyintéző
-beállításaiban vagy amikor ügyintézőket adminisztrál, olyan várólisták
-halmaza határozható meg, amelyekhez az ügyintéző hozzárendelésre kerül, hogy
-dolgozzon bennük. Az összes jegy meg fog jelenni ebben az alapértelmezett
-nézetben, amikor megnyitja a Jegyek -> Várólista nézet menüt.
+The queue overview offers a variety of options for daily work with OTRS. The
+first of these is the My Queue. In the Agent Preferences, or when
+administering agents, a set of queues can be defined for which the agent has
+been assigned to work within. All the tickets will appear in this default
+view, when accessing the <emphasis>Tickets -> Queue View</emphasis> menu.
 </para>
 
 <para>
@@ -648,13 +667,12 @@ dolgozva.
 </para>
 
 <para>
-Mindkét nézettípusban a felhasználó rendelkezik azzal a hozzáadott
-képességgel is, hogy vagy megtekintse az összes zárolatlan jegyet (ez az
-alapértelmezett szűrő), vagy a felhasználó kiválaszthatja majd, hogy az
-összes elérhető jegyet lássa. A jegyeknek a megtekinthető állapottípusok
-egyikében kell lenniük, hogy megjelenjenek a várólista
-nézetben. Alapértelmezett ezek a következők: „nyitott, új, emlékeztető
-függőben, automatikusan függőben”.
+In both of the view types, the user also has the added ability to see either
+all unlocked tickets (this is the default filter), or the user can then
+choose to view all available tickets. Tickets must be in one of the viewable
+state types to be shown in the queue view. Per default, these are
+<literal>open</literal>, <literal>new</literal>, <literal>pending
+reminder</literal>, <literal>pending auto</literal>.
 </para>
 
 <para>
@@ -663,7 +681,7 @@ Ezek a látható riasztások a felhasználó támogatásához.
 
 <para>
 <figure>
-    <title>Ügyintéző várólista nézet látható riasztásai. </title>
+    <title>Agent Queue View visual alarms</title>
 <screenshot>
 <graphic
 fileref="screenshots/introduction/firststeps/agent-queue-overview-visual-alarms.gif"
@@ -673,24 +691,25 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <itemizedlist>
     <title>Látható riasztások</title>
     <listitem>
-        <para>1. életkor kiemelése: Beállítja az életkort percben (első szint) a
-várólisták kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak. Fent a
-„Nyers” várólistán látható.</para>
+        <para>Highlight Age 1: Sets the age in minutes (first level) for highlighting
+queues that contain untouched tickets. Seen in above in the
+<emphasis>Raw</emphasis> queue.</para>
     </listitem>
     <listitem>
-        <para>2. életkor kiemelése: Beállítja az életkort percben (második szint) a
-várólisták kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak. Fent a
-„Levelezés” várólistán látható.</para>
+        <para>Highlight Age 2: Sets the age in minutes (second level) for highlighting
+queues that contain untouched tickets. Seen in above in the
+<emphasis>Postmaster</emphasis> queue.</para>
     </listitem>
     <listitem>
         <para>Blink: A blinking mechanism of the queue that contains the oldest ticket can
-be activated using Ticket::Frontend::AgentTicketQueue###Blink. Not supported
+be activated using
+<literal>Ticket::Frontend::AgentTicketQueue###Blink</literal>. Not supported
 in all browsers. In that case, the queue name will just appear in red color,
-as seen in above on the queue "Junk".</para>
+as seen in above on the queue <emphasis>Junk</emphasis>.</para>
     </listitem>
     <listitem>
-        <para>Félkövér: A jelenlegi várólista félkövér lesz, amint fent a „Saját
-várólistán” látható.</para>
+        <para>Bold: The current queue will be bolded, as seen above in the <emphasis>My
+Queues</emphasis>.</para>
     </listitem>
 </itemizedlist>
 </section>
@@ -698,11 +717,11 @@ várólistán” látható.</para>
 <section id="user-preferences">
 <title>Felhasználó beállításai</title>
 <para>
-OTRS users such as customers, agents and the OTRS administrator can
-configure their account preferences as per their needs. Agent can access the
-configuration screen by clicking on the gear icon at the top of the web
-interface (see figure below), and customers must click on the "Preferences"
-link (see figure below).
+Az OTRS felhasználók (ügyfelek, ügyintézők és az OTRS adminisztrátor) a
+saját igényeik szerint állíthatják be a fiókjuk beállításait. Az ügyintéző a
+webes felület tetején lévő fogaskerék ikonra kattintva férhet hozzá a
+beállítási képernyőhöz (lásd a lenti ábrát), míg az ügyfeleknek a
+„Beállítások” hivatkozásra kell kattintaniuk (lásd a lenti ábrát).
 </para>
 
 <para>

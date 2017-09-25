@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+  
 
-
+<!-- $Id: external-backends.xml,v 1.2 2012-11-30 11:13:05 mb Exp $ -->
 <section id="external-backends">
 <title>Using External backends</title>
 
@@ -67,8 +68,7 @@ OTRSの内に使用されるか表示された顧客情報は高度にカスタ�
 <title>データベース(デフォルト)</title>
 
 <para>
-The Example below shows the configuration of a DB customer backend, which
-uses customer data stored in the OTRS database.
+下記の例は、DB顧客バックエンドの構成を示します。それは、OTRSデータベースに保存された顧客情報を使用します。
 </para>
 
 <example id='db-customer-backend'>
@@ -305,8 +305,7 @@ IDs. Each ID has to be separated by a semicolon (see Example below).
 <title>LDAP</title>
 
 <para>
-If you have an LDAP directory with your customer data, you can use it as the
-customer backend with OTRS, as shown in Example below.
+顧客情報を備えたLDAPディレクトリーを持っているならば、下記の例において示されるように、OTRSの顧客バックエンドとしてそれを使用することができます。
 </para>
 
 <example id='ldap-customer-backend'>
@@ -624,14 +623,16 @@ $Self->{CustomerUser2} = {
     </para>
     <para>
         To activate this optional feature of OTRS, please activate the settings
-"Ticket::EventModulePost###950-DynamicFieldFromCustomerUser" and
-"DynamicFieldFromCustomerUser::Mapping". The latter setting contains the
-configuration of which CustomerUser field entry should be stored in which
-ticket dynamic field. The fields must be present in the system and should be
-enabled for AgentTicketFreeText, so that they can be set manually. They
-mustn't be enabled for AgentTicketPhone, AgentTicketEmail and
-AgentTicketCustomer. If they were, they would have precedence over the
-automatically set values.
+<literal>Ticket::EventModulePost###950-DynamicFieldFromCustomerUser</literal>
+and <literal>DynamicFieldFromCustomerUser::Mapping</literal>. The latter
+setting contains the configuration of which <literal>CustomerUser</literal>
+field entry should be stored in which ticket dynamic field. The fields must
+be present in the system and should be enabled for
+<literal>AgentTicketFreeText</literal>, so that they can be set
+manually. They mustn't be enabled for <literal>AgentTicketPhone</literal>,
+<literal>AgentTicketEmail</literal> and
+<literal>AgentTicketCustomer</literal>. If they were, they would have
+precedence over the automatically set values.
     </para>
 </section>
 
@@ -674,11 +675,8 @@ linkend="adminarea">Admin page</link> (see Example below).
 <title>LDAP</title>
 
 <para>
-If an LDAP directory has all your agent data stored, you can use the LDAP
-module to authenticate your users in OTRS (see Example below). This module
-has only read access to the LDAP tree, which means that you cannot edit your
-user data via the <link linkend='adminarea-agents'>agent management
-interface</link>.
+LDAPディレクトリが担当者データをすべて保存する場合、OTRSの中のユーザを認証するためにLDAPモジュールを使用することができます(下記の例を参照)。このモジュールはLDAPツリーに対して単に読み取り権限を有しています。それは、<link
+linkend='adminarea-agents'>担当者管理インターフェース</link>経由で利用者データを編集することができないことを意味します。
 </para>
 
 <example id='configuration-agent-auth-backend-ldap'>
@@ -739,7 +737,7 @@ $Self->{'AuthModule::LDAP::Params'} = {
 # サンプル値: AuthSyncBackend, AuthSyncBackend2
 $Self->{'AuthModule::UseSyncBackend'} = 'AuthSyncBackend';
 
-# LDAPに対する担当者データ sync
+# LDAPに対する担当者データ sync 
 $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
 $Self->{'AuthSyncModule::LDAP::Host'} = 'ldap://ldap.example.com/';
 $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=otrs, dc=org';

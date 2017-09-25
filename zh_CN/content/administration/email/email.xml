@@ -3,77 +3,147 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="email">
-<title>发送/接收邮件</title>
+    <title>发送/接收邮件</title>
 
-<section id="email-sending">
-<title>发送邮件</title>
+    <section id="email-sending">
+        <title>发送邮件</title>
 
-<section id="email-sending-sendmail">
-<title>通过Sendmail（默认）</title>
+        <section id="email-sending-sendmail">
+            <title>通过Sendmail（默认）</title>
+            <para>
+                OTRS can send out emails via <ulink
+url="http://www.sendmail.org/">Sendmail</ulink>, <ulink
+url="http://www.postfix.org/">Postfix</ulink>, <ulink
+url="http://www.qmail.org">Qmail</ulink> or <ulink
+url="http://www.exim.org">Exim</ulink>.  The default configuration is to use
+Sendmail and should work out-of-the-box.
+            </para>
+            <para>
+                You can configure the sendmail settings via the graphical configuration
+frontend (<literal>Framework::Core::Sendmail</literal>).
+            </para>
+        </section>
 
-<para>
-OTRS可以通过<ulink url="http://www.sendmail.org/">Sendmail</ulink>、<ulink
-url="http://www.postfix.org/">Postfix</ulink>、<ulink
-url="http://www.qmail.org">Qmail</ulink> 或 <ulink
-url="http://www.exim.org">Exim</ulink>发送邮件。 默认配置是使用Sendmail，开箱即用。
-</para>
-
-<para>
-你可以通过图形配置界面配置sendmail设置（<literal>Framework::Core::Sendmail</literal>）
-</para>
-
-</section>
-
-<section id="email-sending-smtp">
-<title>通过SMTP或SMTPS服务器</title>
-
-<para>
-OTRS可以通过SMTP（<ulink url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail
+        <section id="email-sending-smtp">
+            <title>通过SMTP或SMTPS服务器</title>
+            <para>
+                OTRS可以通过SMTP（<ulink url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail
 Transfer Protocol /RFC 821</ulink>）或Secure SMTP发送邮件。
-</para>
+            </para>
+            <para>
+                The SMTP server settings can be configured via the SysConfig
+(<literal>Framework::Core::Sendmail</literal>).  If you don't see SMTPS
+available as an option, the required Perl modules are missing. In that case,
+please refer to <link linkend="installation-of-perl-modules">"Installation
+of Perl modules required for OTRS"</link> for instructions.
+            </para>
+        </section>
 
-<para>
-可以通过系统配置<literal>Framework::Core::Sendmail</literal>设置SMTP服务器参数。如果你没有看到SMTPS选项，说明缺失需要的Perl模块。在这种情况下，请参考<link
+        <section id="email-sending-mailqueue">
+            <title>Mail Queue</title>
+            <para>
+                Before sending, OTRS will queue all emails and let a Daemon task
+asynchronously handle them in due time.  On a normal installation, the
+emails will be sent out every minute by the OTRS Daemon.
+            </para>
+            <para>
+                To check the status of email sending, you can the
+<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename> console
+command with <literal>--list</literal> switch.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --list
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | ID | ArticleID | Attempts | Sender         | Recipient          | Due Time | Last SMTP Code | Last SMTP Message |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | 28 | 284       | 0        | otrs@localhost | marketing@otrs.com | -        | -              | -                 |
+  | 29 | 285       | 0        | otrs@localhost | feedbac@otrs.com   | -        | -              | -                 |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+
+  Mail queue contains 2 message(s)
+                ]]></screen>
+            </para>
+            <para>
+                In order to filter the table, you can use <literal>--filter</literal>
+argument, for example with ID of the send job.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --list --filter ID::28
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | ID | ArticleID | Attempts | Sender         | Recipient          | Due Time | Last SMTP Code | Last SMTP Message |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | 28 | 284       | 0        | otrs@localhost | marketing@otrs.com | -        | -              | -                 |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+
+  Mail queue contains 1 message(s)
+
+Done.
+                ]]></screen>
+            </para>
+            <para>
+                To delete emails queued for sending, specify either
+<literal>--delete-all</literal> switch, or <literal>--delete</literal> with
+some filter active.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --delete --filter ID::28
+Deleted messages from mail queue.
+Done.
+                ]]></screen>
+            </para>
+            <para>
+                You can also manually send email without waiting for OTRS Daemon task to
+kick in. Simply specify the <literal>--send</literal> switch.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --send
+1 message(s) successfully sent!
+Done.
+                ]]></screen>
+            </para>
+        </section>
+    </section>
+
+    <section id="email-receiving">
+        <title>接收邮件</title>
+
+        <section id="email-receiving-pop3">
+            <title>通过OTRS图形界面配置邮件帐户</title>
+            <para>
+                OTRS能够从POP3、POP3S、IMAP和IMAPS的邮件帐户接收邮件。
+            </para>
+            <para>
+                通过<link linkend="adminarea">系统管理页面</link>的“邮箱管理员邮件帐户”链接配置你的邮件帐户。
+            </para>
+            <para>
+                如果要创建一个新的邮件帐户（见下图），必须指定邮件服务器名称、登录用户名和密码。另外，你要选择邮件服务器的类型（可以是POP3、POP3S、IMAP或IMAPS）。如果你没有看到需要的类型，说明系统中缺失需要的Perl模块。在这种情况下，请参考<link
 linkend="installation-of-perl-modules">为OTRS安装额外的Perl模块</link>的说明。
-</para>
-
-</section>
-
-</section>
-
-<section id="email-receiving">
-<title>接收邮件</title>
-
-<section id="email-receiving-pop3">
-<title>通过OTRS图形界面配置邮件帐户</title>
-
-<para>
-OTRS能够从POP3、POP3S、IMAP和IMAPS的邮件帐户接收邮件。
-</para>
-
-<para>
-通过<link linkend="adminarea">系统管理页面</link>的“邮箱管理员邮件帐户”链接配置你的邮件帐户。
-</para>
-
-<para>
-如果要创建一个新的邮件帐户（见下图），必须指定邮件服务器名称、登录用户名和密码。另外，你要选择邮件服务器的类型（可以是POP3、POP3S、IMAP或IMAPS）。如果你没有看到需要的类型，说明系统中缺失需要的Perl模块。在这种情况下，请参考<link
-linkend="installation-of-perl-modules">为OTRS安装额外的Perl模块</link>的说明。</para>
-
-<para>
-<figure>
-    <title>新增一个邮件账号</title>
+            </para>
+            <para>
+                <figure>
+                    <title>新增一个邮件账号</title>
 <screenshot>
 <graphic fileref="screenshots/administration/email/add-mailaccount.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
-</para>
-
-<para>如果“是否信任”选择为“是”，OTRS将对邮件信头中现有的X-OTRS标记进行过滤评估并执行相应的处理操作。因为在工单系统中可以根据X-OTRS标记执行一些操作，你应该将“是否信认”选项设置为“是”仅已知的发件人。OTRS中<link
-linkend="adminarea-postmasterfilter">过滤器模块</link>使用X-OTRS-Headers，X-OTRS头标识在<link
-linkend="table-of-x-otrs-headers">这个表中</link>有详细解释。而创建的邮箱管理员过滤器总是要执行的，与“是否信认”选项的设置无关。
-</para>
-
-<para>
-The distribution of incoming messages can be controlled if they need to be
+            </para>
+            <para>
+                If you select Yes for the value of the Trusted option, any X-OTRS headers
+attached to an incoming message are evaluated and executed. Because the
+X-OTRS header can execute some actions in the ticket system, you should set
+the Trusted option to Yes only for known senders. X-OTRS-Headers are used by
+the <link linkend ="adminarea-postmasterfilter">filter module</link> in
+OTRS. The X-OTRS headers are explained <link linkend
+="table-of-x-otrs-headers">in this table</link> in more detail. Any
+postmaster filter rules created are executed, irrespective of the Trusted
+option's setting.
+            </para>
+            <para>
+                The distribution of incoming messages can be controlled if they need to be
 sorted by queue or by the content of the "To:" field. For the Dispatching
 field, if "Dispatching by selected queue" is selected, all incoming messages
 will be sorted into the specified queue. The address where the mail was sent
@@ -81,98 +151,81 @@ to is disregarded in this case. If "Dispatching by email To: field" is
 selected, the system checks if a queue is linked with the address in the To:
 field of the incoming mail. You can link an address to a queue in the <link
 linkend="adminarea-emailaddresses">E-mail address management</link> section
-of the Admin page. If the address in the To: field is linked with a queue,
+of the Admin page.  If the address in the To: field is linked with a queue,
 the new message will be sorted into the linked queue. If no link is found
 between the address in the To: field and any queue, then the message flows
 into the "Raw" queue in the system, which is the <link
 linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
 after a default installation.
-</para>
-
-<para>
-邮件帐户的所有数据都保存在OTRS数据库中。<filename>bin/otrs.Console.pl
+            </para>
+            <para>
+                邮件帐户的所有数据都保存在OTRS数据库中。<filename>bin/otrs.Console.pl
 Maint::PostMaster::MailAccountFetch</filename>命令使用数据库中的设置来收取邮件。你可以手动执行它来检查你的邮件设置是否能正常工作。
-</para>
+            </para>
+            <para>
+                在一个普通安装的OTRS中，由OTRS守护进程每10分钟收取一次邮件。
+            </para>
+            <note>
+                <para>
+                    收取邮件时OTRS会从POP或IMAP服务器上删除邮件。没有选项来让服务器仍保留一份副本。如果你想在服务器保留一份副本，你应当在邮件服务器上创建转发规则，请查阅你的邮件服务器文档以获取详细信息。
+                </para>
+            </note>
+        </section>
 
-<para>
-在一个普通安装的OTRS中，由OTRS守护进程每10分钟收取一次邮件。
-</para>
-
-<note>
-<para>
-收取邮件时OTRS会从POP或IMAP服务器上删除邮件。没有选项来让服务器仍保留一份副本。如果你想在服务器保留一份副本，你应当在邮件服务器上创建转发规则，请查阅你的邮件服务器文档以获取详细信息。
-</para>
-</note>
-</section>
-
-
-<section id="email-receiving-cmd">
-<title>通过命令行程序和Procmail (<filename>otrs.Console.pl
-Maint::PostMaster::Read</filename>)</title>
-
-<para>
-如果你不能使用邮件帐户来收取邮件到OTRS，命令行程序 <filename>bin/otrs.Console.pl
+        <section id="email-receiving-cmd">
+            <title>
+                通过命令行程序和Procmail (<filename>otrs.Console.pl
+Maint::PostMaster::Read</filename>)
+            </title>
+            <para>
+                如果你不能使用邮件帐户来收取邮件到OTRS，命令行程序 <filename>bin/otrs.Console.pl
 Maint::PostMaster::Read</filename>可能是一个解决这个问题的办法。它通过STDIN（标准输入）取走邮件并通过管道直接输入到OTRS中，这意味着如果MDA（邮件投递代理，如procmail）执行这个程序就能在OTRS中使用邮件。
-</para>
-
-<para>
-为了测试不用MDA时<filename>bin/otrs.Console.pl
+            </para>
+            <para>
+                为了测试不用MDA时<filename>bin/otrs.Console.pl
 Maint::PostMaster::Read</filename>的效果，执行下面的脚本。
-</para>
-
-<para>
-<screen>
+            </para>
+            <para>
+                <screen>
 linux:/opt/otrs# cd bin
 linux:/opt/otrs/bin# cat ../doc/sample_mails/test-email-1.box | ./otrs.Console.pl Maint::PostMaster::Read
 linux:/opt/otrs/bin#
-</screen>
-</para>
-
-<para>
-<emphasis>脚本：测试没有MDA的邮箱管理员。</emphasis>
-</para>
-
-<para>
-如果这封邮件显示在队列视图中，则你的设置能工作了。
-</para>
-
-<example id='procmail-queue-routing'>
-
-<title>使用<filename>otrs.Console.pl</filename>通过Procmail路由</title>
-
-<para>
-为了在一个特定队列中路由邮件，按下面的例子使用<filename>otrs.Console.pl</filename>。
-</para>
-
-<para>
-<screen><![CDATA[
+                </screen>
+            </para>
+            <para>
+                <emphasis>脚本：测试没有MDA的邮箱管理员。</emphasis>
+            </para>
+            <para>
+                如果这封邮件显示在队列视图中，则你的设置能工作了。
+            </para>
+            <example id='procmail-queue-routing'>
+                <title>使用<filename>otrs.Console.pl</filename>通过Procmail路由</title>
+                <para>
+                    为了在一个特定队列中路由邮件，按下面的例子使用<filename>otrs.Console.pl</filename>。
+                </para>
+                <para>
+                    <screen><![CDATA[
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read --target-queue=QUEUENAME
-]]></screen>
-</para>
-
-<para>
-当分类到一个子队列时，你必须使用双冒号<literal>::</literal>来分隔父队列和子队列。
-</para>
-
-<para>
-<screen><![CDATA[
+                    ]]></screen>
+                </para>
+                <para>
+                    当分类到一个子队列时，你必须使用双冒号<literal>::</literal>来分隔父队列和子队列。
+                </para>
+                <para>
+                    <screen><![CDATA[
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read --target-queue=QUEUENAME::SUBQUEUE
-]]></screen>
-</para>
-
-</example>
-
-<para>
-Procmail是Linux平台非常通用的一个邮件过滤器。它已大部分系统中安装，如果没有安装，看看<ulink
+                    ]]></screen>
+                </para>
+            </example>
+            <para>
+                Procmail是Linux平台非常通用的一个邮件过滤器。它已大部分系统中安装，如果没有安装，看看<ulink
 url="http://www.procmail.org/"><citetitle>procmail主页</citetitle></ulink>。
-</para>
-
-<para>
-要配置procmail用于OTRS（基于procmail配置的MTA如sendmail、postfix、exim或qmail），使用<filename>~otrs/.procmailrc.dist</filename>文件，将它复制为<filename>.procmailrc</filename>，并添加下面脚本中的行到文件中。
-</para>
-
-<para>
-<programlisting>
+            </para>
+            <para>
+                要配置procmail用于OTRS（基于procmail配置的MTA如sendmail、postfix、exim或qmail），使用<filename>~otrs/.procmailrc.dist</filename>文件，将它复制为<filename>.procmailrc</filename>，并添加下面脚本中的行到文件中。
+            </para>
+            <para>
+                <programlisting>
 SYS_HOME=$HOME
 PATH=/bin:/usr/bin:/usr/local/bin
 # --
@@ -180,283 +233,263 @@ PATH=/bin:/usr/bin:/usr/local/bin
 # --
 :0 :
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read
-</programlisting>
-</para>
-
-<para>
-<emphasis>脚本：配置procmail用于OTRS。</emphasis>
-</para>
-
-<para>
-所有发送给本地OTRS用户的邮件将通过管道传递给<filename>bin/otrs.Console.pl
+                </programlisting>
+            </para>
+            <para>
+                <emphasis>脚本：配置procmail用于OTRS。</emphasis>
+            </para>
+            <para>
+                所有发送给本地OTRS用户的邮件将通过管道传递给<filename>bin/otrs.Console.pl
 Maint::PostMaster::Read</filename>，然后显示在你的队列视图中。
-</para>
+            </para>
+        </section>
 
-</section>
-
-<section id="email-receiving-fetchmail">
-<title>通过POP3或IMAP收取邮件并将fetchmail用于<filename>otrs.Console.pl
-Maint::PostMaster::Read</filename></title>
-
-<para>
-为了通过POP3或IMAP邮件中收取邮件到OTRS主机/本地OTRS帐户和procmail，使用<ulink
+        <section id="email-receiving-fetchmail">
+            <title>
+                通过POP3或IMAP收取邮件并将fetchmail用于<filename>otrs.Console.pl
+Maint::PostMaster::Read</filename>
+            </title>
+            <para>
+                为了通过POP3或IMAP邮件中收取邮件到OTRS主机/本地OTRS帐户和procmail，使用<ulink
 url="http://www.fetchmail.info/">fetchmail</ulink>。
-</para>
-
-<note>
-<para>
-OTRS主机上需要一个可以工作的SMTP配置。
-</para>
-</note>
-
-<para>
-你可以使用OTRS的home目录中的文件<filename>.fetchmailrc.dist</filename>，将它得到为<filename>.fetchmailrc</filename>。修改为你需要的内容（见下面的例子）。
-</para>
-
-<example id='fetchmailrc'>
-<title><literal>.fetchmailrc</literal></title>
-
-<para>
-<programlisting>
+            </para>
+            <note>
+                <para>
+                    OTRS主机上需要一个可以工作的SMTP配置。
+                </para>
+            </note>
+            <para>
+                你可以使用OTRS的home目录中的文件<filename>.fetchmailrc.dist</filename>，将它得到为<filename>.fetchmailrc</filename>。修改为你需要的内容（见下面的例子）。
+            </para>
+            <example id='fetchmailrc'>
+                <title><literal>.fetchmailrc</literal></title>
+                <para>
+                    <programlisting>
 #poll (mailserver) protocol POP3 user (user) password (password) is (localuser)
 poll mail.example.com protocol POP3 user joe password mama is otrs
-</programlisting>
-</para>
-
-</example>
-
-<para>
-不要忘记设置文件<filename>.fetchmailrc</filename>的权限为710（<command>chmod 710
+                    </programlisting>
+                </para>
+            </example>
+            <para>
+                不要忘记设置文件<filename>.fetchmailrc</filename>的权限为710（<command>chmod 710
 .fetchmailrc</command>）！
-</para>
-
-<para>
-使用上面例子中的文件<filename>.fetchmailrc</filename>，如果执行了命令<command>fetchmail
+            </para>
+            <para>
+                使用上面例子中的文件<filename>.fetchmailrc</filename>，如果执行了命令<command>fetchmail
 -a</command>，会转发所有的邮件到本地OTRS帐户。如果你要定期收取邮件，用这个命令设置一个cron任务即可。
-</para>
-</section>
+            </para>
+        </section>
 
-
-<section id="email-receiving-filter">
-<title>通过OTRS 邮箱管理员模块过滤/分派（用于更复杂的分派）</title>
-
-<para>
-如果你使用<filename>bin/otrs.Console.pl
+        <section id="email-receiving-filter">
+            <title>通过OTRS 邮箱管理员模块过滤/分派（用于更复杂的分派）</title>
+            <para>
+                如果你使用<filename>bin/otrs.Console.pl
 Maint::PostMaster::Read</filename>或<filename>bin/otrs.Console.pl
 Maint::PostMaster::MailAccountFetch</filename>方法，你可以使用邮箱管理员过滤器模块插入或修改X-OTRS头信息。通过X-OTRS头信息，工单系统能够对进入的邮件执行一些操作，例如：分类到一个特定的队列、修改优先级或修改客户联系人ID。关于X-OTRS头的更多信息请参阅系统管理页面的<link
 linkend="adminarea-postmasterpop3-account">添加邮件帐户</link>部分。
-</para>
-
-<para>
-有一些默认的过滤器模块：
-</para>
-
-<note>
-<para>
-任务名称（如$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'JobName'}）需要是唯一的。
-</para>
-</note>
-
-<para>
-<literal>Kernel::System::PostMaster::Filter::Match</literal>是一个匹配一些邮件头（如发件人、收件人、主题等）的默认模块。如果匹配了一个过滤器规则，它可以设置新的邮件头（例如X-OTRS-Ignore:
+            </para>
+            <para>
+                有一些默认的过滤器模块：
+            </para>
+            <note>
+                <para>
+                    任务名称（如$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'JobName'}）需要是唯一的。
+                </para>
+            </note>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::Match</literal>是一个匹配一些邮件头（如发件人、收件人、主题等）的默认模块。如果匹配了一个过滤器规则，它可以设置新的邮件头（例如X-OTRS-Ignore:
 yes或X-OTRS-Queue:
 spam）。下面例子中的任务可以添加到文件<filename>Kernel/Config.pm</filename>。
-</para>
-
-<example id='filter-module-match-example'>
-<title>过滤器模块<literal>Kernel::System::PostMaster::Filter::Match</literal>的任务示例</title>
-
-<para>
-<programlisting>
-    # Job Name: 1-Match
-    # (block/ignore all spam email with From: noreply@)
-    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
-        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
-        Match =&gt; {
-            From =&gt; 'noreply@',
-        },
-        Set =&gt; {
-            'X-OTRS-Ignore' =&gt; 'yes',
-        },
-    };
-    # Job Name: 2-Match
-    # (sort emails with From: sales@example.com and Subject: **ORDER**
-    # into queue 'Order')
-    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
-        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
-        Match =&gt; {
-            To =&gt; 'sales@example.com',
-            Subject =&gt; '**ORDER**',
-        },
-        Set =&gt; {
-            'X-OTRS-Queue' =&gt; 'Order',
-        },
-    };
-</programlisting>
-</para>
-
-</example>
-
-<para>
-<literal>Kernel::System::PostMaster::Filter::CMD</literal>是一个将邮件通过管道传递到外部命令的默认模块。输出为STDOUT（标准输出），如果结果为真，则设置新的邮件头（如X-OTRS-Ignore:
+            </para>
+            <example id='filter-module-match-example'>
+                <title>过滤器模块<literal>Kernel::System::PostMaster::Filter::Match</literal>的任务示例</title>
+                <para>
+                    <programlisting>
+# Job Name: 1-Match
+# (block/ignore all spam email with From: noreply@)
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
+    Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+    Match =&gt; {
+        From =&gt; 'noreply@',
+    },
+    Set =&gt; {
+        'X-OTRS-Ignore' =&gt; 'yes',
+    },
+};
+# Job Name: 2-Match
+# (sort emails with From: sales@example.com and Subject: **ORDER**
+# into queue 'Order')
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
+    Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+    Match =&gt; {
+        To =&gt; 'sales@example.com',
+        Subject =&gt; '**ORDER**',
+    },
+    Set =&gt; {
+        'X-OTRS-Queue' =&gt; 'Order',
+    },
+};
+                    </programlisting>
+                </para>
+            </example>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::CMD</literal>是一个将邮件通过管道传递到外部命令的默认模块。输出为STDOUT（标准输出），如果结果为真，则设置新的邮件头（如X-OTRS-Ignore:
 yes 或 X-OTRS-Queue:
 spam）。下面例子中的内容可以添加到文件<filename>Kernel/Config.pm</filename>。
-</para>
-
-<example id='filter-module-cmd-example'>
-<title>过滤器模块Kernel::System::PostMaster::Filter::CMD的任务示例</title>
-
-<para>
-<programlisting>
-    # Job Name: 5-SpamAssassin
-    # (SpamAssassin example setup, ignore spam emails)
-    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
-        Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
-        CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
-        Set =&gt; {
-            'X-OTRS-Ignore' =&gt; 'yes',
-        },
-    };
-</programlisting>
-</para>
-
-</example>
-
-<para>
-    <literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>是一个在邮件主题、正文或这两者中使用正则表达式解析外部标识的默认模块。它在一个定义的动态字段中存储这个值。当一封邮件进入时，OTRS会首先搜索一个外部标识，当它找到一个外部标识，查询OTRS中预定义的动态字段，如果它找到了一个存在的工单，它就会更新这个工单，否则它会创建一个新的工单并将这个外部引用号放入单独的字段。
-</para>
-<para>
-    OTRS系统配置中已经提供了4种不同的设置来设置不同的外部工单编号。如果需要更多的设置，就得手动添加。下面的例子可以用在文件<filename>Kernel/Config.pm</filename>中来扩展系统配置的设置。
-</para>
-
-<example id='filter-module-externalticketrecognition-example'>
-    <title>
-        过滤器模块<literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>的任务示例
-    </title>
-
+            </para>
+            <example id='filter-module-cmd-example'>
+                <title>过滤器模块Kernel::System::PostMaster::Filter::CMD的任务示例</title>
+                <para>
+                    <programlisting>
+# Job Name: 5-SpamAssassin
+# (SpamAssassin example setup, ignore spam emails)
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
+    Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
+    CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
+    Set =&gt; {
+        'X-OTRS-Ignore' =&gt; 'yes',
+    },
+};
+                    </programlisting>
+                </para>
+            </example>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>是一个在邮件主题、正文或这两者中使用正则表达式解析外部标识的默认模块。它在一个定义的动态字段中存储这个值。当一封邮件进入时，OTRS会首先搜索一个外部标识，当它找到一个外部标识，查询OTRS中预定义的动态字段，如果它找到了一个存在的工单，它就会更新这个工单，否则它会创建一个新的工单并将这个外部引用号放入单独的字段。
+            </para>
+            <para>
+                OTRS SysConfig already provide 4 different settings to setup different
+external ticket numbers. If more settings are needed they need to be added
+manually. The following example can be used in
+<filename>Kernel/Config.pm</filename> to extend SysConfig settings.
+            </para>
+            <example id='filter-module-externalticketrecognition-example'>
+                <title>
+                    过滤器模块<literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>的任务示例
+                </title>
 <programlisting language="Perl"><![CDATA[
-    # Job Name: ExternalTicketNumberRecognition
-    # External Ticket Number Reconition, check for Incident-<number> in incoming mails subject and
-    # body from the addeesses <sender>@externalticket.com, if number is found it will be stored in
-    # the dynamic field 'ExternalNumber' (that need to be setup in the Admin Panel).
-    $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} = {
-        'FromAddressRegExp' => '\\s*@externalticket.com',
-        'NumberRegExp'      => 'Incident-(\\d.*)',
-        'SearchInSubject'   => '1',
-        'SearchInBody'      => '1',
-        'TicketStateTypes'  => 'new;open'
-        'DynamicFieldName'  => 'ExternalNumber',
-        'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
-        'Name'              => 'Test External Ticket Number',
-        'SenderType'        => 'system',
-    };
-    ]]></programlisting></example>
-
-<itemizedlist mark="round">
-    <para><emphasis>配置选项</emphasis></para>
-    <listitem>
-        <para>FromAddressRegExp（发件人地址正则表达式）</para>
-        <para>
-            这是一个可选的设置。只有匹配这个“收件人”地址的邮件才会考虑使用这个过滤器。你可以调整这个设置为外部系统用来发出邮件的发件人地址。在这种情况下这个地址可以不同，你可以设置这个选项为空，这样OTRS不会检查发件人地址。
-        </para>
-    </listitem>
-    <listitem>
-        <para>NumberRegExp（数字正则表达式）</para>
-        <para>
-            这是一个强制设置。这个设置包含了OTRS用来从主题或工单正文中提取工单编号的正则表达式。默认的正则表达式会匹配出现的如‘Incident-12354’，并把括号之间的部分放入动态字段，此处是‘12354’。
-        </para>
-    </listitem>
-    <listitem>
-        <para>SearchInSubject（搜索主题）</para>
-        <para>如果这个设置为‘1’，会在邮件主题中搜索工单编号。</para>
-    </listitem>
-    <listitem>
-        <para>SearchInBody（搜索正文）</para>
-        <para>如果这个设置为‘1’，会在邮件正文中搜索工单编号。</para>
-    </listitem>
-    <listitem>
-        <para>TicketStateTypes（工单状态类型）</para>
-        <para>
-            这是一个可选的设置。如果指定了,它将只搜索OTRS处理指定状态类型的外部工单。状态类型用分号分隔。
-        </para>
-    </listitem>
-    <listitem>
-        <para>DynamicField（动态字段）</para>
-        <para>
-            这是一个必填设置。它定义了用来存储外部编号的动态字段（字段名必须存在于系统并处于有效状态）。
-        </para>
-    </listitem>
-    <listitem>
-        <para>SenderType（发件人类型）</para>
-        <para>这个参数定义OTRS中创建的用于信件的发件人类型。</para>
-    </listitem>
-</itemizedlist>
-
-<para>
-    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
+# Job Name: ExternalTicketNumberRecognition
+# External Ticket Number Reconition, check for Incident-<number> in incoming mails subject and
+# body from the addeesses <sender>@externalticket.com, if number is found it will be stored in
+# the dynamic field 'ExternalNumber' (that need to be setup in the Admin Panel).
+$Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} = {
+    'FromAddressRegExp' => '\\s*@externalticket.com',
+    'NumberRegExp'      => 'Incident-(\\d.*)',
+    'SearchInSubject'   => '1',
+    'SearchInBody'      => '1',
+    'TicketStateTypes'  => 'new;open'
+    'DynamicFieldName'  => 'ExternalNumber',
+    'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+    'Name'              => 'Test External Ticket Number',
+    'SenderType'        => 'system',
+};
+                ]]></programlisting></example>
+            <itemizedlist mark="round">
+                <para><emphasis>配置选项</emphasis></para>
+                <listitem>
+                    <para>FromAddressRegExp（发件人地址正则表达式）</para>
+                    <para>
+                        这是一个可选的设置。只有匹配这个“收件人”地址的邮件才会考虑使用这个过滤器。你可以调整这个设置为外部系统用来发出邮件的发件人地址。在这种情况下这个地址可以不同，你可以设置这个选项为空，这样OTRS不会检查发件人地址。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>NumberRegExp（数字正则表达式）</para>
+                    <para>
+                        这是一个强制设置。这个设置包含了OTRS用来从主题或工单正文中提取工单编号的正则表达式。默认的正则表达式会匹配出现的如‘Incident-12354’，并把括号之间的部分放入动态字段，此处是‘12354’。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>SearchInSubject（搜索主题）</para>
+                    <para>如果这个设置为‘1’，会在邮件主题中搜索工单编号。</para>
+                </listitem>
+                <listitem>
+                    <para>SearchInBody（搜索正文）</para>
+                    <para>如果这个设置为‘1’，会在邮件正文中搜索工单编号。</para>
+                </listitem>
+                <listitem>
+                    <para>TicketStateTypes（工单状态类型）</para>
+                    <para>
+                        这是一个可选的设置。如果指定了,它将只搜索OTRS处理指定状态类型的外部工单。状态类型用分号分隔。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>DynamicField（动态字段）</para>
+                    <para>
+                        这是一个必填设置。它定义了用来存储外部编号的动态字段（字段名必须存在于系统并处于有效状态）。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>SenderType（发件人类型）</para>
+                    <para>这个参数定义OTRS中创建的用于信件的发件人类型。</para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
 module that is capable to decrypt an encrypted incoming email message
 (S/MIME or PGP) placing the unencrypted message body in the email header
-X-OTRS-BodyDecrypted to be processed later.  Additionally it can also update
+X-OTRS-BodyDecrypted to be processed later. Additionally it can also update
 the email body to the unencrypted version.
-</para>
-<para>
-    In order to decrypt the emails the system needs to be properly configured
-for S/MIME and/or PGP and have the needed private keys to decrypt the
-information.
-</para>
-<para>
-    This module is disabled by default and it can be configured directly in the
-System Configuration in the Admin Panel.
-</para>
-<itemizedlist mark="round">
-    <para><emphasis>配置选项</emphasis></para>
-    <listitem>
-        <para>StoreDecryptedBody</para>
-        <para>
-            Set this option to "1" to update the email body to the unencrypted version
-if the decryption was successful. Be aware that using this the emails will
-be stored unencrypted and there is no possible way to revert this action.
-        </para>
-    </listitem>
-</itemizedlist>
+            </para>
+            <para>
+                要对电子邮件进行解密，系统需要正确地配置 S/MIME 和/或 PGP ，并且有解密信息所需的私钥。
+            </para>
+            <para>
+                本模块默认是禁用的，可以直接在系统管理面板的系统配置中进行配置。
+            </para>
+            <itemizedlist mark="round">
+                <para><emphasis>配置选项</emphasis></para>
+                <listitem>
+                    <para>StoreDecryptedBody</para>
+                    <para>
+                        设置本选项为“1”来更新邮件正文为未加密的版本（如果成功解密）。注意使用此选项后电子邮件将存储为未加密格式且无法还原此操作。
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                当然你也可以开发你自己的邮箱管理员过滤器模块。
+            </para>
+        </section>
 
-<para>
-当然你也可以开发你自己的邮箱管理员过滤器模块。
-</para>
-
-</section>
-
-<section id="email-filter-troubleshooting">
-    <title>邮件过滤器故障排除</title>
-    <para>这部分显示了在排查邮箱管理员过滤器的故障时一些共同问题及需要考虑的事情。</para>
-    <itemizedlist>
-        <listitem>
-            <para>过滤器按它们名称的字母顺序按序匹配。如果某个条件匹配了两次，则最后匹配的过滤器生效。</para>
-        </listitem>
-        <listitem>
-            <para>“匹配后停止”可以防止二次匹配。</para>
-        </listitem>
-        <listitem>
-            <para>确保正则表达式是有效的。</para>
-        </listitem>
-        <listitem>
-            <para>可以设置头信息来控制ORTS，但不会写入邮件中。</para>
-        </listitem>
-        <listitem>
-            <para>当匹配一个发件人、抄送、收件人时，使用EMAILADDRESS: &lt;your@address&gt;</para>
-        </listitem>
-        <listitem>
-            <para>邮箱必须是可信的。</para>
-        </listitem>
-        <listitem>
-            <para>匹配条件是“与”条件。</para>
-        </listitem>
-        <listitem>
-            <para>邮箱管理员过滤器不能匹配工单属性。</para>
-        </listitem>
-    </itemizedlist>
-</section>
-
-</section>
-
+        <section id="email-filter-troubleshooting">
+            <title>邮件过滤器故障排除</title>
+            <para>
+                这部分显示了在排查邮箱管理员过滤器的故障时一些共同问题及需要考虑的事情。
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        过滤器按它们名称的字母顺序按序匹配。如果某个条件匹配了两次，则最后匹配的过滤器生效。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>“匹配后停止”可以防止二次匹配。</para>
+                </listitem>
+                <listitem>
+                    <para>确保正则表达式是有效的。</para>
+                </listitem>
+                <listitem>
+                    <para>可以设置头信息来控制ORTS，但不会写入邮件中。</para>
+                </listitem>
+                <listitem>
+                    <para>当匹配一个发件人、抄送、收件人时，使用EMAILADDRESS: &lt;your@address&gt;</para>
+                </listitem>
+                <listitem>
+                    <para>邮箱必须是可信的。</para>
+                </listitem>
+                <listitem>
+                    <para>匹配条件是“与”条件。</para>
+                </listitem>
+                <listitem>
+                    <para>邮箱管理员过滤器不能匹配工单属性。</para>
+                </listitem>
+            </itemizedlist>
+            <note>
+                <para>
+                    Details about Postmaster filter processing are also present in communication
+logs. Make sure to check <link
+linkend="adminarea-communication-log">Communication Log</link> in the Admin
+area.
+                </para>
+            </note>
+        </section>
+    </section>
 </section>

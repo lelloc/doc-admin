@@ -14,6 +14,30 @@
 <section id="agent-interface">
 <title>服务人员WEB界面</title>
 
+    <note>
+        <para>
+            Before logging on for the first time, please consider activating the HTTPS
+on your web server in order for OTRS to be served as a secure app over
+SSL/TLS protocol. For detailed instructions on how to do this, please
+consult the documentation of your web server (e.g. Apache2).
+        </para>
+        <para>
+            After you activate HTTPS, please set the configuration option
+<literal>HttpType</literal> to <emphasis>https</emphasis> in <link
+linkend="adminarea-systemconfiguration">SysConfig</link>. This will make
+sure that all internal links in OTRS are indeed using HTTPS.
+        </para>
+        <para>
+            Good practice is to also redirect all HTTP traffic to HTTPS, in case someone
+tries to access the OTRS via an insecure link. This should be done on web
+server configuration level for maximum effect. However, in case this is not
+possible, you can set <literal>HTTPSForceRedirect</literal> to
+<emphasis>Yes</emphasis> in <link
+linkend="adminarea-systemconfiguration">SysConfig</link> to do it on
+application level.
+        </para>
+    </note>
+
 <para>
 服务人员WEB界面允许服务人员答复客户请求、为客户或其它服务人员创建新工单、创建客户的电话工单、编写FAQ知识库条目、编辑客户信息数据等等。
 </para>
@@ -87,11 +111,8 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <title>首次登录</title>
 
 <para>
-Access the login screen as described in the section <link
-linkend="agent-interface">Agent web interface </link>. Enter a user name and
-password. Since the system has just been installed and no users have yet
-been created, login as OTRS administrator first, using 'root@localhost' for
-username and the generated password in the last step of the installer.
+按<link linkend="agent-interface">服务人员界面
+</link>部分介绍的方法访问OTRS登录窗口，输入用户名和密码。因为系统刚安装完毕且还没有创建任何用户，首先以OTRS系统管理员登录，使用'root@localhost'作为用户名，密码是安装程序最后一步生成的。
 </para>
 
 <warning>
@@ -102,15 +123,11 @@ linkend="user-preferences">偏好设置</link>来修改密码。
 </warning>
 
 <para>
-If you don't want to login as OTRS administrator, just enter the username
-and password for your normal agent account.
+如果你不想以OTRS系统管理员登录，只需输入普通的服务人员帐户信息即可。
 </para>
 
 <para>
-In case you have forgotten your password, you can request the system for a
-new password. Simply press the link below the Login button, enter the
-username that is registered for your OTRS account into the input field, and
-press the Request New Password button (see figure).
+如果你忘记了你的密码，可以向系统请求一个新密码。只需点击“登录”按钮下方的链接，输入注册的OTRS帐户的用户名，并点击“请求新密码”按钮即可（见下图）。
 </para>
 
 <para>
@@ -152,9 +169,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-In the area below the navigation bar, different system messages can be
-shown. If you are logged in as the default OTRS administrator user, you get
-a red message warning you not to work using this system account.
+在导航栏下方区域中，可以显示不同的系统消息。如果你用默认的OTRS系统管理员帐号登录，就会得到一个红色的消息，警告你不要使用该系统帐号干活。
 </para>
 
 <para>
@@ -166,9 +181,7 @@ a red message warning you not to work using this system account.
 </para>
 
 <para>
-Finally at the bottom of the page, the site footer is displayed (see figure
-below). It contains a link to directly access the OTRS official web site, or
-switch to mobile mode.
+最后，在页面的底端，显示的是网站页脚（见下图）。它包含一个链接以便直接访问OTRS官方网站或切换到移动模式。
 </para>
 
 <para>
@@ -226,25 +239,31 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             <listitem>
                 <para>我关注的工单</para>
                 <para>
-                    在当前登录的服务人员的关注清单中的工单，需要打开Ticket::Watcher设置才会显示。
+                    The tickets that the logged agent has in his/her watched list, requires
+<literal>Ticket::Watcher</literal> setting to be turned on to be displayed.
                 </para>
             </listitem>
             <listitem>
                 <para>我负责的工单</para>
                 <para>
-                    当前登录的服务人员被设置为工单负责人的工单，需要打开Ticket::Responsible设置才会显示。
+                    The tickets that the logged agent is set as responsible,
+<literal>Ticket::Responsible</literal> setting is required to be turned on
+in order to make this filter visible.
                 </para>
             </listitem>
             <listitem>
                 <para>我队列中的工单</para>
                 <para>
-                    服务人员在偏好设置中定义“我的队列”，在“我的队列”出现的队列中的工单。
+                    The tickets that are on queues where the agent define as <emphasis>My
+Queues</emphasis>.
                 </para>
             </listitem>
             <listitem>
                 <para>我服务的工单</para>
                 <para>
-                    服务人员在偏好设置中定义“我的服务”，关联了“我的服务”出现的服务的工单，并且服务人员需要对工单所在的队列至少有只读权限。
+                    The tickets that are assigned to services where the agent define as
+<emphasis>My Services</emphasis> and are on queues with at least read-only
+permissions.
                 </para>
             </listitem>
             <listitem>
@@ -266,11 +285,12 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </listitem>
             <listitem>
                 <para>新的工单</para>
-                <para>状态为“新建”的工单。</para>
+                <para>Tickets that have state <emphasis>New</emphasis>.</para>
             </listitem>
             <listitem>
                 <para> 处理中/需要回复的工单</para>
-                <para>状态为“处理中”并且准备好处理的工单。</para>
+                <para>Tickets that have state <emphasis>Open</emphasis> and are ready for work
+with them.</para>
             </listitem>
         </itemizedlist>
     </listitem>
@@ -294,7 +314,9 @@ fileref="screenshots/introduction/firststeps/events-ticket-calendar.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            这个小部件进一步的配置可以在系统配置的子组Frontend::Agent::Dashboard::EventsTicketCalendar中找到。
+            Further configurations for this widget could be found under the
+<literal>Frontend::Agent::Dashboard::EventsTicketCalendar</literal> SubGroup
+in the SysConfig:
         </para>
         <itemizedlist mark="round">
             <listitem>
@@ -346,7 +368,14 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     </listitem>
 </itemizedlist>
 <para>
-    在仪表板的右边列放置了一个特殊的小部分，允许你控制这些小部件的显示或隐藏，这就是‘设置’小部件。点击它的顶部来展开区域，可以看到所有可用的小部件，如图所示。每个小部件的名称前有一个复选框。使用这些复选框来定义对应小部件在仪表板的可见性（未选中的小部件不会显示），在你定义完可见性选项后单击“保存设置”按钮来存储你的修改内容。这个小部件是固定在窗口中的，意即你不能拖放或关闭它。
+    In the right column is located a special widget that allow you to control
+the widgets you want to show or hide. This is the Settings widget. Click on
+it's header to expand the section and see all available widgets, as shown in
+Figure. Each widget name has a checkbox. Use this checkboxes to define the
+visibility of the widgets in the dashboard (unchecked widgets will not be
+shown) after you define the visibility options and click on
+<emphasis>Save</emphasis> for storing your changes.  This section is fixed
+on the screen, this means you can't drag and drop it, or close it.
 </para>
 
 <para>
@@ -448,7 +477,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-队列概览提供了OTRS中日常工作的多种选项。第一个选项是‘我的队列’。在服务人员偏好设置中，或当登录为系统管理员时可以定义一个服务人员所属的多个队列。当访问‘工单’->‘队列视图’菜单时，所有的工单都会出现在这个默认视图。
+The queue overview offers a variety of options for daily work with OTRS. The
+first of these is the My Queue. In the Agent Preferences, or when
+administering agents, a set of queues can be defined for which the agent has
+been assigned to work within. All the tickets will appear in this default
+view, when accessing the <emphasis>Tickets -> Queue View</emphasis> menu.
 </para>
 
 <para>
@@ -456,7 +489,12 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-在这两种类型的视图中，用户还能看到所有锁定的工单（这是默认的过滤器），或者所有可用的工单。工单必须是下面的可视状态类型才能在队列视图中显示：‘处理中’、‘新建’、‘挂起提醒’、‘挂起自动（等待成功/失败关闭）’。
+In both of the view types, the user also has the added ability to see either
+all unlocked tickets (this is the default filter), or the user can then
+choose to view all available tickets. Tickets must be in one of the viewable
+state types to be shown in the queue view. Per default, these are
+<literal>open</literal>, <literal>new</literal>, <literal>pending
+reminder</literal>, <literal>pending auto</literal>.
 </para>
 
 <para>
@@ -465,7 +503,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 
 <para>
 <figure>
-    <title>服务人员队列视图的可视警告信号 </title>
+    <title>Agent Queue View visual alarms</title>
 <screenshot>
 <graphic
 fileref="screenshots/introduction/firststeps/agent-queue-overview-visual-alarms.gif"
@@ -475,19 +513,25 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <itemizedlist>
     <title>可视警告信号</title>
     <listitem>
-        <para>第1个高亮阶段：设置（一级）寿命时间（单位：分钟）来高亮显示包含未处理工单的队列。如上图中的“Raw”队列。</para>
+        <para>Highlight Age 1: Sets the age in minutes (first level) for highlighting
+queues that contain untouched tickets. Seen in above in the
+<emphasis>Raw</emphasis> queue.</para>
     </listitem>
     <listitem>
-        <para>第2个高亮阶段：设置（一级）寿命时间（单位：分钟）来高亮显示包含未处理工单的队列。如上图中的“Postmaster”队列。</para>
+        <para>Highlight Age 2: Sets the age in minutes (second level) for highlighting
+queues that contain untouched tickets. Seen in above in the
+<emphasis>Postmaster</emphasis> queue.</para>
     </listitem>
     <listitem>
         <para>Blink: A blinking mechanism of the queue that contains the oldest ticket can
-be activated using Ticket::Frontend::AgentTicketQueue###Blink. Not supported
+be activated using
+<literal>Ticket::Frontend::AgentTicketQueue###Blink</literal>. Not supported
 in all browsers. In that case, the queue name will just appear in red color,
-as seen in above on the queue "Junk".</para>
+as seen in above on the queue <emphasis>Junk</emphasis>.</para>
     </listitem>
     <listitem>
-        <para>加粗：当前队列名称会被加粗显示，如上图中的“我的队列”。</para>
+        <para>Bold: The current queue will be bolded, as seen above in the <emphasis>My
+Queues</emphasis>.</para>
     </listitem>
 </itemizedlist>
 </section>
@@ -495,11 +539,7 @@ as seen in above on the queue "Junk".</para>
 <section id="user-preferences">
 <title>用户偏好设置</title>
 <para>
-OTRS users such as customers, agents and the OTRS administrator can
-configure their account preferences as per their needs. Agent can access the
-configuration screen by clicking on the gear icon at the top of the web
-interface (see figure below), and customers must click on the "Preferences"
-link (see figure below).
+OTRS用户如客户联系人、服务人员和OTRS系统管理员可以按他们的需要配置帐户偏好设置。服务人员可以通过点击WEB界面顶部的齿轮图标（如下图）来访问配置窗口，客户联系人则必须点击“偏好设置”链接（见下图）。
 </para>
 
 <para>

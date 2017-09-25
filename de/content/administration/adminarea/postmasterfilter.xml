@@ -3,289 +3,214 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="adminarea-postmasterfilter">
-<title>Filtering Incoming Email Messages</title>
-
-<para>
-OTRS has the capability to filter incoming email messages. For example, it
+    <title>Filtering Incoming Email Messages</title>
+    <para>
+        OTRS has the capability to filter incoming email messages. For example, it
 is possible to put certain emails automatically into specified queues, or to
 set a specific state or ticket type for some mails. The filters apply to all
-incoming mails. You can manage your filters via the link "PostMaster Filter"
-on the Admin page (see figure below).
-</para>
-
-<para>
-<figure>
-    <title>PostMaster filter management</title>
+incoming mails. Several filter conditions can be defined per each mail
+header. You can manage your filters via the link "PostMaster Filter" on the
+Admin page (see figure below).
+    </para>
+    <para>
+        <figure>
+            <title>PostMaster filter management</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-postmasterfilter.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
-</para>
-
-<para>
-A filter consists of one or more criteria that must be met in order for the
+    </para>
+    <para>
+        A filter consists of one or more criteria that must be met in order for the
 defined actions to be executed on the email. Filter criteria may be defined
 for the headers or the body of an email, e.g. search for specific header
 entries, such as a sender address, or on strings in the body. Even regular
 expressions can be used for extended pattern matching. If your filter
-matches, you can set fields using the X-OTRS headers in the GUI. These
-values will be applied when creating the ticket or follow-up message in
-OTRS. The Table 4-5 lists the different X-OTRS headers and their meaning.
-</para>
+matches, you can set fields using the <literal>X-OTRS</literal> headers in
+the GUI. These values will be applied when creating the ticket or follow-up
+message in OTRS. The table below lists the different
+<literal>X-OTRS</literal> headers and their meaning.
+    </para>
+    <note>
+        <para>
+            You also can use <literal>X-OTRS-FollowUp-*</literal> headers to set values
+for follow up emails.
+        </para>
+    </note>
 
-<note>
-<para>
-You also can use X-OTRS-FollowUp-* headers to set values for follow up
-emails.
-</para>
-</note>
-
-<table id="table-of-x-otrs-headers">
-<title>Funktion der verschiedenen X-OTRS-Header</title>
-  <tgroup cols="3">
-    <thead>
-      <row>
-        <entry>
-          Name
-        </entry>
-        <entry>
-          Mögliche Werte
-        </entry>
-        <entry>
-          Beschreibung
-        </entry>
-      </row>
-    </thead>
-    <tbody>
-      <row>
-        <entry>
-          X-OTRS-Priority:
-        </entry>
-        <entry>
-          1 very low, 2 low, 3 normal, 4 high, 5 very high
-        </entry>
-        <entry>
-          Legt die Priorität eines Tickets fest.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-Queue:
-        </entry>
-        <entry>
-          Name einer Queue des Systems.
-        </entry>
-        <entry>
-          Sets the queue where the ticket shall be sorted. If set in X-OTRS header,
+    <table id="table-of-x-otrs-headers">
+    <title>Funktion der verschiedenen X-OTRS-Header</title>
+        <tgroup cols="3">
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Mögliche Werte</entry>
+                    <entry>Beschreibung</entry>
+                </row>
+            </thead>
+        <tbody>
+            <row>
+                <entry>X-OTRS-Priority:</entry>
+                <entry>1 very low, 2 low, 3 normal, 4 high, 5 very high</entry>
+                <entry>Legt die Priorität eines Tickets fest.</entry>
+            </row>
+            <row>
+                <entry>X-OTRS-Queue:</entry>
+                <entry>Name einer Queue des Systems. </entry>
+                <entry>
+                    Sets the queue where the ticket shall be sorted. If set in X-OTRS header,
 all other filter rules that try to sort a ticket into a specific queue are
-ignored. If you use a sub-queue, specify it as &quot;Parent::Sub&quot;.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-Lock:
-        </entry>
-        <entry>
-            lock, unlock
-        </entry>
-        <entry>
-          Setzt den "gesperrt"-Status eines Tickets.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-Ignore:
-        </entry>
-        <entry>
-          Yes oder True
-        </entry>
-        <entry>
-          Wird dieser Header gesetzt, wird die Mail komplett ignoriert und gelangt
-somit nie als Ticket in das System.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-State:
-        </entry>
-        <entry>
-          new, open, closed successful, closed unsuccessful, ...
-        </entry>
-        <entry>
-          Setzt den nächsten Status eines Tickets.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-State-PendingTime:
-        </entry>
-        <entry>
-         Z. B. 2010-11-20 00:00:00
-        </entry>
-        <entry>
-            Sets the pending time of a ticket (you also should sent a pending state via
-X-OTRS-State).  You can specify absolute dates like "2010-11-20 00:00:00" or
-relative dates, based on the arrival time of the email.  Use the form "+
+ignored. If you use a sub-queue, specify it as
+<literal>Parent::Sub</literal>.
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-Lock:</entry>
+                <entry>lock, unlock</entry>
+                <entry>Setzt den "gesperrt"-Status eines Tickets.</entry>
+            </row>
+            <row>
+                <entry>X-OTRS-Ignore:</entry>
+                <entry>Yes oder True</entry>
+                <entry>
+                    Wird dieser Header gesetzt, wird die Mail komplett ignoriert und gelangt
+somit nie als Ticket in das System. 
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-State:</entry>
+                <entry>new, open, closed successful, closed unsuccessful, ... </entry>
+                <entry>Setzt den nächsten Status eines Tickets. </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-State-PendingTime:</entry>
+                <entry>Z. B. 2010-11-20 00:00:00</entry>
+                <entry>
+                    Sets the pending time of a ticket (you also should sent a pending state via
+X-OTRS-State). You can specify absolute dates like "2010-11-20 00:00:00" or
+relative dates, based on the arrival time of the email. Use the form "+
 $Number $Unit", where $Unit can be 's' (seconds), 'm' (minutes), 'h' (hours)
-or 'd' (days).  Only one unit can be specified. Examples of valid settings:
+or 'd' (days). Only one unit can be specified. Examples of valid settings:
 "+50s" (pending in 50 seconds), "+30m" (30 minutes), "+12d" (12 days). Note
 that settings like "+1d 12h" are not possible. You can specify "+36h"
 instead.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-Type:
-        </entry>
-        <entry>
-         default (systemabhängig)
-        </entry>
-        <entry>
-          Setzt den Ticket-Typ (wenn Ticket::Type aktiviert ist).
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-Service:
-        </entry>
-        <entry>
-         (systemabhängig)
-        </entry>
-        <entry>
-          Setzt den Service eines Tickets (wenn Ticket::Service aktiviert ist). Wenn
-Sie einen Sub-Service erstellen möchten, müssen Sie einen vorhandenen
-Service als &quot;Parent::Sub&quot; wählen.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-SLA:
-        </entry>
-        <entry>
-         (systemabhängig)
-        </entry>
-        <entry>
-          Setzt das Service-Level-Abkommen eines Tickets (wenn Ticket::Service aktiv
-ist).
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-CustomerUser:
-        </entry>
-        <entry>
-          CustomerUser
-        </entry>
-        <entry>
-          Legt den Kunden-Benutzer fest, dem das Ticket zugeordnet werden soll.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-CustomerNo:
-        </entry>
-        <entry>
-          CustomerNo
-        </entry>
-        <entry>
-          Legt die Kunden-ID fest, die dem Ticket zugeordnet werden soll.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-SenderType:
-        </entry>
-        <entry>
-          agent, system, customer
-        </entry>
-        <entry>
-          Legt die Art des Ticket-Absenders fest.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-IsVisibleForCustomer:
-        </entry>
-        <entry>
-          0, 1
-        </entry>
-        <entry>
-          Controls if the article is shown in the customer interface.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-DynamicField-&lt;DynamicFieldName&gt;:
-        </entry>
-        <entry>
-          Hängt von der Konfiguration der dynamischen Felder ab (Text: Notebook, Date:
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-Type:</entry>
+                <entry>default (systemabhängig)</entry>
+                <entry>Sets the type of a ticket (if <literal>Ticket::Type</literal> is activated).</entry>
+            </row>
+            <row>
+                <entry>X-OTRS-Service:</entry>
+                <entry>(systemabhängig)</entry>
+                <entry>
+                    Sets the service of a ticket (if <literal>Ticket::Service</literal> is
+active). If you want to set a sub-service you should specify it as
+<literal>Parent::Sub</literal>.
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-SLA:</entry>
+                <entry>(systemabhängig)</entry>
+                <entry>Sets the SLA of a ticket (if <literal>Ticket::Service</literal> support is
+active).</entry>
+            </row>
+            <row>
+                <entry>X-OTRS-CustomerUser:</entry>
+                <entry>CustomerUser</entry>
+                <entry>Legt den Kunden-Benutzer fest, dem das Ticket zugeordnet werden soll. </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-CustomerNo:</entry>
+                <entry>CustomerNo</entry>
+                <entry>Legt die Kunden-ID fest, die dem Ticket zugeordnet werden soll. </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-SenderType:</entry>
+                <entry>agent, system, customer</entry>
+                <entry>Legt die Art des Ticket-Absenders fest. </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-IsVisibleForCustomer:</entry>
+                <entry>0, 1</entry>
+                <entry>Controls if the article is shown in the customer interface.</entry>
+            </row>
+            <row>
+                <entry>X-OTRS-DynamicField-&lt;DynamicFieldName&gt;:</entry>
+                <entry>
+                    Hängt von der Konfiguration der dynamischen Felder ab (Text: Notebook, Date:
 2010-11-20 00:00:00, Integer: 1)
-        </entry>
-        <entry>
-          Saves an additional info value for the ticket on &lt;DynamicFieldName&gt;
-Dynamic Field.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-Loop:
-        </entry>
-        <entry>
-          True
-        </entry>
-        <entry>
-          Ist dieser X-OTRS-Header gesetzt, wird keine automatische Antwort an den
-Absender des neuen Tickets geschickt, z. B. um Mailschleifen zu vermeiden.
-        </entry>
-      </row>
-      <row>
-        <entry>
-          X-OTRS-FollowUp-State-Keep:
-        </entry>
-        <entry>
-          0, 1
-        </entry>
-        <entry>
-          If this X-OTRS header is set, the incoming follow-up message will not change
-the ticket state.  For this purpose the header can be customized in the
-sysconfig using option 'KeepStateHeader'.
-        </entry>
-      </row>
-    </tbody>
-  </tgroup>
-</table>
-
-<para>
-You should specify a name for every filter rule. Filter criteria can be
-specified in the section "Filter Condition". Choose via the listboxes for
+                </entry>
+                <entry>
+                    Saves an additional info value for the ticket on
+<literal>&lt;DynamicFieldName&gt;</literal> Dynamic Field.
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-Loop:</entry>
+                <entry>True</entry>
+                <entry>
+                    Ist dieser X-OTRS-Header gesetzt, wird keine automatische Antwort an den
+Absender des neuen Tickets geschickt, z. B. um Mailschleifen zu vermeiden. 
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-FollowUp-State-Keep:</entry>
+                <entry>0, 1</entry>
+                <entry>
+                    If this X-OTRS header is set, the incoming follow-up message will not change
+the ticket state. For this purpose the header can be customized in the
+SysConfig using option <literal>KeepStateHeader</literal>.
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-AttachmentExists:</entry>
+                <entry>no, yes</entry>
+                <entry>
+                    Depending on whether attachments are included in the email this X-OTRS
+header is set to 'yes', or it has a 'no' value if no attachments are
+included.
+                </entry>
+            </row>
+            <row>
+                <entry>X-OTRS-AttachmentCount:</entry>
+                <entry>(number of attachments)</entry>
+                <entry>
+                    This X-OTRS header contains as value the number of attachments which are
+contained in the email (i.e. '0' for mails without attachments).
+                </entry>
+            </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para>
+        You should specify a name for every filter rule. Filter criteria can be
+specified in the section "Filter Condition". Choose via the list boxes for
 "Header 1", "Header 2" and so on for the parts of the messages where you
 would like to search, and specify on the right side the values you wish to
 filter on. In the section "Set Email Headers", you can choose the actions
 that are triggered if the filter rules match. You can select for "Header 1",
 "Header 2" and so on to select the X-OTRS-Header and set the associated
 values (see figure below).
-</para>
-
-<para>
-Filter rules are evaluated in alphabetical order, and are all executed
+    </para>
+    <para>
+        Filter rules are evaluated in alphabetical order, and are all executed
 except if the "Stop after match" setting has been set to "Yes" in one of the
 rules (in this case evaluation of the remaining filters is canceled).
-</para>
-
-<para>
-<figure>
-    <title>Add a PostMaster filter</title>
+    </para>
+    <para>
+        <figure>
+            <title>Add a PostMaster filter</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/add-postmasterfilter.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
-</para>
-
-<example id="sort-mails-into-junk">
-<title>Aussortierung von Spammails in eine bestimmte Queue</title>
-
-<para>
-A useful filter rule would be to let OTRS automatically move mails marked
+    </para>
+    <example id="sort-mails-into-junk">
+        <title>Aussortierung von Spammails in eine bestimmte Queue</title>
+        <para>
+            A useful filter rule would be to let OTRS automatically move mails marked
 for spam, by using a spam detection tool such as SpamAssassin, into the
 "Junk" queue. SpamAssassin adds the "X-Spam-Flag" header to every checked
 mail. When the mail is marked as spam, the Header is set to "Yes". So the
@@ -297,14 +222,12 @@ is specified. To make sure that all spam mails are placed into the "Junk"
 queue, choose in the section for "Set Email Headers", the "X-OTRS-Queue:"
 entry for "Header 1". Specify "Junk" as value for this header. Finally add
 the new filter rule to activate it for new messages in the system.
-</para>
-</example>
-
-<para>
-There are additional modules, that can be used to <link
+        </para>
+    </example>
+    <para>
+        There are additional modules that can be used to <link
 linkend="email-receiving-filter">filter incoming messages</link> more
 specifically. These modules might be useful when dealing with larger, more
 complex systems.
-</para>
-
+    </para>
 </section>

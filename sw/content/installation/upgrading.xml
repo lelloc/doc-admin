@@ -3,58 +3,51 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="upgrading">
-    <title>Upgrading OTRS from 5 to 6</title>
+    <title>Upgrading OTRS</title>
 
-    <para>
-    These instructions are for people upgrading OTRS from <emphasis>5</emphasis>
-to <emphasis>6</emphasis> or from a <emphasis>5</emphasis> to a later
-patchlevel release <emphasis>5</emphasis> and applies both for RPM and
-source code (tarball) upgrades.
-    </para>
-
-    <para>
-    If you are running a lower version of OTRS you have to follow the upgrade
-path to 5 first
-(1.1->1.2->1.3->2.0->2.1->2.2->2.3->2.4->3.0->3.1->3.2->3.3->4->5)! You need
-to perform a full upgrade to every version in between, including database
-changes and the upgrading Perl script.
-    </para>
-
-    <para>
-    Please note that if you upgrade from OTRS 2.2 or earlier, you have to take
-<ulink url="http://bugs.otrs.org/show_bug.cgi?id=6798">an extra
-step</ulink>.
-    </para>
-
-    <para>
-    Within a single minor version you can skip patch level releases if you want
-to upgrade. For instance you can upgrade directly from OTRS 6 patchlevel 2
-to version 6 patchlevel 6. If you need to do such a "patch level upgrade",
-you should skip steps 6 and XXXXX.
-    </para>
-
-    <warning>
+    <note>
         <para>
-            Please note that you need at least Perl 5.16 to run OTRS 6. If your system
-has an older Perl version, you need to update it first before updating OTRS.
-        </para>
-    </warning>
-
-    <warning>
-        <para>
-            For PostgreSQL based installations: please note that you need at least
-PostgreSQL 9.2 to run OTRS 6. If your system has an older PostgreSQL
-version, you need to update it first before updating OTRS.
-        </para>
-    </warning>
-
-    <para>
-        It is highly recommended to perform a test update on a separate testing
+            It is highly recommended to perform a test update on a separate testing
 machine first.
-    </para>
+        </para>
+    </note>
+
+    <variablelist>
+        <varlistentry>
+            <term>Upgrading from an earlier version of OTRS 6</term>
+            <listitem>
+                <para>
+                    You can upgrade directly from any previous to the latest available patch
+level release.
+                </para>
+            </listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>Upgrading from OTRS 5</term>
+            <listitem>
+                <para>
+                    You can upgrade from any OTRS 5 patch level to the latest available OTRS 6
+patch level release.
+                </para>
+            </listitem>
+        </varlistentry>
+        <varlistentry>
+            <term>Upgrading from OTRS 4 or earlier</term>
+            <listitem>
+                <warning>
+                    <para>
+                        You cannot upgrade from OTRS 4 or earlier directly to OTRS 6.  Instead, full
+updates to all available minor versions have to be made sequentially
+instead.  For example, if you come from OTRS 3.0, you first have to perform
+a full update to OTRS 3.1, then to 3.2, 3.3, 4, 5 and finally to OTRS 6.
+                    </para>
+                </warning>
+            </listitem>
+        </varlistentry>
+    </variablelist>
 
     <section role="NotInToc">
-        <title>Step 1: Stop all relevant services</title>
+        <title>Step 1: Stop all relevant services and the OTRS Daemon</title>
 
         <para>
         Please make sure there are no more running services or cron jobs that try to
@@ -64,9 +57,9 @@ example:
 
         <para>
             <screen><![CDATA[
-shell> /etc/init.d/cron stop
-shell> /etc/init.d/postfix stop
-shell> /etc/init.d/apache stop
+root> /etc/init.d/cron stop
+root> /etc/init.d/postfix stop
+root> /etc/init.d/apache stop
             ]]></screen>
         </para>
 
@@ -76,9 +69,9 @@ shell> /etc/init.d/apache stop
 
         <para>
             <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/Cron.sh stop
-shell> bin/otrs.Daemon.pl stop
+otrs> cd /opt/otrs/
+otrs> bin/Cron.sh stop
+otrs> bin/otrs.Daemon.pl stop
             ]]></screen>
         </para>
     </section>
@@ -89,7 +82,10 @@ shell> bin/otrs.Daemon.pl stop
         <para>
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
+                <listitem>
+                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if upgrading from OTRS
+5</para>
+                </listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>as well as the database</para></listitem>
             </itemizedlist>
@@ -106,10 +102,10 @@ shell> bin/otrs.Daemon.pl stop
         <title>Step 3.1: With the tarball:</title>
 
             <screen><![CDATA[
-shell> cd /opt
-shell> mv otrs otrs-old
-shell> tar -xzf otrs-x.x.x.tar.gz
-shell> mv otrs-x.x.x otrs
+root> cd /opt
+root> mv otrs otrs-old
+root> tar -xzf otrs-x.x.x.tar.gz
+root> mv otrs-x.x.x otrs
             ]]></screen>
 
             <section role="NotInToc">
@@ -118,7 +114,10 @@ shell> mv otrs-x.x.x otrs
                 <para>
                     <itemizedlist>
                         <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                        <listitem><para><filename>Kernel/Config/Files/ZZZAuto.pm</filename></para></listitem>
+                        <listitem>
+                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if upgrading from OTRS
+5</para>
+                        </listitem>
                     </itemizedlist>
                 </para>
             </section>
@@ -144,8 +143,8 @@ the stats xml files with the suffix <filename>*.installed</filename> to
 <filename>/opt/otrs/var/stats</filename>.
                 </para>
                 <screen><![CDATA[
-shell> cd OTRS-BACKUP/var/stats
-shell> cp *.installed /opt/otrs/var/stats
+root> cd OTRS-BACKUP/var/stats
+root> cp *.installed /opt/otrs/var/stats
                 ]]></screen>
             </section>
 
@@ -154,19 +153,15 @@ shell> cp *.installed /opt/otrs/var/stats
 
                 <para>
                     Please execute the following command as root user to set the file and
-directory permissions for OTRS:
+directory permissions for OTRS.  It will try to detect the correct user and
+group settings needed for your setup.
                 </para>
 
                 <para>
                 <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.SetPermissions.pl
+root> cd /opt/otrs/
+root> bin/otrs.SetPermissions.pl
                 ]]></screen>
-                </para>
-
-                <para>
-                    It will try to detect the correct user and group settings needed for your
-setup.
                 </para>
             </section>
         </section>
@@ -175,12 +170,11 @@ setup.
             <title>Step 3.2: With the RPM:</title>
             <para>
             <screen><![CDATA[
-shell> rpm -Uvh otrs-x.x.x.-01.rpm
+root> rpm -Uvh otrs-x.x.x.-01.rpm
             ]]></screen>
             </para>
-
             <para>
-            In this case the RPM update automatically restores the old configuration
+                In this case the RPM update automatically restores the old configuration
 files and sets file permissions.
             </para>
         </section>
@@ -190,36 +184,42 @@ files and sets file permissions.
         <title>Step 4: Run the migration script</title>
 
         <para>
-            Please run the migration script (as the <literal>otrs</literal> user, NOT as
-<literal>root</literal>):
+            The upgrade script will perform many checks on your system and give you
+advice on how to install missing Perl modules etc., if that is required. If
+all checks succeeded, the neccessary migration steps will be
+performed. Please also run this script in case of patch level updates.
         </para>
+
+        <note>
+            <para>
+                The migration script will ask you to set a time zone for OTRS if needed. It
+is very important that you set the correct time zone
+(<literal>OTRSTimeZone</literal>) for data storage and keep it, otherwise
+date and time of data added after the upgrade (tickets, articles, etc.) will
+be stored with a different time zone than your pre-existing data, leading to
+inconsistent output.
+            </para>
+            <para>
+                For new systems, using <literal>UTC</literal> is recommended, as users can
+have different personal time zones for working with the OTRS
+application. For existing, migrated systems, a different
+<literal>OTRSTimeZone</literal> should be used if the underlying operating
+system is not configured to <literal>UTC</literal> or if OTRS previously
+used a time offset.
+            </para>
+        </note>
 
         <para>
         <screen><![CDATA[
-shell> scripts/DBUpdate-to-6.pl
+otrs> cd /opt/otrs/
+otrs> scripts/DBUpdate-to-6.pl
         ]]></screen>
-        </para>
-
-        <para>
-            This script will perform many checks on your system and give you advice on
-how to install missing Perl modules etc., if that is required.
-        </para>
-
-        <para>
-            The migration script will ask you to set a time zone for OTRS. It is very
-important that you set the correct time zone (and keep it), otherwise date
-and time of data added after the upgrade (tickets, articles, etc.) will be
-stored with a different time zone than your existing data, leading to
-inconsistent data.  The script will suggest possible time zones based on
-your previous configuration. In case you are not sure or made a mistake, you
-can change the OTRS time zone after the upgrade via SysConfig setting
-<literal>OTRSTimeZone</literal>.
         </para>
 
         <warning>
             <para>
                 Do not continue the upgrading process if this script did not work properly
-for you.  Otherwise data loss may occur.
+for you.  Otherwise malfunction or data loss may occur.
             </para>
         </warning>
     </section>
@@ -228,117 +228,55 @@ for you.  Otherwise data loss may occur.
         <title>Step 5: Restart your services</title>
 
         <para>
-        e. g. (depends on used services):
+            This will depend on your service configuration, here is an example:
         </para>
 
         <para>
         <screen><![CDATA[
-shell> /etc/init.d/apache start
-shell> /etc/init.d/postfix start
-shell> /etc/init.d/cron start
+root> /etc/init.d/apache start
+root> /etc/init.d/postfix start
+root> /etc/init.d/cron start
         ]]></screen>
         </para>
 
         <para>
-        Now you can log into your system.
+            Now you can log into your system. Please note that the OTRS Daemon is
+started only in a later step.
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 6: Check installed packages</title>
+        <title>Step 6: Update installed packages</title>
         <note>
             <para>
-                The OTRS 5 packages are NOT compatible with OTRS 6, so you have to perform a
-package upgrade!
+                Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated.
             </para>
         </note>
         <para>
-            Vifurushi vifuatavyo vinasakinushwa kiotomatiki baada ya mchakato wa
-uboreshaji (kama zilisakinishwa kabla):
+            You can use the following command to update all installed packages:
         </para>
-        <para>
-            <itemizedlist>
-                <listitem><para>OTRSAppointmentCalendar</para></listitem>
-            </itemizedlist>
-
-        <!--
-                TODO: Verify and extend the list of merged packages.
-            -->
-</para>
+        <screen><![CDATA[
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
+        ]]></screen>
     </section>
 
     <section role="NotInToc">
-        <title>Step 7: Start the OTRS Daemon</title>
+        <title>Step 7: Start the OTRS Daemon and cron job</title>
 
         <para>
             The OTRS daemon is responsible for handling any asynchronous and recurring
-tasks in OTRS.  The daemon also handles all GenericAgent jobs and must be
-started as the <literal>otrs</literal> user.
+tasks in OTRS.  The daemon and its keepalive cron job must be started as the
+<literal>otrs</literal> user.
         </para>
 
         <para>
             <screen><![CDATA[
-shell> /opt/otrs/bin/otrs.Daemon.pl start
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Daemon.pl start
+otrs> bin/Cron.sh start
             ]]></screen>
         </para>
     </section>
 
-    <section role="NotInToc">
-        <title>Step 8: Update and activate cron jobs</title>
-
-        <para>
-            There are two default OTRS cron files in
-<filename>/opt/otrs/var/cron/*.dist</filename>, and their purpose is to make
-sure that the OTRS Daemon is running.  They need to be activated by copying
-them without the ".dist" filename extension.
-        </para>
-
-        <para>
-            <screen><![CDATA[
-shell> cd /opt/otrs/var/cron
-shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
-            ]]></screen>
-        </para>
-
-        <para>
-            To schedule these cron jobs on your system, you can use the script
-<filename>Cron.sh</filename> as the <literal>otrs</literal> user.
-        </para>
-
-        <para>
-            <screen><![CDATA[
-shell> /opt/otrs/bin/Cron.sh start
-            ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 9: Update system registration (optional)</title>
-        <para>
-            If the system is already registered with OTRS Group, it is strongly
-recommended to update the registration information at this time. This will
-update the registered version of the system (among other changes) in the
-OTRS Group records, in order to get much accurate information from the cloud
-services.
-        </para>
-        <para>
-            If you don't update the registration information manually, it will be done
-automatically on a regular basis, but this could happen some hours or days
-after. During this period it might be possible to get wrong information from
-cloud services like <emphasis role="bold">OTRS Business Solution™</emphasis>
-updates.
-        </para>
-        <para>
-            <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.Console.pl Maint::Registration::UpdateSend --force
-shell> bin/otrs.Console.pl Maint::Cache::Delete
-            ]]></screen>
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 10: Well done!</title>
-        <para></para>
-    </section>
 </section>

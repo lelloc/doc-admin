@@ -22,7 +22,7 @@
         <section id="performance-tuning-otrs-index">
             <title>TicketIndexModule</title>
             <para>
-                There are two backend modules for the index for the ticket queue view:
+                Есть два типа модулей для индексирования заявок в обзоре очередей:
             </para>
             <variablelist>
                 <varlistentry>
@@ -65,8 +65,8 @@ index:
                     <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
                     <listitem>
                         <para>
-                            This is the default option, and will will do full-text searches on live data
-(it works fine for up to 50,000 tickets).
+                            This is the default option, and will do full-text searches on live data (it
+works fine for up to 50,000 tickets).
                         </para>
                     </listitem>
                 </varlistentry>
@@ -95,10 +95,11 @@ Maint::Ticket::FulltextIndexRebuild</filename>.
                     <term><literal>Ticket::SearchIndex::Attribute</literal></term>
                     <listitem>
                         <para>
-                            The attribute "WordCountMax" defines the maximum of words which will be
-processed to build up the index. For example only the first 1000 words of an
-article body are stored in the article search index. The attributes
-"WordLengthMin" and "WordLengthMax" are used as word length boundaries. Only
+                            The attribute <literal>WordCountMax</literal> defines the maximum of words
+which will be processed to build up the index. For example only the first
+1000 words of an article body are stored in the article search index. The
+attributes <literal>WordLengthMin</literal> and
+<literal>WordLengthMax</literal> are used as word length boundaries. Only
 words with a length between these two values are stored in the article
 search index.
                         </para>
@@ -214,13 +215,14 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
                 ]]></screen>
             </para>
             <para>
-                <emphasis>Script: Switching storage back-ends from database to
-filesystem.</emphasis>
+                <emphasis>Сценарий Переключение хранилища данных с базы данных на файловую
+систему.</emphasis>
             </para>
             <para>
-                If you want to keep old attachments in the database, you can activate the
-SysConfig option <literal>Ticket::StorageModule::CheckAllBackends</literal>
-to make sure OTRS will still find them.
+                Если вы желаете сохранить старые вложения в БД необходимо активировать
+параметр SysConfig
+<literal>Ticket::StorageModule::CheckAllBackends</literal>, задающий
+проверку всех хранилищ, чтобы быть уверенным, что OTRS найдет их там.
             </para>
         </section>
 
@@ -233,12 +235,12 @@ to make sure OTRS will still find them.
 реализовали функцию архивирования заявок.
             </para>
             <para>
-                Tickets that match certain criteria can be marked as "archived". These
-tickets are not accessed if you do a regular ticket search or run a Generic
-Agent job. The system itself does not have to deal with a huge amount of
-tickets any longer as only the "latest" tickets are taken into consideration
-when using OTRS. This can result in a huge performance gain on large
-systems.
+                Заявки, которые удовлетворяют определенным критериям, могут быть отмечены
+как "архивированные". При обычном поиске заявок или при поиске заявок с
+помощью задания Generic Agent, они будут недоступны. Сама собой система не
+будет иметь дела с огромным количеством заявок, до тех пор, пока не
+понадобится обратиться к "очень старой" заявке. Это приводит к огромному
+приросту производительности на больших системах.
             </para>
             <para>
                 Для использования функции архивации выполните следующие действия:
@@ -261,7 +263,8 @@ systems.
                         Определение работы GenericAgent
                     </para>
                     <para>
-                        On the Admin page, select GenericAgent and add a new job there.
+                        В Панели Администратора выберите GenericAgent и добавьте новое задание
+(работу). 
                     </para>
                     <para>
                         <orderedlist>
@@ -339,7 +342,7 @@ shell> /opt/otrs/bin/otrs.Console.pl Maint::Session::DeleteAll
 shell> /opt/otrs/bin/otrs.Console.pl Maint::Cache::Delete
 shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
 
-# add persistent mount point in /etc/fstab
+# добавить постоянную точку монтирования в /etc/fstab
                 ]]></screen>
             </para>
             <note>
@@ -362,7 +365,7 @@ purchase from OTRS Group.
         <title>База данных</title>
         <para>
             Решения зависят от используемой базы данных. Изучайте документацию к
-используемой базе данных или же обратитесь за помощью к администратору.
+используемой базе данных или же обратитесь за помощью к администратору. 
         </para>
 
         <section id="performance-tuning-database-mysql">
@@ -396,9 +399,10 @@ mysql> optimize table article;
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-                PostgreSQL is best tuned by modifying the
-<filename>postgresql.conf</filename> file in your PostgreSQL data
-directory. For advice on how to do this, reference the following articles:
+                PostgreSQL лучше настраивается путем изменений в файле
+<filename>postgresql.conf</filename>, который находится в директории с
+установленным PostgreSQL. За советом, как это сделать, обратитесь к
+следующим статьям:
             </para>
             <para>
                 <itemizedlist>

@@ -67,6 +67,11 @@ any other operation.
                                 SessionCreate
                             </para>
                         </listitem>
+                        <listitem>
+                            <para>
+                                SessionGet
+                            </para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
@@ -90,15 +95,38 @@ SessionID as an authentication method.
                     <para>
                         <programlisting>
                             <![CDATA[
- <SessionCreate>
-<!--You have a MANDATORY CHOICE of the next 2 items at this level-->
-<!--Optional:-->
-<UserLogin>?</UserLogin>
-<!--Optional:-->
-<CustomerUserLogin>?</CustomerUserLogin>
-<!--Optional:-->
-<Password>?</Password>
-</SessionCreate>
+      <SessionCreate>
+         <!--You have a MANDATORY CHOICE of the next 2 items at this level-->
+         <!--Optional:-->
+         <UserLogin>?</UserLogin>
+         <!--Optional:-->
+         <CustomerUserLogin>?</CustomerUserLogin>
+         <!--Optional:-->
+         <Password>?</Password>
+      </SessionCreate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-session-connector-operations-sessionget">
+                    <title>SessionCreate</title>
+                    <para>
+                        Gathers data from a valid session excluding sensitive information such as
+user password or challenge token.
+                    </para>
+                    <note>
+                        <para>
+                            If any of its values is a complex structure then is automatically converted
+to a JSON string.
+                        </para>
+                    </note>
+                    <para>Mögliche Attribute:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <SessionGet>
+         <SessionID>?</SessionID>
+      </SessionGet>
                             ]]>
                         </programlisting>
                     </para>
@@ -475,8 +503,8 @@ ticket.
                 <section id="generic-ticket-connector-operations-ticketsearch">
                     <title>TicketSearch</title>
                     <para>
-                        Die Operation TicketSearch liefert eine Liste mit TicketIDs die auf die
-eingegebenen Suchkriterien passen.
+                        TicketSearch operation returns a list of Ticket IDs that matches a
+predefined criteria.
                     </para>
                     <para>Mögliche Attribute:</para>
                     <para>
@@ -670,14 +698,14 @@ eingegebenen Suchkriterien passen.
                 <section id="generic-ticket-connector-operations-tickethistoryget">
                     <title>TicketHistoryGet</title>
                     <para>
-                        This operation is used to get all the history entries of a ticket including
-the
+                        This operation is used to get all the history entries from a ticket or
+tickets.
                     </para>
                     <para>Mögliche Attribute:</para>
                     <para>
                         <programlisting>
                             <![CDATA[
-      <TicketGet>
+      <TicketHistoryGet>
          <!--You have a MANDATORY CHOICE of the next 2 items at this level-->
          <!--Optional:-->
          <UserLogin>?</UserLogin>
@@ -687,7 +715,7 @@ the
          <Password>?</Password>
          <!--1 or more repetitions:-->
          <TicketID>?</TicketID>
-      </TicketGet>
+      </TicketHistoryGet>
                             ]]>
                         </programlisting>
                     </para>

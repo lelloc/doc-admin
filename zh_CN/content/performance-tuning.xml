@@ -27,9 +27,7 @@
                     <term><literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal></term>
                     <listitem>
                         <para>
-                            This is the default option, and will generate each queue view on the fly
-from the ticket table. You will not have performance trouble until you have
-about 60,000 open tickets in your system.
+                            这是默认选项，并将从工单表中即时生成每个队列视图。 在有6万个处理工单之前，系统都不会遇到性能问题。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -37,34 +35,31 @@ about 60,000 open tickets in your system.
                     <term><literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal></term>
                     <listitem>
                         <para>
-                            The most powerful module, should be used when you have above 80,000 open
-tickets. It uses an extra <literal>ticket_index</literal> table, which will
-be populated with keywords based on ticket data. Use
-<filename>bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild</filename>
-for generating an initial index after switching backends.
+                            当您有超过80,000个处理中的工单时，应该使用最强大的模块。
+它使用一个额外的<literal>ticket_index</literal>表，用基于工单数据的关键字填充。
+在切换后端模块后使用<filename>bin/otrs.Console.pl
+Maint::Ticket::QueueIndexRebuild</filename>生成初始索引。
                         </para>
                     </listitem>
                 </varlistentry>
             </variablelist>
             <para>
-                You can change the used IndexAccelerator module via SysConfig.
+                你可以通过系统配置来修改使用的IndexAccelerator模块。
             </para>
         </section>
 
         <section id="performance-tuning-otrs-search">
-            <title>SearchIndexModule</title>
+            <title>SearchIndexModule（搜索索引模块）</title>
             <para>
-                This module helps to extend your articles full-text search (From, To, Cc,
-Subject and Body search).  There are two backend modules for the search
-index:
+                这个模块有助于扩展您的信件全文搜索（发件人、收件人、抄送、标题和正文搜索）。 搜索索引有两个后端模块：
             </para>
             <variablelist>
                 <varlistentry>
                     <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
                     <listitem>
                         <para>
-                            This is the default option, and will will do full-text searches on live data
-(it works fine for up to 50,000 tickets).
+                            This is the default option, and will do full-text searches on live data (it
+works fine for up to 50,000 tickets).
                         </para>
                     </listitem>
                 </varlistentry>
@@ -72,31 +67,31 @@ index:
                     <term><literal>Kernel::System::Ticket::ArticleSearchIndex::StaticDB</literal></term>
                     <listitem>
                         <para>
-                            This module will strip all articles and build an index after article
-creation, increasing performance of full-text searches up to 50%.
+                            这个模块将剥离所有文章，并在创建文章后构建索引，从而提高多达50%的全文搜索性能。
                         </para>
                     </listitem>
                 </varlistentry>
             </variablelist>
             <para>
-                You can change the used SearchIndexModule via SysConfig.
+                你可以通过系统配置来修改使用的SearchIndexModule（搜索索引模块）。
             </para>
             <para>
-                To create an initial index, use <filename>bin/otrs.Console.pl
-Maint::Ticket::FulltextIndexRebuild</filename>.
+                使用<filename>bin/otrs.Console.pl
+Maint::Ticket::FulltextIndexRebuild</filename>来创建初始索引。
             </para>
             <para>
-                For StaticDB module, there are some options available for fine tuning:
+                对于StaticDB模块，有一些可用于微调的选项：
             </para>
             <variablelist>
                 <varlistentry>
                     <term><literal>Ticket::SearchIndex::Attribute</literal></term>
                     <listitem>
                         <para>
-                            The attribute "WordCountMax" defines the maximum of words which will be
-processed to build up the index. For example only the first 1000 words of an
-article body are stored in the article search index. The attributes
-"WordLengthMin" and "WordLengthMax" are used as word length boundaries. Only
+                            The attribute <literal>WordCountMax</literal> defines the maximum of words
+which will be processed to build up the index. For example only the first
+1000 words of an article body are stored in the article search index. The
+attributes <literal>WordLengthMin</literal> and
+<literal>WordLengthMax</literal> are used as word length boundaries. Only
 words with a length between these two values are stored in the article
 search index.
                         </para>
@@ -106,25 +101,23 @@ search index.
                     <term><literal>Ticket::SearchIndex::Filters</literal></term>
                     <listitem>
                         <para>
-                            There are three default filters defined:
+                            定义了三个默认过滤器：
                         </para>
                         <itemizedlist mark='opencircle'>
                             <listitem>
                                 <para>
-                                    The first filter strips out special chars like: <literal>, &amp; &lt; &gt; ?
-" ! * | ; [ ] ( ) + $ ^=</literal>
+                                    第一个过滤器剥离特殊的字符，如：<literal>, &amp; &lt; &gt; ? " ! * | ; [ ] ( ) + $
+^=</literal>
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    The second filter strips out words which begin or ends with one of following
-chars: <literal>' : .</literal>
+                                    第二个过滤器剥离使用以下字符之一开始或结束的字词：<literal>' : .</literal>
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    The third filter strips out words which do not contain a word-character:
-<literal>a-z, A-Z, 0-9, _</literal>
+                                    第三个过滤器剥离不包含字符的单词：<literal>a-z, A-Z, 0-9, _</literal>
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -134,8 +127,7 @@ chars: <literal>' : .</literal>
                     <term><literal>Ticket::SearchIndex::StopWords</literal></term>
                     <listitem>
                         <para>
-                            There are so-called stop-words defined for some languages. These stop-words
-will be skipped while creating the search index.
+                            有一些语言定义了所谓的停止词。 创建搜索索引时将跳过这些停止词。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -152,22 +144,19 @@ will be skipped while creating the search index.
                     <term><literal>Kernel::System::Ticket::ArticleStorageDB</literal></term>
                     <listitem>
                         <para>
-                            This default module will store attachments in the database.
+                            这个默认模块将附件存储在数据库中。
                         </para>
                         <note>
                             <para>
-                                Don't use it with large setups.
+                                在大型安装环境中不要使用它。
                             </para>
                         </note>
                         <para>
-                            Pro: If your web server isn't running under 'otrs' user, use this module to
-avoid file permission problems.
+                            优点：如果你的WEB服务器不是以‘otrs'用户运行，使用这个模块可以避免文件权限问题。
                         </para>
                         <para>
-                            Con: It is not advisable to store attachments in your database. Take care
-that your database is able to store large objects. I.e.: configure MySQL
-with <literal>set-variable = max_allowed_packet=8M</literal> to store 8 MB
-objects (the default is 2M).
+                            缺点：不建议将附件存储到数据库中。要小心你的数据库能否存储大型对象，例如：配置MySQL的参数<literal> set-variable =
+max_allowed_packet=8M</literal>以存储8MB的对象（默认是2MB）。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -175,35 +164,27 @@ objects (the default is 2M).
                     <term><literal>Kernel::System::Ticket::ArticleStorageFS</literal></term>
                     <listitem>
                         <para>
-                            Use this module to store attachments on the local file system.
+                            使用此模块将附件存储在本地文件系统上。
                         </para>
                         <note>
                             <para>
-                                Recommended for large setups.
+                                在大型安装环境中推荐使用。
                             </para>
                         </note>
                         <para>
-                            赞成：它很快！
+                            优点：它很快！
                         </para>
                         <para>
-                            Con: Your web server should run under the 'otrs' user. Also, if you have
-multiple front-end servers, you must make sure the filesystem is shared
-between the servers. Place it on an NFS share or preferably a SAN or similar
-solution.
+                            缺点：你的WEB服务器需要以‘otrs’用户运行。另外，如果你有多个前端服务器，应确保在这些服务器中共享这个文件系统。将文件系统使用NFS共享或优先使用SAN或类似的解决方案。
                         </para>
                     </listitem>
                 </varlistentry>
             </variablelist>
             <note>
                 <para>
-                    You can switch from one back-end to the other on the fly. You can switch the
-backend in the SysConfig, and then run the command line utility
-<filename>bin/otrs.Console.pl Admin::Article::StorageSwitch</filename> to
-put the articles from the database onto the filesystem or the other way
-around. You can use the <emphasis>--target</emphasis> option to specify the
-target backend. Please note that the entire process can take considerable
-time to run, depending on the number of articles you have and the available
-CPU power and/or network capacity.
+                    你可以动态切换存储后端，切换后运行命令行工具<filename>bin/otrs.Console.pl
+Admin::Article::StorageSwitch</filename>来将文档从数据库放到文件系统中，或者从文件系统放到数据库中。你可以使用<emphasis>--target</emphasis>
+选项来指定目标后端。请注意：整个过程可能会花费相当长的时间，取决于你拥有文档的数量以及可用的CPU能力和/或网络带宽。
                 </para>
             </note>
             <para>
@@ -223,13 +204,13 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
             <title>归档工单</title>
 
             <para>
-                由于OTRS可以作为审计证明系统，删除关闭的工单可能不是个好主意。因此我们提供了将关闭工单归档的功能。
+                由于OTRS可以用作审核系统，删除关闭的工单可能不是一个好主意。 因此，我们实现了一个可以让您归档工单的功能。
             </para>
             <para>
                 匹配某个条件的工单可以标记为“已归档”。这些工单在使用常规的工单搜索或运行一个自动任务时无法访问。系统本身不再需要处理大量的工单，而只考虑‘最近’的工单就可以了。这在大型系统中能带来巨大的性能提升。
             </para>
             <para>
-                启用工单归档功能只需要下列简单的几步：
+                要使用归档功能，只需按照以下步骤操作：
             </para>
             <orderedlist>
                 <listitem>
@@ -237,10 +218,7 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
                         在系统配置中激活归档系统
                     </para>
                     <para>
-                        In the Admin page, go to SysConfig and select the group
-<literal>Ticket</literal>. In <literal>Core::Ticket</literal> you find the
-option <literal>Ticket::ArchiveSystem</literal> which is set to "no" by
-default. Change this setting to "yes" and save this change.
+                        在系统管理页面中，进入系统管理后选择<literal>Ticket（工单）</literal>组，在<literal>Core::Ticket</literal>中找到选项<literal>Ticket::ArchiveSystem</literal>，默认设置为“否”。修改这个选项为“是”并保存。
                     </para>
                 </listitem>
                 <listitem>
@@ -308,10 +286,7 @@ default. Change this setting to "yes" and save this change.
         <section id="performance-tuning-otrs-cache">
             <title>缓存</title>
             <para>
-                OTRS caches a lot of temporary data in
-<filename>/opt/otrs/var/tmp</filename>. Please make sure that this uses a
-high performance file system/storage. If you have enough RAM, you can also
-try to put this directory on a ramdisk like this:
+                OTRS在目录<filename>/opt/otrs/var/tmp</filename>下缓存了大量的临时数据。请确保它使用了高性能的文件系统或存储。如果你有足够的内存，还可以尝试把这个目录放入内存盘，如下面这样：
             </para>
             <para>
                 <screen><![CDATA[
@@ -324,14 +299,11 @@ shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
             </para>
             <note>
                 <para>
-                    Please note that this will be a non-permanent storage that will be lost on
-server reboot. All your sessions (if you store them in the filesystem) and
-your cache data will be lost.
+                    请注意：这个非永久存储会在服务器重启后丢失，所有的会话（如果你将它们存储在文件系统）和缓存数据都将丢失。
                 </para>
             </note>
             <para>
-                There is also a centralized memcached based cache backend available for
-purchase from OTRS Group.
+                还有一种基于集中内存缓存的缓存后端可从OTRS集团购买。
             </para>
         </section>
 
@@ -396,12 +368,8 @@ mysql> optimize table article;
                 </itemizedlist>
             </para>
             <para>
-                If performance is still not satisfactory, we suggest that you join the
-PostgreSQL Performance mailing list ( <ulink
-url="http://www.postgresql.org/community/lists/">
-<citetitle>http://www.postgresql.org/community/lists/</citetitle> </ulink>
-), and ask questions there. The folks on the PostgreSQL list are very
-friendly and can probably help.
+                如果仍然对PostgreSQL性能不满意，我们建议你加入PostgreSQL性能邮件列表：<ulink
+url="http://www.postgresql.org/community/lists/"><citetitle>http://www.postgresql.org/community/lists/</citetitle></ulink>，并在那里提问。PostgreSQL邮件列表上的伙计们都非常友善，应能提供适合的帮助。
             </para>
         </section>
 
@@ -410,43 +378,36 @@ friendly and can probably help.
     <section id="performance-tuning-webserver">
         <title>WEB服务器</title>
         <para>
-            Of course you should use mod_perl 2.0 ( <ulink
-url="http://perl.apache.org/">
-<citetitle>http://perl.apache.org/</citetitle> </ulink> ). It's much faster
-(~ *100) than pure CGI, but it needs more RAM.
+            毫无疑问你应该使用 mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
+)。它比纯CGI快了约100倍，但它需要更多的内存。
         </para>
 
         <section id="performance-tuning-webserver-db">
             <title>预建立的数据库连接</title>
             <para>
-                You can have the database connections pre-established on startup of the web
-server. This saves time (see <filename>README.webserver</filename>).
+                你可以在WEB服务器启动时就预先建立数据库连接。这可以节约时间（参阅WEB服务器的<filename>README</filename>文档）。
             </para>
         </section>
 
         <section id="performance-tuning-webserver-startup">
             <title>预装载的模块 - startup.pl</title>
             <para>
-                Use the startup script <filename>scripts/apache2-perl-startup.pl</filename>
-for preloaded/precompiled Perl modules on your mod_perl webserver to be
-faster, with a smaller memory footprint (see
-<filename>README.webserver</filename>).
+                在你的mod_perl
+WEB服务器上为预装载的/预编译的Perl模块使用启动脚本<filename>scripts/apache2-perl-startup.pl</filename>，仅需少量内存即可让WEB服务器更快（参阅WEB服务器的<filename>README</filename>文档）。
             </para>
         </section>
         <section id="performance-tuning-webserver-reload">
             <title>当磁盘文件更新时重载Perl模块</title>
             <para>
-                By default Apache::Reload is used in
-<filename>scripts/apache2-httpd.include.conf</filename>. Disable it and you
-will get 8% more speed. But remember to restart the web server if you
-install any modules via the OTRS Package Manager, or any values in your
-SysConfig or in <filename>Kernel/Config.pm</filename>.
+                默认情况下在<filename>scripts/apache2-httpd.include.conf</filename>中使用Apache ::
+Reload。禁用它，你将获得8％的速度提升。
+但是，如果您通过OTRS软件包管理器安装任何模块，或在系统配置或<filename>Kernel/Config.pm</filename>中修改了任何值，请记得重启Web服务器。
             </para>
             <important>
                 <para>
-                    This would also mean you can't use the OTRS Package Manager via the web
-interface, you will need to use the console commands:
-<filename>bin/otrs.Console.pl Admin::Package::*</filename>.
+                    这也意味着你不能通过Web界面使用OTRS软件包管理器，而需要使用控制台命令：<filename>bin/otrs.Console.pl
+Admin::Package::*</filename>。
                 </para>
             </important>
         </section>
@@ -454,22 +415,15 @@ interface, you will need to use the console commands:
         <section id="performance-tuning-webserver-strategy">
             <title>选择正确的策略</title>
             <para>
-                If you have a larger installation, e.g. over 1,000 new tickets per day and
-over 40 agents, it is a good idea to read the chapters on Performance of the
-mod_perl User's Guide ( <ulink
-url="http://perl.apache.org/docs/2.0/user/index.html">
-<citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle>
-</ulink> ).
+                如果你是一个大型安装环境，比如每天超过1000个新工单且超过40个服务人员，建议阅读mod_perl用户手册的性能章节（<ulink
+url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>）。
             </para>
         </section>
 
         <section id="performance-tuning-webserver-gzip">
             <title>mod_gzip/mod_deflate</title>
             <para>
-                If your bandwidth is small, use <literal>mod_deflate</literal> for
-Apache2. If you have an html page with 45k,
-<literal>mod_gzip</literal>/<literal>mod_deflate</literal> compresses it to
-about 7k. The drawback is that this increases the load on the server side.
+                如果你的带宽较小，可在Apache2中使用<literal>mod_deflate</literal>模块。<literal>mod_gzip</literal>/<literal>mod_deflate</literal>能够一个45K的HTML页面压缩到约7K。缺点是这会增加WEB服务器端的负载。
             </para>
         </section>
 

@@ -30,85 +30,94 @@ url="http://www.yaml.org/">http://www.yaml.org/</ulink>.
         <programlisting><![CDATA[
 ---
 Debugger:
-DebugThreshold: debug
+  DebugThreshold: debug
 Description: This an example of a web service configuration
 Provider:
-Operation:
-CloseIncident:
-Description: This is a test operation
-MappingInbound: {}
-MappingOutbound: {}
-RemoteSystemGuid: ''
-Type: Test::Test
-Test:
-Description: This is a test operation
-MappingInbound:
-Config:
-KeyMapDefault:
-MapTo: ''
-MapType: Keep
-KeyMapExact:
-Prio: Priority
-ValueMap:
-Priority:
-ValueMapExact:
-Critical: 5 Very High
-Information: 1 Very Low
-Warning: 3 Normal
-ValueMapDefault:
-MapTo: 3 Normal
-MapType: MapTo
-Type: Simple
-MappingOutbound:
-Config:
-KeyMapDefault:
-MapTo: ''
-MapType: Ignore
-KeyMapExact:
-Priority: Prio
-ValueMap:
-Prio:
-ValueMapExact:
-1 Very Low: Information
-3 Normal: Warning
-5 Very High: Critical
-ValueMapDefault:
-MapTo: ''
-MapType: Ignore
-Type: Simple
-Type: Test::Test
-Transport:
-Config:
-MaxLength: 10000000
-NameSpace: http://www.example.com/actions
-Type: HTTP::SOAP
+  Operation:
+    CloseIncident:
+      Description: This is a test operation
+      MappingInbound: {}
+      MappingOutbound: {}
+      RemoteSystemGuid: ''
+      Type: Test::Test
+    Test:
+      Description: This is a test operation
+      MappingInbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Keep
+          KeyMapExact:
+            Prio: Priority
+          ValueMap:
+            Priority:
+              ValueMapExact:
+                Critical: 5 Very High
+                Information: 1 Very Low
+                Warning: 3 Normal
+          ValueMapDefault:
+            MapTo: 3 Normal
+            MapType: MapTo
+        Type: Simple
+      MappingOutbound:
+        Config:
+          KeyMapDefault:
+            MapTo: ''
+            MapType: Ignore
+          KeyMapExact:
+            Priority: Prio
+          ValueMap:
+            Prio:
+              ValueMapExact:
+                1 Very Low: Information
+                3 Normal: Warning
+                5 Very High: Critical
+          ValueMapDefault:
+            MapTo: ''
+            MapType: Ignore
+        Type: Simple
+      Type: Test::Test
+  Transport:
+    Config:
+      MaxLength: 10000000
+      NameSpace: http://www.example.com/actions
+    Type: HTTP::SOAP
 RemoteSystem: remote.system.description.example.com
 Requester:
-Invoker:
-Test:
-Description: This is a test invoker
-Events:
-- Asynchronous: 1
-Event: TicketCreate
-- Asynchronous: 0
-Event: ArticleUpdate
-MappingInbound:
-Type: Simple
-MappingOutbound:
-Type: Simple
-Type: Test::Test
-Transport:
-Config:
-Authentication:
-Password: '*******'
-Type: BasicAuth
-User: otrs
-Encoding: utf-8
-Endpoint: http://www.example.com:8080/endpoint
-NameSpace: http://www.example.com/actions
-SOAPAction: Yes
-SOAPActionSeparator: '#'
-Type: HTTP::SOAP
+  Invoker:
+    Test:
+      Description: This is a test invoker
+      Events:
+        - Asynchronous: 1
+        Condition:
+          Condition:
+            '1':
+              Fields:
+                Queue:
+                  Match: Raw
+                  Type: String
+              Type: and
+          ConditionLinking: and
+          Event: TicketCreate
+        - Asynchronous: 0
+          Event: ArticleUpdate
+      MappingInbound:
+        Type: Simple
+      MappingOutbound:
+        Type: Simple
+      Type: Test::Test
+  Transport:
+    Config:
+      Authentication:
+        Password: '*******'
+        Type: BasicAuth
+        User: otrs
+      Encoding: utf-8
+      Endpoint: http://www.example.com:8080/endpoint
+      NameSpace: http://www.example.com/actions
+      SOAPAction: Yes
+      SOAPActionSeparator: '#'
+    Type: HTTP::SOAP
             ]]>
         </programlisting>
     </para>
@@ -229,37 +238,37 @@ Operationen können unterschiedliche Einstellungen beinhalten.
                         </listitem>
                         <listitem>
                             <para>
-                                MappingInbound: Ein Container für die Mapping-Einstellung für eingehende
-Anfragen.
+                                MappingInbound: a container for the mapping settings for the incoming
+request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingOutbound: Ein Container für die Mapping-Einstellung für ausgehende
-Anfragen.
+                                MappingOutbound: a container for the mapping settings for the outgoing
+response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Type: Das Operation-Backend, im Format Controller::Operation.
+                                Type: the operation backend, in Controller::Operation format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
                         <title>eingehendes Mapping</title>
                         <para>
-                            Dieser Abschnitt basiert auf Mappings vom Typ "Simple". Andere Mappings
-können eventuell mehr oder andere Einstellungen beinhalten.
+                            This section is based on mappings from type "Simple". Other mappings might
+contain more or different settings.
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config: Ein Container für diese Mapping-Einstellungen.
+                                    Config: a container for this mapping settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Type: Das Mapping-Backend.
+                                    Type: the mapping backend.
                                 </para>
                             </listitem>
 
@@ -269,24 +278,23 @@ können eventuell mehr oder andere Einstellungen beinhalten.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            KeyMapDefault: Ein Container für alle nicht gemappten Key-Einstellungen.
+                                            KeyMapDefault: a container for all non mapped keys settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ValueMapDefault: Ein Container für alle nicht gemappten Wert-Einstellungen.
+                                            ValueMapDefault: a container for all non mapped values settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapExact: Ein Container für alle exakten Key-Mappings (Kardinalität 0
-.. 1).
+                                            KeyMapExact: a container for all exact key mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapRegEx: Ein Container für alle regulären Regular Expression
-Key-Mappings (Kardinalität 0 .. 1).
+                                            KeyMapRegEx: a container for all regular expression key mappings
+(cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
@@ -560,6 +568,12 @@ Daemon.
                                     </listitem>
                                     <listitem>
                                         <para>
+                                            Condition: Container for event conditions to trigger the invoker, if there
+are no conditions, event will always trigger the invoker.
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
                                             Event: Der Name des Event-Triggers.
                                         </para>
                                         <itemizedlist>
@@ -752,6 +766,113 @@ Daemon.
                                 </itemizedlist>
                             </listitem>
                         </itemizedlist>
+                        <section>
+                            <title>Bedingung</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Condition: Container to actual event conditions.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        ConditionLinking: Defines how multiple condition interacts with each other.
+                                    </para>
+                                    <itemizedlist>
+                                        <title>Possible Values (for condition linking)</title>
+                                        <listitem><para>and</para></listitem>
+                                        <listitem><para>oder</para></listitem>
+                                        <listitem><para>xor</para></listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                            <section>
+                                <title>Condition -&gt; Condition</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            &lt;ConditionName&gt;: Container for the condition elements.
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                                <section>
+                                    <title>&lt;ConditionName&gt;</title>
+                                    <para>
+                                        Unique name for the condition within the invoker and event the GUI assigns
+consecutive integer condition names starting from 1.
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                Fields: Container for field conditions.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Type: Define how multiple fields interact within its condition.
+                                            </para>
+                                            <itemizedlist>
+                                                <title>Possible Values (for condition linking)</title>
+                                                <listitem><para>and</para></listitem>
+                                                <listitem><para>oder</para></listitem>
+                                                <listitem><para>xor</para></listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>Felder</title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    &lt;FieldName&gt;: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>&lt;FieldName&gt;</title>
+                                            <para>
+                                                The name of a field from the event object (e.g.  for Ticket Events, the
+fields could be Queue Priority Type, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        Match: The value to match from the selected against the event object using
+the Type modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        Type: Modifier to the Match value.
+                                                    </para>
+                                                    <itemizedlist>
+                                                        <title>Possible Values (for type modifier)</title>
+                                                        <listitem>
+                                                            <para>
+                                                                String: Direct compare between object field value and
+<literal>Match</literal> value.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                Regexp: Compare object field value with the regular expression defined in
+the <literal>Match</literal> value.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                Module: Use the module defined in the <literal>Match</literal> with the
+object data.
+                                                            </para>
+                                                        </listitem>
+                                                    </itemizedlist>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
                     </section>
                     <section>
                         <title>eingehendes Mapping</title>

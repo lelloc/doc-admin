@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+  
 
-
+<!-- $Id: external-backends.xml,v 1.2 2012-11-30 11:13:05 mb Exp $ -->
 <section id="external-backends">
 <title>使用外部后端</title>
 
@@ -210,11 +211,10 @@ linux:~#
 
 <note>
     <para>
-        Please note that you may omit <literal>http-link-target</literal> and
-<literal>link class</literal> keys in map array elements, if they are not to
-be used. These keys add <literal>target=""</literal> and
-<literal>class=""</literal> attributes to the HTTP link element,
-respectively. They are ignored if <literal>http-link</literal> is not set.
+        请注意，您可以忽略在映射中的数组元素<literal>http-link-target</literal>和<literal>link
+class</literal>键，如果他们不被使用。
+这些键分别将<literal>target=""</literal>和<literal>class=""</literal>属性添加到HTTP链接元素。
+如果没有设置<literal>http-link</literal>，则忽略它们。
     </para>
 </note>
 
@@ -289,11 +289,7 @@ linux:~#
 </para>
 
 <para>
-To realize this setup, change the customer_user table and the mapping in
-<filename>Kernel/Config.pm</filename> as described above. Then load the
-settings for customer A via the Customers link in the Agent interface or via
-the Admin page. If the settings are displayed, add into the field for
-CustomerIDs the values "B;C;".
+要实现这个设置，修改表customer_user并按以上描述修改文件<filename>Kernel/Config.pm</filename>中的映射。然后在服务人员界面中或者通过系统管理页面载入客户联系人A的设置，设置显示出来后，将CustomerIDs字段输入值“B;C;”。
 </para>
 
 </example>
@@ -616,14 +612,16 @@ $Self->{CustomerUser2} = {
     </para>
     <para>
         To activate this optional feature of OTRS, please activate the settings
-"Ticket::EventModulePost###950-DynamicFieldFromCustomerUser" and
-"DynamicFieldFromCustomerUser::Mapping". The latter setting contains the
-configuration of which CustomerUser field entry should be stored in which
-ticket dynamic field. The fields must be present in the system and should be
-enabled for AgentTicketFreeText, so that they can be set manually. They
-mustn't be enabled for AgentTicketPhone, AgentTicketEmail and
-AgentTicketCustomer. If they were, they would have precedence over the
-automatically set values.
+<literal>Ticket::EventModulePost###950-DynamicFieldFromCustomerUser</literal>
+and <literal>DynamicFieldFromCustomerUser::Mapping</literal>. The latter
+setting contains the configuration of which <literal>CustomerUser</literal>
+field entry should be stored in which ticket dynamic field. The fields must
+be present in the system and should be enabled for
+<literal>AgentTicketFreeText</literal>, so that they can be set
+manually. They mustn't be enabled for <literal>AgentTicketPhone</literal>,
+<literal>AgentTicketEmail</literal> and
+<literal>AgentTicketCustomer</literal>. If they were, they would have
+precedence over the automatically set values.
     </para>
 </section>
 
@@ -1010,11 +1008,7 @@ $Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
 <title>定制WEB界面</title>
 
 <para>
-To display the new field for the room number in the customer.pl web
-interface, the .tt file responsible for the layout in this interface has to
-be modified. Edit the
-<filename>Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt</filename>
-file, adding the new field around line 130 (see Script below).
+要在WEB界面customer.pl中显示新的房间号字段，必须修改界面布局的.tt文件。编辑<filename>Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt</filename>文件，在130行附近添加新字段的内容（见下面的脚本）。
 </para>
 
 <para>

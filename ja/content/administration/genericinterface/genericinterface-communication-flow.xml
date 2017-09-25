@@ -234,7 +234,7 @@
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        依頼者への直通電話は、新規依頼を作成し、それをレイヤーを通して渡すためにされます。
+                                                        要求者への直接呼び出しは、新しい要求を作成し、それをレイヤーに渡すために行われます。
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -246,18 +246,13 @@
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        Create a new Generic Interface (Requester)  task for the OTRS Daemon (by
-delegating the request execution to the Scehduler Daemon, the user
-experience could be highly improved, otherwise all the time needed to
-prepare the request and the remote execution will be added to the OTRS
-Events that trigger those requests).
+                                                        OTRSデーモン用の新しいGeneric
+Interface（要求者）タスクを作成します（Scehdulerデーモンに要求実行を委任することにより、ユーザーエクスペリエンスが大幅に向上することが可能になります。そうでなければ、これらの要求のトリガによって、要求を準備するのとリモート実行に必要な時間が必要になります）。
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        In its next cycle the OTRS daemon process reads the new task and creates a
-call to the Requester that will create a new request and then passes it
-through the layers.
+                                                        次のサイクルでは、OTRSデーモンプロセスが新規タスクを読んで、リクエスタへの呼び出しを作成します。このリクエスタは新しい要求を作成し、それをレイヤーに渡します。
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -278,17 +273,17 @@ through the layers.
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        受信データ(もし必要ならば)を有効にします。
+                                        受信したデータを検証します（必要な場合）。
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        データを補足する(もし必要ならば)呼び出しコア・モジュール。
+                                        データを補完するためにコアモジュールを呼び出します（必要な場合）。
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        依頼データ構造を返すか、あるいは卒なく依頼を取り消すために依頼者にStop Communication信号を送ってください。
+                                        要求データ構造を返すか、要求側に停止通信信号を送信し、正しく要求をキャンセルします。
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -300,7 +295,7 @@ through the layers.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        依頼アクション(Invokers)(これはモジュールベースのレイヤではありません)から渡されるようなデータ。
+                                        呼び出し元から渡されたデータ(これはモジュールベースのレイヤではありません)。
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -329,7 +324,7 @@ through the layers.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        変換され、遠隔のシステムに送るために準備できたデータ。
+                                        リモートシステムに送信するために変換され準備されたデータ。
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -341,7 +336,7 @@ through the layers.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            依頼者からリモート・システム表示形式に既に変換されたリモート・オペレーション・フォーマットおよびデータを受け取ります。
+                                            リモート・オペレーション名と、既にリモート・システム・フォーマットに変換されたデータを要求側から受信します。
                                         </para>
                                     </listitem>
                                     <listitem>
@@ -351,7 +346,7 @@ through the layers.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Sends the request to the remote system and waits for the response.
+                                            要求をリモートシステムに送信し、応答を待ちます。
                                         </para>
                                     </listitem>
                                 </itemizedlist>
@@ -368,12 +363,12 @@ through the layers.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        レスポンスを受け取り、データ・ペイロードをでコードします。
+                                        応答を受信し、データペイロードをデコードします。
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        依頼者にデータを返します。
+                                        データを要求側に返します。
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -385,7 +380,7 @@ through the layers.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Data as received from the Remote System.
+                                        リモートシステムから受信したデータ。
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -397,7 +392,7 @@ through the layers.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    データは、このオペレーション(入信応答データ用マッピング)のためのマッピング構成の中で指定される外部システム・フォーマットからOTRS内部形式へと変換されます。
+                                    データは、この操作のマッピング設定で指定されているように、外部システムフォーマットからOTRS内部フォーマットに変換されます（受信応答データのマッピング）。
                                 </para>
                             </listitem>
                             <listitem>
@@ -414,7 +409,7 @@ through the layers.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    既に変形済データは、依頼者に返されます。
+                                    データは変換され、依頼者に返送される準備ができています。
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -431,25 +426,24 @@ through the layers.
                             </listitem>
                             <listitem>
                                 <para>
-                                    特に各依頼アクション(Invokers)(もしあればエラーハンドリングを含む)に必要とされていたデータを処理します。
+                                    各Invokerによって必要に応じてデータを処理します(存在する場合はエラー処理を含みます)。
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    依頼者に依頼アクション(Invokers)結果およびデータを返します。
+                                    依頼者に実行者の結果とデータを返します。
                                 </para>
                             </listitem>
                         </itemizedlist>
                     </listitem>
                     <listitem>
                         <para>
-                            Event Handler or OTRS Daemon
+                            イベントハンドラまたはOTRSデーモン
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Receives the data from the Requester. In the case of the OTRS Daemon this
-data might contain information to create a task in the future.
+                                    依頼者からデータを受信します。 OTRSデーモンの場合、このデータには将来のタスクを作成するための情報が含まれている可能性があります。
                                 </para>
                             </listitem>
                         </itemizedlist>

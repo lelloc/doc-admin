@@ -3,7 +3,7 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <chapter id="first-steps">
-<title>First Steps</title>
+<title>ファースト・ステップ</title>
 
 <abstract>
 <para>
@@ -13,6 +13,30 @@
 
 <section id="agent-interface">
 <title>Agent Web Interface</title>
+
+    <note>
+        <para>
+            Before logging on for the first time, please consider activating the HTTPS
+on your web server in order for OTRS to be served as a secure app over
+SSL/TLS protocol. For detailed instructions on how to do this, please
+consult the documentation of your web server (e.g. Apache2).
+        </para>
+        <para>
+            After you activate HTTPS, please set the configuration option
+<literal>HttpType</literal> to <emphasis>https</emphasis> in <link
+linkend="adminarea-systemconfiguration">SysConfig</link>. This will make
+sure that all internal links in OTRS are indeed using HTTPS.
+        </para>
+        <para>
+            Good practice is to also redirect all HTTP traffic to HTTPS, in case someone
+tries to access the OTRS via an insecure link. This should be done on web
+server configuration level for maximum effect. However, in case this is not
+possible, you can set <literal>HTTPSForceRedirect</literal> to
+<emphasis>Yes</emphasis> in <link
+linkend="adminarea-systemconfiguration">SysConfig</link> to do it on
+application level.
+        </para>
+    </note>
 
 <para>
 担当者は、担当者ウェブインターフェイスで顧客のリクエストに答えることができます。顧客のためあるいは他の担当者のために新規チケットを作成し、顧客との通話に関することをチケットに書き、FAQを記入し、顧客データを編集します。
@@ -228,11 +252,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     <listitem>
         <para>チケット・リスト・ウィジェット</para>
         <para>
-            Widgets under this category share same overall behavior, look and feel. This
-widgets shows a list of tickets on a determined state. The amount of tickets
-display on each list page can be configured in widget options (they appear
-when you hover the mouse pointer over the top right part of the
-widget). This widgets support the following filters:
+            このカテゴリーの下のウィジェットは全体的な同じ挙動、ルック・アンド・フィールを共有します。このウィジェットは決定した状態のチケットのリストを表示します。チケット数は各リスト・ページに表示します。リスト・ページは、ウィジェット・オプション(あなたがウィジェットの右上部上にマウスポインタを置くとそれらが現われます)で構成することができます。このウィジェットは次のフィルタを支援します:
         </para>
         <itemizedlist mark="round">
             <listitem>
@@ -242,26 +262,31 @@ widget). This widgets support the following filters:
             <listitem>
                 <para>自身の監視チケット</para>
                 <para>
-                    ログインした担当者がウオッチリストを持っているチケット。それを表示するためにTicket::Watcher 設定をオンにすることが必要です。
+                    The tickets that the logged agent has in his/her watched list, requires
+<literal>Ticket::Watcher</literal> setting to be turned on to be displayed.
                 </para>
             </listitem>
             <listitem>
                 <para>自身の責任者</para>
                 <para>
-                    ログインしている担当者が責任者として設定されているチケット。Ticket::Responsible設定は、このフィルターを可視化できるようにオンにする必要があります。
+                    The tickets that the logged agent is set as responsible,
+<literal>Ticket::Responsible</literal> setting is required to be turned on
+in order to make this filter visible.
                 </para>
             </listitem>
             <listitem>
                 <para>自身のキューにあるチケット</para>
                 <para>
-                    このチケットは担当者が「マイ・キュー」として定義するキューにあります。
+                    The tickets that are on queues where the agent define as <emphasis>My
+Queues</emphasis>.
                 </para>
             </listitem>
             <listitem>
                 <para>担当サービス内チケット</para>
                 <para>
-                    The tickets that are assigned to services where the agent define as "My
-Services" and are on queues with at least read-only permissions.
+                    The tickets that are assigned to services where the agent define as
+<emphasis>My Services</emphasis> and are on queues with at least read-only
+permissions.
                 </para>
             </listitem>
             <listitem>
@@ -283,11 +308,12 @@ Services" and are on queues with at least read-only permissions.
             </listitem>
             <listitem>
                 <para>新規チケット</para>
-                <para>状態「新規」を持つチケット</para>
+                <para>Tickets that have state <emphasis>New</emphasis>.</para>
             </listitem>
             <listitem>
                 <para> 対応中チケット / 返答必要</para>
-                <para>状態「対応中」を持つチケットとそれらを対応する準備</para>
+                <para>Tickets that have state <emphasis>Open</emphasis> and are ready for work
+with them.</para>
             </listitem>
         </itemizedlist>
     </listitem>
@@ -297,8 +323,7 @@ Services" and are on queues with at least read-only permissions.
             カレンダ・イベントは新規チケットが作成された時、イベント・チケット・カレンダ機能が有効になります。それはチケット作成画面に表示する２つの新規フィールドを必要とし、ひとつはイベント開始時刻、他方は終了時刻用です。この２つの時刻がイベント期間を決定します。定義されます。
         </para>
         <para>
-            This widget includes the following views: month, week and day. Agents can
-scroll through the pages by using the right and left arrows.
+            このウィジェットは次のビューを含みます：月、週、日。担当者は左右の矢印を使用することでページからスクロールできます。
         </para>
         <para>
             直前にウィジェットは十分に有効になっていないと述べたようにチケット用の「Date/Time」の動的フィールドのいくつかはシステムに追加し、（管理者パネルにある動的フィールドリンク経由で）それらをこのウィジェットのためにSysConfigで設定すべきです。両方の動的フィールドはチケット生成画面に表示されるように構成されるべきです。それらは、カレンダのイベント（開始及び終了時間）用の時間枠について記述するために、チケット生成あるいは他のチケット・アクション画面(例えば自由フィールド)中に満たされるべきです。チケット・ズーム画面は、それが必要であると考えた場合、動的フィールドも示すように構成されるかもしれません。
@@ -312,8 +337,9 @@ fileref="screenshots/introduction/firststeps/events-ticket-calendar.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            このウィジェットのためのさらなる構成は、SysConfig中の"Frontend::Agent::Dashboard::EventsTicketCalendar"
-サブグループの下で見つけられるかもしれません。
+            Further configurations for this widget could be found under the
+<literal>Frontend::Agent::Dashboard::EventsTicketCalendar</literal> SubGroup
+in the SysConfig:
         </para>
         <itemizedlist mark="round">
             <listitem>
@@ -370,9 +396,9 @@ the widgets you want to show or hide. This is the Settings widget. Click on
 it's header to expand the section and see all available widgets, as shown in
 Figure. Each widget name has a checkbox. Use this checkboxes to define the
 visibility of the widgets in the dashboard (unchecked widgets will not be
-shown) after you define the visibility options and click on 'Save' for
-storing your changes.  This section is fixed on the screen, this means you
-can't drag and drop it, or close it.
+shown) after you define the visibility options and click on
+<emphasis>Save</emphasis> for storing your changes.  This section is fixed
+on the screen, this means you can't drag and drop it, or close it.
 </para>
 
 <para>
@@ -478,7 +504,7 @@ The queue overview offers a variety of options for daily work with OTRS. The
 first of these is the My Queue. In the Agent Preferences, or when
 administering agents, a set of queues can be defined for which the agent has
 been assigned to work within. All the tickets will appear in this default
-view, when accessing the Tickets -> Queue View menu.
+view, when accessing the <emphasis>Tickets -> Queue View</emphasis> menu.
 </para>
 
 <para>
@@ -489,8 +515,9 @@ view, when accessing the Tickets -> Queue View menu.
 In both of the view types, the user also has the added ability to see either
 all unlocked tickets (this is the default filter), or the user can then
 choose to view all available tickets. Tickets must be in one of the viewable
-state types to be shown in the queue view. Per default, these are 'open,
-new, pending reminder, pending auto'.
+state types to be shown in the queue view. Per default, these are
+<literal>open</literal>, <literal>new</literal>, <literal>pending
+reminder</literal>, <literal>pending auto</literal>.
 </para>
 
 <para>
@@ -499,7 +526,7 @@ new, pending reminder, pending auto'.
 
 <para>
 <figure>
-    <title>担当者キュー・ビュー視覚アラーム </title>
+    <title>Agent Queue View visual alarms</title>
 <screenshot>
 <graphic
 fileref="screenshots/introduction/firststeps/agent-queue-overview-visual-alarms.gif"
@@ -509,21 +536,25 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <itemizedlist>
     <title>視覚アラーム</title>
     <listitem>
-        <para>ハイライト 時間 1 :
-未対応のチケットを含んでいるハイライトされたキューに対して、数分(第1のレベル)の時間をセットします。「未対応」キューの中で上部に表示されます。</para>
+        <para>Highlight Age 1: Sets the age in minutes (first level) for highlighting
+queues that contain untouched tickets. Seen in above in the
+<emphasis>Raw</emphasis> queue.</para>
     </listitem>
     <listitem>
-        <para>ハイライト 時間 2 :
-未対応のチケットを含んでいるハイライトされたキューに対して、数分(第2のレベル)の時間をセットします。「ポストマスター」キューの中で上部に表示されます。</para>
+        <para>Highlight Age 2: Sets the age in minutes (second level) for highlighting
+queues that contain untouched tickets. Seen in above in the
+<emphasis>Postmaster</emphasis> queue.</para>
     </listitem>
     <listitem>
         <para>Blink: A blinking mechanism of the queue that contains the oldest ticket can
-be activated using Ticket::Frontend::AgentTicketQueue###Blink. Not supported
+be activated using
+<literal>Ticket::Frontend::AgentTicketQueue###Blink</literal>. Not supported
 in all browsers. In that case, the queue name will just appear in red color,
-as seen in above on the queue "Junk".</para>
+as seen in above on the queue <emphasis>Junk</emphasis>.</para>
     </listitem>
     <listitem>
-        <para>太字：現在のキューは「マイキュー」の上部に太字で見えます。</para>
+        <para>Bold: The current queue will be bolded, as seen above in the <emphasis>My
+Queues</emphasis>.</para>
     </listitem>
 </itemizedlist>
 </section>

@@ -423,21 +423,21 @@ használni a folyamatjegyeknél.
             <example>
                 <title>Az összes lehetséges fontos ACL-beállítást bemutató hivatkozás.</title>
 <programlisting>
-# ticket acl
-$Self->{TicketAcl}->{'200-ACL-Reference'} = {
-    # match properties (current values from the form)
+# jegy ACL
+$Self->{TicketAcl}->{'200-ACL-hivatkozas'} = {
+    # illesztési tulajdonságok (jelenlegi értékek az űrlapról)
     Properties => {
 
-        # the used frontend module
+        # a használt előtétprogram modul
         Frontend => {
             Action => ['AgentTicketPhone', 'AgentTicketEmail'],
         },
 
-        # the logged in agent
+        # a bejelentkezett ügyintéző
         User => {
-            UserLogin => ['some login'],
+            UserLogin => ['felhasználónevek'],
             Group_rw => [
-                'hotline',
+                'forródrót',
             ],
             Role => [
                 'admin',
@@ -445,65 +445,65 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         },
 
-        # the logged in customer
+        # a bejelentkezett ügyfél
         CustomerUser => {
-            UserLogin => ['some login'],
-            UserCustomerID => ['some customer id'],
+            UserLogin => ['felhasználónevek'],
+            UserCustomerID => ['ügyfél-azonosítók'],
             Group_rw => [
-                'hotline',
+                'forródrót',
             ],
             # ...
         },
 
-        # process properties
+        # folyamat tulajdonságok
         Process => {
-            ProcessEntityID        => ['Process-9c378d7cc59f0fce4cee7bb9995ee3eb'],         # the Process that the current ticket is part of
-            ActivityEntityID       => ['Activity-f8b2fdebe54eeb7b147a5f8e1da5e35c'],        # the current Activity of the ticket
-            ActivityDialogEntityID => ['ActivityDialog-aff0ae05fe6803f38de8fff6cf33b7ce'],  # the current ActivityDialog that the Agent/Customer is using
+            ProcessEntityID        => ['Process-9c378d7cc59f0fce4cee7bb9995ee3eb'],         # az a folyamat, amelynek a jelenlegi jegy a része
+            ActivityEntityID       => ['Activity-f8b2fdebe54eeb7b147a5f8e1da5e35c'],        # a jegy jelenlegi tevékenysége
+            ActivityDialogEntityID => ['ActivityDialog-aff0ae05fe6803f38de8fff6cf33b7ce'],  # a jelenlegi tevékenység párbeszéd, amelyet az ügyintéző/ügyfél használ
         },
 
-        # ticket properties
+        # jegy tulajdonságok
         Queue => {
-            Name     => ['Raw'],
-            QueueID  => ['some id'],
-            GroupID  => ['some id'],
-            Email    => ['some email'],
-            RealName => ['OTRS System'],
+            Name     => ['Nyers'],
+            QueueID  => ['azonosítók'],
+            GroupID  => ['azonosítók'],
+            Email    => ['e-mail címek'],
+            RealName => ['OTRS rendszer'],
             # ...
         },
         Service => {
-            ServiceID => ['some id'],
-            Name      => ['some name'],
-            ParentID  => ['some id'],
+            ServiceID => ['azonosítók'],
+            Name      => ['nevek'],
+            ParentID  => ['azonosítók'],
             # ...
         },
         Type => {
-            ID   => ['some id'],
-            Name => ['some name'],
+            ID   => ['azonosítók'],
+            Name => ['nevek'],
             # ...
         },
         Priority = {
-            ID   => ['some id'],
-            Name => ['some name'],
+            ID   => ['azonosítók'],
+            Name => ['nevek'],
             # ...
         },
         SLA = {
-            SLAID    => ['some id'],
-            Name     => ['some name'],
-            Calendar => ['some calendar'],
+            SLAID    => ['azonosítók'],
+            Name     => ['nevek'],
+            Calendar => ['naptárak'],
             # ...
         },
         State = {
-            ID       => ['some id'],
-            Name     => ['some name'],
-            TypeName => ['some state type name'],,
-            TypeID   => ['some state type id'],
+            ID       => ['azonosítók'],
+            Name     => ['nevek'],
+            TypeName => ['állapottípusnév'],,
+            TypeID   => ['állapottípus-azonosító'],
             # ...
         },
         Owner => {
-            UserLogin => ['some login'],
+            UserLogin => ['felhasználónevek'],
             Group_rw => [
-                'some group',
+                'csoportok',
             ],
             Role => [
                 'admin',
@@ -511,9 +511,9 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         },
         Responsible => {
-            UserLogin => ['some login'],
+            UserLogin => ['felhasználónevek'],
             Group_rw => [
-                'some group',
+                'csoportok',
             ],
             Role => [
                 'admin',
@@ -521,74 +521,74 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
             # ...
         },
         DynamicField => {
-            # Names must be in DynamicField_&lt;field_name&gt; format.
-            # Values in [ ... ] must always be the untranslated internal data keys
-            #   specified in the dynamic field definition and
-            #   not the data values shown to the user.
-            DynamicField_Field1          => ['some value'],
-            DynamicField_OtherField      => ['some value'],
-            DynamicField_TicketFreeText2 => ['some value'],
+            # A neveknek DynamicField_&lt;mezonev&gt; formátumban kell lenniük.
+            # A tömbben [ ... ] lévő értékeknek mindig a dinamikus mező
+            #   meghatározásban megadott lefordítatlan belső adatkulcsoknak
+            #   kell lenniük, és nem a felhasználónak megjelenített adatértékeknek.
+            DynamicField_Mezo1             => ['valamilyen érték'],
+            DynamicField_MasikMezo         => ['valamilyen érték'],
+            DynamicField_JegySzabadSzoveg2 => ['valamilyen érték'],
             # ...
         },
-        # alternatively, ticket properties can be specified in the ticket hash
+        # vagylagosan a jegytulajdonságok megadhatók a jegykivonatban
         Ticket => {
-            Queue                => ['Raw'],
+            Queue                => ['Nyers'],
             State                => ['new', 'open'],
-            Priority             => ['some priority'],
+            Priority             => ['prioritások'],
             Lock                 => ['lock'],
-            CustomerID           => ['some id'],
-            CustomerUserID       => ['some id'],
-            Owner                => ['some owner'],
-            DynamicField_Field1  => ['some value'],
-            DynamicField_MyField => ['some value'],
+            CustomerID           => ['azonosítók'],
+            CustomerUserID       => ['azonosítók'],
+            Owner                => ['tulajdonosok'],
+            DynamicField_Mezo1   => ['valamilyen érték'],
+            DynamicField_EnMezom => ['valamilyen érték'],
             # ...
         },
     },
 
-    # match properties (existing values from the database)
+    # illesztési tulajdonságok (létező értékek az adatbázisból)
     PropertiesDatabase => {
-        # See section "Properties", the same config can be used here.
+        # Lásd a „Properties” szakaszt, ugyanaz a beállítás használható itt is.
         # ...
     }
 
-    # reset possible options (white list)
+    # lehetséges lehetőségek visszaállítása (fehér lista)
     Possible => {
-        # possible ticket options (white list)
+        # lehetséges jegylehetőségek (fehér lista)
         Ticket => {
-            Queue => ['Hotline', 'Coordination'],
-            State => ['some state'],
-            Priority => ['5 very high'],
-            DynamicField_Field1  => ['some value'],
-            DynamicField_MyField => ['some value'],
+            Queue                => ['Forródrót', 'Koordináció'],
+            State                => ['állapotok'],
+            Priority             => ['5 very high'],
+            DynamicField_Mezo1   => ['valamilyen érték'],
+            DynamicField_EnMezom => ['valamilyen érték'],
             # ...
-            NewOwner => ['some owner'],
-            OldOwner => ['some owner'],
+            NewOwner             => ['valamilyen tulajdonos'],
+            OldOwner             => ['valamilyen tulajdonos'],
             # ...
         },
 
-        # Limit the number of possible ActivityDialogs the Agent/Customer
-        #   can use in a process ticket.
-        ActivityDialog => ['AD1', 'AD3'],
+        # A lehetséges tevékenység párbeszédek számának korlátozása,
+        #   amelyeket az ügyintéző/ügyfél használhat egy folyamatjegyben.
+        ActivityDialog => ['TP1', 'TP3'],
 
-        # Limit the number of possible Processes that can be started
+        # A lehetséges folyamatok számának korlátozása, amelyek indíthatók
         Process => ['Process-9c378d7cc59f0fce4cee7bb9995ee3eb', 'Process-12345678901234567890123456789012'],
 
-        # possible action options (white list)
+        # lehetséges művelet lehetőségek (fehér lista)
         Action => [
             'AgentTicketBounce',
-            'AgentTicketPhone'.      # only used to show/hide the Split action
-            'AgentLinkObject',       # only used to show/hide the Link action
+            'AgentTicketPhone'.      # csak a felosztás művelet megjelenítéséhez/elrejtéséhez használható
+            'AgentLinkObject',       # csak az összekapcsolás művelet megjelenítéséhez/elrejtéséhez használható
             # ...
         ],
     },
-    # add options (white list)
+    # lehetőségek hozzáadása (fehér lista)
     PossibleAdd => {
-        # See section "Possible"
+        # Lásd a „Possible” szakaszt
         # ...
     },
-    # remove options (black list)
+    # lehetőségek eltávolítása (fekete lista)
     PossibleNot => {
-        # See section "Possible"
+        # Lásd a „Possible” szakaszt
         # ...
     },
 };

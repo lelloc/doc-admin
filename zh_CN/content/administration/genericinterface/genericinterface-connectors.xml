@@ -56,6 +56,11 @@
                                 创建会话
                             </para>
                         </listitem>
+                        <listitem>
+                            <para>
+                                SessionGet
+                            </para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
@@ -84,6 +89,29 @@
          <!--Optional:-->
          <Password>?</Password>
       </SessionCreate>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-session-connector-operations-sessionget">
+                    <title>创建会话</title>
+                    <para>
+                        Gathers data from a valid session excluding sensitive information such as
+user password or challenge token.
+                    </para>
+                    <note>
+                        <para>
+                            If any of its values is a complex structure then is automatically converted
+to a JSON string.
+                        </para>
+                    </note>
+                    <para>可能的属性：</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <SessionGet>
+         <SessionID>?</SessionID>
+      </SessionGet>
                             ]]>
                         </programlisting>
                     </para>
@@ -648,14 +676,14 @@
                 <section id="generic-ticket-connector-operations-tickethistoryget">
                     <title>TicketHistoryGet</title>
                     <para>
-                        This operation is used to get all the history entries of a ticket including
-the
+                        This operation is used to get all the history entries from a ticket or
+tickets.
                     </para>
                     <para>可能的属性：</para>
                     <para>
                         <programlisting>
                             <![CDATA[
-      <TicketGet>
+      <TicketHistoryGet>
          <!--You have a MANDATORY CHOICE of the next 2 items at this level-->
          <!--Optional:-->
          <UserLogin>?</UserLogin>
@@ -665,7 +693,7 @@ the
          <Password>?</Password>
          <!--1 or more repetitions:-->
          <TicketID>?</TicketID>
-      </TicketGet>
+      </TicketHistoryGet>
                             ]]>
                         </programlisting>
                     </para>

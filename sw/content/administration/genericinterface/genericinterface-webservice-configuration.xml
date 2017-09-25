@@ -16,7 +16,7 @@ huduma za tovuti.
         Kwanini YAML? YAML ni lugha ya dhulisho mabadiliko iliyoundwa kuwa rafiki
 kwa binadamu kuandika na kusoma (ni rahisi kuelewa zaidi ya JSON)  , haina
 baadhi ya vikwazo vya XML kama lebo za tarakimu, ni wazi, ya kawaida, na ni
-kamili zaidi kuhifadhi usanidi mzima wa huduma ya tovuti.
+kamili zaidi kuhifadhi usanidi mzima wa huduma ya tovuti. 
     </para>
     <note>
         <para>
@@ -90,6 +90,15 @@ Requester:
       Description: This is a test invoker
       Events:
         - Asynchronous: 1
+        Condition:
+          Condition:
+            '1':
+              Fields:
+                Queue:
+                  Match: Raw
+                  Type: String
+              Type: and
+          ConditionLinking: and
           Event: TicketCreate
         - Asynchronous: 0
           Event: ArticleUpdate
@@ -201,7 +210,7 @@ hifadhidata.
                 </listitem>
                 <listitem>
                     <para>
-                        Usafirishaji: chombo cha mipangilio ya mtoaji usafiri wa mtandao.
+                        Usafirishaji: chombo cha mipangilio ya mtoaji usafiri wa mtandao. 
                     </para>
                 </listitem>
             </itemizedlist>
@@ -210,9 +219,8 @@ hifadhidata.
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;OperesheniJina&gt;: Jina la kipekee kwa operesheni, chombo cha
-mipangilio yake ya operesheni (nambari ya elementi 0..n, haitakiwi
-kujirudia).
+                            &lt;OperationName&gt;: Unique name for the operation, container for its own
+operation settings (cardinality 0..n, but not duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -256,7 +264,7 @@ mingine inaweza kuwa na mipangilio zaidi au tofauti.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Usanidi: chombo cha kuunganisha mipangilio hii.
+                                    Usanidi: chombo cha kuunganisha mipangilio hii. 
                                 </para>
                             </listitem>
                             <listitem>
@@ -283,8 +291,7 @@ zisizounganishwa.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            FunguoUnganishaHalisi: chombo cha miunganiko yote halisi ya funguo (nambari
-ya elementi 0 .. 1)
+                                            KeyMapExact: a container for all exact key mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
@@ -295,8 +302,7 @@ ufunguo (nambari ya elementi 0 .. 1).
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ThamaniUnganisha: chombo cha miunganiko yote ya thamani (nambari ya elementi
-0 .. 1).
+                                            ValueMap: a container for all value mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                 </itemizedlist>
@@ -351,8 +357,7 @@ imesetiwa kuwa UnganishaKwa).
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;funguoyazamani&gt;: &lt;funguompya&gt; (nambari ya elementi 0 .. n
-haitakiwi kujirudia).
+                                                &lt;oldkey&gt;: &lt;newkey&gt; (cardinality 0 .. n but not duplicate).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
@@ -390,8 +395,8 @@ UfunguoUnganishaHalisi na UfunguoUnganishaRegEx).
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    ThamaniUnganishaHalisi: chombo cha miungamiko yote halisi (nambari ya
-elementi 0 .. 1).
+                                                    ValueMapExact: a container for all exact value mappings (cardinality 0
+.. 1).
                                                 </para>
                                             </listitem>
                                             <listitem>
@@ -408,8 +413,7 @@ kawaida  (nambari ya elementi 0 .. 1).
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;thamaniyazamani&gt;: &lt;thamanimpya&gt; ( nambari ya elementi 0 .. n
-haitakiwi kujirudia).
+                                                        &lt;oldvalue&gt;: &lt;newvalue&gt; ( cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -488,7 +492,7 @@ huduma hii ya tovuti.
                 </listitem>
                 <listitem>
                     <para>
-                        Usafirishaji: chombo cha mipangilio ya muombaji wa usafiri wa mtandao.
+                        Usafirishaji: chombo cha mipangilio ya muombaji wa usafiri wa mtandao. 
                     </para>
                 </listitem>
             </itemizedlist>
@@ -497,16 +501,16 @@ huduma hii ya tovuti.
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;MchocheziJina&gt;: Jina la kipekee la mchochezi, chombo cha mipangilio
-yake ya mchochezi  (nambari ya elementi 0..n, haitakiwi kujirudia).
+                            &lt;InvokerName&gt;: Unique name for the invoker, container for its own
+invoker settings (cardinality 0..n, but not duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;MchocheziJina&gt;</title>
+                    <title>&lt;InvokerName&gt;</title>
                     <para>
-                        Hiki kifungu kinatokana na wachochezi wa aina "Jaribio::Jaribio" wachochezi
-wengine wanaweza kuwa na mipangilio tofauti.
+                        This section is based on invokers from type "Test::Test" other invokers
+might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
@@ -563,6 +567,12 @@ Daemon.
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Condition: Container for event conditions to trigger the invoker, if there
+are no conditions, event will always trigger the invoker.
+                                        </para>
                                     </listitem>
                                     <listitem>
                                         <para>
@@ -758,6 +768,113 @@ Daemon.
                                 </itemizedlist>
                             </listitem>
                         </itemizedlist>
+                        <section>
+                            <title>Sharti</title>
+                            <itemizedlist mark="round">
+                                <listitem>
+                                    <para>
+                                        Condition: Container to actual event conditions.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        ConditionLinking: Defines how multiple condition interacts with each other.
+                                    </para>
+                                    <itemizedlist>
+                                        <title>Possible Values (for condition linking)</title>
+                                        <listitem><para>and</para></listitem>
+                                        <listitem><para>Au</para></listitem>
+                                        <listitem><para>xor</para></listitem>
+                                    </itemizedlist>
+                                </listitem>
+                            </itemizedlist>
+                            <section>
+                                <title>Condition -&gt; Condition</title>
+                                <itemizedlist mark="round">
+                                    <listitem>
+                                        <para>
+                                            &lt;ConditionName&gt;: Container for the condition elements.
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                                <section>
+                                    <title>&lt;ConditionName&gt;</title>
+                                    <para>
+                                        Unique name for the condition within the invoker and event the GUI assigns
+consecutive integer condition names starting from 1.
+                                    </para>
+                                    <itemizedlist mark="round">
+                                        <listitem>
+                                            <para>
+                                                Fields: Container for field conditions.
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                Type: Define how multiple fields interact within its condition.
+                                            </para>
+                                            <itemizedlist>
+                                                <title>Possible Values (for condition linking)</title>
+                                                <listitem><para>and</para></listitem>
+                                                <listitem><para>Au</para></listitem>
+                                                <listitem><para>xor</para></listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>Sehemu</title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    &lt;FieldName&gt;: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>&lt;FieldName&gt;</title>
+                                            <para>
+                                                The name of a field from the event object (e.g.  for Ticket Events, the
+fields could be Queue Priority Type, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        Match: The value to match from the selected against the event object using
+the Type modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        Type: Modifier to the Match value.
+                                                    </para>
+                                                    <itemizedlist>
+                                                        <title>Possible Values (for type modifier)</title>
+                                                        <listitem>
+                                                            <para>
+                                                                String: Direct compare between object field value and
+<literal>Match</literal> value.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                Regexp: Compare object field value with the regular expression defined in
+the <literal>Match</literal> value.
+                                                            </para>
+                                                        </listitem>
+                                                        <listitem>
+                                                            <para>
+                                                                Module: Use the module defined in the <literal>Match</literal> with the
+object data.
+                                                            </para>
+                                                        </listitem>
+                                                    </itemizedlist>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
                     </section>
                     <section>
                         <title>KuunganishaZinazoingia</title>
@@ -810,8 +927,8 @@ mtandao.
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        JinaNafasi: URI inayowapa maudhui wachochezi wote walio katika huduma hii ya
-wavuti.
+                                        NameSpace: an URI that gives a context to all invokers that belongs to this
+web service.
                                     </para>
                                 </listitem>
                                 <listitem>

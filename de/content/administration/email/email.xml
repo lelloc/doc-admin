@@ -3,99 +3,155 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="email">
-<title>Sending/Receiving Emails</title>
+    <title>Sending/Receiving Emails</title>
 
-<section id="email-sending">
-<title>Sending Emails</title>
+    <section id="email-sending">
+        <title>E-Mails senden</title>
 
-<section id="email-sending-sendmail">
-<title>Via Sendmail (Default)</title>
-
-<para>
-OTRS can send out emails via <ulink
+        <section id="email-sending-sendmail">
+            <title>Via sendmail (Standard)</title>
+            <para>
+                OTRS can send out emails via <ulink
 url="http://www.sendmail.org/">Sendmail</ulink>, <ulink
 url="http://www.postfix.org/">Postfix</ulink>, <ulink
 url="http://www.qmail.org">Qmail</ulink> or <ulink
-url="http://www.exim.org">Exim</ulink>. The default configuration is to use
+url="http://www.exim.org">Exim</ulink>.  The default configuration is to use
 Sendmail and should work out-of-the-box.
-</para>
+            </para>
+            <para>
+                You can configure the sendmail settings via the graphical configuration
+frontend (<literal>Framework::Core::Sendmail</literal>).
+            </para>
+        </section>
 
-<para>
-You can configure the sendmail settings via the graphical configuration
-frontend (<literal>Framework::Core::Sendmail</literal>)
-</para>
-
-</section>
-
-<section id="email-sending-smtp">
-<title>Via SMTP Server or Smarthost</title>
-
-<para>
-OTRS kann E-Mails via SMTP  (<ulink
+        <section id="email-sending-smtp">
+            <title>Via SMTP Server oder Smarthost</title>
+            <para>
+                OTRS kann E-Mails via SMTP  (<ulink
 url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail Transfer Protocol / RFC
-821</ulink>) oder Secure SMTP versenden.
-</para>
-
-<para>
-The SMTP server settings can be configured via the SysConfig
-(<literal>Framework::Core::Sendmail</literal>). If you don't see SMTPS
+821</ulink>) oder Secure SMTP versenden. 
+            </para>
+            <para>
+                The SMTP server settings can be configured via the SysConfig
+(<literal>Framework::Core::Sendmail</literal>).  If you don't see SMTPS
 available as an option, the required Perl modules are missing. In that case,
 please refer to <link linkend="installation-of-perl-modules">"Installation
 of Perl modules required for OTRS"</link> for instructions.
-</para>
+            </para>
+        </section>
 
-</section>
+        <section id="email-sending-mailqueue">
+            <title>Mail Queue</title>
+            <para>
+                Before sending, OTRS will queue all emails and let a Daemon task
+asynchronously handle them in due time.  On a normal installation, the
+emails will be sent out every minute by the OTRS Daemon.
+            </para>
+            <para>
+                To check the status of email sending, you can the
+<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename> console
+command with <literal>--list</literal> switch.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --list
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | ID | ArticleID | Attempts | Sender         | Recipient          | Due Time | Last SMTP Code | Last SMTP Message |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | 28 | 284       | 0        | otrs@localhost | marketing@otrs.com | -        | -              | -                 |
+  | 29 | 285       | 0        | otrs@localhost | feedbac@otrs.com   | -        | -              | -                 |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
 
-</section>
+  Mail queue contains 2 message(s)
+                ]]></screen>
+            </para>
+            <para>
+                In order to filter the table, you can use <literal>--filter</literal>
+argument, for example with ID of the send job.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --list --filter ID::28
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | ID | ArticleID | Attempts | Sender         | Recipient          | Due Time | Last SMTP Code | Last SMTP Message |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
+  | 28 | 284       | 0        | otrs@localhost | marketing@otrs.com | -        | -              | -                 |
+  +----+-----------+----------+----------------+--------------------+----------+----------------+-------------------+
 
-<section id="email-receiving">
-<title>Receiving Emails</title>
+  Mail queue contains 1 message(s)
 
-<section id="email-receiving-pop3">
-<title>Mail Accounts Configured via the OTRS GUI</title>
+Done.
+                ]]></screen>
+            </para>
+            <para>
+                To delete emails queued for sending, specify either
+<literal>--delete-all</literal> switch, or <literal>--delete</literal> with
+some filter active.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --delete --filter ID::28
+Deleted messages from mail queue.
+Done.
+                ]]></screen>
+            </para>
+            <para>
+                You can also manually send email without waiting for OTRS Daemon task to
+kick in. Simply specify the <literal>--send</literal> switch.
+            </para>
+            <para>
+                <screen><![CDATA[
+shell> bin/otrs.Console.pl Maint::Email::MailQueue --send
+1 message(s) successfully sent!
+Done.
+                ]]></screen>
+            </para>
+        </section>
+    </section>
 
-<para>
-OTRS is able to receive emails from POP3, POP3S, IMAP and IMAPS mail
+    <section id="email-receiving">
+        <title>E-Mails empfangen</title>
+
+        <section id="email-receiving-pop3">
+            <title>Mail Accounts Configured via the OTRS GUI</title>
+            <para>
+                OTRS is able to receive emails from POP3, POP3S, IMAP and IMAPS mail
 accounts.
-</para>
-
-<para>
-Configure your mail accounts via the "PostMaster Mail Accounts" link on the
+            </para>
+            <para>
+                Configure your mail accounts via the "PostMaster Mail Accounts" link on the
 Admin page.
-</para>
-
-<para>
-If a new mail account is to be created (see figure below), then its mail
+            </para>
+            <para>
+                If a new mail account is to be created (see figure below), then its mail
 server name, login name and password must be specified. Also, you need to
 select the mail server type, which can be POP3, POP3S, IMAP or IMAPS. If you
 don't see your server type available as an option, the required Perl modules
 are missing on your system. In that case, please refer to <link
 linkend="installation-of-perl-modules"> "Installation of Perl modules
-required for OTRS"</link> for instructions.</para>
-
-<para>
-<figure>
-    <title>Einen E-Mail-Account hinzufügen</title>
+required for OTRS"</link> for instructions.
+            </para>
+            <para>
+                <figure>
+                    <title>Einen E-Mail-Account hinzufügen</title>
 <screenshot>
 <graphic fileref="screenshots/administration/email/add-mailaccount.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
-</para>
-
-<para>Wählen Sie für "Vertraut" den Wert "Ja" aus, dann werden die
-sog. X-OTRS-Header-Einträge ausgewertet und angewendet, sofern derartige
-Header-Einträge in einer abgerufenen Nachricht vorhanden sind. Da mit Hilfe
-der X-OTRS-Header einige Dinge am System beeinflusst werden können, sollten
-Sie "Vertraut" nur auf "Ja" setzen, wenn Sie genau wissen, von welchen
-Absendern die abgerufenen Nachrichten stammen. X-OTRS-Header werden vom
-<link linkend="adminarea-postmasterfilter">Modul für die
-Nachrichtenfilterung</link> in OTRS benutzt, die X-OTRS-Header werden <link
-linkend="table-of-x-otrs-headers">in dieser Tabelle</link> näher
-beschrieben.Eventuell eingerichtete Filterregeln werden auf jeden Fall
-abgearbietet, egal welcher Wert für "Vertraut" ausgewählt wurde.
-</para>
-
-<para>
-The distribution of incoming messages can be controlled if they need to be
+            </para>
+            <para>
+                If you select Yes for the value of the Trusted option, any X-OTRS headers
+attached to an incoming message are evaluated and executed. Because the
+X-OTRS header can execute some actions in the ticket system, you should set
+the Trusted option to Yes only for known senders. X-OTRS-Headers are used by
+the <link linkend ="adminarea-postmasterfilter">filter module</link> in
+OTRS. The X-OTRS headers are explained <link linkend
+="table-of-x-otrs-headers">in this table</link> in more detail. Any
+postmaster filter rules created are executed, irrespective of the Trusted
+option's setting.
+            </para>
+            <para>
+                The distribution of incoming messages can be controlled if they need to be
 sorted by queue or by the content of the "To:" field. For the Dispatching
 field, if "Dispatching by selected queue" is selected, all incoming messages
 will be sorted into the specified queue. The address where the mail was sent
@@ -103,119 +159,102 @@ to is disregarded in this case. If "Dispatching by email To: field" is
 selected, the system checks if a queue is linked with the address in the To:
 field of the incoming mail. You can link an address to a queue in the <link
 linkend="adminarea-emailaddresses">E-mail address management</link> section
-of the Admin page. If the address in the To: field is linked with a queue,
+of the Admin page.  If the address in the To: field is linked with a queue,
 the new message will be sorted into the linked queue. If no link is found
 between the address in the To: field and any queue, then the message flows
 into the "Raw" queue in the system, which is the <link
 linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
 after a default installation.
-</para>
-
-<para>
-All data for the mail accounts are saved in the OTRS database. The
+            </para>
+            <para>
+                All data for the mail accounts are saved in the OTRS database. The
 <filename>bin/otrs.Console.pl Maint::PostMaster::MailAccountFetch</filename>
 command uses the settings in the database and fetches the mail. You can
 execute it manually to check if all your mail settings are working properly.
-</para>
-
-<para>
-On a normal installation, the mail will be fetched every 10 minutes by the
+            </para>
+            <para>
+                On a normal installation, the mail will be fetched every 10 minutes by the
 OTRS Daemon.
-</para>
-
-<note>
-<para>
-Beim Abholen löscht OTRS die E-Mails vom POP oder IMAP server. Es besteht
+            </para>
+            <note>
+                <para>
+                    Beim Abholen löscht OTRS die E-Mails vom POP oder IMAP server. Es besteht
 keine Möglichkeit, die Mails dort zu erhalten. Wenn Sie dies wünschen,
 erstellen Sie am Besten Weiterleitungsregeln auf Ihrem Mail-Server. Lesen
 Sie hierzu bitte in der Dokumentation ihres Mail-Servers nach.
-</para>
-</note>
-</section>
+                </para>
+            </note>
+        </section>
 
-
-<section id="email-receiving-cmd">
-<title>Via Command Line Program and Procmail (<filename>otrs.Console.pl
-Maint::PostMaster::Read</filename>)</title>
-
-<para>
-If you cannot use mail accounts to get the email into OTRS, the command line
+        <section id="email-receiving-cmd">
+            <title>
+                Via Command Line Program and Procmail (<filename>otrs.Console.pl
+Maint::PostMaster::Read</filename>)
+            </title>
+            <para>
+                If you cannot use mail accounts to get the email into OTRS, the command line
 program <filename>bin/otrs.Console.pl Maint::PostMaster::Read</filename>
 might be a way around the problem. It takes the mails via STDIN and pipes
 them directly into OTRS. That means email will be available in your OTRS
 system if the MDA (mail delivery agent, e.g. procmail) executes this
 program.
-</para>
-
-<para>
-To test <filename>bin/otrs.Console.pl Maint::PostMaster::Read</filename>
+            </para>
+            <para>
+                To test <filename>bin/otrs.Console.pl Maint::PostMaster::Read</filename>
 without an MDA, execute the command of the following script.
-</para>
-
-<para>
-<screen>
+            </para>
+            <para>
+                <screen>
 linux:/opt/otrs# cd bin
 linux:/opt/otrs/bin# cat ../doc/sample_mails/test-email-1.box | ./otrs.Console.pl Maint::PostMaster::Read
 linux:/opt/otrs/bin#
-</screen>
-</para>
-
-<para>
-<emphasis>Skript: PostMaster-Test ohne MDA.</emphasis>
-</para>
-
-<para>
-Wird die E-Mail in der Queue-Ansicht angezeigt, sind Ihre Einstellungen in
+                </screen>
+            </para>
+            <para>
+                <emphasis>Skript: PostMaster-Test ohne MDA.</emphasis>
+            </para>
+            <para>
+                Wird die E-Mail in der Queue-Ansicht angezeigt, sind Ihre Einstellungen in
 Ordnung.
-</para>
-
-<example id='procmail-queue-routing'>
-
-<title>Routing via Procmail Using <filename>otrs.Console.pl</filename></title>
-
-<para>
-In order to route mails in a specific queue using
+            </para>
+            <example id='procmail-queue-routing'>
+                <title>Routing via Procmail Using <filename>otrs.Console.pl</filename></title>
+                <para>
+                    In order to route mails in a specific queue using
 <filename>otrs.Console.pl</filename> use the following example.
-</para>
-
-<para>
-<screen><![CDATA[
+                </para>
+                <para>
+                    <screen><![CDATA[
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read --target-queue=QUEUENAME
-]]></screen>
-</para>
-
-<para>
-When sorting to a subqueue, you must separate the parent and child queue
+                    ]]></screen>
+                </para>
+                <para>
+                    When sorting to a subqueue, you must separate the parent and child queue
 with a <literal>::</literal>.
-</para>
-
-<para>
-<screen><![CDATA[
+                </para>
+                <para>
+                    <screen><![CDATA[
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read --target-queue=QUEUENAME::SUBQUEUE
-]]></screen>
-</para>
-
-</example>
-
-<para>
-Procmail ist in der Linux-Umgebung ein sehr bekannter E-Mail-Filter, der
+                    ]]></screen>
+                </para>
+            </example>
+            <para>
+                Procmail ist in der Linux-Umgebung ein sehr bekannter E-Mail-Filter, der
 höchstwahrscheinlich auf Ihrem System installiert sein wird. Falls nicht,
 erhalten Sie auf der <ulink
 url="http://www.procmail.org/"><citetitle>procmail
 Homepage</citetitle></ulink> weitere Informationen.
-</para>
-
-<para>
-Um procmail einzurichten (benötigt einen für procmail konfigurierten MDA
+            </para>
+            <para>
+                Um procmail einzurichten (benötigt einen für procmail konfigurierten MDA
 (z. B. sendmail, postfix, exim oder qmail)), kann die
 Datei<filename>.procmailrc.dist</filename> aus dem OTRS-Homeverzeichnis
 verwendet werden. Kopieren Sie <filename>.procmailrc.dist</filename> nach
 <filename>.procmailrc</filename> und nehmen Sie die in Skript: dargestellten
 Änderungen vor.
-</para>
-
-<para>
-<programlisting>
+            </para>
+            <para>
+                <programlisting>
 SYS_HOME=$HOME
 PATH=/bin:/usr/bin:/usr/local/bin
 # --
@@ -223,76 +262,65 @@ PATH=/bin:/usr/bin:/usr/local/bin
 # --
 :0 :
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read
-</programlisting>
-</para>
-
-<para>
-<emphasis>Skript: Konfiguration von procmail für OTRS.</emphasis>
-</para>
-
-<para>
-All email sent to the local OTRS user will be piped into
+                </programlisting>
+            </para>
+            <para>
+                <emphasis>Skript: Konfiguration von procmail für OTRS.</emphasis>
+            </para>
+            <para>
+                All email sent to the local OTRS user will be piped into
 <filename>bin/otrs.Console.pl Maint::PostMaster::Read</filename> and then
 shown in your QueueView.
-</para>
+            </para>
+        </section>
 
-</section>
-
-<section id="email-receiving-fetchmail">
-<title>Fetching emails via POP3 or IMAP and fetchmail for <filename>otrs.Console.pl
-Maint::PostMaster::Read</filename></title>
-
-<para>
-In order to get email from your mail server, via a POP3 or IMAP mailbox, to
+        <section id="email-receiving-fetchmail">
+            <title>
+                Fetching emails via POP3 or IMAP and fetchmail for <filename>otrs.Console.pl
+Maint::PostMaster::Read</filename>
+            </title>
+            <para>
+                In order to get email from your mail server, via a POP3 or IMAP mailbox, to
 the OTRS machine/local OTRS account and to procmail, use <ulink
 url="http://www.fetchmail.info/">fetchmail</ulink>.
-</para>
-
-<note>
-<para>
-Voraussetzung ist eine funktionierende SMTP-Konfiguration auf dem
+            </para>
+            <note>
+                <para>
+                    Voraussetzung ist eine funktionierende SMTP-Konfiguration auf dem
 OTRS-Rechner.
-</para>
-</note>
-
-<para>
-You can use the <filename>.fetchmailrc.dist</filename> in the home directory
+                </para>
+            </note>
+            <para>
+                You can use the <filename>.fetchmailrc.dist</filename> in the home directory
 of OTRS and copy it to <filename>.fetchmailrc</filename>. Modfiy/change it
 for your needs (see the Example below).
-</para>
-
-<example id='fetchmailrc'>
-<title><literal>.fetchmailrc</literal></title>
-
-<para>
-<programlisting>
+            </para>
+            <example id='fetchmailrc'>
+                <title><literal>.fetchmailrc</literal></title>
+                <para>
+                    <programlisting>
 #poll (mailserver) protocol POP3 user (user) password (password) is (localuser)
 poll mail.example.com protocol POP3 user joe password mama is otrs
-</programlisting>
-</para>
-
-</example>
-
-<para>
-Don't forget to set the <filename>.fetchmailrc</filename> to 710
+                    </programlisting>
+                </para>
+            </example>
+            <para>
+                Don't forget to set the <filename>.fetchmailrc</filename> to 710
 (<command>chmod 710 .fetchmailrc</command>)!
-</para>
-
-<para>
-With the <filename>.fetchmailrc</filename> from the Example above, all email
+            </para>
+            <para>
+                With the <filename>.fetchmailrc</filename> from the Example above, all email
 will be forwarded to the local OTRS account, if the command
 <command>fetchmail -a</command> is executed. Set up a cronjob with this
 command if you want to fetch the mails regularly.
-</para>
-</section>
+            </para>
+        </section>
 
-
-<section id="email-receiving-filter">
-<title>Filtering/Dispatching by OTRS/PostMaster Modules (for More Complex
+        <section id="email-receiving-filter">
+            <title>Filtering/Dispatching by OTRS/PostMaster Modules (for More Complex
 Dispatching)</title>
-
-<para>
-If you use the <filename>bin/otrs.Console.pl
+            <para>
+                If you use the <filename>bin/otrs.Console.pl
 Maint::PostMaster::Read</filename> or <filename>bin/otrs.Console.pl
 Maint::PostMaster::MailAccountFetch</filename> method, you can insert or
 modify X-OTRS header entries with the PostMaster filter modules. With the
@@ -302,92 +330,81 @@ customer ID, for example. More information about the X-OTRS headers are
 available in the section about <link
 linkend="adminarea-postmasterpop3-account">adding mail accounts</link> from
 the OTRS Admin page.
-</para>
-
-<para>
-Es gibt verschiedene Standard-Filtermodule:
-</para>
-
-<note>
-<para>
-Der Jobname
+            </para>
+            <para>
+                Es gibt verschiedene Standard-Filtermodule:
+            </para>
+            <note>
+                <para>
+                    Der Jobname
 (z. B. $Self-&gt;{"PostMaster::PreFilterModule"}-&gt;{"Jobname"}) muss
 eindeutig sein!
-</para>
-</note>
-
-<para>
-<literal>Kernel::System::PostMaster::Filter::Match</literal> is a default
+                </para>
+            </note>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::Match</literal> is a default
 module to match on some email header (e.g. From, To, Subject, ...). It can
 set new email headers (e.g. X-OTRS-Ignore: yes or X-OTRS-Queue: spam) if a
 filter rule matches. The jobs of the Example below can be inserted in
 <filename>Kernel/Config.pm</filename>
-</para>
-
-<example id='filter-module-match-example'>
-<title>Example jobs for the filter module
+            </para>
+            <example id='filter-module-match-example'>
+                <title>Example jobs for the filter module
 <literal>Kernel::System::PostMaster::Filter::Match</literal></title>
-
-<para>
-<programlisting>
-    # Job Name: 1-Match
-    # (block/ignore all spam email with From: noreply@)
-    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
-        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
-        Match =&gt; {
-            From =&gt; 'noreply@',
-        },
-        Set =&gt; {
-            'X-OTRS-Ignore' =&gt; 'yes',
-        },
-    };
-    # Job Name: 2-Match
-    # (sort emails with From: sales@example.com and Subject: **ORDER**
-    # into queue 'Order')
-    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
-        Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
-        Match =&gt; {
-            To =&gt; 'sales@example.com',
-            Subject =&gt; '**ORDER**',
-        },
-        Set =&gt; {
-            'X-OTRS-Queue' =&gt; 'Order',
-        },
-    };
-</programlisting>
-</para>
-
-</example>
-
-<para>
-<literal>Kernel::System::PostMaster::Filter::CMD</literal> is a default
+                <para>
+                    <programlisting>
+# Job Name: 1-Match
+# (block/ignore all spam email with From: noreply@)
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
+    Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+    Match =&gt; {
+        From =&gt; 'noreply@',
+    },
+    Set =&gt; {
+        'X-OTRS-Ignore' =&gt; 'yes',
+    },
+};
+# Job Name: 2-Match
+# (sort emails with From: sales@example.com and Subject: **ORDER**
+# into queue 'Order')
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
+    Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
+    Match =&gt; {
+        To =&gt; 'sales@example.com',
+        Subject =&gt; '**ORDER**',
+    },
+    Set =&gt; {
+        'X-OTRS-Queue' =&gt; 'Order',
+    },
+};
+                    </programlisting>
+                </para>
+            </example>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::CMD</literal> is a default
 module to pipe the email into an external command. The output is given to
 STDOUT and if the result is true, then set new email header
 (e.g. X-OTRS-Ignore: yes or X-OTRS-Queue: spam). The Example below can be
 used in <filename>Kernel/Config.pm</filename>
-</para>
-
-<example id='filter-module-cmd-example'>
-<title>Beispiel-Job für das Filtermodul Kernel::System::PostMaster::Filter::CMD</title>
-
-<para>
-<programlisting>
-    # Job Name: 5-SpamAssassin
-    # (SpamAssassin example setup, ignore spam emails)
-    $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
-        Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
-        CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
-        Set =&gt; {
-            'X-OTRS-Ignore' =&gt; 'yes',
-        },
-    };
-</programlisting>
-</para>
-
-</example>
-
-<para>
-    <literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>
+            </para>
+            <example id='filter-module-cmd-example'>
+                <title>Beispiel-Job für das Filtermodul Kernel::System::PostMaster::Filter::CMD</title>
+                <para>
+                    <programlisting>
+# Job Name: 5-SpamAssassin
+# (SpamAssassin example setup, ignore spam emails)
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
+    Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
+    CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
+    Set =&gt; {
+        'X-OTRS-Ignore' =&gt; 'yes',
+    },
+};
+                    </programlisting>
+                </para>
+            </example>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>
 is a default module that adds the possibility to parse external identifiers,
 in the email subject, the body or both using regular expressions. It then
 stores this value in a defined dynamic field. When an email comes in, OTRS
@@ -395,161 +412,165 @@ will first search for an external identifier and when it finds one, query
 OTRS on the pre-defined dynamic field. If it finds an existing ticket, it
 will update this ticket, otherwise it will create a new ticket with the
 external reference number in the separate field.
-</para>
-<para>
-    OTRS SysConfig already provide 4 different settings to setup different
-external ticket numbers.  If more settings are needed they need to be added
+            </para>
+            <para>
+                OTRS SysConfig already provide 4 different settings to setup different
+external ticket numbers. If more settings are needed they need to be added
 manually. The following example can be used in
 <filename>Kernel/Config.pm</filename> to extend SysConfig settings.
-</para>
-
-<example id='filter-module-externalticketrecognition-example'>
-    <title>
-        Example job for the filter module
+            </para>
+            <example id='filter-module-externalticketrecognition-example'>
+                <title>
+                    Example job for the filter module
 <literal>Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</literal>
-    </title>
-
+                </title>
 <programlisting language="Perl"><![CDATA[
-    # Job Name: ExternalTicketNumberRecognition
-    # External Ticket Number Reconition, check for Incident-<number> in incoming mails subject and
-    # body from the addeesses <sender>@externalticket.com, if number is found it will be stored in
-    # the dynamic field 'ExternalNumber' (that need to be setup in the Admin Panel).
-    $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} = {
-        'FromAddressRegExp' => '\\s*@externalticket.com',
-        'NumberRegExp'      => 'Incident-(\\d.*)',
-        'SearchInSubject'   => '1',
-        'SearchInBody'      => '1',
-        'TicketStateTypes'  => 'new;open'
-        'DynamicFieldName'  => 'ExternalNumber',
-        'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
-        'Name'              => 'Test External Ticket Number',
-        'SenderType'        => 'system',
-    };
-    ]]></programlisting></example>
-
-<itemizedlist mark="round">
-    <para><emphasis>Konfigurationsoptionen</emphasis></para>
-    <listitem>
-        <para>FromAddressRegExp</para>
-        <para>
-            This is an optional setting. Only mails matching this "From:" address will
+# Job Name: ExternalTicketNumberRecognition
+# External Ticket Number Reconition, check for Incident-<number> in incoming mails subject and
+# body from the addeesses <sender>@externalticket.com, if number is found it will be stored in
+# the dynamic field 'ExternalNumber' (that need to be setup in the Admin Panel).
+$Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} = {
+    'FromAddressRegExp' => '\\s*@externalticket.com',
+    'NumberRegExp'      => 'Incident-(\\d.*)',
+    'SearchInSubject'   => '1',
+    'SearchInBody'      => '1',
+    'TicketStateTypes'  => 'new;open'
+    'DynamicFieldName'  => 'ExternalNumber',
+    'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+    'Name'              => 'Test External Ticket Number',
+    'SenderType'        => 'system',
+};
+                ]]></programlisting></example>
+            <itemizedlist mark="round">
+                <para><emphasis>Konfigurationsoptionen</emphasis></para>
+                <listitem>
+                    <para>FromAddressRegExp</para>
+                    <para>
+                        This is an optional setting. Only mails matching this "From:" address will
 be considered for this filter. You can adjust this setting to the sender
 address your external system uses for outgoing mails. In case this address
 can differ, you can set this option to empty. OTRS will in that case not
 check the sender address.
-        </para>
-    </listitem>
-    <listitem>
-        <para>NumberRegExp</para>
-        <para>
-            This is a mandatory setting. This setting contains the regular expression
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>NumberRegExp</para>
+                    <para>
+                        This is a mandatory setting. This setting contains the regular expression
 OTRS will use to extract the ticket number out of the subject and/or ticket
 body. The default regular expression will match occurrences of for example
 'Incident-12354' and will put the part between parentheses in the dynamic
 field field, in this case '12354'.
-        </para>
-    </listitem>
-    <listitem>
-        <para>SearchInSubject</para>
-        <para>Wenn diese Variable auf '1' gesetzt ist, wird der E-Mailbetreff nach einer
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>SearchInSubject</para>
+                    <para>Wenn diese Variable auf '1' gesetzt ist, wird der E-Mailbetreff nach einer
 Ticketnummer durchsucht.</para>
-    </listitem>
-    <listitem>
-        <para>SearchInBody</para>
-        <para>Wenn diese Variable auf '1' gesetzt ist, wird der E-Mailbody nach einer
+                </listitem>
+                <listitem>
+                    <para>SearchInBody</para>
+                    <para>Wenn diese Variable auf '1' gesetzt ist, wird der E-Mailbody nach einer
 Ticketnummer durchsucht.</para>
-    </listitem>
-    <listitem>
-        <para>TicketStateTypes</para>
-        <para>
-            This is an optional setting. If given, it will search OTRS only for open
+                </listitem>
+                <listitem>
+                    <para>TicketStateTypes</para>
+                    <para>
+                        This is an optional setting. If given, it will search OTRS only for open
 external tickets of given state types. The state types are separated with
 semicolons.
-        </para>
-    </listitem>
-    <listitem>
-        <para>DynamicField</para>
-        <para>
-            This is a required setting. It defines the dynamic filed that is used to
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>DynamicField</para>
+                    <para>
+                        This is a required setting. It defines the dynamic filed that is used to
 store the external number (the field name must exist in the system and has
 to be valid).
-        </para>
-    </listitem>
-    <listitem>
-        <para>SenderType</para>
-        <para>Definiert den Absender Typ welcher bei der Ticket erstellung verwendet wird.</para>
-    </listitem>
-</itemizedlist>
-
-<para>
-    <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>SenderType</para>
+                    <para>Definiert den Absender Typ welcher bei der Ticket erstellung verwendet wird.</para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
 module that is capable to decrypt an encrypted incoming email message
 (S/MIME or PGP) placing the unencrypted message body in the email header
-X-OTRS-BodyDecrypted to be processed later.  Additionally it can also update
+X-OTRS-BodyDecrypted to be processed later. Additionally it can also update
 the email body to the unencrypted version.
-</para>
-<para>
-    In order to decrypt the emails the system needs to be properly configured
+            </para>
+            <para>
+                In order to decrypt the emails the system needs to be properly configured
 for S/MIME and/or PGP and have the needed private keys to decrypt the
 information.
-</para>
-<para>
-    This module is disabled by default and it can be configured directly in the
+            </para>
+            <para>
+                This module is disabled by default and it can be configured directly in the
 System Configuration in the Admin Panel.
-</para>
-<itemizedlist mark="round">
-    <para><emphasis>Konfigurationsoptionen</emphasis></para>
-    <listitem>
-        <para>StoreDecryptedBody</para>
-        <para>
-            Set this option to "1" to update the email body to the unencrypted version
+            </para>
+            <itemizedlist mark="round">
+                <para><emphasis>Konfigurationsoptionen</emphasis></para>
+                <listitem>
+                    <para>StoreDecryptedBody</para>
+                    <para>
+                        Set this option to "1" to update the email body to the unencrypted version
 if the decryption was successful. Be aware that using this the emails will
 be stored unencrypted and there is no possible way to revert this action.
-        </para>
-    </listitem>
-</itemizedlist>
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                Natürlich ist es auch möglich, eigene PostMaster-Filtermodule zu entwickeln.
+            </para>
+        </section>
 
-<para>
-Natürlich ist es auch möglich, eigene PostMaster-Filtermodule zu entwickeln.
-</para>
-
-</section>
-
-<section id="email-filter-troubleshooting">
-    <title>Troubleshooting Email Filtering</title>
-    <para>This section shows some common issues and things to consider when
-troubleshooting Postmaster filters.</para>
-    <itemizedlist>
-        <listitem>
-            <para>The filters are worked in order of their alphabetically sorted filter
+        <section id="email-filter-troubleshooting">
+            <title>Troubleshooting Email Filtering</title>
+            <para>
+                This section shows some common issues and things to consider when
+troubleshooting Postmaster filters.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        The filters are worked in order of their alphabetically sorted filter
 names. The last filter wins for a certain field to be set, when the criteria
-match twice.</para>
-        </listitem>
-        <listitem>
-            <para>"Stop After Match" can prevent a second match.</para>
-        </listitem>
-        <listitem>
-            <para>Make sure the regular expression is valid.</para>
-        </listitem>
-        <listitem>
-            <para>Headers can be set as to control OTRS, but are not written in the mail
+match twice.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>"Stop After Match" can prevent a second match.</para>
+                </listitem>
+                <listitem>
+                    <para>Make sure the regular expression is valid.</para>
+                </listitem>
+                <listitem>
+                    <para>Headers can be set as to control OTRS, but are not written in the mail
 itself.</para>
-        </listitem>
-        <listitem>
-            <para>When matching one From, CC, TO, use EMAILADDRESS: &lt;your@address&gt;</para>
-        </listitem>
-        <listitem>
-            <para>The Mailbox must be trusted.</para>
-        </listitem>
-        <listitem>
-            <para>The match criteria are AND conditions.</para>
-        </listitem>
-        <listitem>
-            <para>Ticket properties can not be matched by the postmaster filter.</para>
-        </listitem>
-    </itemizedlist>
-</section>
-
-</section>
-
+                </listitem>
+                <listitem>
+                    <para>When matching one From, CC, TO, use EMAILADDRESS: &lt;your@address&gt;</para>
+                </listitem>
+                <listitem>
+                    <para>The Mailbox must be trusted.</para>
+                </listitem>
+                <listitem>
+                    <para>The match criteria are AND conditions.</para>
+                </listitem>
+                <listitem>
+                    <para>Ticket properties can not be matched by the postmaster filter.</para>
+                </listitem>
+            </itemizedlist>
+            <note>
+                <para>
+                    Details about Postmaster filter processing are also present in communication
+logs. Make sure to check <link
+linkend="adminarea-communication-log">Communication Log</link> in the Admin
+area.
+                </para>
+            </note>
+        </section>
+    </section>
 </section>
