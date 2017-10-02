@@ -55,12 +55,20 @@
         <section id="performance-tuning-otrs-search">
             <title>Ticket Search Index</title>
             <para>
-                OTRS uses a special search index to perform full-text searches across fields in articles from different communication channels.
+                OTRS uses a special search index to perform full-text searches across fields in articles from different
+                communication channels.
             </para>
             <para>
                 To create an initial index, use
                 <filename>bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild</filename>.
             </para>
+            <note>
+                <para>
+                    Actual article indexing happens via an OTRS daemon job in the background. While articles which were
+                    just added in the system are marked for indexing immediately, it could happen their index is
+                    available within a few minutes.
+                </para>
+            </note>
             <para>
                 There are some options available for fine tuning the search index:
             </para>
@@ -69,9 +77,9 @@
                     <term><literal>Ticket::SearchIndex::IndexArchivedTickets</literal></term>
                     <listitem>
                         <para>
-                            Defines if archived tickets will be included in the search index (off by default).
-                            This is advisable to keep the index small on large systems with archived tickets.
-                            If this is turned off, archived tickets will not be found by full-text searches.
+                            Defines if archived tickets will be included in the search index (off by default). This is
+                            advisable to keep the index small on large systems with archived tickets. If this is turned
+                            off, archived tickets will not be found by full-text searches.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -79,8 +87,8 @@
                     <term><literal>Ticket::SearchIndex::Attribute</literal></term>
                     <listitem>
                         <para>
-                            The attribute <literal>WordCountMax</literal> defines the maximum of words which will be
-                            processed to build up the index. For example only the first 1000 words of an article body
+                            The attribute <literal>WordCountMax</literal> defines the maximum number of words which will
+                            be processed to build up the index. For example only the first 1000 words of an article body
                             are stored in the article search index. The attributes <literal>WordLengthMin</literal> and
                             <literal>WordLengthMax</literal> are used as word length boundaries. Only words with a
                             length between these two values are stored in the article search index.
@@ -96,8 +104,8 @@
                         <itemizedlist mark='opencircle'>
                             <listitem>
                                 <para>
-                                    The first filter strips out special chars like: <literal>, &amp; &lt; &gt; ? " ! * |
-                                    ; [ ] ( ) + $ ^=</literal>
+                                    The first filter strips out special chars like:
+                                    <literal>, &amp; &lt; &gt; ? " ! * | ; [ ] ( ) + $ ^=</literal>
                                 </para>
                             </listitem>
                             <listitem>
@@ -130,7 +138,8 @@
         <section id="performance-tuning-otrs-storage">
             <title>Article Storage (Email, Phone and Internal Articles)</title>
             <para>
-                There are two different backend modules for the article storage of phone, email and internal articles (configured via <literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>):
+                There are two different backend modules for the article storage of phone, email and internal articles
+                (configured via <literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>):
             </para>
             <variablelist>
                 <varlistentry>
@@ -167,8 +176,8 @@
                             Pro: It is fast!
                         </para>
                         <para>
-                            Con: If you have multiple front end servers, you must make sure the filesystem is shared between the servers.
-                            Place it on an NFS share or preferably a SAN or similar solution.
+                            Con: If you have multiple front end servers, you must make sure the filesystem is shared
+                            between the servers. Place it on an NFS share or preferably a SAN or similar solution.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -194,7 +203,8 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
             </para>
             <para>
                 If you want to keep old attachments in the database, you can activate the SysConfig option
-                <literal>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</literal> to make sure OTRS will still find them.
+                <literal>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</literal> to make sure OTRS will
+                still find them.
             </para>
         </section>
 
