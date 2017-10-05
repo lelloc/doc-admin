@@ -11,16 +11,16 @@
         <section id="email-sending-sendmail">
             <title>Sendmail használatával (alapértelmezett)</title>
             <para>
-                OTRS can send out emails via <ulink
+                Az OTRS a következőkön keresztül tudja kiküldeni az e-maileket: <ulink
 url="http://www.sendmail.org/">Sendmail</ulink>, <ulink
 url="http://www.postfix.org/">Postfix</ulink>, <ulink
-url="http://www.qmail.org">Qmail</ulink> or <ulink
-url="http://www.exim.org">Exim</ulink>.  The default configuration is to use
-Sendmail and should work out-of-the-box.
+url="http://www.qmail.org">Qmail</ulink> vagy <ulink
+url="http://www.exim.org">Exim</ulink>. Az alapértelmezett beállítás a
+Sendmail használata, és működnie kell anélkül, hogy bármit csinálnánk vele.
             </para>
             <para>
-                You can configure the sendmail settings via the graphical configuration
-frontend (<literal>Framework::Core::Sendmail</literal>).
+                A Sendmail beállításait a grafikus beállítási felületen
+(<literal>Framework::Core::Sendmail</literal>) keresztül állíthatja be.
             </para>
         </section>
 
@@ -32,25 +32,26 @@ url="http://www.ietf.org/rfc/rfc821.txt">Simple Mail Transfer Protocol / RFC
 821</ulink>) vagy biztonságos SMTP protokollokon keresztül.
             </para>
             <para>
-                The SMTP server settings can be configured via the SysConfig
-(<literal>Framework::Core::Sendmail</literal>).  If you don't see SMTPS
-available as an option, the required Perl modules are missing. In that case,
-please refer to <link linkend="installation-of-perl-modules">"Installation
-of Perl modules required for OTRS"</link> for instructions.
+                Az SMTP-kiszolgáló beállításai a rendszerbeállításokon
+(<literal>Framework::Core::Sendmail</literal>) keresztül állíthatók be. Ha
+nem látja az SMTPS lehetőség elérhetőségét, akkor a szükséges Perl-modulok
+hiányoznak. Ebben az esetben nézze meg az <link
+linkend="installation-of-perl-modules">„OTRS-hez szükséges Perl-modulok
+telepítése”</link> szakaszt az utasításokért.
             </para>
         </section>
 
         <section id="email-sending-mailqueue">
-            <title>Mail Queue</title>
+            <title>Levelezési várólista</title>
             <para>
-                Before sending, OTRS will queue all emails and let a Daemon task
-asynchronously handle them in due time.  On a normal installation, the
-emails will be sent out every minute by the OTRS Daemon.
+                Küldés előtt az OTRS sorba állítja az összes e-mailt, és hagyja, hogy egy
+démonfeladat aszinkron módon kezelje azokat a kellő időben. Egy normál
+telepítésnél az e-maileket percenként fogja kiküldeni az OTRS démon.
             </para>
             <para>
-                To check the status of email sending, you can the
-<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename> console
-command with <literal>--list</literal> switch.
+                Az e-mail küldés állapotának ellenőrzéséhez használhatja a
+<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename>
+konzolparancsot a <literal>--list</literal> kapcsolóval.
             </para>
             <para>
                 <screen><![CDATA[
@@ -67,8 +68,8 @@ shell> bin/otrs.Console.pl Maint::Email::MailQueue --list
                 ]]></screen>
             </para>
             <para>
-                In order to filter the table, you can use <literal>--filter</literal>
-argument, for example with ID of the send job.
+                A tábla szűréséhez használhatja a <literal>--filter</literal> argumentumot,
+például a küldési feladat azonosítójával.
             </para>
             <para>
                 <screen><![CDATA[
@@ -85,9 +86,9 @@ Done.
                 ]]></screen>
             </para>
             <para>
-                To delete emails queued for sending, specify either
-<literal>--delete-all</literal> switch, or <literal>--delete</literal> with
-some filter active.
+                A küldéshez sorba állított e-mailek törléséhez adja meg vagy a
+<literal>--delete-all</literal> kapcsolót, vagy a
+<literal>--delete</literal> kapcsolót valamilyen aktív szűrővel.
             </para>
             <para>
                 <screen><![CDATA[
@@ -97,8 +98,8 @@ Done.
                 ]]></screen>
             </para>
             <para>
-                You can also manually send email without waiting for OTRS Daemon task to
-kick in. Simply specify the <literal>--send</literal> switch.
+                Kézzel is elküldheti az e-mailt az OTRS démonfeladatra való várakozás
+nélkül. Egyszerűen adja meg a <literal>--send</literal> kapcsolót.
             </para>
             <para>
                 <screen><![CDATA[
@@ -141,31 +142,33 @@ telepítése”</link> szakaszt az utasításokért.
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                If you select Yes for the value of the Trusted option, any X-OTRS headers
-attached to an incoming message are evaluated and executed. Because the
-X-OTRS header can execute some actions in the ticket system, you should set
-the Trusted option to Yes only for known senders. X-OTRS-Headers are used by
-the <link linkend ="adminarea-postmasterfilter">filter module</link> in
-OTRS. The X-OTRS headers are explained <link linkend
-="table-of-x-otrs-headers">in this table</link> in more detail. Any
-postmaster filter rules created are executed, irrespective of the Trusted
-option's setting.
+                Ha az „Igen” értéket választja a „Megbízható” beállítás értékénél, akkor egy
+bejövő üzenethez csatolt bármely X-OTRS fejléc kiértékelésre és
+végrehajtásra kerül. Mivel az X-OTRS fejléc végrehajthat néhány műveletet a
+jegyrendszeren, ezért csak az ismert küldőknél kell beállítania a
+„Megbízható” beállítást „Igen” értékre. Az X-OTRS-Headers fejléceket a <link
+linkend ="adminarea-postmasterfilter">szűrő modul</link> használja az
+OTRS-ben. Az X-OTRS fejlécek <link linkend ="table-of-x-otrs-headers">ebben
+a táblázatban</link> vannak részletesebben bemutatva. Minden létrehozott
+levelezési szűrőszabály végrehajtásra kerül, tekintet nélkül a „Megbízható”
+lehetőség beállítására.
             </para>
             <para>
-                The distribution of incoming messages can be controlled if they need to be
-sorted by queue or by the content of the "To:" field. For the Dispatching
-field, if "Dispatching by selected queue" is selected, all incoming messages
-will be sorted into the specified queue. The address where the mail was sent
-to is disregarded in this case. If "Dispatching by email To: field" is
-selected, the system checks if a queue is linked with the address in the To:
-field of the incoming mail. You can link an address to a queue in the <link
-linkend="adminarea-emailaddresses">E-mail address management</link> section
-of the Admin page.  If the address in the To: field is linked with a queue,
-the new message will be sorted into the linked queue. If no link is found
-between the address in the To: field and any queue, then the message flows
-into the "Raw" queue in the system, which is the <link
-linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
-after a default installation.
+                A bejövő üzenetek elosztása akkor szabályozható, ha azokat a várólista vagy
+a „Címzett:” mező tartalma szerint szükséges rendezni. Ha a „Szétválogatás a
+kiválasztott várólista szerint” van kiválasztva a „Kézbesítés” mezőnél,
+akkor az összes bejövő üzenet a megadott várólistába lesz rendezve. Ebben az
+esetben figyelmen kívül lesz hagyva az a cím, ahová a levél el lett
+küldve. Ha a „Szétválogatás a levél címzett mezője szerint” van kiválasztva,
+akkor a rendszer ellenőrzi, hogy egy várólista össze van-e kapcsolva a
+bejövő levél címzett mezőjében lévő címmel. Az adminisztrációs oldal <link
+linkend="adminarea-emailaddresses">E-mail cím kezelés</link> szakaszában
+kapcsolhat össze egy címet egy várólistával. Ha a címzett mezőben lévő cím
+össze van kapcsolva egy várólistával, akkor az új üzenet a hozzákapcsolt
+várólistába lesz rendezve. Ha nem található kapcsolat a címzett mezőben lévő
+cím és valamely várólista között, akkor az üzenet a rendszeren lévő „Nyers”
+várólistába fog kerülni, amely egy alapértelmezett telepítés után a <link
+linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>.
             </para>
             <para>
                 A levelezési fiókok összes adata az OTRS adatbázisban van elmentve. A
@@ -261,7 +264,7 @@ parancsfájl sorait.
 SYS_HOME=$HOME
 PATH=/bin:/usr/bin:/usr/local/bin
 # --
-# Pipe all email into the PostMaster process.
+# Az összes e-mail átirányítása a PostMaster folyamatba.
 # --
 :0 :
 | $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read
@@ -305,7 +308,7 @@ az igényei szerint (lásd a lenti példát).
                 <title><literal>.fetchmailrc</literal></title>
                 <para>
                     <programlisting>
-#poll (mailserver) protocol POP3 user (user) password (password) is (localuser)
+#poll (levelező-kiszolgáló) protocol POP3 user (felhasználó) password (jelszó) is (helyi felhasználó)
 poll mail.example.com protocol POP3 user joe password mama is otrs
                     </programlisting>
                 </para>
@@ -359,9 +362,9 @@ példa feladatai beszúrhatók a <filename>Kernel/Config.pm</filename> fájlba.
 <literal>Kernel::System::PostMaster::Filter::Match</literal> szűrőmodulhoz</title>
                 <para>
                     <programlisting>
-# Job Name: 1-Match
-# (block/ignore all spam email with From: noreply@)
-$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
+# Feladatnév: 1-Illeszkedes
+# (minden levélszemét blokkolása/mellőzése a noreply@ feladótól)
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Illeszkedes'} = {
     Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
     Match =&gt; {
         From =&gt; 'noreply@',
@@ -370,17 +373,17 @@ $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'1-Match'} = {
         'X-OTRS-Ignore' =&gt; 'yes',
     },
 };
-# Job Name: 2-Match
-# (sort emails with From: sales@example.com and Subject: **ORDER**
-# into queue 'Order')
-$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Match'} = {
+# Feladatnév: 2-Illeszkedes
+# (e-mailek kiválogatása a sales@example.com feladótól és a **RENDELÉS**
+# tárggyal a „Rendelés” várólistába)
+$Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'2-Illeszkedes'} = {
     Module =&gt; 'Kernel::System::PostMaster::Filter::Match',
     Match =&gt; {
         To =&gt; 'sales@example.com',
-        Subject =&gt; '**ORDER**',
+        Subject =&gt; '**RENDELÉS**',
     },
     Set =&gt; {
-        'X-OTRS-Queue' =&gt; 'Order',
+        'X-OTRS-Queue' =&gt; 'Rendelés',
     },
 };
                     </programlisting>
@@ -398,8 +401,8 @@ fájlban.
                 <title>Példafeladat a Kernel::System::PostMaster::Filter::CMD szűrőmodulhoz</title>
                 <para>
                     <programlisting>
-# Job Name: 5-SpamAssassin
-# (SpamAssassin example setup, ignore spam emails)
+# Feladatnév: 5-SpamAssassin
+# (SpamAssassin példabeállítás, levélszemét e-mailek mellőzése)
 $Self-&gt;{'PostMaster::PreFilterModule'}-&gt;{'5-SpamAssassin'} = {
     Module =&gt; 'Kernel::System::PostMaster::Filter::CMD',
     CMD =&gt; '/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"',
@@ -423,10 +426,11 @@ talál, akkor frissíteni fogja azt a jegyet, egyébként egy új jegyet fog
 létrehozni a külső hivatkozásszámmal a különálló mezőben.
             </para>
             <para>
-                OTRS SysConfig already provide 4 different settings to setup different
-external ticket numbers. If more settings are needed they need to be added
-manually. The following example can be used in
-<filename>Kernel/Config.pm</filename> to extend SysConfig settings.
+                Az OTRS rendszerbeállítás már 4 különböző beállítást biztosít a különböző
+külső jegyszámok beállításához. Ha több beállításra van szükség, akkor
+azokat kézzel kell hozzáadni. A következő példa használható a
+<filename>Kernel/Config.pm</filename> fájlban a rendszerbeállítás
+beállításainak kiterjesztéséhez.
             </para>
             <example id='filter-module-externalticketrecognition-example'>
                 <title>
@@ -435,19 +439,21 @@ manually. The following example can be used in
 szűrőmodulhoz
                 </title>
 <programlisting language="Perl"><![CDATA[
-# Job Name: ExternalTicketNumberRecognition
-# External Ticket Number Reconition, check for Incident-<number> in incoming mails subject and
-# body from the addeesses <sender>@externalticket.com, if number is found it will be stored in
-# the dynamic field 'ExternalNumber' (that need to be setup in the Admin Panel).
-$Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} = {
+# Feladatnév: KulsoJegyszamFelismeres
+# Külső jegyszám felismerés: az Incidens-<szám> keresése a bejövő
+# levelek tárgyában és törzsében, valamint a <küldő>@externalticket.com
+# keresése a feladó címeiben. Ha található szám, akkor az eltárolásra
+# kerül a „KulsoSzam” dinamikus mezőben (amelyet az adminisztrációs
+# panelen kell beállítani).
+$Self->{'PostMaster::PreFilterModule'}->{'000-KulsoJegyszamFelismeres'} = {
     'FromAddressRegExp' => '\\s*@externalticket.com',
-    'NumberRegExp'      => 'Incident-(\\d.*)',
+    'NumberRegExp'      => 'Incidens-(\\d.*)',
     'SearchInSubject'   => '1',
     'SearchInBody'      => '1',
     'TicketStateTypes'  => 'new;open'
-    'DynamicFieldName'  => 'ExternalNumber',
+    'DynamicFieldName'  => 'KulsoSzam',
     'Module'            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
-    'Name'              => 'Test External Ticket Number',
+    'Name'              => 'Külső jegyszám tesztelése',
     'SenderType'        => 'system',
 };
                 ]]></programlisting></example>
@@ -507,11 +513,11 @@ típusát.</para>
                 </listitem>
             </itemizedlist>
             <para>
-                <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> is a default
-module that is capable to decrypt an encrypted incoming email message
-(S/MIME or PGP) placing the unencrypted message body in the email header
-X-OTRS-BodyDecrypted to be processed later. Additionally it can also update
-the email body to the unencrypted version.
+                A <literal>Kernel::System::PostMaster::Filter::Decrypt</literal> egy olyan
+alapértelmezett modul, amely képes visszafejteni egy titkosított bejövő
+e-mail üzenetet (S/MIME vagy PGP) a titkosítatlan üzenettörzs elhelyezésével
+az X-OTRS-BodyDecrypted e-mail fejlécben a későbbi feldolgozáshoz. Továbbá
+frissíteni is tudja az e-mail törzsét a titkosítatlan verzióhoz.
             </para>
             <para>
                 Az e-mailek visszafejtésének érdekében a rendszer megfelelő beállítása
@@ -579,10 +585,10 @@ beírva.</para>
             </itemizedlist>
             <note>
                 <para>
-                    Details about Postmaster filter processing are also present in communication
-logs. Make sure to check <link
-linkend="adminarea-communication-log">Communication Log</link> in the Admin
-area.
+                    A levelezési szűrő feldolgozásával kapcsolatos részletek a kommunikációs
+naplókban szintén megtalálhatók. Győződjön meg arról, hogy megnézte-e az
+adminisztrátori területen lévő <link
+linkend="adminarea-communication-log">kommunikációs naplót</link>.
                 </para>
             </note>
         </section>

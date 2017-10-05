@@ -5,12 +5,13 @@
 <section id="adminarea-postmasterfilter">
     <title>Bejövő e-mail üzenetek szűrése</title>
     <para>
-        OTRS has the capability to filter incoming email messages. For example, it
-is possible to put certain emails automatically into specified queues, or to
-set a specific state or ticket type for some mails. The filters apply to all
-incoming mails. Several filter conditions can be defined per each mail
-header. You can manage your filters via the link "PostMaster Filter" on the
-Admin page (see figure below).
+        Az OTRS rendelkezik a bejövő e-mail üzenetek szűrésének
+képességével. Például lehetséges bizonyos levelek automatikus elhelyezése
+egy adott várólistába, vagy egy adott állapot vagy jegytípus beállítása
+néhány levélnél. A szűrők minden bejövő levélre alkalmazzák. Több
+szűrőfeltétel is meghatározható az egyes levélfejlécekhez. A szűrőket az
+adminisztrációs oldalon lévő „Levelezési szűrők” hivatkozáson keresztül
+kezelheti (lásd a lenti ábrát).
     </para>
     <para>
         <figure>
@@ -21,25 +22,26 @@ fileref="screenshots/administration/adminarea/admin-postmasterfilter.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     </para>
     <para>
-        A filter consists of one or more criteria that must be met in order for the
-defined actions to be executed on the email. Filter criteria may be defined
-for the headers or the body of an email, e.g. search for specific header
-entries, such as a sender address, or on strings in the body. Even regular
-expressions can be used for extended pattern matching. If your filter
-matches, you can set fields using the <literal>X-OTRS</literal> headers in
-the GUI. These values will be applied when creating the ticket or follow-up
-message in OTRS. The table below lists the different
-<literal>X-OTRS</literal> headers and their meaning.
+        Egy szűrő egy vagy több feltételből áll, amelyeknek teljesülniük kell azért,
+hogy a meghatározott művelet végrehajtásra kerüljön a levélen. A
+szűrőfeltételek meghatározhatók egy levél fejléceihez vagy a törzséhez,
+például adott fejlécbejegyzések keresése, úgymint egy küldő címe, vagy
+szövegeké a törzsben. Akár reguláris kifejezések is használhatók a
+kiterjesztett mintaillesztéshez. Ha a szűrő illeszkedik, akkor beállíthat
+mezőket az <literal>X-OTRS</literal> fejlécek használatával a grafikus
+felületen. Ezek az értékek lesznek alkalmazva a jegy létrehozásakor vagy a
+követő üzenetnél az OTRS-ben. A lenti táblázat a különböző
+<literal>X-OTRS</literal> fejléceket és a jelentésüket sorolja fel.
     </para>
     <note>
         <para>
-            You also can use <literal>X-OTRS-FollowUp-*</literal> headers to set values
-for follow up emails.
+            Használhatja az <literal>X-OTRS-FollowUp-*</literal> fejléceket is az
+értékek beállításához a követő leveleknél.
         </para>
     </note>
 
     <table id="table-of-x-otrs-headers">
-    <title>A különböző X-OTRS-fejlécek funkciója</title>
+    <title>A különböző X-OTRS fejlécek funkciója</title>
         <tgroup cols="3">
             <thead>
                 <row>
@@ -58,10 +60,10 @@ for follow up emails.
                 <entry>X-OTRS-Queue:</entry>
                 <entry>Egy várólista neve a rendszeren.</entry>
                 <entry>
-                    Sets the queue where the ticket shall be sorted. If set in X-OTRS header,
-all other filter rules that try to sort a ticket into a specific queue are
-ignored. If you use a sub-queue, specify it as
-<literal>Parent::Sub</literal>.
+                    Beállítja azt a várólistát, amelybe a jegyet rendezni kell. Ha be van
+állítva az X-OTRS fejléc, akkor minden egyéb szűrőszabály mellőzve lesz,
+amely megpróbál egy jegyet egy adott várólistába rendezni. Ha alvárólistát
+használ, akkor <literal>Szülő::Allista</literal> formában adja meg.
                 </entry>
             </row>
             <row>
@@ -86,35 +88,37 @@ teljesen figyelmen kívül lesz hagyva, és sosem lesz kézbesítve a rendszerre
                 <entry>X-OTRS-State-PendingTime:</entry>
                 <entry>például 2010-11-20 00:00:00</entry>
                 <entry>
-                    Sets the pending time of a ticket (you also should sent a pending state via
-X-OTRS-State). You can specify absolute dates like "2010-11-20 00:00:00" or
-relative dates, based on the arrival time of the email. Use the form "+
-$Number $Unit", where $Unit can be 's' (seconds), 'm' (minutes), 'h' (hours)
-or 'd' (days). Only one unit can be specified. Examples of valid settings:
-"+50s" (pending in 50 seconds), "+30m" (30 minutes), "+12d" (12 days). Note
-that settings like "+1d 12h" are not possible. You can specify "+36h"
-instead.
+                    Beállítja egy jegy várakozó idejét (függő állapotot az X-OTRS-State fejlécen
+keresztül is küldhet). Megadhat abszolút dátumokat, mint például „2010-11-20
+00:00:00”, vagy relatív dátumokat a levél beérkező idején
+alapulva. Használja a „+ $Szám $Mértékegység” alakot, ahol a $Mértékegység
+lehet „s” (másodperc), „m” (perc), „h” (óra) vagy „d” (nap). Csak egy
+mértékegység adható meg. Példák az érvényes beállításokra: „+50s” (50
+másodpercig függőben), „+30m” (30 perc), „+12d” (12 nap). Vegye figyelembe,
+hogy a „+1d 12h” jellegű beállítások nem lehetségesek. Inkább „+36h” értéket
+adjon meg helyette.
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-Type:</entry>
                 <entry>alapértelmezett (a beállítástól függ)</entry>
-                <entry>Sets the type of a ticket (if <literal>Ticket::Type</literal> is activated).</entry>
+                <entry>Beállítja egy jegy típusát (ha a <literal>Ticket::Type</literal> be van
+kapcsolva).</entry>
             </row>
             <row>
                 <entry>X-OTRS-Service:</entry>
                 <entry>(a beállítástól függ)</entry>
                 <entry>
-                    Sets the service of a ticket (if <literal>Ticket::Service</literal> is
-active). If you want to set a sub-service you should specify it as
-<literal>Parent::Sub</literal>.
+                    Beállítja egy jegy szolgáltatását (ha a <literal>Ticket::Service</literal>
+aktív). Ha egy alszolgáltatást szeretne megadni, akkor
+<literal>Szülő::Alszolgáltatás</literal> formában kell megadnia.
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-SLA:</entry>
                 <entry>(a beállítástól függ)</entry>
-                <entry>Sets the SLA of a ticket (if <literal>Ticket::Service</literal> support is
-active).</entry>
+                <entry>Beállítja egy jegy SLA-ját (ha a <literal>Ticket::Service</literal>
+támogatás aktív).</entry>
             </row>
             <row>
                 <entry>X-OTRS-CustomerUser:</entry>
@@ -134,7 +138,7 @@ active).</entry>
             <row>
                 <entry>X-OTRS-IsVisibleForCustomer:</entry>
                 <entry>0, 1</entry>
-                <entry>Controls if the article is shown in the customer interface.</entry>
+                <entry>Azt vezérli, hogy a bejegyzés megjelenjen-e az ügyfélfelületen.</entry>
             </row>
             <row>
                 <entry>X-OTRS-DynamicField-&lt;DinamikusMezőNeve&gt;:</entry>
@@ -143,8 +147,8 @@ active).</entry>
 00:00:00, Egész: 1)
                 </entry>
                 <entry>
-                    Saves an additional info value for the ticket on
-<literal>&lt;DynamicFieldName&gt;</literal> Dynamic Field.
+                    Egy további információs értéket ment el a jegyhez a
+<literal>&lt;DinamikusMezőNeve&gt;</literal> dinamikus mezőn.
                 </entry>
             </row>
             <row>
@@ -159,40 +163,42 @@ kézbesítve az üzenet küldőjének (levélhurok védelem).
                 <entry>X-OTRS-FollowUp-State-Keep:</entry>
                 <entry>0, 1</entry>
                 <entry>
-                    If this X-OTRS header is set, the incoming follow-up message will not change
-the ticket state. For this purpose the header can be customized in the
-SysConfig using option <literal>KeepStateHeader</literal>.
+                    Ha ez az X-OTRS fejléc be van állítva, akkor a bejövő követő üzenet nem
+fogja megváltoztatni a jegy állapotát. Erre a célra a fejléc személyre
+szabható a rendszerbeállításokban a <literal>KeepStateHeader</literal>
+beállítás használatával.
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-AttachmentExists:</entry>
-                <entry>no, yes</entry>
+                <entry>nem, igen</entry>
                 <entry>
-                    Depending on whether attachments are included in the email this X-OTRS
-header is set to 'yes', or it has a 'no' value if no attachments are
-included.
+                    Attól függően, hogy tartalmaz-e mellékleteket az e-mail, ez az X-OTRS fejléc
+„igen” értékre van állítva, vagy „nem” értéke van, ha nem tartalmaz
+mellékletet.
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-AttachmentCount:</entry>
-                <entry>(number of attachments)</entry>
+                <entry>(mellékletek száma)</entry>
                 <entry>
-                    This X-OTRS header contains as value the number of attachments which are
-contained in the email (i.e. '0' for mails without attachments).
+                    Ez az X-OTRS fejléc tartalmazza számként a mellékletek számát, amelyeket az
+e-mail tartalmaz (azaz „0” a mellékletek nélküli leveleknél).
                 </entry>
             </row>
         </tbody>
       </tgroup>
     </table>
     <para>
-        You should specify a name for every filter rule. Filter criteria can be
-specified in the section "Filter Condition". Choose via the list boxes for
-"Header 1", "Header 2" and so on for the parts of the messages where you
-would like to search, and specify on the right side the values you wish to
-filter on. In the section "Set Email Headers", you can choose the actions
-that are triggered if the filter rules match. You can select for "Header 1",
-"Header 2" and so on to select the X-OTRS-Header and set the associated
-values (see figure below).
+        Meg kell adnia egy nevet minden szűrőszabályhoz. A szűrőfeltételek a
+„Szűrőfeltétel” szakaszban adhatók meg. Válasszon a listamezőkön keresztül
+az „1. fejléc”, a „2. fejléc”, és így tovább esetén az üzenetek azon
+részeihez, ahol keresni szeretne, és a jobb oldalon adja meg azokat az
+értékeket, amelyekre szűrni kíván. Az „E-mail fejlécek beállítása”
+szakaszban  választhatja ki azokat a műveleteket, amelyek aktiválva lesznek,
+ha a szűrőszabályok illeszkednek. Kiválaszthatja az „1. fejléc”, a
+„2. fejléc”, és így tovább számára az X-OTRS fejléc kiválasztását és a
+hozzárendelt változók beállítását (lásd a lenti ábrát).
     </para>
     <para>
         A szűrőszabályok ábécé-sorrendben lesznek kiértékelve, és az összes
@@ -229,9 +235,9 @@ rendszeren lévő új üzenetekhez.
         </para>
     </example>
     <para>
-        There are additional modules that can be used to <link
-linkend="email-receiving-filter">filter incoming messages</link> more
-specifically. These modules might be useful when dealing with larger, more
-complex systems.
+        Vannak további modulok, amelyek a <link
+linkend="email-receiving-filter">bejövő üzenetek szűréséhez</link>
+speciálisabban használhatók. Ezek a modulok akkor lehetnek hasznosak, amikor
+nagyobb, összetettebb rendszerekkel foglalkozik.
     </para>
 </section>

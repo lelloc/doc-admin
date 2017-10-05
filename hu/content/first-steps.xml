@@ -20,25 +20,28 @@ elérhető felhasználó beállításokra.
 
     <note>
         <para>
-            Before logging on for the first time, please consider activating the HTTPS
-on your web server in order for OTRS to be served as a secure app over
-SSL/TLS protocol. For detailed instructions on how to do this, please
-consult the documentation of your web server (e.g. Apache2).
+            Mielőtt első alkalommal jelentkezne be, fontolja meg a HTTPS bekapcsolását a
+webkiszolgálón annak érdekében, hogy az OTRS biztonságos alkalmazásként
+legyen kiszolgálva SSL/TLS protokollokon keresztül. A részletes
+utasításokhoz olvassa el a webkiszolgáló (például Apache2) dokumentációját,
+hogy hogyan kell ezt elvégezni.
         </para>
         <para>
-            After you activate HTTPS, please set the configuration option
-<literal>HttpType</literal> to <emphasis>https</emphasis> in <link
-linkend="adminarea-systemconfiguration">SysConfig</link>. This will make
-sure that all internal links in OTRS are indeed using HTTPS.
+            Miután bekapcsolta a HTTPS-t, állítsa a <literal>HttpType</literal>
+konfigurációs beállítást <emphasis>https</emphasis> értékre a <link
+linkend="adminarea-systemconfiguration">rendszerbeállításokban</link>. Ez
+fogja azt biztosítani, hogy az OTRS összes belső hivatkozása valóban HTTPS-t
+használjon.
         </para>
         <para>
-            Good practice is to also redirect all HTTP traffic to HTTPS, in case someone
-tries to access the OTRS via an insecure link. This should be done on web
-server configuration level for maximum effect. However, in case this is not
-possible, you can set <literal>HTTPSForceRedirect</literal> to
-<emphasis>Yes</emphasis> in <link
-linkend="adminarea-systemconfiguration">SysConfig</link> to do it on
-application level.
+            A helyes gyakorlat az, hogy az összes HTTP-forgalmat is átirányítja HTTPS-re
+abban az esetben, ha valaki egy nem biztonságos hivatkozáson keresztül
+próbálja meg elérni az OTRS-t. Ezt a webkiszolgáló beállítási szintjén kell
+megtenni a legjobb hatás érdekében. Azonban ha ez nem lehetséges, akkor
+átállíthatja a <literal>HTTPSForceRedirect</literal> beállítást
+<emphasis>Igen</emphasis> értékre a <link
+linkend="adminarea-systemconfiguration">rendszerbeállításokban</link>, hogy
+az alkalmazás szintjén tegye ezt meg.
         </para>
     </note>
 
@@ -108,8 +111,8 @@ való keresést mindenféle speciális meghatalmazás nélkül.
 <para>
 A példánkban a nyilvános webes felület a következő URL-ek bármelyikén
 keresztül elérhető: <ulink
-url="http://www.example.com/otrs/faq.pl"><citetitle>http://www.example.com/otrs/faq.pl</citetitle></ulink>
-, <ulink
+url="http://www.example.com/otrs/faq.pl"><citetitle>http://www.example.com/otrs/faq.pl</citetitle></ulink>,
+<ulink
 url="http://www.example.com/otrs/public.pl"><citetitle>http://www.example.com/otrs/public.pl</citetitle></ulink>
 </para>
 
@@ -328,31 +331,32 @@ elemek a következő szűrőket támogatják:
             <listitem>
                 <para>Saját megfigyelt jegyek</para>
                 <para>
-                    The tickets that the logged agent has in his/her watched list, requires
-<literal>Ticket::Watcher</literal> setting to be turned on to be displayed.
+                    Azok a jegyek, amelyek a bejelentkezett ügyintéző megfigyelési listáján
+vannak. A <literal>Ticket::Watcher</literal> beállítás bekapcsolását igényli
+a megjelenítéshez.
                 </para>
             </listitem>
             <listitem>
                 <para>Saját felelősségek</para>
                 <para>
-                    The tickets that the logged agent is set as responsible,
-<literal>Ticket::Responsible</literal> setting is required to be turned on
-in order to make this filter visible.
+                    Azok a jegyek, amelyeknél a bejelentkezett ügyintéző felelősként van
+beállítva. A <literal>Ticket::Responsible</literal> beállítás bekapcsolása
+szükséges annak érdekében, hogy ez a szűrő látható legyen.
                 </para>
             </listitem>
             <listitem>
                 <para>Jegyek a várólistáimban</para>
                 <para>
-                    The tickets that are on queues where the agent define as <emphasis>My
-Queues</emphasis>.
+                    Azok a jegyek, amelyek olyan várólistákban vannak, amelyeket az ügyintéző
+<emphasis>Saját várólistákként</emphasis> határozott meg.
                 </para>
             </listitem>
             <listitem>
                 <para>Jegyek a szolgáltatásaimban</para>
                 <para>
-                    The tickets that are assigned to services where the agent define as
-<emphasis>My Services</emphasis> and are on queues with at least read-only
-permissions.
+                    Azok a jegyek, amelyek olyan szolgáltatásokhoz vannak rendelve, amelyeket az
+ügyintéző <emphasis>Saját szolgáltatásokként</emphasis> határozott meg, és
+legalább csak olvasható jogosultságokkal rendelkező várólistákban vannak.
                 </para>
             </listitem>
             <listitem>
@@ -375,12 +379,12 @@ dátuma elérve.</para>
             </listitem>
             <listitem>
                 <para>Új jegyek</para>
-                <para>Tickets that have state <emphasis>New</emphasis>.</para>
+                <para>Azok a jegyek, amelyeknek <emphasis>Új</emphasis> állapota van.</para>
             </listitem>
             <listitem>
                 <para> Nyitott jegyek / Válaszra várnak</para>
-                <para>Tickets that have state <emphasis>Open</emphasis> and are ready for work
-with them.</para>
+                <para>Azok a jegyek, amelyeknek <emphasis>Nyitott</emphasis> állapota van és
+készen állnak a velük végzendő munkára.</para>
             </listitem>
         </itemizedlist>
     </listitem>
@@ -419,9 +423,9 @@ fileref="screenshots/introduction/firststeps/events-ticket-calendar.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Further configurations for this widget could be found under the
-<literal>Frontend::Agent::Dashboard::EventsTicketCalendar</literal> SubGroup
-in the SysConfig:
+            Ezen felületi elem további beállításai megtalálhatók a
+<literal>Frontend::Agent::Dashboard::EventsTicketCalendar</literal>
+alcsoport alatt a rendszerbeállításokban:
         </para>
         <itemizedlist mark="round">
             <listitem>
@@ -485,14 +489,17 @@ megnyílni, amely lehetővé teszi az ügyintézőknek, hogy részletesebb
     </listitem>
 </itemizedlist>
 <para>
-    In the right column is located a special widget that allow you to control
-the widgets you want to show or hide. This is the Settings widget. Click on
-it's header to expand the section and see all available widgets, as shown in
-Figure. Each widget name has a checkbox. Use this checkboxes to define the
-visibility of the widgets in the dashboard (unchecked widgets will not be
-shown) after you define the visibility options and click on
-<emphasis>Save</emphasis> for storing your changes.  This section is fixed
-on the screen, this means you can't drag and drop it, or close it.
+    A jobb oldali oszlopban egy speciális felületi elem található, amely
+lehetővé teszi a felületi elemek szabályozást, hogy mit szeretne
+megjeleníteni vagy elrejteni. Ez a beállítások felületi elem. Kattintson a
+fejlécére a szakasz kinyitásához és minden elérhető felületi elem
+megtekintéséhez, amint az ábrán látható. Minden felületi elem nevének van
+egy jelölőnégyzete. Ezen jelölőnégyzetek használatával határozható meg a
+felületi elemek láthatósága a vezérlőpulton (a nem bejelölt felületi elemek
+nem lesznek láthatók), miután meghatározta a láthatósági beállításokat, és
+rákattintott a <emphasis>Mentés</emphasis> gombra a változtatások
+eltárolásához. Ez a szakasz rögzítve van a képernyőn, ami azt jelenti, hogy
+nem tudja fogd és vidd módon áthelyezni vagy bezárni azt.
 </para>
 
 <para>
@@ -653,11 +660,13 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-The queue overview offers a variety of options for daily work with OTRS. The
-first of these is the My Queue. In the Agent Preferences, or when
-administering agents, a set of queues can be defined for which the agent has
-been assigned to work within. All the tickets will appear in this default
-view, when accessing the <emphasis>Tickets -> Queue View</emphasis> menu.
+A várólista áttekintő különböző lehetőségeket nyújt az OTRS-sel végzendő
+napi munkához. Ezek közül az első a Saját várólista. Az ügyintéző
+beállításaiban vagy amikor ügyintézőket adminisztrál, olyan várólisták
+halmaza határozható meg, amelyekhez az ügyintéző hozzárendelésre kerül, hogy
+dolgozzon bennük. Az összes jegy meg fog jelenni ebben az alapértelmezett
+nézetben, amikor megnyitja a <emphasis>Jegyek -> Várólista</emphasis> nézet
+menüt.
 </para>
 
 <para>
@@ -681,7 +690,7 @@ Ezek a látható riasztások a felhasználó támogatásához.
 
 <para>
 <figure>
-    <title>Agent Queue View visual alarms</title>
+    <title>Ügyintéző várólista nézet látható riasztásai</title>
 <screenshot>
 <graphic
 fileref="screenshots/introduction/firststeps/agent-queue-overview-visual-alarms.gif"
@@ -691,25 +700,25 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 <itemizedlist>
     <title>Látható riasztások</title>
     <listitem>
-        <para>Highlight Age 1: Sets the age in minutes (first level) for highlighting
-queues that contain untouched tickets. Seen in above in the
-<emphasis>Raw</emphasis> queue.</para>
+        <para>1. életkor kiemelése: Beállítja az életkort percben (első szint) a
+várólisták kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak. Fent a
+<emphasis>Nyers</emphasis> várólistán látható.</para>
     </listitem>
     <listitem>
-        <para>Highlight Age 2: Sets the age in minutes (second level) for highlighting
-queues that contain untouched tickets. Seen in above in the
-<emphasis>Postmaster</emphasis> queue.</para>
+        <para>2. életkor kiemelése: Beállítja az életkort percben (második szint) a
+várólisták kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak. Fent a
+<emphasis>Levelezés</emphasis> várólistán látható.</para>
     </listitem>
     <listitem>
-        <para>Blink: A blinking mechanism of the queue that contains the oldest ticket can
-be activated using
-<literal>Ticket::Frontend::AgentTicketQueue###Blink</literal>. Not supported
-in all browsers. In that case, the queue name will just appear in red color,
-as seen in above on the queue <emphasis>Junk</emphasis>.</para>
+        <para>Villogás: A legrégebbi jegyet tartalmazó várólista villogási mechanizmusa a
+<literal>Ticket::Frontend::AgentTicketQueue###Blink</literal> beállítással
+kapcsolható be. Nem minden böngészőben támogatott. Ebben az esetben a
+várólista neve piros színnel fog megjelenni, amint fent a
+<emphasis>Szemét</emphasis> várólistán látható.</para>
     </listitem>
     <listitem>
-        <para>Bold: The current queue will be bolded, as seen above in the <emphasis>My
-Queues</emphasis>.</para>
+        <para>Félkövér: A jelenlegi várólista félkövér lesz, amint fent a <emphasis>Saját
+várólistán</emphasis> látható.</para>
     </listitem>
 </itemizedlist>
 </section>

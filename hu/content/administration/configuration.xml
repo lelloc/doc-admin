@@ -9,48 +9,51 @@
 <title>OTRS beállítófájlok</title>
 
 <para>
-All OTRS configuration files are stored in the directory
-<filename>Kernel</filename> and in its subdirectories. There is no need to
-manually change any other file than <filename>Kernel/Config.pm</filename>,
-because the rest of the files will be changed when the system gets
-upgraded. Just copy the configuration parameters from other files into
-<filename>Kernel/Config.pm</filename> and change them as per your
-needs. This file will never be touched during the upgrade process, so your
-manual changes are safe.
+Az összes OTRS beállítófájl a <filename>Kernel</filename> könyvtárban és
+annak alkönyvtáraiban van eltárolva. Nincs szükség a
+<filename>Kernel/Config.pm</filename> fájlon kívül egyetlen fájl kézi
+megváltoztatására sem, mert a többi fájl meg lesz változtatva, amikor a
+rendszer frissítést kap. Egyszerűen másolja át a beállítási paramétereket a
+többi fájlból a <filename>Kernel/Config.pm</filename> fájlba, és változtassa
+meg azokat az igényei szerint. Ehhez a fájlhoz sosem fognak hozzányúlni a
+frissítési folyamat közben, így a kézi változtatásai biztonságban vannak.
 </para>
 
 <para>
-The configuration can be rebuilt either manually by executing <literal>perl
-bin/otrs.Console.pl Maint::Config::Rebuild</literal> or automatically by the
-installer, package operations (install, upgrade, reinstall and uninstall),
-etc. All <filename>.xml</filename> files located in
-<filename>Kernel/Config/Files/XML/</filename> are parsed and their content
-is transferred to the OTRS database. Most of the <filename>.xml</filename>
-files which are part of this directory by default belong to OTRS Free, but
-OTRS Free Features such as FAQ or Survey (or any other OTRS extension) will
-add their own configuration files to this directory as well.
+A beállítások újraépíthetők kézzel a <literal>perl bin/otrs.Console.pl
+Maint::Config::Rebuild</literal>parancsfájl végrehajtásával, vagy
+automatikusan a telepítő, a csomagműveletek (telepítés, frissítés,
+újratelepítés és eltávolítás) stb. által. A
+<filename>Kernel/Config/Files/XML/</filename> mappában található összes
+<filename>.xml</filename> fájl fel lesz dolgozva, és a tartalmuk át lesz
+küldve az OTRS adatbázisába. A legtöbb <filename>.xml</filename> fájl -
+amelyek ennek a könyvtárnak a részei - alapértelmezetten az OTRS Free
+csoporthoz tartoznak, de az OTRS Free funkciók, mint például a GyIK vagy
+kérdőív (vagy bármely más OTRS kiterjesztés) is hozzá fogják adni a saját
+beállítófájljukat ehhez a könyvtárhoz.
 </para>
 
 <para>
-To apply any sort of changes to the configuration, it is necessary to deploy
-them. The deployment process will extract all settings and the according
-values from the OTRS database, convert them to a format that OTRS can
-understand naturally and put them into
-<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>.
+A konfiguráción elvégzett bármilyen változtatás alkalmazásához üzembe kell
+állítani azokat. Az üzembe állítási folyamat ki fogja szedni az összes
+beállítást és a megfelelő értékeket az OTRS adatbázisából, átalakítja olyan
+formátumra, hogy az OTRS természetes módon megértse, és elhelyezi azokat a
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename> fájlba.
 </para>
 
 <para>
-If the OTRS web interface is accessed, the settings contained in the files
-<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>,
-<filename>Kernel/Config/Files/ZZZACL.pm</filename> (if existing),
-<filename>Kernel/Config/Files/ZZZProcessManagement.pm</filename> (if
-existing) and any other custom <filename>.pm</filename> file will be
-evaluated alphabetically. These files are used by the graphical user
-interface for caching purposes and should never be changed manually. Lastly,
-the file <filename>Kernel/Config.pm</filename> that contains your individual
-settings and manually changed configuration parameters will be
-parsed. Reading the configuration files in this order makes sure that your
-specific configuration settings are considered correctly by the system.
+Ha az OTRS a webes felületen keresztül lett elérve, akkor a
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>, a
+<filename>Kernel/Config/Files/ZZZACL.pm</filename> (ha létezik), a
+<filename>Kernel/Config/Files/ZZZProcessManagement.pm</filename> (ha
+létezik) és bármilyen más egyéni <filename>.pm</filename> fájlban tárolt
+beállítás ábécé sorrendben lesz kiértékelve. Ezeket a fájlokat a grafikus
+felhasználói felület használja gyorsítótárazási célokra, és sosem szabad
+kézzel megváltoztatni. Végül a <filename>Kernel/Config.pm</filename> fájl
+lesz feldolgozva, amely az egyéni beállításokat és a kézzel megváltoztatott
+beállítási paramétereket tartalmazza. A beállítófájlok ebben a sorrendben
+történő olvasása biztosítja, hogy a különleges konfigurációs beállításait
+helyesen vegye figyelembe a rendszer.
 </para>
 
 </section>

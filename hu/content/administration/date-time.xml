@@ -3,53 +3,56 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="da-tetime">
-<title>Date and Time Related Functions</title>
+<title>Dátummal és idővel kapcsolatos funkciók</title>
 
 <section id="date-time-settings">
 <title>Nyitvatartási idők, munkaszüneti napok és időzónák beállítása</title>
 
 <para>
-Some functions in OTRS, like escalations and <link
-linkend="unlock-tickets">automatic unlocking of tickets</link>, depend on a
-proper configuration of business hours, time zones and holidays. You can
-define these via the <link linkend="sysconfig">SysConfig interface</link>,
-in <link linkend="ConfigReference_Section_Core_Time">Core::Time</link>.  You
-can also specify different sets of business hours, holidays and time zones
-as separate 'Calendars' in <link
+Az OTRS-ben lévő néhány funkció - mint például az eszkalációk és a <link
+linkend="unlock-tickets">jegyek automatikus feloldása</link> - a
+nyitvatartási idők, az időzónák és a munkaszüneti napok megfelelő
+beállításától függ. Ezeket a <link linkend="sysconfig">rendszerbeállítási
+felületen</link> keresztül a <link
+linkend="ConfigReference_Section_Core_Time">Core::Time</link> beállítással
+határozhatja meg. A nyitvatartási idők, a munkaszüneti napok és az időzónák
+különböző beállításait is megadhatja különálló „naptárakként” a <link
 linkend="ConfigReference_Section_Core_Time_Calendar1">Core::Time::Calendar1</link>
-through <link
-linkend="ConfigReference_Section_Core_Time_Calendar9">Core::Time::Calendar9</link>.
-Calendars can be defined by <link linkend="adminarea-queue">queue
-settings</link>, or on SLA levels. This means that, for example, you can
-specify a calendar with 5 x 8 business hours for your 'standard' SLA, but
-create a separate calendar with 7 x 24 support for your 'gold' SLA; as well
-as set a calendar for your 'Support-USA' queue with a different time window
-than your 'Support-Japan' queue. OTRS can handle up to 99 different
-calendars.
+paramétertől a <link
+linkend="ConfigReference_Section_Core_Time_Calendar9">Core::Time::Calendar9</link>
+paraméterig. A naptárak meghatározhatók <link
+linkend="adminarea-queue">várólista beállításonként</link> vagy
+SLA-szinteken. Ez azt jelenti, hogy például megadhat egy naptárat egy 5×8-as
+nyitvatartási idővel a „szabványos” SLA-hoz, de létrehozhat egy különálló
+naptárat 7×24 órás támogatással az „arany” SLA-hoz, valamint beállíthat egy
+naptárat a „támogatás-USA” várólistához a „támogatás-Japán” várólistától
+eltérő időablakkal. Az OTRS legfeljebb 99 különféle naptárat tud kezelni.
 </para>
 
 <section id="TimeZones">
-<title>Time zones</title>
+<title>Időzónák</title>
 
 <para>
-OTRS needs to know which time zone should be used to store date and time
-related data in the database. You can set this in <link
-linkend="ConfigReference_Setting_OTRSTimeZone">Core::Time:OTRSTimeZone</link>.
-The default is UTC and if you set up a new OTRS it is strongly recommended
-to leave it at this. If you updated from an OTRS older than version 6, you
-must ensure that <literal>OTRSTimeZone</literal> is being set to a time zone
-that matches your previous setup. Otherwise new data will be stored with a
-different time zone than your existing data.  Once you decided on a time
-zone and data was stored (tickets, etc.), you shouldn't change the time zone
-anymore because otherwise you would end up with data stored in different
-time zones.
+Az OTRS-nek tudnia kell, hogy mely időzónát kell használnia a dátummal és
+idővel kapcsolatos adatok tárolásához az adatbázisban. Ezt a <link
+linkend="ConfigReference_Setting_OTRSTimeZone">Core::Time:OTRSTimeZone</link>
+beállításban adhatja meg. Az alapértelmezett az UTC, és ha egy új OTRS-t
+állít be, akkor erősen javasolt ezt ezen hagyni. Ha egy 6-os verziónál
+régebbi OTRS-ről frissített, akkor meg kell győződnie arról, hogy az
+<literal>OTRSTimeZone</literal> egy olyan időzónára lett-e beállítva, amely
+illeszkedik a korábbi beállítására. Egyébként az új adatok a meglévő
+adatoktól eltérő időzónával lesznek tárolva. Amikor kiválasztott egy
+időzónát, és az adatok tárolásra kerültek (jegyek, stb.), akkor többé nem
+szabad megváltoztatnia az időzónát, mert különben eltérő időzónákkal tárolt
+adatokkal találhatja szembe magát.
 </para>
 
 <para>
-You can set a default time zone for new agents and customer users via <link
-linkend="ConfigReference_Setting_UserDefaultTimeZone">Core::Time:UserDefaultTimeZone</link>.
-This time zone will be used for all users that don't have selected a time
-zone in their preferences.
+A <link
+linkend="ConfigReference_Setting_UserDefaultTimeZone">Core::Time:UserDefaultTimeZone</link>
+beállításon keresztül állíthat be egy alapértelmezett időzónát az új
+ügyintézőknek és ügyfél-felhasználóknak. Ez az időzóna lesz használva minden
+olyan felhasználónál, akik nem választottak még időzónát a beállításaikban.
 </para>
 
 </section>
@@ -58,11 +61,11 @@ zone in their preferences.
 <title>Nyitvatartási idők</title>
 
 <para>
-Set up the working hours for your system in SysConfig <link
-linkend="ConfigReference_Setting_TimeWorkingHours">Core::Time:TimeWorkingHours</link>,
-or for your specific calendar in the calendar's configuration. OTRS can
-handle a granularity of one hour. Checking the marks in the boxes 8, 9, 10
-... 17 corresponds with business hours of 8:00 AM - 6:00 PM.
+Állítsa be a munkaidőt a rendszerénél a <link
+linkend="ConfigReference_Setting_TimeWorkingHours">Core::Time:TimeWorkingHours</link>
+rendszerbeállításban, vagy az adott naptárnál a naptár beállításaiban. Az
+OTRS egyórás felbontást tud kezelni. A 8, 9, 10 … 17 négyzetek bejelölése
+felel meg a 8.00 - 18.00 óra közötti nyitvatartási időnek.
 </para>
 
 <para>
@@ -77,10 +80,10 @@ fel jegyek.
 <title>Rögzített dátumú munkaszüneti napok</title>
 
 <para>
-Holidays that are on a fixed date every year, such as New Year's Day or the
-Fourth of July, can be specified in <link
-linkend="ConfigReference_Setting_TimeVacationDays">TimeVacationDays</link>,
-or in the corresponding section for the calendars 1-9.
+Azok a munkaszüneti napok, amelyek minden évben egy rögzített dátumra esnek
+(mint például Újév napja vagy Március 15.), a <link
+linkend="ConfigReference_Setting_TimeVacationDays">TimeVacationDays</link>
+paraméterben adhatók meg, vagy az 1-9. naptáraknál a megfelelő szakaszokban.
 </para>
 
 <para>
@@ -101,9 +104,10 @@ telepítve érkezik.
 <title>Mozgó munkaszüneti napok</title>
 
 <para>
-Holidays such as Easter that do not have a yearly fixed date but instead
-vary each year, can be specified in <link
-linkend="ConfigReference_Setting_TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>.
+Az olyan munkaszüneti napok, mint például a húsvét, amelyeknek nincs évente
+rögzített dátuma, hanem minden évben változik, azok a <link
+linkend="ConfigReference_Setting_TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>
+beállításban adhatók meg.
 </para>
 
 <para>

@@ -3,91 +3,97 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="customer-users-and-customers">
-<title>Customer Users and Customers</title>
+<title>Ügyfél-felhasználók és ügyfelek</title>
 
 <section id="adminarea-customer-users">
-<title>Customer Users</title>
+<title>Ügyfél-felhasználók</title>
 
 <para>
-OTRS supports different types of users. Using the link <emphasis>Customer
-Users</emphasis> (via the navigation bar, or the Admin page), you can manage
-the accounts of your customer users (see figure below), who can log into the
-system via the Customer Users interface
-(<filename>customer.pl</filename>). Through this interface, your customers
-can not only create tickets but also review their past tickets for new
-updates. It is important to know that a customer user is needed for the
-ticket history in the system.
+Az OTRS különféle típusú felhasználókat támogat. Az
+<emphasis>Ügyfél-felhasználók</emphasis> hivatkozás használatával (a
+navigációs sávon vagy az adminisztrációs oldalon keresztül) kezelheti az
+ügyfél-felhasználói fiókjait (lásd a lenti ábrát), hogy ki jelentkezhet be a
+rendszerre az ügyfél-felhasználó felületen keresztül
+(<filename>customer.pl</filename>). Ezen felületen keresztül az ügyfelei nem
+csak jegyeket tudnak létrehozni, hanem áttekinthetik a korábbi jegyeiket is
+a frissítésekkel. Fontos tudnia, hogy egy ügyfél-felhasználóra van szükség a
+rendszeren lévő jegyelőzményekhez.
 </para>
 
 <para>
 <figure>
-    <title>Customer User management</title>
+    <title>Ügyfél-felhasználó kezelés</title>
 <screenshot>
 <graphic fileref="screenshots/administration/adminarea/admin-customer.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-You can search for a registered customer user, or edit their settings by
-clicking on their name. You also have the possibility to change the customer
-back-end, for further information please refer to the chapter about <link
-linkend="external-backends">external back-ends</link>.
+Rákereshet egy regisztrált ügyfél-felhasználóra, vagy szerkesztheti a
+beállításaikat a nevükre kattintva. Megvan az a lehetősége is, hogy
+megváltoztassa az ügyfél háttérprogramját. További információkért olvassa el
+a <link linkend="external-backends">külső háttérprogramokról</link> szóló
+fejezetet.
 </para>
 
 <para>
-To create a new customer user account, click on the <emphasis>Add customer
-user</emphasis> button (see figure below). Some of the fields are mandatory,
-i.e., they have to contain values, so if you leave one of those empty, it
-will be highlighted in red.
+Egy új ügyfél-felhasználói fiók létrehozásához kattintson az
+<emphasis>Ügyfél-felhasználó hozzáadása</emphasis> gombra (lásd a lenti
+ábrát). Néhány mező kötelező, azaz értéket kell tartalmazniuk, így ha azok
+egyikét üresen hagyja, akkor pirossal lesznek kiemelve.
 </para>
 
 <para>
 <figure>
-    <title>Adding a customer user</title>
+    <title>Egy ügyfél-felhasználó hozzáadása</title>
 <screenshot>
 <graphic fileref="screenshots/administration/adminarea/add-customer.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-Customer Users can access the system by providing their username and
-password. The CustomerID is needed by the system to identify the user and
-associated tickets. Since the email address is a unique value, it can be
-used as the ID.
+Az ügyfél-felhasználók a felhasználónevük és jelszavuk megadásával férhetnek
+hozzá a rendszerhez. A rendszernek szüksége van az ügyfél-azonosítóra a
+felhasználó és a hozzárendelt jegyek azonosításához. Mivel az e-mail cím
+egyedi érték, használható azonosítóként.
 </para>
 
 <para>
-With the configuration parameter <link
+Az adminisztrátori rendszerbeállításokban lévő <link
 linkend="ConfigReference_Setting_AdminCustomerUser::UseAutoComplete">AdminCustomerUser::UseAutoComplete</link>
-in the Admin SysConfig the autocomplete field can be activated for the
-customer ID selection in the customer user add or edit screen.
+beállítási paraméterrel kapcsolható be az automatikus kiegészítés mező az
+ügyfél-azonosító kijelöléséhez az ügyfél-felhasználó hozzáadása vagy
+szerkesztése képernyőn.
 </para>
 
 <note>
 <para>
-As with agents, groups and roles, customer users can not be deleted from the
-system, only deactivated by setting the Valid option to
-<emphasis>invalid</emphasis> or <emphasis>invalid-temporarily</emphasis>.
+Mint az ügyintézők, csoportok és szerepek esetén, az ügyfél-felhasználók sem
+törölhetők a rendszerről, csak kikapcsolhatók az érvényesség lehetőség
+<emphasis>érvénytelen</emphasis> vagy <emphasis>átmenetileg
+érvénytelen</emphasis> értékre állításával.
 </para>
 </note>
 
 </section>
 
 <section id="adminarea-customer-users-customers-relation">
-    <title>Customer Users ↔ Customers Relations</title>
+    <title>Ügyfél-felhasználók ↔ Ügyfelek kapcsolatok</title>
     <para>
-        Customer users can be assigned to multiple customers (and vice-versa) using
-the link <emphasis>Customer Users ↔ Customers</emphasis> on the admin
-page. In addition to their own (primary) customer, they will be linked to
-any other customer for which there is a defined relation.
+        Az ügyfél-felhasználók hozzárendelhetők több ügyfélhez is (és fordítva) az
+adminisztrációs oldalon lévő <emphasis>Ügyfél-felhasználók ↔
+Ügyfelek</emphasis> hivatkozás használatával. A saját (elsődleges)
+ügyfelükön kívül hozzá lesznek kapcsolva bármilyen más ügyfélhez, amelyekhez
+létezik meghatározott kapcsolat.
     </para>
     <para>
-        This gives them access to tickets of customer users from these customers.
+        Ez ad nekik hozzáférést az ezektől az ügyfelektől származó
+ügyfél-felhasználók jegyeihez.
     </para>
 
     <para>
     <figure>
-        <title>Customer Users-Customers relations management</title>
+        <title>Ügyfél-felhasználók–ügyfelek kapcsolatainak kezelése</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-customer-users-customers.png"
@@ -96,35 +102,40 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </section>
 
 <section id="adminarea-customer-users-groups">
-<title>Customer Users ↔ Groups</title>
+<title>Ügyfél-felhasználók ↔ Csoportok</title>
 
 <para>
-Customer users can also be added to a group, which can be useful if you want
-to add customer users of the same company with access to one or a few
-queues. First create the group to which your customer users will belong, via
-the <link linkend="adminarea-groups">Group management module</link>. Then
-add the <link linkend="adminarea-queue">queues</link> and select the new
-group for the queues.
+Az ügyfél-felhasználók is hozzáadhatók egy csoporthoz, amely akkor lehet
+hasznos, ha ugyanazon vállalat ügyfél-felhasználóit szeretné hozzáadni egy
+vagy néhány várólistához való hozzáféréssel. A <link
+linkend="adminarea-groups">csoportkezelés modulon</link> keresztül először
+hozza létre a csoportot, amelyhez az ügyfél-felhasználók tartozni
+fognak. Ezután adja hozzá a <link
+linkend="adminarea-queue">várólistákat</link>, és válassza ki az új
+csoportot a várólistákhoz.
 </para>
 
 <para>
-The next step is to activate the customer group support. This can be done
-with the configuration parameter <link
-linkend="ConfigReference_Setting_CustomerGroupSupport">CustomerGroupSupport</link>,
-from the Admin SysConfig option. Using the parameter <link
-linkend="ConfigReference_Setting_CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
-you can specify the default groups for a newly added customer user, so that
-every new account will be automatically added to these groups.
+A következő lépés, hogy bekapcsolja az ügyfélcsoport támogatását. Ezt a
+<link
+linkend="ConfigReference_Setting_CustomerGroupSupport">CustomerGroupSupport</link>
+beállítási paraméterrel lehet megtenni az adminisztrációs rendszerbeállítás
+lehetőségből. A <link
+linkend="ConfigReference_Setting_CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
+paraméter használatával megadhatja az alapértelmezett csoportokat egy
+újonnan hozzáadott ügyfélhez azért, hogy minden új fiók automatikusan
+hozzáadásra kerüljön ezekhez a csoportokhoz.
 </para>
 
 <para>
-Through the link <emphasis>Customer Users ↔ Groups</emphasis> you can manage
-which customer shall belong to the different groups (see figure below).
+Az <emphasis>Ügyfél-felhasználók ↔ Csoportok</emphasis> hivatkozáson
+keresztül kezelheti, hogy mely ügyfélnek kell a különböző csoportokhoz
+tartoznia (lásd a lenti ábrát).
 </para>
 
 <para>
 <figure>
-    <title>Customer Users-Group relations management</title>
+    <title>Ügyfél-felhasználók–csoport kapcsolatok kezelése</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-customer-user-groups.png"
@@ -139,7 +150,7 @@ vagy a csoportra (lásd a lenti 4.18. és 4.19. ábrát ezzel kapcsolatban).
 
 <para>
 <figure>
-    <title>Change Group relations for a Customer User</title>
+    <title>Csoportkapcsolatok megváltoztatása egy ügyfél-felhasználónál</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/groups-customer-users-relations.png"
@@ -148,7 +159,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 
 <para>
 <figure>
-    <title>Change Customer user relations for a Group</title>
+    <title>Ügyfélfelhasználó-kapcsolatok megváltoztatása egy csoportnál</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/groups-customer-users-relations2.png"
@@ -158,76 +169,84 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </section>
 
 <section id="adminarea-customers-groups">
-<title>Customers ↔ Groups</title>
+<title>Ügyfelek ↔ Csoportok</title>
 
 <para>
-Customers can also be added to a group, which can be useful if you don't
-want to add group relations to every single customer user. First create the
-group to which your customers will belong, via the <link
-linkend="adminarea-groups">Group management module</link>. Then add the
-<link linkend="adminarea-queue">queues</link> and select the new group for
-the queues.
+Az ügyfelek is hozzáadható egy csoporthoz, amely akkor lehet hasznos, ha nem
+szeretne csoportkapcsolatokat hozzáadni minden egyes
+ügyfél-felhasználóhoz. A <link linkend="adminarea-groups">csoportkezelés
+modulon</link> keresztül először hozza létre a csoportot, amelyhez az
+ügyfelek tartozni fognak. Ezután adja hozzá a <link
+linkend="adminarea-queue">várólistákat</link>, és válassza ki az új
+csoportot a várólistákhoz.
 </para>
 
 <para>
-The next step is to activate the customer group support. This can be done
-with the configuration parameter <link
-linkend="ConfigReference_Setting_CustomerGroupSupport">CustomerGroupSupport</link>,
-from the Admin SysConfig option. Using the parameter <link
-linkend="ConfigReference_Setting_CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>,
-you can specify the default groups for a newly added customers, so that
-every new customer will be automatically added to these groups. Available
-permission levels can be changed via configuration.
+A következő lépés, hogy bekapcsolja az ügyfélcsoport támogatását. Ezt a
+<link
+linkend="ConfigReference_Setting_CustomerGroupSupport">CustomerGroupSupport</link>
+beállítási paraméterrel lehet megtenni az adminisztrációs rendszerbeállítás
+lehetőségből. A <link
+linkend="ConfigReference_Setting_CustomerGroupAlwaysGroups">CustomerGroupAlwaysGroups</link>
+paraméter használatával megadhatja az alapértelmezett csoportokat egy
+újonnan hozzáadott ügyfelekhez azért, hogy minden új ügyfél automatikusan
+hozzáadásra kerüljön ezekhez a csoportokhoz. Az elérhető jogosultsági
+szintek a beállításokon keresztül változtathatók meg.
 </para>
 
 <para>
-Assigned permissions will be shared among all customer users of this
-customer, so permissions don't have to be given individually to every
-customer user (although this is still possible if required).
+A hozzárendelt jogosultságok meg lesznek osztva ezen ügyfél összes
+ügyfél-felhasználója között, így a jogosultságokat nem kell egyesével
+hozzáadni minden ügyfél-felhasználóhoz (habár ez továbbra is lehetséges, ha
+szükséges).
 </para>
 
 <para>
-Different contexts of permission assignment are available, which will
-determine how the permissions are inherited by customer users.
+A jogosultság-hozzárendelés különböző környezetei érhetők el, amelyek azt
+fogják meghatározni, hogy a jogosultságokat hogyan örököljék az
+ügyfél-felhasználók.
 </para>
 
 <para>
-    The following contexts are available:
+    A következő környezetek érhetők el:
 </para>
 <para>
     <itemizedlist>
         <listitem>
-            <para>Same Customer</para>
+            <para>Ugyanaz az ügyfél</para>
             <para>
-                Group permissions will be inherited by all customer users of this
-customer. This provides them with access to tickets of all customer users
-from the this customer if they are located in a queue that's assigned to
-this group.
+                A csoportjogosultságokat ezen ügyfél összes ügyfél-felhasználója meg fogja
+örökölni. Ez hozzáférést biztosít számukra az ettől az ügyféltől származó
+összes ügyfél-felhasználó jegyéhez, ha azok egy olyan várólistában
+találhatók, amely ehhez a csoporthoz van rendelve.
             </para>
         </listitem>
         <listitem>
-            <para>Other Customers</para>
+            <para>Más ügyfelek</para>
             <para>
-                Group permissions will be inherited by all customer users of this
-customer. This provides them with access to tickets of all customer users
-from other customers if they are located in a queue that's assigned to this
-group and if the other customer also has permissions to this group.
+                A csoportjogosultságokat ezen ügyfél összes ügyfél-felhasználója meg fogja
+örökölni. Ez hozzáférést biztosít számukra a másik ügyféltől származó összes
+ügyfél-felhasználó jegyéhez, ha azok egy olyan várólistában találhatók,
+amely ehhez a csoporthoz van rendelve, és ha a másik ügyfél is rendelkezik
+jogosultsággal erre a csoportra.
             </para>
             <para>
-                Access is limited to the level the customer user of a ticket has.
+                A hozzáférés korlátozva van arra a szintre, amellyel egy jegy
+ügyfél-felhasználója rendelkezik.
             </para>
         </listitem>
     </itemizedlist>
 </para>
 
 <para>
-Through the link <emphasis>Customers ↔ Groups</emphasis> you can manage
-which customer shall belong to the different groups (see figure below).
+Az <emphasis>Ügyfelek ↔ Csoportok</emphasis> hivatkozáson keresztül
+kezelheti, hogy mely ügyfélnek kell a különböző csoportokhoz tartoznia (lásd
+a lenti ábrát).
 </para>
 
 <para>
 <figure>
-    <title>Customers-Group relations management</title>
+    <title>Ügyfelek-csoport kapcsolatok kezelése</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-customer-groups.png"
@@ -242,7 +261,7 @@ vagy a csoportra (lásd a lenti 4.18. és 4.19. ábrát ezzel kapcsolatban).
 
 <para>
 <figure>
-    <title>Change Group relations for a Customer User</title>
+    <title>Csoportkapcsolatok megváltoztatása egy ügyfél-felhasználónál</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/groups-customers-relations.png"
@@ -251,7 +270,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 
 <para>
 <figure>
-    <title>Change Customer user relations for a Group</title>
+    <title>Ügyfélfelhasználó-kapcsolatok megváltoztatása egy csoportnál</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/groups-customers-relations2.png"
@@ -261,118 +280,125 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </section>
 
 <section id="adminarea-customer-permission-functionality-explained">
-<title>Customer permission functionality explained</title>
+<title>Az ügyféljogosultságok funkcionalitásának magyarázata</title>
 
 <para>
-    Access to tickets on the customer interface with enabled group support is
-mostly evaluated by a combination of group and individual (customer/customer
-user based)  permission. Only if both criteria are met, specific access is
-granted.
+    Az ügyfélfelületen az engedélyezett csoporttámogatással történő jegyekhez
+való hozzáférés többnyire a csoport és az egyéni (ügyfél/ügyfél-felhasználó
+alapú) jogosultságok kombinációjából van kiszámítva. Csak akkor van bizonyos
+hozzáférés megadva, ha mindkét feltétel teljesül.
 </para>
 <para>
-    If the resulting access is <emphasis>rw</emphasis>, a customer user can view
-and modify a ticket, if the access is <emphasis>ro</emphasis> only viewing
-is possible.
+    Ha az eredményül kapott hozzáférés <emphasis>írás, olvasás</emphasis>, akkor
+egy ügyfél-felhasználó megtekinthet és módosíthat egy jegyet. Ha a
+hozzáférés <emphasis>csak olvasás</emphasis>, akkor csak megtekintés
+lehetséges.
 </para>
 <para>
-    For ticket creation only the group permissions are used and a customer user
-can create tickets for all queues with <emphasis>rw</emphasis> permissions
-(unless restricted otherwise, e.g. ACL or
-<literal>CustomerPanelOwnSelection</literal>).
+    Jegylétrehozáshoz csak a csoportjogosultságok vannak használva, és egy
+ügyfél-felhasználó az összes várólistához létrehozhat jegyeket
+<emphasis>írás, olvasás</emphasis> jogosultsággal (hacsak másképp nincs
+korlátozva, például ACL vagy <literal>CustomerPanelOwnSelection</literal>
+használatával).
 </para>
 <para>
-    Group permissions are additive (meaning that only one method needs to grant
-permissions)  and the following possibilities are taken into account:
+    A csoportjogosultságok összeadandók (ez azt jelenti, hogy csak egy
+módszernek kell jogosultságot adni), és a következő lehetőségek lesznek
+figyelembe véve:
 </para>
 <para>
     <itemizedlist>
-        <listitem><para>Customer user default groups via SysConfig setting</para></listitem>
+        <listitem><para>Az ügyfél-felhasználó alapértelmezett csoportjai a rendszerbeállításokon
+keresztül</para></listitem>
         <listitem>
             <para>
-                Groups assigned to the customer user via <emphasis>Customer Users ↔
-Customers</emphasis> admin frontend
+                Az ügyfél-felhasználóhoz rendelt csoportok az <emphasis>Ügyfél-felhasználók
+↔ Ügyfelek</emphasis> adminisztrációs előtétprogramon keresztül
             </para>
         </listitem>
-        <listitem><para>Customer default groups via SysConfig setting</para></listitem>
+        <listitem><para>Az ügyfél alapértelmezett csoportjai a rendszerbeállításokon keresztül</para></listitem>
         <listitem>
             <para>
-                Groups assigned to the customer via <emphasis>Customers ↔ Groups</emphasis>
-admin frontend
+                Az ügyfélhez rendelt csoportok az <emphasis>Ügyfelek ↔ Csoportok</emphasis>
+adminisztrációs előtétprogramon keresztül
             </para>
         </listitem>
     </itemizedlist>
 </para>
 <para>
-    For the methods above, all customers related to a customer user are
-used. This includes the 'primary' customer (selected in <emphasis>Customer
-User</emphasis> admin frontend), additional customers (added in
-<emphasis>Customer Users ↔ Customers</emphasis> admin frontend) and other
-customer that might exist in the backend.
+    A fenti módszereknél egy ügyfél-felhasználóval kapcsolatban álló összes
+ügyfél használva lesz. Ez tartalmazza az „elsődleges” ügyfelet (az
+<emphasis>Ügyfél-felhasználó</emphasis> adminisztrációs előtétprogramon
+kiválasztva), a további ügyfeleket (az <emphasis>Ügyfél-felhasználók ↔
+Ügyfelek</emphasis> adminisztrációs előtétprogramon hozzáadva), valamint az
+egyéb ügyfelet, amely esetleg a háttérprogramban létezhet.
 </para>
 <para>
-    Individual permission checks require one of the following conditions to be
-met:
+    Az egyéni jogosultság-ellenőrzések a következő feltételek teljesülésének
+egyikét igénylik:
 </para>
 <para>
     <itemizedlist>
-        <listitem><para>Ticket is assigned to the customer user</para></listitem>
+        <listitem><para>A jegy hozzá van rendelve az ügyfél-felhasználóhoz</para></listitem>
         <listitem>
             <para>
-                Ticket is assigned to a customer that the customer user is related to (as
-explained above)
+                A jegy egy olyan ügyfélhez van rendelve, akivel az ügyfél-felhasználó
+kapcsolatban áll (a fentiek szerint)
             </para>
         </listitem>
         <listitem>
             <para>
-                Ticket is assigned to a customer with group permissions for the ticket queue
-while a customer related to the customer user has <emphasis>Other
-Customers</emphasis> permission to the same group
+                A jegy csoportjogosultságokkal van hozzárendelve egy ügyfélhez a jegy
+várólistájánál, miközben az ügyfél-felhasználóval kapcsolatban álló
+ügyfélnek <emphasis>egyéb ügyfelek</emphasis> jogosultsága van ugyanarra a
+csoportra
             </para>
         </listitem>
     </itemizedlist>
 </para>
 <para>
-    An example for the last item to clarify the functionality:
+    Egy példa az utolsó elemre a funkcionalitás tisztázásához:
 </para>
 <para>
     <itemizedlist>
         <listitem>
             <para>
-                Ticket is assigned to customer user 'Arvid Karlsson' with related customer
-'Ericsson AB'
+                A jegy hozzá van rendelve az „Ericsson AB” ügyféllel kapcsolatban álló
+„Arvid Karlsson” ügyfél-felhasználóhoz
             </para>
         </listitem>
-        <listitem><para>Ticket is located in queue 'Support Sweden'</para></listitem>
-        <listitem><para>Queue 'Support Sweden' is in group 'support-se'</para></listitem>
+        <listitem><para>A jegy a „Support Sweden” várólistában található</para></listitem>
+        <listitem><para>A „Support Sweden” várólista a „support-se” csoportban van</para></listitem>
         <listitem>
             <para>
-                Customer 'Ericsson AB' has 'Same Customer' context 'rw' permission to group
-'support-se'
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                Logged in customer user is 'Barry Smith' which is related to customer
-'Farmers Inc.'
+                Az „Ericsson AB” ügyfélnek „ugyanaz az ügyfél” környezete van „írás,
+olvasás” jogosultsággal a „support-se” csoportra
             </para>
         </listitem>
         <listitem>
             <para>
-                Customer 'Farmers Inc.' has 'Same Customer' context 'ro' permission to group
-'support-se'
+                A bejelentkezett ügyfél-felhasználó „Barry Smith”, aki a „Farmers Inc.”
+ügyféllel áll kapcsolatban
             </para>
         </listitem>
         <listitem>
             <para>
-                Now, if Customer 'Farmers Inc.' is given 'Other Customers' context 'ro'
-permission to group 'support-se', Barry Smith will be able to view the
-ticket
+                A „Farmers Inc.” ügyfélnek „ugyanaz az ügyfél” környezete van „csak olvasás”
+jogosultsággal a „support-se” csoportra
             </para>
         </listitem>
         <listitem>
             <para>
-                In order for Barry to modify the ticket, 'rw' permission is required for
-both 'Same Customer' and 'Other Customers' context
+                Most ha a „Farmers Inc.” ügyfélnek „egyéb ügyfelek” környezetet adnak „csak
+olvasás” jogosultsággal a „support-se” csoportra, akkor Barry Smith képes
+lesz megnézni a jegyet
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Annak érdekében, hogy Barry módosíthassa a jegyet, „írás, olvasás”
+jogosultság szükséges mind az „ugyanaz az ügyfél”, mind az „egyéb ügyfelek”
+környezetnél
             </para>
         </listitem>
     </itemizedlist>
@@ -381,55 +407,61 @@ both 'Same Customer' and 'Other Customers' context
 </section>
 
 <section id="adminarea-customer-multi-tier-relationship-usage-example">
-    <title>Multi-Tier Customer Relationship Usage/Setup Example</title>
+    <title>Többszintű ügyfélkapcsolat használat / beállítási példa</title>
     <para>
-        In this example we will create a multi-tier customer structure with
-resulting ticket permissions. To get the same results you will need a
-relatively clean system without many customizations.
+        Ebben a példában létre fogunk hozni egy többszintű ügyfélszerkezetet az
+eredményül kapott jegyjogosultságokkal. Ugyanezen eredmény eléréséhez egy
+viszonylag tiszta rendszerre lesz szüksége számos személyre szabás nélkül.
     </para>
     <para>
-        First, create following customers through 'Admin → Customers' frontend:
-    </para>
-    <para>
-        <itemizedlist>
-            <listitem><para>CustomerID: de, Customer: Graubrot AG </para></listitem>
-            <listitem><para>CustomerID: mx, Customer: Hernandez SA </para></listitem>
-            <listitem><para>CustomerID: se, Customer: Ericsson AB </para></listitem>
-            <listitem><para>CustomerID: us, Customer: Farmers Inc. </para></listitem>
-        </itemizedlist>
-    </para>
-    <para>
-        Next, create the following customer users through <emphasis>Admin → Customer
-Users</emphasis> frontend and assign them to the already created
-customers. Use any valid email addresses for Email field.
+        Először hozza létre a következő ügyfeleket az „Adminisztráció → Ügyfelek”
+előtétprogramon:
     </para>
     <para>
         <itemizedlist>
+            <listitem><para>Ügyfél-azonosító: de, ügyfél: Graubrot AG </para></listitem>
+            <listitem><para>Ügyfél-azonosító: mx, ügyfél: Hernandez SA </para></listitem>
+            <listitem><para>Ügyfél-azonosító: se, ügyfél: Ericsson AB </para></listitem>
+            <listitem><para>Ügyfél-azonosító: us, ügyfél: Farmers Inc. </para></listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        Ezután hozza létre a következő ügyfél-felhasználókat az
+<emphasis>Adminisztráció → Ügyfél-felhasználók</emphasis> előtétprogramon
+keresztül, és rendelje hozzá őket a már létrehozott ügyfelekhez. Használjon
+bármilyen érvényes e-mail címet az e-mail mezőnél.
+    </para>
+    <para>
+        <itemizedlist>
             <listitem>
                 <para>
-                    Firstname: Arvid, Lastname: Karlsson, Username: ak, CustomerID: Ericsson AB
+                    Keresztnév: Arvid, vezetéknév: Karlsson, felhasználónév: ak,
+ügyfél-azonosító: Ericsson AB
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Firstname: Barry, Lastname: Smith, Username: bs, CustomerID: Farmers Inc.
+                    Keresztnév: Barry, vezetéknév: Smith, felhasználónév: bs, ügyfél-azonosító:
+Farmers Inc.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Firstname: Christian, Lastname: Müller, Username: cm, CustomerID: Graubrot
-AG
+                    Keresztnév: Christian, vezetéknév: Müller, felhasználónév: cm,
+ügyfél-azonosító: Graubrot AG
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Firstname: Diego, Lastname: Garcia, Username: dg, CustomerID: Hernandez SA
+                    Keresztnév: Diego, vezetéknév: Garcia, felhasználónév: dg, ügyfél-azonosító:
+Hernandez SA
                 </para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        Then, go to 'Admin → Groups' frontend and add the following as new groups:
+        Majd menjen az „Adminisztráció → Csoportok” előtétprogramra, és adja hozzá a
+következő új csoportokat:
     </para>
     <para>
         <itemizedlist>
@@ -442,54 +474,58 @@ AG
         </itemizedlist>
     </para>
     <para>
-        Then, go to <emphasis>Admin → Queues</emphasis> and add corresponding queues
-which will use previously created groups. For the System address you can use
-any available.
+        Ezután menjen az <emphasis>Adminisztráció → Várólisták</emphasis> oldalra,
+és adja hozzá a megfelelő várólistákat, amelyek az előbb létrehozott
+csoportokat fogják használni. A rendszercímhez használhat bármilyen
+elérhetőt.
     </para>
     <para>
         <itemizedlist>
-            <listitem><para>Name: FAQ Germany, Group: faq-emea</para></listitem>
-            <listitem><para>Name: FAQ Mexico, Group: faq-amer</para></listitem>
-            <listitem><para>Name: FAQ Sweden, Group: faq-emea</para></listitem>
-            <listitem><para>Name: FAQ USA, Group: faq-amer</para></listitem>
-            <listitem><para>Name: Support Germany, Group: support-de</para></listitem>
-            <listitem><para>Name: Support Mexico, Group: support-mx</para></listitem>
-            <listitem><para>Name: Support Sweden, Group: support-se</para></listitem>
-            <listitem><para>Name: Support USA, Group: support-us</para></listitem>
+            <listitem><para>Név: FAQ Germany, csoport: faq-emea</para></listitem>
+            <listitem><para>Név: FAQ Mexico, csoport: faq-amer</para></listitem>
+            <listitem><para>Név: FAQ Sweden, csoport: faq-emea</para></listitem>
+            <listitem><para>Név: FAQ USA, csoport: faq-amer</para></listitem>
+            <listitem><para>Név: Support Germany, csoport: support-de</para></listitem>
+            <listitem><para>Név: Support Mexico, csoport: support-mx</para></listitem>
+            <listitem><para>Név: Support Sweden, csoport: support-se</para></listitem>
+            <listitem><para>Név: Support USA, csoport: support-us</para></listitem>
         </itemizedlist>
     </para>
     <para>
-        Go to <emphasis>Admin → Customer Users ↔ Customers</emphasis> frontend and
-assign customer users to other customers.
+        Menjen az <emphasis>Adminisztráció → Ügyfél-felhasználók ↔
+Ügyfelek</emphasis> előtétprogramra, és rendelje hozzá az
+ügyfél-felhasználókat az egyéb ügyfelekhez.
     </para>
     <para>
         <itemizedlist>
             <listitem>
                 <para>Arvid Karlsson</para>
-                <para>de Graubrot AG → active {1}</para>
+                <para>de Graubrot AG → aktív {1}</para>
             </listitem>
             <listitem>
                 <para>Diego Garcia</para>
-                <para>se Ericsson AB, us Farmers Inc. → active {2}</para>
+                <para>se Ericsson AB, us Farmers Inc. → aktív {2}</para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        Additionally, go to <emphasis>Admin → Customer Users ↔ Groups</emphasis>
-frontend and assign a single customer user direct access to a group.
+        Továbbá menjen az <emphasis>Adminisztráció → Ügyfél-felhasználók ↔
+Csoportok</emphasis> előtétprogramra, és rendeljen hozzá egy egyedülálló
+ügyfél-felhasználót közvetlen hozzáféréssel egy csoporthoz.
     </para>
     <para>
         <itemizedlist>
             <listitem>
                 <para>Diego Garcia</para>
-                <para>faq-emea → rw {3}</para>
+                <para>faq-emea → írás, olvasás {3}</para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        Now, go to <emphasis>Admin → Customers ↔ Groups</emphasis> frontend and
-assign customers to groups according to the matrix below. Be sure to select
-proper permission level for each group and company.
+        Most menjen az <emphasis>Adminisztráció → Ügyfelek ↔ Csoportok</emphasis>
+előtétprogramra, és rendelje hozzá az ügyfeleket a csoportokhoz a lenti
+mátrix alapján. Ügyeljen arra, hogy a megfelelő jogosultsági szintet
+válassza az egyes csoportoknál és vállalatoknál.
     </para>
     <para>
         <itemizedlist>
@@ -497,11 +533,11 @@ proper permission level for each group and company.
                 <para>de Graubrot AG</para>
                 <itemizedlist>
                     <listitem>
-                        <para>Same Customer {4}</para>
-                        <para>faq-amer → ro</para>
-                        <para>faq-emea → ro</para>
-                        <para>support-de → rw</para>
-                        <para>support-mx → ro</para>
+                        <para>Ugyanaz az ügyfél {4}</para>
+                        <para>faq-amer → csak olvasás</para>
+                        <para>faq-emea → csak olvasás</para>
+                        <para>support-de → írás, olvasás</para>
+                        <para>support-mx → csak olvasás</para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -509,19 +545,19 @@ proper permission level for each group and company.
                 <para>mx Hernandex SA</para>
                 <itemizedlist>
                     <listitem>
-                        <para>Same Customer {5}</para>
-                        <para>faq-amer → ro</para>
-                        <para>faq-emea → ro</para>
-                        <para>support-de → ro</para>
-                        <para>support-mx → rw</para>
+                        <para>Ugyanaz az ügyfél {5}</para>
+                        <para>faq-amer → csak olvasás</para>
+                        <para>faq-emea → csak olvasás</para>
+                        <para>support-de → csak olvasás</para>
+                        <para>support-mx → írás, olvasás</para>
                     </listitem>
                     <listitem>
-                        <para>Other Customers {6}</para>
+                        <para>Egyéb ügyfelek {6}</para>
                         <para>
-                            support-de → rw (this is intentional to demonstrate limitation to base
-permissions)
+                            support-de → írás, olvasás (ez szándékos az alap jogosultságokra való
+korlátozás bemutatásához)
                         </para>
-                        <para>support-mx → rw</para>
+                        <para>support-mx → írás, olvasás</para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -529,10 +565,10 @@ permissions)
                 <para>se Ericsson AB</para>
                 <itemizedlist>
                     <listitem>
-                        <para>Same Customer {7}</para>
-                        <para>faq-amer → ro</para>
-                        <para>faq-emea → ro</para>
-                        <para>support-se → rw</para>
+                        <para>Ugyanaz az ügyfél {7}</para>
+                        <para>faq-amer → csak olvasás</para>
+                        <para>faq-emea → csak olvasás</para>
+                        <para>support-se → írás, olvasás</para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -540,22 +576,22 @@ permissions)
                 <para>us Farmers Inc.</para>
                 <itemizedlist>
                     <listitem>
-                        <para>Same Customer {8}</para>
-                        <para>faq-amer → ro</para>
-                        <para>faq-emea → ro</para>
-                        <para>support-us → rw</para>
+                        <para>Ugyanaz az ügyfél {8}</para>
+                        <para>faq-amer → csak olvasás</para>
+                        <para>faq-emea → csak olvasás</para>
+                        <para>support-us → írás, olvasás</para>
                     </listitem>
                     <listitem>
-                        <para>Other Customers {9}</para>
-                        <para>faq-amer → ro</para>
+                        <para>Egyéb ügyfelek {9}</para>
+                        <para>faq-amer → csak olvasás</para>
                     </listitem>
                 </itemizedlist>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        For reference, please consult image below where all relationships are drawn
-as lines:
+        Hivatkozásként nézze meg a leni képet, ahol az összes kapcsolat meg van
+rajzolva vonalakkal:
     </para>
     <para>
         <screenshot>
@@ -564,181 +600,197 @@ fileref="screenshots/administration/adminarea/multi-tier-customer-relationshop-u
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot>
     </para>
     <para>
-        Finally, let's create some tickets. Go to <emphasis>New phone
-ticket</emphasis> frontend and create tickets, one each per customer user
-and queue (32 in total). By the way, this is possible in the agent frontend
-as the customer group restrictions are only active on the customer frontend.
+        Végezetül hozzunk létre néhány jegyet. Menjen az <emphasis>Új telefonos
+jegy</emphasis> előtétprogramra, és hozzon létre jegyeket:
+ügyfél-felhasználónként és várólistánként egy darabot (összesen
+32-t). Mellesleg ez lehetséges az ügyintézői előtétprogramon, mivel az
+ügyfélcsoport korlátozások csak az ügyfél előtétprogramon vannak
+bekapcsolva.
     </para>
     <para>
-        For checking resulting access to the tickets, you can easily switch between
-the customer users by activating <literal>SwitchToCustomer</literal> option
-in SysConfig. Then just go to <emphasis>Admin → Customer Users</emphasis>
-and click on corresponding <emphasis>Switch to customer</emphasis> link next
-to the user's name.
+        Az eredményül kapott jegyekhez történő hozzáférés ellenőrzéséhez egyszerűen
+válthat az ügyfél-felhasználók között a <literal>SwitchToCustomer</literal>
+lehetőség bekapcsolásával a rendszerbeállításokban. Ezután menjen az
+<emphasis>Adminisztráció → Ügyfél-felhasználók</emphasis> oldalra, és
+kattintson a megfelelő <emphasis>Váltás az ügyfélre</emphasis> hivatkozásra
+a felhasználó neve mellett.
     </para>
     <para>
-        You will be immediately logged in as that customer user and you can visit
-<emphasis>Tickets → Company Tickets</emphasis> screen for checking the
-ticket access. It should conform to the matrix below. Click on a ticket to
-check if corresponding permission level is honored: for
-<emphasis>ro</emphasis> permission level you should not see the
-<emphasis>Reply</emphasis> button.
+        Azonnal be lesz jelentkezve annak az ügyfél-felhasználónak a nevében, és
+megnézheti a <emphasis>Jegyek → Vállalati jegyek</emphasis> képernyőt a
+jegyhozzáférés ellenőrzéséhez. Meg kell felelnie a lenti
+mátrixnak. Kattintson egy jegyre annak ellenőrzéséhez, hogy a megfelelő
+jogosultsági szintet betartja-e: a <emphasis>csak olvasás</emphasis>
+jogosultsági szintnél nem szabad látnia a <emphasis>Válasz</emphasis>
+gombot.
     </para>
     <para>
-        This is the expected result for each customer user. The marker '{0}' refers
-to the location above where the corresponding setting was taken (this shows
-why the access is granted).
+        Ez az elvárt eredmény az egyes ügyfél-felhasználóknál. A „{0}” jelző
+hivatkozik arra a fenti helyre, ahol a megfelelő beállítás meg lett adva (ez
+jeleníti meg, hogy a hozzáférés miért lett megadva).
     </para>
     <para>
-        Resulting access for customer user Arvid Karlsson
+        Az eredményül kapott hozzáférés Arvid Karlsson ügyfél-felhasználónál
     </para>
     <para>
         <itemizedlist>
             <listitem>
-                <para>Queue FAQ Germany: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+                <para>FAQ Germany várólistára: csak olvasás ({7} által) + Christian jegyeire csak
+olvasás ({1} által)</para>
             </listitem>
             <listitem>
-                <para>Queue FAQ Mexico: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+                <para>FAQ Mexico várólistára: csak olvasás ({7} által) + Christian jegyeire csak
+olvasás ({1} által)</para>
             </listitem>
             <listitem>
-                <para>Queue FAQ Sweden: ro (via {7}) + Christian's Tickets ro (via {1})</para>
+                <para>FAQ Sweden várólistára: csak olvasás ({7} által) + Christian jegyeire csak
+olvasás ({1} által)</para>
             </listitem>
             <listitem>
-                <para>Queue FAQ USA: ro (via {7}) + Christian's Tickets ro (via {1})</para>
-            </listitem>
-            <listitem>
-                <para>
-                    Queue Support Germany: rw (via {1→6}) + Christian's Tickets rw (via {1})
-                </para>
-            </listitem>
-            <listitem>
-                <para>Queue Support Mexico: -</para>
+                <para>FAQ USA várólistára: csak olvasás ({7} által) + Christian jegyeire csak
+olvasás ({1} által)</para>
             </listitem>
             <listitem>
                 <para>
-                    Queue Support Sweden: rw (via {7}) + Christian's Tickets rw (via {1})
+                    Support Germany várólistára: írás, olvasás ({1→6} által) + Christian
+jegyeire írás, olvasás ({1} által)
                 </para>
             </listitem>
             <listitem>
-                <para>Queue Support USA: -</para>
+                <para>Support Mexico várólistára: -</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Support Sweden várólistára: írás, olvasás ({7} által) + Christian jegyeire
+írás, olvasás ({1} által)
+                </para>
+            </listitem>
+            <listitem>
+                <para>Support USA várólistára: -</para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        Resulting access for customer user Barry Smith
+        Az eredményül kapott hozzáférés Barry Smith ügyfél-felhasználónál
     </para>
     <para>
         <itemizedlist>
             <listitem>
-                <para>Queue FAQ Germany: ro (via {8})</para>
+                <para>FAQ Germany várólistára: csak olvasás ({8} által)</para>
             </listitem>
             <listitem>
                 <para>
-                    Queue FAQ Mexico: ro (via {8}) + Arvid's, Christian's, Diego's Tickets ro
-(via {9})
+                    FAQ Mexico várólistára: csak olvasás ({8} által) + Arvid, Christian és Diego
+jegyeire csak olvasás ({9} által)
                 </para>
             </listitem>
             <listitem>
-                <para>Queue FAQ Sweden: ro (via {8})</para>
+                <para>FAQ Sweden várólistára: csak olvasás ({8} által)</para>
             </listitem>
             <listitem>
                 <para>
-                    Queue FAQ USA: ro (via {8}) + Arvid's, Christian's, Diego's Tickets ro (via
-{9})
+                    FAQ USA várólistára: csak olvasás ({8} által) + Arvid, Christian és Diego
+jegyeire csak olvasás ({9} által)
                 </para>
             </listitem>
             <listitem>
-                <para>Queue Support Germany: -</para>
+                <para>Support Germany várólistára: -</para>
             </listitem>
             <listitem>
-                <para>Queue Support Mexico: -</para>
+                <para>Support Mexico várólistára: -</para>
             </listitem>
             <listitem>
-                <para>Queue Support Sweden: -</para>
+                <para>Support Sweden várólistára: -</para>
             </listitem>
             <listitem>
-                <para>Queue Support USA: rw (via {8})</para>
+                <para>Support USA várólistára: írás, olvasás ({8} által)</para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        Resulting access for customer user Christian Müller
+        Az eredményül kapott hozzáférés Christian Müller ügyfél-felhasználónál
     </para>
     <para>
         <itemizedlist>
             <listitem>
-                <para>Queue FAQ Germany: ro (via {4})</para>
+                <para>FAQ Germany várólistára: csak olvasás ({4} által)</para>
             </listitem>
             <listitem>
-                <para>Queue FAQ Mexico: ro (via {4})</para>
+                <para>FAQ Mexico várólistára: csak olvasás ({4} által)</para>
             </listitem>
             <listitem>
-                <para>Queue FAQ Sweden: ro (via {4})</para>
+                <para>FAQ Sweden várólistára: csak olvasás ({4} által)</para>
             </listitem>
             <listitem>
-                <para>Queue FAQ USA: ro (via {4})</para>
+                <para>FAQ USA várólistára: csak olvasás ({4} által)</para>
             </listitem>
             <listitem>
-                <para>Queue Support Germany: rw (via {4})</para>
+                <para>Support Germany várólistára: írás, olvasás ({4} által)</para>
             </listitem>
             <listitem>
-                <para>Queue Support Mexico: ro (via {4})</para>
+                <para>Support Mexico várólistára: csak olvasás ({4} által)</para>
             </listitem>
             <listitem>
-                <para>Queue Support Sweden: -</para>
+                <para>Support Sweden várólistára: -</para>
             </listitem>
             <listitem>
-                <para>Queue Support USA: -</para>
+                <para>Support USA várólistára: -</para>
             </listitem>
         </itemizedlist>
     </para>
     <para>
-        Resulting access for customer user Diego Garcia
+        Az eredményül kapott hozzáférés Diego Garcia ügyfél-felhasználónál
     </para>
     <para>
         <itemizedlist>
             <listitem>
                 <para>
-                    Queue FAQ Germany: rw (via {3}) + Arvid's, Barry's Tickets rw (via {2})
+                    FAQ Germany várólistára: írás, olvasás ({3} által) + Arvid és Barry jegyeire
+írás, olvasás ({2} által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue FAQ Mexico: ro (via {5}) + Arvid's, Barry's Tickets ro (via {2}) +
-Christian's Tickets ro (via {2→9})
+                    FAQ Mexico várólistára: csak olvasás ({5} által) + Arvid és Barry jegyeire
+csak olvasás ({2} által) + Christian jegyeire csak olvasás ({2→9} által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue FAQ Sweden: rw (via {3}) + Arvid's, Barry's Tickets rw (via {2})
+                    FAQ Sweden várólistára: írás, olvasás ({3} által) + Arvid és Barry jegyeire
+írás, olvasás ({2} által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue FAQ USA: ro (via {5}) + Arvid's, Barry's Tickets ro (via {2}) +
-Christian's Tickets ro (via {2→9})
+                    FAQ USA várólistára: csak olvasás ({5} által) + Arvid és Barry jegyeire csak
+olvasás ({2} által) + Christian jegyeire csak olvasás ({2→9} által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue Support Germany: ro (via {5}) + Arvid's, Barry's Tickets ro (via {2})
-+ Christian's Tickets ro (via {6})
+                    Support Germany várólistára: csak olvasás ({5} által) + Arvid és Barry
+jegyeire csak olvasás ({2} által) + Christian jegyeire csak olvasás ({6}
+által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue Support Mexico: rw (via {5}) + Arvid's, Barry's Tickets rw (via {2})
-+ Christian's Tickets rw (via {6})
+                    Support Mexico várólistára: írás, olvasás ({5} által) + Arvid és Barry
+jegyeire írás, olvasás ({2} által) + Christian jegyeire írás, olvasás ({6}
+által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue Support Sweden: rw (via {2→4}) + Arvid's, Barry's Tickets rw (via {2})
+                    Support Sweden várólistára: írás, olvasás ({2→4} által) + Arvid és Barry
+jegyeire írás, olvasás ({2} által)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Queue Support USA: rw (via {2→5}) + Arvid's, Barry's Tickets rw (via {2})
+                    Support USA várólistára: írás, olvasás ({2→5} által) + Arvid és Barry
+jegyeire írás, olvasás ({2} által)
                 </para>
             </listitem>
         </itemizedlist>

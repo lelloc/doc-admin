@@ -53,51 +53,46 @@ for generating an initial index after switching backends.
         </section>
 
         <section id="performance-tuning-otrs-search">
-            <title>SearchIndexModule</title>
+            <title>Ticket Search Index</title>
             <para>
-                This module helps to extend your articles full-text search (From, To, Cc,
-Subject and Body search).  There are two backend modules for the search
-index:
-            </para>
-            <variablelist>
-                <varlistentry>
-                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
-                    <listitem>
-                        <para>
-                            This is the default option, and will do full-text searches on live data (it
-works fine for up to 50,000 tickets).
-                        </para>
-                    </listitem>
-                </varlistentry>
-                <varlistentry>
-                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::StaticDB</literal></term>
-                    <listitem>
-                        <para>
-                            This module will strip all articles and build an index after article
-creation, increasing performance of full-text searches up to 50%.
-                        </para>
-                    </listitem>
-                </varlistentry>
-            </variablelist>
-            <para>
-                You can change the used SearchIndexModule via SysConfig.
+                OTRS uses a special search index to perform full-text searches across fields
+in articles from different communication channels.
             </para>
             <para>
                 To create an initial index, use <filename>bin/otrs.Console.pl
-Maint::Ticket::FulltextIndexRebuild</filename>.
+Maint::Ticket::FulltextIndex --rebuild</filename>.
             </para>
+            <note>
+                <para>
+                    Actual article indexing happens via an OTRS daemon job in the
+background. While articles which were just added in the system are marked
+for indexing immediately, it could happen their index is available within a
+few minutes.
+                </para>
+            </note>
             <para>
-                For StaticDB module, there are some options available for fine tuning:
+                There are some options available for fine tuning the search index:
             </para>
             <variablelist>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::IndexArchivedTickets</literal></term>
+                    <listitem>
+                        <para>
+                            Defines if archived tickets will be included in the search index (off by
+default). This is advisable to keep the index small on large systems with
+archived tickets. If this is turned off, archived tickets will not be found
+by full-text searches.
+                        </para>
+                    </listitem>
+                </varlistentry>
                 <varlistentry>
                     <term><literal>Ticket::SearchIndex::Attribute</literal></term>
                     <listitem>
                         <para>
-                            The attribute <literal>WordCountMax</literal> defines the maximum of words
-which will be processed to build up the index. For example only the first
-1000 words of an article body are stored in the article search index. The
-attributes <literal>WordLengthMin</literal> and
+                            The attribute <literal>WordCountMax</literal> defines the maximum number of
+words which will be processed to build up the index. For example only the
+first 1000 words of an article body are stored in the article search
+index. The attributes <literal>WordLengthMin</literal> and
 <literal>WordLengthMax</literal> are used as word length boundaries. Only
 words with a length between these two values are stored in the article
 search index.
@@ -145,13 +140,15 @@ will be skipped while creating the search index.
         </section>
 
         <section id="performance-tuning-otrs-storage">
-            <title>TicketStorageModule</title>
+            <title>Article Storage (Email, Phone and Internal Articles)</title>
             <para>
-                Es stehen zwei Module für das Speichern der Tickets und Artikel bereit:
+                There are two different backend modules for the article storage of phone,
+email and internal articles (configured via
+<literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>):
             </para>
             <variablelist>
                 <varlistentry>
-                    <term><literal>Kernel::System::Ticket::ArticleStorageDB</literal></term>
+                    <term><literal>Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageDB</literal></term>
                     <listitem>
                         <para>
                             This default module will store attachments in the database.
@@ -162,19 +159,15 @@ will be skipped while creating the search index.
                             </para>
                         </note>
                         <para>
-                            Pro: If your web server isn't running under 'otrs' user, use this module to
-avoid file permission problems.
+                            Pro: works with multiple front end servers.
                         </para>
                         <para>
-                            Con: It is not advisable to store attachments in your database. Take care
-that your database is able to store large objects. I.e.: configure MySQL
-with <literal>set-variable = max_allowed_packet=8M</literal> to store 8 MB
-objects (the default is 2M).
+                            Con: requires much storage space in the database.
                         </para>
                     </listitem>
                 </varlistentry>
                 <varlistentry>
-                    <term><literal>Kernel::System::Ticket::ArticleStorageFS</literal></term>
+                    <term><literal>Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageFS</literal></term>
                     <listitem>
                         <para>
                             Use this module to store attachments on the local file system.
@@ -188,10 +181,9 @@ objects (the default is 2M).
                             Pro: Schneller!
                         </para>
                         <para>
-                            Con: Your web server should run under the 'otrs' user. Also, if you have
-multiple front-end servers, you must make sure the filesystem is shared
-between the servers. Place it on an NFS share or preferably a SAN or similar
-solution.
+                            Con: If you have multiple front end servers, you must make sure the
+filesystem is shared between the servers. Place it on an NFS share or
+preferably a SAN or similar solution.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -219,7 +211,8 @@ Dateisystem.</emphasis>
             </para>
             <para>
                 If you want to keep old attachments in the database, you can activate the
-SysConfig option <literal>Ticket::StorageModule::CheckAllBackends</literal>
+SysConfig option
+<literal>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</literal>
 to make sure OTRS will still find them.
             </para>
         </section>
