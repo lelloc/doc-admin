@@ -252,13 +252,13 @@ shell> perl -cw /opt/otrs/bin/otrs.Console.pl
 
         <para>
             <screen><![CDATA[
-# rhel / centos:
+# RHEL / CentOS:
 shell> yum install httpd mod_perl
 
-# suse:
+# SuSE:
 shell> zypper install apache2-mod_perl
 
-# debian/ubuntu:
+# Debian/Ubuntu:
 shell> apt-get install apache2 libapache2-mod-perl2
         ]]></screen>
         </para>
@@ -269,6 +269,13 @@ shell> apt-get install apache2 libapache2-mod-perl2
             Log in as root, change to the <filename>conf.d</filename> directory and link the appropriate template in
             <filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename> to a file called <filename>zzz_otrs.conf</filename>
             in the Apache configuration directory (to make sure it is loaded after the other configurations).
+        </para>
+
+        <para>
+            <screen><![CDATA[
+# Debian/Ubuntu:
+shell> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
+        ]]></screen>
         </para>
 
         <para>
