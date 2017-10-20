@@ -64,7 +64,7 @@ Maint::Ticket::FulltextIndex --rebuild</filename>.
             </para>
             <note>
                 <para>
-                    Actual article indexing happens via an OTRS daemon job in the
+                    The actual article indexing happens via an OTRS daemon job in the
 background. While articles which were just added in the system are marked
 for indexing immediately, it could happen their index is available within a
 few minutes.
@@ -74,6 +74,14 @@ few minutes.
                 There are some options available for fine tuning the search index:
             </para>
             <variablelist>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::ForceUnfilteredStorage</literal></term>
+                    <listitem>
+                        <para>
+                            This setting is not active by default. It forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.
+                        </para>
+                    </listitem>
+                </varlistentry>
                 <varlistentry>
                     <term><literal>Ticket::SearchIndex::IndexArchivedTickets</literal></term>
                     <listitem>
