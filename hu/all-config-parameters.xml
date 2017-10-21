@@ -5205,17 +5205,6 @@ WordLengthMin: '3'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::SearchIndex::FilterStopWords">
-                <term>Ticket::SearchIndex::FilterStopWords</term>
-                <listitem>
-                    <para>A kiszűrendő szavak szűrése a bejegyzés keresési indexből alapértelmezetten be van kapcsolva. Ha ki van kapcsolva, akkor a keresési index a szűretlen szöveget fogja tárolni.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::SearchIndex::Filters">
                 <term>Ticket::SearchIndex::Filters</term>
                 <listitem>
@@ -5226,6 +5215,17 @@ WordLengthMin: '3'
 - '[,\&\<\>\?"\!\*\|;\[\]\(\)\+\$\^=]'
 - ^[':.]|[':.]$
 - ^[^\w]+$
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::SearchIndex::ForceUnfilteredStorage">
+                <term>Ticket::SearchIndex::ForceUnfilteredStorage</term>
+                <listitem>
+                    <para>Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 0
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -13367,17 +13367,6 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '22'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerInfoZoom">
-                <term>Ticket::Frontend::CustomerInfoZoom</term>
-                <listitem>
-                    <para>Megjeleníti az ügyfél-felhasználó információit a jegynagyítás nézetben.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>

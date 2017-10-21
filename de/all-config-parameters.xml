@@ -5205,17 +5205,6 @@ WordLengthMin: '3'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::SearchIndex::FilterStopWords">
-                <term>Ticket::SearchIndex::FilterStopWords</term>
-                <listitem>
-                    <para>Stoppworte aus dem Artikel-Suchindex herausfiltern. Wird diese Einstellung abgeschaltet, werden Texte ungefiltert im Suchindex gespeichert.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::SearchIndex::Filters">
                 <term>Ticket::SearchIndex::Filters</term>
                 <listitem>
@@ -5226,6 +5215,17 @@ WordLengthMin: '3'
 - '[,\&\<\>\?"\!\*\|;\[\]\(\)\+\$\^=]'
 - ^[':.]|[':.]$
 - ^[^\w]+$
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::SearchIndex::ForceUnfilteredStorage">
+                <term>Ticket::SearchIndex::ForceUnfilteredStorage</term>
+                <listitem>
+                    <para>Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- 0
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -13367,17 +13367,6 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '22'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerInfoZoom">
-                <term>Ticket::Frontend::CustomerInfoZoom</term>
-                <listitem>
-                    <para>Zeigt Informationen zum jeweiligen Kundenbenutzer in der Ticket-Detailansicht.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>
