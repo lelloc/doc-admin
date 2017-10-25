@@ -17261,6 +17261,63 @@ Title: Open Tickets / Need to be answered
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Agent_View_CustomerUserSearch">
+        <title>Frontend → Agent → View → CustomerUserSearch</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezett szűrőmezőket az ügyfél-felhasználó címjegyzék keresésében (CustomerUser vagy CustomerCompany). A CustomerCompany mezőnél egy „CustomerCompany_” előtagot kell hozzáadni.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Email:
+- UserLogin
+- UserFirstname
+- UserLastname
+- UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
+                <listitem>
+                    <para>Meghatározza a keresési paramétereket az ügyintézői ügyfél-felhasználó címjegyzék képernyőn. A „CustomerTicketTextField” beállítással a címzett mező értékei megadhatók.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Email:
+  CustomerTicketTextField: UserMailString
+  Order::Default: Up
+  PageShown: '50'
+  SearchLimit: '10000'
+  SortBy::Default: UserLogin
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
+                <listitem>
+                    <para>Meghatározza a megjelenített oszlopokat és a pozíciót az ügyintézői ügyfél-felhasználó címjegyzék eredményei képernyőn.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Email:
+- UserFirstname
+- UserLastname
+- UserLogin
+- UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Agent_View_Dashboard">
         <title>Frontend → Agent → View → Dashboard</title>
         <variablelist>
@@ -24905,63 +24962,6 @@ Module: Kernel::Output::HTML::TicketMenu::TeaserAttachmentView
 Name: All attachments (OTRS Business Solution™)
 PopupType: ''
 Target: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Agent_ViewCustomerUserSearch">
-        <title>Frontend → Agent → ViewCustomerUserSearch</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezett szűrőmezőket az ügyfél-felhasználó címjegyzék keresésében (CustomerUser vagy CustomerCompany). A CustomerCompany mezőnél egy „CustomerCompany_” előtagot kell hozzáadni.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-Email:
-- UserLogin
-- UserFirstname
-- UserLastname
-- UserEmail
-- UserCustomerID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
-                <listitem>
-                    <para>Meghatározza a keresési paramétereket az ügyintézői ügyfél-felhasználó címjegyzék képernyőn. A „CustomerTicketTextField” beállítással a címzett mező értékei megadhatók.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-Email:
-  CustomerTicketTextField: UserMailString
-  Order::Default: Up
-  PageShown: '50'
-  SearchLimit: '10000'
-  SortBy::Default: UserLogin
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
-                <listitem>
-                    <para>Meghatározza a megjelenített oszlopokat és a pozíciót az ügyintézői ügyfél-felhasználó címjegyzék eredményei képernyőn.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-Email:
-- UserFirstname
-- UserLastname
-- UserLogin
-- UserEmail
-- UserCustomerID
 ]]></programlisting>
                     </para>
                 </listitem>

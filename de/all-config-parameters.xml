@@ -17261,6 +17261,63 @@ Title: Open Tickets / Need to be answered
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Agent_View_CustomerUserSearch">
+        <title>Frontend → Agent → View → CustomerUserSearch</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
+                <listitem>
+                    <para>Definiert die Standard-Filterfelder in der Kundenbenutzer-Adressbuch-Suche (Kundenbenutzer oder Kundenfirma). Für Kundenfirma-Felder muss ein Präfix 'CustomerCompany_' hinzugefügt werden.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Email:
+- UserLogin
+- UserFirstname
+- UserLastname
+- UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
+                <listitem>
+                    <para>Bestimmt die Suchparameter für den Bildschirm AgentCustomerUserAddressBook. Mit der Einstellung 'CustomerTicketTextField' können Werte für das Empfängerfeld vorgegeben werden.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Email:
+  CustomerTicketTextField: UserMailString
+  Order::Default: Up
+  PageShown: '50'
+  SearchLimit: '10000'
+  SortBy::Default: UserLogin
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
+                <listitem>
+                    <para>Legt die angezeigten Spalten und ihre Position für den Ergebnisbildschirm von AgentCustomerUserAddressBook fest.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Email:
+- UserFirstname
+- UserLastname
+- UserLogin
+- UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Agent_View_Dashboard">
         <title>Frontend → Agent → View → Dashboard</title>
         <variablelist>
@@ -24909,63 +24966,6 @@ Module: Kernel::Output::HTML::TicketMenu::TeaserAttachmentView
 Name: All attachments (OTRS Business Solution™)
 PopupType: ''
 Target: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Agent_ViewCustomerUserSearch">
-        <title>Frontend → Agent → ViewCustomerUserSearch</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
-                <listitem>
-                    <para>Definiert die Standard-Filterfelder in der Kundenbenutzer-Adressbuch-Suche (Kundenbenutzer oder Kundenfirma). Für Kundenfirma-Felder muss ein Präfix 'CustomerCompany_' hinzugefügt werden.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[---
-Email:
-- UserLogin
-- UserFirstname
-- UserLastname
-- UserEmail
-- UserCustomerID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
-                <listitem>
-                    <para>Bestimmt die Suchparameter für den Bildschirm AgentCustomerUserAddressBook. Mit der Einstellung 'CustomerTicketTextField' können Werte für das Empfängerfeld vorgegeben werden.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[---
-Email:
-  CustomerTicketTextField: UserMailString
-  Order::Default: Up
-  PageShown: '50'
-  SearchLimit: '10000'
-  SortBy::Default: UserLogin
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
-                <listitem>
-                    <para>Legt die angezeigten Spalten und ihre Position für den Ergebnisbildschirm von AgentCustomerUserAddressBook fest.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[---
-Email:
-- UserFirstname
-- UserLastname
-- UserLogin
-- UserEmail
-- UserCustomerID
 ]]></programlisting>
                     </para>
                 </listitem>

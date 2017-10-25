@@ -17261,6 +17261,63 @@ Title: Open Tickets / Need to be answered
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Agent_View_CustomerUserSearch">
+        <title>Frontend → Agent → View → CustomerUserSearch</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
+                <listitem>
+                    <para>定义客户用户通讯录搜索（客户用户或客户单位）中的默认过滤器字段。 对于客户单位字段，必须添加一个前缀“CustomerCompany_”。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Email:
+- UserLogin
+- UserFirstname
+- UserLastname
+- UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
+                <listitem>
+                    <para>定义AgentCustomerUserAddressBook（服务人员界面客户用户通讯录）屏幕的搜索参数。 使用'CustomerTicketTextField'设置，可以指定收件人字段的值。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Email:
+  CustomerTicketTextField: UserMailString
+  Order::Default: Up
+  PageShown: '50'
+  SearchLimit: '10000'
+  SortBy::Default: UserLogin
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
+                <listitem>
+                    <para>定义在服务人员界面客户用户通讯录搜索结果屏幕中显示的列和位置。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Email:
+- UserFirstname
+- UserLastname
+- UserLogin
+- UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Agent_View_Dashboard">
         <title>Frontend → Agent → View → Dashboard</title>
         <variablelist>
@@ -24905,63 +24962,6 @@ Module: Kernel::Output::HTML::TicketMenu::TeaserAttachmentView
 Name: All attachments (OTRS Business Solution™)
 PopupType: ''
 Target: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Agent_ViewCustomerUserSearch">
-        <title>Frontend → Agent → ViewCustomerUserSearch</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
-                <listitem>
-                    <para>定义客户用户通讯录搜索（客户用户或客户单位）中的默认过滤器字段。 对于客户单位字段，必须添加一个前缀“CustomerCompany_”。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-Email:
-- UserLogin
-- UserFirstname
-- UserLastname
-- UserEmail
-- UserCustomerID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
-                <listitem>
-                    <para>定义AgentCustomerUserAddressBook（服务人员界面客户用户通讯录）屏幕的搜索参数。 使用'CustomerTicketTextField'设置，可以指定收件人字段的值。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-Email:
-  CustomerTicketTextField: UserMailString
-  Order::Default: Up
-  PageShown: '50'
-  SearchLimit: '10000'
-  SortBy::Default: UserLogin
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
-                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
-                <listitem>
-                    <para>定义在服务人员界面客户用户通讯录搜索结果屏幕中显示的列和位置。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-Email:
-- UserFirstname
-- UserLastname
-- UserLogin
-- UserEmail
-- UserCustomerID
 ]]></programlisting>
                     </para>
                 </listitem>
