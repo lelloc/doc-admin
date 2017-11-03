@@ -302,57 +302,15 @@ shell> a2enmod headers
     <section role="NotInToc">
         <title>Step 7: File Permissions</title>
         <para>
-            File permissions need to be adjusted to allow OTRS to read and write files:
+            Please execute the following command as root user to set the file and directory permissions for OTRS.
+            It will try to detect the correct user and group settings needed for your setup.
         </para>
 
         <para>
-            <cmdsynopsis>
-                <command>otrs.SetPermissions.pl</command>
-                <arg choice='opt'>
-                  --otrs-user=
-                  <replaceable>OTRS user, defaults to 'otrs'</replaceable>
-                </arg>
-                <arg choice='req'>
-                  --web-group=
-                  <replaceable>group of the web server user</replaceable>
-                </arg>
-            </cmdsynopsis>
-        </para>
-
-        <para>
-            For example:
-        </para>
-
-        <para>
-            <itemizedlist>
-                <listitem><para>Web server which runs as the OTRS user:</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-user=otrs
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>Webserver with wwwrun user (e. g. SUSE):</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>Webserver with apache user (e. g. Red Hat, CentOS):</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=apache
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>Webserver with www-data user (e. g. Debian, Ubuntu):</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=www-data
-                ]]></screen>
-                </para></listitem>
-            </itemizedlist>
+        <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.SetPermissions.pl
+        ]]></screen>
         </para>
     </section>
 
