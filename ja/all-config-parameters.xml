@@ -12,7 +12,7 @@
             <varlistentry id="ConfigReference_Setting_CloudServices::Disabled">
                 <term>CloudServices::Disabled</term>
                 <listitem>
-                    <para>Disables the communication between this system and OTRS Group servers that provides cloud services. If active, some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.</para>
+                    <para>OTRSグループが提供するクラウドサービスへのアクセスを停止します。有効にするとシステム登録やサポートデータの送信、OTRS Business Solution™️ やOTRS Verify™️の使用、ダッシュボードでのOTRS関連のお知らせなどの機能が利用できなくなります。</para>
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -64,7 +64,7 @@ Name: SMS
             <varlistentry id="ConfigReference_Setting_DemoSystem">
                 <term>DemoSystem</term>
                 <listitem>
-                    <para>システムを“デモ”モードで動作させます。“Yes”に設定すると、担当者が、担当者用ウェブ・インタフェースを通して、言語選択やテーマなどのプレファレンスを変更できるようになります。これらの変更は、現在のセッションにおいてのみ有効です。担当者がパスワードを変更することはできません。</para>
+                    <para>Runs the system in "Demo" mode. If active, agents can change preferences, such as selection of language and theme via the agent web interface. These changes are only valid for the current session. It will not be possible for agents to change their passwords.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -119,10 +119,7 @@ Name: SMS
             <varlistentry id="ConfigReference_Setting_SecureMode">
                 <term>SecureMode</term>
                 <listitem>
-                    <para>ウェブ・インストーラーを無効にし(http://yourhost.example.com/otrs/installer.pl)、システムがハイジ
-ャックされるのを防ぎます。もし、“No”に設定されている場合は、システムは再インストールすることができ、現在の基本
-設定がインストーラー・スクリプト内の質問に事前投入されます。もしアクティブでなれけば、Generic Agent、パッケー&gt;ジ・マネジャー、SQLボックスも無効にします（これは、DROP DATABASEなどの破壊的クエリーの使用を避け、ユーザ・パス
-ワードの盗難を防ぐためです）。</para>
+                    <para>Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If inactive, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not inactive, it also disables the GenericAgent, PackageManager and SQL Box.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -233,7 +230,7 @@ URL: http://maps.google.com/maps?z=7&q=
             <varlistentry id="ConfigReference_Setting_AppointmentCalendar::Import::RecurringMonthsLimit">
                 <term>AppointmentCalendar::Import::RecurringMonthsLimit</term>
                 <listitem>
-                    <para>OTRS doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next n months (120 months/10 years by default).</para>
+                    <para>OTRS doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '120'
@@ -797,7 +794,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InBackend">
                 <term>Cache::InBackend</term>
                 <listitem>
-                    <para>Should the cache data be stored in the selected cache backend?</para>
+                    <para>If active the cache data will be stored in cache backend.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -808,7 +805,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InMemory">
                 <term>Cache::InMemory</term>
                 <listitem>
-                    <para>Should the cache data be held in memory?</para>
+                    <para>If active the cache data be held in memory.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -847,7 +844,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_CommunicationChannel_Chat">
                 <term>CommunicationChannel###Chat</term>
                 <listitem>
-                    <para>Defines chat communication channel.</para>
+                    <para>チャット・コミュニケーション・チャネルを定義します。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: Chat communication channel.
@@ -861,7 +858,7 @@ Name: Chat
             <varlistentry id="ConfigReference_Setting_CommunicationChannel_Email">
                 <term>CommunicationChannel###Email</term>
                 <listitem>
-                    <para>Defines email communication channel.</para>
+                    <para>電子メール・コミュニケーション・チャネルを定義します。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: Email communication channel.
@@ -875,7 +872,7 @@ Name: Email
             <varlistentry id="ConfigReference_Setting_CommunicationChannel_Internal">
                 <term>CommunicationChannel###Internal</term>
                 <listitem>
-                    <para>Defines internal communication channel.</para>
+                    <para>内部コミュニケーション・チャネルを定義します。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: Internal communication channel.
@@ -889,7 +886,7 @@ Name: OTRS
             <varlistentry id="ConfigReference_Setting_CommunicationChannel_Phone">
                 <term>CommunicationChannel###Phone</term>
                 <listitem>
-                    <para>Defines phone communication channel.</para>
+                    <para>電話コミュニケーション・チャネルを定義します。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: Phone communication channel.
@@ -1093,7 +1090,7 @@ VALIDSIG: The PGP signature with the keyid is good.
             <varlistentry id="ConfigReference_Setting_PGP::TrustedNetwork">
                 <term>PGP::TrustedNetwork</term>
                 <listitem>
-                    <para>ご利用の全公開/秘密PGP鍵について、信頼される署名によって認証されていなくても信頼する場合、これをyesに設定してください。</para>
+                    <para>Activate this if you trust in all your public and private pgp keys, even if they are not certified with a trusted signature.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -1730,7 +1727,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_AutoResponseForWebTickets">
                 <term>AutoResponseForWebTickets</term>
                 <listitem>
-                    <para>If this option is set to 'Yes', tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is set to 'No', no autoresponses will be sent.</para>
+                    <para>If this option is active, tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is inactive, no autoresponses will be sent.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -2759,7 +2756,7 @@ Module: Kernel::System::Ticket::Event::TicketNewMessageUpdate
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_4100-DynamicFieldFromCustomerUser">
                 <term>Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser</term>
                 <listitem>
-                    <para>This event module stores attributes from CustomerUser as DynamicFields tickets. Please see the setting above for how to configure the mapping.</para>
+                    <para>This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.</para>
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -3823,7 +3820,7 @@ Rows: '5'
             <varlistentry id="ConfigReference_Setting_SessionCheckRemoteIP">
                 <term>SessionCheckRemoteIP</term>
                 <listitem>
-                    <para>リモートIPアドレス・チェックをONにします。もし、例えばproxy farmまたはdialup connection経由でアプリケーションが使用されている場合、"No"の設定する必要があります。なぜなら、リモートIPアドレスは、ほとんどの場合リクエストごとに異なるからです。</para>
+                    <para>Turns on the remote ip address check. It should not be active if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -4140,7 +4137,7 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
             <varlistentry id="ConfigReference_Setting_DynamicFieldFromCustomerUser::Mapping">
                 <term>DynamicFieldFromCustomerUser::Mapping</term>
                 <listitem>
-                    <para>Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the next setting below.</para>
+                    <para>Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser setting.</para>
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -4429,7 +4426,7 @@ pending reminder: open
             <varlistentry id="ConfigReference_Setting_Ticket::NumberGenerator::CheckSystemID">
                 <term>Ticket::NumberGenerator::CheckSystemID</term>
                 <listitem>
-                    <para>チケット番号ディテクションの中のシステムIDを、フォローアップのために確認します (もし、システムIDがシステム利用後に変更されていた場合は“No”を使用してください)。</para>
+                    <para>Checks the SystemID in ticket number detection for follow-ups ( If inactive, SystemID will be changed after using the system).</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -6492,7 +6489,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeShowAlwaysLong">
                 <term>TimeShowAlwaysLong</term>
                 <listitem>
-                    <para>"Yes"に設定すると時間を長いフォーマットで表示し（日、時、分）、"No"に設定すると短いフォーマットで表示します（日、時）。</para>
+                    <para>Shows time in long format (days, hours, minutes), if active; or in short format (days, hours), if inactive.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -6503,7 +6500,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeShowCompleteDescription">
                 <term>TimeShowCompleteDescription</term>
                 <listitem>
-                    <para>"Yes"に設定すると完全な記述による時間を表示し（days, hours, minutes)、"No"に設定すると最初の文字のみ表示します（d, h, m）。</para>
+                    <para>Shows time use complete description (days, hours, minutes), if active; or just first letter (d, h, m), if inactive.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -6514,7 +6511,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeVacationDays">
                 <term>TimeVacationDays</term>
                 <listitem>
-                    <para>定常的な休日を追加します。数字は1～9までの単純な数字のパターンを使用してください（01～09ではない）。</para>
+                    <para>Adds the permanent vacation days.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -6534,7 +6531,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime">
                 <term>TimeVacationDaysOneTime</term>
                 <listitem>
-                    <para>一度だけの休日を追加します。数字は1～9までの単純な数字のパターンを使用してください（01～09ではない）。</para>
+                    <para>Adds the one time vacation days.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -6670,7 +6667,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar1">
                 <term>TimeVacationDays::Calendar1</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -6690,7 +6687,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar1">
                 <term>TimeVacationDaysOneTime::Calendar1</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -6826,7 +6823,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar2">
                 <term>TimeVacationDays::Calendar2</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -6846,7 +6843,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar2">
                 <term>TimeVacationDaysOneTime::Calendar2</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -6982,7 +6979,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar3">
                 <term>TimeVacationDays::Calendar3</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7002,7 +6999,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar3">
                 <term>TimeVacationDaysOneTime::Calendar3</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7138,7 +7135,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar4">
                 <term>TimeVacationDays::Calendar4</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7158,7 +7155,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar4">
                 <term>TimeVacationDaysOneTime::Calendar4</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7294,7 +7291,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar5">
                 <term>TimeVacationDays::Calendar5</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7314,7 +7311,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar5">
                 <term>TimeVacationDaysOneTime::Calendar5</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7450,7 +7447,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar6">
                 <term>TimeVacationDays::Calendar6</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7470,7 +7467,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar6">
                 <term>TimeVacationDaysOneTime::Calendar6</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7606,7 +7603,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar7">
                 <term>TimeVacationDays::Calendar7</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7626,7 +7623,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar7">
                 <term>TimeVacationDaysOneTime::Calendar7</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7762,7 +7759,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar8">
                 <term>TimeVacationDays::Calendar8</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7782,7 +7779,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar8">
                 <term>TimeVacationDaysOneTime::Calendar8</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7918,7 +7915,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar9">
                 <term>TimeVacationDays::Calendar9</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -7938,7 +7935,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar9">
                 <term>TimeVacationDaysOneTime::Calendar9</term>
                 <listitem>
-                    <para>指定したカレンダーの休日を1回追加します。 1〜9の数字（01〜09ではなく）には1桁のパターンを使用して下さい。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -8255,7 +8252,7 @@ TaskName: ArticleSearchIndexRebuild
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_CommunicationLogDelete">
                 <term>Daemon::SchedulerCronTaskManager::Task###CommunicationLogDelete</term>
                 <listitem>
-                    <para>Checks for communication log entries to be deleted.</para>
+                    <para>削除するコミュニケーション・ログのエントリをチェックします。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Function: Execute
@@ -8272,7 +8269,7 @@ TaskName: CommunicationLogDelete
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_ConfigurationDeploymentCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###ConfigurationDeploymentCleanup</term>
                 <listitem>
-                    <para>Removes old system configuration deployments (Sunday mornings).</para>
+                    <para>古いシステム設定のデプロイを削除します。（日曜の朝）</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -13241,7 +13238,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPassword">
                 <term>NotificationBodyLostPassword</term>
                 <listitem>
-                    <para>新しいパスワードに関して、担当者に送信される通知メールの本文テキストを定義します（本リンクを使用した後に、新しいパスワードが送信されます）。</para>
+                    <para>Defines the body text for notification mails sent to agents, about new password.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nHere's your new OTRS password.\n\nNew password:
@@ -13254,7 +13251,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPasswordToken">
                 <term>NotificationBodyLostPasswordToken</term>
                 <listitem>
-                    <para>新規にリクエストされたパスワードに関するトークンと共に、担当者に送信される通知メールの本文テキストを定義します（本リンクを使用した後に、新しいパスワードが送信されます）。</para>
+                    <para>Defines the body text for notification mails sent to agents, with token about new requested password.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
@@ -16326,7 +16323,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewPreview_DynamicField">
                 <term>Ticket::Frontend::OverviewPreview###DynamicField</term>
                 <listitem>
-                    <para>Dynamic fields shown in the ticket preview format overview screen of the agent interface.</para>
+                    <para>担当者インターフェイスのチケットプレビュー形式の一覧画面に表示される動的なフィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -16352,7 +16349,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewMenuModule_001-Sort">
                 <term>Ticket::Frontend::OverviewMenuModule###001-Sort</term>
                 <listitem>
-                    <para>Shows a select of ticket attributes to order the queue view ticket list. The possible selections can be configured via 'TicketOverviewMenuSort###SortAttributes'.</para>
+                    <para>This setting shows the sorting attributes in all overview screen, not only in queue view.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::TicketOverviewMenu::Sort
@@ -17271,7 +17268,7 @@ Title: Open Tickets / Need to be answered
             <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
                 <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
                 <listitem>
-                    <para>Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix 'CustomerCompany_' must be added.</para>
+                    <para>顧客ユーザーのアドレス帳の検索（CustomerUser又はCustomerCompany）のデフォルトのフィルターフィールドを定義します。 CustomerCompanyフィールドには、接頭辞 'CustomerCompany_'を追加する必要があります。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -18001,7 +17998,7 @@ Type: Type
             <varlistentry id="ConfigReference_Setting_OnlyValuesOnTicket">
                 <term>OnlyValuesOnTicket</term>
                 <listitem>
-                    <para>Defines if the values for filters should be retrieved from all available tickets. If set to "Yes", only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.</para>
+                    <para>Defines if the values for filters should be retrieved from all available tickets. If active, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -18703,7 +18700,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Stats::SearchPageShown">
                 <term>Stats::SearchPageShown</term>
                 <listitem>
-                    <para>Defines the default maximum number of statistics per page on the overview screen.</para>
+                    <para>一覧画面の1ページあたりのデフォルトの最大統計数を定義します。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '50'
@@ -18880,7 +18877,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateDefault">
                 <term>Ticket::Frontend::AgentTicketBulk###StateDefault</term>
                 <listitem>
-                    <para>担当者インタフェースのチケット・バルク画面で、チケットのメモを追加した後の、デフォルトの次の状態を定義します。</para>
+                    <para>Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.</para>
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- open
@@ -18891,7 +18888,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateType">
                 <term>Ticket::Frontend::AgentTicketBulk###StateType</term>
                 <listitem>
-                    <para>担当者インタフェースのチケット・バルク画面で、チケットのメモを追加した後の次の状態を定義します。</para>
+                    <para>Defines the next state of a ticket, in the ticket bulk screen of the agent interface.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -19281,7 +19278,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketClose_Title">
                 <term>Ticket::Frontend::AgentTicketClose###Title</term>
                 <listitem>
-                    <para>担当者インタフェースのクローズ・チケット画面で、タイトルのフィールドを表示します。</para>
+                    <para>Shows the title field in the close ticket screen of the agent interface.</para>
                     <para>This setting can be overridden in the user preferences, but is not active by default.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -19549,7 +19546,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketEmail_IsVisibleForCustomer">
                 <term>Ticket::Frontend::AgentTicketEmail###IsVisibleForCustomer</term>
                 <listitem>
-                    <para>Sets the default article customer visibility for new email tickets in the agent interface.</para>
+                    <para>担当者Webインターフェイスで新しいメールチケットのデフォルト記事を顧客参照と定義します。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -21126,7 +21123,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketNote_Title">
                 <term>Ticket::Frontend::AgentTicketNote###Title</term>
                 <listitem>
-                    <para>担当者インタフェースのチケット・メモ画面で、タイトルのフィールドを表示します。</para>
+                    <para>Shows the title field in the ticket note screen of the agent interface.</para>
                     <para>This setting can be overridden in the user preferences, but is not active by default.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -21462,7 +21459,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketOwner_Title">
                 <term>Ticket::Frontend::AgentTicketOwner###Title</term>
                 <listitem>
-                    <para>担当者インタフェースのズームされたチケットのチケット所有者画面で、タイトルのフィールドを表示します。</para>
+                    <para>Shows the title field in the ticket owner screen of a zoomed ticket in the agent interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -21796,7 +21793,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPending_Title">
                 <term>Ticket::Frontend::AgentTicketPending###Title</term>
                 <listitem>
-                    <para>担当者インタフェースのズームされたチケットのチケット保留画面で、タイトルのフィールドを表示します。</para>
+                    <para>Shows the title field in the ticket pending screen of a zoomed ticket in the agent interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -22002,7 +21999,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPhone_IsVisibleForCustomer">
                 <term>Ticket::Frontend::AgentTicketPhone###IsVisibleForCustomer</term>
                 <listitem>
-                    <para>Sets the default article customer visibility for new phone tickets in the agent interface.</para>
+                    <para>担当者Webインターフェイスで新しい電話チケットのデフォルト記事を顧客参照と定義します。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -22633,7 +22630,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPriority_Title">
                 <term>Ticket::Frontend::AgentTicketPriority###Title</term>
                 <listitem>
-                    <para>担当者インタフェースのズームされたチケットのチケット優先度画面で、タイトルのフィールドを表示します。</para>
+                    <para>Shows the title field in the ticket priority screen of a zoomed ticket in the agent interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -23199,7 +23196,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketResponsible_Title">
                 <term>Ticket::Frontend::AgentTicketResponsible###Title</term>
                 <listitem>
-                    <para>担当者インタフェースのチケット責任者画面で、タイトルのフィールドを表示します。</para>
+                    <para>Shows the title field in the ticket responsible screen of the agent interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -23915,7 +23912,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketStatusView_ViewableTicketsPage">
                 <term>Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage</term>
                 <listitem>
-                    <para>担当者インタフェースのステータスビューで、全てのオープンのチケット（ロックされているものも含む）を表示します。</para>
+                    <para>Number of tickets to be displayed in each page.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '50'
@@ -24304,7 +24301,7 @@ RegExp:
             <varlistentry id="ConfigReference_Setting_Ticket::ZoomAttachmentDisplayCount">
                 <term>Ticket::ZoomAttachmentDisplayCount</term>
                 <listitem>
-                    <para>項目に添付ファイルがある場合、チケット・ズームでアイコン・アカウントを表示します。</para>
+                    <para>Shows a count of attachments in the ticket zoom, if the article has attachments.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '20'
@@ -26248,7 +26245,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPassword">
                 <term>CustomerPanelBodyLostPassword</term>
                 <listitem>
-                    <para>新パスワードについて、顧客に送信される通知メールの本文テキストを定義します（本リンクが使用された後に、新しいパスワードが送信されます）。</para>
+                    <para>Defines the body text for notification mails sent to customers, about new password.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nNew password: <OTRS_NEWPW>\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl\n
@@ -26260,7 +26257,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPasswordToken">
                 <term>CustomerPanelBodyLostPasswordToken</term>
                 <listitem>
-                    <para>新しくリクエストされたパスワードに関するトークンと共に、顧客に送信される通知メールの本文テキストとを定義します（本リンクが使用された後に、新しいパスワードが送信されます）。</para>
+                    <para>Defines the body text for notification mails sent to customers, with token about new requested password.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
@@ -28273,7 +28270,7 @@ Name: TicketUpdate
             <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::TicketCreate_IsVisibleForCustomer">
                 <term>GenericInterface::Operation::TicketCreate###IsVisibleForCustomer</term>
                 <listitem>
-                    <para>Defines the default visibility of the article to customer for this operation.</para>
+                    <para>この操作のために顧客へデフォルトで参照する設定を定義します。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -28362,7 +28359,7 @@ Name: TicketUpdate
             <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::TicketUpdate_IsVisibleForCustomer">
                 <term>GenericInterface::Operation::TicketUpdate###IsVisibleForCustomer</term>
                 <listitem>
-                    <para>Defines the default visibility of the article to customer for this operation.</para>
+                    <para>この操作のために顧客へデフォルトで参照する設定を定義します。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'

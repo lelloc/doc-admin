@@ -64,7 +64,7 @@ Name: SMS
             <varlistentry id="ConfigReference_Setting_DemoSystem">
                 <term>DemoSystem</term>
                 <listitem>
-                    <para>系统运行到“演示”模式。如果设置为“是”，服务人员能够修改偏好设置，如通过WEB界面选择语言和主题，这些变更只对当前会话有效。服务人员不能修改密码。</para>
+                    <para>Runs the system in "Demo" mode. If active, agents can change preferences, such as selection of language and theme via the agent web interface. These changes are only valid for the current session. It will not be possible for agents to change their passwords.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -119,7 +119,7 @@ Name: SMS
             <varlistentry id="ConfigReference_Setting_SecureMode">
                 <term>SecureMode</term>
                 <listitem>
-                    <para>禁用WEB安装程序(http://yourhost.example.com/otrs/installer.pl)，防止系统被劫持。如果设置为“否”，系统能够被重新安装，当前的基本配置将被安装脚本的预设问题替换。如果不禁用，还同时禁用了通用代理、软件包管理和SQL查询屏幕。</para>
+                    <para>Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If inactive, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not inactive, it also disables the GenericAgent, PackageManager and SQL Box.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -230,7 +230,7 @@ URL: http://maps.google.com/maps?z=7&q=
             <varlistentry id="ConfigReference_Setting_AppointmentCalendar::Import::RecurringMonthsLimit">
                 <term>AppointmentCalendar::Import::RecurringMonthsLimit</term>
                 <listitem>
-                    <para>OTRS不支持对没有结束日期或没有重复次数的预约做循环处理。在导入过程中，可能有ICS文件包含了此类预约。作为替代，系统将所有的此类预约创建为已过去的预约，然后加上接下来的n个月(默认120个月或10年)的重复预约。</para>
+                    <para>OTRS doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '120'
@@ -794,7 +794,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InBackend">
                 <term>Cache::InBackend</term>
                 <listitem>
-                    <para>缓存数据要保存到选择的缓存后端吗？</para>
+                    <para>If active the cache data will be stored in cache backend.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -805,7 +805,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InMemory">
                 <term>Cache::InMemory</term>
                 <listitem>
-                    <para>缓存数据应该保留在内存吗？</para>
+                    <para>If active the cache data be held in memory.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -1090,7 +1090,7 @@ VALIDSIG: The PGP signature with the keyid is good.
             <varlistentry id="ConfigReference_Setting_PGP::TrustedNetwork">
                 <term>PGP::TrustedNetwork</term>
                 <listitem>
-                    <para>如果你信任所有的公共和私有PGP密钥（即使它们不是可信任签名认证的），设置这个参数为“是”。</para>
+                    <para>Activate this if you trust in all your public and private pgp keys, even if they are not certified with a trusted signature.</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -1727,7 +1727,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_AutoResponseForWebTickets">
                 <term>AutoResponseForWebTickets</term>
                 <listitem>
-                    <para>如果这个选项设置为“是”，服务人员或客户通过WEB界面创建的工单将收到自动响应（如果配置了自动响应）。如果这个选项设置为“否”，则不会发送自动响应。</para>
+                    <para>If this option is active, tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is inactive, no autoresponses will be sent.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -2755,7 +2755,7 @@ Module: Kernel::System::Ticket::Event::TicketNewMessageUpdate
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_4100-DynamicFieldFromCustomerUser">
                 <term>Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser</term>
                 <listitem>
-                    <para>这个事件模块存储客户用户的属性为工单动态字段，如何配置这个映射请查看上面的设置。</para>
+                    <para>This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -3819,7 +3819,7 @@ Rows: '5'
             <varlistentry id="ConfigReference_Setting_SessionCheckRemoteIP">
                 <term>SessionCheckRemoteIP</term>
                 <listitem>
-                    <para>开启远程IP地址检查，如果系统通过代理或拨号连接，应该设置为“否”，因为远程IP在每次请求时可能都不一样。</para>
+                    <para>Turns on the remote ip address check. It should not be active if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -4136,7 +4136,7 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
             <varlistentry id="ConfigReference_Setting_DynamicFieldFromCustomerUser::Mapping">
                 <term>DynamicFieldFromCustomerUser::Mapping</term>
                 <listitem>
-                    <para>定义客户用户数据（键）与工单动态字段（值）的映射。目的是在工单动态字段中存储客户用户数据。动态字段必须存在于系统中且启用了AgentTicketFreeText（服务人员工单自由文本），这样才能由服务人员手动设置/更新。动态字段不能在服务人员电话工单、邮件工单和客户工单中启用，否则他们将优先于自动设置值。要使用这些映射，还要激活接下来的设置。</para>
+                    <para>Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser setting.</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -4425,7 +4425,7 @@ pending reminder: open
             <varlistentry id="ConfigReference_Setting_Ticket::NumberGenerator::CheckSystemID">
                 <term>Ticket::NumberGenerator::CheckSystemID</term>
                 <listitem>
-                    <para>在跟进工单的工单号检测时检查系统ID（如果使用系统后变更过系统ID，则设置为“NO”）。</para>
+                    <para>Checks the SystemID in ticket number detection for follow-ups ( If inactive, SystemID will be changed after using the system).</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -6488,7 +6488,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeShowAlwaysLong">
                 <term>TimeShowAlwaysLong</term>
                 <listitem>
-                    <para>如果设置为“是”，则以长格式显示时间（天、小时、分钟）；如果设置为“否”，则以短格式显示时间（天、小时）。</para>
+                    <para>Shows time in long format (days, hours, minutes), if active; or in short format (days, hours), if inactive.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -6499,7 +6499,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeShowCompleteDescription">
                 <term>TimeShowCompleteDescription</term>
                 <listitem>
-                    <para>如果设置为“是”，则显示时间的完整描述（days-天，hours-小时，minutes-分钟）；如果设置为“否”，则只显示时间的首字母（d-天，h-时,m-分）。</para>
+                    <para>Shows time use complete description (days, hours, minutes), if active; or just first letter (d, h, m), if inactive.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -6510,7 +6510,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeVacationDays">
                 <term>TimeVacationDays</term>
                 <listitem>
-                    <para>添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6530,7 +6530,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime">
                 <term>TimeVacationDaysOneTime</term>
                 <listitem>
-                    <para>添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6666,7 +6666,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar1">
                 <term>TimeVacationDays::Calendar1</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6686,7 +6686,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar1">
                 <term>TimeVacationDaysOneTime::Calendar1</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6822,7 +6822,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar2">
                 <term>TimeVacationDays::Calendar2</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6842,7 +6842,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar2">
                 <term>TimeVacationDaysOneTime::Calendar2</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6978,7 +6978,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar3">
                 <term>TimeVacationDays::Calendar3</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -6998,7 +6998,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar3">
                 <term>TimeVacationDaysOneTime::Calendar3</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7134,7 +7134,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar4">
                 <term>TimeVacationDays::Calendar4</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7154,7 +7154,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar4">
                 <term>TimeVacationDaysOneTime::Calendar4</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7290,7 +7290,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar5">
                 <term>TimeVacationDays::Calendar5</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7310,7 +7310,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar5">
                 <term>TimeVacationDaysOneTime::Calendar5</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7446,7 +7446,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar6">
                 <term>TimeVacationDays::Calendar6</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7466,7 +7466,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar6">
                 <term>TimeVacationDaysOneTime::Calendar6</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7602,7 +7602,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar7">
                 <term>TimeVacationDays::Calendar7</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7622,7 +7622,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar7">
                 <term>TimeVacationDaysOneTime::Calendar7</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7758,7 +7758,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar8">
                 <term>TimeVacationDays::Calendar8</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7778,7 +7778,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar8">
                 <term>TimeVacationDaysOneTime::Calendar8</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7914,7 +7914,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar9">
                 <term>TimeVacationDays::Calendar9</term>
                 <listitem>
-                    <para>为指定的日历添加固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -7934,7 +7934,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar9">
                 <term>TimeVacationDaysOneTime::Calendar9</term>
                 <listitem>
-                    <para>为指定的日历添加非固定假期，请使用从1到9的单数字模式（而不是01-09）。</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -13237,7 +13237,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPassword">
                 <term>NotificationBodyLostPassword</term>
                 <listitem>
-                    <para>定义发送给服务人员关于新密码的通知邮件的正文文本（点击这个链接后将发送新密码）。</para>
+                    <para>Defines the body text for notification mails sent to agents, about new password.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nHere's your new OTRS password.\n\nNew password:
@@ -13250,7 +13250,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPasswordToken">
                 <term>NotificationBodyLostPasswordToken</term>
                 <listitem>
-                    <para>定义发送给服务人员关于新请求密码的链接的正文文本（点击这个链接后将发送新密码）。</para>
+                    <para>Defines the body text for notification mails sent to agents, with token about new requested password.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
@@ -16348,7 +16348,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewMenuModule_001-Sort">
                 <term>Ticket::Frontend::OverviewMenuModule###001-Sort</term>
                 <listitem>
-                    <para>显示一个工单队列视图中工单列表排序的工单属性选择器，可用于选择的属性项可通过参数'TicketOverviewMenuSort###SortAttributes'配置。</para>
+                    <para>This setting shows the sorting attributes in all overview screen, not only in queue view.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::TicketOverviewMenu::Sort
@@ -17997,7 +17997,7 @@ Type: Type
             <varlistentry id="ConfigReference_Setting_OnlyValuesOnTicket">
                 <term>OnlyValuesOnTicket</term>
                 <listitem>
-                    <para>定义过滤器的值是否应从所有可用的工单中检索。如果设置为“是”，则只有实际用在工单中的值才能用于过滤。请注意：客户用户列表将像这样始终被检索。</para>
+                    <para>Defines if the values for filters should be retrieved from all available tickets. If active, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -18876,7 +18876,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateDefault">
                 <term>Ticket::Frontend::AgentTicketBulk###StateDefault</term>
                 <listitem>
-                    <para>定义服务人员界面在工单批量操作屏幕添加备注后的默认下一个工单状态。</para>
+                    <para>Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- open
@@ -18887,7 +18887,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateType">
                 <term>Ticket::Frontend::AgentTicketBulk###StateType</term>
                 <listitem>
-                    <para>定义服务人员界面工单批量操作屏幕添加备注后的下一个工单状态。</para>
+                    <para>Defines the next state of a ticket, in the ticket bulk screen of the agent interface.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -19277,7 +19277,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketClose_Title">
                 <term>Ticket::Frontend::AgentTicketClose###Title</term>
                 <listitem>
-                    <para>在服务人员界面关闭工单屏幕显示工单标题字段。</para>
+                    <para>Shows the title field in the close ticket screen of the agent interface.</para>
                     <para>这个设置可以在用户偏好设置中被覆盖，但默认不会处于活动状态。。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -21122,7 +21122,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketNote_Title">
                 <term>Ticket::Frontend::AgentTicketNote###Title</term>
                 <listitem>
-                    <para>在服务人员界面工单备注屏幕显示工单标题字段。</para>
+                    <para>Shows the title field in the ticket note screen of the agent interface.</para>
                     <para>这个设置可以在用户偏好设置中被覆盖，但默认不会处于活动状态。。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -21458,7 +21458,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketOwner_Title">
                 <term>Ticket::Frontend::AgentTicketOwner###Title</term>
                 <listitem>
-                    <para>在服务人员界面工单所有者屏幕显示工单标题字段。</para>
+                    <para>Shows the title field in the ticket owner screen of a zoomed ticket in the agent interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -21792,7 +21792,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPending_Title">
                 <term>Ticket::Frontend::AgentTicketPending###Title</term>
                 <listitem>
-                    <para>在服务人员界面工单挂起屏幕显示工单标题字段。</para>
+                    <para>Shows the title field in the ticket pending screen of a zoomed ticket in the agent interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -22629,7 +22629,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPriority_Title">
                 <term>Ticket::Frontend::AgentTicketPriority###Title</term>
                 <listitem>
-                    <para>在服务人员界面工单优先级屏幕显示工单标题字段。</para>
+                    <para>Shows the title field in the ticket priority screen of a zoomed ticket in the agent interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -23195,7 +23195,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketResponsible_Title">
                 <term>Ticket::Frontend::AgentTicketResponsible###Title</term>
                 <listitem>
-                    <para>在服务人员界面工单负责人屏幕显示工单标题字段。</para>
+                    <para>Shows the title field in the ticket responsible screen of the agent interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -23902,7 +23902,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketStatusView_ViewableTicketsPage">
                 <term>Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage</term>
                 <listitem>
-                    <para>在服务人员界面工单状态视图显示所有处理中的工单（即使工单已被锁定）。</para>
+                    <para>Number of tickets to be displayed in each page.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '50'
@@ -24291,7 +24291,7 @@ RegExp:
             <varlistentry id="ConfigReference_Setting_Ticket::ZoomAttachmentDisplayCount">
                 <term>Ticket::ZoomAttachmentDisplayCount</term>
                 <listitem>
-                    <para>如果信件有附件，在工单详情视图显示有计数的图标。</para>
+                    <para>Shows a count of attachments in the ticket zoom, if the article has attachments.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '20'
@@ -26235,7 +26235,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPassword">
                 <term>CustomerPanelBodyLostPassword</term>
                 <listitem>
-                    <para>定义发送给客户关于新密码的正文文本（点击这个链接后将发送新密码）。</para>
+                    <para>Defines the body text for notification mails sent to customers, about new password.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nNew password: <OTRS_NEWPW>\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl\n
@@ -26247,7 +26247,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPasswordToken">
                 <term>CustomerPanelBodyLostPasswordToken</term>
                 <listitem>
-                    <para>定义发送给客户关于新密码的链接的正文文本（点击这个链接后将发送新密码）。</para>
+                    <para>Defines the body text for notification mails sent to customers, with token about new requested password.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to

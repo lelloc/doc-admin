@@ -64,7 +64,7 @@ Name: SMS
             <varlistentry id="ConfigReference_Setting_DemoSystem">
                 <term>DemoSystem</term>
                 <listitem>
-                    <para>Runs the system in "Demo" mode. If set to "Yes", agents can change preferences, such as selection of language and theme via the agent web interface. These changes are only valid for the current session. It will not be possible for agents to change their passwords.</para>
+                    <para>Runs the system in "Demo" mode. If active, agents can change preferences, such as selection of language and theme via the agent web interface. These changes are only valid for the current session. It will not be possible for agents to change their passwords.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
@@ -119,7 +119,7 @@ Name: SMS
             <varlistentry id="ConfigReference_Setting_SecureMode">
                 <term>SecureMode</term>
                 <listitem>
-                    <para>Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If set to "No", the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not active, it also disables the GenericAgent, PackageManager and SQL Box.</para>
+                    <para>Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If inactive, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not inactive, it also disables the GenericAgent, PackageManager and SQL Box.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
@@ -230,7 +230,7 @@ URL: http://maps.google.com/maps?z=7&q=
             <varlistentry id="ConfigReference_Setting_AppointmentCalendar::Import::RecurringMonthsLimit">
                 <term>AppointmentCalendar::Import::RecurringMonthsLimit</term>
                 <listitem>
-                    <para>OTRS doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next n months (120 months/10 years by default).</para>
+                    <para>OTRS doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '120'
@@ -794,7 +794,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InBackend">
                 <term>Cache::InBackend</term>
                 <listitem>
-                    <para>Should the cache data be stored in the selected cache backend?</para>
+                    <para>If active the cache data will be stored in cache backend.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
@@ -805,7 +805,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InMemory">
                 <term>Cache::InMemory</term>
                 <listitem>
-                    <para>Should the cache data be held in memory?</para>
+                    <para>If active the cache data be held in memory.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
@@ -1090,7 +1090,7 @@ VALIDSIG: The PGP signature with the keyid is good.
             <varlistentry id="ConfigReference_Setting_PGP::TrustedNetwork">
                 <term>PGP::TrustedNetwork</term>
                 <listitem>
-                    <para>Set this to yes if you trust in all your public and private pgp keys, even if they are not certified with a trusted signature.</para>
+                    <para>Activate this if you trust in all your public and private pgp keys, even if they are not certified with a trusted signature.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -1727,7 +1727,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_AutoResponseForWebTickets">
                 <term>AutoResponseForWebTickets</term>
                 <listitem>
-                    <para>If this option is set to 'Yes', tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is set to 'No', no autoresponses will be sent.</para>
+                    <para>If this option is active, tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is inactive, no autoresponses will be sent.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
@@ -2755,7 +2755,7 @@ Module: Kernel::System::Ticket::Event::TicketNewMessageUpdate
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_4100-DynamicFieldFromCustomerUser">
                 <term>Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser</term>
                 <listitem>
-                    <para>This event module stores attributes from CustomerUser as DynamicFields tickets. Please see the setting above for how to configure the mapping.</para>
+                    <para>This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.</para>
                     <para>This setting is not active by default.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -3819,7 +3819,7 @@ Rows: '5'
             <varlistentry id="ConfigReference_Setting_SessionCheckRemoteIP">
                 <term>SessionCheckRemoteIP</term>
                 <listitem>
-                    <para>Turns on the remote ip address check. It should be set to "No" if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.</para>
+                    <para>Turns on the remote ip address check. It should not be active if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
@@ -4136,7 +4136,7 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
             <varlistentry id="ConfigReference_Setting_DynamicFieldFromCustomerUser::Mapping">
                 <term>DynamicFieldFromCustomerUser::Mapping</term>
                 <listitem>
-                    <para>Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the next setting below.</para>
+                    <para>Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser setting.</para>
                     <para>This setting is not active by default.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -4425,7 +4425,7 @@ pending reminder: open
             <varlistentry id="ConfigReference_Setting_Ticket::NumberGenerator::CheckSystemID">
                 <term>Ticket::NumberGenerator::CheckSystemID</term>
                 <listitem>
-                    <para>Checks the SystemID in ticket number detection for follow-ups (use "No" if SystemID has been changed after using the system).</para>
+                    <para>Checks the SystemID in ticket number detection for follow-ups ( If inactive, SystemID will be changed after using the system).</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
@@ -6488,7 +6488,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeShowAlwaysLong">
                 <term>TimeShowAlwaysLong</term>
                 <listitem>
-                    <para>Shows time in long format (days, hours, minutes), if set to "Yes"; or in short format (days, hours), if set to "No".</para>
+                    <para>Shows time in long format (days, hours, minutes), if active; or in short format (days, hours), if inactive.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
@@ -6499,7 +6499,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeShowCompleteDescription">
                 <term>TimeShowCompleteDescription</term>
                 <listitem>
-                    <para>Shows time use complete description (days, hours, minutes), if set to "Yes"; or just first letter (d, h, m), if set to "No".</para>
+                    <para>Shows time use complete description (days, hours, minutes), if active; or just first letter (d, h, m), if inactive.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
@@ -6510,7 +6510,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeVacationDays">
                 <term>TimeVacationDays</term>
                 <listitem>
-                    <para>Adds the permanent vacation days. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6530,7 +6530,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime">
                 <term>TimeVacationDaysOneTime</term>
                 <listitem>
-                    <para>Adds the one time vacation days. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6666,7 +6666,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar1">
                 <term>TimeVacationDays::Calendar1</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6686,7 +6686,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar1">
                 <term>TimeVacationDaysOneTime::Calendar1</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6822,7 +6822,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar2">
                 <term>TimeVacationDays::Calendar2</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6842,7 +6842,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar2">
                 <term>TimeVacationDaysOneTime::Calendar2</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6978,7 +6978,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar3">
                 <term>TimeVacationDays::Calendar3</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -6998,7 +6998,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar3">
                 <term>TimeVacationDaysOneTime::Calendar3</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7134,7 +7134,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar4">
                 <term>TimeVacationDays::Calendar4</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7154,7 +7154,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar4">
                 <term>TimeVacationDaysOneTime::Calendar4</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7290,7 +7290,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar5">
                 <term>TimeVacationDays::Calendar5</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7310,7 +7310,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar5">
                 <term>TimeVacationDaysOneTime::Calendar5</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7446,7 +7446,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar6">
                 <term>TimeVacationDays::Calendar6</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7466,7 +7466,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar6">
                 <term>TimeVacationDaysOneTime::Calendar6</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7602,7 +7602,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar7">
                 <term>TimeVacationDays::Calendar7</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7622,7 +7622,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar7">
                 <term>TimeVacationDaysOneTime::Calendar7</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7758,7 +7758,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar8">
                 <term>TimeVacationDays::Calendar8</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7778,7 +7778,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar8">
                 <term>TimeVacationDaysOneTime::Calendar8</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7914,7 +7914,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDays::Calendar9">
                 <term>TimeVacationDays::Calendar9</term>
                 <listitem>
-                    <para>Adds the permanent vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the permanent vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -7934,7 +7934,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeVacationDaysOneTime::Calendar9">
                 <term>TimeVacationDaysOneTime::Calendar9</term>
                 <listitem>
-                    <para>Adds the one time vacation days for the indicated calendar. Please use single digit pattern for numbers from 1 to 9 (instead of 01 - 09).</para>
+                    <para>Adds the one time vacation days for the indicated calendar.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -13237,7 +13237,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPassword">
                 <term>NotificationBodyLostPassword</term>
                 <listitem>
-                    <para>Defines the body text for notification mails sent to agents, about new password (after using this link the new password will be sent).</para>
+                    <para>Defines the body text for notification mails sent to agents, about new password.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nHere's your new OTRS password.\n\nNew password:
@@ -13250,7 +13250,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPasswordToken">
                 <term>NotificationBodyLostPasswordToken</term>
                 <listitem>
-                    <para>Defines the body text for notification mails sent to agents, with token about new requested password (after using this link the new password will be sent).</para>
+                    <para>Defines the body text for notification mails sent to agents, with token about new requested password.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
@@ -16348,7 +16348,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewMenuModule_001-Sort">
                 <term>Ticket::Frontend::OverviewMenuModule###001-Sort</term>
                 <listitem>
-                    <para>Shows a select of ticket attributes to order the queue view ticket list. The possible selections can be configured via 'TicketOverviewMenuSort###SortAttributes'.</para>
+                    <para>This setting shows the sorting attributes in all overview screen, not only in queue view.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::TicketOverviewMenu::Sort
@@ -17997,7 +17997,7 @@ Type: Type
             <varlistentry id="ConfigReference_Setting_OnlyValuesOnTicket">
                 <term>OnlyValuesOnTicket</term>
                 <listitem>
-                    <para>Defines if the values for filters should be retrieved from all available tickets. If set to "Yes", only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.</para>
+                    <para>Defines if the values for filters should be retrieved from all available tickets. If active, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
@@ -18876,7 +18876,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateDefault">
                 <term>Ticket::Frontend::AgentTicketBulk###StateDefault</term>
                 <listitem>
-                    <para>Defines the default next state of a ticket after adding a note, in the ticket bulk screen of the agent interface.</para>
+                    <para>Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.</para>
                     <para>This setting is not active by default.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- open
@@ -18887,7 +18887,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateType">
                 <term>Ticket::Frontend::AgentTicketBulk###StateType</term>
                 <listitem>
-                    <para>Defines the next state of a ticket after adding a note, in the ticket bulk screen of the agent interface.</para>
+                    <para>Defines the next state of a ticket, in the ticket bulk screen of the agent interface.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
@@ -19277,7 +19277,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketClose_Title">
                 <term>Ticket::Frontend::AgentTicketClose###Title</term>
                 <listitem>
-                    <para>Shows the title fields in the close ticket screen of the agent interface.</para>
+                    <para>Shows the title field in the close ticket screen of the agent interface.</para>
                     <para>This setting can be overridden in the user preferences, but is not active by default.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
@@ -21122,7 +21122,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketNote_Title">
                 <term>Ticket::Frontend::AgentTicketNote###Title</term>
                 <listitem>
-                    <para>Shows the title fields in the ticket note screen of the agent interface.</para>
+                    <para>Shows the title field in the ticket note screen of the agent interface.</para>
                     <para>This setting can be overridden in the user preferences, but is not active by default.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
@@ -21458,7 +21458,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketOwner_Title">
                 <term>Ticket::Frontend::AgentTicketOwner###Title</term>
                 <listitem>
-                    <para>Shows the title fields in the ticket owner screen of a zoomed ticket in the agent interface.</para>
+                    <para>Shows the title field in the ticket owner screen of a zoomed ticket in the agent interface.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -21792,7 +21792,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPending_Title">
                 <term>Ticket::Frontend::AgentTicketPending###Title</term>
                 <listitem>
-                    <para>Shows the title fields in the ticket pending screen of a zoomed ticket in the agent interface.</para>
+                    <para>Shows the title field in the ticket pending screen of a zoomed ticket in the agent interface.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -22629,7 +22629,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPriority_Title">
                 <term>Ticket::Frontend::AgentTicketPriority###Title</term>
                 <listitem>
-                    <para>Shows the title fields in the ticket priority screen of a zoomed ticket in the agent interface.</para>
+                    <para>Shows the title field in the ticket priority screen of a zoomed ticket in the agent interface.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -23195,7 +23195,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketResponsible_Title">
                 <term>Ticket::Frontend::AgentTicketResponsible###Title</term>
                 <listitem>
-                    <para>Shows the title fields in the ticket responsible screen of the agent interface.</para>
+                    <para>Shows the title field in the ticket responsible screen of the agent interface.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -23902,7 +23902,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketStatusView_ViewableTicketsPage">
                 <term>Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage</term>
                 <listitem>
-                    <para>Shows all open tickets (even if they are locked) in the status view of the agent interface.</para>
+                    <para>Number of tickets to be displayed in each page.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '50'
@@ -24291,7 +24291,7 @@ RegExp:
             <varlistentry id="ConfigReference_Setting_Ticket::ZoomAttachmentDisplayCount">
                 <term>Ticket::ZoomAttachmentDisplayCount</term>
                 <listitem>
-                    <para>Shows a count of icons in the ticket zoom, if the article has attachments.</para>
+                    <para>Shows a count of attachments in the ticket zoom, if the article has attachments.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '20'
@@ -26235,7 +26235,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPassword">
                 <term>CustomerPanelBodyLostPassword</term>
                 <listitem>
-                    <para>Defines the body text for notification mails sent to customers, about new password (after using this link the new password will be sent).</para>
+                    <para>Defines the body text for notification mails sent to customers, about new password.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nNew password: <OTRS_NEWPW>\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl\n
@@ -26247,7 +26247,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPasswordToken">
                 <term>CustomerPanelBodyLostPasswordToken</term>
                 <listitem>
-                    <para>Defines the body text for notification mails sent to customers, with token about new requested password (after using this link the new password will be sent).</para>
+                    <para>Defines the body text for notification mails sent to customers, with token about new requested password.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
