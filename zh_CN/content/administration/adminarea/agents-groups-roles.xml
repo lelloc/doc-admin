@@ -27,9 +27,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-To register an agent, click on the <literal>Add agent</literal> button,
-enter the required data and press the Submit button at the bottom of the
-screen, as shown in Figure.
+要注册服务人员，请点击<literal>添加服务人员</literal>按钮，输入所需的数据，然后按屏幕底部的提交按钮，如图所示。
 </para>
 
 <para>
@@ -67,19 +65,19 @@ linkend="adminarea-roles">角色</link>部分。
     </thead>
     <tbody>
       <row>
-        <entry>admin</entry>
+        <entry>admin（系统管理）</entry>
         <entry>允许执行系统中的管理任务。</entry>
       </row>
       <row>
-        <entry>stats</entry>
+        <entry>stats（统计）</entry>
         <entry>
           有资格访问OTRS的统计模块并生成统计报表。
         </entry>
       </row>
       <row>
-        <entry>users</entry>
+        <entry>users（用户）</entry>
         <entry>
-          服务人员应该属于这个组且有读写权限。他们能访问工单系统的所有功能。
+          服务人员应该属于这个组且有读写权限，这样他们才能访问工单系统的所有功能。
         </entry>
       </row>
     </tbody>
@@ -192,7 +190,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          ro-只读
+          ro（只读）
         </entry>
         <entry>
           对这个组的工单、记录和队列有只读访问权限。
@@ -200,7 +198,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          move into-转移到
+          move into（转移到）
         </entry>
         <entry>
           在属于本组的队列或区域间转移工单或记录的权限。
@@ -208,7 +206,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          create-创建
+          create（创建）
         </entry>
         <entry>
           在这个组的队列或区域中创建工单或记录的权限。
@@ -216,7 +214,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          备注
+          note（备注）
         </entry>
         <entry>
           在该组的队列或区域中的添加工单或记录备注的权利。
@@ -224,7 +222,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          owner-所有者
+          owner（所有者）
         </entry>
         <entry>
           在本组的队列或区域中更新工单或记录的所有者的权限。
@@ -232,7 +230,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          priority-优先级
+          priority（优先级）
         </entry>
         <entry>
           在本组的队列或区域中更改工单或记录的优先级的权限。
@@ -240,7 +238,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
       </row>
       <row>
         <entry>
-          rw-读写
+          rw（读写）
         </entry>
         <entry>
           对属于这个组的队列或区域的工单、记录和队列完全读写访问权限。
@@ -253,12 +251,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 
 <note>
     <para>
-        By default, the QueueView only lists tickets in queues that an agent has
-<emphasis>rw</emphasis> access to, i.e., the tickets the agent needs to work
-on. If you want to change this behaviour, you can set <link
+        默认情况下，队列视图仅列出服务人员具有<emphasis> rw（读写） </emphasis>访问权限的队列中的工单，即服务人员需要处理的工单。
+如果要更改此行为，可以将<link
 linkend="ConfigReference_Setting_Ticket::Frontend::AgentTicketQueue_ViewAllPossibleTickets">
-Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
-<emphasis>Yes</emphasis>.
+Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link>
+设置为<emphasis>是</emphasis>。
     </para>
 </note>
  <para>默认情况下不会显示所有可用的权限。这些附加的权限可以添加。</para>
@@ -274,8 +271,8 @@ Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
             </thead>
             <tbody>
               <row>
-                <entry>stats</entry>
-                <entry>访问统计页面的权限</entry>
+                <entry>stats（统计）</entry>
+                <entry>访问统计页面的权限。</entry>
               </row>
               <row>
                 <entry>退回</entry>
@@ -311,8 +308,8 @@ Ticket::Frontend::AgentTicketQueue###ViewAllPossibleTickets </link> to
       </para>
       <note>
         <para>
-          These permissions can be added by changing the <link
-linkend="ConfigReference_Setting_System::Permission">System::Permission</link>
+          可以通过更改<link
+linkend="ConfigReference_Setting_System::Permission">System::Permission</link>添加这些权限。
         </para>
       </note>
 </section>
@@ -338,15 +335,11 @@ linkend="ConfigReference_Setting_System::Permission">System::Permission</link>
 
 <note>
 <para>
-Roles are really useful when dealing with complex organizations and when
-maintaining larger OTRS installations. Proper care is advised though. Mixing
-Agent to Group with Agent to Role mappings can make for a complex access
-control scheme, that is difficult to understand and maintain. If you wish to
-use only roles and disable the Agents &lt;-&gt; Groups option in the Admin
-area, you can do so by modifying the <link
-linkend="ConfigReference_Setting_Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>
-in the SysConfig. Be aware that this won't remove already existing Agents to
-Group assignments!
+角色在处理复杂的组织和维护较大的OTRS安装时非常有用。
+不过请注意，混合使用服务人员到组的映射和服务人员到角色的映射可以做出复杂的访问控制方案，这会难以理解和维护。
+如果您只想使用角色并禁用系统管理模块的服务人员 &lt;-&gt;组选项，可以通过修改系统配置中的 <link
+linkend="ConfigReference_Setting_Frontend::Module_AdminUserGroup">Frontend::Module###AdminUserGroup</link>来实现。
+请注意，这不会删除已经存在的服务人员到组的分配！
 </para>
 </note>
 
@@ -369,11 +362,8 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </note>
 
 <para>
-An overview of all roles in the system is displayed. To edit a role's
-settings, click on the role's name. In a fresh new OTRS installation, there
-are no roles defined by default. To register one, click on the <literal>Add
-role</literal> button, provide the needed data and submit it (see figure
-below).
+显示系统中所有角色的概览。 要编辑角色的设置，请单击角色的名称。 在新的OTRS安装中，默认情况下没有定义角色。
+要注册一个角色，请点击<literal>添加角色</literal>按钮，提供所需的数据并提交（见下图）。
 </para>
 
 <para>

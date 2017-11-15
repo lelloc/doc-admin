@@ -265,13 +265,13 @@ legnépszerűbb Linux disztribúciókon.
 
         <para>
             <screen><![CDATA[
-# rhel / centos:
+# RHEL / CentOS:
 shell> yum install httpd mod_perl
 
-# suse:
+# SuSE:
 shell> zypper install apache2-mod_perl
 
-# debian/ubuntu:
+# Debian/Ubuntu:
 shell> apt-get install apache2 libapache2-mod-perl2
         ]]></screen>
         </para>
@@ -287,6 +287,13 @@ kapcsolja hozzá az
 található megfelelő sablont egy <filename>zzz_otrs.conf</filename> nevű
 fájlhoz az Apache beállítási könyvtárában (hogy meggyőződhessen arról, hogy
 betöltődik az egyéb beállítások után).
+        </para>
+
+        <para>
+            <screen><![CDATA[
+# Debian/Ubuntu:
+shell> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
+        ]]></screen>
         </para>
 
         <para>
@@ -315,52 +322,16 @@ apache2.service</command> paranccsal teheti meg.
     <section role="NotInToc">
         <title>7. lépés: fájljogosultságok</title>
         <para>
-            A fájljogosultságokat be kell állítani, hogy az OTRS képes legyen olvasni és
-írni a fájlokat:
+            Hajtsa végre a következő parancsot root felhasználóként az OTRS fájl- és
+könyvtárjogosultságainak beállításához. Megpróbálja felismerni a
+beállításhoz szükséges helyes felhasználó- és csoportbeállításokat.
         </para>
 
         <para>
-            <cmdsynopsis>
-<command>otrs.SetPermissions.pl</command> <arg choice='opt'> --otrs-user=
-<replaceable>OTRS felhasználó, alapértelmezetten „otrs”</replaceable> </arg>
-<arg choice='req'> --web-group= <replaceable>a webkiszolgáló
-felhasználójának csoportja</replaceable> </arg></cmdsynopsis>
-        </para>
-
-        <para>
-            Például:
-        </para>
-
-        <para>
-            <itemizedlist>
-                <listitem><para>Olyan webkiszolgálónál, amely az OTRS felhasználóként fut:</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-user=otrs
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>A wwwrun felhasználóval futó webkiszolgálónál (például SUSE):</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>Apache felhasználóval futó webkiszolgálónál (például Red Hat, CentOS):</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=apache
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>A www-data felhasználóval futó webkiszolgálónál (például Debian, Ubuntu):</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=www-data
-                ]]></screen>
-                </para></listitem>
-            </itemizedlist>
+        <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.SetPermissions.pl
+        ]]></screen>
         </para>
     </section>
 
@@ -381,7 +352,7 @@ hozzá a következő sorokat az <filename>/etc/my.cnf</filename> fájlba a
             </para>
             <para>
                 <screen><![CDATA[
-max_allowed_packet   = 20M
+max_allowed_packet   = 64M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
                 ]]></screen>

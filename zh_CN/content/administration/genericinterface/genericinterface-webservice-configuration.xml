@@ -258,7 +258,7 @@ Requester:
 
                         </itemizedlist>
                             <section>
-                                <title>配置</title>
+                                <title>Config（配置）</title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
@@ -304,7 +304,7 @@ Requester:
                                                 <title>可能的值</title>
                                                 <listitem>
                                                     <para>
-                                                        Keep（保持）：保持不变
+                                                        Keep（保持）：保持不变。
                                                     </para>
                                                 </listitem>
                                                 <listitem>
@@ -432,7 +432,7 @@ Requester:
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>配置</title>
+                            <title>Config（配置）</title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
@@ -516,7 +516,7 @@ Requester:
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            异步：设置是否委派给OTRS守护进程执行调用程序。
+                                            Asynchronous（异步）：设置是否委派给OTRS守护进程执行调用程序。
                                         </para>
                                         <itemizedlist mark="round">
                                             <title>可能的值</title>
@@ -534,8 +534,7 @@ Requester:
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Condition: Container for event conditions to trigger the invoker, if there
-are no conditions, event will always trigger the invoker.
+                                            Condition（条件）：触发调用程序的事件条件的容器，如果没有条件，事件总是会触发调用程序。
                                         </para>
                                     </listitem>
                                     <listitem>
@@ -586,7 +585,7 @@ are no conditions, event will always trigger the invoker.
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketCustomerUpdate（（更新工单客户联系人）
+                                                    TicketCustomerUpdate（（更新工单客户）
                                                 </para>
                                             </listitem>
                                             <listitem>
@@ -737,18 +736,18 @@ are no conditions, event will always trigger the invoker.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Condition: Container to actual event conditions.
+                                        Condition（条件）：实际事件条件的容器。
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        ConditionLinking: Defines how multiple condition interacts with each other.
+                                        ConditionLinking（条件链接）：定义多重条件如何相互影响。
                                     </para>
                                     <itemizedlist>
-                                        <title>Possible Values (for condition linking)</title>
-                                        <listitem><para>和</para></listitem>
-                                        <listitem><para>或</para></listitem>
-                                        <listitem><para>异或</para></listitem>
+                                        <title>可能的值（用于条件链接）</title>
+                                        <listitem><para>and（与）</para></listitem>
+                                        <listitem><para>or（或）</para></listitem>
+                                        <listitem><para>xor（异或）</para></listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
@@ -757,31 +756,30 @@ are no conditions, event will always trigger the invoker.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            &lt;ConditionName&gt;: Container for the condition elements.
+                                            &lt;ConditionName（条件名称）&gt;：条件元素的容器。
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
-                                    <title>&lt;ConditionName&gt;</title>
+                                    <title>&lt;ConditionName（条件名称）&gt;</title>
                                     <para>
-                                        Unique name for the condition within the invoker and event the GUI assigns
-consecutive integer condition names starting from 1.
+                                        调用程序和事件中的条件的唯一名称，图形用户界面从1开始分配连续的整数作为条件名称。
                                     </para>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                Fields: Container for field conditions.
+                                                Fields（字段）：字段条件的容器。
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Type: Define how multiple fields interact within its condition.
+                                                Type（类型）：定义一个条件下的多个字段如何交互。
                                             </para>
                                             <itemizedlist>
-                                                <title>Possible Values (for condition linking)</title>
-                                                <listitem><para>和</para></listitem>
-                                                <listitem><para>或</para></listitem>
-                                                <listitem><para>异或</para></listitem>
+                                                <title>可能的值（用于条件链接）</title>
+                                                <listitem><para>and（与）</para></listitem>
+                                                <listitem><para>or（或）</para></listitem>
+                                                <listitem><para>xor（异或）</para></listitem>
                                             </itemizedlist>
                                         </listitem>
                                     </itemizedlist>
@@ -790,45 +788,40 @@ consecutive integer condition names starting from 1.
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    &lt;FieldName&gt;: Container field attributes.
+                                                    &lt;FieldName（字段名称）&gt;：字段属性的容器。
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <section>
-                                            <title>&lt;FieldName&gt;</title>
+                                            <title>&lt;FieldName（字段名称）&gt;</title>
                                             <para>
-                                                The name of a field from the event object (e.g.  for Ticket Events, the
-fields could be Queue Priority Type, etc).
+                                                来自事件对象的字段的名称，例如：对于工单事件，字段可以是Queue（队列）、 Priority（优先级）、 Type（类型）等。
                                             </para>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        Match: The value to match from the selected against the event object using
-the Type modifier.
+                                                        Match（匹配）：使用“Type （类型）”修饰符从所选的对象与事件对象匹配的值。
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Type: Modifier to the Match value.
+                                                        Type （类型）：匹配值的修饰符。
                                                     </para>
                                                     <itemizedlist>
-                                                        <title>Possible Values (for type modifier)</title>
+                                                        <title>可能的值（用于类型修饰符）</title>
                                                         <listitem>
                                                             <para>
-                                                                String: Direct compare between object field value and
-<literal>Match</literal> value.
+                                                                String（字符串）：直接比较对象字段的值和<literal>Match（匹配）</literal>的值。
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Regexp: Compare object field value with the regular expression defined in
-the <literal>Match</literal> value.
+                                                                Regexp（正则表达式）：将对象字段的值与<literal>Match（匹配）</literal>定义的正则表达式进行比较。
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Module: Use the module defined in the <literal>Match</literal> with the
-object data.
+                                                                Module（模块）：使用<literal>Match（匹配）</literal>中定义的模块比较对象数据。
                                                             </para>
                                                         </listitem>
                                                     </itemizedlist>
@@ -870,7 +863,7 @@ object data.
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>配置</title>
+                            <title>Config（配置）</title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>

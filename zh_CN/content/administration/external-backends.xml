@@ -10,11 +10,11 @@
 <title>客户数据</title>
 
 <para>
-OTRS会使用许多客户联系人数据属性如用户名、邮件地址、电话号码等等，这些属性在服务人员和客户联系人前端界面都会显示，还用于客户联系人的身份验证。
+OTRS会使用许多客户数据属性如用户名、邮件地址、电话号码等等，这些属性在服务人员和客户前端界面都会显示，还用于客户的身份验证。
 </para>
 
 <para>
-在OTRS中使用或显示的客户联系人数据是高度可定制的，但下面的信息始终需要用于客户联系人身份验证。
+在OTRS中使用或显示的客户数据是高度可定制的，但下面的信息始终需要用于客户身份验证：
 </para>
 
 <para>
@@ -31,20 +31,20 @@ OTRS会使用许多客户联系人数据属性如用户名、邮件地址、电�
   </listitem>
   <listitem>
     <para>
-      客户联系人ID
+      客户ID
     </para>
   </listitem>
 </itemizedlist>
 </para>
 
 <para>
-如果你要在服务人员界面显示客户联系人信息，使用下面的系统配置参数。
+如果你要在服务人员界面显示客户信息，使用下面的系统配置参数。
 </para>
 
 <para>
 <programlisting>
     # Ticket::Frontend::CustomerInfo*
-    # （在编写电话/邮件工单、工单详情和队列视图窗口显示客户联系人信息）
+    # （在编写电话/邮件工单、工单详情和队列视图窗口显示客户信息）
     $Self->{'Ticket::Frontend::CustomerInfoCompose'} = 1;
     $Self->{'Ticket::Frontend::CustomerInfoZoom'} = 1;
 </programlisting>
@@ -57,21 +57,21 @@ OTRS会使用许多客户联系人数据属性如用户名、邮件地址、电�
 </section>
 
 <section id="customer-user-backend">
-<title>客户联系人后端</title>
+<title>客户用户后端</title>
 
 <para>
-你可以使用两种类型的客户联系人后端：DB和LDAP。如果你已经有另外的客户联系人后端（如SAP），当然可用写一个模块来使用它。
+你可以使用两种类型的客户后端：DB和LDAP。如果你已经有另外的客户后端（如SAP），当然可用写一个模块来使用它。
 </para>
 
 <section id='customer-backend-db'>
 <title>数据库(默认)</title>
 
 <para>
-下面的示例显示一个客户联系人数据库后端的配置，使用了存储在OTRS数据库中的客户联系人数据。
+下面的示例显示一个客户数据库后端的配置，使用了存储在OTRS数据库中的客户数据。
 </para>
 
 <example id='db-customer-backend'>
-<title>配置客户联系人的数据库后端</title>
+<title>配置客户的数据库后端</title>
 
 <para>
 <programlisting>
@@ -157,7 +157,7 @@ CustomerValid => 'valid_id',
 </example>
 
 <para>
-如果你要定制客户联系人数据，修改OTRS数据库中customer_user表的列标题或添加一个新列。作为一个示例，下面的脚本显示了如果添加一个房间号的新列。
+如果你要定制客户数据，修改OTRS数据库中customer_user表的列标题或添加一个新列。作为一个示例，下面的脚本显示了如果添加一个房间号的新列。
 </para>
 
 <para>
@@ -205,7 +205,7 @@ linux:~#
 </para>
 
 <para>
-还可以在服务人员界面通过客户链接编辑所有的客户联系人信息。
+还可以在服务人员界面通过客户链接编辑所有的客户信息。
 </para>
 
 <note>
@@ -218,14 +218,14 @@ class</literal>键，如果他们不被使用。
 </note>
 
 <section id='multi-customer-ids-db'>
-<title>多ID的客户联系人（公司工单）</title>
+<title>多个ID的客户（单位工单）</title>
 
 <para>
-给一个客户联系人分配多个ID是可能的。这在一个客户联系人必须访问另一个客户联系人的工单时很有用，例如：一名主管想关注他的助手的工单。如果一个客户联系人能够访问另一个客户联系人的工单，需要使用OTRS的公司工单功能。可通过客户界面的“公司工单”链接来访问公司工单。
+给一个客户分配多个ID是可能的。这在一个客户必须访问另一个客户的工单时很有用，例如：一名主管想关注他的助手的工单。如果一个客户能够访问另一个客户的工单，需要使用OTRS的单位工单功能。可通过客户界面的“单位工单”链接来访问单位工单。
 </para>
 
 <para>
-要使用公司工单，必须给OTRS数据库中的customer_user表添加一个新列，以保存一个客户联系人的ID。
+要使用单位工单，必须在OTRS数据库中的customer_user表中添加一个可以被客户访问的ID的新列，请参阅下面的脚本。
 </para>
 
 <para>
@@ -273,22 +273,22 @@ linux:~#
 </para>
 
 <para>
-现在，这个用于多ID的新列能够通过服务人员界面客户联系人管理部分进行编辑。
+现在，这个用于多个客户ID的新列能够通过服务人员界面客户管理部分进行编辑。
 </para>
 
 <para>
-要确保一个客户联系人能够访问其它客户联系人的工单，将其它客户联系人的ID添加到这个新列，每个ID要用分号分隔（见下面的示例）。
+要确保一个客户能够访问其它客户的工单，将其它客户的ID添加到这个新列，每个ID要用分号分隔（见下面的示例）。
 </para>
 
 <example id='company-tickets-db'>
-<title>通过数据库后端使用公司工单</title>
+<title>通过数据库后端使用单位工单</title>
 
 <para>
-系统中有客户联系人A、B和C，A想要通过客户界面访问B和C的工单，B和C不能访问其他人的工单。
+系统中有客户A、B和C，A想要通过客户界面访问B和C的工单，B和C不能访问其他人的工单。
 </para>
 
 <para>
-要实现这个设置，修改表customer_user并按以上描述修改文件<filename>Kernel/Config.pm</filename>中的映射。然后在服务人员界面中或者通过系统管理页面载入客户联系人A的设置，设置显示出来后，将CustomerIDs字段输入值“B;C;”。
+要实现这个设置，修改表customer_user并按以上描述修改文件<filename>Kernel/Config.pm</filename>中的映射。然后在服务人员界面中或者通过系统管理页面载入客户A的设置，设置显示出来后，将CustomerIDs字段输入值“B;C;”。
 </para>
 
 </example>
@@ -301,7 +301,7 @@ linux:~#
 <title>LDAP</title>
 
 <para>
-如果你有一个客户联系人的LDAP目录，你可以用它作为OTRS的客户后端，如下面的例子所示。
+如果你有一个客户数据的LDAP目录，你可以用它作为OTRS的客户后端，如下面的例子所示。
 </para>
 
 <example id='ldap-customer-backend'>
@@ -396,10 +396,10 @@ $Self->{CustomerUser} = {
 
 
 <section id='multi-customer-ids-ldap'>
-<title>多ID的客户联系人（公司工单）</title>
+<title>多个ID的客户（单位工单）</title>
 
 <para>
-使用LDAP后端时同样可以给一个客户联系人分配多个ID。要使用公司工单，需要在LDAP中添加一个新的字段以包含其它客户联系人的ID。
+使用LDAP后端时同样可以给一个客户分配多个ID。要使用单位工单，需要在LDAP中添加一个新的字段以包含其它客户的ID。
 </para>
 
 <para>
@@ -423,18 +423,18 @@ $Self->{CustomerUser} = {
 </para>
 
 <para>
-要确保一个客户联系人能够访问其它客户联系人的工单，将其它客户联系人的ID添加到这个在LDAP中的新字段，每个ID要用分号分隔（见下面的示例）。
+要确保一个客户能够访问其它客户的工单，将其它客户的ID添加到这个在LDAP中的新字段，每个ID要用分号分隔（见下面的示例）。
 </para>
 
 <example id='company-tickets-ldap'>
-<title>通过LDAP后端使用公司工单</title>
+<title>通过LDAP后端使用单位工单</title>
 
 <para>
-系统中有客户联系人A、B和C，A想要通过客户界面访问B和C的工单，B和C不能访问其他人的工单。
+系统中有客户A、B和C，A想要通过客户界面访问B和C的工单，B和C不能访问其他人的工单。
 </para>
 
 <para>
-要实现这个设置，按上述方法修改LDAP目录和文件<filename>Kernel/Config.pm</filename>中的映射。然后在LDAP目录中为客户联系人A的新字段输入值“B;C;”。
+要实现这个设置，按上述方法修改LDAP目录和文件<filename>Kernel/Config.pm</filename>中的映射。然后在LDAP目录中为客户A的新字段输入值“B;C;”。
 </para>
 
 </example>
@@ -596,41 +596,38 @@ $Self->{CustomerUser2} = {
 </example>
 
 <para>
-最多可以集成10个不同的客户数据后端，在OTRS中使用客户管理界面来查看或编辑（需要写入权限）所有的客户联系人数据。
+最多可以集成10个不同的客户数据后端，在OTRS中使用客户管理界面来查看或编辑（需要写入权限）所有的客户数据。
 </para>
 
 </section>
 
 <section id="dynamicfield-from-customeruser">
-    <title>在动态字段中存储客户联系人数据</title>
+    <title>在动态字段中存储客户用户数据</title>
     <para>
-        有些时候在工单中直接存储客户联系人数据也是有用的，例如在这些数据上创建一些特殊的统计。
+        有些时候在工单中直接存储客户用户数据也是很有用的，例如在这些数据上创建一些特殊的统计。
     </para>
     <para>
-        当创建一个工单或修改了工单的客户联系人时设置动态字段的值。动态字段的值来源于客户联系人数据，这适用于所有的客户数据后端，但对LDAP后端特别有用。
+        当创建一个工单或修改了工单的客户时设置动态字段的值。动态字段的值来源于客户数据，这适用于所有的客户数据后端，但对LDAP后端特别有用。
     </para>
     <para>
-        To activate this optional feature of OTRS, please activate the settings
-<literal>Ticket::EventModulePost###950-DynamicFieldFromCustomerUser</literal>
-and <literal>DynamicFieldFromCustomerUser::Mapping</literal>. The latter
-setting contains the configuration of which <literal>CustomerUser</literal>
-field entry should be stored in which ticket dynamic field. The fields must
-be present in the system and should be enabled for
-<literal>AgentTicketFreeText</literal>, so that they can be set
-manually. They mustn't be enabled for <literal>AgentTicketPhone</literal>,
-<literal>AgentTicketEmail</literal> and
-<literal>AgentTicketCustomer</literal>. If they were, they would have
-precedence over the automatically set values.
+        要激活OTRS的这个可选功能，请激活设置<literal> Ticket :: EventModulePost ###
+950-DynamicFieldFromCustomerUser </literal>和<literal>
+DynamicFieldFromCustomerUser :: Mapping </literal>。
+后一个设置包含应该在哪个工单动态字段中存储<literal> CustomerUser </literal>字段条目的配置。
+这些字段必须存在于系统中，并且应启用<literal> AgentTicketFreeText（服务人员工单自定义字段）
+</literal>，以便可以手动设置。
+不能启用<literal>AgentTicketPhone</literal>、<literal>AgentTicketEmail</literal>和<literal>AgentTicketCustomer</literal>。
+如果启用了它们，它们将优先于自动设置的值。
     </para>
 </section>
 
 </section>
 
 <section id="auth-backends">
-<title>服务人员和客户联系人身份认证后端</title>
+<title>服务人员和客户身份认证后端</title>
 
 <para>
-OTRS提供了不同的服务人员和客户联系人身份认证后端。
+OTRS提供了不同的服务人员和客户身份认证后端。
 </para>
 
 <section id='agent-auth-backends'>
@@ -850,17 +847,17 @@ $Self->{'AuthModule::Radius::Password'} = 'radiussecret';
 </section>
 
 <section id="customer-auth-backends">
-<title>客户联系人身份认证后端</title>
+<title>客户身份认证后端</title>
 
 <section id='customer-auth-backend-db'>
 <title>数据库(默认)</title>
 
 <para>
-OTRS中客户联系人身份认证后端默认是OTRS数据库，可以通过OTRS的WEB界面编辑所有的客户联系人数据（见下面的例子）。
+OTRS中客户身份认证后端默认是OTRS数据库，可以通过OTRS的WEB界面编辑所有的客户数据（见下面的例子）。
 </para>
 
 <example id='configuration-customer-auth-backend-db'>
-<title>用数据库后端认证客户联系人</title>
+<title>用数据库后端认证客户用户</title>
 
 <para>
 <programlisting>
@@ -883,11 +880,11 @@ $Self->{'Customer::AuthModule::DB::CustomerPassword'} = 'pw';
 <title>LDAP</title>
 
 <para>
-如果你所有的客户联系人数据在LDAP目录中，可以使用OTRS的LDAP模块来认证你的客户联系人（见下面的例子）。因为这个模块只有LDAP后端的只读权限，所以不能通过OTRS的WEB界面编辑客户联系人数据。
+如果你所有的客户数据在LDAP目录中，可以使用OTRS的LDAP模块来认证你的客户（见下面的例子）。因为这个模块只有LDAP后端的只读权限，所以不能通过OTRS的WEB界面编辑客户数据。
 </para>
 
 <example id='configuration-customer-auth-backend-ldap'>
-<title>用LDAP后端认证客户联系人</title>
+<title>用LDAP后端认证客户用户</title>
 
 <para>
 <programlisting>
@@ -936,14 +933,14 @@ $Self->{'Customer::AuthModule::LDAP::Params'} = {
 </section>
 
 <section id='customer-auth-backend-httpbasic'>
-<title>用于客户联系人的HTTPBasicAuth模块</title>
+<title>用于客户的HTTPBasicAuth模块</title>
 
 <para>
-如果你要为所有的客户联系人部署一套“单点登录”解决方案，可以使用HTTP基本认证（对所有需要单点登录的系统）和OTRS的HTTPBasicAuth模块（客户联系人使用OTRS不再需要登录），见下面的例子。
+如果你要为所有的客户用户部署一套“单点登录”解决方案，可以使用HTTP基本认证（对所有需要单点登录的系统）和OTRS的HTTPBasicAuth模块（客户使用OTRS不再需要登录），见下面的例子。
 </para>
 
 <example id='configuration-customer-auth-backend-htbasic'>
-<title>为客户联系人配置HTTP基本认证</title>
+<title>为客户用户配置HTTP基本认证</title>
 
 <para>
 <programlisting>
@@ -969,11 +966,11 @@ $Self->{CustomerPanelLogoutURL} = 'http://host.example.com/thanks-for-using-otrs
 <title>Radius</title>
 
 <para>
-下面例子中显示的配置参数使用一个Radius服务器来认证客户联系人。
+下面例子中显示的配置参数使用一个Radius服务器来认证客户。
 </para>
 
 <example id='configuration-customer-auth-backend-radius'>
-<title>使用一个Radius后端的客户联系人身份认证</title>
+<title>使用一个Radius后端的客户用户身份认证</title>
 
 <para>
 <programlisting>
@@ -993,14 +990,14 @@ $Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
 </section>
 
 <section id="customer-self-registration">
-<title>定制客户联系人自助注册</title>
+<title>定制客户自助注册</title>
 
 <para>
-可以定制新的客户联系人通过customer.pl面板访问的自助注册。可以添加新的可选或必填字段如房间号、地址或状态等。
+可以定制新的客户通过customer.pl面板访问的自助注册。可以添加新的可选或必填字段如房间号、地址或状态等。
 </para>
 
 <para>
-下面的例子显示了如何在客户联系人数据库中指定一个必填字段，在这个例子中是存储客户联系人的房间号。
+下面的例子显示了如何在客户数据库中指定一个必填字段，在这个例子中是存储客户的房间号。
 </para>
 
 <section id='customer-self-registration-tt'>
@@ -1028,10 +1025,10 @@ $Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
 </section>
 
 <section id="customer-self-registration-mapping">
-<title>客户联系人映射</title>
+<title>客户映射</title>
 
 <para>
-下一步用新的房间号条目扩展客户联系人映射。为确保OTRS更新后不会丢失自定义的修改内容，将“CustomerUser”设置从文件<filename>Kernel/Config/Defaults.pm</filename>放到文件<filename>Kernel/Config.pm</filename>中。现在修改MAP数组并添加新的房间号字段，如下面脚本所示。
+下一步用新的房间号条目扩展客户映射。为确保OTRS更新后不会丢失自定义的修改内容，将“CustomerUser”设置从文件<filename>Kernel/Config/Defaults.pm</filename>放到文件<filename>Kernel/Config.pm</filename>中。现在修改MAP数组并添加新的房间号字段，如下面脚本所示。
 </para>
 
 <para>
@@ -1151,7 +1148,7 @@ linux:~#
 </para>
 
 <para>
-现在新的房间字段（若填写了）会在客户信息面板中显示，在客户联系人管理窗口也会显示。另外，新的客户联系人在注册新帐户时应该输入他们的房间号。
+现在新的房间字段（若填写了）会在客户信息面板中显示，在客户管理窗口也会显示。另外，新的客户在注册新帐户时应该输入他们的房间号。
 </para>
 </section>
 

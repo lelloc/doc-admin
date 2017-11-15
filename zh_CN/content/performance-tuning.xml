@@ -49,35 +49,28 @@ Maint::Ticket::QueueIndexRebuild</filename>生成初始索引。
         </section>
 
         <section id="performance-tuning-otrs-search">
-            <title>Ticket Search Index</title>
+            <title>工单搜索索引</title>
             <para>
-                OTRS uses a special search index to perform full-text searches across fields
-in articles from different communication channels.
+                OTRS使用特殊的搜索索引对来自不同通信渠道的信件中的字段进行全文搜索。
             </para>
             <para>
-                To create an initial index, use <filename>bin/otrs.Console.pl
-Maint::Ticket::FulltextIndex --rebuild</filename>.
+                要创建一个初始索引，请使用<filename>bin/otrs.Console.pl Maint::Ticket::FulltextIndex
+--rebuild</filename>。
             </para>
             <note>
                 <para>
-                    Actual article indexing happens via an OTRS daemon job in the
-background. While articles which were just added in the system are marked
-for indexing immediately, it could happen their index is available within a
-few minutes.
+                    实际的信件索引通过后台的OTRS守护进程任务进行。 虽然刚刚添加到系统中的信件被标记为立即进行索引，但其索引可能在几分钟后才可用。
                 </para>
             </note>
             <para>
-                There are some options available for fine tuning the search index:
+                有一些选项可用于微调搜索索引：
             </para>
             <variablelist>
                 <varlistentry>
                     <term><literal>Ticket::SearchIndex::IndexArchivedTickets</literal></term>
                     <listitem>
                         <para>
-                            Defines if archived tickets will be included in the search index (off by
-default). This is advisable to keep the index small on large systems with
-archived tickets. If this is turned off, archived tickets will not be found
-by full-text searches.
+                            定义归档工单是否将包含在搜索索引中（默认情况下关闭）。 建议在有归档工单的大型系统上保持较小的索引。 如果这个选项关闭了，全文搜索将不搜索归档的工单。。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -85,13 +78,9 @@ by full-text searches.
                     <term><literal>Ticket::SearchIndex::Attribute</literal></term>
                     <listitem>
                         <para>
-                            The attribute <literal>WordCountMax</literal> defines the maximum number of
-words which will be processed to build up the index. For example only the
-first 1000 words of an article body are stored in the article search
-index. The attributes <literal>WordLengthMin</literal> and
-<literal>WordLengthMax</literal> are used as word length boundaries. Only
-words with a length between these two values are stored in the article
-search index.
+                            属性<literal> WordCountMax </literal>定义将被处理以构建索引的最大字数。
+例如，信件主体的前1000个词存储在信件搜索索引中。 <literal>WordLengthMin</literal>和<literal>
+WordLengthMax </literal>属性用作字长边界。 只有长度在这两个值之间的单词才存储在信件搜索索引中。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -133,11 +122,10 @@ search index.
         </section>
 
         <section id="performance-tuning-otrs-storage">
-            <title>Article Storage (Email, Phone and Internal Articles)</title>
+            <title>信件存储 (电子邮件、电话和内部信件)</title>
             <para>
-                There are two different backend modules for the article storage of phone,
-email and internal articles (configured via
-<literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>):
+                用于电话、电子邮件和内部信件的信件存储有两个不同的后端模块（通过
+<literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>配置）：
             </para>
             <variablelist>
                 <varlistentry>
@@ -152,10 +140,10 @@ email and internal articles (configured via
                             </para>
                         </note>
                         <para>
-                            Pro: works with multiple front end servers.
+                            优点：可与多个前端服务器配合使用。
                         </para>
                         <para>
-                            Con: requires much storage space in the database.
+                            缺点：在数据库中需要大量的存储空间。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -174,9 +162,7 @@ email and internal articles (configured via
                             优点：它很快！
                         </para>
                         <para>
-                            Con: If you have multiple front end servers, you must make sure the
-filesystem is shared between the servers. Place it on an NFS share or
-preferably a SAN or similar solution.
+                            缺点：如果有多个前端服务器，则必须确保文件系统在服务器之间共享。 将其放置在NFS共享或最好是SAN或类似解决方案中。
                         </para>
                     </listitem>
                 </varlistentry>
@@ -197,10 +183,7 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
                 <emphasis>脚本: 切换存储后端，从数据库切换到文件系统。</emphasis>
             </para>
             <para>
-                If you want to keep old attachments in the database, you can activate the
-SysConfig option
-<literal>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</literal>
-to make sure OTRS will still find them.
+                如果要在数据库中保留旧附件，可以激活系统配置选项<literal>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</literal>以确保OTRS仍然可以找到它们。
             </para>
         </section>
 

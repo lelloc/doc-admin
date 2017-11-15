@@ -3,53 +3,39 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="da-tetime">
-<title>Date and Time Related Functions</title>
+<title>日期和时间相关功能</title>
 
 <section id="date-time-settings">
 <title>设置上班时间、假期和时区</title>
 
 <para>
-Some functions in OTRS, like escalations and <link
-linkend="unlock-tickets">automatic unlocking of tickets</link>, depend on a
-proper configuration of business hours, time zones and holidays. You can
-define these via the <link linkend="sysconfig">SysConfig interface</link>,
-in <link linkend="ConfigReference_Section_Core_Time">Core::Time</link>.  You
-can also specify different sets of business hours, holidays and time zones
-as separate 'Calendars' in <link
-linkend="ConfigReference_Section_Core_Time_Calendar1">Core::Time::Calendar1</link>
-through <link
-linkend="ConfigReference_Section_Core_Time_Calendar9">Core::Time::Calendar9</link>.
-Calendars can be defined by <link linkend="adminarea-queue">queue
-settings</link>, or on SLA levels. This means that, for example, you can
-specify a calendar with 5 x 8 business hours for your 'standard' SLA, but
-create a separate calendar with 7 x 24 support for your 'gold' SLA; as well
-as set a calendar for your 'Support-USA' queue with a different time window
-than your 'Support-Japan' queue. OTRS can handle up to 99 different
-calendars.
+OTRS中的一些功能如升级和<link
+linkend="unlock-tickets">工单自动解锁</link>，取决于适当的上班时间、时区和假期配置。你可以通过<link
+linkend="sysconfig">系统配置界面</link>中的<link
+linkend="ConfigReference_Section_Core_Time">Core::Time</link>定义这些设置。还可以将不同的上班时间、假日和时区集合指定为单独的“日历”
+：从<link
+linkend="ConfigReference_Section_Core_Time_Calendar1">Core::Time::Calendar1</link>到<link
+linkend="ConfigReference_Section_Core_Time_Calendar9">Core::Time::Calendar9</link>。日历可以由<link
+linkend="adminarea-queue">队列设置</link>或SLA级别定义。例如，你可以为“标准”SLA指定一个具有5 x
+8个上班时间的日历，但为“金牌”SLA创建一个具有7 x 24支持的单独日历；也可以为'Support-USA' 队列设置一个与
+'Support-Japan'队列不同的时间窗口的日历。 OTRS可以处理多达99个不同的日历。
 </para>
 
 <section id="TimeZones">
-<title>Time zones</title>
+<title>时区</title>
 
 <para>
-OTRS needs to know which time zone should be used to store date and time
-related data in the database. You can set this in <link
-linkend="ConfigReference_Setting_OTRSTimeZone">Core::Time:OTRSTimeZone</link>.
-The default is UTC and if you set up a new OTRS it is strongly recommended
-to leave it at this. If you updated from an OTRS older than version 6, you
-must ensure that <literal>OTRSTimeZone</literal> is being set to a time zone
-that matches your previous setup. Otherwise new data will be stored with a
-different time zone than your existing data.  Once you decided on a time
-zone and data was stored (tickets, etc.), you shouldn't change the time zone
-anymore because otherwise you would end up with data stored in different
-time zones.
+OTRS需要知道应该使用哪个时区在数据库中存储日期和时间相关的数据。 你可以在<link
+linkend="ConfigReference_Setting_OTRSTimeZone">Core::Time:OTRSTimeZone</link>中进行设置。
+默认值为UTC，如果你是新安装的OTRS，强烈建议你将其保留。 如果从OTRS
+6之前的版本升级，则必须确保将<literal>OTRSTimeZone</literal>设置为与之前的设置相匹配的时区。
+否则，新数据将以与现有数据不同的时区存储。 一旦决定了使用某个时区且已经存储了数据（工单等），就不应该改变时区，否则你存储的数据就在不同的时区。
 </para>
 
 <para>
-You can set a default time zone for new agents and customer users via <link
-linkend="ConfigReference_Setting_UserDefaultTimeZone">Core::Time:UserDefaultTimeZone</link>.
-This time zone will be used for all users that don't have selected a time
-zone in their preferences.
+你可以通过<link
+linkend="ConfigReference_Setting_UserDefaultTimeZone">Core::Time:UserDefaultTimeZone</link>为新服务人员和客户用户设置默认时区。
+该时区将用于所有未在其首选项中选择时区的用户。
 </para>
 
 </section>
@@ -58,11 +44,9 @@ zone in their preferences.
 <title>上班时间</title>
 
 <para>
-Set up the working hours for your system in SysConfig <link
-linkend="ConfigReference_Setting_TimeWorkingHours">Core::Time:TimeWorkingHours</link>,
-or for your specific calendar in the calendar's configuration. OTRS can
-handle a granularity of one hour. Checking the marks in the boxes 8, 9, 10
-... 17 corresponds with business hours of 8:00 AM - 6:00 PM.
+在系统配置 <link
+linkend="ConfigReference_Setting_TimeWorkingHours">Core::Time:TimeWorkingHours</link>中设置系统的上班时间，或者在日历配置中为你的特定日历设置上班时间。
+OTRS可以处理一小时的粒度。选择框中的标记8、9、10 ... 17对应于上午8:00至下午5:00的上班时间。
 </para>
 
 <para>
@@ -75,10 +59,8 @@ handle a granularity of one hour. Checking the marks in the boxes 8, 9, 10
 <title>固定日期的假日</title>
 
 <para>
-Holidays that are on a fixed date every year, such as New Year's Day or the
-Fourth of July, can be specified in <link
-linkend="ConfigReference_Setting_TimeVacationDays">TimeVacationDays</link>,
-or in the corresponding section for the calendars 1-9.
+可以在<link
+linkend="ConfigReference_Setting_TimeVacationDays">TimeVacationDays</link>中或在日历1-9的相应部分中指定每年固定日期的假日（如元旦或国庆）。
 </para>
 
 <para>
@@ -97,9 +79,8 @@ OTRS默认安装使用的是<emphasis>德国</emphasis>假日。
 <title>浮动假日</title>
 
 <para>
-Holidays such as Easter that do not have a yearly fixed date but instead
-vary each year, can be specified in <link
-linkend="ConfigReference_Setting_TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>.
+可以在<link
+linkend="ConfigReference_Setting_TimeVacationDaysOneTime">TimeVacationDaysOneTime</link>中指定诸如中秋节、春节等不具有年度固定日期而是每年变化的假日。
 </para>
 
 <para>
@@ -161,7 +142,7 @@ linkend="user-preferences">偏好设置</link>中激活了解锁工单通知的�
 </para>
 
 <para>
-此外，如果工单中最近的信件由一个服务人员创建，并且一个客户联系人添加了另外一封信件（不管是通过WEB还是邮件响应），解锁计时器都将被重置。
+此外，如果工单中最近的信件由一个服务人员创建，并且一个客户添加了另外一封信件（不管是通过WEB还是邮件响应），解锁计时器都将被重置。
 </para>
 
 <para>

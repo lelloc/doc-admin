@@ -40,7 +40,7 @@
         <section id="generic-session-connector">
             <title>会话连接器</title>
             <para>
-                这个连接器有能力创建一个有效的会话ID，能够用在其它任何操作中。
+                这个连接器可以创建一个有效的会话ID，能够用在其它任何操作中。
             </para>
             <itemizedlist>
                 <para>
@@ -53,12 +53,12 @@
                     <itemizedlist>
                         <listitem>
                             <para>
-                                创建会话
+                                SessionCreate（创建会话）
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                SessionGet
+                                SessionGet（获取会话）
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -67,7 +67,7 @@
             <section id="generic-session-connector-operations">
                 <title>操作</title>
                 <section id="generic-session-connector-operations-sessioncreate">
-                    <title>创建会话</title>
+                    <title>SessionCreate（创建会话）</title>
                     <para>
                         创建一个新的有效会话ID，用在其它连接器比如创建工单的其它操作中。
                     </para>
@@ -94,15 +94,13 @@
                     </para>
                 </section>
                 <section id="generic-session-connector-operations-sessionget">
-                    <title>创建会话</title>
+                    <title>SessionCreate（创建会话）</title>
                     <para>
-                        Gathers data from a valid session excluding sensitive information such as
-user password or challenge token.
+                        从一个有效的会话搜集数据，不包括用户密码或质疑令牌等敏感信息。
                     </para>
                     <note>
                         <para>
-                            If any of its values is a complex structure then is automatically converted
-to a JSON string.
+                            如果它的任何值是一个复杂的结构，那么将自动转换为一个JSON字符串。
                         </para>
                     </note>
                     <para>可能的属性：</para>
@@ -140,22 +138,22 @@ to a JSON string.
                         </listitem>
                         <listitem>
                             <para>
-                                更新工单
+                                TicketUpdate（更新工单）
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                获取工单
+                                TicketGet（获取工单）
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                搜索工单
+                                TicketSearch（搜索工单）
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                TicketHistoryGet
+                                TicketHistoryGet（获取工单历史）
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -294,7 +292,7 @@ to a JSON string.
                     </para>
                 </section>
                 <section id="generic-ticket-connector-operations-ticketupdate">
-                    <title>更新工单</title>
+                    <title>TicketUpdate（更新工单）</title>
                     <para>
                         ‘更新工单’操作用来修改已有工单的属性或者添加一个新的信件（包括附件和所有定义的工单和信件的动态字段）。
                     </para>
@@ -436,7 +434,7 @@ to a JSON string.
                     </para>
                 </section>
                 <section id="generic-ticket-connector-operations-ticketget">
-                    <title>获取工单</title>
+                    <title>TicketGet（获取工单）</title>
                     <para>
                         这个操作用来获取一个工单的所有属性，包括动态字段、所有信件和属于工单的所有附件。
                     </para>
@@ -480,7 +478,7 @@ to a JSON string.
                     </para>
                 </section>
                 <section id="generic-ticket-connector-operations-ticketsearch">
-                    <title>搜索工单</title>
+                    <title>TicketSearch（搜索工单）</title>
                     <para>
                         ‘搜索工单’操作返回匹配一个预定义条件的工单编号列表。
                     </para>
@@ -674,10 +672,9 @@ to a JSON string.
                     </para>
                 </section>
                 <section id="generic-ticket-connector-operations-tickethistoryget">
-                    <title>TicketHistoryGet</title>
+                    <title>TicketHistoryGet（获取工单历史）</title>
                     <para>
-                        This operation is used to get all the history entries from a ticket or
-tickets.
+                        这个操作用于从一个或多个工单中获取所有历史记录。
                     </para>
                     <para>可能的属性：</para>
                     <para>
@@ -1304,9 +1301,8 @@ else {
                 <command>获取工单：</command>在/Ticket/{TicketID}路径上使用GET方法，{TicketID}是代表传输配置中:TicketID的模板。
             </para>
             <para>
-                <command>For Ticket History Get: </command>use GET method on
-/TicketHistory/{TicketID} path (where {TicketID} is a template represented
-by :TicketID in the transport configuration)
+                <command>获取工单历史：
+</command>在/TicketHistory/{TicketID}路径上使用GET方法，{TicketID}是代表传输配置中:TicketID的模板。
             </para>
 
             <section>
@@ -1434,7 +1430,7 @@ curl "http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConn
                 </para>
             </section>
             <section>
-                <title>Get Ticket History Details</title>
+                <title>获取工单历史详情</title>
                 <para>cURL命令：</para>
                 <para>
                     <screen>

@@ -5,12 +5,8 @@
 <section id="adminarea-postmasterfilter">
     <title>过滤进入的邮件消息</title>
     <para>
-        OTRS has the capability to filter incoming email messages. For example, it
-is possible to put certain emails automatically into specified queues, or to
-set a specific state or ticket type for some mails. The filters apply to all
-incoming mails. Several filter conditions can be defined per each mail
-header. You can manage your filters via the link "PostMaster Filter" on the
-Admin page (see figure below).
+        OTRS可以过滤传入的电子邮件。 例如，可以将某些电子邮件自动放入指定的队列中，或者为某些邮件设置特定的状态或工单类型。 过滤器适用于所有传入的邮件。
+每个邮件头可以定义几个过滤条件。 可以通过系统管理页面上的“邮箱管理员过滤器”链接来管理你的过滤器（见下图）。
     </para>
     <para>
         <figure>
@@ -21,20 +17,14 @@ fileref="screenshots/administration/adminarea/admin-postmasterfilter.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     </para>
     <para>
-        A filter consists of one or more criteria that must be met in order for the
-defined actions to be executed on the email. Filter criteria may be defined
-for the headers or the body of an email, e.g. search for specific header
-entries, such as a sender address, or on strings in the body. Even regular
-expressions can be used for extended pattern matching. If your filter
-matches, you can set fields using the <literal>X-OTRS</literal> headers in
-the GUI. These values will be applied when creating the ticket or follow-up
-message in OTRS. The table below lists the different
-<literal>X-OTRS</literal> headers and their meaning.
+        过滤器由一个或多个必须符合的条件组成，以便在电子邮件中执行定义的操作。
+可以为电子邮件的标头或正文定义过滤标准，例如，搜索特定的标头条目如发件人地址，或正文中的字符串。甚至可以用正则表达式来扩展模式匹配。
+如果您的过滤器匹配，您可以使用GUI中的<literal> X-OTRS </literal>标头设置字段的值。
+这些值将在OTRS中创建工单或跟进消息时应用。 下表列出了不同的<literal> X-OTRS </literal>标头及其含义。
     </para>
     <note>
         <para>
-            You also can use <literal>X-OTRS-FollowUp-*</literal> headers to set values
-for follow up emails.
+            你还可以使用<literal>X-OTRS-FollowUp-*</literal>标头设置跟进电子邮件的值。
         </para>
     </note>
 
@@ -58,10 +48,8 @@ for follow up emails.
                 <entry>X-OTRS-Queue:</entry>
                 <entry>系统中一个队列的名称。</entry>
                 <entry>
-                    Sets the queue where the ticket shall be sorted. If set in X-OTRS header,
-all other filter rules that try to sort a ticket into a specific queue are
-ignored. If you use a sub-queue, specify it as
-<literal>Parent::Sub</literal>.
+                    设置工单排序的队列。 如果设置在X-OTRS标头文件中，则将忽略尝试将工单排序到特定队列中的所有其他过滤规则。
+如果使用了子队列，请按<literal>父队列::子队列</literal>格式指定。
                 </entry>
             </row>
             <row>
@@ -78,62 +66,56 @@ ignored. If you use a sub-queue, specify it as
             </row>
             <row>
                 <entry>X-OTRS-State:</entry>
-                <entry>新建、处理中、成功关闭、失败关闭等等</entry>
+                <entry>新建、处理中、成功关闭、失败关闭...</entry>
                 <entry>设置工单下一状态。</entry>
             </row>
             <row>
                 <entry>X-OTRS-State-PendingTime:</entry>
                 <entry>例如：2010-11-20 00:00:00</entry>
                 <entry>
-                    Sets the pending time of a ticket (you also should sent a pending state via
-X-OTRS-State). You can specify absolute dates like "2010-11-20 00:00:00" or
-relative dates, based on the arrival time of the email. Use the form "+
-$Number $Unit", where $Unit can be 's' (seconds), 'm' (minutes), 'h' (hours)
-or 'd' (days). Only one unit can be specified. Examples of valid settings:
-"+50s" (pending in 50 seconds), "+30m" (30 minutes), "+12d" (12 days). Note
-that settings like "+1d 12h" are not possible. You can specify "+36h"
-instead.
+                    设置一个工单的挂起时间（还应通过X-OTRS-State发送挂起状态）。可以指定绝对日期，如“2010-11-20
+00:00:00”或根据电子邮件的到达时间的相对日期， 使用“+ $Number $Unit”的形式，其中$Unit可以是's'
+（秒）、'm'（分钟）、'h'（小时）或'd'（天）， 只能指定一个单位。
+有效设置示例：“+50s”（50秒后挂起），“+30m”（30分钟），“+12d”（12天）。 请注意，“+1d
+12h”这样的设置是不可能的，你可以用“+36h”代替。
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-Type:</entry>
                 <entry>默认（取决于你的设置）</entry>
-                <entry>Sets the type of a ticket (if <literal>Ticket::Type</literal> is activated).</entry>
+                <entry>设置一个工单的类型（如果激活了<literal>Ticket::Type</literal>）。</entry>
             </row>
             <row>
                 <entry>X-OTRS-Service:</entry>
                 <entry>（取决于你的设置）</entry>
                 <entry>
-                    Sets the service of a ticket (if <literal>Ticket::Service</literal> is
-active). If you want to set a sub-service you should specify it as
-<literal>Parent::Sub</literal>.
+                    设置一个工单的服务（如果激活了<literal>Ticket::Service</literal>）。如果你要设置一个子服务，则应按<literal>父服务::子服务</literal>格式指定
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-SLA:</entry>
                 <entry>（取决于你的设置）</entry>
-                <entry>Sets the SLA of a ticket (if <literal>Ticket::Service</literal> support is
-active).</entry>
+                <entry>设置一个工单的SLA（如果激活了<literal>Ticket::Service</literal>）。</entry>
             </row>
             <row>
                 <entry>X-OTRS-CustomerUser:</entry>
-                <entry>客户联系人</entry>
-                <entry>设置工单的客户联系人。</entry>
+                <entry>客户</entry>
+                <entry>设置工单的客户用户。</entry>
             </row>
             <row>
                 <entry>X-OTRS-CustomerNo:</entry>
-                <entry>CustomerNo（客户联系人编号）</entry>
-                <entry>设置工单客户联系人的ID。</entry>
+                <entry>CustomerNo（客户编号）</entry>
+                <entry>设置本工单的客户ID。</entry>
             </row>
             <row>
                 <entry>X-OTRS-SenderType:</entry>
-                <entry>agent, system, customer（服务人员、系统、客户联系人）</entry>
+                <entry>agent, system, customer（服务人员、系统、客户）</entry>
                 <entry>设置工单发件人的类型。</entry>
             </row>
             <row>
                 <entry>X-OTRS-IsVisibleForCustomer:</entry>
                 <entry>0, 1</entry>
-                <entry>Controls if the article is shown in the customer interface.</entry>
+                <entry>控制信件是否在客户界面中显示。</entry>
             </row>
             <row>
                 <entry>X-OTRS-DynamicField-&lt;DynamicFieldName&gt;:</entry>
@@ -141,55 +123,45 @@ active).</entry>
                     取决于动态字段配置（文本：笔记本、日期： 2010-11-20 00:00:00、整数：1）
                 </entry>
                 <entry>
-                    Saves an additional info value for the ticket on
-<literal>&lt;DynamicFieldName&gt;</literal> Dynamic Field.
+                    在动态字段<literal>&lt;DynamicFieldName&gt;</literal>中保存工单附加信息的值。
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-Loop:</entry>
                 <entry>True（真）</entry>
                 <entry>
-                    如果设置了这个X-OTRS头，就不会给消息的发件人发送自动答复（邮件循环保护）。
+                    如果设置了这个X-OTRS标头，就不会给消息的发件人发送自动答复（邮件环路保护）。
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-FollowUp-State-Keep:</entry>
                 <entry>0, 1</entry>
                 <entry>
-                    If this X-OTRS header is set, the incoming follow-up message will not change
-the ticket state. For this purpose the header can be customized in the
-SysConfig using option <literal>KeepStateHeader</literal>.
+                    如果设置了这个X-OTRS标头，传入的跟进消息不会更改工单状态。 为此，可以使用在系统配置中的选项<literal> KeepStateHeader
+</literal>自定义标头。
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-AttachmentExists:</entry>
                 <entry>no, yes</entry>
                 <entry>
-                    Depending on whether attachments are included in the email this X-OTRS
-header is set to 'yes', or it has a 'no' value if no attachments are
-included.
+                    如果电子邮件中包含附件，此X-OTRS标头设置为“yes”，如果未包含任何附件，则它具有“no”值。
                 </entry>
             </row>
             <row>
                 <entry>X-OTRS-AttachmentCount:</entry>
-                <entry>(number of attachments)</entry>
+                <entry>（附件数）</entry>
                 <entry>
-                    This X-OTRS header contains as value the number of attachments which are
-contained in the email (i.e. '0' for mails without attachments).
+                    此X-OTRS标头包含的值是电子邮件中包含的附件数量（例如：没有附件的邮件此标头值为“0”）。
                 </entry>
             </row>
         </tbody>
       </tgroup>
     </table>
     <para>
-        You should specify a name for every filter rule. Filter criteria can be
-specified in the section "Filter Condition". Choose via the list boxes for
-"Header 1", "Header 2" and so on for the parts of the messages where you
-would like to search, and specify on the right side the values you wish to
-filter on. In the section "Set Email Headers", you can choose the actions
-that are triggered if the filter rules match. You can select for "Header 1",
-"Header 2" and so on to select the X-OTRS-Header and set the associated
-values (see figure below).
+        你应该为每个过滤规则指定一个名称。 过滤条件可以在“过滤条件”部分中指定。
+通过“标头1”、“标头2”等的列表框选择要搜索的消息的部分，并在右侧指定要过滤的值。 在“设置邮件标头”部分中，可以选择过滤规则匹配时触发的操作。
+您可以在“标头1”、“标头2”等处选择X-OTRS标头并设置相关值（见下图）。
     </para>
     <para>
         过滤器规则按字母顺序评估，除非设置了‘在匹配后停止’为“是”（在这种情况下匹配一条规则后就忽略其它的规则），否则会逐一评估所有的规则。
@@ -210,9 +182,7 @@ Yes”。要使用这个条件创建一个过滤器，你可以将这个过滤�
         </para>
     </example>
     <para>
-        There are additional modules that can be used to <link
-linkend="email-receiving-filter">filter incoming messages</link> more
-specifically. These modules might be useful when dealing with larger, more
-complex systems.
+        还有一些额外的模块可以更有针对性地用于<link linkend="email-receiving-filter">过滤传入消息</link>。
+在处理更大、更复杂的系统时，这些模块可能很有用。
     </para>
 </section>

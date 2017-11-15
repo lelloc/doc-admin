@@ -123,7 +123,7 @@ Business Solution™</ulink>中有可用的示例Web服务，你知道吗？
     <section id="webservice_gui_change">
         <title>修改WEB服务</title>
         <para>
-            在这个窗口你有处理一个WEB服务所有部分的完整功能集。在左侧的操作栏中你可以找到一些按钮，允许你在一个WEB服务上执行所有可能的操作。
+            在这个窗口你有处理一个WEB服务所有部分的完整功能集。在左侧的操作栏中你可以找到一些按钮，允许你在一个WEB服务上执行所有可能的操作：
         </para>
         <para>
         <itemizedlist>
@@ -149,12 +149,12 @@ Business Solution™</ulink>中有可用的示例Web服务，你知道吗？
             </listitem>
             <listitem>
                 <para>
-                    删除WEB服务
+                    删除WEB服务。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    调试器
+                    调试器。
                 </para>
             </listitem>
         </itemizedlist>
@@ -406,10 +406,7 @@ fileref="screenshots/administration/genericinterface/genericinterface-webservice
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    Optionally, you may want to define additional response headers. These may be
-used to add static header values to every response. Just click on Add
-response header and fill both key and value fields. There is no limit in
-number of additional header lines.
+                    或者，你可能需要定义附加的响应头，它们可用于为每个响应添加静态标头值。 只需点击“添加响应头”并填充键和值字段。 附加的标头行的数量没有限制。
                 </para>
                 <para>
                     对于“HTTP::REST”，配置可能要稍微复杂一些，因为它的设置会根据配置的操作而动态增长，给每个操作添加两个设置：“路由映射，用于操作
@@ -716,15 +713,10 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                     操作后端是预先选择的，不能编辑。如果在WEB服务编辑窗口选择了该调用程序你就会看到这个参数。这个字段仅用于提供信息。
                 </para>
                 <para>
-                    Event triggers are events within OTRS such as "TicketCreate", "ArticleSend",
-etc. These can act as triggers to execute the invoker. Each invoker needs to
-have at least one event trigger registered, or the invoker will be useless,
-because it will never be called. Additionally a set of rules (conditions)
-for each event can be defined to have more control over the triggering of
-the events, This rules depends on the data of the object associated with the
-event.  The asynchronous property of the event triggers define if the OTRS
-process will handle the invoker or if it will be delegated to the OTRS
-Daemon.
+                    事件触发器是OTRS中的事件，如“TicketCreate（创建工单）”、“ArticleSend（发送信件）”等。它们可以作为执行调用程序的触发器。
+每个调用程序需要至少注册一个事件触发器，否则调用程序将无用，因为它永远不会被调用。
+另外，可以定义每个事件的一组规则（条件）以更好地控制事件的触发。该规则取决于与事件相关联的对象的数据。
+事件触发器的异步属性定义是由OTRS进程处理调用程序，还是将调用程序委派给OTRS守护进程。
                 </para>
                 <note>
                     <para>
@@ -735,9 +727,7 @@ Daemon.
                     要添加一个事件触发器，首先从第一个列表中选择事件家族，然后从第二个列表中选择事件名称，然后设置异步属性（未选中即意味着事件触发器不是异步的），最后点击“+”按钮。就会创建一个新的事件触发器，会在调用程序的“事件触发器”列表中列出。
                 </para>
                 <para>
-                    From the "Event Triggers" list each events shows if it contains conditions
-or not.  The edit button next to the condition property allows to add or
-edit the current conditions of the event.
+                    从“事件触发器”列表中，每个事件显示是否包含条件。 条件属性旁边的编辑按钮允许添加或编辑事件的当前条件。
                 </para>
                 <para>
                     要删除一个事件触发器，简单定位到“事件触发器”列表中要删除的事件触发器，点击行尾的“垃圾桶”图标即可。这会打开一个对话框问你是否确认删除该事件触发器，点击“删除”从列表中删除这个事件触发器，或“取消”关闭对话框。
@@ -756,47 +746,31 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </section>
 
             <section id="webservice-invoker-event">
-                <title>Web Service Invoker Event</title>
+                <title>WEB服务调用程序事件</title>
                 <para>
-                    Sometimes defining an event to trigger an invoker could result in many
-unnecessary or wrong request to a remote server. Event conditions could be
-set to restrict the triggering of the invoker in such cases.
+                    有时定义一个事件来触发一个调用程序可能会导致对远程服务器的许多不必要或错误的请求。 在这种情况下，可以设置事件条件来限制调用程序的触发。
                 </para>
                 <para>
-                    To access the event settings screen where the conditions can be defined is
-necessary to be in the invoker screen and from there click on the edit icon
-next to the condition status on the event where this conditions should take
-effect.
+                    要访问可以定义条件的事件设置屏幕，需要在调用程序屏幕中，并从中点击此条件生效的事件条件状态旁边的编辑图标。
                 </para>
                 <para>
-                    Within the event settings screen in the action bar there is a button to go
-back to the invoker screen as well as a button to remove all the event
-conditions.  By default the screen is pre-populated with the first
-condition. Update the Type of linkings between conditions if more than one
-condition is planned, then change the Type of linking from 'Condition 1' if
-more than one field is planned. Both linking fields accepts 'and' 'or' or
-'xor' as values.
+                    在操作栏的事件设置屏幕中，有一个按钮返回到调用者屏幕以及一个按钮来删除所有事件条件。 默认情况下，屏幕预先填充第一个条件。
+如果计划了多个条件，则更新条件之间的链接类型；如果一个条件内计划了多个字段，则从“条件1”开始更改字段之间的链接类型。
+两个链接类型字段都接受'and(与)'、'or(或)'或'xor(异或)'作为值。
                 </para>
                 <para>
-                    Fill the Field name, set the matching type (String for exact match, Regexp
-for regular expression or Validation Module) and set Value to match (in case
-of Validation Module the full class name like:
-Kernel::GenericInterface::Event::Validation::ValidateDemo).
+                    填写字段名称，设置匹配类型（String是完全匹配，Regexp是正则表达式或验证模块），并设置要匹配的值（在使用验证模块时需要完整的类名称如：Kernel::GenericInterface::Event::Validation::ValidateDemo）。
                 </para>
                 <para>
-                    To add more fields to the condition, click on the '+' button in the fields
-header. To remove a field, click on the '-' button in the field row. It is
-necessary to keep at least one field per condition.
+                    要向条件添加更多字段，请单击字段标题中的“+”按钮。 要删除字段，请单击字段行中的“ - ”按钮。 每个条件必须至少保留一个字段。
                 </para>
                 <para>
-                    To add more conditions clock on the button below the last condition box.  To
-remove remove a condition, click on the '-' button in the condition header.
-It is necessary to keep at least one condition in the set. To remove all
-conditions use the button in the sidebar.
+                    要添加更多条件，请点击最后一个条件框下面的按钮。 要删除某个条件，请单击条件标题中的“ - ”按钮。 集合中需要保留至少一个条件。
+要删除所有条件，请使用侧边栏中的按钮。
                 </para>
                 <para>
                     <figure>
-                        <title>Web service invoker event</title>
+                        <title>WEB服务调用程序事件</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/genericinterface/genericinterface-webservice-invoker-event.png"

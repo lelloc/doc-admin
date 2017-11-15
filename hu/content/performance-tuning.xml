@@ -56,35 +56,37 @@ meg.
         </section>
 
         <section id="performance-tuning-otrs-search">
-            <title>Ticket Search Index</title>
+            <title>Hibajegykeresési index</title>
             <para>
-                OTRS uses a special search index to perform full-text searches across fields
-in articles from different communication channels.
+                Az OTRS egy különleges keresési indexet használ a szabad-szavas keresések
+végrehajtásához a különböző kommunikációs csatornákból érkező bejegyzések
+mezőiben.
             </para>
             <para>
-                To create an initial index, use <filename>bin/otrs.Console.pl
+                Egy kezdeti index létrehozásához használja a <filename>bin/otrs.Console.pl
 Maint::Ticket::FulltextIndex --rebuild</filename>.
             </para>
             <note>
                 <para>
-                    Actual article indexing happens via an OTRS daemon job in the
-background. While articles which were just added in the system are marked
-for indexing immediately, it could happen their index is available within a
-few minutes.
+                    A tényleges bejegyzésindexelés egy OTRS démonfeladaton keresztül történik a
+háttérben. Mivel a rendszerhez éppen hozzáadott bejegyzések azonnal meg
+lesznek jelölve indexelésre, így megtörténhet, hogy az indexük néhány percen
+belül elérhető lesz.
                 </para>
             </note>
             <para>
-                There are some options available for fine tuning the search index:
+                Elérhető néhány beállítás a keresési index finomhangolásához:
             </para>
             <variablelist>
                 <varlistentry>
                     <term><literal>Ticket::SearchIndex::IndexArchivedTickets</literal></term>
                     <listitem>
                         <para>
-                            Defines if archived tickets will be included in the search index (off by
-default). This is advisable to keep the index small on large systems with
-archived tickets. If this is turned off, archived tickets will not be found
-by full-text searches.
+                            Meghatározza, hogy az archivált jegyek fel legyenek-e véve a keresési
+indexbe (alapértelmezetten ki van kapcsolva). Ajánlott az indexet kis
+méretűként tartani archivált jegyekkel rendelkező nagy rendszereken. Ha ez
+ki van kapcsolva, akkor az archivált jegyek nem lesznek megtalálhatók a
+szabad-szavas keresésekkel.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -92,13 +94,13 @@ by full-text searches.
                     <term><literal>Ticket::SearchIndex::Attribute</literal></term>
                     <listitem>
                         <para>
-                            The attribute <literal>WordCountMax</literal> defines the maximum number of
-words which will be processed to build up the index. For example only the
-first 1000 words of an article body are stored in the article search
-index. The attributes <literal>WordLengthMin</literal> and
-<literal>WordLengthMax</literal> are used as word length boundaries. Only
-words with a length between these two values are stored in the article
-search index.
+                            A <literal>WordCountMax</literal> attribútum határozza meg azon szavak
+legnagyobb számát, amelyek feldolgozásra kerülnek az index
+felépítéséhez. Például egy bejegyzés törzsének csak az első 1000 szava
+legyen eltárolva a bejegyzés keresési indexében. A
+<literal>WordLengthMin</literal> és a <literal>WordLengthMax</literal>
+szóhossz határokként vannak használva. Csak azok a szavak vannak eltárolva a
+bejegyzés keresési indexében, amelyek hossza ezen két érték közé esik.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -143,11 +145,12 @@ kiszűrendő szavak ki lesznek hagyva a keresési index létrehozásakor.
         </section>
 
         <section id="performance-tuning-otrs-storage">
-            <title>Article Storage (Email, Phone and Internal Articles)</title>
+            <title>Bejegyzéstárolás (e-mail, telefon és belső bejegyzések)</title>
             <para>
-                There are two different backend modules for the article storage of phone,
-email and internal articles (configured via
-<literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>):
+                Két különböző háttérprogram-modul létezik a telefonos, e-mail és belső
+bejegyzések bejegyzéstárolásához (a
+<literal>Ticket::Article::Backend::MIMEBase::ArticleStorage</literal>
+beállításon keresztül beállítva):
             </para>
             <variablelist>
                 <varlistentry>
@@ -162,10 +165,10 @@ email and internal articles (configured via
                             </para>
                         </note>
                         <para>
-                            Pro: works with multiple front end servers.
+                            Előnye: működik több előtétprogramos kiszolgálóval.
                         </para>
                         <para>
-                            Con: requires much storage space in the database.
+                            Hátránya: több tárolóhelyet igényel az adatbázisban.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -185,9 +188,10 @@ tárolásához.
                             Előnye: gyors!
                         </para>
                         <para>
-                            Con: If you have multiple front end servers, you must make sure the
-filesystem is shared between the servers. Place it on an NFS share or
-preferably a SAN or similar solution.
+                            Hátránya: ha több előtétprogramos kiszolgálói vannak, akkor meg kell
+győződnie arról, hogy a fájlrendszer meg van-e osztva a kiszolgálók
+között. Helyezze azt egy NFS megosztásra vagy inkább egy SAN vagy hasonló
+megoldásra.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -215,10 +219,11 @@ shell> bin/otrs.Console.pl Admin::Article::StorageSwitch --target ArticleStorage
 fájlrendszerre.</emphasis>
             </para>
             <para>
-                If you want to keep old attachments in the database, you can activate the
-SysConfig option
+                Ha a régi mellékleteket az adatbázisban szeretné tartani, akkor
+bekapcsolhatja a
 <literal>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</literal>
-to make sure OTRS will still find them.
+rendszerbeállítási lehetőséget annak biztosításához, hogy az OTRS továbbra
+is megtalálja azokat.
             </para>
         </section>
 

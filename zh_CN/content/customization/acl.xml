@@ -46,30 +46,27 @@ Lists访问控制列表</link>图形界面允许首先将ACL保存到数据库�
             <listitem>
                 <para>PropertiesDatabase数据库中的属性</para>
                 <para>
-                    This section is similar to <literal>Properties</literal> but does not take
-changes in ticket attributes that are not saved into the DataBase, this
-means that changing an attribute without submit will not make any
-effect. This section is not use for ticket creation screens (as tickets are
-not yet created in the Database).
+                    本部分类似于<literal>属性</literal>，但不会更改未保存到数据库中的工单属性，这意味着更改属性而不提交将不会产生任何影响。
+本部分内容不用于创建工单屏幕（因为工单尚未在数据库中创建）。
                 </para>
             </listitem>
         </itemizedlist>
         <itemizedlist mark="round">
-            <para>修改部分</para>
+            <para>更改部分</para>
             <listitem>
-                <para>可能的</para>
+                <para>Possible（可能的）</para>
                 <para>
                     ‘可能的’部分重置数据，以便将数据减少为只有在本部分列出的元素。
                 </para>
             </listitem>
             <listitem>
-                <para>可能的添加</para>
+                <para>PossibleAdd（添加可能的）</para>
                 <para>
                     在‘添加可能的’部分的元素添加因在其它ACL减少而缺失的元素。‘添加可能的’只能连同其它有‘可能的’或‘不可能的’部分的ACL使用。
                 </para>
             </listitem>
             <listitem>
-                <para>不可能的</para>
+                <para>PossibleNot（不可能的）</para>
                 <para>
                     本部分用于从当前数据中移除特定元素。它可以单独使用，也可以与连同其它有‘可能的’或‘添加可能的’部分的ACL使用。
                 </para>
@@ -81,30 +78,30 @@ not yet created in the Database).
         <itemizedlist mark="round">
             <para>修改器</para>
             <listitem>
-                <para>[Not非]</para>
+                <para>[Not]非</para>
                 <para>
                     这个修改器用来取反一个值，例如：有关工单优先级的'[Not]2-低'，与以下结果相同：'1-非常低'、 '3-正常'、 '4-高'、 '5-非常高'。
                 </para>
             </listitem>
             <listitem>
-                <para>[RegExp正则表达式（区分大小写）]</para>
+                <para>[RegExp]正则表达式（区分大小写）</para>
                 <para>
-                    用来定义一个正则表达式以匹配多个值，例如：关于工单优先级的'[RegExp]低'就是'1-非常低'、'2低'。
+                    用来定义一个正则表达式以匹配多个值，例如：关于工单优先级的 '[RegExp]low'就是 '1 very low'、 '2 low'。
                 </para>
             </listitem>
             <listitem>
-                <para>[regexp正则表达式（忽略大小写）]</para>
-                <para>它与[RegExp正则表达式（区分大小写）]很相似，但它是不区分大小写的。</para>
+                <para>[regexp]正则表达式（忽略大小写）</para>
+                <para>它与[RegExp]正则表达式（区分大小写）很相似，但它是不区分大小写的。</para>
             </listitem>
             <listitem>
-                <para>[NotRegExp-正则表达式取反]</para>
+                <para>[NotRegExp]-正则表达式取反</para>
                 <para>
-                    对正则表达式取反，如关于工单优先级的'[NotRegExp]低'就是'3-正常', '4-高', '5-非常高'
+                    对正则表达式取反，如关于工单优先级的'[NotRegExp]低'就相当于是'3-正常'、'4-高'、'5-非常高'。
                 </para>
             </listitem>
             <listitem>
-                <para>[Notregexp-正则表达式取反（忽略大小写）]</para>
-                <para>它与[NotRegExp-正则表达式取反]很相似，但它是不区分大小写的。</para>
+                <para>[Notregexp]-正则表达式取反（忽略大小写）</para>
+                <para>它与[NotRegExp]-正则表达式取反很相似，但它是不区分大小写的。</para>
             </listitem>
         </itemizedlist>
     </section>
@@ -117,7 +114,7 @@ not yet created in the Database).
         <para>
             <example id="acl-move">
                 <title
-                    >仅允许工单优先级5的工单转移到一个队列的ACL
+                    >仅允许工单优先级5的工单转移到一个队列的ACL。
                 </title>
                 <para>
                     本示例为你展示一条ACL的基本结构。首先，ACL需要有一个名称。本案例中，ACL的名称是“100-Example-ACL”。注意：ACL在执行前会按数字排序，所以你要斟酌命名。
@@ -303,7 +300,7 @@ $Self->{TicketAcl}->{'104-Only-Hardware-Services-for-HW-Queues-ACL'} = {
         <para>
             <example id="acl-disallow-process-for-customerid" >
                 <title>
-                    ACL使用CustomerID禁用客户界面的一个流程
+                    ACL使用CustomerID禁用客户界面的一个流程。
                 </title>
                  <para>
                     <figure>
@@ -349,7 +346,7 @@ linkend="process-management-acl">访问控制列表（ACL）部分</link>。
 
         <para>
             <example>
-                <title>所有可能的重要ACL设置的参考</title>
+                <title>所有可能的重要ACL设置的参考。</title>
 <programlisting>
 # ticket acl
 $Self->{TicketAcl}->{'200-ACL-Reference'} = {
@@ -498,7 +495,7 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
 
         # Limit the number of possible ActivityDialogs the Agent/Customer
         #   can use in a process ticket.
-        #限制服务人员/客户联系人在一个流程工单中可用的活动对话框数量
+        #限制服务人员/客户在一个流程工单中可用的活动对话框数量
         ActivityDialog => ['AD1', 'AD3'],
 
         # Limit the number of possible Processes that can be started限制能启动的可用流程数量
@@ -527,10 +524,10 @@ $Self->{TicketAcl}->{'200-ACL-Reference'} = {
         </para>
         <note>
             <para>
-                匹配ACL时，如果传递了CustomerUserID参数，ACL机制会使用提供的CustomerUserID来比较的ACL定义，以便收集客户联系人的详细信息来填充客户联系人哈希表，在‘Properties’匹配时还会覆盖工单哈希表中的客户信息。另一方面，在‘PropertiesDatabase’匹配时也会计算，但是用工单客户为依据来收集信息数据。
+                匹配ACL时，如果传递了CustomerUserID参数，ACL机制会使用提供的CustomerUserID来比较的ACL定义，以便收集客户用户的详细信息来填充客户用户哈希表，在‘Properties’匹配时还会覆盖工单哈希表中的客户信息。另一方面，在‘PropertiesDatabase’匹配时也会计算，但是用工单客户为依据来收集信息数据。
             </para>
             <para>
-                注意：在客户界面，始终会传递当前登录的客户联系人的CustomerUserID。
+                注意：在客户界面，始终会传递当前登录的客户用户的CustomerUserID。
             </para>
             <para>
                 要知道在工单搜索窗口（AgentTicketSearch和CustomerTicketSearch）唯一受ACL影响的就是动态字段。这意味着在工单搜索窗口你不能限制其它任何属性比如工单类型、状态、队列等等。

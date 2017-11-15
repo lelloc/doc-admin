@@ -225,9 +225,8 @@ linkend="adminarea-smime">“S/MIME证书”</link>链接。如果在OTRS中还�
 </para>
 
 <para>
-With the SysConfig group <link
-linkend="ConfigReference_Section_Core_Crypt_SMIME">"Crypt::SMIME"</link>,
-you can also enable and configure the general S/MIME support.
+通过系统配置组<link
+linkend="ConfigReference_Section_Core_Crypt_SMIME">"Crypt::SMIME"</link>，你还可以启用和配置通用S/MIME支持。
 </para>
 
 <para>
@@ -240,15 +239,14 @@ linkend="adminarea-smime">S/MIME证书</link>链接中执行。在这里，你�
 </para>
 
 <para>
-Obviously, all public S/MIME keys of communication partners can be imported
-using the <link linkend="adminarea-customer-users">customer user
-administration tool</link> as well.
+显然，通信伙伴的所有公共S/MIME密钥也可以使用<link
+linkend="adminarea-customer-users">客户用户管理工具</link>导入。
 </para>
 
 <section id="SMIMEFetchFromCustomer">
     <title>在客户用户后端获取S/MIME证书</title>
     <para>
-        可以使用客户联系人后端 （例如 LDAP) 作为公共S/MIME 证书的来源。这些证书可以导入到系统，并在 <link
+        可以使用客户用户后端 （例如 LDAP) 作为公共S/MIME 证书的来源。这些证书可以导入到系统，并在 <link
 linkend="adminarea-smime"> OTRS系统管理页面上的S/MIME 配置</link> 显示。它们可用于从 OTRS
 向客户发送加密的电子邮件。
     </para>
@@ -261,9 +259,9 @@ linkend="adminarea-smime"> OTRS系统管理页面上的S/MIME 配置</link> 显�
             <listitem><para>在系统配置中启用 <literal>SMIME::FetchFromCustomer</literal></para></listitem>
             <listitem>
                 <para>
-                    配置客户联系人后端以提供属性 <literal>UserSMIMECertificate</literal>的客户联系人的S/MIME 证书 （在
+                    配置客户用户后端以提供属性 <literal>UserSMIMECertificate</literal>的客户用户的S/MIME 证书 （在
 <filename>$OTRS_HOME/Kernel/Config/Defaults.pm</filename>文件中有一个 LDAP
-客户联系人映射的例子）。
+客户用户映射的例子）。
                 </para>
             </listitem>
         </orderedlist>
@@ -279,7 +277,7 @@ linkend="adminarea-smime"> OTRS系统管理页面上的S/MIME 配置</link> 显�
                 </para>
                 <para>
                     一个专用的邮箱管理员过滤器(在系统配置<literal>PostMaster::PreFilterModule###000-SMIMEFetchFromCustomer</literal>
-中)将提取每个传入的电子邮件的地址，并试图从客户清单中找到匹配的电子邮件地址。如果发现匹配，它将尝试从客户联系人属性获取S/MIME
+中)将提取每个传入的电子邮件的地址，并试图从客户清单中找到匹配的电子邮件地址。如果发现匹配，它将尝试从客户用户属性获取S/MIME
 证书，如果找到了证书它会尝试将其导入（除非它已经导入）。
                 </para>
             </listitem>
@@ -296,18 +294,18 @@ shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fet
                     ]]></screen>
                 </para>
                 <para>
-                    在这种情况下，控制台命令将尝试用提供的电子邮件地址与一个客户联系人的邮件地址进行匹配。如果发现匹配，它将尝试向系统中添加客户联系人属性中找到的S/MIME
+                    在这种情况下，控制台命令将尝试用提供的电子邮件地址与一个客户用户的邮件地址进行匹配。如果发现匹配，它将尝试向系统中添加客户用户属性中找到的S/MIME
 证书（如果证书还没有添加）。
                 </para>
                 <para>
-                    同样的控制台命令可用于导入所有客户联系人（受限于客户联系人后端的<literal>CustomerUserSearchListLimit</literal>
+                    同样的控制台命令可用于导入所有客户用户（受限于客户用户后端的<literal>CustomerUserSearchListLimit</literal>
 属性） 的 S/MIME
-证书。此选项是专为具有大量客户联系人的系统设计的，因为需要太多的时间来执行，根据限制它并不一定会获取所有的客户证书。在这种模式下按如下执行控制台命令︰<screen><![CDATA[
+证书。此选项是专为具有大量客户用户的系统设计的，因为需要太多的时间来执行，根据限制它并不一定会获取所有的客户证书。在这种模式下按如下执行控制台命令︰<screen><![CDATA[
 shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fetch --add-all
                     ]]></screen>
                 </para>
                 <para>
-                    使用此选项后控制台命令将客户联系人后端以获取所有可能的客户，检查找到的每个客户是否有S/MIME 证书。如果找到了证书，它将向系统中添加此S/MIME
+                    使用此选项后控制台命令将客户后端以获取所有可能的客户，检查找到的每个客户是否有S/MIME 证书。如果找到了证书，它将向系统中添加此S/MIME
 证书（如果此证书还没有添加到系统）。
                 </para>
             </listitem>
@@ -317,7 +315,7 @@ shell> perl /opt/otrs/bin/otrs.Console.pl Maint::SMIME::CustomerCertificate::Fet
                 </para>
                 <para>
                     可以用另一个控制台命令 <literal>Maint::SMIME::CustomerCertificate::Renew</literal>
-来检查系统中所有现有的证书。这将验证客户联系人现有的证书是否匹配通过客户联系人属性查到的证书。并将在客户联系人后端中找到的任何新证书添加到系统
+来检查系统中所有现有的证书。这将验证客户用户现有的证书是否匹配通过客户用户属性查到的证书。并将在客户用户后端中找到的任何新证书添加到系统
 （在这一过程中不会删除证书）。
                 </para>
                 <para>

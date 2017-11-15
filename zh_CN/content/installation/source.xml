@@ -18,7 +18,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        在文件/etc/selinux/config中配置SELINUX=disabled
+                        在文件/etc/selinux/config中配置SELINUX=disabled：
                     </para>
                     <para>
                         <screen><![CDATA[
@@ -227,7 +227,7 @@ shell> perl -cw /opt/otrs/bin/otrs.Console.pl
             ]]></screen>
         </para>
         <para>
-             “syntax OK”表示所有必须的模块都已安装。
+            “syntax OK”表示所有必须的模块都已安装。
         </para>
     </section>
 
@@ -241,19 +241,26 @@ WEB服务器和mod_perl模块；一般都通过系统的软件包管理器来安
 
         <para>
             <screen><![CDATA[
-# rhel / centos:
+# RHEL / CentOS:
 shell> yum install httpd mod_perl
 
-# suse:
+# SuSE:
 shell> zypper install apache2-mod_perl
 
-# debian/ubuntu:
+# Debian/Ubuntu:
 shell> apt-get install apache2 libapache2-mod-perl2
         ]]></screen>
         </para>
 
         <para>
             大部分的<application>Apache</application>安装都会包括一个<filename>conf.d</filename>目录。在Linux系统中这个目录一般在<filename>/etc/apache</filename>或<filename>/etc/apache2</filename>目录下。以root用户登录，进入<filename>conf.d</filename>目录，并在Apache配置目录创建一个到<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename>的软链接<filename>zzz_otrs.conf</filename>（确保载入其它配置之后再载入OTRS配置）。
+        </para>
+
+        <para>
+            <screen><![CDATA[
+# Debian/Ubuntu:
+shell> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
+        ]]></screen>
         </para>
 
         <para>
@@ -279,50 +286,14 @@ apache2.service</command>命令来重启Apache。
     <section role="NotInToc">
         <title>步骤7：文件权限</title>
         <para>
-            文件权限根据需要调整，以允许OTRS读取和写入文件：
+            请以root用户身份执行以下命令，以设置OTRS的文件和目录权限。 它将尝试检测你的安装所需的正确的用户和组设置。
         </para>
 
         <para>
-            <cmdsynopsis>
-<command>otrs.SetPermissions.pl</command> <arg choice='opt'>
---otrs-user=<replaceable>OTRS用户，默认为'otrs'</replaceable> </arg> <arg
-choice='req'> --web-group= <replaceable>WEB服务器用户所属的组</replaceable> </arg></cmdsynopsis>
-        </para>
-
-        <para>
-            例如：
-        </para>
-
-        <para>
-            <itemizedlist>
-                <listitem><para>以OTRS用户运行WEB服务器：</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-user=otrs
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>以wwwrun用户运行WEB服务器（如SUSE）：</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=wwwrun
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>以apache用户运行WEB服务器（如Red Hat、CentOS）：</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=apache
-                ]]></screen>
-                </para></listitem>
-
-                <listitem><para>以www-data用户运行WEB服务器（如RDebian、 Ubuntu）：</para>
-                <para>
-                <screen><![CDATA[
-shell> bin/otrs.SetPermissions.pl --web-group=www-data
-                ]]></screen>
-                </para></listitem>
-            </itemizedlist>
+        <screen><![CDATA[
+shell> cd /opt/otrs/
+shell> bin/otrs.SetPermissions.pl
+        ]]></screen>
         </para>
     </section>
 
@@ -338,7 +309,7 @@ url="http://localhost/otrs/installer.pl">http://localhost/otrs/installer.pl</uli
             </para>
             <para>
                 <screen><![CDATA[
-max_allowed_packet   = 20M
+max_allowed_packet   = 64M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
                 ]]></screen>
