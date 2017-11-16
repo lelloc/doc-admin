@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
-"POT-Creation-Date: 2017-11-15 10:41+0100\n"
+"POT-Creation-Date: 2017-11-16 15:48+0100\n"
 "PO-Revision-Date: 2017-11-15 09:44+0000\n"
 "Last-Translator: Martin Gruner <martin.gruner@otrs.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/otrs/OTRS/language/hu/)\n"
@@ -1889,8 +1889,8 @@ msgstr ""
 #: en/content/installation/upgrading.xml:150
 #: en/content/installation/upgrading.xml:161
 #: en/content/installation/upgrading.xml:200
-#: en/content/installation/upgrading.xml:222
-#: en/content/installation/upgrading.xml:259
+#: en/content/installation/upgrading.xml:240
+#: en/content/installation/upgrading.xml:264
 #: en/content/installation/packages.xml:41
 #: en/content/installation/packages.xml:53
 #: en/content/installation/packages.xml:80
@@ -35576,42 +35576,13 @@ msgstr ""
 
 #. type: Content of: <section><section><title>
 #: en/content/installation/upgrading.xml:215
-msgid "Step 5: Restart your services"
-msgstr "5. lépés: szolgáltatások újraindítása"
-
-#. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:218
-msgid "This will depend on your service configuration, here is an example:"
-msgstr "Ez a szolgáltatás beállításától fog függeni. Itt egy példa:"
-
-#. type: CDATA
-#: en/content/installation/upgrading.xml:222
-#, no-wrap
-msgid ""
-"root> /etc/init.d/apache start\n"
-"root> /etc/init.d/postfix start\n"
-"root> /etc/init.d/cron start\n"
-msgstr ""
-"root> /etc/init.d/apache start\n"
-"root> /etc/init.d/postfix start\n"
-"root> /etc/init.d/cron start\n"
-
-#. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:230
-msgid ""
-"Now you can log into your system. Please note that the OTRS Daemon is "
-"started only in a later step."
-msgstr ""
-"Most már bejelentkezhet a rendszerre. Ne feledje, hogy az OTRS démon csak "
-"egy későbbi lépésben lesz elindítva."
-
-#. type: Content of: <section><section><title>
-#: en/content/installation/upgrading.xml:235
-msgid "Step 6: Update installed packages"
+#, fuzzy
+#| msgid "Step 6: Update installed packages"
+msgid "Step 5: Update installed packages"
 msgstr "6. lépés: telepített csomagok frissítése"
 
 #. type: Content of: <section><section><note><para>
-#: en/content/installation/upgrading.xml:238
+#: en/content/installation/upgrading.xml:218
 msgid ""
 "Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated."
 msgstr ""
@@ -35619,13 +35590,16 @@ msgstr ""
 "kell azokat."
 
 #. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:242
-msgid "You can use the following command to update all installed packages:"
+#: en/content/installation/upgrading.xml:222
+msgid ""
+"You can use the command below to update all installed packages.  This works "
+"for all packages that are available from online repositories.  You can "
+"upgrade other packages later via the package manager (this requires a "
+"running OTRS Daemon)."
 msgstr ""
-"Használhatja a következő parancsot az összes telepített csomag frissítéséhez:"
 
 #. type: CDATA
-#: en/content/installation/upgrading.xml:244
+#: en/content/installation/upgrading.xml:226
 #, no-wrap
 msgid ""
 "otrs> cd /opt/otrs/\n"
@@ -35635,14 +35609,50 @@ msgstr ""
 "otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll\n"
 
 #. type: Content of: <section><section><title>
-#: en/content/installation/upgrading.xml:251
+#: en/content/installation/upgrading.xml:233
+#, fuzzy
+#| msgid "Step 5: Restart your services"
+msgid "Step 6: Restart your services"
+msgstr "5. lépés: szolgáltatások újraindítása"
+
+#. type: Content of: <section><section><para>
+#: en/content/installation/upgrading.xml:236
+msgid "This will depend on your service configuration, here is an example:"
+msgstr "Ez a szolgáltatás beállításától fog függeni. Itt egy példa:"
+
+#. type: CDATA
+#: en/content/installation/upgrading.xml:240
+#, no-wrap
+msgid ""
+"root> /etc/init.d/apache start\n"
+"root> /etc/init.d/postfix start\n"
+"root> /etc/init.d/cron start\n"
+msgstr ""
+"root> /etc/init.d/apache start\n"
+"root> /etc/init.d/postfix start\n"
+"root> /etc/init.d/cron start\n"
+
+#. type: Content of: <section><section><note><para>
+#: en/content/installation/upgrading.xml:249
+msgid ""
+"The OTRS Daemon is required for correct operation of OTRS such as sending "
+"emails.  Please activate it as described in the next step."
+msgstr ""
+
+#. type: Content of: <section><section><title>
+#: en/content/installation/upgrading.xml:256
 msgid "Step 7: Start the OTRS Daemon and cron job"
 msgstr "7. lépés: az OTRS démon és a cron-feladat elindítása"
 
 #. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:254
+#: en/content/installation/upgrading.xml:259
+#, fuzzy
+#| msgid ""
+#| "The OTRS daemon is responsible for handling any asynchronous and "
+#| "recurring tasks in OTRS.  The daemon and its keepalive cron job must be "
+#| "started as the <literal>otrs</literal> user."
 msgid ""
-"The OTRS daemon is responsible for handling any asynchronous and recurring "
+"The OTRS Daemon is responsible for handling any asynchronous and recurring "
 "tasks in OTRS.  The daemon and its keepalive cron job must be started as the "
 "<literal>otrs</literal> user."
 msgstr ""
@@ -35651,7 +35661,7 @@ msgstr ""
 "literal> felhasználóként kell elindítani."
 
 #. type: CDATA
-#: en/content/installation/upgrading.xml:259
+#: en/content/installation/upgrading.xml:264
 #, no-wrap
 msgid ""
 "otrs> cd /opt/otrs/\n"
@@ -35661,6 +35671,11 @@ msgstr ""
 "otrs> cd /opt/otrs/\n"
 "otrs> bin/otrs.Daemon.pl start\n"
 "otrs> bin/Cron.sh start\n"
+
+#. type: Content of: <section><section><para>
+#: en/content/installation/upgrading.xml:271
+msgid "Now you can log into your system."
+msgstr ""
 
 #. type: Content of: <section><title>
 #: en/content/installation/packages.xml:6
@@ -38715,6 +38730,18 @@ msgid ""
 msgstr ""
 "<graphic fileref=\"screenshots/bugs-otrs-org.png\" scalefit=\"1\" width="
 "\"100%\" contentdepth=\"100%\"></graphic>"
+
+#~ msgid ""
+#~ "Now you can log into your system. Please note that the OTRS Daemon is "
+#~ "started only in a later step."
+#~ msgstr ""
+#~ "Most már bejelentkezhet a rendszerre. Ne feledje, hogy az OTRS démon csak "
+#~ "egy későbbi lépésben lesz elindítva."
+
+#~ msgid "You can use the following command to update all installed packages:"
+#~ msgstr ""
+#~ "Használhatja a következő parancsot az összes telepített csomag "
+#~ "frissítéséhez:"
 
 #~ msgid ""
 #~ "File permissions need to be adjusted to allow OTRS to read and write "

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
-"POT-Creation-Date: 2017-11-15 10:41+0100\n"
+"POT-Creation-Date: 2017-11-16 15:48+0100\n"
 "PO-Revision-Date: 2017-11-14 12:27+0000\n"
 "Last-Translator: Takayuki MINATO <turbo@minato.tv>\n"
 "Language-Team: Japanese (http://www.transifex.com/otrs/OTRS/language/ja/)\n"
@@ -1741,8 +1741,8 @@ msgstr "タイトル：Prozessmanagement für Dummies、著者：Thilo Knuppertz
 #: en/content/installation/upgrading.xml:150
 #: en/content/installation/upgrading.xml:161
 #: en/content/installation/upgrading.xml:200
-#: en/content/installation/upgrading.xml:222
-#: en/content/installation/upgrading.xml:259
+#: en/content/installation/upgrading.xml:240
+#: en/content/installation/upgrading.xml:264
 #: en/content/installation/packages.xml:41
 #: en/content/installation/packages.xml:53
 #: en/content/installation/packages.xml:80
@@ -31225,48 +31225,28 @@ msgstr ""
 
 #. type: Content of: <section><section><title>
 #: en/content/installation/upgrading.xml:215
-msgid "Step 5: Restart your services"
-msgstr ""
-
-#. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:218
-msgid "This will depend on your service configuration, here is an example:"
-msgstr ""
-
-#. type: CDATA
-#: en/content/installation/upgrading.xml:222
-#, no-wrap
-msgid ""
-"root> /etc/init.d/apache start\n"
-"root> /etc/init.d/postfix start\n"
-"root> /etc/init.d/cron start\n"
-msgstr ""
-
-#. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:230
-msgid ""
-"Now you can log into your system. Please note that the OTRS Daemon is "
-"started only in a later step."
-msgstr ""
-
-#. type: Content of: <section><section><title>
-#: en/content/installation/upgrading.xml:235
-msgid "Step 6: Update installed packages"
-msgstr ""
+#, fuzzy
+#| msgid "Upgrade all installed packages"
+msgid "Step 5: Update installed packages"
+msgstr "インストール済みのパッケージをアップグレード"
 
 #. type: Content of: <section><section><note><para>
-#: en/content/installation/upgrading.xml:238
+#: en/content/installation/upgrading.xml:218
 msgid ""
 "Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated."
 msgstr ""
 
 #. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:242
-msgid "You can use the following command to update all installed packages:"
+#: en/content/installation/upgrading.xml:222
+msgid ""
+"You can use the command below to update all installed packages.  This works "
+"for all packages that are available from online repositories.  You can "
+"upgrade other packages later via the package manager (this requires a "
+"running OTRS Daemon)."
 msgstr ""
 
 #. type: CDATA
-#: en/content/installation/upgrading.xml:244
+#: en/content/installation/upgrading.xml:226
 #, no-wrap
 msgid ""
 "otrs> cd /opt/otrs/\n"
@@ -31274,25 +31254,58 @@ msgid ""
 msgstr ""
 
 #. type: Content of: <section><section><title>
-#: en/content/installation/upgrading.xml:251
+#: en/content/installation/upgrading.xml:233
+#, fuzzy
+#| msgid "Start OTRS services"
+msgid "Step 6: Restart your services"
+msgstr "OTRS Daemonを起動する"
+
+#. type: Content of: <section><section><para>
+#: en/content/installation/upgrading.xml:236
+msgid "This will depend on your service configuration, here is an example:"
+msgstr ""
+
+#. type: CDATA
+#: en/content/installation/upgrading.xml:240
+#, no-wrap
+msgid ""
+"root> /etc/init.d/apache start\n"
+"root> /etc/init.d/postfix start\n"
+"root> /etc/init.d/cron start\n"
+msgstr ""
+
+#. type: Content of: <section><section><note><para>
+#: en/content/installation/upgrading.xml:249
+msgid ""
+"The OTRS Daemon is required for correct operation of OTRS such as sending "
+"emails.  Please activate it as described in the next step."
+msgstr ""
+
+#. type: Content of: <section><section><title>
+#: en/content/installation/upgrading.xml:256
 msgid "Step 7: Start the OTRS Daemon and cron job"
 msgstr ""
 
 #. type: Content of: <section><section><para>
-#: en/content/installation/upgrading.xml:254
+#: en/content/installation/upgrading.xml:259
 msgid ""
-"The OTRS daemon is responsible for handling any asynchronous and recurring "
+"The OTRS Daemon is responsible for handling any asynchronous and recurring "
 "tasks in OTRS.  The daemon and its keepalive cron job must be started as the "
 "<literal>otrs</literal> user."
 msgstr ""
 
 #. type: CDATA
-#: en/content/installation/upgrading.xml:259
+#: en/content/installation/upgrading.xml:264
 #, no-wrap
 msgid ""
 "otrs> cd /opt/otrs/\n"
 "otrs> bin/otrs.Daemon.pl start\n"
 "otrs> bin/Cron.sh start\n"
+msgstr ""
+
+#. type: Content of: <section><section><para>
+#: en/content/installation/upgrading.xml:271
+msgid "Now you can log into your system."
 msgstr ""
 
 #. type: Content of: <section><title>
