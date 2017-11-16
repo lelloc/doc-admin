@@ -212,7 +212,25 @@ otrs> scripts/DBUpdate-to-6.pl
     </section>
 
     <section role="NotInToc">
-        <title>Step 5: Restart your services</title>
+        <title>Step 5: Update installed packages</title>
+        <note>
+            <para>
+                Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated.
+            </para>
+        </note>
+        <para>
+            You can use the command below to update all installed packages.
+            This works for all packages that are available from online repositories.
+            You can upgrade other packages later via the package manager (this requires a running OTRS Daemon).
+        </para>
+        <screen><![CDATA[
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
+        ]]></screen>
+    </section>
+
+    <section role="NotInToc">
+        <title>Step 6: Restart your services</title>
 
         <para>
             This will depend on your service configuration, here is an example:
@@ -226,32 +244,19 @@ root> /etc/init.d/cron start
         ]]></screen>
         </para>
 
-        <para>
-            Now you can log into your system. Please note that the OTRS Daemon is started only in a later step.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 6: Update installed packages</title>
         <note>
             <para>
-                Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated.
+                The OTRS Daemon is required for correct operation of OTRS such as sending emails.
+                Please activate it as described in the next step.
             </para>
         </note>
-        <para>
-            You can use the following command to update all installed packages:
-        </para>
-        <screen><![CDATA[
-otrs> cd /opt/otrs/
-otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
-        ]]></screen>
     </section>
 
     <section role="NotInToc">
         <title>Step 7: Start the OTRS Daemon and cron job</title>
 
         <para>
-            The OTRS daemon is responsible for handling any asynchronous and recurring tasks in OTRS.
+            The OTRS Daemon is responsible for handling any asynchronous and recurring tasks in OTRS.
             The daemon and its keepalive cron job must be started as the <literal>otrs</literal> user.
         </para>
 
@@ -261,6 +266,9 @@ otrs> cd /opt/otrs/
 otrs> bin/otrs.Daemon.pl start
 otrs> bin/Cron.sh start
             ]]></screen>
+        </para>
+        <para>
+            Now you can log into your system.
         </para>
     </section>
 
