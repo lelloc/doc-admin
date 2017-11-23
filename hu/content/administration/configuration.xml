@@ -9,28 +9,26 @@
 <title>OTRS beállítófájlok</title>
 
 <para>
-Az összes OTRS beállítófájl a <filename>Kernel</filename> könyvtárban és
-annak alkönyvtáraiban van eltárolva. Nincs szükség a
-<filename>Kernel/Config.pm</filename> fájlon kívül egyetlen fájl kézi
-megváltoztatására sem, mert a többi fájl meg lesz változtatva, amikor a
-rendszer frissítést kap. Egyszerűen másolja át a beállítási paramétereket a
-többi fájlból a <filename>Kernel/Config.pm</filename> fájlba, és változtassa
-meg azokat az igényei szerint. Ehhez a fájlhoz sosem fognak hozzányúlni a
-frissítési folyamat közben, így a kézi változtatásai biztonságban vannak.
+All OTRS configuration files are stored in the directory
+<filename>Kernel</filename> and in its subdirectories. There is no need to
+manually change any other file than <filename>Kernel/Config.pm</filename>,
+because the rest of the files will be changed when the system gets
+updated. Just copy the configuration parameters from other files into
+<filename>Kernel/Config.pm</filename> and change them as per your
+needs. This file will never be touched during the update process, so your
+manual changes are safe.
 </para>
 
 <para>
-A beállítások újraépíthetők kézzel a <literal>perl bin/otrs.Console.pl
-Maint::Config::Rebuild</literal>parancsfájl végrehajtásával, vagy
-automatikusan a telepítő, a csomagműveletek (telepítés, frissítés,
-újratelepítés és eltávolítás) stb. által. A
-<filename>Kernel/Config/Files/XML/</filename> mappában található összes
-<filename>.xml</filename> fájl fel lesz dolgozva, és a tartalmuk át lesz
-küldve az OTRS adatbázisába. A legtöbb <filename>.xml</filename> fájl -
-amelyek ennek a könyvtárnak a részei - alapértelmezetten az OTRS Free
-csoporthoz tartoznak, de az OTRS Free funkciók, mint például a GyIK vagy
-kérdőív (vagy bármely más OTRS kiterjesztés) is hozzá fogják adni a saját
-beállítófájljukat ehhez a könyvtárhoz.
+The configuration can be rebuilt either manually by executing <literal>perl
+bin/otrs.Console.pl Maint::Config::Rebuild</literal> or automatically by the
+installer, package operations (install, update, reinstall and uninstall),
+etc. All <filename>.xml</filename> files located in
+<filename>Kernel/Config/Files/XML/</filename> are parsed and their content
+is transferred to the OTRS database. Most of the <filename>.xml</filename>
+files which are part of this directory by default belong to OTRS Free, but
+OTRS Free Features such as FAQ or Survey (or any other OTRS extension) will
+add their own configuration files to this directory as well.
 </para>
 
 <para>

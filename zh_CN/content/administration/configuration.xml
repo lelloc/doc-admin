@@ -9,18 +9,26 @@
 <title>OTRS 配置文件</title>
 
 <para>
-所有OTRS配置文件都存储在目录<filename> Kernel </filename>及其子目录中。
-除了<filename>Kernel/Config.pm</filename>外不需要手动更改任何其他文件，因为系统升级时其它的文件会被更改。
-只需将配置参数从其他文件复制到<filename>Kernel/Config.pm</filename>，然后根据需要进行更改参数。
-在升级过程中永远不会更改此文件，所以你的手动更改是安全的。
+All OTRS configuration files are stored in the directory
+<filename>Kernel</filename> and in its subdirectories. There is no need to
+manually change any other file than <filename>Kernel/Config.pm</filename>,
+because the rest of the files will be changed when the system gets
+updated. Just copy the configuration parameters from other files into
+<filename>Kernel/Config.pm</filename> and change them as per your
+needs. This file will never be touched during the update process, so your
+manual changes are safe.
 </para>
 
 <para>
-可以通过执行<literal>perl bin/otrs.Console.pl
-Maint::Config::Rebuild</literal>手动重建配置，或通过安装程序、程序包操作（安装、升级、重新安装和卸载）等自动重建配置
-。位于<filename>Kernel/Config/Files/XML/</filename>中的所有<filename> .xml
-</filename>文件被解析，且其内容会传到OTRS数据库。
-默认情况下，这个目录的大部分文件都属于OTRS免费版，但是OTRS免费功能，如FAQ知识库或调查（或任何其他OTRS扩展），也会将自己的配置文件添加到此目录。
+The configuration can be rebuilt either manually by executing <literal>perl
+bin/otrs.Console.pl Maint::Config::Rebuild</literal> or automatically by the
+installer, package operations (install, update, reinstall and uninstall),
+etc. All <filename>.xml</filename> files located in
+<filename>Kernel/Config/Files/XML/</filename> are parsed and their content
+is transferred to the OTRS database. Most of the <filename>.xml</filename>
+files which are part of this directory by default belong to OTRS Free, but
+OTRS Free Features such as FAQ or Survey (or any other OTRS extension) will
+add their own configuration files to this directory as well.
 </para>
 
 <para>

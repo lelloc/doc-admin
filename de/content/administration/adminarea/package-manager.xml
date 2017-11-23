@@ -37,11 +37,11 @@ dargestellt.
 </para>
 
 <para>
-To upgrade an installed package, the list of available packages in the
-online repository will show <emphasis>Upgrade</emphasis> in the Action
-column for any package that has a higher version than the one that is
-installed locally. Just click Upgrade and it will install the new package
-version on your system.
+To update an installed package, the list of available packages in the online
+repository will show <emphasis>Update</emphasis> in the Action column for
+any package that has a higher version than the one that is installed
+locally. Just click Update and it will install the new package version on
+your system.
 </para>
 
 <para>
@@ -64,15 +64,15 @@ linkend="ConfigReference_Section_Core_Package">Core::Package</link>.
     <section id="adminarea-package-manager-upgrade-all">
         <title>Alle installierten Pakete aktualisieren</title>
         <para>
-            Since OTRS 6, a new button labeled <literal>"Upgrade all installed
+            Since OTRS 6, a new button labeled <literal>"Update all installed
 packages"</literal> has been added to the sidebar of the package manager
 screen. When this button is pressed, an OTRS Daemon task will be scheduled
-to upgrade all packages. Alternatively, this action can be also issued from
+to update all packages. Alternatively, this action can be also issued from
 the command line interface by using the
 <literal>Admin::Package::UpgradeAll</literal> console command.
         </para>
         <figure>
-            <title>Package Manager Upgrade All Installed Packages Button</title>
+            <title>Package Manager Update All Installed Packages Button</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-packagemanager-upgradeall-button.png"
@@ -80,27 +80,27 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         <para>
             This feature reads the information of all defined package repositories and
 determines if there is a new version for every installed package in the
-system and calculates the correct order to upgrade the packages respecting
+system and calculates the correct order to update the packages respecting
 all other package dependencies, even if new versions of existing packages
 require new packages not yet installed in the system.
         </para>
         <note>
             <para>
                 If there are packages installed that do not have a corresponding repository
-defined in the system, they can not be upgraded by this feature and will be
+defined in the system, they can not be updated by this feature and will be
 marked as failed (due to the missing on-line repository).
             </para>
         </note>
         <para>
-            When the process to upgrade all packages is running, a notification bar is
+            When the process to update all packages is running, a notification bar is
 added to the package manager screen for easier identification. When
 notification link is clicked, a progress summary is displayed with the
 current progress. Also, when the process is running package actions such as
-"Install", "Upgrade", "Uninstall" and "ReInstall" some actions on the screen
+"Install", "Update", "Uninstall" and "ReInstall" some actions on the screen
 might be temporarily disabled in order to avoid conflicts.
         </para>
         <figure>
-            <title>Package Manager Upgrade All Installed Packages In Progress Notification</title>
+            <title>Package Manager Update All Installed Packages In Progress Notification</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-packagemanager-upgradeall-process-notification.png"
@@ -108,15 +108,15 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         <para>
             When the process finishes (only if it was started in the graphical user
 interface) the progress notification will change to indicate the new state:
-it becomes green if all packages was correctly upgraded or red if there
-where any failures. Clicking on this notification will show the final
-summary. In the summary table, a tooltip for the status column of every
-package can indicate more details about the state. After closing this
-window, the package manager screen will refresh to show the new version of
-the installed packages.
+it becomes green if all packages was correctly updated or red if there where
+any failures. Clicking on this notification will show the final summary. In
+the summary table, a tooltip for the status column of every package can
+indicate more details about the state. After closing this window, the
+package manager screen will refresh to show the new version of the installed
+packages.
         </para>
         <figure>
-            <title>Package Manager Upgrade All Installed Packages Summary</title>
+            <title>Package Manager Update All Installed Packages Summary</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-packagemanager-upgradeall-summary.png"

@@ -2,8 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
-<section id="upgrading">
-    <title>Upgrading OTRS</title>
+<section id="updating">
+    <title>Updating OTRS</title>
 
     <note>
         <para>
@@ -13,29 +13,29 @@
 
     <variablelist>
         <varlistentry>
-            <term>Upgrading from an earlier version of OTRS 6</term>
+            <term>Updating from an earlier version of OTRS 6</term>
             <listitem>
                 <para>
-                    You can upgrade directly from any previous to the latest available patch
+                    You can update directly from any previous to the latest available patch
 level release.
                 </para>
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Upgrading from OTRS 5</term>
+            <term>Updating from OTRS 5</term>
             <listitem>
                 <para>
-                    You can upgrade from any OTRS 5 patch level to the latest available OTRS 6
+                    You can update from any OTRS 5 patch level to the latest available OTRS 6
 patch level release.
                 </para>
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Upgrading from OTRS 4 or earlier</term>
+            <term>Updating from OTRS 4 or earlier</term>
             <listitem>
                 <warning>
                     <para>
-                        You cannot upgrade from OTRS 4 or earlier directly to OTRS 6.  Instead, full
+                        You cannot update from OTRS 4 or earlier directly to OTRS 6.  Instead, full
 updates to all available minor versions have to be made sequentially
 instead.  For example, if you come from OTRS 3.0, you first have to perform
 a full update to OTRS 3.1, then to 3.2, 3.3, 4, 5 and finally to OTRS 6.
@@ -82,8 +82,7 @@ otrs> bin/otrs.Daemon.pl stop
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                 <listitem>
-                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if upgrading from OTRS
-5</para>
+                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if updating from OTRS 5</para>
                 </listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>データベースも同様に行います。</para></listitem>
@@ -114,8 +113,7 @@ root> mv otrs-x.x.x otrs
                     <itemizedlist>
                         <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                         <listitem>
-                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if upgrading from OTRS
-5</para>
+                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if updating from OTRS 5</para>
                         </listitem>
                     </itemizedlist>
                 </para>
@@ -182,8 +180,18 @@ files and sets file permissions.
     <section role="NotInToc">
         <title>Step 4: Run the migration script</title>
 
+        <note>
+            <para>
+                If you have any custom Perl or XML configuration files in
+<filename>Kernel/Config/Files</filename>, these need to be <ulink
+url="http://doc.otrs.com/doc/manual/developer/6.0/en/html/package-porting.html#packge-porting-5-to-6-configuration-files">converted
+to the new formats supported by OTRS 6</ulink> before running the migration
+script.
+            </para>
+        </note>
+
         <para>
-            The upgrade script will perform many checks on your system and give you
+            The migration script will perform many checks on your system and give you
 advice on how to install missing Perl modules etc., if that is required. If
 all checks succeeded, the neccessary migration steps will be
 performed. Please also run this script in case of patch level updates.
@@ -194,7 +202,7 @@ performed. Please also run this script in case of patch level updates.
                 The migration script will ask you to set a time zone for OTRS if needed. It
 is very important that you set the correct time zone
 (<literal>OTRSTimeZone</literal>) for data storage and keep it, otherwise
-date and time of data added after the upgrade (tickets, articles, etc.) will
+date and time of data added after the update (tickets, articles, etc.) will
 be stored with a different time zone than your pre-existing data, leading to
 inconsistent output.
             </para>
@@ -229,7 +237,26 @@ for you.  Otherwise malfunction or data loss may occur.
     </section>
 
     <section role="NotInToc">
-        <title>Step 5: Restart your services</title>
+        <title>Step 5: Update installed packages</title>
+        <note>
+            <para>
+                Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated.
+            </para>
+        </note>
+        <para>
+            You can use the command below to update all installed packages.  This works
+for all packages that are available from online repositories.  You can
+update other packages later via the package manager (this requires a running
+OTRS Daemon).
+        </para>
+        <screen><![CDATA[
+otrs> cd /opt/otrs/
+otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
+        ]]></screen>
+    </section>
+
+    <section role="NotInToc">
+        <title>Step 6: Restart your services</title>
 
         <para>
             This will depend on your service configuration, here is an example:
@@ -243,33 +270,19 @@ root> /etc/init.d/cron start
         ]]></screen>
         </para>
 
-        <para>
-            Now you can log into your system. Please note that the OTRS Daemon is
-started only in a later step.
-        </para>
-    </section>
-
-    <section role="NotInToc">
-        <title>Step 6: Update installed packages</title>
         <note>
             <para>
-                Packages for OTRS 5 are not compatible with OTRS 6 and have to be updated.
+                The OTRS Daemon is required for correct operation of OTRS such as sending
+emails.  Please activate it as described in the next step.
             </para>
         </note>
-        <para>
-            You can use the following command to update all installed packages:
-        </para>
-        <screen><![CDATA[
-otrs> cd /opt/otrs/
-otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
-        ]]></screen>
     </section>
 
     <section role="NotInToc">
         <title>Step 7: Start the OTRS Daemon and cron job</title>
 
         <para>
-            The OTRS daemon is responsible for handling any asynchronous and recurring
+            The OTRS Daemon is responsible for handling any asynchronous and recurring
 tasks in OTRS.  The daemon and its keepalive cron job must be started as the
 <literal>otrs</literal> user.
         </para>
@@ -280,6 +293,9 @@ otrs> cd /opt/otrs/
 otrs> bin/otrs.Daemon.pl start
 otrs> bin/Cron.sh start
             ]]></screen>
+        </para>
+        <para>
+            Now you can log into your system.
         </para>
     </section>
 
