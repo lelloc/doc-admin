@@ -49,9 +49,9 @@ démonfeladat aszinkron módon kezelje azokat a kellő időben. Egy normál
 telepítésnél az e-maileket percenként fogja kiküldeni az OTRS démon.
             </para>
             <para>
-                Az e-mail küldés állapotának ellenőrzéséhez használhatja a
-<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename>
-konzolparancsot a <literal>--list</literal> kapcsolóval.
+                To check the status of email sending, you can use the
+<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename> console
+command with <literal>--list</literal> switch.
             </para>
             <para>
                 <screen><![CDATA[
@@ -121,18 +121,17 @@ Done.
 fiókokból.
             </para>
             <para>
-                A levelezési fiókokat az adminisztrációs oldalon lévő „Levelezési
-levélfiókok” hivatkozáson keresztül állítsa be.
+                Configure your mail accounts via the <emphasis>PostMaster Mail
+Accounts</emphasis> link on the Admin page.
             </para>
             <para>
-                Ha egy új levelezési fiókot hoznak létre (lásd a lenti ábrát), akkor annak
-levelező-kiszolgálóját, bejelentkezési nevét és jelszavát is meg kell
-adni. Ki kell választani a levelező-kiszolgáló típusát is, amely POP3,
-POP3S, IMAP vagy IMAPS lehet. Ha nem látja a kiszolgáló típusát elérhető
-lehetőségként, akkor a szükséges Perl-modulok hiányoznak a
-rendszerről. Ebben az esetben nézze meg az <link
-linkend="installation-of-perl-modules">„OTRS-hez szükséges Perl-modulok
-telepítése”</link> szakaszt az utasításokért.
+                If a new mail account is to be created (see figure below), then its mail
+server name, login name and password must be specified. Also, you need to
+select the mail server type, which can be POP3, POP3S, IMAP or IMAPS. If you
+don't see your server type available as an option, the required Perl modules
+are missing on your system. In that case, please refer to <link
+linkend="installation-of-perl-modules"> Installation of Perl modules
+required for OTRS</link> for instructions.
             </para>
             <para>
                 <figure>
@@ -142,33 +141,34 @@ telepítése”</link> szakaszt az utasításokért.
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                Ha az „Igen” értéket választja a „Megbízható” beállítás értékénél, akkor egy
-bejövő üzenethez csatolt bármely X-OTRS fejléc kiértékelésre és
-végrehajtásra kerül. Mivel az X-OTRS fejléc végrehajthat néhány műveletet a
-jegyrendszeren, ezért csak az ismert küldőknél kell beállítania a
-„Megbízható” beállítást „Igen” értékre. Az X-OTRS-Headers fejléceket a <link
-linkend ="adminarea-postmasterfilter">szűrő modul</link> használja az
-OTRS-ben. Az X-OTRS fejlécek <link linkend ="table-of-x-otrs-headers">ebben
-a táblázatban</link> vannak részletesebben bemutatva. Minden létrehozott
-levelezési szűrőszabály végrehajtásra kerül, tekintet nélkül a „Megbízható”
-lehetőség beállítására.
+                If you select Yes for the value of the Trusted option, any X-OTRS headers
+attached to an incoming message are evaluated and executed. Because the
+X-OTRS header can execute some actions in the ticket system, you should set
+the <emphasis>Trusted</emphasis> option to <emphasis>Yes</emphasis> only for
+known senders. X-OTRS-Headers are used by the <link linkend
+="adminarea-postmasterfilter">filter module</link> in OTRS. The X-OTRS
+headers are explained <link linkend ="table-of-x-otrs-headers">in this
+table</link> in more detail. Any postmaster filter rules created are
+executed, irrespective of the Trusted option's setting.
             </para>
             <para>
-                A bejövő üzenetek elosztása akkor szabályozható, ha azokat a várólista vagy
-a „Címzett:” mező tartalma szerint szükséges rendezni. Ha a „Szétválogatás a
-kiválasztott várólista szerint” van kiválasztva a „Kézbesítés” mezőnél,
-akkor az összes bejövő üzenet a megadott várólistába lesz rendezve. Ebben az
-esetben figyelmen kívül lesz hagyva az a cím, ahová a levél el lett
-küldve. Ha a „Szétválogatás a levél címzett mezője szerint” van kiválasztva,
-akkor a rendszer ellenőrzi, hogy egy várólista össze van-e kapcsolva a
-bejövő levél címzett mezőjében lévő címmel. Az adminisztrációs oldal <link
-linkend="adminarea-emailaddresses">E-mail cím kezelés</link> szakaszában
-kapcsolhat össze egy címet egy várólistával. Ha a címzett mezőben lévő cím
-össze van kapcsolva egy várólistával, akkor az új üzenet a hozzákapcsolt
-várólistába lesz rendezve. Ha nem található kapcsolat a címzett mezőben lévő
-cím és valamely várólista között, akkor az üzenet a rendszeren lévő „Nyers”
-várólistába fog kerülni, amely egy alapértelmezett telepítés után a <link
-linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>.
+                The distribution of incoming messages can be controlled if they need to be
+sorted by queue or by the content of the <emphasis>To:</emphasis> field. For
+the <emphasis>Dispatching</emphasis> field, if <emphasis>Dispatching by
+selected queue</emphasis> is selected, all incoming messages will be sorted
+into the specified queue. The address where the mail was sent to is
+disregarded in this case. If <emphasis>Dispatching by email To:
+field</emphasis> is selected, the system checks if a queue is linked with
+the address in the <emphasis>To:</emphasis> field of the incoming mail. You
+can link an address to a queue in the <link
+linkend="adminarea-emailaddresses">E-mail address management</link> section
+of the Admin page.  If the address in the <emphasis>To:</emphasis> field is
+linked with a queue, the new message will be sorted into the linked
+queue. If no link is found between the address in the
+<emphasis>To:</emphasis> field and any queue, then the message flows into
+the <emphasis>Raw</emphasis> queue in the system, which is the <link
+linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
+after a default installation.
             </para>
             <para>
                 A levelezési fiókok összes adata az OTRS adatbázisban van elmentve. A
@@ -462,11 +462,11 @@ $Self->{'PostMaster::PreFilterModule'}->{'000-KulsoJegyszamFelismeres'} = {
                 <listitem>
                     <para>Feladócím reguláris kifejezés (FromAddressRegExp)</para>
                     <para>
-                        Ez egy opcionális beállítás. Csak az ezen „Feladó:” címre illeszkedő levelek
-lesznek figyelembe véve ennél a szűrőnél. Beállíthatja ezt a beállítást arra
-a feladó címre, amelyet a külső rendszer használ a kimenő leveleknél. Abban
-az esetben, ha ez a cím eltérő is lehet, akkor beállíthatja üresre ezt a
-beállítást. Az OTRS abban az esetben nem fogja ellenőrizni a küldő címét.
+                        This is an optional setting. Only mails matching this
+<emphasis>From:</emphasis> address will be considered for this filter. You
+can adjust this setting to the sender address your external system uses for
+outgoing mails. In case this address can differ, you can set this option to
+empty. OTRS will in that case not check the sender address.
                     </para>
                 </listitem>
                 <listitem>
@@ -560,7 +560,7 @@ kétszer illeszkednek.
                     </para>
                 </listitem>
                 <listitem>
-                    <para>A „Leállítás találat után” megakadályozhat egy második találatot.</para>
+                    <para><emphasis>Stop After Match</emphasis> can prevent a second match.</para>
                 </listitem>
                 <listitem>
                     <para>Győződjön meg arról, hogy a reguláris kifejezés érvényes-e.</para>
