@@ -45,7 +45,7 @@
                 On a normal installation, the emails will be sent out every minute by the OTRS Daemon.
             </para>
             <para>
-                To check the status of email sending, you can the <filename>bin/otrs.Console.pl
+                To check the status of email sending, you can use the <filename>bin/otrs.Console.pl
                 Maint::Email::MailQueue</filename> console command with <literal>--list</literal> switch.
             </para>
             <para>
@@ -114,14 +114,14 @@ Done.
                 OTRS is able to receive emails from POP3, POP3S, IMAP and IMAPS mail accounts.
             </para>
             <para>
-                Configure your mail accounts via the "PostMaster Mail Accounts" link on the Admin page.
+                Configure your mail accounts via the <emphasis>PostMaster Mail Accounts</emphasis> link on the Admin page.
             </para>
             <para>
                 If a new mail account is to be created (see figure below), then its mail server name, login name and
                 password must be specified. Also, you need to select the mail server type, which can be POP3, POP3S,
                 IMAP or IMAPS. If you don't see your server type available as an option, the required Perl modules are
                 missing on your system. In that case, please refer to <link linkend="installation-of-perl-modules">
-                "Installation of Perl modules required for OTRS"</link> for instructions.
+                Installation of Perl modules required for OTRS</link> for instructions.
             </para>
             <para>
                 <figure>
@@ -134,21 +134,21 @@ Done.
             <para>
                 If you select Yes for the value of the Trusted option, any X-OTRS headers attached to an incoming
                 message are evaluated and executed. Because the X-OTRS header can execute some actions in the ticket
-                system, you should set the Trusted option to Yes only for known senders. X-OTRS-Headers are used by the
+                system, you should set the <emphasis>Trusted</emphasis> option to <emphasis>Yes</emphasis> only for known senders. X-OTRS-Headers are used by the
                 <link linkend ="adminarea-postmasterfilter">filter module</link> in OTRS. The X-OTRS headers are
                 explained <link linkend ="table-of-x-otrs-headers">in this table</link> in more detail. Any postmaster
                 filter rules created are executed, irrespective of the Trusted option's setting.
             </para>
             <para>
                 The distribution of incoming messages can be controlled if they need to be sorted by queue or by the
-                content of the "To:" field. For the Dispatching field, if "Dispatching by selected queue" is selected,
+                content of the <emphasis>To:</emphasis> field. For the <emphasis>Dispatching</emphasis> field, if <emphasis>Dispatching by selected queue</emphasis> is selected,
                 all incoming messages will be sorted into the specified queue. The address where the mail was sent to is
-                disregarded in this case. If "Dispatching by email To: field" is selected, the system checks if a queue
-                is linked with the address in the To: field of the incoming mail. You can link an address to a queue in
+                disregarded in this case. If <emphasis>Dispatching by email To: field</emphasis> is selected, the system checks if a queue
+                is linked with the address in the <emphasis>To:</emphasis> field of the incoming mail. You can link an address to a queue in
                 the <link linkend="adminarea-emailaddresses">E-mail address management</link> section of the Admin page.
-                If the address in the To: field is linked with a queue, the new message will be sorted into the linked
-                queue. If no link is found between the address in the To: field and any queue, then the message flows
-                into the "Raw" queue in the system, which is the
+                If the address in the <emphasis>To:</emphasis> field is linked with a queue, the new message will be sorted into the linked
+                queue. If no link is found between the address in the <emphasis>To:</emphasis> field and any queue, then the message flows
+                into the <emphasis>Raw</emphasis> queue in the system, which is the
                 <link linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link> after a
                 default installation.
             </para>
@@ -403,7 +403,7 @@ $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} 
                 <listitem>
                     <para>FromAddressRegExp</para>
                     <para>
-                        This is an optional setting. Only mails matching this "From:" address will be considered for
+                        This is an optional setting. Only mails matching this <emphasis>From:</emphasis> address will be considered for
                         this filter. You can adjust this setting to the sender address your external system uses for
                         outgoing mails. In case this address can differ, you can set this option to empty. OTRS will in
                         that case not check the sender address.
@@ -488,7 +488,7 @@ $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} 
                     </para>
                 </listitem>
                 <listitem>
-                    <para>"Stop After Match" can prevent a second match.</para>
+                    <para><emphasis>Stop After Match</emphasis> can prevent a second match.</para>
                 </listitem>
                 <listitem>
                     <para>Make sure the regular expression is valid.</para>
