@@ -134,27 +134,27 @@ Requester:
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Описание: краткий текст, описывающий веб-сервис.
+                        <literal>Description</literal>: a short text that describes the web service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        RemoteSystem: краткое описание Удаленной Системы.
+                        <literal>RemoteSystem</literal>: a short description of the Remote System.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Debugger: хранилище для хранения настроек отладчика.
+                        <literal>Debugger</literal>: a container for the debugger settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Provider: хранилище для хранения настроек поставщика.
+                        <literal>Provider</literal>: a container for the provider settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Requester: хранилище для хранения настроек о запрашивающей стороне.
+                        <literal>Requester</literal>: a container for the requester settings.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -162,36 +162,37 @@ Requester:
 
         <section>
             <title>
-                Отладчик
+                <literal>Debugger</literal>
             </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        DebugThreshold: the debugger level.
+                        <literal>DebugThreshold</literal>: the debugger level.
                     </para>
                     <itemizedlist mark="round">
                         <title>
-                            Возможные значения
+                            Возможные значения:
                         </title>
                         <listitem>
                             <para>
-                                debug: все журналы хранятся в базе данных.
+                                <literal>debug</literal>: all logs are stored in the database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                info: информация, уведомления и журнал ошибкок хранятся в базе данных.
+                                <literal>info</literal>: info, notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                notice: ошибки уровня уведомление (notice) и ошибка (error) хранятся в базе
-данных.
+                                <literal>notice</literal>: notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                error: только ошибки уровня error хранятся в базе данных.
+                                <literal>error</literal>: only error level logs are stored in the database.
                             </para>
                         </listitem>
 
@@ -201,137 +202,155 @@ Requester:
         </section>
 
         <section>
-            <title>Поставщик</title>
+            <title>
+                <literal>Provider</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Operation: хранилище для настроек каждой операции.
+                        <literal>Operation</literal>: a container for each operation settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Transport: хранилище для настроек поставщика транспортой сети.
+                        <literal>Transport</literal>: a container for provider network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>Операция</title>
+                <title>
+                    <literal>Operation</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;OperationName&gt;: Уникальное название операции, хранилище для своих
-собственных настроек (от 0..n, но без повторений).
+                            <literal>&lt;OperationName&gt;</literal>: Unique name for the operation,
+container for its own operation settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;OperationName&gt;</title>
+                    <title>
+                        <literal>&lt;OperationName&gt;</literal>
+                    </title>
                     <para>
-                        Этот раздел основан на операция с типом "Test::Test" другие операции могут
-содержать больше или другие настройки.
+                        This section is based on operations from type <literal>Test::Test</literal>
+other operations might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Описание: краткий текст, описывающий операцию.
+                                <literal>Description</literal>: a short text that describes the operation.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingInbound: хранилище для настроек отображаемых данных для данных из
-входящего запроса.
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingOutbound: хранилище для отображающихся настроек для исходящих данных.
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Тип бэкэнд операция в формате Controller::Operation.
+                                <literal>Type</literal>: the operation backend, in Controller::Operation
+format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>MappingInbound</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            Этот раздел основан на отображаемых значениях с типом "Simple". Другие
-отображаемые значения могут содержать больше или другие настройки.
+                            This section is based on mappings from type <literal>Simple</literal>. Other
+mappings might contain more or different settings.
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config: хранилище настроек для этих отображаемых значений.
+                                    <literal>Config</literal>: a container for this mapping settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Тип: mapping backend.
+                                    <literal>Type</literal>: the mapping backend.
                                 </para>
                             </listitem>
 
                         </itemizedlist>
                             <section>
-                                <title>Config</title>
+                                <title>
+                                    <literal>Config</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            KeyMapDefault: хранилище для всех не отображаемых значений ключей.
+                                            <literal>KeyMapDefault</literal>: a container for all non mapped keys
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ValueMapDefault: хранилище для всех не отображаемых значений настроек.
+                                            <literal>ValueMapDefault</literal>: a container for all non mapped values
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapExact: хранилище для всех ключей точных отображаемых значений(от 0
-.. 1).
+                                            <literal>KeyMapExact</literal>: a container for all exact key mappings
+(cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapRegEx: хранилище для отображаемых значений всех регулярных выражений.
+                                            <literal>KeyMapRegEx</literal>: a container for all regular expression key
+mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ValueMap: хранилище для всех значений отображений (mapping-a).
+                                            <literal>ValueMap</literal>: a container for all value mappings (cardinality
+0 .. 1).
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
                                     <title>
-                                        KeyMapDefault
+                                        <literal>KeyMapDefault</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                MapTo: новое значение, которое будет использоваться (применима только если
-параметр MapType установлен в значение MapTo).
+                                                <literal>MapTo</literal>: the new value to be used (only applicable if
+<literal>MapType</literal> is set to <literal>MapTo</literal>).
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                MapType: правило для отображения.
+                                                <literal>MapType</literal>: the rule for the mapping.
                                             </para>
                                             <itemizedlist>
-                                                <title>Возможные значения</title>
+                                                <title>Возможные значения:</title>
                                                 <listitem>
                                                     <para>
-                                                        Keep: оставить без изменений.
+                                                        <literal>Keep</literal>: leave unchanged.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Ignore: понизить.
+                                                        <literal>Ignore</literal>: drop.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        MapTo: заменить на значение MapTo.
+                                                        <literal>MapTo</literal>: change to the <literal>MapTo</literal> value.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -340,85 +359,91 @@ Requester:
                                 </section>
                                 <section>
                                     <title>
-                                        ValueMapDefault
+                                        <literal>ValueMapDefault</literal>
                                     </title>
                                     <para>
-                                        Тоже что и KeyMapDefault.
+                                        Similar to <literal>KeyMapDefault</literal>.
                                     </para>
                                 </section>
                                 <section>
                                     <title>
-                                        KeyMapExact
+                                        <literal>KeyMapExact</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;oldkey&gt;: &lt;newkey&gt; (от 0 .. n но без повторений).
+                                                <literal>&lt;oldkey&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+(cardinality 0 .. n but not duplicate).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        KeyMapRegEx
+                                        <literal>KeyMapRegEx</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;oldkey(RegEx)&gt;: &lt;newkey&gt; ( от 0 .. n но без повторений).
+                                                <literal>&lt;oldkey(RegEx)&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+( cardinality 0 .. n but no duplicates).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        ValueMap
+                                        <literal>ValueMap</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;newkey&gt;: контейнер для отображаемых значений для этого нового ключа
-(зависит от новых ключей от  KeyMapExact и KeyMapRegEx).
+                                                <literal>&lt;newkey&gt;</literal>: a container for value mappings for this
+new key (cardinality depends on the new keys from
+<literal>KeyMapExact</literal> and <literal>KeyMapRegEx</literal>).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                     <section>
                                         <title>
-                                            &lt;newkey&gt;
+                                            <literal>&lt;newkey&gt;</literal>
                                         </title>
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    ValueMapExact: хранилище для всех точных отображаемых значений (от 0 .. 1).
+                                                    <literal>ValueMapExact</literal>: a container for all exact value mappings
+(cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ValueMapRegEx: хранилище для отображаемых значений всех регулярных выражений
-(от 0 .. 1).
+                                                    <literal>ValueMapRegEx</literal>: a container for all regular expression
+value mappings (cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <section>
                                             <title>
-                                                ValueMapExact
+                                                <literal>ValueMapExact</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;oldvalue&gt;: &lt;newvalue&gt; ( cardinality 0 .. n без повторений).
+                                                        <literal>&lt;oldvalue&gt;</literal>: <literal>&lt;newvalue&gt;</literal> (
+cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
                                         </section>
                                         <section>
                                             <title>
-                                                ValueMapRegEx
+                                                <literal>ValueMapRegEx</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;oldvalue(RegEx)&gt;: &lt;newvalue&gt; ( от 0 .. n без повторений).
+                                                        <literal>&lt;oldvalue(RegEx)&gt;</literal>:
+<literal>&lt;newvalue&gt;</literal> ( cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -428,13 +453,17 @@ Requester:
                             </section>
                     </section>
                     <section>
-                        <title>MappingOutbound</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            Тоже что и MappingInbound.
+                            Same as <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Передача</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             Этот раздел основана на сетевом поставщике HTTP::SOAP, другие поставщики
 могут содержать больше или другие настройки.
@@ -442,28 +471,31 @@ Requester:
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config: хранилище для конкретных параметров конфигурации транспортной сети.
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Тип: бэкэнд транспортной сети поставщика.
+                                    <literal>Type</literal>: the provider network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Config</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        MaxLength: максимальная длина в байтах для чтения SOAP-сообщений системой
-OTRS.
+                                        <literal>MaxLength</literal>: the maximum length in bytes to be read in a
+SOAP message by OTRS.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        NameSpace: URI , который дает контекст для всех операций, принадлежащих
-этому веб-сервису.
+                                        <literal>NameSpace</literal>: an URI that gives a context to all operations
+that belongs to this web service.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -474,66 +506,78 @@ OTRS.
         </section>
 
         <section>
-            <title>Запрашиваемая сторона</title>
+            <title>
+                <literal>Requester</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Invoker: хранилище для настроек каждой метки.
+                        <literal>Invoker</literal>: a container for each invokers' settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Transport: хранилище для настроек транспортной сети запрашивающей стороны.
+                        <literal>Transport</literal>: a container for requester network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>Запрашивающая сторона</title>
+                <title>
+                    <literal>Invoker</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;InvokerName&gt;: Уникальное имя для вызывающей стороны, хранилище для
-своих собственых настроек (от 0..n, без повторов).
+                            <literal>&lt;InvokerName&gt;</literal>: Unique name for the invoker,
+container for its own invoker settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;InvokerName&gt;</title>
+                    <title>
+                        <literal>&lt;InvokerName&gt;</literal>
+                    </title>
                     <para>
-                        Этот раздел основан на типе "Test::Test", другие invoker-ры могут иметь
-больше или другие настройки.
+                        This section is based on invokers from type <literal>Test::Test</literal>
+other invokers might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Description: a short text that describes the invoker.
+                                <literal>Description</literal>: a short text that describes the invoker.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                События: хранилище настроек не именованного списка действий.
+                                <literal>Events</literal>: a container for a unnamed list of event trigger
+settings.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingInbound: хранилище для настроек отображаемых значений для данных
-поступающих от ответов.
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingOutbound: хранилище для настроек отображаемых значений для исходящих
-данных запроса.
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Тип: invoker backend, в формате Controller::Invoker.
+                                <literal>Type</literal>: the invoker backend, in
+<literal>Controller::Invoker</literal> format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>События</title>
+                        <title>
+                            <literal>Events</literal>
+                        </title>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
@@ -542,11 +586,11 @@ OTRS.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Asynchronous: to set if the invoker execution will be delegated to the OTRS
-Daemon.
+                                            <literal>Asynchronous</literal>: to set if the invoker execution will be
+delegated to the OTRS Daemon.
                                         </para>
                                         <itemizedlist mark="round">
-                                            <title>Возможные значения</title>
+                                            <title>Возможные значения:</title>
                                             <listitem>
                                                 <para>
                                                     0: not handled by the OTRS Daemon.
@@ -561,197 +605,197 @@ Daemon.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Condition: Container for event conditions to trigger the invoker, if there
-are no conditions, event will always trigger the invoker.
+                                            <literal>Condition</literal>: Container for event conditions to trigger the
+invoker, if there are no conditions, event will always trigger the invoker.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Event: имя события триггера.
+                                            <literal>Event</literal>: the name of the event trigger.
                                         </para>
                                         <itemizedlist>
-                                            <title>Возможные Значения (для событий заявки)</title>
+                                            <title>Possible values (for ticket events)</title>
                                             <listitem>
                                                 <para>
-                                                    TicketCreate
+                                                    <literal>TicketCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketDelete
+                                                    <literal>TicketDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketTitleUpdate
+                                                    <literal>TicketTitleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketUnlockTimeoutUpdate
+                                                    <literal>TicketUnlockTimeoutUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketQueueUpdate
+                                                    <literal>TicketQueueUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketTypeUpdate
+                                                    <literal>TicketTypeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketServiceUpdate
+                                                    <literal>TicketServiceUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSLAUpdate
+                                                    <literal>TicketSLAUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketCustomerUpdate
+                                                    <literal>TicketCustomerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketPendingTimeUpdate
+                                                    <literal>TicketPendingTimeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketLockUpdate
+                                                    <literal>TicketLockUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketArchiveFlagUpdate
+                                                    <literal>TicketArchiveFlagUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketStateUpdate
+                                                    <literal>TicketStateUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketOwnerUpdate
+                                                    <literal>TicketOwnerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketResponsibleUpdate
+                                                    <literal>TicketResponsibleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketPriorityUpdate
+                                                    <literal>TicketPriorityUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    HistoryAdd
+                                                    <literal>HistoryAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    HistoryDelete
+                                                    <literal>HistoryDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketAccountTime
+                                                    <literal>TicketAccountTime</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketMerge
+                                                    <literal>TicketMerge</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSubscribe
+                                                    <literal>TicketSubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketUnsubscribe
+                                                    <literal>TicketUnsubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketFlagSet
+                                                    <literal>TicketFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketFlagDelete
+                                                    <literal>TicketFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSlaveLinkAdd
+                                                    <literal>TicketSlaveLinkAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSlaveLinkDelete
+                                                    <literal>TicketSlaveLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketMasterLinkDelete
+                                                    <literal>TicketMasterLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <itemizedlist>
-                                            <title>Возможные Значения (для действий над статьями)</title>
+                                            <title>Possible values (for article events)</title>
                                             <listitem>
                                                 <para>
-                                                    ArticleCreate
+                                                    <literal>ArticleCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleUpdate
+                                                    <literal>ArticleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleSend
+                                                    <literal>ArticleSend</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleBounce
+                                                    <literal>ArticleBounce</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleAgentNotification
+                                                    <literal>ArticleAgentNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleCustomerNotification
+                                                    <literal>ArticleCustomerNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleAutoResponse
+                                                    <literal>ArticleAutoResponse</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleFlagSet
+                                                    <literal>ArticleFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleFlagDelete
+                                                    <literal>ArticleFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
@@ -760,36 +804,56 @@ are no conditions, event will always trigger the invoker.
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Условие</title>
+                            <title>
+                                <literal>Condition</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Condition: Container to actual event conditions.
+                                        <literal>Condition</literal>: Container to actual event conditions.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        ConditionLinking: Defines how multiple condition interacts with each other.
+                                        <literal>ConditionLinking</literal>: Defines how multiple condition
+interacts with each other.
                                     </para>
                                     <itemizedlist>
-                                        <title>Possible Values (for condition linking)</title>
-                                        <listitem><para>и</para></listitem>
-                                        <listitem><para>или</para></listitem>
-                                        <listitem><para>xor</para></listitem>
+                                        <title>Possible values (for condition linking)</title>
+                                        <listitem>
+                                            <para>
+                                                <literal>and</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>or</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>xor</literal>
+                                            </para>
+                                        </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Condition -&gt; Condition</title>
+                                <title>
+                                    <literal>Condition</literal> -&gt; <literal>Condition</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            &lt;ConditionName&gt;: Container for the condition elements.
+                                            <literal>&lt;ConditionName&gt;</literal>: Container for the condition
+elements.
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
-                                    <title>&lt;ConditionName&gt;</title>
+                                    <title>
+                                        <literal>&lt;ConditionName&gt;</literal>
+                                    </title>
                                     <para>
                                         Unique name for the condition within the invoker and event the GUI assigns
 consecutive integer condition names starting from 1.
@@ -797,65 +861,83 @@ consecutive integer condition names starting from 1.
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                Fields: Container for field conditions.
+                                                <literal>Fields</literal>: Container for field conditions.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Type: Define how multiple fields interact within its condition.
+                                                <literal>Type</literal>: Define how multiple fields interact within its
+condition.
                                             </para>
                                             <itemizedlist>
-                                                <title>Possible Values (for condition linking)</title>
-                                                <listitem><para>и</para></listitem>
-                                                <listitem><para>или</para></listitem>
-                                                <listitem><para>xor</para></listitem>
-                                            </itemizedlist>
-                                        </listitem>
-                                    </itemizedlist>
-                                    <section>
-                                        <title>Поля</title>
-                                        <itemizedlist mark="round">
-                                            <listitem>
-                                                <para>
-                                                    &lt;FieldName&gt;: Container field attributes.
-                                                </para>
-                                            </listitem>
-                                        </itemizedlist>
-                                        <section>
-                                            <title>&lt;FieldName&gt;</title>
-                                            <para>
-                                                The name of a field from the event object (e.g.  for Ticket Events, the
-fields could be Queue Priority Type, etc).
-                                            </para>
-                                            <itemizedlist mark="round">
+                                                <title>Possible values (for condition linking)</title>
                                                 <listitem>
                                                     <para>
-                                                        Match: The value to match from the selected against the event object using
-the Type modifier.
+                                                        <literal>and</literal>
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Type: Modifier to the Match value.
+                                                        <literal>or</literal>
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>xor</literal>
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>
+                                            <literal>Fields</literal>
+                                        </title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    <literal>&lt;FieldName&gt;</literal>: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>
+                                                <literal>&lt;FieldName&gt;</literal>
+                                            </title>
+                                            <para>
+                                                The name of a field from the event object (e.g.  for Ticket Events, the
+fields could be <literal>Queue</literal>, <literal>Priority</literal>,
+<literal>Type</literal>, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Match</literal>: The value to match from the selected against the
+event object using the <literal>Type</literal> modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Type</literal>: Modifier to the <literal>Match</literal> value.
                                                     </para>
                                                     <itemizedlist>
-                                                        <title>Possible Values (for type modifier)</title>
+                                                        <title>Possible values (for type modifier)</title>
                                                         <listitem>
                                                             <para>
-                                                                String: Direct compare between object field value and
+                                                                <literal>String</literal>: Direct compare between object field value and
 <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Regexp: Compare object field value with the regular expression defined in
-the <literal>Match</literal> value.
+                                                                <literal>Regexp</literal>: Compare object field value with the regular
+expression defined in the <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Module: Use the module defined in the <literal>Match</literal> with the
-object data.
+                                                                <literal>Module</literal>: Use the module defined in the
+<literal>Match</literal> with the object data.
                                                             </para>
                                                         </listitem>
                                                     </itemizedlist>
@@ -868,19 +950,25 @@ object data.
                         </section>
                     </section>
                     <section>
-                        <title>MappingInbound</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            Тоже что и Действие MappingInbound.
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>MappingOutbound</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            Тоже что и Действие MappingInbound.
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Передача</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             Этот раздел основан на транспортной сети запрашивающей стороны HTTP::SOAP,
 транспортные сети могут содержать больше или другие настройки.
@@ -888,96 +976,106 @@ object data.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config: хранилище для конкретных параметров конфигурации транспортной сети.
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Тип: бэкэнд транспортной сети запрашивающей стороны.
+                                    <literal>Type</literal>: the requester network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Config</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Аутентификация: хранилище для настроек аутентификации.
+                                        <literal>Authentication</literal>: a container for authentication settings.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Encoding: the SOAP Message request encoding.
+                                        <literal>Encoding</literal>: the SOAP Message request encoding.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Endpoint: the URI of the Remote Server web service to accept OTRS requests.
+                                        <literal>Endpoint</literal>: the URI of the Remote Server web service to
+accept OTRS requests.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        NameSpace: URI который предоставлят связь для всех invoker-ов, которые
-принадлежат этому веб-серверу.
+                                        <literal>NameSpace</literal>: an URI that gives a context to all invokers
+that belongs to this web service.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAPAction: для отправки пустого или заполненого SOAPAction-заголовка в
-формате SOAP сообщения (in "&lt;NameSpace&gt; &lt;Separator&gt;
-&lt;Action&gt;" format).
+                                        <literal>SOAPAction</literal>: to send an empty or filled
+<literal>SOAPAction</literal> header in the SOAP message (in
+<literal>&lt;NameSpace&gt; &lt;Separator&gt; &lt;Action&gt;</literal>
+format).
                                     </para>
                                     <itemizedlist mark="round">
-                                        <title>Возможные значения</title>
+                                        <title>Возможные значения:</title>
                                         <listitem>
                                             <para>
-                                                Yes: to send a filled SOAPAction header.
+                                                <literal>Yes</literal>: to send a filled <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                No: для отправки пустого обработчика SOAP-действия.
+                                                <literal>No</literal>: to send an empty <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAPActionSeparator: для установки &lt;Separator&gt; из заполненых
-SOAPAction заголовков.
+                                        <literal>SOAPActionSeparator</literal>: to set the
+<literal>&lt;Separator&gt;</literal> of a filled
+<literal>SOAPAction</literal> header.
                                     </para>
                                     <itemizedlist mark="round">
-                                        <title>Возможные значения</title>
+                                        <title>Возможные значения:</title>
                                         <listitem>
                                             <para>
-                                                '/': используется для .net веб-сервисов.
+                                                <literal>'/'</literal>: used for .net web services.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                '#': используется для всех веб-сервисов на базе протокола REST.
+                                                <literal>'#'</literal>: used for all the rest web services.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Authentication</title>
+                                <title>
+                                    <literal>Authentication</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            User: имя привилегированого пользователя, который имеет доступ к удаленному
-веб-сервису.
+                                            <literal>User</literal>: the privileged user name that has access to the
+remote web service.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Пароль: пароль для привелигированого пользователя в формате обычного текста.
+                                            <literal>Password</literal>: the password for privileged user in plain text.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Тип: тип аутентификации.
+                                            <literal>Type</literal>: the type of authentication.
                                         </para>
                                     </listitem>
                                 </itemizedlist>

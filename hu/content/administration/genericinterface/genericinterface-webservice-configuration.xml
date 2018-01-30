@@ -134,27 +134,27 @@ Requester:
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Leírás (Description): egy rövid szöveg, amely leírja a webszolgáltatást.
+                        <literal>Description</literal>: a short text that describes the web service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Távoli rendszer (RemoteSystem): a távoli rendszer rövid leírása.
+                        <literal>RemoteSystem</literal>: a short description of the Remote System.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Hibakereső (Debugger): egy konténer a hibakereső beállításaihoz.
+                        <literal>Debugger</literal>: a container for the debugger settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Szolgáltató (Provider): egy konténer a szolgáltató beállításaihoz.
+                        <literal>Provider</literal>: a container for the provider settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Kérelmező (Requester): egy konténer a kérelmező beállításaihoz.
+                        <literal>Requester</literal>: a container for the requester settings.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -162,12 +162,12 @@ Requester:
 
         <section>
             <title>
-                Hibakereső
+                <literal>Debugger</literal>
             </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Hibakeresési küszöbszint (DebugThreshold): a hibakereső szintje.
+                        <literal>DebugThreshold</literal>: the debugger level.
                     </para>
                     <itemizedlist mark="round">
                         <title>
@@ -175,25 +175,24 @@ Requester:
                         </title>
                         <listitem>
                             <para>
-                                hibakeresés (debug): az összes napló eltárolásra kerül az adatbázisban.
+                                <literal>debug</literal>: all logs are stored in the database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                információ (info): az információ, az értesítés és a hiba szintek naplói
-kerülnek eltárolásra az adatbázisban.
+                                <literal>info</literal>: info, notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                értesítés (notice): az értesítés és a hiba szintek naplói kerülnek
-eltárolásra az adatbázisban.
+                                <literal>notice</literal>: notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                hiba (error): csak a hiba szintek naplói kerülnek eltárolásra az
-adatbázisban.
+                                <literal>error</literal>: only error level logs are stored in the database.
                             </para>
                         </listitem>
 
@@ -203,143 +202,155 @@ adatbázisban.
         </section>
 
         <section>
-            <title>Szolgáltató</title>
+            <title>
+                <literal>Provider</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Művelet (Operation): egy konténer az egyes műveleti beállításokhoz.
+                        <literal>Operation</literal>: a container for each operation settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Átvitel (Transport): egy konténer a szolgáltató hálózati átvitelének
-beállításaihoz.
+                        <literal>Transport</literal>: a container for provider network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>Művelet</title>
+                <title>
+                    <literal>Operation</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;Műveletnév&gt;: Egyedi név a művelethez, egy konténer a saját
-műveletének beállításaihoz (0..n számosságú, de nem kettőzött).
+                            <literal>&lt;OperationName&gt;</literal>: Unique name for the operation,
+container for its own operation settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;Műveletnév&gt;</title>
+                    <title>
+                        <literal>&lt;OperationName&gt;</literal>
+                    </title>
                     <para>
-                        Ez a szakasz a „Test::Test” típusból való műveleteken alapul. Az egyéb
-műveletek több vagy különböző beállításokat tartalmazhatnak.
+                        This section is based on operations from type <literal>Test::Test</literal>
+other operations might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Leírás (Description): egy rövid szöveg, amely leírja a műveletet.
+                                <literal>Description</literal>: a short text that describes the operation.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Bejövő leképezés (MappingInbound): egy konténer a bejövő kérésadatok
-leképezési beállításaihoz.
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Kimenő leképezés (MappingOutbound): egy konténer a kimenő válaszadatok
-leképezési beállításaihoz.
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Típus (Type): a művelet háttérprogramja Vezérlő::Művelet formátumban.
+                                <literal>Type</literal>: the operation backend, in Controller::Operation
+format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>Bejövő leképezés</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            Ez a szakasz a „Simple” típusból való leképezéseken alapul. Az egyéb
-leképezések több vagy különböző beállításokat tartalmazhatnak.
+                            This section is based on mappings from type <literal>Simple</literal>. Other
+mappings might contain more or different settings.
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Beállítás (Config): egy konténer ezekhez a leképezési beállításokhoz.
+                                    <literal>Config</literal>: a container for this mapping settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Típus (Type): a leképező háttérprogram.
+                                    <literal>Type</literal>: the mapping backend.
                                 </para>
                             </listitem>
 
                         </itemizedlist>
                             <section>
-                                <title>Beállítás (Config)</title>
+                                <title>
+                                    <literal>Config</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Alapértelmezett kulcsleképezés (KeyMapDefault): egy konténer az összes nem
-leképezett kulcs beállításaihoz.
+                                            <literal>KeyMapDefault</literal>: a container for all non mapped keys
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Alapértelmezett értékleképezés (ValueMapDefault): egy konténer az összes nem
-leképezett érték beállításaihoz.
+                                            <literal>ValueMapDefault</literal>: a container for all non mapped values
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Pontos kulcsleképezés (KeyMapExact): egy konténer az összes pontos
-kulcsleképezéshez (0..1 számosságú).
+                                            <literal>KeyMapExact</literal>: a container for all exact key mappings
+(cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Reguláris kifejezéses kulcsleképezés (KeyMapRegEx): egy konténer az összes
-reguláris kifejezéses kulcsleképezéshez (0..1 számosságú).
+                                            <literal>KeyMapRegEx</literal>: a container for all regular expression key
+mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Értékleképezés (ValueMap): egy konténer az összes értékleképezéshez (0..1
-számosságú).
+                                            <literal>ValueMap</literal>: a container for all value mappings (cardinality
+0 .. 1).
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
                                     <title>
-                                        Alapértelmezett kulcsleképezés
+                                        <literal>KeyMapDefault</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                Leképezés (MapTo): a használandó új érték (csak akkor alkalmazható, ha a
-leképezés típusa „MapTo” értékre van állítva).
+                                                <literal>MapTo</literal>: the new value to be used (only applicable if
+<literal>MapType</literal> is set to <literal>MapTo</literal>).
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Leképezés típusa (MapType): a leképezés szabálya.
+                                                <literal>MapType</literal>: the rule for the mapping.
                                             </para>
                                             <itemizedlist>
                                                 <title>Lehetséges értékek</title>
                                                 <listitem>
                                                     <para>
-                                                        Megtartás (Keep): változatlanul hagyás.
+                                                        <literal>Keep</literal>: leave unchanged.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Mellőzés (Ignore): eldobás.
+                                                        <literal>Ignore</literal>: drop.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Leképezés (MapTo): megváltoztatás a „MapTo” értékére.
+                                                        <literal>MapTo</literal>: change to the <literal>MapTo</literal> value.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -348,89 +359,91 @@ leképezés típusa „MapTo” értékre van állítva).
                                 </section>
                                 <section>
                                     <title>
-                                        Alapértelmezett értékleképezés
+                                        <literal>ValueMapDefault</literal>
                                     </title>
                                     <para>
-                                        Hasonló az alapértelmezett kulcsleképezéshez.
+                                        Similar to <literal>KeyMapDefault</literal>.
                                     </para>
                                 </section>
                                 <section>
                                     <title>
-                                        Pontos kulcsleképezés
+                                        <literal>KeyMapExact</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;régikulcs&gt;: &lt;újkulcs&gt; (0..n számosságú, de nem kettőzött).
+                                                <literal>&lt;oldkey&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+(cardinality 0 .. n but not duplicate).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        Reguláris kifejezéses kulcsleképezés
+                                        <literal>KeyMapRegEx</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;régikulcs(RegEx)&gt;: &lt;újkulcs&gt; (0..n számosságú, de nem
-kettőzött).
+                                                <literal>&lt;oldkey(RegEx)&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+( cardinality 0 .. n but no duplicates).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        Értékleképezés
+                                        <literal>ValueMap</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;újkulcs&gt;: egy konténer ennek az új kulcsnak az értékleképezéséhez (a
-számosság a pontos kulcsleképezésből és a reguláris kifejezéses
-kulcsleképezésből származó új kulcsoktól függ).
+                                                <literal>&lt;newkey&gt;</literal>: a container for value mappings for this
+new key (cardinality depends on the new keys from
+<literal>KeyMapExact</literal> and <literal>KeyMapRegEx</literal>).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                     <section>
                                         <title>
-                                            &lt;újkulcs&gt;
+                                            <literal>&lt;newkey&gt;</literal>
                                         </title>
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    Pontos értékleképezés (ValueMapExact): egy konténer az összes pontos
-értékleképezéshez (0..1 számosságú).
+                                                    <literal>ValueMapExact</literal>: a container for all exact value mappings
+(cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    Reguláris kifejezéses értékleképezés (ValueMapRegEx): egy konténer az összes
-reguláris kifejezéses értékleképezéshez (0..1 számosságú).
+                                                    <literal>ValueMapRegEx</literal>: a container for all regular expression
+value mappings (cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <section>
                                             <title>
-                                                Pontos értékleképezés
+                                                <literal>ValueMapExact</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;régiérték&gt;: &lt;újérték&gt; (0..n számosságú, de nem kettőzött).
+                                                        <literal>&lt;oldvalue&gt;</literal>: <literal>&lt;newvalue&gt;</literal> (
+cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
                                         </section>
                                         <section>
                                             <title>
-                                                Reguláris kifejezéses értékleképezés
+                                                <literal>ValueMapRegEx</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;régiérték(RegEx)&gt;: &lt;újérték&gt; (0..n számosságú, de nem
-kettőzött).
+                                                        <literal>&lt;oldvalue(RegEx)&gt;</literal>:
+<literal>&lt;newvalue&gt;</literal> ( cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -440,13 +453,17 @@ kettőzött).
                             </section>
                     </section>
                     <section>
-                        <title>Kimenő leképezés</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            Ugyanaz mint a bejövő leképezés.
+                            Same as <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Átvitel</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             Ez a szakasz a szolgáltató HTTP::SOAP hálózati átvitelén alapul. Az egyéb
 átvitelek több vagy különböző beállításokat tartalmazhatnak.
@@ -454,29 +471,31 @@ kettőzött).
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Beállítás (Config): egy konténer az adott hálózati átvitel konfigurációs
-beállításaihoz.
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Típus (Type): a szolgáltató hálózati átviteli háttérprogramja.
+                                    <literal>Type</literal>: the provider network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Beállítás (Config)</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Legnagyobb hossz (MaxLength): az OTRS által egy SOAP üzenetben beolvasandó
-legnagyobb hossz bájtban.
+                                        <literal>MaxLength</literal>: the maximum length in bytes to be read in a
+SOAP message by OTRS.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Névtér (NameSpace): egy URI, amely egy környezetet ad az összes olyan
-művelethez, amely ehhez a webszolgáltatáshoz tartozik.
+                                        <literal>NameSpace</literal>: an URI that gives a context to all operations
+that belongs to this web service.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -487,68 +506,78 @@ művelethez, amely ehhez a webszolgáltatáshoz tartozik.
         </section>
 
         <section>
-            <title>Kérelmező</title>
+            <title>
+                <literal>Requester</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Meghívó (Invoker): egy konténer az egyes kérelmezők beállításokhoz.
+                        <literal>Invoker</literal>: a container for each invokers' settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Átvitel (Transport): egy konténer a kérelmező hálózati átvitelének
-beállításaihoz.
+                        <literal>Transport</literal>: a container for requester network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>Meghívó</title>
+                <title>
+                    <literal>Invoker</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;Meghívónév&gt;: Egyedi név a meghívóhoz, egy konténer a saját
-meghívójának beállításaihoz (0..n számosságú, de nem kettőzött).
+                            <literal>&lt;InvokerName&gt;</literal>: Unique name for the invoker,
+container for its own invoker settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;Meghívónév&gt;</title>
+                    <title>
+                        <literal>&lt;InvokerName&gt;</literal>
+                    </title>
                     <para>
-                        Ez a szakasz a „Test::Test” típusból való meghívókon alapul. Az egyéb
-meghívók több vagy különböző beállításokat tartalmazhatnak.
+                        This section is based on invokers from type <literal>Test::Test</literal>
+other invokers might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Leírás (Description): egy rövid szöveg, amely leírja a meghívót.
+                                <literal>Description</literal>: a short text that describes the invoker.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Események (Events): egy konténer az eseményaktiváló beállításainak névtelen
-listájához.
+                                <literal>Events</literal>: a container for a unnamed list of event trigger
+settings.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Bejövő leképezés (MappingInbound): egy konténer a bejövő válaszadatok
-leképezési beállításaihoz.
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Kimenő leképezés (MappingOutbound): egy konténer a kimenő kérésadatok
-leképezési beállításaihoz.
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Típus (Type): a meghívó háttérprogramja Vezérlő::Meghívó formátumban.
+                                <literal>Type</literal>: the invoker backend, in
+<literal>Controller::Invoker</literal> format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>Események</title>
+                        <title>
+                            <literal>Events</literal>
+                        </title>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
@@ -557,8 +586,8 @@ leképezési beállításaihoz.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Aszinkron (Asynchronous): annak beállításához, hogy a meghívó végrehajtása
-delegálásra kerüljön-e az OTRS démonhoz.
+                                            <literal>Asynchronous</literal>: to set if the invoker execution will be
+delegated to the OTRS Daemon.
                                         </para>
                                         <itemizedlist mark="round">
                                             <title>Lehetséges értékek</title>
@@ -576,197 +605,197 @@ delegálásra kerüljön-e az OTRS démonhoz.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Condition: Container for event conditions to trigger the invoker, if there
-are no conditions, event will always trigger the invoker.
+                                            <literal>Condition</literal>: Container for event conditions to trigger the
+invoker, if there are no conditions, event will always trigger the invoker.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Esemény (Event): az eseményaktiváló neve.
+                                            <literal>Event</literal>: the name of the event trigger.
                                         </para>
                                         <itemizedlist>
-                                            <title>Lehetséges értékek (a jegyeseményeknél)</title>
+                                            <title>Possible values (for ticket events)</title>
                                             <listitem>
                                                 <para>
-                                                    TicketCreate
+                                                    <literal>TicketCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketDelete
+                                                    <literal>TicketDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketTitleUpdate
+                                                    <literal>TicketTitleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketUnlockTimeoutUpdate
+                                                    <literal>TicketUnlockTimeoutUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketQueueUpdate
+                                                    <literal>TicketQueueUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketTypeUpdate
+                                                    <literal>TicketTypeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketServiceUpdate
+                                                    <literal>TicketServiceUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSLAUpdate
+                                                    <literal>TicketSLAUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketCustomerUpdate
+                                                    <literal>TicketCustomerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketPendingTimeUpdate
+                                                    <literal>TicketPendingTimeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketLockUpdate
+                                                    <literal>TicketLockUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketArchiveFlagUpdate
+                                                    <literal>TicketArchiveFlagUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketStateUpdate
+                                                    <literal>TicketStateUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketOwnerUpdate
+                                                    <literal>TicketOwnerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketResponsibleUpdate
+                                                    <literal>TicketResponsibleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketPriorityUpdate
+                                                    <literal>TicketPriorityUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    HistoryAdd
+                                                    <literal>HistoryAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    HistoryDelete
+                                                    <literal>HistoryDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketAccountTime
+                                                    <literal>TicketAccountTime</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketMerge
+                                                    <literal>TicketMerge</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSubscribe
+                                                    <literal>TicketSubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketUnsubscribe
+                                                    <literal>TicketUnsubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketFlagSet
+                                                    <literal>TicketFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketFlagDelete
+                                                    <literal>TicketFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSlaveLinkAdd
+                                                    <literal>TicketSlaveLinkAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSlaveLinkDelete
+                                                    <literal>TicketSlaveLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketMasterLinkDelete
+                                                    <literal>TicketMasterLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <itemizedlist>
-                                            <title>Lehetséges értékek (a bejegyzéseseményeknél)</title>
+                                            <title>Possible values (for article events)</title>
                                             <listitem>
                                                 <para>
-                                                    ArticleCreate
+                                                    <literal>ArticleCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleUpdate
+                                                    <literal>ArticleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleSend
+                                                    <literal>ArticleSend</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleBounce
+                                                    <literal>ArticleBounce</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleAgentNotification
+                                                    <literal>ArticleAgentNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleCustomerNotification
+                                                    <literal>ArticleCustomerNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleAutoResponse
+                                                    <literal>ArticleAutoResponse</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleFlagSet
+                                                    <literal>ArticleFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleFlagDelete
+                                                    <literal>ArticleFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
@@ -775,36 +804,56 @@ are no conditions, event will always trigger the invoker.
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Feltétel (Condition)</title>
+                            <title>
+                                <literal>Condition</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Condition: Container to actual event conditions.
+                                        <literal>Condition</literal>: Container to actual event conditions.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        ConditionLinking: Defines how multiple condition interacts with each other.
+                                        <literal>ConditionLinking</literal>: Defines how multiple condition
+interacts with each other.
                                     </para>
                                     <itemizedlist>
-                                        <title>Possible Values (for condition linking)</title>
-                                        <listitem><para>és</para></listitem>
-                                        <listitem><para>vagy</para></listitem>
-                                        <listitem><para>kizáró vagy</para></listitem>
+                                        <title>Possible values (for condition linking)</title>
+                                        <listitem>
+                                            <para>
+                                                <literal>and</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>or</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>xor</literal>
+                                            </para>
+                                        </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Condition -&gt; Condition</title>
+                                <title>
+                                    <literal>Condition</literal> -&gt; <literal>Condition</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            &lt;ConditionName&gt;: Container for the condition elements.
+                                            <literal>&lt;ConditionName&gt;</literal>: Container for the condition
+elements.
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
-                                    <title>&lt;ConditionName&gt;</title>
+                                    <title>
+                                        <literal>&lt;ConditionName&gt;</literal>
+                                    </title>
                                     <para>
                                         Unique name for the condition within the invoker and event the GUI assigns
 consecutive integer condition names starting from 1.
@@ -812,65 +861,83 @@ consecutive integer condition names starting from 1.
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                Fields: Container for field conditions.
+                                                <literal>Fields</literal>: Container for field conditions.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Type: Define how multiple fields interact within its condition.
+                                                <literal>Type</literal>: Define how multiple fields interact within its
+condition.
                                             </para>
                                             <itemizedlist>
-                                                <title>Possible Values (for condition linking)</title>
-                                                <listitem><para>és</para></listitem>
-                                                <listitem><para>vagy</para></listitem>
-                                                <listitem><para>kizáró vagy</para></listitem>
-                                            </itemizedlist>
-                                        </listitem>
-                                    </itemizedlist>
-                                    <section>
-                                        <title>Mezők (Fields)</title>
-                                        <itemizedlist mark="round">
-                                            <listitem>
-                                                <para>
-                                                    &lt;FieldName&gt;: Container field attributes.
-                                                </para>
-                                            </listitem>
-                                        </itemizedlist>
-                                        <section>
-                                            <title>&lt;FieldName&gt;</title>
-                                            <para>
-                                                The name of a field from the event object (e.g.  for Ticket Events, the
-fields could be Queue Priority Type, etc).
-                                            </para>
-                                            <itemizedlist mark="round">
+                                                <title>Possible values (for condition linking)</title>
                                                 <listitem>
                                                     <para>
-                                                        Match: The value to match from the selected against the event object using
-the Type modifier.
+                                                        <literal>and</literal>
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Type: Modifier to the Match value.
+                                                        <literal>or</literal>
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>xor</literal>
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>
+                                            <literal>Fields</literal>
+                                        </title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    <literal>&lt;FieldName&gt;</literal>: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>
+                                                <literal>&lt;FieldName&gt;</literal>
+                                            </title>
+                                            <para>
+                                                The name of a field from the event object (e.g.  for Ticket Events, the
+fields could be <literal>Queue</literal>, <literal>Priority</literal>,
+<literal>Type</literal>, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Match</literal>: The value to match from the selected against the
+event object using the <literal>Type</literal> modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Type</literal>: Modifier to the <literal>Match</literal> value.
                                                     </para>
                                                     <itemizedlist>
-                                                        <title>Possible Values (for type modifier)</title>
+                                                        <title>Possible values (for type modifier)</title>
                                                         <listitem>
                                                             <para>
-                                                                String: Direct compare between object field value and
+                                                                <literal>String</literal>: Direct compare between object field value and
 <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Regexp: Compare object field value with the regular expression defined in
-the <literal>Match</literal> value.
+                                                                <literal>Regexp</literal>: Compare object field value with the regular
+expression defined in the <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Module: Use the module defined in the <literal>Match</literal> with the
-object data.
+                                                                <literal>Module</literal>: Use the module defined in the
+<literal>Match</literal> with the object data.
                                                             </para>
                                                         </listitem>
                                                     </itemizedlist>
@@ -883,19 +950,25 @@ object data.
                         </section>
                     </section>
                     <section>
-                        <title>Bejövő leképezés</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            Ugyanaz mint a művelet bejövő leképezése.
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Kimenő leképezés</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            Ugyanaz mint a művelet bejövő leképezése.
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Átvitel</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             Ez a szakasz a kérelmező HTTP::SOAP hálózati átvitelén alapul. Az egyéb
 átvitelek több vagy különböző beállításokat tartalmazhatnak.
@@ -903,98 +976,106 @@ object data.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Beállítás (Config): egy konténer az adott hálózati átvitel konfigurációs
-beállításaihoz.
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Típus (Type): a kérelmező hálózati átviteli háttérprogramja.
+                                    <literal>Type</literal>: the requester network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Beállítás (Config)</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Hitelesítés (Authentication): egy konténer a hitelesítés beállításaihoz.
+                                        <literal>Authentication</literal>: a container for authentication settings.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Kódolás (Encoding): a SOAP üzenetkérés kódolása.
+                                        <literal>Encoding</literal>: the SOAP Message request encoding.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Végpont (Endpoint): a távoli kiszolgáló webszolgáltatásának URI-ja az OTRS
-kérések elfogadásához.
+                                        <literal>Endpoint</literal>: the URI of the Remote Server web service to
+accept OTRS requests.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Névtér (NameSpace): egy URI, amely egy környezetet ad az összes olyan
-meghívóhoz, amely ehhez a webszolgáltatáshoz tartozik.
+                                        <literal>NameSpace</literal>: an URI that gives a context to all invokers
+that belongs to this web service.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAP művelet (SOAPAction): egy üres vagy kitöltött SOAP művelet fejléc
-küldéséhez a SOAP üzenetben („&lt;Névtér&gt; &lt;Elválasztó&gt;
-&lt;Művelet&gt;” formátumban).
+                                        <literal>SOAPAction</literal>: to send an empty or filled
+<literal>SOAPAction</literal> header in the SOAP message (in
+<literal>&lt;NameSpace&gt; &lt;Separator&gt; &lt;Action&gt;</literal>
+format).
                                     </para>
                                     <itemizedlist mark="round">
                                         <title>Lehetséges értékek</title>
                                         <listitem>
                                             <para>
-                                                Igen (Yes): egy kitöltött SOAP művelet fejléc küldéséhez.
+                                                <literal>Yes</literal>: to send a filled <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Nem (No): egy üres SOAP művelet fejléc küldéséhez.
+                                                <literal>No</literal>: to send an empty <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAP művelet elválasztó (SOAPActionSeparator): egy kitöltött SOAP művelet
-fejléc &lt;Elválasztójának&gt; beállításához.
+                                        <literal>SOAPActionSeparator</literal>: to set the
+<literal>&lt;Separator&gt;</literal> of a filled
+<literal>SOAPAction</literal> header.
                                     </para>
                                     <itemizedlist mark="round">
                                         <title>Lehetséges értékek</title>
                                         <listitem>
                                             <para>
-                                                '/': a .net webszolgáltatásoknál használják.
+                                                <literal>'/'</literal>: used for .net web services.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                '#': az összes REST webszolgáltatásnál ezt használják.
+                                                <literal>'#'</literal>: used for all the rest web services.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Hitelesítés</title>
+                                <title>
+                                    <literal>Authentication</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Felhasználó (User): a kiváltságos felhasználó neve, akinek hozzáférése van a
-távoli webszolgáltatáshoz.
+                                            <literal>User</literal>: the privileged user name that has access to the
+remote web service.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Jelszó (Password): a kiváltságos felhasználó jelszava egyszerű szövegként.
+                                            <literal>Password</literal>: the password for privileged user in plain text.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Típus (Type): a hitelesítés típusa.
+                                            <literal>Type</literal>: the type of authentication.
                                         </para>
                                     </listitem>
                                 </itemizedlist>

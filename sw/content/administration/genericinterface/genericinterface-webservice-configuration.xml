@@ -133,27 +133,27 @@ Requester:
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Maelezo: nakala fupi inayoelezea huduma ya tovuti.
+                        <literal>Description</literal>: a short text that describes the web service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        MfumoMbali: maelezo mafupi ya Mfumo wa Mbali.
+                        <literal>RemoteSystem</literal>: a short description of the Remote System.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Anaye eua: chombo cha mipangilio ya anaye eua.
+                        <literal>Debugger</literal>: a container for the debugger settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Mtoaji: chombo cha mipangilio ya mtoaji.
+                        <literal>Provider</literal>: a container for the provider settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Muombaji: chombo cha mipangilio ya muombaji.
+                        <literal>Requester</literal>: a container for the requester settings.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -161,12 +161,12 @@ Requester:
 
         <section>
             <title>
-                Anaye eua
+                <literal>Debugger</literal>
             </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        DebugThreshold: the debugger level.
+                        <literal>DebugThreshold</literal>: the debugger level.
                     </para>
                     <itemizedlist mark="round">
                         <title>
@@ -174,24 +174,24 @@ Requester:
                         </title>
                         <listitem>
                             <para>
-                                eua: batli zote zinahifadhiwa kwenye hifadhidata.
+                                <literal>debug</literal>: all logs are stored in the database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Taarifa: batli za tabaka la taarifa, notisi na kasoro ndio zinahifadhiwa
-katika hifadhidata.
+                                <literal>info</literal>: info, notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                notisi: batli za tabaka la notisi na makosa ndio zinahifadhiwa kwenye
-hifadhidata.
+                                <literal>notice</literal>: notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                kosa: batli za tabaka la makosa tu ndio zinahifadhiwa kwenye hifadhidata.
+                                <literal>error</literal>: only error level logs are stored in the database.
                             </para>
                         </listitem>
 
@@ -201,141 +201,155 @@ hifadhidata.
         </section>
 
         <section>
-            <title>Mtoaji</title>
+            <title>
+                <literal>Provider</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Operesheni: chombo kwa kila mipangilio ya operesheni.
+                        <literal>Operation</literal>: a container for each operation settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Usafirishaji: chombo cha mipangilio ya mtoaji usafiri wa mtandao.
+                        <literal>Transport</literal>: a container for provider network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>Operesheni</title>
+                <title>
+                    <literal>Operation</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;OperationName&gt;: Unique name for the operation, container for its own
-operation settings (cardinality 0..n, but not duplicate).
+                            <literal>&lt;OperationName&gt;</literal>: Unique name for the operation,
+container for its own operation settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;JinaOperesheni&gt;</title>
+                    <title>
+                        <literal>&lt;OperationName&gt;</literal>
+                    </title>
                     <para>
-                        Hiki kifungu kinajikita katika operesheni kutoka aina "Test::Test"
-operesheni nyingine zinaweza kuwa na zaidi au mipangilio mingine.
+                        This section is based on operations from type <literal>Test::Test</literal>
+other operations might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Maelezo: nakala fupi inayoelezea operesheni.
+                                <literal>Description</literal>: a short text that describes the operation.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                KuunganishaZinazoingia: chombo cha kuunganisha mipangilio ya data za maombi
-yanayoingia.
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                KuunganishaZinazotoka: chombo cha kuunganisha mipangilio ya data za majibu
-yanayotoka.
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Aina: mazingira ya nyuma ya operesheni, katika Mdhibiti::Umbizo la
-operesheni.
+                                <literal>Type</literal>: the operation backend, in Controller::Operation
+format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>KuunganishaZinazoingia</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            Kifungu hiki kinajikita katika miunganiko ya aina "Rahisi". Miunganiko
-mingine inaweza kuwa na mipangilio zaidi au tofauti.
+                            This section is based on mappings from type <literal>Simple</literal>. Other
+mappings might contain more or different settings.
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Usanidi: chombo cha kuunganisha mipangilio hii.
+                                    <literal>Config</literal>: a container for this mapping settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Aina: kuunganisha mazingira ya nyuma.
+                                    <literal>Type</literal>: the mapping backend.
                                 </para>
                             </listitem>
 
                         </itemizedlist>
                             <section>
-                                <title>Usanidi</title>
+                                <title>
+                                    <literal>Config</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            UfunguoUnganishaChaguo-msingi: chombo cha mipangilio yote ya funguo
-isiyounganishwa.
+                                            <literal>KeyMapDefault</literal>: a container for all non mapped keys
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ThamaniUnganishaChaguo-msingi: chombo cha mipangilio ya thamani zote
-zisizounganishwa.
+                                            <literal>ValueMapDefault</literal>: a container for all non mapped values
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapExact: a container for all exact key mappings (cardinality 0 .. 1).
+                                            <literal>KeyMapExact</literal>: a container for all exact key mappings
+(cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            UfunguoUnganishaRegEx: chombo cha miunganiko yote ya semi za kawaida za
-ufunguo (nambari ya elementi 0 .. 1).
+                                            <literal>KeyMapRegEx</literal>: a container for all regular expression key
+mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ValueMap: a container for all value mappings (cardinality 0 .. 1).
+                                            <literal>ValueMap</literal>: a container for all value mappings (cardinality
+0 .. 1).
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
                                     <title>
-                                        UfunguoUnganishaChaguo-msingi
+                                        <literal>KeyMapDefault</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                UnganishaKwa: thamani mpya ya kutumika (inatumika pale tu UnganishaAina
-imesetiwa kuwa UnganishaKwa).
+                                                <literal>MapTo</literal>: the new value to be used (only applicable if
+<literal>MapType</literal> is set to <literal>MapTo</literal>).
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                AinaRamani: sheria kwa ajili ya kuunganisha.
+                                                <literal>MapType</literal>: the rule for the mapping.
                                             </para>
                                             <itemizedlist>
                                                 <title>Thamani ziwezekanazo</title>
                                                 <listitem>
                                                     <para>
-                                                        Weka: acha bila kubadilisha.
+                                                        <literal>Keep</literal>: leave unchanged.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Puuza: dondosha.
+                                                        <literal>Ignore</literal>: drop.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        UnganishaKwa: badilisha kwenda kwenye thamani UnganishaKwa.
+                                                        <literal>MapTo</literal>: change to the <literal>MapTo</literal> value.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -344,89 +358,91 @@ imesetiwa kuwa UnganishaKwa).
                                 </section>
                                 <section>
                                     <title>
-                                        ThamaniUnganishaChaguo-msingi
+                                        <literal>ValueMapDefault</literal>
                                     </title>
                                     <para>
-                                        Sawa sawa na UfunguoUnganishaChaguo-msingi.
+                                        Similar to <literal>KeyMapDefault</literal>.
                                     </para>
                                 </section>
                                 <section>
                                     <title>
-                                        UfunguoUnganishaHalisi
+                                        <literal>KeyMapExact</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;oldkey&gt;: &lt;newkey&gt; (cardinality 0 .. n but not duplicate).
+                                                <literal>&lt;oldkey&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+(cardinality 0 .. n but not duplicate).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        UfunguoUnganishaRegEx
+                                        <literal>KeyMapRegEx</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;ufunguozamani(RegEx)&gt;: &lt;ufunguompya&gt; ( nambari ya elementi 0
-.. n lakini hakuna kujirudia).
+                                                <literal>&lt;oldkey(RegEx)&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+( cardinality 0 .. n but no duplicates).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        ThamaniUnganisha
+                                        <literal>ValueMap</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;ufunguompya&gt;: chombo cha miunganiko ya thamani kwa hii funguo mpya
-(nambari ya elementi inategemeana na funguo mpya kutoka
-UfunguoUnganishaHalisi na UfunguoUnganishaRegEx).
+                                                <literal>&lt;newkey&gt;</literal>: a container for value mappings for this
+new key (cardinality depends on the new keys from
+<literal>KeyMapExact</literal> and <literal>KeyMapRegEx</literal>).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                     <section>
                                         <title>
-                                            &lt;ufunguompya&gt;
+                                            <literal>&lt;newkey&gt;</literal>
                                         </title>
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    ValueMapExact: a container for all exact value mappings (cardinality 0
-.. 1).
+                                                    <literal>ValueMapExact</literal>: a container for all exact value mappings
+(cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ThamaniUnganishaRegEx: chombo cha uunganishaji wa thamani zote za semi za
-kawaida  (nambari ya elementi 0 .. 1).
+                                                    <literal>ValueMapRegEx</literal>: a container for all regular expression
+value mappings (cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <section>
                                             <title>
-                                                ValueMapExact
+                                                <literal>ValueMapExact</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;oldvalue&gt;: &lt;newvalue&gt; ( cardinality 0 .. n but not duplicate).
+                                                        <literal>&lt;oldvalue&gt;</literal>: <literal>&lt;newvalue&gt;</literal> (
+cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
                                         </section>
                                         <section>
                                             <title>
-                                                ThamaniUnganishaRegEx
+                                                <literal>ValueMapRegEx</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;thamanizamani(RegEx)&gt;: &lt;thamanimpya&gt; ( nambari ya elementi 0
-.. n lakini isijirudie).
+                                                        <literal>&lt;oldvalue(RegEx)&gt;</literal>:
+<literal>&lt;newvalue&gt;</literal> ( cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -436,13 +452,17 @@ kawaida  (nambari ya elementi 0 .. 1).
                             </section>
                     </section>
                     <section>
-                        <title>KuunganishaZinazotoka</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            Sawa na KuunganishaZinazoingia
+                            Same as <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Safirisha</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             Hiki kifungu kimejikita kwenye usafirishaji mtandao wa HTTP::SOAP wa mtoaji,
 usafirishaji mwingine unaweza kuwa na mipangilio tofauti au zaidi.
@@ -450,29 +470,31 @@ usafirishaji mwingine unaweza kuwa na mipangilio tofauti au zaidi.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config: chombo cha mipangilio yote maalumu ya usanidi wa usafirishaji wa
-mtandao.
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Aina: mazingira ya nyuma ya mtoaji wa usafirishaji wa mtandao.
+                                    <literal>Type</literal>: the provider network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Usanidi</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        KikomoUrefu: kikomo cha urefu wa kusomwa katika baiti kwenye ujumbe wa SOAP
-kwa OTRS.
+                                        <literal>MaxLength</literal>: the maximum length in bytes to be read in a
+SOAP message by OTRS.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        JinaNafasi: URI ambayo inatoa maudhui kwa operesheni zote zilizo kwenye
-huduma hii ya tovuti.
+                                        <literal>NameSpace</literal>: an URI that gives a context to all operations
+that belongs to this web service.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -483,66 +505,78 @@ huduma hii ya tovuti.
         </section>
 
         <section>
-            <title>Muombaji</title>
+            <title>
+                <literal>Requester</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Mchochezi: chombo cha mipangilio ya kila mchochezi.
+                        <literal>Invoker</literal>: a container for each invokers' settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Usafirishaji: chombo cha mipangilio ya muombaji wa usafiri wa mtandao.
+                        <literal>Transport</literal>: a container for requester network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>Mchochezi</title>
+                <title>
+                    <literal>Invoker</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;InvokerName&gt;: Unique name for the invoker, container for its own
-invoker settings (cardinality 0..n, but not duplicate).
+                            <literal>&lt;InvokerName&gt;</literal>: Unique name for the invoker,
+container for its own invoker settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;InvokerName&gt;</title>
+                    <title>
+                        <literal>&lt;InvokerName&gt;</literal>
+                    </title>
                     <para>
-                        This section is based on invokers from type "Test::Test" other invokers
-might contain more or different settings.
+                        This section is based on invokers from type <literal>Test::Test</literal>
+other invokers might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Description: a short text that describes the invoker.
+                                <literal>Description</literal>: a short text that describes the invoker.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Matukio: chombo cha mipangilio ya vichochezi vya matukio visivyo na majina.
+                                <literal>Events</literal>: a container for a unnamed list of event trigger
+settings.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                KuunganishaZinazoingia: chombo cha kuunganisha mipangilio ya majibu ya data
-zinazoingia.
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                KuunganishaZinazotoka: chombo cha kuunganisha mipangilio ya data za maombi
-yanayotoka.
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Aina: mazingira ya nyuma ya mchochezi, katika Mdhibiti::Umbizo la mchochezi.
+                                <literal>Type</literal>: the invoker backend, in
+<literal>Controller::Invoker</literal> format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>Matukio</title>
+                        <title>
+                            <literal>Events</literal>
+                        </title>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
@@ -551,8 +585,8 @@ yanayotoka.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Asynchronous: to set if the invoker execution will be delegated to the OTRS
-Daemon.
+                                            <literal>Asynchronous</literal>: to set if the invoker execution will be
+delegated to the OTRS Daemon.
                                         </para>
                                         <itemizedlist mark="round">
                                             <title>Thamani ziwezekanazo</title>
@@ -570,197 +604,197 @@ Daemon.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Condition: Container for event conditions to trigger the invoker, if there
-are no conditions, event will always trigger the invoker.
+                                            <literal>Condition</literal>: Container for event conditions to trigger the
+invoker, if there are no conditions, event will always trigger the invoker.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Tukio: jina la kichochezi cha tukio.
+                                            <literal>Event</literal>: the name of the event trigger.
                                         </para>
                                         <itemizedlist>
-                                            <title>Thamani Ziwezekanazo (kwa matukio ya tiketi)</title>
+                                            <title>Possible values (for ticket events)</title>
                                             <listitem>
                                                 <para>
-                                                    TengenezaTiketi
+                                                    <literal>TicketCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    FutaTiketi
+                                                    <literal>TicketDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaKichwaTiketi
+                                                    <literal>TicketTitleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiFunguaMudaWaMwishoSasisha
+                                                    <literal>TicketUnlockTimeoutUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaFoleniTiketi
+                                                    <literal>TicketQueueUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaAinaTiketi
+                                                    <literal>TicketTypeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaHudumaTiketi
+                                                    <literal>TicketServiceUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaSLATiketi
+                                                    <literal>TicketSLAUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaMtejaTiketi
+                                                    <literal>TicketCustomerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaMudaKusubiriTiketi
+                                                    <literal>TicketPendingTimeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaFungaTiketi
+                                                    <literal>TicketLockUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiNyarakaBenderaSasisha
+                                                    <literal>TicketArchiveFlagUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaHaliTiketi
+                                                    <literal>TicketStateUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaMmilikiTiketi
+                                                    <literal>TicketOwnerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiJukumuSasisha
+                                                    <literal>TicketResponsibleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiKipaumbeleSasisha
+                                                    <literal>TicketPriorityUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    OngezaHistoria
+                                                    <literal>HistoryAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    FutaHistoria
+                                                    <literal>HistoryDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiHesabuMuda
+                                                    <literal>TicketAccountTime</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MuunganikoTiketi
+                                                    <literal>TicketMerge</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiJiunge
+                                                    <literal>TicketSubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiJiondoe
+                                                    <literal>TicketUnsubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiBenderaSeti
+                                                    <literal>TicketFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiBenderaFuta
+                                                    <literal>TicketFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiMtumwaKiungoOngeza
+                                                    <literal>TicketSlaveLinkAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiMtumwaKiungoFuta
+                                                    <literal>TicketSlaveLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TiketiMkuuKiungoFuta
+                                                    <literal>TicketMasterLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <itemizedlist>
-                                            <title>Thamani Ziwezekanazo (kwa matukio ya makala)</title>
+                                            <title>Possible values (for article events)</title>
                                             <listitem>
                                                 <para>
-                                                    TengenezaMakala
+                                                    <literal>ArticleCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    SasishaMakala
+                                                    <literal>ArticleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TumaMakala
+                                                    <literal>ArticleSend</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MakalaDunda
+                                                    <literal>ArticleBounce</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MakalaWakalaTaarifa
+                                                    <literal>ArticleAgentNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MakalaMtejaTaarifa
+                                                    <literal>ArticleCustomerNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MakalaOtomatikiMajibu
+                                                    <literal>ArticleAutoResponse</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MakalaBenderaSeti
+                                                    <literal>ArticleFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    MakalaBenderaFuta
+                                                    <literal>ArticleFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
@@ -769,36 +803,56 @@ are no conditions, event will always trigger the invoker.
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Sharti</title>
+                            <title>
+                                <literal>Condition</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Condition: Container to actual event conditions.
+                                        <literal>Condition</literal>: Container to actual event conditions.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        ConditionLinking: Defines how multiple condition interacts with each other.
+                                        <literal>ConditionLinking</literal>: Defines how multiple condition
+interacts with each other.
                                     </para>
                                     <itemizedlist>
-                                        <title>Possible Values (for condition linking)</title>
-                                        <listitem><para>na</para></listitem>
-                                        <listitem><para>Au</para></listitem>
-                                        <listitem><para>xor</para></listitem>
+                                        <title>Possible values (for condition linking)</title>
+                                        <listitem>
+                                            <para>
+                                                <literal>and</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>or</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>xor</literal>
+                                            </para>
+                                        </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Condition -&gt; Condition</title>
+                                <title>
+                                    <literal>Condition</literal> -&gt; <literal>Condition</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            &lt;ConditionName&gt;: Container for the condition elements.
+                                            <literal>&lt;ConditionName&gt;</literal>: Container for the condition
+elements.
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
-                                    <title>&lt;ConditionName&gt;</title>
+                                    <title>
+                                        <literal>&lt;ConditionName&gt;</literal>
+                                    </title>
                                     <para>
                                         Unique name for the condition within the invoker and event the GUI assigns
 consecutive integer condition names starting from 1.
@@ -806,65 +860,83 @@ consecutive integer condition names starting from 1.
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                Fields: Container for field conditions.
+                                                <literal>Fields</literal>: Container for field conditions.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Type: Define how multiple fields interact within its condition.
+                                                <literal>Type</literal>: Define how multiple fields interact within its
+condition.
                                             </para>
                                             <itemizedlist>
-                                                <title>Possible Values (for condition linking)</title>
-                                                <listitem><para>na</para></listitem>
-                                                <listitem><para>Au</para></listitem>
-                                                <listitem><para>xor</para></listitem>
-                                            </itemizedlist>
-                                        </listitem>
-                                    </itemizedlist>
-                                    <section>
-                                        <title>Sehemu</title>
-                                        <itemizedlist mark="round">
-                                            <listitem>
-                                                <para>
-                                                    &lt;FieldName&gt;: Container field attributes.
-                                                </para>
-                                            </listitem>
-                                        </itemizedlist>
-                                        <section>
-                                            <title>&lt;FieldName&gt;</title>
-                                            <para>
-                                                The name of a field from the event object (e.g.  for Ticket Events, the
-fields could be Queue Priority Type, etc).
-                                            </para>
-                                            <itemizedlist mark="round">
+                                                <title>Possible values (for condition linking)</title>
                                                 <listitem>
                                                     <para>
-                                                        Match: The value to match from the selected against the event object using
-the Type modifier.
+                                                        <literal>and</literal>
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Type: Modifier to the Match value.
+                                                        <literal>or</literal>
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>xor</literal>
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>
+                                            <literal>Fields</literal>
+                                        </title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    <literal>&lt;FieldName&gt;</literal>: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>
+                                                <literal>&lt;FieldName&gt;</literal>
+                                            </title>
+                                            <para>
+                                                The name of a field from the event object (e.g.  for Ticket Events, the
+fields could be <literal>Queue</literal>, <literal>Priority</literal>,
+<literal>Type</literal>, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Match</literal>: The value to match from the selected against the
+event object using the <literal>Type</literal> modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Type</literal>: Modifier to the <literal>Match</literal> value.
                                                     </para>
                                                     <itemizedlist>
-                                                        <title>Possible Values (for type modifier)</title>
+                                                        <title>Possible values (for type modifier)</title>
                                                         <listitem>
                                                             <para>
-                                                                String: Direct compare between object field value and
+                                                                <literal>String</literal>: Direct compare between object field value and
 <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Regexp: Compare object field value with the regular expression defined in
-the <literal>Match</literal> value.
+                                                                <literal>Regexp</literal>: Compare object field value with the regular
+expression defined in the <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Module: Use the module defined in the <literal>Match</literal> with the
-object data.
+                                                                <literal>Module</literal>: Use the module defined in the
+<literal>Match</literal> with the object data.
                                                             </para>
                                                         </listitem>
                                                     </itemizedlist>
@@ -877,19 +949,25 @@ object data.
                         </section>
                     </section>
                     <section>
-                        <title>KuunganishaZinazoingia</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            Sawa na Operesheni KuunganishaZinazoingia.
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>KuunganishaZinazotoka</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            Sawa na Operesheni KuunganishaZinazoingia.
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>Safirisha</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             Hiki kifungu kimejikita kwenye usafirishaji mtandao wa HTTP::SOAP wa
 muombaji, usafirishaji mwingine unawezakuwa na mipangilio tofauti au zaidi.
@@ -897,97 +975,106 @@ muombaji, usafirishaji mwingine unawezakuwa na mipangilio tofauti au zaidi.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config: chombo cha mipangilio yote maalumu ya usanidi wa usafirishaji wa
-mtandao.
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Aina: mazingira ya nyuma ya muombaji wa usafirishaji wa mtandao.
+                                    <literal>Type</literal>: the requester network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Usanidi</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Uthibitisho: chombo cha mipangilio ya uthibitisho
+                                        <literal>Authentication</literal>: a container for authentication settings.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Encoding: the SOAP Message request encoding.
+                                        <literal>Encoding</literal>: the SOAP Message request encoding.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Endpoint: the URI of the Remote Server web service to accept OTRS requests.
+                                        <literal>Endpoint</literal>: the URI of the Remote Server web service to
+accept OTRS requests.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        NameSpace: an URI that gives a context to all invokers that belongs to this
-web service.
+                                        <literal>NameSpace</literal>: an URI that gives a context to all invokers
+that belongs to this web service.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAPAction: kutuma kichwa cha SOAPAction kilicho tupu au kilichojazwa katika
-ujumbe wa SOAP (ndani ya "&lt;JinaNafasi&gt; &lt;Kigawanyo&gt;
-&lt;Kitendo&gt;" umbizo).
+                                        <literal>SOAPAction</literal>: to send an empty or filled
+<literal>SOAPAction</literal> header in the SOAP message (in
+<literal>&lt;NameSpace&gt; &lt;Separator&gt; &lt;Action&gt;</literal>
+format).
                                     </para>
                                     <itemizedlist mark="round">
                                         <title>Thamani ziwezekanazo</title>
                                         <listitem>
                                             <para>
-                                                Yes: to send a filled SOAPAction header.
+                                                <literal>Yes</literal>: to send a filled <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Hapana: kutuma kichwa cha SOAPAction tupu.
+                                                <literal>No</literal>: to send an empty <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAPActionSeparator: kuseti &lt;Kigawanyo&gt; cha kichwa cha SOAPAction
-iliyojazwa.
+                                        <literal>SOAPActionSeparator</literal>: to set the
+<literal>&lt;Separator&gt;</literal> of a filled
+<literal>SOAPAction</literal> header.
                                     </para>
                                     <itemizedlist mark="round">
                                         <title>Thamani ziwezekanazo</title>
                                         <listitem>
                                             <para>
-                                                '/': inatumika kwa na huduma za tovuti za .net.
+                                                <literal>'/'</literal>: used for .net web services.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                '#': inatumika na huduma zote za tovuti zilizobaki.
+                                                <literal>'#'</literal>: used for all the rest web services.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Uthibitisho</title>
+                                <title>
+                                    <literal>Authentication</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Mtumiaji: jina la mtumiaji lenye haki ambalo lina ufikivu kwa huduma ya
-mbali ya tovuti.
+                                            <literal>User</literal>: the privileged user name that has access to the
+remote web service.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Nywila: nywila ya mtumiaji mwenye haki katika nakala wazi.
+                                            <literal>Password</literal>: the password for privileged user in plain text.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Aina: aina ya uthibitisho.
+                                            <literal>Type</literal>: the type of authentication.
                                         </para>
                                     </listitem>
                                 </itemizedlist>

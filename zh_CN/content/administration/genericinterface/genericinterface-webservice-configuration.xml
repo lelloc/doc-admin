@@ -124,27 +124,27 @@ Requester:
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Description（描述）：描述WEB服务的简短文本。
+                        <literal>Description</literal>: a short text that describes the web service.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        RemoteSystem（远程系统）：远程系统的简短描述。
+                        <literal>RemoteSystem</literal>: a short description of the Remote System.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Debugger（调试器）：调试器设置的一个容器。
+                        <literal>Debugger</literal>: a container for the debugger settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Provider（提供者）：提供者设置的一个容器。
+                        <literal>Provider</literal>: a container for the provider settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Requester（请求者）：请求者设置的一个容器。
+                        <literal>Requester</literal>: a container for the requester settings.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -152,35 +152,37 @@ Requester:
 
         <section>
             <title>
-                调试器
+                <literal>Debugger</literal>
             </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        调试阈值：调试器的级别。
+                        <literal>DebugThreshold</literal>: the debugger level.
                     </para>
                     <itemizedlist mark="round">
                         <title>
-                            可能的值
+                            可能值
                         </title>
                         <listitem>
                             <para>
-                                debug（调试）：所有日志都存储到数据库。
+                                <literal>debug</literal>: all logs are stored in the database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                info（信息）：info（信息）、notice（注意）和error（错误）级别的日志存储到数据库。
+                                <literal>info</literal>: info, notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                notice（注意）：notice（注意）和error（错误）级别的日志存储到数据库。
+                                <literal>notice</literal>: notice and error level logs are stored in the
+database.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                error（错误）：只有error（错误）级别的日志存储到数据库。
+                                <literal>error</literal>: only error level logs are stored in the database.
                             </para>
                         </listitem>
 
@@ -190,131 +192,155 @@ Requester:
         </section>
 
         <section>
-            <title>提供者</title>
+            <title>
+                <literal>Provider</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Operation（操作）：每个操作设置的一个容器。
+                        <literal>Operation</literal>: a container for each operation settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Transport（传输）：提供者网络传输设置的一个容器。
+                        <literal>Transport</literal>: a container for provider network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>操作</title>
+                <title>
+                    <literal>Operation</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;OperationName操作名称&gt;：操作的唯一名称，它自己的操作设置的容器（可以加基数0..n，但不能重复）。
+                            <literal>&lt;OperationName&gt;</literal>: Unique name for the operation,
+container for its own operation settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;OperationName&gt;</title>
+                    <title>
+                        <literal>&lt;OperationName&gt;</literal>
+                    </title>
                     <para>
-                        这部分基于来自“Test::Test”类型的操作，其它操作可能包含更多或不同的设置。
+                        This section is based on operations from type <literal>Test::Test</literal>
+other operations might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Description（描述）：描述这个操作的简短文本。
+                                <literal>Description</literal>: a short text that describes the operation.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingInbound（入站映射）：进入的请求数据的映射设置容器。
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingOutbound（出站映射）：外发的响应数据的映射设置容器。
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Type（类型）：操作后端，格式为Controller::Operation。
+                                <literal>Type</literal>: the operation backend, in Controller::Operation
+format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>MappingInbound（入站映射）</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            本部分内容基于映射类型“Simple（简单）”，其它映射类型可能包含更多或不同的设置。
+                            This section is based on mappings from type <literal>Simple</literal>. Other
+mappings might contain more or different settings.
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config（配置）：这个映射设置的容器。
+                                    <literal>Config</literal>: a container for this mapping settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Type（类型）：映射后端。
+                                    <literal>Type</literal>: the mapping backend.
                                 </para>
                             </listitem>
 
                         </itemizedlist>
                             <section>
-                                <title>Config（配置）</title>
+                                <title>
+                                    <literal>Config</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            KeyMapDefault（默认的键映射）：所有未映射的键的设置的容器。
+                                            <literal>KeyMapDefault</literal>: a container for all non mapped keys
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ValueMapDefault（默认的值映射）：所有未映射的值的设置的容器。
+                                            <literal>ValueMapDefault</literal>: a container for all non mapped values
+settings.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapExact（准确的键映射）：所有准确的键映射（基数0 .. 1）的容器。
+                                            <literal>KeyMapExact</literal>: a container for all exact key mappings
+(cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            KeyMapRegEx（正则键映射）：所有正则表达式的键映射（基数0 .. 1）的容器。
+                                            <literal>KeyMapRegEx</literal>: a container for all regular expression key
+mappings (cardinality 0 .. 1).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            ValueMap（值映射）：所有值映射（基数0 .. 1）的容器。
+                                            <literal>ValueMap</literal>: a container for all value mappings (cardinality
+0 .. 1).
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
                                     <title>
-                                        KeyMapDefault（默认的键映射）
+                                        <literal>KeyMapDefault</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                MapTo（映射到）：使用新的值（只适用于MapTo映射类型）。
+                                                <literal>MapTo</literal>: the new value to be used (only applicable if
+<literal>MapType</literal> is set to <literal>MapTo</literal>).
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                MapType（映射类型）：映射的规则。
+                                                <literal>MapType</literal>: the rule for the mapping.
                                             </para>
                                             <itemizedlist>
-                                                <title>可能的值</title>
+                                                <title>可能值</title>
                                                 <listitem>
                                                     <para>
-                                                        Keep（保持）：保持不变。
+                                                        <literal>Keep</literal>: leave unchanged.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Ignore（忽略）：丢弃。
+                                                        <literal>Ignore</literal>: drop.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        MapTo（映射到）：修改为MapTo的值。
+                                                        <literal>MapTo</literal>: change to the <literal>MapTo</literal> value.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -323,83 +349,91 @@ Requester:
                                 </section>
                                 <section>
                                     <title>
-                                        ValueMapDefault（默认的值映射）
+                                        <literal>ValueMapDefault</literal>
                                     </title>
                                     <para>
-                                        与KeyMapDefault（默认的键映射）类似。
+                                        Similar to <literal>KeyMapDefault</literal>.
                                     </para>
                                 </section>
                                 <section>
                                     <title>
-                                        KeyMapExact（准确的键映射）
+                                        <literal>KeyMapExact</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;oldkey原键&gt;: &lt;newkey新键&gt;（基数 0 .. n，但不能重复）。
+                                                <literal>&lt;oldkey&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+(cardinality 0 .. n but not duplicate).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        KeyMapRegEx（正则表达式键映射）
+                                        <literal>KeyMapRegEx</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;oldkey(RegEx)匹配正则表达式的原键&gt;: &lt;newkey新键&gt;（基数 0 .. n，但不能重复）。
+                                                <literal>&lt;oldkey(RegEx)&gt;</literal>: <literal>&lt;newkey&gt;</literal>
+( cardinality 0 .. n but no duplicates).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </section>
                                 <section>
                                     <title>
-                                        ValueMap（值映射）
+                                        <literal>ValueMap</literal>
                                     </title>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                &lt;newkey（新键）&gt;：这个新键的值映射容器（基数取决于来自KeyMapExact和KeyMapRegEx的新键）。
+                                                <literal>&lt;newkey&gt;</literal>: a container for value mappings for this
+new key (cardinality depends on the new keys from
+<literal>KeyMapExact</literal> and <literal>KeyMapRegEx</literal>).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                     <section>
                                         <title>
-                                            &lt;newkey（新键）&gt;
+                                            <literal>&lt;newkey&gt;</literal>
                                         </title>
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    ：所有准确的值映射容器（基数 0 .. 1）。
+                                                    <literal>ValueMapExact</literal>: a container for all exact value mappings
+(cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ValueMapRegEx（正则表达式的值映射）：所有的正则表达式的值映射容器（基数 0 .. 1）。
+                                                    <literal>ValueMapRegEx</literal>: a container for all regular expression
+value mappings (cardinality 0 .. 1).
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <section>
                                             <title>
-                                                ValueMapExact（准确的值映射）
+                                                <literal>ValueMapExact</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;oldvalue原值&gt;: &lt;newvalue新值&gt;（基数 0 .. n但不能重复）。
+                                                        <literal>&lt;oldvalue&gt;</literal>: <literal>&lt;newvalue&gt;</literal> (
+cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
                                         </section>
                                         <section>
                                             <title>
-                                                ValueMapRegEx（正则表达式的值映射）
+                                                <literal>ValueMapRegEx</literal>
                                             </title>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        &lt;oldvalue(RegEx)匹配正则表达式的原值&gt;: &lt;newvalue新值&gt;（基数 0 .. n，但不能重复）。
+                                                        <literal>&lt;oldvalue(RegEx)&gt;</literal>:
+<literal>&lt;newvalue&gt;</literal> ( cardinality 0 .. n but not duplicate).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -409,39 +443,48 @@ Requester:
                             </section>
                     </section>
                     <section>
-                        <title>MappingOutbound（出站映射）</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            与MappingInbound（入站映射）相同。
+                            Same as <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>传输</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             本部分基于提供者的网络传输HTTP::SOAP，其它的传输可能包含更多或不同的设置。
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config（配置）：这个特定的网络传输配置的容器。
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Type（类型）：提供者网络传输后端。
+                                    <literal>Type</literal>: the provider network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Config（配置）</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        MaxLength（最大长度）：OTRS中一个SOAP消息能够读取的最大长度（单位：字节）。
+                                        <literal>MaxLength</literal>: the maximum length in bytes to be read in a
+SOAP message by OTRS.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        NameSpace（命名空间）：一个URI，给定一个属于这个WEB服务所有操作的上下文环境。
+                                        <literal>NameSpace</literal>: an URI that gives a context to all operations
+that belongs to this web service.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -452,62 +495,78 @@ Requester:
         </section>
 
         <section>
-            <title>Requester（请求者）</title>
+            <title>
+                <literal>Requester</literal>
+            </title>
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        Invoker（调用程序）：每个调用程序的设置的容器。
+                        <literal>Invoker</literal>: a container for each invokers' settings.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Transport（传输）：请求者网络传输设置的容器。
+                        <literal>Transport</literal>: a container for requester network transport
+settings.
                     </para>
                 </listitem>
             </itemizedlist>
             <section>
-                <title>调用程序</title>
+                <title>
+                    <literal>Invoker</literal>
+                </title>
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            &lt;InvokerName调用程序名称&gt;：该调用程序的唯一名称，它自己的调用程序设置的容器（基数 0 .. n，但不能重复）。
+                            <literal>&lt;InvokerName&gt;</literal>: Unique name for the invoker,
+container for its own invoker settings (cardinality 0..n, but not
+duplicate).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
-                    <title>&lt;InvokerName调用程序名称&gt;</title>
+                    <title>
+                        <literal>&lt;InvokerName&gt;</literal>
+                    </title>
                     <para>
-                        本部分内容基于调用程序类型“Test::Test”，其它调用程序类型可能包含更多或不同的设置。
+                        This section is based on invokers from type <literal>Test::Test</literal>
+other invokers might contain more or different settings.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                Description（描述）：描述这个调用程序的简短文本。
+                                <literal>Description</literal>: a short text that describes the invoker.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Events（事件）：事件触发器的未命名列表的容器。
+                                <literal>Events</literal>: a container for a unnamed list of event trigger
+settings.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingInbound（入站映射）：进入的响应数据的映射设置容器。
+                                <literal>MappingInbound</literal>: a container for the mapping settings for
+the incoming response data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                MappingOutbound（出站映射）：外发的请求数据的映射设置容器。
+                                <literal>MappingOutbound</literal>: a container for the mapping settings for
+the outgoing request data.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                Type（类型）：Controller（控制器）::Invoker（调用程序）格式的调用程序后端。
+                                <literal>Type</literal>: the invoker backend, in
+<literal>Controller::Invoker</literal> format.
                             </para>
                         </listitem>
                     </itemizedlist>
                     <section>
-                        <title>Events（事件）</title>
+                        <title>
+                            <literal>Events</literal>
+                        </title>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
@@ -516,10 +575,11 @@ Requester:
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            Asynchronous（异步）：设置是否委派给OTRS守护进程执行调用程序。
+                                            <literal>Asynchronous</literal>: to set if the invoker execution will be
+delegated to the OTRS Daemon.
                                         </para>
                                         <itemizedlist mark="round">
-                                            <title>可能的值</title>
+                                            <title>可能值</title>
                                             <listitem>
                                                 <para>
                                                     0：不由OTRS守护进程执行调用程序。
@@ -534,196 +594,197 @@ Requester:
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Condition（条件）：触发调用程序的事件条件的容器，如果没有条件，事件总是会触发调用程序。
+                                            <literal>Condition</literal>: Container for event conditions to trigger the
+invoker, if there are no conditions, event will always trigger the invoker.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Event（事件）：事件触发器的名称。
+                                            <literal>Event</literal>: the name of the event trigger.
                                         </para>
                                         <itemizedlist>
-                                            <title>可能的值（用于工单事件）</title>
+                                            <title>Possible values (for ticket events)</title>
                                             <listitem>
                                                 <para>
-                                                    工单创建
+                                                    <literal>TicketCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketDelete（删除工单）
+                                                    <literal>TicketDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketTitleUpdate（更新工单标题）
+                                                    <literal>TicketTitleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketUnlockTimeoutUpdate（更新工单解锁超时）
+                                                    <literal>TicketUnlockTimeoutUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketQueueUpdate（更新工单队列）
+                                                    <literal>TicketQueueUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketTypeUpdate（更新工单类型）
+                                                    <literal>TicketTypeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketServiceUpdate（更新工单服务）
+                                                    <literal>TicketServiceUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSLAUpdate（更新工单SLA）
+                                                    <literal>TicketSLAUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketCustomerUpdate（（更新工单客户）
+                                                    <literal>TicketCustomerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketPendingTimeUpdate（更新工单挂起时间）
+                                                    <literal>TicketPendingTimeUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketLockUpdate（更新工单锁定）
+                                                    <literal>TicketLockUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketArchiveFlagUpdate（更新工单归档标识）
+                                                    <literal>TicketArchiveFlagUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketStateUpdate（更新工单状态）
+                                                    <literal>TicketStateUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketOwnerUpdate（更新工单所有者）
+                                                    <literal>TicketOwnerUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketResponsibleUpdate（更新工单负责人）
+                                                    <literal>TicketResponsibleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketPriorityUpdate（更新工单优先级）
+                                                    <literal>TicketPriorityUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    HistoryAdd（添加历史）
+                                                    <literal>HistoryAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    HistoryDelete（删除历史）
+                                                    <literal>HistoryDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketAccountTime（工单占用时间）
+                                                    <literal>TicketAccountTime</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketMerge（合并工单）
+                                                    <literal>TicketMerge</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSubscribe（关注工单）
+                                                    <literal>TicketSubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketUnsubscribe（取消关注工单）
+                                                    <literal>TicketUnsubscribe</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketFlagSet（设置工单标识）
+                                                    <literal>TicketFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketFlagDelete（删除工单标识）
+                                                    <literal>TicketFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSlaveLinkAdd（添加‘从工单’链接）
+                                                    <literal>TicketSlaveLinkAdd</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketSlaveLinkDelete（删除‘从工单’链接）
+                                                    <literal>TicketSlaveLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    TicketMasterLinkDelete（删除‘主工单’链接）
+                                                    <literal>TicketMasterLinkDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <itemizedlist>
-                                            <title>可能的值（用于信件事件）</title>
+                                            <title>Possible values (for article events)</title>
                                             <listitem>
                                                 <para>
-                                                    ArticleCreate（创建信件）
+                                                    <literal>ArticleCreate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleUpdate（更新信件）
+                                                    <literal>ArticleUpdate</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleSend（发送信件）
+                                                    <literal>ArticleSend</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleBounce（退回信件）
+                                                    <literal>ArticleBounce</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleAgentNotification（服务人员通知信件）
+                                                    <literal>ArticleAgentNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleCustomerNotification（客户通知信件）
+                                                    <literal>ArticleCustomerNotification</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleAutoResponse（自动响应信件）
+                                                    <literal>ArticleAutoResponse</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleFlagSet（设置信件标识）
+                                                    <literal>ArticleFlagSet</literal>
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    ArticleFlagDelete（删除信件标识）
+                                                    <literal>ArticleFlagDelete</literal>
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
@@ -732,96 +793,139 @@ Requester:
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>条件</title>
+                            <title>
+                                <literal>Condition</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Condition（条件）：实际事件条件的容器。
+                                        <literal>Condition</literal>: Container to actual event conditions.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        ConditionLinking（条件链接）：定义多重条件如何相互影响。
+                                        <literal>ConditionLinking</literal>: Defines how multiple condition
+interacts with each other.
                                     </para>
                                     <itemizedlist>
-                                        <title>可能的值（用于条件链接）</title>
-                                        <listitem><para>and（与）</para></listitem>
-                                        <listitem><para>or（或）</para></listitem>
-                                        <listitem><para>xor（异或）</para></listitem>
+                                        <title>Possible values (for condition linking)</title>
+                                        <listitem>
+                                            <para>
+                                                <literal>and</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>or</literal>
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <literal>xor</literal>
+                                            </para>
+                                        </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Condition -&gt; Condition</title>
+                                <title>
+                                    <literal>Condition</literal> -&gt; <literal>Condition</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            &lt;ConditionName（条件名称）&gt;：条件元素的容器。
+                                            <literal>&lt;ConditionName&gt;</literal>: Container for the condition
+elements.
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
-                                    <title>&lt;ConditionName（条件名称）&gt;</title>
+                                    <title>
+                                        <literal>&lt;ConditionName&gt;</literal>
+                                    </title>
                                     <para>
                                         调用程序和事件中的条件的唯一名称，图形用户界面从1开始分配连续的整数作为条件名称。
                                     </para>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                Fields（字段）：字段条件的容器。
+                                                <literal>Fields</literal>: Container for field conditions.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Type（类型）：定义一个条件下的多个字段如何交互。
+                                                <literal>Type</literal>: Define how multiple fields interact within its
+condition.
                                             </para>
                                             <itemizedlist>
-                                                <title>可能的值（用于条件链接）</title>
-                                                <listitem><para>and（与）</para></listitem>
-                                                <listitem><para>or（或）</para></listitem>
-                                                <listitem><para>xor（异或）</para></listitem>
-                                            </itemizedlist>
-                                        </listitem>
-                                    </itemizedlist>
-                                    <section>
-                                        <title>字段</title>
-                                        <itemizedlist mark="round">
-                                            <listitem>
-                                                <para>
-                                                    &lt;FieldName（字段名称）&gt;：字段属性的容器。
-                                                </para>
-                                            </listitem>
-                                        </itemizedlist>
-                                        <section>
-                                            <title>&lt;FieldName（字段名称）&gt;</title>
-                                            <para>
-                                                来自事件对象的字段的名称，例如：对于工单事件，字段可以是Queue（队列）、 Priority（优先级）、 Type（类型）等。
-                                            </para>
-                                            <itemizedlist mark="round">
+                                                <title>Possible values (for condition linking)</title>
                                                 <listitem>
                                                     <para>
-                                                        Match（匹配）：使用“Type （类型）”修饰符从所选的对象与事件对象匹配的值。
+                                                        <literal>and</literal>
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        Type （类型）：匹配值的修饰符。
+                                                        <literal>or</literal>
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>xor</literal>
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </listitem>
+                                    </itemizedlist>
+                                    <section>
+                                        <title>
+                                            <literal>Fields</literal>
+                                        </title>
+                                        <itemizedlist mark="round">
+                                            <listitem>
+                                                <para>
+                                                    <literal>&lt;FieldName&gt;</literal>: Container field attributes.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
+                                        <section>
+                                            <title>
+                                                <literal>&lt;FieldName&gt;</literal>
+                                            </title>
+                                            <para>
+                                                The name of a field from the event object (e.g.  for Ticket Events, the
+fields could be <literal>Queue</literal>, <literal>Priority</literal>,
+<literal>Type</literal>, etc).
+                                            </para>
+                                            <itemizedlist mark="round">
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Match</literal>: The value to match from the selected against the
+event object using the <literal>Type</literal> modifier.
+                                                    </para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>
+                                                        <literal>Type</literal>: Modifier to the <literal>Match</literal> value.
                                                     </para>
                                                     <itemizedlist>
-                                                        <title>可能的值（用于类型修饰符）</title>
+                                                        <title>Possible values (for type modifier)</title>
                                                         <listitem>
                                                             <para>
-                                                                String（字符串）：直接比较对象字段的值和<literal>Match（匹配）</literal>的值。
+                                                                <literal>String</literal>: Direct compare between object field value and
+<literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Regexp（正则表达式）：将对象字段的值与<literal>Match（匹配）</literal>定义的正则表达式进行比较。
+                                                                <literal>Regexp</literal>: Compare object field value with the regular
+expression defined in the <literal>Match</literal> value.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                Module（模块）：使用<literal>Match（匹配）</literal>中定义的模块比较对象数据。
+                                                                <literal>Module</literal>: Use the module defined in the
+<literal>Match</literal> with the object data.
                                                             </para>
                                                         </listitem>
                                                     </itemizedlist>
@@ -834,111 +938,131 @@ Requester:
                         </section>
                     </section>
                     <section>
-                        <title>MappingInbound（入站映射）</title>
+                        <title>
+                            <literal>MappingInbound</literal>
+                        </title>
                         <para>
-                            与操作的MappingInbound（入站映射）相同。
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>MappingOutbound（出站映射）</title>
+                        <title>
+                            <literal>MappingOutbound</literal>
+                        </title>
                         <para>
-                            与操作的MappingInbound（入站映射）相同。
+                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
                         </para>
                     </section>
                     <section>
-                        <title>传输</title>
+                        <title>
+                            <literal>Transport</literal>
+                        </title>
                         <para>
                             本部分基于请求者的网络传输HTTP::SOAP，其它的传输可能包含更多或不同的设置。
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    Config（配置）：这个特定的网络传输配置的容器。
+                                    <literal>Config</literal>: a container for the specific network transport
+configuration settings.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Type（类型）：请求者的网络传输后端。
+                                    <literal>Type</literal>: the requester network transport backend.
                                 </para>
                             </listitem>
                         </itemizedlist>
                         <section>
-                            <title>Config（配置）</title>
+                            <title>
+                                <literal>Config</literal>
+                            </title>
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        Authentication（身份认证）：身份认证设置的容器。
+                                        <literal>Authentication</literal>: a container for authentication settings.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Encoding（编码）：需要将SOAP消息编码。
+                                        <literal>Encoding</literal>: the SOAP Message request encoding.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        Endpoint（端点）：远程服务器WEB服务的URI，用来接受OTRS的请求。
+                                        <literal>Endpoint</literal>: the URI of the Remote Server web service to
+accept OTRS requests.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        NameSpace（命名空间）：一个URI，给定一个属于这个WEB服务的所有调用程序的上下文环境。
+                                        <literal>NameSpace</literal>: an URI that gives a context to all invokers
+that belongs to this web service.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAPAction（SOAP动作）：在SOAP消息中发送一个空的或填满的SOAPAction头（用“&lt;NameSpace&gt;
-&lt;Separator&gt; &lt;Action&gt;”格式）。
+                                        <literal>SOAPAction</literal>: to send an empty or filled
+<literal>SOAPAction</literal> header in the SOAP message (in
+<literal>&lt;NameSpace&gt; &lt;Separator&gt; &lt;Action&gt;</literal>
+format).
                                     </para>
                                     <itemizedlist mark="round">
-                                        <title>可能的值</title>
+                                        <title>可能值</title>
                                         <listitem>
                                             <para>
-                                                Yes（是）：发送一个填满的SOAPAction头。
+                                                <literal>Yes</literal>: to send a filled <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                No（否）：发送一个空的SOAPAction头。
+                                                <literal>No</literal>: to send an empty <literal>SOAPAction</literal>
+header.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        SOAPActionSeparator（SOAP动作分隔符）：设置填满的SOAP动作头的&lt;分隔符&gt;。
+                                        <literal>SOAPActionSeparator</literal>: to set the
+<literal>&lt;Separator&gt;</literal> of a filled
+<literal>SOAPAction</literal> header.
                                     </para>
                                     <itemizedlist mark="round">
-                                        <title>可能的值</title>
+                                        <title>可能值</title>
                                         <listitem>
                                             <para>
-                                                '/'：用于.NET WEB服务。
+                                                <literal>'/'</literal>: used for .net web services.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                '#'：用于所有其它的WEB服务。
+                                                <literal>'#'</literal>: used for all the rest web services.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                             </itemizedlist>
                             <section>
-                                <title>Authentication（身份验证）</title>
+                                <title>
+                                    <literal>Authentication</literal>
+                                </title>
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            User（用户名）：有权访问远程WEB服务的用户名。
+                                            <literal>User</literal>: the privileged user name that has access to the
+remote web service.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Password（密码）：特权用户的纯文本密码。
+                                            <literal>Password</literal>: the password for privileged user in plain text.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Type（类型）：身份验证的类型。
+                                            <literal>Type</literal>: the type of authentication.
                                         </para>
                                     </listitem>
                                 </itemizedlist>
