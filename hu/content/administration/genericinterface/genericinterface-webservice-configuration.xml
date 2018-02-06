@@ -33,17 +33,17 @@ url="http://www.yaml.org/">http://www.yaml.org/</ulink> oldalt.
 ---
 Debugger:
   DebugThreshold: debug
-Description: This an example of a web service configuration
+Description: Ez egy példa egy webszolgáltatás beállítására
 Provider:
   Operation:
     CloseIncident:
-      Description: This is a test operation
+      Description: Ez egy próba művelet
       MappingInbound: {}
       MappingOutbound: {}
       RemoteSystemGuid: ''
       Type: Test::Test
     Test:
-      Description: This is a test operation
+      Description: Ez egy próba művelet
       MappingInbound:
         Config:
           KeyMapDefault:
@@ -88,7 +88,7 @@ RemoteSystem: remote.system.description.example.com
 Requester:
   Invoker:
     Test:
-      Description: This is a test invoker
+      Description: Ez egy próba meghívó
       Events:
         - Asynchronous: 1
         Condition:
@@ -134,27 +134,28 @@ Requester:
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        <literal>Description</literal>: a short text that describes the web service.
+                        <literal>Description</literal>: egy rövid szöveg, amely leírja a
+webszolgáltatást.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <literal>RemoteSystem</literal>: a short description of the Remote System.
+                        <literal>RemoteSystem</literal>: a távoli rendszer rövid leírása.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <literal>Debugger</literal>: a container for the debugger settings.
+                        <literal>Debugger</literal>: egy konténer a hibakereső beállításaihoz.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <literal>Provider</literal>: a container for the provider settings.
+                        <literal>Provider</literal>: egy konténer a szolgáltató beállításaihoz.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <literal>Requester</literal>: a container for the requester settings.
+                        <literal>Requester</literal>: egy konténer a kérelmező beállításaihoz.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -167,7 +168,7 @@ Requester:
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        <literal>DebugThreshold</literal>: the debugger level.
+                        <literal>DebugThreshold</literal>: a hibakereső szintje.
                     </para>
                     <itemizedlist mark="round">
                         <title>
@@ -175,24 +176,25 @@ Requester:
                         </title>
                         <listitem>
                             <para>
-                                <literal>debug</literal>: all logs are stored in the database.
+                                <literal>debug</literal>: az összes napló eltárolásra kerül az adatbázisban.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>info</literal>: info, notice and error level logs are stored in the
-database.
+                                <literal>info</literal>: az információ, az értesítés és a hiba szintek
+naplói kerülnek eltárolásra az adatbázisban.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>notice</literal>: notice and error level logs are stored in the
-database.
+                                <literal>notice</literal>: az értesítés és a hiba szintek naplói kerülnek
+eltárolásra az adatbázisban.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>error</literal>: only error level logs are stored in the database.
+                                <literal>error</literal>: csak a hiba szintek naplói kerülnek eltárolásra az
+adatbázisban.
                             </para>
                         </listitem>
 
@@ -208,13 +210,13 @@ database.
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        <literal>Operation</literal>: a container for each operation settings.
+                        <literal>Operation</literal>: egy konténer az egyes műveleti beállításokhoz.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <literal>Transport</literal>: a container for provider network transport
-settings.
+                        <literal>Transport</literal>: egy konténer a szolgáltató hálózati
+átvitelének beállításaihoz.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -225,42 +227,42 @@ settings.
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            <literal>&lt;OperationName&gt;</literal>: Unique name for the operation,
-container for its own operation settings (cardinality 0..n, but not
-duplicate).
+                            <literal>&lt;Műveletnév&gt;</literal>: egyedi név a művelethez, egy konténer
+a saját műveletének beállításaihoz (0..n számosságú, de nem kettőzött).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
                     <title>
-                        <literal>&lt;OperationName&gt;</literal>
+                        <literal>&lt;Műveletnév&gt;</literal>
                     </title>
                     <para>
-                        This section is based on operations from type <literal>Test::Test</literal>
-other operations might contain more or different settings.
+                        Ez a szakasz a <literal>Test::Test</literal> típusból való műveleteken
+alapul. Az egyéb műveletek több vagy különböző beállításokat
+tartalmazhatnak.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                <literal>Description</literal>: a short text that describes the operation.
+                                <literal>Description</literal>: egy rövid szöveg, amely leírja a műveletet.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>MappingInbound</literal>: a container for the mapping settings for
-the incoming request data.
+                                <literal>MappingInbound</literal>: egy konténer a bejövő kérésadatok
+leképezési beállításaihoz.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>MappingOutbound</literal>: a container for the mapping settings for
-the outgoing response data.
+                                <literal>MappingOutbound</literal>: egy konténer a kimenő válaszadatok
+leképezési beállításaihoz.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>Type</literal>: the operation backend, in Controller::Operation
-format.
+                                <literal>Type</literal>: a művelet háttérprogramja Vezérlő::Művelet
+formátumban.
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -269,18 +271,19 @@ format.
                             <literal>MappingInbound</literal>
                         </title>
                         <para>
-                            This section is based on mappings from type <literal>Simple</literal>. Other
-mappings might contain more or different settings.
+                            Ez a szakasz a <literal>Simple</literal> típusból való leképezéseken
+alapul. Az egyéb leképezések több vagy különböző beállításokat
+tartalmazhatnak.
                         </para>
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    <literal>Config</literal>: a container for this mapping settings.
+                                    <literal>Config</literal>: egy konténer ezekhez a leképezési beállításokhoz.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <literal>Type</literal>: the mapping backend.
+                                    <literal>Type</literal>: a leképező háttérprogram.
                                 </para>
                             </listitem>
 
@@ -292,32 +295,32 @@ mappings might contain more or different settings.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            <literal>KeyMapDefault</literal>: a container for all non mapped keys
-settings.
+                                            <literal>KeyMapDefault</literal>: egy konténer az összes nem leképezett
+kulcs beállításaihoz.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>ValueMapDefault</literal>: a container for all non mapped values
-settings.
+                                            <literal>ValueMapDefault</literal>: egy konténer az összes nem leképezett
+érték beállításaihoz.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>KeyMapExact</literal>: a container for all exact key mappings
-(cardinality 0 .. 1).
+                                            <literal>KeyMapExact</literal>: egy konténer az összes pontos
+kulcsleképezéshez (0..1 számosságú).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>KeyMapRegEx</literal>: a container for all regular expression key
-mappings (cardinality 0 .. 1).
+                                            <literal>KeyMapRegEx</literal>: egy konténer az összes reguláris kifejezéses
+kulcsleképezéshez (0..1 számosságú).
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>ValueMap</literal>: a container for all value mappings (cardinality
-0 .. 1).
+                                            <literal>ValueMap</literal>: egy konténer az összes értékleképezéshez (0..1
+számosságú).
                                         </para>
                                     </listitem>
                                 </itemizedlist>
@@ -328,29 +331,31 @@ mappings (cardinality 0 .. 1).
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                <literal>MapTo</literal>: the new value to be used (only applicable if
-<literal>MapType</literal> is set to <literal>MapTo</literal>).
+                                                <literal>MapTo</literal>: a használandó új érték (csak akkor alkalmazható,
+ha a <literal>MapType</literal> tulajdonság <literal>MapTo</literal> értékre
+van állítva).
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                <literal>MapType</literal>: the rule for the mapping.
+                                                <literal>MapType</literal>: a leképezés szabálya.
                                             </para>
                                             <itemizedlist>
                                                 <title>Lehetséges értékek</title>
                                                 <listitem>
                                                     <para>
-                                                        <literal>Keep</literal>: leave unchanged.
+                                                        <literal>Keep</literal>: változatlanul hagyás.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <literal>Ignore</literal>: drop.
+                                                        <literal>Ignore</literal>: eldobás.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <literal>MapTo</literal>: change to the <literal>MapTo</literal> value.
+                                                        <literal>MapTo</literal>: megváltoztatás a <literal>MapTo</literal>
+értékére.
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -362,7 +367,7 @@ mappings (cardinality 0 .. 1).
                                         <literal>ValueMapDefault</literal>
                                     </title>
                                     <para>
-                                        Similar to <literal>KeyMapDefault</literal>.
+                                        Hasonló a <literal>KeyMapDefault</literal> tulajdonsághoz.
                                     </para>
                                 </section>
                                 <section>
@@ -372,8 +377,8 @@ mappings (cardinality 0 .. 1).
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                <literal>&lt;oldkey&gt;</literal>: <literal>&lt;newkey&gt;</literal>
-(cardinality 0 .. n but not duplicate).
+                                                <literal>&lt;régikulcs&gt;</literal>: <literal>&lt;újkulcs&gt;</literal>
+(0..n számosságú, de nem kettőzött).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
@@ -385,8 +390,8 @@ mappings (cardinality 0 .. 1).
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                <literal>&lt;oldkey(RegEx)&gt;</literal>: <literal>&lt;newkey&gt;</literal>
-( cardinality 0 .. n but no duplicates).
+                                                <literal>&lt;régikulcs(RegEx)&gt;</literal>:
+<literal>&lt;újkulcs&gt;</literal> (0..n számosságú, de nem kettőzött).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
@@ -398,27 +403,27 @@ mappings (cardinality 0 .. 1).
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                <literal>&lt;newkey&gt;</literal>: a container for value mappings for this
-new key (cardinality depends on the new keys from
-<literal>KeyMapExact</literal> and <literal>KeyMapRegEx</literal>).
+                                                <literal>&lt;újkulcs&gt;</literal>: egy konténer ennek az új kulcsnak az
+értékleképezéséhez (a számosság a <literal>KeyMapExact</literal> és a
+<literal>KeyMapRegEx</literal> tulajdonságból származó új kulcsoktól függ).
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                     <section>
                                         <title>
-                                            <literal>&lt;newkey&gt;</literal>
+                                            <literal>&lt;újkulcs&gt;</literal>
                                         </title>
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    <literal>ValueMapExact</literal>: a container for all exact value mappings
-(cardinality 0 .. 1).
+                                                    <literal>ValueMapExact</literal>: egy konténer az összes pontos
+értékleképezéshez (0..1 számosságú).
                                                 </para>
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    <literal>ValueMapRegEx</literal>: a container for all regular expression
-value mappings (cardinality 0 .. 1).
+                                                    <literal>ValueMapRegEx</literal>: egy konténer az összes reguláris
+kifejezéses értékleképezéshez (0..1 számosságú).
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
@@ -429,8 +434,8 @@ value mappings (cardinality 0 .. 1).
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        <literal>&lt;oldvalue&gt;</literal>: <literal>&lt;newvalue&gt;</literal> (
-cardinality 0 .. n but not duplicate).
+                                                        <literal>&lt;régiérték&gt;</literal>: <literal>&lt;újérték&gt;</literal>
+(0..n számosságú, de nem kettőzött).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -442,8 +447,8 @@ cardinality 0 .. n but not duplicate).
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        <literal>&lt;oldvalue(RegEx)&gt;</literal>:
-<literal>&lt;newvalue&gt;</literal> ( cardinality 0 .. n but not duplicate).
+                                                        <literal>&lt;régiérték(RegEx)&gt;</literal>:
+<literal>&lt;újérték&gt;</literal> (0..n számosságú, de nem kettőzött).
                                                     </para>
                                                 </listitem>
                                             </itemizedlist>
@@ -457,7 +462,7 @@ cardinality 0 .. n but not duplicate).
                             <literal>MappingOutbound</literal>
                         </title>
                         <para>
-                            Same as <literal>MappingInbound</literal>.
+                            Ugyanaz mint a <literal>MappingInbound</literal> tulajdonság.
                         </para>
                     </section>
                     <section>
@@ -471,13 +476,13 @@ cardinality 0 .. n but not duplicate).
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    <literal>Config</literal>: a container for the specific network transport
-configuration settings.
+                                    <literal>Config</literal>: egy konténer az adott hálózati átvitel
+konfigurációs beállításaihoz.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <literal>Type</literal>: the provider network transport backend.
+                                    <literal>Type</literal>: a szolgáltató hálózati átviteli háttérprogramja.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -488,14 +493,14 @@ configuration settings.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        <literal>MaxLength</literal>: the maximum length in bytes to be read in a
-SOAP message by OTRS.
+                                        <literal>MaxLength</literal>: az OTRS által egy SOAP üzenetben beolvasandó
+legnagyobb hossz bájtban.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>NameSpace</literal>: an URI that gives a context to all operations
-that belongs to this web service.
+                                        <literal>NameSpace</literal>: egy URI, amely egy környezetet ad az összes
+olyan művelethez, amely ehhez a webszolgáltatáshoz tartozik.
                                     </para>
                                 </listitem>
                             </itemizedlist>
@@ -512,13 +517,13 @@ that belongs to this web service.
             <itemizedlist mark="round">
                 <listitem>
                     <para>
-                        <literal>Invoker</literal>: a container for each invokers' settings.
+                        <literal>Invoker</literal>: egy konténer az egyes kérelmezők beállításaihoz.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <literal>Transport</literal>: a container for requester network transport
-settings.
+                        <literal>Transport</literal>: egy konténer a kérelmező hálózati átvitelének
+beállításaihoz.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -529,48 +534,47 @@ settings.
                 <itemizedlist mark="round">
                     <listitem>
                         <para>
-                            <literal>&lt;InvokerName&gt;</literal>: Unique name for the invoker,
-container for its own invoker settings (cardinality 0..n, but not
-duplicate).
+                            <literal>&lt;Meghívónév&gt;</literal>: Egyedi név a meghívóhoz, egy konténer
+a saját meghívójának beállításaihoz (0..n számosságú, de nem kettőzött).
                         </para>
                     </listitem>
                 </itemizedlist>
                 <section>
                     <title>
-                        <literal>&lt;InvokerName&gt;</literal>
+                        <literal>&lt;Meghívónév&gt;</literal>
                     </title>
                     <para>
-                        This section is based on invokers from type <literal>Test::Test</literal>
-other invokers might contain more or different settings.
+                        Ez a szakasz a <literal>Test::Test</literal> típusból való meghívókon
+alapul. Az egyéb meghívók több vagy különböző beállításokat tartalmazhatnak.
                     </para>
                     <itemizedlist mark="round">
                         <listitem>
                             <para>
-                                <literal>Description</literal>: a short text that describes the invoker.
+                                <literal>Description</literal>: egy rövid szöveg, amely leírja a meghívót.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>Events</literal>: a container for a unnamed list of event trigger
-settings.
+                                <literal>Events</literal>: egy konténer az eseményaktiváló beállításainak
+névtelen listájához.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>MappingInbound</literal>: a container for the mapping settings for
-the incoming response data.
+                                <literal>MappingInbound</literal>: egy konténer a bejövő válaszadatok
+leképezési beállításaihoz.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>MappingOutbound</literal>: a container for the mapping settings for
-the outgoing request data.
+                                <literal>MappingOutbound</literal>: egy konténer a kimenő kérésadatok
+leképezési beállításaihoz.
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <literal>Type</literal>: the invoker backend, in
-<literal>Controller::Invoker</literal> format.
+                                <literal>Type</literal>: a meghívó háttérprogramja
+<literal>Vezérlő::Meghívó</literal> formátumban.
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -586,8 +590,8 @@ the outgoing request data.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            <literal>Asynchronous</literal>: to set if the invoker execution will be
-delegated to the OTRS Daemon.
+                                            <literal>Asynchronous</literal>: annak beállításához, hogy a meghívó
+végrehajtása delegálásra kerüljön-e az OTRS démonhoz.
                                         </para>
                                         <itemizedlist mark="round">
                                             <title>Lehetséges értékek</title>
@@ -605,16 +609,17 @@ delegated to the OTRS Daemon.
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>Condition</literal>: Container for event conditions to trigger the
-invoker, if there are no conditions, event will always trigger the invoker.
+                                            <literal>Condition</literal>: eseményfeltételek konténere a meghívó
+aktiválásához; ha nincsenek feltételek, akkor az esemény mindig aktiválni
+fogja a meghívót.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>Event</literal>: the name of the event trigger.
+                                            <literal>Event</literal>: az eseményaktiváló neve.
                                         </para>
                                         <itemizedlist>
-                                            <title>Possible values (for ticket events)</title>
+                                            <title>Lehetséges értékek (a jegyeseményeknél)</title>
                                             <listitem>
                                                 <para>
                                                     <literal>TicketCreate</literal>
@@ -752,7 +757,7 @@ invoker, if there are no conditions, event will always trigger the invoker.
                                             </listitem>
                                         </itemizedlist>
                                         <itemizedlist>
-                                            <title>Possible values (for article events)</title>
+                                            <title>Lehetséges értékek (a bejegyzéseseményeknél)</title>
                                             <listitem>
                                                 <para>
                                                     <literal>ArticleCreate</literal>
@@ -810,16 +815,16 @@ invoker, if there are no conditions, event will always trigger the invoker.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        <literal>Condition</literal>: Container to actual event conditions.
+                                        <literal>Condition</literal>: konténer a tényleges eseményfeltételekhez.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>ConditionLinking</literal>: Defines how multiple condition
-interacts with each other.
+                                        <literal>ConditionLinking</literal>: azt határozza meg, hogy több feltétel
+hogyan álljon egymással kölcsönhatásban.
                                     </para>
                                     <itemizedlist>
-                                        <title>Possible values (for condition linking)</title>
+                                        <title>Lehetséges értékek (a feltételkapcsolásánál)</title>
                                         <listitem>
                                             <para>
                                                 <literal>and</literal>
@@ -845,32 +850,32 @@ interacts with each other.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            <literal>&lt;ConditionName&gt;</literal>: Container for the condition
-elements.
+                                            <literal>&lt;Feltételnév&gt;</literal>: konténer a feltétel elemeihez.
                                         </para>
                                     </listitem>
                                 </itemizedlist>
                                 <section>
                                     <title>
-                                        <literal>&lt;ConditionName&gt;</literal>
+                                        <literal>&lt;Feltételnév&gt;</literal>
                                     </title>
                                     <para>
-                                        Unique name for the condition within the invoker and event the GUI assigns
-consecutive integer condition names starting from 1.
+                                        Egyedi név a feltételhez a meghívón és az eseményen belül. A grafikus
+felhasználói felület folyamatosan növekvő egész számot rendel a feltétel
+neveihez 1-től kezdve.
                                     </para>
                                     <itemizedlist mark="round">
                                         <listitem>
                                             <para>
-                                                <literal>Fields</literal>: Container for field conditions.
+                                                <literal>Fields</literal>: konténer a mező feltételeihez.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                <literal>Type</literal>: Define how multiple fields interact within its
-condition.
+                                                <literal>Type</literal>: annak meghatározása, hogy több mező milyen
+kölcsönhatásban legyen egymással a feltételén belül.
                                             </para>
                                             <itemizedlist>
-                                                <title>Possible values (for condition linking)</title>
+                                                <title>Lehetséges értékek (a feltételkapcsolásánál)</title>
                                                 <listitem>
                                                     <para>
                                                         <literal>and</literal>
@@ -896,48 +901,48 @@ condition.
                                         <itemizedlist mark="round">
                                             <listitem>
                                                 <para>
-                                                    <literal>&lt;FieldName&gt;</literal>: Container field attributes.
+                                                    <literal>&lt;Mezőnév&gt;</literal>: konténermező attribútumok.
                                                 </para>
                                             </listitem>
                                         </itemizedlist>
                                         <section>
                                             <title>
-                                                <literal>&lt;FieldName&gt;</literal>
+                                                <literal>&lt;Mezőnév&gt;</literal>
                                             </title>
                                             <para>
-                                                The name of a field from the event object (e.g.  for Ticket Events, the
-fields could be <literal>Queue</literal>, <literal>Priority</literal>,
-<literal>Type</literal>, etc).
+                                                Egy mező neve az eseményobjektumból (például a jegyeseményeknél a mezők a
+következők lehetnek: <literal>Queue</literal>, <literal>Priority</literal>,
+<literal>Type</literal>, stb.).
                                             </para>
                                             <itemizedlist mark="round">
                                                 <listitem>
                                                     <para>
-                                                        <literal>Match</literal>: The value to match from the selected against the
-event object using the <literal>Type</literal> modifier.
+                                                        <literal>Match</literal>: az érték a kiválasztottból az eseményobjektummal
+való illesztéshez a <literal>Type</literal> módosító használatával.
                                                     </para>
                                                 </listitem>
                                                 <listitem>
                                                     <para>
-                                                        <literal>Type</literal>: Modifier to the <literal>Match</literal> value.
+                                                        <literal>Type</literal>: módosító a <literal>Match</literal> értékhez.
                                                     </para>
                                                     <itemizedlist>
-                                                        <title>Possible values (for type modifier)</title>
+                                                        <title>Lehetséges értékek (a típusmódosítónál)</title>
                                                         <listitem>
                                                             <para>
-                                                                <literal>String</literal>: Direct compare between object field value and
-<literal>Match</literal> value.
+                                                                <literal>String</literal>: közvetlen összehasonlítás az objektummező értéke
+és a <literal>Match</literal> értéke között.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                <literal>Regexp</literal>: Compare object field value with the regular
-expression defined in the <literal>Match</literal> value.
+                                                                <literal>Regexp</literal>: az objektummező értékének összehasonlítása a
+<literal>Match</literal> értékében meghatározott reguláris kifejezéssel.
                                                             </para>
                                                         </listitem>
                                                         <listitem>
                                                             <para>
-                                                                <literal>Module</literal>: Use the module defined in the
-<literal>Match</literal> with the object data.
+                                                                <literal>Module</literal>: a <literal>Match</literal> tulajdonságban
+meghatározott modul használata az objektum adataival.
                                                             </para>
                                                         </listitem>
                                                     </itemizedlist>
@@ -954,7 +959,8 @@ expression defined in the <literal>Match</literal> value.
                             <literal>MappingInbound</literal>
                         </title>
                         <para>
-                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
+                            Ugyanaz mint az <literal>Operation</literal> szakasz
+<literal>MappingInbound</literal> tulajdonsága.
                         </para>
                     </section>
                     <section>
@@ -962,7 +968,8 @@ expression defined in the <literal>Match</literal> value.
                             <literal>MappingOutbound</literal>
                         </title>
                         <para>
-                            Same as <literal>Operation</literal> <literal>MappingInbound</literal>.
+                            Ugyanaz mint az <literal>Operation</literal> szakasz
+<literal>MappingInbound</literal> tulajdonsága.
                         </para>
                     </section>
                     <section>
@@ -976,13 +983,13 @@ expression defined in the <literal>Match</literal> value.
                         <itemizedlist mark="round">
                             <listitem>
                                 <para>
-                                    <literal>Config</literal>: a container for the specific network transport
-configuration settings.
+                                    <literal>Config</literal>: egy konténer az adott hálózati átvitel
+konfigurációs beállításaihoz.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <literal>Type</literal>: the requester network transport backend.
+                                    <literal>Type</literal>: a kérelmező hálózati átviteli háttérprogramja.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -993,65 +1000,66 @@ configuration settings.
                             <itemizedlist mark="round">
                                 <listitem>
                                     <para>
-                                        <literal>Authentication</literal>: a container for authentication settings.
+                                        <literal>Authentication</literal>: egy konténer a hitelesítés
+beállításaihoz.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>Encoding</literal>: the SOAP Message request encoding.
+                                        <literal>Encoding</literal>: a SOAP üzenetkérés kódolása.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>Endpoint</literal>: the URI of the Remote Server web service to
-accept OTRS requests.
+                                        <literal>Endpoint</literal>: a távoli kiszolgáló webszolgáltatásának URI-ja
+az OTRS kérések elfogadásához.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>NameSpace</literal>: an URI that gives a context to all invokers
-that belongs to this web service.
+                                        <literal>NameSpace</literal>: egy URI, amely egy környezetet ad az összes
+olyan meghívóhoz, amely ehhez a webszolgáltatáshoz tartozik.
                                     </para>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>SOAPAction</literal>: to send an empty or filled
-<literal>SOAPAction</literal> header in the SOAP message (in
-<literal>&lt;NameSpace&gt; &lt;Separator&gt; &lt;Action&gt;</literal>
-format).
+                                        <literal>SOAPAction</literal>: egy üres vagy kitöltött
+<literal>SOAPAction</literal> fejléc küldéséhez a SOAP üzenetben
+(<literal>&lt;Névtér&gt; &lt;Elválasztó&gt; &lt;Művelet&gt;</literal>
+formátumban).
                                     </para>
                                     <itemizedlist mark="round">
                                         <title>Lehetséges értékek</title>
                                         <listitem>
                                             <para>
-                                                <literal>Yes</literal>: to send a filled <literal>SOAPAction</literal>
-header.
+                                                <literal>Yes</literal>: egy kitöltött <literal>SOAPAction</literal> fejléc
+küldéséhez.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                <literal>No</literal>: to send an empty <literal>SOAPAction</literal>
-header.
+                                                <literal>No</literal>: egy üres <literal>SOAPAction</literal> fejléc
+küldéséhez.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <literal>SOAPActionSeparator</literal>: to set the
-<literal>&lt;Separator&gt;</literal> of a filled
-<literal>SOAPAction</literal> header.
+                                        <literal>SOAPActionSeparator</literal>: egy kitöltött
+<literal>SOAPAction</literal> fejléc <literal>&lt;Elválasztó&gt;</literal>
+beállításához.
                                     </para>
                                     <itemizedlist mark="round">
                                         <title>Lehetséges értékek</title>
                                         <listitem>
                                             <para>
-                                                <literal>'/'</literal>: used for .net web services.
+                                                <literal>'/'</literal>: a .net webszolgáltatásoknál használják.
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                <literal>'#'</literal>: used for all the rest web services.
+                                                <literal>'#'</literal>: az összes többi webszolgáltatásnál ezt használják.
                                             </para>
                                         </listitem>
                                     </itemizedlist>
@@ -1064,18 +1072,19 @@ header.
                                 <itemizedlist mark="round">
                                     <listitem>
                                         <para>
-                                            <literal>User</literal>: the privileged user name that has access to the
-remote web service.
+                                            <literal>User</literal>: a kiváltságos felhasználó neve, akinek hozzáférése
+van a távoli webszolgáltatáshoz.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>Password</literal>: the password for privileged user in plain text.
+                                            <literal>Password</literal>: a kiváltságos felhasználó jelszava egyszerű
+szövegként.
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            <literal>Type</literal>: the type of authentication.
+                                            <literal>Type</literal>: a hitelesítés típusa.
                                         </para>
                                     </listitem>
                                 </itemizedlist>

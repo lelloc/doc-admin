@@ -41,7 +41,7 @@ készek. Ha az előnyben részesített szín nem érhető el, akkor rákattintha
         </para>
         <para>
             <figure>
-                <title>Színválasztó a naptárszerkesztés képernyőn</title>
+                <title>Színválasztó a naptár szerkesztőképernyőjén</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendarmanage-calendaredit-colorpicker.png"
@@ -63,54 +63,56 @@ mentette el a naptárat), akkor újratöltheti a képernyőt, és újra megnézh
 a jelenlegi színbeállítást.
         </para>
         <para>
-            For the selected permission group of your calendar, an agent who should have
-access to, needs at least a read permission within the related
-group. Enclosed is a list of permissions to access certain feature-levels
-within the different calendars:
+            A naptár kiválasztott jogosultsági csoportjánál egy olyan ügyintézőnek,
+akinek hozzá kell férnie, legalább olvasási jogosultsággal kell rendelkeznie
+a kapcsolódó csoporton belül. Itt látható a bizonyos funkciószintekhez
+történő hozzáféréshez szükséges jogosultságok listája a különböző naptárakon
+belül:
         </para>
         <variablelist>
             <varlistentry>
-                <term>RO</term>
+                <term>CSAK OLVASÁS</term>
                 <listitem>
                     <para>
-                        The related agent can see the calendar and its appointments, but can't do
-any changes.
+                        Az érintett ügyintéző megtekintheti a naptárat és az időpontjait, de
+semmilyen változtatást sem végezhet.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>MOVE_INTO</term>
+                <term>ÁTMOZGATÁS</term>
                 <listitem>
                     <para>
-                        The related agent can update existing appointments, but can't create new
-ones or delete existing ones.
+                        Az érintett ügyintéző frissítheti a meglévő időpontokat, de nem hozhat létre
+újakat vagy nem törölheti a meglévőket.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>CREATE</term>
+                <term>LÉTREHOZÁS</term>
                 <listitem>
                     <para>
-                        The related agent can create new appointments.
+                        Az érintett ügyintéző létrehozhat új időpontokat.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>RW</term>
+                <term>ÍRÁS, OLVASÁS</term>
                 <listitem>
                     <para>
-                        The related agent is able to delete appointments.
+                        Az érintett ügyintéző képes időpontokat törölni.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
         <para>
-            The validity field indicates if a calendar is valid. Invalid calendars won't
-show up in the different overviews, even if agents have access to it.
+            Az érvényesség mező jelzi, hogy egy naptár érvényes-e. Az érvénytelen
+naptárak nem jelennek meg a különböző áttekintőkben még akkor sem, ha az
+ügyintézőknek van hozzáférésük.
         </para>
     </section>
     <section>
-        <title>Exporting calendars and/or appointments</title>
+        <title>Naptárak és/vagy időpontok exportálása</title>
         <para>
             Amikor a különböző naptárakat létrehozták, akkor lehetőség van vagy a teljes
 naptármeghatározás (beleértve a naptár időpontjait) exportálására a jól
@@ -118,235 +120,242 @@ ismert YAML-formátumba, vagy csak egy naptár kapcsolódó időpontjainak
 exportálására ICS-formátumba.
         </para>
         <para>
-            To export a complete calendar structure to the YAML format, the calendar
-list in the calendar management screen can be used. By clicking on the
-related link within column <emphasis>Export</emphasis>, a YAML structure
-named <filename>Export_Calendar_CalendarName.yml</filename>, including the
-calendar meta-data (calendar name, color, permission group, validity state)
-can be downloaded. The structure also includes all calendar
-appointments. This functionality can be used to simply backup a certain
-calendar and/or transfer it to a foreign OTRS instance.
+            Egy teljes naptárszerkezet YAML-fájlba történő exportálásához a
+naptárkezelés áttekintőben lévő naptárlista használható. Az
+<emphasis>Exportálás</emphasis> oszlopon belül a hozzá tartozó hivatkozásra
+kattintva egy <filename>Export_Calendar_CalendarName.yml</filename> nevű
+YAML-szerkezetet lehet letölteni, amely tartalmazza a naptár metaadatait
+(naptár neve, színe, jogosultsági csoport, érvényességi állapot). A
+szerkezet tartalmazza a naptár összes időpontját is. Ez a funkcionalitás
+használható egy bizonyos naptár egyszerű biztonsági mentéséhez és/vagy egy
+idegen OTRS példányba történő átvitelhez.
         </para>
         <para>
-            To export just the calendar appointments in ICS format, the link within
-column <emphasis>Download</emphasis> can be used. After clicking on the
-related link, an ICS file named <filename>CalendarName.ics</filename> can be
-downloaded, including all appointments of the related calendar. This file
-can be used to backup just the appointments of a certain calendar and/or
-transfer it to either an existing calendar on a foreign OTRS instance or any
-other calendar tool, which supports the ICS standard, to display the
-appointments.
+            Csak a naptáridőpontok ICS-formátumba történő exportálásához a
+<emphasis>Letöltés</emphasis> oszlopon belüli hivatkozás használható. A
+hozzá tartozó hivatkozásra kattintás után egy
+<filename>CalendarName.ics</filename> nevű fájl tölthető le, amely az
+érintett naptár összes időpontját tartalmazza. Ez a fájl használható egy
+bizonyos naptárból csak az időpontok biztonsági mentéséhez és/vagy azok
+átviteléhez az időpontok megtekintésére vagy egy meglévő naptárban egy
+idegen OTRS példányon, vagy bármely egyéb naptáreszközben, amely támogatja
+az ICS szabványt.
         </para>
     </section>
     <section>
-        <title>Importing calendars and/or appointments</title>
+        <title>Naptárak és/vagy időpontok importálása</title>
         <para>
-            As an equivalent to the export function, it is possible to either import a
-complete calendar structure including related appointments in the YAML
-format, or just a set of appointments to an already existing calendar in the
-ICS format.
+            Az exportálási funkcióhoz hasonlóan lehetőség van vagy egy YAML-formátumban
+lévő teljes naptárszerkezet és a benne lévő időpontok, vagy egy
+ICS-formátumban lévő időponthalmaz importálására egy már meglévő naptárba.
         </para>
         <para>
-            To import a complete calendar structure, the related <emphasis>Calendar
-Import</emphasis> widget on the left side of the calendar management screen
-can be used. Within this widget, a YML file can be selected and uploaded to
-import the calendar. The checkbox <emphasis>Overwrite existing
-entities</emphasis> indicates if a calendar with the same name as the
-imported one should be overwritten. If a calendar with the same name exists,
-but the checkbox is empty during the upload, a related error message will be
-displayed.
+            Egy teljes naptárszerkezet importálásához a naptárkezelés képernyő bal
+oldalán lévő <emphasis>Naptár importálása</emphasis> felületi elem
+használható. Ezen felületi elemen belül kiválasztható és feltölthető egy
+YML-fájl a naptár importálásához. A <emphasis>Meglévő entitások
+felülírása</emphasis> jelölőnégyzet jelzi, ha az importált naptárral
+megegyező nevűt felül kell írni. Ha létezik ugyanolyan nevű naptár, de a
+jelölőnégyzet üres a feltöltés során, akkor egy hozzá tartozó hibaüzenet
+kerül megjelenítésére.
         </para>
         <para>
-            To import a set of appointments to an already existing calendar, the
-<emphasis>Import Appointments</emphasis> button can be clicked to access the
-appointment import screen.
+            Egy meglévő naptárba történő időponthalmaz importálásához az
+<emphasis>Időpontok importálása</emphasis> gombot lehet megnyomni az időpont
+importálása képernyőhöz való hozzáféréshez.
         </para>
         <para>
             <figure>
-                <title>Appointment import in calendar management overview</title>
+                <title>Időpont importálása a naptárkezelés áttekintőjében</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendarmanage-appointmentimport.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Here it's needed to select an ICS file to be used for the import. Right
-after that, a calendar needs to be selected from the related list to import
-the new appointments in.  The checkbox <emphasis>Update existing
-appointments</emphasis> indicates, if already existing appointments with the
-same UniqueID shall be overwritten or not. Appointments with the same
-UniqueID but already existing in the related calendar won't be omitted
-during the import process. They will be inserted again and will be available
-multiple times in case of doubt, if the option to overwrite appointments is
-not enabled.
+            Itt ki kell választani az importáláshoz használandó ICS-fájlt. Ezt követően
+egy naptárat kell kiválasztani a kapcsolódó listából, amelybe az új
+időpontok importálva lesznek. A <emphasis>Meglévő időpontok
+frissítése</emphasis> jelölőnégyzet jelzi, hogy az ugyanolyan egyedi
+azonosítóval rendelkező meglévő időpontokat felül kell-e írni vagy sem. Az
+ugyanolyan egyedi azonosítóval rendelkező, de a kapcsolódó naptárban már
+létező időpontok nem lesznek kihagyva az importálási folyamat során. Újra
+beszúrásra kerülnek, és többször is elérhetők kétség esetén, ha az időpontok
+felülírásának lehetősége nincs engedélyezve.
         </para>
     </section>
     <section>
         <title>Naptár áttekintő</title>
         <para>
             Ha legalább egy naptárat létrehoztak, és elérhető egy bizonyos ügyintézőnek,
-akkor az új vagy a már meglévő időpontokat egy naptáráttekintőn és egy
-napirendáttekintőn keresztül lehet kezelni.
+akkor az új vagy a már meglévő időpontokat egy naptár áttekintőn és egy
+napirend áttekintőn keresztül lehet kezelni.
         </para>
         <para>
-            Within the calendar overview, an agent is able to display, create, edit
-and/or delete appointments of different calendars, depending on their
-permission level to the related calendars, as described above.
+            A naptár áttekintőn belül egy ügyintéző képes a különböző naptárak
+időpontjainak megjelenítésére, létrehozására, szerkesztésére és/vagy
+törlésére a kapcsolódó naptárakhoz tartozó jogosultsági szintjeitől függően
+a fent leírtak szerint.
         </para>
         <para>
             <figure>
-                <title>Calendar overview screen</title>
+                <title>Naptár áttekintő képernyő</title>
 <screenshot>
 <graphic fileref="screenshots/appointment-calendar/calendaroverview.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            As visible in the following screenshot, the calendar overview contains the
-management tools for the calendars and appointments on the left side and the
-calendar view on the right side. With the buttons in the
-<emphasis>Actions</emphasis> widget it's possible to either access the
-calendar management directly or add a new appointment (if the agent has the
-permission).
+            Amint a következő képernyőképen látható, a naptár áttekintő tartalmazza a
+kezelési eszközöket a naptárakhoz és időpontokhoz a bal oldalon, és a
+naptárnézetet a jobb oldalon. A <emphasis>Műveletek</emphasis> felületi
+elemben lévő gombokkal lehetőség van a naptárkezelés közvetlen
+hozzáféréséhez vagy egy új időpont hozzáadásához (ha az ügyintézőnek megvan
+hozzá a jogosultsága).
         </para>
         <para>
             <figure>
-                <title>Sidebar in calendar overview screen</title>
+                <title>Oldalsáv a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-sidebar.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The <emphasis>Calendars</emphasis> widget contains all calendars accessible
-by the agent. The checkboxes are used to enable or disable the view of
-certain calendars, like it's the case in many foreign calendar tools.
+            A <emphasis>Naptárak</emphasis> felületi elem tartalmazza az ügyintéző által
+hozzáférhető összes naptárat. A jelölőnégyzetek használhatók bizonyos
+naptárak nézetének engedélyezéséhez vagy letiltásához, úgymint sok idegen
+naptáreszköz esetén.
         </para>
         <para>
-            Since all appointments of any active calendar for every agent will be
-provided by the server (and not stored or cached on the client), it can
-result in heavy load on the server if too many calendars are active at the
-same time. Therefore a system configuration option
-<literal>AppointmentCalendar::CalendarLimitOverview</literal> limits the
-maximum number of active calendars per agent. If the limit is reached by an
-agent, a related error message will be displayed, indicating there are too
-many active calendars.
+            Mivel az egyes ügyintézőknél bármely aktív naptár időpontjait a kiszolgáló
+fogja biztosítani (és nincs eltárolva vagy gyorsítótárba téve a kliensen),
+ez nagy terhelést eredményezhet a kiszolgálón, ha egyszerre túl sok naptár
+aktív. Ebből adódóan az
+<literal>AppointmentCalendar::CalendarLimitOverview</literal>
+rendszerbeállítási lehetőség korlátozza az ügyintézőnkénti aktív naptárak
+legnagyobb számát. Ha a korlátot eléri egy ügyintéző, akkor egy hozzá
+tartozó hibaüzenet jelenik meg azt jelezve, hogy túl sok aktív naptára van.
         </para>
         <para>
-            The URL column provides an external link to the calendar, which is used to
-subscribe.  This functionality is described later in this document.
+            Az URL oszlop egy külső hivatkozást biztosít arra a naptárra, amely
+feliratkozásra használható. Ez a funkcionalitás később kerül ismertetésre
+ebben a dokumentumban.
         </para>
         <para>
-            To have a good overview of available appointments within different calendars
-and the related dates the appointments start or end, we provide different
-view modes to be used by the agents.
+            Hogy jó áttekintést kapjon a különböző naptárakon belül elérhető
+időpontokról és a hozzájuk tartozó dátumokról, amikor az időpontok kezdődnek
+és befejeződnek, különböző nézetmódokat biztosítunk, amelyeket az ügyintézők
+használhatnak.
         </para>
         <para>
             <figure>
-                <title>View modes in calendar overview screen</title>
+                <title>Nézetmódok a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-viewmodes.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            They are separated in timeline modes and non-timeline modes with different
-time ranges, to have the best view on different appointments for the related
-situations. On most of the view modes, a red line indicates the current time
-of the current day.
+            Idővonal módokra és nem idővonal módokra vannak szétválasztva különböző
+időtartományokkal, hogy a legjobb nézetet kapja a különböző időpontoknál a
+hozzájuk kapcsolódó helyzetekben. A nézetmódok legtöbbjénél egy piros vonal
+jelzi az aktuális nap jelenlegi idejét.
         </para>
         <para>
-            The information in the middle of the top-bar shows the current time range
-the agent is in, for the current view. Within the timeline views, the
-current calendar week will be displayed in light gray, when possible. Within
-the non-timeline views, the current calendar week is displayed as a single
-column on the left side, if possible.
+            A felső sáv közepén lévő információk jelenítik meg azt a jelenlegi
+időtartományt, amelyben az ügyintéző van az aktuális nézetnél. Az idővonal
+nézeteken belül a jelenlegi naptár hete világosszürkével jelenik meg, amikor
+lehetséges. A nem idővonal nézeteken belül a jelenlegi naptár hete egy
+önálló oszlopként jelenik meg a bal oldalon, ha lehetséges.
         </para>
         <para>
-            Enclosed a screenshot of the non-timeline weekly view:
+            Mellékleten a nem idővonal heti nézetének képernyőképe:
         </para>
         <para>
             <figure>
-                <title>Weekly view in calendar overview screen</title>
+                <title>Heti nézet a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-week.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            and the non-timeline monthly view:
+            és a nem idővonal havi nézet:
         </para>
         <para>
             <figure>
-                <title>Monthly view in calendar overview screen</title>
+                <title>Havi nézet a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-month.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            On the upper right side, the agents can access the navigation controls.
+            A jobb felső részen az ügyintézők elérhetik a navigációs vezérlőket.
         </para>
         <para>
             <figure>
-                <title>Navigation controls in calendar overview screen</title>
+                <title>Navigációs vezérlők a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-navigations.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The left- and right-arrow buttons are used to navigate through the dates of
-the current time range. The <emphasis>Today</emphasis> button brings the
-agent back to the current date to save time.
+            A balra és jobbra mutató nyíl gombok használhatók az aktuális időtartomány
+dátumai közti navigációhoz. A <emphasis>Ma</emphasis> gomb visszaviszi az
+ügyintézőt a jelenlegi dátumra, hogy időt takarítson meg.
         </para>
         <para>
-            The <emphasis>Jump</emphasis> button is used to access a certain date
-directly without a need to go every date in between to access a certain date
-(maybe one year earlier or later). A click on the button opens a date
-picker, which highlights all dates which have already appointments stored. A
-mouseover shows the number of appointments with to the current date. A click
-on a date brings the agent to the related time range and displays all
-appointments.
+            Az <emphasis>Ugrás</emphasis> gomb használható egy bizonyos dátum közvetlen
+eléréséhez anélkül, minden közte lévő dátumon végig kelljen menni egy
+bizonyos dátum eléréséhez (talán egy évvel korábban vagy később). Egy
+kattintás a gombra megnyit egy dátumválasztót, amely kiemeli az összes olyan
+dátumot, amely már rendelkezik tárolt időpontokkal. Az egérrel történő
+rámutatás megjeleníti az időpontok számát az aktuális dátummal. Egy dátumra
+való kattintás elviszi az ügyintézőt a hozzá tartozó időtartományba, és
+megjeleníti az összes időpontot.
         </para>
         <para>
              <figure>
-                 <title>Today and Jump buttons in calendar overview screen</title>
+                 <title>Ma és Ugrás gombok a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-navigations-jump.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            On the right side of the main widget (on top of the navigation buttons) a
-gear wheel appears on mouse over, which is used to access a visibility
-filter:
+            A fő felületi elem jobb oldalán (a navigációs gombok tetején) egy fogaskerék
+jelenik meg az egérrel történő rámutatáskor, amely egy láthatósági szűrő
+eléréséhez használható:
         </para>
         <para>
             <figure>
-                <title>User preferences for calendar overview screen</title>
+                <title>Felhasználói beállítások a naptár áttekintő képernyőnél</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-preferences.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Here you can choose, if you want to see all available appointments, or just
-the ones that are directly assigned to you.
+            Itt kiválaszthatja, hogy az összes elérhető időpontot szeretné-e látni, vagy
+csak azokat, amelyeket közvetlenül önhöz rendeltek.
         </para>
     </section>
     <section>
         <title>Napirend áttekintő</title>
         <para>
-            Within the agenda overview, an agent is able to display the appointments of
-all available (accessible) calendars in a table-like overview. This overview
-is designed to have a detailed list of upcoming appointments in a structured
-table. Like in the calendar overview appointments can be created, edited or
-deleted. This view supports a monthly, weekly and daily point of view on
-available appointments.
+            A napirend áttekintőn belül egy ügyintéző képes megjeleníteni az összes
+elérhető (hozzáférhető) naptár időpontjait egy táblázatszerű
+áttekintőben. Ezt az áttekintőt úgy tervezték, hogy a közelgő időpontok
+részletes listáját adja egy strukturált táblázatban. Akárcsak a naptár
+áttekintőben, az időpontok is létrehozhatók, szerkeszthetők vagy
+törölhetők. Ez a nézet támogatja az elérhető időpontok havi, heti és napi
+nézőpontjait.
         </para>
         <para>
             <figure>
-                <title>Agenda overview screen</title>
+                <title>Napirend áttekintő képernyő</title>
 <screenshot>
 <graphic fileref="screenshots/appointment-calendar/agendaoverview.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
@@ -355,89 +364,92 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     <section>
         <title>Naptáridőpontok kezelése</title>
         <para>
-            Within the calendar overview, to add new appointments it's either possible
-to click on the <emphasis>Add Appointment</emphasis> button or click on the
-overview widget. It's also possible to drag over a range of the widget to
-setup a rough time span. Right after that, a modal dialog appears where the
-data can be inserted:
+            A naptár áttekintőn belül új időpontok hozzáadásához vagy az
+<emphasis>Időpont hozzáadása</emphasis> gombra kattintással, vagy az
+áttekintő felületi elemre kattintással van lehetőség. Lehetséges a felületi
+elem időtartományának elhúzásával is beállítani egy hozzávetőleges
+időtartamot. Közvetlenül azután egy kizárólagos párbeszédablak jelenik meg,
+ahol az adatok beszúrhatók:
         </para>
         <para>
             <figure>
-                <title>Appointment edit screen</title>
+                <title>Időpont szerkesztése képernyő</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmentedit.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The only mandatory fields of the basic information are the appointment title
-and the related calendar to assign the appointment to. The description and
-location are optional fields. If the location contains a value, a related
-link icon will show up next to the field which by default links to Google
-map to get a better picture of the location. This link is configurable
-through the system configuration option
-<literal>AgentAppointmentEdit::Location::Link</literal>.
+            Az alap információk kötelezői mezői mindössze az időpont címe és a
+kapcsolódó naptár, amelyhez az időpont hozzárendelésre kerül. A leírás és a
+hely elhagyható mezők. Ha a hely tartalmaz értéket, akkor egy hozzá tartozó
+hivatkozás ikon jelenik meg a mező mellett, amely alapértelmezetten a Google
+térképre hivatkozik, hogy jobb képet kapjon a helyszínről. Ez a hivatkozás
+beállítható az <literal>AgentAppointmentEdit::Location::Link</literal>
+rendszerbeállítási lehetőségen keresztül.
         </para>
         <para>
-            Within the <emphasis>Date/Time section</emphasis>, the related start date
-and end date needs to be selected.
+            A <emphasis>Dátum/idő</emphasis> szakaszon belül a kapcsolódó kezdődátumot
+és befejezési dátumot kell kiválasztani.
         </para>
         <para>
-            The <emphasis>All-day</emphasis> checkbox indicates that the appointment
-takes place on the whole day. If it's activated, time of the start date and
-the end date will be disabled and set to 00:00.
+            Az <emphasis>Egész napos</emphasis> jelölőnégyzet jelzi, hogy az időpont
+egész nap folyamatosan tart. Ha be van kapcsolva, akkor a kezdődátum és a
+befejezési dátum ideje le lesz tiltva, és 00:00-ra lesz állítva.
         </para>
         <para>
-            The <emphasis>Repeat</emphasis> option is used to define appointment
-recurrences and will be described separately, see section
-<emphasis>Repeating appointments</emphasis> below.
+            Az <emphasis>Ismétlődés</emphasis> lehetőség használható az időpont
+ismétlődéseinek meghatározásához, ami külön kerül bemutatásra. Tekintse meg
+a lenti <emphasis>Ismétlődő időpontok</emphasis> szakaszt.
         </para>
         <para>
-            The <emphasis>Notification</emphasis> option is used to define appointment
-notifications and will be described separately, see section
-<emphasis>Notifications</emphasis> below.
+            Az <emphasis>Értesítés</emphasis> lehetőség használható az időpont
+értesítéseinek meghatározásához, ami külön kerül bemutatásra. Tekintse meg a
+lenti <emphasis>Értesítések</emphasis> szakaszt.
         </para>
         <para>
-            The <emphasis>Link</emphasis> option is used to define appointment links to
-foreign objects (like tickets)  and will be described separately, see
-section <emphasis>Link tickets to appointments</emphasis> below.
+            Az <emphasis>Összekapcsolás</emphasis> lehetőség használható az időpont és
+idegen objektumok (például jegyek) összekapcsolásának meghatározásához, ami
+külön kerül bemutatásra. Tekintse meg a lenti <emphasis>Jegyek
+összekapcsolása időpontokkal</emphasis> szakaszt.
         </para>
         <para>
-            If the appointment already exists, the <emphasis>Copy</emphasis> and
-<emphasis>Delete</emphasis> buttons appear at the bottom of the modal
-dialog, provided that the current agent has the related permissions. The
-<emphasis>Copy</emphasis> button will just ignore the changes in the dialog
-and create a copy of the current appointment at the same time range with
-same information. The <emphasis>Delete</emphasis> button will delete related
-appointment, but the agent will face a question if they are really sure they
-want to delete the appointment, for security reasons.
+            Ha az időpont már létezik, akkor <emphasis>Másolás</emphasis> and
+<emphasis>Törlés</emphasis> gombok jelennek meg a kizárólagos párbeszédablak
+alján, feltéve, hogy az aktuális ügyintézőnek megvannak a megfelelő
+jogosultságai. A <emphasis>Másolás</emphasis> egyszerűen figyelmen kívül
+hagyja a változtatásokat a párbeszédablakon, és létrehozza az aktuális
+időpont másolatát ugyanabban az időtartományban és ugyanazzal az
+információtartalommal. A <emphasis>Törlés</emphasis> gomb törölni fogja az
+időpontot, de biztonsági okokból az ügyintéző kap egy kérdést, hogy valóban
+biztos-e abban, hogy törölni szeretné az időpontot.
         </para>
         <para>
-            Once the appointment has been saved, it appears in the overview of the page:
+            Miután az időpont mentésre került, megjelenik az oldal áttekintőjében:
         </para>
         <para>
             <figure>
-                <title>Appointment display in calendar overview screen</title>
+                <title>Időpont megjelenítése a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmentadded.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            With a click on the appointment, the modal dialog opens again and
-appointment can be edited. If the agent has the correct permission, the
-appointment can also be edited via drag and drop to either move the complete
-appointment to another place (date/time) or just increase/decrease the
-start- and/or the end-time by dragging the appointment on the related
-handles on the left or the right end.
+            Az időpontra való kattintással a kizárólagos párbeszédablak ismét megnyílik,
+és az időpont szerkeszthető. Ha az ügyintézőnek megfelelő jogosultsága van,
+akkor az időpont szerkeszthető fogd és vidd módon is vagy a teljes időpont
+áthelyezésével egy másik helyre (dátum/idő), vagy a kezdő és/vagy befejezési
+idő növelésével/csökkentéséve, ha az időpontot a megfelelő fogantyúkkal
+elhúzza a bal vagy jobb végénél.
         </para>
         <para>
-            If the cursor of the mouse hovers over a certain appointment, a tooltip with
-the related appointment information appears:
+            Ha az egérkurzor egy bizonyos időpont fölött van, akkor egy buboréksúgó
+jelenik meg a kapcsolódó időpont-információkkal:
         </para>
         <para>
             <figure>
-                <title>Appointment tooltip</title>
+                <title>Időpont buboréksúgó</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmentmouseover.png"
@@ -447,212 +459,218 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     <section>
         <title>Ismétlődő időpontok</title>
         <para>
-            If appointments needs to be created in a recurring manner, it is possible to
-setup detailed information about the occurrences of an appointment.
+            Ha az időpontokat ismétlődő módon kell létrehozni, akkor lehetőség van egy
+időpont ismétlődéseivel kapcsolatos részletes információk beállítására.
         </para>
         <para>
-            For this to work it is either possible to use pre-defined frequencies of the
-occurrences, or to define custom settings:
+            Ahhoz, hogy ez működjön, lehetőség van az előfordulások előre meghatározott
+gyakoriságát használni, vagy egyéni beállításokat meghatározni:
         </para>
         <para>
             <figure>
-                <title>Edit screen of a repeating appointment</title>
+                <title>Ismétlődő időpontok szerkesztőképernyője</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmenteditrecurrence.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            After the selection is finished, it's necessary to define the runtime of the
-recurrences. It's possible to choose either a date to repeat until, or an
-amount of times to repeat.
+            Miután a kijelölés befejeződött, meg kell határozni az ismétlődések futási
+idejét. Lehetőség van egy dátum kiválasztására, amíg ismétlődjön, vagy az
+ismétlődések számának meghatározására.
         </para>
         <para>
-            After all decisions are made and the settings are saved successfully, the
-appointment will be marked a recurring appointment. The parent appointment
-will be marked with circle-arrow-symbol and the child appointments with a
-chain-symbol.
+            Miután minden döntés megszületett, és a beállítások sikeresen el lettek
+mentve, az időpont megjelöli az ismétlődő időpontot. A szülőidőpont egy
+körkörös nyíl szimbólummal, a gyermekidőpontok egy lánc szimbólummal lesznek
+megjelölve.
         </para>
         <para>
             <figure>
-                <title>Repeating appointments in calendar overview screen</title>
+                <title>Ismétlődő időpontok a naptár áttekintő képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmenteditrecurrenceadded.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Future changes to the parent appointment will affect the children
-automatically, without any further message. If an agent is about to change
-one of the child appointments, a message will ask what would they like to
-update:
+            A szülőidőponton végzett későbbi változtatások automatikusan hatással
+lesznek a gyermekekre is, további figyelmeztetés nélkül. Ha egy ügyintéző a
+gyermekidőpontok egyikének megváltoztatására készül, akkor egy üzenetablak
+meg fogja kérdezni, hogy mit szeretne frissíteni:
         </para>
         <para>
             <figure>
-                <title>Edit screen of a repeating child appointment</title>
+                <title>Ismétlődő gyermekidőpontok szerkesztőképernyője</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmenteditrecurrencereedit.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            If the update affects all appointments, the behavior will be the same as
-with the update of the parent appointment. All options (including the
-recurring settings) are changeable.
+            Ha a frissítés az összes időpontot érinti, akkor a működés megegyezik a
+szülőidőpont frissítésével. Az összes beállítás (beleértve az ismétlődés
+beállításait) megváltoztatható.
         </para>
         <para>
-            If just the current (child) occurrence is affected, it's not possible to
-change the repeating settings, but a related message and a link to the
-parent appointment will be provided:
+            Ha csak az aktuális (gyermek) ismétlődés érintett, akkor nincs lehetőség
+megváltoztatni az ismétlődés beállításit, de egy kapcsolódó üzenet és a
+szülőidőpontra mutató hivatkozás lesz megjelenítve:
         </para>
         <para>
             <figure>
-                <title>Repeating settings of a child appointment</title>
+                <title>Egy gyermekidőpont ismétlődési beállításai</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmenteditrecurrencereeditsingle.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The enabled repeating option will be additionally displayed in the tooltip
-of the related appointment(s).
+            Az engedélyezett ismétlődési lehetőség is megjelenik továbbá a kapcsolódó
+időpontok buboréksúgóiban.
         </para>
     </section>
     <section>
         <title>Értesítések</title>
         <para>
-            Within the edit screen of an appointment, it is possible to setup a date to
-notify about the appointment. As in the settings for appointment repeat, it
-is possible to use pre-defined templates for notifications (i.e. 5 minutes
-before, 15 minutes before etc.)  or to setup a custom point of time:
+            Egy időpont szerkesztőképernyőjén belül lehetőség van egy dátum
+beállítására, hogy értesítést küldjön az időpontról. Mint az időpont
+ismétlődésének beállításaiban, lehetőség van előre meghatározott sablonok
+használatára az értesítésekhez (azaz 5 perccel előtte, 15 perccel előtte,
+stb.) vagy egyéni időpont beállítására:
         </para>
         <para>
             <figure>
-                <title>Notification settings in appointment edit screen</title>
+                <title>Értesítési beállítások az időpont szerkesztése képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-appointmenteditnotification.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The custom settings for notifications are split into a relative point of
-time (like 5 minutes after the appointment has been started, 2 hours before
-the appointment ends etc.) and an explicit date time value, which can
-additionally be selected with a date picker. The related section needs to be
-enabled with a radio button, hence the disabled section will be ignored.
+            Az értesítések egyéni beállításai fel vannak osztva relatív időpontra (mint
+például 5 perccel az időpont kezdete után, 2 órával az időpont vége előtt,
+stb.) és pontos dátum és idő értékre, amely szintén kiválasztható a
+dátumválasztóval. A hozzá tartozó szakaszt egy választógombbal kell
+engedélyezni, ezért a letiltott szakasz figyelmen kívül lesz hagyva.
         </para>
         <para>
-            If an appointment has an active notification setting, the date/time string
-of the notification will be displayed in the tooltip. In addition to that,
-the appointment will be marked with a bell-symbol to indicate that there is
-an active notification set, without any mouse over actions.
+            Ha egy időpont rendelkezik aktív értesítési beállítással, akkor az értesítés
+dátum és idő szövege meg fog jelenni a buboréksúgóban. Ráadásul az időpont
+meg lesz jelölve egy csengő szimbólummal azt jelezve, hogy aktív értesítés
+van beállítva. Ehhez nem szükséges semmilyen egérkurzor fölé húzási művelet.
         </para>
     </section>
     <section>
         <title>Eseményalapú időpont- vagy naptárértesítések</title>
         <para>
-            As in the well-known ticket notifications, this package comes up with an
-event based notification mechanism, that can be handled using an
-administration interface. Within that interface, notification event entries
-can be created, updated and/or deleted to react on different OTRS events
-with related filters, recipients and content templates.
+            Mint a jól ismert jegyértesítésekben, ez a csomag is egy eseményalapú
+értesítési mechanizmussal érkezik, amely egy adminisztrációs felület
+használatával kezelhető. A felületen belül értesítési esemény bejegyzések
+hozhatók létre, frissíthetők és/vagy törölhetők, hogy reagáljanak a
+különböző OTRS eseményekre kapcsolódó szűrőkkel, címzettekkel és
+tartalomsablonokkal.
         </para>
         <para>
-            During the installation of the package, one default entry
-<emphasis>Appointment reminder notification</emphasis> will be installed.
+            A csomag telepítése közben egy alapértelmezett <emphasis>Időpont emlékeztető
+értesítés</emphasis> bejegyzés kerül telepítésre.
         </para>
         <para>
-            The management frontend for notification templates can be reached using the
-administration menu:
+            Az értesítési sablonok kezelési előtétprogramja az adminisztrációs menü
+használatával érhető el:
         </para>
         <para>
             <figure>
-                <title>Calendar/Appointment notification management link</title>
+                <title>Naptár és időpont értesítés kezelése hivatkozás</title>
 <screenshot>
 <graphic fileref="screenshots/appointment-calendar/admininterfacelink.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            In the notification overview, all available notification templates can be
-displayed.  Within that overview, such templates can be created, edited,
-imported/exported and, of course, deleted.
+            Az értesítés áttekintőjében az összes elérhető értesítési sablon
+megjeleníthető. Az áttekintőn belül az ilyen sablonok létrehozhatók,
+szerkeszthetők, importálhatók, exportálhatók és természetesen törölhetők.
         </para>
         <para>
             <figure>
-                <title>Calendar/Appointment notification management overview</title>
+                <title>Naptár és időpont értesítés kezelésének áttekintője</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationoverview.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            From the left sidebar, notification entries can either be created, exported
-or imported.  The complete set of available entries can be exported, or an
-already exported file can be used to import notification entries.
+            A bal oldalsávról létrehozhatók, exportálhatók vagy importálhatók az
+értesítési bejegyzések. Az elérhető bejegyzések teljes halmaza exportálható,
+vagy egy korábban exportált fájl használható az értesítési bejegyzések
+importálására.
         </para>
         <para>
             <figure>
-                <title>Sidebar in calendar/appointment notification overview</title>
+                <title>Oldalsáv a naptár és időpont értesítési áttekintőben</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationsidebar.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The main table on the right side will display the available appointment
-notifications.  For each line, the related entry can be edited by clicking
-on the name column, exported with a click on the export icon, copied with a
-click on the copy icon or even deleted.  All icons relates just to the
-single entries (not like the export notifications button in the sidebar).
+            A jobb oldalon lévő fő táblázat jeleníti meg az elérhető időpont
+értesítéseket. Minden egyes sorában a hozzá tartozó bejegyzés szerkeszthető
+a név oszlopra kattintva, exportálható az exportálás ikonra kattintva,
+lemásolható a másolás ikonra kattintva, vagy akár törölhető is. Az összes
+ikon csak az egyes bejegyzésekre vonatkozik (nem úgy mint az értesítések
+exportálása gomb az oldalsávon).
         </para>
         <para>
             <figure>
-                <title>Table in calendar/appointment notification overview</title>
+                <title>Táblázat a naptár és időpont értesítési áttekintőben</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationtable.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            In order to create a new or update an existing entry, edit screen can be
-used, same as in the ticket notifications. Within that screen, it is needed
-to define some basic parameters, like a name, which needs to be unique for
-the OTRS system (it cannot even conflict with a name from the ticket
-notifications).
+            Egy új bejegyzés létrehozásához vagy egy meglévő bejegyzés frissítéséhez a
+szerkesztőképernyő hasonló módon használható, mint a jegyértesítéseknél. A
+képernyőn belül meg kell határozni néhány alap paramétert, mint például a
+nevet, amelynek egyedinek kell lennie az OTRS rendszernél (nem ütközhet még
+a jegyértesítések nevével sem).
         </para>
         <para>
-            Each notification entry can be made selectable as an option in the agent
-preferences.  Optionally, a tooltip message for the related notification
-entry in the user preferences can be inserted, which will be displayed to
-the user on mouse over.
+            Minden egyes értesítési bejegyzés kiválasztható lesz lehetőségként az
+ügyintézői beállításokban. Adott esetben az ügyintézői beállításokba a
+kapcsolódó értesítési bejegyzéshez egy buboréksúgó üzenet is beszúrható,
+amely akkor kerül megjelenítésre, ha a felhasználó föléjük húzza az
+egérkurzort.
         </para>
         <para>
-            If needed, a comment for the entry can be added which will be displayed in
-the overview screen of the administration interface. Last but not least, the
-validity state can be selected (valid by default).
+            Ha szükséges, megjegyzés is hozzáadható a bejegyzéshez, amely az
+adminisztrációs felület áttekintő képernyőjén lesz megjelenítve. Végül, de
+nem utolsó sorban az érvényességi állapot is kiválasztható
+(alapértelmezetten érvényes).
         </para>
         <para>
-            To let the template react on OTRS events, at least one of the available
-events need to be selected from the list in <emphasis>Events</emphasis>
-widget.
+            Annak érdekében, hogy a sablon figyeljen az OTRS eseményekre, az elérhető
+események legalább egyikét ki kell választani a listából az
+<emphasis>Események</emphasis> felületi elemen.
         </para>
         <para>
             <figure>
-                <title>Event definition for calendar/appointment notifications</title>
+                <title>Eseménymeghatározás a naptár és időpont értesítésekhez</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationevents.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Enclosed is a list of possible events with description:
+            Mellékelve látható a lehetséges események listája a leírásukkal:
         </para>
         <variablelist>
             <varlistentry>
                 <term>AppointmentCreate</term>
                 <listitem>
                     <para>
-                        Executed after an appointment has been created.
+                        Azután kerül végrehajtásra, ha egy időpontot létrehoztak.
                     </para>
                 </listitem>
             </varlistentry>
@@ -660,7 +678,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 <term>AppointmentUpdate</term>
                 <listitem>
                     <para>
-                        Executed after an appointment has been updated.
+                        Azután kerül végrehajtásra, ha egy időpontot frissítettek.
                     </para>
                 </listitem>
             </varlistentry>
@@ -668,7 +686,7 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 <term>AppointmentDelete</term>
                 <listitem>
                     <para>
-                        Executed after an appointment has been deleted.
+                        Azután kerül végrehajtásra, ha egy időpontot töröltek.
                     </para>
                 </listitem>
             </varlistentry>
@@ -676,12 +694,12 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 <term>AppointmentNotification</term>
                 <listitem>
                     <para>
-                        This is a special appointment event that will be executed by the OTRS daemon
-in time. If an appointment contains a date/time value for notifications, as
-already described in this documentation, and such a notification date is
-reached, the OTRS daemon will execute the event
-<literal>AppointmentNotification</literal> for every related appointment
-separately.
+                        Ez egy különleges időpontesemény, amelyet az OTRS démon fog végrehajtani a
+megfelelő időben. Ha az időpont tartalmaz dátum és idő értéket az
+értesítésekhez, akkor amint az korábban bemutatásra került ebben a
+dokumentumban, és az adott értesítési dátumot elérte, az OTRS démon
+végrehajtja az <literal>AppointmentNotification</literal> eseményt
+külön-külön minden egyes érintett időpontnál.
                     </para>
                 </listitem>
             </varlistentry>
@@ -689,7 +707,7 @@ separately.
                 <term>CalendarCreate</term>
                 <listitem>
                     <para>
-                        Executed after a calendar has been created.
+                        Azután kerül végrehajtásra, ha egy naptárat létrehoztak.
                     </para>
                 </listitem>
             </varlistentry>
@@ -697,89 +715,92 @@ separately.
                 <term>CalendarUpdate</term>
                 <listitem>
                     <para>
-                        Executed after a calendar has been updated.
+                        Azután kerül végrehajtásra, ha egy naptárat frissítettek.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
         <para>
-            The appointment filter widget can optionally be used to narrow the list of
-appointments by matching configured values:
+            Adott esetben az időpontszűrő felületi elem használható az időpontok
+listájának szűkítéséhez a beállított értékek illesztésével:
         </para>
         <para>
             <figure>
-                <title>Filter settings in calendar/appointment notifications</title>
+                <title>Szűrési beállítások a naptár és időpont értesítésekben</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationfilter.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            For example, here it's possible to select which calendar the related
-appointment needs to be part of, or a part or complete title or location of
-the appointment. Also, it's possible to choose from a list of teams or
-resources assigned to the appointments (available only with <emphasis
-role="bold">OTRS Business Solution™</emphasis>).
+            Például itt van lehetőség kiválasztani, hogy mely naptár részének kell
+lennie a kapcsoló időpontnak, vagy az időpont címének vagy helyének
+részleges vagy teljes szövegét. Lehetséges az értesítésekhez rendelt
+csapatok vagy erőforrások listájából is választani (csak az <emphasis
+role="bold">OTRS Business Solution™</emphasis> használatával érhető el).
         </para>
         <para>
-            Within the <emphasis>Recipient</emphasis> widget, the related recipients can
-be selected which would receive generated notifications.
+            A <emphasis>Címzett</emphasis> felületi elemen belül a kapcsolódó címzettek
+választhatók ki, akik megkaphatják az előállított értesítéseket.
         </para>
         <para>
             <figure>
-                <title>Recipient settings in calendar/appointment notifications</title>
+                <title>Címzett beállításai a naptár és időpont értesítésekben</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationrecipients.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            All resource related list entries are available only with <emphasis
-role="bold">OTRS Business Solution™</emphasis>.
+            Az összes erőforrással kapcsolatos listabejegyzés csak az <emphasis
+role="bold">OTRS Business Solution™</emphasis> használatával érhető el.
         </para>
         <para>
-            Within the <emphasis>Notification Methods</emphasis> widget, an available
-transport can be selected (<emphasis>Email</emphasis>,
-<emphasis>SMS</emphasis> or <emphasis>Web View</emphasis>), as well as
-additional recipients and email templates.
+            Az <emphasis>Értesítési módszerek</emphasis> felületi elemen belül az
+elérhető átvitel választható ki (<emphasis>E-mail</emphasis>,
+<emphasis>SMS</emphasis> vagy <emphasis>Webnézet</emphasis>), valamint
+további címzettek és e-mail sablonok.
         </para>
         <para>
             <figure>
-                <title>Notification methods in calendar/appointment notifications</title>
+                <title>Értesítési módszerek a naptár és időpont értesítésekben</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationnotificationmethods.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The main content of a notification can be defined in the localized subject
-and the body fields. Here it's possible to define static text content mixed
-with OTRS smart tags, if needed. The default notification entry shows how
-such a body and subject can look like.
+            Egy értesítés fő tartalma a honosított tárgy és törzs mezőkben határozható
+meg. Itt van lehetőség az OTRS okos címkéivel kevert állandó szöveges
+tartalom meghatározására, ha szükséges. Az alapértelmezett értesítési
+bejegyzés bemutatja, hogy egy ilyen törzsnek és tárgynak hogyan kell
+kinéznie.
         </para>
         <para>
             <figure>
-                <title>Notification body in calendar/appointment notifications</title>
+                <title>Értesítés törzse a naptár és időpont értesítésekben</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/adminappointmentnotificationbody.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            A full list of available smart tags is provided in the <emphasis>Tag
-Reference</emphasis> widget at the bottom of the page.
+            Az elérhető okos címkék teljes listáját az oldal alján lévő
+<emphasis>Címkehivatkozás</emphasis> felületi elem biztosítja.
         </para>
         <para>
-            For every added notification entry which has the option <emphasis>Show in
-agent preferences</emphasis> enabled, a new option will be displayed in the
-related user preferences widget of every agent. With these options, every
-agent can select which types of notifications and by which available
-transport method they want to receive.
+            Minden olyan hozzáadott értesítési bejegyzésnél, amelynél engedélyezve van a
+<emphasis>Megjelenítés az ügyintézői beállításokban</emphasis> lehetőség,
+egy hozzá tartozó új beállítás lesz megjelenítve minden ügyintéző
+felhasználói beállítások felületi elemén. Ezekkel a beállításokkal az egyes
+ügyintézők kiválaszthatják, hogy milyen típusú értesítéseket és mely
+elérhető átviteli módszerrel szeretnének megkapni.
         </para>
         <para>
             <figure>
                 <title>
-                    Show in agent preferences option in calendar/appointment notifications
+                    Megjelenítés az ügyintézői beállításokban lehetőség a naptár és időpont
+értesítésekben
                 </title>
 <screenshot>
 <graphic
@@ -790,121 +811,129 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
     <section>
         <title>Jegyek összekapcsolása időpontokkal</title>
         <para>
-            The appointment calendar comes with an abstraction layer to link external
-objects with appointments, using the OTRS internal link object. Those
-additional objects can come up with external packages without any further
-need to update the code of the calendar directly.
+            Az időpontnaptár egy absztrakciós réteggel érkezik a külső objektumoknak az
+időpontokkal való összekapcsolásához, az OTRS belső objektum
+összekapcsolását használva. Ezek a további objektumok jöhetnek külső
+csomagokkal is anélkül, hogy közvetlenül a naptár kódjában bármilyen későbbi
+frissítés szükséges lenne.
         </para>
         <para>
-            Basically, within the edit screen of an appointment it is possible to link
-existing tickets. Tickets can be searched by their ticket numbers and/or
-ticket titles via an autocompletion field. Once the agent clicks on a
-result, the related ticket will be saved in a result box and after the
-appointment has been saved, the ticket will be linked to the appointment.
+            Alapvetően egy időpont szerkesztőképernyőjén belül lehetőség van
+összekapcsolni a meglévő jegyekkel. A jegyek kereshetők a jegyszámuk és/vagy
+a jegycímük alapján egy automatikusan kiegészítő mezőn keresztül. Amikor az
+ügyintéző rákattint egy találtra, akkor a kapcsolódó jegy mentésre kerül egy
+eredménydobozban, és miután az időpont mentésre kerül, a jegy hozzá lesz
+kapcsolva az időponthoz.
         </para>
         <para>
             <figure>
-                <title>Ticket link option in appointment edit screen</title>
+                <title>Jegy összekapcsolási lehetőség az időpont szerkesztőképernyőjén</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-linktickets.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Additionally, it's possible to link multiple tickets to one
-appointment. Since the normal OTRS link object is used to create the
-connection between both objects, the link will be displayed in the ticket
-zoom screen as well.
+            Továbbá lehetőség van több jegyet is hozzákapcsolni egy időponthoz. Mivel a
+normál OTRS objektumösszekapcsolást használják a két objektum közti
+kapcsolat létrehozásához, a kapcsolat megjelenik a jegynagyítás képernyőn
+is.
         </para>
         <para>
             <figure>
-                <title>Linked appointments table in ticket zoom screen</title>
+                <title>Kapcsolt időpontok táblázata a jegynagyítás képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/ticketzoom-linkedappointment.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Those links can either be created through an existing appointment in the
-related edit dialog, using the overviews or via the link feature in the
-ticket zoom.
+            Ezek a kapcsolatok vagy egy meglévő időponton keresztül hozhatók létre a
+hozzá tartozó szerkesztési párbeszédablakokban, vagy az áttekintő
+használatával, vagy a jegynagyításban lévő összekapcsolás funkción
+keresztül.
         </para>
         <para>
             <figure>
-                <title>Appointment linking from ticket zoom screen</title>
+                <title>Időpont hozzákapcsolása a jegynagyítás képernyőről</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/ticketzoom-appointmentlinking.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Via the ticket zoom screen, it's additionally possible to create a new
-appointment, which links the related ticket automatically to the newly
-created appointment. There is a new option <emphasis>New
-Appointment</emphasis> located in the ticket action menu
-<emphasis>Miscellaneous</emphasis>.
+            A jegynagyítás képernyőn keresztül is lehetséges továbbá egy új időpont
+létrehozása, amely automatikusan összekapcsolja az érintett jegyet az
+újonnan létrehozott időponttal. Létezik egy új <emphasis>Új
+időpont</emphasis> lehetőség, amely az <emphasis>Egyebek</emphasis>
+jegyművelet menüben található.
         </para>
         <para>
             <figure>
-                <title>New appointment link in ticket zoom screen</title>
+                <title>Új időpont hivatkozás a jegynagyítás képernyőn</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/ticketzoom-newappointment.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            After a click on the link, the agent will be forwarded to the calendar
-overview, which automatically opens a new appointment dialog, that has the
-related ticket pre-linked and can be filled out as usual.
+            Miután rákattint a kapcsolatra, az ügyintéző a naptár áttekintőhöz lesz
+továbbítva, amely automatikusan megnyitja az új időpont párbeszédablakot,
+amely előre összekapcsolva tartalmazza az érintett jegyet, és kitölthető a
+szokásos módon.
         </para>
     </section>
     <section>
         <title>Kezelt jegyidőpontok</title>
         <para>
-            To make a step back to the calendar management, the package offers the
-possibility to automatically create and update appointments in calendars,
-using a special ticket search rule within the calendar edit screen.
+            Hogy visszatérjünk a naptár kezeléséhez, a csomag a naptárban lévő időpontok
+automatikus létrehozásának és frissítésének képességét is nyújtja egy
+különleges jegykeresési szabály használatával a naptár szerkesztőképernyőjén
+belül.
         </para>
         <para>
-            Tickets can have special date/time entries like pending times, escalation
-times (first response time, update time etc.) or assigned dynamic field from
-type date/time.  Logically, the calendars are able to show those date/time
-entries, but since the calendar appointments needs to have time ranges
-consisting of a start time and an end time, it's needed to define a related
-end time for managed appointments, as times like the pending time points to
-just a single date/time value.
+            A jegyek rendelkezhetnek különleges dátum és idő bejegyzésekkel, mint
+például várakozási idők, eszkalációs idők (első válaszidő, frissítési idő,
+stb.) vagy hozzárendelt dátum és idő típusú dinamikus mezővel. Logikailag a
+naptárak képesek megjeleníteni ezeket a dátum és idő bejegyzéseket, de mivel
+a naptár időpontjainak egy kezdődátumból és egy befejezési dátumból álló
+időtartományokra van szükségük, ezért meg kell határozni egy hozzá tartozó
+befejezési időt a kezelt időpontoknál, ugyanis az idők (mint például a
+várakozási idők) csak egy önálló dátum és idő értékre mutatnak.
         </para>
         <para>
-            Below the basic calendar configuration in the calendar edit screen, a
-special widget called <emphasis>Ticket Appointments</emphasis> takes care
-about the rules to be used for automatic appointment creation.
+            Az alap naptárbeállítások alatt a naptár szerkesztőképernyőjén egy
+<emphasis>Jegyidőpontok</emphasis> nevű különleges felületi elem gondoskodik
+azokról a szabályokról, amelyek az automatikus időpontlétrehozáshoz lesznek
+használva.
         </para>
         <para>
             <figure>
-                <title>Ticket appointments configuration in calendar edit screen</title>
+                <title>Jegyidőpontok beállítása a naptár szerkesztőképernyőjén</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendarmanage-calendaredit-ticketappointments.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            It's necessary to define rules to describe a ticket search for tickets,
-which will result in automatically created and managed appointments in the
-related calendar. It's possible to define multiple rules with different
-parameters to combine several types of tickets within the same calendar.
+            Szükség van szabályok meghatározására egy jegykeresés leírásához azoknál a
+jegyeknél, amelyek eredményként jelennek meg az automatikusan létrehozott és
+kezelt időpontokban a hozzá tartozó naptárban. Lehetőség van több szabály
+meghatározására is különböző paraméterekkel, hogy több típusú jegyet
+lehessen egyesíteni ugyanazon a naptáron belül.
         </para>
         <para>
-            A rule consists of the following parameters to generate proper ticket
-searches:
+            Egy szabály a következő paraméterekből áll a megfelelő jegykeresések
+előállításához:
         </para>
         <variablelist>
             <varlistentry>
                 <term>Kezdődátum</term>
                 <listitem>
                     <para>
-                        A dropdown list, that indicates the special date/time value of the related
-tickets. This can be either the pending time, the different escalation times
-or a dynamic field from type date/time assigned to the ticket.
+                        Egy legördülő lista, amely a kapcsolódó jegy különleges dátum és idő értékét
+jelzi. Ez lehet a várakozási idő, a különböző eszkalációs idők vagy a
+jegyhez hozzárendelt dátum és idő típusú dinamikus mező.
                     </para>
                 </listitem>
             </varlistentry>
@@ -912,9 +941,9 @@ or a dynamic field from type date/time assigned to the ticket.
                 <term>Befejezési dátum</term>
                 <listitem>
                     <para>
-                        This can be a relative time value, counted from the selected start time
-(like +5 minutes, +1 hour etc.) or a dynamic field from type date/time,
-pointing to an absolute date and time value.
+                        Ez lehet egy relatív időérték a kiválasztott kezdődátumtól számítottan (mint
+például +5 perc, +1 óra, stb.) vagy egy dátum és idő típusú dinamikus mező,
+amely egy abszolút dátum és idő értékre mutat.
                     </para>
                 </listitem>
             </varlistentry>
@@ -922,9 +951,9 @@ pointing to an absolute date and time value.
                 <term>Várólisták</term>
                 <listitem>
                     <para>
-                        A multi-selectable dropdown list, that indicates the queues the related
-tickets needs to be located in. This field is mandatory and can't be left
-unfilled.
+                        Egy többválasztós legördülő lista, amely azokat a várólistákat jelzi,
+amelyekben a kapcsolódó jegyeknek lenniük kell. Ez a mező kötelező, és nem
+maradhat kitöltetlenül.
                     </para>
                 </listitem>
             </varlistentry>
@@ -932,57 +961,60 @@ unfilled.
                 <term>Keresési attribútumok</term>
                 <listitem>
                     <para>
-                        This is a list of additional (optional) search attributes to provide more
-detailed filter possibilities to the agent. It acts like the search
-attributes in ticket search screen of the agent interface. Single attributes
-can be selected, added to the form and filled out with filter values.
+                        Ez további (elhagyható) keresési attribútumok listája, hogy részletesebb
+szűrési lehetőségeket biztosítson az ügyintézőnek. Úgy viselkedik, mint a
+keresési attribútumok az ügyintézői felület jegykeresés
+képernyőjén. Kiválaszthatók az önálló attribútumok, hozzáadhatók az
+űrlaphoz, és kitölthetők a szűrőértékekkel.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
         <para>
-            An overview of the configuration for such a rule looks as follows:
+            A beállítás áttekintője egy ilyen szabálynál a következőképpen néz ki:
         </para>
         <para>
             <figure>
-                <title>Ticket appointment rule in calendar edit screen</title>
+                <title>Jegyidőpont szabálya a naptár szerkesztőképernyőjén</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendarmanage-calendaredit-ticketappointmentsoverview.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The rule in the screenshot will find all tickets that have a pending time
-and would add one hour to the related pending time to generate the end time
-and create appointments for the set of found tickets during the search. The
-tickets additionally needs to be located in queue <emphasis>Raw</emphasis>.
+            A képernyőképen lévő szabály az összes olyan jegyet meg fogja keresni,
+amelynek van várakozási ideje, és egy órát adna a kapcsolódó várakozási
+időhöz a befejezési idő előállításához és az időpontok létrehozásához a
+keresés közben megtalált jegyek halmazánál. Továbbá a jegyeknek a
+<emphasis>Raw</emphasis> várólistában kell lenniük.
         </para>
         <para>
-            An example of an automatically added appointment looks as follows:
+            Egy automatikusan hozzáadott időpont példája a következőképpen néz ki:
         </para>
         <para>
             <figure>
-                <title>Ticket appointment in calendar overview screen</title>
+                <title>Jegyidőpont a naptár áttekintő képernyőjén</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-ticketappointment.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The <emphasis>P</emphasis> symbol indicates that this appointment includes a
-pending time as the start time value. The end time value is a dynamic field
-from type date/time in this example to display a bigger appointment for that
-test purpose.
+            A <emphasis>P</emphasis> szimbólum azt jelzi, hogy az időpont egy várakozási
+időt tartalmaz a kezdési idő értékeként. A befejezési idő értéke egy dátum
+és idő típusú dinamikus mező ebben a példában, hogy nagyobb időpontot
+jelenítsen meg erre a vizsgálati célra.
         </para>
         <para>
-            Special appointments of different types will be marked with related symbols:
+            A különböző típusok különleges időpontjait a következő kapcsolódó
+szimbólumokkal jelzi:
         </para>
         <variablelist>
             <varlistentry>
                 <term>P</term>
                 <listitem>
                     <para>
-                        Appointments of tickets with pending time as the start time.
+                        A jegyek időpontjai várakozási idővel szerepelnek kezdési időként.
                     </para>
                 </listitem>
             </varlistentry>
@@ -990,8 +1022,8 @@ test purpose.
                 <term>E</term>
                 <listitem>
                     <para>
-                        Appointments of tickets with escalation times as the start time (first
-response time, update time, solution time).
+                        A jegyek időpontjai eszkalációs idővel szerepelnek kezdési időként (első
+válaszidő, frissítési idő, megoldási idő).
                     </para>
                 </listitem>
             </varlistentry>
@@ -999,101 +1031,104 @@ response time, update time, solution time).
                 <term>D</term>
                 <listitem>
                     <para>
-                        Appointments of tickets with a dynamic field from type date/time as the
-start time.
+                        A jegyek időpontjai dátum és idő típusú dinamikus mezővel szerepelnek
+kezdési időként.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
         <para>
-            The edit screen of such a special appointment looks as follows:
+            Egy ilyen különleges időpont szerkesztőképernyője a következőképpen néz ki:
         </para>
         <para>
             <figure>
-                <title>Edit screen of a ticket appointment</title>
+                <title>Egy jegyidőpont szerkesztőképernyője</title>
 <screenshot>
 <graphic
 fileref="screenshots/appointment-calendar/calendaroverview-ticketappointmentedit.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            The appointment title will be displayed as ticket number and title and
-cannot be changed, since it's automatically created, updated and removed,
-depending on the related ticket. Title will be displayed as a link to the
-related ticket zoom screen.
+            Az időpont címe lesz megjelenítve jegyszámként és címként, amely nem
+változtatható meg, mivel automatikusan kerül előállításra, frissítésre és
+eltávolításra a kapcsolódó jegytől függően. A cím a kapcsolódó jegynagyítás
+képernyőre mutató hivatkozásként lesz megjelenítve.
         </para>
         <para>
-            Of course, it's still possible to define basic information like a
-description and a location, which will be stored for that single
-appointment. For such appointments it's also possible to define notification
-times and link additional tickets.
+            Természetesen továbbra is lehetséges az alap információk meghatározása, mint
+például egy leírás és egy hely, amelyek ennél az egyedülálló időpontnál
+lesznek eltárolva. Az ilyen időpontoknál lehetőség van értesítési idők
+meghatározására és további jegyek hozzákapcsolására is.
         </para>
         <para>
-            Some of those start time values are variable and therefore updatable by the
-related agent and some are not.
+            Ezen kezdési idő értékek némelyike változó, és ennélfogva a hozzá tartozó
+ügyintézőnek frissíthető, de némelyik nem.
         </para>
         <para>
-            For instance the pending time is a value that can be changed using the
-pending ticket action in the ticket zoom of the related ticket. Dynamic
-field values can be changed easily, too.
+            Például a várakozási idő egy olyan érték, amely a függőben lévő jegy művelet
+használatával változtatható meg a kapcsolódó jegy jegynagyításán. A
+dinamikus mező értékei is egyszerűen megváltoztathatók.
         </para>
         <para>
-            An escalation value like first response time or the update time are special
-values which will be computed using a Service / SLA entry assigned to the
-related ticket.
+            Az eszkalációs értékek (mint például az első válaszidő vagy a frissítési
+idő) olyan különleges értékek, amelyek a kapcsolódó jegyhez rendelt
+szolgáltatás vagy SLA bejegyzés használatával lesznek kiszámítva.
         </para>
         <para>
-            If, for instance, an automatically created appointment of type pending time
-is changed using the calendar overview, the related value will be updated in
-the ticket as well, which is the same behavior as for special appointments
-of type dynamic field. Therefore it's either possible to update the related
-ticket using the ticket zoom, or by just updating the appointment that
-writes back all needed changes to the ticket.
+            Például ha egy várakozási idő típusú, automatikusan létrehozott időpont
+megváltozik a naptár áttekintő használatával, akkor a hozzá tartozó érték
+frissítve lesz a jegyben is, amely ugyanaz a működés, mint a dinamikus mező
+típusú különleges időpontoknál. Ennélfogva lehetőség van a kapcsolódó jegy
+frissítésére vagy a jegynagyítás használatával, vagy csak az időpont
+frissítésével, amely visszaírja az összes szükséges változtatást a jegybe.
         </para>
         <para>
-            Appointments from type escalation time cannot be updated using the related
-appointments, as those values are not changeable directly by the agent. Such
-appointments are simply read-only on the related values, as well as on the
-drag and drop features/handles.
+            Az eszkalációs idő típusú időpontok nem frissíthetők a kapcsolódó időpontok
+használatával, mivel azok az értékek közvetlenül nem módosíthatók az
+ügyintéző által. Az ilyen időpontok egyszerűen csak olvashatók az érintett
+értékeknél, valamint a fogd és vidd funkciónál vagy fogantyúknál.
         </para>
         <para>
-            On every update on the calendar definition or the related tickets, the
-automatically created appointments will be updated as well. This work will
-be done by the OTRS daemon in the background. Therefore, it's necessary to
-have the daemon running for this feature to work properly!
+            A naptár meghatározásán vagy a kapcsolódó jegyeknél végzett minden
+frissítéskor az automatikusan létrehozott időpontok is frissítve
+lesznek. Ezt a munkát az OTRS démon fogja elvégezni a háttérben. Ebből
+adódóan szükséges, hogy a démon fusson ahhoz, hogy ez a funkció megfelelően
+működjön!
         </para>
     </section>
     <section>
         <title>Vezérlőpult felületi elem a közelgő időpontokhoz</title>
         <para>
-            To have a quick overview about upcoming appointments, it's possible to
-enable a dashboard widget called <emphasis>Appointments</emphasis>.
+            Hogy gyors áttekintőt kapjon a közelgő időpontokról, egy
+<emphasis>Időpontok</emphasis> nevű vezérlőpult felületi elem engedélyezése
+lehetséges.
         </para>
         <para>
             <figure>
-                <title>Today filter in upcoming appointments dashboard widget</title>
+                <title>Mai nap szűrője a közelgő időpontok vezérlőpult felületi elemen</title>
 <screenshot>
 <graphic fileref="screenshots/appointment-calendar/dashboardwidgettoday.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            This widget displays upcoming appointments of every accessible calendar by
-the agent in a simplified manner.
+            Ez a felületi elem egyszerűsített módon jeleníti meg az ügyintéző által
+hozzáférhető minden egyes naptár közelgő időpontjait.
         </para>
         <para>
-            It offers the possibility to create new appointments with a click on the
-<emphasis>New Appointment</emphasis> button, which forwards the agent to the
-calendar overview screen and opens a new appointment dialog.
+            Annak a lehetőségét nyújtja, hogy új időpontokat hozzon létre az
+<emphasis>Új időpont</emphasis> gombra kattintva, amely a naptár áttekintő
+képernyőjére vezeti az ügyintézőt, és megnyit egy új időpont
+párbeszédablakot.
         </para>
         <para>
-            The widget content consists of three filter entries:
+            A felületi elem tartalma három szűrőbejegyzésből áll:
         </para>
         <variablelist>
             <varlistentry>
                 <term>Ma</term>
                 <listitem>
                     <para>
-                        Displays upcoming appointments for the current date.
+                        Megjeleníti az aktuális nap közelgő időpontjait.
                     </para>
                 </listitem>
             </varlistentry>
@@ -1101,7 +1136,7 @@ calendar overview screen and opens a new appointment dialog.
                 <term>Holnap</term>
                 <listitem>
                     <para>
-                        Displays upcoming appointments for the next day.
+                        Megjeleníti a következő nap közelgő időpontjait.
                     </para>
                 </listitem>
             </varlistentry>
@@ -1109,35 +1144,37 @@ calendar overview screen and opens a new appointment dialog.
                 <term>Hamarosan</term>
                 <listitem>
                     <para>
-                        Soon means the next five days, excluding today and tomorrow.
+                        <emphasis>Hamarosan</emphasis> alatt a következő öt napot kell érteni,
+kivéve a mai és a holnapi napot.
                     </para>
                 </listitem>
             </varlistentry>
         </variablelist>
         <para>
-            Like in the other dashboard widgets, the agent can switch between the
-filters by clicking on the filter name:
+            Mint a többi vezérlőpult felületi elemben, az ügyintéző válthat a szűrők
+közt a szűrő nevére kattintva:
         </para>
         <para>
             <figure>
-                <title>Soon filter in upcoming appointments dashboard widget</title>
+                <title>Hamarosan szűrő a közelgő időpontok vezérlőpult felületi elemen</title>
 <screenshot>
 <graphic fileref="screenshots/appointment-calendar/dashboardwidgetsoon.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         </para>
         <para>
-            Since the appointment information is simplified and needs to be compact in
-order to be displayed properly in the small widget, it's possible to show
-more detailed information about every value in the related tooltip while
-hovering over the column, as visible in the previous screenshot.
+            Mivel az időpont információi le vannak egyszerűsítve, és tömörnek kell
+lenniük annak érdekében, hogy helyesen jelenjenek meg a kis felületi
+elemben, lehetőség van részletesebb információk megjelenítésére minden egyes
+értékkel kapcsolatban a hozzá tartozó buboréksúgóban, miközben az oszlop
+fölé mutat az egérrel, amint az előző képernyőképen látható.
         </para>
         <para>
-            Basically just the color of the related calendar, the start time of the
-appointment and the appointment title will be displayed to the agent. On
-hovering over the related column, further information will be displayed if
-needed. If the agent clicks on such an appointment, the browser redirects to
-the calendar overview screen and opens the related appointment to show the
-full set of information.
+            Alapvetően csak a kapcsolódó naptár színe, az időpont kezdési ideje és az
+időpont címe kerül megjelenítésre az ügyintézőnek. A megfelelő oszlopra
+mutatva az egérrel további információk lesznek megjelenítve, ha
+szükséges. Ha az ügyintéző rákattint egy ilyen időpontra, akkor a böngésző
+átirányítja a naptár áttekintő képernyőjére, és megnyitja a kapcsolódó
+időpontot a teljes információtartalom megjelenítéséhez.
         </para>
     </section>
 </section>

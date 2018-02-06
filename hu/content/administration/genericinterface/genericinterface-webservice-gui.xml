@@ -37,7 +37,7 @@ hibakereső képernyőn.
     </para>
 
     <section id="webservice_gui_overview">
-        <title>Webszolgáltatás áttekintés</title>
+        <title>Webszolgáltatás áttekintő</title>
         <para>
             Az adminisztrációs felület fő képernyőjén (a Rendszeradminisztráció
 dobozban) lévő <emphasis>Webszolgáltatások</emphasis> hivatkozás vezet a
@@ -977,16 +977,17 @@ fogja látni ezt a paramétert, amikor kiválasztja a meghívót a
 webszolgáltatás szerkesztési képernyőjén. Ez a mező csak tájékoztató.
                 </para>
                 <para>
-                    Event triggers are events within OTRS such as
-<literal>TicketCreate</literal>, <literal>ArticleSend</literal>, etc. These
-can act as triggers to execute the invoker. Each invoker needs to have at
-least one event trigger registered, or the invoker will be useless, because
-it will never be called. Additionally a set of rules (conditions) for each
-event can be defined to have more control over the triggering of the
-events.  These rules depend on the data of the object associated with the
-event.  The asynchronous property of the event triggers define if the OTRS
-process will handle the invoker or if it will be delegated to the OTRS
-Daemon.
+                    Az eseményaktiválók olyan események az OTRS-en belül, mint például a
+<literal>TicketCreate</literal>, <literal>ArticleSend</literal>, stb. Ezek
+viselkedhetnek aktiválókként a meghívó végrehajtásához. Minden egyes
+meghívónak rendelkeznie kell legalább egy regisztrált eseményaktiválóval,
+különben a meghívó használhatatlan lesz, mert soha sem kerül
+meghívásra. Ezen kívül az egyes eseményekhez szabályok halmaza (feltételek)
+is meghatározható, hogy nagyobb irányítása legyen az események aktiválása
+felett. Ezek a szabályok az eseményhez rendelt objektum adataitól
+függenek. Az eseményaktiválók aszinkron tulajdonsága határozza meg, hogy az
+OTRS folyamatot a meghívó fogja-e kezelni, vagy az OTRS démon lesz-e
+megbízva vele.
                 </para>
                 <note>
                     <para>
@@ -1008,9 +1009,10 @@ eseményaktiváló nem lesz aszinkron), és végül kattintson a plusz gombra. E
 <emphasis>Eseményaktiválók</emphasis> listáján.
                 </para>
                 <para>
-                    From the <emphasis>Event Triggers</emphasis> list each events shows if it
-contains conditions or not.  The edit button next to the condition property
-allows to add or edit the current conditions of the event.
+                    Az <emphasis>Eseményaktiválók</emphasis> listájáról minden egyes esemény
+megjeleníti, hogy tartalmaz-e feltételeket vagy sem. A feltétel tulajdonság
+mellett lévő szerkesztés gomb lehetővé teszi az esemény aktuális
+feltételeinek hozzáadását vagy szerkesztését.
                 </para>
                 <para>
                     Egy eseményaktiváló törléséhez egyszerűen keresse meg a törlendő
@@ -1044,45 +1046,48 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             <section id="webservice-invoker-event">
                 <title>Webszolgáltatás meghívó esemény</title>
                 <para>
-                    Sometimes defining an event to trigger an invoker could result in many
-unnecessary or wrong request to a remote server. Event conditions could be
-set to restrict the triggering of the invoker in such cases.
+                    Néha egy meghívó aktiválásához meghatározott esemény sok szükségtelen vagy
+rossz kérést eredményezhet egy távoli kiszolgáló felé. Ilyen esetekben az
+esemény feltételei beállíthatók a meghívó aktiválásának korlátozásához.
                 </para>
                 <para>
-                    To access the event settings screen where the conditions can be defined is
-necessary to be in the invoker screen and from there click on the edit icon
-next to the condition status on the event where this condition should take
-effect.
+                    Az esemény beállításai képernyő eléréséhez – ahol a feltételek
+meghatározhatók – az szükséges, hogy a meghívó képernyőn legyen, és onnan
+kattintson a feltétel állapota melletti szerkesztés ikonra annál az
+eseménynél, ahol a feltételnek hatással kell lennie.
                 </para>
                 <para>
-                    Within the event settings screen in the action bar there is a button to go
-back to the invoker screen as well as a button to remove all the event
-conditions.  By default the screen is pre-populated with the first
-condition. Update the Type of linkings between conditions if more than one
-condition is planned, then change the Type of linking from
-<emphasis>Condition 1</emphasis> if more than one field is planned. Both
-linking fields accept <emphasis>and</emphasis>, <emphasis>or</emphasis> or
-<emphasis>xor</emphasis> as values.
+                    Az esemény beállításai képernyőn belül a műveletsávban van egy gomb a
+meghívó képernyőre való visszatéréshez, valamint egy gomb az esemény összes
+feltételének eltávolításához. Alapértelmezetten a képernyő előre ki van
+töltve az első feltétellel. Frissítse a kapcsolódás típusát a feltételek
+között, ha egynél több feltételt terveznek, majd változtassa meg a
+kapcsolódás típusát az <emphasis>1. feltételről</emphasis>, ha egynél több
+mezőt terveznek. Mindkét kapcsolódási mező elfogadja
+<emphasis>és</emphasis>, <emphasis>vagy</emphasis>, illetve <emphasis>kizáró
+vagy</emphasis> értékekként.
                 </para>
                 <para>
-                    Fill the <emphasis>Field</emphasis> name, set the matching type
-(<emphasis>String</emphasis> for exact match, <emphasis>Regexp</emphasis>
-for regular expression or <emphasis>Validation Module</emphasis>) and set
-Value to match (in case of <emphasis>Validation Module</emphasis> the full
-class name like:
+                    Töltse ki a <emphasis>Mező</emphasis> nevét, állítsa be az illesztés típusát
+(<emphasis>Szöveg</emphasis> a pontos egyezéshez, <emphasis>Reguláris
+kifejezés</emphasis> a reguláris kifejezés használatához vagy
+<emphasis>Ellenőrző modul</emphasis>), és állítsa be az értéket az
+illesztéshez (<emphasis>Ellenőrző modul</emphasis> esetén a teljes
+osztálynevet, mint például:
 <literal>Kernel::GenericInterface::Event::Validation::ValidateDemo</literal>).
                 </para>
                 <para>
-                    To add more fields to the condition, click on the <emphasis>+</emphasis>
-button in the fields header. To remove a field, click on the
-<emphasis>-</emphasis> button in the field row. It is necessary to keep at
-least one field per condition.
+                    A feltételhez történő további mezők hozzáadásához kattintson a
+<emphasis>+</emphasis> gombra a mezők fejlécében. Egy mező eltávolításához
+kattintson a <emphasis>-</emphasis> gombra a mező sorában. Feltételenként
+legalább egy mező megtartása szükséges.
                 </para>
                 <para>
-                    To add more conditions click on the button below the last condition box.  To
-remove a condition, click on the <emphasis>-</emphasis> button in the
-condition header.  It is necessary to keep at least one condition in the
-set. To remove all conditions use the button in the sidebar.
+                    Több feltétel hozzáadásához kattintson az utolsó feltétel doboza alatti
+gombra. Egy feltétel eltávolításához kattintson a <emphasis>-</emphasis>
+gombra a feltétel fejlécében. Legalább egy feltétel megtartása szükséges a
+beállításban. Az összes feltétel eltávolításához használja az oldalsávon
+lévő gombot.
                 </para>
                 <para>
                     <figure>
