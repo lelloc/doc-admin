@@ -8583,17 +8583,6 @@ via the Preferences button after logging in.
 ];
 ]]></programlisting></para>
 </listitem></varlistentry>
-<varlistentry id="ConfigReference_ProcessManagement:Frontend::Agent::Ticket::ViewProcess:Ticket::Frontend::CustomerTicketProcess_StateType">
-    <term>Ticket::Frontend::CustomerTicketProcess###StateType</term>
-    <listitem>
-<para>Determines the next possible ticket states, for process tickets in the customer interface.</para>
-<para>Diese Einstellung kann nicht deaktiviert werden.</para>
-<para>Standardwert:<programlisting><![CDATA[ $Self->{'Ticket::Frontend::CustomerTicketProcess'}->{'StateType'} =  [
-  'new',
-  'open'
-];
-]]></programlisting></para>
-</listitem></varlistentry>
 <varlistentry id="ConfigReference_ProcessManagement:Frontend::Agent::Ticket::ViewProcess:Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly">
     <term>Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly</term>
     <listitem>
@@ -8674,6 +8663,20 @@ via the Preferences button after logging in.
 <para>Standardwert:<programlisting><![CDATA[ $Self->{'CustomerFrontend::NavBarModule'}->{'10-CustomerTicketProcesses'} =  {
   'Module' => 'Kernel::Output::HTML::NavBar::CustomerTicketProcess'
 };
+]]></programlisting></para>
+</listitem></varlistentry>
+</variablelist>
+<variablelist id="ConfigReference_ProcessManagement:Frontend::Customer::Ticket::ViewProcess">
+    <title>ProcessManagement → Frontend::Customer::Ticket::ViewProcess</title>
+<varlistentry id="ConfigReference_ProcessManagement:Frontend::Customer::Ticket::ViewProcess:Ticket::Frontend::CustomerTicketProcess_StateType">
+    <term>Ticket::Frontend::CustomerTicketProcess###StateType</term>
+    <listitem>
+<para>Determines the next possible ticket states, for process tickets in the customer interface.</para>
+<para>Diese Einstellung kann nicht deaktiviert werden.</para>
+<para>Standardwert:<programlisting><![CDATA[ $Self->{'Ticket::Frontend::CustomerTicketProcess'}->{'StateType'} =  [
+  'new',
+  'open'
+];
 ]]></programlisting></para>
 </listitem></varlistentry>
 </variablelist>
@@ -12575,7 +12578,7 @@ Thanks for your help!
 <para>Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.</para>
 <para>Standardwert:<programlisting><![CDATA[ $Self->{'DashboardBackend'}->{'0270-TicketQueueOverview'} =  {
   'Block' => 'ContentLarge',
-  'CacheTTLLocal' => '0.5',
+  'CacheTTLLocal' => '2',
   'Default' => '1',
   'Description' => 'Provides a matrix overview of the tickets per state per queue.',
   'Group' => '',
