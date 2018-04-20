@@ -111,7 +111,7 @@ Name: SMS
                     <para>Inafafanua jina la programu tumizi, inayoonyeshwa katikakiolesura cha wavuti, vichupo na ufio wa kichwa wa kivinjari cha wavuti.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- OTRS 6
+                        <programlisting><![CDATA[--- OTRS 7
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -2829,14 +2829,14 @@ Transaction: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_9800-TicketProcessTransitions">
-                <term>Ticket::EventModulePost###9800-TicketProcessTransitions</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_9800-TicketProcessSequenceFlows">
+                <term>Ticket::EventModulePost###9800-TicketProcessSequenceFlows</term>
                 <listitem>
                     <para>Usajili wa moduli ya tukio. Kwa utendaji wa zaidi unaweza kuweka tukio chochezi (mfano Tukio =&gt; Tengeneza tiketi).</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
 Event: ''
-Module: Kernel::System::Ticket::Event::TicketProcessTransitions
+Module: Kernel::System::Ticket::Event::TicketProcessSequenceFlows
 Transaction: '1'
 ]]></programlisting>
                     </para>
@@ -2864,6 +2864,23 @@ Transaction: '1'
 Event: TicketSLAUpdate|TicketQueueUpdate|TicketStateUpdate|TicketCreate|ArticleCreate|TicketDynamicFieldUpdate|TicketTypeUpdate|TicketServiceUpdate|TicketCustomerUpdate|TicketPriorityUpdate|TicketMerge
 Module: Kernel::System::Ticket::Event::TicketEscalationIndex
 Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_GoogleChrome">
+        <title>Core → GoogleChrome</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_GoogleChrome::Bin">
+                <term>GoogleChrome::Bin</term>
+                <listitem>
+                    <para>Defines the path to the Google Chrome or Chromium binary.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- /usr/bin/chromium
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -3455,6 +3472,19 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
     <section id="ConfigReference_Section_Core_ProcessManagement">
         <title>Core → ProcessManagement</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_Process::ActivityTypes">
+                <term>Process::ActivityTypes</term>
+                <listitem>
+                    <para>Defines the activity types which can be used in the system.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+ScriptTask: Script task activity
+ServiceTask: Service task activity
+UserTask: User task activity
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Process::CacheTTL">
                 <term>Process::CacheTTL</term>
                 <listitem>
@@ -3521,6 +3551,17 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Process::DynamicFieldProcessManagementActivityStatus">
+                <term>Process::DynamicFieldProcessManagementActivityStatus</term>
+                <listitem>
+                    <para>This option defines the dynamic field in which the most recent Process Management activity status is stored.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- ProcessManagementActivityStatus
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Process::DynamicFieldProcessManagementProcessID">
                 <term>Process::DynamicFieldProcessManagementProcessID</term>
                 <listitem>
@@ -3542,8 +3583,8 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
 Activity: A
 ActivityDialog: AD
 Process: P
-Transition: T
-TransitionAction: TA
+SequenceFlow: SF
+SequenceFlowAction: SFA
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -3559,10 +3600,10 @@ TransitionAction: TA
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ProcessManagement::Transition::Debug::Enabled">
-                <term>ProcessManagement::Transition::Debug::Enabled</term>
+            <varlistentry id="ConfigReference_Setting_ProcessManagement::SequenceFlow::Debug::Enabled">
+                <term>ProcessManagement::SequenceFlow::Debug::Enabled</term>
                 <listitem>
-                    <para>Kama imewezeshwa kueua taarifa  kwa ajili ya mipito imewekwa batli.</para>
+                    <para>If enabled debugging information for sequence flows is logged.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- 0
@@ -3570,21 +3611,21 @@ TransitionAction: TA
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ProcessManagement::Transition::Debug::Filter_00-Default">
-                <term>ProcessManagement::Transition::Debug::Filter###00-Default</term>
+            <varlistentry id="ConfigReference_Setting_ProcessManagement::SequenceFlow::Debug::Filter_00-Default">
+                <term>ProcessManagement::SequenceFlow::Debug::Filter###00-Default</term>
                 <listitem>
-                    <para>Chuja kwa ajili ya mipito ya ueuaji.Angalizo: Vichuja zaidi vinaweza kuongezwa katika umbizo &lt;OTRS_TICKET_Attribute&gt; mfano &lt;OTRS_TICKET_Priority&gt;.</para>
+                    <para>Filter for debugging SequenceFlows. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.</para>
                     <para>This setting is not active by default.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
 <OTRS_TICKET_TicketNumber>: ''
-TransitionEntityID: ''
+SequenceFlowEntityID: ''
 ]]></programlisting>
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ProcessManagement::Transition::Debug::LogPriority">
-                <term>ProcessManagement::Transition::Debug::LogPriority</term>
+            <varlistentry id="ConfigReference_Setting_ProcessManagement::SequenceFlow::Debug::LogPriority">
+                <term>ProcessManagement::SequenceFlow::Debug::LogPriority</term>
                 <listitem>
                     <para>Inafafanua kipaumbele ambacho taarifa zinawekwa batli na kuwasilishwa.</para>
                     <para>This setting is not active by default.</para>
@@ -3675,28 +3716,6 @@ Rows: '5'
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SOAP::Password">
-                <term>SOAP::Password</term>
-                <listitem>
-                    <para>Fafanua neno la siri la kufikia kishiko cha SOAP (bin/cgi-bin/rpc.pl).</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- some_pass
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SOAP::User">
-                <term>SOAP::User</term>
-                <listitem>
-                    <para>Inafafanua jina la mtuaji kufikia kishiko cha SOAP (bin/cgi-bin/rpc.pl).</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- some_user
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -3925,17 +3944,6 @@ Rows: '5'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SessionUseCookie">
-                <term>SessionUseCookie</term>
-                <listitem>
-                    <para>Inafanya usimamizi wa kipindi utumie vidakuzi vya html. Kama vidakuzi vya html havijawezeshwa au kivinjari cha mteja haijawezesha vidakuzi vya  html, mfumo utafanya kazi kama kawaida na itaambatisha kitambulisho cha kipindi kwenye viunganishi.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_SessionUseCookieAfterBrowserClose">
                 <term>SessionUseCookieAfterBrowserClose</term>
                 <listitem>
@@ -4033,27 +4041,16 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
         </variablelist>
     </section>
 
-    <section id="ConfigReference_Section_Core_SupportDataCollector">
-        <title>Core → SupportDataCollector</title>
+    <section id="ConfigReference_Section_Core_Stats_Reports">
+        <title>Core → Stats → Reports</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_SupportDataCollector::HTTPHostname">
-                <term>SupportDataCollector::HTTPHostname</term>
+            <varlistentry id="ConfigReference_Setting_StatsReportConfig::CacheTTL">
+                <term>StatsReportConfig::CacheTTL</term>
                 <listitem>
-                    <para>Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the OTRS Daemon).</para>
-                    <para>This setting is not active by default.</para>
+                    <para>Cache time in seconds for the statistics reports backend.</para>
+                    <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SupportDataCollector::WebUserAgent::Timeout">
-                <term>SupportDataCollector::WebUserAgent::Timeout</term>
-                <listitem>
-                    <para>Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the OTRS Daemon).</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '20'
+                        <programlisting><![CDATA[--- '3600'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -4110,6 +4107,16 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
     <section id="ConfigReference_Section_Core_Ticket">
         <title>Core → Ticket</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_AdminTemplate::SubjectMethod_KeepTicketNumber">
+                <term>AdminTemplate::SubjectMethod###KeepTicketNumber</term>
+                <listitem>
+                    <para>Defines the behavior for the subject method "overwrite". If the option is enabled, the ticket number will not be overwritten.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_AgentSelfNotifyOnAction">
                 <term>AgentSelfNotifyOnAction</term>
                 <listitem>
@@ -6476,7 +6483,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_TimeInputMinutesStep">
                 <term>TimeInputMinutesStep</term>
                 <listitem>
-                    <para>Defines the available steps in time selections. Select "Minute" to be able to select all minutes of one hour from 1-59. Select "30 Minutes" to only make full and half hours available.</para>
+                    <para>Defines the available steps in time selections. Select "1 minute" to be able to select all minutes of one hour from 1-59. Select "30 minutes" to only make full and half hours available.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- '1'
@@ -8212,7 +8219,7 @@ Module: Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker
             <varlistentry id="ConfigReference_Setting_DaemonModules_SystemConfigurationSyncManager">
                 <term>DaemonModules###SystemConfigurationSyncManager</term>
                 <listitem>
-                    <para>The daemon registration for the system configuration deployment sync manager.</para>
+                    <para>The daemon registration for the configuration deployment sync manager.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
@@ -8777,6 +8784,23 @@ Module: Kernel::System::Console::Command::Maint::PostMaster::SpoolMailsReprocess
 Params: []
 Schedule: 10 0 * * *
 TaskName: SpoolMailsReprocess
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_StatsReportsGenerateCron">
+                <term>Daemon::SchedulerCronTaskManager::Task###StatsReportsGenerateCron</term>
+                <listitem>
+                    <para>Generate statistics reports.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Function: Execute
+MaximumParallelInstances: '1'
+Module: Kernel::System::Console::Command::Maint::Stats::Reports::GenerateCron
+Params: []
+Schedule: '*/10 * * * *'
+TaskName: StatsReportsGenerateCron
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -9670,6 +9694,22 @@ Title: GenericInterface Operation GUI
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminGenericInterfaceOperationRPC">
+                <term>Frontend::Module###AdminGenericInterfaceOperationRPC</term>
+                <listitem>
+                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Description: Admin
+Group:
+- admin
+GroupRo: []
+NavBarName: ''
+Title: GenericInterface RPC Operation GUI
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminGenericInterfaceTransportHTTPREST">
                 <term>Frontend::Module###AdminGenericInterfaceTransportHTTPREST</term>
                 <listitem>
@@ -9974,8 +10014,8 @@ Title: Process Management Path GUI
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminProcessManagementTransition">
-                <term>Frontend::Module###AdminProcessManagementTransition</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminProcessManagementSequenceFlow">
+                <term>Frontend::Module###AdminProcessManagementSequenceFlow</term>
                 <listitem>
                     <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala.</para>
                     <para>Thamani chaguo-msingi:
@@ -9985,13 +10025,13 @@ Group:
 - admin
 GroupRo: []
 NavBarName: ''
-Title: Process Management Transition GUI
+Title: Process Management SequenceFlow GUI
 ]]></programlisting>
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminProcessManagementTransitionAction">
-                <term>Frontend::Module###AdminProcessManagementTransitionAction</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminProcessManagementSequenceFlowAction">
+                <term>Frontend::Module###AdminProcessManagementSequenceFlowAction</term>
                 <listitem>
                     <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala.</para>
                     <para>Thamani chaguo-msingi:
@@ -10001,7 +10041,7 @@ Group:
 - admin
 GroupRo: []
 NavBarName: ''
-Title: Process Management Transition Action GUI
+Title: Process Management SequenceFlow Action GUI
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -11878,6 +11918,20 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceOperationRPC_001-GenericInterface">
+                <term>Loader::Module::AdminGenericInterfaceOperationRPC###001-GenericInterface</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.Admin.GenericInterface.css
+JavaScript:
+- Core.Agent.Admin.GenericInterfaceOperation.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceTransportHTTPREST_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceTransportHTTPREST###002-GenericInterface</term>
                 <listitem>
@@ -12082,6 +12136,7 @@ CSS:
 - Core.AllocationList.css
 JavaScript:
 - Core.Agent.Admin.ProcessManagement.js
+- Core.Agent.Admin.ProcessManagement.ModuleConfiguration.MultiLanguageRichText.js
 - Core.UI.AllocationList.js
 ]]></programlisting>
                     </para>
@@ -12119,8 +12174,8 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementTransition_002-ProcessManagement">
-                <term>Loader::Module::AdminProcessManagementTransition###002-ProcessManagement</term>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementSequenceFlow_002-ProcessManagement">
+                <term>Loader::Module::AdminProcessManagementSequenceFlow###002-ProcessManagement</term>
                 <listitem>
                     <para>Loader module registration for the agent interface.</para>
                     <para>Thamani chaguo-msingi:
@@ -12133,8 +12188,8 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementTransitionAction_002-ProcessManagement">
-                <term>Loader::Module::AdminProcessManagementTransitionAction###002-ProcessManagement</term>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementSequenceFlowAction_002-ProcessManagement">
+                <term>Loader::Module::AdminProcessManagementSequenceFlowAction###002-ProcessManagement</term>
                 <listitem>
                     <para>Loader module registration for the agent interface.</para>
                     <para>Thamani chaguo-msingi:
@@ -12142,6 +12197,7 @@ JavaScript:
 CSS:
 - Core.Agent.Admin.ProcessManagement.css
 JavaScript:
+- Core.Agent.Admin.ProcessManagement.ModuleConfiguration.MultiLanguageRichText.js
 - Core.Agent.Admin.ProcessManagement.js
 ]]></programlisting>
                     </para>
@@ -13831,6 +13887,17 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NoTimelineViewAutoArticle">
+                <term>NoTimelineViewAutoArticle</term>
+                <listitem>
+                    <para>Disables automatic opening of the last customer article in the timeline view in AgentTicketZoom.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPassword">
                 <term>NotificationBodyLostPassword</term>
                 <listitem>
@@ -14421,14 +14488,15 @@ Module: Kernel::Output::HTML::Notification::DaemonCheck
             <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_9000-Generic">
                 <term>Frontend::NotifyModule###9000-Generic</term>
                 <listitem>
-                    <para>Inafafanua moduli inayoonyesha taarifa ya ujumla katika kiolesura cha wakala. Kama "Nakala" imesanidiwa au maudhui ya "File" yataonyeshwa.</para>
+                    <para>Defines the module that shows a generic notification in the agent interface. Either "Text" - if configured - or the contents of "File" will be displayed. Use "Priority" key to style the notification. If "Link" key is supplied, notification text will be wrapped in an anchor leading to specified address. You can use "Target" key to define a target attribute of the defined link.</para>
                     <para>This setting is not active by default.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
 File: <OTRS_CONFIG_Home>/var/notify.txt
-Link: http://www.otrs.com
+Link: https://www.otrs.com
 Module: Kernel::Output::HTML::Notification::Generic
 Priority: Warning
+Target: _blank
 Text: The OTRS Website
 ]]></programlisting>
                     </para>
@@ -14909,6 +14977,23 @@ Title: Statistics
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentStatisticsReports">
+                <term>Frontend::Module###AgentStatisticsReports</term>
+                <listitem>
+                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Description: Statistics reports.
+Group:
+- stats
+GroupRo:
+- stats
+NavBarName: Statistics Reports
+Title: Statistics Reports
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentTicketArticleContent">
                 <term>Frontend::Module###AgentTicketArticleContent</term>
                 <listitem>
@@ -14935,6 +15020,21 @@ Group: []
 GroupRo: []
 NavBarName: Ticket
 Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentTicketAttachmentView">
+                <term>Frontend::Module###AgentTicketAttachmentView</term>
+                <listitem>
+                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Description: Ticket attachments.
+Group: []
+GroupRo: []
+NavBarName: Ticket
+Title: Attachments
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -15777,6 +15877,43 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentStatisticsReports_001-Framework">
+                <term>Loader::Module::AgentStatisticsReports###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+CSS:
+- thirdparty/nvd3-1.7.1/nv.d3.css
+- Core.Agent.StatisticsReports.css
+JavaScript:
+- thirdparty/d3-3.5.6/d3.min.js
+- thirdparty/nvd3-1.7.1/nvd3.min.js
+- thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
+- thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
+- thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js
+- Core.UI.AdvancedChart.js
+- Core.Agent.StatisticsReports.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketAttachmentView_002-Ticket">
+                <term>Loader::Module::AgentTicketAttachmentView###002-Ticket</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.AttachmentView.css
+JavaScript:
+- thirdparty/jquery-tablesorter-2.28.14/jquery.tablesorter.js
+- Core.UI.Table.Sort.js
+- Core.Agent.TicketAttachmentView.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketBounce_002-Ticket">
                 <term>Loader::Module::AgentTicketBounce###002-Ticket</term>
                 <listitem>
@@ -16255,6 +16392,7 @@ JavaScript:
 - Core.Agent.LinkObject.js
 - Core.Agent.TableFilters.js
 - Core.Agent.TicketFormDraft.js
+- Core.Agent.TicketZoom.TimelineView.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -16492,19 +16630,6 @@ JavaScript:
   Type: Menu
 - AccessKey: ''
   Block: ''
-  Description: Statistic Reports overview.
-  Group:
-  - stats
-  GroupRo:
-  - stats
-  Link: Action=AgentStatisticsReports;Subaction=Overview
-  LinkOption: class="OTRSBusinessRequired"
-  Name: Reports (OTRS Business Solution™)
-  NavBar: Reports
-  Prio: '100'
-  Type: ''
-- AccessKey: ''
-  Block: ''
   Description: Statistics overview.
   Group:
   - stats
@@ -16515,6 +16640,29 @@ JavaScript:
   Name: Statistics
   NavBar: Reports
   Prio: '200'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentStatisticsReports_001-Framework">
+                <term>Frontend::Navigation###AgentStatisticsReports###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- AccessKey: ''
+  Block: ''
+  Description: ''
+  Group:
+  - stats
+  GroupRo:
+  - stats
+  Link: Action=AgentStatisticsReports;Subaction=Overview
+  LinkOption: ''
+  Name: Reports
+  NavBar: Reports
+  Prio: '100'
   Type: ''
 ]]></programlisting>
                     </para>
@@ -24616,6 +24764,7 @@ WidgetTitle: Process Information
                     <para>AgentTicketZoom widget that displays ticket data in the side bar.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
+Async: '1'
 Location: Sidebar
 Module: Kernel::Output::HTML::TicketZoom::TicketInformation
 ]]></programlisting>
@@ -24641,7 +24790,22 @@ Module: Kernel::Output::HTML::TicketZoom::CustomerInformation
                     <para>AgentTicketZoom widget that displays a table of objects linked to the ticket.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
+Async: '1'
+Location: Main
 Module: Kernel::Output::HTML::TicketZoom::LinkTable
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketZoom_Widgets_0400-ProcessInformation">
+                <term>Ticket::Frontend::AgentTicketZoom###Widgets###0400-ProcessInformation</term>
+                <listitem>
+                    <para>AgentTicketZoom widget that displays process information for the ticket.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Async: '1'
+Location: Process
+Module: Kernel::Output::HTML::TicketZoom::ProcessInformation
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -25262,6 +25426,25 @@ Target: ''
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Attachments">
+                <term>Ticket::Frontend::MenuModule###420-Attachments</term>
+                <listitem>
+                    <para>Shows all attachments available in the ticket.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Action: AgentTicketAttachmentView
+ClusterName: Miscellaneous
+ClusterPriority: '999'
+Description: View all attachments of the current ticket.
+Link: Action=AgentTicketAttachmentView;TicketID=[% Data.TicketID | html %]
+Module: Kernel::Output::HTML::TicketMenu::AttachmentView
+Name: Attachments
+PopupType: TicketAction
+Target: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Customer">
                 <term>Ticket::Frontend::MenuModule###420-Customer</term>
                 <listitem>
@@ -25526,26 +25709,6 @@ Link: Action=AgentAppointmentCalendarOverview;Subaction=AppointmentCreate;Plugin
   Data.TicketID | uri %]
 Module: Kernel::Output::HTML::TicketMenu::Generic
 Name: New Appointment
-PopupType: ''
-Target: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_999-TeaserAttachmentView">
-                <term>Ticket::Frontend::MenuModule###999-TeaserAttachmentView</term>
-                <listitem>
-                    <para>Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: AgentTicketZoom
-Class: OTRSBusinessRequired
-ClusterName: Miscellaneous
-ClusterPriority: '999'
-Description: View all attachments of the current ticket
-Link: Action=AgentTicketZoom;TicketID=[% Data.TicketID | html %]
-Module: Kernel::Output::HTML::TicketMenu::TeaserAttachmentView
-Name: All attachments (OTRS Business Solution™)
 PopupType: ''
 Target: ''
 ]]></programlisting>
@@ -25944,7 +26107,7 @@ Standard: '1'
                     <para>Inafafanua njia ya msingi ya URL kwa ajili ya ikoni, CSS na maandiko ya Java.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- /otrs-web/
+                        <programlisting><![CDATA[--- /otrs/htdocs/
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -28550,21 +28713,6 @@ Title: PublicRepository
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicSupportDataCollector">
-                <term>PublicFrontend::Module###PublicSupportDataCollector</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: PublicSupportDataCollector
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: PublicSupportDataCollector
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
         </variablelist>
     </section>
 
@@ -28717,9 +28865,61 @@ ConfigDialog: AdminGenericInterfaceMappingXSLT
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_GenericInterface_Operation_Generic_RPC">
+        <title>GenericInterface → Operation → Generic → RPC</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Generic::RPC">
+                <term>GenericInterface::Operation::Generic::RPC</term>
+                <listitem>
+                    <para>Enables the usage of operation Generic::RPC.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Generic::RPC::Modules_001-Default">
+                <term>GenericInterface::Operation::Generic::RPC::Modules###001-Default</term>
+                <listitem>
+                    <para>Registration of allowed modules used by operation Generic::RPC. Just modules below Kernel::System and Custom::Kernel::System (and Kernel::Config) are allowed for executions.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- Kernel::Config
+- Kernel::System::CustomerCompany
+- Kernel::System::CustomerUser
+- Kernel::System::Encode
+- Kernel::System::Group
+- Kernel::System::LinkObject
+- Kernel::System::Log
+- Kernel::System::Main
+- Kernel::System::PID
+- Kernel::System::Queue
+- Kernel::System::AuthSession
+- Kernel::System::Ticket
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_GenericInterface_Operation_ModuleRegistration">
         <title>GenericInterface → Operation → ModuleRegistration</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_Generic::RPC">
+                <term>GenericInterface::Operation::Module###Generic::RPC</term>
+                <listitem>
+                    <para>Usajili wa moduli ya kiolesura cha jumla kwaajili la tabaka la utendaji.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+ConfigDialog: AdminGenericInterfaceOperationRPC
+Controller: Generic
+Name: RPC
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_Session::SessionCreate">
                 <term>GenericInterface::Operation::Module###Session::SessionCreate</term>
                 <listitem>
