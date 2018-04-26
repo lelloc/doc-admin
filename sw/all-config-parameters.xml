@@ -13491,7 +13491,7 @@ Prio: '100'
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '0'
 Icon: fa fa-th-list
-IsOTRSBusinessTransport: '1'
+IsOTRSBusinessTransport: '0'
 Module: Kernel::System::Ticket::Event::NotificationEvent::Transport::NotificationView
 Name: Web View
 Prio: '110'
@@ -14940,6 +14940,21 @@ Title: Link Object
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentNotificationView">
+                <term>Frontend::Module###AgentNotificationView</term>
+                <listitem>
+                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha wakala.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Description: Notification web view.
+Group: []
+GroupRo: []
+NavBarName: Notification web view
+Title: Notification Web View
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentOTRSBusiness">
                 <term>Frontend::Module###AgentOTRSBusiness</term>
                 <listitem>
@@ -15860,6 +15875,23 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentNotificationView_001-Framework">
+                <term>Loader::Module::AgentNotificationView###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.AllocationList.css
+- Core.Agent.NotificationView.css
+JavaScript:
+- Core.UI.AllocationList.js
+- Core.Agent.TableFilters.js
+- Core.Agent.NotificationView.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentOTRSBusiness_001-Framework">
                 <term>Loader::Module::AgentOTRSBusiness###001-Framework</term>
                 <listitem>
@@ -16627,6 +16659,27 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentNotificationView_001-Framework">
+                <term>Frontend::Navigation###AgentNotificationView###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- AccessKey: ''
+  Block: ''
+  Description: View notifications
+  Group: []
+  GroupRo: []
+  Link: Action=AgentNotificationView
+  LinkOption: ''
+  Name: Notification web view
+  NavBar: ''
+  Prio: '910'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentPreferences_001-Framework">
                 <term>Frontend::Navigation###AgentPreferences###001-Framework</term>
                 <listitem>
@@ -17317,6 +17370,24 @@ Link: Action=AgentTicketQueue
 Module: Kernel::Output::HTML::ToolBar::Link
 Name: Queue view
 Priority: '1010010'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::ToolBarModule_12-NotificationWebView::AgentNotificationView">
+                <term>Frontend::ToolBarModule###12-NotificationWebView::AgentNotificationView</term>
+                <listitem>
+                    <para>Tool-bar item for a notification web view.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+AccessKey: u
+Action: AgentNotificationView
+CssClass: NotificationView
+Icon: fa fa-flag-o
+Link: Action=AgentNotificationView
+Module: Kernel::Output::HTML::ToolBar::NotificationView
+Name: 'Notifications Unseen:'
+Priority: '1040010'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -18803,6 +18874,120 @@ Type: Type
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Agent_View_NotificationView">
+        <title>Frontend → Agent → View → NotificationView</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_Notification::Transport::NotificationView::DaysToKeep">
+                <term>Notification::Transport::NotificationView::DaysToKeep</term>
+                <listitem>
+                    <para>Defines the number of days a notification should be still shown in the notification web view screen (value of '0' means always show).</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '30'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::Frontend::AgentNotificationView_DefaultColumns">
+                <term>NotificationView::Frontend::AgentNotificationView###DefaultColumns</term>
+                <listitem>
+                    <para>Columns that can be filtered in the notification web view of the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Age: '2'
+Name: '2'
+ObjectReference: '2'
+ObjectType: '2'
+Subject: '2'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::Frontend::BulkFeature">
+                <term>NotificationView::Frontend::BulkFeature</term>
+                <listitem>
+                    <para>Enables notification web view bulk action feature for the agent frontend to work on more than one notification at a time.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::Frontend::BulkFeatureGroup">
+                <term>NotificationView::Frontend::BulkFeatureGroup</term>
+                <listitem>
+                    <para>Enables notification web view bulk action feature only for the listed groups.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- admin
+- users
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::Frontend::Overview_Small">
+                <term>NotificationView::Frontend::Overview###Small</term>
+                <listitem>
+                    <para>Allows having a small format notification web view.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::NotificationView::Small
+ModulePriority: '100'
+Name: Small
+NameShort: S
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::ObjectType_Appointment">
+                <term>NotificationView::ObjectType###Appointment</term>
+                <listitem>
+                    <para>Defines the settings for appointment notification.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+FilterPrio: '1020'
+Hook: '[% Translate("Appointment") | html %]:'
+Link: Action=AgentAppointmentCalendarOverview;AppointmentID=[% Data.ObjectID | html
+  %]
+Name: Appointment Notifications
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::ObjectType_Calendar">
+                <term>NotificationView::ObjectType###Calendar</term>
+                <listitem>
+                    <para>Defines the settings for calendar notification.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+FilterPrio: '1030'
+Hook: '[% Translate("Calendar") | html %]:'
+Link: Action=AgentAppointmentCalendarManage;Subaction=Edit;CalendarID=[% Data.ObjectID
+  | html %]
+Name: Calendar Notifications
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_NotificationView::ObjectType_Ticket">
+                <term>NotificationView::ObjectType###Ticket</term>
+                <listitem>
+                    <para>Defines the settings for ticket notification.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+FilterPrio: '1010'
+Hook: '[% Config("Ticket::Hook") | html %]'
+Link: Action=AgentTicketZoom;TicketID=[% Data.ObjectID | html %]
+Name: Ticket Notifications
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Agent_View_Preferences">
         <title>Frontend → Agent → View → Preferences</title>
         <variablelist>
@@ -19106,6 +19291,50 @@ Label: Ticket notifications
 Module: Kernel::Output::HTML::Preferences::NotificationEvent
 PrefKey: AdminNotifcationEventTransport
 PreferenceGroup: NotificationSettings
+Prio: '8000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PreferencesGroups_NotificationViewFilterSettings">
+                <term>PreferencesGroups###NotificationViewFilterSettings</term>
+                <listitem>
+                    <para>Parameters for notification web view filters.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Active: '0'
+Desc: Column ticket filters for Notification web view type "Small".
+Key: ''
+Label: Enabled filters.
+Module: Kernel::Output::HTML::Preferences::ColumnFilters
+PrefKey: UserFilterColumnsEnabled
+PreferenceGroup: Miscellaneous
+Prio: '8100'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PreferencesGroups_NotificationViewSmallPageShown">
+                <term>PreferencesGroups###NotificationViewSmallPageShown</term>
+                <listitem>
+                    <para>Parameters for the pages (in which the notifications are shown) of the small notifications view.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Active: '0'
+Data:
+  '10': '10'
+  '15': '15'
+  '20': '20'
+  '25': '25'
+  '30': '30'
+  '35': '35'
+DataSelected: '25'
+Desc: Notification limit per page for Notification web view "Small".
+Key: ''
+Label: Notification web view "Small" Limit
+Module: Kernel::Output::HTML::Preferences::Generic
+PrefKey: UserNotificationViewSmallPageShown
+PreferenceGroup: Miscellaneous
 Prio: '8000'
 ]]></programlisting>
                     </para>
