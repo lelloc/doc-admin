@@ -8258,6 +8258,41 @@ Module: Kernel::System::Daemon::DaemonModules::SystemConfigurationSyncManager
     <section id="ConfigReference_Section_Daemon_SchedulerCronTaskManager_Task">
         <title>Daemon → SchedulerCronTaskManager → Task</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_AccessTokenDeleteExpired">
+                <term>Daemon::SchedulerCronTaskManager::Task###AccessTokenDeleteExpired</term>
+                <listitem>
+                    <para>Delete expired access-tokens.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Function: Execute
+MaximumParallelInstances: '1'
+Module: Kernel::System::Console::Command::Maint::AccessToken
+Params:
+- --purge
+Schedule: 00 01 * * *
+TaskName: AccessTokenDeleteExpired
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_AccessTokenGenerateNewKey">
+                <term>Daemon::SchedulerCronTaskManager::Task###AccessTokenGenerateNewKey</term>
+                <listitem>
+                    <para>Generate new access-token key, and from now on all new tokens will use this key, and also purges the older ones.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Function: Execute
+MaximumParallelInstances: '1'
+Module: Kernel::System::Console::Command::Maint::AccessToken::Keys
+Params:
+- --generate
+- --keep 3
+Schedule: 00 04 * * *
+TaskName: AccessTokenGenerateNewKey
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_ArticleSearchIndexRebuild">
                 <term>Daemon::SchedulerCronTaskManager::Task###ArticleSearchIndexRebuild</term>
                 <listitem>
@@ -26401,7 +26436,7 @@ Standard: '1'
                     <para>アイコン、CSS、Java ScriptのURLベースのパスを定義します。</para>
                     <para>This setting can not be deactivated.</para>
                     <para>デフォルト値:
-                        <programlisting><![CDATA[--- /otrs/htdocs/
+                        <programlisting><![CDATA[--- /htdocs/
 ]]></programlisting>
                     </para>
                 </listitem>
