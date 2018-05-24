@@ -49,7 +49,6 @@ Name: Support data collector
 ConfigDialog: AdminCloudServiceSMS
 Description: This will allow the system to send text messages via SMS.
 Icon: fa fa-mobile
-IsOTRSBusiness: '1'
 Name: SMS
 ]]></programlisting>
                     </para>
@@ -908,6 +907,20 @@ Name: Phone
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CommunicationChannel_SMS">
+                <term>CommunicationChannel###SMS</term>
+                <listitem>
+                    <para>Defines SMS communication channel.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: SMS communication channel.
+Icon: fa-mobile
+Module: Kernel::System::CommunicationChannel::SMS
+Name: SMS
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 
@@ -982,6 +995,19 @@ Name: Phone
                     <para>This setting can not be deactivated.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '168'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CommunicationLog::Transport_CloudService">
+                <term>CommunicationLog::Transport###CloudService</term>
+                <listitem>
+                    <para>Registers a log module, that can be used to log communication related information.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::System::CommunicationLog::Transport::CloudService
+Name: CloudService
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1334,6 +1360,19 @@ Module: Kernel::System::DynamicField::Driver::ProcessManagement::ActivityID
 ConfigDialog: AdminDynamicFieldCheckbox
 DisplayName: Checkbox
 Module: Kernel::System::DynamicField::Driver::Checkbox
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DynamicFields::Driver_ContactWithData">
+                <term>DynamicFields::Driver###ContactWithData</term>
+                <listitem>
+                    <para>DynamicField backend registration.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+ConfigDialog: AdminDynamicFieldContactWithData
+DisplayName: Contact with data
+Module: Kernel::System::DynamicField::Driver::ContactWithData
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -3717,6 +3756,37 @@ Label: Dialog message
 Module: Kernel::Output::HTML::SLAPreferences::Generic
 PrefKey: FieldSelectionDialogText
 Rows: '5'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_SMS">
+        <title>Core → SMS</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_SMS::MessageTextLimit">
+                <term>SMS::MessageTextLimit</term>
+                <listitem>
+                    <para>Defines the hard limit for number of characters that can be sent via SMS per message.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1600'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_SMSTemplate::Types">
+                <term>SMSTemplate::Types</term>
+                <listitem>
+                    <para>Defines the list of types for SMS templates.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Answer: Answer
+Create: Create
+SMSOutbound: SMSOutbound
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -9368,6 +9438,22 @@ Title: Auto Responses
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminCloudServiceSMS">
+                <term>Frontend::Module###AdminCloudServiceSMS</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: This module is part of the admin area of OTRS.
+Group:
+- admin
+GroupRo: []
+NavBarName: ''
+Title: SMS
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminCloudServiceSupportDataCollector">
                 <term>Frontend::Module###AdminCloudServiceSupportDataCollector</term>
                 <listitem>
@@ -9412,6 +9498,22 @@ Group:
 GroupRo: []
 NavBarName: Admin
 Title: Communication Log GUI
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminContactWithData">
+                <term>Frontend::Module###AdminContactWithData</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: Admin contact with data.
+Group:
+- admin
+GroupRo: []
+NavBarName: Ticket
+Title: Admin Contact With Data
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -9542,6 +9644,22 @@ Group:
 GroupRo: []
 NavBarName: ''
 Title: Dynamic Fields Checkbox Backend GUI
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminDynamicFieldContactWithData">
+                <term>Frontend::Module###AdminDynamicFieldContactWithData</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: This module is part of the admin area of OTRS Business Solution™.
+Group:
+- admin
+GroupRo: []
+NavBarName: ''
+Title: Dynamic Fields Contact Data Backend GUI
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -10154,6 +10272,22 @@ Title: Auto Responses ↔ Queues
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminQueueSMSTemplates">
+                <term>Frontend::Module###AdminQueueSMSTemplates</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: This module is part of the admin area of OTRS.
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: SMS Templates ↔ Queues
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminQueueTemplates">
                 <term>Frontend::Module###AdminQueueTemplates</term>
                 <listitem>
@@ -10262,6 +10396,22 @@ Group:
 GroupRo: []
 NavBarName: Admin
 Title: S/MIME Management
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminSMSTemplate">
+                <term>Frontend::Module###AdminSMSTemplate</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: This module is part of the admin area of OTRS.
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: SMS Templates
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -10553,6 +10703,17 @@ Group:
 GroupRo: []
 NavBarName: ''
 Title: Shows information on how to start OTRS Daemon
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavBarModule_000-AdminContactWithData">
+                <term>Frontend::NavBarModule###000-AdminContactWithData</term>
+                <listitem>
+                    <para>Agent frontend module registration (disable 'Edit contacts with data' link if if there is no source field configured).</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::NavBar::AdminContactWithData
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -11155,6 +11316,25 @@ Name: Auto Responses ↔ Queues
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminQueueSMSTemplates">
+                <term>Frontend::NavigationModule###AdminQueueSMSTemplates</term>
+                <listitem>
+                    <para>Admin area navigation for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Block: Ticket
+Description: Link SMS templates to queues.
+Group:
+- admin
+GroupRo: []
+IconBig: fa-mobile
+IconSmall: fa-folder
+Module: Kernel::Output::HTML::NavBar::ModuleAdmin
+Name: SMS Templates ↔ Queues
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminQueueTemplates">
                 <term>Frontend::NavigationModule###AdminQueueTemplates</term>
                 <listitem>
@@ -11284,6 +11464,25 @@ IconBig: fa-user-secret
 IconSmall: ''
 Module: Kernel::Output::HTML::NavBar::ModuleAdmin
 Name: S/MIME Certificates
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminSMSTemplate">
+                <term>Frontend::NavigationModule###AdminSMSTemplate</term>
+                <listitem>
+                    <para>Admin area navigation for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Block: Ticket
+Description: Create and manage SMS templates.
+Group:
+- admin
+GroupRo: []
+IconBig: fa-mobile
+IconSmall: ''
+Module: Kernel::Output::HTML::NavBar::ModuleAdmin
+Name: SMS Templates
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -11665,6 +11864,20 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCloudServiceSMS_001-Framework">
+                <term>Loader::Module::AdminCloudServiceSMS###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.Admin.CloudService.SMS.css
+JavaScript:
+- Core.Agent.Admin.CloudServiceSMS.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCloudServiceSupportDataCollector_002-CloudServices">
                 <term>Loader::Module::AdminCloudServiceSupportDataCollector###002-CloudServices</term>
                 <listitem>
@@ -11802,6 +12015,22 @@ JavaScript:
 JavaScript:
 - Core.Agent.Admin.DynamicField.js
 - Core.Agent.Admin.DynamicFieldCheckbox.js
+- Core.Agent.Admin.SysConfig.Entity.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicFieldContactWithData_002-Ticket">
+                <term>Loader::Module::AdminDynamicFieldContactWithData###002-Ticket</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.Admin.DynamicField.css
+JavaScript:
+- Core.Agent.Admin.DynamicField.js
+- Core.Agent.Admin.DynamicFieldDropdown.js
 - Core.Agent.Admin.SysConfig.Entity.js
 ]]></programlisting>
                     </para>
@@ -12304,6 +12533,18 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminQueueSMSTemplates_001-Framework">
+                <term>Loader::Module::AdminQueueSMSTemplates###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.QueueSMSTemplates.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminQueueTemplates_002-Ticket">
                 <term>Loader::Module::AdminQueueTemplates###002-Ticket</term>
                 <listitem>
@@ -12386,6 +12627,18 @@ JavaScript:
                         <programlisting><![CDATA[---
 JavaScript:
 - Core.Agent.Admin.SMIME.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSMSTemplate_001-Framework">
+                <term>Loader::Module::AdminSMSTemplate###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.SMSTemplate.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -12724,6 +12977,17 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminCloudServiceSMS_001-Framework">
+                <term>Frontend::Navigation###AdminCloudServiceSMS###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminCloudServiceSupportDataCollector_002-CloudServices">
                 <term>Frontend::Navigation###AdminCloudServiceSupportDataCollector###002-CloudServices</term>
                 <listitem>
@@ -12753,6 +13017,28 @@ JavaScript:
                     <para>This setting is not active by default.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminContactWithData_002-Ticket">
+                <term>Frontend::Navigation###AdminContactWithData###002-Ticket</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- AccessKey: ''
+  Block: ''
+  Description: Edit contacts with data.
+  Group:
+  - admin
+  GroupRo: []
+  Link: Action=AdminContactWithData
+  LinkOption: ''
+  Name: Edit contacts with data
+  NavBar: Ticket
+  Prio: '900'
+  Type: ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -13045,6 +13331,17 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminQueueSMSTemplates_001-Framework">
+                <term>Frontend::Navigation###AdminQueueSMSTemplates###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminQueueTemplates_002-Ticket">
                 <term>Frontend::Navigation###AdminQueueTemplates###002-Ticket</term>
                 <listitem>
@@ -13113,6 +13410,17 @@ JavaScript:
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminSMIME_001-Framework">
                 <term>Frontend::Navigation###AdminSMIME###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminSMSTemplate_001-Framework">
+                <term>Frontend::Navigation###AdminSMSTemplate###001-Framework</term>
                 <listitem>
                     <para>Main menu item registration.</para>
                     <para>This setting is not active by default.</para>
@@ -13340,6 +13648,23 @@ JavaScript:
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Admin_View_ContactWithData">
+        <title>Frontend → Admin → View → ContactWithData</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_AdminContactWithData::RunInitialWildcardSearch">
+                <term>AdminContactWithData::RunInitialWildcardSearch</term>
+                <listitem>
+                    <para>Runs an initial wildcard search of the existing contacts with data when accessing the AdminContactWithData module.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Admin_View_CustomerCompany">
         <title>Frontend → Admin → View → CustomerCompany</title>
         <variablelist>
@@ -13396,7 +13721,6 @@ JavaScript:
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '1'
 Icon: fa fa-envelope
-IsOTRSBusinessTransport: '0'
 Module: Kernel::System::Calendar::Event::Transport::Email
 Name: Email
 Prio: '100'
@@ -13412,7 +13736,6 @@ Prio: '100'
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '0'
 Icon: fa fa-th-list
-IsOTRSBusinessTransport: '1'
 Module: Kernel::System::Calendar::Event::Transport::NotificationView
 Name: Web View
 Prio: '110'
@@ -13428,7 +13751,6 @@ Prio: '110'
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '0'
 Icon: fa fa-mobile
-IsOTRSBusinessTransport: '1'
 Module: Kernel::System::Calendar::Event::Transport::SMS
 Name: SMS (Short Message Service)
 Prio: '120'
@@ -13529,7 +13851,6 @@ Prio: '120'
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '1'
 Icon: fa fa-envelope
-IsOTRSBusinessTransport: '0'
 Module: Kernel::System::Ticket::Event::NotificationEvent::Transport::Email
 Name: Email
 Prio: '100'
@@ -13545,7 +13866,6 @@ Prio: '100'
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '0'
 Icon: fa fa-th-list
-IsOTRSBusinessTransport: '0'
 Module: Kernel::System::Ticket::Event::NotificationEvent::Transport::NotificationView
 Name: Web View
 Prio: '110'
@@ -13561,7 +13881,6 @@ Prio: '110'
                         <programlisting><![CDATA[---
 AgentEnabledByDefault: '0'
 Icon: fa fa-mobile
-IsOTRSBusinessTransport: '1'
 Module: Kernel::System::Ticket::Event::NotificationEvent::Transport::SMS
 Name: SMS (Short Message Service)
 Prio: '120'
@@ -13731,6 +14050,22 @@ QueryDelay: '100'
                 <term>AutoComplete::Agent###Default</term>
                 <listitem>
                     <para>Defines the config options for the autocompletion feature.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+AutoCompleteActive: '1'
+ButtonText: Search
+MaxResultsDisplayed: '20'
+MinQueryLength: '2'
+QueryDelay: '100'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_AutoComplete::Agent_DynamicFieldContactWithData">
+                <term>AutoComplete::Agent###DynamicFieldContactWithData</term>
+                <listitem>
+                    <para>Defines the config options for the autocompletion feature.</para>
+                    <para>This setting can not be deactivated.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 AutoCompleteActive: '1'
@@ -14870,6 +15205,21 @@ Title: Plugin search
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentContactWithDataSearch">
+                <term>Frontend::Module###AgentContactWithDataSearch</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: Agent contact with data search.
+Group: []
+GroupRo: []
+NavBarName: Ticket
+Title: Agent Contact With Data Search
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentCustomerInformationCenter">
                 <term>Frontend::Module###AgentCustomerInformationCenter</term>
                 <listitem>
@@ -14911,6 +15261,21 @@ Group: []
 GroupRo: []
 NavBarName: Ticket
 Title: Agent Customer Search
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentCustomerSearchSMS">
+                <term>Frontend::Module###AgentCustomerSearchSMS</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: Agent Customer Search SMS.
+Group: []
+GroupRo: []
+NavBarName: Ticket
+Title: Agent Customer Search SMS
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -15594,6 +15959,36 @@ Title: Responsible Tickets
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentTicketSMS">
+                <term>Frontend::Module###AgentTicketSMS</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: Create new SMS ticket.
+Group: []
+GroupRo: []
+NavBarName: Ticket
+Title: New SMS ticket
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentTicketSMSOutbound">
+                <term>Frontend::Module###AgentTicketSMSOutbound</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: Ticket Outbound SMS.
+Group: []
+GroupRo: []
+NavBarName: Ticket
+Title: SMS Outbound
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentTicketSearch">
                 <term>Frontend::Module###AgentTicketSearch</term>
                 <listitem>
@@ -15778,6 +16173,17 @@ Module: Kernel::Output::HTML::NavBar::AgentTicketProcess
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::NavBar::AdminFavourites
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavBarModule_5-TicketSMS">
+                <term>Frontend::NavBarModule###5-TicketSMS</term>
+                <listitem>
+                    <para>Frontend module registration (disable SMS ticket screen if cloud service is not activated).</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::NavBar::AgentTicketSMS
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -16440,6 +16846,37 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketSMS_001-Framework">
+                <term>Loader::Module::AgentTicketSMS###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- thirdparty/libphonenumber-js/libphonenumber-js.min.js
+- Core.Agent.CustomerSearchSMS.js
+- Core.Agent.TicketAction.js
+- Core.Agent.TicketSMS.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketSMSOutbound_001-Framework">
+                <term>Loader::Module::AgentTicketSMSOutbound###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- thirdparty/libphonenumber-js/libphonenumber-js.min.js
+- Core.Agent.CustomerSearchSMS.js
+- Core.Agent.TicketAction.js
+- Core.Agent.TicketSMS.js
+- Core.Agent.TicketFormDraft.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketSearch_002-Ticket">
                 <term>Loader::Module::AgentTicketSearch###002-Ticket</term>
                 <listitem>
@@ -16530,6 +16967,18 @@ JavaScript:
 - Core.Agent.TableFilters.js
 - Core.Agent.TicketFormDraft.js
 - Core.Agent.TicketZoom.TimelineView.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketZoom_010-TicketSMS">
+                <term>Loader::Module::AgentTicketZoom###010-TicketSMS</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.TicketSMS.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -16960,6 +17409,27 @@ JavaScript:
                     <para>This setting is not active by default.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentTicketSMS_001-Framework">
+                <term>Frontend::Navigation###AgentTicketSMS###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- AccessKey: ''
+  Block: ''
+  Description: Create new SMS ticket and send it out (outbound).
+  Group: []
+  GroupRo: []
+  Link: Action=AgentTicketSMS
+  LinkOption: ''
+  Name: New SMS ticket
+  NavBar: Ticket
+  Prio: '230'
+  Type: ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -18195,6 +18665,22 @@ Email:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields_SMS">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields###SMS</term>
+                <listitem>
+                    <para>Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix 'CustomerCompany_' must be added.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- UserFirstname
+- UserLastname
+- UserLogin
+- UserMobile
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters">
                 <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters</term>
                 <listitem>
@@ -18212,6 +18698,22 @@ Email:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_SearchParameters_SMS">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###SearchParameters###SMS</term>
+                <listitem>
+                    <para>Defines the search parameters for the AgentCustomerUserAddressBook screen. With the setting 'CustomerTicketTextField' the values for the recipient field can be specified.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+CustomerTicketTextField: UserMobile
+Order::Default: Up
+PageShown: '50'
+SearchLimit: '10000'
+SortBy::Default: UserLogin
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns">
                 <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns</term>
                 <listitem>
@@ -18224,6 +18726,22 @@ Email:
 - UserLastname
 - UserLogin
 - UserEmail
+- UserCustomerID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_ShowColumns_SMS">
+                <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###ShowColumns###SMS</term>
+                <listitem>
+                    <para>Defines the shown columns and the position in the AgentCustomerUserAddressBook result screen.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- UserFirstname
+- UserLastname
+- UserLogin
+- UserMobile
 - UserCustomerID
 ]]></programlisting>
                     </para>
@@ -21555,6 +22073,18 @@ WebRequestCustomer: Added web request from customer.
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::HistoryTypes_001-Framework">
+                <term>Ticket::Frontend::HistoryTypes###001-Framework</term>
+                <listitem>
+                    <para>Controls how to display the ticket history entries as readable values.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+AddSMS: Added SMS for "%s".
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 
@@ -24342,6 +24872,215 @@ Type: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Agent_View_TicketSMSNew">
+        <title>Frontend → Agent → View → TicketSMSNew</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_DynamicField">
+                <term>Ticket::Frontend::AgentTicketSMS###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the SMS ticket screen of the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_IsVisibleForCustomer">
+                <term>Ticket::Frontend::AgentTicketSMS###IsVisibleForCustomer</term>
+                <listitem>
+                    <para>Sets the default article customer visibility for new SMS tickets in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_Priority">
+                <term>Ticket::Frontend::AgentTicketSMS###Priority</term>
+                <listitem>
+                    <para>Sets the default priority for new SMS tickets in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_SLAMandatory">
+                <term>Ticket::Frontend::AgentTicketSMS###SLAMandatory</term>
+                <listitem>
+                    <para>SLAが担当者によって必ず選択される必要があるかどうかを設定します。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_SenderType">
+                <term>Ticket::Frontend::AgentTicketSMS###SenderType</term>
+                <listitem>
+                    <para>Sets the default sender type for new SMS tickets in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- agent
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_ServiceMandatory">
+                <term>Ticket::Frontend::AgentTicketSMS###ServiceMandatory</term>
+                <listitem>
+                    <para>サービスが担当者によって必ず選択される必要があるかどうかを設定します。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_StateDefault">
+                <term>Ticket::Frontend::AgentTicketSMS###StateDefault</term>
+                <listitem>
+                    <para>Sets the default next ticket state, after the creation of an SMS ticket in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- open
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_StateType">
+                <term>Ticket::Frontend::AgentTicketSMS###StateType</term>
+                <listitem>
+                    <para>Determines the next possible ticket states, after the creation of a new SMS ticket in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- open
+- pending auto
+- pending reminder
+- closed
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_Subject">
+                <term>Ticket::Frontend::AgentTicketSMS###Subject</term>
+                <listitem>
+                    <para>Sets the default title for new SMS tickets in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS_Text">
+                <term>Ticket::Frontend::AgentTicketSMS###Text</term>
+                <listitem>
+                    <para>Sets the default text for new SMS tickets in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMS::CustomerIDReadOnly">
+                <term>Ticket::Frontend::AgentTicketSMS::CustomerIDReadOnly</term>
+                <listitem>
+                    <para>Controls if CustomerID is read-only in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_TicketSMSOutbound">
+        <title>Frontend → Agent → View → TicketSMSOutbound</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_DynamicField">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the SMS outbound screen of the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_FormDraft">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###FormDraft</term>
+                <listitem>
+                    <para>Allows to save current work as draft in the SMS outbound screen of the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_IsVisibleForCustomerDefault">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###IsVisibleForCustomerDefault</term>
+                <listitem>
+                    <para>Defines if the message in the SMS outbound screen of the agent interface is visible for the customer by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_Permission">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###Permission</term>
+                <listitem>
+                    <para>Required permissions to use the SMS outbound screen in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- compose
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_RequiredLock">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###RequiredLock</term>
+                <listitem>
+                    <para>Defines if a ticket lock is required in the SMS outbound screen of the agent interface (if the ticket isn't locked yet, the ticket gets locked and the current agent will be set automatically as its owner).</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_StateDefault">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###StateDefault</term>
+                <listitem>
+                    <para>Defines the default next state of a ticket after the message has been sent, in the SMS outbound screen of the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- open
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSMSOutbound_StateType">
+                <term>Ticket::Frontend::AgentTicketSMSOutbound###StateType</term>
+                <listitem>
+                    <para>Defines the next possible states after sending a message in the SMS outbound screen of the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- open
+- closed
+- pending reminder
+- pending auto
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Agent_View_TicketSearch">
         <title>Frontend → Agent → View → TicketSearch</title>
         <variablelist>
@@ -25130,6 +25869,20 @@ Module: Kernel::Output::HTML::TicketZoom::CustomerInformation
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketZoom_Widgets_0210-ContactWithData">
+                <term>Ticket::Frontend::AgentTicketZoom###Widgets###0210-ContactWithData</term>
+                <listitem>
+                    <para>AgentTicketZoom widget that displays Contact with data dynamic field in the side bar.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Async: '1'
+Location: Sidebar
+Module: Kernel::Output::HTML::TicketZoom::ContactWithData
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketZoom_Widgets_0300-LinkTable">
                 <term>Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable</term>
                 <listitem>
@@ -25439,6 +26192,20 @@ MarkAsImportant:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_Chat_AgentTicketSMSOutbound">
+                <term>Ticket::Frontend::Article::Actions###Chat###AgentTicketSMSOutbound</term>
+                <listitem>
+                    <para>Defines available article actions for SMS articles.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::ArticleAction::AgentTicketSMSOutbound
+Prio: '50'
+Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_Email">
                 <term>Ticket::Frontend::Article::Actions###Email</term>
                 <listitem>
@@ -25490,6 +26257,20 @@ MarkAsImportant:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_Email_AgentTicketSMSOutbound">
+                <term>Ticket::Frontend::Article::Actions###Email###AgentTicketSMSOutbound</term>
+                <listitem>
+                    <para>Defines available article actions for SMS articles.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::ArticleAction::AgentTicketSMSOutbound
+Prio: '50'
+Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_Internal">
                 <term>Ticket::Frontend::Article::Actions###Internal</term>
                 <listitem>
@@ -25529,6 +26310,20 @@ MarkAsImportant:
   Module: Kernel::Output::HTML::ArticleAction::MarkAsImportant
   Prio: '700'
   Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_Internal_AgentTicketSMSOutbound">
+                <term>Ticket::Frontend::Article::Actions###Internal###AgentTicketSMSOutbound</term>
+                <listitem>
+                    <para>Defines available article actions for SMS articles.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::ArticleAction::AgentTicketSMSOutbound
+Prio: '50'
+Valid: '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -25586,6 +26381,51 @@ AgentTicketPlain:
 AgentTicketPrint:
   Module: Kernel::Output::HTML::ArticleAction::AgentTicketPrint
   Prio: '500'
+  Valid: '1'
+MarkAsImportant:
+  Module: Kernel::Output::HTML::ArticleAction::MarkAsImportant
+  Prio: '700'
+  Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_Phone_AgentTicketSMSOutbound">
+                <term>Ticket::Frontend::Article::Actions###Phone###AgentTicketSMSOutbound</term>
+                <listitem>
+                    <para>Defines available article actions for SMS articles.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::ArticleAction::AgentTicketSMSOutbound
+Prio: '50'
+Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Article::Actions_SMS">
+                <term>Ticket::Frontend::Article::Actions###SMS</term>
+                <listitem>
+                    <para>Defines available article actions for SMS articles.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+AgentTicketCompose:
+  Module: Kernel::Output::HTML::ArticleAction::AgentTicketCompose
+  Prio: '100'
+  Valid: '1'
+AgentTicketForward:
+  Module: Kernel::Output::HTML::ArticleAction::AgentTicketForward
+  Prio: '200'
+  Valid: '1'
+AgentTicketPrint:
+  Module: Kernel::Output::HTML::ArticleAction::AgentTicketPrint
+  Prio: '500'
+  Valid: '1'
+AgentTicketSMSOutbound:
+  Module: Kernel::Output::HTML::ArticleAction::AgentTicketSMSOutbound
+  Prio: '50'
   Valid: '1'
 MarkAsImportant:
   Module: Kernel::Output::HTML::ArticleAction::MarkAsImportant
@@ -25880,6 +26720,25 @@ Description: Send new outgoing mail from this ticket
 Link: Action=AgentTicketEmailOutbound;TicketID=[% Data.TicketID | html %]
 Module: Kernel::Output::HTML::TicketMenu::Generic
 Name: E-Mail Outbound
+PopupType: TicketAction
+Target: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_429-SMS_Outbound">
+                <term>Ticket::Frontend::MenuModule###429-SMS Outbound</term>
+                <listitem>
+                    <para>Shows a link in the menu to send an outbound SMS in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Action: AgentTicketSMSOutbound
+ClusterName: Communication
+ClusterPriority: '435'
+Description: Send new outgoing SMS from this ticket
+Link: Action=AgentTicketSMSOutbound;TicketID=[% Data.TicketID | html %]
+Module: Kernel::Output::HTML::TicketMenu::SMS
+Name: SMS Outbound
 PopupType: TicketAction
 Target: ''
 ]]></programlisting>
@@ -26661,6 +27520,18 @@ Standard: '1'
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 - thirdparty/ckeditor-4.7.0/ckeditor.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Agent::CommonJS_200-DynamicFieldContactWithData">
+                <term>Loader::Agent::CommonJS###200-DynamicFieldContactWithData</term>
+                <listitem>
+                    <para>担当者インタフェースに対して、常にロードされるJSファイルのリストです。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- Core.Agent.DynamicFieldContactWithDataSearch.js
 ]]></programlisting>
                     </para>
                 </listitem>
