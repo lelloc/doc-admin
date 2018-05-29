@@ -29867,6 +29867,278 @@ Type: '0'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_External">
+        <title>Frontend → External</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::DefaultLanguage">
+                <term>ExternalFrontend::DefaultLanguage</term>
+                <listitem>
+                    <para>Defines the method for determining the default language in the external interface. 'Auto-detect' will set language based on the user browser configuration. 'System default' will use configured value of the DefaultLanguage setting. Please note that once a user overrides the default language, their choice will be honored in the future.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- Browser
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_Menu">
+        <title>Frontend → External → Menu</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Menu_Bottom">
+                <term>ExternalFrontend::Menu###Bottom</term>
+                <listitem>
+                    <para>Bottom menu item registration for the external interface. Additional menu links are defined by adding new items and specifying their parameters. 'Group' and 'GroupRo' arrays can be used to limit display of the links to members of certain groups with RW and RO permissions respectively. 'Name' defines the displayed link text and 'Description' will be shown in a tooltip on hover. 'RouteLink' is meant for an application route path, while 'ExternalLink' should be used for links to external sites. Please note you can only define one of them at the time. 'IsPublic' defines if the link will be shown to unauthenticated users and in case this is set to '1', 'Group' and 'GroupRo' parameters will be ignored. 'Target' will define link's target attribute, please use '_blank' for opening in a new tab. 'Prio' determines the order of the links, with smaller numbers displayed first.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- Description: Knowledge base.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Knowledge Base
+  Prio: '100'
+  RouteLink: /knowledge-base
+  Target: ''
+- Description: Services.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Services
+  Prio: '200'
+  RouteLink: /services
+  Target: ''
+- Description: Custom link 1.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Custom Link
+  Prio: '300'
+  RouteLink: /custom-link-1
+  Target: ''
+- Description: Custom link 2.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: ''
+  Name: Custom Link
+  Prio: '400'
+  RouteLink: /custom-link-2
+  Target: ''
+- Description: Knowledge base.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Knowledge Base
+  Prio: '500'
+  RouteLink: /knowledge-base
+  Target: ''
+- Description: Services.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Services
+  Prio: '600'
+  RouteLink: /services
+  Target: ''
+- Description: Custom link 1.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Custom Link
+  Prio: '700'
+  RouteLink: /custom-link-1
+  Target: ''
+- Description: Custom link 2.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: ''
+  Name: Custom Link
+  Prio: '800'
+  RouteLink: /custom-link-2
+  Target: ''
+- Description: Knowledge base.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Knowledge Base
+  Prio: '900'
+  RouteLink: /knowledge-base
+  Target: ''
+- Description: Services.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Services
+  Prio: '1000'
+  RouteLink: /services
+  Target: ''
+- Description: Custom link 1.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Custom Link
+  Prio: '1100'
+  RouteLink: /custom-link-1
+  Target: ''
+- Description: Custom link 2.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: ''
+  Name: Custom Link
+  Prio: '1200'
+  RouteLink: /custom-link-2
+  Target: ''
+- Description: Knowledge base.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Knowledge Base
+  Prio: '1300'
+  RouteLink: /knowledge-base
+  Target: ''
+- Description: Services.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Services
+  Prio: '1400'
+  RouteLink: /services
+  Target: ''
+- Description: Custom link 1.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Custom Link
+  Prio: '1500'
+  RouteLink: /custom-link-1
+  Target: ''
+- Description: Custom link 2.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: ''
+  Name: Custom Link
+  Prio: '1600'
+  RouteLink: /custom-link-2
+  Target: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Menu_Main">
+                <term>ExternalFrontend::Menu###Main</term>
+                <listitem>
+                    <para>Main menu item registration for the external interface. Additional menu links are defined by adding new items and specifying their parameters. 'Group' and 'GroupRo' arrays can be used to limit display of the links to members of certain groups with RW and RO permissions respectively. 'Name' defines the displayed link text and 'Description' will be shown in a tooltip on hover. 'RouteLink' is meant for an application route path, while 'ExternalLink' should be used for links to external sites. Please note you can only define one of them at the time. 'IsPublic' defines if the link will be shown to unauthenticated users and in case this is set to '1', 'Group' and 'GroupRo' parameters will be ignored. 'Target' will define link's target attribute, please use '_blank' for opening in a new tab. 'Prio' determines the order of the links, with smaller numbers displayed first.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- Description: Knowledge base.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Knowledge Base
+  Prio: '100'
+  RouteLink: /knowledge-base
+  Target: ''
+- Description: Services.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Services
+  Prio: '200'
+  RouteLink: /services
+  Target: ''
+- Description: Custom link 1.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Custom Link
+  Prio: '300'
+  RouteLink: /custom-link-1
+  Target: ''
+- Description: Custom link 2.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: ''
+  Name: Custom Link
+  Prio: '400'
+  RouteLink: /custom-link-2
+  Target: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Menu_Top">
+                <term>ExternalFrontend::Menu###Top</term>
+                <listitem>
+                    <para>Top menu item registration for the external interface. Additional menu links are defined by adding new items and specifying their parameters. 'Group' and 'GroupRo' arrays can be used to limit display of the links to members of certain groups with RW and RO permissions respectively. 'Name' defines the displayed link text and 'Description' will be shown in a tooltip on hover. 'RouteLink' is meant for an application route path, while 'ExternalLink' should be used for links to external sites. Please note you can only define one of them at the time. 'IsPublic' defines if the link will be shown to unauthenticated users and in case this is set to '1', 'Group' and 'GroupRo' parameters will be ignored. 'Target' will define link's target attribute, please use '_blank' for opening in a new tab. 'Prio' determines the order of the links, with smaller numbers displayed first.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- Description: Custom link.
+  ExternalLink: ''
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Name: Custom Link
+  Prio: '100'
+  RouteLink: /home
+  Target: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_Route">
+        <title>Frontend → External → Route</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Route_001-Framework">
+                <term>ExternalFrontend::Route###001-Framework</term>
+                <listitem>
+                    <para>Defines the application routes for the external interface. Additional routes are defined by adding new items and specifying their parameters. 'Group' and 'GroupRo' arrays can be used to limit access of the route to members of certain groups with RW and RO permissions respectively. 'Path' defines the relative path of the route, and 'Alias' can be used for specifying an alternative path. 'Component' is the path of the Vue component responsible for displaying the route content, relative to the Components/Route folder in the app. 'IsPublic' defines if the route will be accessible for unauthenticated users and in case this is set to '1', 'Group' and 'GroupRo' parameters will be ignored. 'Props' can be used to signal that the path contain dynamic segments, and that their values should be bound to the component as props (use '1' to turn on this feature).</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- Alias: /home
+  Component: HomePage
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Path: /
+  Props: ''
+- Alias: '*'
+  Component: ErrorPage
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Path: error
+  Props: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Public">
         <title>Frontend → Public</title>
         <variablelist>
