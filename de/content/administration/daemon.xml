@@ -22,7 +22,7 @@ can work cooperatively with other OTRS Daemons on different frontend servers
 in a cluster environment.
     </para>
     <para>
-        When idle OTRS Daemon consist in five processes:
+        When idle OTRS Daemon consist in six processes:
         <itemizedlist mark="round">
             <listitem>
                 <para>
@@ -91,6 +91,24 @@ immediately.
 time schedule (discarding all other Generic Agent jobs that are set to
 executed by events). When is time to run a Generic Agent job it sends the
 task information to the task worker daemon to handle the task.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    System Configuration sync manager daemon
+(<filename>Kernel/System/Daemon/DaemonModules/SystemConfigurationSyncManager.pm</filename>)
+                </para>
+                <para>
+                    This daemon verifies that the configuration file
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename> is up to date with the
+deployment information from the database, otherwise the file is updated. and
+signal the main daemon to restart all daemon modules with the updated
+configuration.
+                </para>
+                <para>
+                    Additionally if any other .pm file in
+<filename>Kernel/Config/Files/</filename> is modified while the daemon is
+running, it will also signal the main daemon to restart all daemon modules.
                 </para>
             </listitem>
         </itemizedlist>

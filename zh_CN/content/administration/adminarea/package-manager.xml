@@ -6,11 +6,8 @@
 <title>软件包管理器</title>
 
 <para>
-Using the <emphasis>Package Manager</emphasis> link on the Admin page, you
-can install and manage packages that extend the functionality of OTRS (see
-figure below). See the <link linkend="application">Additional
-applications</link> section for a discussion on the extensions that are
-available from the OTRS repositories.
+使用系统管理页面的<emphasis>软件包管理器</emphasis>链接，你可以安装和管理用来扩展OTRS功能的软件包（见下图）。查阅<link
+linkend="application">附加的应用程序</link>部分看看OTRS软件仓库中有哪些可用的扩展。
 </para>
 
 <para>
@@ -26,15 +23,11 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 软件包管理器显示服务器上当前已经安装了的OTRS插件软件包以及它们的版本号。
 </para>
 
-<para>你可以从远程主机安装软件包，选择<emphasis>在线软件仓库</emphasis>，点击<emphasis>更新软件仓库信息</emphasis>，则会显示可用的软件。窗口右侧显示可用的软件包。要安装一个软件包，点击<emphasis>安装</emphasis>即可。安装完成后，这个软件包就会在<emphasis>本地软件仓库</emphasis>部分显示。
+<para>你可以从远程主机安装软件包，选择<emphasis>在线软件仓库</emphasis>，点击<emphasis>更新软件仓库信息</emphasis>，则会显示可用的软件。屏幕右侧显示可用的软件包。要安装一个软件包，点击<emphasis>安装</emphasis>即可。安装完成后，这个软件包就会在<emphasis>本地软件仓库</emphasis>部分显示。
 </para>
 
 <para>
-To update an installed package, the list of available packages in the online
-repository will show <emphasis>Update</emphasis> in the Action column for
-any package that has a higher version than the one that is installed
-locally. Just click <emphasis>Update</emphasis> and it will install the new
-package version on your system.
+要更新已安装的软件包，在线软件仓库中会在操作列显示有高版本可用的软件包为<emphasis>更新</emphasis>。只需点击<emphasis>更新</emphasis>即可将新版本的软件包安装到系统中。
 </para>
 
 <para>
@@ -48,59 +41,41 @@ linkend="ConfigReference_Section_Core_Package">Core::Package</link>下的可用�
     <section id="adminarea-package-manager-upgrade-all">
         <title>更新所有已安装的软件包</title>
         <para>
-            Since OTRS 6, a new button labeled <emphasis>Update all installed
-packages</emphasis> has been added to the sidebar of the package manager
-screen. When this button is pressed, an OTRS Daemon task will be scheduled
-to update all packages. Alternatively, this action can be also issued from
-the command line interface by using the
-<literal>Admin::Package::UpgradeAll</literal> console command.
+            从OTRS 6开始，软件包管理器屏幕的侧栏中添加了一个标签为<emphasis>所有安装的软件包</emphasis>的新按钮。
+当点击此按钮时，将安排OTRS守护进程任务来更新所有软件包。
+或者，也可以使用控制台命令<literal>Admin::Package::UpgradeAll</literal>从命令行界面发起此操作。
         </para>
         <figure>
-            <title>Package Manager Update All Installed Packages Button</title>
+            <title>软件包管理器"更新所有已安装的软件包"按钮</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-packagemanager-upgradeall-button.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         <para>
-            This feature reads the information of all defined package repositories and
-determines if there is a new version for every installed package in the
-system and calculates the correct order to update the packages respecting
-all other package dependencies, even if new versions of existing packages
-require new packages not yet installed in the system.
+            此功能读取所有定义的软件仓库的信息，以确定系统中每个已安装的软件包是否存在新版本，并计算更新到这些软件包及其所有依赖软件包（即使现有软件包的新版本需要尚未安装在系统中的软件包）的正确顺序。
         </para>
         <note>
             <para>
-                If there are packages installed that do not have a corresponding repository
-defined in the system, they can not be updated by this feature and will be
-marked as failed (due to the missing on-line repository).
+                如果安装了没有在系统中定义的对应软件仓库的软件包，则不能通过此功能更新，并且将被标记为失败（由于缺少在线软件仓库）。
             </para>
         </note>
         <para>
-            When the process to update all packages is running, a notification bar is
-added to the package manager screen for easier identification. When
-notification link is clicked, a progress summary is displayed with the
-current progress. Also, when the process is running package actions such as
-"Install", "Update", "Uninstall" and "ReInstall" some actions on the screen
-might be temporarily disabled in order to avoid conflicts.
+            当升级所有软件包的进程正在运行时，软件包管理器屏幕会添加一个通知栏以便于识别。 当点击通知链接时，会显示包含当前进度的进度摘要。
+此外，当正在运行诸如“安装”、“更新”、“卸载”和“重新安装”之类的软件包操作进程时，屏幕上的某些操作可能会暂时禁用，以避免冲突。
         </para>
         <figure>
-            <title>Package Manager Update All Installed Packages In Progress Notification</title>
+            <title>软件包管理器"正在更新所有已安装的软件包"通知</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-packagemanager-upgradeall-process-notification.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
         <para>
-            When the process finishes (only if it was started in the graphical user
-interface) the progress notification will change to indicate the new state:
-it becomes green if all packages was correctly updated or red if there where
-any failures. Clicking on this notification will show the final summary. In
-the summary table, a tooltip for the status column of every package can
-indicate more details about the state. After closing this window, the
-package manager screen will refresh to show the new version of the installed
-packages.
+            当进程完成时（只有在图形用户界面中启动），进度通知将会更改，以指示新的状态：如果所有软件包正确更新，那么它将变为绿色，如果出现任何故障则为红色。
+点击此通知将显示最终摘要。 在汇总表中，每个包的状态列的工具提示可以指示有关状态的更多详细信息。
+关闭此屏幕后，软件包管理器屏幕将刷新以显示已安装软件包的新版本。
         </para>
         <figure>
-            <title>Package Manager Update All Installed Packages Summary</title>
+            <title>软件包管理器"更新所有已安装的软件包"摘要</title>
 <screenshot>
 <graphic
 fileref="screenshots/administration/adminarea/admin-packagemanager-upgradeall-summary.png"

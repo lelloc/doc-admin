@@ -9,26 +9,18 @@
 <title>OTRS 配置文件</title>
 
 <para>
-All OTRS configuration files are stored in the directory
-<filename>Kernel</filename> and in its subdirectories. There is no need to
-manually change any other file than <filename>Kernel/Config.pm</filename>,
-because the rest of the files will be changed when the system gets
-updated. Just copy the configuration parameters from other files into
-<filename>Kernel/Config.pm</filename> and change them as per your
-needs. This file will never be touched during the update process, so your
-manual changes are safe.
+所有OTRS配置文件都存储在目录<filename> Kernel </filename>及其子目录中。
+除了<filename>Kernel/Config.pm</filename>外不需要手动更改任何其他文件，因为系统更新时其它的文件会被更改。
+只需将配置参数从其他文件复制到<filename>Kernel/Config.pm</filename>，然后根据需要进行更改参数。
+在升级过程中永远不会更改此文件，所以你的手动更改是安全的。
 </para>
 
 <para>
-The configuration can be rebuilt either manually by executing <literal>perl
-bin/otrs.Console.pl Maint::Config::Rebuild</literal> or automatically by the
-installer, package operations (install, update, reinstall and uninstall),
-etc. All <filename>.xml</filename> files located in
-<filename>Kernel/Config/Files/XML/</filename> are parsed and their content
-is transferred to the OTRS database. Most of the <filename>.xml</filename>
-files which are part of this directory by default belong to OTRS Free, but
-OTRS Free Features such as FAQ or Survey (or any other OTRS extension) will
-add their own configuration files to this directory as well.
+可以通过执行<literal>perl bin/otrs.Console.pl
+Maint::Config::Rebuild</literal>手动重建配置，或通过安装程序、程序包操作（安装、更新、重新安装和卸载）等自动重建配置
+。位于<filename>Kernel/Config/Files/XML/</filename>中的所有<filename> .xml
+</filename>文件被解析，且其内容会传到OTRS数据库。
+默认情况下，这个目录的大部分<filename>.xml</filename>文件都属于OTRS免费版，但是OTRS免费功能，如FAQ知识库或调查（或任何其他OTRS扩展），也会将自己的配置文件添加到此目录。
 </para>
 
 <para>
@@ -72,25 +64,15 @@ OTRS 免费版目前带来了1700多种配置设置，并且有不同的方法�
 </para>
 
 <para>
-All configuration settings are shown as read only by default. To edit a
-setting, click the <emphasis>Edit this setting</emphasis> button that
-appears on hovering your mouse cursor over a setting. Once edit mode has
-been entered, changes made to the fields from within the setting can be
-saved by clicking the <emphasis>Save</emphasis> button on the right (or by
-hitting the <emphasis>Enter</emphasis> key on your keyboard). If a setting
-is currently edited by another administrator, it is not possible to get
-access to the edit mode for that setting until the other administrator
-finished their work. Editing can be cancelled by clicking the
-<emphasis>Cancel</emphasis> button on the right or hitting the
-<emphasis>Escape</emphasis> key on your keyboard. When editing is cancelled,
-all changes made during the current editing session are discarded.
+所有配置设置默认显示为只读。 要编辑设置，请将鼠标悬停在设置上后，单击“<emphasis>编辑这个设置</emphasis>”按钮。
+一旦进入编辑模式，可以通过点击右侧的<emphasis>保存</emphasis>按钮（或者按键盘上的<emphasis>回车</emphasis>键）来保存对设置内的字段所做的更改。
+如果当前有另一个管理员在编辑一个设置，则无法访问该设置的编辑模式，直到其他管理员完成编辑工作。
+可以通过点击右侧的<emphasis>取消</emphasis>按钮或者按键盘上的<emphasis> ESC</emphasis> 键来取消编辑。
+取消编辑后，在当前编辑会话期间所做的所有更改都将被丢弃。
 </para>
 
 <para>
-Clicking the setting name or the menu icon on the top right of each setting
-will reveal a menu with some more options (e.g. enable/disable a setting,
-reset a setting values to their defaults, copy a direct link to a setting or
-add a setting to a list of favorites for quick access).
+单击每个设置右上角的设置名称或菜单图标将显示一些具有更多选项的菜单（例如，启用/禁用设置、将设置值重置为默认值、复制到设置的直接访问链接或添加一个设置到收藏夹中以便快速访问）。
 </para>
 
 <para>
@@ -109,20 +91,15 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 </para>
 
 <para>
-If you would like to save all the changes you made to your system
-configuration (for example to quickly set up a new instance) you can use the
-<emphasis>Export settings</emphasis> button, which will provide a
-<filename>.yml</filename> file for downloading. To restore your own
-settings, use <emphasis>Import settings</emphasis> and select the
-<filename>.yml</filename> file you have created before.
+如果要保存对系统配置所做的所有更改（例如快速设置一个新实例），可以使用<emphasis>导出设置</emphasis>按钮，这将提供一个<filename>
+.yml </filename>文件可供下载。 要恢复自己的设置，请使用<emphasis>导入设置</emphasis>，然后选择之前创建的
+<filename>.yml</filename>文件。
 </para>
 
 <note>
 <para>
-For security reasons, the configuration settings for the database connection
-cannot be changed in the graphical user interface of the system
-configuration. These have to be set manually in
-<filename>Kernel/Config.pm</filename>.
+出于安全考虑，在系统配置的图形用户界面中无法更改数据库连接的配置设置。
+这些设置必须在<filename>Kernel/Config.pm</filename>中手动设置。
 </para>
 </note>
 

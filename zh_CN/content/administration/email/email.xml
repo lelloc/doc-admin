@@ -40,9 +40,9 @@ linkend="installation-of-perl-modules">“安装OTRS所需的Perl模块”</link
                 OTRS在发送之前将所有电子邮件排队，并让一个守护进程任务在适当时候异步处理。 在正常安装中，电子邮件将由OTRS守护进程每分钟发送一次。
             </para>
             <para>
-                To check the status of email sending, you can use the
-<filename>bin/otrs.Console.pl Maint::Email::MailQueue</filename> console
-command with <literal>--list</literal> switch.
+                要检查电子邮件发送的状态，可以使用带<literal> --list
+</literal>参数的控制台命令<filename>bin/otrs.Console.pl
+Maint::Email::MailQueue</filename>。
             </para>
             <para>
                 <screen><![CDATA[
@@ -107,17 +107,11 @@ Done.
                 OTRS能够从POP3、POP3S、IMAP和IMAPS的邮件帐户接收邮件。
             </para>
             <para>
-                Configure your mail accounts via the <emphasis>PostMaster Mail
-Accounts</emphasis> link on the Admin page.
+                通过系统管理页面的“<emphasis>邮箱管理员邮件帐户</emphasis>”链接配置你的邮件帐户。
             </para>
             <para>
-                If a new mail account is to be created (see figure below), then its mail
-server name, login name and password must be specified. Also, you need to
-select the mail server type, which can be POP3, POP3S, IMAP or IMAPS. If you
-don't see your server type available as an option, the required Perl modules
-are missing on your system. In that case, please refer to <link
-linkend="installation-of-perl-modules"> Installation of Perl modules
-required for OTRS</link> for instructions.
+                如果要创建一个新的邮件帐户（见下图），必须指定邮件服务器名称、登录用户名和密码。另外，你要选择邮件服务器的类型（可以是POP3、POP3S、IMAP或IMAPS）。如果你没有看到需要的类型，说明系统中缺失需要的Perl模块。在这种情况下，请参考<link
+linkend="installation-of-perl-modules">为OTRS安装必需的Perl模块</link>的说明。
             </para>
             <para>
                 <figure>
@@ -127,34 +121,21 @@ required for OTRS</link> for instructions.
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                If you select Yes for the value of the Trusted option, any X-OTRS headers
-attached to an incoming message are evaluated and executed. Because the
-X-OTRS header can execute some actions in the ticket system, you should set
-the <emphasis>Trusted</emphasis> option to <emphasis>Yes</emphasis> only for
-known senders. X-OTRS-Headers are used by the <link linkend
-="adminarea-postmasterfilter">filter module</link> in OTRS. The X-OTRS
-headers are explained <link linkend ="table-of-x-otrs-headers">in this
-table</link> in more detail. Any postmaster filter rules created are
-executed, irrespective of the Trusted option's setting.
+                如果为“受信任”选项的值选择“是”，则会对附加到传入消息的任何X-OTRS标头进行评估和执行。
+因为X-OTRS标头可以在工单系统中执行一些操作，所以你应该只对已知的发件人将“<emphasis>受信任</emphasis>”选项设置为“<emphasis>是</emphasis>”。
+X-OTRS标头由OTRS中的<link linkend ="adminarea-postmasterfilter">过滤器模块</link>使用。
+<link linkend ="table-of-x-otrs-headers">这个表</link>中有X-OTRS标头更详细的解释。
+创建的邮箱管理员过滤器规则都会执行，而不管“受信任”选项的设置如何。
             </para>
             <para>
-                The distribution of incoming messages can be controlled if they need to be
-sorted by queue or by the content of the <emphasis>To:</emphasis> field. For
-the <emphasis>Dispatching</emphasis> field, if <emphasis>Dispatching by
-selected queue</emphasis> is selected, all incoming messages will be sorted
-into the specified queue. The address where the mail was sent to is
-disregarded in this case. If <emphasis>Dispatching by email To:
-field</emphasis> is selected, the system checks if a queue is linked with
-the address in the <emphasis>To:</emphasis> field of the incoming mail. You
-can link an address to a queue in the <link
-linkend="adminarea-emailaddresses">E-mail address management</link> section
-of the Admin page.  If the address in the <emphasis>To:</emphasis> field is
-linked with a queue, the new message will be sorted into the linked
-queue. If no link is found between the address in the
-<emphasis>To:</emphasis> field and any queue, then the message flows into
-the <emphasis>Raw</emphasis> queue in the system, which is the <link
-linkend="ConfigReference_Setting_PostmasterDefaultQueue">PostmasterDefaultQueue</link>
-after a default installation.
+                如果需要按队列或“<emphasis>To:（收件人）</emphasis>”字段的内容排序，则可以控制传入消息的分发。
+对于“<emphasis>wv分派</emphasis>”字段，如果选择“<emphasis>按所选队列分派</emphasis>”，则所有传入的消息都将被分类到指定的队列中，邮件收件人地址在这种情况下被忽略。
+如果选择“<emphasis>按收件人(To:)分派</emphasis>”，则系统将检查队列是否与传入邮件的“<emphasis>To:（收件人）</emphasis>”字段中的地址相关联。
+你可以在系统管理页面的<link
+linkend="adminarea-emailaddresses">电子邮件地址管理</link>部分中将地址链接到队列。
+如果<emphasis>To:（收件人）</emphasis>字段中的地址已与队列链接，则新消息将被分派到链接队列中。
+如果在<emphasis>To:（收件人）</emphasis>字段中的地址没有链接到任何队列，则消息流入系统中的“<emphasis>Raw</emphasis>”队列，这是默认安装后的<link
+linkend="ConfigReference_Setting_PostmasterDefaultQueue">邮箱管理员默认队列</link>。
             </para>
             <para>
                 邮件帐户的所有数据都保存在OTRS数据库中。<filename>bin/otrs.Console.pl
@@ -383,11 +364,7 @@ $Self->{'PostMaster::PreFilterModule'}->{'000-ExternalTicketNumberRecognition'} 
                 <listitem>
                     <para>FromAddressRegExp（发件人地址正则表达式）</para>
                     <para>
-                        This is an optional setting. Only mails matching this
-<emphasis>From:</emphasis> address will be considered for this filter. You
-can adjust this setting to the sender address your external system uses for
-outgoing mails. In case this address can differ, you can set this option to
-empty. OTRS will in that case not check the sender address.
+                        这是一个可选的设置。只有匹配这个“<emphasis>From:（发件人）</emphasis>”地址的邮件才会考虑使用这个过滤器。你可以调整这个设置为外部系统用来发出邮件的发件人地址。在这种情况下这个地址可以不同，你可以设置这个选项为空，这样OTRS不会检查发件人地址。
                     </para>
                 </listitem>
                 <listitem>
@@ -457,7 +434,7 @@ empty. OTRS will in that case not check the sender address.
                     </para>
                 </listitem>
                 <listitem>
-                    <para><emphasis>Stop After Match</emphasis> can prevent a second match.</para>
+                    <para>“<emphasis>匹配后停止</emphasis>”可以防止重复匹配。</para>
                 </listitem>
                 <listitem>
                     <para>确保正则表达式是有效的。</para>

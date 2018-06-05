@@ -3,7 +3,7 @@
   "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="updating">
-    <title>Updating OTRS</title>
+    <title>正在更新OTRS</title>
 
     <note>
         <para>
@@ -19,32 +19,28 @@ temporarily turn off archive/binary logs for the migration).
 
     <variablelist>
         <varlistentry>
-            <term>Updating from an earlier version of OTRS 6</term>
+            <term>从OTRS 6的早期版本更新</term>
             <listitem>
                 <para>
-                    You can update directly from any previous to the latest available patch
-level release.
+                    你可以直接从任何的先前版本升级到最新的补丁级别版本。
                 </para>
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Updating from OTRS 5</term>
+            <term>从OTRS 5更新</term>
             <listitem>
                 <para>
-                    You can update from any OTRS 5 patch level to the latest available OTRS 6
-patch level release.
+                    你可以从任何的OTRS 5补丁级别更新到OTRS 6最新的可用补丁级别版本。
                 </para>
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Updating from OTRS 4 or earlier</term>
+            <term>从OTRS 4或更早版本更新</term>
             <listitem>
                 <warning>
                     <para>
-                        You cannot update from OTRS 4 or earlier directly to OTRS 6.  Full updates
-to all available minor versions have to be made sequentially instead.  For
-example, if you come from OTRS 3.0, you first have to perform a full update
-to OTRS 3.1, then to 3.2, 3.3, 4, 5 and finally to OTRS 6.
+                        你不能从OTRS 4或更早版本直接更新到OTRS 6。必须依次对所有可用的次要版本进行完全更新。 例如，如果你从OTRS
+3.0开始，则首先必须完整更新到OTRS 3.1，然后更新到3.2、3.4、4、5，最后更新到OTRS 6。
                     </para>
                 </warning>
             </listitem>
@@ -86,7 +82,7 @@ otrs> bin/otrs.Daemon.pl stop
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                 <listitem>
-                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if updating from OTRS 5</para>
+                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, 如果从OTRS 5更新</para>
                 </listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>当然还有数据库</para></listitem>
@@ -117,7 +113,7 @@ root> mv otrs-x.x.x otrs
                     <itemizedlist>
                         <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
                         <listitem>
-                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if updating from OTRS 5</para>
+                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, 如果从OTRS 5更新</para>
                         </listitem>
                     </itemizedlist>
                 </para>
@@ -127,10 +123,7 @@ root> mv otrs-x.x.x otrs
                 <title>恢复工单数据</title>
 
                 <para>
-                    If you configured OTRS to store article data in the file system you have to
-restore the <filename>article</filename> folder to
-<filename>/opt/otrs/var/</filename> or the folder specified in the System
-Configuration.
+                    如果你配置OTRS将信件数据存储在文件系统，你必须恢复<filename>article</filename>目录到<filename>/opt/otrs/var/</filename>或在系统配置中指定的目录。
                 </para>
             </section>
 
@@ -181,29 +174,21 @@ root> rpm -Uvh otrs-x.x.x.-01.rpm
 
         <note>
             <para>
-                If you have any custom Perl or XML configuration files in
-<filename>Kernel/Config/Files</filename>, these need to be <ulink
-url="http://doc.otrs.com/doc/manual/developer/6.0/en/html/package-porting.html#packge-porting-5-to-6-configuration-files">converted
-to the new formats supported by OTRS 6</ulink> before running the migration
-script.
+                如果您在<filename>Kernel/Config/Files</filename>中有任何自定义的Perl或XML配置文件，则需要在运行迁移脚本之前将这些文件<ulink
+url="http://doc.otrs.com/doc/manual/developer/6.0/en/html/package-porting.html#packge-porting-5-to-6-configuration-files">转换为OTRS
+6支持的新格式</ulink>。
             </para>
         </note>
 
         <para>
-            The migration script will perform many checks on your system and give you
-advice on how to install missing Perl modules etc., if that is required. If
-all checks succeeded, the necessary migration steps will be
-performed. Please also run this script in case of patch level updates.
+            迁移脚本将对你的系统执行许多检查，并提供有关如何安装缺少的Perl模块等的建议（如果是必需的模块）。 如果所有检查成功，将执行必要的迁移步骤。
+如果是补丁级别更新，也请运行此脚本。
         </para>
 
         <note>
             <para>
-                The migration script will ask you to set a time zone for OTRS if needed. It
-is very important that you set the correct time zone
-(<literal>OTRSTimeZone</literal>) for data storage and keep it, otherwise
-date and time of data added after the update (tickets, articles, etc.) will
-be stored with a different time zone than your pre-existing data, leading to
-inconsistent output.
+                如果需要，迁移脚本将要求你为OTRS设置时区。 为数据存储设置正确的时区（<literal> OTRSTimeZone
+</literal>）并保留不变非常重要，否则更新后添加的数据（工单、信件等）的日期和时间将与你的预先存在的数据具有不同的时区，导致输出不一致。
             </para>
             <para>
                 对于新系统，建议使用<literal> UTC </literal>，因为用户可以使用不同的个人时区来使用OTRS应用程序。
@@ -231,17 +216,15 @@ otrs> scripts/DBUpdate-to-6.pl
     </section>
 
     <section role="NotInToc">
-        <title>Step 5: Update installed packages</title>
+        <title>步骤5：更新已安装的软件包</title>
         <note>
             <para>
                 OTRS 5的软件包与OTRS 6不兼容，必须进行更新。
             </para>
         </note>
         <para>
-            You can use the command below to update all installed packages.  This works
-for all packages that are available from online repositories.  You can
-update other packages later via the package manager (this requires a running
-OTRS Daemon).
+            你可以使用下面的命令来更新所有已安装的软件包。 这适用于从在线存储库提供的所有软件包。
+您稍后可以通过软件包管理器更新其他软件包（这需要OTRS守护进程在运行）。
         </para>
         <screen><![CDATA[
 otrs> cd /opt/otrs/
@@ -250,7 +233,7 @@ otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
     </section>
 
     <section role="NotInToc">
-        <title>Step 6: Restart your services</title>
+        <title>步骤6：重启服务</title>
 
         <para>
             这将取决于你的服务配置，这里是一个例子：
@@ -266,8 +249,7 @@ root> /etc/init.d/cron start
 
         <note>
             <para>
-                The OTRS Daemon is required for correct operation of OTRS such as sending
-emails.  Please activate it as described in the next step.
+                OTRS守护进程是正确操作OTRS所必需的，例如发送电子邮件。 请按照下一步中的说明激活它。
             </para>
         </note>
     </section>
@@ -276,9 +258,8 @@ emails.  Please activate it as described in the next step.
         <title>步骤7：启动OTRS守护进程和cron任务</title>
 
         <para>
-            The OTRS Daemon is responsible for handling any asynchronous and recurring
-tasks in OTRS.  The daemon and its keepalive cron job must be started as the
-<literal>otrs</literal> user.
+            OTRS守护进程负责处理OTRS中任何异步和重复的任务。 守护进程及保持其存活的cron任务必须以<literal> otrs
+</literal>用户身份启动。
         </para>
 
         <para>

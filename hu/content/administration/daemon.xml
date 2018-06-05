@@ -23,7 +23,7 @@ együttműködni más OTRS démonokkal a különböző előtétprogram kiszolgá
 egy fürtözött környezetben.
     </para>
     <para>
-        Amikor üresjáratban van, akkor az OTRS démon öt folyamatból áll:
+        When idle OTRS Daemon consist in six processes:
         <itemizedlist mark="round">
             <listitem>
                 <para>
@@ -98,6 +98,24 @@ olyan általános ügyintéző feladatot, amelyeket események jelöltek meg
 végrehajtásra). Amikor eljön az idő egy általános ügyintéző feladat
 futtatására, akkor elküldi a feladat információit a feladatelvégző démonnak
 a feladat kezeléséhez.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    System Configuration sync manager daemon
+(<filename>Kernel/System/Daemon/DaemonModules/SystemConfigurationSyncManager.pm</filename>)
+                </para>
+                <para>
+                    This daemon verifies that the configuration file
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename> is up to date with the
+deployment information from the database, otherwise the file is updated. and
+signal the main daemon to restart all daemon modules with the updated
+configuration.
+                </para>
+                <para>
+                    Additionally if any other .pm file in
+<filename>Kernel/Config/Files/</filename> is modified while the daemon is
+running, it will also signal the main daemon to restart all daemon modules.
                 </para>
             </listitem>
         </itemizedlist>
