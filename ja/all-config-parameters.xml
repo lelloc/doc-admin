@@ -29217,41 +29217,6 @@ URL: skins/Customer/default/img/logo.png
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelCreateAccount">
-                <term>CustomerPanelCreateAccount</term>
-                <listitem>
-                    <para>顧客が自ら自身のアカウントを作成できるようにします。</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelCreateAccount::MailRestrictions::Blacklist">
-                <term>CustomerPanelCreateAccount::MailRestrictions::Blacklist</term>
-                <listitem>
-                    <para>If active, none of the regular expressions may match the user's email address to allow registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-- \@your\.domain\.example$
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelCreateAccount::MailRestrictions::Whitelist">
-                <term>CustomerPanelCreateAccount::MailRestrictions::Whitelist</term>
-                <listitem>
-                    <para>If active, one of the regular expressions has to match the user's email address to allow registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-- \@your\.domain\.example$
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_CustomerPanelLoginURL">
                 <term>CustomerPanelLoginURL</term>
                 <listitem>
@@ -29270,17 +29235,6 @@ URL: skins/Customer/default/img/logo.png
                     <para>This setting is not active by default.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelLostPassword">
-                <term>CustomerPanelLostPassword</term>
-                <listitem>
-                    <para>顧客に関する、パスワード忘れ機能を有効にします。</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -29325,17 +29279,6 @@ URL: skins/Customer/default/img/logo.png
                     <para>This setting can not be deactivated.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- New OTRS Account!
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelUserID">
-                <term>CustomerPanelUserID</term>
-                <listitem>
-                    <para>顧客パネルのためのユーザ識別子を定義します。</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -30956,6 +30899,32 @@ Type: '0'
     <section id="ConfigReference_Section_Frontend_External">
         <title>Frontend → External</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RegisterBody">
+                <term>ExternalFrontend::Account::RegisterBody</term>
+                <listitem>
+                    <para>新アカウントについて、顧客に送信される通知メールの本文テキストを定義します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has created a new
+  OTRS account for you.\n\nFull name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>\nUser
+  name: <OTRS_USERLOGIN>\nPassword: <OTRS_USERPASSWORD>\n\nYou can log in via the
+  following URL. We encourage you to change your password in the user preferences
+  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/external\n            "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RegisterSubject">
+                <term>ExternalFrontend::Account::RegisterSubject</term>
+                <listitem>
+                    <para>新アカウントについて、顧客に送信される通知メールの件名を定義します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- New OTRS Account!
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::DefaultLanguage">
                 <term>ExternalFrontend::DefaultLanguage</term>
                 <listitem>
@@ -30963,6 +30932,118 @@ Type: '0'
                     <para>This setting can not be deactivated.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- Browser
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontendUserID">
+                <term>ExternalFrontendUserID</term>
+                <listitem>
+                    <para>Defines the user identifier for the external frontend.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_Account">
+        <title>Frontend → External → Account</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::EmailBlacklist">
+                <term>ExternalFrontend::Account::EmailBlacklist</term>
+                <listitem>
+                    <para>If active, none of the regular expressions may match the user's email address to allow registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- \@your\.domain\.example$
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::EmailWhitelist">
+                <term>ExternalFrontend::Account::EmailWhitelist</term>
+                <listitem>
+                    <para>If active, one of the regular expressions has to match the user's email address to allow registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- \@your\.domain\.example$
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::Recover">
+                <term>ExternalFrontend::Account::Recover</term>
+                <listitem>
+                    <para>Enables customers to recover their own accounts via the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RecoverBody">
+                <term>ExternalFrontend::Account::RecoverBody</term>
+                <listitem>
+                    <para>Defines the body for an email with password recovery instructions for customer users, containing a link to request a new password.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
+  change your OTRS password.\n\nIf you want to do this, click on this link. You will
+  receive another email containing the password.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/external/account/reset/<OTRS_TOKEN>\n\nIf
+  you did not request a new password, please ignore this email.\n            "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RecoverSubject">
+                <term>ExternalFrontend::Account::RecoverSubject</term>
+                <listitem>
+                    <para>Defines the subject for an email with password recovery instructions for customer users.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- New OTRS password request
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::Register">
+                <term>ExternalFrontend::Account::Register</term>
+                <listitem>
+                    <para>Enables customers to create their own accounts via the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::ResetBody">
+                <term>ExternalFrontend::Account::ResetBody</term>
+                <listitem>
+                    <para>Defines the body for an email with new password for customer users.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYour new password is: <OTRS_NEWPW>\n\nYou can log
+  in via the following URL. We encourage you to change your password in the user preferences
+  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/external\n            "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::ResetSubject">
+                <term>ExternalFrontend::Account::ResetSubject</term>
+                <listitem>
+                    <para>Defines the subject for an email with new password for customer users.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- New OTRS password
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31216,7 +31297,31 @@ Type: '0'
   Group: []
   GroupRo: []
   IsPublic: '1'
-  Path: error
+  Path: /error
+  Props: ''
+- Alias: ''
+  Component: AccountResetPage
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Path: /account/reset/:token
+  Props: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Route_999-Development">
+                <term>ExternalFrontend::Route###999-Development</term>
+                <listitem>
+                    <para>Defines the application routes for the external interface. Additional routes are defined by adding new items and specifying their parameters. 'Group' and 'GroupRo' arrays can be used to limit access of the route to members of certain groups with RW and RO permissions respectively. 'Path' defines the relative path of the route, and 'Alias' can be used for specifying an alternative path. 'Component' is the path of the Vue component responsible for displaying the route content, relative to the Components/Route folder in the app. 'IsPublic' defines if the route will be accessible for unauthenticated users and in case this is set to '1', 'Group' and 'GroupRo' parameters will be ignored. 'Props' can be used to signal that the path contain dynamic segments, and that their values should be bound to the component as props (use '1' to turn on this feature).</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+- Alias: ''
+  Component: DesignSandbox
+  Group: []
+  GroupRo: []
+  IsPublic: '1'
+  Path: /sandbox
   Props: ''
 ]]></programlisting>
                     </para>
