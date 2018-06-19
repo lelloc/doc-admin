@@ -34,6 +34,11 @@
         <itemizedlist>
             <listitem>
                 <para>
+                    FAQ
+                </para>
+            </listitem>
+            <listitem>
+                <para>
                     Session
                 </para>
             </listitem>
@@ -44,6 +49,149 @@
             </listitem>
         </itemizedlist>
 
+        <section id="generic-faq-connector">
+            <title>FAQ Connector</title>
+            <para>
+                This connector get and search public FAQ items, as well as list FAQ languages and categories.
+            </para>
+            <itemizedlist>
+                <para>
+                    Provides:
+                </para>
+                <listitem>
+                    <para>
+                        Operations:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                LanguageList
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                PublicCategoryList
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                PublicFAQGet
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                PublicFAQSearch
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <section id="generic-faq-connector-operations">
+                <title>Operations</title>
+                <section id="generic-faq-connector-operations-languagelist">
+                    <title>LanguageList</title>
+                    <para>
+                        For this operation is not necessary to send any special parameter to the server, you just need to request the web service directly indicating the "LanguageList" operation. The operation will return a list of languages including ID and the Name for each language on the system.
+                    </para>
+                    <para>Possible Attributes:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <LanguageList/>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-faq-connector-operations-publiccategorylist">
+                    <title>PublicCategoryList</title>
+                    <para>
+                        For this operation is also not necessary any special parameter, just the simple call for requesting the web service with the operation name 'PublicCategoryList' as a response you will receive a list of categories including the ID and the Name (long format) for each category.
+                    </para>
+                    <para> Possible Attributes:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <PublicCategoryList/>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-faq-connector-operations-publicfaqget">
+                    <title>PublicFAQGet</title>
+                    <para>
+                        To be able to get one or more FAQ entries, you should send the ItemID(s) as a parameter for the FAQ entry you want to get. You will receive the entire FAQ record with all attachments included. Note that attachment contents will be transferred as base64-encoded strings.
+                    </para>
+                    <para>
+                        Setting GetAttachmentContents to 0 will prevent to fetch the content of the attachment this will increase the performance of the operation when the attachment contents are not really needed.
+                    </para>
+                    <para> Possible Attributes:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <PublicFAQGet>
+         <ItemID>?</ItemID>
+         <!-- optional, defaults to 1 -->
+         <GetAttachmentContents>?</GetAttachmentContents>
+      </PublicFAQGet>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+                <section id="generic-faq-connector-operations-publicfaqsearch">
+                    <title>PublicFAQSearch</title>
+                    <para>
+                        For this operation you can specify the following optional parameters: Name, Title, What
+                        (full text search), Keyword, LanguageIDs and CategoryIDs to narrow the search results.
+                        You may also specify the order of the results by the following parameters: OrderBy and
+                        OrderByDirection.
+                    </para>
+                    <para>
+                        Send a request to the web service with the operation name 'PublicFAQSearch' as a
+                        response you will receive a list of FAQ item IDs.
+                    </para>
+                    <note>
+                        <para>
+                            The full FAQ item data can be retrieved for each ID by using 'PublicFAQGet'
+                            operation separately.
+                        </para>
+                    </note>
+
+                    <para> Possible Attributes:</para>
+                    <para>
+                        <programlisting>
+                            <![CDATA[
+      <PublicFAQSearch>
+         <!--Optional:-->
+         <Number>?</Number>
+         <!--Optional:-->
+         <Title>?</Title>
+         <!--Optional:-->
+         <What>?</What>
+         <!--Optional:-->
+         <Keyword>?</Keyword>
+         <!--Zero or more repetitions:-->
+         <LanguageIDs>?</LanguageIDs>
+         <!--Zero or more repetitions:-->
+         <CategoryIDs>?</CategoryIDs>
+         <!--Zero or more repetitions:-->
+         <SortBy>?</SortBy>
+         <!--Optional:-->
+         <OrderBy>?</OrderBy>
+         <!--Optional:-->
+         <OprderByDirection>?</OprderByDirection>
+      </PublicFAQSearch>
+                            ]]>
+                        </programlisting>
+                    </para>
+                </section>
+            </section>
+        </section>
         <section id="generic-session-connector">
             <title>Session Connector</title>
             <para>
