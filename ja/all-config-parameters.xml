@@ -26,20 +26,6 @@
     <section id="ConfigReference_Section_CloudService_Admin_ModuleRegistration">
         <title>CloudService → Admin → ModuleRegistration</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_CloudService::Admin::Module_100-SupportDataCollector">
-                <term>CloudService::Admin::Module###100-SupportDataCollector</term>
-                <listitem>
-                    <para>Cloud service admin module registration for the transport layer.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-ConfigDialog: AdminCloudServiceSupportDataCollector
-Description: Configure sending of support data to OTRS Group for improved support.
-Icon: fa fa-compass
-Name: Support data collector
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_CloudService::Admin::Module_200-SMS">
                 <term>CloudService::Admin::Module###200-SMS</term>
                 <listitem>
@@ -8934,6 +8920,23 @@ TaskName: ConfigurationDeploymentCleanup
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_ContractCheck">
+                <term>Daemon::SchedulerCronTaskManager::Task###ContractCheck</term>
+                <listitem>
+                    <para>Checks the contract status of the system.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Function: Execute
+MaximumParallelInstances: '1'
+Module: Kernel::System::Console::Command::Maint::SystemContract::ContractStatusCheck
+Params: []
+Schedule: '*/5 * * * *'
+TaskName: ContractCheck
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_CoreCacheCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###CoreCacheCleanup</term>
                 <listitem>
@@ -9331,40 +9334,6 @@ Params:
 - --send
 Schedule: '* * * * *'
 TaskName: MailQueueSend
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_OTRSBusinessAvailabilityCheck">
-                <term>Daemon::SchedulerCronTaskManager::Task###OTRSBusinessAvailabilityCheck</term>
-                <listitem>
-                    <para>Checks the availability of OTRS Business Solution™ for this system.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Function: Execute
-MaximumParallelInstances: '1'
-Module: Kernel::System::Console::Command::Maint::OTRSBusiness::AvailabilityCheck
-Params: []
-Schedule: 15,35,55 */1 * * *
-TaskName: OTRSBusinessAvailabilityCheck
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_OTRSBusinessEntitlementCheck">
-                <term>Daemon::SchedulerCronTaskManager::Task###OTRSBusinessEntitlementCheck</term>
-                <listitem>
-                    <para>Checks the entitlement status of OTRS Business Solution™.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Function: Execute
-MaximumParallelInstances: '1'
-Module: Kernel::System::Console::Command::Maint::OTRSBusiness::EntitlementCheck
-Params: []
-Schedule: 25,45 */1 * * *
-TaskName: OTRSBusinessEntitlementCheck
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -10003,22 +9972,6 @@ Title: SMS
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminCloudServiceSupportDataCollector">
-                <term>Frontend::Module###AdminCloudServiceSupportDataCollector</term>
-                <listitem>
-                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Description: Admin
-Group:
-- admin
-GroupRo: []
-NavBarName: ''
-Title: Support data collector
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminCloudServices">
                 <term>Frontend::Module###AdminCloudServices</term>
                 <listitem>
@@ -10609,22 +10562,6 @@ Group:
 GroupRo: []
 NavBarName: Admin
 Title: Ticket Notifications
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminOTRSBusiness">
-                <term>Frontend::Module###AdminOTRSBusiness</term>
-                <listitem>
-                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Description: Admin
-Group:
-- admin
-GroupRo: []
-NavBarName: Admin
-Title: OTRS Business Solution™
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -11272,8 +11209,8 @@ Title: Shows information on how to start OTRS Daemon
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::NavBarModule_000-AdminContactWithData">
-                <term>Frontend::NavBarModule###000-AdminContactWithData</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavBarModule_11-AdminContactWithData">
+                <term>Frontend::NavBarModule###11-AdminContactWithData</term>
                 <listitem>
                     <para>Agent frontend module registration (disable 'Edit contacts with data' link if if there is no source field configured).</para>
                     <para>デフォルト値:
@@ -11743,26 +11680,6 @@ IconBig: fa-bell-o
 IconSmall: ''
 Module: Kernel::Output::HTML::NavBar::ModuleAdmin
 Name: Ticket Notifications
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminOTRSBusiness">
-                <term>Frontend::NavigationModule###AdminOTRSBusiness</term>
-                <listitem>
-                    <para>Admin area navigation for the agent interface.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Block: OTRSGroup
-CssClass: OTRSBusiness
-Description: Deploy and manage OTRS Business Solution™.
-Group:
-- admin
-GroupRo: []
-IconBig: fa-angle-double-up
-IconSmall: ''
-Module: Kernel::Output::HTML::NavBar::ModuleAdmin
-Name: OTRS Business Solution™
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -12481,18 +12398,6 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCloudServiceSupportDataCollector_002-CloudServices">
-                <term>Loader::Module::AdminCloudServiceSupportDataCollector###002-CloudServices</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Agent.Admin.CloudService.SupportDataCollector.css
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCloudServices_001-Framework">
                 <term>Loader::Module::AdminCloudServices###001-Framework</term>
                 <listitem>
@@ -12957,18 +12862,6 @@ CSS:
 - Core.Agent.Admin.NotificationEvent.css
 JavaScript:
 - Core.Agent.Admin.NotificationEvent.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminOTRSBusiness_001-Framework">
-                <term>Loader::Module::AdminOTRSBusiness###001-Framework</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Agent.Admin.OTRSBusiness.css
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -13615,17 +13508,6 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminCloudServiceSupportDataCollector_002-CloudServices">
-                <term>Frontend::Navigation###AdminCloudServiceSupportDataCollector###002-CloudServices</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminCloudServices_001-Framework">
                 <term>Frontend::Navigation###AdminCloudServices###001-Framework</term>
                 <listitem>
@@ -13861,17 +13743,6 @@ JavaScript:
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminNotificationEvent_002-Ticket">
                 <term>Frontend::Navigation###AdminNotificationEvent###002-Ticket</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminOTRSBusiness_001-Framework">
-                <term>Frontend::Navigation###AdminOTRSBusiness###001-Framework</term>
                 <listitem>
                     <para>Main menu item registration.</para>
                     <para>This setting is not active by default.</para>
@@ -15437,15 +15308,15 @@ Module: Kernel::Output::HTML::Notification::AgentCloudServicesDisabled
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_1100-OTRSBusiness">
-                <term>Frontend::NotifyModule###1100-OTRSBusiness</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_1100-SystemContract">
+                <term>Frontend::NotifyModule###1100-SystemContract</term>
                 <listitem>
-                    <para>Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</para>
+                    <para>Defines the module to display a notification in different interfaces on different occasions for System Contract.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Group: admin
-Module: Kernel::Output::HTML::Notification::AgentOTRSBusiness
+Module: Kernel::Output::HTML::Notification::AgentSystemContract
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -16187,21 +16058,6 @@ Title: Notification Web View
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentOTRSBusiness">
-                <term>Frontend::Module###AgentOTRSBusiness</term>
-                <listitem>
-                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Description: Agent
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: OTRS Business Solution™
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentPreferences">
                 <term>Frontend::Module###AgentPreferences</term>
                 <listitem>
@@ -16277,6 +16133,21 @@ GroupRo:
 - stats
 NavBarName: Statistics Reports
 Title: Statistics Reports
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentSystemContract">
+                <term>Frontend::Module###AgentSystemContract</term>
+                <listitem>
+                    <para>担当者インタフェースに関するフロントエンド・モジュールの登録です。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Description: Agent
+Group: []
+GroupRo: []
+NavBarName: ''
+Title: System Contract
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -17249,18 +17120,6 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentOTRSBusiness_001-Framework">
-                <term>Loader::Module::AgentOTRSBusiness###001-Framework</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Agent.Admin.OTRSBusiness.css
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentPreferences_001-Framework">
                 <term>Loader::Module::AgentPreferences###001-Framework</term>
                 <listitem>
@@ -17323,6 +17182,18 @@ JavaScript:
 - thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js
 - Core.UI.AdvancedChart.js
 - Core.Agent.StatisticsReports.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentSystemContract_001-Framework">
+                <term>Loader::Module::AgentSystemContract###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.SystemContract.css
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -29516,18 +29387,6 @@ Title: Welcome!
     <section id="ConfigReference_Section_Frontend_Customer_FrontendNotification">
         <title>Frontend → Customer → FrontendNotification</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_1-OTRSBusiness">
-                <term>CustomerFrontend::NotifyModule###1-OTRSBusiness</term>
-                <listitem>
-                    <para>Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::Notification::CustomerOTRSBusiness
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_1-ShowAgentOnline">
                 <term>CustomerFrontend::NotifyModule###1-ShowAgentOnline</term>
                 <listitem>
@@ -29550,6 +29409,18 @@ ShowEmail: '1'
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::Notification::CustomerOnline
 ShowEmail: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_1-SystemContract">
+                <term>CustomerFrontend::NotifyModule###1-SystemContract</term>
+                <listitem>
+                    <para>Defines the module to display a notification in different interfaces on different occasions for System Contract.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::Notification::CustomerSystemContract
 ]]></programlisting>
                     </para>
                 </listitem>
