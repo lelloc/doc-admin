@@ -1953,6 +1953,19 @@ UseObjectName: '1'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DynamicFields::ObjectType_FAQ">
+                <term>DynamicFields::ObjectType###FAQ</term>
+                <listitem>
+                    <para>Dinamikus mező objektum regisztráció.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+DisplayName: FAQ
+Module: Kernel::System::DynamicField::ObjectType::FAQ
+Prio: '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_DynamicFields::ObjectType_Ticket">
                 <term>DynamicFields::ObjectType###Ticket</term>
                 <listitem>
@@ -3365,6 +3378,628 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_FAQ">
+        <title>Core → FAQ</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::CacheTTL">
+                <term>FAQ::CacheTTL</term>
+                <listitem>
+                    <para>Cache Time To Leave for FAQ items.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '172800'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Default::Language">
+                <term>FAQ::Default::Language</term>
+                <listitem>
+                    <para>Default language for FAQ articles on single language mode.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Default::RootCategoryComment">
+                <term>FAQ::Default::RootCategoryComment</term>
+                <listitem>
+                    <para>Default category name.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- default comment
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Default::RootCategoryName">
+                <term>FAQ::Default::RootCategoryName</term>
+                <listitem>
+                    <para>Default category name.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Default::State">
+                <term>FAQ::Default::State</term>
+                <listitem>
+                    <para>Default state for FAQ entry.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- internal (agent)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::FAQHook">
+                <term>FAQ::FAQHook</term>
+                <listitem>
+                    <para>The identifier for a FAQ, e.g. FAQ#, KB#, MyFAQ#. The default is FAQ#.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQ#
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::MultiLanguage">
+                <term>FAQ::MultiLanguage</term>
+                <listitem>
+                    <para>Enable multiple languages on FAQ module.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TitleSize">
+                <term>FAQ::TitleSize</term>
+                <listitem>
+                    <para>Default maximum size of the titles in a FAQ article to be shown.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Voting">
+                <term>FAQ::Voting</term>
+                <listitem>
+                    <para>Enable voting mechanism on FAQ module.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_FAQ_Approval">
+        <title>Core → FAQ → Approval</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalGroup">
+                <term>FAQ::ApprovalGroup</term>
+                <listitem>
+                    <para>Group for the approval of FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- users
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalQueue">
+                <term>FAQ::ApprovalQueue</term>
+                <listitem>
+                    <para>Queue for the approval of FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQ_Approval
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalRequired">
+                <term>FAQ::ApprovalRequired</term>
+                <listitem>
+                    <para>New FAQ articles need approval before they get published.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalTicketBody">
+                <term>FAQ::ApprovalTicketBody</term>
+                <listitem>
+                    <para>Ticket body for approval of FAQ article.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- "Hi,\n\na new FAQ article needs your approval before it can be published.\n\n
+  \ FAQ#   : <OTRS_FAQ_NUMBER>\n  Title  : <OTRS_FAQ_TITLE>\n  Author : <OTRS_FAQ_AUTHOR>\n
+  \ State  : <OTRS_FAQ_STATE>\n\nIf you want to do this, click on this link:\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentFAQEdit;ItemID=<OTRS_FAQ_ITEMID>\n\nYour
+  OTRS Notification Master\n            "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalTicketDefaultState">
+                <term>FAQ::ApprovalTicketDefaultState</term>
+                <listitem>
+                    <para>Default state of tickets for the approval of FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- new
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalTicketPriority">
+                <term>FAQ::ApprovalTicketPriority</term>
+                <listitem>
+                    <para>Default priority of tickets for the approval of FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalTicketSubject">
+                <term>FAQ::ApprovalTicketSubject</term>
+                <listitem>
+                    <para>Ticket subject for approval of FAQ article.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQ approval required for FAQ# <OTRS_FAQ_NUMBER>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::ApprovalTicketType">
+                <term>FAQ::ApprovalTicketType</term>
+                <listitem>
+                    <para>Default type of tickets for the approval of FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Unclassified
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_FAQ_Explorer">
+        <title>Core → FAQ → Explorer</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::ItemList::VotingResultColors">
+                <term>FAQ::Explorer::ItemList::VotingResultColors</term>
+                <listitem>
+                    <para>CSS color for the voting result.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+'100': green
+'30': red
+'70': orange
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::ItemList::VotingResultDecimalPlaces">
+                <term>FAQ::Explorer::ItemList::VotingResultDecimalPlaces</term>
+                <listitem>
+                    <para>Decimal places of the voting result.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '2'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastChange::Limit">
+                <term>FAQ::Explorer::LastChange::Limit</term>
+                <listitem>
+                    <para>Number of shown items in last changes.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '3'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastChange::Show">
+                <term>FAQ::Explorer::LastChange::Show</term>
+                <listitem>
+                    <para>Show last change items in defined interfaces.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+external: external (customer)
+internal: internal (agent)
+public: public (public)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastChange::ShowSubCategoryItems">
+                <term>FAQ::Explorer::LastChange::ShowSubCategoryItems</term>
+                <listitem>
+                    <para>Show items of subcategories.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastCreate::Limit">
+                <term>FAQ::Explorer::LastCreate::Limit</term>
+                <listitem>
+                    <para>Number of shown items in last created.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '3'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastCreate::Show">
+                <term>FAQ::Explorer::LastCreate::Show</term>
+                <listitem>
+                    <para>Show last created items in defined interfaces.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+external: external (customer)
+internal: internal (agent)
+public: public (public)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastCreate::ShowSubCategoryItems">
+                <term>FAQ::Explorer::LastCreate::ShowSubCategoryItems</term>
+                <listitem>
+                    <para>Show items of subcategories.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::Path::Show">
+                <term>FAQ::Explorer::Path::Show</term>
+                <listitem>
+                    <para>Show FAQ path yes/no.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::QuickSearch::Show">
+                <term>FAQ::Explorer::QuickSearch::Show</term>
+                <listitem>
+                    <para>Interfaces where the quick search should be shown.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+public: public (public)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::Top10::Limit">
+                <term>FAQ::Explorer::Top10::Limit</term>
+                <listitem>
+                    <para>Number of shown items in the top 10 feature.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '10'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::Top10::Show">
+                <term>FAQ::Explorer::Top10::Show</term>
+                <listitem>
+                    <para>Show top 10 items in defined interfaces.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+external: external (customer)
+internal: internal (agent)
+public: public (public)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::Top10::ShowSubCategoryItems">
+                <term>FAQ::Explorer::Top10::ShowSubCategoryItems</term>
+                <listitem>
+                    <para>Show items of subcategories.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_FAQ_Item">
+        <title>Core → FAQ → Item</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Field1">
+                <term>FAQ::Item::Field1</term>
+                <listitem>
+                    <para>Definition of FAQ item free text field.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Caption: Symptom
+Prio: '100'
+Show: public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Field2">
+                <term>FAQ::Item::Field2</term>
+                <listitem>
+                    <para>Definition of FAQ item free text field.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Caption: Problem
+Prio: '200'
+Show: public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Field3">
+                <term>FAQ::Item::Field3</term>
+                <listitem>
+                    <para>Definition of FAQ item free text field.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Caption: Solution
+Prio: '300'
+Show: public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Field4">
+                <term>FAQ::Item::Field4</term>
+                <listitem>
+                    <para>Definition of FAQ item free text field.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Caption: Field4
+Prio: '400'
+Show: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Field5">
+                <term>FAQ::Item::Field5</term>
+                <listitem>
+                    <para>Definition of FAQ item free text field.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Caption: Field5
+Prio: '500'
+Show: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Field6">
+                <term>FAQ::Item::Field6</term>
+                <listitem>
+                    <para>Definition of FAQ item free text field.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Caption: Comment
+Prio: '600'
+Show: internal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::HTML">
+                <term>FAQ::Item::HTML</term>
+                <listitem>
+                    <para>Show FAQ Article with HTML.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_FAQ_Item_Voting">
+        <title>Core → FAQ → Item → Voting</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Voting::Rates">
+                <term>FAQ::Item::Voting::Rates</term>
+                <listitem>
+                    <para>Rates for voting. Key must be in percent.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+'0': '1'
+'100': '5'
+'25': '2'
+'50': '3'
+'75': '4'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Item::Voting::Show">
+                <term>FAQ::Item::Voting::Show</term>
+                <listitem>
+                    <para>Show voting in defined interfaces.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+external: external (customer)
+internal: internal (agent)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_FAQ_RelatedArticles">
+        <title>Core → FAQ → RelatedArticles</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Agent::RelatedArticles::Enabled">
+                <term>FAQ::Agent::RelatedArticles::Enabled</term>
+                <listitem>
+                    <para>Enable the related article feature for the agent frontend.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Customer::RelatedArticles::Enabled">
+                <term>FAQ::Customer::RelatedArticles::Enabled</term>
+                <listitem>
+                    <para>Enable the related article feature for the customer frontend.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::KeywordArticeList::SearchLimit">
+                <term>FAQ::KeywordArticeList::SearchLimit</term>
+                <listitem>
+                    <para>Limit for the search to build the keyword FAQ article list.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '5000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_FAQ_TicketCompose">
+        <title>Core → FAQ → TicketCompose</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_IncludeInternal">
+                <term>FAQ::TicketCompose###IncludeInternal</term>
+                <listitem>
+                    <para>Include internal fields on a FAQ based Ticket.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_InsertMethod">
+                <term>FAQ::TicketCompose###InsertMethod</term>
+                <listitem>
+                    <para>Defines the information to be inserted in a FAQ based Ticket. "Full FAQ" includes text, attachments and inline images.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Full
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_ShowFieldNames">
+                <term>FAQ::TicketCompose###ShowFieldNames</term>
+                <listitem>
+                    <para>Include the name of each field in a FAQ based Ticket.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_ShowInsertLinkButton">
+                <term>FAQ::TicketCompose###ShowInsertLinkButton</term>
+                <listitem>
+                    <para>Show "Insert FAQ Link" Button in AgentFAQZoomSmall for public FAQ Articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_ShowInsertTextAndLinkButton">
+                <term>FAQ::TicketCompose###ShowInsertTextAndLinkButton</term>
+                <listitem>
+                    <para>Show "Insert FAQ Text &amp; Link" / "Insert Full FAQ &amp; Link" Button in AgentFAQZoomSmall for public FAQ Articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_ShowInsertTextButton">
+                <term>FAQ::TicketCompose###ShowInsertTextButton</term>
+                <listitem>
+                    <para>Show "Insert FAQ Text" / "Insert Full FAQ" Button in AgentFAQZoomSmall.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::TicketCompose_UpdateArticleSubject">
+                <term>FAQ::TicketCompose###UpdateArticleSubject</term>
+                <listitem>
+                    <para>Define if the FAQ title should be concatenated to article subject.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_GoogleChrome">
         <title>Core → GoogleChrome</title>
         <variablelist>
@@ -3432,6 +4067,58 @@ Type: ParentChild
 Object1: Appointment
 Object2: Ticket
 Type: Normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_LinkObject::PossibleLink_8301">
+                <term>LinkObject::PossibleLink###8301</term>
+                <listitem>
+                    <para>This setting defines that a 'FAQ' object can be linked with other 'FAQ' objects using the 'Normal' link type.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Object1: FAQ
+Object2: FAQ
+Type: Normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_LinkObject::PossibleLink_8302">
+                <term>LinkObject::PossibleLink###8302</term>
+                <listitem>
+                    <para>This setting defines that a 'FAQ' object can be linked with other 'FAQ' objects using the 'ParentChild' link type.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Object1: FAQ
+Object2: FAQ
+Type: ParentChild
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_LinkObject::PossibleLink_8303">
+                <term>LinkObject::PossibleLink###8303</term>
+                <listitem>
+                    <para>This setting defines that a 'FAQ' object can be linked with other 'Ticket' objects using the 'Normal' link type.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Object1: FAQ
+Object2: Ticket
+Type: Normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_LinkObject::PossibleLink_8304">
+                <term>LinkObject::PossibleLink###8304</term>
+                <listitem>
+                    <para>This setting defines that a 'FAQ' object can be linked with other 'Ticket' objects using the 'ParentChild' link type.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Object1: FAQ
+Object2: Ticket
+Type: ParentChild
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -14706,6 +15393,20 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Agent::StateTypes">
+                <term>FAQ::Agent::StateTypes</term>
+                <listitem>
+                    <para>List of state types which can be used in the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- internal
+- external
+- public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::AvatarEngine">
                 <term>Frontend::AvatarEngine</term>
                 <listitem>
@@ -14792,6 +15493,18 @@ Module: Kernel::Output::HTML::HeaderMeta::Refresh
                         <programlisting><![CDATA[---
 Action: AgentTicketSearch
 Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::HeaderMetaModule_3-FAQSearch">
+                <term>Frontend::HeaderMetaModule###3-FAQSearch</term>
+                <listitem>
+                    <para>Module to generate html OpenSearch profile for short FAQ search.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: AgentFAQSearch
+Module: Kernel::Output::HTML::HeaderMeta::AgentFAQSearch
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -15291,6 +16004,105 @@ ParamType: Multiple
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Agent_FAQJournalOverview">
+        <title>Frontend → Agent → FAQJournalOverview</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::JournalOverview_Small">
+                <term>FAQ::Frontend::JournalOverview###Small</term>
+                <listitem>
+                    <para>Defines an overview module to show the small view of a FAQ journal.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::FAQJournalOverview::Small
+Name: Small
+NameShort: S
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_FAQOverview">
+        <title>Frontend → Agent → FAQOverview</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::Overview_Small">
+                <term>FAQ::Frontend::Overview###Small</term>
+                <listitem>
+                    <para>Defines an overview module to show the small view of a FAQ list.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::FAQOverview::Small
+Name: Small
+NameShort: S
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::OverviewSmall_DynamicField">
+                <term>FAQ::Frontend::OverviewSmall###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ small format overview screen of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_FAQRelatedArticles">
+        <title>Frontend → Agent → FAQRelatedArticles</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQRelatedArticles_DefaultLanguages">
+                <term>FAQ::Frontend::AgentFAQRelatedArticles###DefaultLanguages</term>
+                <listitem>
+                    <para>The default languages for the related FAQ articles.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQRelatedArticles_Position">
+                <term>FAQ::Frontend::AgentFAQRelatedArticles###Position</term>
+                <listitem>
+                    <para>Defines the position where the related FAQ articles widget is located.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQRelatedArticles_QueuesEnabled">
+                <term>FAQ::Frontend::AgentFAQRelatedArticles###QueuesEnabled</term>
+                <listitem>
+                    <para>List of queue names for which the related article feature is enabled.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- Raw
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQRelatedArticles_ShowLimit">
+                <term>FAQ::Frontend::AgentFAQRelatedArticles###ShowLimit</term>
+                <listitem>
+                    <para>Output limit for the related FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '10'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Agent_FrontendNotification">
         <title>Frontend → Agent → FrontendNotification</title>
         <variablelist>
@@ -15559,6 +16371,37 @@ Priority:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_LinkObject::ComplexTable_FAQ">
+                <term>LinkObject::ComplexTable###FAQ</term>
+                <listitem>
+                    <para>Define which columns are shown in the linked FAQs widget (LinkObject::ViewMode = "complex"). Note: Only FAQ attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns. Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+DefaultColumns:
+  Approved: '1'
+  CategoryName: '1'
+  Changed: '1'
+  ContentType: '1'
+  Created: '2'
+  FAQNumber: '2'
+  Language: '1'
+  State: '2'
+  Title: '2'
+Module: Kernel::Output::HTML::LinkObject::FAQ.pm
+Priority:
+  Approved: '160'
+  CategoryName: '140'
+  Changed: '180'
+  ContentType: '170'
+  Created: '130'
+  FAQNumber: '100'
+  Language: '150'
+  State: '120'
+  Title: '110'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_LinkObject::ComplexTable_Ticket">
                 <term>LinkObject::ComplexTable###Ticket</term>
                 <listitem>
@@ -15625,6 +16468,17 @@ Priority:
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 - AgentTicketZoom
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_LinkObject::ComplexTable::SettingsVisibility_FAQ">
+                <term>LinkObject::ComplexTable::SettingsVisibility###FAQ</term>
+                <listitem>
+                    <para>Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js and Core.Agent.LinkObject.js.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AgentFAQZoom
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -16008,6 +16862,218 @@ Group: []
 GroupRo: []
 NavBarName: Dashboard
 Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQAdd">
+                <term>Frontend::Module###AgentFAQAdd</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQCategory">
+                <term>Frontend::Module###AgentFAQCategory</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group:
+- admin
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQDelete">
+                <term>Frontend::Module###AgentFAQDelete</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Delete.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: Delete
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQEdit">
+                <term>Frontend::Module###AgentFAQEdit</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Edit.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: Edit
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQExplorer">
+                <term>Frontend::Module###AgentFAQExplorer</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQHistory">
+                <term>Frontend::Module###AgentFAQHistory</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ History.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: History
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQJournal">
+                <term>Frontend::Module###AgentFAQJournal</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQLanguage">
+                <term>Frontend::Module###AgentFAQLanguage</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group:
+- admin
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQPrint">
+                <term>Frontend::Module###AgentFAQPrint</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Print.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: Print
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQRelatedArticles">
+                <term>Frontend::Module###AgentFAQRelatedArticles</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Agent FAQ Related Articles.
+Group: []
+GroupRo: []
+NavBarName: ''
+Title: Agent FAQ Related Articles
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQRichText">
+                <term>Frontend::Module###AgentFAQRichText</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ AJAX Responder for Richtext.
+Group: []
+GroupRo: []
+NavBarName: ''
+Title: FAQ AJAX Responder
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQSearch">
+                <term>Frontend::Module###AgentFAQSearch</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQSearchSmall">
+                <term>Frontend::Module###AgentFAQSearchSmall</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Search FAQ Small.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQZoom">
+                <term>Frontend::Module###AgentFAQZoom</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: FAQ Area.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: FAQ
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -17090,6 +18156,115 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQAdd_002-FAQ">
+                <term>Loader::Module::AgentFAQAdd###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.FAQ.Detail.css
+JavaScript:
+- Core.Agent.FAQ.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQCategory_002-FAQ">
+                <term>Loader::Module::AgentFAQCategory###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.FAQ.ConfirmationDialog.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQEdit_002-FAQ">
+                <term>Loader::Module::AgentFAQEdit###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.FAQ.Detail.css
+JavaScript:
+- Core.Agent.FAQ.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQExplorer_002-FAQ">
+                <term>Loader::Module::AgentFAQExplorer###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.FAQ.Detail.css
+JavaScript:
+- Core.Agent.FAQ.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQJournal_002-FAQ">
+                <term>Loader::Module::AgentFAQJournal###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQLanguage_002-FAQ">
+                <term>Loader::Module::AgentFAQLanguage###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.FAQ.ConfirmationDialog.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQSearch_002-FAQ">
+                <term>Loader::Module::AgentFAQSearch###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.FAQ.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentFAQZoom_002-FAQ">
+                <term>Loader::Module::AgentFAQZoom###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.FAQ.Detail.css
+- Core.AllocationList.css
+JavaScript:
+- Core.Agent.FAQ.ConfirmationDialog.js
+- Core.Agent.FAQ.TicketCompose.js
+- Core.Agent.FAQ.FAQZoom.js
+- Core.UI.AllocationList.js
+- Core.UI.Table.Sort.js
+- Core.Agent.TableFilters.js
+- Core.Agent.LinkObject.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentLinkObject_001-Framework">
                 <term>Loader::Module::AgentLinkObject###001-Framework</term>
                 <listitem>
@@ -17279,6 +18454,18 @@ JavaScript:
 - Core.Agent.CustomerSearchAutoComplete.js
 - Core.Agent.TicketAction.js
 - Core.Agent.TicketSplit.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketEmail_002-FAQ">
+                <term>Loader::Module::AgentTicketEmail###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.FAQ.RelatedArticles.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -17473,6 +18660,18 @@ JavaScript:
 - Core.Agent.TicketAction.js
 - Core.Agent.TicketActionCommon.js
 - Core.Agent.TicketFormDraft.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketPhone_002-FAQ">
+                <term>Loader::Module::AgentTicketPhone###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.FAQ.RelatedArticles.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -17951,6 +19150,158 @@ CSS:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQAdd_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQAdd###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: b
+  Block: ''
+  Description: New FAQ Article.
+  Group: []
+  GroupRo: []
+  Link: Action=AgentFAQAdd
+  LinkOption: ''
+  Name: New
+  NavBar: FAQ
+  Prio: '920'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQCategory_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQCategory###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: g
+  Block: ''
+  Description: Category Management.
+  Group:
+  - admin
+  GroupRo: []
+  Link: Action=AgentFAQCategory
+  LinkOption: ''
+  Name: Category Management
+  NavBar: FAQ
+  Prio: '950'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQExplorer_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQExplorer###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: f
+  Block: ItemArea
+  Description: FAQ Area
+  Group: []
+  GroupRo: []
+  Link: Action=AgentFAQExplorer
+  LinkOption: ''
+  Name: FAQ
+  NavBar: FAQ
+  Prio: '350'
+  Type: Menu
+- AccessKey: x
+  Block: ''
+  Description: FAQ Explorer
+  Group: []
+  GroupRo: []
+  Link: Action=AgentFAQExplorer
+  LinkOption: ''
+  Name: Explorer
+  NavBar: FAQ
+  Prio: '910'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQJournal_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQJournal###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: j
+  Block: ''
+  Description: FAQ Journal
+  Group: []
+  GroupRo: []
+  Link: Action=AgentFAQJournal
+  LinkOption: ''
+  Name: Journal
+  NavBar: FAQ
+  Prio: '930'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQLanguage_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQLanguage###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: l
+  Block: ''
+  Description: Language Management.
+  Group:
+  - admin
+  GroupRo: []
+  Link: Action=AgentFAQLanguage
+  LinkOption: ''
+  Name: Language Management
+  NavBar: FAQ
+  Prio: '940'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQSearch_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQSearch###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: z
+  Block: ''
+  Description: Search FAQ.
+  Group: []
+  GroupRo: []
+  Link: Action=AgentFAQSearch
+  LinkOption: onclick="Core.Agent.Search.OpenSearchDialog('AgentFAQSearch'); if (event.stopPropagation)
+    { event.stopPropagation(); } else { window.event.cancelBubble = true; } return
+    false;"
+  Name: Search
+  NavBar: FAQ
+  Prio: '960'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentFAQSearchSmall_002-FAQ">
+                <term>Frontend::Navigation###AgentFAQSearchSmall###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AgentLinkObject_001-Framework">
                 <term>Frontend::Navigation###AgentLinkObject###001-Framework</term>
                 <listitem>
@@ -18322,6 +19673,17 @@ CSS:
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 ^AgentCustomerUserInformationCenter: Action=AgentCustomerUserInformationCenterSearch
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Search_FAQ">
+                <term>Frontend::Search###FAQ</term>
+                <listitem>
+                    <para>FAQ search backend router of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+^(?:Agent|Admin)FAQ: Action=AgentFAQSearch;Subaction=AJAX
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -18983,6 +20345,25 @@ Module: Kernel::Output::HTML::ToolBar::Generic
 Name: Customer User
 Priority: '1990040'
 Size: '10'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::ToolBarModule_90-FAQ::AgentFAQAdd">
+                <term>Frontend::ToolBarModule###90-FAQ::AgentFAQAdd</term>
+                <listitem>
+                    <para>Toolbar Item for a shortcut.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+AccessKey: ''
+Action: AgentFAQAdd
+CssClass: FAQ
+Icon: fa fa-question
+Link: Action=AgentFAQAdd
+Module: Kernel::Output::HTML::ToolBar::Link
+Name: Add FAQ article
+Priority: '1020090'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -20047,6 +21428,42 @@ Title: Out Of Office
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DashboardBackend_0398-FAQ-LastChange">
+                <term>DashboardBackend###0398-FAQ-LastChange</term>
+                <listitem>
+                    <para>Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Block: ContentSmall
+Default: '1'
+Description: ''
+Group: ''
+Mandatory: '0'
+Module: Kernel::Output::HTML::Dashboard::FAQ
+Title: Latest updated FAQ articles
+Type: LastChange
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DashboardBackend_0399-FAQ-LastCreate">
+                <term>DashboardBackend###0399-FAQ-LastCreate</term>
+                <listitem>
+                    <para>Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Block: ContentSmall
+Default: '1'
+Description: ''
+Group: ''
+Mandatory: '0'
+Module: Kernel::Output::HTML::Dashboard::FAQ
+Title: Latest created FAQ articles
+Type: LastCreate
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_DashboardBackend_0400-UserOnline">
                 <term>DashboardBackend###0400-UserOnline</term>
                 <listitem>
@@ -20252,6 +21669,630 @@ Type: Type
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQAdd">
+        <title>Frontend → Agent → View → FAQAdd</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQAdd_DynamicField">
+                <term>FAQ::Frontend::AgentFAQAdd###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ add screen of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQAdd_RichTextHeight">
+                <term>FAQ::Frontend::AgentFAQAdd###RichTextHeight</term>
+                <listitem>
+                    <para>Meghatározza a RichText szerkesztő komponens magasságát ennél a képernyőnél. Szám (képpont) vagy százalék (relatív) értéket adjon meg.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '320'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQAdd_RichTextWidth">
+                <term>FAQ::Frontend::AgentFAQAdd###RichTextWidth</term>
+                <listitem>
+                    <para>Meghatározza a RichText szerkesztő komponens szélességét ennél a képernyőnél. Szám (képpont) vagy százalék (relatív) értéket adjon meg.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '620'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQEdit">
+        <title>Frontend → Agent → View → FAQEdit</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQEdit_DynamicField">
+                <term>FAQ::Frontend::AgentFAQEdit###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ edit screen of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQEdit_RichTextHeight">
+                <term>FAQ::Frontend::AgentFAQEdit###RichTextHeight</term>
+                <listitem>
+                    <para>Meghatározza a RichText szerkesztő komponens magasságát ennél a képernyőnél. Szám (képpont) vagy százalék (relatív) értéket adjon meg.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '320'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQEdit_RichTextWidth">
+                <term>FAQ::Frontend::AgentFAQEdit###RichTextWidth</term>
+                <listitem>
+                    <para>Meghatározza a RichText szerkesztő komponens szélességét ennél a képernyőnél. Szám (képpont) vagy százalék (relatív) értéket adjon meg.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '620'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQExplorer">
+        <title>Frontend → Agent → View → FAQExplorer</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQExplorer_Order::Default">
+                <term>FAQ::Frontend::AgentFAQExplorer###Order::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ order in the FAQ Explorer result of the agent interface. Up: oldest on top. Down: latest on top.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Down
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQExplorer_SearchLimit">
+                <term>FAQ::Frontend::AgentFAQExplorer###SearchLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the FAQ Explorer result of the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQExplorer_ShowColumns">
+                <term>FAQ::Frontend::AgentFAQExplorer###ShowColumns</term>
+                <listitem>
+                    <para>Defines the shown columns in the FAQ Explorer. This option has no effect on the position of the column.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Category: '0'
+Changed: '0'
+Language: '1'
+State: '1'
+Title: '1'
+Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQExplorer_ShowInvalidFAQItems">
+                <term>FAQ::Frontend::AgentFAQExplorer###ShowInvalidFAQItems</term>
+                <listitem>
+                    <para>Show invalid items in the FAQ Explorer result of the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQExplorer_SortBy::Default">
+                <term>FAQ::Frontend::AgentFAQExplorer###SortBy::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ attribute for FAQ sorting in the FAQ Explorer of the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQExplorer_TitleSize">
+                <term>FAQ::Frontend::AgentFAQExplorer###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Explorer in the agent interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQJournal">
+        <title>Frontend → Agent → View → FAQJournal</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQJournal_JournalLimit">
+                <term>FAQ::Frontend::AgentFAQJournal###JournalLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the FAQ journal in the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQJournal_ShowColumns">
+                <term>FAQ::Frontend::AgentFAQJournal###ShowColumns</term>
+                <listitem>
+                    <para>Defines the shown columns in the FAQ journal. This option has no effect on the position of the column.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Category: '1'
+Name: '1'
+Time: '1'
+Title: '1'
+Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQJournal_TitleSize">
+                <term>FAQ::Frontend::AgentFAQJournal###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ journal in the agent interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQPrint">
+        <title>Frontend → Agent → View → FAQPrint</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQPrint_DynamicField">
+                <term>FAQ::Frontend::AgentFAQPrint###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ print screen of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQSearch">
+        <title>Frontend → Agent → View → FAQSearch</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_ApprovedSearch">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###ApprovedSearch</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_CategoryIDs">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###CategoryIDs</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_CreatedUserIDs">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###CreatedUserIDs</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_Fulltext">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_ItemChangeTimePoint">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###ItemChangeTimePoint</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_ItemChangeTimeSlot">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###ItemChangeTimeSlot</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_ItemCreateTimePoint">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###ItemCreateTimePoint</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_ItemCreateTimeSlot">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###ItemCreateTimeSlot</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_Keyword">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###Keyword</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_LanguageIDs">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###LanguageIDs</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_LastChangedUserIDs">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###LastChangedUserIDs</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_Number">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###Number</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_RateSearchType">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###RateSearchType</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_StateIDs">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###StateIDs</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_Title">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###Title</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_ValidIDs">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###ValidIDs</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Defaults_VoteSearchType">
+                <term>FAQ::Frontend::AgentFAQSearch###Defaults###VoteSearchType</term>
+                <listitem>
+                    <para>Defines the default shown FAQ search attribute for FAQ search screen.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_DynamicField">
+                <term>FAQ::Frontend::AgentFAQSearch###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ search screen of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_Order::Default">
+                <term>FAQ::Frontend::AgentFAQSearch###Order::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ order of a search result in the agent interface. Up: oldest on top. Down: latest on top.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Down
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_SearchCSVDynamicField">
+                <term>FAQ::Frontend::AgentFAQSearch###SearchCSVDynamicField</term>
+                <listitem>
+                    <para>Dinamikus mezők, amelyek a keresési eredmények CSV formátumba való exportálásához használhatók.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_SearchLimit">
+                <term>FAQ::Frontend::AgentFAQSearch###SearchLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the result of a search in the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_ShowColumns">
+                <term>FAQ::Frontend::AgentFAQSearch###ShowColumns</term>
+                <listitem>
+                    <para>Defines the shown columns in the FAQ search. This option has no effect on the position of the column.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Category: '1'
+Changed: '1'
+Language: '1'
+State: '1'
+Title: '1'
+Valid: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_SortBy::Default">
+                <term>FAQ::Frontend::AgentFAQSearch###SortBy::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ attribute for FAQ sorting in a FAQ search of the agent interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQSearch_TitleSize">
+                <term>FAQ::Frontend::AgentFAQSearch###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Search in the agent interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQZoom">
+        <title>Frontend → Agent → View → FAQZoom</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentFAQZoom_DynamicField">
+                <term>FAQ::Frontend::AgentFAQZoom###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ zoom screen of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentHTMLFieldHeightDefault">
+                <term>FAQ::Frontend::AgentHTMLFieldHeightDefault</term>
+                <listitem>
+                    <para>Set the default height (in pixels) of inline HTML fields in AgentFAQZoom.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '100'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::AgentHTMLFieldHeightMax">
+                <term>FAQ::Frontend::AgentHTMLFieldHeightMax</term>
+                <listitem>
+                    <para>Set the maximum height (in pixels) of inline HTML fields in AgentFAQZoom.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '2500'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Agent_View_FAQZoom_MenuModule">
+        <title>Frontend → Agent → View → FAQZoom → MenuModule</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::MenuModule_000-Back">
+                <term>FAQ::Frontend::MenuModule###000-Back</term>
+                <listitem>
+                    <para>Shows a link in the menu to go back in the FAQ zoom view of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: ''
+Description: Back
+Link: '[% Env("LastScreenOverview") %]'
+Module: Kernel::Output::HTML::FAQMenu::Generic
+Name: Back
+Target: Back
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::MenuModule_010-Edit">
+                <term>FAQ::Frontend::MenuModule###010-Edit</term>
+                <listitem>
+                    <para>Shows a link in the menu to edit a FAQ in the its zoom view of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: AgentFAQEdit
+Description: Edit this FAQ
+Link: Action=AgentFAQEdit;ItemID=[% Data.ItemID | html %];ScreenType=Popup
+Module: Kernel::Output::HTML::FAQMenu::Generic
+Name: Edit
+Target: PopUp
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::MenuModule_020-History">
+                <term>FAQ::Frontend::MenuModule###020-History</term>
+                <listitem>
+                    <para>Shows a link in the menu to access the history of a FAQ in its zoom view of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: AgentFAQHistory
+Description: History of this FAQ
+Link: Action=AgentFAQHistory;ItemID=[% Data.ItemID | html %]
+Module: Kernel::Output::HTML::FAQMenu::Generic
+Name: History
+Target: PopUp
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::MenuModule_030-Print">
+                <term>FAQ::Frontend::MenuModule###030-Print</term>
+                <listitem>
+                    <para>Shows a link in the menu to print a FAQ in the its zoom view of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: AgentFAQPrint
+Description: Print this FAQ
+Link: Action=AgentFAQPrint;ItemID=[% Data.ItemID | html %]
+LinkParam: target="print_FAQ"
+Module: Kernel::Output::HTML::FAQMenu::Generic
+Name: Print
+Target: PopUp
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::MenuModule_040-Link">
+                <term>FAQ::Frontend::MenuModule###040-Link</term>
+                <listitem>
+                    <para>Shows a link in the menu that allows linking a FAQ with another object in the zoom view of such FAQ of the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: AgentLinkObject
+Description: Link another object to this FAQ item
+Link: Action=AgentLinkObject;SourceObject=FAQ;SourceKey=[% Data.ItemID | html %]
+Module: Kernel::Output::HTML::FAQMenu::Generic
+Name: Link
+Target: PopUp
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::MenuModule_050-Delete">
+                <term>FAQ::Frontend::MenuModule###050-Delete</term>
+                <listitem>
+                    <para>Shows a link in the menu that allows to delete a FAQ in its zoom view in the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: AgentFAQDelete
+Description: Delete this FAQ
+Link: Action=AgentFAQDelete;ItemID=[% Data.ItemID | html %]
+Module: Kernel::Output::HTML::FAQMenu::Delete
+Name: Delete
+Target: ConfirmationDialog
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -20652,6 +22693,58 @@ Key: ''
 Label: Dynamic Fields Overview Limit
 Module: Kernel::Output::HTML::Preferences::Generic
 PrefKey: AdminDynamicFieldsOverviewPageShown
+PreferenceGroup: Miscellaneous
+Prio: '8000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PreferencesGroups_FAQJournalOverviewSmallPageShown">
+                <term>PreferencesGroups###FAQJournalOverviewSmallPageShown</term>
+                <listitem>
+                    <para>Parameters for the pages (in which the FAQ items are shown) of the small FAQ journal overview.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Active: '0'
+Data:
+  '10': '10'
+  '15': '15'
+  '20': '20'
+  '25': '25'
+  '30': '30'
+  '35': '35'
+DataSelected: '25'
+Desc: Select how many items should be shown in Journal Overview "Small" by default.
+Key: Limit.
+Label: FAQ Journal Overview "Small" Limit
+Module: Kernel::Output::HTML::Preferences::Generic
+PrefKey: UserFAQJournalOverviewSmallPageShown
+PreferenceGroup: Miscellaneous
+Prio: '8000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PreferencesGroups_FAQOverviewSmallPageShown">
+                <term>PreferencesGroups###FAQOverviewSmallPageShown</term>
+                <listitem>
+                    <para>Parameters for the pages (in which the FAQ items are shown) of the small FAQ overview.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Active: '0'
+Data:
+  '10': '10'
+  '15': '15'
+  '20': '20'
+  '25': '25'
+  '30': '30'
+  '35': '35'
+DataSelected: '25'
+Desc: Select how many items should be shown in Overview "Small" by default.
+Key: Limit.
+Label: FAQ Overview "Small" Limit
+Module: Kernel::Output::HTML::Preferences::Generic
+PrefKey: UserFAQOverviewSmallPageShown
 PreferenceGroup: Miscellaneous
 Prio: '8000'
 ]]></programlisting>
@@ -25989,28 +28082,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Body">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Body</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Cc">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Cc</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_CustomerID">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###CustomerID</term>
                 <listitem>
@@ -26044,8 +28115,19 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_From">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###From</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>This setting can be overridden in the user preferences.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Body">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Body</term>
                 <listitem>
                     <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -26055,11 +28137,44 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Cc">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Cc</term>
                 <listitem>
                     <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>This setting can be overridden in the user preferences.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_From">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_From</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Subject">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Subject</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_To">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_To</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -26117,17 +28232,6 @@ Type: '1'
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Subject">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Subject</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -26233,17 +28337,6 @@ Type: '1'
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Title">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###Title</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_To">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###To</term>
                 <listitem>
                     <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -28269,6 +30362,18 @@ Standard: '1'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Agent::CommonCSS_200-FAQ">
+                <term>Loader::Agent::CommonCSS###200-FAQ</term>
+                <listitem>
+                    <para>CSS fájlok listája, amelyek mindig betöltődnek az ügyintézői felületnél.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- Core.Agent.FAQ.Default.css
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Agent::CommonJS_000-Framework">
                 <term>Loader::Agent::CommonJS###000-Framework</term>
                 <listitem>
@@ -28384,6 +30489,18 @@ Standard: '1'
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 - Core.Agent.DynamicFieldContactWithDataSearch.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Agent::CommonJS_200-FAQ">
+                <term>Loader::Agent::CommonJS###200-FAQ</term>
+                <listitem>
+                    <para>JS fájlok listája, amelyek mindig betöltődnek az ügyintézői felületnél.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- Core.Agent.FAQ.TicketCompose.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -28803,6 +30920,24 @@ URL3:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Output::OutputFilterTextAutoLink_FAQ">
+                <term>Frontend::Output::OutputFilterTextAutoLink###FAQ</term>
+                <listitem>
+                    <para>A filter for HTML output to add links behind a defined string. The element Image allows two input kinds. First the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possibility is to insert the link to the image.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+RegExp:
+- (FAQ)[#\s]*?1(\d{4})
+URL1:
+  Description: FAQ
+  Image: /otrs-web/skins/Agent/default/img/help-small.png
+  Target: _blank
+  URL: /otrs/index.pl?Action=AgentFAQZoom;ItemID=<MATCH2>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Output::OutputFilterTextAutoLink_MSBulletins">
                 <term>Frontend::Output::OutputFilterTextAutoLink###MSBulletins</term>
                 <listitem>
@@ -28946,6 +31081,18 @@ Module: Kernel::Output::HTML::HeaderMeta::Refresh
                         <programlisting><![CDATA[---
 Action: CustomerTicketSearch
 Module: Kernel::Output::HTML::HeaderMeta::CustomerTicketSearch
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::HeaderMetaModule_3-FAQSearch">
+                <term>CustomerFrontend::HeaderMetaModule###3-FAQSearch</term>
+                <listitem>
+                    <para>Module to generate HTML OpenSearch profile for short FAQ search in the customer interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: CustomerFAQSearch
+Module: Kernel::Output::HTML::HeaderMeta::CustomerFAQSearch
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -29172,6 +31319,19 @@ URL: skins/Customer/default/img/logo.png
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Customer::StateTypes">
+                <term>FAQ::Customer::StateTypes</term>
+                <listitem>
+                    <para>List of state types which can be used in the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- external
+- public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_1-GoogleMaps">
                 <term>Frontend::CustomerUser::Item###1-GoogleMaps</term>
                 <listitem>
@@ -29383,6 +31543,72 @@ Title: Welcome!
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Customer_FAQOverview">
+        <title>Frontend → Customer → FAQOverview</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQOverview_DynamicField">
+                <term>FAQ::Frontend::CustomerFAQOverview###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ overview screen of the customer interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Customer_FAQRelatedArticles">
+        <title>Frontend → Customer → FAQRelatedArticles</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_DefaultLanguages">
+                <term>FAQ::Frontend::CustomerFAQRelatedArticles###DefaultLanguages</term>
+                <listitem>
+                    <para>The default languages for the related FAQ articles.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_QueuesEnabled">
+                <term>FAQ::Frontend::CustomerFAQRelatedArticles###QueuesEnabled</term>
+                <listitem>
+                    <para>List of queue names for which the related article feature is enabled.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- Raw
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_ShowLimit">
+                <term>FAQ::Frontend::CustomerFAQRelatedArticles###ShowLimit</term>
+                <listitem>
+                    <para>Output limit for the related FAQ articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '10'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_VoteStarsVisible">
+                <term>FAQ::Frontend::CustomerFAQRelatedArticles###VoteStarsVisible</term>
+                <listitem>
+                    <para>Show the stars for the articles with a rating equal or greater like the defined value (set value '0' to deactivate the output).</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '4'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Customer_FrontendNotification">
         <title>Frontend → Customer → FrontendNotification</title>
         <variablelist>
@@ -29509,6 +31735,81 @@ Group: []
 GroupRo: []
 NavBarName: ''
 Title: Chat Download
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQExplorer">
+                <term>CustomerFrontend::Module###CustomerFAQExplorer</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyfélfelülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Customer FAQ.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQPrint">
+                <term>CustomerFrontend::Module###CustomerFAQPrint</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyfélfelülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Customer FAQ Print.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQRelatedArticles">
+                <term>CustomerFrontend::Module###CustomerFAQRelatedArticles</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyfélfelülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Customer FAQ Related Articles.
+Group: []
+GroupRo: []
+NavBarName: ''
+Title: Customer FAQ Related Articles
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQSearch">
+                <term>CustomerFrontend::Module###CustomerFAQSearch</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyfélfelülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Customer FAQ search.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: Search FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQZoom">
+                <term>CustomerFrontend::Module###CustomerFAQZoom</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyfélfelülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Customer FAQ Zoom.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -29735,6 +32036,63 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerFAQExplorer_002-FAQ">
+                <term>Loader::Module::CustomerFAQExplorer###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Customer.FAQ.Detail.css
+- Core.Customer.FAQ.Default.css
+- Core.Customer.FAQ.Widget.css
+JavaScript:
+- Core.Customer.FAQ.FAQZoom.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerFAQSearch_002-FAQ">
+                <term>Loader::Module::CustomerFAQSearch###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerFAQZoom_002-FAQ">
+                <term>Loader::Module::CustomerFAQZoom###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Customer.FAQ.Detail.css
+- Core.Customer.FAQ.Default.css
+- Core.Customer.FAQZoom.css
+JavaScript:
+- Core.Customer.FAQ.FAQZoom.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-FAQ">
+                <term>Loader::Module::CustomerTicketMessage###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Customer.FAQ.RelatedArticles.css
+- Core.Customer.FAQ.Default.css
+JavaScript:
+- Core.Customer.FAQ.RelatedArticles.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
                 <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
                 <listitem>
@@ -29832,6 +32190,59 @@ JavaScript:
   Name: Create new chat
   NavBar: Chat
   Prio: '202'
+  Type: Submenu
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerFAQExplorer_002-FAQ">
+                <term>CustomerFrontend::Navigation###CustomerFAQExplorer###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: ''
+  Block: ''
+  Description: FAQ
+  Group: []
+  GroupRo: []
+  Link: Action=CustomerFAQExplorer
+  LinkOption: ''
+  Name: FAQ
+  NavBar: FAQ
+  Prio: '700'
+  Type: Menu
+- AccessKey: x
+  Block: ''
+  Description: FAQ Explorer
+  Group: []
+  GroupRo: []
+  Link: Action=CustomerFAQExplorer
+  LinkOption: ''
+  Name: FAQ Explorer
+  NavBar: FAQ
+  Prio: '710'
+  Type: Submenu
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerFAQSearch_002-FAQ">
+                <term>CustomerFrontend::Navigation###CustomerFAQSearch###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: f
+  Block: ''
+  Description: Search
+  Group: []
+  GroupRo: []
+  Link: Action=CustomerFAQSearch
+  LinkOption: ''
+  Name: Search
+  NavBar: FAQ
+  Prio: '780'
   Type: Submenu
 ]]></programlisting>
                     </para>
@@ -29950,6 +32361,202 @@ JavaScript:
   NavBar: Ticket
   Prio: '300'
   Type: Submenu
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Customer_View_FAQExplorer">
+        <title>Frontend → Customer → View → FAQExplorer</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_Order::Default">
+                <term>FAQ::Frontend::CustomerFAQExplorer###Order::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ order in the FAQ Explorer result of the customer interface. Up: oldest on top. Down: latest on top.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Down
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_SearchLimit">
+                <term>FAQ::Frontend::CustomerFAQExplorer###SearchLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the FAQ Explorer result of the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_SearchPageShown">
+                <term>FAQ::Frontend::CustomerFAQExplorer###SearchPageShown</term>
+                <listitem>
+                    <para>Number of FAQ articles to be displayed in the FAQ Explorer of the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '40'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_SortBy::Default">
+                <term>FAQ::Frontend::CustomerFAQExplorer###SortBy::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ attribute for FAQ sorting in the FAQ Explorer of the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_TitleSize">
+                <term>FAQ::Frontend::CustomerFAQExplorer###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Explorer in the customer interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Customer_View_FAQPrint">
+        <title>Frontend → Customer → View → FAQPrint</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQPrint_DynamicField">
+                <term>FAQ::Frontend::CustomerFAQPrint###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ print screen of the customer interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Customer_View_FAQSearch">
+        <title>Frontend → Customer → View → FAQSearch</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_DynamicField">
+                <term>FAQ::Frontend::CustomerFAQSearch###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ search screen of the customer interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_Order::Default">
+                <term>FAQ::Frontend::CustomerFAQSearch###Order::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ order of a search result in the customer interface. Up: oldest on top. Down: latest on top.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Down
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SearchCSVDynamicField">
+                <term>FAQ::Frontend::CustomerFAQSearch###SearchCSVDynamicField</term>
+                <listitem>
+                    <para>Dinamikus mezők, amelyek a keresési eredmények CSV formátumba való exportálásához használhatók.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SearchLimit">
+                <term>FAQ::Frontend::CustomerFAQSearch###SearchLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the result of a search in the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SearchPageShown">
+                <term>FAQ::Frontend::CustomerFAQSearch###SearchPageShown</term>
+                <listitem>
+                    <para>Number of FAQ articles to be displayed on each page of a search result in the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '40'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SortBy::Default">
+                <term>FAQ::Frontend::CustomerFAQSearch###SortBy::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ attribute for FAQ sorting in a FAQ search of the customer interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_TitleSize">
+                <term>FAQ::Frontend::CustomerFAQSearch###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Search in the customer interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Customer_View_FAQZoom">
+        <title>Frontend → Customer → View → FAQZoom</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQZoom_DynamicField">
+                <term>FAQ::Frontend::CustomerFAQZoom###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ zoom screen of the customer interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerHTMLFieldHeightDefault">
+                <term>FAQ::Frontend::CustomerHTMLFieldHeightDefault</term>
+                <listitem>
+                    <para>Set the default height (in pixels) of inline HTML fields in CustomerFAQZoom (and PublicFAQZoom).</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '100'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerHTMLFieldHeightMax">
+                <term>FAQ::Frontend::CustomerHTMLFieldHeightMax</term>
+                <listitem>
+                    <para>Set the maximum height (in pixels) of inline HTML fields in CustomerFAQZoom (and PublicFAQZoom).</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '2500'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31229,13 +33836,53 @@ Type: '0'
     <section id="ConfigReference_Section_Frontend_Public">
         <title>Frontend → Public</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Public::StateTypes">
+                <term>FAQ::Public::StateTypes</term>
+                <listitem>
+                    <para>List of state types which can be used in the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_PublicFrontend::CommonParam_Action">
                 <term>PublicFrontend::CommonParam###Action</term>
                 <listitem>
-                    <para>Meghatározza a nyilvános előtétprogram művelet paraméterének alapértelmezett értékét. Ezt a művelet paramétert használják a rendszer parancsfájljaiban.</para>
+                    <para>Default value for the Action parameter for the public frontend. The Action parameter is used in the scripts of the system.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- PublicDefault
+                        <programlisting><![CDATA[--- PublicFAQExplorer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::HeaderMetaModule_3-FAQSearch">
+                <term>PublicFrontend::HeaderMetaModule###3-FAQSearch</term>
+                <listitem>
+                    <para>Module to generate HTML OpenSearch profile for short FAQ search in the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Action: PublicFAQSearch
+Module: Kernel::Output::HTML::HeaderMeta::PublicFAQSearch
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Public_FAQOverview">
+        <title>Frontend → Public → FAQOverview</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQOverview_DynamicField">
+                <term>FAQ::Frontend::PublicFAQOverview###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ overview screen of the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31257,6 +33904,60 @@ CSS:
 JavaScript:
 - Core.Customer.Chat.js
 - Core.Public.Chat.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQExplorer_002-FAQ">
+                <term>Loader::Module::PublicFAQExplorer###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Customer.FAQ.Detail.css
+- Core.Customer.FAQ.Default.css
+- Core.Customer.FAQ.Widget.css
+JavaScript:
+- Core.Customer.FAQ.FAQZoom.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQRSS_002-FAQ">
+                <term>Loader::Module::PublicFAQRSS###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQSearch_002-FAQ">
+                <term>Loader::Module::PublicFAQSearch###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Customer.FAQ.Default.css
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQZoom_002-FAQ">
+                <term>Loader::Module::PublicFAQZoom###002-FAQ</term>
+                <listitem>
+                    <para>Loader module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Customer.FAQ.Default.css
+- Core.Customer.FAQ.Detail.css
+- Core.Customer.FAQZoom.css
+JavaScript:
+- Core.Customer.FAQ.FAQZoom.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31306,6 +34007,95 @@ Title: PublicDefault
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQ">
+                <term>PublicFrontend::Module###PublicFAQ</term>
+                <listitem>
+                    <para>Frontend module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Public FAQ Zoom.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQExplorer">
+                <term>PublicFrontend::Module###PublicFAQExplorer</term>
+                <listitem>
+                    <para>Frontend module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Public FAQ.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQPrint">
+                <term>PublicFrontend::Module###PublicFAQPrint</term>
+                <listitem>
+                    <para>Frontend module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Public FAQ Print.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQRSS">
+                <term>PublicFrontend::Module###PublicFAQRSS</term>
+                <listitem>
+                    <para>Frontend module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Public FAQ.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQSearch">
+                <term>PublicFrontend::Module###PublicFAQSearch</term>
+                <listitem>
+                    <para>Frontend module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Public FAQ search.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: Search FAQ
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQZoom">
+                <term>PublicFrontend::Module###PublicFAQZoom</term>
+                <listitem>
+                    <para>Frontend module registration for the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Public FAQ Zoom.
+Group: []
+GroupRo: []
+NavBarName: FAQ
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
                 <term>PublicFrontend::Module###PublicRepository</term>
                 <listitem>
@@ -31338,6 +34128,222 @@ Title: PublicRepository
   NavBar: ''
   Prio: '400'
   Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Navigation_PublicFAQExplorer_002-FAQ">
+                <term>PublicFrontend::Navigation###PublicFAQExplorer###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: x
+  Block: ''
+  Description: FAQ Area
+  Group: []
+  GroupRo: []
+  Link: Action=PublicFAQExplorer
+  LinkOption: ''
+  Name: FAQ
+  NavBar: ''
+  Prio: '400'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PublicFrontend::Navigation_PublicFAQSearch_002-FAQ">
+                <term>PublicFrontend::Navigation###PublicFAQSearch###002-FAQ</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- AccessKey: ''
+  Block: ''
+  Description: FAQ Area
+  Group: []
+  GroupRo: []
+  Link: Action=PublicFAQSearch
+  LinkOption: ''
+  Name: Search FAQ
+  NavBar: ''
+  Prio: '600'
+  Type: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Public_View_FAQExplorer">
+        <title>Frontend → Public → View → FAQExplorer</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_Order::Default">
+                <term>FAQ::Frontend::PublicFAQExplorer###Order::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ order in the FAQ Explorer result of the public interface. Up: oldest on top. Down: latest on top.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Down
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_SearchLimit">
+                <term>FAQ::Frontend::PublicFAQExplorer###SearchLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the FAQ Explorer result of the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_SearchPageShown">
+                <term>FAQ::Frontend::PublicFAQExplorer###SearchPageShown</term>
+                <listitem>
+                    <para>Number of FAQ articles to be displayed in the FAQ Explorer of the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '40'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_SortBy::Default">
+                <term>FAQ::Frontend::PublicFAQExplorer###SortBy::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ attribute for FAQ sorting in the FAQ Explorer of the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_TitleSize">
+                <term>FAQ::Frontend::PublicFAQExplorer###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Explorer in the public interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Public_View_FAQPrint">
+        <title>Frontend → Public → View → FAQPrint</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQPrint_DynamicField">
+                <term>FAQ::Frontend::PublicFAQPrint###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ print screen of the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Public_View_FAQSearch">
+        <title>Frontend → Public → View → FAQSearch</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_DynamicField">
+                <term>FAQ::Frontend::PublicFAQSearch###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ search screen of the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_Order::Default">
+                <term>FAQ::Frontend::PublicFAQSearch###Order::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ order of a search result in the public interface. Up: oldest on top. Down: latest on top.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- Down
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SearchCSVDynamicField">
+                <term>FAQ::Frontend::PublicFAQSearch###SearchCSVDynamicField</term>
+                <listitem>
+                    <para>Dinamikus mezők, amelyek a keresési eredmények CSV formátumba való exportálásához használhatók.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SearchLimit">
+                <term>FAQ::Frontend::PublicFAQSearch###SearchLimit</term>
+                <listitem>
+                    <para>Maximum number of FAQ articles to be displayed in the result of a search in the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '200'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SearchPageShown">
+                <term>FAQ::Frontend::PublicFAQSearch###SearchPageShown</term>
+                <listitem>
+                    <para>Number of FAQ articles to be displayed on each page of a search result in the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '40'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SortBy::Default">
+                <term>FAQ::Frontend::PublicFAQSearch###SortBy::Default</term>
+                <listitem>
+                    <para>Defines the default FAQ attribute for FAQ sorting in a FAQ search of the public interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FAQID
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_TitleSize">
+                <term>FAQ::Frontend::PublicFAQSearch###TitleSize</term>
+                <listitem>
+                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Search in the public interface.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '50'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_Public_View_FAQZoom">
+        <title>Frontend → Public → View → FAQZoom</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQZoom_DynamicField">
+                <term>FAQ::Frontend::PublicFAQZoom###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the FAQ zoom screen of the public interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31536,6 +34542,58 @@ ConfigDialog: AdminGenericInterfaceMappingXSLT
     <section id="ConfigReference_Section_GenericInterface_Operation_ModuleRegistration">
         <title>GenericInterface → Operation → ModuleRegistration</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_FAQ::LanguageList">
+                <term>GenericInterface::Operation::Module###FAQ::LanguageList</term>
+                <listitem>
+                    <para>Általános felület modul regisztráció a műveleti réteghez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+ConfigDialog: AdminGenericInterfaceOperationDefault
+Controller: FAQ
+Name: LanguageList
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_FAQ::PublicCategoryList">
+                <term>GenericInterface::Operation::Module###FAQ::PublicCategoryList</term>
+                <listitem>
+                    <para>Általános felület modul regisztráció a műveleti réteghez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+ConfigDialog: AdminGenericInterfaceOperationDefault
+Controller: FAQ
+Name: PublicCategoryList
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_FAQ::PublicFAQGet">
+                <term>GenericInterface::Operation::Module###FAQ::PublicFAQGet</term>
+                <listitem>
+                    <para>Általános felület modul regisztráció a műveleti réteghez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+ConfigDialog: AdminGenericInterfaceOperationDefault
+Controller: FAQ
+Name: PublicFAQGet
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_FAQ::PublicFAQSearch">
+                <term>GenericInterface::Operation::Module###FAQ::PublicFAQSearch</term>
+                <listitem>
+                    <para>Általános felület modul regisztráció a műveleti réteghez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+ConfigDialog: AdminGenericInterfaceOperationDefault
+Controller: FAQ
+Name: PublicFAQSearch
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_GenericInterface::Operation::Module_Generic::RPC">
                 <term>GenericInterface::Operation::Module###Generic::RPC</term>
                 <listitem>
