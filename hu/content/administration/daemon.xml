@@ -23,7 +23,7 @@ együttműködni más OTRS démonokkal a különböző előtétprogram kiszolgá
 egy fürtözött környezetben.
     </para>
     <para>
-        When idle OTRS Daemon consist in six processes:
+        Amikor üresjáratban van, akkor az OTRS démon hat folyamatból áll:
         <itemizedlist mark="round">
             <listitem>
                 <para>
@@ -102,20 +102,21 @@ a feladat kezeléséhez.
             </listitem>
             <listitem>
                 <para>
-                    System Configuration sync manager daemon
+                    Rendszerbeállítások szinkronizálását kezelő démon
 (<filename>Kernel/System/Daemon/DaemonModules/SystemConfigurationSyncManager.pm</filename>)
                 </para>
                 <para>
-                    This daemon verifies that the configuration file
-<filename>Kernel/Config/Files/ZZZAAuto.pm</filename> is up to date with the
-deployment information from the database, otherwise the file is updated. and
-signal the main daemon to restart all daemon modules with the updated
-configuration.
+                    Ez a démon ellenőrzi, hogy a
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename> beállítófájl
+naprakész-e az adatbázisból érkező üzembe állítási információkkal. Egyébként
+frissíti a fájlt, és jelzi a fő démonnak, hogy indítsa újra az összes
+démonmodult a frissített beállításokkal.
                 </para>
                 <para>
-                    Additionally if any other .pm file in
-<filename>Kernel/Config/Files/</filename> is modified while the daemon is
-running, it will also signal the main daemon to restart all daemon modules.
+                    Továbbá ha bármely más .pm fájl módosítva lett a
+<filename>Kernel/Config/Files/</filename> mappában a démon futása alatt,
+akkor szintén jelezni fogja a fő démonnak, hogy indítsa újra az összes
+démonmodult.
                 </para>
             </listitem>
         </itemizedlist>
