@@ -544,7 +544,7 @@ Name: DynamicField_%s
             <varlistentry id="ConfigReference_Setting_Customer::AuthModule::HTTPBasicAuth::Replace">
                 <term>Customer::AuthModule::HTTPBasicAuth::Replace</term>
                 <listitem>
-                    <para>Wenn "HTTPBasicAuth" als Customer::AuthModule ausgewählt ist, können Sie hier angeben, ob führende Teile von Benutzernamen (z.B. zur Umwandlung von Domänen wie "example_domain\user" zu "user").</para>
+                    <para>Wenn "HTTPBasicAuth" als Customer::AuthModule festgelegt wurde, können Sie festlegen, ob Teile am Anfang des Benutzernamens entfernt werden sollen (z. B. um die Domain aus Nutzernamen wie example_domain\user zu entfernen).</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- example_domain\\
@@ -805,7 +805,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InBackend">
                 <term>Cache::InBackend</term>
                 <listitem>
-                    <para>If enabled, the cache data will be stored in cache backend.</para>
+                    <para>Wenn aktiviert, werden Cache-Daten im Cache Backend gespeichert.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
@@ -816,7 +816,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_Cache::InMemory">
                 <term>Cache::InMemory</term>
                 <listitem>
-                    <para>If enabled, the cache data be held in memory.</para>
+                    <para>Wenn aktiviert, werden Cache-Daten im Speicher gehalten.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
@@ -2570,6 +2570,25 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_LinkObject">
+        <title>Core → Event → LinkObject</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_LinkObject::EventModulePost_9900-GenericInterface">
+                <term>LinkObject::EventModulePost###9900-GenericInterface</term>
+                <listitem>
+                    <para>Führt die konfigurierte Aktion für jedes Ereignis für jeden konfigurierten Webservice aus (als Invoker).</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::GenericInterface::Event::Handler
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_Package">
         <title>Core → Event → Package</title>
         <variablelist>
@@ -3247,6 +3266,16 @@ ItemMaxAttempts: '3'
                 <listitem>
                     <para>If this setting is enabled, local modifications will not be highlighted as errors in the package manager and support data collector.</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::AllowNotVerifiedPackages">
+                <term>Package::AllowNotVerifiedPackages</term>
+                <listitem>
+                    <para>If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -8836,7 +8865,7 @@ TaskName: TicketDraftDeleteExpired
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_TicketNumberCounterCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###TicketNumberCounterCleanup</term>
                 <listitem>
-                    <para>Entfernt veraltete Ticketnummern-Zähler (Sonntagmorgens).</para>
+                    <para>Removes old ticket number counters (each 10 minutes).</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
@@ -13465,7 +13494,7 @@ Prio: '120'
                     <para>The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
-StyleHeight: 70px
+StyleHeight: 60px
 URL: skins/Agent/default/img/loginlogo_default.png
 ]]></programlisting>
                     </para>
@@ -13478,9 +13507,9 @@ URL: skins/Agent/default/img/loginlogo_default.png
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13494,9 +13523,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13508,10 +13537,10 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
-StyleHeight: 45px
-StyleRight: 45px
-StyleTop: 10px
-StyleWidth: 220px
+StyleHeight: 55px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13524,9 +13553,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13719,10 +13748,21 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Gravatar::ArticleDefaultImage">
+                <term>Frontend::Gravatar::ArticleDefaultImage</term>
+                <listitem>
+                    <para>Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check http://gravatar.com/site/implement/images/ for further information.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- mm
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Gravatar::DefaultImage">
                 <term>Frontend::Gravatar::DefaultImage</term>
                 <listitem>
-                    <para>Define which avatar default image should be used for the current agent if no gravatar is assigned to the mail address of the agent. Check http://gravatar.com/site/implement/images/ for further information.</para>
+                    <para>Definiert welches Avatar Standardbild für den aktuellen Agent verwendet werden soll, wenn kein Gravatar für die Mailadresse des Agents zugeordnet ist. Siehe http://gravatar.com/site/implement/images/ für weitere Informationen.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- mm
@@ -13834,7 +13874,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_NotificationBodyLostPassword">
                 <term>NotificationBodyLostPassword</term>
                 <listitem>
-                    <para>Defines the body text for notification mails sent to agents, about new password.</para>
+                    <para>Definiert den Text im Hauptteil für Benachrichtigungs-Emails an Agenten betreffend dem neuen Passwort.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nHere's your new OTRS password.\n\nNew password:
@@ -14414,6 +14454,18 @@ Module: Kernel::Output::HTML::Notification::AgentTimeZoneCheck
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::Notification::DaemonCheck
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_8000-PackageManager-CheckNotVerifiedPackages">
+                <term>Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages</term>
+                <listitem>
+                    <para>Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -23915,28 +23967,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Body">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Body</term>
-                <listitem>
-                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
-                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Cc">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Cc</term>
-                <listitem>
-                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
-                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_CustomerID">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###CustomerID</term>
                 <listitem>
@@ -23970,8 +24000,19 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_From">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###From</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
+                    <para>Diese Einstellung kann in den Benutzereinstellungen überschrieben werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Body">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Body</term>
                 <listitem>
                     <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
@@ -23981,11 +24022,44 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Cc">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Cc</term>
                 <listitem>
                     <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
-                    <para>Diese Einstellung kann in den Benutzereinstellungen überschrieben werden.</para>
+                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_From">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_From</term>
+                <listitem>
+                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
+                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Subject">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Subject</term>
+                <listitem>
+                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
+                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_To">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_To</term>
+                <listitem>
+                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
+                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -24043,17 +24117,6 @@ Type: '1'
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Subject">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Subject</term>
-                <listitem>
-                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
-                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -24159,17 +24222,6 @@ Type: '1'
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Title">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###Title</term>
-                <listitem>
-                    <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
-                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_To">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###To</term>
                 <listitem>
                     <para>Definiert die standardmäßig angezeigten Ticketsuchattribute für die Ticketsuche.</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
@@ -25224,7 +25276,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_400-Owner">
                 <term>Ticket::Frontend::MenuModule###400-Owner</term>
                 <listitem>
-                    <para>Zeigt einen Link zum Anzeigen des Besitzers eines Tickets im Ticket-Zoom des Agentenbereichs an. Zusätzliche Zugriffskontrolle auf diesen Link kann durch Angabe von "Group" als Schlüssel und Inhalten wie "rw:group1;move_into:group2" als Wert konfiguriert werden. Um Elemente des Ticketmenüs zu gruppieren, kann "ClusterName" als Schlüssel und ein beliebiger Name als Wert verwendet werden, unter dem diese Gruppe im Benutzer interface angezeigt werden soll. Verwenden Sie "ClusterPriority", um die Anzeigereihenfolge der verschiedenen Gruppen innerhalb des Ticketmenüs zu steuern.</para>
+                    <para>Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Action: AgentTicketOwner
@@ -25243,7 +25295,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_410-Responsible">
                 <term>Ticket::Frontend::MenuModule###410-Responsible</term>
                 <listitem>
-                    <para>Zeigt einen Link zum Anzeigen des verantwortlichen Agenten eines Tickets im Ticket-Zoom des Agentenbereichs an. Zusätzliche Zugriffskontrolle auf diesen Link kann durch Angabe von "Group" als Schlüssel und Inhalten wie "rw:group1;move_into:group2" als Wert konfiguriert werden. Um Elemente des Ticketmenüs zu gruppieren, kann "ClusterName" als Schlüssel und ein beliebiger Name als Wert verwendet werden, unter dem diese Gruppe im Benutzer interface angezeigt werden soll. Verwenden Sie "ClusterPriority", um die Anzeigereihenfolge der verschiedenen Gruppen innerhalb des Ticketmenüs zu steuern.</para>
+                    <para>Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Action: AgentTicketResponsible
@@ -25262,7 +25314,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Customer">
                 <term>Ticket::Frontend::MenuModule###420-Customer</term>
                 <listitem>
-                    <para>Zeigt einen Link zum Anzeigen des Kunden, der das Ticket eröffnet hat im Ticket-Zoom des Agentenbereichs an. Zusätzliche Zugriffskontrolle auf diesen Link kann durch Angabe von "Group" als Schlüssel und Inhalten wie "rw:group1;move_into:group2" als Wert konfiguriert werden. Um Elemente des Ticketmenüs zu gruppieren, kann "ClusterName" als Schlüssel und ein beliebiger Name als Wert verwendet werden, unter dem diese Gruppe im Benutzer interface angezeigt werden soll. Verwenden Sie "ClusterPriority", um die Anzeigereihenfolge der verschiedenen Gruppen innerhalb des Ticketmenüs zu steuern.</para>
+                    <para>Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Action: AgentTicketCustomer
@@ -25300,7 +25352,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_425-Phone_Call_Outbound">
                 <term>Ticket::Frontend::MenuModule###425-Phone Call Outbound</term>
                 <listitem>
-                    <para>Zeigt einen Link zum Hinzufügen einer Notiz zu einem Ticket im Ticket-Zoom des Agentenbereichs an. Zusätzliche Zugriffskontrolle auf diesen Link kann durch Angabe von "Group" als Schlüssel und Inhalten wie "rw:group1;move_into:group2" als Wert konfiguriert werden. Um Elemente des Ticketmenüs zu gruppieren, kann "ClusterName" als Schlüssel und ein beliebiger Name als Wert verwendet werden, unter dem diese Gruppe im Benutzer interface angezeigt werden soll. Verwenden Sie "ClusterPriority", um die Anzeigereihenfolge der verschiedenen Gruppen innerhalb des Ticketmenüs zu steuern.</para>
+                    <para>Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneOutbound
@@ -25319,7 +25371,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_426-Phone_Call_Inbound">
                 <term>Ticket::Frontend::MenuModule###426-Phone Call Inbound</term>
                 <listitem>
-                    <para>Zeigt einen Link zum Hinzufügen einer Notiz zu einem Ticket im Ticket-Zoom des Agentenbereichs an. Zusätzliche Zugriffskontrolle auf diesen Link kann durch Angabe von "Group" als Schlüssel und Inhalten wie "rw:group1;move_into:group2" als Wert konfiguriert werden. Um Elemente des Ticketmenüs zu gruppieren, kann "ClusterName" als Schlüssel und ein beliebiger Name als Wert verwendet werden, unter dem diese Gruppe im Benutzer interface angezeigt werden soll. Verwenden Sie "ClusterPriority", um die Anzeigereihenfolge der verschiedenen Gruppen innerhalb des Ticketmenüs zu steuern.</para>
+                    <para>Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneInbound
@@ -26784,10 +26836,10 @@ Value: Ticket::CustomerID::Other
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
-StyleHeight: 50px
+StyleHeight: 45px
 StyleRight: 25px
-StyleTop: 2px
-StyleWidth: 135px
+StyleTop: 9px
+StyleWidth: 300px
 URL: skins/Customer/default/img/logo.png
 ]]></programlisting>
                     </para>
@@ -26818,7 +26870,7 @@ URL: skins/Customer/default/img/logo.png
             <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPassword">
                 <term>CustomerPanelBodyLostPassword</term>
                 <listitem>
-                    <para>Defines the body text for notification mails sent to customers, about new password.</para>
+                    <para>Definiert den Text im Hauptteil für Benachrichtigungs-Emails an Kunden betreffend dem neuen Passwort.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nNew password: <OTRS_NEWPW>\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl\n
@@ -27265,7 +27317,7 @@ Module: Kernel::Output::HTML::Notification::CustomerUserTimeZoneCheck
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_AjaxAttachment">
                 <term>CustomerFrontend::Module###AjaxAttachment</term>
                 <listitem>
-                    <para>Frontend-Modulregistrierung im Agent-Interface.</para>
+                    <para>Frontend-Modulregistrierung für den Kundenbereich.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Description: AjaxAttachment
@@ -27478,7 +27530,7 @@ Module: Kernel::Output::HTML::NavBar::CustomerTicketProcess
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
                 <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
                 <listitem>
-                    <para>Loader-Modulregistrierung für die Agentenoberfläche.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27490,7 +27542,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketProcess_002-ProcessManagement">
                 <term>Loader::Module::CustomerTicketProcess###002-ProcessManagement</term>
                 <listitem>
-                    <para>Loader-Modulregistrierung für die Agentenoberfläche.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 CSS:
@@ -27506,7 +27558,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketSearch_002-Ticket">
                 <term>Loader::Module::CustomerTicketSearch###002-Ticket</term>
                 <listitem>
-                    <para>Loader-Modulregistrierung für die Agentenoberfläche.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27518,7 +27570,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketZoom_002-Ticket">
                 <term>Loader::Module::CustomerTicketZoom###002-Ticket</term>
                 <listitem>
-                    <para>Loader-Modulregistrierung für die Agentenoberfläche.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27978,7 +28030,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
                 <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
                 <listitem>
-                    <para>Ermöglicht es Kunden, die Ticket-Queue in der Kunden-Oberfläche zu setzen . Wenn dieser Wert auf 'Nein' steht, sollte der Wert 'QueueDefault' konfiguriert werden.</para>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
@@ -28064,7 +28116,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
                 <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
                 <listitem>
-                    <para>Ermöglicht es Kunden, den Ticket-Typ im Kunden-Interface zu setzen. Wenn dieser Wert auf 'Nein' steht, sollte der Wert 'TicketTypeDefault' konfiguriert werden.</para>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
@@ -28505,7 +28557,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicCalendar">
                 <term>PublicFrontend::Module###PublicCalendar</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontendmodul-Registrierung für das Public-Interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Description: Public calendar.
@@ -28520,7 +28572,7 @@ Title: Public Calendar
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicDefault">
                 <term>PublicFrontend::Module###PublicDefault</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontendmodul-Registrierung für das Public-Interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Description: PublicDefault
@@ -28535,7 +28587,7 @@ Title: PublicDefault
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
                 <term>PublicFrontend::Module###PublicRepository</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontendmodul-Registrierung für das Public-Interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Description: PublicRepository
@@ -28550,7 +28602,7 @@ Title: PublicRepository
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicSupportDataCollector">
                 <term>PublicFrontend::Module###PublicSupportDataCollector</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontendmodul-Registrierung für das Public-Interface.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Description: PublicSupportDataCollector

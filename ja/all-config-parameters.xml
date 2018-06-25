@@ -2571,6 +2571,25 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_LinkObject">
+        <title>Core → Event → LinkObject</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_LinkObject::EventModulePost_9900-GenericInterface">
+                <term>LinkObject::EventModulePost###9900-GenericInterface</term>
+                <listitem>
+                    <para>Performs the configured action for each event (as an Invoker) for each configured web service.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::GenericInterface::Event::Handler
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_Package">
         <title>Core → Event → Package</title>
         <variablelist>
@@ -3248,6 +3267,16 @@ ItemMaxAttempts: '3'
                 <listitem>
                     <para>If this setting is enabled, local modifications will not be highlighted as errors in the package manager and support data collector.</para>
                     <para>この設定は標準では有効ではありません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::AllowNotVerifiedPackages">
+                <term>Package::AllowNotVerifiedPackages</term>
+                <listitem>
+                    <para>If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -4262,7 +4291,7 @@ PhoneCall: Phone call
             <varlistentry id="ConfigReference_Setting_Ticket::CustomerArchiveSystem">
                 <term>Ticket::CustomerArchiveSystem</term>
                 <listitem>
-                    <para>Activates the ticket archive system search in the customer interface.</para>
+                    <para>カスタマー・インターフェースでチケット・アーカイブ・システムの検索を有効化します。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -8837,7 +8866,7 @@ TaskName: TicketDraftDeleteExpired
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_TicketNumberCounterCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###TicketNumberCounterCleanup</term>
                 <listitem>
-                    <para>Removes old ticket number counters (Sunday mornings).</para>
+                    <para>Removes old ticket number counters (each 10 minutes).</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -13466,7 +13495,7 @@ Prio: '120'
                     <para>The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
-StyleHeight: 70px
+StyleHeight: 60px
 URL: skins/Agent/default/img/loginlogo_default.png
 ]]></programlisting>
                     </para>
@@ -13479,9 +13508,9 @@ URL: skins/Agent/default/img/loginlogo_default.png
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13495,9 +13524,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13509,10 +13538,10 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
-StyleHeight: 45px
-StyleRight: 45px
-StyleTop: 10px
-StyleWidth: 220px
+StyleHeight: 55px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13525,9 +13554,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13716,6 +13745,17 @@ Type: '1'
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Gravatar::ArticleDefaultImage">
+                <term>Frontend::Gravatar::ArticleDefaultImage</term>
+                <listitem>
+                    <para>Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check http://gravatar.com/site/implement/images/ for further information.</para>
+                    <para>この設定は無効化することはできません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- mm
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -14415,6 +14455,18 @@ Module: Kernel::Output::HTML::Notification::AgentTimeZoneCheck
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::Notification::DaemonCheck
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_8000-PackageManager-CheckNotVerifiedPackages">
+                <term>Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages</term>
+                <listitem>
+                    <para>Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</para>
+                    <para>この設定は無効化することはできません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -23916,28 +23968,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Body">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Body</term>
-                <listitem>
-                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
-                    <para>この設定は標準では有効ではありません。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Cc">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Cc</term>
-                <listitem>
-                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
-                    <para>この設定は標準では有効ではありません。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_CustomerID">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###CustomerID</term>
                 <listitem>
@@ -23980,8 +24010,19 @@ Contentはダイナミック・フィールドの形式によって設定内容�
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_From">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###From</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
+                    <para>This setting can be overridden in the user preferences.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Body">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Body</term>
                 <listitem>
                     <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
                     <para>この設定は標準では有効ではありません。</para>
@@ -23991,11 +24032,44 @@ Contentはダイナミック・フィールドの形式によって設定内容�
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Cc">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Cc</term>
                 <listitem>
                     <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
-                    <para>This setting can be overridden in the user preferences.</para>
+                    <para>この設定は標準では有効ではありません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_From">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_From</term>
+                <listitem>
+                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
+                    <para>この設定は標準では有効ではありません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Subject">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Subject</term>
+                <listitem>
+                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
+                    <para>この設定は標準では有効ではありません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_To">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_To</term>
+                <listitem>
+                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
+                    <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -24053,17 +24127,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Subject">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Subject</term>
-                <listitem>
-                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
-                    <para>この設定は標準では有効ではありません。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -24169,17 +24232,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Title">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###Title</term>
-                <listitem>
-                    <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
-                    <para>この設定は標準では有効ではありません。</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_To">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###To</term>
                 <listitem>
                     <para>チケット検索画面で、デフォルトの表示されるチケット検索属性を定義します。</para>
                     <para>この設定は標準では有効ではありません。</para>
@@ -25234,7 +25286,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_400-Owner">
                 <term>Ticket::Frontend::MenuModule###400-Owner</term>
                 <listitem>
-                    <para>Shows a link in the menu to see the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
+                    <para>Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Action: AgentTicketOwner
@@ -25253,7 +25305,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_410-Responsible">
                 <term>Ticket::Frontend::MenuModule###410-Responsible</term>
                 <listitem>
-                    <para>Shows a link in the menu to see the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
+                    <para>Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Action: AgentTicketResponsible
@@ -25272,7 +25324,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Customer">
                 <term>Ticket::Frontend::MenuModule###420-Customer</term>
                 <listitem>
-                    <para>Shows a link in the menu to see the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
+                    <para>Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Action: AgentTicketCustomer
@@ -25310,7 +25362,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_425-Phone_Call_Outbound">
                 <term>Ticket::Frontend::MenuModule###425-Phone Call Outbound</term>
                 <listitem>
-                    <para>Shows a link in the menu to add a note in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
+                    <para>Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneOutbound
@@ -25329,7 +25381,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_426-Phone_Call_Inbound">
                 <term>Ticket::Frontend::MenuModule###426-Phone Call Inbound</term>
                 <listitem>
-                    <para>Shows a link in the menu to add a note in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
+                    <para>Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneInbound
@@ -26794,10 +26846,10 @@ Value: Ticket::CustomerID::Other
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
-StyleHeight: 50px
+StyleHeight: 45px
 StyleRight: 25px
-StyleTop: 2px
-StyleWidth: 135px
+StyleTop: 9px
+StyleWidth: 300px
 URL: skins/Customer/default/img/logo.png
 ]]></programlisting>
                     </para>
@@ -27488,7 +27540,7 @@ Module: Kernel::Output::HTML::NavBar::CustomerTicketProcess
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
                 <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
                 <listitem>
-                    <para>担当者Webインタフェースのローダーモジュール登録</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27500,7 +27552,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketProcess_002-ProcessManagement">
                 <term>Loader::Module::CustomerTicketProcess###002-ProcessManagement</term>
                 <listitem>
-                    <para>担当者Webインタフェースのローダーモジュール登録</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 CSS:
@@ -27516,7 +27568,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketSearch_002-Ticket">
                 <term>Loader::Module::CustomerTicketSearch###002-Ticket</term>
                 <listitem>
-                    <para>担当者Webインタフェースのローダーモジュール登録</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27528,7 +27580,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketZoom_002-Ticket">
                 <term>Loader::Module::CustomerTicketZoom###002-Ticket</term>
                 <listitem>
-                    <para>担当者Webインタフェースのローダーモジュール登録</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27988,7 +28040,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
                 <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
                 <listitem>
-                    <para>顧客が顧客インタフェースでチケット・キューを設定することを、許可します。‘No’に設定した場合、QueueDefaultを設定する必要があります。</para>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -28074,7 +28126,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
                 <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
                 <listitem>
-                    <para>Allows customers to set the ticket type in the customer interface. If this is set to 'No', TicketTypeDefault should be configured.</para>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- '1'
@@ -28515,7 +28567,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicCalendar">
                 <term>PublicFrontend::Module###PublicCalendar</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公開画面のフロントエンドモジュールの定義</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: Public calendar.
@@ -28530,7 +28582,7 @@ Title: Public Calendar
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicDefault">
                 <term>PublicFrontend::Module###PublicDefault</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公開画面のフロントエンドモジュールの定義</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: PublicDefault
@@ -28545,7 +28597,7 @@ Title: PublicDefault
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
                 <term>PublicFrontend::Module###PublicRepository</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公開画面のフロントエンドモジュールの定義</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: PublicRepository
@@ -28560,7 +28612,7 @@ Title: PublicRepository
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicSupportDataCollector">
                 <term>PublicFrontend::Module###PublicSupportDataCollector</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公開画面のフロントエンドモジュールの定義</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Description: PublicSupportDataCollector

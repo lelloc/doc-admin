@@ -917,7 +917,7 @@ Name: Phone
             <varlistentry id="ConfigReference_Setting_Ticket::Article::Backend::MIMEBase::ArticleDataDir">
                 <term>Ticket::Article::Backend::MIMEBase::ArticleDataDir</term>
                 <listitem>
-                    <para>Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.</para>
+                    <para>Задает каталог для сохранения данных, если "FS" выбрано в ArticleStorage. </para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- <OTRS_CONFIG_Home>/var/article
@@ -939,7 +939,7 @@ Name: Phone
             <varlistentry id="ConfigReference_Setting_Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends">
                 <term>Ticket::Article::Backend::MIMEBase::CheckAllStorageBackends</term>
                 <listitem>
-                    <para>Указывет, должны ли все виды хранилищ проверяться при просмотре вложений. Это необходимо лишь в случае, когда часть вложений хранится в файловой системе, а остальные в базе данных.</para>
+                    <para>Определяет, должны ли все виды хранилищ проверяться при просмотре вложений. Это необходимо лишь в случае, когда часть вложений хранится в файловой системе, а остальные в базе данных.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 0
@@ -950,7 +950,7 @@ Name: Phone
             <varlistentry id="ConfigReference_Setting_Ticket::Article::Backend::MIMEBase::IndexAttachmentNames">
                 <term>Ticket::Article::Backend::MIMEBase::IndexAttachmentNames</term>
                 <listitem>
-                    <para>Specifies whether the (MIMEBase) article attachments will be indexed and searchable.</para>
+                    <para>Определяет, будут ли вложения сообщений (MIMEBase) проиндексированы и доступны для поиска.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -1281,7 +1281,7 @@ User: some_user
             <varlistentry id="ConfigReference_Setting_Core::MirrorDB::User">
                 <term>Core::MirrorDB::User</term>
                 <listitem>
-                    <para>Задайте имя пользователя для аутентификации в первой зеркальной БД.</para>
+                    <para>Задайте имя пользователя для аутентификации в первой зеркалируемой БД.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- some_user
@@ -2189,7 +2189,7 @@ Set:
             <varlistentry id="ConfigReference_Setting_PostmasterDefaultPriority">
                 <term>PostmasterDefaultPriority</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет для новых заявок</para>
+                    <para>Задает приоритет по умолчанию для новых заявок.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -2211,7 +2211,7 @@ Set:
             <varlistentry id="ConfigReference_Setting_PostmasterDefaultState">
                 <term>PostmasterDefaultState</term>
                 <listitem>
-                    <para>Задает состояние по умалчанию для новых заявок</para>
+                    <para>Задает состояние по умолчанию для новых заявок</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- new
@@ -2570,6 +2570,25 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_LinkObject">
+        <title>Core → Event → LinkObject</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_LinkObject::EventModulePost_9900-GenericInterface">
+                <term>LinkObject::EventModulePost###9900-GenericInterface</term>
+                <listitem>
+                    <para>Performs the configured action for each event (as an Invoker) for each configured web service.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::GenericInterface::Event::Handler
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_Package">
         <title>Core → Event → Package</title>
         <variablelist>
@@ -2703,7 +2722,7 @@ Module: Kernel::System::Ticket::Event::ResponsibleAutoSet
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_3100-LockAfterCreate">
                 <term>Ticket::EventModulePost###3100-LockAfterCreate</term>
                 <listitem>
-                    <para>When agent creates a ticket, whether or not the ticket is automatically locked to the agent.</para>
+                    <para>Когда агент создает заявку, она автоматически блокируется этим агентом.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -2742,7 +2761,7 @@ Module: Kernel::System::Ticket::Event::ForceUnlock
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_4000-TicketArticleNewMessageUpdate">
                 <term>Ticket::EventModulePost###4000-TicketArticleNewMessageUpdate</term>
                 <listitem>
-                    <para>Обновляет значение флага "Seen"(прочитано), если каждое сообщение просмотрено или создано новое сообщение.</para>
+                    <para>Обновляет значение флага "Seen" (прочитано), если каждое сообщение просмотрено или создано новое сообщение.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Event: ArticleCreate|ArticleFlagSet
@@ -3253,6 +3272,16 @@ ItemMaxAttempts: '3'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::AllowNotVerifiedPackages">
+                <term>Package::AllowNotVerifiedPackages</term>
+                <listitem>
+                    <para>If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Package::FileUpload">
                 <term>Package::FileUpload</term>
                 <listitem>
@@ -3377,7 +3406,7 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
             <varlistentry id="ConfigReference_Setting_EditAnotherUsersPreferencesGroup">
                 <term>EditAnotherUsersPreferencesGroup</term>
                 <listitem>
-                    <para>Specifies the group where the user needs rw permissions so that they can edit other users preferences.</para>
+                    <para>Задает для пользователя группу с rw правами, члены которой могут редактировать настройки других пользователей.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- admin
@@ -3818,7 +3847,7 @@ Rows: '5'
             <varlistentry id="ConfigReference_Setting_SessionCheckRemoteIP">
                 <term>SessionCheckRemoteIP</term>
                 <listitem>
-                    <para>Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.</para>
+                    <para>Включить проверку удаленного IP-адреса. Она не должна быть включена, если соединение, например, устанавливается через проски или используется модемное соединение, потому что удаленный IP-адрес в основном будет отличаться в запросах.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -4624,7 +4653,7 @@ pending auto close-: closed unsuccessful
             <varlistentry id="ConfigReference_Setting_Ticket::Type::Default">
                 <term>Ticket::Type::Default</term>
                 <listitem>
-                    <para>Определяет тип тикета по умолчанию.</para>
+                    <para>Определяет тип заявки по умолчанию.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Unclassified
@@ -4672,7 +4701,7 @@ pending auto close-: closed unsuccessful
             <varlistentry id="ConfigReference_Setting_Ticket::ViewableSenderTypes">
                 <term>Ticket::ViewableSenderTypes</term>
                 <listitem>
-                    <para>Задает умалчиваемый отображаемый тип отправителя заявки (стандартно: customer).</para>
+                    <para>Задает отображаемый тип отправителя заявки по умолчанию (по умолчанию: customer).</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -6626,7 +6655,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_TimeZone">
                 <term>TimeZone</term>
                 <listitem>
-                    <para>This setting is deprecated. Set OTRSTimeZone instead.</para>
+                    <para>Этот параметр устарел. Вместо него используйте OTRSTimeZone.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '+0'
@@ -8125,7 +8154,7 @@ Wed:
             <varlistentry id="ConfigReference_Setting_Daemon::Log::RotationType">
                 <term>Daemon::Log::RotationType</term>
                 <listitem>
-                    <para>Type of daemon log rotation to use: Choose 'OTRS' to let OTRS system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.</para>
+                    <para>Какой тип обновления журнала залогированных событий использовать: Выберите 'OTRS', чтобы позволить OTRS системе самой заботиться о ротации логов, или выберите 'External', чтобы использовать сторонний механизм ротации (например logrotate). Примечание: сторонний механизм ротации логов требует собственной независимой настройки.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- otrs
@@ -8836,7 +8865,7 @@ TaskName: TicketDraftDeleteExpired
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_TicketNumberCounterCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###TicketNumberCounterCleanup</term>
                 <listitem>
-                    <para>Removes old ticket number counters (Sunday mornings).</para>
+                    <para>Removes old ticket number counters (each 10 minutes).</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -13465,7 +13494,7 @@ Prio: '120'
                     <para>The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
-StyleHeight: 70px
+StyleHeight: 60px
 URL: skins/Agent/default/img/loginlogo_default.png
 ]]></programlisting>
                     </para>
@@ -13478,9 +13507,9 @@ URL: skins/Agent/default/img/loginlogo_default.png
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13494,9 +13523,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13508,10 +13537,10 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
-StyleHeight: 45px
-StyleRight: 45px
-StyleTop: 10px
-StyleWidth: 220px
+StyleHeight: 55px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13524,9 +13553,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13715,6 +13744,17 @@ Type: '1'
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Gravatar::ArticleDefaultImage">
+                <term>Frontend::Gravatar::ArticleDefaultImage</term>
+                <listitem>
+                    <para>Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check http://gravatar.com/site/implement/images/ for further information.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- mm
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -14182,7 +14222,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::UserDefaultQueue">
                 <term>Ticket::Frontend::UserDefaultQueue</term>
                 <listitem>
-                    <para>Задает умалчиваемую очередь для новых заявок, создаваемых в интерфейсе агента.</para>
+                    <para>Задает очередь по умолчанию для новых заявок, создаваемых в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Postmaster
@@ -14414,6 +14454,18 @@ Module: Kernel::Output::HTML::Notification::AgentTimeZoneCheck
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::Notification::DaemonCheck
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_8000-PackageManager-CheckNotVerifiedPackages">
+                <term>Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages</term>
+                <listitem>
+                    <para>Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -16938,7 +16990,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewMenuModule_001-Sort">
                 <term>Ticket::Frontend::OverviewMenuModule###001-Sort</term>
                 <listitem>
-                    <para>This setting shows the sorting attributes in all overview screen, not only in queue view.</para>
+                    <para>Это параметр отображает опции сортировки во всех экранах обзора заявок, а не только в обзоре очередей.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::TicketOverviewMenu::Sort
@@ -18242,7 +18294,7 @@ Width: '198'
             <varlistentry id="ConfigReference_Setting_DashboardBackend_0210-MOTD">
                 <term>DashboardBackend###0210-MOTD</term>
                 <listitem>
-                    <para>Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</para>
+                    <para>Показывать сообщение дня (MOTD) в Дайджесте. "Group" используется, чтобы ограничить доступ к плагину (например Group: admin;group1;group2;). "Default" показывает - включен ли плагин по умолчанию или пользователь может включить его вручную. "Mandatory" определяет будет ли плагин отображаться всегда и не сможет быть закрыт агентами.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -19429,7 +19481,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketBulk###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране массовых действий в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране массовых действий в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -19472,7 +19524,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketBulk_StateDefault">
                 <term>Ticket::Frontend::AgentTicketBulk###StateDefault</term>
                 <listitem>
-                    <para>Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.</para>
+                    <para>Определяет следующее состояние по умолчанию для заявки на экране массового действия с заявками в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- open
@@ -19688,7 +19740,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketClose_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketClose###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране закрытия заявки в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране закрытия заявки в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -20141,7 +20193,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketEmail_IsVisibleForCustomer">
                 <term>Ticket::Frontend::AgentTicketEmail###IsVisibleForCustomer</term>
                 <listitem>
-                    <para>Sets the default article customer visibility for new email tickets in the agent interface.</para>
+                    <para>Устанавливает по умолчанию видимость сообщения клиентом для новых почтовых заявок в интерфейсе агента.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -20218,7 +20270,7 @@ Print: Print
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketEmail_SplitLinkType">
                 <term>Ticket::Frontend::AgentTicketEmail###SplitLinkType</term>
                 <listitem>
-                    <para>Sets the default link type of split tickets in the agent interface.</para>
+                    <para>Установливает тип связи по умолчанию при разделении заявок в интерфейсе агента.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Direction: Target
@@ -20783,7 +20835,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketFreeText_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketFreeText###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране изменения Дополнительных полей заявки в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране изменения Дополнительных полей заявки в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -21195,7 +21247,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MergeText">
                 <term>Ticket::Frontend::MergeText</term>
                 <listitem>
-                    <para>При слиянии/объединении заявок, клиент может быть информирован об этом почтовым сообщением, активацией параметра "Inform Sender". Здесь вы можете задать текст, который  потом может быть изменен агентом.</para>
+                    <para>При слиянии/объединении заявок, клиент может быть информирован об этом почтовым сообщением, активацией параметра "Inform Sender". Здесь вы можете задать текст, который  потом может быть изменен агентами.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Your email with ticket number "<OTRS_TICKET>" is merged to "<OTRS_MERGE_TO_TICKET>".
@@ -21530,7 +21582,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketNote_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketNote###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране создания заметки к заявке в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране создания заметки к заявке в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -21879,7 +21931,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketOwner_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketOwner###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране назначения Владельца при просмотре заявки в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране назначения Владельца при просмотре заявки в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -22214,7 +22266,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPending_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketPending###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране перевода заявки в ожидание при просмотре заявки в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране перевода заявки в ожидание при просмотре заявки в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -22498,7 +22550,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPhoneInbound_SenderType">
                 <term>Ticket::Frontend::AgentTicketPhoneInbound###SenderType</term>
                 <listitem>
-                    <para>Выберите умалчиваемый тип отправителя для телефонной заявки при регистрации входящего звонка в интерфейсе агента.</para>
+                    <para>Задает тип отправителя по умолчанию для телефонной заявки при регистрации входящего звонка в интерфейсе агента.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- customer
@@ -22594,7 +22646,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPhone_IsVisibleForCustomer">
                 <term>Ticket::Frontend::AgentTicketPhone###IsVisibleForCustomer</term>
                 <listitem>
-                    <para>Sets the default article customer visibility for new phone tickets in the agent interface.</para>
+                    <para>Устанавливает по умолчанию видимость сообщения клиентом для новых телефонных заявок в интерфейсе агента.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -22838,7 +22890,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPhoneOutbound_SenderType">
                 <term>Ticket::Frontend::AgentTicketPhoneOutbound###SenderType</term>
                 <listitem>
-                    <para>Выберите умалчиваемый тип отправителя для телефонной заявки при регистрации исходящего звонка клиенту в интерфейсе агента.</para>
+                    <para>Задает тип отправителя по умолчанию для телефонной заявки при регистрации исходящего звонка клиенту в интерфейсе агента.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- agent
@@ -23050,7 +23102,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPriority_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketPriority###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране назначения Приоритета при просмотре заявки в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране назначения Приоритета при просмотре заявки в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -23241,7 +23293,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketProcess_SplitLinkType">
                 <term>Ticket::Frontend::AgentTicketProcess###SplitLinkType</term>
                 <listitem>
-                    <para>Sets the default link type of split tickets in the agent interface.</para>
+                    <para>Установливает тип связи по умолчанию при разделении заявок в интерфейсе агента.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Direction: Target
@@ -23365,7 +23417,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketQueue_Order::Default">
                 <term>Ticket::Frontend::AgentTicketQueue###Order::Default</term>
                 <listitem>
-                    <para>Умалчиваемый порядок сортировки для всех очередей отображаемых в обзоре очередей, после сортировки по приоритету.</para>
+                    <para>Задает порядок сортировки по умолчанию для всех очередей отображаемых в обзоре очередей, после сортировки по приоритету.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Up
@@ -23400,7 +23452,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketQueue_SortBy::Default">
                 <term>Ticket::Frontend::AgentTicketQueue###SortBy::Default</term>
                 <listitem>
-                    <para>Умалчиваемый критерий сортировки для всех очередей отображаемых в обзоре очередей.</para>
+                    <para>Задает критерий сортировки по умолчанию для всех очередей отображаемых в обзоре очередей.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Age
@@ -23603,7 +23655,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketResponsible_PriorityDefault">
                 <term>Ticket::Frontend::AgentTicketResponsible###PriorityDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки на экране назначения Ответственного при просмотре заявки в интерфейсе агента.</para>
+                    <para>Задает приоритет заявки по умолчанию на экране назначения Ответственного при просмотре заявки в интерфейсе агента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 3 normal
@@ -23915,28 +23967,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Body">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Body</term>
-                <listitem>
-                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
-                    <para>Этот параметр по-умолчанию не активен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Cc">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Cc</term>
-                <listitem>
-                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
-                    <para>Этот параметр по-умолчанию не активен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_CustomerID">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###CustomerID</term>
                 <listitem>
@@ -23970,8 +24000,19 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_From">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###From</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
+                    <para>Этот параметр может быть изменен в личных настройках.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Body">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Body</term>
                 <listitem>
                     <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
@@ -23981,11 +24022,44 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Cc">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Cc</term>
                 <listitem>
                     <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
-                    <para>Этот параметр может быть изменен в личных настройках.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_From">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_From</term>
+                <listitem>
+                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Subject">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Subject</term>
+                <listitem>
+                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_To">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_To</term>
+                <listitem>
+                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -24043,17 +24117,6 @@ Type: '1'
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Subject">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Subject</term>
-                <listitem>
-                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
-                    <para>Этот параметр по-умолчанию не активен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -24159,17 +24222,6 @@ Type: '1'
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Title">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###Title</term>
-                <listitem>
-                    <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
-                    <para>Этот параметр по-умолчанию не активен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_To">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###To</term>
                 <listitem>
                     <para>Выберите атрибут по умолчанию для показа на экране поискового запроса.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
@@ -24354,7 +24406,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketService_Order::Default">
                 <term>Ticket::Frontend::AgentTicketService###Order::Default</term>
                 <listitem>
-                    <para>Умалчиваемый порядок сортировки для всех сервисов отображаемых в обзоре сервисов, после сортировки по приоритету.</para>
+                    <para>Задает порядок сортировки по умолчанию для всех сервисов отображаемых в обзоре сервисов, после сортировки по приоритету.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Up
@@ -24389,7 +24441,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketService_SortBy::Default">
                 <term>Ticket::Frontend::AgentTicketService###SortBy::Default</term>
                 <listitem>
-                    <para>Умалчиваемый критерий сортировки для всех сервисов отображаемых в обзоре сервисов.</para>
+                    <para>Задает критерий сортировки по умолчанию для всех сервисов отображаемых в обзоре сервисов.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Age
@@ -25224,7 +25276,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_400-Owner">
                 <term>Ticket::Frontend::MenuModule###400-Owner</term>
                 <listitem>
-                    <para>Показывает пункт меню "Владелец" при просмотре заявки в интерфейсе агента. Дополнительно, можно ограничить доступ к этому пункту меню, использованием ключа "Group", где в содержании указывается перечень групп, которым эта кнопка будет доступна "rw:group1;move_into:group2". Для организации пунктов меню в группы/кластеры используйте в качестве ключа "ClusterName" и в содержании укажите то имя, которое желаете увидеть в строке меню. Используйте "ClusterPriority" для настройки порядка отображения групп/кластеров в меню.</para>
+                    <para>Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Action: AgentTicketOwner
@@ -25243,7 +25295,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_410-Responsible">
                 <term>Ticket::Frontend::MenuModule###410-Responsible</term>
                 <listitem>
-                    <para>Показывает пункт меню "Ответственный" при просмотре заявки в интерфейсе агента. Дополнительно, можно ограничить доступ к этому пункту меню, использованием ключа "Group", где в содержании указывается перечень групп, которым эта кнопка будет доступна "rw:group1;move_into:group2". Для организации пунктов меню в группы/кластеры используйте в качестве ключа "ClusterName" и в содержании укажите то имя, которое желаете увидеть в строке меню. Используйте "ClusterPriority" для настройки порядка отображения групп/кластеров в меню.</para>
+                    <para>Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Action: AgentTicketResponsible
@@ -25262,7 +25314,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Customer">
                 <term>Ticket::Frontend::MenuModule###420-Customer</term>
                 <listitem>
-                    <para>Показывает пункт меню "Клиент" при просмотре заявки в интерфейсе агента. Дополнительно, можно ограничить доступ к этому пункту меню, использованием ключа "Group", где в содержании указывается перечень групп, которым эта кнопка будет доступна "rw:group1;move_into:group2". Для организации пунктов меню в группы/кластеры используйте в качестве ключа "ClusterName" и в содержании укажите то имя, которое желаете увидеть в строке меню. Используйте "ClusterPriority" для настройки порядка отображения групп/кластеров в меню.</para>
+                    <para>Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Action: AgentTicketCustomer
@@ -25300,7 +25352,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_425-Phone_Call_Outbound">
                 <term>Ticket::Frontend::MenuModule###425-Phone Call Outbound</term>
                 <listitem>
-                    <para>Показывает пункт меню "Заметка" при просмотре заявки в интерфейсе агента. Дополнительно, можно ограничить доступ к этому пункту меню, использованием ключа "Group", где в содержании указывается перечень групп, которым эта кнопка будет доступна "rw:group1;move_into:group2". Для организации пунктов меню в группы/кластеры используйте в качестве ключа "ClusterName" и в содержании укажите то имя, которое желаете увидеть в строке меню. Используйте "ClusterPriority" для настройки порядка отображения групп/кластеров в меню.</para>
+                    <para>Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneOutbound
@@ -25319,7 +25371,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_426-Phone_Call_Inbound">
                 <term>Ticket::Frontend::MenuModule###426-Phone Call Inbound</term>
                 <listitem>
-                    <para>Показывает пункт меню "Заметка" при просмотре заявки в интерфейсе агента. Дополнительно, можно ограничить доступ к этому пункту меню, использованием ключа "Group", где в содержании указывается перечень групп, которым эта кнопка будет доступна "rw:group1;move_into:group2". Для организации пунктов меню в группы/кластеры используйте в качестве ключа "ClusterName" и в содержании укажите то имя, которое желаете увидеть в строке меню. Используйте "ClusterPriority" для настройки порядка отображения групп/кластеров в меню.</para>
+                    <para>Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneInbound
@@ -25949,7 +26001,7 @@ Standard: '1'
             <varlistentry id="ConfigReference_Setting_HTTPSForceRedirect">
                 <term>HTTPSForceRedirect</term>
                 <listitem>
-                    <para>Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.</para>
+                    <para>Перенаправить все запросы с http на https протокол. Пожалуйста проверьте, что https протокол настроен корректно на Вашем web сервере, прежде чем включать эту опцию.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 0
@@ -26784,10 +26836,10 @@ Value: Ticket::CustomerID::Other
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
-StyleHeight: 50px
+StyleHeight: 45px
 StyleRight: 25px
-StyleTop: 2px
-StyleWidth: 135px
+StyleTop: 9px
+StyleWidth: 300px
 URL: skins/Customer/default/img/logo.png
 ]]></programlisting>
                     </para>
@@ -27265,7 +27317,7 @@ Module: Kernel::Output::HTML::Notification::CustomerUserTimeZoneCheck
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_AjaxAttachment">
                 <term>CustomerFrontend::Module###AjaxAttachment</term>
                 <listitem>
-                    <para>Frontend module registration для интерфейса агента.</para>
+                    <para>Frontend module registration для интерфейса клиента.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Description: AjaxAttachment
@@ -27478,7 +27530,7 @@ Module: Kernel::Output::HTML::NavBar::CustomerTicketProcess
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
                 <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
                 <listitem>
-                    <para>Loader module registration for the agent interface.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27490,7 +27542,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketProcess_002-ProcessManagement">
                 <term>Loader::Module::CustomerTicketProcess###002-ProcessManagement</term>
                 <listitem>
-                    <para>Loader module registration for the agent interface.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 CSS:
@@ -27506,7 +27558,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketSearch_002-Ticket">
                 <term>Loader::Module::CustomerTicketSearch###002-Ticket</term>
                 <listitem>
-                    <para>Loader module registration for the agent interface.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27518,7 +27570,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketZoom_002-Ticket">
                 <term>Loader::Module::CustomerTicketZoom###002-Ticket</term>
                 <listitem>
-                    <para>Loader module registration for the agent interface.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27978,7 +28030,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
                 <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
                 <listitem>
-                    <para>Позволяет клиенту выбрать очередь для заявки. Если установить "Нет", необходимо настроить параметр QueueDefault (Очередь по умолчанию).</para>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -27989,7 +28041,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_QueueDefault">
                 <term>Ticket::Frontend::CustomerTicketMessage###QueueDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемую очередь для новых заявок, создаваемых клиентом в WEB интерфейсе.</para>
+                    <para>Задает очередь по умолчанию для новых заявок, создаваемых клиентом в WEB интерфейсе.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Postmaster
@@ -28053,7 +28105,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_StateDefault">
                 <term>Ticket::Frontend::CustomerTicketMessage###StateDefault</term>
                 <listitem>
-                    <para>Умалчиваемое состояние для новых заявок в интерфейсе клиента.</para>
+                    <para>Задает состояние по умолчанию для новых заявок в интерфейсе клиента.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- new
@@ -28064,7 +28116,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
                 <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
                 <listitem>
-                    <para>Позволяет клиенту выбирать Тип для заявки. Если установить "Нет", необходимо настроить параметр TicketTypeDefault(Тип по умолчанию).</para>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -28075,7 +28127,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketTypeDefault">
                 <term>Ticket::Frontend::CustomerTicketMessage###TicketTypeDefault</term>
                 <listitem>
-                    <para>Задает умалчиваемый приоритет заявки для новой заявки в интерфейсе клиента.</para>
+                    <para>Задает приоритет заявки по умолчанию для новой заявки в интерфейсе клиента.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Unclassified
@@ -28425,7 +28477,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_SenderType">
                 <term>Ticket::Frontend::CustomerTicketZoom###SenderType</term>
                 <listitem>
-                    <para>Выберите умалчиваемый тип отправителя для заявки при ответе в интерфейсе клиента.</para>
+                    <para>Задает тип отправителя по умолчанию для заявки при ответе в интерфейсе клиента.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- customer
@@ -28488,7 +28540,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_PublicFrontend::CommonParam_Action">
                 <term>PublicFrontend::CommonParam###Action</term>
                 <listitem>
-                    <para>Задает умалчиваемое значение параметра Action для общедоступного (public) интерфейса. Параметр Action используется в скриптах системы.</para>
+                    <para>Задает значение параметра Action по умолчанию для общедоступного (public) интерфейса. Параметр Action используется в скриптах системы.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- PublicDefault
@@ -28505,7 +28557,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicCalendar">
                 <term>PublicFrontend::Module###PublicCalendar</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontend module registration для public/публичного/общедоступного интерфейса.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Description: Public calendar.
@@ -28520,7 +28572,7 @@ Title: Public Calendar
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicDefault">
                 <term>PublicFrontend::Module###PublicDefault</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontend module registration для public/публичного/общедоступного интерфейса.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Description: PublicDefault
@@ -28535,7 +28587,7 @@ Title: PublicDefault
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
                 <term>PublicFrontend::Module###PublicRepository</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontend module registration для public/публичного/общедоступного интерфейса.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Description: PublicRepository
@@ -28550,7 +28602,7 @@ Title: PublicRepository
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicSupportDataCollector">
                 <term>PublicFrontend::Module###PublicSupportDataCollector</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Frontend module registration для public/публичного/общедоступного интерфейса.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Description: PublicSupportDataCollector

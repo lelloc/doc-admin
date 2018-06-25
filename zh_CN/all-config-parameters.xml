@@ -12,7 +12,7 @@
             <varlistentry id="ConfigReference_Setting_CloudServices::Disabled">
                 <term>CloudServices::Disabled</term>
                 <listitem>
-                    <para>Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to 'Disable cloud services', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.</para>
+                    <para>定义本系统能否与OTRS集团提供云服务的服务器通信。如果设置为“禁用云服务”，某些功能如系统注册、发送支持数据、升级到OTRS Business Solution™（OTRS商业解决方案）、OTRS Verify™（OTRS验证）、仪表板中的OTRS新闻和产品新闻小部件等将失效。</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -544,7 +544,7 @@ Name: DynamicField_%s
             <varlistentry id="ConfigReference_Setting_Customer::AuthModule::HTTPBasicAuth::Replace">
                 <term>Customer::AuthModule::HTTPBasicAuth::Replace</term>
                 <listitem>
-                    <para>如果Customer::AuthModule（客户认证模块）选择“HTTPBasicAuth（HTTP基本认证）”，您可以指定剥离用户名的主要部分（如域名，比如将example_domain\user变为user）。</para>
+                    <para>如果Customer::AuthModule（客户认证模块）选择“HTTPBasicAuth（HTTP基本认证）”，您可以指定剥去用户名称的主要部分（例如域名，如从example_domain\user变为user）。</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- example_domain\\
@@ -2570,6 +2570,25 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_LinkObject">
+        <title>Core → Event → LinkObject</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_LinkObject::EventModulePost_9900-GenericInterface">
+                <term>LinkObject::EventModulePost###9900-GenericInterface</term>
+                <listitem>
+                    <para>对每个已配置的Web服务的每个事件（作为调用程序）执行配置的操作。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::GenericInterface::Event::Handler
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_Package">
         <title>Core → Event → Package</title>
         <variablelist>
@@ -2780,7 +2799,7 @@ Transaction: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_7000-NotificationEvent">
                 <term>Ticket::EventModulePost###7000-NotificationEvent</term>
                 <listitem>
-                    <para>Sends the notifications which are configured in the admin interface under "Ticket Notifications".</para>
+                    <para>发送在系统管理界面“工单通知”中配置好的通知。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Event: ''
@@ -3247,6 +3266,16 @@ ItemMaxAttempts: '3'
                 <listitem>
                     <para>如果启用这个设置，本地修改内容不会在软件包管理器和支持数据收集工具中高亮显示为错误。</para>
                     <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::AllowNotVerifiedPackages">
+                <term>Package::AllowNotVerifiedPackages</term>
+                <listitem>
+                    <para>If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -8636,7 +8665,7 @@ TaskName: GeneticInterfaceDebugLogCleanup
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_LoaderCacheDelete">
                 <term>Daemon::SchedulerCronTaskManager::Task###LoaderCacheDelete</term>
                 <listitem>
-                    <para>每周删除过期的载入器缓存（星期天早晨）。</para>
+                    <para>每周删除过期的加载器缓存（星期天早晨）。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Function: CacheDelete
@@ -8836,7 +8865,7 @@ TaskName: TicketDraftDeleteExpired
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_TicketNumberCounterCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###TicketNumberCounterCleanup</term>
                 <listitem>
-                    <para>删除旧的工单编号计数器（星期日上午）。</para>
+                    <para>Removes old ticket number counters (each 10 minutes).</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -11467,7 +11496,7 @@ Name: Agents ↔ Groups
             <varlistentry id="ConfigReference_Setting_Loader::Module::Admin_001-Framework">
                 <term>Loader::Module::Admin###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11483,7 +11512,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminACL_002-Ticket">
                 <term>Loader::Module::AdminACL###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11497,7 +11526,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminAppointmentCalendarManage_002-Calendar">
                 <term>Loader::Module::AdminAppointmentCalendarManage###002-Calendar</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11514,7 +11543,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminAppointmentNotificationEvent_002-Calendar">
                 <term>Loader::Module::AdminAppointmentNotificationEvent###002-Calendar</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11528,7 +11557,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminAttachment_002-Ticket">
                 <term>Loader::Module::AdminAttachment###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11540,7 +11569,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminAutoResponse_002-Ticket">
                 <term>Loader::Module::AdminAutoResponse###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11552,7 +11581,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCloudServiceSupportDataCollector_002-CloudServices">
                 <term>Loader::Module::AdminCloudServiceSupportDataCollector###002-CloudServices</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11564,7 +11593,7 @@ CSS:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCloudServices_001-Framework">
                 <term>Loader::Module::AdminCloudServices###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11576,7 +11605,7 @@ CSS:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCommunicationLog_001-Framework">
                 <term>Loader::Module::AdminCommunicationLog###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11592,7 +11621,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCustomerCompany_001-Framework">
                 <term>Loader::Module::AdminCustomerCompany###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11604,7 +11633,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCustomerGroup_001-Framework">
                 <term>Loader::Module::AdminCustomerGroup###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11616,7 +11645,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCustomerUser_001-Framework">
                 <term>Loader::Module::AdminCustomerUser###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11629,7 +11658,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCustomerUserCustomer_001-Framework">
                 <term>Loader::Module::AdminCustomerUserCustomer###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11641,7 +11670,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCustomerUserGroup_001-Framework">
                 <term>Loader::Module::AdminCustomerUserGroup###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11653,7 +11682,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminCustomerUserService_001-Framework">
                 <term>Loader::Module::AdminCustomerUserService###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11665,7 +11694,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicField_002-Ticket">
                 <term>Loader::Module::AdminDynamicField###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11680,7 +11709,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicFieldCheckbox_002-Ticket">
                 <term>Loader::Module::AdminDynamicFieldCheckbox###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11694,7 +11723,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicFieldDateTime_002-Ticket">
                 <term>Loader::Module::AdminDynamicFieldDateTime###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11710,7 +11739,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicFieldDropdown_002-Ticket">
                 <term>Loader::Module::AdminDynamicFieldDropdown###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11726,7 +11755,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicFieldMultiselect_002-Ticket">
                 <term>Loader::Module::AdminDynamicFieldMultiselect###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11742,7 +11771,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminDynamicFieldText_002-Ticket">
                 <term>Loader::Module::AdminDynamicFieldText###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11756,7 +11785,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericAgent_002-Ticket">
                 <term>Loader::Module::AdminGenericAgent###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11768,7 +11797,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceDebugger_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceDebugger###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11782,7 +11811,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceErrorHandlingDefault_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceErrorHandlingDefault###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11796,7 +11825,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceErrorHandlingRequestRetry_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceErrorHandlingRequestRetry###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11811,7 +11840,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceInvokerDefault_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceInvokerDefault###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11825,7 +11854,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceInvokerEvent_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceInvokerEvent###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11839,7 +11868,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceMappingSimple_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceMappingSimple###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11853,7 +11882,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceMappingXSLT_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceMappingXSLT###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11867,7 +11896,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceOperationDefault_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceOperationDefault###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11881,7 +11910,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceTransportHTTPREST_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceTransportHTTPREST###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11895,7 +11924,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceTransportHTTPSOAP_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceTransportHTTPSOAP###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11911,7 +11940,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceWebservice_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceWebservice###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11925,7 +11954,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericInterfaceWebserviceHistory_002-GenericInterface">
                 <term>Loader::Module::AdminGenericInterfaceWebserviceHistory###002-GenericInterface</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11939,7 +11968,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGroup_001-Framework">
                 <term>Loader::Module::AdminGroup###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11951,7 +11980,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminLog_001-Framework">
                 <term>Loader::Module::AdminLog###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11963,7 +11992,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminMailAccount_001-Framework">
                 <term>Loader::Module::AdminMailAccount###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -11975,7 +12004,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminNotificationEvent_002-Ticket">
                 <term>Loader::Module::AdminNotificationEvent###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -11989,7 +12018,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminOTRSBusiness_001-Framework">
                 <term>Loader::Module::AdminOTRSBusiness###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12001,7 +12030,7 @@ CSS:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPackageManager_001-Framework">
                 <term>Loader::Module::AdminPackageManager###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12015,7 +12044,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPerformanceLog_001-Framework">
                 <term>Loader::Module::AdminPerformanceLog###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12027,7 +12056,7 @@ CSS:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPostMasterFilter_001-Framework">
                 <term>Loader::Module::AdminPostMasterFilter###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12041,7 +12070,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPriority_002-Ticket">
                 <term>Loader::Module::AdminPriority###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12054,7 +12083,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagement_002-ProcessManagement">
                 <term>Loader::Module::AdminProcessManagement###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12074,7 +12103,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementActivity_002-ProcessManagement">
                 <term>Loader::Module::AdminProcessManagementActivity###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12090,7 +12119,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementActivityDialog_002-ProcessManagement">
                 <term>Loader::Module::AdminProcessManagementActivityDialog###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12106,7 +12135,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementPath_002-ProcessManagement">
                 <term>Loader::Module::AdminProcessManagementPath###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12122,7 +12151,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementTransition_002-ProcessManagement">
                 <term>Loader::Module::AdminProcessManagementTransition###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12136,7 +12165,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminProcessManagementTransitionAction_002-ProcessManagement">
                 <term>Loader::Module::AdminProcessManagementTransitionAction###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12150,7 +12179,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminQueue_002-Ticket">
                 <term>Loader::Module::AdminQueue###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12163,7 +12192,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminQueueAutoResponse_002-Ticket">
                 <term>Loader::Module::AdminQueueAutoResponse###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12175,7 +12204,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminQueueTemplates_002-Ticket">
                 <term>Loader::Module::AdminQueueTemplates###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12187,7 +12216,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminRegistration_001-Framework">
                 <term>Loader::Module::AdminRegistration###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12201,7 +12230,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminRole_001-Framework">
                 <term>Loader::Module::AdminRole###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12213,7 +12242,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminRoleGroup_001-Framework">
                 <term>Loader::Module::AdminRoleGroup###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12225,7 +12254,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminRoleUser_001-Framework">
                 <term>Loader::Module::AdminRoleUser###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12237,7 +12266,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSLA_002-Ticket">
                 <term>Loader::Module::AdminSLA###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12249,7 +12278,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSMIME_001-Framework">
                 <term>Loader::Module::AdminSMIME###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12261,7 +12290,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSalutation_002-Ticket">
                 <term>Loader::Module::AdminSalutation###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12273,7 +12302,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSelectBox_001-Framework">
                 <term>Loader::Module::AdminSelectBox###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12285,7 +12314,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminService_002-Ticket">
                 <term>Loader::Module::AdminService###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12297,7 +12326,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSession_001-Framework">
                 <term>Loader::Module::AdminSession###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12309,7 +12338,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSignature_002-Ticket">
                 <term>Loader::Module::AdminSignature###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12321,7 +12350,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminState_002-Ticket">
                 <term>Loader::Module::AdminState###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12334,7 +12363,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSupportDataCollector_001-Framework">
                 <term>Loader::Module::AdminSupportDataCollector###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12348,7 +12377,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSystemAddress_002-Ticket">
                 <term>Loader::Module::AdminSystemAddress###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12360,7 +12389,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSystemConfiguration_001-Framework">
                 <term>Loader::Module::AdminSystemConfiguration###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -12383,7 +12412,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSystemConfigurationDeployment_001-Framework">
                 <term>Loader::Module::AdminSystemConfigurationDeployment###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -12399,7 +12428,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSystemConfigurationGroup_001-Framework">
                 <term>Loader::Module::AdminSystemConfigurationGroup###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -12422,7 +12451,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSystemMaintenance_001-Framework">
                 <term>Loader::Module::AdminSystemMaintenance###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12434,7 +12463,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminTemplate_002-Ticket">
                 <term>Loader::Module::AdminTemplate###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12446,7 +12475,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminTemplateAttachment_002-Ticket">
                 <term>Loader::Module::AdminTemplateAttachment###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12458,7 +12487,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminType_002-Ticket">
                 <term>Loader::Module::AdminType###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -12471,7 +12500,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminUserGroup_001-Framework">
                 <term>Loader::Module::AdminUserGroup###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -13462,10 +13491,10 @@ Prio: '120'
             <varlistentry id="ConfigReference_Setting_AgentLoginLogo">
                 <term>AgentLoginLogo</term>
                 <listitem>
-                    <para>The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</para>
+                    <para>服务人员界面显示在登录窗口顶部的LOGO，图片的URL地址可以是皮肤图片目录的相对路径，也可以是远程WEB服务器的完整地址。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
-StyleHeight: 70px
+StyleHeight: 60px
 URL: skins/Agent/default/img/loginlogo_default.png
 ]]></programlisting>
                     </para>
@@ -13478,9 +13507,9 @@ URL: skins/Agent/default/img/loginlogo_default.png
                     <para>默认值:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13494,9 +13523,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>默认值:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13505,13 +13534,13 @@ URL: skins/Agent/default/img/logo_bg.png
             <varlistentry id="ConfigReference_Setting_AgentLogoCustom_highcontrast">
                 <term>AgentLogoCustom###highcontrast</term>
                 <listitem>
-                    <para>The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</para>
+                    <para>服务人员界面“High Contrast（高对比度）”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
-StyleHeight: 45px
-StyleRight: 45px
-StyleTop: 10px
-StyleWidth: 220px
+StyleHeight: 55px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13524,9 +13553,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>默认值:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13715,6 +13744,17 @@ Type: '1'
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Gravatar::ArticleDefaultImage">
+                <term>Frontend::Gravatar::ArticleDefaultImage</term>
+                <listitem>
+                    <para>Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check http://gravatar.com/site/implement/images/ for further information.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- mm
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -14414,6 +14454,18 @@ Module: Kernel::Output::HTML::Notification::AgentTimeZoneCheck
                     <para>默认值:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::Notification::DaemonCheck
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_8000-PackageManager-CheckNotVerifiedPackages">
+                <term>Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages</term>
+                <listitem>
+                    <para>Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -15593,7 +15645,7 @@ Module: Kernel::Output::HTML::NavBar::AgentTicketService
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentAppointmentAgendaOverview_002-Calendar">
                 <term>Loader::Module::AgentAppointmentAgendaOverview###002-Calendar</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15611,7 +15663,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentAppointmentCalendarOverview_002-Calendar">
                 <term>Loader::Module::AgentAppointmentCalendarOverview###002-Calendar</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15631,7 +15683,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentCustomerInformationCenter_001-Framework">
                 <term>Loader::Module::AgentCustomerInformationCenter###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15648,7 +15700,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentCustomerUserAddressBook_001-Framework">
                 <term>Loader::Module::AgentCustomerUserAddressBook###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15662,7 +15714,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentCustomerUserInformationCenter_001-Framework">
                 <term>Loader::Module::AgentCustomerUserInformationCenter###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15679,7 +15731,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentDashboard_001-Framework">
                 <term>Loader::Module::AgentDashboard###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15711,7 +15763,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentLinkObject_001-Framework">
                 <term>Loader::Module::AgentLinkObject###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15723,7 +15775,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentOTRSBusiness_001-Framework">
                 <term>Loader::Module::AgentOTRSBusiness###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15735,7 +15787,7 @@ CSS:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentPreferences_001-Framework">
                 <term>Loader::Module::AgentPreferences###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15754,7 +15806,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentStatistics_001-Framework">
                 <term>Loader::Module::AgentStatistics###001-Framework</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15780,7 +15832,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketBounce_002-Ticket">
                 <term>Loader::Module::AgentTicketBounce###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15792,7 +15844,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketBulk_002-Ticket">
                 <term>Loader::Module::AgentTicketBulk###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15805,7 +15857,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketClose_002-Ticket">
                 <term>Loader::Module::AgentTicketClose###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15819,7 +15871,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketCompose_002-Ticket">
                 <term>Loader::Module::AgentTicketCompose###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15835,7 +15887,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketCustomer_002-Ticket">
                 <term>Loader::Module::AgentTicketCustomer###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15850,7 +15902,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketEmail_002-Ticket">
                 <term>Loader::Module::AgentTicketEmail###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15866,7 +15918,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketEmailOutbound_002-Ticket">
                 <term>Loader::Module::AgentTicketEmailOutbound###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15882,7 +15934,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketEmailResend_002-Ticket">
                 <term>Loader::Module::AgentTicketEmailResend###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15897,7 +15949,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketEscalationView_002-Ticket">
                 <term>Loader::Module::AgentTicketEscalationView###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15914,7 +15966,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketForward_002-Ticket">
                 <term>Loader::Module::AgentTicketForward###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15930,7 +15982,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketFreeText_002-Ticket">
                 <term>Loader::Module::AgentTicketFreeText###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15944,7 +15996,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketHistory_002-Ticket">
                 <term>Loader::Module::AgentTicketHistory###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15958,7 +16010,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketLockedView_002-Ticket">
                 <term>Loader::Module::AgentTicketLockedView###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -15976,7 +16028,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketMerge_002-Ticket">
                 <term>Loader::Module::AgentTicketMerge###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -15988,7 +16040,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketMove_002-Ticket">
                 <term>Loader::Module::AgentTicketMove###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16002,7 +16054,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketNote_002-Ticket">
                 <term>Loader::Module::AgentTicketNote###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16016,7 +16068,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketOwner_002-Ticket">
                 <term>Loader::Module::AgentTicketOwner###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16030,7 +16082,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketPending_002-Ticket">
                 <term>Loader::Module::AgentTicketPending###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16044,7 +16096,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketPhone_002-Ticket">
                 <term>Loader::Module::AgentTicketPhone###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16060,7 +16112,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketPhoneInbound_002-Ticket">
                 <term>Loader::Module::AgentTicketPhoneInbound###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16074,7 +16126,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketPhoneOutbound_002-Ticket">
                 <term>Loader::Module::AgentTicketPhoneOutbound###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16088,7 +16140,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketPriority_002-Ticket">
                 <term>Loader::Module::AgentTicketPriority###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16102,7 +16154,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketProcess_002-ProcessManagement">
                 <term>Loader::Module::AgentTicketProcess###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16120,7 +16172,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketQueue_002-Ticket">
                 <term>Loader::Module::AgentTicketQueue###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16138,7 +16190,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketResponsible_002-Ticket">
                 <term>Loader::Module::AgentTicketResponsible###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -16152,7 +16204,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketResponsibleView_002-Ticket">
                 <term>Loader::Module::AgentTicketResponsibleView###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16169,7 +16221,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketSearch_002-Ticket">
                 <term>Loader::Module::AgentTicketSearch###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16186,7 +16238,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketService_002-Ticket">
                 <term>Loader::Module::AgentTicketService###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16204,7 +16256,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketStatusView_002-Ticket">
                 <term>Loader::Module::AgentTicketStatusView###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16221,7 +16273,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketWatchView_002-Ticket">
                 <term>Loader::Module::AgentTicketWatchView###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16239,7 +16291,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::AgentTicketZoom_002-Ticket">
                 <term>Loader::Module::AgentTicketZoom###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>客户界面的加载器模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -16813,7 +16865,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Overview_Medium">
                 <term>Ticket::Frontend::Overview###Medium</term>
                 <listitem>
-                    <para>允许拥有一个基本格式工单概览视图（如果CustomerInfo =&gt; 1还将显示客户信息）。</para>
+                    <para>允许拥有一个基本版式的工单概览视图（如果CustomerInfo =&gt; 1还将显示客户信息）。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CustomerInfo: '0'
@@ -16851,7 +16903,7 @@ TicketActionsPerTicket: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Overview_Small">
                 <term>Ticket::Frontend::Overview###Small</term>
                 <listitem>
-                    <para>允许拥有一个简洁格式工单概览视图（如果CustomerInfo =&gt; 1还将显示客户信息）。</para>
+                    <para>允许拥有一个简洁版式的工单概览视图（如果CustomerInfo =&gt; 1还将显示客户信息）。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CustomerInfo: '1'
@@ -16866,7 +16918,7 @@ NameShort: S
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::Overview::PreviewArticleLimit">
                 <term>Ticket::Frontend::Overview::PreviewArticleLimit</term>
                 <listitem>
-                    <para>设置工单概览的预览模式中工单计数是可见的。</para>
+                    <para>设置工单概览预览版式中可见的信件数。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '5'
@@ -16902,7 +16954,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewMedium_DynamicField">
                 <term>Ticket::Frontend::OverviewMedium###DynamicField</term>
                 <listitem>
-                    <para>在服务人员界面的工单基本格式概览屏幕中显示的动态字段。</para>
+                    <para>在服务人员界面的工单概览基本版式屏幕中显示的动态字段。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -16922,7 +16974,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewSmall_DynamicField">
                 <term>Ticket::Frontend::OverviewSmall###DynamicField</term>
                 <listitem>
-                    <para>在服务人员界面的简洁格式工单概览屏幕中显示的动态字段。</para>
+                    <para>在服务人员界面的工单概览简洁版式屏幕中显示的动态字段。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -18647,7 +18699,7 @@ Type: Type
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_AppointmentNotificationEvent">
                 <term>PreferencesGroups###AppointmentNotificationEvent</term>
                 <listitem>
-                    <para>Transport selection for appointment notifications. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>预约通知的传输选项。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18664,7 +18716,7 @@ Prio: '8001'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Avatar">
                 <term>PreferencesGroups###Avatar</term>
                 <listitem>
-                    <para>Defines the users avatar. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义用户头像。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18682,7 +18734,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CSVSeparator">
                 <term>PreferencesGroups###CSVSeparator</term>
                 <listitem>
-                    <para>Gives end users the possibility to override the separator character for CSV files, defined in the translation files. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>使最终用户能够覆盖转换文件中定义的CSV文件分隔符。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -18709,7 +18761,7 @@ Prio: '4000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Comment">
                 <term>PreferencesGroups###Comment</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -18756,7 +18808,7 @@ Prio: '8100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CreateNextMask">
                 <term>PreferencesGroups###CreateNextMask</term>
                 <listitem>
-                    <para>Parameters for the CreateNextMask object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>服务人员界面的偏好设置视图中CreateNextMask对象的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18778,7 +18830,7 @@ Prio: '3000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CustomQueue">
                 <term>PreferencesGroups###CustomQueue</term>
                 <listitem>
-                    <para>Parameters for the CustomQueue object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>服务人员界面的偏好设置视图中CustomQueue 对象的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18797,7 +18849,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CustomService">
                 <term>PreferencesGroups###CustomService</term>
                 <listitem>
-                    <para>Parameters for the CustomService object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>服务人员界面的偏好设置视图中CustomService 对象的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18815,7 +18867,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_DynamicField">
                 <term>PreferencesGroups###DynamicField</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -18836,7 +18888,7 @@ Prio: '7000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_DynamicFieldsOverviewPageShown">
                 <term>PreferencesGroups###DynamicFieldsOverviewPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the dynamic fields are shown) of the dynamic fields overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>动态字段概览页面（用来显示动态字段）的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -18862,7 +18914,7 @@ Prio: '8000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_GoogleAuthenticatorSecretKey">
                 <term>PreferencesGroups###GoogleAuthenticatorSecretKey</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -18884,7 +18936,7 @@ ValidateRegexMessage: The secret you supplied is invalid. The secret must only c
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Language">
                 <term>PreferencesGroups###Language</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18903,7 +18955,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_NotificationEvent">
                 <term>PreferencesGroups###NotificationEvent</term>
                 <listitem>
-                    <para>Transport selection for ticket notifications. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>工单通知的传输选项。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18921,7 +18973,7 @@ Prio: '8000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_OutOfOffice">
                 <term>PreferencesGroups###OutOfOffice</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18941,7 +18993,7 @@ Prio: '4000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Password">
                 <term>PreferencesGroups###Password</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. 'PasswordRegExp' allows to match passwords against a regular expression. Define the minimum number of characters using 'PasswordMinSize'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to '1'. 'PasswordMin2Characters' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). 'PasswordNeedDigit' controls the need of at least 1 digit (set to 0 or 1 to control). 'PasswordMaxLoginFailed' allows to set an agent to invalid-temporarily if max failed logins reached. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义在偏好设置中这个条目的配置参数。'PasswordRegExp'保证密码不匹配一个正则表达式；'PasswordMinSize'定义密码的最小字符数；如果至少需要2个小写字母和2个大写字母就设置合适的选项为“1”，'PasswordMin2Characters'定义密码如果要包含至少2个字母字符（设置为0或1）；'PasswordNeedDigit'控制是否至少包含1个数字（设置为0或1）；'PasswordMaxLoginFailed'设置最大登录失败数，一个服务人员在登录失败次数达到这个数后会临时无效。请注意：将'Active（激活）'设置为0只会阻止服务人员根据他们的个人偏好编辑此组的设置，但仍然允许管理员以其他用户的名义编辑其偏好设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18964,7 +19016,7 @@ Prio: '0500'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_RefreshTime">
                 <term>PreferencesGroups###RefreshTime</term>
                 <listitem>
-                    <para>Parameters for the RefreshTime object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>服务人员界面的偏好设置视图中RefreshTime （刷新时间）对象的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18991,7 +19043,7 @@ Prio: '2000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Skin">
                 <term>PreferencesGroups###Skin</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -19010,7 +19062,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Theme">
                 <term>PreferencesGroups###Theme</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -19029,7 +19081,7 @@ Prio: '3000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewFilterSettings">
                 <term>PreferencesGroups###TicketOverviewFilterSettings</term>
                 <listitem>
-                    <para>Parameters for the column filters of the small ticket overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>工单概览简洁版式的列过滤器参数。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19047,7 +19099,7 @@ Prio: '8100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewMediumPageShown">
                 <term>PreferencesGroups###TicketOverviewMediumPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the tickets are shown) of the medium ticket overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>工单概览基本版式页面（用来显示工单）的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19073,7 +19125,7 @@ Prio: '8100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewPreviewPageShown">
                 <term>PreferencesGroups###TicketOverviewPreviewPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the tickets are shown) of the ticket preview overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>工单概览预览版式页面（用来显示工单）的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19099,7 +19151,7 @@ Prio: '8200'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewSmallPageShown">
                 <term>PreferencesGroups###TicketOverviewSmallPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the tickets are shown) of the small ticket overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>工单概览简洁版式页面（用来显示工单）的参数。请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19125,7 +19177,7 @@ Prio: '8000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TimeZone">
                 <term>PreferencesGroups###TimeZone</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>定义此条目的配置参数，以显示在偏好设置视图中。 请注意：将'Active（激活）'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用'PreferenceGroup'来控制这些设置应该显示在用户界面的哪个区域。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -23915,28 +23967,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Body">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Body</term>
-                <listitem>
-                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
-                    <para>这个设置默认没有激活。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Cc">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Cc</term>
-                <listitem>
-                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
-                    <para>这个设置默认没有激活。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_CustomerID">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###CustomerID</term>
                 <listitem>
@@ -23970,8 +24000,19 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_From">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###From</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
+                    <para>这个设置可以在用户偏好设置中被覆盖。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Body">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Body</term>
                 <listitem>
                     <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
                     <para>这个设置默认没有激活。</para>
@@ -23981,11 +24022,44 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Cc">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Cc</term>
                 <listitem>
                     <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
-                    <para>这个设置可以在用户偏好设置中被覆盖。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_From">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_From</term>
+                <listitem>
+                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Subject">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Subject</term>
+                <listitem>
+                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_To">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_To</term>
+                <listitem>
+                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
+                    <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -24043,17 +24117,6 @@ Type: '1'
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Subject">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Subject</term>
-                <listitem>
-                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
-                    <para>这个设置默认没有激活。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -24159,17 +24222,6 @@ Type: '1'
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Title">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###Title</term>
-                <listitem>
-                    <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
-                    <para>这个设置默认没有激活。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_To">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###To</term>
                 <listitem>
                     <para>定义工单搜索屏幕中默认显示的工单搜索属性。</para>
                     <para>这个设置默认没有激活。</para>
@@ -24646,7 +24698,7 @@ Module: Kernel::Output::HTML::TicketZoom::LinkTable
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentZoomExpand">
                 <term>Ticket::Frontend::AgentZoomExpand</term>
                 <listitem>
-                    <para>Shows all the articles of the ticket (expanded) in the agent zoom view.</para>
+                    <para>在服务人员工单详情视图中展开显示这个工单所有的信件。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -25224,7 +25276,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_400-Owner">
                 <term>Ticket::Frontend::MenuModule###400-Owner</term>
                 <listitem>
-                    <para>在服务人员界面工单详情视图中，为查看工单所有者菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。</para>
+                    <para>Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Action: AgentTicketOwner
@@ -25243,7 +25295,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_410-Responsible">
                 <term>Ticket::Frontend::MenuModule###410-Responsible</term>
                 <listitem>
-                    <para>在服务人员界面工单详情视图中，为查看工单负责人菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。</para>
+                    <para>Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Action: AgentTicketResponsible
@@ -25262,7 +25314,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Customer">
                 <term>Ticket::Frontend::MenuModule###420-Customer</term>
                 <listitem>
-                    <para>在服务人员界面工单详情视图中，为查看请求工单的客户菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。在服务人员界面工单详情视图中，为锁定/解锁工单菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。</para>
+                    <para>Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Action: AgentTicketCustomer
@@ -25300,7 +25352,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_425-Phone_Call_Outbound">
                 <term>Ticket::Frontend::MenuModule###425-Phone Call Outbound</term>
                 <listitem>
-                    <para>在服务人员界面工单详情视图中，为添加工单备注菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。</para>
+                    <para>Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneOutbound
@@ -25319,7 +25371,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_426-Phone_Call_Inbound">
                 <term>Ticket::Frontend::MenuModule###426-Phone Call Inbound</term>
                 <listitem>
-                    <para>在服务人员界面工单详情视图中，为添加工单备注菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。</para>
+                    <para>Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneInbound
@@ -25860,7 +25912,7 @@ zh_TW: 正體中文
             <varlistentry id="ConfigReference_Setting_Frontend::RichText::EnhancedMode">
                 <term>Frontend::RichText::EnhancedMode</term>
                 <listitem>
-                    <para>定义是否使用增加模式（可以使用表格、替换、下标、上标、从WORD中粘贴等等）。</para>
+                    <para>定义是否使用增强模式（启用表格、替换、下标、上标、从WORD粘贴等功能）。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -26784,10 +26836,10 @@ Value: Ticket::CustomerID::Other
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
-StyleHeight: 50px
+StyleHeight: 45px
 StyleRight: 25px
-StyleTop: 2px
-StyleWidth: 135px
+StyleTop: 9px
+StyleWidth: 300px
 URL: skins/Customer/default/img/logo.png
 ]]></programlisting>
                     </para>
@@ -27265,7 +27317,7 @@ Module: Kernel::Output::HTML::Notification::CustomerUserTimeZoneCheck
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_AjaxAttachment">
                 <term>CustomerFrontend::Module###AjaxAttachment</term>
                 <listitem>
-                    <para>服务人员界面的前端模块注册。</para>
+                    <para>客户界面的前端模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Description: AjaxAttachment
@@ -27478,7 +27530,7 @@ Module: Kernel::Output::HTML::NavBar::CustomerTicketProcess
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
                 <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27490,7 +27542,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketProcess_002-ProcessManagement">
                 <term>Loader::Module::CustomerTicketProcess###002-ProcessManagement</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 CSS:
@@ -27506,7 +27558,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketSearch_002-Ticket">
                 <term>Loader::Module::CustomerTicketSearch###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27518,7 +27570,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketZoom_002-Ticket">
                 <term>Loader::Module::CustomerTicketZoom###002-Ticket</term>
                 <listitem>
-                    <para>客户界面的装载器模块注册。</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27978,7 +28030,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
                 <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
                 <listitem>
-                    <para>在客户界面允许设置工单的队列，如果此处设置为“NO”，则需要配置参数QueueDefault（默认队列）。</para>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -28064,7 +28116,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
                 <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
                 <listitem>
-                    <para>在客户界面允许设置工单的类型，如果此处设置为“NO”，需要设置工单默认类型。</para>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -28092,7 +28144,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverview_ColumnHeader">
                 <term>Ticket::Frontend::CustomerTicketOverview###ColumnHeader</term>
                 <listitem>
-                    <para>在简洁模式工单概览中显示最近的客户信件的主题或工单标题。</para>
+                    <para>在工单概览简洁版式中显示最近的客户信件的主题或工单标题。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- TicketTitle
 ]]></programlisting>
@@ -28339,7 +28391,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_CustomerZoomExpand">
                 <term>Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand</term>
                 <listitem>
-                    <para>Shows all the articles of the ticket (expanded) in the customer zoom view.</para>
+                    <para>在客户的工单详情视图中展开显示这个工单所有的信件。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -28505,7 +28557,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicCalendar">
                 <term>PublicFrontend::Module###PublicCalendar</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公共界面的前端模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Description: Public calendar.
@@ -28520,7 +28572,7 @@ Title: Public Calendar
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicDefault">
                 <term>PublicFrontend::Module###PublicDefault</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公共界面的前端模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Description: PublicDefault
@@ -28535,7 +28587,7 @@ Title: PublicDefault
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
                 <term>PublicFrontend::Module###PublicRepository</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公共界面的前端模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Description: PublicRepository
@@ -28550,7 +28602,7 @@ Title: PublicRepository
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicSupportDataCollector">
                 <term>PublicFrontend::Module###PublicSupportDataCollector</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>公共界面的前端模块注册。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Description: PublicSupportDataCollector

@@ -12,7 +12,7 @@
             <varlistentry id="ConfigReference_Setting_CloudServices::Disabled">
                 <term>CloudServices::Disabled</term>
                 <listitem>
-                    <para>Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to 'Disable cloud services', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.</para>
+                    <para>Meghatározza, hogy lehetséges-e a kommunikáció a rendszer és az OTRS csoport azon kiszolgálói között, amelyek felhőszolgáltatásokat nyújtanak. Ha „Felhőszolgáltatások letiltása” értékre van állítva, akkor néhány funkcionalitás el fog veszi, mint például a rendszer regisztráció, a támogatási adatok küldése, az OTRS Business Solution™ használata és az arra történő frissítés, az OTRS Verify™, az OTRS hírek és termékhírek vezérlőpult felületi elemek, stb.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -2570,6 +2570,25 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_LinkObject">
+        <title>Core → Event → LinkObject</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_LinkObject::EventModulePost_9900-GenericInterface">
+                <term>LinkObject::EventModulePost###9900-GenericInterface</term>
+                <listitem>
+                    <para>Végrehajtja a beállított műveletet minden eseménynél (mint egy meghívó) minden egyes beállított webszolgáltatáshoz.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::GenericInterface::Event::Handler
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_Package">
         <title>Core → Event → Package</title>
         <variablelist>
@@ -2780,7 +2799,7 @@ Transaction: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_7000-NotificationEvent">
                 <term>Ticket::EventModulePost###7000-NotificationEvent</term>
                 <listitem>
-                    <para>Sends the notifications which are configured in the admin interface under "Ticket Notifications".</para>
+                    <para>Elküldi azokat az értesítéseket, amelyek az adminisztrációs felületen a „Jegyértesítések” alatt vannak beállítva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Event: ''
@@ -3247,6 +3266,16 @@ ItemMaxAttempts: '3'
                 <listitem>
                     <para>Ha ez a beállítás engedélyezve van, akkor a helyi módosítások nem lesznek hibaként kiemelve a csomagkezelőben és támogatási adatgyűjtőben.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::AllowNotVerifiedPackages">
+                <term>Package::AllowNotVerifiedPackages</term>
+                <listitem>
+                    <para>If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
 ]]></programlisting>
@@ -4435,7 +4464,7 @@ pending reminder: open
             <varlistentry id="ConfigReference_Setting_Ticket::NumberGenerator::Date::UseFormattedCounter">
                 <term>Ticket::NumberGenerator::Date::UseFormattedCounter</term>
                 <listitem>
-                    <para>Engedélyezi a legkisebb jegyszámláló méretet (ha „Dátum” lett kiválasztva mint jegyszám-előállító).</para>
+                    <para>Engedélyezi a legkisebb jegyszámláló méretet (ha „Date” lett kiválasztva mint jegyszám-előállító).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -4446,7 +4475,7 @@ pending reminder: open
             <varlistentry id="ConfigReference_Setting_Ticket::NumberGenerator::MinCounterSize">
                 <term>Ticket::NumberGenerator::MinCounterSize</term>
                 <listitem>
-                    <para>Beállítja a legkisebb jegyszámlálóméretet, ha „Automatikus növelés” lett kiválasztva jegyszám-előállítóként. Alapértelmezetten 5, amely azt jelenti, hogy a számláló 10000-től indul.</para>
+                    <para>Beállítja a legkisebb jegyszámlálóméretet, ha „AutoIncrement” lett kiválasztva jegyszám-előállítóként. Alapértelmezetten 5, amely azt jelenti, hogy a számláló 10000-től indul.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '5'
@@ -8836,7 +8865,7 @@ TaskName: TicketDraftDeleteExpired
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_TicketNumberCounterCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###TicketNumberCounterCleanup</term>
                 <listitem>
-                    <para>Eltávolítja a régi jegyszám számlálókat (vasárnap reggelente).</para>
+                    <para>Removes old ticket number counters (each 10 minutes).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -8995,7 +9024,7 @@ TaskName: WebUploadCacheCleanup
             <varlistentry id="ConfigReference_Setting_Events_Article">
                 <term>Events###Article</term>
                 <listitem>
-                    <para>Az összes bejegyzés esemény listája, amelyek megjelennek a grafikus felületen.</para>
+                    <para>Az összes bejegyzésesemény listája, amelyek megjelennek a grafikus felületen.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -9033,7 +9062,7 @@ TaskName: WebUploadCacheCleanup
             <varlistentry id="ConfigReference_Setting_Events_CustomerCompany">
                 <term>Events###CustomerCompany</term>
                 <listitem>
-                    <para>Az összes CustomerCompany esemény listája, amelyek megjelennek a grafikus felületen.</para>
+                    <para>Az összes ügyfélvállalat-esemény listája, amelyek megjelennek a grafikus felületen.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -9046,7 +9075,7 @@ TaskName: WebUploadCacheCleanup
             <varlistentry id="ConfigReference_Setting_Events_CustomerUser">
                 <term>Events###CustomerUser</term>
                 <listitem>
-                    <para>Az összes CustomerUser esemény listája, amelyek megjelennek a grafikus felületen.</para>
+                    <para>Az összes ügyfélfelhasználó-esemény listája, amelyek megjelennek a grafikus felületen.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -9086,7 +9115,7 @@ TaskName: WebUploadCacheCleanup
             <varlistentry id="ConfigReference_Setting_Events_Package">
                 <term>Events###Package</term>
                 <listitem>
-                    <para>Az összes Package esemény listája, amelyek megjelennek a grafikus felületen.</para>
+                    <para>Az összes csomagesemény listája, amelyek megjelennek a grafikus felületen.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -9101,7 +9130,7 @@ TaskName: WebUploadCacheCleanup
             <varlistentry id="ConfigReference_Setting_Events_Queue">
                 <term>Events###Queue</term>
                 <listitem>
-                    <para>Az összes várólista esemény listája, amelyek megjelennek a grafikus felületen.</para>
+                    <para>Az összes várólista-esemény listája, amelyek megjelennek a grafikus felületen.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -13462,10 +13491,10 @@ Prio: '120'
             <varlistentry id="ConfigReference_Setting_AgentLoginLogo">
                 <term>AgentLoginLogo</term>
                 <listitem>
-                    <para>The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</para>
+                    <para>Az ügyintéző felület bejelentkező doboza fölött megjelenített logó. A kép URL lehet relatív URL a felszín képkönyvtárától, vagy egy teljes URL egy távoli webkiszolgálótól.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
-StyleHeight: 70px
+StyleHeight: 60px
 URL: skins/Agent/default/img/loginlogo_default.png
 ]]></programlisting>
                     </para>
@@ -13478,9 +13507,9 @@ URL: skins/Agent/default/img/loginlogo_default.png
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13494,9 +13523,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13505,13 +13534,13 @@ URL: skins/Agent/default/img/logo_bg.png
             <varlistentry id="ConfigReference_Setting_AgentLogoCustom_highcontrast">
                 <term>AgentLogoCustom###highcontrast</term>
                 <listitem>
-                    <para>The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</para>
+                    <para>Az ügyintézői felület fejlécében megjelenített logó a „Nagy kontraszt” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
-StyleHeight: 45px
-StyleRight: 45px
-StyleTop: 10px
-StyleWidth: 220px
+StyleHeight: 55px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13524,9 +13553,9 @@ URL: skins/Agent/default/img/logo_bg.png
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 StyleHeight: 55px
-StyleRight: 29px
-StyleTop: 21px
-StyleWidth: 230px
+StyleRight: 24px
+StyleTop: 7px
+StyleWidth: 300px
 URL: skins/Agent/default/img/logo_bg.png
 ]]></programlisting>
                     </para>
@@ -13715,6 +13744,17 @@ Type: '1'
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Gravatar::ArticleDefaultImage">
+                <term>Frontend::Gravatar::ArticleDefaultImage</term>
+                <listitem>
+                    <para>Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check http://gravatar.com/site/implement/images/ for further information.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- mm
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -14083,7 +14123,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::NewQueueSelectionString">
                 <term>Ticket::Frontend::NewQueueSelectionString</term>
                 <listitem>
-                    <para>Meghatározza azokat a szövegeket, amelyek a telefonos jegy címzettjeként (Címzett:), illetve az e-mail jegy küldőjeként (Feladó:) kerülnek megjelenítésre az ügyintézői felületen. A várólistánál mint NewQueueSelectionType „&lt;Queue&gt;” a várólisták neveit jeleníti meg, és a SystemAddress „&lt;Realname&gt; &lt;&lt;Email&gt;&gt;” esetén a címzett nevét és e-mail címét jeleníti meg.</para>
+                    <para>Meghatározza azokat a szövegeket, amelyek a telefonos jegy címzettjeként (Címzett:), illetve az e-mail jegy küldőjeként (Feladó:) kerülnek megjelenítésre az ügyintézői felületen. A NewQueueSelectionType beállításként megadott várólistánál a „&lt;Queue&gt;” a várólisták neveit jeleníti meg, és a rendszercímnél a „&lt;Realname&gt; &lt;&lt;Email&gt;&gt;” a címzett nevét és e-mail címét jeleníti meg.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- <Queue>
@@ -14414,6 +14454,18 @@ Module: Kernel::Output::HTML::Notification::AgentTimeZoneCheck
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::Notification::DaemonCheck
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NotifyModule_8000-PackageManager-CheckNotVerifiedPackages">
+                <term>Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages</term>
+                <listitem>
+                    <para>Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Module: Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -18647,7 +18699,7 @@ Type: Type
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_AppointmentNotificationEvent">
                 <term>PreferencesGroups###AppointmentNotificationEvent</term>
                 <listitem>
-                    <para>Transport selection for appointment notifications. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Átvitelkiválasztás az időpont-értesítésekhez. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18664,7 +18716,7 @@ Prio: '8001'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Avatar">
                 <term>PreferencesGroups###Avatar</term>
                 <listitem>
-                    <para>Defines the users avatar. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza a felhasználók avatárját. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18682,7 +18734,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CSVSeparator">
                 <term>PreferencesGroups###CSVSeparator</term>
                 <listitem>
-                    <para>Gives end users the possibility to override the separator character for CSV files, defined in the translation files. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Megadja a végfelhasználóknak azt a lehetőséget, hogy felülírják a CSV fájloknál a fordítási fájlokban meghatározott elválasztó karaktert. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -18709,7 +18761,7 @@ Prio: '4000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Comment">
                 <term>PreferencesGroups###Comment</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -18756,7 +18808,7 @@ Prio: '8100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CreateNextMask">
                 <term>PreferencesGroups###CreateNextMask</term>
                 <listitem>
-                    <para>Parameters for the CreateNextMask object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>A következő maszk létrehozása objektum paraméterei az ügyintézői felület beállítás nézetében. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18778,7 +18830,7 @@ Prio: '3000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CustomQueue">
                 <term>PreferencesGroups###CustomQueue</term>
                 <listitem>
-                    <para>Parameters for the CustomQueue object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Az egyéni várólista objektum paraméterei az ügyintézői felület beállítás nézetében. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18797,7 +18849,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_CustomService">
                 <term>PreferencesGroups###CustomService</term>
                 <listitem>
-                    <para>Parameters for the CustomService object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Az egyéni szolgáltatás objektum paraméterei az ügyintézői felület beállítás nézetében. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18815,7 +18867,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_DynamicField">
                 <term>PreferencesGroups###DynamicField</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -18836,7 +18888,7 @@ Prio: '7000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_DynamicFieldsOverviewPageShown">
                 <term>PreferencesGroups###DynamicFieldsOverviewPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the dynamic fields are shown) of the dynamic fields overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Paraméterek a dinamikus mezők áttekintőjének oldalaihoz (amelyben a dinamikus mezők vannak megjelenítve). Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -18862,7 +18914,7 @@ Prio: '8000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_GoogleAuthenticatorSecretKey">
                 <term>PreferencesGroups###GoogleAuthenticatorSecretKey</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -18884,7 +18936,7 @@ ValidateRegexMessage: The secret you supplied is invalid. The secret must only c
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Language">
                 <term>PreferencesGroups###Language</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18903,7 +18955,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_NotificationEvent">
                 <term>PreferencesGroups###NotificationEvent</term>
                 <listitem>
-                    <para>Transport selection for ticket notifications. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Átvitelkiválasztás a jegyértesítésekhez. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18921,7 +18973,7 @@ Prio: '8000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_OutOfOffice">
                 <term>PreferencesGroups###OutOfOffice</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18941,7 +18993,7 @@ Prio: '4000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Password">
                 <term>PreferencesGroups###Password</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. 'PasswordRegExp' allows to match passwords against a regular expression. Define the minimum number of characters using 'PasswordMinSize'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to '1'. 'PasswordMin2Characters' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). 'PasswordNeedDigit' controls the need of at least 1 digit (set to 0 or 1 to control). 'PasswordMaxLoginFailed' allows to set an agent to invalid-temporarily if max failed logins reached. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit a beállítások nézetben történő megjelenítéshez. A „PasswordRegExp” lehetővé teszi a jelszavak illesztését egy reguláris kifejezéssel. A „PasswordMinSize” használatával meghatározható a karakterek legkisebb száma. A megfelelő beállítás „1”-re állításával meghatározható, hogy legalább 2 kisbetűs és 2 nagybetűs karakter szükséges. A „PasswordMin2Characters” azt határozza meg, hogy a jelszónak tartalmaznia kell legalább 2 betű karaktert (állítsa 0-ra vagy 1-re). A „PasswordNeedDigit” szabályozza a legalább 1 számjegy szükségét (állítsa 0-ra vagy 1-re a szabályzáshoz). A „PasswordMaxLoginFailed” lehetővé teszi egy ügyintéző átmenetileg érvénytelenre állítását, ha a maximális sikertelen bejelentkezést elérte. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18964,7 +19016,7 @@ Prio: '0500'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_RefreshTime">
                 <term>PreferencesGroups###RefreshTime</term>
                 <listitem>
-                    <para>Parameters for the RefreshTime object in the preference view of the agent interface. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>A frissítési idő objektum paraméterei az ügyintézői felület beállítás nézetében. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -18991,7 +19043,7 @@ Prio: '2000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Skin">
                 <term>PreferencesGroups###Skin</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -19010,7 +19062,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_Theme">
                 <term>PreferencesGroups###Theme</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -19029,7 +19081,7 @@ Prio: '3000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewFilterSettings">
                 <term>PreferencesGroups###TicketOverviewFilterSettings</term>
                 <listitem>
-                    <para>Parameters for the column filters of the small ticket overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Paraméterek a kis jegyáttekintő oszlopszűrőihez. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19047,7 +19099,7 @@ Prio: '8100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewMediumPageShown">
                 <term>PreferencesGroups###TicketOverviewMediumPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the tickets are shown) of the medium ticket overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Paraméterek a közepes jegyáttekintő oldalaihoz (amelyben a jegyek vannak megjelenítve). Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19073,7 +19125,7 @@ Prio: '8100'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewPreviewPageShown">
                 <term>PreferencesGroups###TicketOverviewPreviewPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the tickets are shown) of the ticket preview overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Paraméterek a jegyelőnézet áttekintőjének oldalaihoz (amelyben a jegyek vannak megjelenítve). Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19099,7 +19151,7 @@ Prio: '8200'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TicketOverviewSmallPageShown">
                 <term>PreferencesGroups###TicketOverviewSmallPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the tickets are shown) of the small ticket overview. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Paraméterek a kis jegyáttekintő oldalaihoz (amelyben a jegyek vannak megjelenítve). Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -19125,7 +19177,7 @@ Prio: '8000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_TimeZone">
                 <term>PreferencesGroups###TimeZone</term>
                 <listitem>
-                    <para>Defines the config parameters of this item, to be shown in the preferences view. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface.</para>
+                    <para>Meghatározza ennek az elemnek a beállítási paramétereit, amelyek a beállítások nézetben jelennek meg. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '1'
@@ -23915,28 +23967,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Body">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Body</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Cc">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Cc</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_CustomerID">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###CustomerID</term>
                 <listitem>
@@ -23970,8 +24000,19 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_From">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###From</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás felülbírálható a felhasználói beállításokban.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Body">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Body</term>
                 <listitem>
                     <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -23981,11 +24022,44 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Fulltext">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Fulltext</term>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Cc">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Cc</term>
                 <listitem>
                     <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás felülbírálható a felhasználói beállításokban.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_From">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_From</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_Subject">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Subject</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_MIMEBase_To">
+                <term>Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_To</term>
+                <listitem>
+                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -24043,17 +24117,6 @@ Type: '1'
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Subject">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###Subject</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -24159,17 +24222,6 @@ Type: '1'
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_Title">
                 <term>Ticket::Frontend::AgentTicketSearch###Defaults###Title</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Defaults_To">
-                <term>Ticket::Frontend::AgentTicketSearch###Defaults###To</term>
                 <listitem>
                     <para>Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -24646,7 +24698,7 @@ Module: Kernel::Output::HTML::TicketZoom::LinkTable
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentZoomExpand">
                 <term>Ticket::Frontend::AgentZoomExpand</term>
                 <listitem>
-                    <para>Shows all the articles of the ticket (expanded) in the agent zoom view.</para>
+                    <para>Megjeleníti a jegy összes bejegyzését (kinyitva) az ügyintézői nagyítás nézetben.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -25224,7 +25276,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_400-Owner">
                 <term>Ticket::Frontend::MenuModule###400-Owner</term>
                 <listitem>
-                    <para>Egy hivatkozást jelenít meg a menüben egy jegy tulajdonosának megtekintéséhez az ügyintézői felület jegynagyítás nézetében. Ezen hivatkozás megjelenítéséhez vagy meg nem jelenítéséhez további hozzáférési vezérlőt lehet készíteni a „Group” kulcs és az „rw:csoport1;move_into:csoport2” tartalomhoz hasonló használatával. A menüpontok csoportokba rendezéséhez használja a „ClusterName” kulcsot bármilyen olyan tartalommal, amelyet a felhasználói felületen látni szeretne. Használja a „ClusterPriority” kulcsot egy bizonyos fürt sorrendjének beállításához az eszköztáron belül.</para>
+                    <para>Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: AgentTicketOwner
@@ -25243,7 +25295,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_410-Responsible">
                 <term>Ticket::Frontend::MenuModule###410-Responsible</term>
                 <listitem>
-                    <para>Egy hivatkozást jelenít meg a menüben egy jegy felelős ügyintézőjének megtekintéséhez az ügyintézői felület jegynagyítás nézetében. Ezen hivatkozás megjelenítéséhez vagy meg nem jelenítéséhez további hozzáférési vezérlőt lehet készíteni a „Group” kulcs és az „rw:csoport1;move_into:csoport2” tartalomhoz hasonló használatával. A menüpontok csoportokba rendezéséhez használja a „ClusterName” kulcsot bármilyen olyan tartalommal, amelyet a felhasználói felületen látni szeretne. Használja a „ClusterPriority” kulcsot egy bizonyos fürt sorrendjének beállításához az eszköztáron belül.</para>
+                    <para>Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: AgentTicketResponsible
@@ -25262,7 +25314,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_420-Customer">
                 <term>Ticket::Frontend::MenuModule###420-Customer</term>
                 <listitem>
-                    <para>Egy hivatkozást jelenít meg a menüben az ügyintézői felület jegynagyítás nézetében annak az ügyfélnek a megtekintéséhez, aki a jegyet kérte. Ezen hivatkozás megjelenítéséhez vagy meg nem jelenítéséhez további hozzáférési vezérlőt lehet készíteni a „Group” kulcs és az „rw:csoport1;move_into:csoport2” tartalomhoz hasonló használatával. A menüpontok csoportokba rendezéséhez használja a „ClusterName” kulcsot bármilyen olyan tartalommal, amelyet a felhasználói felületen látni szeretne. Használja a „ClusterPriority” kulcsot egy bizonyos fürt sorrendjének beállításához az eszköztáron belül.</para>
+                    <para>Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: AgentTicketCustomer
@@ -25300,7 +25352,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_425-Phone_Call_Outbound">
                 <term>Ticket::Frontend::MenuModule###425-Phone Call Outbound</term>
                 <listitem>
-                    <para>Egy hivatkozást jelenít meg a menüben egy jegyzet hozzáadásához az ügyintézői felület jegynagyítás nézetében. Ezen hivatkozás megjelenítéséhez vagy meg nem jelenítéséhez további hozzáférési vezérlőt lehet készíteni a „Group” kulcs és az „rw:csoport1;move_into:csoport2” tartalomhoz hasonló használatával. A menüpontok csoportokba rendezéséhez használja a „ClusterName” kulcsot bármilyen olyan tartalommal, amelyet a felhasználói felületen látni szeretne. Használja a „ClusterPriority” kulcsot egy bizonyos fürt sorrendjének beállításához az eszköztáron belül.</para>
+                    <para>Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneOutbound
@@ -25319,7 +25371,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::MenuModule_426-Phone_Call_Inbound">
                 <term>Ticket::Frontend::MenuModule###426-Phone Call Inbound</term>
                 <listitem>
-                    <para>Egy hivatkozást jelenít meg a menüben egy jegyzet hozzáadásához az ügyintézői felület jegynagyítás nézetében. Ezen hivatkozás megjelenítéséhez vagy meg nem jelenítéséhez további hozzáférési vezérlőt lehet készíteni a „Group” kulcs és az „rw:csoport1;move_into:csoport2” tartalomhoz hasonló használatával. A menüpontok csoportokba rendezéséhez használja a „ClusterName” kulcsot bármilyen olyan tartalommal, amelyet a felhasználói felületen látni szeretne. Használja a „ClusterPriority” kulcsot egy bizonyos fürt sorrendjének beállításához az eszköztáron belül.</para>
+                    <para>Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: AgentTicketPhoneInbound
@@ -26497,7 +26549,7 @@ Templates:
             <varlistentry id="ConfigReference_Setting_Frontend::Output::OutputFilterTextAutoLink_Bugtraq">
                 <term>Frontend::Output::OutputFilterTextAutoLink###Bugtraq</term>
                 <listitem>
-                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon a bugraq számok mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
+                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon a bugtraq számok mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -26784,10 +26836,10 @@ Value: Ticket::CustomerID::Other
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
-StyleHeight: 50px
+StyleHeight: 45px
 StyleRight: 25px
-StyleTop: 2px
-StyleWidth: 135px
+StyleTop: 9px
+StyleWidth: 300px
 URL: skins/Customer/default/img/logo.png
 ]]></programlisting>
                     </para>
@@ -27265,7 +27317,7 @@ Module: Kernel::Output::HTML::Notification::CustomerUserTimeZoneCheck
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_AjaxAttachment">
                 <term>CustomerFrontend::Module###AjaxAttachment</term>
                 <listitem>
-                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Előtétprogram-modul regisztráció az ügyfélfelülethez.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Description: AjaxAttachment
@@ -27478,7 +27530,7 @@ Module: Kernel::Output::HTML::NavBar::CustomerTicketProcess
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
                 <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
                 <listitem>
-                    <para>Betöltőmodul regisztráció az ügyintézői felülethez.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27490,7 +27542,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketProcess_002-ProcessManagement">
                 <term>Loader::Module::CustomerTicketProcess###002-ProcessManagement</term>
                 <listitem>
-                    <para>Betöltőmodul regisztráció az ügyintézői felülethez.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 CSS:
@@ -27506,7 +27558,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketSearch_002-Ticket">
                 <term>Loader::Module::CustomerTicketSearch###002-Ticket</term>
                 <listitem>
-                    <para>Betöltőmodul regisztráció az ügyintézői felülethez.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27518,7 +27570,7 @@ JavaScript:
             <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketZoom_002-Ticket">
                 <term>Loader::Module::CustomerTicketZoom###002-Ticket</term>
                 <listitem>
-                    <para>Betöltőmodul regisztráció az ügyintézői felülethez.</para>
+                    <para>Loader module registration for the customer interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 JavaScript:
@@ -27892,7 +27944,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_CustomerPanelSelectionString">
                 <term>CustomerPanelSelectionString</term>
                 <listitem>
-                    <para>Meghatározza azokat a szövegeket, amelyek a jegy címzettjeként (Címzett:) kerülnek megjelenítésre az ügyfélfelületen. A várólistánál mint CustomerPanelSelectionType, „&lt;Queue&gt;” a várólisták neveit jeleníti meg, és a SystemAddress „&lt;Realname&gt; &lt;&lt;Email&gt;&gt;” esetén a címzett nevét és e-mail címét jeleníti meg.</para>
+                    <para>Meghatározza azokat a szövegeket, amelyek a jegy címzettjeként (Címzett:) kerülnek megjelenítésre az ügyfélfelületen. A CustomerPanelSelectionType beállításként megadott várólistánál a „&lt;Queue&gt;” a várólisták neveit jeleníti meg, és a rendszercímnél a „&lt;Realname&gt; &lt;&lt;Email&gt;&gt;” a címzett nevét és e-mail címét jeleníti meg.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- <Queue>
 ]]></programlisting>
@@ -27978,7 +28030,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
                 <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
                 <listitem>
-                    <para>Lehetővé teszi az ügyfeleknek a jegy várólistájának beállítását az ügyfélfelületen. Ha ez „Nem” értékre van állítva, akkor az alapértelmezett várólista kerül beállításra.</para>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -28064,7 +28116,7 @@ Misc: Second Queue
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
                 <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
                 <listitem>
-                    <para>Lehetővé teszi az ügyfeleknek a jegy típusának beállítását az ügyfélfelületen. Ha ez „Nem” értékre van állítva, az alapértelmezett jegytípus kerül beállításra.</para>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -28339,7 +28391,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_CustomerZoomExpand">
                 <term>Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand</term>
                 <listitem>
-                    <para>Shows all the articles of the ticket (expanded) in the customer zoom view.</para>
+                    <para>Megjeleníti a jegy összes bejegyzését (kinyitva) az ügyfél nagyítás nézetben.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -28505,7 +28557,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicCalendar">
                 <term>PublicFrontend::Module###PublicCalendar</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Előtétprogram-modul regisztráció a nyilvános felülethez.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Description: Public calendar.
@@ -28520,7 +28572,7 @@ Title: Public Calendar
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicDefault">
                 <term>PublicFrontend::Module###PublicDefault</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Előtétprogram-modul regisztráció a nyilvános felülethez.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Description: PublicDefault
@@ -28535,7 +28587,7 @@ Title: PublicDefault
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
                 <term>PublicFrontend::Module###PublicRepository</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Előtétprogram-modul regisztráció a nyilvános felülethez.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Description: PublicRepository
@@ -28550,7 +28602,7 @@ Title: PublicRepository
             <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicSupportDataCollector">
                 <term>PublicFrontend::Module###PublicSupportDataCollector</term>
                 <listitem>
-                    <para>Frontend module registration for the public interface.</para>
+                    <para>Előtétprogram-modul regisztráció a nyilvános felülethez.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Description: PublicSupportDataCollector
