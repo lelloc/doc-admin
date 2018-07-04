@@ -3252,7 +3252,7 @@ Module: Kernel::System::Ticket::Event::ForceUnlock
                     <para>Update Ticket "Seen" flag if every article got seen or a new Article got created.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
-Event: ArticleCreate|ArticleFlagSet
+Event: ArticleCreate|ArticleFlagSet|ArticleCustomerFlagSet
 Module: Kernel::System::Ticket::Event::TicketNewMessageUpdate
 ]]></programlisting>
                     </para>
@@ -10366,6 +10366,8 @@ TaskName: WebUploadCacheCleanup
 - ArticleAutoResponse
 - ArticleFlagSet
 - ArticleFlagDelete
+- ArticleCustomerFlagSet
+- ArticleCustomerFlagDelete
 - ArticleAgentNotification
 - ArticleCustomerNotification
 - ArticleEmailSendingQueued
@@ -10499,7 +10501,9 @@ TaskName: WebUploadCacheCleanup
 - TicketSubscribe
 - TicketUnsubscribe
 - TicketFlagSet
+- TicketCustomerFlagSet
 - TicketFlagDelete
+- TicketCustomerFlagDelete
 - EscalationResponseTimeNotifyBefore
 - EscalationUpdateTimeNotifyBefore
 - EscalationSolutionTimeNotifyBefore
@@ -33579,6 +33583,20 @@ Type: '0'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverviewCustomEmptyText">
+                <term>Ticket::Frontend::ExternalTicketOverviewCustomEmptyText</term>
+                <listitem>
+                    <para>Custom text for the page shown to customers that have no tickets yet (if you need those text translated add them to a custom translation module).</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[---
+Button: Create your first ticket
+Text: Please click the button below to create your first ticket.
+Title: Welcome!
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 
@@ -33946,6 +33964,13 @@ Type: '0'
   Path: /account/reset/:token
   Props: '1'
 - Alias: ''
+  Component: TicketOverview
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /ticket-overview/:filter?
+  Props: '1'
+- Alias: ''
   Component: PersonalPreferences
   Group: []
   GroupRo: []
@@ -33969,6 +33994,70 @@ Type: '0'
   IsPublic: '1'
   Path: /sandbox
   Props: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_TicketList">
+        <title>Frontend → External → TicketList</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::StateMap">
+                <term>ExternalFrontend::StateMap</term>
+                <listitem>
+                    <para>Defines state name map for external interface.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_View_TicketOverview">
+        <title>Frontend → External → View → TicketOverview</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_ColumnHeader">
+                <term>Ticket::Frontend::ExternalTicketOverview###ColumnHeader</term>
+                <listitem>
+                    <para>Shows either the last customer article's subject or the ticket title in the external interface.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- TicketTitle
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_DynamicField">
+                <term>Ticket::Frontend::ExternalTicketOverview###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the ticket overview screen of the external interface.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_Owner">
+                <term>Ticket::Frontend::ExternalTicketOverview###Owner</term>
+                <listitem>
+                    <para>Show the current owner in the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_Queue">
+                <term>Ticket::Frontend::ExternalTicketOverview###Queue</term>
+                <listitem>
+                    <para>Show the current queue in the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- 0
 ]]></programlisting>
                     </para>
                 </listitem>
