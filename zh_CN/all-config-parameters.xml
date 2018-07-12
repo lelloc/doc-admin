@@ -6167,6 +6167,7 @@ User: User
 - AgentTicketWatcher
 - AgentTicketZoom
 - AgentLinkObject
+- AgentSplitSelection
 - CustomerTicketPrint
 - CustomerTicketProcess
 - CustomerTicketZoom
@@ -32925,6 +32926,185 @@ Prio: '2500'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Customer_View_TicketCreate">
+        <title>Frontend → Customer → View → TicketCreate</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_DynamicField">
+                <term>ExternalFrontend::TicketCreate###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_HistoryComment">
+                <term>ExternalFrontend::TicketCreate###HistoryComment</term>
+                <listitem>
+                    <para>在客户界面中新的历史条目的注释。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_HistoryType">
+                <term>ExternalFrontend::TicketCreate###HistoryType</term>
+                <listitem>
+                    <para>定义客户界面中的默认历史类型。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- WebRequestCustomer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_NextScreenAfterNewTicket">
+                <term>ExternalFrontend::TicketCreate###NextScreenAfterNewTicket</term>
+                <listitem>
+                    <para>确定在客户界面创建新客户工单后的下一个窗口。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- TicketOverview
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Priority">
+                <term>ExternalFrontend::TicketCreate###Priority</term>
+                <listitem>
+                    <para>在客户界面允许设置工单的优先级。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_PriorityDefault">
+                <term>ExternalFrontend::TicketCreate###PriorityDefault</term>
+                <listitem>
+                    <para>在客户界面中，创建客户工单的默认优先级。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Queue">
+                <term>ExternalFrontend::TicketCreate###Queue</term>
+                <listitem>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_QueueDefault">
+                <term>ExternalFrontend::TicketCreate###QueueDefault</term>
+                <listitem>
+                    <para>在客户界面中，创建客户工单的默认队列。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- Postmaster
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SLA">
+                <term>ExternalFrontend::TicketCreate###SLA</term>
+                <listitem>
+                    <para>在客户界面允许设置工单的SLA。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SLAMandatory">
+                <term>ExternalFrontend::TicketCreate###SLAMandatory</term>
+                <listitem>
+                    <para>设置是否必须由客户选择SLA。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SenderType">
+                <term>ExternalFrontend::TicketCreate###SenderType</term>
+                <listitem>
+                    <para>客户界面新工单的发件人类型。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- customer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Service">
+                <term>ExternalFrontend::TicketCreate###Service</term>
+                <listitem>
+                    <para>在客户界面允许设置工单所属的服务。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_ServiceMandatory">
+                <term>ExternalFrontend::TicketCreate###ServiceMandatory</term>
+                <listitem>
+                    <para>设置是否必须由客户选择服务。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_StateDefault">
+                <term>ExternalFrontend::TicketCreate###StateDefault</term>
+                <listitem>
+                    <para>定义客户界面中新建客户工单的默认状态。</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- new
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_TicketType">
+                <term>ExternalFrontend::TicketCreate###TicketType</term>
+                <listitem>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_TicketTypeDefault">
+                <term>ExternalFrontend::TicketCreate###TicketTypeDefault</term>
+                <listitem>
+                    <para>定义客户界面新建客户工单窗口默认的工单类型。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- Unclassified
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Customer_View_TicketMessage">
         <title>Frontend → Customer → View → TicketMessage</title>
         <variablelist>
@@ -33989,6 +34169,13 @@ Title: Welcome!
   GroupRo: []
   IsPublic: '0'
   Path: /personal-preferences/:category?
+  Props: '1'
+- Alias: ''
+  Component: TicketCreate
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /ticket-create/:fromChatID?
   Props: '1'
 ]]></programlisting>
                     </para>

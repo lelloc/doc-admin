@@ -6168,6 +6168,7 @@ User: User
 - AgentTicketWatcher
 - AgentTicketZoom
 - AgentLinkObject
+- AgentSplitSelection
 - CustomerTicketPrint
 - CustomerTicketProcess
 - CustomerTicketZoom
@@ -32926,6 +32927,185 @@ Prio: '2500'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Customer_View_TicketCreate">
+        <title>Frontend → Customer → View → TicketCreate</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_DynamicField">
+                <term>ExternalFrontend::TicketCreate###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_HistoryComment">
+                <term>ExternalFrontend::TicketCreate###HistoryComment</term>
+                <listitem>
+                    <para>顧客インタフェースの新規履歴エントリーのためのコメントです。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_HistoryType">
+                <term>ExternalFrontend::TicketCreate###HistoryType</term>
+                <listitem>
+                    <para>顧客インタフェースのデフォルトの履歴タイプを定義します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- WebRequestCustomer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_NextScreenAfterNewTicket">
+                <term>ExternalFrontend::TicketCreate###NextScreenAfterNewTicket</term>
+                <listitem>
+                    <para>顧客インタフェースで、新規顧客チケットの後の次の画面を決定します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- TicketOverview
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Priority">
+                <term>ExternalFrontend::TicketCreate###Priority</term>
+                <listitem>
+                    <para>顧客が顧客インタフェースでチケット優先度を設定することを、許可します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_PriorityDefault">
+                <term>ExternalFrontend::TicketCreate###PriorityDefault</term>
+                <listitem>
+                    <para>顧客インタフェースで、新規顧客チケットのデフォルトの優先度を定義します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Queue">
+                <term>ExternalFrontend::TicketCreate###Queue</term>
+                <listitem>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_QueueDefault">
+                <term>ExternalFrontend::TicketCreate###QueueDefault</term>
+                <listitem>
+                    <para>顧客インタフェースで、新規顧客チケットのためのデフォルトのキューを定義します。</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- Postmaster
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SLA">
+                <term>ExternalFrontend::TicketCreate###SLA</term>
+                <listitem>
+                    <para>顧客が顧客インタフェースでチケットSLAを設定することを、許可します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SLAMandatory">
+                <term>ExternalFrontend::TicketCreate###SLAMandatory</term>
+                <listitem>
+                    <para>SLAが顧客によって必ず選択される必要があるかどうかを設定します。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SenderType">
+                <term>ExternalFrontend::TicketCreate###SenderType</term>
+                <listitem>
+                    <para>顧客インタフェースからの新規チケットのための送信者タイプです。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- customer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Service">
+                <term>ExternalFrontend::TicketCreate###Service</term>
+                <listitem>
+                    <para>顧客が顧客インタフェースでチケット・サービスを設定することを、許可します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_ServiceMandatory">
+                <term>ExternalFrontend::TicketCreate###ServiceMandatory</term>
+                <listitem>
+                    <para>サービスが顧客によって必ず選択される必要があるかどうかを設定します。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_StateDefault">
+                <term>ExternalFrontend::TicketCreate###StateDefault</term>
+                <listitem>
+                    <para>顧客インタフェースで、新規顧客チケットのデフォルトの状態を定義します。</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- new
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_TicketType">
+                <term>ExternalFrontend::TicketCreate###TicketType</term>
+                <listitem>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_TicketTypeDefault">
+                <term>ExternalFrontend::TicketCreate###TicketTypeDefault</term>
+                <listitem>
+                    <para>Defines the default ticket type for new customer tickets in the customer interface.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- Unclassified
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Customer_View_TicketMessage">
         <title>Frontend → Customer → View → TicketMessage</title>
         <variablelist>
@@ -33990,6 +34170,13 @@ Title: Welcome!
   GroupRo: []
   IsPublic: '0'
   Path: /personal-preferences/:category?
+  Props: '1'
+- Alias: ''
+  Component: TicketCreate
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /ticket-create/:fromChatID?
   Props: '1'
 ]]></programlisting>
                     </para>

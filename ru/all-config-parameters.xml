@@ -6167,6 +6167,7 @@ User: User
 - AgentTicketWatcher
 - AgentTicketZoom
 - AgentLinkObject
+- AgentSplitSelection
 - CustomerTicketPrint
 - CustomerTicketProcess
 - CustomerTicketZoom
@@ -32925,6 +32926,185 @@ Prio: '2500'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_Customer_View_TicketCreate">
+        <title>Frontend → Customer → View → TicketCreate</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_DynamicField">
+                <term>ExternalFrontend::TicketCreate###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_HistoryComment">
+                <term>ExternalFrontend::TicketCreate###HistoryComment</term>
+                <listitem>
+                    <para>Комметарий для новых записей истории в интерфейсе клиента.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_HistoryType">
+                <term>ExternalFrontend::TicketCreate###HistoryType</term>
+                <listitem>
+                    <para>Задает тип записи истории в интерфейсе клиента.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- WebRequestCustomer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_NextScreenAfterNewTicket">
+                <term>ExternalFrontend::TicketCreate###NextScreenAfterNewTicket</term>
+                <listitem>
+                    <para>Задает какой следующий экран открывается после создания заявки в интерфейсе клиента.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- TicketOverview
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Priority">
+                <term>ExternalFrontend::TicketCreate###Priority</term>
+                <listitem>
+                    <para>Позволяет в интерфейсе клиента установить приоритет заявки.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_PriorityDefault">
+                <term>ExternalFrontend::TicketCreate###PriorityDefault</term>
+                <listitem>
+                    <para>Задает приоритет по умолчанию для новой заявки клиента через клиентский интерфейс.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Queue">
+                <term>ExternalFrontend::TicketCreate###Queue</term>
+                <listitem>
+                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_QueueDefault">
+                <term>ExternalFrontend::TicketCreate###QueueDefault</term>
+                <listitem>
+                    <para>Задает умалчиваемую очередь для новых заявок, создаваемых клиентом в WEB интерфейсе.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- Postmaster
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SLA">
+                <term>ExternalFrontend::TicketCreate###SLA</term>
+                <listitem>
+                    <para>Позволяет клиенту выбирать SLA для заявки.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SLAMandatory">
+                <term>ExternalFrontend::TicketCreate###SLAMandatory</term>
+                <listitem>
+                    <para>Задает, что SLA должен быть выбран клиентом.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_SenderType">
+                <term>ExternalFrontend::TicketCreate###SenderType</term>
+                <listitem>
+                    <para>Тип отправителя для новых заявок из интерфейса клиента.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- customer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_Service">
+                <term>ExternalFrontend::TicketCreate###Service</term>
+                <listitem>
+                    <para>Позволяет клиенту выбирать Сервис для заявки.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_ServiceMandatory">
+                <term>ExternalFrontend::TicketCreate###ServiceMandatory</term>
+                <listitem>
+                    <para>Задает, что Сервис должен быть выбран клиентом.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_StateDefault">
+                <term>ExternalFrontend::TicketCreate###StateDefault</term>
+                <listitem>
+                    <para>Умалчиваемое состояние для новых заявок в интерфейсе клиента.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- new
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_TicketType">
+                <term>ExternalFrontend::TicketCreate###TicketType</term>
+                <listitem>
+                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_TicketTypeDefault">
+                <term>ExternalFrontend::TicketCreate###TicketTypeDefault</term>
+                <listitem>
+                    <para>Задает умалчиваемый приоритет заявки для новой заявки в интерфейсе клиента.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- Unclassified
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_Customer_View_TicketMessage">
         <title>Frontend → Customer → View → TicketMessage</title>
         <variablelist>
@@ -33989,6 +34169,13 @@ Title: Welcome!
   GroupRo: []
   IsPublic: '0'
   Path: /personal-preferences/:category?
+  Props: '1'
+- Alias: ''
+  Component: TicketCreate
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /ticket-create/:fromChatID?
   Props: '1'
 ]]></programlisting>
                     </para>
