@@ -1,0 +1,616 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<section id="reporting">
+    <title>Reporting</title>
+    <para>
+        OTRS has an extensible reporting mechanism that allows to define a
+customized operational statistics and generate custom reports associated
+with OTRS usage. The OTRS system uses the term "statistic" generically to
+refer to a single report presenting various indicators, while "report"
+refers to a collection of several statistics in one PDF document that can be
+easily configured and automatically generated and distributed.
+    </para>
+
+    <section id="reporting-statistics-module">
+        <title>Takwimu</title>
+        <para>
+            Proper configuration of the OTRS statistics module is associated with a
+multitude of requirements and considerations. These include the various OTRS
+modules to be evaluated, user permission settings, indicators to be
+calculated and their complexity levels, ease of configuration of the
+statistics module, speed and efficiency of calculations, and support of a
+rich set of output variants.
+        </para>
+        <para>
+            Statistical elements, i.e. files which supplement the functionality of the
+statistics module for specific requirements, can be integrated for
+calculating complex statistics.
+        </para>
+
+        <section id="reporting-statistics-usage" >
+            <title>Statistics Configuration and Usage</title>
+            <para>
+                When signed on as an agent, the statistics module can be opened by selecting
+"Reports" and then "Statistics" in the main menu.
+            </para>
+
+            <section id="reporting-statistics-overview" >
+                <title>Mapitio</title>
+                <para>
+                    Selecting the "Statistics" link in the navigation bar, and then the sub-menu
+link "Statistics", calls up the Overview screen. The Overview screen
+presents a list of all pre-configured reports an agent can use (see figure
+below).
+                </para>
+                <para>
+                    <figure>
+                        <title>Overview of the standard statistics.</title>
+<screenshot>
+<graphic fileref="screenshots/administration/reporting/stats-overview.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+
+                <para>
+                    When the statistics module is installed, it comes preloaded with a few
+sample statistics imported into the system. These are shown as a list on the
+overview page. If the overview list extends to more than a single page, the
+agent can browse through the different pages. The list of statistics can be
+sorted as desired, by clicking the desired column header in the list. To
+generate a particular statistic, click on the statistic's "Run now" link.
+                </para>
+            </section>
+
+            <section id="reporting-statistics-viewing-generating">
+                <title>Generation</title>
+                <para>
+                    The View screen provides the display for statistic's configuration settings
+(see figure below).
+                </para>
+                <para>
+                    <figure>
+                        <title>Viewing a specific statistic.</title>
+<screenshot id="stats-view-screenshot" >
+<graphic fileref="screenshots/administration/reporting/stats-view.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    Configuration settings for a particular statistic can be set within the
+range of options in the View screen. Either the statistic creator or any
+others with the appropriate permissions can change the settings.
+                </para>
+                <para>
+                    Pressing the "Start" button (at the bottom of the screen) is the last step
+to generate the statistic.
+                </para>
+            </section>
+
+            <section id="reporting-statistics-modify-new">
+                <title>Usanidi</title>
+                <para>
+                    Agents with write rights can edit an existing report configuration by
+calling up the edit screen of the statistics module. Alternately, they may
+create a new report.
+                </para>
+                <para>
+                    There are four possible steps in the configuration of a statistic: the
+general specification data, configuring the x-axis, y-axis and possible data
+filters for the reported data (or restrictions).  Let's create a new
+statistic as an example by clicking the "Add" button in the overview
+screen. Our goal will be to get an overview of how many tickets with very
+high priority are in every queue (x-axis) and state (y-axis).
+                </para>
+                <para>
+                    <figure>
+                        <title>Adding a new statistic, first step.</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/stats-add-typeselection.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    At the beginning we have to select the type of statistic we want to
+add. Three types are available:
+                </para>
+                <para>
+                    <variablelist>
+                        <varlistentry>
+                            <term>Dynamic Matrix Statistics</term>
+                            <listitem>
+                                <para>
+                                    This type of statistics will generate a matrix of computed values (e.g. new
+tickets per day of month and queue). All value cells in the matrix have the
+same type (number, average time, etc). Values are computed from entities in
+the system (e.g.  tickets). Some matrix statistics support a summation
+column and/or row (only useful for certain data).
+                                </para>
+                            </listitem>
+                        </varlistentry>
+                        <varlistentry>
+                            <term>Dynamic List Statistics</term>
+                            <listitem>
+                                <para>
+                                    This kind of statistic will generate a table where every line (not cell)
+represents an entity in the system (e.g. a ticket). The columns in this row
+are usually configurable (x-axis, see below) and contain the data of this
+object (e.g. ticket attributes). All value cells in one column have the same
+type.
+                                </para>
+                            </listitem>
+                        </varlistentry>
+                        <varlistentry>
+                            <term>Static Statistics</term>
+                            <listitem>
+                                <para>
+                                    This kind of statistic is not very much configurable and usually used for
+very special and/or complex computations.
+                                </para>
+                            </listitem>
+                        </varlistentry>
+                    </variablelist>
+                </para>
+                <para>
+                    So let's select "Dynamic Matrix" for our example. Then the "General
+Specifications" configuration will appear below the statistic type
+selection.
+                </para>
+                <para>
+                    <figure>
+                        <title>Adding a new statistic, second step.</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/stats-add-general.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    After providing a title and description for the new statistic, we have to
+select the statistics backend that we want to use. This is the actual
+backend module which is responsible to collect and analyze the data for our
+statistic. In our case we'll select "TicketAccumulation".
+                </para>
+                <para>
+                    By configuring permission groups, we can facilitate a restriction of the
+groups (and therefore, agents) who can later view and generate the
+pre-configured statistics. Thus the various statistics can be allocated to
+the different departments and work groups who need them. It is possible to
+allocate one statistic to various groups.
+                </para>
+                <para>
+                    <example>
+                        <title>Default statistics permission group</title>
+                        <para>
+                            The "stats" group was selected. The report is viewable for all users having
+at least RO rights for the "stats" group. This access is available by
+default.
+                        </para>
+                    </example>
+                </para>
+                <para>
+                    <example>
+                        <title>Customized statistics permission group</title>
+                        <para>
+                            A group named "sales" was selected. All users with RO rights for the "sales"
+group can see the stat in the view mode and generate it. However, the
+statistic will not be available for viewing by other users.
+                        </para>
+                    </example>
+                </para>
+                <para>
+                    Additionally, possible output formats can be selected. Here we can just keep
+all output formats and choose the one to use when actually generating the
+statistic. Let's save the statistic now.
+                </para>
+                <para>
+                    The next screen will indicate the next step with a highlighted button: we
+should configure the x-axis. By clicking the button, a dialog will appear
+where we can select the element to be used for the x-axis. In our case that
+will be the queue:
+                </para>
+                <para>
+                    <figure>
+                        <title>Configuring the x-axis of a statistic.</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/stats-config-xaxis.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    We can optionally limit the queues to be shown by selecting some in the
+queue field. With the checkbox we can control if the agent who generates the
+statistic can make changes to the queue selection. We'll keep the defaults
+and press "Save".
+                </para>
+                <para>
+                    Now we can configure the y-axis in the same way: select the state field.
+                </para>
+
+                <para>
+                    <figure>
+                        <title>Configuring the y-axis of a statistic.</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/stats-config-yaxis.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    Here it is possible to select one element or two. In the first case, every
+value of the element will be one element on the y-axis. If two elements are
+selected, their permutations will be the elements on the value series. For
+example you could select "state" and "priority", and the resulting elements
+will be "new - 1 very low", "new - 2 low", ... "open - 1 very low" and so
+on. Let's just use the state and press "Save".
+                </para>
+                <para>
+                    Now in the last step we could add data filters to only include tickets
+belonging to a certain customer, with certain priorities and so on. We'll
+add a filter for very high priority tickets:
+                </para>
+                <para>
+                    <figure>
+                        <title>Configuring the data filter of a statistic.</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/stats-config-filter.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    Now press "Save" again. The configuration is finished.
+                </para>
+                <para>
+                    You may already have noted that in the configuration dialog there is a
+preview area where we can check the effect of our configuration settings.
+                </para>
+                <para>
+                    <figure>
+                        <title>Configuring the data filter of a statistic.</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/stats-config-preview.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <note>
+                    <para>
+                        Please note that the preview uses random data and does not consider data
+restrictions.
+                    </para>
+                </note>
+                <para>
+                    The statistic is configured. By pressing the "Run now" button we can go to
+the View screen where the desired output format can be selected and the
+statistic can be generated in the different formats.
+                </para>
+            </section>
+
+            <section id="reporting-statistics-import">
+                <title>Agiza</title>
+                <para>
+                    The Import screen can be accessed by pressing the "Import" button on the
+Overview screen. RW permissions for the statistics module are required.
+                </para>
+                <para>
+                    <figure>
+                        <title>Statistics import</title>
+<screenshot>
+<graphic fileref="screenshots/administration/reporting/stats-import.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    Import screen facilitates the importing of statistics, and when combined
+with the export function of the module, is a very handy
+functionality. Statistics can be created and tested conveniently on test
+systems, then imported into the production system.
+                </para>
+            </section>
+        </section>
+
+        <section id="reporting-statistics-managing-the-module">
+            <title>Statistics System Administration</title>
+            <para>
+                This section provides information about the tasks and responsibilities of
+the OTRS administrator dealing with the statistics module.
+            </para>
+            <section id="reporting-statistics-permissions" >
+                <title>Permission settings, Groups and Queues</title>
+                <para>
+                    The default configuration of the module registration gives all agents with
+"stats" group permissions access to the statistics module.
+                </para>
+                <para>
+                    Access according to permission settings:
+                    <itemizedlist>
+                        <listitem>
+                            <para><emphasis>rw</emphasis>. Allows configuring statistics.</para>
+                        </listitem>
+                        <listitem>
+                            <para><emphasis>ro</emphasis>. Permits generating pre-configured statistics.</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <para>
+                    The OTRS administrator decides whether agents with the permission to
+generate pre-configured statistics are allocated RO rights in the "stats"
+group, or if their respective groups are added in the module registration in
+SysConfig.
+                </para>
+            </section>
+
+            <section id="reporting-statistics-sysconfig" >
+                <title>SysConfig Settings</title>
+                <para>
+                    The SysConfig groups <link
+linkend="ConfigReference_Section_Core_Stats">Core::Stats</link> and <link
+linkend="ConfigReference_Section_Frontend_Agent_View_Stats">Frontend::Agent::View::Stats</link>
+contain all configuration parameters for the basic set-up of the statistics
+module. Moreover, the configuration parameter <link
+linkend="ConfigReference_Setting_Frontend::Module_AgentStatistics">$Self-&gt;{'Frontend::Module'}-&gt;{'AgentStats'}</link>
+controls the arrangement and registration of the modules and icons within
+the statistics module.
+                </para>
+            </section>
+
+            <section id="reporting-statistics-generating-on-commandline" >
+                <title>Generating Statistics on the Command Line</title>
+                <para>
+                    Statistics can be generated on the command line with the command
+<filename>bin/otrs.Console.pl Maint::Stats::Generate</filename>. As an
+example, see the command line call in the following script.
+                </para>
+                <para>
+                    <programlisting><![CDATA[
+shell> bin/otrs.Console.pl Maint::Stats::Generate --number 10004 --target-directory /tmp
+Generating statistic number 10004...
+  Writing file /tmp/List_of_the_most_time-consuming_tickets_Created_2015-09-08_14-51.csv.
+Done.
+                    ]]></programlisting>
+                </para>
+                <para>
+                    A view from the statistic configuration "Stat#10004" is generated and saved
+as a CSV file in the <filename>/tmp</filename> directory.
+                </para>
+                <para>
+                    The generated statistic can also be sent as an e-mail. More information can
+be called up with the command in the script below.
+                </para>
+                <para>
+                    <programlisting><![CDATA[
+shell> bin/otrs.Console.pl Maint::Stats::Generate --help
+                    ]]></programlisting>
+                </para>
+                <para>
+                    It usually does not make sense to generate statistics manually via the
+command line, as the statistics module has a convenient graphical user
+interface. However, generating statistics manually does make sense when
+combined with a cron job.
+                </para>
+                <para>
+                    Imagine the following scenario: On the first day of every month, the heads
+of department want to receive a statistic for the past month. By combining a
+cron job and a command line call the statistics can be sent to them
+automatically by e-mail. For more complex scenarios where more the one
+statistic is needed to be sent and/or if a more professional and executive
+look and feel is needed, please consider to use <link
+linkend="reporting-report-generator">The Report Generator</link>.
+                </para>
+            </section>
+        </section>
+    </section>
+
+    <section id="reporting-report-generator">
+        <title>The Report Generator</title>
+        <para>
+            The report generator allows to combine multiple statistics for
+sending/downloading. Reports can be configured to be sent automatically on
+specified times or run manually.
+        </para>
+
+        <section id="reporting-report-generator-usage">
+            <title>Report Generation Configuration and Usage</title>
+            <para>The Report Generator can be opened by selecting "Reports" and then "Reports"
+in the main menu.</para>
+
+            <section id="reporting-report-generator-overview" >
+                <title>Mapitio</title>
+                <para>
+                    Selecting the "Reports" link in the navigation bar, and then the sub-menu
+link "Reports", calls up the Overview screen. The Overview screen presents a
+list of all user defined reports the agent can use (see figure below).
+                </para>
+                <para>
+                    <figure>
+                        <title>Overview of the defined reports.</title>
+<screenshot>
+<graphic fileref="screenshots/administration/reporting/report-overview.png"
+scalefit="1" width="100%" contentdepth="100%"/></screenshot></figure>
+                </para>
+                <para>
+                    By default the system does not have any defined reports, it is a task for
+the administrators to create such reports. To start with the process, click
+on the "Add" action button located in the sidebar.
+                </para>
+            </section>
+
+            <section id="reporting-report-generator-create">
+                <title>Creating Reports</title>
+                <para>
+                    After you've entered title and description for your report in the first
+step, you'll be able to set up your report.
+                </para>
+
+                <section id="reporting-report-generator-create-general">
+                    <title>General Settings</title>
+                    <para>
+                        Set up title, description and validity of the report. This information will
+not be visible in the report.
+                    </para>
+                    <para>
+                        <figure>
+                            <title>Automatic generation settings</title>
+<screenshot>
+<graphic fileref="screenshots/administration/reporting/report-general.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                    </para>
+                </section>
+
+                <section id="reporting-report-generator-create-automatic">
+                    <title>Automatic Generation Settings</title>
+                    <para>
+                        If the report should be generated automatically (e.g. once per day), you can
+set up subject, text and recipients for the email which is going to be sent
+and which will contain the report as an attachment. You'll also need to add
+information on how often the report should be sent. The configuration format
+is taken from the cron mechanism of UNIX-based operating systems. For more
+information on which settings are possible, please refer to official cron
+documentation sources or <ulink
+url="https://en.wikipedia.org/wiki/Cron">wikipedia</ulink>.
+                    </para>
+                    <para>
+                        <figure>
+                            <title>Automatic generation settings</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/report-automatic-generation.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                    </para>
+                </section>
+
+                <section id="reporting-report-generator-create-output">
+                    <title>Output Settings</title>
+                    <para>
+                        In this section, you can set up additional information which should be
+contained in the report (e.g. a preamble or an epilogue). This could be used
+for adding copyright or data protection information.
+                    </para>
+                    <para>
+                        <figure>
+                            <title>Output settings</title>
+<screenshot>
+<graphic fileref="screenshots/administration/reporting/report-output.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                    </para>
+                </section>
+            </section>
+
+            <section id="reporting-report-generator-view">
+                <title>Manually Generating Reports</title>
+                <para>
+                    To generate a report, you can use the <emphasis>Run now</emphasis> button
+from the reports overview.  You'll be asked for confirmation and afterwards
+the report will be created and sent immediately.  Please find screenshots of
+a generated report below.
+                </para>
+                <para>
+                    <figure>
+                        <title>Report: Front page</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/report-result-frontpage.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    <figure>
+                        <title>Report: Table of contents</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/report-result-toc.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    <figure>
+                        <title>Report: Preamble</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/report-result-preamble.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+                <para>
+                    <figure>
+                        <title>Report: Statistics</title>
+<screenshot>
+<graphic
+fileref="screenshots/administration/reporting/report-result-stats.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+            </section>
+        </section>
+
+        <section id="reporting-report-generator-managin">
+            <title>Report Generation Administration</title>
+            <para>
+                This section provides information about the tasks and responsibilities of
+the OTRS administrator dealing with the report generator module.
+            </para>
+
+            <section id="reporting-report-generator-permissions" >
+                <title>Permission settings and Groups</title>
+                <para>
+                    The default configuration of the module registration gives all agents with
+"stats" group permissions access to the report generator module.
+                </para>
+                <para>
+                    Access according to permission settings:
+                    <itemizedlist>
+                        <listitem>
+                            <para><emphasis>rw</emphasis>. Allows configuring, adding and deleting reports.</para>
+                        </listitem>
+                        <listitem>
+                            <para><emphasis>ro</emphasis>. Permits generating already defined reports.</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </section>
+
+            <section id="reporting-report-generator-sysconfig" >
+                <title>SysConfig Settings</title>
+                <para>
+                    The SysConfig navigation group <link
+linkend="ConfigReference_Section_Core_Stats_Reports">Core::Stats::Reports</link>
+contains all configuration parameters for the basic set-up of reports.
+                </para>
+            </section>
+
+            <section id="reporting-report-generator-generating-manually-on-commandline" >
+                <title>Generating reports manually on the Command Line</title>
+                <para>
+                    Reports can be generated on the command line with the command
+<filename>bin/otrs.Console.pl Maint::Stats::Reports::Generate</filename>. As
+an example, see the command line call in the following script.
+                </para>
+                <para>
+                    <programlisting><![CDATA[
+shell> bin/otrs.Console.pl Maint::Stats::Reports::Generate --report-name Testreport --target-path /tmp/Testreport.pdf
+Generating report...
+Done.
+                    ]]></programlisting>
+                </para>
+
+                <para>
+                    The report "Testreport" is generated and saved as "Testreport.pdf" file in
+the <filename>/tmp</filename> directory.
+                </para>
+            </section>
+
+            <section id="reporting-report-generator-generating-automatically-on-commandline" >
+                <title>Generating reports automatically on the Command Line</title>
+                <para>
+                    Usually OTRS daemon will generate and send by email all reports that are
+configured for that on their 'Automatic Generation Settings' using their
+preferred schedule, however if for any reason this is needed to be done at
+an arbitrary moment, OTRS administrators can use the command line with the
+command <filename>bin/otrs.Console.pl
+Maint::Stats::Reports::GenerateCron</filename>. As an example, see the
+command line call below:
+                </para>
+
+                <para>
+                    <programlisting><![CDATA[
+shell> bin/otrs.Console.pl Maint::Stats::Reports::GenerateCron
+Generating reports...
+  New tickets & ticket overview...
+    Sent email to someone@otrs.com.
+Done.
+                    ]]></programlisting>
+                </para>
+            </section>
+        </section>
+    </section>
+</section>

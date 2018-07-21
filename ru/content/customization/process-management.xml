@@ -2,15 +2,14 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <section id="process-management" >
-<title>Управление Процессами</title>
+    <title>Управление Процессами</title>
     <section>
         <title>Введение</title>
         <para>
-            Эта функция в OTRS Позволяет поделировать процессы (потоки работ/задач) в
-системе управления заявками. ГОсновная идея заключается в том, чтобы задать
-повторяющиеся процессы и делегировать части работы различным сотрудникам, а
-также управлять продолжением работы по процессу, в зависимости от
-определенных условий.
+            This feature of OTRS allows you to model processes (work-flows) in the
+ticket system. The basic idea is to be able to define recurring processes,
+and to delegate work items to different people, as well as leading the
+progress of a process in different directions based on certain criteria.
         </para>
     </section>
     <section>
@@ -23,8 +22,8 @@
         <section>
             <title>Запись спроса</title>
             <para>
-                Прежде чем заказ будет размещен, запрос на литературу работником будет
-записан. Следующая книга нужна в нашем примере:
+                Before an order can be placed, the demand for literature by an employee will
+be recorded. The following book is needed in our example:
             </para>
             <para>
                 <screen>
@@ -66,7 +65,7 @@ ISBN: 3527703713
     <section>
         <title>Выполнение примера</title>
         <para>
-            If we assume that a ticket acts in this work-flow like an accompanying
+            If we assume that a ticket acts in this workflow like an accompanying
 document that can receive change notes, we already have a clear picture of
 process tickets.
         </para>
@@ -77,21 +76,21 @@ process tickets.
             <itemizedlist>
                 <listitem>
                     <para>
-                        Возможности регистрации данных, назовем их <emphasis>Activity
-Dialogs/Диалоги Активности</emphasis>,
+                        Possibilities to record data, let's call them <emphasis>User Task Activity
+Dialogs</emphasis>,
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        Проверки, которые могут автоматически реагировать на изменение данных,
-назовем <emphasis>Переходы</emphasis>,
+                        Checks which can react to changed data automatically, let's call them
+<emphasis>Sequence Flows</emphasis>,
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        изменения, которые могут быть применены для обработки заявки после успешного
-перехода обработки заявки, назовем их <emphasis>Transition
-Actions</emphasis>.
+                        Changes which can be applied to a process ticket after successful moving
+between the activities of a process ticket, let's call them
+<emphasis>Sequence Flow Actions</emphasis>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -103,24 +102,23 @@ Actions</emphasis>.
             <itemizedlist>
                 <listitem>
                     <para>
-                        Возможность предложить, чтобы более чем один Диалог Активности/Activity
-Dialog был доступен. В нашем примере это необходимо, когда менеджер должен
-иметь выбор между "Approve/Утвердить" and "Deny/Запретить". Назовем это
-<emphasis>Activity/Активность</emphasis>.
+                        A possibility to offer more than just one User Task Activity Dialog to be
+available. In our example this is needed when the manager must have the
+choice between "Approve" and "Deny". Let's call this <emphasis>User Task
+Activity</emphasis>.
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
         <para>
-            Теперь, введя понятия  Activities/Активность, Activity Dialogs/Диалоги
-Активности, Transitions/Переходы и Transition Actions/Действия перехода, мы
-имеем все необходимые инструменты для построения отдельных этапов нашего
-примера. Что мы еще не определили, так это область в которой для каждого
-потока работ/ work-flow был бы задан порядок шагов. Назовем это
-<emphasis>Process/Процесс</emphasis>. Чтобы иметь возможность ссылаться на
-все эти сущности/понятия позже, дадим им краткие имена/аббревиатуры в
-скобках. Эти обозначения основаны на внутреннем механизме идентификации,
-называемом  EntityIDs.
+            Now, with User Task Activities, User Task Activity Dialogs, Sequence Flows
+and Sequence Flow Actions we have the necessary tools to model the
+individual steps of our example. What's still missing is an area where for
+each work-flow the order of the steps can be specified. Let's call this
+<emphasis>Process</emphasis>. To be able to refer to all these entities
+later, we will assign to them an abbreviation in parentheses. This
+abbreviation is based on an internal identification mechanism called
+EntityIDs.
         </para>
         <para>
             EntityIDs согласовываются с одной или двумя буквами (в зависимости от части
@@ -128,15 +126,15 @@ Dialog был доступен. В нашем примере это необхо
             <itemizedlist>
                 <listitem><para>Процесс: 'P1', 'P2' ... 'Pn'.</para></listitem>
                 <listitem><para>Деятельность: 'A1', 'A2' ... 'An'.</para></listitem>
-                <listitem><para>Диалог Активности: 'AD1', 'AD2' ... 'ADn'.</para></listitem>
-                <listitem><para>Переход: 'T1', 'T2' ... 'Tn'.</para></listitem>
-                <listitem><para>Переход действий: 'TA1', 'TA2' ... 'TAn'.</para></listitem>
+                <listitem><para>User Task Activity Dialog: 'AD1', 'AD2' ... 'ADn'.</para></listitem>
+                <listitem><para>Sequence Flow: 'SF1', 'SF2' ... 'SFn'.</para></listitem>
+                <listitem><para>Sequence Flow Action: 'SFA1', 'SFA2' ... 'SFAn'.</para></listitem>
             </itemizedlist>
         </para>
         <para>
-           Перед созданием процесса и его частей необходимо подготовить систему. Нужно
-определить некоторые Очереди, Клиентов и Динамические Поля, а также
-установить некоторые опции в файле  SysConfig.
+           Before the creation of the process and its parts, it is necessary to prepare
+the system, we will need to define some Queues, Users and Dynamic Fields as
+well as set some SysConfig options.
         </para>
         <para>
             Создать следующие Очереди:
@@ -242,8 +240,8 @@ Dialog был доступен. В нашем примере это необхо
                         </tgroup>
                     </informaltable>
                     <para>
-                        Примечание: Используйте именно эти возможные значения для "Ключ" и
-"Значение" при создании динамических полей.
+                        Note: Please use exactly these possible values for "Key" and "Value" in the
+Dynamic Field setup.
                     </para>
                 </listitem>
                 <listitem>
@@ -404,15 +402,16 @@ Dialog был доступен. В нашем примере это необхо
         <section>
             <title>Процесс (в качестве контейнера)</title>
             <para>
-                Для создания нового процесса необходимо перейти к пункту Управление
-процессами на панели Администратора, после нажатия на который мы попадем на
-экран Обзора процессов. После создания процесса мы получим возможность
-создания всех его объектов (всех составляющих процесса).
+                To create a new process it is necessary to click on the "Process Management"
+link in the 'Processes &amp; Automation' section in the Admin panel, which
+will lead to the Process Management Overview screen.  After the creation of
+the process, we can create all other entities (or process parts).
             </para>
             <note>
                 <para>
-                    Деятельности, Диалоги Активности, Переходы и Действия переходов определенные
-в одном процессе будут доступны для всех процессов системы.
+                    Activities, User Task Activity Dialogs, Sequence Flows and Sequence Flow
+Actions defined in one process will be available for all the processes in
+the system.
                 </para>
             </note>
             <para>
@@ -434,9 +433,9 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                Заполняем информацию о процессе, указываем Название Процесса и его Описание,
-а статус оставим со значением "inactive", пока не закончим все
-задачи. Сохраняем процесс.
+                Fill the process information, set Process Name and the Description, but
+leave the process State as "inactive", until we finish all the tasks. Save
+the process.
             </para>
             <para>
                 <figure>
@@ -447,41 +446,43 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
         </section>
         <section>
-            <title>Диалоги Действий</title>
+            <title>User Task Activity Dialogs</title>
                 <para>
-                    Кликните по имени процесса в окне Обзора процессов, затем в списке
-"Доступные элементы процесса" нажмите на "Диалоги Активности" (это действие
-распахнет список опций для диалогов активности и сожмет другие списки, к
-нему не относящиеся, напоминает эффект гармошки), затем нажмите на "Создать
-новый Диалог Активности".
+                    Click on the new process name in the Process Management Overview Screen,
+then in the "Available Process Elements" click on "User Task Activity
+Dialogs" (this action will expand the user task activity dialog options and
+will collapse all others doing an accordion like effect). Finally, click on
+"Create New User Task Activity Dialog".
                 </para>
                 <para>
                     <figure>
-                        <title>Кнопка создания нового Диалога Активности</title>
+                        <title>Create New User Task Activity Dialog button</title>
 <screenshot>
 <graphic
-fileref="screenshots/customization/pm-accordion-new-activitydialog.png"
+fileref="screenshots/customization/pm-accordion-new-usertask-activity-dialog.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    In the opened popup screen fill the "Activity dialog Name" as well as the
-"Description (short)" fields, for this example we will leave all other
-fields as the default, to assign fields to the Activity Dialog simple drag
-the required field from the "Available Fields" pool and drop into the
-"Assigned Fields" pool.  The order in the "Assigned Fields" pool is the
-order as the fields will have in the screen, to modify the order simply drag
-and drop the field within the pool to rearrange it in the correct place.
+                    In the opened popup screen fill the "Dialog Name" as well as the
+"Description (short)" field. For this example, we will leave all other
+fields as the default. To assign fields to the User Task Activity Dialog,
+simply drag the required field from the "Available Fields" pool and drop it
+into the "Assigned Fields" pool. The order in the "Assigned Fields" pool is
+the order that the fields will have in the screen: in order to modify the
+order simply drag and drop a field within the pool to rearrange it in the
+correct place.
                 </para>
                 <para>
                     <figure>
-                        <title>Добавить новый Диалог Активности</title>
+                        <title>Add new User Task Activity Dialog</title>
 <screenshot>
-<graphic fileref="screenshots/customization/pm-edit-activitydialog.png"
+<graphic
+fileref="screenshots/customization/pm-edit-usertask-activity-dialog.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
                     As soon as the fields are dropped into the "Assigned Fields" pool another
-popup screen is shown with some details about the field, we will leave the
+popup screen is shown with some details about the field. We will leave the
 default options and only for Article fields we should make sure that the
 CommunicationChannel field is set to "Internal" and that the
 IsVisibleForCustomer is not active.
@@ -498,33 +499,34 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
 окне чтобы изменения вступили в силу.
                 </para>
                 <para>
-                    В этом примере мы будем использовать поля типа Article для комментариев,
-другой способ состоит в том, чтобы создать динамическое поле типа
-TextArea. Оставшиеся из упомянутых полей в строках ниже это динамические
-поля которые мы задали ранее.
+                    In this example we will use Article field for comments, but another option
+could be to create a TextArea type Dynamic Field. The rest of the mentioned
+fields in the lines below are the Dynamic Fields that we already defined
+before.
                 </para>
                 <para>
-                    Обратите вниманиче что на этой странице все Динамические Поля имеют префикс
-"DynamicField_" как в "DynamicField_Title", не путайте с полем "Title",
-которое является заголовком/темой Заявки.
+                    Please be aware that in this screen all the Dynamic Fields have the prefix
+"DynamicField_" as in "DynamicField_Title". Do not confuse this with the
+field "Title" that is actually the Ticket Title.
                 </para>
                 <para>
-                    Создать следующие Диалоги Активности:
+                    Create the following User Task Activity Dialogs:
                 </para>
                 <para>
                 <itemizedlist>
                     <listitem>
                         <para>"Запись спроса" (AD1)</para>
                         <para>
-                            Диалог Активности, который содержит все требуемые поля для хранения данных о
-заказе (Название, Автор и ISBN) и поле Состояние/Status с возможностью
-выбора "Утверждение".
+                            A user task activity dialog that contains all the required fields for the
+data to be collected for the order (Title, Author and ISBN), and a Status
+field with the possibility to choose "Approval".
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Отказать" (AD2)</para>
                         <para>
-                            Диалог Активности с полем комментария и полем статуса с опцией "Отказать".
+                            A user task activity dialog with a comment field (Article) and a Status
+field with the option "Approval denied".
                         </para>
                     </listitem>
                     <listitem>
@@ -536,31 +538,31 @@ TextArea. Оставшиеся из упомянутых полей в стро�
                     <listitem>
                         <para>"Заказ отменен" (AD4)</para>
                         <para>
-                            An activity dialog which makes it possible for purchasing to reject an
-impossible order (book out of stock). Here we also need a comment field and
-the Status field with the option "Order denied".
+                            A user task activity dialog which makes it possible for purchasing to reject
+an impossible order (book out of stock). Here we also need a comment field
+and the Status field with the option "Order denied".
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Заказ размещен" (AD5)</para>
                         <para>
-                            An activity dialog with the fields Supplier, Price and Delivery date for
-purchasing and the Status field with the option "Order placed".
+                            A user task activity dialog with the fields Supplier, Price and Delivery
+date for purchasing and the Status field with the option "Order placed".
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Поставка получена" (AD6)</para>
                         <para>
-                            An activity for the mail room with a field for the Date of receipt and the
-Status field with the option "Shipment received".
+                            A user task activity dialog for the mail room with a field for the Date of
+receipt and the Status field with the option "Shipment received".
                         </para>
                     </listitem>
                 </itemizedlist>
                 </para>
                 <para>
-                    To restrict the Status field for each activity dialog we need to add some
-ACLs in the <filename>Kernel/Config.pm</filename> or to a new Perl file
-located in <filename>Kernel/Config/Files</filename>.
+                    To restrict the Status field for each user task activity dialog, we need to
+add some ACLs in the <filename>Kernel/Config.pm</filename> or to a new Perl
+file located in <filename>Kernel/Config/Files</filename>.
                 </para>
                 <para>
                     <screen>
@@ -645,75 +647,76 @@ located in <filename>Kernel/Config/Files</filename>.
                 </para>
         </section>
         <section>
-            <title>Переходы</title>
+            <title>Sequence Flows</title>
                 <para>
-                    В "Доступные Элементы Процесса" щелкните "Переходы", а затем кликните на
-"Создать новый переход".
+                    In the "Available Process Elements" click on "Sequence Flows", then click on
+"Create New Sequence Flow".
                 </para>
                 <para>
                     <figure>
-                        <title>Создать Новую кнопку Перехода</title>
+                        <title>Create New Sequence Flow button</title>
 <screenshot>
-<graphic fileref="screenshots/customization/pm-accordion-new-transition.png"
+<graphic
+fileref="screenshots/customization/pm-accordion-new-sequence-flow.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    В открывшемся всплывающем окне заполните "Transition Name/Имя Перехода",
-затем, в условиях, для этого примера мы будем использовать только одно
-условие и только одно поле, для обоих мы оставим Type of Linking/Тип
-связывания "and/И", а также будем использовать тип значения поля для
-сравнения - "String".
+                    In the opened popup screen fill the "Sequence Flow Name", then in the
+sequence flow condition expressions, for this example, we will add just one
+condition expression and just one field. For both we can leave the Type of
+Linking as "and" and we will use the filled match type value as "String".
                 </para>
                 <para>
                     <figure>
-                        <title>Добавить новый Переход</title>
+                        <title>Add new Sequence Flow</title>
 <screenshot>
-<graphic fileref="screenshots/customization/pm-edit-transition.png"
+<graphic fileref="screenshots/customization/pm-edit-sequence-flow.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    Когда все условия установлены, нажмите кнопку Отправить, чтобы сохнанить
-изменения.
+                    After all sequence flow condition expressions are set, click on the submit
+button to save the changes.
                 </para>
                 <para>
-                    Создать следующие Переходы:
+                    Create the following Sequence Flows:
                 </para>
                 <para>
                 <itemizedlist>
                     <listitem>
-                        <para>"Утверждение" (T1)</para>
+                        <para>"Approval" (SF1)</para>
                         <para>
-                            Переход, который проверяет, установлен ли статус поля в "Approval".
+                            A sequence flow which checks if the Status field is set to "Approval".
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Отказано в утверждении" (T2)</para>
+                        <para>"Approval denied" (SF2)</para>
                         <para>
-                            Переход проверяющий установку статуса поля в значение "Approval denied".
+                            A sequence flow which checks if the Status field is set to "Approval
+denied".
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Утвержден" (T3)</para>
+                        <para>"Approved" (SF3)</para>
                         <para>
-                            Переход, проверяющий установку статуса поля в значение "Approved".
+                            A sequence flow which checks if the Status field is set to "Approved".
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Заказ отменен" (T4)</para>
+                        <para>"Order denied" (SF4)</para>
                         <para>
-                            Переход проверяющий установку статуса поля в значение "Order denied".
+                            A sequence flow which checks if the Status field is set to "Order denied".
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Заказ размещен" (T5)</para>
+                        <para>"Order placed" (SF5)</para>
                         <para>
-                            Переход проверяющий установку статуса поля в значение "Order denied".
+                            A sequence flow which checks if the Status field is set to "Order placed".
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Поставка получена" (T6)</para>
+                        <para>"Shipment received" (SF6)</para>
                         <para>
-                            Переход, который проверяет установлено ли поле статуса в значение "Shipment
+                            A sequence flow which checks if the Status field is set to "Shipment
 received".
                         </para>
                     </listitem>
@@ -721,28 +724,29 @@ received".
                 </para>
         </section>
         <section>
-            <title>Действия Перехода</title>
+            <title>Sequence Flow Actions</title>
                 <para>
-                    Кликните на "Действия Переходов " в меню "Доступные элементы процесса", а
-затем кликните "Создать Новое Действие Перехода".
+                    Click on "Sequence Flow Actions" in the "Available Process Elements", then
+click on "Create New Sequence Flow Action".
                 </para>
                 <para>
                     <figure>
-                        <title>Кнопка создания нового Действие Перехода</title>
+                        <title>Create New Sequence Flow Action button</title>
 <screenshot>
 <graphic
-fileref="screenshots/customization/pm-accordion-new-transitionaction.png"
+fileref="screenshots/customization/pm-accordion-new-sequence-flow-action.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    In the opened popup screen fill the "Transition Action Name", and the
-"Transition Action module" then add the required and optional parameter
+                    In the opened popup screen, fill the "Sequence Flow Action Name", and the
+"Sequence Flow Action module", then add the required and optional parameter
 names and values.
                 </para>
                 <para>
-                    All the Transition Action Modules are located in
-<filename>Kernel/System/ProcessManagement/TransitionAction</filename> and
-the following is the list of bundled Transition Actions included in this
+                    All the Sequence Flow Action Modules are shared with the Script Task
+Activities and they are located in
+<filename>Kernel/System/ProcessManagement/Modules</filename>. Following is
+the list of all bundled Sequence Flow Action Modules included in this
 release:
                 </para>
                 <para>
@@ -755,6 +759,7 @@ release:
                         <listitem><para>TicketOwnerSet</para></listitem>
                         <listitem><para>TicketQueueSet</para></listitem>
                         <listitem><para>TicketResponsibleSet</para></listitem>
+                        <listitem><para>TicketSendEmail</para></listitem>
                         <listitem><para>TicketServiceSet</para></listitem>
                         <listitem><para>TicketSLASet</para></listitem>
                         <listitem><para>TicketStateSet</para></listitem>
@@ -763,10 +768,9 @@ release:
                     </itemizedlist>
                 </para>
                 <para>
-                    Каждый модуль имеет свои собственные и другие параметры, пожалуйста
-просмотрите документацию к этому модулю  <link
-linkend="available-transition-actions">module documentation</link>, чтобы
-узнать все обязательные и опциональные параметры.
+                    Each module has its own specific parameters. Please review the <link
+linkend="available-sequence-flow-actions">module documentation</link> to
+learn all required and optional parameters.
                 </para>
                 <note>
                     <para>
@@ -780,109 +784,164 @@ linkend="available-transition-actions">module documentation</link>, чтобы
 рекомендуется, так как будет отменен в будущих версиях.
                     </para>
                 </note>
+                <note>
+                    <para>
+                        From OTRS 7.0.1, you can use new OTRS smart tags in the &quot;Body&quot;
+parameter of TicketCreate and TicketArticleCreate modules:
+&lt;OTRS_AGENT_BODY_RICHTEXT&gt; and &lt;OTRS_CUSTOMER_BODY_RICHTEXT&gt;.
+                    </para>
+                    <para>
+                        For both tags you can specify a set of parameters to influence the content
+of the body, please check the <link
+linkend="module-doc-ticketcreate">TicketCreate module documentation</link>
+and <link linkend="module-doc-ticketarticlecreate">TicketArticleCreate
+module documentation</link>.
+                    </para>
+                    <para>
+                        As already mentioned, both OTRS smart tags are only supported in
+TicketCreate and TicketArticleCreate modules.
+                    </para>
+                </note>
                 <para>
                     <figure>
-                        <title>Добавить новый Переход</title>
+                        <title>Add new Sequence Flow Action</title>
 <screenshot>
-<graphic fileref="screenshots/customization/pm-edit-transitionaction.png"
+<graphic
+fileref="screenshots/customization/pm-edit-sequence-flow-action.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 </para>
                 <para>
-                    Как только все параметры и значения установлены, нажмите кнопку отправить
-чтобы изменения вступили в силу.
+                    After setting the sequence flow action name and module, click on 'Save'
+button, and after a reload, 'Configure' button next to the selected module
+will appear. Click on it to set all parameters.
                 </para>
                 <para>
-                    Создать следующие Переходы:
+                    <figure>
+                        <title>Configure Sequence Flow Action</title>
+<screenshot>
+<graphic
+fileref="screenshots/customization/pm-edit-sequence-flow-action-configuration.png"
+scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
+                </para>
+
+                <para>
+                    After all parameters and values are set click on the 'Save and Finish'
+button to save the parameters and return to the sequence flow action screen
+again, then click on 'Save and Finish' (again) to save all data and return
+to the main process screen.
+                </para>
+                <para>
+                    Create the following Sequence Flow Actions:
                 </para>
                 <para>
                 <itemizedlist>
                     <listitem>
-                        <para>"Переместить обработку Заявки в очередь 'Менеджмент' " (TA1)</para>
+                        <para>"Move the process ticket into the 'Management' queue" (SFA1)</para>
                         <para>
-                            This action is supposed to be executed when the Transition "Approval" (T1)
-applied.
+                            This action is supposed to be executed when the sequence flow "Approval"
+(SF1) is applied.
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Изменяет ответственного за заявку на 'manager'" (TA2)</para>
+                        <para>"Change ticket responsible to 'manager'" (SFA2)</para>
                         <para>
-                            Будет выполнено когд применен Переход "Approval" (T1).
+                            To be executed when the sequence flow "Approval" (SF1) is applied.
                         </para>
                     </listitem>
                     <listitem>
-                        <para>"Перемещает процесс обработки заявки в очередь 'Employees'" (TA3)</para>
+                        <para>"Move process ticket into the 'Employees' queue" (SFA3)</para>
                         <para>Будет выполнено когда:</para>
                         <itemizedlist>
                             <listitem><para>
-                                Применение Перехода "Отказано в утверждении" (T2)
+                                The sequence flow "Approval denied" (SF2) is applied
                             </para></listitem>
                             <listitem><para>
-                                Применение Перехода "Order denied" (T4)
+                                The sequence flow "Order denied" (SF4) is applied
                             </para></listitem>
                             <listitem><para>
-                                Применение Перехода "Поставка получена" (T6)
+                                The sequence flow "Shipment received" (SF6) is applied
                             </para></listitem>
                         </itemizedlist>
                     </listitem>
                     <listitem>
-                        <para>"Изменить ответственного за заявку на 'Employee'" (TA4)</para>
+                        <para>"Change ticket responsible to 'Employee'" (SFA4)</para>
                         <para>Будет выполнено когда:</para>
                         <itemizedlist>
                             <listitem><para>
-                                Применение Перехода "Отказано в утверждении" (T2)
+                                The sequence flow "Approval denied" (SF2) is applied
                             </para></listitem>
                             <listitem><para>
-                                Применение Перехода "Order denied" (T4)
+                                The sequence flow "Order denied" (SF4) is applied
                             </para></listitem>
                             <listitem><para>
-                                Применение Перехода "Поставка получена" (T6)
+                                The sequence flow "Shipment received" (SF6) is applied
                             </para></listitem>
                         </itemizedlist>
                     </listitem>
                     <listitem>
-                        <para>"Перемещает обработку Заявки в очередь 'Purchasing' " (TA5)</para>
-                        <para>Будет выполнено когда применен Переход "Утверждено" (T3).</para>
+                        <para>"Move process ticket into the 'Purchasing' queue" (SFA5)</para>
+                        <para>To be executed when the sequence flow "Approved" (SF3) is applied.</para>
                     </listitem>
                     <listitem>
-                        <para>"Перемесить процессную заявку в очередь "Post office" " (TA6)</para>
-                        <para>Будет выполнено когда применен Переход "Заказ размещен" (T5).</para>
+                        <para>"Move process ticket into the 'Post office' queue" (SFA6)</para>
+                        <para>To be executed when the sequence flow "Order placed" (SF5) is applied.</para>
                     </listitem>
                     <listitem>
-                        <para>"Закрыть Заявку со статусом успешно" (TA7)</para>
+                        <para>"Close ticket successfully" (SFA7)</para>
                         <para>Будет выполнено когда:</para>
                         <itemizedlist>
                             <listitem><para>
-                                Применен переход "Поставка получена" (T6)
+                                The sequence flow "Shipment received" (SF6) is applied
                             </para></listitem>
                         </itemizedlist>
                     </listitem>
                     <listitem>
-                        <para>"Закрыть заявку со статусом не успешно" (TA8)</para>
+                        <para>"Close ticket unsuccessfully" (SFA8)</para>
                         <para>Будет выполнено когда:</para>
                         <itemizedlist>
                             <listitem><para>
-                                Применение Перехода "Отказано в утверждении" (T2)
+                                The sequence flow "Approval denied" (SF2) is applied
                             </para></listitem>
                             <listitem><para>
-                                Применение Перехода "Order denied" (T4)
+                                The sequence "Order denied" (SF4) is applied
                             </para></listitem>
                         </itemizedlist>
                     </listitem>
                 </itemizedlist>
                 </para>
                 <para>
-                    Как можно видеть, есть места, где одинаковые Transition Actions/Действия
-Перехода будут выполняться. Таким образом было бы логично сделать возможным
-связывать Transition Actions свободно с Transitions/Переходами, для их
-повторного использования.
+                    As you can see, there are places where the same Sequence Flow Actions should
+be executed. Therefore it is reasonable to make it possible to link Sequence
+Flow Actions freely with Sequence Flow to be able to reuse them.
                 </para>
         </section>
         <section>
             <title>Деятельность</title>
             <para>
-                Мы выбрали такой подход чтобы рассматривать Деятельности в качестве корзины,
-которая может хранить однин или больше Диалогов Деятельности. Нам нужны эти
-действия в нашем примере:
+                There are three types of activities:
+                <itemizedlist>
+                    <listitem>
+                        <para>Script Task Activities</para>
+                        <para>
+                            This tasks executes a script module automatically when the activity is
+reached, these modules are shared with the Sequence Flow Actions.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Service Task Activities</para>
+                        <para>
+                            Triggers an invoker from a Generic Interface web service when the activity
+is reached.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>User Task Activities</para>
+                        <para>
+                            They could be seen as a bundle which can contain one or more User Task
+Activity Dialogs.
+                        </para>
+                    </listitem>
+                </itemizedlist>
             </para>
             <para>
                 Кликните на "Деятельности" в меню "Доступные Элементы Процесса", а затем
@@ -896,59 +955,67 @@ applied.
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                In the opened popup screen fill the "Activity Name", then drag the required
-Activity Dialogs from the "Available Activity Dialogs" pool, and drop them
-into to the "Assigned Activity Dialogs" pool. This dialogs will be presented
-(in the ticket zoom screen) in the same order as it is defined on this
-screen translating from top to bottom, from left to right.
+                In the opened popup screen fill the "Activity Name", and be sure that "User
+task activity" is set in the "Activity type" field, then drag the required
+User Task Activity Dialogs from the "Available User Task Activity Dialogs"
+pool, and drop them into to the "Assigned User Task Activity Dialogs"
+pool. This dialog will be presented (in the ticket zoom screen) in the same
+order as it is defined on this screen translating from top to bottom, from
+left to right.
             </para>
             <para>
-                This order is specially important in the first Activity, since the first
-Activity Dialog for this activity is the only one that is presented when the
-process starts.
+                This order is especially important in the first Activity, since the first
+User Task Activity Dialog for this activity is the only one that is
+presented when the process starts.
             </para>
+            <note>
+                <para>
+                    Script and Service task activities at the very beginning of the processes
+will present a default dialog to trigger the process start by executing the
+script or invoker.
+                </para>
+            </note>
             <para>
-                Создать следующие Деятельности:
+                Create the following User Task Activities:
             </para>
             <para>
                 <itemizedlist>
                     <listitem>
                         <para>"Recording the demand/Запись запроса" (A1) </para>
-                        <para>Содержит Activity Dialog/Диалог Активности "Recording the demandЗапись
-запроса" (AD1)</para>
+                        <para>Contains the User Task Activity Dialog "Recording the demand" (AD1)</para>
                     </listitem>
                     <listitem>
                         <para>"Approval/Утверждение" (A2)</para>
                         <para>
-                            Содержит Диалоги Активности "Отказано в одобрении" (AD2) а также "Утвержден"
-(AD3)
+                            Contains the User Task Activity Dialogs "Approval denied" (AD2) as well as
+"Approved" (AD3)
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Заказ" (A3)</para>
                         <para>
-                            Содержит Диалоги Активности "Заказ отклонен" (AD4) а также "Заказ размещен"
-(AD5)
+                            Contains the User Task Activity Dialogs "Order rejected" (AD4) as well as
+"Order placed" (AD5)
                         </para>
                     </listitem>
                     <listitem>
                         <para>"Входящие" (A4)</para>
-                        <para>Содержит Activity Dialog/Диалог Активности "Shipment received/Посылка
-получена" (AD6)</para>
+                        <para>Contains the User Task Activity Dialog "Shipment received" (AD6)</para>
                     </listitem>
                     <listitem>
-                        <para>"Process complete/Процесс завершен" (A5): Это Activity/Действие без
-возможных Activity Dialogs/Диалогов Активности. Оно должно быть вставлено
-после  "Approval denied/Не утверждено", "Order denied/Заказ отвергнут" или
-"Shipment received/Посылка получена" и указывает на окончание процесса.
+                        <para>"Process complete" (A5)</para>
+                        <para>
+                            This is a User task Activity without possible User Task Activity Dialogs. It
+will be set after "Approval denied", "Order denied" or "Shipment received"
+and represents the end of the process.
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
             <para>
-                Теперь мы можем видеть, что Деятельность точно определяет сосотояние
-процесса Заявки. После успешного Перехода Заявка перемещается из одного вида
-деятельности в другой.
+                Now we can clearly see that Activities are precisely defined states of a
+process ticket. After a successful Sequence flow a process ticket moves from
+one Activity to another.
             </para>
         </section>
         <section>
@@ -960,26 +1027,27 @@ work-flow. Other processes could be office supply ordering or completely
 different processes.
             </para>
             <para>
-                Процесс имеет начальную точку, состоящую из стартового Activity/Действия и
-стартового Activity Dialog/Диалога активности. Для любого нового заказа
-книги, начальный Activity Dialog/Диалог активности (первый диалог для
-первого Действия) является первым отображаемым экраном. Если он завершен и
-сохранен, будет создаваться новая процессная заявка, которая далее будет
-выполняться в соответствии с заданным потоком работ/work-flow.
+                The process has a starting point which consists of the start User Task
+Activity and the start User Task Activity Dialog. For any new book order,
+the start User Task Activity Dialog (first User Task Activity Dialog for the
+first User Task Activity) is the first screen that is displayed. If this is
+completed and saved, the Process ticket will be created and can follow the
+configured work-flow.
             </para>
             <para>
-                Процесс также содержит указания, как процессная заявка будет продвигаться
-внутри Процесса. Назовем это "Path/Схема". Она состоит из начального
-Activity/Действия, одного или более Transitions/Переходов (возможно, с
-Transition Actions/Действиями переходов) и других Activities/Действий.
+                The process also contains the directions for how the process ticket can move
+through the Process. Let's call this the "Path". It consists of the start
+Activity, one or more Sequence Flows (possibly with Sequence Flow Actions),
+and other Activities.
             </para>
             <para>
-                Предполагая, что эти Активности/Activities уже назначены их
-Диалогам/Activity Dialogs, перетащите Активность из "гармошки" (в левой
-части экрана) и поместите на область схемы (ниже информации о
-процессе). Заметьте, что стрелка от начала процесса (зеленый кружок) к
-Активности будет проложена автоматически. (Это первая Активность и ее первый
-Диалог будет первым экраном, который будет показан при старте Процесса).
+                Assuming that the User Task Activities have already assigned their User Task
+Activity Dialogs, drag an Activity from the accordion (in the left part of
+the screen) and drop it into the canvas area (below process
+information). Notice that an arrow from the process start (green circle) to
+the Activity is placed automatically. (This is the first User Task Activity
+and its first User Task Activity Dialog is the first screen that will be
+shown when the process starts).
             </para>
             <para>
                 <figure>
@@ -992,7 +1060,9 @@ scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
                 Next, drag another Activity into the canvas too. Now we will have two
 Activities in the canvas. The first one is connected to the start point and
 the second has no connections. You can hover the mouse over each activity to
-reveal their own Activity Dialogs.
+reveal their own User Task Activity Dialogs (in case of other type of
+activities, relative information is shown such as the selected script or web
+service and invoker).
             </para>
             <para>
                 <figure>
@@ -1002,43 +1072,44 @@ reveal their own Activity Dialogs.
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                Then let's create the "Path" (connection) between this two Activities, for
-this we will use the Transitions. Click on Transitions in the accordion drag
-a Transition and drop it inside the first Activity. Notice that the Activity
-changes its color indicating that the Transition is attached. As soon as the
-Transition is dropped the end point of the Transition arrow will be placed
-next to the process start point. Drag the Transition arrow end point and
-drop it inside the other Activity to create the connection between the
-Activities.
+                Then let's create the "Path" (connection) between these two Activities, for
+this we will use the Sequence Flows. Click on Sequence Flows in the
+accordion, drag a Sequence Flow and drop it inside the first
+Activity. Notice that the Activity changes its color indicating that the
+Sequence Flow is attached. As soon as the Sequence Flow is dropped, the end
+point of the Sequence FLow arrow will be placed next to the process start
+point. Drag the Sequence Flow arrow end point and drop it inside the other
+Activity to create the connection between the Activities.
             </para>
             <para>
                 <figure>
-                    <title>Перетащите Transition/Переход на полотно схемы.</title>
+                    <title>Drag a Sequence Flow into the canvas</title>
 <screenshot>
-<graphic fileref="screenshots/customization/pm-canvas-drag-transition.png"
+<graphic
+fileref="screenshots/customization/pm-canvas-drag-sequence-flow.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                Теперь, когда "Path/Последовательность" Действий задана - необходимо
-назначить Действия Переходов/Transition Actions для
-Переходов/Transition. Двойной щелчок по имени Перехода (на схеме) откроет
-новое дополнительное окно.
+                Now that the "Path" between the Activities is defined, we need to assign the
+Sequence Flow Actions to the Sequence Flows. Double click the Sequence Flow
+label (on the canvas), this will open a new popup window.
             </para>
             <para>
                 <figure>
-                    <title>Связать Активности используя Переходы</title>
+                    <title>Connect Activities using Sequence Flows</title>
 <screenshot>
-<graphic fileref="screenshots/customization/pm-canvas-drag-transition2.png"
+<graphic
+fileref="screenshots/customization/pm-canvas-drag-sequence-flow2.png"
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                Захватите мышью требуемые Активности Перехода из списка Доступных
-Активностей Перехода и перетащите в список Назначенных Активностей Перехода
-и затем нажмите кнопку Отправить.
+                Drag the needed Sequence Flow Actions from Available Sequence Flow Actions
+pool and drop them into the Assigned Sequence Flow Actions pool and click on
+submit button.
             </para>
             <para>
                 <figure>
-                    <title>Назначить Действия Перехода</title>
+                    <title>Assign Sequence Flow Actions</title>
 <screenshot>
 <graphic fileref="screenshots/customization/pm-edit-path.png" scalefit="1"
 width="100%" contentdepth="100%"></graphic></screenshot></figure>
@@ -1048,8 +1119,8 @@ width="100%" contentdepth="100%"></graphic></screenshot></figure>
 Сохранить под схемой и сохраните все сделанные изменения.
             </para>
             <para>
-                Complete the "path" adding the following Activities, Transitions and
-Transition Actions:
+                Complete the "path" adding the following Activities, Sequence Flows and
+Sequence Flow Actions:
             </para>
             <para>Запись спроса до значения "Approval"</para>
             <para>
@@ -1058,26 +1129,26 @@ Transition Actions:
                         <para>Начальная точка: Activity: Запись запроса  (A1)</para>
                     </listitem>
                     <listitem>
-                        <para>Возможный Переход: Утверждение (T1)</para>
+                        <para>Possible Sequence Flow: "Approval" (SF1)</para>
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    Если условие этой Активности выполнено, заявка будет перемещена к Activity:
-Утверждение (A2)
+                                    If the sequence flow condition expression of this activity is fulfilled, the
+ticket will move to Activity: "Approval" (A2)
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    Кроме того выполнится следующее TransitionActions/Действия Перехода:
+                                    Additionally, the following Sequence Flow Actions are executed:
                                 </para>
                                 <itemizedlist>
                                     <listitem>
                                         <para>
-                                            "Переместить обработку Заявки в очередь 'Менеджмент' " (TA1)
+                                            "Move the process ticket into the 'Management' queue" (SFA1)
                                         </para>
                                     </listitem>
                                     <listitem>
-                                        <para>"Изменяет ответственного за заявку на 'manager'" (TA2)</para>
+                                        <para>"Change ticket responsible to 'manager'" (SFA2)</para>
                                     </listitem>
                                 </itemizedlist>
                             </listitem>
@@ -1087,12 +1158,13 @@ Transition Actions:
             </para>
             <para>
                 The Activity: "Recording the demand" (A1) is a defined step of the process
-ticket, where there is the possibility for the Transition: "Approval"
-(T1). If this applies, the ticket will move to the next Activity: "Approval"
-(A2), and the Transition Actions: "Move the process ticket into the
-'Management' queue" (TA1) and "Change ticket responsible to 'manager'" (TA2)
-are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
-"Approval denied" (AD2) and "Approved" (AD3) are available.
+ticket, where there is the possibility for the Sequence Flow: "Approval"
+(SF1). If this applies, the ticket will move to the next Activity:
+"Approval" (A2), and the Sequence Flow Actions: "Move the process ticket
+into the 'Management' queue" (SFA1) and "Change ticket responsible to
+'manager'" (SFA2) are executed. In the Activity: "Approval" (A2), the User
+Task Activity Dialogs: "Approval denied" (AD2) and "Approved" (AD3) are
+available.
             </para>
             <para>Утверждение</para>
             <para>
@@ -1101,10 +1173,10 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                         <para>Начальная точка: Activity/Активность "Approval/Утверждение" (A2)</para>
                     </listitem>
                     <listitem>
-                        <para>Возможные Транзакции:</para>
+                        <para>Possible Sequence Flows:</para>
                             <itemizedlist>
                                 <listitem>
-                                    <para>"Отказано в утверждении" (T2)</para>
+                                    <para>"Approval denied" (SF2)</para>
                                     <itemizedlist>
                                         <listitem>
                                         <para>
@@ -1113,22 +1185,22 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                         </listitem>
                                         <listitem>
                                         <para>
-                                            Кроме того выполнится следующее TransitionActions/Действия Перехода:
+                                            Additionally, the following Sequence Flow Actions are executed:
                                         </para>
                                         <itemizedlist>
                                         <listitem>
                                             <para>
-                                                "Перемещает процесс обработки заявки в очередь 'Employees'" (TA3)
+                                                "Move process ticket into the 'Employees' queue" (SFA3)
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                "Изменить ответственного за заявку на 'Employee'" (TA4)
+                                                "Change ticket responsible to 'Employee'" (SFA4)
                                              </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                "Закрыть заявку со статусом не успешно" (TA8)
+                                                "Close ticket unsuccessfully" (SFA8)
                                              </para>
                                         </listitem>
                                         </itemizedlist>
@@ -1136,7 +1208,7 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
-                                    <para>"Утвержден" (T3)</para>
+                                    <para>"Approved" (SF3)</para>
                                     <itemizedlist>
                                         <listitem>
                                         <para>
@@ -1146,13 +1218,12 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Дополнительно, следующие Transition Action/Действия Перехода будут
-выполнены:
+                                                Additionally, the following Sequence Flow Action is executed:
                                             </para>
                                             <itemizedlist>
                                             <listitem>
                                                 <para>
-                                                    "Перемещает обработку Заявки в очередь 'Purchasing' " (TA5)
+                                                    "Move process ticket into the 'Purchasing' queue" (SFA5)
                                                 </para>
                                             </listitem>
                                             </itemizedlist>
@@ -1164,10 +1235,10 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                 </itemizedlist>
             </para>
             <para>
-                Можно видеть, что текущая Activity/Активность, которая определяет шаг
-процессной заявки имеет одну или более возможностей для Transition/Перехода,
-который, в свою очередь, имеет одну единственную целевую Activity/Активность
-(и, возможно, одно или более Transition Actions/Действие Перехода).
+                We can see that from the current Activity, which defines a step of the
+process ticket, there are one or more possibilities for moving to other
+Activities using a Sequence Flow which has exactly one target Activity (and
+possibly one or more Sequence Flow Actions).
             </para>
             <para>Заказ</para>
             <para>
@@ -1176,10 +1247,10 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                         <para>Начальная точка: Activity/Активность "Order/Заказ" (A3)</para>
                     </listitem>
                     <listitem>
-                        <para>Возможные Транзакции:</para>
+                        <para>Possible Sequence Flows:</para>
                             <itemizedlist>
                                 <listitem>
-                                    <para>"Заказ отменен" (T4)</para>
+                                    <para>"Order denied" (SF4)</para>
                                     <itemizedlist>
                                         <listitem>
                                         <para>
@@ -1188,22 +1259,22 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                         </listitem>
                                         <listitem>
                                         <para>
-                                            Кроме того выполнится следующее TransitionActions/Действия Перехода:
+                                            Additionally, the following Sequence Flow Actions are executed:
                                         </para>
                                         <itemizedlist>
                                         <listitem>
                                             <para>
-                                                "Перемещает процесс обработки заявки в очередь 'Employees'" (TA3)
+                                                "Move process ticket into the 'Employees' queue" (SFA3)
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                "Установить ответственного за заявку в 'Employee'" (TA4)
+                                                "Set ticket responsible to 'Employee'" (SFA4)
                                              </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                "Закрыть заявку со статусом не успешно" (TA8)
+                                                "Close ticket unsuccessfully" (SFA8)
                                              </para>
                                         </listitem>
                                         </itemizedlist>
@@ -1211,7 +1282,7 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                     </itemizedlist>
                                 </listitem>
                                 <listitem>
-                                    <para>"Заказ размещен" (T5)</para>
+                                    <para>"Order placed" (SF5)</para>
                                     <itemizedlist>
                                         <listitem>
                                         <para>
@@ -1220,13 +1291,12 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                Дополнительно, следующие Transition Action/Действия Перехода будут
-выполнены:
+                                                Additionally, the following Sequence Flow Action is executed:
                                             </para>
                                             <itemizedlist>
                                             <listitem>
                                                 <para>
-                                                    "Перемесить процессную заявку в очередь "Post office" " (TA6)
+                                                    "Move process ticket into the 'Post office' queue" (SFA6)
                                                 </para>
                                             </listitem>
                                             </itemizedlist>
@@ -1244,10 +1314,10 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                         <para>Начальная точка: Activity/Действие: "Incoming/Поступление" (A4).</para>
                     </listitem>
                     <listitem>
-                        <para>Возможные Транзакции:</para>
+                        <para>Possible Sequence Flows:</para>
                             <itemizedlist>
                                 <listitem>
-                                    <para>"Поставка получена" (T6)</para>
+                                    <para>"Shipment received" (SF6)</para>
                                     <itemizedlist>
                                         <listitem>
                                         <para>
@@ -1256,22 +1326,22 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                                         </listitem>
                                         <listitem>
                                         <para>
-                                            Кроме того выполнится следующее TransitionActions/Действия Перехода:
+                                            Additionally, the following Sequence Flow Actions are executed:
                                         </para>
                                         <itemizedlist>
                                         <listitem>
                                             <para>
-                                                "Перемещает процесс обработки заявки в очередь 'Employees'" (TA3)
+                                                "Move process ticket into the 'Employees' queue" (SFA3)
                                             </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                "Установить ответственного за заявку в 'Employee'" (TA4)
+                                                "Set ticket responsible to 'Employee'" (SFA4)
                                              </para>
                                         </listitem>
                                         <listitem>
                                             <para>
-                                                "Закрыть Заявку со статусом успешно" (TA7)
+                                                "Close ticket successfully" (SFA7)
                                              </para>
                                         </listitem>
                                         </itemizedlist>
@@ -1283,7 +1353,7 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
                 </itemizedlist>
             </para>
             <para>
-                Полный путь к Процессу покупкпи книги будет иметь следующий вид:
+                The complete Path for the book ordering Process will then looks like this:
             </para>
             <para>
                 <figure>
@@ -1293,12 +1363,12 @@ are executed. In the Activity: "Approval" (A2), the Activity Dialogs:
 scalefit="1" width="100%" contentdepth="100%"></graphic></screenshot></figure>
             </para>
             <para>
-                After you finish the process path please click on "Save" button in the lower
-part of the canvas and then click on "Synchronize All Processes"
-button. This will gather all processes information form the Database and
-create a cache file (in Perl language). This cache file is actually the
-processes configuration that the system will use to create or use process
-tickets.
+                After you finish the process path please click on "Save and Finish" button
+in the lower part of the canvas and then click on "Synchronize All
+Processes" button. This will gather all processes information form the
+Database and create a cache file (in Perl language). This cache file is
+actually the processes configuration that the system will use to create or
+use process tickets.
             </para>
             <para>
                 Все изменения сделанные в Процессе (в интерфейсе админа) потребуют
@@ -1331,6 +1401,7 @@ Activities:
     EntityID: A1
     ID: 151
     Name: Recording the demand
+    Type: UserTask
   A2:
     ActivityDialogs:
       - AD2
@@ -1344,6 +1415,7 @@ Activities:
     EntityID: A2
     ID: 152
     Name: Approval
+    Type: UserTask
   A3:
     ActivityDialogs:
       - AD4
@@ -1357,6 +1429,7 @@ Activities:
     EntityID: A3
     ID: 153
     Name: Order
+    Type: UserTask
   A4:
     ActivityDialogs:
       - AD6
@@ -1368,6 +1441,7 @@ Activities:
     EntityID: A4
     ID: 154
     Name: Incoming
+    Type: UserTask
   A5:
     ActivityDialogs: []
     ChangeTime: 2012-11-23 11:51:33
@@ -1376,6 +1450,7 @@ Activities:
     EntityID: A5
     ID: 155
     Name: Process complete
+    Type: UserTask
 ActivityDialogs:
   AD1:
     ChangeTime: 2012-12-06 02:16:21
@@ -1587,40 +1662,40 @@ Process:
     Description: The process to order a book
     Path:
       A1:
-        T1:
+        SF1:
           ActivityEntityID: A2
-          TransitionAction:
-            - TA2
-            - TA1
+          SequenceFlowAction:
+            - SFA2
+            - SFA1
       A2:
-        T2:
+        SF2:
           ActivityEntityID: A5
-          TransitionAction:
-            - TA3
-            - TA4
-            - TA8
-        T3:
+          SequenceFlowAction:
+            - SFA3
+            - SFA4
+            - SFA8
+        SF3:
           ActivityEntityID: A3
-          TransitionAction:
-            - TA5
+          SequenceFlowAction:
+            - SFA5
       A3:
         T4:
           ActivityEntityID: A5
-          TransitionAction:
-            - TA3
-            - TA4
-            - TA8
-        T5:
+          SequenceFlowAction:
+            - SFA3
+            - SFA4
+            - SFA8
+        SF5:
           ActivityEntityID: A4
-          TransitionAction:
-            - TA6
+          SequenceFlowAction:
+            - SFA6
       A4:
-        T6:
+        SF6:
           ActivityEntityID: A5
-          TransitionAction:
-            - TA3
-            - TA4
-            - TA7
+          SequenceFlowAction:
+            - SFA3
+            - SFA4
+            - SFA7
       A5: {}
     StartActivity: A1
     StartActivityDialog: AD1
@@ -1646,110 +1721,110 @@ Process:
   Name: Book ordering
   State: Active
   StateEntityID: S1
-  TransitionActions:
-    - TA1
-    - TA2
-    - TA3
-    - TA4
-    - TA8
-    - TA5
-    - TA3
-    - TA4
-    - TA8
-    - TA6
-    - TA3
-    - TA4
-    - TA7
-  Transitions:
-    - T1
-    - T2
-    - T3
-    - T4
-    - T5
-    - T6
-TransitionActions:
-  TA1:
+  SequenceFlowActions:
+    - SFA1
+    - SFA2
+    - SFA3
+    - SFA4
+    - SFA8
+    - SFA5
+    - SFA3
+    - SFA4
+    - SFA8
+    - SFA6
+    - SFA3
+    - SFA4
+    - SFA7
+  SequenceFlows:
+    - SF1
+    - SF2
+    - SF3
+    - SF4
+    - SF5
+    - SF6
+SequenceFlowActions:
+  SFA1:
     ChangeTime: 2012-11-23 16:01:37
     Config:
       Config:
         Queue: Management
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+      Module: TicketQueueSet
     CreateTime: 2012-11-23 15:50:59
-    EntityID: TA1
+    EntityID: SFA1
     ID: 61
     Name: Move the process ticket into the "Management" queue
-  TA2:
+  SFA2:
     ChangeTime: 2012-11-23 16:02:12
     Config:
       Config:
         Responsible: manager
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet
+      Module: TicketResponsibleSet
     CreateTime: 2012-11-23 15:58:22
     EntityID: TA2
     ID: 62
     Name: Change ticket responsible to "manager"
-  TA3:
+  SFA3:
     ChangeTime: 2012-11-24 14:27:02
     Config:
       Config:
         Queue: Employees
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+      Module: TicketQueueSet
     CreateTime: 2012-11-23 16:02:54
     EntityID: TA3
     ID: 63
     Name: Move the process ticket into the "Employees" queue
-  TA4:
+  SFA4:
     ChangeTime: 2012-11-23 16:04:06
     Config:
       Config:
         Responsible: Employee
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet
+      Module: TicketResponsibleSet
     CreateTime: 2012-11-23 16:04:06
     EntityID: TA4
     ID: 64
     Name: Change ticket responsible to "Employee"
-  TA5:
+  SFA5:
     ChangeTime: 2012-12-06 02:18:34
     Config:
       Config:
         Queue: Purchasing
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+      Module: TicketQueueSet
     CreateTime: 2012-11-23 16:04:54
     EntityID: TA5
     ID: 65
     Name: Move process ticket into the "Purchasing" queue
-  TA6:
+  SFA6:
     ChangeTime: 2012-12-06 02:18:48
     Config:
       Config:
         Queue: Post office
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet
+      Module: TicketQueueSet
     CreateTime: 2012-11-23 16:06:20
     EntityID: TA6
     ID: 66
     Name: Move process ticket into the "Post office" queue
-  TA7:
+  SFA7:
     ChangeTime: 2012-12-06 02:29:55
     Config:
       Config:
         State: closed successful
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketStateSet
+      Module: TicketStateSet
     CreateTime: 2012-12-06 02:29:27
     EntityID: TA7
     ID: 67
     Name: Close ticket successfully
-  TA8:
+  SFA8:
     ChangeTime: 2012-12-06 02:31:12
     Config:
       Config:
         State: closed unsuccessful
-      Module: Kernel::System::ProcessManagement::TransitionAction::TicketStateSet
+      Module: TicketStateSet
     CreateTime: 2012-12-06 02:31:12
     EntityID: TA8
     ID: 68
     Name: Close ticket unsuccessfully
-Transitions:
-  T1:
+SequenceFlows:
+  SF1:
     ChangeTime: 2012-11-23 15:12:20
     Config:
       Condition:
@@ -1764,7 +1839,7 @@ Transitions:
     EntityID: T1
     ID: 94
     Name: Approval
-  T2:
+  SF2:
     ChangeTime: 2012-11-23 15:12:50
     Config:
       Condition:
@@ -1779,7 +1854,7 @@ Transitions:
     EntityID: T2
     ID: 95
     Name: Approval denied
-  T3:
+  SF3:
     ChangeTime: 2012-11-23 15:13:29
     Config:
       Condition:
@@ -1794,7 +1869,7 @@ Transitions:
     EntityID: T3
     ID: 96
     Name: Approved
-  T4:
+  SF4:
     ChangeTime: 2012-11-23 15:14:08
     Config:
       Condition:
@@ -1809,7 +1884,7 @@ Transitions:
     EntityID: T4
     ID: 97
     Name: Order denied
-  T5:
+  SF5:
     ChangeTime: 2012-11-23 18:30:33
     Config:
       Condition:
@@ -1824,7 +1899,7 @@ Transitions:
     EntityID: T5
     ID: 98
     Name: Order placed
-  T6:
+  SF6:
     ChangeTime: 2012-11-23 15:15:30
     Config:
       Condition:
@@ -1851,21 +1926,27 @@ Transitions:
         <section>
             <title>Процесс</title>
             <para>
-                Процесс моделирует путь прохождения задач процесса. Путевыми точками на этом
-пути могут быть Активности или Переходы, мы расскажем об этом позже.
+                A Process models the path of a workflow/process. The waypoints on this path
+can be Activities or Sequence Flows, we'll talk about these later.
             </para>
             <section>
                 <title>Настройка Процесса</title>
                 <para>
-                    The Process configuration can be done in the file
-<filename>Kernel/Config.pm</filename> but it is strongly recommended to
-create new files like
+                    While the Process configuration can be done directly in a perl file such as
+<filename>Kernel/Config.pm</filename> this practice is discouraged since the
+GUI offers the majority of the needed features and is easier to maintain.
+                </para>
+                <para>
+                    In case that is absolutely required to create a process directly in a perl
+file then it is strongly recommended to create new files like
 <filename>Kernel/Config/Files/MyProcess.pm</filename>. Notice that the GUI
 generates the file
-<filename>Kernel/Config/File/ZZZProcessManagement</filename> please avoid to
-use that filename, otherwise it will be overwritten when you sync
-processes.  Let's see an example process configuration (from process cache
-file):
+<filename>Kernel/Config/Files/ZZZProcessManagement</filename>, so please
+avoid using that specific filename, otherwise it will be overwritten when
+you sync processes.
+                </para>
+                <para>
+                    Let's see an example process configuration (from the process cache file):
                 </para>
                 <para>
                     <screen>
@@ -1973,64 +2054,69 @@ $Self->{'Process'} = {
             <section>
                 <title>StartActivity</title>
                 <para>
-                    При создании новой процессной заявки, StartActivity / Начальная Активность
-должна быть задана.Как только заявка будет создана, эта Активность будет
-инициирована и использована как начальная точка для первых проверок
-переходов.
+                    When creating a new process ticket, a StartActivity must be defined. As soon
+as the ticket is created, this Activity will be set and used as the base for
+the first sequence flow checks.
                 </para>
             </section>
             <section>
                 <title>StartActivityDialog</title>
                 <para>
-                    Для новой процессной заявки должен быть задан StartActivityDialog/Начальный
-Диалог Активности. Он будет показан при создании новой процессной заявки
-(после выбора процесс). В этот момент заявка еще не существует, она будет
-создана после выполнения StartActivityDialog.
+                    For new process tickets, if the initial activity is of the type 'User task
+activity' then a StartActivityDialog must be defined. This will be shown
+when creating a new process ticket (after the process was selected). At this
+point, the ticket does not exist yet, it will be created after submitting
+the StartActivityDialog. In case of a non 'User task activity' a default
+activity dialog will be presented to start the process.
                 </para>
             </section>
             <section>
                 <title>Путь</title>
                 <para>
-                    Схема отображает структуру Активностей и возможных Переходов между ними для
-текущего процесса. А также Действия Переходов/Transition Actions возможные
-при переходах. Она показывает пути выполнения процессной заявки. Например:
+                    The Path contains the structure of the Activities, and the possible Sequence
+Flows between them, for the current process. Additionally, path also
+contains the Sequence Flow Actions that happen when moving from one activity
+to another. They control the way that a process ticket can take. Example:
                 </para>
                 <para>
                     <screen>
 'A1' => {
-    'T1' => {
+    'SF1' => {
         ActivityEntityID => 'A2',
     },
-    'T2' => {
+    'SF2' => {
         ActivityEntityID => 'A3',
     },
-    'T3' => {
-        ActivityEntityID => 'A4',
-        TransitionAction => ['TA1', 'TA2'],
+    'SF3' => {
+        ActivityEntityID   => 'A4',
+        SequenceFlowAction => ['SFA1', 'SFA2'],
     },
 },
                     </screen>
                 </para>
                 <para>
                     If a process ticket is in Activity <literal>A1</literal>, it has three
-possible ways to get to another Activity. In the Transitions
-<literal>T1</literal> to <literal>T3</literal>, conditions are defined, that
-a process ticket must fulfill to move (transit) to another Activity.
+possible ways to get to another Activity. In the Sequence Flows
+<literal>SF1</literal> to <literal>SF3</literal>, sequence flow condition
+expressions are defined, that a process ticket must fulfill to move
+(transit) to another Activity.
                 </para>
                 <para>
                     If in this case all the values of the process ticket and its dynamic fields
-that are needed for the Transition <literal>T2</literal> are correct, the
-ticket will be moved from Activity <literal>A1</literal> to
-<literal>A3</literal>. After an ActivityDialog is submitted, or any other
-change is made to a ticket, it will be checked for possible Transitions from
-the current Activity. If multiple Transitions are possible, the first one
-will be used (based on numerical sorting of the TransitionIDs).
+that are needed for the Sequence Flow <literal>SF2</literal> are correct,
+the ticket will be moved from Activity <literal>A1</literal> to
+<literal>A3</literal>. After a User Task Activity Dialog is submitted, or
+any other change is made to the ticket, it will be checked for possible
+Sequence Flows from the current Activity. If multiple Sequence Flows are
+possible, the first one will be used (based on numerical sorting of the
+Sequence Flow EntityIDs).
                 </para>
                 <para>
-                    Дополнительно, имеется возможность назначить Действия Переходов при
-конфигурации Процесса. Это модули, которые будут выполняться после успешного
-Перехода. Они должны быть заданы в виде массива/таблицы, как в примере,
-подробности этого мы обсудим позже.
+                    Additionally, it is possible to assign Sequence Flow Actions to Sequence
+Flows in the Path configuration. These are modules which are executed after
+a successful move from one activity to the next one. They have to be
+specified in array form as in the example, we'll talk about the details
+later.
                 </para>
             </section>
         </section>
@@ -2038,10 +2124,13 @@ will be used (based on numerical sorting of the TransitionIDs).
         <section>
             <title>Активность</title>
             <para>
-                An Activity contains one or more Activity Dialogs and models a
-<literal>step</literal> in the process. All Activity Dialogs of the current
-Activity are displayed in the ticket zoom and can be used until the
-conditions of a Transition are fulfilled.
+                An Activity can contain one or more Activity Dialogs, a module or a web
+service ID and an invoker depending on the activity type. Activities models
+a <literal>step</literal> in the process. For User Task Activities all their
+User Task Activity Dialogs of the current Activity are displayed in the
+ticket zoom and can be used until the Sequence Flow Condition Expressions of
+a Sequence Flow are fulfilled. For non User Task Activities a notification
+is shown to indicate that the Activity is a self executing task.
             </para>
             <section>
             <title>Настройка Активности</title>
@@ -2061,6 +2150,8 @@ $Self->{'Process::Activity'} =
         ActivityDialog => {
             1 => 'AD1',
         },
+        Config => '',
+        Type   => 'UserTask',
     },
     'A2' => {
         Name       => 'Activity 2 optional',
@@ -2073,6 +2164,44 @@ $Self->{'Process::Activity'} =
             2 => 'AD6',
             3 => 'AD1',
         },
+        Config => '',
+        Type   => 'UserTask',
+    },
+    'A3' => {
+        Name => 'Activity 3 optional',
+        CreateTime => '2018-01-30 03:44:30',
+        CreateBy   => '1',
+        ChangeTime => '2018-01-30 03:44:30',
+        ChageBy    => '1',
+        ActivityDescription => 'This Activity fires an Invoker form a Web Service',
+        ActivityErrorCode   => '',
+        ActivityDialog      => '',
+        WebServiceID => '1'
+        Invoker      => 'test_operation',
+        Interface    => [
+            'AgentInterface',
+        ],
+        Config       => '',
+        Type => 'ServiceTask',
+    },
+    'A4' => {
+        Name => 'Activity 4 optional',
+        CreateTime => '2018-01-30 03:44:30',
+        CreateBy   => '1',
+        ChangeTime => '2018-01-30 03:44:30',
+        ChageBy    => '1',
+        ActivityDialog => '',
+        ActivityDescription => 'This Activity executes a script module',
+        ActivityErrorCode   => '',
+        Module => 'DynamicFieldSet',
+        Config => {
+          'DynamicField_NameX' => 'Hello',
+        },
+        Interface => [
+          'AgentInterface',
+          'CustomerInterface',
+        ],
+        Type => 'ScriptTask',
     },
 };
                 </screen>
@@ -2111,11 +2240,71 @@ $Self->{'Process::Activity'} =
             <section>
                 <title>ActivityDialog</title>
                 <para>
-                    Activity Dialog contains the list of Activity Dialogs which are available in
-this Activity. All Activity Dialogs of the current Activity are displayed in
-the ticket zoom. Their order is set by the order in the configuration, here
-<literal>AD5</literal> is shown before <literal>AD6</literal> and
-<literal>AD1</literal>.
+                    Activity Dialog contains the list of User Task Activity Dialogs which are
+available in this Activity (only for User Task Activities). All Activity
+Dialogs of the current Activity are displayed in the ticket zoom. Their
+order is set by the order in the configuration, here <literal>AD5</literal>
+is shown before <literal>AD6</literal> and <literal>AD1</literal>.
+                </para>
+            </section>
+            <section>
+                <title>ActivityDescription</title>
+                <para>
+                    Field used to store the purpose of an activity is only available for "Script
+Task" and "Service Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>ActivityErrorCode</title>
+                <para>
+                    It's used to send a custom error code in case of a failure, and if it's not
+defined error code '1' is used by default. This is only available for
+"Script Task" and "Service Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>WebServiceID</title>
+                <para>
+                    Holds the ID of the Web Service used by the activity. This is only available
+for "Service Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>Запрашивающая сторона</title>
+                <para>
+                    Stores the name of an Invoker from the selected Web Service used by the
+activity. This is only available for "Service Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>Модуль</title>
+                <para>
+                    The name of a script module used by the activity, (located in
+<filename>Kernel/System/ProcessManagement/Modules</filename>). This is only
+available for "Script Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>Config</title>
+                <para>
+                    Configuration parameters for the selected script used by the activity. This
+is only available for "Script Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>Interface</title>
+                <para>
+                    List of interfaces where the activity can start a processes (if it's the
+first activity). If value does not contain the name of the current
+interface, the process is not listed for selection. This is only available
+for "Service Task" and "Script Task" Activities.
+                </para>
+            </section>
+            <section>
+                <title>Type</title>
+                <para>
+                    Defines the type of the activity, possible values are: 'User task activity',
+'Service task activity' and 'Script task activity'.
                 </para>
             </section>
         </section>
@@ -2123,8 +2312,9 @@ the ticket zoom. Their order is set by the order in the configuration, here
         <section>
             <title>ActivityDialog</title>
             <para>
-                Диалог Активности это обычный экран и может быть использован в различных
-Активностях.
+                A User Task Activity Dialog is a representation or render of a User Task
+Activity as a screen. User Task Activity Dialogs can be shared among the
+User Task Activities.
             </para>
             <section>
                 <title>Настройка ActivityDialog/Далога Активности</title>
@@ -2137,7 +2327,7 @@ $Self->{'Process::ActivityDialog'} = {
     'AD1' => {
         Name             => 'ActivityDialog 1 optional',
         DescriptionShort => 'Basic info',
-        DescriptionLong  => 'Please insert the necessesary basic information for IT orders',
+        DescriptionLong  => 'Please insert the necessary basic information for IT orders',
         CreateTime       => '28-02-2012 13:37:00',
         CreateBy         => '1',
         ChangeTime       => '29-02-2012 13:37:00',
@@ -2275,10 +2465,10 @@ StateID => {
                 </para>
                 <para>
                     The field <literal>Article</literal> is a special case. If it is present in
-a <literal>Fields</literal> configuration, the Activity Dialog will contain
-a complete Richtext editor with subject field and attachment handling. The
-entered text will then be added to the ticket as an article. Let's see an
-example Article field configuration:
+the <literal>Fields</literal> configuration, the Activity Dialog will
+contain a complete Rich-text editor with subject field and attachment
+handling. The entered text will then be added to the ticket as an
+article. Let's see an example Article field configuration:
                 </para>
                 <para>
                     <screen>
@@ -2315,7 +2505,7 @@ Article => {
                 <section>
                     <title>Отобразить</title>
                     <para>
-                        Задает, должно ли поле отображаться и/или обязательно. Возможные значения:
+                        Controls if the field is shown and/or mandatory. Possible values:
                         <itemizedlist>
                             <listitem>
                                 <para>
@@ -2402,21 +2592,22 @@ Queue => {
         </section>
 
         <section>
-            <title>Переход</title>
+            <title>SequenceFlow</title>
             <para>
-                Результат Перехода - основанный на заданных условиях - дальнейший путь
-Процесса, т.е. к какой Активности должна перейти процессная заявка.
+                A Sequence Flow decides, based on configurable Sequence Flow Condition
+Expressions, which path in the Process is taken, i.e. to which Activity a
+Process ticket can be moved.
             </para>
             <section>
-                <title>Конфигурирование Перехода</title>
+                <title>Sequence Flow configuration</title>
                 <para>
                     Давайте рассмотрим пример:
                 </para>
                 <para>
                     <screen>
-$Self->{'Process::Transition'} = {
-    'T1' => {
-        Name => 'Transition 1',
+$Self->{'Process::SequenceFlow'} = {
+    'SF1' => {
+        Name => 'Sequence Flow 1',
         CreateTime => '14-03-2012 13:37:00', # optional
         CreateBy   => '1',                   # optional
         ChangeTime => '15-03-2012 13:37:00', # optional
@@ -2432,8 +2623,8 @@ $Self->{'Process::Transition'} = {
             },
         },
     },
-    'T2' => {
-        Name       => 'Transition 2 optional',
+    'SF2' => {
+        Name       => 'SequenceFlow 2 optional',
         CreateTime => 'DATE',   # optional
         CreateBy   => 'USERID', # optional
         ChangeTime => 'DATE',   # optional
@@ -2453,7 +2644,7 @@ $Self->{'Process::Transition'} = {
             <section>
                 <title>Название</title>
                 <para>
-                    Имя Перехода
+                    Name of the sequence flow.
                 </para>
             </section>
             <section>
@@ -2465,7 +2656,7 @@ $Self->{'Process::Transition'} = {
             <section>
                 <title>CreateBy</title>
                 <para>
-                    UID пользователя, создавшего этот Переход
+                    UID of the user who created this Sequence Flow.
                 </para>
             </section>
             <section>
@@ -2477,14 +2668,14 @@ $Self->{'Process::Transition'} = {
             <section>
                 <title>ChangeBy</title>
                 <para>
-                    UID пользователя, последним изменявшего этот Переход.
+                    UID of the last user who changed this Sequence Flow.
                 </para>
             </section>
             <section>
                 <title>Условие</title>
                 <para>
-                    Содержит все условия, необходимые для осуществления этого
-Transition/Перехода. Пример:
+                    Contains all sequence flow condition expressions that are necessary for this
+Sequence Flow to take effect. Example:
                 </para>
                 <para>
                     <screen>
@@ -2515,27 +2706,30 @@ Condition => {
                     </screen>
                 </para>
                 <para>
-                    Давайте рассмотрим подробно конфигурирование Условий.
+                    Let's look at the Sequence Flow Condition Expression configuration in
+detail.
                 </para>
                 <section>
-                    <title>Тип (Условия)</title>
+                    <title>Type (Condition Expression Linking)</title>
                     <para>
-                        Задает операторы для соединения элементов Условия. Возможные значения:
+                        Specifies the way the different condition expression elements are connected
+to each other.  Possible values:
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <literal>and</literal>: This is the default. All conditions must be met for
-the transition to take effect.
+                                    <literal>and</literal>: This is the default. All condition expressions must
+be met for the sequence flow to take effect.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <literal>or</literal>: At least one condition must match.
+                                    <literal>or</literal>: At least one condition expression must match.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
-                                    <literal>xor</literal>: Exactly one condition must match, not more.
+                                    <literal>xor</literal>: Exactly one condition expression must match, not
+more.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2544,20 +2738,20 @@ the transition to take effect.
                 <section>
                     <title>Cond1</title>
                     <para>
-                        Это имя одного из условий примера. Имя выбирается произвольно. Условия
-вычисляются в порядке очередности.
+                        This is the name of an example condition expression. It can be freely
+chosen. Conditions are evaluated in sorted order.
                     </para>
                 </section>
                 <section>
-                    <title>Тип (Условия)</title>
+                    <title>Type (Field)</title>
                     <para>
-                        Specifies the way how the individual field tests of this condition are
-connected to each other. Possible values:
+                        Specifies the way how the individual field tests of this condition
+expression are connected to each other. Possible values:
                         <itemizedlist>
                             <listitem>
                                 <para>
                                     <literal>and</literal>: This is the default. All field tests must match for
-this condition to match.
+this condition expression to match.
                                 </para>
                             </listitem>
                             <listitem>
@@ -2632,7 +2826,6 @@ Fields => {
                     <title>Type</title>
                     <para>
                         Определяет тип проверяемого поля. Возможные значения:
-
                         <itemizedlist>
                             <listitem>
                                 <para>
@@ -2655,17 +2848,17 @@ specified in <literal>Match</literal>. Both lists must be the same.
                             <listitem>
                                 <para>
                                     <literal>Regex</literal>: The field value can be tested with a regular
-expression. It is important that <literal>Match</literal> contains
-<emphasis>qr{}xms</emphasis> as a base condition. Between the braces the
-actual regular expression can be noted.
+expression.  It is important to understand that <literal>Match</literal>
+contains <emphasis>qr{}xms</emphasis> as a base condition. Between the
+braces the actual regular expression will be inserted.
                                 </para>
                             </listitem>
                             <listitem>
                                 <para>
                                     <literal>Module</literal>: Allows you to use a perl module for condition
-checking. If it returns 1, the check was positive. You can find an example
-module in
-<filename>Kernel/System/ProcessManagement/TransitionValidation/ValidateDemo.pm</filename>.
+expression checking. If it returns 1, the check was positive. You can find
+an example module in
+<filename>Kernel/System/ProcessManagement/SequenceFlow/ConditionExpression/Validation/ValidateDemo.pm</filename>.
                                 </para>
                             </listitem>
                         </itemizedlist>
@@ -2675,26 +2868,26 @@ module in
         </section>
 
         <section>
-            <title>Действия Перехода</title>
+            <title>Sequence Flow Actions</title>
             <para>
-                Действия Перехода это действия которые могут быть выполнены после успешного
-Перехода (когда процессная заявка переходит от одной Активности к
-другой). Эти Дествия Перехода могут быть использованы для выполнения
-различных изменений в заявке, например, изменить Очередь или Владельца
-заявки, и вы можете создать свои собственные Действия Переходов для
-осуществления других сложных изменений.
+                Sequence Flow Actions are actions which can be triggered after successfully
+applied sequence flows (when a process ticket moves from one activity to
+another). These Sequence Flow Actions can be used to perform different
+changes on the ticket, e.g. change the Queue or the Owner of the ticket. You
+can also create your own Sequence Flow Actions to perform other complex
+changes.
             </para>
             <section>
-                <title>Настройка Действий Перехода</title>
+                <title>Sequence Flow Action configuration</title>
                 <para>
                     Давайте рассмотрим пример:
                 </para>
                 <para>
                     <screen>
-$Self->{'Process::TransitionAction'} = {
-    'TA1' => {
+$Self->{'Process::SequenceFlowAction'} = {
+    'SFA1' => {
         Name   => 'Queue Move',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+        Module => 'TicketQueueSet',
         Config => {
             Queue  => 'Junk',
             UserID => 123,
@@ -2707,53 +2900,56 @@ $Self->{'Process::TransitionAction'} = {
             <section>
                 <title>Название</title>
                 <para>
-                    Имя Действия Перехода
+                    The name of the Sequence Flow Action.
                 </para>
             </section>
             <section>
                 <title>Модуль</title>
                 <para>
-                    Задает используемый Perl модуль.
+                    Specifies the Perl module to be used (from the list in
+<filename>Kernel/System/ProcessManagement/</filename> Modules).
                 </para>
             </section>
             <section>
                 <title>Config</title>
                 <para>
                     This parameter contains all settings which are required for the module. Its
-content depends on the particular Transition Action module which is
-used. Please see the documentation of the individual modules for details. In
-our example, only the Queue must be specified. Nevertheless we are also
-sending UserID parameter, by using the UserID parameter. The transition
-action will be executed impersonating the user with the given UserID.
+content depends on the particular Sequence Flow Action module which is used,
+some modules might require even more complex configurations than just simple
+key - value pairs. Please see the documentation of the individual modules
+for details. In our example, only the Queue must be specified. Nevertheless
+we are also sending UserID parameter, by using the UserID value. The
+sequence flow action will be executed impersonating the user with the given
+UserID.
                 </para>
                 <para>
                     The use of UserID inside the <literal>Config</literal> parameter of a
-Transition Action is accepted by all Transition Actions (since OTRS
-3.2.4). In this example it could be particularly important if the user that
-triggers the Transition does not have permissions to move the ticket to the
-queue <literal>Junk</literal>, while the user with the UserID 123 might
-have.
+Sequence Flow Action is accepted by all Sequence Flow Actions Modules (since
+OTRS 3.2.4). In this example it could be particularly important if the user
+that triggers the Sequence Flow does not have permissions to move the ticket
+to the queue <literal>Junk</literal>, while the user with the UserID 123
+might have.
                 </para>
             </section>
             <section>
-                <title>Повторное использование модулей Действий Переходов.</title>
+                <title>Reusing Sequence Flow Action modules</title>
                 <para>
-                    To use Transition Action modules multiple times, just specify several
-Transition Actions in your configuration. Example:
+                    To use Sequence Flow Action modules multiple times, just specify several
+Sequence Flow Actions in your configuration. Example:
                 </para>
                 <para>
                     <screen>
-    $Self->{'Process::TransitionAction'} = {
-        'TA1' => {
+    $Self->{'Process::SequenceFlowAction'} = {
+        'SFA1' => {
             Name   => 'Queue Move Junk',
-            Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+            Module => 'TicketQueueSet',
             Config => {
                 Queue => 'Junk',
             },
         },
-        'TA2' => {
+        'SFA2' => {
             Name   => 'Queue Move Raw',
-            Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+            Module => 'TicketQueueSet',
             Config => {
                 Queue => 'Raw',
             },
@@ -2763,18 +2959,18 @@ Transition Actions in your configuration. Example:
                 </para>
                 <para>
                     Here the same module is used to move a process ticket into the
-<literal>Raw</literal> queue, and another time to move it into the junk
-queue. The Transition Action which must be used for a particular Transition
-is determined from the <literal>Path</literal> setting of the Process
-configuration.
+<literal>Raw</literal> queue, and another time to move it into the
+<literal>Junk</literal> queue. The Sequence Flow Action which must be used
+for a particular Sequence Flow is determined from the
+<literal>Path</literal> setting of the Process configuration.
                 </para>
             </section>
-            <section id="available-transition-actions">
-                <title>Доступные Действия Перехода</title>
+            <section id="available-sequence-flow-actions">
+                <title>Available Sequence Flow Actions</title>
                 <para>
-                    OTRS стандартно имеет в составе несколько Действий Перехода, которые могут
-быть использованы в ваших процессах. Здесь вы можете найти их описание и
-способ настройки.
+                    OTRS comes with several Sequence Flow Actions that can be used in your
+processes. Here you can find their documentation and how they need to be
+configured.
                 </para>
 
                 <section>
@@ -2784,10 +2980,10 @@ configuration.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Set DynamicField MasterSlave to Master and Approved to 1',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::DynamicFieldSet',
+        Module => 'DynamicFieldSet',
         Config => {
             MasterSlave => 'Master',
             Approved    => '1',
@@ -2798,18 +2994,18 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>MasterSlave</literal> and <literal>Approved</literal> are given as
-examples of DynamicField names.  The values of the fields
+examples of DynamicField names. The values of the fields
 (<literal>Master</literal> and <literal>1</literal>) will be set by this
-TransitionAction.
+Sequence Flow Action.
                     </para>
                 </section>
 
-                <section>
+                <section id="module-doc-ticketarticlecreate">
                     <title>TicketArticleCreate</title>
                     <para>
                         Creates an article, the %DataPayload parameters depends on the given
@@ -2818,18 +3014,28 @@ used. Example:
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Article Create Note',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate',
+        Module => 'TicketArticleCreate',
         Config => {
 
         Config                   => {
-            SenderType           => 'agent',            # (required) agent|system|customer
-            IsVisibleForCustomer => 1,                  # 0 or 1
-            CommunicationChannel => 'Internal',         # Internal|Phone|Email|..., default: Internal
+            SenderType           => 'agent',                # (required) agent|system|customer
+            IsVisibleForCustomer => 1,                      # 0 or 1
+            CommunicationChannel => 'Internal',             # Internal|Phone|Email|..., default: Internal
 
-            %DataPayload,                               # some parameters depending of each communication channel
+            %DataPayload,                                   # some parameters depending of each communication channel
+
+            # specific for <OTRS_AGENT_BODY_RICHTEXT> / <OTRS_CUSTOMER_BODY_RICHTEXT> OTRS smart tags:
+            AgentBodyRichTextQuote    => 0,                 # optional, 0 or 1, insert the last agent article as quote like 'AgentTicketCompose' frontend
+            CustomerBodyRichTextQuote => 0,                 # optional, 0 or 1, insert the last customer article as quote like 'AgentTicketCompose' frontend
+
+            AgentBodyRichTextInlineImagesInclude    => 0,   # optional, 0 or 1, inline attachments of the last agent article are taken over to the new article
+            CustomerBodyRichTextInlineImagesInclude => 0,   # optional, 0 or 1, inline attachments of the last customer article are taken over to the new article
+
+            AgentBodyRichTextAttachmentsInclude    => 0,    # optional, 0 or 1, all attachments of the last agent article are taken over to the new article
+            CustomerBodyRichTextAttachmentsInclude => 0,    # optional, 0 or 1, all attachments of the last customer article are taken over to the new article
         },
     },
 };
@@ -2837,7 +3043,7 @@ $Self->{'Process::TransitionAction'} = {
                     </para>
                     <para>
                         The following is the %DataPayload for MIME based Communication channels
-(<literal>Email</literal>,<literal>Internal</literal> and
+(<literal>Email</literal>, <literal>Internal</literal> and
 <literal>Phone</literal>).
                     </para>
                     <para>
@@ -2870,9 +3076,9 @@ $Self->{'Process::TransitionAction'} = {
                     </para>
 
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction. It can be freely chosen, but should reflect the purpose of
-the configured action.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action. It can be freely chosen, but should reflect the purpose of the
+configured action.
                     </para>
                     <para>
                         <literal>SenderType</literal> defines the sender type of the
@@ -2929,8 +3135,8 @@ above.
 message IDs.
                     </para>
                     <para>
-                        <literal>NoAgentNotify</literal> - if set to 1, the email notification of
-the Agent will not be sent.
+                        <literal>NoAgentNotify</literal> - if set to 1, the email notification for
+an agent will not be sent.
                     </para>
                     <para>
                         <literal>AutoResponseType</literal> can take the following values: auto
@@ -2943,8 +3149,16 @@ follow up, auto reject, auto remove, auto reply, auto reply/new ticket.
 UserIDs that are either always notified, not notified or listed as notified
 but not actually sent a notification email.
                     </para>
+                    <para>
+                        OTRS smart tags like <literal>&lt;OTRS_CUSTOMER_BODY&gt;</literal> or
+<literal>&lt;OTRS_AGENT_BODY&gt;</literal> are now supported in the Sequence
+Flow Action <literal>TicketArticleCreate</literal>. Those smart tags could
+be used to create a new article and insert data from the process ticket to
+this article. The usage of the OTRS smart tags is identical to the text
+templates in <emphasis>Ticket Notifications</emphasis>.
+                    </para>
                 </section>
-                <section>
+                <section id="module-doc-ticketcreate">
                     <title>TicketCreate</title>
                     <para>
                         Создает заявку с сообщением, новая заявка может быть связана с процессной
@@ -2952,10 +3166,10 @@ but not actually sent a notification email.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Ticket Create',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate',
+        Module => 'TicketCreate',
         Config => {
 
             # ticket required:
@@ -2992,15 +3206,25 @@ $Self->{'Process::TransitionAction'} = {
             DynamicField_NameX => $Value,
             LinkAs => $LinkType,                                        # Normal, Parent, Child, etc. (respective original ticket)
             UserID => 123,                                              # optional, to override the UserID from the logged user
+
+            # specific for <OTRS_AGENT_BODY_RICHTEXT> / <OTRS_CUSTOMER_BODY_RICHTEXT> OTRS smart tags:
+            AgentBodyRichTextQuote    => 0,                             # optional, 0 or 1, insert the last agent article as quote like 'AgentTicketCompose' frontend
+            CustomerBodyRichTextQuote => 0,                             # optional, 0 or 1, insert the last customer article as quote like 'AgentTicketCompose' frontend
+
+            AgentBodyRichTextInlineImagesInclude    => 0,               # optional, 0 or 1, inline attachments of the last agent article are taken over to the new article
+            CustomerBodyRichTextInlineImagesInclude => 0,               # optional, 0 or 1, inline attachments of the last customer article are taken over to the new article
+
+            AgentBodyRichTextAttachmentsInclude    => 0,                # optional, 0 or 1, all attachments of the last agent article are taken over to the new article
+            CustomerBodyRichTextAttachmentsInclude => 0,                # optional, 0 or 1, all attachments of the last customer article are taken over to the new article
         },
     },
 };
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction. It can be freely chosen, but should reflect the purpose of
-the configured action.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action. It can be freely chosen, but should reflect the purpose of the
+configured action.
                     </para>
                     <para>
                         <literal>Title</literal> The ticket title.
@@ -3015,14 +3239,14 @@ the ticket.
                     </para>
                     <para>
                         <literal>Priority</literal> or <literal>PriorityID</literal> specifies the
-name or id of the priority to be used in the new ticket.
+name or ID of the priority to be used in the new ticket.
                     </para>
                     <para>
                         <literal>State</literal> or <literal>StateID</literal> specifies the name or
-id of the state to be used in the new ticket.
+ID of the state to be used in the new ticket.
                     </para>
                     <para>
-                        <literal>CustomerID</literal>, the customer id to be set for the new ticket.
+                        <literal>CustomerID</literal>, the customer ID to be set for the new ticket.
                     </para>
                     <para>
                         <literal>CustomerUser</literal>, the login of the customer that will be
@@ -3030,21 +3254,21 @@ assigned in the ticket.
                     </para>
                     <para>
                         <literal>OwnerID</literal> or <literal>OwnerID</literal>, specifies the
-login or id of the agent that will be the new ticket owner.
+login or ID of the agent that will be the new ticket owner.
                     </para>
                     <para>
                         <literal>TN</literal>, custom number for the new ticket.
                     </para>
                     <para>
                         <literal>Type</literal> or <literal>TypeID</literal> specifies the name or
-id of the ticket type to be used in the new ticket.
+ID of the ticket type to be used in the new ticket.
                     </para>
                     <para>
                         <literal>Service</literal> or <literal>ServiceID</literal> specifies the
-name or id of the service to be used in the new ticket.
+name or ID of the service to be used in the new ticket.
                     </para>
                     <para>
-                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or id
+                        <literal>SLA</literal> or <literal>SLAID</literal> specifies the name or ID
 of the SLA to be used in the new ticket.
                     </para>
                     <para>
@@ -3060,13 +3284,10 @@ Times, when the ticket state belongs to a pending state type.
 from current date/time) to set the Ticket Pending Times, when the ticket
 state belongs to a pending state type.
                     </para>
-
-
                     <para>
                         <literal>SenderType</literal> defines the sender type of the
 article. Possible values: agent, system, customer.
                     </para>
-
                     <para>
                         <literal>IsVisibleForCustomer</literal> defines if the article should be
 displayed in the customer interface.
@@ -3097,10 +3318,10 @@ etc.
                     <para>
                         OTRS smart tags like <literal>&lt;OTRS_CUSTOMER_BODY&gt;</literal> or
 <literal>&lt;OTRS_CUSTOMER_REALNAME&gt;</literal> are now supported in the
-Transition Action <literal>TicketCreate</literal>.  Those smart tags could
+Sequence Flow Action <literal>TicketCreate</literal>. Those smart tags could
 be used to create a new ticket and insert data from the process ticket to
-this child ticket.  The usage of the OTRS smart tags is identical to the
-text templates in <emphasis>Ticket Notifications</emphasis>.
+this child ticket. The usage of the OTRS smart tags is identical to the text
+templates in <emphasis>Ticket Notifications</emphasis>.
                     </para>
                 </section>
                 <section>
@@ -3110,10 +3331,10 @@ text templates in <emphasis>Ticket Notifications</emphasis>.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Customer Set Customer to test',
-        Module => 'Kernel::System::Process::TransitionAction::TicketCustomerSet',
+        Module => 'TicketCustomerSet',
         Config => {
             No      => 'test',
             User    => 'client-user-123',
@@ -3127,8 +3348,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>No</literal> or <literal>CustomerID</literal> set the Customer ID
@@ -3147,10 +3368,10 @@ Username of the customer.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Set Lock to lock',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketLockSet',
+        Module => 'TicketLockSet',
         Config => {
             Lock   => 'lock',
             # or
@@ -3161,8 +3382,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>Lock</literal> defines the new lock of the process ticket.
@@ -3179,10 +3400,10 @@ TransitionAction.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Owner Set root@localhost',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketOwnerSet',
+        Module => 'TicketOwnerSet',
         Config => {
             Owner => 'root@localhost',
             # or
@@ -3193,8 +3414,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>Owner</literal> specifies the login name of the new owner.
@@ -3211,10 +3432,10 @@ TransitionAction.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Queue Move Raw',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
+        Module => 'TicketQueueSet',
         Config => {
             Queue => 'Raw',
             # or
@@ -3225,8 +3446,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence
+FlowAction.
                     </para>
                     <para>
                         <literal>Queue</literal> specifies the name of the target queue.
@@ -3243,10 +3464,10 @@ TransitionAction.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Responsible Set root@localhost',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet',
+        Module => 'TicketResponsibleSet',
         Config => {
             Responsible => 'root@localhost',
             # or
@@ -3257,8 +3478,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>Responsible</literal> specifies the login name of the new
@@ -3273,15 +3494,15 @@ responsible.
                 <section>
                     <title>TicketServiceSet</title>
                     <para>
-                        Назначает сервис процессной заявке. Заявка должна иметь клиента и сервис
-должен быть назначен этому клиенту. Пример:
+                        Assigns a service to a process ticket. The ticket requires to have a
+customer and the service must be assigned to that customer. Example:
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Set MyService service',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketServiceSet',
+        Module => 'TicketServiceSet',
         Config => {
             Service   => 'MyService',
             # or
@@ -3292,8 +3513,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>Service</literal> defines the new service of the process
@@ -3308,15 +3529,15 @@ ticket. The full name is required
                 <section>
                     <title>TicketSLASet</title>
                     <para>
-                        Задает SLA для процессной заявки. Заявке должен быть уже назначен сервис и
-SLA должен быть привязан к этому сервису. Пример:
+                        Assigns a service level agreement to a process ticket. The ticket requires
+to have a service and the SLA must be assigned to that service. Example:
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Set MySLA SLA',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketSLASet',
+        Module => 'TicketSLASet',
         Config => {
             SLA   => 'MySLA',
             # or
@@ -3327,8 +3548,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>SLA</literal> defines the new service level agreement of the
@@ -3346,10 +3567,10 @@ process ticket.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::Sequence Flow Action'} = {
     'TA1' => {
         Name   => 'Set State to open',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketStateSet',
+        Module => 'TicketStateSet',
         Config => {
             State   => 'open',
             # or
@@ -3362,8 +3583,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>State</literal> defines the new state of the process ticket.
@@ -3373,9 +3594,9 @@ TransitionAction.
                     </para>
                     <para>
                         <literal>PendingTimeDiff</literal> used only for pending type states,
-defines the time difference in seconds relative (relative to the Transition
-Action execution time) to set ticket pending time (e.g. 3600 means that the
-pending time is 1hr after the Transition Action is executed).
+defines the time difference in seconds relative (relative to the Sequence
+Flow Action execution time) to set ticket pending time (e.g. 3600 means that
+the pending time is 1 hr after the Sequence Flow Action is executed).
                     </para>
                 </section>
 
@@ -3386,10 +3607,10 @@ pending time is 1hr after the Transition Action is executed).
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Set Ticket Title to Ticket-title',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketTitleSet',
+        Module => 'TicketTitleSet',
         Config => {
             Title => 'Ticket-title',
         },
@@ -3398,8 +3619,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>Title</literal> specifies the new title of the ticket.
@@ -3413,10 +3634,10 @@ TransitionAction.
                     </para>
                     <para>
                         <screen><![CDATA[
-$Self->{'Process::TransitionAction'} = {
+$Self->{'Process::SequenceFlowAction'} = {
     'TA1' => {
         Name   => 'Set Ticket Type to default',
-        Module => 'Kernel::System::ProcessManagement::TransitionAction::TicketTypeSet',
+        Module => 'TicketTypeSet',
         Config => {
             Type     => 'default',
             # or
@@ -3427,8 +3648,8 @@ $Self->{'Process::TransitionAction'} = {
                         ]]></screen>
                     </para>
                     <para>
-                        <literal>Name</literal> specifies the name of the configured
-TransitionAction.
+                        <literal>Name</literal> specifies the name of the configured Sequence Flow
+Action.
                     </para>
                     <para>
                         <literal>Type</literal> specifies the name of the ticket type.
@@ -3443,9 +3664,9 @@ TransitionAction.
         <section id="process-management-acl">
             <title>Списки Контроля Доступа (ACLs)</title>
             <para>
-                С помощью ACL, вы можете ограничить выбор значений в процессной
-заявке. Смотрите также <link linkend="acl-reference">ACL reference</link>
-для обзора полного синтаксиса ACL для заявок.
+                With the help of ACLs, you can limit selectable values in process
+tickets. Please also see the <link linkend="acl-reference">ACL
+reference</link> for a description of the full ticket ACL syntax.
             </para>
             <section>
                 <title>Настройка ACL</title>
@@ -3504,44 +3725,46 @@ linkend="acl">the ACL manual</link>.
                 <section>
                     <title>ActivityDialogEntityID</title>
                     <para>
-                        ID Диалога Активности открытого в настоящий момент для процессной заявки.
+                        The ID of the User Task Activity Dialog that is currently open for a process
+ticket.
                     </para>
                 </section>
             </section>
             <section>
-                <title>Possible/PossibleNot Activity Dialog/Диалог Активности</title>
+                <title>Possible/PossibleNot User Task Activity Dialog</title>
                 <para>
-                    Здесь вы можете задать список ID'ов Диалогов Активности. Этот список
-ограничивает Диалоги Активности, которые могут быть предложены пользователю
-при просмотре заявки.
+                    Here you can specify a list of User Task Activity Dialog IDs. This list will
+limit the possible User Task Activity Dialogs that are offered to the user
+in the ticket zoom mask.
                 </para>
                 <para>
-                    <literal>Possible</literal> lists the Activity Dialogs that are allowed. The
-setting above will only allow <literal>AD1</literal> and
-<literal>AD3</literal> of the list of configured Activity Dialogs.
+                    <literal>Possible</literal> lists the User Task Activity Dialogs that are
+allowed. The setting above will only allow <literal>AD1</literal> and
+<literal>AD3</literal> of the list of configured User Task Activity Dialogs.
                 </para>
                 <para>
-                    <literal>PossibleNot</literal> lists the Activity Dialogs that are not
-allowed. In the example above, the setting will remove
-<literal>AD3</literal> from the list of configured Activity Dialogs.
+                    <literal>PossibleNot</literal> lists the User Task Activity Dialogs that are
+not allowed. In the example above, the setting will remove
+<literal>AD3</literal> from the list of configured User Task Activity
+Dialogs.
                 </para>
                 <para>
                     If both <literal>Possible</literal> and <literal>PossibleNot</literal> are
-specified, the list of configured Activity Dialogs will first be filtered by
-<literal>Possible</literal>, leaving only <literal>AD1</literal> and
-<literal>AD3</literal> in our example. Then <literal>PossibleNot</literal>
-will be applied and filter out <literal>AD3</literal>, so that only
-<literal>AD1</literal> remains and is shown as a possible Activity Dialog
-that the user can use.
+specified, the list of configured User Task Activity Dialogs will first be
+filtered by <literal>Possible</literal>, leaving only <literal>AD1</literal>
+and <literal>AD3</literal> in our example. Then
+<literal>PossibleNot</literal> will be applied and filter out
+<literal>AD3</literal>, so that only <literal>AD1</literal> remains and is
+shown as a possible User Task Activity Dialog that the user can use.
                 </para>
                 <para>
-                    Если множество правил ACL удовлетворяются, их пересечение будет вычислено
-для определения доступных Диалогов Активности. Пример:
+                    If multiple ACL rules match, the intersection of all matching rules will be
+calculated to determine the possible User Task Activity Dialogs. Example:
                 </para>
                 <para>
-                    Configured Activity Dialogs: <literal>AD1</literal>, <literal>AD2</literal>,
-<literal>AD3</literal>, <literal>AD4</literal>, <literal>AD5</literal>,
-<literal>AD6</literal>, <literal>AD7</literal>.
+                    Configured User Task Activity Dialogs: <literal>AD1</literal>,
+<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
+<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal>.
                 </para>
                 <para>
                     <screen>
@@ -3583,16 +3806,16 @@ $Self->{TicketAcl}->{'003-ACL-Priority'} = {
 then all three ACL rules will match.
                 </para>
                 <para>
-                    The first rule reduces the Activity Dialogs from <literal>AD1</literal>,
-<literal>AD2</literal>, <literal>AD3</literal>, <literal>AD4</literal>,
-<literal>AD5</literal>, <literal>AD6</literal>, <literal>AD7</literal> to
+                    The first rule reduces the User Task Activity Dialogs from
 <literal>AD1</literal>, <literal>AD2</literal>, <literal>AD3</literal>,
-<literal>AD6</literal>, <literal>AD7</literal> and forbids
-<literal>AD4</literal> and <literal>AD5</literal>.
+<literal>AD4</literal>, <literal>AD5</literal>, <literal>AD6</literal>,
+<literal>AD7</literal> to <literal>AD1</literal>, <literal>AD2</literal>,
+<literal>AD3</literal>, <literal>AD6</literal>, <literal>AD7</literal> and
+forbids <literal>AD4</literal> and <literal>AD5</literal>.
                 </para>
                 <para>
-                    The second rule will now further reduce the remaining Activity Dialogs.  In
-our example, <literal>AD2</literal>, <literal>AD3</literal>,
+                    The second rule will now further reduce the remaining User Task Activity
+Dialogs.  In our example, <literal>AD2</literal>, <literal>AD3</literal>,
 <literal>AD7</literal> will remain.
                 </para>
                 <para>
@@ -3600,14 +3823,14 @@ our example, <literal>AD2</literal>, <literal>AD3</literal>,
 <literal>PossibleNot</literal>.  <literal>AD3</literal> is removed from the
 list. <literal>AD4</literal> is not removed, since it was not on the list in
 the first place. At the end, <literal>AD2</literal> and
-<literal>AD7</literal> remain as possible Activity Dialogs that the user can
-utilize.
+<literal>AD7</literal> remain as possible User Task Activity Dialogs that
+the user can utilize.
                 </para>
                 <para>
                     It is also possible to limit the processes that can be displayed in the
 <literal>New process ticket</literal> screen. The functionality is similar
-to limiting the Activity Dialogs with one exception: The ACLs could only be
-based on Users.
+to limiting the User Task Activity Dialogs with one exception: The ACLs
+could only be based on Users.
                 </para>
                 <para>Смотрите примеры ниже:</para>
                 <para>
@@ -3679,7 +3902,6 @@ practice Ready2Adopt processes. Currently, there is only an
 <emphasis>Application for leave</emphasis> process available, but you can
 find additional Ready2Adopt processes in the <emphasis role="bold">OTRS
 Business Solution™</emphasis>.
-
             </para>
             <para>
                 <figure>

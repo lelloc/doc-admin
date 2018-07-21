@@ -199,6 +199,461 @@ headers（メール参照ヘッダー）または外部チケット番号で認�
             </para>
         </section>
 
+        <section id="new-features-of-otrs-7">
+            <title>New Features of OTRS 7</title>
+            <para></para>
+        </section>
+
+        <section id="new-features-of-otrs-6">
+            <title>New Features of OTRS 6</title>
+            <section>
+                <title>生産性</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Implemented proper time zone support. Time zones can be configured system
+wide and also on a per-user basis.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Improvements to ticket handling</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>Added possibility to store unfinished ticket forms as drafts for later
+reuse.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Completely revamped ticket zoom screen, with a fresh new design with accent
+on content. User avatars have been introduced as a visual aid for easier
+identification of the article sender. Article display settings are now
+displayed in a settings dialog.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Dropped dubious and somewhat confusing article types, and introduced the
+concept of communication channels as source for ticket articles (e.g. Email,
+Phone, Chat, etc). Customer visibility of articles can now be determined by
+a simple check-box.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Improved AgentTicketHistory screen usability.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Merged the add-on module OTRSAdvancedTicketSplit. Now it's possible to
+select to which kind of ticket an article should be split: phone (default),
+email or process ticket. For process tickets, additional selection of
+specific process will be provided. However, only those fields which are
+configured in the first activity dialog will be adopted from original
+ticket.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added support for ticket number and title search in ticket merge and bulk
+screens. Auto-complete list can be used to populate the ticket number field
+with a single click, therefore speeding up the process and limiting room for
+error. In the ticket merge screen, there is also a CustomeriD search filter
+option, which will limit the results to tickets belonging to the same
+customer company as the source ticket.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Split last sender and ticket title columns in ticket overviews.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    It's now possible to access all supported article actions directly from
+large ticket overview screen.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>It is now possible to delete linked objects directly from the zoom view.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Ticket search and statistic can now filter for pending until time.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to restrict zoom and print screens in the customer
+interface by using ACLs.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>The used search template is now shown on the ticket search result screen.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to automatically lock new tickets to the agent who creates
+them.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to send notifications to the agent who created a ticket,
+thanks to Dian Tong Software.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added new recipient notification groups 'AllRecipientsFirstArticle' and
+'AllRecipientsLastArticle'.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Make it possible to configure which ticket state types to show striked
+through in the linked objects table, thanks to Renée Bäcker.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Made possible to define ServiceIDs and SLAIDs as default shown ticket search
+attributes, thanks to Paweł Bogusławski.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Merged the add-on module OTRSTicketCloseRedirect. It is now possible by a
+new SysConfig setting to stay in Ticket Zoom after an action that closes the
+ticket instead of been redirected to the last overview screen or
+dashboard. This is now controlled by the new SysConfig setting
+"Ticket::Frontend::RedirectAfterCloseDisabled".
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Merged the add-on module OTRSUserDefaultQueue, With a new SysConfig setting
+now it is possible to pre-select a queue to create a ticket in the New
+Phone, Email and Process ticket screens.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Merged the add-on module OTRSAppointmentCalendar. Now OTRS provides a
+calendar implementation that allows agents to manage and display multiple
+calendars and their appointments.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Improvements for working with customers</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Added dynamic field support for customer users and customers. This makes it
+possible to attach additional data fields to customer users and customers
+(companies) without making manual changes to the database.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Modernized the OTRS address book. It is now possible to search for all
+configured custom user and customer fields.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added the Customer User Information Center frontend. This works like the
+existing Customer Information Center, but focuses on all data of one
+particular customer user, rather than a complete customer (company).
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Improved the selection of customers in various screens by adding
+autocomplete fields.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added support for proper Chinese name formatting, thanks to Dian Tong
+Software.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Removed custom spell-checker in favor of using the built-in spell checker
+features of the different browsers.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Email articles now support display of their transmission status in the agent
+zoom screen. Messages with errors will be flagged as such, and automatic
+notifications will be triggered for relevant agents. Useful email resend
+screen can be used to resend failed messages.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added option for dashboard widgets to mark them as mandatory. With this
+feature administrators have the ability to configure dashboard widgets that
+can't be disabled by the agents individually.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Added the possibility to filter content of the CCI Dashboard Widget.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>Usability &amp; Accessibility</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Added beautiful drag &amp; drop multi file upload for agent and customer
+interface.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Added a high contrast skin for visually impaired agents.</para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>スケーラビリティー &amp; パフォーマンス</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Improved session storage to no longer include permission information. This
+should result in significant performance gains for large systems with many
+agents and groups.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Moved ticket number counter from the TicketCounter.log file to the
+database. This allows OTRS to process incoming e-mails much faster and in
+parallel.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Improved web upload cache performance, thanks to Paweł Bogusławski.</para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Improved Generic Agent performance at deleting old execution times. Thanks
+to Moritz Lenz @ noris networks!
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>セキュリティ</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Made bcrypt cost configurable for agent and customer password hashing,
+thanks to Paweł Bogusławski.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>外部システムとの作業</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>Web service improvements</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Added support for additional response headers in REST and SOAP provider
+configuration.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Added possibility to filter for events before calling Invokers.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Added the possibility to include the ticket data in web service response
+data.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Added automatic cleanup of old web service debug log information.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Added new operations TicketHistoryGet and SessionGet.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Updated default web service configurations.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Improved Authentication, Proxy and SSL handling in SOAP and REST transport.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Improved usability of debugger.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Added SOAPAction naming flexibility.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Improved SOAP output generation.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Prevent usage of invalid web services in provider.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Globally changed wording from 'webservice' to 'web service'.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Added error handling to the Generic Interface.</para>
+                            </listitem>
+                            <listitem>
+                                <para>Improved XSLT mapping functionality.</para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>Email improvements</para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    Added possibility to configure default headers for outgoing emails
+(Sendmail::DefaultHeaders), thanks to Renée Bäcker.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to use multiple named captures in Postmaster filters,
+thanks to Renée Bäcker.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to set the ticket title in Postmaster filters, thanks to
+Renée Bäcker.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Add support for setting owner and responsible via filter also for
+follow-ups, thanks to Renée Bäcker.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Make it possible to re-enable auto responses from Postmaster filters by
+setting X-OTRS-Loop to no/false, thanks to Paweł Bogusławski.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    All email communication is now being queued for sending and handled by
+dedicated scheduled daemon task. In case of errors, multiple retries will be
+scheduled, in order to alleviate temporary problems.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to add an external link to the action menu in
+AgentTicketZoom, thanks to Paweł Bogusławski.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+            </section>
+            <section>
+                <title>インストールとアドミニストレーション（管理）</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Renewed system configuration mechanism including a totally new graphical
+user interface.
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>Added possibility to review changes before they are effective.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Exclusively edit settings, so other administrators can not change the same
+setting at the same time.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>Added possibility to define favorite settings for quick access.</para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added new console commands to display and update setting values
+(Maint::Config::Dump and Maint::Config::Rebuild).
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    Added possibility to distribute configuration states to all nodes in a
+cluster environment.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added new command Admin::Package::UpgradeAll, which allows updating all
+installed packages at once. This can also be triggered from the package
+manager screen.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Renewed main administration screen.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Renewed user preferences screen.</para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added SHA-512 as new password digest method to agent and customer
+authentication.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Added support for multi-tiered customer and customer user relationships.</para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added the possibility to use the auto complete search for the customer ID
+selection in the user management frontend.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Improved command Maint::Ticket::InvalidUserCleanup. It can now now both
+unlock tickets of invalid users and also (optionally) change their state to
+make sure they will not be overlooked. Thanks to Moritz Lenz @ noris
+networks!
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added per-address email loop protection configuration
+(PostmasterMaxEmailsPerAddress), thanks to Moritz Lenz.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Added console command to list configured queues, thanks to Martin Burggraf.</para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Added completely new log mechanism for email communications. The
+dashboard-like display allows administrators to quickly see what might be
+wrong in their system regarding receiving and sending emails. Account
+overview can be used to determine which mail accounts might be having issues
+and why. Detailed logging should help figuring out how an email was
+processed by the system before ending up in a specific ticket.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </section>
+        </section>
+
         <section id="new-features-of-otrs-5">
             <title>OTRS 5 での新機能</title>
             <section>
@@ -267,168 +722,6 @@ it easy to focus on active elements.</para></listitem>
                 </itemizedlist>
             </section>
         </section>
-
-        <section id="new-features-of-otrs-4">
-            <title>OTRS 4 での新機能</title>
-            <section>
-                <title>生産性</title>
-                <itemizedlist>
-                    <listitem><para>新しく洗練されたフラットデザインが実装されました。 </para></listitem>
-                    <listitem><para>担当者がチケットの注釈に直接返信できるようになりました。オリジナルの注釈が新規注釈の中で引用されます。 </para></listitem>
-                    <listitem><para>担当者は すべての画面において内部向けの注釈でテンプレートを利用することが可能です </para></listitem>
-                    <listitem><para>コメントを記入しないまま、チケット操作画面（例：ノート、オーナー、etc.）で処理を行うことが可能になりました（選択可能）。</para></listitem>
-                    <listitem><para>New ticket overview based on "my services" that an agent can subscribe
-to. Notification options for new tickets and follow-ups can now be based on
-"my queues", "my services" or combinations of both. </para></listitem>
-                    <listitem><para>OTRSは数千のチケットが表示できるようになりました。</para></listitem>
-                    <listitem><para>Customer online list in Dashboard now links directly to
-CustomerInformationCenter page for the customer.</para></listitem>
-                    <listitem><para>担当者はいつでも各自のメインメニューをドラッグ&amp;ドロップで編集・記憶することができます。</para></listitem>
-                    <listitem><para>担当者と顧客は、添付ファイル名からチケットを検索できるようになりました。 </para></listitem>
-                    <listitem><para>実行中プロセスチケットのダッシュボード・ウィジェットが追加されました。</para></listitem>
-                    <listitem><para>新たな検索オプションとして最終更新日時が追加されました。</para></listitem>
-                    <listitem><para>未返信チケットのための外部メール画面を追加しました。</para></listitem>
-                </itemizedlist>
-            </section>
-            <section>
-                <title>スケーラビリティー &amp; パフォーマンス</title>
-                <itemizedlist>
-                    <listitem><para>OTRS 4
-ではリクエストあたりのレスポンス時間も短縮され、同一ハードウェアにおいて大量のデータを取り扱うページを複数同時に処理できるようになりました。</para></listitem>
-                </itemizedlist>
-            </section>
-            <section>
-                <title>外部システムとの作業</title>
-                <itemizedlist>
-                    <listitem><para>ジェネリックインターフェイスはネットワークトランスポートプロトコルとして新たにHTTP RESTをサポートします。</para></listitem>
-                </itemizedlist>
-            </section>
-            <section>
-                <title>インストールとアドミニストレーション（管理）</title>
-                <itemizedlist>
-                    <listitem><para>Postmaster filters are no longer limited to 4 match/set fields. They can now
-have a configurable amount of fields (default 12, up to 99).</para></listitem>
-                    <listitem><para>A new configuration option Ticket::MergeDynamicFields makes it possible to
-specify which dynamic fields should also be merged when a ticket is merged
-to another ticket.</para></listitem>
-                    <listitem><para>Added new options to check dynamic fields of type text on patterns relating
-to error messages (translated), if they do not match.</para></listitem>
-                    <listitem><para>Added new options to restrict dynamic fields of type date/datetime on future
-or past dates.</para></listitem>
-                    <listitem><para>OTRS can be configured to automatically unlock a ticket if articles are
-added and the owner is out of office.</para></listitem>
-                    <listitem><para>Linked tickets of a specific type (e.g. merged or removed) can now be hidden
-via SysConfig option.</para></listitem>
-                    <listitem>
-                        <para>
-                            ACL handling has been improved, made more consistent and easier to debug.
-                            <itemizedlist>
-                                <listitem><para>Added new ACL option PossibleAdd to add items to a possible list without
-resetting (like Possible does).</para></listitem>
-                                <listitem><para>Added new ACL value modifiers [Not], [NotRegExp], [Notregexp], for all ACLs
-parts.</para></listitem>
-                            </itemizedlist>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            Process handling has been improved, made more consistent and easier to
-debug.
-                            <itemizedlist>
-                                <listitem><para>A new GUID-based entity naming scheme for the OTRS Process configuration
-makes it possible to safely transfer processes from one system to another
-without duplicating the entities.</para></listitem>
-                                <listitem><para>新規チケット作成用の遷移アクションを追加しました。</para></listitem>
-                                <listitem><para>Added possibility to define variable Transition Action attributes based on
-current process ticket values.</para></listitem>
-                            </itemizedlist>
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            The possibility to schedule System Maintenance periods is available from the
-System Administration panel in the Admin interface.
-                            <itemizedlist>
-                                <listitem><para>A notification about an incoming System Maintenance period will be shown
-with some (configurable) time in advance.</para></listitem>
-                                <listitem><para>If a System Maintenance is active, a notification about it will be shown on
-the Agent and Customer interface, and only admin users can log on to the
-system.</para></listitem>
-                                <listitem><para>An overview screen informs admins about active sessions, which can be ended
-all on one click or one by one.</para></listitem>
-                            </itemizedlist>
-                        </para>
-                    </listitem>
-                    <listitem><para>Added possibility to disable sysconfig import via configuration.</para></listitem>
-                    <listitem><para>パスワードハッシュ形式にApache MD5形式を追加しました（ありがとう、Norihiro Tanaka さん）。</para></listitem>
-                    <listitem><para>Added the possibility to restrict customer self registration by email
-address whitelist or blacklist, thanks to Renée Bäcker.</para></listitem>
-                    <listitem><para>Added new dashboard module that shows the output of an external command,
-thanks to ib.pl.</para></listitem>
-                </itemizedlist>
-            </section>
-            <section>
-                <title>デプロイ</title>
-                <itemizedlist>
-                    <listitem><para>Template::Toolkitをベースにした、新しいパワフルなテンプレートエンジン</para></listitem>
-                    <listitem><para>A central object manager makes creating and using global objects much easier
-(thanks to Moritz Lenz @ noris network).</para></listitem>
-                    <listitem><para>The OPM package format was extended to signal that a package has been merged
-into another package, allowing the package manager to correctly handle this
-situation on package installation or update.</para></listitem>
-                    <listitem><para>Caching was centralized in one global cache object which also performs
-in-memory caching for all data.</para></listitem>
-                    <listitem><para>Added cache benchmark script, thanks to ib.pl.</para></listitem>
-                </itemizedlist>
-            </section>
-        </section>
-
-        <section id="new-features-of-otrs-3.3">
-            <title>OTRS 3.3の新たな機能</title>
-            <section>
-                <title>生産性</title>
-                <itemizedlist>
-                    <listitem><para>Dashboard ticket lists and regular ticket overviews can now be filtered by
-eligible ticket columns, and the shown columns are configurable.</para></listitem>
-                    <listitem><para>チケット・ミディアムおよびプレビュー概要が、ソート可能になりました。</para></listitem>
-                    <listitem><para>チケットをイベントとして表示することができるダッシュボード用のカレンダー・ウィジェットを追加しました。</para></listitem>
-                    <listitem><para>状態値およびキュー当たりのチケットの数から、表形式で表示する新しいダッシュボード・ウィジェットの追加。</para></listitem>
-                    <listitem><para>担当者は重要な記事をマークすることができるようになりました。</para></listitem>
-                    <listitem><para>新しいツリー選択ウィジェットは、ツリーデータ（キュー、サービスなど)）を用いて作業をより速く、より簡単にします。</para></listitem>
-                    <listitem><para>曜日および日付時刻といった動的なフィールドで、相対日付(例えば1か月以上前に)を検索するサポート機能を追加。</para></listitem>
-                    <listitem><para>テンプレート(以前は「標準レスポンス」)を指定することができます。新しいチケットの生成および転送のためにも使えます。</para></listitem>
-                    <listitem><para>利用可能なプロセスのリストは、ACLによってフィルターすることができるようになりました。</para></listitem>
-                    <listitem><para>カスタマー・インターフェースからのプロセスを始める追加サポート。</para></listitem>
-                    <listitem><para>多くの場合テキストは文字の定数(「Queue1...」...)によって短くはできませんが、利用可能な画面（解像度）によって可能になります。それによって一覧でより多くの情報を見ることができます。</para></listitem>
-                    <listitem><para>OTRSがレティナ・ディスプレイ対応となりました。イメージはより高い解像度に適応されています。また、ほとんどのイメージ・アイコンは
-FontAwesome webfont からのフォント文字と取り替えられました。</para></listitem>
-                    <listitem><para>新機能「管理ダッシュボード」が追加され、ダッシュボード中で統計の図表を表示できるようになりました。ただし、IE8はこの機能をサポートしておりませんのでご留意下さい。</para></listitem>
-                </itemizedlist>
-            </section>
-            <section>
-                <title>外部システムとの作業</title>
-                <itemizedlist>
-                    <listitem><para>OTRSは、複数の顧客会社データベースを使用することができるようになりました。（Cyrille@belnet-ictに感謝！）</para></listitem>
-                    <listitem><para>OTRSは、顧客ユーザーデータをチケットの動的フィールドに（チケットに永久保存するため）格納するようになりました。これはレポーティングに役立つ場合があります。</para></listitem>
-                    <listitem><para>OTRSは、外部システムから受信したEメールを、チケット番号に基づいて既存のチケットへ、正しく割り当てることができるようになりました。</para></listitem>
-                    <listitem><para>OTRSは、POP3/TLS接続経由でEメールを取得(fetch)することができるようになりました。</para></listitem>
-                </itemizedlist>
-            </section>
-            <section>
-                <title>インストールとアドミニストレーション（管理）</title>
-                <itemizedlist>
-                    <listitem><para>ウェブインストーラーは、MySQLに加えてのPostgreSQL、オラクルおよびSQLサーバー・データベースの上でOTRSをセットアップできるようになりました。</para></listitem>
-                    <listitem><para>OTRSは、MySQL 5.6をフルサポートするようになりました。</para></listitem>
-                    <listitem><para>一般の担当者ジョブが、設定されたチケット・イベントのために実行することができるようになりました。</para></listitem>
-                    <listitem><para>新しいグラフィカルなACLエディターはACL編集をより簡単にします。</para></listitem>
-                    <listitem><para>ポストマスター・フィルターによっては、無効にされたフィルター条件を使用することができるようになりました。（Renee Backerに感謝！）</para></listitem>
-                    <listitem><para>ポストマスター・フィルターは、関連した滞留日と所有者あるいは、受信するEメールデータに基づく新しいチケットに対する責任者を特定するようになりました。</para></listitem>
-                    <listitem><para>顧客と担当者のパスワードは強力なbcryptアルゴリズムを使って暗号化することができるようになりました。bcryptはSHAより良質です。　</para></listitem>
-                    <listitem><para>多くのアイコンはアイコン・フォントを使うことができるようになりました。それによりさまざまな基調色でカスタム・スキンを作成することが容易になりました。</para></listitem>
-                </itemizedlist>
-            </section>
-        </section>
-
     </section>
 
     <section id="software-requirements">
@@ -488,7 +781,8 @@ ShellとCPANモジュールもしくはご利用のオペレーティング・�
             <title>データベース・サポート</title>
 
             <itemizedlist>
-                <listitem><para>MySQL 5.0以上</para></listitem>
+                <listitem><para>MySQL 5.0 or higher (MySQL 8+ is <ulink
+url="https://bugs.otrs.org/show_bug.cgi?id=13866">not supported</ulink>)</para></listitem>
                 <listitem><para>MariaDB</para></listitem>
                 <listitem><para>PostgreSQL 9.2 or higher</para></listitem>
                 <listitem><para>Oracle 10g以上</para></listitem>
@@ -508,17 +802,21 @@ linkend="installation-of-perl-modules">Perl・モジュールのインストー�
         <section id="webbrowser-support">
             <title>ウェブブラウザー・サポート</title>
             <para>
-                OTRSを使用するために、JavaScriptをサポートする最新のブラウザを使用すれば、問題ありません。以下のブラウザはサポートしません:
+                To use OTRS, you'll be OK if you use a modern browser with JavaScript
+support enabled.  Supported Browsers are:
             </para>
             <itemizedlist>
                 <listitem>
-                      <para>Internet Explorer before version 11</para>
+                      <para>Google Chrome</para>
                 </listitem>
                 <listitem>
-                      <para>Firefox before version 31</para>
+                      <para>Firefox version 31 and higher</para>
                 </listitem>
                 <listitem>
-                      <para>Safari before version 6</para>
+                      <para>Safari version 6 and higher</para>
+                </listitem>
+                    <listitem>
+                      <para>Internet Explorer version 11 and higher, Microsoft Edge</para>
                 </listitem>
             </itemizedlist>
             <para>
@@ -553,18 +851,19 @@ url="http://www.otrs.com/open-source/"><citetitle>http://www.otrs.com/open-sourc
         <title>OTRSのためのプロフェッショナル・サービス</title>
 
         <para>
-            Our <ulink
-url="https://www.otrs.com/otrs-business-solution-improving-customer-service/">OTRS
-Business Solution</ulink>™ offers you best professional support from the
-OTRS team, reliable OTRS security and regular free updates as well as an
-<ulink
-url="https://www.otrs.com/solutions/otrs-business-solution-on-premise/#integrated-business-features">exclusive
-set of additional Business Features</ulink> that you can flexibly activate
-or deactivate according to different deployment scenarios.
+            We offer best professional support from the OTRS team, reliable OTRS
+security and regular free updates as well as an <ulink
+url="https://otrs.com/how-to-buy/packages/#feature-add-ons">exclusive set of
+additional Business Features</ulink> that you can flexibly activate or
+deactivate according to different deployment scenarios.
         </para>
         <para>
-            <ulink url="http://www.otrs.com/">OTRSグループ</ulink> は、様々な国々の特定の<ulink
-url="http://www.otrs.com/en/solutions/training/">トレーニング・プログラム</ulink>を提供します。定期的に開催する私たちの公のOTRS管理者トレーニングのうちの1つに参加するか、あるいは社内の特定の要求をすべてカバーするための社内トレーニングから利益を享受することもできます。
+            <ulink url="https://www.otrs.com/">The OTRS Group</ulink> offers specific
+<ulink url="https://www.otrs.com/public-otrs-trainings/">training
+programs</ulink> in different countries.  You can either participate in one
+of our public OTRS Administrator trainings which take place regularly, or
+benefit from an inhouse training that covers all the specific needs of your
+company.
         </para>
 
     </section>

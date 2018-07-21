@@ -15,7 +15,7 @@
         OTRS守护进程能够同时处理多达10个任务，还能与群集中不同前端服务器的OTRS守护进程进行协同工作。
     </para>
     <para>
-        OTRS守护进程在空闲时包含5个进程：
+        When idle OTRS Daemon consist in six processes:
         <itemizedlist mark="round">
             <listitem>
                 <para>
@@ -63,6 +63,26 @@
                 </para>
                 <para>
                     这个守护进程扫描存储在数据库中的定时自动任务（丢弃所有事件触发的自动任务）。当自动任务运行时间到了时，它将需要的信息发送给任务工作者守护进程以处理任务。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    System Configuration sync manager daemon
+(<filename>Kernel/System/Daemon/DaemonModules/SystemConfigurationSyncManager.pm</filename>)
+                </para>
+                <para>
+                    This daemon verifies that the configuration files
+<filename>Kernel/Config/Files/ZZZAAuto.pm</filename>
+<filename>Kernel/Config/Files/ZZZACL.pm</filename> and
+<filename>Kernel/Config/Files/ZZZProcessManagement.pm</filename> are up to
+date with the deployment information from the database, otherwise the files
+are updated. and signal the main daemon to restart all daemon modules with
+the updated configuration.
+                </para>
+                <para>
+                    Additionally if any other .pm file in
+<filename>Kernel/Config/Files/</filename> is modified while the daemon is
+running, it will also signal the main daemon to restart all daemon modules.
                 </para>
             </listitem>
         </itemizedlist>
