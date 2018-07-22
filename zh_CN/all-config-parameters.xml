@@ -30851,6 +30851,159 @@ Users:
     <section id="ConfigReference_Section_Frontend_Base_OutputFilter">
         <title>Frontend → Base → OutputFilter</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html_AAAURL">
+                <term>ExternalFrontend::Util::Text::Ascii2Html###AAAURL</term>
+                <listitem>
+                    <para>定义信件中处理文本的过滤器，以便高亮URL地址。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Module: Kernel::WebApp::Util::Text::Ascii2Html::Plugin::URL
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html_AutoLink">
+                <term>ExternalFrontend::Util::Text::Ascii2Html###AutoLink</term>
+                <listitem>
+                    <para>定义信件中处理文本的过滤器，以便高亮预定义的关键词。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Module: Kernel::WebApp::Util::Text::Ascii2Html::Plugin::AutoLink
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_Bugtraq">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###Bugtraq</term>
+                <listitem>
+                    <para>定义HTML输出结果中在BUG追踪号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+RegExp:
+- Bugtraq[\s\w\t]*?ID[\s\w\t]*?:[\s\w\t]*?(\d{2,8})
+- Bugtraq[\s\w\t]*?ID[\s\w\t]*?(\d{2,8})
+- Bugtraq[\s\w\t]*?:[\s\w\t]*?(\d{2,8})
+- Bugtraq[\s\w\t]*?(\d{2,8})
+- BID[\s\w\t]*?:[\s\w\t]*?(\d{2,8})
+- BID[\s\w\t]*?(\d{2,8})
+URL1:
+  Description: Security Focus
+  Image: http://www.securityfocus.com/favicon.ico
+  Target: _blank
+  URL: http://www.securityfocus.com/bid/<MATCH1>/info
+URL2:
+  Description: Google
+  Image: http://www.google.de/favicon.ico
+  Target: _blank
+  URL: http://google.com/search?q=<MATCH>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_CVE">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###CVE</term>
+                <listitem>
+                    <para>定义HTML输出结果中在CVE号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+RegExp:
+- (CVE|CAN)\-(\d{3,4})\-(\d{2,})
+URL1:
+  Description: Mitre
+  Image: http://cve.mitre.org/favicon.ico
+  Target: _blank
+  URL: http://cve.mitre.org/cgi-bin/cvename.cgi?name=<MATCH1>-<MATCH2>-<MATCH3>
+URL2:
+  Description: Google
+  Image: http://www.google.de/favicon.ico
+  Target: _blank
+  URL: http://google.com/search?q=<MATCH1>-<MATCH2>-<MATCH3>
+URL3:
+  Description: US-CERT NVD
+  Image: http://nvd.nist.gov/favicon.ico
+  Target: _blank
+  URL: http://nvd.nist.gov/nvd.cfm?cvename=<MATCH1>-<MATCH2>-<MATCH3>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_MSBulletins">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###MSBulletins</term>
+                <listitem>
+                    <para>定义HTML输出结果中在微软公告号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+RegExp:
+- MS[^A-Za-z]{0,5}(\d\d).?(\d{2,4})
+URL1:
+  Description: Microsoft Technet
+  Image: http://www.microsoft.com/favicon.ico
+  Target: _blank
+  URL: http://www.microsoft.com/technet/security/bulletin/MS<MATCH1>-<MATCH2>.mspx
+URL2:
+  Description: Google
+  Image: http://www.google.de/favicon.ico
+  Target: _blank
+  URL: http://google.com/search?q=MS<MATCH1>-<MATCH2>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_Setting1">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###Setting1</term>
+                <listitem>
+                    <para>在HTML输出结果中为预定义字符串添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（例如：faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+RegExp:
+- RegExp
+URL1:
+  Description: Description
+  Image: right-small.png
+  Target: _blank
+  URL: URL
+URL2:
+  Description: Description
+  Image: Image
+  Target: _blank
+  URL: URL
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_Setting2">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###Setting2</term>
+                <listitem>
+                    <para>在HTML输出结果中为预定义字符串添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+RegExp:
+- RegExp
+URL1:
+  Description: Description
+  Image: right-small.png
+  Target: _blank
+  URL: URL
+URL2:
+  Description: Description
+  Image: Image
+  Target: _blank
+  URL: URL
+URL3:
+  Description: Description
+  Image: Image
+  Target: _blank
+  URL: URL
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Output::FilterText_AAAURL">
                 <term>Frontend::Output::FilterText###AAAURL</term>
                 <listitem>
@@ -33153,179 +33306,6 @@ Misc: Second Queue
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketMessage###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_HistoryComment">
-                <term>Ticket::Frontend::CustomerTicketMessage###HistoryComment</term>
-                <listitem>
-                    <para>在客户界面中新的历史条目的注释。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_HistoryType">
-                <term>Ticket::Frontend::CustomerTicketMessage###HistoryType</term>
-                <listitem>
-                    <para>定义客户界面中的默认历史类型。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- WebRequestCustomer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_NextScreenAfterNewTicket">
-                <term>Ticket::Frontend::CustomerTicketMessage###NextScreenAfterNewTicket</term>
-                <listitem>
-                    <para>确定在客户界面创建新客户工单后的下一个窗口。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- CustomerTicketOverview
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Priority">
-                <term>Ticket::Frontend::CustomerTicketMessage###Priority</term>
-                <listitem>
-                    <para>在客户界面允许设置工单的优先级。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_PriorityDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###PriorityDefault</term>
-                <listitem>
-                    <para>在客户界面中，创建客户工单的默认优先级。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 3 normal
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
-                <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
-                <listitem>
-                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_QueueDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###QueueDefault</term>
-                <listitem>
-                    <para>在客户界面中，创建客户工单的默认队列。</para>
-                    <para>这个设置默认没有激活。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- Postmaster
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_SLA">
-                <term>Ticket::Frontend::CustomerTicketMessage###SLA</term>
-                <listitem>
-                    <para>在客户界面允许设置工单的SLA。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_SLAMandatory">
-                <term>Ticket::Frontend::CustomerTicketMessage###SLAMandatory</term>
-                <listitem>
-                    <para>设置是否必须由客户选择SLA。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_SenderType">
-                <term>Ticket::Frontend::CustomerTicketMessage###SenderType</term>
-                <listitem>
-                    <para>客户界面新工单的发件人类型。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- customer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Service">
-                <term>Ticket::Frontend::CustomerTicketMessage###Service</term>
-                <listitem>
-                    <para>在客户界面允许设置工单所属的服务。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_ServiceMandatory">
-                <term>Ticket::Frontend::CustomerTicketMessage###ServiceMandatory</term>
-                <listitem>
-                    <para>设置是否必须由客户选择服务。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_StateDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###StateDefault</term>
-                <listitem>
-                    <para>定义客户界面中新建客户工单的默认状态。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- new
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
-                <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
-                <listitem>
-                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketTypeDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###TicketTypeDefault</term>
-                <listitem>
-                    <para>定义客户界面新建客户工单窗口默认的工单类型。</para>
-                    <para>这个设置默认没有激活。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- Unclassified
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
         </variablelist>
     </section>
 
@@ -33560,161 +33540,10 @@ Misc: Second Queue
     <section id="ConfigReference_Section_Frontend_Customer_View_TicketZoom">
         <title>Frontend → Customer → View → TicketZoom</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_AttributesView">
-                <term>Ticket::Frontend::CustomerTicketZoom###AttributesView</term>
-                <listitem>
-                    <para>Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-Owner: '0'
-Priority: '1'
-Queue: '1'
-Responsible: '0'
-SLA: '0'
-Service: '0'
-State: '1'
-Type: '0'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_CustomerZoomExpand">
                 <term>Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand</term>
                 <listitem>
                     <para>Shows all the articles of the ticket (expanded) in the customer zoom view.</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketZoom###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the ticket zoom screen of the customer interface.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_FollowUpDynamicField">
-                <term>Ticket::Frontend::CustomerTicketZoom###FollowUpDynamicField</term>
-                <listitem>
-                    <para>Dynamic fields options shown in the ticket reply section in the ticket zoom screen of the customer interface.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_HistoryComment">
-                <term>Ticket::Frontend::CustomerTicketZoom###HistoryComment</term>
-                <listitem>
-                    <para>为工单展开操作窗口定义历史注释信息，以用于服务人员界面的工单历史。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_HistoryType">
-                <term>Ticket::Frontend::CustomerTicketZoom###HistoryType</term>
-                <listitem>
-                    <para>为工单详情操作定义历史类型，以用于服务人员界面的工单历史。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- FollowUp
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_NextScreenAfterFollowUp">
-                <term>Ticket::Frontend::CustomerTicketZoom###NextScreenAfterFollowUp</term>
-                <listitem>
-                    <para>确定在客户界面跟进工单窗口的下一个窗口。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- CustomerTicketOverview
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_Priority">
-                <term>Ticket::Frontend::CustomerTicketZoom###Priority</term>
-                <listitem>
-                    <para>在客户界面允许选择工单的优先级。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_PriorityDefault">
-                <term>Ticket::Frontend::CustomerTicketZoom###PriorityDefault</term>
-                <listitem>
-                    <para>在客户界面中，工单详情窗口跟进客户工单的默认优先级。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 3 normal
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_SenderType">
-                <term>Ticket::Frontend::CustomerTicketZoom###SenderType</term>
-                <listitem>
-                    <para>定义服务人员界面工单详情窗口中工单默认的发送人类型。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- customer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_State">
-                <term>Ticket::Frontend::CustomerTicketZoom###State</term>
-                <listitem>
-                    <para>在客户界面允许选择客户工单的下一个编写状态。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_StateDefault">
-                <term>Ticket::Frontend::CustomerTicketZoom###StateDefault</term>
-                <listitem>
-                    <para>在客户界面中定义客户跟进工单后的默认下一个工单状态。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- open
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_StateType">
-                <term>Ticket::Frontend::CustomerTicketZoom###StateType</term>
-                <listitem>
-                    <para>定义客户界面客户工单下一个可能的状态。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-- open
-- closed
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_ZoomTimeDisplay">
-                <term>Ticket::Frontend::CustomerTicketZoom###ZoomTimeDisplay</term>
-                <listitem>
-                    <para>在工单详情视图中显示所用工时。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 0
@@ -34161,7 +33990,7 @@ Title: Welcome!
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Path: /ticket-overview/:filter?
+  Path: /ticket/overview/:filter?
   Props: '1'
 - Alias: ''
   Component: PersonalPreferences
@@ -34175,7 +34004,14 @@ Title: Welcome!
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Path: /ticket-create/:fromChatID?
+  Path: /ticket/create/:fromChatID?
+  Props: '1'
+- Alias: ''
+  Component: TicketZoom
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /ticket/:ticketNumber/:fromChatID?
   Props: '1'
 ]]></programlisting>
                     </para>
@@ -34210,6 +34046,163 @@ Title: Welcome!
                     <para>Defines state name map for external interface.</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_TicketZoom">
+        <title>Frontend → External → TicketZoom</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_AttributesView">
+                <term>ExternalFrontend::TicketZoom###AttributesView</term>
+                <listitem>
+                    <para>Shows the enabled ticket attributes in the external interface (0 = Disabled and 1 = Enabled).</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Owner: '0'
+Priority: '1'
+Queue: '1'
+Responsible: '0'
+SLA: '0'
+Service: '0'
+State: '1'
+Type: '0'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_DynamicField">
+                <term>ExternalFrontend::TicketZoom###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the ticket zoom screen of the customer interface.</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_FollowUpDynamicField">
+                <term>ExternalFrontend::TicketZoom###FollowUpDynamicField</term>
+                <listitem>
+                    <para>Dynamic fields options shown in the ticket reply section in the ticket zoom screen of the external interface.</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_HistoryComment">
+                <term>ExternalFrontend::TicketZoom###HistoryComment</term>
+                <listitem>
+                    <para>Defines the history comment for the ticket zoom action, which gets used for ticket history in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_HistoryType">
+                <term>ExternalFrontend::TicketZoom###HistoryType</term>
+                <listitem>
+                    <para>Defines the history type for the ticket zoom action, which gets used for ticket history in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- FollowUp
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_NextScreenAfterFollowUp">
+                <term>ExternalFrontend::TicketZoom###NextScreenAfterFollowUp</term>
+                <listitem>
+                    <para>Determines the next screen after the follow-up screen of a zoomed ticket in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- TicketOverview
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_Priority">
+                <term>ExternalFrontend::TicketZoom###Priority</term>
+                <listitem>
+                    <para>Allows customers to change the ticket priority in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_PriorityDefault">
+                <term>ExternalFrontend::TicketZoom###PriorityDefault</term>
+                <listitem>
+                    <para>Defines the default priority of follow-up customer tickets in the ticket zoom screen in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_SenderType">
+                <term>ExternalFrontend::TicketZoom###SenderType</term>
+                <listitem>
+                    <para>Defines the default sender type for tickets in the ticket zoom screen of the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- customer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_State">
+                <term>ExternalFrontend::TicketZoom###State</term>
+                <listitem>
+                    <para>Allows choosing the next compose state for customer tickets in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_StateDefault">
+                <term>ExternalFrontend::TicketZoom###StateDefault</term>
+                <listitem>
+                    <para>Defines the default next state for a ticket after customer follow-up in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- open
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_StateType">
+                <term>ExternalFrontend::TicketZoom###StateType</term>
+                <listitem>
+                    <para>Defines the next possible states for customer tickets in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+- open
+- closed
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_ZoomTimeDisplay">
+                <term>ExternalFrontend::TicketZoom###ZoomTimeDisplay</term>
+                <listitem>
+                    <para>Displays the accounted time for an article in the ticket zoom view of the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- 0
 ]]></programlisting>
                     </para>
                 </listitem>

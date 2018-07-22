@@ -30851,6 +30851,159 @@ Users:
     <section id="ConfigReference_Section_Frontend_Base_OutputFilter">
         <title>Frontend → Base → OutputFilter</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html_AAAURL">
+                <term>ExternalFrontend::Util::Text::Ascii2Html###AAAURL</term>
+                <listitem>
+                    <para>Meghatározza azokat a szűrőket, amelyek feldolgozzák a bejegyzésekben lévő szöveget az URL-ek kiemelése érdekében.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Module: Kernel::WebApp::Util::Text::Ascii2Html::Plugin::URL
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html_AutoLink">
+                <term>ExternalFrontend::Util::Text::Ascii2Html###AutoLink</term>
+                <listitem>
+                    <para>Egy szűrőt határoz meg a bejegyzésekben lévő szöveg feldolgozásához annak érdekében, hogy kiemelje az előre meghatározott kulcsszavakat.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Module: Kernel::WebApp::Util::Text::Ascii2Html::Plugin::AutoLink
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_Bugtraq">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###Bugtraq</term>
+                <listitem>
+                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon a bugraq számok mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+RegExp:
+- Bugtraq[\s\w\t]*?ID[\s\w\t]*?:[\s\w\t]*?(\d{2,8})
+- Bugtraq[\s\w\t]*?ID[\s\w\t]*?(\d{2,8})
+- Bugtraq[\s\w\t]*?:[\s\w\t]*?(\d{2,8})
+- Bugtraq[\s\w\t]*?(\d{2,8})
+- BID[\s\w\t]*?:[\s\w\t]*?(\d{2,8})
+- BID[\s\w\t]*?(\d{2,8})
+URL1:
+  Description: Security Focus
+  Image: http://www.securityfocus.com/favicon.ico
+  Target: _blank
+  URL: http://www.securityfocus.com/bid/<MATCH1>/info
+URL2:
+  Description: Google
+  Image: http://www.google.de/favicon.ico
+  Target: _blank
+  URL: http://google.com/search?q=<MATCH>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_CVE">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###CVE</term>
+                <listitem>
+                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon a CVE számok mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+RegExp:
+- (CVE|CAN)\-(\d{3,4})\-(\d{2,})
+URL1:
+  Description: Mitre
+  Image: http://cve.mitre.org/favicon.ico
+  Target: _blank
+  URL: http://cve.mitre.org/cgi-bin/cvename.cgi?name=<MATCH1>-<MATCH2>-<MATCH3>
+URL2:
+  Description: Google
+  Image: http://www.google.de/favicon.ico
+  Target: _blank
+  URL: http://google.com/search?q=<MATCH1>-<MATCH2>-<MATCH3>
+URL3:
+  Description: US-CERT NVD
+  Image: http://nvd.nist.gov/favicon.ico
+  Target: _blank
+  URL: http://nvd.nist.gov/nvd.cfm?cvename=<MATCH1>-<MATCH2>-<MATCH3>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_MSBulletins">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###MSBulletins</term>
+                <listitem>
+                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon az MSBulletin számok mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+RegExp:
+- MS[^A-Za-z]{0,5}(\d\d).?(\d{2,4})
+URL1:
+  Description: Microsoft Technet
+  Image: http://www.microsoft.com/favicon.ico
+  Target: _blank
+  URL: http://www.microsoft.com/technet/security/bulletin/MS<MATCH1>-<MATCH2>.mspx
+URL2:
+  Description: Google
+  Image: http://www.google.de/favicon.ico
+  Target: _blank
+  URL: http://google.com/search?q=MS<MATCH1>-<MATCH2>
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_Setting1">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###Setting1</term>
+                <listitem>
+                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon egy meghatározott szöveg mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+RegExp:
+- RegExp
+URL1:
+  Description: Description
+  Image: right-small.png
+  Target: _blank
+  URL: URL
+URL2:
+  Description: Description
+  Image: Image
+  Target: _blank
+  URL: URL
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Util::Text::Ascii2Html::AutoLink_Setting2">
+                <term>ExternalFrontend::Util::Text::Ascii2Html::AutoLink###Setting2</term>
+                <listitem>
+                    <para>Szűrő meghatározása a HTML kimenethez, hogy hivatkozást adjon egy meghatározott szöveg mögé. Ez a képelem kétfajta bevitelt tesz lehetővé. Elsőként egy kép nevét (például faq.png). Ez esetben az OTRS képútvonal lesz felhasználva. A másik lehetőség a hivatkozás beszúrása a képhez.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+RegExp:
+- RegExp
+URL1:
+  Description: Description
+  Image: right-small.png
+  Target: _blank
+  URL: URL
+URL2:
+  Description: Description
+  Image: Image
+  Target: _blank
+  URL: URL
+URL3:
+  Description: Description
+  Image: Image
+  Target: _blank
+  URL: URL
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Output::FilterText_AAAURL">
                 <term>Frontend::Output::FilterText###AAAURL</term>
                 <listitem>
@@ -33153,179 +33306,6 @@ Misc: Second Queue
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketMessage###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_HistoryComment">
-                <term>Ticket::Frontend::CustomerTicketMessage###HistoryComment</term>
-                <listitem>
-                    <para>Megjegyzés az új előzmény bejegyzésekhez az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_HistoryType">
-                <term>Ticket::Frontend::CustomerTicketMessage###HistoryType</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezett előzménytípust az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- WebRequestCustomer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_NextScreenAfterNewTicket">
-                <term>Ticket::Frontend::CustomerTicketMessage###NextScreenAfterNewTicket</term>
-                <listitem>
-                    <para>Meghatározza az új ügyféljegy utáni következő képernyőt az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- CustomerTicketOverview
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Priority">
-                <term>Ticket::Frontend::CustomerTicketMessage###Priority</term>
-                <listitem>
-                    <para>Lehetővé teszi az ügyfeleknek a jegy prioritásának beállítását az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_PriorityDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###PriorityDefault</term>
-                <listitem>
-                    <para>Meghatározza az új ügyféljegyek alapértelmezett prioritását az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 3 normal
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Queue">
-                <term>Ticket::Frontend::CustomerTicketMessage###Queue</term>
-                <listitem>
-                    <para>Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_QueueDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###QueueDefault</term>
-                <listitem>
-                    <para>Meghatározza az új ügyféljegyek alapértelmezett várólistáját az ügyfélfelületen.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- Postmaster
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_SLA">
-                <term>Ticket::Frontend::CustomerTicketMessage###SLA</term>
-                <listitem>
-                    <para>Lehetővé teszi az ügyfeleknek a jegy SLA beállítását az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_SLAMandatory">
-                <term>Ticket::Frontend::CustomerTicketMessage###SLAMandatory</term>
-                <listitem>
-                    <para>Beállítja, hogy az ügyfélnek ki kell választania az SLA-t.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_SenderType">
-                <term>Ticket::Frontend::CustomerTicketMessage###SenderType</term>
-                <listitem>
-                    <para>Az új jegyek küldőtípusa az ügyfélfelületről.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- customer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_Service">
-                <term>Ticket::Frontend::CustomerTicketMessage###Service</term>
-                <listitem>
-                    <para>Lehetővé teszi az ügyfeleknek a jegy szolgáltatásának beállítását az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_ServiceMandatory">
-                <term>Ticket::Frontend::CustomerTicketMessage###ServiceMandatory</term>
-                <listitem>
-                    <para>Beállítja, hogy az ügyfélnek ki kell választania a szolgáltatást.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_StateDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###StateDefault</term>
-                <listitem>
-                    <para>Meghatározza az új ügyféljegyek alapértelmezett állapotát az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- new
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketType">
-                <term>Ticket::Frontend::CustomerTicketMessage###TicketType</term>
-                <listitem>
-                    <para>Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketMessage_TicketTypeDefault">
-                <term>Ticket::Frontend::CustomerTicketMessage###TicketTypeDefault</term>
-                <listitem>
-                    <para>Meghatározza az alapértelmezett jegytípust az új ügyféljegyekhez az ügyfélfelületen.</para>
-                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- Unclassified
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
         </variablelist>
     </section>
 
@@ -33560,161 +33540,10 @@ Misc: Second Queue
     <section id="ConfigReference_Section_Frontend_Customer_View_TicketZoom">
         <title>Frontend → Customer → View → TicketZoom</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_AttributesView">
-                <term>Ticket::Frontend::CustomerTicketZoom###AttributesView</term>
-                <listitem>
-                    <para>Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-Owner: '0'
-Priority: '1'
-Queue: '1'
-Responsible: '0'
-SLA: '0'
-Service: '0'
-State: '1'
-Type: '0'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_CustomerZoomExpand">
                 <term>Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand</term>
                 <listitem>
                     <para>Shows all the articles of the ticket (expanded) in the customer zoom view.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketZoom###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the ticket zoom screen of the customer interface.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_FollowUpDynamicField">
-                <term>Ticket::Frontend::CustomerTicketZoom###FollowUpDynamicField</term>
-                <listitem>
-                    <para>Dynamic fields options shown in the ticket reply section in the ticket zoom screen of the customer interface.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_HistoryComment">
-                <term>Ticket::Frontend::CustomerTicketZoom###HistoryComment</term>
-                <listitem>
-                    <para>Meghatározza az előzmények megjegyzést a jegynagyítás művelethez, amelyet a jegy előzményeinél szoktak használni az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_HistoryType">
-                <term>Ticket::Frontend::CustomerTicketZoom###HistoryType</term>
-                <listitem>
-                    <para>Meghatározza az előzmények típusát a jegynagyítás művelethez, amelyet a jegy előzményeinél szoktak használni az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- FollowUp
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_NextScreenAfterFollowUp">
-                <term>Ticket::Frontend::CustomerTicketZoom###NextScreenAfterFollowUp</term>
-                <listitem>
-                    <para>Meghatározza egy nagyított jegynek a követő képernyője utáni következő képernyőt az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- CustomerTicketOverview
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_Priority">
-                <term>Ticket::Frontend::CustomerTicketZoom###Priority</term>
-                <listitem>
-                    <para>Lehetővé teszi az ügyfeleknek a jegy prioritásának megváltoztatását az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_PriorityDefault">
-                <term>Ticket::Frontend::CustomerTicketZoom###PriorityDefault</term>
-                <listitem>
-                    <para>Meghatározza a követő ügyféljegyek alapértelmezett prioritását a jegynagyítás képernyőn az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 3 normal
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_SenderType">
-                <term>Ticket::Frontend::CustomerTicketZoom###SenderType</term>
-                <listitem>
-                    <para>Meghatározza a jegyek alapértelmezett küldőtípusát az ügyfélfelület jegynagyítás képernyőjén.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- customer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_State">
-                <term>Ticket::Frontend::CustomerTicketZoom###State</term>
-                <listitem>
-                    <para>Lehetővé teszi az ügyfélfelületen lévő ügyféljegyek következő írási állapotának kiválasztását.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_StateDefault">
-                <term>Ticket::Frontend::CustomerTicketZoom###StateDefault</term>
-                <listitem>
-                    <para>Meghatározza egy jegy alapértelmezett következő állapotát az ügyfél követése után az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- open
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_StateType">
-                <term>Ticket::Frontend::CustomerTicketZoom###StateType</term>
-                <listitem>
-                    <para>Meghatározza az ügyféljegyek következő lehetséges állapotait az ügyfélfelületen.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-- open
-- closed
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_ZoomTimeDisplay">
-                <term>Ticket::Frontend::CustomerTicketZoom###ZoomTimeDisplay</term>
-                <listitem>
-                    <para>Megjeleníti az elszámolt időt egy bejegyzésnél a jegy nagyítás nézeten.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -34161,7 +33990,7 @@ Title: Welcome!
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Path: /ticket-overview/:filter?
+  Path: /ticket/overview/:filter?
   Props: '1'
 - Alias: ''
   Component: PersonalPreferences
@@ -34175,7 +34004,14 @@ Title: Welcome!
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Path: /ticket-create/:fromChatID?
+  Path: /ticket/create/:fromChatID?
+  Props: '1'
+- Alias: ''
+  Component: TicketZoom
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /ticket/:ticketNumber/:fromChatID?
   Props: '1'
 ]]></programlisting>
                     </para>
@@ -34210,6 +34046,163 @@ Title: Welcome!
                     <para>Defines state name map for external interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_TicketZoom">
+        <title>Frontend → External → TicketZoom</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_AttributesView">
+                <term>ExternalFrontend::TicketZoom###AttributesView</term>
+                <listitem>
+                    <para>Shows the enabled ticket attributes in the external interface (0 = Disabled and 1 = Enabled).</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Owner: '0'
+Priority: '1'
+Queue: '1'
+Responsible: '0'
+SLA: '0'
+Service: '0'
+State: '1'
+Type: '0'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_DynamicField">
+                <term>ExternalFrontend::TicketZoom###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the ticket zoom screen of the customer interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_FollowUpDynamicField">
+                <term>ExternalFrontend::TicketZoom###FollowUpDynamicField</term>
+                <listitem>
+                    <para>Dynamic fields options shown in the ticket reply section in the ticket zoom screen of the external interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_HistoryComment">
+                <term>ExternalFrontend::TicketZoom###HistoryComment</term>
+                <listitem>
+                    <para>Defines the history comment for the ticket zoom action, which gets used for ticket history in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_HistoryType">
+                <term>ExternalFrontend::TicketZoom###HistoryType</term>
+                <listitem>
+                    <para>Defines the history type for the ticket zoom action, which gets used for ticket history in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- FollowUp
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_NextScreenAfterFollowUp">
+                <term>ExternalFrontend::TicketZoom###NextScreenAfterFollowUp</term>
+                <listitem>
+                    <para>Determines the next screen after the follow-up screen of a zoomed ticket in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- TicketOverview
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_Priority">
+                <term>ExternalFrontend::TicketZoom###Priority</term>
+                <listitem>
+                    <para>Allows customers to change the ticket priority in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_PriorityDefault">
+                <term>ExternalFrontend::TicketZoom###PriorityDefault</term>
+                <listitem>
+                    <para>Defines the default priority of follow-up customer tickets in the ticket zoom screen in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 3 normal
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_SenderType">
+                <term>ExternalFrontend::TicketZoom###SenderType</term>
+                <listitem>
+                    <para>Defines the default sender type for tickets in the ticket zoom screen of the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- customer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_State">
+                <term>ExternalFrontend::TicketZoom###State</term>
+                <listitem>
+                    <para>Allows choosing the next compose state for customer tickets in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_StateDefault">
+                <term>ExternalFrontend::TicketZoom###StateDefault</term>
+                <listitem>
+                    <para>Defines the default next state for a ticket after customer follow-up in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- open
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_StateType">
+                <term>ExternalFrontend::TicketZoom###StateType</term>
+                <listitem>
+                    <para>Defines the next possible states for customer tickets in the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- open
+- closed
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketZoom_ZoomTimeDisplay">
+                <term>ExternalFrontend::TicketZoom###ZoomTimeDisplay</term>
+                <listitem>
+                    <para>Displays the accounted time for an article in the ticket zoom view of the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- 0
 ]]></programlisting>
                     </para>
                 </listitem>
