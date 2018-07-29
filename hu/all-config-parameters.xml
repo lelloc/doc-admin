@@ -11670,6 +11670,38 @@ Title: Services
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminServiceCatalogueCategories">
+                <term>Frontend::Module###AdminServiceCatalogueCategories</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Admin
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: Admin Service Catalogue Categories
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminServiceCatalogueServices">
+                <term>Frontend::Module###AdminServiceCatalogueServices</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Admin
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: Admin Service Catalogue Services
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminSession">
                 <term>Frontend::Module###AdminSession</term>
                 <listitem>
@@ -12107,7 +12139,7 @@ Name: Communication Log
                     <para>Admin area navigation for the agent interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
-Block: Administration
+Block: External
 Description: Manage Custom Pages.
 Group:
 - admin
@@ -12764,6 +12796,44 @@ IconBig: fa-wrench
 IconSmall: ''
 Module: Kernel::Output::HTML::NavBar::ModuleAdmin
 Name: Services
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminServiceCatalogueCategories">
+                <term>Frontend::NavigationModule###AdminServiceCatalogueCategories</term>
+                <listitem>
+                    <para>Admin area navigation for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Block: External
+Description: Manage Service Catalogue Categories.
+Group:
+- admin
+GroupRo: []
+IconBig: fa-sitemap
+IconSmall: ''
+Module: Kernel::Output::HTML::NavBar::ModuleAdmin
+Name: Service Catalogue Categories
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminServiceCatalogueServices">
+                <term>Frontend::NavigationModule###AdminServiceCatalogueServices</term>
+                <listitem>
+                    <para>Admin area navigation for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Block: External
+Description: Manage Service Catalogue Services.
+Group:
+- admin
+GroupRo: []
+IconBig: fa-list-alt
+IconSmall: ''
+Module: Kernel::Output::HTML::NavBar::ModuleAdmin
+Name: Service Catalogue Services
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -13892,6 +13962,30 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminServiceCatalogueCategories_001-Framework">
+                <term>Loader::Module::AdminServiceCatalogueCategories###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.ServiceCatalogue.Categories.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminServiceCatalogueServices_001-Framework">
+                <term>Loader::Module::AdminServiceCatalogueServices###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.ServiceCatalogue.Services.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminSession_001-Framework">
                 <term>Loader::Module::AdminSession###001-Framework</term>
                 <listitem>
@@ -14667,6 +14761,28 @@ JavaScript:
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminService_002-Ticket">
                 <term>Frontend::Navigation###AdminService###002-Ticket</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminServiceCatalogueCategories_001-Framework">
+                <term>Frontend::Navigation###AdminServiceCatalogueCategories###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminServiceCatalogueServices_001-Framework">
+                <term>Frontend::Navigation###AdminServiceCatalogueServices###001-Framework</term>
                 <listitem>
                     <para>Main menu item registration.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -30840,6 +30956,9 @@ Automation:
 Communication:
   Order: '2000'
   Title: Communication & Notifications
+External:
+  Order: '4500'
+  Title: External Interface
 Miscellaneous:
   Order: '7000'
   Title: Miscellaneous
@@ -33756,7 +33875,7 @@ Title: Welcome!
   ExternalLink: ''
   Group: []
   GroupRo: []
-  IsPublic: '1'
+  IsPublic: '0'
   Name: Services
   Prio: '200'
   RouteLink: /services
@@ -33792,7 +33911,7 @@ Title: Welcome!
   ExternalLink: ''
   Group: []
   GroupRo: []
-  IsPublic: '1'
+  IsPublic: '0'
   Name: Services
   Prio: '600'
   RouteLink: /services
@@ -33828,7 +33947,7 @@ Title: Welcome!
   ExternalLink: ''
   Group: []
   GroupRo: []
-  IsPublic: '1'
+  IsPublic: '0'
   Name: Services
   Prio: '1000'
   RouteLink: /services
@@ -33864,7 +33983,7 @@ Title: Welcome!
   ExternalLink: ''
   Group: []
   GroupRo: []
-  IsPublic: '1'
+  IsPublic: '0'
   Name: Services
   Prio: '1400'
   RouteLink: /services
@@ -33910,7 +34029,7 @@ Title: Welcome!
   ExternalLink: ''
   Group: []
   GroupRo: []
-  IsPublic: '1'
+  IsPublic: '0'
   Name: Services
   Prio: '200'
   RouteLink: /services
@@ -34030,6 +34149,13 @@ Title: Welcome!
   GroupRo: []
   IsPublic: '0'
   Path: /ticket/:ticketNumber/:fromChatID?
+  Props: '1'
+- Alias: ''
+  Component: ServiceCatalogue
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /services/:category?
   Props: '1'
 ]]></programlisting>
                     </para>
