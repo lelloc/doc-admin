@@ -10966,6 +10966,38 @@ Title: Admin Notification
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminExternalHomePage">
+                <term>Frontend::Module###AdminExternalHomePage</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Admin
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: Admin External Home Page
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminExternalLayout">
+                <term>Frontend::Module###AdminExternalLayout</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Admin
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: Admin External Interface Layout
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminGenericAgent">
                 <term>Frontend::Module###AdminGenericAgent</term>
                 <listitem>
@@ -12306,6 +12338,44 @@ Name: Admin Notification
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminExternalHomePage">
+                <term>Frontend::NavigationModule###AdminExternalHomePage</term>
+                <listitem>
+                    <para>Admin area navigation for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Block: External
+Description: Manage the Home Page.
+Group:
+- admin
+GroupRo: []
+IconBig: fa-home
+IconSmall: ''
+Module: Kernel::Output::HTML::NavBar::ModuleAdmin
+Name: Home Page
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminExternalLayout">
+                <term>Frontend::NavigationModule###AdminExternalLayout</term>
+                <listitem>
+                    <para>Admin area navigation for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Block: External
+Description: Manage the Layout.
+Group:
+- admin
+GroupRo: []
+IconBig: fa-paint-brush
+IconSmall: ''
+Module: Kernel::Output::HTML::NavBar::ModuleAdmin
+Name: Layout
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminGenericAgent">
                 <term>Frontend::NavigationModule###AdminGenericAgent</term>
                 <listitem>
@@ -13393,6 +13463,41 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminExternalHomePage_001-Framework">
+                <term>Loader::Module::AdminExternalHomePage###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.Admin.ExternalHomePage.css
+- thirdparty/spectrum-1.8.0/spectrum.css
+JavaScript:
+- thirdparty/spectrum-1.8.0/spectrum.js
+- Core.UI.InputFields.js
+- Core.Agent.Admin.ExternalHomePage.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminExternalLayout_001-Framework">
+                <term>Loader::Module::AdminExternalLayout###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.Admin.ExternalHomePage.css
+- Core.Agent.Admin.ExternalLayout.css
+- thirdparty/spectrum-1.8.0/spectrum.css
+JavaScript:
+- thirdparty/spectrum-1.8.0/spectrum.js
+- Core.UI.InputFields.js
+- Core.Agent.Admin.ExternalLayout.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminGenericAgent_002-Ticket">
                 <term>Loader::Module::AdminGenericAgent###002-Ticket</term>
                 <listitem>
@@ -14464,6 +14569,28 @@ JavaScript:
             </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminEmail_001-Framework">
                 <term>Frontend::Navigation###AdminEmail###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminExternalHomePage_001-Framework">
+                <term>Frontend::Navigation###AdminExternalHomePage###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminExternalLayout_001-Framework">
+                <term>Frontend::Navigation###AdminExternalLayout###001-Framework</term>
                 <listitem>
                     <para>Main menu item registration.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -16027,7 +16154,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentFAQSearch
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::RedirectAfterCloseDisabled">
                 <term>Ticket::Frontend::RedirectAfterCloseDisabled</term>
                 <listitem>
-                    <para>Disables the redirection to the last screen overview / dashboard after a ticket is created.</para>
+                    <para>Disables the redirection to the last screen overview / dashboard after a ticket is closed.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -33846,6 +33973,70 @@ Title: Welcome!
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- New OTRS password
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_Customize">
+        <title>Frontend → External → Customize</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::CustomizationColors">
+                <term>ExternalFrontend::CustomizationColors</term>
+                <listitem>
+                    <para>List of colors in hexadecimal RGB which will be available for selection during customization of the external interface. Make sure the colors are dark enough so white text can be overlayed on them.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- '#000000'
+- '#1E1E1E'
+- '#3A3A3A'
+- '#545453'
+- '#6E6E6E'
+- '#878687'
+- '#888787'
+- '#A09FA0'
+- '#B8B8B8'
+- '#D0D0D0'
+- '#E8E8E8'
+- '#FFFFFF'
+- '#891100'
+- '#894800'
+- '#888501'
+- '#458401'
+- '#028401'
+- '#018448'
+- '#008688'
+- '#004A88'
+- '#001888'
+- '#491A88'
+- '#891E88'
+- '#891648'
+- '#FF2101'
+- '#FF8802'
+- '#FFFA03'
+- '#83F902'
+- '#05F802'
+- '#03F987'
+- '#00FDFF'
+- '#008CFF'
+- '#002EFF'
+- '#8931FF'
+- '#FF39FF'
+- '#FF2987'
+- '#FF726E'
+- '#FFCE6E'
+- '#FFFB6D'
+- '#CEFA6E'
+- '#68F96E'
+- '#68FDFF'
+- '#68FBD0'
+- '#6ACFFF'
+- '#6E76FF'
+- '#D278FF'
+- '#FF7AFF'
+- '#FF7FD3'
 ]]></programlisting>
                     </para>
                 </listitem>
