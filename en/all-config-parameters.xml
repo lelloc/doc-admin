@@ -4525,7 +4525,7 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
                     <para>Defines the location to get online repository list for additional packages. The first available result will be used.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
-- http://ftp.otrs.org/pub/otrs/misc/packages/repository.xml
+- https://ftp.otrs.org/pub/otrs/misc/packages/repository.xml
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33363,32 +33363,6 @@ Misc: Second Queue
     <section id="ConfigReference_Section_Frontend_External">
         <title>Frontend → External</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RegisterBody">
-                <term>ExternalFrontend::Account::RegisterBody</term>
-                <listitem>
-                    <para>Defines the body text for notification mails sent to customers, about new account.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has created a new
-  OTRS account for you.\n\nFull name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>\nUser
-  name: <OTRS_USERLOGIN>\nPassword: <OTRS_USERPASSWORD>\n\nYou can log in via the
-  following URL. We encourage you to change your password in the user preferences
-  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/external\n            "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RegisterSubject">
-                <term>ExternalFrontend::Account::RegisterSubject</term>
-                <listitem>
-                    <para>Defines the subject for notification mails sent to customers, about new account.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- New OTRS Account!
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::DefaultLanguage">
                 <term>ExternalFrontend::DefaultLanguage</term>
                 <listitem>
@@ -33414,103 +33388,29 @@ Title: Welcome!
                     </para>
                 </listitem>
             </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_External_Account">
-        <title>Frontend → External → Account</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::EmailBlacklist">
-                <term>ExternalFrontend::Account::EmailBlacklist</term>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RegisterBody">
+                <term>WebApp::API::Customer::Account::RegisterBody</term>
                 <listitem>
-                    <para>If active, none of the regular expressions may match the user's email address to allow registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[---
-- \@your\.domain\.example$
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::EmailWhitelist">
-                <term>ExternalFrontend::Account::EmailWhitelist</term>
-                <listitem>
-                    <para>If active, one of the regular expressions has to match the user's email address to allow registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[---
-- \@your\.domain\.example$
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::Recover">
-                <term>ExternalFrontend::Account::Recover</term>
-                <listitem>
-                    <para>Enables customers to recover their own accounts via the external interface.</para>
+                    <para>Defines the body text for notification mails sent to customers, about new account.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
-                        <programlisting><![CDATA[--- '1'
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has created a new
+  OTRS account for you.\n\nFull name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>\nUser
+  name: <OTRS_USERLOGIN>\nPassword: <OTRS_USERPASSWORD>\n\nYou can log in via the
+  following URL. We encourage you to change your password in the user preferences
+  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN><OTRS_CONFIG_Frontend::PrefixPath>/external\n
+  \           "
 ]]></programlisting>
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RecoverBody">
-                <term>ExternalFrontend::Account::RecoverBody</term>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RegisterSubject">
+                <term>WebApp::API::Customer::Account::RegisterSubject</term>
                 <listitem>
-                    <para>Defines the body for an email with password recovery instructions for customer users, containing a link to request a new password.</para>
+                    <para>Defines the subject for notification mails sent to customers, about new account.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
-  change your OTRS password.\n\nIf you want to do this, click on this link. You will
-  receive another email containing the password.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/external/account/reset/<OTRS_TOKEN>\n\nIf
-  you did not request a new password, please ignore this email.\n            "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::RecoverSubject">
-                <term>ExternalFrontend::Account::RecoverSubject</term>
-                <listitem>
-                    <para>Defines the subject for an email with password recovery instructions for customer users.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- New OTRS password request
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::Register">
-                <term>ExternalFrontend::Account::Register</term>
-                <listitem>
-                    <para>Enables customers to create their own accounts via the external interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::ResetBody">
-                <term>ExternalFrontend::Account::ResetBody</term>
-                <listitem>
-                    <para>Defines the body for an email with new password for customer users.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYour new password is: <OTRS_NEWPW>\n\nYou can log
-  in via the following URL. We encourage you to change your password in the user preferences
-  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/external\n            "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Account::ResetSubject">
-                <term>ExternalFrontend::Account::ResetSubject</term>
-                <listitem>
-                    <para>Defines the subject for an email with new password for customer users.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- New OTRS password
+                        <programlisting><![CDATA[--- New OTRS Account!
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -35505,6 +35405,108 @@ Protocol: HTTP
 ConfigDialog: AdminGenericInterfaceTransportHTTPTest
 Name: Test
 Protocol: HTTP
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_WebApp_API_Customer_Account">
+        <title>WebApp → API → Customer → Account</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::EmailBlacklist">
+                <term>WebApp::API::Customer::Account::EmailBlacklist</term>
+                <listitem>
+                    <para>If active, none of the regular expressions may match the user's email address to allow registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[---
+- \@your\.domain\.example$
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::EmailWhitelist">
+                <term>WebApp::API::Customer::Account::EmailWhitelist</term>
+                <listitem>
+                    <para>If active, one of the regular expressions has to match the user's email address to allow registration.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[---
+- \@your\.domain\.example$
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::Recover">
+                <term>WebApp::API::Customer::Account::Recover</term>
+                <listitem>
+                    <para>Enables customers to recover their own accounts via the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RecoverBody">
+                <term>WebApp::API::Customer::Account::RecoverBody</term>
+                <listitem>
+                    <para>Defines the body for an email with password recovery instructions for customer users, containing a link to request a new password.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
+  change your OTRS password.\n\nIf you want to do this, click on this link. You will
+  receive another email containing the password.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN><OTRS_CONFIG_Frontend::PrefixPath>/external/account/reset/<OTRS_TOKEN>\n\nIf
+  you did not request a new password, please ignore this email.\n            "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RecoverSubject">
+                <term>WebApp::API::Customer::Account::RecoverSubject</term>
+                <listitem>
+                    <para>Defines the subject for an email with password recovery instructions for customer users.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- New OTRS password request
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::Register">
+                <term>WebApp::API::Customer::Account::Register</term>
+                <listitem>
+                    <para>Enables customers to create their own accounts via the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::ResetBody">
+                <term>WebApp::API::Customer::Account::ResetBody</term>
+                <listitem>
+                    <para>Defines the body for an email with new password for customer users.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYour new password is: <OTRS_NEWPW>\n\nYou can log
+  in via the following URL. We encourage you to change your password in the user preferences
+  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN><OTRS_CONFIG_Frontend::PrefixPath>/external\n
+  \           "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::ResetSubject">
+                <term>WebApp::API::Customer::Account::ResetSubject</term>
+                <listitem>
+                    <para>Defines the subject for an email with new password for customer users.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- New OTRS password
 ]]></programlisting>
                     </para>
                 </listitem>
