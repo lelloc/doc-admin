@@ -1645,6 +1645,116 @@ VALIDSIG: The PGP signature with the keyid is good.
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Customer">
+        <title>Core → Customer</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_Customer::DefaultUserID">
+                <term>Customer::DefaultUserID</term>
+                <listitem>
+                    <para>Defines the (agent) user identifier for actions triggered by customers.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerDisableCompanyTicketAccess">
+                <term>CustomerDisableCompanyTicketAccess</term>
+                <listitem>
+                    <para>Chaguo hili litakuzuia kufikia tiketi za kampuni za mteja, ambazo hazikujatengenezwa na mtumiaji wa mteja.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerGroupAlwaysGroups">
+                <term>CustomerGroupAlwaysGroups</term>
+                <listitem>
+                    <para>Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don't want to manage every customer user for these groups).</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- users
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerGroupCompanyAlwaysGroups">
+                <term>CustomerGroupCompanyAlwaysGroups</term>
+                <listitem>
+                    <para>Defines the groups every customer will be in (if CustomerGroupSupport is enabled and you don't want to manage every customer for these groups).</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- users
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerGroupPermissionContext_001-CustomerID-same">
+                <term>CustomerGroupPermissionContext###001-CustomerID-same</term>
+                <listitem>
+                    <para>Defines a permission context for customer to group assignment.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Description: Gives customer users group based access to tickets from customer users
+  of the same customer (ticket CustomerID is a CustomerID of the customer user).
+Name: Same Customer
+Value: Ticket::CustomerID::Same
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerGroupPermissionContext_100-CustomerID-other">
+                <term>CustomerGroupPermissionContext###100-CustomerID-other</term>
+                <listitem>
+                    <para>Defines a permission context for customer to group assignment.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Description: Provides customer users access to tickets even if the tickets are not
+  assigned to a customer user of the same customer ID(s), based on permission groups.
+Name: Other Customers
+Value: Ticket::CustomerID::Other
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerGroupSupport">
+                <term>CustomerGroupSupport</term>
+                <listitem>
+                    <para>Activates support for customer and customer user groups.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_CustomerPreferences">
+                <term>CustomerPreferences</term>
+                <listitem>
+                    <para>Fafanua vigezo kwa jedwali la upendeleo la mteja.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Module: Kernel::System::CustomerUser::Preferences::DB
+Params:
+  Table: customer_preferences
+  TableKey: preferences_key
+  TableUserID: user_id
+  TableValue: preferences_value
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_DB_Mirror">
         <title>Core → DB → Mirror</title>
         <variablelist>
@@ -1747,6 +1857,100 @@ User: some_user
                     <para>This setting is not active by default.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- some_user
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_DocumentSearch_Driver">
+        <title>Core → DocumentSearch → Driver</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::Appointment::Enabled">
+                <term>DocumentSearch::Drivers::Appointment::Enabled</term>
+                <listitem>
+                    <para>It controls availability for Appointment search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::ArticleChat::Enabled">
+                <term>DocumentSearch::Drivers::ArticleChat::Enabled</term>
+                <listitem>
+                    <para>It controls availability for ArticleChat search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::ArticleMIME::Enabled">
+                <term>DocumentSearch::Drivers::ArticleMIME::Enabled</term>
+                <listitem>
+                    <para>It controls availability for ArticleMIME search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::ArticleSMS::Enabled">
+                <term>DocumentSearch::Drivers::ArticleSMS::Enabled</term>
+                <listitem>
+                    <para>It controls availability for ArticleSMS search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::CustomPageContent::Enabled">
+                <term>DocumentSearch::Drivers::CustomPageContent::Enabled</term>
+                <listitem>
+                    <para>It controls availability for Custom Page Content search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::FAQ::Enabled">
+                <term>DocumentSearch::Drivers::FAQ::Enabled</term>
+                <listitem>
+                    <para>It controls availability for FAQ search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::ServiceCatalogueContent::Enabled">
+                <term>DocumentSearch::Drivers::ServiceCatalogueContent::Enabled</term>
+                <listitem>
+                    <para>It controls availability for Service Catalogue Content search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::Ticket::Enabled">
+                <term>DocumentSearch::Drivers::Ticket::Enabled</term>
+                <listitem>
+                    <para>It controls availability for Ticket search driver.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -2226,7 +2430,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_AutoResponseForWebTickets">
                 <term>AutoResponseForWebTickets</term>
                 <listitem>
-                    <para>If this option is enabled, tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is not enabled, no autoresponses will be sent.</para>
+                    <para>If this option is enabled, tickets created via the web interface, via external or agent interface, will receive an autoresponse if configured. If this option is not enabled, no autoresponses will be sent.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- '1'
@@ -2910,6 +3114,38 @@ Module: Kernel::System::Calendar::Event::TicketAppointments
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_CustomPage">
+        <title>Core → Event → CustomPage</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_CustomPage::EventModulePost_1000-IndexManagement">
+                <term>CustomPage::EventModulePost###1000-IndexManagement</term>
+                <listitem>
+                    <para>Marks down the object involved on the event.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: (CustomPageContentAdd|CustomPageContentUpdate|CustomPageContentDelete)
+Module: Kernel::System::CustomPage::Event::CustomPageContentIndexManagement
+Transaction: '0'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ServiceCatalogueService::EventModulePost_1000-ServiceCatalogueIndexManagement">
+                <term>ServiceCatalogueService::EventModulePost###1000-ServiceCatalogueIndexManagement</term>
+                <listitem>
+                    <para>Marks down the object involved on the event.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: (ServiceContentAdd|ServiceContentUpdate|ServiceContentDelete)
+Module: Kernel::System::ServiceCatalogue::Event::ServiceCatalogueContentIndexManagement
+Transaction: '0'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_CustomerCompany">
         <title>Core → Event → CustomerCompany</title>
         <variablelist>
@@ -3071,6 +3307,24 @@ Transaction: '1'
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Core_Event_FAQ">
+        <title>Core → Event → FAQ</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::EventModulePost_1000-IndexManagement">
+                <term>FAQ::EventModulePost###1000-IndexManagement</term>
+                <listitem>
+                    <para>Marks down the object involved on the event.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::System::FAQ::Event::FAQIndexManagement
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Core_Event_LinkObject">
         <title>Core → Event → LinkObject</title>
         <variablelist>
@@ -3125,6 +3379,19 @@ Transaction: '1'
     <section id="ConfigReference_Section_Core_Event_Queue">
         <title>Core → Event → Queue</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_DynamicField::EventModulePost_1000-TicketIndexManagement">
+                <term>DynamicField::EventModulePost###1000-TicketIndexManagement</term>
+                <listitem>
+                    <para>Event module that performs an update statement on Document Search Indices if a dynamic field was deleted.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: DynamicFieldDelete
+Module: Kernel::System::DynamicField::Event::IndexManagement
+Transaction: '0'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Queue::EventModulePost_2300-UpdateQueue">
                 <term>Queue::EventModulePost###2300-UpdateQueue</term>
                 <listitem>
@@ -3133,6 +3400,19 @@ Transaction: '1'
                         <programlisting><![CDATA[---
 Event: QueueUpdate
 Module: Kernel::System::Queue::Event::TicketAcceleratorUpdate
+Transaction: '0'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Queue::EventModulePost_2400-TicketIndexManagement">
+                <term>Queue::EventModulePost###2400-TicketIndexManagement</term>
+                <listitem>
+                    <para>Event module that performs an update statement on Document Search Ticket Index if group has been changed.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: QueueUpdate
+Module: Kernel::System::Queue::Event::TicketIndexManagement
 Transaction: '0'
 ]]></programlisting>
                     </para>
@@ -3157,6 +3437,30 @@ Transaction: '1'
     <section id="ConfigReference_Section_Core_Event_Ticket">
         <title>Core → Event → Ticket</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_AppointmentCalendar::EventModulePost_1000-IndexManagement">
+                <term>AppointmentCalendar::EventModulePost###1000-IndexManagement</term>
+                <listitem>
+                    <para>Marks down the object involved on the event.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::System::Calendar::Event::IndexManagement
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_1000-IndexManagement">
+                <term>Ticket::EventModulePost###1000-IndexManagement</term>
+                <listitem>
+                    <para>Marks down the object involved on the event.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Event: ''
+Module: Kernel::System::Ticket::Event::IndexManagement
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_2300-ArchiveRestore">
                 <term>Ticket::EventModulePost###2300-ArchiveRestore</term>
                 <listitem>
@@ -3394,6 +3698,20 @@ Transaction: '1'
     <section id="ConfigReference_Section_Core_FAQ">
         <title>Core → FAQ</title>
         <variablelist>
+            <varlistentry id="ConfigReference_Setting_FAQ::Agent::StateTypes">
+                <term>FAQ::Agent::StateTypes</term>
+                <listitem>
+                    <para>List of state types which can be used in the agent interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- internal
+- external
+- public
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_FAQ::CacheTTL">
                 <term>FAQ::CacheTTL</term>
                 <listitem>
@@ -3401,6 +3719,19 @@ Transaction: '1'
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- '172800'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Customer::StateTypes">
+                <term>FAQ::Customer::StateTypes</term>
+                <listitem>
+                    <para>List of state types which can be used in the customer interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- external
+- public
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -3467,6 +3798,18 @@ Transaction: '1'
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_FAQ::Public::StateTypes">
+                <term>FAQ::Public::StateTypes</term>
+                <listitem>
+                    <para>List of state types which can be used in the public interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- public
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -3898,17 +4241,6 @@ internal: internal (agent)
                 <term>FAQ::Agent::RelatedArticles::Enabled</term>
                 <listitem>
                     <para>Enable the related article feature for the agent frontend.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Customer::RelatedArticles::Enabled">
-                <term>FAQ::Customer::RelatedArticles::Enabled</term>
-                <listitem>
-                    <para>Enable the related article feature for the customer frontend.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- '1'
@@ -5337,7 +5669,7 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
             <varlistentry id="ConfigReference_Setting_SystemMaintenance::IsActiveDefaultLoginErrorMessage">
                 <term>SystemMaintenance::IsActiveDefaultLoginErrorMessage</term>
                 <listitem>
-                    <para>Weka ujumbe wa yaliyokosewa chaguo-msingi kwa skrini ya kuingia kwenye kiolesura cha wakala na mteja, inaonyeshwa wakati wa kipindi amilifu cha matengenezo ya mfumo  yanaendelea.</para>
+                    <para>Sets the default error message for the login screen in the agent interface, it's shown when a running system maintenance period is active.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- We are performing scheduled maintenance. Login is temporarily not available.
 ]]></programlisting>
@@ -5347,7 +5679,7 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
             <varlistentry id="ConfigReference_Setting_SystemMaintenance::IsActiveDefaultLoginMessage">
                 <term>SystemMaintenance::IsActiveDefaultLoginMessage</term>
                 <listitem>
-                    <para>Weka ujumbe chaguo-msingi kwa skrini ya kuingia kwenye kiolesura cha wakala na mteja, inaonyeshwa wakati wa kipindi amilifu cha matengenezo ya mfumo yanaendelea.</para>
+                    <para>Sets the default message for the login screen in the agent interface, it's shown when a running system maintenance period is active.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- We are performing scheduled maintenance. We should be back online shortly.
 ]]></programlisting>
@@ -5575,7 +5907,7 @@ ProcessDialog: Process dialog
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::DefaultRecipientDisplayType">
                 <term>Ticket::Frontend::DefaultRecipientDisplayType</term>
                 <listitem>
-                    <para>Default display type for recipient (To,Cc) names in AgentTicketZoom and CustomerTicketZoom.</para>
+                    <para>Default display type for recipient (To,Cc) names in AgentTicketZoom.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- Realname
 ]]></programlisting>
@@ -5585,7 +5917,7 @@ ProcessDialog: Process dialog
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::DefaultSenderDisplayType">
                 <term>Ticket::Frontend::DefaultSenderDisplayType</term>
                 <listitem>
-                    <para>Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.</para>
+                    <para>Default display type for sender (From) names in AgentTicketZoom.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- Realname
 ]]></programlisting>
@@ -9985,6 +10317,24 @@ Params:
 - '14'
 Schedule: 02 03 * * *
 TaskName: GeneticInterfaceDebugLogCleanup
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_IndexMaintenance">
+                <term>Daemon::SchedulerCronTaskManager::Task###IndexMaintenance</term>
+                <listitem>
+                    <para>Verify indices structure and index missing documents.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Function: Execute
+MaximumParallelInstances: '1'
+Module: Kernel::System::Console::Command::Maint::DocumentSearch::IndexWorker
+Params:
+- --verify-index
+Schedule: '*/1 * * * *'
+TaskName: IndexMaintenance
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -15654,20 +16004,6 @@ Type: '1'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Agent::StateTypes">
-                <term>FAQ::Agent::StateTypes</term>
-                <listitem>
-                    <para>List of state types which can be used in the agent interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- internal
-- external
-- public
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::AvatarEngine">
                 <term>Frontend::AvatarEngine</term>
                 <listitem>
@@ -15708,6 +16044,178 @@ Type: '1'
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_1-GoogleMaps">
+                <term>Frontend::CustomerUser::Item###1-GoogleMaps</term>
+                <listitem>
+                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya ramani za google katika mwisho wa kifungu cha taarifa cha mteja.</para>
+                    <para>This setting can be overridden in the user preferences, but is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Attributes: UserStreet;UserCity;UserCountry;
+CSS: Core.Agent.CustomerUser.GoogleMaps.css
+CSSClass: GoogleMaps
+IconName: fa-globe
+Module: Kernel::Output::HTML::CustomerUser::Generic
+Required: UserStreet;UserCity;
+Target: _blank
+Text: Location
+URL: http://maps.google.com/maps?z=7&q=
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_15-OpenTickets">
+                <term>Frontend::CustomerUser::Item###15-OpenTickets</term>
+                <listitem>
+                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofunguliwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
+                    <para>This setting can be overridden in the user preferences, but is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Action: AgentTicketSearch
+Attributes: StateType=Open;
+CSS: Core.Agent.CustomerUser.OpenTicket.css
+CSSClassNoOpenTicket: NoOpenTicket
+CSSClassOpenTicket: OpenTicket
+CustomerUserLogin: '0'
+IconNameNoOpenTicket: fa-check-circle
+IconNameOpenTicket: fa-exclamation-circle
+Module: Kernel::Output::HTML::CustomerUser::GenericTicket
+Subaction: Search
+Target: _blank
+Text: Open tickets (customer)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_16-OpenTicketsForCustomerUserLogin">
+                <term>Frontend::CustomerUser::Item###16-OpenTicketsForCustomerUserLogin</term>
+                <listitem>
+                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofunguliwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Action: AgentTicketSearch
+Attributes: StateType=Open;
+CSS: Core.Agent.CustomerUser.OpenTicket.css
+CSSClassNoOpenTicket: NoOpenTicket
+CSSClassOpenTicket: OpenTicket
+CustomerUserLogin: '1'
+IconNameNoOpenTicket: fa-check-circle
+IconNameOpenTicket: fa-exclamation-circle
+Module: Kernel::Output::HTML::CustomerUser::GenericTicket
+Subaction: Search
+Target: _blank
+Text: Open tickets (customer user)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_17-ClosedTickets">
+                <term>Frontend::CustomerUser::Item###17-ClosedTickets</term>
+                <listitem>
+                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofungwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Action: AgentTicketSearch
+Attributes: StateType=Closed;
+CSS: Core.Agent.CustomerUser.OpenTicket.css
+CSSClassNoOpenTicket: NoOpenTicket
+CSSClassOpenTicket: OpenTicket
+CustomerUserLogin: '0'
+IconNameNoOpenTicket: fa-power-off
+IconNameOpenTicket: fa-power-off
+Module: Kernel::Output::HTML::CustomerUser::GenericTicket
+Subaction: Search
+Target: _blank
+Text: Closed tickets (customer)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_18-ClosedTicketsForCustomerUserLogin">
+                <term>Frontend::CustomerUser::Item###18-ClosedTicketsForCustomerUserLogin</term>
+                <listitem>
+                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofungwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Action: AgentTicketSearch
+Attributes: StateType=Closed;
+CSS: Core.Agent.CustomerUser.OpenTicket.css
+CSSClassNoOpenTicket: NoOpenTicket
+CSSClassOpenTicket: OpenTicket
+CustomerUserLogin: '1'
+IconNameNoOpenTicket: fa-power-off
+IconNameOpenTicket: fa-power-off
+Module: Kernel::Output::HTML::CustomerUser::GenericTicket
+Subaction: Search
+Target: _blank
+Text: Closed tickets (customer user)
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_2-Google">
+                <term>Frontend::CustomerUser::Item###2-Google</term>
+                <listitem>
+                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya google katika mwisho wa kifungu cha taarifa cha mteja.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Attributes: UserFirstname;UserLastname;
+CSS: Core.Agent.CustomerUser.Google.css
+CSSClass: Google
+IconName: fa-google
+Module: Kernel::Output::HTML::CustomerUser::Generic
+Required: UserFirstname;UserLastname;
+Target: _blank
+Text: Google
+URL: http://google.com/search?q=
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_2-LinkedIn">
+                <term>Frontend::CustomerUser::Item###2-LinkedIn</term>
+                <listitem>
+                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya LinkedIn katika mwisho wa kifungu cha taarifa cha mteja.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Attributes: UserFirstname;UserLastname;
+CSS: Core.Agent.CustomerUser.LinkedIn.css
+CSSClass: LinkedIn
+IconName: fa-linkedin
+Module: Kernel::Output::HTML::CustomerUser::Generic
+Required: UserFirstname;UserLastname;
+Target: _blank
+Text: LinkedIn
+URL: http://www.linkedin.com/commonSearch?type=people&keywords=
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_3-XING">
+                <term>Frontend::CustomerUser::Item###3-XING</term>
+                <listitem>
+                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya XING katika mwisho wa kifungu cha taarifa cha mteja.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+Attributes: UserFirstname;UserLastname;
+CSS: Core.Agent.CustomerUser.Xing.css
+CSSClass: Xing
+IconName: fa-xing
+Module: Kernel::Output::HTML::CustomerUser::Generic
+Required: UserFirstname;UserLastname;
+Target: _blank
+Text: XING
+URL: https://www.xing.com/app/search?op=search;keywords=
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -28631,6 +29139,17 @@ Mfano:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_GlobalProfileGroup">
+                <term>Ticket::Frontend::AgentTicketSearch###GlobalProfileGroup</term>
+                <listitem>
+                    <para>Defines the groups whose agents can set up global search templates.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[---
+- admin
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_Order::Default">
                 <term>Ticket::Frontend::AgentTicketSearch###Order::Default</term>
                 <listitem>
@@ -30146,7 +30665,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_DefaultTheme">
                 <term>DefaultTheme</term>
                 <listitem>
-                    <para>Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at http://otrs.github.io/doc/.</para>
+                    <para>Defines the default front-end (HTML) theme to be used by the agents. If you like, you can add your own theme. Please refer the administrator manual located at http://otrs.github.io/doc/.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- Standard
@@ -30157,7 +30676,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_DefaultTheme::HostBased">
                 <term>DefaultTheme::HostBased</term>
                 <listitem>
-                    <para>Inawezekana kusanidi dhima tofauti, kwa mfano kutofautisha kati wakala na wateja, wataokaotumika katika kila huduma kwenye kikoa katika programu tumizi. Kwa kutumia imizo la kawaida (regex), unaweza kusanidi jozi ya yaliyomo/kibonye kulandanisha kikoa. Thamani katika "Kibonye" ilandane na kikoa, na thamani kwenye "Yaliyomo" iwe dhima batili katika mfumo wako. Tafadhali ona maingizo ya mfano kwa  ajili fomu sahihi ya  imizo la kawaida.</para>
+                    <para>It is possible to configure different themes to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.</para>
                     <para>This setting is not active by default.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[---
@@ -30438,17 +30957,6 @@ zh_TW: 正體中文
                 <term>Frontend::RichText::EnhancedMode</term>
                 <listitem>
                     <para>Inafafanua kama hali timizi ya uimarishaji itumike(Wezesha matumizi ya jedwali, kubadilisha,hati chini, hati juu, Bandika kutoka kwenye Word, n.k.).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::RichText::EnhancedMode::Customer">
-                <term>Frontend::RichText::EnhancedMode::Customer</term>
-                <listitem>
-                    <para>Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- 0
@@ -30886,162 +31394,6 @@ VisibleName: High Contrast
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::CommonCSS_000-Framework">
-                <term>Loader::Customer::CommonCSS###000-Framework</term>
-                <listitem>
-                    <para>Orodha ya mafaili ya CSS yapelekwe mara zote katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- Core.Reset.css
-- Core.Default.css
-- Core.Form.css
-- Core.Dialog.css
-- Core.Tooltip.css
-- Core.Login.css
-- Core.Control.css
-- Core.Table.css
-- Core.TicketZoom.css
-- Core.InputFields.css
-- Core.Print.css
-- Core.Animations.css
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::CommonJS_000-Framework">
-                <term>Loader::Customer::CommonJS###000-Framework</term>
-                <listitem>
-                    <para>Orodha ya mafaili ya JS yapelekwe mara zote katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- thirdparty/jquery-3.2.1/jquery.js
-- thirdparty/jquery-browser-detection/jquery-browser-detection.js
-- thirdparty/jquery-validate-1.16.0/jquery.validate.js
-- thirdparty/jquery-ui-1.12.1/jquery-ui.js
-- thirdparty/jquery-pubsub/pubsub.js
-- thirdparty/jquery-jstree-3.3.4/jquery.jstree.js
-- thirdparty/nunjucks-3.0.1/nunjucks.js
-- Core.Init.js
-- Core.Debug.js
-- Core.Exception.js
-- Core.Data.js
-- Core.JSON.js
-- Core.JavaScriptEnhancements.js
-- Core.Config.js
-- Core.Language.js
-- Core.Template.js
-- Core.App.js
-- Core.App.Responsive.js
-- Core.AJAX.js
-- Core.UI.js
-- Core.UI.InputFields.js
-- Core.UI.Accessibility.js
-- Core.UI.Dialog.js
-- Core.UI.Floater.js
-- Core.UI.RichTextEditor.js
-- Core.UI.Datepicker.js
-- Core.UI.Popup.js
-- Core.UI.TreeSelection.js
-- Core.UI.Autocomplete.js
-- Core.Form.js
-- Core.Form.ErrorTooltips.js
-- Core.Form.Validate.js
-- Core.Customer.js
-- Core.Customer.Responsive.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::CommonJS_001-JQueryMigrate">
-                <term>Loader::Customer::CommonJS###001-JQueryMigrate</term>
-                <listitem>
-                    <para>Orodha ya mafaili ya JS yapelekwe mara zote katika kiolesura cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- thirdparty/jquery-migrate-3.0.0/jquery-migrate.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::CommonJS_002-Ticket">
-                <term>Loader::Customer::CommonJS###002-Ticket</term>
-                <listitem>
-                    <para>Orodha ya mafaili ya JS yapelekwe mara zote katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- Core.Customer.Chat.Toolbar.js
-- Core.VideoChat.js
-- thirdparty/adapter.js-1.4.0/adapter.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::CommonJS_100-CKEditor">
-                <term>Loader::Customer::CommonJS###100-CKEditor</term>
-                <listitem>
-                    <para>Orodha ya mafaili ya JS yapelekwe mara zote katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- thirdparty/ckeditor-4.7.0/ckeditor.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::ResponsiveCSS_000-Framework">
-                <term>Loader::Customer::ResponsiveCSS###000-Framework</term>
-                <listitem>
-                    <para>List of responsive CSS files to always be loaded for the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- Core.Responsive.css
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::SelectedSkin">
-                <term>Loader::Customer::SelectedSkin</term>
-                <listitem>
-                    <para>Gamba la wakala la Jina la ndani ambalo linatumika katika kiolesura cha mteja. Tafadhali angali magamba yanayopatikana katika Mazingira ya mbele::wakala::Magamba.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- default
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::SelectedSkin::HostBased">
-                <term>Loader::Customer::SelectedSkin::HostBased</term>
-                <listitem>
-                    <para>Inawezekana kusanidi magamba tofauti, kwa mfano kutofautisha kati wateja tofauti, wataokaotumika katika kila huduma kwenye kikoa katika programu tumizi. Kwa kutumia imizo la kawaida (regex), unaweza kusanidi jozi ya yaliyomo/kibonye kulandanisha kikoa. Thamani katika "Kibonye" ilandane na kikoa, na thamani kwenye "Yaliyomo" iwe gamba batili katika mfumo wako. Tafadhali ona maingizo ya mfano kwa  ajili fomu sahihi ya  imizo la kawaida.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-host1\.example\.com: Someskin1
-host2\.example\.com: Someskin2
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Customer::Skin_000-default">
-                <term>Loader::Customer::Skin###000-default</term>
-                <listitem>
-                    <para>Default skin for the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: This is the default orange - black skin for the customer interface.
-HomePage: www.otrs.org
-InternalName: default
-VisibleName: Default
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Enabled::CSS">
                 <term>Loader::Enabled::CSS</term>
                 <listitem>
@@ -31292,2070 +31644,6 @@ URL3:
   Image: Image
   Target: _blank
   URL: URL
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer">
-        <title>Frontend → Customer</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_AutoComplete::Customer_Default">
-                <term>AutoComplete::Customer###Default</term>
-                <listitem>
-                    <para>Inafafanua michaguo ya usanidi kwa ajili ya kipengele cha ukamilifu otomatiki.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-AutoCompleteActive: '1'
-ButtonText: Search
-MaxResultsDisplayed: '20'
-MinQueryLength: '2'
-QueryDelay: '100'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Customer::DefaultUserID">
-                <term>Customer::DefaultUserID</term>
-                <listitem>
-                    <para>Defines the (agent) user identifier for actions triggered by customers.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::CommonParam_Action">
-                <term>CustomerFrontend::CommonParam###Action</term>
-                <listitem>
-                    <para>Fafanua chaguo-msingi inayotumika katika Moduli-Mbelenyuma kama hakuna kigezo cha kitendo iliyotolewa na url kwa kiole sura cha mteja. </para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- CustomerTicketOverview
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::CommonParam_TicketID">
-                <term>CustomerFrontend::CommonParam###TicketID</term>
-                <listitem>
-                    <para>Kitambulisho cha tiketi chaguo-msingi kinachotumika na mfumo katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::HeaderMetaModule_1-Refresh">
-                <term>CustomerFrontend::HeaderMetaModule###1-Refresh</term>
-                <listitem>
-                    <para>Defines the module to generate code for periodic page reloads.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::HeaderMeta::Refresh
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::HeaderMetaModule_2-TicketSearch">
-                <term>CustomerFrontend::HeaderMetaModule###2-TicketSearch</term>
-                <listitem>
-                    <para>Moduli ya kutengeneza umbo la Utafutaji wazi wa html kwa utafutaji wa tiketi mfupi katika kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: CustomerTicketSearch
-Module: Kernel::Output::HTML::HeaderMeta::CustomerTicketSearch
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::HeaderMetaModule_3-FAQSearch">
-                <term>CustomerFrontend::HeaderMetaModule###3-FAQSearch</term>
-                <listitem>
-                    <para>Module to generate HTML OpenSearch profile for short FAQ search in the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: CustomerFAQSearch
-Module: Kernel::Output::HTML::HeaderMeta::CustomerFAQSearch
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerGroupAlwaysGroups">
-                <term>CustomerGroupAlwaysGroups</term>
-                <listitem>
-                    <para>Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don't want to manage every customer user for these groups).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- users
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerGroupCompanyAlwaysGroups">
-                <term>CustomerGroupCompanyAlwaysGroups</term>
-                <listitem>
-                    <para>Defines the groups every customer will be in (if CustomerGroupSupport is enabled and you don't want to manage every customer for these groups).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- users
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerGroupPermissionContext_001-CustomerID-same">
-                <term>CustomerGroupPermissionContext###001-CustomerID-same</term>
-                <listitem>
-                    <para>Defines a permission context for customer to group assignment.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Gives customer users group based access to tickets from customer users
-  of the same customer (ticket CustomerID is a CustomerID of the customer user).
-Name: Same Customer
-Value: Ticket::CustomerID::Same
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerGroupPermissionContext_100-CustomerID-other">
-                <term>CustomerGroupPermissionContext###100-CustomerID-other</term>
-                <listitem>
-                    <para>Defines a permission context for customer to group assignment.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Provides customer users access to tickets even if the tickets are not
-  assigned to a customer user of the same customer ID(s), based on permission groups.
-Name: Other Customers
-Value: Ticket::CustomerID::Other
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerGroupSupport">
-                <term>CustomerGroupSupport</term>
-                <listitem>
-                    <para>Activates support for customer and customer user groups.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerHeadline">
-                <term>CustomerHeadline</term>
-                <listitem>
-                    <para>Kichwa cha habari kinaonyeshwa katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Example Company
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerLogo">
-                <term>CustomerLogo</term>
-                <listitem>
-                    <para>Nembo iliyoonyeshwa kwenye kichwa cha kiolesura cha mteja. URL kwenye taswira inaweza URL inayofanana na gamba la taswira la mpangilio orodha, au URL nzima kwenye seva ya wavuti. </para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-StyleHeight: 50px
-StyleRight: 25px
-StyleTop: 2px
-StyleWidth: 135px
-URL: skins/Customer/default/img/logo.png
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanel::InfoFile">
-                <term>CustomerPanel::InfoFile</term>
-                <listitem>
-                    <para>Defines the path of the shown info file, that is located under Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- CustomerAccept
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanel::InfoKey">
-                <term>CustomerPanel::InfoKey</term>
-                <listitem>
-                    <para>Inafafanua kibonye cha kuangalia na Ukubali wa mteja. Kama huyu mtumiaji anapendelea kibonye cha ndio, ujumbe utakubaliwa na mfumo.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- CustomerAccept1
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPassword">
-                <term>CustomerPanelBodyLostPassword</term>
-                <listitem>
-                    <para>Defines the body text for notification mails sent to customers, about new password.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\n\nNew password: <OTRS_NEWPW>\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl\n
-  \           "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelBodyLostPasswordToken">
-                <term>CustomerPanelBodyLostPasswordToken</term>
-                <listitem>
-                    <para>Defines the body text for notification mails sent to customers, with token about new requested password.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has requested to
-  change your OTRS\npassword.\n\nIf you want to do this, click on this link. You will
-  receive another email containing the password.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl?Action=CustomerLostPassword;Token=<OTRS_TOKEN>\n\nIf
-  you did not request a new password, please ignore this email.\n            "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelBodyNewAccount">
-                <term>CustomerPanelBodyNewAccount</term>
-                <listitem>
-                    <para>Inafafanua kiini cha matini cha barua pepe za taarifa zilizotumwa kwenda kwa wateja, kuhusu akaunti mpya.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has created a new
-  OTRS account for\nyou.\n\nFull name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>\nUser
-  name: <OTRS_USERLOGIN>\nPassword : <OTRS_USERPASSWORD>\n\nYou can log in via the
-  following URL. We encourage you to change your password\nvia the Preferences button
-  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl\n
-  \           "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelLoginURL">
-                <term>CustomerPanelLoginURL</term>
-                <listitem>
-                    <para>Inafafanua URL ya kuingia mbadala kwa paneli ya mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelLogoutURL">
-                <term>CustomerPanelLogoutURL</term>
-                <listitem>
-                    <para>Inafafanua URL ya kutoka  mbadala kwa paneli ya mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelPreApplicationModule_CustomerAccept">
-                <term>CustomerPanelPreApplicationModule###CustomerAccept</term>
-                <listitem>
-                    <para>Moduli hii na fomula saidizi yake PreRun() zitatendewa kazi, kama zikikataliwa, kwa kila ombi. Moduli hii iatumika kuangalia michaguo ya mtumiaji au kuonyesha taarifa kuhusu programu-tumizi mpya.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Kernel::Modules::CustomerAccept
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSubjectLostPassword">
-                <term>CustomerPanelSubjectLostPassword</term>
-                <listitem>
-                    <para>Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, kuhusu neno jipya la siri.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- New OTRS password
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSubjectLostPasswordToken">
-                <term>CustomerPanelSubjectLostPasswordToken</term>
-                <listitem>
-                    <para>Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, na alama ya neno jipya la siri lililoombwa.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- New OTRS password request
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSubjectNewAccount">
-                <term>CustomerPanelSubjectNewAccount</term>
-                <listitem>
-                    <para>Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, kuhusu akaunti mpya.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- New OTRS Account!
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Customer::StateTypes">
-                <term>FAQ::Customer::StateTypes</term>
-                <listitem>
-                    <para>List of state types which can be used in the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- external
-- public
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_1-GoogleMaps">
-                <term>Frontend::CustomerUser::Item###1-GoogleMaps</term>
-                <listitem>
-                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya ramani za google katika mwisho wa kifungu cha taarifa cha mteja.</para>
-                    <para>This setting can be overridden in the user preferences, but is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Attributes: UserStreet;UserCity;UserCountry;
-CSS: Core.Agent.CustomerUser.GoogleMaps.css
-CSSClass: GoogleMaps
-IconName: fa-globe
-Module: Kernel::Output::HTML::CustomerUser::Generic
-Required: UserStreet;UserCity;
-Target: _blank
-Text: Location
-URL: http://maps.google.com/maps?z=7&q=
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_15-OpenTickets">
-                <term>Frontend::CustomerUser::Item###15-OpenTickets</term>
-                <listitem>
-                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofunguliwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
-                    <para>This setting can be overridden in the user preferences, but is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: AgentTicketSearch
-Attributes: StateType=Open;
-CSS: Core.Agent.CustomerUser.OpenTicket.css
-CSSClassNoOpenTicket: NoOpenTicket
-CSSClassOpenTicket: OpenTicket
-CustomerUserLogin: '0'
-IconNameNoOpenTicket: fa-check-circle
-IconNameOpenTicket: fa-exclamation-circle
-Module: Kernel::Output::HTML::CustomerUser::GenericTicket
-Subaction: Search
-Target: _blank
-Text: Open tickets (customer)
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_16-OpenTicketsForCustomerUserLogin">
-                <term>Frontend::CustomerUser::Item###16-OpenTicketsForCustomerUserLogin</term>
-                <listitem>
-                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofunguliwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: AgentTicketSearch
-Attributes: StateType=Open;
-CSS: Core.Agent.CustomerUser.OpenTicket.css
-CSSClassNoOpenTicket: NoOpenTicket
-CSSClassOpenTicket: OpenTicket
-CustomerUserLogin: '1'
-IconNameNoOpenTicket: fa-check-circle
-IconNameOpenTicket: fa-exclamation-circle
-Module: Kernel::Output::HTML::CustomerUser::GenericTicket
-Subaction: Search
-Target: _blank
-Text: Open tickets (customer user)
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_17-ClosedTickets">
-                <term>Frontend::CustomerUser::Item###17-ClosedTickets</term>
-                <listitem>
-                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofungwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: AgentTicketSearch
-Attributes: StateType=Closed;
-CSS: Core.Agent.CustomerUser.OpenTicket.css
-CSSClassNoOpenTicket: NoOpenTicket
-CSSClassOpenTicket: OpenTicket
-CustomerUserLogin: '0'
-IconNameNoOpenTicket: fa-power-off
-IconNameOpenTicket: fa-power-off
-Module: Kernel::Output::HTML::CustomerUser::GenericTicket
-Subaction: Search
-Target: _blank
-Text: Closed tickets (customer)
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_18-ClosedTicketsForCustomerUserLogin">
-                <term>Frontend::CustomerUser::Item###18-ClosedTicketsForCustomerUserLogin</term>
-                <listitem>
-                    <para>Kipengee cha mteja (Ikoni) ambacho kinaonyesha tiketi zilizofungwa za mteja huyu kama taarifa za kuzuiliwa. Kuweka Kuingia kwa mteja mtumiaji kuwa 1 kutafuta tiketi kulingana na jina la kuingia kuliko kitambulisho cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: AgentTicketSearch
-Attributes: StateType=Closed;
-CSS: Core.Agent.CustomerUser.OpenTicket.css
-CSSClassNoOpenTicket: NoOpenTicket
-CSSClassOpenTicket: OpenTicket
-CustomerUserLogin: '1'
-IconNameNoOpenTicket: fa-power-off
-IconNameOpenTicket: fa-power-off
-Module: Kernel::Output::HTML::CustomerUser::GenericTicket
-Subaction: Search
-Target: _blank
-Text: Closed tickets (customer user)
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_2-Google">
-                <term>Frontend::CustomerUser::Item###2-Google</term>
-                <listitem>
-                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya google katika mwisho wa kifungu cha taarifa cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Attributes: UserFirstname;UserLastname;
-CSS: Core.Agent.CustomerUser.Google.css
-CSSClass: Google
-IconName: fa-google
-Module: Kernel::Output::HTML::CustomerUser::Generic
-Required: UserFirstname;UserLastname;
-Target: _blank
-Text: Google
-URL: http://google.com/search?q=
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_2-LinkedIn">
-                <term>Frontend::CustomerUser::Item###2-LinkedIn</term>
-                <listitem>
-                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya LinkedIn katika mwisho wa kifungu cha taarifa cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Attributes: UserFirstname;UserLastname;
-CSS: Core.Agent.CustomerUser.LinkedIn.css
-CSSClass: LinkedIn
-IconName: fa-linkedin
-Module: Kernel::Output::HTML::CustomerUser::Generic
-Required: UserFirstname;UserLastname;
-Target: _blank
-Text: LinkedIn
-URL: http://www.linkedin.com/commonSearch?type=people&keywords=
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_3-XING">
-                <term>Frontend::CustomerUser::Item###3-XING</term>
-                <listitem>
-                    <para>Inafafanua kipengee cha mteja, ambacho kinatengeneza ikoni ya XING katika mwisho wa kifungu cha taarifa cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Attributes: UserFirstname;UserLastname;
-CSS: Core.Agent.CustomerUser.Xing.css
-CSSClass: Xing
-IconName: fa-xing
-Module: Kernel::Output::HTML::CustomerUser::Generic
-Required: UserFirstname;UserLastname;
-Target: _blank
-Text: XING
-URL: https://www.xing.com/app/search?op=search;keywords=
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ModernizeCustomerFormFields">
-                <term>ModernizeCustomerFormFields</term>
-                <listitem>
-                    <para>Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerDisableCompanyTicketAccess">
-                <term>Ticket::Frontend::CustomerDisableCompanyTicketAccess</term>
-                <listitem>
-                    <para>Chaguo hili litakuzuia kufikia tiketi za kampuni za mteja, ambazo hazikujatengenezwa na mtumiaji wa mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverviewCustomEmptyText">
-                <term>Ticket::Frontend::CustomerTicketOverviewCustomEmptyText</term>
-                <listitem>
-                    <para>Nakala ya kawaida kwa kurasa zilizoonyeshwa kwa wateja ambao hawana tiketi bado (Kama unahitaji nakala hizo kutafsiriwa ziongeze katika moduli ya kawaida ya kutafsiri ).</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Button: Create your first ticket
-Text: Please click the button below to create your first ticket.
-Title: Welcome!
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_FAQOverview">
-        <title>Frontend → Customer → FAQOverview</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQOverview_DynamicField">
-                <term>FAQ::Frontend::CustomerFAQOverview###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ overview screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_FAQRelatedArticles">
-        <title>Frontend → Customer → FAQRelatedArticles</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_DefaultLanguages">
-                <term>FAQ::Frontend::CustomerFAQRelatedArticles###DefaultLanguages</term>
-                <listitem>
-                    <para>The default languages for the related FAQ articles.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- en
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_QueuesEnabled">
-                <term>FAQ::Frontend::CustomerFAQRelatedArticles###QueuesEnabled</term>
-                <listitem>
-                    <para>List of queue names for which the related article feature is enabled.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- Raw
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_ShowLimit">
-                <term>FAQ::Frontend::CustomerFAQRelatedArticles###ShowLimit</term>
-                <listitem>
-                    <para>Output limit for the related FAQ articles.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '10'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQRelatedArticles_VoteStarsVisible">
-                <term>FAQ::Frontend::CustomerFAQRelatedArticles###VoteStarsVisible</term>
-                <listitem>
-                    <para>Show the stars for the articles with a rating equal or greater like the defined value (set value '0' to deactivate the output).</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '4'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_FrontendNotification">
-        <title>Frontend → Customer → FrontendNotification</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_1-ShowAgentOnline">
-                <term>CustomerFrontend::NotifyModule###1-ShowAgentOnline</term>
-                <listitem>
-                    <para>Defines the module that shows the currently logged in agents in the customer interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::Notification::AgentOnline
-ShowEmail: '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_1-ShowCustomerOnline">
-                <term>CustomerFrontend::NotifyModule###1-ShowCustomerOnline</term>
-                <listitem>
-                    <para>Defines the module that shows the currently logged in customers in the customer interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::Notification::CustomerOnline
-ShowEmail: '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_1-SystemContract">
-                <term>CustomerFrontend::NotifyModule###1-SystemContract</term>
-                <listitem>
-                    <para>Defines the module to display a notification in different interfaces on different occasions for System Contract.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::Notification::CustomerSystemContract
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_6-CustomerSystemMaintenance-Check">
-                <term>CustomerFrontend::NotifyModule###6-CustomerSystemMaintenance-Check</term>
-                <listitem>
-                    <para>Defines the module to display a notification in the customer interface, if the customer is logged in while having system maintenance active.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::Notification::CustomerSystemMaintenanceCheck
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_7-CustomerUserTimeZone-Check">
-                <term>CustomerFrontend::NotifyModule###7-CustomerUserTimeZone-Check</term>
-                <listitem>
-                    <para>Defines the module to display a notification in the customer interface, if the customer user has not yet selected a time zone.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::Notification::CustomerUserTimeZoneCheck
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_ModuleRegistration">
-        <title>Frontend → Customer → ModuleRegistration</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_AjaxAttachment">
-                <term>CustomerFrontend::Module###AjaxAttachment</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: AjaxAttachment
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerAccept">
-                <term>CustomerFrontend::Module###CustomerAccept</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: To accept login information, such as an EULA or license.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: Info
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerChat">
-                <term>CustomerFrontend::Module###CustomerChat</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer chat screens.
-Group: []
-GroupRo: []
-NavBarName: Chat
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerChatDownload">
-                <term>CustomerFrontend::Module###CustomerChatDownload</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Chat download.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: Chat Download
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQExplorer">
-                <term>CustomerFrontend::Module###CustomerFAQExplorer</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer FAQ.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQPrint">
-                <term>CustomerFrontend::Module###CustomerFAQPrint</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer FAQ Print.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQRelatedArticles">
-                <term>CustomerFrontend::Module###CustomerFAQRelatedArticles</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer FAQ Related Articles.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: Customer FAQ Related Articles
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQSearch">
-                <term>CustomerFrontend::Module###CustomerFAQSearch</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer FAQ search.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: Search FAQ
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerFAQZoom">
-                <term>CustomerFrontend::Module###CustomerFAQZoom</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer FAQ Zoom.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerPreferences">
-                <term>CustomerFrontend::Module###CustomerPreferences</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer preferences.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: Preferences
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketArticleContent">
-                <term>CustomerFrontend::Module###CustomerTicketArticleContent</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: To view HTML attachments.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketAttachment">
-                <term>CustomerFrontend::Module###CustomerTicketAttachment</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: To download attachments.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketMessage">
-                <term>CustomerFrontend::Module###CustomerTicketMessage</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Create tickets.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: New Ticket
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketOverview">
-                <term>CustomerFrontend::Module###CustomerTicketOverview</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Overview of customer tickets.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: Overview
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketPrint">
-                <term>CustomerFrontend::Module###CustomerTicketPrint</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer Ticket Print Module.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: Print
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketProcess">
-                <term>CustomerFrontend::Module###CustomerTicketProcess</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Process Ticket.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: Process ticket
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketSearch">
-                <term>CustomerFrontend::Module###CustomerTicketSearch</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Customer ticket search.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: Search
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerTicketZoom">
-                <term>CustomerFrontend::Module###CustomerTicketZoom</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Ticket zoom view.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: Zoom
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_CustomerVideoChat">
-                <term>CustomerFrontend::Module###CustomerVideoChat</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Video and audio call screen.
-Group: []
-GroupRo: []
-NavBarName: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_Logout">
-                <term>CustomerFrontend::Module###Logout</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Logout of customer panel.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Module_PictureUpload">
-                <term>CustomerFrontend::Module###PictureUpload</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Picture upload module.
-Group: []
-GroupRo: []
-NavBarName: Ticket
-Title: Picture-Upload
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NavBarModule_000-CustomerChat">
-                <term>CustomerFrontend::NavBarModule###000-CustomerChat</term>
-                <listitem>
-                    <para>Customer frontend module registration (disable chat link if chat feature is inactive or no agents are available for chat).</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::NavBar::CustomerChat
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::NavBarModule_10-CustomerTicketProcesses">
-                <term>CustomerFrontend::NavBarModule###10-CustomerTicketProcesses</term>
-                <listitem>
-                    <para>Usajili wa moduli ya mazingira ya mbele (lemaza skrini ya michakato ya tiketi kama hakuna mchakato unaopatikana) kwa ajili ya mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::Output::HTML::NavBar::CustomerTicketProcess
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_ModuleRegistration_Loader">
-        <title>Frontend → Customer → ModuleRegistration → Loader</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerChat_002-Ticket">
-                <term>Loader::Module::CustomerChat###002-Ticket</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.Chat.css
-JavaScript:
-- Core.Customer.Chat.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerFAQExplorer_002-FAQ">
-                <term>Loader::Module::CustomerFAQExplorer###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.FAQ.Detail.css
-- Core.Customer.FAQ.Default.css
-- Core.Customer.FAQ.Widget.css
-JavaScript:
-- Core.Customer.FAQ.FAQZoom.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerFAQSearch_002-FAQ">
-                <term>Loader::Module::CustomerFAQSearch###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerFAQZoom_002-FAQ">
-                <term>Loader::Module::CustomerFAQZoom###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.FAQ.Detail.css
-- Core.Customer.FAQ.Default.css
-- Core.Customer.FAQZoom.css
-JavaScript:
-- Core.Customer.FAQ.FAQZoom.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-FAQ">
-                <term>Loader::Module::CustomerTicketMessage###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.FAQ.RelatedArticles.css
-- Core.Customer.FAQ.Default.css
-JavaScript:
-- Core.Customer.FAQ.RelatedArticles.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketMessage_002-Ticket">
-                <term>Loader::Module::CustomerTicketMessage###002-Ticket</term>
-                <listitem>
-                    <para>Loader module registration for the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-JavaScript:
-- Core.Customer.TicketMessage.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketProcess_002-ProcessManagement">
-                <term>Loader::Module::CustomerTicketProcess###002-ProcessManagement</term>
-                <listitem>
-                    <para>Loader module registration for the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.TicketProcess.css
-JavaScript:
-- Core.TicketProcess.js
-- Core.Customer.TicketProcess.js
-- Core.TicketProcess.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketSearch_002-Ticket">
-                <term>Loader::Module::CustomerTicketSearch###002-Ticket</term>
-                <listitem>
-                    <para>Loader module registration for the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-JavaScript:
-- Core.Customer.TicketSearch.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::CustomerTicketZoom_002-Ticket">
-                <term>Loader::Module::CustomerTicketZoom###002-Ticket</term>
-                <listitem>
-                    <para>Loader module registration for the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-JavaScript:
-- Core.Customer.TicketZoom.js
-- Core.UI.Popup.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_ModuleRegistration_MainMenu">
-        <title>Frontend → Customer → ModuleRegistration → MainMenu</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerChat_002-Ticket">
-                <term>CustomerFrontend::Navigation###CustomerChat###002-Ticket</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: ''
-  Block: ''
-  Description: Chat overview.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerChat;Subaction=ChatOverview
-  LinkOption: ''
-  Name: Chats
-  NavBar: Chat
-  Prio: '200'
-  Type: Menu
-- AccessKey: c
-  Block: ''
-  Description: Chat overview.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerChat;Subaction=ChatOverview
-  LinkOption: ''
-  Name: My chats
-  NavBar: Chat
-  Prio: '201'
-  Type: Submenu
-- AccessKey: ''
-  Block: ''
-  Description: Start new chat.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerChat;Subaction=CreateChatRequest
-  LinkOption: target="_blank"
-  Name: Create new chat
-  NavBar: Chat
-  Prio: '202'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerFAQExplorer_002-FAQ">
-                <term>CustomerFrontend::Navigation###CustomerFAQExplorer###002-FAQ</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: ''
-  Block: ''
-  Description: FAQ
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerFAQExplorer
-  LinkOption: ''
-  Name: FAQ
-  NavBar: FAQ
-  Prio: '700'
-  Type: Menu
-- AccessKey: x
-  Block: ''
-  Description: FAQ Explorer
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerFAQExplorer
-  LinkOption: ''
-  Name: FAQ Explorer
-  NavBar: FAQ
-  Prio: '710'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerFAQSearch_002-FAQ">
-                <term>CustomerFrontend::Navigation###CustomerFAQSearch###002-FAQ</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: f
-  Block: ''
-  Description: Search
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerFAQSearch
-  LinkOption: ''
-  Name: Search
-  NavBar: FAQ
-  Prio: '780'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerPreferences_001-Framework">
-                <term>CustomerFrontend::Navigation###CustomerPreferences###001-Framework</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerTicketMessage_002-Ticket">
-                <term>CustomerFrontend::Navigation###CustomerTicketMessage###002-Ticket</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: n
-  Block: ''
-  Description: Create new Ticket.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerTicketMessage
-  LinkOption: ''
-  Name: New Ticket
-  NavBar: Ticket
-  Prio: '100'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerTicketOverview_002-Ticket">
-                <term>CustomerFrontend::Navigation###CustomerTicketOverview###002-Ticket</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: m
-  Block: ''
-  Description: Tickets.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerTicketOverview;Subaction=MyTickets
-  LinkOption: ''
-  Name: Tickets
-  NavBar: Ticket
-  Prio: '100'
-  Type: Menu
-- AccessKey: ''
-  Block: ''
-  Description: My Tickets.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerTicketOverview;Subaction=MyTickets
-  LinkOption: ''
-  Name: My Tickets
-  NavBar: Ticket
-  Prio: '110'
-  Type: Submenu
-- AccessKey: t
-  Block: ''
-  Description: Company Tickets.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerTicketOverview;Subaction=CompanyTickets
-  LinkOption: ''
-  Name: Company Tickets
-  NavBar: Ticket
-  Prio: '120'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerTicketProcess_002-ProcessManagement">
-                <term>CustomerFrontend::Navigation###CustomerTicketProcess###002-ProcessManagement</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: o
-  Block: ''
-  Description: Create new process ticket.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerTicketProcess
-  LinkOption: ''
-  Name: New process ticket
-  NavBar: Ticket
-  Prio: '220'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerFrontend::Navigation_CustomerTicketSearch_002-Ticket">
-                <term>CustomerFrontend::Navigation###CustomerTicketSearch###002-Ticket</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: s
-  Block: ''
-  Description: Search.
-  Group: []
-  GroupRo: []
-  Link: Action=CustomerTicketSearch
-  LinkOption: ''
-  Name: Search
-  NavBar: Ticket
-  Prio: '300'
-  Type: Submenu
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_FAQExplorer">
-        <title>Frontend → Customer → View → FAQExplorer</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_Order::Default">
-                <term>FAQ::Frontend::CustomerFAQExplorer###Order::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ order in the FAQ Explorer result of the customer interface. Up: oldest on top. Down: latest on top.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Down
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_SearchLimit">
-                <term>FAQ::Frontend::CustomerFAQExplorer###SearchLimit</term>
-                <listitem>
-                    <para>Maximum number of FAQ articles to be displayed in the FAQ Explorer result of the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '200'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_SearchPageShown">
-                <term>FAQ::Frontend::CustomerFAQExplorer###SearchPageShown</term>
-                <listitem>
-                    <para>Number of FAQ articles to be displayed in the FAQ Explorer of the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '40'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_SortBy::Default">
-                <term>FAQ::Frontend::CustomerFAQExplorer###SortBy::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ attribute for FAQ sorting in the FAQ Explorer of the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- FAQID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQExplorer_TitleSize">
-                <term>FAQ::Frontend::CustomerFAQExplorer###TitleSize</term>
-                <listitem>
-                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Explorer in the customer interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '50'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_FAQPrint">
-        <title>Frontend → Customer → View → FAQPrint</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQPrint_DynamicField">
-                <term>FAQ::Frontend::CustomerFAQPrint###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ print screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_FAQSearch">
-        <title>Frontend → Customer → View → FAQSearch</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_DynamicField">
-                <term>FAQ::Frontend::CustomerFAQSearch###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ search screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_Order::Default">
-                <term>FAQ::Frontend::CustomerFAQSearch###Order::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ order of a search result in the customer interface. Up: oldest on top. Down: latest on top.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Down
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SearchCSVDynamicField">
-                <term>FAQ::Frontend::CustomerFAQSearch###SearchCSVDynamicField</term>
-                <listitem>
-                    <para>Uga zenye nguvu zimetumika kuhamisha majibu ya utafutaji katika umbizo la CSV</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SearchLimit">
-                <term>FAQ::Frontend::CustomerFAQSearch###SearchLimit</term>
-                <listitem>
-                    <para>Maximum number of FAQ articles to be displayed in the result of a search in the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '200'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SearchPageShown">
-                <term>FAQ::Frontend::CustomerFAQSearch###SearchPageShown</term>
-                <listitem>
-                    <para>Number of FAQ articles to be displayed on each page of a search result in the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '40'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_SortBy::Default">
-                <term>FAQ::Frontend::CustomerFAQSearch###SortBy::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ attribute for FAQ sorting in a FAQ search of the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- FAQID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerFAQSearch_TitleSize">
-                <term>FAQ::Frontend::CustomerFAQSearch###TitleSize</term>
-                <listitem>
-                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Search in the customer interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '50'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_FAQZoom">
-        <title>Frontend → Customer → View → FAQZoom</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerHTMLFieldHeightDefault">
-                <term>FAQ::Frontend::CustomerHTMLFieldHeightDefault</term>
-                <listitem>
-                    <para>Set the default height (in pixels) of inline HTML fields in CustomerFAQZoom (and PublicFAQZoom).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '100'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::CustomerHTMLFieldHeightMax">
-                <term>FAQ::Frontend::CustomerHTMLFieldHeightMax</term>
-                <listitem>
-                    <para>Set the maximum height (in pixels) of inline HTML fields in CustomerFAQZoom (and PublicFAQZoom).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '2500'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_KnowledgeBaseDetailView">
-        <title>Frontend → Customer → View → KnowledgeBaseDetailView</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::KnowledgeBaseDetailView_DynamicField">
-                <term>ExternalFrontend::KnowledgeBaseDetailView###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the KnowlegdeBase Detail View of the external interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_Preferences">
-        <title>Frontend → Customer → View → Preferences</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferences">
-                <term>CustomerPreferences</term>
-                <listitem>
-                    <para>Fafanua vigezo kwa jedwali la upendeleo la mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Module: Kernel::System::CustomerUser::Preferences::DB
-Params:
-  Table: customer_preferences
-  TableKey: preferences_key
-  TableUserID: user_id
-  TableValue: preferences_value
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_GoogleAuthenticatorSecretKey">
-                <term>CustomerPreferencesGroups###GoogleAuthenticatorSecretKey</term>
-                <listitem>
-                    <para>Inafafanua vigezo vya usanidi vya kipengele hiki, vitaonyeshwa katika mandhari ya mapendeleo.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '0'
-Block: Input
-Desc: Enter your shared secret to enable two factor authentication.
-Key: Shared Secret
-Label: Google Authenticator
-Module: Kernel::Output::HTML::Preferences::Generic
-PrefKey: UserGoogleAuthenticatorSecretKey
-PreferenceGroup: Miscellaneous
-Prio: '1100'
-ValidateRegex: ^([A-Z2-7]{16}|)$
-ValidateRegexMessage: The secret you supplied is invalid. The secret must only contain
-  letters (A-Z, uppercase) and numbers (2-7) and must consist of 16 characters.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_Language">
-                <term>CustomerPreferencesGroups###Language</term>
-                <listitem>
-                    <para>Inafafanua vigezo vyote vya kipengele hiki katika mapendeleo ya mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Desc: Select the main interface language.
-Key: Language
-Label: Interface language
-Module: Kernel::Output::HTML::Preferences::Language
-PrefKey: UserLanguage
-PreferenceGroup: UserProfile
-Prio: '2000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_PGP">
-                <term>CustomerPreferencesGroups###PGP</term>
-                <listitem>
-                    <para>Inafafanua vigezo vyote vya kipengele hiki katika mapendeleo ya mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Desc: Upload your PGP key.
-Key: PGP Key
-Label: PGP Key
-Module: Kernel::Output::HTML::Preferences::PGP
-PrefKey: UserPGPKey
-PreferenceGroup: Miscellaneous
-Prio: '10000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_Password">
-                <term>CustomerPreferencesGroups###Password</term>
-                <listitem>
-                    <para>Defines all the parameters for this item in the customer preferences. 'PasswordRegExp' allows to match passwords against a regular expression. Define the minimum number of characters using 'PasswordMinSize'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to '1'. 'PasswordMin2Characters' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). 'PasswordNeedDigit' controls the need of at least 1 digit (set to 0 or 1 to control).</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Area: Customer
-Desc: Set a new password by filling in your current password and a new one.
-Label: Change password
-Module: Kernel::Output::HTML::Preferences::Password
-PasswordMin2Characters: '0'
-PasswordMin2Lower2UpperCharacters: '0'
-PasswordMinSize: '0'
-PasswordNeedDigit: '0'
-PasswordRegExp: ''
-PreferenceGroup: Miscellaneous
-Prio: '1000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_RefreshTime">
-                <term>CustomerPreferencesGroups###RefreshTime</term>
-                <listitem>
-                    <para>Inaelezea vigezo vyote kwa kipengele cha Muda wa kuonyesha upya katika mapendeleo ya mteja ya kiolesura cha mteja. </para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Data:
-  '0': off
-  '10': 10 minutes
-  '15': 15 minutes
-  '2': ' 2 minutes'
-  '5': ' 5 minutes'
-  '7': ' 7 minutes'
-DataSelected: '0'
-Desc: Select after which period ticket overviews should refresh automatically.
-Key: Refresh interval
-Label: Ticket overview
-Module: Kernel::Output::HTML::Preferences::Generic
-PrefKey: UserRefreshTime
-PreferenceGroup: UserProfile
-Prio: '4000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_SMIME">
-                <term>CustomerPreferencesGroups###SMIME</term>
-                <listitem>
-                    <para>Inafafanua vigezo vyote vya kipengele hiki katika mapendeleo ya mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Desc: Upload your S/MIME certificate.
-Key: S/MIME Certificate
-Label: S/MIME Certificate
-Module: Kernel::Output::HTML::Preferences::SMIME
-PrefKey: UserSMIMEKey
-PreferenceGroup: Miscellaneous
-Prio: '11000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_ShownTickets">
-                <term>CustomerPreferencesGroups###ShownTickets</term>
-                <listitem>
-                    <para>Inaelezea vigezo vyote kwa kipengee cha Tiketi zilizonyeshwa katika mapendeleo ya mteja ya kiolesura cha mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Data:
-  '15': '15'
-  '20': '20'
-  '25': '25'
-  '30': '30'
-DataSelected: '25'
-Desc: Select how many tickets should be shown in overviews by default.
-Key: Tickets per page
-Label: Number of displayed tickets
-Module: Kernel::Output::HTML::Preferences::Generic
-PrefKey: UserShowTickets
-PreferenceGroup: UserProfile
-Prio: '4000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_Theme">
-                <term>CustomerPreferencesGroups###Theme</term>
-                <listitem>
-                    <para>Inafafanua vigezo vyote vya kipengele hiki katika mapendeleo ya mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '0'
-Desc: Select your preferred theme for OTRS.
-Key: Select your frontend Theme.
-Label: Theme
-Module: Kernel::Output::HTML::Preferences::Theme
-PrefKey: UserTheme
-PreferenceGroup: UserProfile
-Prio: '1000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPreferencesGroups_TimeZone">
-                <term>CustomerPreferencesGroups###TimeZone</term>
-                <listitem>
-                    <para>Inafafanua vigezo vyote vya kipengele hiki katika mapendeleo ya mteja.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Active: '1'
-Desc: Select your personal time zone. All times will be displayed relative to this
-  time zone.
-Key: Time Zone
-Label: Time Zone
-Module: Kernel::Output::HTML::Preferences::TimeZone
-PrefKey: UserTimeZone
-PreferenceGroup: UserProfile
-Prio: '2500'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_TicketMessage">
-        <title>Frontend → Customer → View → TicketMessage</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_CustomerPanel::NewTicketQueueSelectionModule">
-                <term>CustomerPanel::NewTicketQueueSelectionModule</term>
-                <listitem>
-                    <para>Moduli kwa ajili ya uchaguzi katika skrini ya tiketi katika kioleusura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Kernel::Output::HTML::CustomerNewTicket::QueueSelectionGeneric
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelOwnSelection">
-                <term>CustomerPanelOwnSelection</term>
-                <listitem>
-                    <para>Inaamua foleni zipi zitakuwa halali kwa wapokeaji wa tiketi katika kiolesura cha mteja.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Junk: First Queue
-Misc: Second Queue
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSelectionString">
-                <term>CustomerPanelSelectionString</term>
-                <listitem>
-                    <para>Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "&lt;Queue&gt;" shows the names of the queues, and for SystemAddress, "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- <Queue>
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSelectionType">
-                <term>CustomerPanelSelectionType</term>
-                <listitem>
-                    <para>Defines the recipient target of the tickets ("Queue" shows all queues, "SystemAddress" shows only the queues which are assigned to system addresses) in the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Queue
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_TicketOverview">
-        <title>Frontend → Customer → View → TicketOverview</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverview_ColumnHeader">
-                <term>Ticket::Frontend::CustomerTicketOverview###ColumnHeader</term>
-                <listitem>
-                    <para>Inaonyesha somo la mwisho la makala ya mteja la mwisho au kichwa cha tiketi katika mapitio madogo ya umbizo.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- TicketTitle
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverview_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketOverview###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the ticket overview screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverview_Owner">
-                <term>Ticket::Frontend::CustomerTicketOverview###Owner</term>
-                <listitem>
-                    <para>Inaonyesha mmiliki wa sasa katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverview_Queue">
-                <term>Ticket::Frontend::CustomerTicketOverview###Queue</term>
-                <listitem>
-                    <para>Inaonyesha foleni ya sasa katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketOverviewSortable">
-                <term>Ticket::Frontend::CustomerTicketOverviewSortable</term>
-                <listitem>
-                    <para>Inadhibiti kama wateja wanauwezo wa kupanga tiketi zao.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_TicketPrint">
-        <title>Frontend → Customer → View → TicketPrint</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketPrint_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketPrint###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the ticket print screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_TicketProcess">
-        <title>Frontend → Customer → View → TicketProcess</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketProcess_StateType">
-                <term>Ticket::Frontend::CustomerTicketProcess###StateType</term>
-                <listitem>
-                    <para>Determines the next possible ticket states, for process tickets in the customer interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- new
-- open
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_TicketSearch">
-        <title>Frontend → Customer → View → TicketSearch</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Customer::TicketSearch::AllServices">
-                <term>Customer::TicketSearch::AllServices</term>
-                <listitem>
-                    <para>If enabled, the customer can search for tickets in all services (regardless what services are assigned to the customer).</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::CustomerTicketSearch::Order::Default">
-                <term>Ticket::CustomerTicketSearch::Order::Default</term>
-                <listitem>
-                    <para>Inafafanua mpangilio wa tiketi chaguo-msingi katika matokeo ya utafutaji ya tiketi ya kiolesura cha mteja. Juu: Kongwe juu. Chini: Za sasa juu.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Down
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::CustomerTicketSearch::SearchLimit">
-                <term>Ticket::CustomerTicketSearch::SearchLimit</term>
-                <listitem>
-                    <para>Namba ya upeo wa juu wa tiketi zitakazo onyeshwa katika matokeo katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '5000'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::CustomerTicketSearch::SearchPageShown">
-                <term>Ticket::CustomerTicketSearch::SearchPageShown</term>
-                <listitem>
-                    <para>Namba ta tiketi zitakazoonyeshwa katika kila ukurasa wa matokeo ya utafutaji katika kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '40'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::CustomerTicketSearch::SortBy::Default">
-                <term>Ticket::CustomerTicketSearch::SortBy::Default</term>
-                <listitem>
-                    <para>Inafafanua sifa ya tiketi chaguo-msingi kwa ajili ya kupanga tiketi katika utafutaji wa tiketi wa kiolesura cha mteja.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Age
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketSearch_DynamicField">
-                <term>Ticket::Frontend::CustomerTicketSearch###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the ticket search screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketSearch_ExtendedSearchCondition">
-                <term>Ticket::Frontend::CustomerTicketSearch###ExtendedSearchCondition</term>
-                <listitem>
-                    <para>Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketSearch_SearchArticleCSVTree">
-                <term>Ticket::Frontend::CustomerTicketSearch###SearchArticleCSVTree</term>
-                <listitem>
-                    <para>Inahamisha mti wa makala yote katika majibu ya utafutajii (inaweza athiri utendaji wa mfumo). </para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketSearch_SearchCSVData">
-                <term>Ticket::Frontend::CustomerTicketSearch###SearchCSVData</term>
-                <listitem>
-                    <para>Data zinazotumika kuhamisha matokeo ya kutafuta katika umbizo la CSV.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- TicketNumber
-- Age
-- Created
-- Closed
-- State
-- Priority
-- Lock
-- CustomerID
-- CustomerName
-- From
-- Subject
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketSearch_SearchCSVDynamicField">
-                <term>Ticket::Frontend::CustomerTicketSearch###SearchCSVDynamicField</term>
-                <listitem>
-                    <para>Uga zenye nguvu zimetumika kuhamisha majibu ya utafutaji katika umbizo la CSV</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketSearch_SearchOverviewDynamicField">
-                <term>Ticket::Frontend::CustomerTicketSearch###SearchOverviewDynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the ticket search overview results screen of the customer interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Customer_View_TicketZoom">
-        <title>Frontend → Customer → View → TicketZoom</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerTicketZoom_CustomerZoomExpand">
-                <term>Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand</term>
-                <listitem>
-                    <para>Shows all the articles of the ticket (expanded) in the customer zoom view.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- 0
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33813,6 +32101,22 @@ Title: Welcome!
                 <term>ExternalFrontend::StateMap</term>
                 <listitem>
                     <para>Defines state name map for external interface.</para>
+                    <para>Thamani chaguo-msingi:
+                        <programlisting><![CDATA[--- {}
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Frontend_External_View_KnowledgeBaseDetailView">
+        <title>Frontend → External → View → KnowledgeBaseDetailView</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::KnowledgeBaseDetailView_DynamicField">
+                <term>ExternalFrontend::KnowledgeBaseDetailView###DynamicField</term>
+                <listitem>
+                    <para>Dynamic fields shown in the KnowlegdeBase Detail View of the external interface.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -34341,524 +32645,6 @@ Type: '0'
                     <para>This setting can not be deactivated.</para>
                     <para>Thamani chaguo-msingi:
                         <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public">
-        <title>Frontend → Public</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Public::StateTypes">
-                <term>FAQ::Public::StateTypes</term>
-                <listitem>
-                    <para>List of state types which can be used in the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- public
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::CommonParam_Action">
-                <term>PublicFrontend::CommonParam###Action</term>
-                <listitem>
-                    <para>Default value for the Action parameter for the public frontend. The Action parameter is used in the scripts of the system.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- PublicFAQExplorer
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::HeaderMetaModule_3-FAQSearch">
-                <term>PublicFrontend::HeaderMetaModule###3-FAQSearch</term>
-                <listitem>
-                    <para>Module to generate HTML OpenSearch profile for short FAQ search in the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Action: PublicFAQSearch
-Module: Kernel::Output::HTML::HeaderMeta::PublicFAQSearch
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public_FAQOverview">
-        <title>Frontend → Public → FAQOverview</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQOverview_DynamicField">
-                <term>FAQ::Frontend::PublicFAQOverview###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ overview screen of the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public_ModuleRegistration">
-        <title>Frontend → Public → ModuleRegistration</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicChat_002-Ticket">
-                <term>Loader::Module::PublicChat###002-Ticket</term>
-                <listitem>
-                    <para>Loader module registration for the agent interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.Chat.css
-JavaScript:
-- Core.Customer.Chat.js
-- Core.Public.Chat.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQExplorer_002-FAQ">
-                <term>Loader::Module::PublicFAQExplorer###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.FAQ.Detail.css
-- Core.Customer.FAQ.Default.css
-- Core.Customer.FAQ.Widget.css
-JavaScript:
-- Core.Customer.FAQ.FAQZoom.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQRSS_002-FAQ">
-                <term>Loader::Module::PublicFAQRSS###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQSearch_002-FAQ">
-                <term>Loader::Module::PublicFAQSearch###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.FAQ.Default.css
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::PublicFAQZoom_002-FAQ">
-                <term>Loader::Module::PublicFAQZoom###002-FAQ</term>
-                <listitem>
-                    <para>Loader module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-CSS:
-- Core.Customer.FAQ.Default.css
-- Core.Customer.FAQ.Detail.css
-- Core.Customer.FAQZoom.css
-JavaScript:
-- Core.Customer.FAQ.FAQZoom.js
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicCalendar">
-                <term>PublicFrontend::Module###PublicCalendar</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public calendar.
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: Public Calendar
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicChat">
-                <term>PublicFrontend::Module###PublicChat</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public chat module.
-Group: []
-GroupRo: []
-NavBarName: Chat
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicDefault">
-                <term>PublicFrontend::Module###PublicDefault</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: PublicDefault
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: PublicDefault
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQ">
-                <term>PublicFrontend::Module###PublicFAQ</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public FAQ Zoom.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQExplorer">
-                <term>PublicFrontend::Module###PublicFAQExplorer</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public FAQ.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQPrint">
-                <term>PublicFrontend::Module###PublicFAQPrint</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public FAQ Print.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQRSS">
-                <term>PublicFrontend::Module###PublicFAQRSS</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public FAQ.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQSearch">
-                <term>PublicFrontend::Module###PublicFAQSearch</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public FAQ search.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: Search FAQ
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicFAQZoom">
-                <term>PublicFrontend::Module###PublicFAQZoom</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: Public FAQ Zoom.
-Group: []
-GroupRo: []
-NavBarName: FAQ
-Title: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Module_PublicRepository">
-                <term>PublicFrontend::Module###PublicRepository</term>
-                <listitem>
-                    <para>Frontend module registration for the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-Description: PublicRepository
-Group: []
-GroupRo: []
-NavBarName: ''
-Title: PublicRepository
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Navigation_PublicChat_002-Ticket">
-                <term>PublicFrontend::Navigation###PublicChat###002-Ticket</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: ''
-  Block: ''
-  Description: Chat
-  Group: []
-  GroupRo: []
-  Link: Action=PublicChat
-  LinkOption: ''
-  Name: Chat
-  NavBar: ''
-  Prio: '400'
-  Type: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Navigation_PublicFAQExplorer_002-FAQ">
-                <term>PublicFrontend::Navigation###PublicFAQExplorer###002-FAQ</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: x
-  Block: ''
-  Description: FAQ Area
-  Group: []
-  GroupRo: []
-  Link: Action=PublicFAQExplorer
-  LinkOption: ''
-  Name: FAQ
-  NavBar: ''
-  Prio: '400'
-  Type: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_PublicFrontend::Navigation_PublicFAQSearch_002-FAQ">
-                <term>PublicFrontend::Navigation###PublicFAQSearch###002-FAQ</term>
-                <listitem>
-                    <para>Main menu item registration.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[---
-- AccessKey: ''
-  Block: ''
-  Description: FAQ Area
-  Group: []
-  GroupRo: []
-  Link: Action=PublicFAQSearch
-  LinkOption: ''
-  Name: Search FAQ
-  NavBar: ''
-  Prio: '600'
-  Type: ''
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public_View_FAQExplorer">
-        <title>Frontend → Public → View → FAQExplorer</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_Order::Default">
-                <term>FAQ::Frontend::PublicFAQExplorer###Order::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ order in the FAQ Explorer result of the public interface. Up: oldest on top. Down: latest on top.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Down
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_SearchLimit">
-                <term>FAQ::Frontend::PublicFAQExplorer###SearchLimit</term>
-                <listitem>
-                    <para>Maximum number of FAQ articles to be displayed in the FAQ Explorer result of the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '200'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_SearchPageShown">
-                <term>FAQ::Frontend::PublicFAQExplorer###SearchPageShown</term>
-                <listitem>
-                    <para>Number of FAQ articles to be displayed in the FAQ Explorer of the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '40'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_SortBy::Default">
-                <term>FAQ::Frontend::PublicFAQExplorer###SortBy::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ attribute for FAQ sorting in the FAQ Explorer of the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- FAQID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQExplorer_TitleSize">
-                <term>FAQ::Frontend::PublicFAQExplorer###TitleSize</term>
-                <listitem>
-                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Explorer in the public interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '50'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public_View_FAQPrint">
-        <title>Frontend → Public → View → FAQPrint</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQPrint_DynamicField">
-                <term>FAQ::Frontend::PublicFAQPrint###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ print screen of the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public_View_FAQSearch">
-        <title>Frontend → Public → View → FAQSearch</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_DynamicField">
-                <term>FAQ::Frontend::PublicFAQSearch###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ search screen of the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_Order::Default">
-                <term>FAQ::Frontend::PublicFAQSearch###Order::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ order of a search result in the public interface. Up: oldest on top. Down: latest on top.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- Down
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SearchCSVDynamicField">
-                <term>FAQ::Frontend::PublicFAQSearch###SearchCSVDynamicField</term>
-                <listitem>
-                    <para>Uga zenye nguvu zimetumika kuhamisha majibu ya utafutaji katika umbizo la CSV</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SearchLimit">
-                <term>FAQ::Frontend::PublicFAQSearch###SearchLimit</term>
-                <listitem>
-                    <para>Maximum number of FAQ articles to be displayed in the result of a search in the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '200'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SearchPageShown">
-                <term>FAQ::Frontend::PublicFAQSearch###SearchPageShown</term>
-                <listitem>
-                    <para>Number of FAQ articles to be displayed on each page of a search result in the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '40'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_SortBy::Default">
-                <term>FAQ::Frontend::PublicFAQSearch###SortBy::Default</term>
-                <listitem>
-                    <para>Defines the default FAQ attribute for FAQ sorting in a FAQ search of the public interface.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- FAQID
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQSearch_TitleSize">
-                <term>FAQ::Frontend::PublicFAQSearch###TitleSize</term>
-                <listitem>
-                    <para>Maximum size of the titles in a FAQ article to be shown in the FAQ Search in the public interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- '50'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_Public_View_FAQZoom">
-        <title>Frontend → Public → View → FAQZoom</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Frontend::PublicFAQZoom_DynamicField">
-                <term>FAQ::Frontend::PublicFAQZoom###DynamicField</term>
-                <listitem>
-                    <para>Dynamic fields shown in the FAQ zoom screen of the public interface.</para>
-                    <para>Thamani chaguo-msingi:
-                        <programlisting><![CDATA[--- {}
 ]]></programlisting>
                     </para>
                 </listitem>
