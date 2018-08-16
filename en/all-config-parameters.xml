@@ -31638,64 +31638,6 @@ URL3:
     <section id="ConfigReference_Section_Frontend_External">
         <title>Frontend → External</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::DefaultLanguage">
-                <term>ExternalFrontend::DefaultLanguage</term>
-                <listitem>
-                    <para>Defines the method for determining the default language in the external interface. 'Auto-detect' will set language based on the user browser configuration. 'System default' will use configured value of the DefaultLanguage setting. Please note that once a user overrides the default language, their choice will be honored in the future.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- Browser
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverviewCustomEmptyText">
-                <term>Ticket::Frontend::ExternalTicketOverviewCustomEmptyText</term>
-                <listitem>
-                    <para>Custom text for the page shown to customers that have no tickets yet (if you need those text translated add them to a custom translation module).</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[---
-Button: Create your first ticket
-Text: Please click the button below to create your first ticket.
-Title: Welcome!
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RegisterBody">
-                <term>WebApp::API::Customer::Account::RegisterBody</term>
-                <listitem>
-                    <para>Defines the body text for notification mails sent to customers, about new account.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has created a new
-  OTRS account for you.\n\nFull name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>\nUser
-  name: <OTRS_USERLOGIN>\nPassword: <OTRS_USERPASSWORD>\n\nYou can log in via the
-  following URL. We encourage you to change your password in the user preferences
-  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN><OTRS_CONFIG_Frontend::PrefixPath>/external\n
-  \           "
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RegisterSubject">
-                <term>WebApp::API::Customer::Account::RegisterSubject</term>
-                <listitem>
-                    <para>Defines the subject for notification mails sent to customers, about new account.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- New OTRS Account!
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_External_Customize">
-        <title>Frontend → External → Customize</title>
-        <variablelist>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::CustomizationColors">
                 <term>ExternalFrontend::CustomizationColors</term>
                 <listitem>
@@ -31750,6 +31692,27 @@ Title: Welcome!
 - '#D278FF'
 - '#FF7AFF'
 - '#FF7FD3'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::DefaultLanguage">
+                <term>ExternalFrontend::DefaultLanguage</term>
+                <listitem>
+                    <para>Defines the method for determining the default language in the external interface. 'Auto-detect' will set language based on the user browser configuration. 'System default' will use configured value of the DefaultLanguage setting. Please note that once a user overrides the default language, their choice will be honored in the future.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- Browser
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::StateMap">
+                <term>ExternalFrontend::StateMap</term>
+                <listitem>
+                    <para>Defines state name map for external interface.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- {}
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -32078,24 +32041,8 @@ Title: Welcome!
         </variablelist>
     </section>
 
-    <section id="ConfigReference_Section_Frontend_External_TicketList">
-        <title>Frontend → External → TicketList</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::StateMap">
-                <term>ExternalFrontend::StateMap</term>
-                <listitem>
-                    <para>Defines state name map for external interface.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- {}
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_Frontend_External_View_KnowledgeBaseDetailView">
-        <title>Frontend → External → View → KnowledgeBaseDetailView</title>
+    <section id="ConfigReference_Section_Frontend_External_View_KnowledgeBaseDetail">
+        <title>Frontend → External → View → KnowledgeBaseDetail</title>
         <variablelist>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::KnowledgeBaseDetailView_DynamicField">
                 <term>ExternalFrontend::KnowledgeBaseDetailView###DynamicField</term>
@@ -33255,6 +33202,33 @@ Protocol: HTTP
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RegisterBody">
+                <term>WebApp::API::Customer::Account::RegisterBody</term>
+                <listitem>
+                    <para>Defines the body text for notification mails sent to customers, about new account.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- "Hi <OTRS_USERFIRSTNAME>,\n\nYou or someone impersonating you has created a new
+  OTRS account for you.\n\nFull name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>\nUser
+  name: <OTRS_USERLOGIN>\nPassword: <OTRS_USERPASSWORD>\n\nYou can log in via the
+  following URL. We encourage you to change your password in the user preferences
+  after logging in.\n\n<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN><OTRS_CONFIG_Frontend::PrefixPath>/external\n
+  \           "
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Account::RegisterSubject">
+                <term>WebApp::API::Customer::Account::RegisterSubject</term>
+                <listitem>
+                    <para>Defines the subject for notification mails sent to customers, about new account.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- New OTRS Account!
 ]]></programlisting>
                     </para>
                 </listitem>
