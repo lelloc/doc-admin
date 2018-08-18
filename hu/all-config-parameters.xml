@@ -1936,7 +1936,7 @@ User: some_user
             <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::ServiceCatalogueContent::Enabled">
                 <term>DocumentSearch::Drivers::ServiceCatalogueContent::Enabled</term>
                 <listitem>
-                    <para>It controls availability for Service Catalogue Content search driver.</para>
+                    <para>It controls availability for Customer Service Catalogue Content search driver.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -3130,19 +3130,6 @@ Transaction: '0'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ServiceCatalogueService::EventModulePost_1000-ServiceCatalogueIndexManagement">
-                <term>ServiceCatalogueService::EventModulePost###1000-ServiceCatalogueIndexManagement</term>
-                <listitem>
-                    <para>Marks down the object involved on the event.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-Event: (ServiceContentAdd|ServiceContentUpdate|ServiceContentDelete)
-Module: Kernel::System::ServiceCatalogue::Event::ServiceCatalogueContentIndexManagement
-Transaction: '0'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
         </variablelist>
     </section>
 
@@ -3414,6 +3401,25 @@ Transaction: '0'
 Event: ''
 Module: Kernel::GenericInterface::Event::Handler
 Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_Core_Event_ServiceCatalogueItem">
+        <title>Core → Event → ServiceCatalogueItem</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ServiceCatalogueItem::EventModulePost_1000-ServiceCatalogueIndexManagement">
+                <term>ServiceCatalogueItem::EventModulePost###1000-ServiceCatalogueIndexManagement</term>
+                <listitem>
+                    <para>Marks down the object involved on the event.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Event: (ItemContentAdd|ItemContentUpdate|ItemContentDelete)
+Module: Kernel::System::ServiceCatalogue::Event::ServiceCatalogueContentIndexManagement
+Transaction: '0'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -12039,6 +12045,22 @@ Title: Services
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminServiceCatalogue">
+                <term>Frontend::Module###AdminServiceCatalogue</term>
+                <listitem>
+                    <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Description: Admin
+Group:
+- admin
+GroupRo: []
+NavBarName: Admin
+Title: Admin Customer Service Catalogue.
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminServiceCatalogueCategories">
                 <term>Frontend::Module###AdminServiceCatalogueCategories</term>
                 <listitem>
@@ -12050,13 +12072,13 @@ Group:
 - admin
 GroupRo: []
 NavBarName: Admin
-Title: Admin Service Catalogue Categories
+Title: Admin Customer Service Catalogue Categories
 ]]></programlisting>
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminServiceCatalogueServices">
-                <term>Frontend::Module###AdminServiceCatalogueServices</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AdminServiceCatalogueItems">
+                <term>Frontend::Module###AdminServiceCatalogueItems</term>
                 <listitem>
                     <para>Előtétprogram-modul regisztráció az ügyintézői felülethez.</para>
                     <para>Alapértelmezett érték:
@@ -12066,7 +12088,7 @@ Group:
 - admin
 GroupRo: []
 NavBarName: Admin
-Title: Admin Service Catalogue Services
+Title: Admin Customer Service Catalogue Items
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -13207,40 +13229,21 @@ Name: Services
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminServiceCatalogueCategories">
-                <term>Frontend::NavigationModule###AdminServiceCatalogueCategories</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminServiceCatalogue">
+                <term>Frontend::NavigationModule###AdminServiceCatalogue</term>
                 <listitem>
                     <para>Admin area navigation for the agent interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Block: External
-Description: Manage Service Catalogue Categories.
+Description: Manage Customer Service Catalogue.
 Group:
 - admin
 GroupRo: []
 IconBig: fa-sitemap
 IconSmall: ''
 Module: Kernel::Output::HTML::NavBar::ModuleAdmin
-Name: Service Catalogue Categories
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::NavigationModule_AdminServiceCatalogueServices">
-                <term>Frontend::NavigationModule###AdminServiceCatalogueServices</term>
-                <listitem>
-                    <para>Admin area navigation for the agent interface.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[---
-Block: External
-Description: Manage Service Catalogue Services.
-Group:
-- admin
-GroupRo: []
-IconBig: fa-list-alt
-IconSmall: ''
-Module: Kernel::Output::HTML::NavBar::ModuleAdmin
-Name: Service Catalogue Services
+Name: Customer Service Catalogue
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -14404,6 +14407,18 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminServiceCatalogue_001-Framework">
+                <term>Loader::Module::AdminServiceCatalogue###001-Framework</term>
+                <listitem>
+                    <para>Loader module registration for the agent interface.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+CSS:
+- Core.Agent.Admin.ServiceCatalogue.css
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminServiceCatalogueCategories_001-Framework">
                 <term>Loader::Module::AdminServiceCatalogueCategories###001-Framework</term>
                 <listitem>
@@ -14416,14 +14431,14 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminServiceCatalogueServices_001-Framework">
-                <term>Loader::Module::AdminServiceCatalogueServices###001-Framework</term>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminServiceCatalogueItems_001-Framework">
+                <term>Loader::Module::AdminServiceCatalogueItems###001-Framework</term>
                 <listitem>
                     <para>Loader module registration for the agent interface.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 JavaScript:
-- Core.Agent.Admin.ServiceCatalogue.Services.js
+- Core.Agent.Admin.ServiceCatalogue.Items.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -15234,6 +15249,17 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminServiceCatalogue_001-Framework">
+                <term>Frontend::Navigation###AdminServiceCatalogue###001-Framework</term>
+                <listitem>
+                    <para>Main menu item registration.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- []
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminServiceCatalogueCategories_001-Framework">
                 <term>Frontend::Navigation###AdminServiceCatalogueCategories###001-Framework</term>
                 <listitem>
@@ -15245,8 +15271,8 @@ JavaScript:
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminServiceCatalogueServices_001-Framework">
-                <term>Frontend::Navigation###AdminServiceCatalogueServices###001-Framework</term>
+            <varlistentry id="ConfigReference_Setting_Frontend::Navigation_AdminServiceCatalogueItems_001-Framework">
+                <term>Frontend::Navigation###AdminServiceCatalogueItems###001-Framework</term>
                 <listitem>
                     <para>Main menu item registration.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
@@ -31737,12 +31763,12 @@ URL3:
   Name: Knowledge Base
   Prio: '100'
   Target: ''
-- Description: Services.
+- Description: Service Catalogue.
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Link: /services
-  Name: Services
+  Link: /service-catalogue
+  Name: Service Catalogue
   Prio: '200'
   Target: ''
 - Description: Custom link 1.
@@ -31769,12 +31795,12 @@ URL3:
   Name: Knowledge Base
   Prio: '500'
   Target: ''
-- Description: Services.
+- Description: Service Catalogue.
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Link: /services
-  Name: Services
+  Link: /service-catalogue
+  Name: Service Catalogue
   Prio: '600'
   Target: ''
 - Description: Custom link 1.
@@ -31801,12 +31827,12 @@ URL3:
   Name: Knowledge Base
   Prio: '900'
   Target: ''
-- Description: Services.
+- Description: Service Catalogue.
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Link: /services
-  Name: Services
+  Link: /service-catalogue
+  Name: Service Catalogue
   Prio: '1000'
   Target: ''
 - Description: Custom link 1.
@@ -31833,12 +31859,12 @@ URL3:
   Name: Knowledge Base
   Prio: '1300'
   Target: ''
-- Description: Services.
+- Description: Service Catalogue.
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Link: /services
-  Name: Services
+  Link: /service-catalogue
+  Name: Service Catalogue
   Prio: '1400'
   Target: ''
 - Description: Custom link 1.
@@ -31875,12 +31901,12 @@ URL3:
   Name: Knowledge Base
   Prio: '100'
   Target: ''
-- Description: Services.
+- Description: Service Catalogue.
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Link: /services
-  Name: Services
+  Link: /service-catalogue
+  Name: Service Catalogue
   Prio: '200'
   Target: ''
 - Description: Custom link 1.
@@ -32001,7 +32027,7 @@ URL3:
   Group: []
   GroupRo: []
   IsPublic: '0'
-  Path: /services/:category?
+  Path: /service-catalogue/:categoryId?
   Props: '1'
 - Alias: /knowledge-base/
   Component: KnowledgeBaseOverview
