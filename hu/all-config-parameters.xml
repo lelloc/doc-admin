@@ -3013,6 +3013,7 @@ Set:
 - In-Reply-To
 - Auto-Submitted
 - X-Loop
+- X-Spam
 - X-Spam-Flag
 - X-Spam-Level
 - X-Spam-Score
@@ -10377,6 +10378,24 @@ Params:
 - --send
 Schedule: '* * * * *'
 TaskName: MailQueueSend
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_NotificationViewDeleteExpired">
+                <term>Daemon::SchedulerCronTaskManager::Task###NotificationViewDeleteExpired</term>
+                <listitem>
+                    <para>Delete expired notifications from Notification View screen.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+Function: Execute
+MaximumParallelInstances: '1'
+Module: Kernel::System::Console::Command::Maint::NotificationView::DeleteExpired
+Params:
+- --user-type
+- Customer
+Schedule: 00 02 * * *
+TaskName: NotificationViewDeleteExpired
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31771,117 +31790,29 @@ URL3:
   Name: Service Catalogue
   Prio: '200'
   Target: ''
-- Description: Custom link 1.
+- Description: Privacy Policy Example.
   Group: []
   GroupRo: []
   IsPublic: '1'
-  Link: /custom-link-1
-  Name: Custom Link
+  Link: /c/privacy-policy-example
+  Name: Privacy Policy Example
   Prio: '300'
   Target: ''
-- Description: Custom link 2.
+- Description: Imprint Example.
   Group: []
   GroupRo: []
   IsPublic: ''
-  Link: /custom-link-2
-  Name: Custom Link
+  Link: /c/imprint-example
+  Name: Imprint Example
   Prio: '400'
   Target: ''
-- Description: Knowledge base.
+- Description: Copyright Notice.
   Group: []
   GroupRo: []
   IsPublic: '1'
-  Link: /knowledge-base
-  Name: Knowledge Base
+  Link: https://otrs.com
+  Name: Copyright 2018 OTRS
   Prio: '500'
-  Target: ''
-- Description: Service Catalogue.
-  Group: []
-  GroupRo: []
-  IsPublic: '0'
-  Link: /service-catalogue
-  Name: Service Catalogue
-  Prio: '600'
-  Target: ''
-- Description: Custom link 1.
-  Group: []
-  GroupRo: []
-  IsPublic: '1'
-  Link: /custom-link-1
-  Name: Custom Link
-  Prio: '700'
-  Target: ''
-- Description: Custom link 2.
-  Group: []
-  GroupRo: []
-  IsPublic: ''
-  Link: /custom-link-2
-  Name: Custom Link
-  Prio: '800'
-  Target: ''
-- Description: Knowledge base.
-  Group: []
-  GroupRo: []
-  IsPublic: '1'
-  Link: /knowledge-base
-  Name: Knowledge Base
-  Prio: '900'
-  Target: ''
-- Description: Service Catalogue.
-  Group: []
-  GroupRo: []
-  IsPublic: '0'
-  Link: /service-catalogue
-  Name: Service Catalogue
-  Prio: '1000'
-  Target: ''
-- Description: Custom link 1.
-  Group: []
-  GroupRo: []
-  IsPublic: '1'
-  Link: /custom-link-1
-  Name: Custom Link
-  Prio: '1100'
-  Target: ''
-- Description: Custom link 2.
-  Group: []
-  GroupRo: []
-  IsPublic: ''
-  Link: /custom-link-2
-  Name: Custom Link
-  Prio: '1200'
-  Target: ''
-- Description: Knowledge base.
-  Group: []
-  GroupRo: []
-  IsPublic: '1'
-  Link: /knowledge-base
-  Name: Knowledge Base
-  Prio: '1300'
-  Target: ''
-- Description: Service Catalogue.
-  Group: []
-  GroupRo: []
-  IsPublic: '0'
-  Link: /service-catalogue
-  Name: Service Catalogue
-  Prio: '1400'
-  Target: ''
-- Description: Custom link 1.
-  Group: []
-  GroupRo: []
-  IsPublic: '1'
-  Link: /custom-link-1
-  Name: Custom Link
-  Prio: '1500'
-  Target: ''
-- Description: Custom link 2.
-  Group: []
-  GroupRo: []
-  IsPublic: ''
-  Link: /custom-link-2
-  Name: Custom Link
-  Prio: '1600'
   Target: ''
 ]]></programlisting>
                     </para>
@@ -31909,20 +31840,20 @@ URL3:
   Name: Service Catalogue
   Prio: '200'
   Target: ''
-- Description: Custom link 1.
+- Description: Custom Link 2.
   Group: []
   GroupRo: []
   IsPublic: '1'
-  Link: /custom-link-1
-  Name: Custom Link
+  Link: /error
+  Name: Custom Link 2
   Prio: '300'
   Target: ''
-- Description: Custom link 2.
+- Description: Custom Link 3.
   Group: []
   GroupRo: []
   IsPublic: ''
-  Link: /custom-link-2
-  Name: Custom Link
+  Link: /ticket/overview
+  Name: Custom Link 3
   Prio: '400'
   Target: ''
 ]]></programlisting>
@@ -31935,12 +31866,12 @@ URL3:
                     <para>Top menu item registration for the external interface. Additional menu links are defined by adding new items and specifying their parameters. 'Group' and 'GroupRo' arrays can be used to limit display of the links to members of certain groups with RW and RO permissions respectively. 'Name' defines the displayed link text and 'Description' will be shown in a tooltip on hover. 'Link' is meant for an application route path or a link to an external site. Please note you can only define one of them at the time. 'IsPublic' defines if the link will be shown to unauthenticated users and in case this is set to '1', 'Group' and 'GroupRo' parameters will be ignored. 'Target' will define link's target attribute, please use '_blank' for opening in a new tab. 'Prio' determines the order of the links, with smaller numbers displayed first.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
-- Description: Custom link.
+- Description: Custom Link 1.
   Group: []
   GroupRo: []
   IsPublic: '1'
   Link: /home
-  Name: Custom Link
+  Name: Custom Link 1
   Prio: '100'
   Target: ''
 ]]></programlisting>
