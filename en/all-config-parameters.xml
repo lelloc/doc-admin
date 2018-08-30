@@ -3933,31 +3933,6 @@ Transaction: '1'
     <section id="ConfigReference_Section_Core_FAQ_Explorer">
         <title>Core → FAQ → Explorer</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::ItemList::VotingResultColors">
-                <term>FAQ::Explorer::ItemList::VotingResultColors</term>
-                <listitem>
-                    <para>CSS color for the voting result.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[---
-'100': green
-'30': red
-'70': orange
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_FAQ::Explorer::ItemList::VotingResultDecimalPlaces">
-                <term>FAQ::Explorer::ItemList::VotingResultDecimalPlaces</term>
-                <listitem>
-                    <para>Decimal places of the voting result.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- '2'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_FAQ::Explorer::LastChange::Limit">
                 <term>FAQ::Explorer::LastChange::Limit</term>
                 <listitem>
@@ -3976,9 +3951,7 @@ Transaction: '1'
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
-external: external (customer)
 internal: internal (agent)
-public: public (public)
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -4012,9 +3985,7 @@ public: public (public)
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
-external: external (customer)
 internal: internal (agent)
-public: public (public)
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -4047,8 +4018,7 @@ public: public (public)
                     <para>Interfaces where the quick search should be shown.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
-                        <programlisting><![CDATA[---
-public: public (public)
+                        <programlisting><![CDATA[--- {}
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -4071,9 +4041,7 @@ public: public (public)
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[---
-external: external (customer)
 internal: internal (agent)
-public: public (public)
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -4196,22 +4164,6 @@ Show: internal
     <section id="ConfigReference_Section_Core_FAQ_Item_Voting">
         <title>Core → FAQ → Item → Voting</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_FAQ::Item::Voting::Rates">
-                <term>FAQ::Item::Voting::Rates</term>
-                <listitem>
-                    <para>Rates for voting. Key must be in percent.</para>
-                    <para>This setting can not be deactivated.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[---
-'0': '1'
-'100': '5'
-'25': '2'
-'50': '3'
-'75': '4'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_FAQ::Item::Voting::Show">
                 <term>FAQ::Item::Voting::Show</term>
                 <listitem>
@@ -4221,6 +4173,7 @@ Show: internal
                         <programlisting><![CDATA[---
 external: external (customer)
 internal: internal (agent)
+public: public (public)
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31768,6 +31721,34 @@ URL3:
         </variablelist>
     </section>
 
+    <section id="ConfigReference_Section_Frontend_External_Auth">
+        <title>Frontend → External → Auth</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Auth::LoginURL">
+                <term>ExternalFrontend::Auth::LoginURL</term>
+                <listitem>
+                    <para>Defines an alternate login URL for the external interface.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Auth::LogoutURL">
+                <term>ExternalFrontend::Auth::LogoutURL</term>
+                <listitem>
+                    <para>Defines an alternate logout URL for the external interface.</para>
+                    <para>This setting is not active by default.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
     <section id="ConfigReference_Section_Frontend_External_Menu">
         <title>Frontend → External → Menu</title>
         <variablelist>
@@ -33230,34 +33211,6 @@ Protocol: HTTP
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- New OTRS password
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-        </variablelist>
-    </section>
-
-    <section id="ConfigReference_Section_WebApp_API_Customer_Auth">
-        <title>WebApp → API → Customer → Auth</title>
-        <variablelist>
-            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Auth::LoginURL">
-                <term>WebApp::API::Customer::Auth::LoginURL</term>
-                <listitem>
-                    <para>Defines an alternate login URL for the external interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_WebApp::API::Customer::Auth::LogoutURL">
-                <term>WebApp::API::Customer::Auth::LogoutURL</term>
-                <listitem>
-                    <para>Defines an alternate logout URL for the external interface.</para>
-                    <para>This setting is not active by default.</para>
-                    <para>Default value:
-                        <programlisting><![CDATA[--- http://host.example.com/cgi-bin/login.pl
 ]]></programlisting>
                     </para>
                 </listitem>
