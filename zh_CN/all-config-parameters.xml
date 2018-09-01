@@ -3325,11 +3325,24 @@ Transaction: '1'
             <varlistentry id="ConfigReference_Setting_Package::EventModulePost_9000-SupportDataSend">
                 <term>Package::EventModulePost###9000-SupportDataSend</term>
                 <listitem>
-                    <para>软件包事件模块注册。</para>
+                    <para>Package event module to file a scheduler task for update registration.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 Event: (PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)
 Module: Kernel::System::Package::Event::SupportDataSend
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::EventModulePost_9100-TriggerWebserverReload">
+                <term>Package::EventModulePost###9100-TriggerWebserverReload</term>
+                <listitem>
+                    <para>Package event module to trigger a production web server reload, if allowed by the configuration.</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+Event: (PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)
+Module: Kernel::System::Package::Event::TriggerWebserverReload
 Transaction: '1'
 ]]></programlisting>
                     </para>
@@ -4885,28 +4898,6 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SwitchToCustomer">
-                <term>SwitchToCustomer</term>
-                <listitem>
-                    <para>允许系统管理员作为其他客户登录（通过客户用户管理面板）。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SwitchToCustomer::PermissionGroup">
-                <term>SwitchToCustomer::PermissionGroup</term>
-                <listitem>
-                    <para>指定组名，以便组中有rw（读写）权限的用户能够访问“切换到客户”功能。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- admin
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_SwitchToUser">
                 <term>SwitchToUser</term>
                 <listitem>
@@ -5329,17 +5320,6 @@ Rows: '5'
                     <para>设置SessionMaxIdleTime中定义的时间范围内每个服务人员最大的活动会话数。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '20'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSessionName">
-                <term>CustomerPanelSessionName</term>
-                <listitem>
-                    <para>定义客户会话中关键词的名称。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- OTRSCustomerInterface
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31958,6 +31938,13 @@ URL3:
   IsPublic: '1'
   Path: /knowledge-base/article/:articleId
   Props: '1'
+- Alias: ''
+  Component: PersonalNotifications
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /personal-notifications
+  Props: '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33082,6 +33069,17 @@ Protocol: HTTP
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::Server::TriggerAutomaticReloads">
+                <term>WebApp::Server::TriggerAutomaticReloads</term>
+                <listitem>
+                    <para>If active, certain operations like package changes and configuration deployments will trigger a hot reload of the production web server. This can be turned off if you plan to restart the web server manually or if another mechanism is used to perform the needed restarts.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>

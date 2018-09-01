@@ -3326,11 +3326,24 @@ Transaction: '1'
             <varlistentry id="ConfigReference_Setting_Package::EventModulePost_9000-SupportDataSend">
                 <term>Package::EventModulePost###9000-SupportDataSend</term>
                 <listitem>
-                    <para>Modul zum automatischen Planen der Aktualisierung der System-Registrierung.</para>
+                    <para>Package event module to file a scheduler task for update registration.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 Event: (PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)
 Module: Kernel::System::Package::Event::SupportDataSend
+Transaction: '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Package::EventModulePost_9100-TriggerWebserverReload">
+                <term>Package::EventModulePost###9100-TriggerWebserverReload</term>
+                <listitem>
+                    <para>Package event module to trigger a production web server reload, if allowed by the configuration.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Event: (PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)
+Module: Kernel::System::Package::Event::TriggerWebserverReload
 Transaction: '1'
 ]]></programlisting>
                     </para>
@@ -4886,28 +4899,6 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SwitchToCustomer">
-                <term>SwitchToCustomer</term>
-                <listitem>
-                    <para>Erlaubt Administratoren sich als Kunde über die Customer-User-Administrationsoberfläche anzumelden.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_SwitchToCustomer::PermissionGroup">
-                <term>SwitchToCustomer::PermissionGroup</term>
-                <listitem>
-                    <para>Legt die Gruppe fest, für die ein Agent Schreibrechte besitzen muss, um Zugriff auf die "SwitchToCustomer"-Funktion zu haben.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- admin
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_SwitchToUser">
                 <term>SwitchToUser</term>
                 <listitem>
@@ -5330,17 +5321,6 @@ Rows: '5'
                     <para>Legt die maximale Anzahl an aktiven Sitzungen pro Agent innerhalb der in SessionMaxIdleTime festgelegten Zeitspanne fest.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '20'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_CustomerPanelSessionName">
-                <term>CustomerPanelSessionName</term>
-                <listitem>
-                    <para>Definiert den Namen des Schlüssels für die Kunden-Sessions.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- OTRSCustomerInterface
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31959,6 +31939,13 @@ URL3:
   IsPublic: '1'
   Path: /knowledge-base/article/:articleId
   Props: '1'
+- Alias: ''
+  Component: PersonalNotifications
+  Group: []
+  GroupRo: []
+  IsPublic: '0'
+  Path: /personal-notifications
+  Props: '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33083,6 +33070,17 @@ Protocol: HTTP
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::Server::TriggerAutomaticReloads">
+                <term>WebApp::Server::TriggerAutomaticReloads</term>
+                <listitem>
+                    <para>If active, certain operations like package changes and configuration deployments will trigger a hot reload of the production web server. This can be turned off if you plan to restart the web server manually or if another mechanism is used to perform the needed restarts.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>
