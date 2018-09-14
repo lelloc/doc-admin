@@ -17576,6 +17576,21 @@ Title: Agent Dashboard
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentDocumentSearch">
+                <term>Frontend::Module###AgentDocumentSearch</term>
+                <listitem>
+                    <para>Frontend-Modulregistrierung im Agent-Interface.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Description: Document Search
+Group: []
+GroupRo: []
+NavBarName: Document Search
+Title: ''
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::Module_AgentFAQAdd">
                 <term>Frontend::Module###AgentFAQAdd</term>
                 <listitem>
@@ -21059,6 +21074,25 @@ Size: '10'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Frontend::ToolBarModule_500-DocumentSearch::AgentDocumentSearch">
+                <term>Frontend::ToolBarModule###500-DocumentSearch::AgentDocumentSearch</term>
+                <listitem>
+                    <para>Symbol in der Toolbar, um schnell zur entsprechenden Funktion zu gelangen. Die Gruppenspezifische Sichtbarkeit dieses Links kann durch Nutzung des Schlüssels "Group" und Inhalten wie "rw:group1;move_into:group2" realisiert werden.</para>
+                    <para>Diese Einstellung kann in den Benutzereinstellungen überschrieben werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+AccessKey: ''
+Action: AgentDocumentSearch
+CssClass: DocumentSearchDialogIcon
+Icon: fa fa-file-text
+Link: '#'
+Module: Kernel::Output::HTML::ToolBar::Link
+Name: Document search
+Priority: '1030010'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Frontend::ToolBarModule_90-FAQ::AgentFAQAdd">
                 <term>Frontend::ToolBarModule###90-FAQ::AgentFAQAdd</term>
                 <listitem>
@@ -23358,6 +23392,33 @@ Label: My Services
 Module: Kernel::Output::HTML::Preferences::CustomService
 PreferenceGroup: NotificationSettings
 Prio: '1000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_PreferencesGroups_DocumentSearchPageShown">
+                <term>PreferencesGroups###DocumentSearchPageShown</term>
+                <listitem>
+                    <para>Parameters for the pages (in which the document are shown) of the document search.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+Active: '0'
+Data:
+  '10': '10'
+  '15': '15'
+  '20': '20'
+  '25': '25'
+  '30': '30'
+  '35': '35'
+  '50': '50'
+DataSelected: '10'
+Desc: Document limit per page for Document Search Results.
+Key: ''
+Label: Document Search Results Page Limit
+Module: Kernel::Output::HTML::Preferences::Generic
+PrefKey: AgentDocumentSearchPageShown
+PreferenceGroup: Miscellaneous
+Prio: '8100'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31067,6 +31128,7 @@ Standard: '1'
 - Core.InputFields.css
 - Core.Print.css
 - Core.Animations.css
+- Core.DocumentSearch.css
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31142,6 +31204,7 @@ Standard: '1'
 - Core.Form.Validate.js
 - Core.Agent.js
 - Core.Agent.Search.js
+- Core.Agent.DocumentSearch.js
 - Core.Agent.CustomerInformationCenterSearch.js
 - Core.Agent.CustomerSearch.js
 - Core.Agent.CustomerUserInformationCenterSearch.js
@@ -31630,6 +31693,21 @@ URL3:
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- Browser
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
+                <term>ExternalFrontend::Languages</term>
+                <listitem>
+                    <para>List of languages which will be avaible in external frontend.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+- en
+- de
+- es
+- fr
+- ru
 ]]></programlisting>
                     </para>
                 </listitem>
