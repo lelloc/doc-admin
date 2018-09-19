@@ -9811,7 +9811,8 @@ MaximumParallelInstances: '1'
 Module: Kernel::System::Console::Command::Maint::AccessToken::Keys
 Params:
 - --generate
-- --keep 3
+- --keep
+- '3'
 Schedule: 00 04 * * *
 TaskName: AccessTokenGenerateNewKey
 ]]></programlisting>
@@ -16233,7 +16234,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentFAQSearch
             <varlistentry id="ConfigReference_Setting_LoginURL">
                 <term>LoginURL</term>
                 <listitem>
-                    <para>Definiert eine alternative URL, auf die der Login-Link verweist.</para>
+                    <para>Defines an alternate login URL for the agent interface.</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- http://host.example.com/login.html
@@ -16244,7 +16245,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentFAQSearch
             <varlistentry id="ConfigReference_Setting_LogoutURL">
                 <term>LogoutURL</term>
                 <listitem>
-                    <para>Definiert eine alternative URL, auf die der Logout-Link verweist.</para>
+                    <para>Defines an alternate logout URL for the agent interface.</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- http://host.example.com/thanks-for-using-otrs.html
@@ -33231,6 +33232,78 @@ Protocol: HTTP
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- New OTRS password
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section id="ConfigReference_Section_WebApp_APIClient">
+        <title>WebApp → APIClient</title>
+        <variablelist>
+            <varlistentry id="ConfigReference_Setting_WebApp::APIClient_CloseTimeout">
+                <term>WebApp::APIClient###CloseTimeout</term>
+                <listitem>
+                    <para>Defines timeout in milliseconds for the closing of a WebSocket connection in the frontend applications. Value of '0' will disable the timeout.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::APIClient_MaxReconnectionDelay">
+                <term>WebApp::APIClient###MaxReconnectionDelay</term>
+                <listitem>
+                    <para>Defines maximum delay in milliseconds when trying to re-establish a WebSocket connection in the frontend applications.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '10000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::APIClient_OpenTimeout">
+                <term>WebApp::APIClient###OpenTimeout</term>
+                <listitem>
+                    <para>Defines timeout in milliseconds for the opening of a WebSocket connection in the frontend applications. Value of '0' will disable the timeout.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- 0
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::APIClient_PrimaryProtocol">
+                <term>WebApp::APIClient###PrimaryProtocol</term>
+                <listitem>
+                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (i.e. file uploads).</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- ws
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::APIClient_ReconnectionDelayIncrement">
+                <term>WebApp::APIClient###ReconnectionDelayIncrement</term>
+                <listitem>
+                    <para>Defines increment delay in milliseconds with every reconnection attempt of a WebSocket connection in the frontend applications.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '1000'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::APIClient_ResponseTimeout">
+                <term>WebApp::APIClient###ResponseTimeout</term>
+                <listitem>
+                    <para>Defines timeout in milliseconds for the responses of WebSocket requests in the frontend applications. Value of '0' will disable the timeout.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '30000'
 ]]></programlisting>
                     </para>
                 </listitem>
