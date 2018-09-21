@@ -41,7 +41,7 @@ SELINUXTYPE=targeted
                     </para>
                     <para>
                     <screen><![CDATA[
-shell> getenforce
+root> getenforce
 Disabled
                         ]]></screen>
                     </para>
@@ -59,8 +59,8 @@ Disabled
 
         <para>
         <screen><![CDATA[
-shell> tar xzf /tmp/otrs-x.x.x.tar.gz
-shell> mv otrs-x.x.x /opt/otrs
+root> tar xzf /tmp/otrs-x.x.x.tar.gz
+root> mv otrs-x.x.x /opt/otrs
         ]]></screen>
         </para>
     </section>
@@ -74,7 +74,7 @@ shell> mv otrs-x.x.x /opt/otrs
 
         <para>
             <screen><![CDATA[
-shell> perl /opt/otrs/bin/otrs.CheckEnvironment.pl
+root> perl /opt/otrs/bin/otrs.CheckEnvironment.pl
 Checking for Perl Modules:
   o Archive::Tar.....................ok (v1.90)
   o Archive::Zip.....................ok (v1.37)
@@ -101,7 +101,7 @@ Checking for Perl Modules:
         </para>
         <para>
             <screen><![CDATA[
-shell> useradd -d /opt/otrs -c 'OTRS user' otrs
+root> useradd -d /opt/otrs -c 'OTRS user' otrs
             ]]></screen>
         </para>
     </section>
@@ -114,13 +114,13 @@ shell> useradd -d /opt/otrs -c 'OTRS user' otrs
         </para>
         <para>
             <screen><![CDATA[
-shell> cp /opt/otrs/Kernel/Config.pm.dist /opt/otrs/Kernel/Config.pm
+root> cp /opt/otrs/Kernel/Config.pm.dist /opt/otrs/Kernel/Config.pm
     ]]></screen>
         </para>
     </section>
 
     <section role="NotInToc" id="web-server-configuration">
-        <title>Step 5: Configuring the Apache web server</title>
+        <title>Step 5: Configure the Apache Web Server</title>
 
         <para>
             OTRS comes with an own built-in web server that is used behind apache as a reverse proxy (or any other reverse proxy server). A few apache modules are needed for correct operation: <literal>proxy_module</literal>, <literal>proxy_http_module</literal> and <literal>proxy_wstunnel_module</literal>.
@@ -130,9 +130,9 @@ shell> cp /opt/otrs/Kernel/Config.pm.dist /opt/otrs/Kernel/Config.pm
             <screen><![CDATA[
 # On some systems like Debian and SuSE, these modules need to be specifically enabled:
 
-a2enmod proxy
-a2enmod proxy_http
-a2enmod proxy_wstunnel
+root> a2enmod proxy
+root> a2enmod proxy_http
+root> a2enmod proxy_wstunnel
         ]]></screen>
         </para>
 
@@ -147,7 +147,7 @@ a2enmod proxy_wstunnel
         <para>
             <screen><![CDATA[
 # Debian/Ubuntu:
-shell> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
+root> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
         ]]></screen>
         </para>
 
@@ -158,7 +158,7 @@ shell> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-ena
     </section>
 
     <section role="NotInToc">
-        <title>Step 6: File Permissions</title>
+        <title>Step 6: Set File Permissions</title>
         <para>
             Please execute the following command as root user to set the file and directory permissions for OTRS.
             It will try to detect the correct user and group settings needed for your setup.
@@ -166,33 +166,146 @@ shell> ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-ena
 
         <para>
         <screen><![CDATA[
-shell> cd /opt/otrs/
-shell> bin/otrs.SetPermissions.pl
+root> cd /opt/otrs/
+root> bin/otrs.SetPermissions.pl
         ]]></screen>
         </para>
     </section>
 
     <section role="NotInToc" id="database-configuration">
-        <title>Step 7: Database Setup and Basic System Configuration</title>
+        <title>Step 7: Setup the Database</title>
         <para>
-            Please use the web installer at <ulink url="http://localhost/otrs/installer.pl">http://localhost/otrs/installer.pl</ulink> (replace "localhost" with your OTRS hostname) to setup your database and basic system settings such as email accounts.
+            The following steps need to be taken to setup the database for OTRS properly:
         </para>
+        <itemizedlist>
+            <listitem><para>Create a dedicated database user and database.</para></listitem>
+            <listitem><para>Create the database structure.</para></listitem>
+            <listitem><para>Insert the initial data.</para></listitem>
+            <listitem><para>Configure the database connection in <filename>Kernel/Config.pm</filename>.</para></listitem>
+        </itemizedlist>
         <note>
-            <para>
-                The following configuration settings are recommended for MySQL setups. Please add the following
-                lines to <filename>/etc/my.cnf</filename> under the [mysqld] section:
-            </para>
+            <para>Please note that OTRS requires utf8 as database storage encoding.</para>
+        </note>
+        <section>
+            <title>MySQL</title>
+
             <para>
                 <screen><![CDATA[
+#
+# Run the following commands in mysql as admin user:
+#
+
+mysql -uroot -p
+
+    # Create database
+    CREATE DATABASE otrs CHARACTER SET utf8;
+
+    # Create database user
+    # Special handling for MySQL 8, as the default caching_sha2_password can only be used over secure connections.
+    CREATE USER 'otrs'@'localhost' IDENTIFIED WITH mysql_native_password BY 'choose-your-password';
+    # Older mysql versions:
+    CREATE USER 'otrs'@'localhost' IDENTIFIED BY 'choose-your-password';
+
+    # Assign user privileges to the new database.
+    GRANT ALL PRIVILEGES ON otrs.* TO 'otrs'@'localhost';
+    FLUSH PRIVILEGES;
+
+#
+# Run the following commands on the shell:
+#
+
+# Create schema and insert data.
+mysql -uroot -p otrs < /opt/otrs/scripts/database/otrs-schema.mysql.sql
+mysql -uroot -p otrs < /opt/otrs/scripts/database/otrs-initial_insert.mysql.sql
+mysql -uroot -p otrs < /opt/otrs/scripts/database/otrs-schema-post.mysql.sql
+
+# Configure database settings in Kernel/Config.pm
+$Self->{DatabaseHost} = '127.0.0.1';
+$Self->{Database}     = 'otrs';
+$Self->{DatabaseUser} = 'otrs';
+$Self->{DatabasePw}   = 'choose-your-password';
+$Self->{DatabaseDSN}  = "DBI:mysql:database=$Self->{Database};host=$Self->{DatabaseHost};";
+                ]]></screen>
+            </para>
+
+            <note>
+                <para>
+                    The following configuration settings are recommended for MySQL setups. Please add the following
+                    lines to <filename>/etc/my.cnf</filename> under the [mysqld] section:
+                </para>
+                <para>
+                    <screen><![CDATA[
 max_allowed_packet   = 64M
 query_cache_size     = 32M
 innodb_log_file_size = 256M
                 ]]></screen>
+                </para>
+            </note>
+        </section>
+
+        <section>
+            <title>PostgreSQL</title>
+
+            <para>
+                <screen><![CDATA[
+#
+# Run these commands as "postgres" user:
+#
+sudo su - postgres
+
+    # Create database
+    createdb --encoding=utf8 --owner=otrs otrs
+
+    # Create database user
+    echo "create user otrs password 'choose-your-password';" | psql
+
+#
+# Run these commands on the shell as 'otrs' user.
+#
+
+    # Create schema and insert data.
+    export PGPASSWORD=some-pass
+    psql otrs otrs -h localhost < /opt/otrs/scripts/database/otrs-schema.postgresql.sql
+    psql otrs otrs -h localhost < /opt/otrs/scripts/database/otrs-initial_insert.postgresql.sql
+    psql otrs otrs -h localhost < /opt/otrs/scripts/database/otrs-schema-post.postgresql.sql
+
+# Configure database settings in Kernel/Config.pm
+$Self->{DatabaseHost} = '127.0.0.1';
+$Self->{Database}     = 'otrs';
+$Self->{DatabaseUser} = 'otrs';
+$Self->{DatabasePw}   = 'choose-your-password';
+$Self->{DatabaseDSN}  = "DBI:Pg:dbname=$Self->{Database};host=$Self->{DatabaseHost};";
+                ]]></screen>
             </para>
-        </note>
-        <note>
-            <para>Please note that OTRS requires utf8 as database storage encoding.</para>
-        </note>
+        </section>
+
+        <section>
+            <title>Finishing the Database Setup</title>
+
+            <para>
+                To verify your database setup, run the  following command (as <literal>otrs</literal> user):
+            </para>
+            <para>
+                <screen><![CDATA[
+otrs> /opt/otrs/bin/otrs.Console.pl Maint::Database::Check
+Trying to connect to database 'DBI:Pg:dbname=otrs;host=localhost' with user 'otrs'...
+Connection successful.
+                ]]></screen>
+            </para>
+
+            <note>
+                <para>
+                    For security reasons, please change the default password <literal>root</literal> of the admin user <literal>root@localhost</literal>.
+                </para>
+                <para>
+                    <screen><![CDATA[
+otrs> /opt/otrs/bin/otrs.Console.pl Admin::User::SetPassword root@localhost
+Generated password 'rtB98S55kuc9'.
+Successfully set password for user 'root@localhost'.
+                    ]]></screen>
+                </para>
+            </note>
+        </section>
     </section>
 
     <section role="NotInToc">
@@ -205,21 +318,21 @@ innodb_log_file_size = 256M
 
         <para>
             <screen><![CDATA[
-shell> /opt/otrs/bin/otrs.Daemon.pl start
-shell> /opt/otrs/bin/otrs.WebServer.pl
+otrs> /opt/otrs/bin/otrs.Daemon.pl start
+otrs> /opt/otrs/bin/otrs.WebServer.pl
             ]]></screen>
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: First login</title>
+        <title>Step 9: First Login</title>
         <para>
-            Now you are ready to login to your system at <ulink url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink> with the credentials you configured in the web installer (User: root@localhost).
+            Now you are ready to login to your system at <ulink url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink> as user <literal>root@localhost</literal> with the password that was generated (see above).
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: Cron jobs for the OTRS user</title>
+        <title>Step 10: Setup Cron Jobs</title>
         <para>
             There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
             and their purpose is to make sure that the OTRS Daemon is running.
@@ -228,8 +341,8 @@ shell> /opt/otrs/bin/otrs.WebServer.pl
 
         <para>
             <screen><![CDATA[
-shell> cd /opt/otrs/var/cron
-shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
+otrs> cd /opt/otrs/var/cron
+otrs> for foo in *.dist; do cp $foo `basename $foo .dist`; done
             ]]></screen>
         </para>
 
@@ -240,10 +353,10 @@ shell> for foo in *.dist; do cp $foo `basename $foo .dist`; done
 
         <para>
             <screen><![CDATA[
-shell> /opt/otrs/bin/Cron.sh start
+otrs> /opt/otrs/bin/Cron.sh start
 
 # Stopping the cron jobs is also possible (useful for maintenance):
-shell> /opt/otrs/bin/Cron.sh stop
+otrs> /opt/otrs/bin/Cron.sh stop
             ]]></screen>
         </para>
 
@@ -253,7 +366,7 @@ shell> /opt/otrs/bin/Cron.sh stop
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Setup bash autocompletion (optional)</title>
+        <title>Step 11: Setup Bash Autocompletion (optional)</title>
         <para>
             All regular OTRS commandline operations happen via the otrs Console interface
             <filename>bin/otrs.Console.pl</filename>. This provides an auto completion
