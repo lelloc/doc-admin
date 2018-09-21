@@ -92,6 +92,9 @@ Checking for Perl Modules:
             </para>
         </note>
 
+        <para>
+            OTRS requires a supported stable version of Node.js to be installed. Please refer to the <ulink url="https://nodejs.org/en/download/package-manager/">Node.js installation instructions</ulink>.
+        </para>
     </section>
 
     <section role="NotInToc">
@@ -309,7 +312,32 @@ Successfully set password for user 'root@localhost'.
     </section>
 
     <section role="NotInToc">
-        <title>Step 8: Start the OTRS Daemon and Web Server</title>
+        <title>Step 8: Setup Elasticsearch Cluster</title>
+        <para>
+            OTRS requires an active cluster of Elasticsearch 6.0 or higher. The easiest way is to <ulink url="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html">setup Elasticsearch</ulink> on the same host as OTRS and binding it to its default port. With that, no further configuration in OTRS is needed.
+        </para>
+        <para>
+            Additionally, OTRS requires plugins to be installed into Elasticsearch:
+        </para>
+        <para>
+            <screen><![CDATA[
+# Install required plugins for elasticsearch.
+root> /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
+root> /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
+            ]]></screen>
+        </para>
+        <para>
+            To verify the Elasticsearch installation, you can use the following command:
+            <screen><![CDATA[
+otrs> /opt/otrs/bin/otrs.Console.pl Maint::DocumentSearch::Check
+Trying to connect to cluster...
+  Connection successful.
+            ]]></screen>
+        </para>
+    </section>
+
+    <section role="NotInToc">
+        <title>Step 9: Start the OTRS Daemon and Web Server</title>
 
         <para>
             The new OTRS daemon is responsible for handling any asynchronous and recurring tasks in OTRS. The built-in OTRS web server process handles the web requests handed over from Apache. Both processes must be started from
@@ -325,14 +353,14 @@ otrs> /opt/otrs/bin/otrs.WebServer.pl
     </section>
 
     <section role="NotInToc">
-        <title>Step 9: First Login</title>
+        <title>Step 10: First Login</title>
         <para>
             Now you are ready to login to your system at <ulink url="http://localhost/otrs/index.pl">http://localhost/otrs/index.pl</ulink> as user <literal>root@localhost</literal> with the password that was generated (see above).
         </para>
     </section>
 
     <section role="NotInToc">
-        <title>Step 10: Setup Cron Jobs</title>
+        <title>Step 11: Setup Cron Jobs</title>
         <para>
             There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
             and their purpose is to make sure that the OTRS Daemon is running.
@@ -366,7 +394,7 @@ otrs> /opt/otrs/bin/Cron.sh stop
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Setup Bash Autocompletion (optional)</title>
+        <title>Step 12: Setup Bash Autocompletion (optional)</title>
         <para>
             All regular OTRS commandline operations happen via the otrs Console interface
             <filename>bin/otrs.Console.pl</filename>. This provides an auto completion
@@ -385,7 +413,7 @@ otrs> /opt/otrs/bin/Cron.sh stop
     </section>
 
     <section role="NotInToc">
-        <title>Step 12: Further Information</title>
+        <title>Step 13: Further Information</title>
         <para>
             We advise you to read the OTRS <link linkend="performance-tuning">performance tuning chapter</link>.
         </para>
