@@ -9,17 +9,11 @@
         <para>
             强烈建议在一台独立的测试主机上先进行升级测试。
         </para>
-        <para>
-            The database migration from OTRS 5 to 6 performs significant changes to
-database tables and data.  Please make sure that there is enough storage
-space available for these operations (it might be worth considering to
-temporarily turn off archive/binary logs for the migration).
-        </para>
     </note>
 
     <variablelist>
         <varlistentry>
-            <term>Updating from an earlier version of OTRS 6</term>
+            <term>Updating from an earlier version of OTRS 7</term>
             <listitem>
                 <para>
                     You can update directly from any previous to the latest available patch
@@ -28,23 +22,23 @@ level release.
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Updating from OTRS 5</term>
+            <term>Updating from OTRS 6</term>
             <listitem>
                 <para>
-                    You can update from any OTRS 5 patch level to the latest available OTRS 6
+                    You can update from any OTRS 6 patch level to the latest available OTRS 7
 patch level release.
                 </para>
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Updating from OTRS 4 or earlier</term>
+            <term>Updating from OTRS 5 or earlier</term>
             <listitem>
                 <warning>
                     <para>
-                        You cannot update from OTRS 4 or earlier directly to OTRS 6.  Full updates
+                        You cannot update from OTRS 5 or earlier directly to OTRS 7.  Full updates
 to all available minor versions have to be made sequentially instead.  For
-example, if you come from OTRS 3.0, you first have to perform a full update
-to OTRS 3.1, then to 3.2, 3.3, 4, 5 and finally to OTRS 6.
+example, if you come from OTRS 4.0, you first have to perform a full update
+to OTRS 5, then to 6 and finally to OTRS 7.
                     </para>
                 </warning>
             </listitem>
@@ -77,6 +71,14 @@ otrs> bin/Cron.sh stop
 otrs> bin/otrs.Daemon.pl stop
             ]]></screen>
         </para>
+
+        <para>
+            If you perform a patch level update of OTRS 7, you need to also stop the
+built-in OTRS web server: <screen>
+otrs> cd /opt/otrs/
+otrs> bin/otrs.WebServer.pl --stop
+            </screen>
+        </para>
     </section>
 
     <section role="NotInToc">
@@ -85,9 +87,8 @@ otrs> bin/otrs.Daemon.pl stop
         <para>
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                <listitem>
-                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if updating from OTRS 5</para>
-                </listitem>
+                <listitem><para><filename>Kernel/WebApp.conf</filename> (only in case of a patch level
+update of OTRS 7, and only if the file was modified)</para></listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>当然还有数据库</para></listitem>
             </itemizedlist>
@@ -98,80 +99,86 @@ otrs> bin/otrs.Daemon.pl stop
     </section>
 
     <section role="NotInToc">
-    <title>步骤3：安装新版本（tar包或RPM包）</title>
+    <title>Step 3: Install the new release</title>
 
-        <section role="NotInToc">
-        <title>步骤3.1：使用tar包：</title>
+        <note>
+            <para>
+                With OTRS 7 RPMs are no longer provided. RPM based installations need to
+switch by uninstalling the RPM (this will not drop your database) and using
+the source archives instead.
+            </para>
+        </note>
 
-            <screen><![CDATA[
+        <screen><![CDATA[
 root> cd /opt
 root> mv otrs otrs-old
 root> tar -xzf otrs-x.x.x.tar.gz
 root> mv otrs-x.x.x otrs
-            ]]></screen>
+        ]]></screen>
 
-            <section role="NotInToc">
-            <title>恢复原配置文件</title>
+        <section role="NotInToc">
+        <title>恢复原配置文件</title>
 
-                <para>
-                    <itemizedlist>
-                        <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                        <listitem>
-                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, if updating from OTRS 5</para>
-                        </listitem>
-                    </itemizedlist>
-                </para>
-            </section>
-
-            <section role="NotInToc">
-                <title>恢复工单数据</title>
-
-                <para>
-                    If you configured OTRS to store article data in the file system you have to
-restore the <filename>article</filename> folder to
-<filename>/opt/otrs/var/</filename> or the folder specified in the System
-Configuration.
-                </para>
-            </section>
-
-
-            <section role="NotInToc">
-                <title>恢复已安装的默认统计</title>
-
-                <para>
-                    如果你有其他包含默认统计，则必须将后缀为<filename>*.installed</filename>的统计xml文件恢复到<filename>/opt/otrs/var/stats</filename>。
-                </para>
-                <screen><![CDATA[
-root> cd OTRS-BACKUP/var/stats
-root> cp *.installed /opt/otrs/var/stats
-                ]]></screen>
-            </section>
-
-            <section role="NotInToc">
-                <title>设置文件权限</title>
-
-                <para>
-                    请以root用户身份执行以下命令，以设置OTRS的文件和目录权限。 它将尝试检测你的安装所需的正确的用户和组设置。
-                </para>
-
-                <para>
-                <screen><![CDATA[
-root> cd /opt/otrs/
-root> bin/otrs.SetPermissions.pl
-                ]]></screen>
-                </para>
-            </section>
+            <para>
+                <itemizedlist>
+                    <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
+                    <listitem><para><filename>Kernel/WebApp.conf</filename> (only in case of a patch level
+update of OTRS 7, and only if the file was modified)</para></listitem>
+                </itemizedlist>
+            </para>
         </section>
 
         <section role="NotInToc">
-            <title>步骤3.2：使用RPM包：</title>
+            <title>恢复工单数据</title>
+
+            <para>
+                If you configured OTRS to store article data in the file system you have to
+restore the <filename>article</filename> folder to
+<filename>/opt/otrs/var/</filename> or the folder specified in the System
+Configuration.
+            </para>
+        </section>
+
+
+        <section role="NotInToc">
+            <title>恢复已安装的默认统计</title>
+
+            <para>
+                如果你有其他包含默认统计，则必须将后缀为<filename>*.installed</filename>的统计xml文件恢复到<filename>/opt/otrs/var/stats</filename>。
+            </para>
+            <screen><![CDATA[
+root> cd OTRS-BACKUP/var/stats
+root> cp *.installed /opt/otrs/var/stats
+            ]]></screen>
+        </section>
+
+        <section role="NotInToc">
+            <title>设置文件权限</title>
+
+            <para>
+                请以root用户身份执行以下命令，以设置OTRS的文件和目录权限。 它将尝试检测你的安装所需的正确的用户和组设置。
+            </para>
+
             <para>
             <screen><![CDATA[
-root> rpm -Uvh otrs-x.x.x.-01.rpm
+root> cd /opt/otrs/
+root> bin/otrs.SetPermissions.pl
             ]]></screen>
             </para>
+        </section>
+
+        <section role="NotInToc">
+            <title>Install Required Programs and Perl Modules</title>
             <para>
-                在这种情况下通过RPM升级会自动恢复原配置文件并设置文件权限。
+                Please refer to the <link linkend="installation-of-perl-modules">section in
+the installation guide</link> that explains how to verify external
+dependencies such as Perl modules and Node.js.
+            </para>
+            <para>
+                In addition to that, OTRS 7 also requires an active cluster of Elasticsearch
+6.0 or higher. Please refer to the <link
+linkend="installation-setup-elasticsearch-cluster">Setup Elasticsearch
+Cluster</link> section in the installation guide.
             </para>
         </section>
     </section>
@@ -184,7 +191,7 @@ root> rpm -Uvh otrs-x.x.x.-01.rpm
                 If you have any custom Perl or XML configuration files in
 <filename>Kernel/Config/Files</filename>, these need to be <ulink
 url="http://doc.otrs.com/doc/manual/developer/6.0/en/html/package-porting.html#packge-porting-5-to-6-configuration-files">converted
-to the new formats supported by OTRS 6</ulink> before running the migration
+to the new formats supported by OTRS 7</ulink> before running the migration
 script.
             </para>
         </note>
@@ -196,22 +203,6 @@ all checks succeeded, the necessary migration steps will be
 performed. Please also run this script in case of patch level updates.
         </para>
 
-        <note>
-            <para>
-                The migration script will ask you to set a time zone for OTRS if needed. It
-is very important that you set the correct time zone
-(<literal>OTRSTimeZone</literal>) for data storage and keep it, otherwise
-date and time of data added after the update (tickets, articles, etc.) will
-be stored with a different time zone than your pre-existing data, leading to
-inconsistent output.
-            </para>
-            <para>
-                对于新系统，建议使用<literal> UTC </literal>，因为用户可以使用不同的个人时区来使用OTRS应用程序。
-对于现有的已迁移系统，如果底层操作系统未配置为<literal> UTC
-</literal>或OTRS以前使用时间偏移，则应使用不同的<literal> OTRSTimeZone </literal>。
-            </para>
-        </note>
-
         <para>
             运行迁移脚本（用<literal>otrs</literal>用户，而不是<literal>root</literal>用户）：
         </para>
@@ -219,7 +210,7 @@ inconsistent output.
         <para>
         <screen><![CDATA[
 otrs> cd /opt/otrs/
-otrs> scripts/DBUpdate-to-6.pl
+otrs> scripts/DBUpdate-to-7.pl
         ]]></screen>
         </para>
 
@@ -234,7 +225,7 @@ otrs> scripts/DBUpdate-to-6.pl
         <title>Step 5: Update installed packages</title>
         <note>
             <para>
-                OTRS 5的软件包与OTRS 6不兼容，必须进行更新。
+                Packages for OTRS 6 are not compatible with OTRS 7 and have to be updated.
             </para>
         </note>
         <para>
@@ -253,7 +244,19 @@ otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
         <title>Step 6: Restart your services</title>
 
         <para>
-            这将取决于你的服务配置，这里是一个例子：
+            OTRS 7 comes with an own built-in web server that is used behind apache as a
+reverse proxy (or any other reverse proxy server). For major updates from
+OTRS 6, the apache configuration must be updated with the new version in
+<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename>, if it was
+copied and not just linked. Please also note that while mod_perl is no
+longer needed, other Apache modules are required now:
+<literal>proxy_module</literal>, <literal>proxy_http_module</literal> and
+<literal>proxy_wstunnel_module</literal>.
+        </para>
+
+        <para>
+            After that, the services can be restarted.  This will depend on your service
+configuration, here is an example:
         </para>
 
         <para>
@@ -273,12 +276,13 @@ emails.  Please activate it as described in the next step.
     </section>
 
     <section role="NotInToc">
-        <title>步骤7：启动OTRS守护进程和cron任务</title>
+        <title>Step 7: Start the OTRS Daemon, web server and cron job</title>
 
         <para>
             The OTRS Daemon is responsible for handling any asynchronous and recurring
 tasks in OTRS.  The daemon and its keepalive cron job must be started as the
-<literal>otrs</literal> user.
+<literal>otrs</literal> user.  The built-in OTRS web server process handles
+the web requests handed over from Apache.
         </para>
 
         <para>
@@ -286,6 +290,7 @@ tasks in OTRS.  The daemon and its keepalive cron job must be started as the
 otrs> cd /opt/otrs/
 otrs> bin/otrs.Daemon.pl start
 otrs> bin/Cron.sh start
+otrs> bin/otrs.WebServer.pl
             ]]></screen>
         </para>
         <para>

@@ -10,17 +10,11 @@
             Nagyon ajánlott először egy próbafrissítést végrehajtani egy elkülönített
 tesztelési gépen.
         </para>
-        <para>
-            The database migration from OTRS 5 to 6 performs significant changes to
-database tables and data.  Please make sure that there is enough storage
-space available for these operations (it might be worth considering to
-temporarily turn off archive/binary logs for the migration).
-        </para>
     </note>
 
     <variablelist>
         <varlistentry>
-            <term>Frissítés az OTRS 6 egy korábbi verziójáról</term>
+            <term>Updating from an earlier version of OTRS 7</term>
             <listitem>
                 <para>
                     Frissíthet közvetlenül bármely előző verzióról az elérhető legfrissebb
@@ -29,24 +23,23 @@ hibajavító szintű kiadásra.
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Frissítés az OTRS 5-ről</term>
+            <term>Updating from OTRS 6</term>
             <listitem>
                 <para>
-                    Frissíthet bármely OTRS 5 hibajavító szintű kiadásról az elérhető
-legfrissebb OTRS 6 hibajavító szintű kiadásra.
+                    You can update from any OTRS 6 patch level to the latest available OTRS 7
+patch level release.
                 </para>
             </listitem>
         </varlistentry>
         <varlistentry>
-            <term>Frissítés az OTRS 4-ről vagy egy korábbi kiadásról</term>
+            <term>Updating from OTRS 5 or earlier</term>
             <listitem>
                 <warning>
                     <para>
-                        Nem frissíthet az OTRS 4-ről vagy egy korábbi kiadásról közvetlenül OTRS
-6-ra. Ehelyett teljes frissítést kell elvégezni egymás után az összes
-elérhető kisebb verzióra. Például ha az OTRS 3.0-ról indul, akkor először
-teljes frissítést kell végrehajtani az OTRS 3.1-re, aztán 3.2-re, 3.3-ra,
-4-re, 5-re és végül az OTRS 6-ra.
+                        You cannot update from OTRS 5 or earlier directly to OTRS 7.  Full updates
+to all available minor versions have to be made sequentially instead.  For
+example, if you come from OTRS 4.0, you first have to perform a full update
+to OTRS 5, then to 6 and finally to OTRS 7.
                     </para>
                 </warning>
             </listitem>
@@ -81,6 +74,14 @@ otrs> bin/Cron.sh stop
 otrs> bin/otrs.Daemon.pl stop
             ]]></screen>
         </para>
+
+        <para>
+            If you perform a patch level update of OTRS 7, you need to also stop the
+built-in OTRS web server: <screen>
+otrs> cd /opt/otrs/
+otrs> bin/otrs.WebServer.pl --stop
+            </screen>
+        </para>
     </section>
 
     <section role="NotInToc">
@@ -89,10 +90,8 @@ otrs> bin/otrs.Daemon.pl stop
         <para>
             <itemizedlist>
                 <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                <listitem>
-                    <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, ha az OTRS 5-ről
-frissít</para>
-                </listitem>
+                <listitem><para><filename>Kernel/WebApp.conf</filename> (only in case of a patch level
+update of OTRS 7, and only if the file was modified)</para></listitem>
                 <listitem><para><filename>var/*</filename></para></listitem>
                 <listitem><para>valamint az adatbázis</para></listitem>
             </itemizedlist>
@@ -103,87 +102,91 @@ frissít</para>
     </section>
 
     <section role="NotInToc">
-    <title>3. lépés: az új kiadás telepítés (tar vagy RPM)</title>
+    <title>Step 3: Install the new release</title>
 
-        <section role="NotInToc">
-        <title>3.1. lépés: tarball segítségével:</title>
+        <note>
+            <para>
+                With OTRS 7 RPMs are no longer provided. RPM based installations need to
+switch by uninstalling the RPM (this will not drop your database) and using
+the source archives instead.
+            </para>
+        </note>
 
-            <screen><![CDATA[
+        <screen><![CDATA[
 root> cd /opt
 root> mv otrs otrs-old
 root> tar -xzf otrs-x.x.x.tar.gz
 root> mv otrs-x.x.x otrs
-            ]]></screen>
+        ]]></screen>
 
-            <section role="NotInToc">
-            <title>Régi beállítófájlok visszaállítása</title>
+        <section role="NotInToc">
+        <title>Régi beállítófájlok visszaállítása</title>
 
-                <para>
-                    <itemizedlist>
-                        <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
-                        <listitem>
-                            <para><filename>Kernel/Config/Files/ZZZAuto.pm</filename>, ha az OTRS 5-ről
-frissít</para>
-                        </listitem>
-                    </itemizedlist>
-                </para>
-            </section>
-
-            <section role="NotInToc">
-                <title>Bejegyzésadatok visszaállítása</title>
-
-                <para>
-                    Ha úgy állította be az OTRS-t, hogy a bejegyzésadatokat a fájlrendszeren
-tárolja, akkor vissza kell állítania az <filename>article</filename> mappát
-az <filename>/opt/otrs/var/</filename> mappába, vagy a
-rendszerbeállításokban megadott mappába.
-                </para>
-            </section>
-
-
-            <section role="NotInToc">
-                <title>A már telepített alapértelmezett statisztikák visszaállítása</title>
-
-                <para>
-                    Ha alapértelmezett statisztikákkal rendelkező további csomagjai vannak,
-akkor vissza kell állítania a statisztikák XML-fájljait az
-<filename>*.installed</filename> utótaggal az
-<filename>/opt/otrs/var/stats</filename> mappába.
-                </para>
-                <screen><![CDATA[
-root> cd OTRS-BACKUP/var/stats
-root> cp *.installed /opt/otrs/var/stats
-                ]]></screen>
-            </section>
-
-            <section role="NotInToc">
-                <title>Fájljogosultságok beállítása</title>
-
-                <para>
-                    Hajtsa végre a következő parancsot root felhasználóként az OTRS fájl- és
-könyvtárjogosultságainak beállításához. Megpróbálja felismerni a
-beállításhoz szükséges helyes felhasználó- és csoportbeállításokat.
-                </para>
-
-                <para>
-                <screen><![CDATA[
-root> cd /opt/otrs/
-root> bin/otrs.SetPermissions.pl
-                ]]></screen>
-                </para>
-            </section>
+            <para>
+                <itemizedlist>
+                    <listitem><para><filename>Kernel/Config.pm</filename></para></listitem>
+                    <listitem><para><filename>Kernel/WebApp.conf</filename> (only in case of a patch level
+update of OTRS 7, and only if the file was modified)</para></listitem>
+                </itemizedlist>
+            </para>
         </section>
 
         <section role="NotInToc">
-            <title>3.2. lépés: RPM segítségével:</title>
+            <title>Bejegyzésadatok visszaállítása</title>
+
+            <para>
+                Ha úgy állította be az OTRS-t, hogy a bejegyzésadatokat a fájlrendszeren
+tárolja, akkor vissza kell állítania az <filename>article</filename> mappát
+az <filename>/opt/otrs/var/</filename> mappába, vagy a
+rendszerbeállításokban megadott mappába.
+            </para>
+        </section>
+
+
+        <section role="NotInToc">
+            <title>A már telepített alapértelmezett statisztikák visszaállítása</title>
+
+            <para>
+                Ha alapértelmezett statisztikákkal rendelkező további csomagjai vannak,
+akkor vissza kell állítania a statisztikák XML-fájljait az
+<filename>*.installed</filename> utótaggal az
+<filename>/opt/otrs/var/stats</filename> mappába.
+            </para>
+            <screen><![CDATA[
+root> cd OTRS-BACKUP/var/stats
+root> cp *.installed /opt/otrs/var/stats
+            ]]></screen>
+        </section>
+
+        <section role="NotInToc">
+            <title>Fájljogosultságok beállítása</title>
+
+            <para>
+                Hajtsa végre a következő parancsot root felhasználóként az OTRS fájl- és
+könyvtárjogosultságainak beállításához. Megpróbálja felismerni a
+beállításhoz szükséges helyes felhasználó- és csoportbeállításokat.
+            </para>
+
             <para>
             <screen><![CDATA[
-root> rpm -Uvh otrs-x.x.x.-01.rpm
+root> cd /opt/otrs/
+root> bin/otrs.SetPermissions.pl
             ]]></screen>
             </para>
+        </section>
+
+        <section role="NotInToc">
+            <title>Install Required Programs and Perl Modules</title>
             <para>
-                Ebben az esetben az RPM frissítés automatikusan visszaállítja a régi
-beállítófájlokat és beállítja a fájljogosultságokat.
+                Please refer to the <link linkend="installation-of-perl-modules">section in
+the installation guide</link> that explains how to verify external
+dependencies such as Perl modules and Node.js.
+            </para>
+            <para>
+                In addition to that, OTRS 7 also requires an active cluster of Elasticsearch
+6.0 or higher. Please refer to the <link
+linkend="installation-setup-elasticsearch-cluster">Setup Elasticsearch
+Cluster</link> section in the installation guide.
             </para>
         </section>
     </section>
@@ -193,11 +196,11 @@ beállítófájlokat és beállítja a fájljogosultságokat.
 
         <note>
             <para>
-                Ha bármilyen egyéni Perl vagy XML beállítófájlja van a
-<filename>Kernel/Config/Files</filename> mappában, akkor azokat <ulink
-url="http://doc.otrs.com/doc/manual/developer/6.0/en/html/package-porting.html#packge-porting-5-to-6-configuration-files">át
-kell alakítani az OTRS 6 által támogatott új formátumra</ulink> a költöztető
-parancsfájl futtatása előtt.
+                If you have any custom Perl or XML configuration files in
+<filename>Kernel/Config/Files</filename>, these need to be <ulink
+url="http://doc.otrs.com/doc/manual/developer/6.0/en/html/package-porting.html#packge-porting-5-to-6-configuration-files">converted
+to the new formats supported by OTRS 7</ulink> before running the migration
+script.
             </para>
         </note>
 
@@ -209,25 +212,6 @@ akkor a szükséges költöztető lépések végre lesznek hajtva. Futtassa ezt 
 parancsfájlt hibajavító szintű frissítések esetén is.
         </para>
 
-        <note>
-            <para>
-                A költöztető parancsfájl meg fogja kérni, hogy állítson be egy időzónát az
-OTRS-hez, ha szükséges. Nagyon fontos az, hogy a helyes időzónát állítsa be
-(<literal>OTRSTimeZone</literal>) az adattároláshoz, és tartsa is meg azt,
-különben a frissítés után hozzáadott adatok (jegyek, bejegyzések, stb.)
-dátuma és ideje különböző időzónával lesznek eltárolva a már meglévő
-adatoktól, amely következetlen kimenethez vezet.
-            </para>
-            <para>
-                Új rendszereknél az <literal>UTC</literal> használata ajánlott, mivel a
-felhasználóknak eltérő személyes időzónáik lehetnek az OTRS alkalmazással
-végzett munkához. Meglévő, költöztetett rendszereknél különböző
-<literal>OTRSTimeZone</literal> értéket kell használni, ha az alatta lévő
-operációs rendszer nem <literal>UTC</literal> szerint van beállítva, vagy ha
-az OTRS korábban időeltolást használt.
-            </para>
-        </note>
-
         <para>
             Futtassa le a költöztető parancsfájlt (<literal>otrs</literal>
 felhasználóként, NE <literal>root</literal> felhasználóként):
@@ -236,7 +220,7 @@ felhasználóként, NE <literal>root</literal> felhasználóként):
         <para>
         <screen><![CDATA[
 otrs> cd /opt/otrs/
-otrs> scripts/DBUpdate-to-6.pl
+otrs> scripts/DBUpdate-to-7.pl
         ]]></screen>
         </para>
 
@@ -252,8 +236,7 @@ megfelelően önnél. Egyébként meghibásodás vagy adatvesztés fordulhat el�
         <title>5. lépés: telepített csomagok frissítése</title>
         <note>
             <para>
-                Az OTRS 5 csomagjai nem kompatibilisek az OTRS 6-os verzióval, és frissíteni
-kell azokat.
+                Packages for OTRS 6 are not compatible with OTRS 7 and have to be updated.
             </para>
         </note>
         <para>
@@ -272,7 +255,19 @@ otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
         <title>6. lépés: szolgáltatások újraindítása</title>
 
         <para>
-            Ez a szolgáltatás beállításától fog függeni. Itt egy példa:
+            OTRS 7 comes with an own built-in web server that is used behind apache as a
+reverse proxy (or any other reverse proxy server). For major updates from
+OTRS 6, the apache configuration must be updated with the new version in
+<filename>/opt/otrs/scripts/apache2-httpd.include.conf</filename>, if it was
+copied and not just linked. Please also note that while mod_perl is no
+longer needed, other Apache modules are required now:
+<literal>proxy_module</literal>, <literal>proxy_http_module</literal> and
+<literal>proxy_wstunnel_module</literal>.
+        </para>
+
+        <para>
+            After that, the services can be restarted.  This will depend on your service
+configuration, here is an example:
         </para>
 
         <para>
@@ -292,12 +287,13 @@ küldéséhez. Kapcsolja be a következő lépésben leírtak szerint.
     </section>
 
     <section role="NotInToc">
-        <title>7. lépés: az OTRS démon és a cron-feladat elindítása</title>
+        <title>Step 7: Start the OTRS Daemon, web server and cron job</title>
 
         <para>
-            Az OTRS démon felelős bármely aszinkron és ismétlődő feladat kezelésénél az
-OTRS-ben. A démont és az életben tartó cron-feladatát az
-<literal>otrs</literal> felhasználóként kell elindítani.
+            The OTRS Daemon is responsible for handling any asynchronous and recurring
+tasks in OTRS.  The daemon and its keepalive cron job must be started as the
+<literal>otrs</literal> user.  The built-in OTRS web server process handles
+the web requests handed over from Apache.
         </para>
 
         <para>
@@ -305,6 +301,7 @@ OTRS-ben. A démont és az életben tartó cron-feladatát az
 otrs> cd /opt/otrs/
 otrs> bin/otrs.Daemon.pl start
 otrs> bin/Cron.sh start
+otrs> bin/otrs.WebServer.pl
             ]]></screen>
         </para>
         <para>

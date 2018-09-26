@@ -446,71 +446,14 @@ barátságosak és valószínűleg tudnak segíteni.
     </section>
 
     <section id="performance-tuning-webserver">
-        <title>Webkiszolgáló</title>
+        <title>Web Server</title>
         <para>
-            Természetesen a mod_perl 2.0 (<ulink
-url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>)
-modult kell használnia. Sokkal gyorsabb (~ * 100) mint a puszta CGI, de több
-RAM-ot igényel.
+            OTRS comes with a built-in web server that is correctly preconfigured for
+many production use cases. Please see the file
+<filename>Kernel/WebApp.conf</filename> for further tuning possibilities in
+high-load environments, where for example the number of active worker
+processes needs to be increased.
         </para>
-
-        <section id="performance-tuning-webserver-db">
-            <title>Előre kiépített adatbázis-kapcsolatok</title>
-            <para>
-                Az adatbázis-kapcsolatok előre kiépíthetők a webkiszolgáló indításakor. Ez
-időt spórol (lásd: <filename>README.webserver</filename>).
-            </para>
-        </section>
-
-        <section id="performance-tuning-webserver-startup">
-            <title>Előre betöltött modulok - startup.pl</title>
-            <para>
-                Használja a <filename>scripts/apache2-perl-startup.pl</filename> indítási
-parancsfájlt az előre betöltött vagy előre lefordított Perl-modulokhoz a
-mod_perl webkiszolgálón, hogy gyorsabb legyen és kisebb memórialábnyommal
-rendelkezzen (lásd: <filename>README.webserver</filename>).
-            </para>
-        </section>
-        <section id="performance-tuning-webserver-reload">
-            <title>Perl-modulok újratöltése, amikor frissülnek a lemezen</title>
-            <para>
-                Alapértelmezetten az Apache::Reload van használatban a
-<filename>scripts/apache2-httpd.include.conf</filename> fájlban. Tiltsa ezt
-le, és 8%-kal nagyobb sebessége lesz. De ne felejtse el újraindítani a
-webkiszolgálót, ha valamilyen modult telepít az OTRS csomagkezelőjén
-keresztül, vagy valamilyen értéket megváltoztat a rendszerbeállításokban
-vagy a <filename>Kernel/Config.pm</filename> fájlban.
-            </para>
-            <important>
-                <para>
-                    Ez azt is jelenti, hogy nem tudja az OTRS csomagkezelőt a webes felületen
-keresztül használni, hanem a parancssori változatot kell használnia:
-<filename>bin/otrs.Console.pl Admin::Package::*</filename>.
-                </para>
-            </important>
-        </section>
-
-        <section id="performance-tuning-webserver-strategy">
-            <title>A megfelelő stratégia választása</title>
-            <para>
-                Ha nagyobb telepítéssel rendelkezik (például 1000-nél több új jegy naponta
-és több mint 40 ügyintéző), akkor jó ötlet a mod_perl felhasználói
-útmutatójában a teljesítményről szóló fejezet elolvasása (<ulink
-url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>).
-            </para>
-        </section>
-
-        <section id="performance-tuning-webserver-gzip">
-            <title>mod_gzip/mod_deflate</title>
-            <para>
-                Ha kicsi a sávszélessége, akkor használja a <literal>mod_deflate</literal>
-modult az Apache2 webkiszolgálóhoz. Ha van egy 45 kB méretű HTML-oldala,
-akkor a <literal>mod_gzip</literal>/<literal>mod_deflate</literal> nagyjából
-7 kB méretűre tömöríti össze. Ennek az a hátránya, hogy megnöveli a
-kiszolgáló oldali terhelést.
-            </para>
-        </section>
-
     </section>
 
 </chapter>

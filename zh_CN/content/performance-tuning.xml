@@ -365,57 +365,14 @@ url="http://www.postgresql.org/community/lists/"><citetitle>http://www.postgresq
     </section>
 
     <section id="performance-tuning-webserver">
-        <title>WEB服务器</title>
+        <title>Web Server</title>
         <para>
-            毫无疑问你应该使用 mod_perl 2.0 ( <ulink
-url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
-)。它比纯CGI快了约100倍，但它需要更多的内存。
+            OTRS comes with a built-in web server that is correctly preconfigured for
+many production use cases. Please see the file
+<filename>Kernel/WebApp.conf</filename> for further tuning possibilities in
+high-load environments, where for example the number of active worker
+processes needs to be increased.
         </para>
-
-        <section id="performance-tuning-webserver-db">
-            <title>预建立的数据库连接</title>
-            <para>
-                你可以在WEB服务器启动时就预先建立数据库连接。这可以节约时间（参阅WEB服务器的<filename>README</filename>文档）。
-            </para>
-        </section>
-
-        <section id="performance-tuning-webserver-startup">
-            <title>预装载的模块 - startup.pl</title>
-            <para>
-                在你的mod_perl
-WEB服务器上为预装载的/预编译的Perl模块使用启动脚本<filename>scripts/apache2-perl-startup.pl</filename>，仅需少量内存即可让WEB服务器更快（参阅WEB服务器的<filename>README</filename>文档）。
-            </para>
-        </section>
-        <section id="performance-tuning-webserver-reload">
-            <title>当磁盘文件更新时重载Perl模块</title>
-            <para>
-                默认情况下在<filename>scripts/apache2-httpd.include.conf</filename>中使用Apache ::
-Reload。禁用它，你将获得8％的速度提升。
-但是，如果您通过OTRS软件包管理器安装任何模块，或在系统配置或<filename>Kernel/Config.pm</filename>中修改了任何值，请记得重启Web服务器。
-            </para>
-            <important>
-                <para>
-                    这也意味着你不能通过Web界面使用OTRS软件包管理器，而需要使用控制台命令：<filename>bin/otrs.Console.pl
-Admin::Package::*</filename>。
-                </para>
-            </important>
-        </section>
-
-        <section id="performance-tuning-webserver-strategy">
-            <title>选择正确的策略</title>
-            <para>
-                如果你是一个大型安装环境，比如每天超过1000个新工单且超过40个服务人员，建议阅读mod_perl用户手册的性能章节（<ulink
-url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>）。
-            </para>
-        </section>
-
-        <section id="performance-tuning-webserver-gzip">
-            <title>mod_gzip/mod_deflate</title>
-            <para>
-                如果你的带宽较小，可在Apache2中使用<literal>mod_deflate</literal>模块。<literal>mod_gzip</literal>/<literal>mod_deflate</literal>能够一个45K的HTML页面压缩到约7K。缺点是这会增加WEB服务器端的负载。
-            </para>
-        </section>
-
     </section>
 
 </chapter>
