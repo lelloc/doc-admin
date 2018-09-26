@@ -869,8 +869,7 @@ ezen modulokat használni, mielőtt megpróbálná a parancsfájlt futtatni.
                     <![CDATA[
 #!/usr/bin/perl -w
 # --
-# otrs.SOAPRequest.pl - minta egy SOAP kérés küldéséhez az OTRS általános
-#                       felület jegy csatlakozójának
+# otrs.SOAPRequest.pl - sample to send a SOAP request to OTRS Generic Interface Ticket Connector
 # Copyright (C) 2001-2018 OTRS AG, https://otrs.com/
 # --
 # This program is free software: you can redistribute it and/or modify
@@ -890,7 +889,7 @@ ezen modulokat használni, mielőtt megpróbálná a parancsfájlt futtatni.
 use strict;
 use warnings;
 
-# A ../ használata a lib helyeként
+# use ../ as lib location
 use File::Basename;
 use FindBin qw($RealBin);
 use lib dirname($RealBin);
@@ -899,46 +898,45 @@ use SOAP::Lite;
 use Data::Dumper;
 
 # ---
-# Meghatározandó változók.
+# Variables to be defined.
 
-# Ez az URL a webszolgáltatáshoz
-# A formátuma:
+# this is the URL for the web service
+# the format is
 # <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl/Webservice/<WEB_SERVICE_NAME>
-# vagy
+# or
 # <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl/WebserviceID/<WEB_SERVICE_ID>
 my $URL = 'http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnector';
 
-# Ennek a névtérnek egyeznie kell a SOAP-átvitelben megadott névtérrel a webszolgáltatásnál.
+# this name space should match the specified name space in the SOAP transport for the web service.
 my $NameSpace = 'http://www.otrs.org/TicketConnector/';
 
-# Ez a végrehajtandó művelet, amely lehet: TicketCreate, TicketUpdate, TicketGet, TicketSearch
-# vagy SessionCreate. És ezeket meg kell határozni a webszolgáltatásban.
+# this is operation to execute, it could be TicketCreate, TicketUpdate, TicketGet, TicketSearch
+# or SessionCreate. and they must to be defined in the web service.
 my $Operation = 'TicketCreate';
 
-# Ez a változó egy kérésnél felvenni kívánt összes paraméter tárolásához használható
-# XML-formátumban. Minden egyes műveletnek egy meghatározott kötelező és nem kötelező
-# paraméterek halmaza van a helyes működéshez. Nézze meg az OTRS adminisztrációs
-# kézikönyvet azért, hogy beszerezhesse a paraméterek teljes listáját.
+# this variable is used to store all the parameters to be included on a request in XML format. Each
+# operation has a determined set of mandatory and non mandatory parameters to work correctly. Please
+# check the OTRS Admin Manual in order to get a complete list of parameters.
 my $XMLData = '
-<UserLogin>valamilyen felhasználói bejelentkezés</UserLogin>
-<Password>valamilyen jelszó</Password>
+<UserLogin>some user login</UserLogin>
+<Password>some password</Password>
 <Ticket>
-    <Title>valamilyen cím</Title>
-    <CustomerUser>valamilyen ügyfél-felhasználó bejelentkezés</CustomerUser>
-    <Queue>valamilyen várólista</Queue>
-    <State>valamilyen állapot</State>
-    <Priority>valamilyen prioritás</Priority>
+    <Title>some title</Title>
+    <CustomerUser>some customer user login</CustomerUser>
+    <Queue>some queue</Queue>
+    <State>some state</State>
+    <Priority>some priority</Priority>
 </Ticket>
 <Article>
-    <Subject>valamilyen tárgy</Subject>
-    <Body>valamilyen törzs</Body>
+    <Subject>some subject</Subject>
+    <Body>some body</Body>
     <ContentType>text/plain; charset=utf8</ContentType>
 </Article>
 ';
 
 # ---
 
-# Egy SOAP::Lite adatszerkezet létrehozása a megadott XML-adatszerkezetből.
+# create a SOAP::Lite data structure from the provided XML data structure.
 my $SOAPData = SOAP::Data
     ->type( 'xml' => $XMLData );
 
@@ -947,27 +945,26 @@ my $SOAPObject = SOAP::Lite
     ->proxy($URL)
     ->$Operation($SOAPData);
 
-# Hiba keresése a SOAP-kódban.
+# check for a fault in the soap code.
 if ( $SOAPObject->fault ) {
     print $SOAPObject->faultcode, " ", $SOAPObject->faultstring, "\n";
 }
 
-# Egyébként az eredmények kiírása.
+# otherwise print the results.
 else {
 
-    # Az XML-válaszrész lekérése a SOAP-üzenetből.
+    # get the XML response part from the SOAP message.
     my $XMLResponse = $SOAPObject->context()->transport()->proxy()->http_response()->content();
 
-    # A válasz visszaalakítása (átalakítás egy Perl-szerkezetre).
+    # deserialize response (convert it into a perl structure).
     my $Deserialized = eval {
         SOAP::Deserializer->deserialize($XMLResponse);
     };
 
-    # Az összes fejléc és a SOAP-üzenet egyéb nem szükséges részeinek eltávolítása.
+    # remove all the headers and other not needed parts of the SOAP message.
     my $Body = $Deserialized->body();
 
-    # Csak a fontos adatok kiírása, és a műveletnév kulcsot nem (mint például
-    # TicketCreateResponse).
+    # just output relevant data and no the operation name key (like TicketCreateResponse).
     for my $ResponseKey ( keys %{$Body} ) {
         print Dumper( $Body->{$ResponseKey} );
     }
@@ -990,8 +987,7 @@ képes ezen modulokat használni, mielőtt megpróbálná a parancsfájlt futtat
                     <![CDATA[
 #!/usr/bin/perl
 # --
-# otrs.RESTRequest.pl - minta egy REST kérés küldéséhez az OTRS általános
-#                       felület jegy csatlakozójának
+# otrs.RESTRequest.pl - sample to send a REST request to OTRS Generic Interface Ticket Connector
 # Copyright (C) 2001-2018 OTRS AG, https://otrs.com/
 # --
 # This program is free software: you can redistribute it and/or modify
@@ -1013,7 +1009,7 @@ use warnings;
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
 
-# A ../ használata a lib helyeként
+# use ../ as lib location
 use File::Basename;
 use FindBin qw($RealBin);
 use lib dirname($RealBin);
@@ -1022,9 +1018,9 @@ use JSON;
 use REST::Client;
 
 # ---
-# Meghatározandó változók.
+# Variables to be defined
 
-# Ez a HOST a webszolgáltatásnál. A formátum:
+# This is the HOST for the web service the format is:
 # <HTTP_TYPE>:://<OTRS_FQDN>/nph-genericinterface.pl
 my $Host = 'http://localhost/otrs/nph-genericinterface.pl';
 
@@ -1034,50 +1030,48 @@ my $RestClient = REST::Client->new(
     }
 );
 
-# Ez a vezérlő és a kérés. A formátum:
+# This is the Controller and Request the format is:
 # /Webservice/<WEB_SERVICE_NAME>/<RESOURCE>/<REQUEST_VALUE>
-# vagy
+# or
 # /WebserviceID/<WEB_SERVICE_ID>/<RESOURCE>/<REQUEST_VALUE>
-# Ez a példa le fogja kérni a TicketID = 1 azonosítóval rendelkező jegyet.
-(<REQUEST_VALUE>)
+# This example will retrieve the Ticket with the TicketID = 1 (<REQUEST_VALUE>)
 my $ControllerAndRequest = '/Webservice/GenericTicketConnectorREST/Ticket/1';
 
 my $Params = {
-    # érvényes ügyintézői bejelentkezéssel kell kitölteni
-    UserLogin     => "valamilyen felhasználói bejelentkezés",
-    # érvényes ügyintézői jelszóval kell kitölteni
-    Password      => "valamilyen felhasználói jelszó",
-    # elhagyható, ha 1-re van állítva, akkor a jegy dinamikus mezői fel lesznek véve a válaszba
-    DynamicFields => 1,
-    # elhagyható, ha 1-re van állítva, akkor az összes jegybejegyzés fel lesz véve a válaszba
-    AllArticles   => 1,
-    # Több lehetőség található a /Kernel/GenericInterface/Operation/Ticket/TicketGet.pm fájl
-    # Run() alrutin dokumentációjában.
+    UserLogin     => "some user login",       # to be filled with valid agent login
+    Password      => "some user password",    # to be filled with valid agent password
+    DynamicFields => 1,                       # optional, if set to 1,
+                                              # ticket dynamic fields included in response
+    AllArticles   => 1,                       # optional, if set to 1,
+                                              # all ticket articles are included in response
+                                              # more options to be found in
+         # /Kernel/GenericInterface/Operation/Ticket/TicketGet.pm's
+         # Run() subroutine documentation.
 };
 
 my @RequestParam;
 
-# Minta webszolgáltatás-beállításként a TicketGet műveletnél GET HTTP metódust használ.
-# Minden egyéb paramétert URI lekérdezési paraméterként kell elküldeni.
+# As sample web service configuration for TicketGet uses HTTP method GET all other parameters needs
+# to be sent as URI query parameters
 
 # ----
-# GET metódusnál
+# For GET method
 my $QueryParams = $RestClient->buildQuery( %{ $Params } );
 
 $ControllerAndRequest .= $QueryParams;
 
-# A @RequestParam tömb a 0. pozícióban tárolja a vezérlőt és a kérést
+# The @RequestParam array on position 0 holds controller and request
 @RequestParam = ($ControllerAndRequest);
 
 $RestClient->GET(@RequestParam);
 # ----
 
 # # ----
-# # POST metódusnál
+# # For POST method
 # my $JSONParams = encode_json $Params;
 
-# # A @RequestParam tömb a 0. pozícióban tárolja a vezérlőt és a kérést
-# # az 1. pozícióban tárolja a JSON adatszöveget, amely elküldésre kerül
+# # The @RequestParam array on position 0 holds controller and request
+# # on position 1 it holds the JSON data string that gets posted
 # @RequestParam = (
 #   $ControllerAndRequest,
 #   $JSONParams
@@ -1086,21 +1080,21 @@ $RestClient->GET(@RequestParam);
 # $RestClient->POST(@RequestParam);
 # # ----
 
-# Ha a gép nem érhető el, hibásan van beállítva vagy nem sikerül kiszolgálni a kért oldalt:
+# If the host isn't reachable, wrong configured or couldn't serve the requested page:
 my $ResponseCode = $RestClient->responseCode();
 if ( $ResponseCode ne '200' ) {
-    print "A kérés sikertelen, a válaszkód ez volt: $ResponseCode\n";
+    print "Request failed, response code was: $ResponseCode\n";
     exit;
 }
 
-# Ha kérést helyesen válaszolták meg, akkor itt fogadunk egy JSON szöveget.
+# If the request was answered correctly, we receive a JSON string here.
 my $ResponseContent = $RestClient->responseContent();
 
 my $Data = decode_json $ResponseContent;
 
-# Csak ki kell írni a visszaadott adatszerkezetet:
+# Just to print out the returned Data structure:
 use Data::Dumper;
-print "A válasz ez volt:\n";
+print "Response was:\n";
 print Dumper($Data);
 
                     ]]>

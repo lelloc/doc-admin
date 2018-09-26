@@ -14,6 +14,26 @@
 <section id="agent-interface">
 <title>担当者ウェブインターフェイス</title>
 
+    <note>
+        <para>
+            Before logging on for the first time, please consider activating the HTTPS
+on your web server in order for OTRS to be served as a secure app over
+SSL/TLS protocol. For detailed instructions on how to do this, please
+consult the documentation of your web server (e.g. Apache2).
+        </para>
+        <para>
+            After you activate HTTPS, please set the configuration option
+<literal>HttpType</literal> to <emphasis>https</emphasis> in <link
+linkend="adminarea-sysconfig">SysConfig</link>. This will make sure that all
+internal links in OTRS are indeed using HTTPS.
+        </para>
+        <para>
+            Good practice is to also redirect all HTTP traffic to HTTPS, in case someone
+tries to access the OTRS via an insecure link. This should be done on web
+server configuration level for maximum effect.
+        </para>
+    </note>
+
 <para>
 担当者は、担当者ウェブインターフェイスで顧客のリクエストに答えることができます。顧客のためあるいは他の担当者のために新規チケットを作成し、顧客との通話に関することをチケットに書き、FAQを記入し、顧客データを編集します。
 </para>
@@ -29,8 +49,9 @@ url="http://www.example.com/otrs/index.pl">
 
 <para>
 <screenshot>
-<screeninfo>index.pl - 担当者のログイン画面</screeninfo> <graphic srccredit="index.pl -
-スクリーンショット" scale="40" fileref="screenshots/login.png"></graphic></screenshot>
+<screeninfo>index.pl - 担当者のログイン画面</screeninfo> <graphic
+fileref="screenshots/login.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -55,8 +76,9 @@ url="http://www.example.com/otrs/customer.pl">
 
 <para>
 <screenshot>
-<screeninfo>customer.pl - 顧客ログイン画面</screeninfo> <graphic srccredit="customer.pl -
-スクリーンショット" scale="40" fileref="screenshots/customer-login.png"></graphic></screenshot>
+<screeninfo>customer.pl - 顧客ログイン画面</screeninfo> <graphic
+fileref="screenshots/customer-login.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -83,8 +105,9 @@ url="http://www.example.com/otrs/public.pl">
 
 <para>
 <screenshot>
-<screeninfo>public.pl - パブリック・ウェブインターフェイス</screeninfo> <graphic srccredit="public.pl -
-スクリーンショット" scale="40" fileref="screenshots/public-interface.png"></graphic></screenshot>
+<screeninfo>public.pl - パブリック・ウェブインターフェイス</screeninfo> <graphic
+fileref="screenshots/public-interface.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -119,9 +142,9 @@ OTRS管理者としてログインしたくなければ、あなたの通常の�
 
 <para>
 <screenshot>
-<screeninfo>login.pl - 新規パスワードの要求</screeninfo> <graphic srccredit="login.pl -
-スクリーンショット" scale="40"
-fileref="screenshots/request-new-password.png"></graphic></screenshot>
+<screeninfo>login.pl - 新規パスワードの要求</screeninfo> <graphic
+fileref="screenshots/request-new-password.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -139,8 +162,9 @@ fileref="screenshots/request-new-password.png"></graphic></screenshot>
 
 <para>
 <screenshot>
-<screeninfo>初めてのログイン成功後の画面</screeninfo> <graphic srccredit="初期画面 -
-スクリーンショット" scale="40" fileref="screenshots/first-screen.png"></graphic></screenshot>
+<screeninfo>初めてのログイン成功後の画面</screeninfo> <graphic
+fileref="screenshots/first-screen.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -181,8 +205,9 @@ fileref="screenshots/request-new-password.png"></graphic></screenshot>
 
 <para>
 <screenshot>
-<screeninfo>フッター</screeninfo> <graphic srccredit="フッター" scale="40"
-fileref="screenshots/footer.png"></graphic></screenshot>
+<screeninfo>フッター</screeninfo> <graphic
+fileref="screenshots/footer.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -208,9 +233,9 @@ fileref="screenshots/footer.png"></graphic></screenshot>
 
 <para>
     <screenshot>
-<screeninfo>ダッシュボード・ウィジェット</screeninfo> <graphic srccredit="ダッシュボード・ウィジェット"
-scale="40"
-fileref="screenshots/dashboard-left-column-widgets.png"></graphic></screenshot>
+<screeninfo>ダッシュボード・ウィジェット</screeninfo> <graphic
+fileref="screenshots/dashboard-left-column-widgets.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -292,8 +317,9 @@ Services" and are on queues with at least read-only permissions.
         </para>
         <para>
             <screenshot>
-<screeninfo>イベント・チケット・カレンダー・ウィジェット</screeninfo> <graphic srccredit="フッター" scale="40"
-fileref="screenshots/events-ticket-calendar.png"></graphic></screenshot>
+<screeninfo>イベント・チケット・カレンダー・ウィジェット</screeninfo> <graphic
+fileref="screenshots/events-ticket-calendar.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
         </para>
         <para>
             このウィジェットのためのさらなる構成は、SysConfig中の"Frontend::Agent::Dashboard::EventsTicketCalendar"
@@ -354,8 +380,9 @@ fileref="screenshots/events-ticket-calendar.png"></graphic></screenshot>
 
 <para>
     <screenshot>
-<screeninfo>ダッシュボード設定の編集</screeninfo> <graphic srccredit="ダッシュボード設定"
-scale="40" fileref="screenshots/edit-settings.png"></graphic></screenshot>
+<screeninfo>ダッシュボード設定の編集</screeninfo> <graphic
+fileref="screenshots/edit-settings.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -446,8 +473,9 @@ OTRSは、ユーザ、グループおよび役割のためのアクセス管理�
 
 <para>
 <screenshot>
-<screeninfo>担当者用キュー・ビュー（デフォルト）</screeninfo> <graphic srccredit="index.pl -
-スクリーンショット" scale="40" fileref="screenshots/agent-queue-view.png"></graphic></screenshot>
+<screeninfo>担当者用キュー・ビュー（デフォルト）</screeninfo> <graphic
+fileref="screenshots/agent-queue-view.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -469,9 +497,9 @@ OTRSは、ユーザ、グループおよび役割のためのアクセス管理�
 
 <para>
 <screenshot>
-<screeninfo>担当者キュー・ビュー視覚アラーム</screeninfo> <graphic srccredit="index.pl -
-スクリーンショット" scale="40"
-fileref="screenshots/agent-queue-overview-visual-alarms.png"></graphic></screenshot>
+<screeninfo>担当者キュー・ビュー視覚アラーム</screeninfo> <graphic
+fileref="screenshots/agent-queue-overview-visual-alarms.png" scalefit="1"
+width="100%" contentdepth="100%"></graphic></screenshot>
 </para>
 
 <itemizedlist>
@@ -502,8 +530,9 @@ OTRSユーザ（顧客、担当者、OTRS管理者としての）は、必要に
 
 <para>
 <screenshot>
-<screeninfo>担当者用アカウント選択（選好）画面</screeninfo> <graphic srccredit="index.pl -
-スクリーンショット" scale="40" fileref="screenshots/agent-preferences.png"></graphic></screenshot>
+<screeninfo>担当者用アカウント選択（選好）画面</screeninfo> <graphic
+fileref="screenshots/agent-preferences.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>
@@ -558,9 +587,9 @@ OTRSユーザ（顧客、担当者、OTRS管理者としての）は、必要に
 
 <para>
 <screenshot>
-<screeninfo>顧客用アカウント選択（選好）画面</screeninfo> <graphic srccredit="customer.pl -
-スクリーンショット" scale="40"
-fileref="screenshots/customer-preferences.png"></graphic></screenshot>
+<screeninfo>顧客用アカウント選択（選好）画面</screeninfo> <graphic
+fileref="screenshots/customer-preferences.png" scalefit="1" width="100%"
+contentdepth="100%"></graphic></screenshot>
 </para>
 
 <para>

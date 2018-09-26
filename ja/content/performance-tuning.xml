@@ -6,90 +6,206 @@
     <title>パフォーマンス・チューニング</title>
 
     <abstract>
-    <para>
-    以下はOTRS導入のための強化テクニックのパフォーマンスのリストです。構成、コーディング、メモリー使用、その他を含みます。
-    </para>
+        <para>
+            以下はOTRS導入のための強化テクニックのパフォーマンスのリストです。構成、コーディング、メモリー使用、その他を含みます。
+        </para>
     </abstract>
 
     <section id="performance-tuning-otrs">
         <title>OTRS</title>
         <para>
-        OTRSのパフォーマンスを改善するいくつかのオプションがあります。
+            OTRSのパフォーマンスを改善するいくつかのオプションがあります。
         </para>
 
         <section id="performance-tuning-otrs-index">
             <title>TicketIndexModule</title>
             <para>
-            チケット・インデックス用の2つのバックエンド・モジュールがあります:
+                There are two backend modules for the index for the ticket queue view:
             </para>
-
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will generate each queue view on the fly
+from the ticket table. You will not have performance trouble until you have
+about 60,000 open tickets in your system.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::IndexAccelerator::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            The most powerful module, should be used when you have above 80,000 open
+tickets. It uses an extra <literal>ticket_index</literal> table, which will
+be populated with keywords based on ticket data. Use
+<filename>bin/otrs.RebuildTicketIndex.pl</filename> for generating an
+initial index after switching backends.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
             <para>
-            <itemizedlist mark='opencircle'>
+                You can change the used IndexAccelerator module via SysConfig.
+            </para>
+        </section>
 
-            <listitem>
+        <section id="performance-tuning-otrs-search">
+            <title>SearchIndexModule</title>
             <para>
-            Kernel::System::Ticket::IndexAccelerator::RuntimeDB
-(default)を使うことで、チケット・テーブルから取り急ぎ見えるいくつかのキューを生成します。システム内で約60,000の対応中チケットを持つまではパフォーマンスに関するトラブルを抱えないでしょう。
+                This module helps to extend your articles full-text search (From, To, Cc,
+Subject and Body search).  There are two backend modules for the search
+index:
             </para>
-            </listitem>
-
-            <listitem>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB</literal></term>
+                    <listitem>
+                        <para>
+                            This is the default option, and will will do full-text searches on live data
+(it works fine for up to 50,000 tickets).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleSearchIndex::StaticDB</literal></term>
+                    <listitem>
+                        <para>
+                            This module will strip all articles and build an index after article
+creation, increasing performance of full-text searches up to 50%.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
             <para>
-            あなたが80,000以上の対応中チケットを持っている場合、Kernel::System::Ticket::IndexAccelerator::StaticDB(最も強力なモジュール)が使用されるべきです。それは余分なticket_indexテーブルを使用します。それはビューのように働きます。バックエンドを切り替えた後に最初のインデック作成を生成するために<filename>bin/otrs.RebuildTicketIndex.pl</filename>を使用してください。
+                You can change the used SearchIndexModule via SysConfig.
             </para>
-            </listitem>
-
-            </itemizedlist>
-            </para>
-
             <para>
-            SysConfig経由でIndexAcceleratorを変更することができます。
+                To create an initial index, use
+<filename>bin/otrs.RebuildFulltextIndex.pl</filename>.
             </para>
-
+            <para>
+                For StaticDB module, there are some options available for fine tuning:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Attribute</literal></term>
+                    <listitem>
+                        <para>
+                            The attribute "WordCountMax" defines the maximum of words which will be
+processed to build up the index. For example only the first 1000 words of an
+article body are stored in the article search index. The attributes
+"WordLengthMin" and "WordLengthMax" are used as word length boundaries. Only
+words with a length between these two values are stored in the article
+search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::Filters</literal></term>
+                    <listitem>
+                        <para>
+                            There are three default filters defined:
+                        </para>
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    The first filter strips out special chars like: <literal>, &amp; &lt; &gt; ?
+" ! * | ; [ ] ( ) + $ ^=</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The second filter strips out words which begin or ends with one of following
+chars: <literal>' : .</literal>
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    The third filter strips out words which do not contain a word-character:
+<literal>a-z, A-Z, 0-9, _</literal>
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Ticket::SearchIndex::StopWords</literal></term>
+                    <listitem>
+                        <para>
+                            There are so-called stop-words defined for some languages. These stop-words
+will be skipped while creating the search index.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
         </section>
 
         <section id="performance-tuning-otrs-storage">
             <title>TicketStorageModule（チケット・格納・モジュール）</title>
             <para>
-            チケット・記事記憶装置用の2つの異なるバックエンド・モジュールがあります:
+                チケット・記事記憶装置用の2つの異なるバックエンド・モジュールがあります:
             </para>
-
-            <para>
-            <itemizedlist mark='opencircle'>
-
-            <listitem>
-            <para>
-            付属などを格納するためにデータベースの中でKernel::System::Ticket::ArticleStorageDB(デフォルト)を形成してください。ノート:大きな組織でそれを使用しないでください。
-            </para>
-            <para>
-            賛成意見:ウェブサーバー・ユーザが「otrs」ユーザでない場合は、ファイル許可問題を回避するためにこのモジュールを使用してください。
-            </para>
-            <para>
-            反対意見:あなたのデータベースに添付ファイルをを格納することは望ましくありません。あなたのデータベースは大きなオブジェクトを格納できることに気を配って下さい。例えば8MBのオブジェクト(デフォルトは2MBです)を格納するために「set-variable
-= max_allowed_packet=8M」でMySQLを設定します。
-            </para>
-            </listitem>
-
-            <listitem>
-            <para>
-            ローカルのファイルシステム上に添付ファイルなどを格納するためにKernel::System::Ticket::ArticleStorageFSを設定してください。
-            </para>
-            <para>
-            賛成意見: 速いですね!
-            </para>
-            <para>
-            反対意見:ウェブサーバ・ユーザは「otrs」ユーザであるべきです。さらに、多数のフロントエンドのサーバーを持つなら、、ファイルシステムがサーバー間で共有されることを確かめるべきです。NFS共有か可能ならSANかそれに類似のソリューションに置いて下さい。
-            </para>
-            </listitem>
-
-            </itemizedlist>
-
-            </para>
-
-            <para>
-                取り急ぎ1つのバックエンドから別のバックエンドまで切り替えることができます。SysConfigの中のバックエンドを切り替えて、次に、コマンドライン・ユーティリティ<filename>otrs.ArticleStorageSwitch.pl</filename>を実行することができます。データベースからファイルシステムに記事をputするためです。ソースとバックエンドの目的地を指定するために「<emphasis>-s</emphasis>」と「<emphasis>-d</emphasis>」オプションを使うことができます。全プロセスを実行するには相当な時間がかかることにご注意ください。それは保持している記事数と可能なCPUパワー及びあるいはネットワーク能力に依存します。
-            </para>
-
+            <variablelist>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageDB</literal></term>
+                    <listitem>
+                        <para>
+                            This default module will store attachments in the database.
+                        </para>
+                        <note>
+                            <para>
+                                Don't use it with large setups.
+                            </para>
+                        </note>
+                        <para>
+                            Pro: If your web server isn't running under 'otrs' user, use this module to
+avoid file permission problems.
+                        </para>
+                        <para>
+                            Con: It is not advisable to store attachments in your database. Take care
+that your database is able to store large objects. I.e.: configure MySQL
+with <literal>set-variable = max_allowed_packet=8M</literal> to store 8 MB
+objects (the default is 2M).
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><literal>Kernel::System::Ticket::ArticleStorageFS</literal></term>
+                    <listitem>
+                        <para>
+                            Use this module to store attachments on the local file system.
+                        </para>
+                        <note>
+                            <para>
+                                Recommended for large setups.
+                            </para>
+                        </note>
+                        <para>
+                            賛成意見: 速いですね!
+                        </para>
+                        <para>
+                            Con: Your web server should run under the 'otrs' user. Also, if you have
+multiple front-end servers, you must make sure the filesystem is shared
+between the servers. Place it on an NFS share or preferably a SAN or similar
+solution.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+            <note>
+                <para>
+                    You can switch from one back-end to the other on the fly. You can switch the
+backend in the SysConfig, and then run the command line utility
+<filename>otrs.ArticleStorageSwitch.pl</filename> to put the articles from
+the database onto the filesystem or the other way around. You can use the
+<emphasis>-s</emphasis> and <emphasis>-d</emphasis> options to specify the
+source and destination back-ends. Please note that the entire process can
+take considerable time to run, depending on the number of articles you have
+and the available CPU power and/or network capacity.
+                </para>
+            </note>
             <para>
             <screen><![CDATA[
 shell&gt; bin/otrs.ArticleStorageSwitch.pl -s ArticleStorageDB -d ArticleStorageFS
@@ -107,7 +223,12 @@ shell&gt; bin/otrs.ArticleStorageSwitch.pl -s ArticleStorageDB -d ArticleStorage
                 監査に耐えうるシステムとしてOTRSを使うならば、完了したチケットを削除することはよい考えとはいえません。そのため我々はチケットをアーカイブすることができる機能を実装しました。
             </para>
             <para>
-                監査に耐えうるシステムとしてOTRSを使うならば、完了したチケットを削除することはよい考えとはいえません。そのため我々はチケットをアーカイブすることができる機能を実装しました。ある基準とマッチするチケットは「アーカイブ済」としてマークすることができます。これらのチケットは、通常チケット検索、あるいは一般担当者ジョブを実行してもアクセスできません。OTRSを使う時は、「最新の」チケットのみを考慮に入れればよいのでシステムそれ自身は、もはや巨大な量のチケットを取り扱う必要はありません。これにより巨大なシステムでの巨大なパフォーマンスの利得が生まれることとなります。
+                Tickets that match certain criteria can be marked as "archived". These
+tickets are not accessed if you do a regular ticket search or run a Generic
+Agent job. The system itself does not have to deal with a huge amount of
+tickets any longer as only the "latest" tickets are taken into consideration
+when using OTRS. This can result in a huge performance gain on large
+systems.
             </para>
             <para>
                 アーカイブ機能を使用するには次のステップに従います:
@@ -185,9 +306,12 @@ search」を加えてください。
             <title>キャッシュ</title>
             <para>
                 OTRS caches a lot of temporary data in
-<filename>/opt/otrs/var/tmp</filename>.  Please make sure that this uses a
-high performance file system/storage.  If you have enough RAM, you can also
-try to put this directory on a ramdisk like this: <screen><![CDATA[
+<filename>/opt/otrs/var/tmp</filename>. Please make sure that this uses a
+high performance file system/storage. If you have enough RAM, you can also
+try to put this directory on a ramdisk like this:
+            </para>
+            <para>
+                <screen><![CDATA[
 shell> /opt/otrs/bin/otrs.CleanUp.pl
 shell> /opt/otrs/bin/otrs.DeleteCache.pl
 shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
@@ -198,12 +322,12 @@ shell> sudo mount -o size=16G -t tmpfs none /opt/otrs/var/tmp
             <note>
                 <para>
                     Please note that this will be a non-permanent storage that will be lost on
-server reboot.  All your sessions (if you store them in the filesystem) and
+server reboot. All your sessions (if you store them in the filesystem) and
 your cache data will be lost.
                 </para>
             </note>
             <para>
-                There is also a centralized memcached based Cache backend available for
+                There is also a centralized memcached based cache backend available for
 purchase from OTRS Group.
             </para>
         </section>
@@ -214,19 +338,18 @@ purchase from OTRS Group.
     <section id="performance-tuning-database">
         <title>データベース</title>
         <para>
-        DB発行は使用されているデータベースによって変わります。データベース管理者とデータベースかチェックのためのドキュメンテーションを研究してください。
+            DB発行は使用されているデータベースによって変わります。データベース管理者とデータベースかチェックのためのドキュメンテーションを研究してください。
         </para>
 
         <section id="performance-tuning-database-mysql">
             <title>MySQL</title>
             <para>
-            MySQLテーブル・タイプMyISAM(デフォルトです)を使用し、テーブルの大部分を削除したならば、あるいは可変長列(VARCHAR、BLOBあるいはTEXTカラムがあるテーブル)でテーブルに多くの変更を加えていれば、「optimize（最適化）」コマンドでデータ・ファイル(テーブル)をフラグメンテーション解消しなければいけません。
+                MySQLテーブル・タイプMyISAM(デフォルトです)を使用し、テーブルの大部分を削除したならば、あるいは可変長列(VARCHAR、BLOBあるいはTEXTカラムがあるテーブル)でテーブルに多くの変更を加えていれば、「optimize（最適化）」コマンドでデータ・ファイル(テーブル)をフラグメンテーション解消しなければいけません。
             </para>
             <para>
-            mysqldデーモンがCPU時間の多くを必要とする場合、テーブルの最適化を試みるべきです。-
+                mysqldデーモンがCPU時間の多くを必要とする場合、テーブルの最適化を試みるべきです。-
 チケット、ticket_historyおよび記事(下記のスクリプトを参照)。
             </para>
-
             <para>
             <screen><![CDATA[
 shell> mysql -u user -p database
@@ -235,49 +358,50 @@ mysql> optimize table ticket_history;
 mysql> optimize table article;
             ]]></screen>
             </para>
-
             <para>
-            <emphasis>スクリプト:データ・ベース・テーブルの最適化。</emphasis>
+                <emphasis>スクリプト:データ・ベース・テーブルの最適化。</emphasis>
             </para>
-
         </section>
 
         <section id="performance-tuning-database-postgresql">
             <title>PostgreSQL</title>
             <para>
-            PostgreSQLは、PostgreSQLデータディレクトリのpostgresql.confファイルの修正により最適化されます。これをする方法についてのアドバイスについては、次の記事を参考文献としてください:
+                PostgreSQL is best tuned by modifying the
+<filename>postgresql.conf</filename> file in your PostgreSQL data
+directory. For advice on how to do this, reference the following articles:
             </para>
-
             <para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                        <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
+                            <ulink url="http://www.revsys.com/writings/postgresql-performance.html">
 <citetitle>http://www.revsys.com/writings/postgresql-performance.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/perf.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/perf.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                        <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
+                            <ulink url="http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html">
 <citetitle>http://varlena.com/GeneralBits/Tidbits/annotated_conf_e.html</citetitle>
 </ulink>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
-
             <para>
-            パフォーマンスが不十分な場合、PostgreSQLパフォーマンス・メーリング・リスト( <ulink
-url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/community/lists/</ulink>
-)に参加しそこに質問をすることを提案します。PostgreSQLリスト上の人々は非常にフレンドリーで、おそらく助けてくれることでしょう。
+                If performance is still not satisfactory, we suggest that you join the
+PostgreSQL Performance mailing list ( <ulink
+url="http://www.postgresql.org/community/lists/">
+<citetitle>http://www.postgresql.org/community/lists/</citetitle> </ulink>
+), and ask questions there. The folks on the PostgreSQL list are very
+friendly and can probably help.
             </para>
         </section>
 
@@ -286,47 +410,66 @@ url="http://www.postgresql.org/community/lists/">http://www.postgresql.org/commu
     <section id="performance-tuning-webserver">
         <title>ウェブサーバ</title>
         <para>
-        mod_perl 2.0( <ulink
-url="http://perl.apache.org/"><citetitle>http://perl.apache.org/</citetitle></ulink>
-)を使用するべきです。それは純粋なcgiよりはるかに速い(~ * 100)。しかし、それはより多くのRAMを必要とします。
+            Of course you should use mod_perl 2.0 ( <ulink
+url="http://perl.apache.org/">
+<citetitle>http://perl.apache.org/</citetitle> </ulink> ). It's much faster
+(~ *100) than pure CGI, but it needs more RAM.
         </para>
 
         <section id="performance-tuning-webserver-db">
             <title>事前に確立しているデータベース接続</title>
             <para>
-            ウェブサーバのスタートアップに先んじてあらかじめデータベース接続を確立することができます。時間の節約になります(README.webserverを参照)。
+                You can have the database connections pre-established on startup of the web
+server. This saves time (see <filename>README.webserver</filename>).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-startup">
             <title>プレインストールされたモジュール - startup.pl</title>
             <para>
-            スタートアップ・スクリプト・スクリプト<filename>scripts/apache2-perl-startup.pl</filename>を使用して下さい。それはmod_perlウェブサーバ上の事前ロードされ、コンパイルされたPerlをより早くします。しかもより小さいメモリで。(README.webserverを参照)。
+                Use the startup script <filename>scripts/apache2-perl-startup.pl</filename>
+for preloaded/precompiled Perl modules on your mod_perl webserver to be
+faster, with a smaller memory footprint (see
+<filename>README.webserver</filename>).
             </para>
         </section>
         <section id="performance-tuning-webserver-reload">
             <title>ディスク上で更新された時パール・モジュールをリロードします。</title>
             <para>
-            Apache::Reloadはデフォルトでscripts/apache2-httpd.include.conf.の中で使用されます。それを不能にすれば8%のスピードアップとなります。しかし、もしOTRSパッケージマネージャからなんらかのモジュールを、あるいは
-SysConfig 中または
-Kernel/Config.pm.中でなんらかの値を、インストールしているならば、忘れてはいけないことは　ウェブサーバのリスタートです。重要:このことは、ウェブ・インターフェース経由でOTRSパッケージ・マネージャーを使用することができないことを意味します。コマンドラインから変数の
-- <filename>bin/otrs.PackageManager.pl</filename>をご利用下さい。
+                By default Apache::Reload is used in
+<filename>scripts/apache2-httpd.include.conf</filename>. Disable it and you
+will get 8% more speed. But remember to restart the web server if you
+install any modules via the OTRS Package Manager, or any values in your
+SysConfig or in <filename>Kernel/Config.pm</filename>.
             </para>
+            <important>
+                <para>
+                    This would also mean you can't use the OTRS Package Manager via the web
+interface, you will need to use the command line variant -
+<filename>bin/otrs.PackageManager.pl</filename>.
+                </para>
+            </important>
         </section>
 
         <section id="performance-tuning-webserver-strategy">
             <title>正しい戦略の選択</title>
             <para>
-            より大きな装置(例えば40人以上担当者または1,000枚/day以上の新しいチケット)を持っているなら、mod_perlユーザ・ガイド( <ulink
-url="http://perl.apache.org/docs/2.0/user/index.html"><citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle></ulink>
-)の性能についての章を読むと良いでしょう。
+                If you have a larger installation, e.g. over 1,000 new tickets per day and
+over 40 agents, it is a good idea to read the chapters on Performance of the
+mod_perl User's Guide ( <ulink
+url="http://perl.apache.org/docs/2.0/user/index.html">
+<citetitle>http://perl.apache.org/docs/2.0/user/index.html</citetitle>
+</ulink> ).
             </para>
         </section>
 
         <section id="performance-tuning-webserver-gzip">
             <title>mod_gzip/mod_deflate</title>
             <para>
-            帯域幅が小さい場合は、Apache2用のmod_deflateをご利用ください。45000のHTMLページを持っているなら、mod_gzip/mod_deflate　は約7000にそれを圧縮します。欠点は、これがサーバー側のロードを増加させるということです。
+                If your bandwidth is small, use <literal>mod_deflate</literal> for
+Apache2. If you have an html page with 45k,
+<literal>mod_gzip</literal>/<literal>mod_deflate</literal> compresses it to
+about 7k. The drawback is that this increases the load on the server side.
             </para>
         </section>
 
