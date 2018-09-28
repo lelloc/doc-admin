@@ -872,7 +872,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::CustomerToAgent">
                 <term>ChatEngine::ChatDirection::CustomerToAgent</term>
                 <listitem>
-                    <para>Lehetővé teszi egy ügyintézővel történő csevegés indítását az ügyfélfelületről.</para>
+                    <para>Lehetővé teszi egy ügyintézővel történő csevegés indítását a külső felületről hitelesített felhasználóként.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -883,7 +883,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::PublicToAgent">
                 <term>ChatEngine::ChatDirection::PublicToAgent</term>
                 <listitem>
-                    <para>Lehetővé teszi egy ügyintézővel történő csevegés indítását a nyilvános felületről.</para>
+                    <para>Lehetővé teszi egy ügyintézővel történő csevegés indítását a külső felületről nem hitelesített felhasználóként.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -912,65 +912,10 @@ version: '3'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferences">
-                <term>ChatEngine::CustomerFrontend::AgentPreferences</term>
-                <listitem>
-                    <para>Meghatározza azon ügyintézői beállítások csoportkulcsainak listáját, amelyek láthatóak lesznek az ügyfélfelületen (csak akkor működik, ha a DefaultAgentName le van tiltva). Példa: ha meg szeretné jeleníteni a PreferencesGroups###Language értékét, akkor adja hozzá a Language kulcsot.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferencesText">
-                <term>ChatEngine::CustomerFrontend::AgentPreferencesText</term>
-                <listitem>
-                    <para>Meghatároz egy szöveget az ügyintézői beállításokhoz az ügyfélfelületen (csak akkor működik, ha a DefaultAgentName le van tiltva).</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- Agent Information
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AvailabilityCheck">
-                <term>ChatEngine::CustomerFrontend::AvailabilityCheck</term>
-                <listitem>
-                    <para>Annak lehetővé tétele az ügyfeleknek, hogy csak olyan csatornákat válasszanak, amelyek rendelkeznek elérhető ügyintézőkkel.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerInterface::AllowChatChannels">
-                <term>ChatEngine::CustomerInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>Meghatározza, hogy az ügyfél-felhasználók képesek-e csevegőcsatornákat kiválasztani. Ha nem, akkor a csevegés az alapértelmezett csevegőcsatornában lesz létrehozva.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerThreshold">
-                <term>ChatEngine::CustomerThreshold</term>
-                <listitem>
-                    <para>Meghatározza azt az időtartamot (percben), mielőtt „Nincs válasz” üzenet jelenik meg az ügyfélnek.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '5'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ChatEngine::DefaultAgentName">
                 <term>ChatEngine::DefaultAgentName</term>
                 <listitem>
-                    <para>Alapértelmezett ügyintézőnév az ügyfél- és a nyilvános felülethez. Ha engedélyezve van, akkor az ügyintéző valódi neve nem lesz látható az ügyfeleknek vagy a nyilvános felhasználóknak a csevegés használata közben.</para>
+                    <para>Alapértelmezett ügyintézőnév a külső felületen. Ha engedélyezve van, akkor az ügyintéző valódi neve nem lesz látható a felhasználóknak a csevegés használata közben.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- Support Agent
@@ -996,6 +941,39 @@ version: '3'
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- Default channel
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AllowChatChannels">
+                <term>ChatEngine::ExternalFrontend::AllowChatChannels</term>
+                <listitem>
+                    <para>Meghatározza, hogy a külső felületen lévő felhasználók képesek-e csevegőcsatornát kiválasztani. Ha nem, akkor a csevegés az alapértelmezett csevegőcsatornában lesz létrehozva.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AvailabilityCheck">
+                <term>ChatEngine::ExternalFrontend::AvailabilityCheck</term>
+                <listitem>
+                    <para>Annak lehetővé tétele a felhasználóknak, hogy csak olyan csatornákat válasszanak, amelyek rendelkeznek elérhető ügyintézőkkel a külső felületen.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::NoAnswerThreshold">
+                <term>ChatEngine::ExternalFrontend::NoAnswerThreshold</term>
+                <listitem>
+                    <para>Meghatározza azt az időtartamot (percben), mielőtt „Nincs válasz” üzenet jelenik meg a felhasználóknak a külső felületen.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1029,133 +1007,6 @@ version: '3'
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- users
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AllowChatChannels">
-                <term>ChatEngine::PublicInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>Meghatározza, hogy a nyilvános felhasználók képesek-e csevegőcsatornákat kiválasztani. Ha nem, akkor a csevegés az alapértelmezett csevegőcsatornában lesz létrehozva.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AvailabilityCheck">
-                <term>ChatEngine::PublicInterface::AvailabilityCheck</term>
-                <listitem>
-                    <para>Annak lehetővé tétele a nyilvános felhasználóknak, hogy csak olyan csatornákat válasszanak, amelyek rendelkeznek elérhető ügyintézőkkel.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatClosed">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatClosed</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg az ügyfélfelülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically. You can
-  download this chat.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg az ügyfélfelülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- This chat is completed. You can now close the chat window.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting</term>
-                <listitem>
-                    <para>Nincsenek elérhető ügyintézők üzenet.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To add an article to the existing
-  ticket, please click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket</term>
-                <listitem>
-                    <para>Nincsenek elérhető ügyintézők üzenet.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To create a new ticket, please
-  click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::CustomerFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg az ügyfélfelülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::PublicFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg a nyilvános felülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- This chat is completed. You can start a new chat using the button on top of this
-  page.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NoAgentsAvailable">
-                <term>ChatEngine::Texts::PublicFrontend::NoAgentsAvailable</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg a nyilvános felülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- There are no chat agents available at present. Please try again later.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::PublicFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg a nyilvános felülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicInterface::ChatClosed">
-                <term>ChatEngine::Texts::PublicInterface::ChatClosed</term>
-                <listitem>
-                    <para>Alapértelmezett szöveg a nyilvános felülethez.</para>
-                    <para>Ez a beállítás nem kapcsolható ki.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically.
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1224,46 +1075,6 @@ version: '3'
                 <term>Ticket::Agent::UnavailableForExternalChatsOnLogin</term>
                 <listitem>
                     <para>Ha engedélyezve van, akkor ellenőrizni fogja az ügyintézők elérhetőségét a bejelentkezéskor. Ha a felhasználó elérhető a külső csevegésekhez, akkor csökkenteni fogja az elérhetőséget kizárólag a belső csevegésekre.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_AllowChatOnlyIfAgentsAvailable">
-                <term>Ticket::Customer::StartChatFromTicket###AllowChatOnlyIfAgentsAvailable</term>
-                <listitem>
-                    <para>Ha engedélyezve van, akkor az ügyfél jegynagyítás nézetből indított csevegés csak akkor lesz lehetséges, ha vannak elérhető ügyintézők a hozzákapcsolt csevegőcsatornán.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Allowed">
-                <term>Ticket::Customer::StartChatFromTicket###Allowed</term>
-                <listitem>
-                    <para>Beállítja, hogy egy csevegéskérés kiküldhető-e az ügyfél jegynagyítás nézetéből.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Permissions">
-                <term>Ticket::Customer::StartChatFromTicket###Permissions</term>
-                <listitem>
-                    <para>Ha engedélyezve van, akkor csak a jegy ügyfele indíthat csevegést egy jegynagyítás nézetből.</para>
-                    <para>Alapértelmezett érték:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatWOTicket">
-                <term>Ticket::Customer::StartChatWOTicket</term>
-                <listitem>
-                    <para>Ha engedélyezve van, akkor az ügyfelek jegy nélkül is indíthatnak csevegést egy ügyintézővel.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -3314,7 +3125,7 @@ Transaction: '1'
             <varlistentry id="ConfigReference_Setting_Package::EventModulePost_9000-SupportDataSend">
                 <term>Package::EventModulePost###9000-SupportDataSend</term>
                 <listitem>
-                    <para>Package event module to file a scheduler task for update registration.</para>
+                    <para>Csomagesemény modul egy ütemező feladat megadásához a regisztráció frissítéséhez.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Event: (PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)
@@ -3327,7 +3138,7 @@ Transaction: '1'
             <varlistentry id="ConfigReference_Setting_Package::EventModulePost_9100-TriggerWebserverReload">
                 <term>Package::EventModulePost###9100-TriggerWebserverReload</term>
                 <listitem>
-                    <para>Package event module to trigger a production web server reload, if allowed by the configuration.</para>
+                    <para>Csomag esemény modul a produktív webkiszolgáló újratöltésének aktiválásához, ha a beállítások lehetővé teszik.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Event: (PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)
@@ -16233,7 +16044,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentFAQSearch
             <varlistentry id="ConfigReference_Setting_LoginURL">
                 <term>LoginURL</term>
                 <listitem>
-                    <para>Defines an alternate login URL for the agent interface.</para>
+                    <para>Egy alternatív bejelentkezési URL-t határoz meg az ügyintézői felülethez.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- http://host.example.com/login.html
@@ -16244,7 +16055,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentFAQSearch
             <varlistentry id="ConfigReference_Setting_LogoutURL">
                 <term>LogoutURL</term>
                 <listitem>
-                    <para>Defines an alternate logout URL for the agent interface.</para>
+                    <para>Egy alternatív kijelentkezési URL-t határoz meg az ügyintézői felülethez.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- http://host.example.com/thanks-for-using-otrs.html
@@ -23184,7 +22995,7 @@ Name: Ticket Notifications
   Key: NotificationSettings
   Name: Notification Settings
   Prio: '1001'
-- Description: Change the systems appearance and more.
+- Description: Change the system appearance and more.
   Icon: fa-cog
   Key: Miscellaneous
   Name: Miscellaneous
@@ -23388,7 +23199,7 @@ Prio: '1000'
             <varlistentry id="ConfigReference_Setting_PreferencesGroups_DocumentSearchPageShown">
                 <term>PreferencesGroups###DocumentSearchPageShown</term>
                 <listitem>
-                    <para>Parameters for the pages (in which the document are shown) of the document search.</para>
+                    <para>Paraméterek a dokumentumkeresés oldalaihoz (amelyben a dokumentum megjelenik).</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Active: '0'
@@ -30707,6 +30518,7 @@ hu: Hungarian
 id: Indonesian
 it: Italian
 ja: Japanese
+ko: Korean
 lt: Lithuanian
 lv: Latvian
 ms: Malay
@@ -30765,6 +30577,7 @@ hu: Magyar
 id: Bahasa Indonesia
 it: Italiano
 ja: 日本語
+ko: 한국어
 lt: Lietuvių kalba
 lv: Latvijas
 ms: Melayu
@@ -31634,7 +31447,7 @@ URL3:
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
                 <term>ExternalFrontend::Languages</term>
                 <listitem>
-                    <para>List of languages which will be avaible in external frontend.</para>
+                    <para>Nyelvek listája, amelyek elérhetők lesznek az külső előtétprogramon.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 - en
@@ -32119,6 +31932,51 @@ Prio: '2500'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::DefaultLanguages">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::DefaultLanguages</term>
+                <listitem>
+                    <para>The default languages for the related knowledge base articles.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::Enabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::Enabled</term>
+                <listitem>
+                    <para>Enable the related knowledge base article feature for the external interface.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::QueuesEnabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::QueuesEnabled</term>
+                <listitem>
+                    <para>List of queue names for which the related knowledge base article feature is enabled.</para>
+                    <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[---
+- Raw
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::ShowLimit">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::ShowLimit</term>
+                <listitem>
+                    <para>Output limit for the related knowledge base articles.</para>
+                    <para>Ez a beállítás nem kapcsolható ki.</para>
+                    <para>Alapértelmezett érték:
+                        <programlisting><![CDATA[--- '5'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_NextScreenAfterNewTicket">
                 <term>ExternalFrontend::TicketCreate###NextScreenAfterNewTicket</term>
                 <listitem>
@@ -32466,7 +32324,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_State">
                 <term>Ticket::Frontend::ExternalTicketOverview###State</term>
                 <listitem>
-                    <para>Show the current state in the external interface.</para>
+                    <para>Az aktuális állapot megjelenítése a külső felületen.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -33032,7 +32890,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::DefaultRedirect">
                 <term>WebApp::DefaultRedirect</term>
                 <listitem>
-                    <para>Defines the default redirect. Use '/external' for the external or '/otrs/index.pl' for the agent interface, or an absolute URL if you want to redirect to an external site.</para>
+                    <para>Felüldefiniálja az alapértelmezett átirányítást. Használja az „/external” értéket a külső felületnél, az „/otrs/index.pl” értéket az ügyintézői felületnél vagy egy abszolút URL-t, ha egy külső oldalra szeretne átirányítani.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- /external
@@ -33054,7 +32912,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::Server::TriggerAutomaticReloads">
                 <term>WebApp::Server::TriggerAutomaticReloads</term>
                 <listitem>
-                    <para>If active, certain operations like package changes and configuration deployments will trigger a hot reload of the production web server. This can be turned off if you plan to restart the web server manually or if another mechanism is used to perform the needed restarts.</para>
+                    <para>Ha aktív, akkor bizonyos műveletek, mint például a csomagváltoztatások és a beállítási üzembe állítások aktiválni fogják a produktív webkiszolgáló gyors újratöltését. Ez kikapcsolható, ha kézileg tervezi a webkiszolgáló újraindítását, vagy ha más mechanizmust használ a szükséges újraindítások végrehajtásához.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -33200,7 +33058,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_CloseTimeout">
                 <term>WebApp::APIClient###CloseTimeout</term>
                 <listitem>
-                    <para>Defines timeout in milliseconds for the closing of a WebSocket connection in the frontend applications. Value of '0' will disable the timeout.</para>
+                    <para>Meghatározza az időkorlátot ezredmásodpercben egy WebSocket kapcsolat lezárásánál az előtétprogram alkalmazásaiban. A „0” érték letiltja az időkorlátot.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -33211,7 +33069,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_MaxReconnectionDelay">
                 <term>WebApp::APIClient###MaxReconnectionDelay</term>
                 <listitem>
-                    <para>Defines maximum delay in milliseconds when trying to re-establish a WebSocket connection in the frontend applications.</para>
+                    <para>Meghatározza a legnagyobb késleltetést ezredmásodpercben egy WebSocket kapcsolat újralétesítési kísérletéhez az előtétprogram alkalmazásaiban.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '10000'
@@ -33222,7 +33080,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_OpenTimeout">
                 <term>WebApp::APIClient###OpenTimeout</term>
                 <listitem>
-                    <para>Defines timeout in milliseconds for the opening of a WebSocket connection in the frontend applications. Value of '0' will disable the timeout.</para>
+                    <para>Meghatározza az időkorlátot ezredmásodpercben egy WebSocket kapcsolat megnyitásánál az előtétprogram alkalmazásaiban. A „0” érték letiltja az időkorlátot.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -33233,7 +33091,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_PrimaryProtocol">
                 <term>WebApp::APIClient###PrimaryProtocol</term>
                 <listitem>
-                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (i.e. file uploads).</para>
+                    <para>Meghatározza az elsődleges API kliens kommunikációs protokollt az előtétprogram alkalmazásaiban. Ne feledje, hogy a WebSocket lehetőség automatikusan vissza fog váltani XHR-re bizonyos helyzetekben (például fájlfeltöltéseknél).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ws
@@ -33244,7 +33102,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_ReconnectionDelayIncrement">
                 <term>WebApp::APIClient###ReconnectionDelayIncrement</term>
                 <listitem>
-                    <para>Defines increment delay in milliseconds with every reconnection attempt of a WebSocket connection in the frontend applications.</para>
+                    <para>Meghatározza a késleltetés növelését ezredmásodpercben egy WebSocket kapcsolat minden egyes újrakapcsolódási kísérletnél az előtétprogram alkalmazásaiban.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1000'
@@ -33255,7 +33113,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_ResponseTimeout">
                 <term>WebApp::APIClient###ResponseTimeout</term>
                 <listitem>
-                    <para>Defines timeout in milliseconds for the responses of WebSocket requests in the frontend applications. Value of '0' will disable the timeout.</para>
+                    <para>Meghatározza az időkorlátot ezredmásodpercben a WebSocket kérések válaszainál az előtétprogram alkalmazásaiban. A „0” érték letiltja az időkorlátot.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '30000'

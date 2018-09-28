@@ -872,7 +872,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::CustomerToAgent">
                 <term>ChatEngine::ChatDirection::CustomerToAgent</term>
                 <listitem>
-                    <para>Ermöglicht es, aus dem Kunden-Interface heraus einen Chat mit einem Agenten zu starten.</para>
+                    <para>Makes it possible to start a chat with an agent from the external interface as authenticated user.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
@@ -883,7 +883,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::PublicToAgent">
                 <term>ChatEngine::ChatDirection::PublicToAgent</term>
                 <listitem>
-                    <para>Ermöglicht es, aus dem Public-Interface heraus einen Chat mit einem Agenten zu starten.</para>
+                    <para>Makes it possible to start a chat with an agent from the external interface as unauthenticated user.</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
@@ -912,66 +912,10 @@ version: '3'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferences">
-                <term>ChatEngine::CustomerFrontend::AgentPreferences</term>
-                <listitem>
-                    <para>Definiert eine Liste von Gruppenschlüsseln für die Benutzereinstellungen die im der Kunden-Oberfläche sichtbar sind (funktioniert nur wenn DefaultAgentName deaktiviert ist).
-Beispiel: wenn sie PreferencesGroups###Language anzeigen wollen, fügen sie "Language" hinzu.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferencesText">
-                <term>ChatEngine::CustomerFrontend::AgentPreferencesText</term>
-                <listitem>
-                    <para>Definiert einen Text für die Benutzereinstellungen im der Kunden-Oberfläche (funktioniert nur wenn  DefaultAgentName deaktiviert ist).</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- Agent Information
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AvailabilityCheck">
-                <term>ChatEngine::CustomerFrontend::AvailabilityCheck</term>
-                <listitem>
-                    <para>Dem Kunden nur die Auswahl von Chat-Kanälen mit verfügbaren Agenten erlauben.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerInterface::AllowChatChannels">
-                <term>ChatEngine::CustomerInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>Definiert ob Kundenbenutzer den Chat-Kanal auswählen können. Wenn nicht, dann wird der Chat im Standard Chat-Kanal erstellt.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerThreshold">
-                <term>ChatEngine::CustomerThreshold</term>
-                <listitem>
-                    <para>Definiert die Zeitspanne (in Minuten) bis ein Kunde die "Keine Antwort" Meldung angezeigt bekommt</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '5'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ChatEngine::DefaultAgentName">
                 <term>ChatEngine::DefaultAgentName</term>
                 <listitem>
-                    <para>Standard-Agentenname für Kunden-Interface und Public-Interface. Falls aktiviert, wird der echte Name des Agenten für Kunden im Chat nicht sichtbar sein.</para>
+                    <para>Default agent name in the external interface. If enabled, the real name of the agent will not be visible to users while using the chat.</para>
                     <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- Support Agent
@@ -997,6 +941,39 @@ Beispiel: wenn sie PreferencesGroups###Language anzeigen wollen, fügen sie "Lan
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- Default channel
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AllowChatChannels">
+                <term>ChatEngine::ExternalFrontend::AllowChatChannels</term>
+                <listitem>
+                    <para>Defines if users in the external interface are able to select Chat Channel. If not, chat will be created in default Chat Channel.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AvailabilityCheck">
+                <term>ChatEngine::ExternalFrontend::AvailabilityCheck</term>
+                <listitem>
+                    <para>Allow users to select only channels that have available agent(s) in the external interface.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::NoAnswerThreshold">
+                <term>ChatEngine::ExternalFrontend::NoAnswerThreshold</term>
+                <listitem>
+                    <para>Defines the period of time (in minutes) before no answer message is displayed to the users in the external interface.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1030,133 +1007,6 @@ Beispiel: wenn sie PreferencesGroups###Language anzeigen wollen, fügen sie "Lan
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- users
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AllowChatChannels">
-                <term>ChatEngine::PublicInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>Definiert ob öffentliche Benutzer den Chat-Kanal auswählen können. Wenn nicht, dann wird der Chat im Standard Chat-Kanal erstellt.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AvailabilityCheck">
-                <term>ChatEngine::PublicInterface::AvailabilityCheck</term>
-                <listitem>
-                    <para>Dem öffentlichen Benutzer nur die Auswahl von Chat-Kanälen mit verfügbaren Agenten erlauben.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatClosed">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatClosed</term>
-                <listitem>
-                    <para>Standardtext für das Kunden-Interface.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically. You can
-  download this chat.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>Standardtext für das Kunden-Interface.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- This chat is completed. You can now close the chat window.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting</term>
-                <listitem>
-                    <para>"Keine Agenten verfügbar" Nachricht.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To add an article to the existing
-  ticket, please click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket</term>
-                <listitem>
-                    <para>"Keine Agenten verfügbar" Nachricht.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To create a new ticket, please
-  click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::CustomerFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>Standardtext für das Kunden-Interface.</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::PublicFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>Standardtext für das Public-Interface</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- This chat is completed. You can start a new chat using the button on top of this
-  page.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NoAgentsAvailable">
-                <term>ChatEngine::Texts::PublicFrontend::NoAgentsAvailable</term>
-                <listitem>
-                    <para>Standardtext für das Public-Interface</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- There are no chat agents available at present. Please try again later.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::PublicFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>Standardtext für das Public-Interface</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicInterface::ChatClosed">
-                <term>ChatEngine::Texts::PublicInterface::ChatClosed</term>
-                <listitem>
-                    <para>Standardtext für das Public-Interface</para>
-                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically.
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1225,46 +1075,6 @@ Beispiel: wenn sie PreferencesGroups###Language anzeigen wollen, fügen sie "Lan
                 <term>Ticket::Agent::UnavailableForExternalChatsOnLogin</term>
                 <listitem>
                     <para>Wenn der Schalter aktiviert ist wird die Chat-Verfügbarkeit des Agenten beim Einloggen überprüft und angepasst. Falls die letzte Einstellung "Verfügbar für externe Chats" war, wird diese automatisch auf "Verfügbar für interne Chats" limitiert.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_AllowChatOnlyIfAgentsAvailable">
-                <term>Ticket::Customer::StartChatFromTicket###AllowChatOnlyIfAgentsAvailable</term>
-                <listitem>
-                    <para>If enabled, starting a chat from customer ticket zoom view will only be possible, if there are available agents in the linked chat channel.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Allowed">
-                <term>Ticket::Customer::StartChatFromTicket###Allowed</term>
-                <listitem>
-                    <para>Definiert ob eine Chat-Anfrage aus der Kunden Ticket Zoom Ansicht gesendet werden kann.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Permissions">
-                <term>Ticket::Customer::StartChatFromTicket###Permissions</term>
-                <listitem>
-                    <para>If enabled, only the ticket customer can start a chat from a ticket zoom view.</para>
-                    <para>Standardwert:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatWOTicket">
-                <term>Ticket::Customer::StartChatWOTicket</term>
-                <listitem>
-                    <para>If enabled, customers can start a chat with an agent without a ticket.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -23185,7 +22995,7 @@ Name: Ticket Notifications
   Key: NotificationSettings
   Name: Notification Settings
   Prio: '1001'
-- Description: Change the systems appearance and more.
+- Description: Change the system appearance and more.
   Icon: fa-cog
   Key: Miscellaneous
   Name: Miscellaneous
@@ -30708,6 +30518,7 @@ hu: Hungarian
 id: Indonesian
 it: Italian
 ja: Japanese
+ko: Korean
 lt: Lithuanian
 lv: Latvian
 ms: Malay
@@ -30766,6 +30577,7 @@ hu: Magyar
 id: Bahasa Indonesia
 it: Italiano
 ja: 日本語
+ko: 한국어
 lt: Lietuvių kalba
 lv: Latvijas
 ms: Melayu
@@ -31635,7 +31447,7 @@ URL3:
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
                 <term>ExternalFrontend::Languages</term>
                 <listitem>
-                    <para>List of languages which will be avaible in external frontend.</para>
+                    <para>List of languages which will be available in external frontend.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[---
 - en
@@ -32116,6 +31928,51 @@ Prio: '2500'
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- WebRequestCustomer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::DefaultLanguages">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::DefaultLanguages</term>
+                <listitem>
+                    <para>The default languages for the related knowledge base articles.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::Enabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::Enabled</term>
+                <listitem>
+                    <para>Enable the related knowledge base article feature for the external interface.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::QueuesEnabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::QueuesEnabled</term>
+                <listitem>
+                    <para>List of queue names for which the related knowledge base article feature is enabled.</para>
+                    <para>Diese Einstellung ist standardmäßig nicht aktiv.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[---
+- Raw
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::ShowLimit">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::ShowLimit</term>
+                <listitem>
+                    <para>Output limit for the related knowledge base articles.</para>
+                    <para>Diese Einstellung kann nicht deaktiviert werden.</para>
+                    <para>Standardwert:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33234,7 +33091,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_PrimaryProtocol">
                 <term>WebApp::APIClient###PrimaryProtocol</term>
                 <listitem>
-                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (i.e. file uploads).</para>
+                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (e.g. file uploads).</para>
                     <para>Diese Einstellung kann nicht deaktiviert werden.</para>
                     <para>Standardwert:
                         <programlisting><![CDATA[--- ws

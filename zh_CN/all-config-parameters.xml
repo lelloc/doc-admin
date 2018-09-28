@@ -872,7 +872,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::CustomerToAgent">
                 <term>ChatEngine::ChatDirection::CustomerToAgent</term>
                 <listitem>
-                    <para>从客户界面可以发起与一个服务人员的聊天。</para>
+                    <para>Makes it possible to start a chat with an agent from the external interface as authenticated user.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -883,7 +883,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::PublicToAgent">
                 <term>ChatEngine::ChatDirection::PublicToAgent</term>
                 <listitem>
-                    <para>从公共用户界面可以发起与一个服务人员的聊天。</para>
+                    <para>Makes it possible to start a chat with an agent from the external interface as unauthenticated user.</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -912,65 +912,10 @@ version: '3'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferences">
-                <term>ChatEngine::CustomerFrontend::AgentPreferences</term>
-                <listitem>
-                    <para>定义一个客户界面可见的服务人员首选项组键的列表（仅当禁用DefaultAgentName才有效）。例如：你要显示PreferencesGroups###Language，添加语言。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferencesText">
-                <term>ChatEngine::CustomerFrontend::AgentPreferencesText</term>
-                <listitem>
-                    <para>定义客户界面服务人员首选项的一段文本（仅当禁用DefaultAgentName才有效）。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- Agent Information
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AvailabilityCheck">
-                <term>ChatEngine::CustomerFrontend::AvailabilityCheck</term>
-                <listitem>
-                    <para>允许客户只选择有可用服务人员的频道。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerInterface::AllowChatChannels">
-                <term>ChatEngine::CustomerInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>定义客户用户能否选择聊天频道。如果不能，就在默认聊天频道创建聊天。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerThreshold">
-                <term>ChatEngine::CustomerThreshold</term>
-                <listitem>
-                    <para>定义显示“无应答”消息给客户的时间段（分钟）。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '5'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ChatEngine::DefaultAgentName">
                 <term>ChatEngine::DefaultAgentName</term>
                 <listitem>
-                    <para>客户和公共用户界面看到的默认服务人员姓名。如果启用了，聊天时客户/公共用户无法知晓服务人员的真实姓名。</para>
+                    <para>Default agent name in the external interface. If enabled, the real name of the agent will not be visible to users while using the chat.</para>
                     <para>这个设置默认没有激活。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- Support Agent
@@ -996,6 +941,39 @@ version: '3'
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- Default channel
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AllowChatChannels">
+                <term>ChatEngine::ExternalFrontend::AllowChatChannels</term>
+                <listitem>
+                    <para>Defines if users in the external interface are able to select Chat Channel. If not, chat will be created in default Chat Channel.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AvailabilityCheck">
+                <term>ChatEngine::ExternalFrontend::AvailabilityCheck</term>
+                <listitem>
+                    <para>Allow users to select only channels that have available agent(s) in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::NoAnswerThreshold">
+                <term>ChatEngine::ExternalFrontend::NoAnswerThreshold</term>
+                <listitem>
+                    <para>Defines the period of time (in minutes) before no answer message is displayed to the users in the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1029,133 +1007,6 @@ version: '3'
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- users
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AllowChatChannels">
-                <term>ChatEngine::PublicInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>定义公共用户能否选择聊天频道。如果不能，就在默认聊天频道创建聊天。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AvailabilityCheck">
-                <term>ChatEngine::PublicInterface::AvailabilityCheck</term>
-                <listitem>
-                    <para>允许公共用户只选择有可用服务人员的频道。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatClosed">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatClosed</term>
-                <listitem>
-                    <para>客户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically. You can
-  download this chat.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>客户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- This chat is completed. You can now close the chat window.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting</term>
-                <listitem>
-                    <para>没有服务人员可用的消息。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To add an article to the existing
-  ticket, please click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket</term>
-                <listitem>
-                    <para>没有服务人员可用的消息。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To create a new ticket, please
-  click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::CustomerFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>客户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::PublicFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>公共用户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- This chat is completed. You can start a new chat using the button on top of this
-  page.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NoAgentsAvailable">
-                <term>ChatEngine::Texts::PublicFrontend::NoAgentsAvailable</term>
-                <listitem>
-                    <para>公共用户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- There are no chat agents available at present. Please try again later.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::PublicFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>公共用户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicInterface::ChatClosed">
-                <term>ChatEngine::Texts::PublicInterface::ChatClosed</term>
-                <listitem>
-                    <para>公共用户界面的默认文本。</para>
-                    <para>不能使这个设置失效。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically.
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1224,46 +1075,6 @@ version: '3'
                 <term>Ticket::Agent::UnavailableForExternalChatsOnLogin</term>
                 <listitem>
                     <para>如果启用本选项，将在登录时检查服务人员的可用性。如果用户可用外部聊天，就仅减少内部聊天的可用性。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_AllowChatOnlyIfAgentsAvailable">
-                <term>Ticket::Customer::StartChatFromTicket###AllowChatOnlyIfAgentsAvailable</term>
-                <listitem>
-                    <para>如果启用，在客户工单详情视图仅当可用的服务人员在链接的聊天频道时才能发起聊天。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Allowed">
-                <term>Ticket::Customer::StartChatFromTicket###Allowed</term>
-                <listitem>
-                    <para>设置客户工单详情视图能否发出聊天请求。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Permissions">
-                <term>Ticket::Customer::StartChatFromTicket###Permissions</term>
-                <listitem>
-                    <para>如果启用，仅工单详情视图中的工单客户可以发起聊天。。</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatWOTicket">
-                <term>Ticket::Customer::StartChatWOTicket</term>
-                <listitem>
-                    <para>如果启用，客户无需工单就能发起与服务人员的聊天。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -1914,7 +1725,7 @@ User: some_user
             <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::FAQ::Enabled">
                 <term>DocumentSearch::Drivers::FAQ::Enabled</term>
                 <listitem>
-                    <para>It controls availability for FAQ search driver.</para>
+                    <para>它控制FAQ知识库搜索驱动的可用性。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -1925,7 +1736,7 @@ User: some_user
             <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::ServiceCatalogueContent::Enabled">
                 <term>DocumentSearch::Drivers::ServiceCatalogueContent::Enabled</term>
                 <listitem>
-                    <para>It controls availability for Customer Service Catalogue Content search driver.</para>
+                    <para>它控制客户服务目录内容搜索驱动的可用性。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -1936,7 +1747,7 @@ User: some_user
             <varlistentry id="ConfigReference_Setting_DocumentSearch::Drivers::Ticket::Enabled">
                 <term>DocumentSearch::Drivers::Ticket::Enabled</term>
                 <listitem>
-                    <para>It controls availability for Ticket search driver.</para>
+                    <para>它控制工单搜索驱动的可用性。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- '1'
@@ -23184,7 +22995,7 @@ Name: Ticket Notifications
   Key: NotificationSettings
   Name: Notification Settings
   Prio: '1001'
-- Description: Change the systems appearance and more.
+- Description: Change the system appearance and more.
   Icon: fa-cog
   Key: Miscellaneous
   Name: Miscellaneous
@@ -30707,6 +30518,7 @@ hu: Hungarian
 id: Indonesian
 it: Italian
 ja: Japanese
+ko: Korean
 lt: Lithuanian
 lv: Latvian
 ms: Malay
@@ -30765,6 +30577,7 @@ hu: Magyar
 id: Bahasa Indonesia
 it: Italiano
 ja: 日本語
+ko: 한국어
 lt: Lietuvių kalba
 lv: Latvijas
 ms: Melayu
@@ -31634,7 +31447,7 @@ URL3:
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
                 <term>ExternalFrontend::Languages</term>
                 <listitem>
-                    <para>List of languages which will be avaible in external frontend.</para>
+                    <para>List of languages which will be available in external frontend.</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 - en
@@ -32115,6 +31928,51 @@ Prio: '2500'
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- WebRequestCustomer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::DefaultLanguages">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::DefaultLanguages</term>
+                <listitem>
+                    <para>The default languages for the related knowledge base articles.</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::Enabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::Enabled</term>
+                <listitem>
+                    <para>Enable the related knowledge base article feature for the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::QueuesEnabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::QueuesEnabled</term>
+                <listitem>
+                    <para>List of queue names for which the related knowledge base article feature is enabled.</para>
+                    <para>这个设置默认没有激活。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+- Raw
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::ShowLimit">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::ShowLimit</term>
+                <listitem>
+                    <para>Output limit for the related knowledge base articles.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33233,7 +33091,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_PrimaryProtocol">
                 <term>WebApp::APIClient###PrimaryProtocol</term>
                 <listitem>
-                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (i.e. file uploads).</para>
+                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (e.g. file uploads).</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- ws

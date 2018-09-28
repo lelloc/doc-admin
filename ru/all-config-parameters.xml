@@ -872,7 +872,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::CustomerToAgent">
                 <term>ChatEngine::ChatDirection::CustomerToAgent</term>
                 <listitem>
-                    <para>Дает возможность начать обсуждение с агентом из интерфейса клиента.</para>
+                    <para>Makes it possible to start a chat with an agent from the external interface as authenticated user.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -883,7 +883,7 @@ version: '3'
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatDirection::PublicToAgent">
                 <term>ChatEngine::ChatDirection::PublicToAgent</term>
                 <listitem>
-                    <para>Дает возможность начать обсуждение с агентом из общедоступного интерфейса.</para>
+                    <para>Makes it possible to start a chat with an agent from the external interface as unauthenticated user.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -912,65 +912,10 @@ version: '3'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferences">
-                <term>ChatEngine::CustomerFrontend::AgentPreferences</term>
-                <listitem>
-                    <para>Defines a list of agent preferences group keys that will be visible in Customer interface (works only if DefaultAgentName is disabled). Example: If you want to display PreferencesGroups###Language, add Language.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- []
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AgentPreferencesText">
-                <term>ChatEngine::CustomerFrontend::AgentPreferencesText</term>
-                <listitem>
-                    <para>Defines a text for Agent Preferences in the Customer interface (works only if DefaultAgentName is disabled).</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- Agent Information
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerFrontend::AvailabilityCheck">
-                <term>ChatEngine::CustomerFrontend::AvailabilityCheck</term>
-                <listitem>
-                    <para>Allow customer to select only channels that have available agent(s).</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerInterface::AllowChatChannels">
-                <term>ChatEngine::CustomerInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>Defines if customer users are able to select Chat Channel. If not, chat will be created in default Chat Channel.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::CustomerThreshold">
-                <term>ChatEngine::CustomerThreshold</term>
-                <listitem>
-                    <para>Defines the period of time (in minutes) before No Answer message is displayed to the customer.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '5'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ChatEngine::DefaultAgentName">
                 <term>ChatEngine::DefaultAgentName</term>
                 <listitem>
-                    <para>Имя агента по умолчанию для клиентского и общедоступного интерфейсов. Если параметр включен, реальное имя агента не будет отображаться клиентам или анонимным пользователям при обсуждении.</para>
+                    <para>Default agent name in the external interface. If enabled, the real name of the agent will not be visible to users while using the chat.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Support Agent
@@ -996,6 +941,39 @@ version: '3'
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- Default channel
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AllowChatChannels">
+                <term>ChatEngine::ExternalFrontend::AllowChatChannels</term>
+                <listitem>
+                    <para>Defines if users in the external interface are able to select Chat Channel. If not, chat will be created in default Chat Channel.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::AvailabilityCheck">
+                <term>ChatEngine::ExternalFrontend::AvailabilityCheck</term>
+                <listitem>
+                    <para>Allow users to select only channels that have available agent(s) in the external interface.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::NoAnswerThreshold">
+                <term>ChatEngine::ExternalFrontend::NoAnswerThreshold</term>
+                <listitem>
+                    <para>Defines the period of time (in minutes) before no answer message is displayed to the users in the external interface.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1029,133 +1007,6 @@ version: '3'
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- users
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AllowChatChannels">
-                <term>ChatEngine::PublicInterface::AllowChatChannels</term>
-                <listitem>
-                    <para>Defines if public users are able to select Chat Channel. If not, chat will be created in default Chat Channel.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::PublicInterface::AvailabilityCheck">
-                <term>ChatEngine::PublicInterface::AvailabilityCheck</term>
-                <listitem>
-                    <para>Allow public users to select only channels that have available agent(s).</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatClosed">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatClosed</term>
-                <listitem>
-                    <para>Текст по умолчанию для интерфейса клиента.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically. You can
-  download this chat.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::CustomerFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>Текст по умолчанию для интерфейса клиента.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- This chat is completed. You can now close the chat window.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::AddToExisiting</term>
-                <listitem>
-                    <para>No agents available message.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To add an article to the existing
-  ticket, please click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket">
-                <term>ChatEngine::Texts::CustomerFrontend::NoAgentsAvailable::NewTicket</term>
-                <listitem>
-                    <para>No agents available message.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- 'There are no chat agents available at present. To create a new ticket, please
-  click here:'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::CustomerFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::CustomerFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>Текст по умолчанию для интерфейса клиента.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::ChatCompleted">
-                <term>ChatEngine::Texts::PublicFrontend::ChatCompleted</term>
-                <listitem>
-                    <para>Текст по умолчанию для публичного/общедоступного интерфейса.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- This chat is completed. You can start a new chat using the button on top of this
-  page.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NoAgentsAvailable">
-                <term>ChatEngine::Texts::PublicFrontend::NoAgentsAvailable</term>
-                <listitem>
-                    <para>Текст по умолчанию для публичного/общедоступного интерфейса.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- There are no chat agents available at present. Please try again later.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicFrontend::NotYetAccepted">
-                <term>ChatEngine::Texts::PublicFrontend::NotYetAccepted</term>
-                <listitem>
-                    <para>Текст по умолчанию для публичного/общедоступного интерфейса.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- Please bear with us until one of our agents is able to handle your chat request.
-  Thank you for your patience.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ChatEngine::Texts::PublicInterface::ChatClosed">
-                <term>ChatEngine::Texts::PublicInterface::ChatClosed</term>
-                <listitem>
-                    <para>Текст по умолчанию для публичного/общедоступного интерфейса.</para>
-                    <para>Этот параметр не может быть отключен.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- This chat has ended. Please leave it or it will be closed automatically.
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -1224,46 +1075,6 @@ version: '3'
                 <term>Ticket::Agent::UnavailableForExternalChatsOnLogin</term>
                 <listitem>
                     <para>If enabled it will check agents availability on login. If user is available for external chats, it will reduce availability to internal chats only.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_AllowChatOnlyIfAgentsAvailable">
-                <term>Ticket::Customer::StartChatFromTicket###AllowChatOnlyIfAgentsAvailable</term>
-                <listitem>
-                    <para>If enabled, starting a chat from customer ticket zoom view will only be possible, if there are available agents in the linked chat channel.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Allowed">
-                <term>Ticket::Customer::StartChatFromTicket###Allowed</term>
-                <listitem>
-                    <para>Sets if a chat request can be sent out from customer ticket zoom view.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- '1'
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatFromTicket_Permissions">
-                <term>Ticket::Customer::StartChatFromTicket###Permissions</term>
-                <listitem>
-                    <para>If enabled, only the ticket customer can start a chat from a ticket zoom view.</para>
-                    <para>Значение по умолчанию:
-                        <programlisting><![CDATA[--- 0
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Customer::StartChatWOTicket">
-                <term>Ticket::Customer::StartChatWOTicket</term>
-                <listitem>
-                    <para>If enabled, customers can start a chat with an agent without a ticket.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
 ]]></programlisting>
@@ -23184,7 +22995,7 @@ Name: Ticket Notifications
   Key: NotificationSettings
   Name: Notification Settings
   Prio: '1001'
-- Description: Change the systems appearance and more.
+- Description: Change the system appearance and more.
   Icon: fa-cog
   Key: Miscellaneous
   Name: Miscellaneous
@@ -30707,6 +30518,7 @@ hu: Hungarian
 id: Indonesian
 it: Italian
 ja: Japanese
+ko: Korean
 lt: Lithuanian
 lv: Latvian
 ms: Malay
@@ -30765,6 +30577,7 @@ hu: Magyar
 id: Bahasa Indonesia
 it: Italiano
 ja: 日本語
+ko: 한국어
 lt: Lietuvių kalba
 lv: Latvijas
 ms: Melayu
@@ -31291,7 +31104,7 @@ VisibleName: Slim
             <varlistentry id="ConfigReference_Setting_Loader::Agent::Skin_002-high-contrast">
                 <term>Loader::Agent::Skin###002-high-contrast</term>
                 <listitem>
-                    <para>High contrast skin for visually impaired users.</para>
+                    <para>Высококонтрастная тема оформления для слабовидящих пользователей</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Description: High contrast skin for visually impaired users.
@@ -31634,7 +31447,7 @@ URL3:
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
                 <term>ExternalFrontend::Languages</term>
                 <listitem>
-                    <para>List of languages which will be avaible in external frontend.</para>
+                    <para>List of languages which will be available in external frontend.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 - en
@@ -32115,6 +31928,51 @@ Prio: '2500'
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- WebRequestCustomer
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::DefaultLanguages">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::DefaultLanguages</term>
+                <listitem>
+                    <para>The default languages for the related knowledge base articles.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[---
+- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::Enabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::Enabled</term>
+                <listitem>
+                    <para>Enable the related knowledge base article feature for the external interface.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::QueuesEnabled">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::QueuesEnabled</term>
+                <listitem>
+                    <para>List of queue names for which the related knowledge base article feature is enabled.</para>
+                    <para>Этот параметр по-умолчанию не активен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[---
+- Raw
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketCreate_KnowledgeBase::RelatedArticles::ShowLimit">
+                <term>ExternalFrontend::TicketCreate###KnowledgeBase::RelatedArticles::ShowLimit</term>
+                <listitem>
+                    <para>Output limit for the related knowledge base articles.</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- '5'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -33233,7 +33091,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_PrimaryProtocol">
                 <term>WebApp::APIClient###PrimaryProtocol</term>
                 <listitem>
-                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (i.e. file uploads).</para>
+                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (e.g. file uploads).</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- ws
