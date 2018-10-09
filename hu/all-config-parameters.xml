@@ -32940,7 +32940,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::Server::TriggerAutomaticReloads">
                 <term>WebApp::Server::TriggerAutomaticReloads</term>
                 <listitem>
-                    <para>Ha aktív, akkor bizonyos műveletek, mint például a csomagváltoztatások és a beállítási üzembe állítások aktiválni fogják a produktív webkiszolgáló gyors újratöltését. Ez kikapcsolható, ha kézileg tervezi a webkiszolgáló újraindítását, vagy ha más mechanizmust használ a szükséges újraindítások végrehajtásához.</para>
+                    <para>If active, certain operations like package changes and external interface setting changes will trigger a hot reload of the production web server. This can be turned off if you plan to restart the web server manually or if another mechanism is used to perform the needed restarts.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1'
@@ -33086,7 +33086,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_CloseTimeout">
                 <term>WebApp::APIClient###CloseTimeout</term>
                 <listitem>
-                    <para>Meghatározza az időkorlátot ezredmásodpercben egy WebSocket kapcsolat lezárásánál az előtétprogram alkalmazásaiban. A „0” érték letiltja az időkorlátot.</para>
+                    <para>Defines timeout in milliseconds for the closing of a WebSocket connection in the frontend applications. Value of '0' will disable the timeout. Please note that changes to this setting require a restart of the web server (bin/otrs.WebServer.pl --deploy-assets).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -33097,7 +33097,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_MaxReconnectionDelay">
                 <term>WebApp::APIClient###MaxReconnectionDelay</term>
                 <listitem>
-                    <para>Meghatározza a legnagyobb késleltetést ezredmásodpercben egy WebSocket kapcsolat újralétesítési kísérletéhez az előtétprogram alkalmazásaiban.</para>
+                    <para>Defines maximum delay in milliseconds when trying to re-establish a WebSocket connection in the frontend applications. Please note that changes to this setting require a restart of the web server (bin/otrs.WebServer.pl --deploy-assets).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '10000'
@@ -33108,7 +33108,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_OpenTimeout">
                 <term>WebApp::APIClient###OpenTimeout</term>
                 <listitem>
-                    <para>Meghatározza az időkorlátot ezredmásodpercben egy WebSocket kapcsolat megnyitásánál az előtétprogram alkalmazásaiban. A „0” érték letiltja az időkorlátot.</para>
+                    <para>Defines timeout in milliseconds for the opening of a WebSocket connection in the frontend applications. Value of '0' will disable the timeout. Please note that changes to this setting require a restart of the web server (bin/otrs.WebServer.pl --deploy-assets).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -33119,7 +33119,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_PrimaryProtocol">
                 <term>WebApp::APIClient###PrimaryProtocol</term>
                 <listitem>
-                    <para>Meghatározza az elsődleges API kliens kommunikációs protokollt az előtétprogram alkalmazásaiban. Ne feledje, hogy a WebSocket lehetőség automatikusan vissza fog váltani XHR-re bizonyos helyzetekben (például fájlfeltöltéseknél).</para>
+                    <para>Defines primary API client communication protocol in the frontend applications. Please note that WebSocket option will fall back automatically to XHR in certain situations (e.g. file uploads). Please note that changes to this setting require a restart of the web server (bin/otrs.WebServer.pl --deploy-assets).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ws
@@ -33130,7 +33130,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_ReconnectionDelayIncrement">
                 <term>WebApp::APIClient###ReconnectionDelayIncrement</term>
                 <listitem>
-                    <para>Meghatározza a késleltetés növelését ezredmásodpercben egy WebSocket kapcsolat minden egyes újrakapcsolódási kísérletnél az előtétprogram alkalmazásaiban.</para>
+                    <para>Defines increment delay in milliseconds with every reconnection attempt of a WebSocket connection in the frontend applications. Please note that changes to this setting require a restart of the web server (bin/otrs.WebServer.pl --deploy-assets).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '1000'
@@ -33141,7 +33141,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::APIClient_ResponseTimeout">
                 <term>WebApp::APIClient###ResponseTimeout</term>
                 <listitem>
-                    <para>Meghatározza az időkorlátot ezredmásodpercben a WebSocket kérések válaszainál az előtétprogram alkalmazásaiban. A „0” érték letiltja az időkorlátot.</para>
+                    <para>Defines timeout in milliseconds for the responses of WebSocket requests in the frontend applications. Value of '0' will disable the timeout. Please note that changes to this setting require a restart of the web server (bin/otrs.WebServer.pl --deploy-assets).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '30000'
