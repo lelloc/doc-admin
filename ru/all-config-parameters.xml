@@ -32937,10 +32937,21 @@ Protocol: HTTP
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_WebApp::Server::AutomaticReloadFile">
+                <term>WebApp::Server::AutomaticReloadFile</term>
+                <listitem>
+                    <para>Defines the path to a file that should signal the need to reload the web server. It will only work correctly with the default value; change this only if you intend to use this file for other purposes (like triggering a cluster-wide web server reload - in this case you have to handle the actual reloads on your own).</para>
+                    <para>Этот параметр не может быть отключен.</para>
+                    <para>Значение по умолчанию:
+                        <programlisting><![CDATA[--- <OTRS_CONFIG_Home>/var/run/otrs.WebServer.pid.needs-reload
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_WebApp::Server::TriggerAutomaticReloads">
                 <term>WebApp::Server::TriggerAutomaticReloads</term>
                 <listitem>
-                    <para>If active, certain operations like package changes and external interface setting changes will trigger a hot reload of the production web server. This can be turned off if you plan to restart the web server manually or if another mechanism is used to perform the needed restarts.</para>
+                    <para>If active, certain operations like package changes and external interface setting changes will trigger a hot reload of the production web server on the current node. This can be turned off if you plan to restart the web server manually or if another mechanism is used to perform the needed restarts.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
