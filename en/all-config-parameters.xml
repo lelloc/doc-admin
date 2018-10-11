@@ -891,6 +891,17 @@ version: '3'
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ChatIntegration::VideoChatEnabled">
+                <term>ChatEngine::ChatIntegration::VideoChatEnabled</term>
+                <listitem>
+                    <para>Defines if the video and audio calling feature is enabled for integrated chat.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- '1'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ChatEngine::ChatOrder">
                 <term>ChatEngine::ChatOrder</term>
                 <listitem>
@@ -974,6 +985,17 @@ version: '3'
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '5'
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ChatEngine::ExternalFrontend::VideoChatEnabled">
+                <term>ChatEngine::ExternalFrontend::VideoChatEnabled</term>
+                <listitem>
+                    <para>Defines if the video and audio calling feature is enabled for users of the external interface.</para>
+                    <para>This setting can not be deactivated.</para>
+                    <para>Default value:
+                        <programlisting><![CDATA[--- '1'
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -10423,7 +10445,7 @@ TaskName: WebUploadCacheCleanup
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerTaskWorker::MaximumWorkers">
                 <term>Daemon::SchedulerTaskWorker::MaximumWorkers</term>
                 <listitem>
-                    <para>Defines the maximum number of tasks to be executed as the same time.</para>
+                    <para>Defines the maximum number of tasks to be executed as the same time. Note: Options below 5 might result in an slow processing of the tasks and are not recommended.</para>
                     <para>This setting can not be deactivated.</para>
                     <para>Default value:
                         <programlisting><![CDATA[--- '5'
@@ -31026,7 +31048,7 @@ Standard: '1'
                         <programlisting><![CDATA[---
 - Core.Agent.Chat.Toolbar.js
 - Core.VideoChat.js
-- thirdparty/adapter.js-1.4.0/adapter.js
+- thirdparty/adapter.js-6.4.0/adapter.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -32307,8 +32329,8 @@ Type: '0'
     <section id="ConfigReference_Section_Frontend_External_View_TicketOverview">
         <title>Frontend → External → View → TicketOverview</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_ColumnHeader">
-                <term>Ticket::Frontend::ExternalTicketOverview###ColumnHeader</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketOverview_ColumnHeader">
+                <term>ExternalFrontend::TicketOverview###ColumnHeader</term>
                 <listitem>
                     <para>Shows either the last customer article's subject or the ticket title in the external interface.</para>
                     <para>Default value:
@@ -32317,8 +32339,8 @@ Type: '0'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_DynamicField">
-                <term>Ticket::Frontend::ExternalTicketOverview###DynamicField</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketOverview_DynamicField">
+                <term>ExternalFrontend::TicketOverview###DynamicField</term>
                 <listitem>
                     <para>Dynamic fields shown in the ticket overview screen of the external interface.</para>
                     <para>Default value:
@@ -32327,8 +32349,8 @@ Type: '0'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_Owner">
-                <term>Ticket::Frontend::ExternalTicketOverview###Owner</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketOverview_Owner">
+                <term>ExternalFrontend::TicketOverview###Owner</term>
                 <listitem>
                     <para>Show the current owner in the external interface.</para>
                     <para>This setting can not be deactivated.</para>
@@ -32338,8 +32360,8 @@ Type: '0'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_Queue">
-                <term>Ticket::Frontend::ExternalTicketOverview###Queue</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketOverview_Queue">
+                <term>ExternalFrontend::TicketOverview###Queue</term>
                 <listitem>
                     <para>Show the current queue in the external interface.</para>
                     <para>This setting can not be deactivated.</para>
@@ -32349,8 +32371,8 @@ Type: '0'
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry id="ConfigReference_Setting_Ticket::Frontend::ExternalTicketOverview_State">
-                <term>Ticket::Frontend::ExternalTicketOverview###State</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketOverview_State">
+                <term>ExternalFrontend::TicketOverview###State</term>
                 <listitem>
                     <para>Show the current state in the external interface.</para>
                     <para>This setting can not be deactivated.</para>
