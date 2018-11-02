@@ -1008,7 +1008,7 @@ Name: Email
             <varlistentry id="ConfigReference_Setting_PGP">
                 <term>PGP</term>
                 <listitem>
-                    <para>Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.</para>
+                    <para>PGPを有効化します。PGPサポートでメールの署名と暗号化が有効になっている場合は、.gnupgフォルダにアクセスする際の権限問題を回避するため、WebサーバーをOTRSユーザーとして実行することを強くお勧めします。 </para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -1161,7 +1161,7 @@ VALIDSIG: The PGP signature with the keyid is good.
             <varlistentry id="ConfigReference_Setting_SMIME::FetchFromCustomer">
                 <term>SMIME::FetchFromCustomer</term>
                 <listitem>
-                    <para>Enables fetch S/MIME from CustomerUser backend support.</para>
+                    <para>顧客ユーザー情報サポートからS / MIME設定を取得できるようにします。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- 0
@@ -2724,7 +2724,7 @@ Module: Kernel::System::Ticket::Event::ResponsibleAutoSet
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_3100-LockAfterCreate">
                 <term>Ticket::EventModulePost###3100-LockAfterCreate</term>
                 <listitem>
-                    <para>When agent creates a ticket, whether or not the ticket is automatically locked to the agent.</para>
+                    <para>担当者 がチケットを作成すると、自動的に チケット をその 担当者に割り当ててロックするかどうかを設定します。</para>
                     <para>この設定は標準では有効ではありません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
@@ -12030,6 +12030,18 @@ CSS:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPGP_001-Framework">
+                <term>Loader::Module::AdminPGP###001-Framework</term>
+                <listitem>
+                    <para>担当者Webインタフェースのローダーモジュール登録</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.PGP.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPackageManager_001-Framework">
                 <term>Loader::Module::AdminPackageManager###001-Framework</term>
                 <listitem>
@@ -15633,7 +15645,7 @@ Module: Kernel::Output::HTML::NavBar::CustomerCompany
             <varlistentry id="ConfigReference_Setting_Frontend::NavBarModule_7-AgentTicketService">
                 <term>Frontend::NavBarModule###7-AgentTicketService</term>
                 <listitem>
-                    <para>Frontend module registration (disable AgentTicketService link if Ticket Service feature is not used).</para>
+                    <para>フロントエンド・モジュールの登録 (チケット・サービス機能が使われていない場合、AgentTicketServiceリンクは無効)。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 Module: Kernel::Output::HTML::NavBar::AgentTicketService
@@ -16969,7 +16981,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewPreview_DynamicField">
                 <term>Ticket::Frontend::OverviewPreview###DynamicField</term>
                 <listitem>
-                    <para>担当者インターフェイスのチケットプレビュー形式の一覧画面に表示される動的なフィールド</para>
+                    <para>担当者インターフェイスのチケットプレビュー形式画面に表示するダイナミック・フィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -16979,7 +16991,7 @@ system: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::OverviewSmall_DynamicField">
                 <term>Ticket::Frontend::OverviewSmall###DynamicField</term>
                 <listitem>
-                    <para>Dynamic fields shown in the ticket small format overview screen of the agent interface.</para>
+                    <para>担当者インターフェイスのコンパクトなチケット概要画面に表示するダイナミック・フィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -21230,7 +21242,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AutomaticMergeSubject">
                 <term>Ticket::Frontend::AutomaticMergeSubject</term>
                 <listitem>
-                    <para>When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the subject of this note (this subject cannot be changed by the agent).</para>
+                    <para>チケットがマージされると、有効ではなくなったチケットに自動的にメモが追加されます。このメモの件名をここで定義できます(担当者はこの件名を変更できません)。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- Ticket Merged
@@ -21241,7 +21253,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AutomaticMergeText">
                 <term>Ticket::Frontend::AutomaticMergeText</term>
                 <listitem>
-                    <para>When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the body of this note (this text cannot be changed by the agent).</para>
+                    <para>チケットがマージされると、有効ではなくなったチケットに自動的にメモが追加されます。このメモの内容をここで定義できます(担当者はこの本文を変更できません)。</para>
                     <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.
@@ -22948,7 +22960,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPrint_DynamicField">
                 <term>Ticket::Frontend::AgentTicketPrint###DynamicField</term>
                 <listitem>
-                    <para>Dynamic fields shown in the ticket print screen of the agent interface.</para>
+                    <para>担当者インターフェイスのチケット印刷画面に表示するダイナミック・フィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -22974,7 +22986,7 @@ LinkType: ParentChild
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketPriority_DynamicField">
                 <term>Ticket::Frontend::AgentTicketPriority###DynamicField</term>
                 <listitem>
-                    <para>Dynamic fields shown in the ticket priority screen of the agent interface.</para>
+                    <para>担当者インタフェースのチケット優先度画面に表示するダイナミック・フィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -23526,7 +23538,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketResponsible_DynamicField">
                 <term>Ticket::Frontend::AgentTicketResponsible###DynamicField</term>
                 <listitem>
-                    <para>Dynamic fields shown in the ticket responsible screen of the agent interface.</para>
+                    <para>担当者インターフェイスのチケット責任者画面に表示するダイナミック・フィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
@@ -24248,7 +24260,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_DynamicField">
                 <term>Ticket::Frontend::AgentTicketSearch###DynamicField</term>
                 <listitem>
-                    <para>Dynamic fields shown in the ticket search screen of the agent interface.</para>
+                    <para>担当者インタフェースのチケット検索画面に表示するダイナミック・フィールド</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[--- {}
 ]]></programlisting>
