@@ -4757,9 +4757,9 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
 - note
 - owner
 - priority
-- chat_owner
-- chat_participant
 - chat_observer
+- chat_participant
+- chat_owner
 - rw
 ]]></programlisting>
                     </para>
@@ -13890,6 +13890,18 @@ CSS:
 - Core.Agent.Admin.NotificationEvent.css
 JavaScript:
 - Core.Agent.Admin.NotificationEvent.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPGP_001-Framework">
+                <term>Loader::Module::AdminPGP###001-Framework</term>
+                <listitem>
+                    <para>服务人员界面的加载器模块注册。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.PGP.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -28994,7 +29006,7 @@ Type: '1'
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::AgentTicketSearch_GlobalProfileGroup">
                 <term>Ticket::Frontend::AgentTicketSearch###GlobalProfileGroup</term>
                 <listitem>
-                    <para>Defines the groups whose agents can set up global search templates.</para>
+                    <para>定义可以设定全局搜索模板的服务人员群组。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 - admin
@@ -30517,7 +30529,7 @@ Target: ''
             <varlistentry id="ConfigReference_Setting_DefaultTheme">
                 <term>DefaultTheme</term>
                 <listitem>
-                    <para>Defines the default front-end (HTML) theme to be used by the agents. If you like, you can add your own theme. Please refer the administrator manual located at http://otrs.github.io/doc/.</para>
+                    <para>定义服务人员应用的默认前端（HTML）主题。如果需要，您可以自行添加自定义主题。请参考位于链接 http://otrs.github.io/doc/ 的管理员手册。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- Standard
@@ -31497,17 +31509,38 @@ URL3:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::LanguageFallback">
+                <term>ExternalFrontend::LanguageFallback</term>
+                <listitem>
+                    <para>Defines fallback language for the external interface.</para>
+                    <para>不能使这个设置失效。</para>
+                    <para>默认值:
+                        <programlisting><![CDATA[--- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
                 <term>ExternalFrontend::Languages</term>
                 <listitem>
-                    <para>List of languages which will be available in external frontend.</para>
+                    <para>List of languages which will be available in external frontend. Please, make sure that it contains value selected in ExternalFrontend::LanguageFallback.</para>
+                    <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
 - en
+- en_CA
+- en_GB
 - de
 - es
+- es_CO
+- es_MX
+- hu
+- zh_CN
+- zh_TW
+- pt
+- pt_BR
 - fr
-- ru
+- fr_CA
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31672,77 +31705,96 @@ URL3:
     <section id="ConfigReference_Section_Frontend_External_PrivacyNotice">
         <title>Frontend → External → PrivacyNotice</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_de">
-                <term>ExternalFrontend::PrivacyNotice###de</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice">
+                <term>ExternalFrontend::PrivacyNotice</term>
                 <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
+                    <para>定义外部人员界面的隐私通知设置。对于所有用户来讲，在接受隐私条款之前，该通知都将对其可见。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_en">
-                <term>ExternalFrontend::PrivacyNotice###en</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_es">
-                <term>ExternalFrontend::PrivacyNotice###es</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_fr">
-                <term>ExternalFrontend::PrivacyNotice###fr</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_ru">
-                <term>ExternalFrontend::PrivacyNotice###ru</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>默认值:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
+de:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+en:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+en_CA:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+en_GB:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+es:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+es_CO:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+es_MX:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+fr:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+fr_CA:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+hu:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+pt:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+pt_BR:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+zh_CN:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+zh_TW:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -32031,7 +32083,7 @@ Prio: '2500'
             <varlistentry id="ConfigReference_Setting_CustomerPersonalPreference::Groups_0001-Framework">
                 <term>CustomerPersonalPreference::Groups###0001-Framework</term>
                 <listitem>
-                    <para>Customer preferences categories.</para>
+                    <para>客户偏好设置类别。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[---
@@ -32372,7 +32424,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketDetailView_PriorityDefault">
                 <term>ExternalFrontend::TicketDetailView###PriorityDefault</term>
                 <listitem>
-                    <para>Defines the default priority of follow-up customer tickets in the ticket detail view in the external interface.</para>
+                    <para>在外部人员界面中，定义工单详情视图上的跟进客户工单默认优先级。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- 3 normal
@@ -32383,7 +32435,7 @@ Type: '0'
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::TicketDetailView_SenderType">
                 <term>ExternalFrontend::TicketDetailView###SenderType</term>
                 <listitem>
-                    <para>Defines the default sender type for tickets in the ticket detail view of the external interface.</para>
+                    <para>在外部人员界面中，定义工单详情视图上的工单默认发送者类型。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- customer
@@ -33042,7 +33094,7 @@ Protocol: HTTP
             <varlistentry id="ConfigReference_Setting_WebApp::DefaultRedirect">
                 <term>WebApp::DefaultRedirect</term>
                 <listitem>
-                    <para>Defines the default redirect. Use '/external' for the external or '/otrs/index.pl' for the agent interface, or an absolute URL if you want to redirect to an external site.</para>
+                    <para>定义默认的重定向链接。使用“/external/”给外部人员界面，或者“/otrs/index.pl”给服务人员界面，或者一个绝对URL链接，如果您想要重定向去外部网站的话。</para>
                     <para>不能使这个设置失效。</para>
                     <para>默认值:
                         <programlisting><![CDATA[--- /external

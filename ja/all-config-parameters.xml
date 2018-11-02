@@ -4758,9 +4758,9 @@ ftp://ftp.example.com/pub/otrs/misc/packages/: '[Example] ftp://ftp.example.com/
 - note
 - owner
 - priority
-- chat_owner
-- chat_participant
 - chat_observer
+- chat_participant
+- chat_owner
 - rw
 ]]></programlisting>
                     </para>
@@ -13891,6 +13891,18 @@ CSS:
 - Core.Agent.Admin.NotificationEvent.css
 JavaScript:
 - Core.Agent.Admin.NotificationEvent.js
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry id="ConfigReference_Setting_Loader::Module::AdminPGP_001-Framework">
+                <term>Loader::Module::AdminPGP###001-Framework</term>
+                <listitem>
+                    <para>担当者Webインタフェースのローダーモジュール登録</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[---
+JavaScript:
+- Core.Agent.Admin.PGP.js
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31507,17 +31519,38 @@ URL3:
                     </para>
                 </listitem>
             </varlistentry>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::LanguageFallback">
+                <term>ExternalFrontend::LanguageFallback</term>
+                <listitem>
+                    <para>Defines fallback language for the external interface.</para>
+                    <para>この設定は無効化することはできません。</para>
+                    <para>デフォルト値:
+                        <programlisting><![CDATA[--- en
+]]></programlisting>
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry id="ConfigReference_Setting_ExternalFrontend::Languages">
                 <term>ExternalFrontend::Languages</term>
                 <listitem>
-                    <para>List of languages which will be available in external frontend.</para>
+                    <para>List of languages which will be available in external frontend. Please, make sure that it contains value selected in ExternalFrontend::LanguageFallback.</para>
+                    <para>この設定は無効化することはできません。</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
 - en
+- en_CA
+- en_GB
 - de
 - es
+- es_CO
+- es_MX
+- hu
+- zh_CN
+- zh_TW
+- pt
+- pt_BR
 - fr
-- ru
+- fr_CA
 ]]></programlisting>
                     </para>
                 </listitem>
@@ -31682,77 +31715,96 @@ URL3:
     <section id="ConfigReference_Section_Frontend_External_PrivacyNotice">
         <title>Frontend → External → PrivacyNotice</title>
         <variablelist>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_de">
-                <term>ExternalFrontend::PrivacyNotice###de</term>
+            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice">
+                <term>ExternalFrontend::PrivacyNotice</term>
                 <listitem>
                     <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
                     <para>デフォルト値:
                         <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_en">
-                <term>ExternalFrontend::PrivacyNotice###en</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_es">
-                <term>ExternalFrontend::PrivacyNotice###es</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_fr">
-                <term>ExternalFrontend::PrivacyNotice###fr</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
-]]></programlisting>
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry id="ConfigReference_Setting_ExternalFrontend::PrivacyNotice_ru">
-                <term>ExternalFrontend::PrivacyNotice###ru</term>
-                <listitem>
-                    <para>Defines privacy notice configuration for the external interface. The notice will be shown to all users until they accept the privacy policy.</para>
-                    <para>デフォルト値:
-                        <programlisting><![CDATA[---
-ButtonText: OK, got it!
-Link: https://www.example.com/your-cookie-consent
-LinkTarget: _blank
-LinkText: data protection
-Text: This site uses cookies. By clicking ok you accept our %s agreement.
+de:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+en:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+en_CA:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+en_GB:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+es:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+es_CO:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+es_MX:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+fr:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+fr_CA:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+hu:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+pt:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+pt_BR:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+zh_CN:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
+zh_TW:
+  ButtonText: OK, got it!
+  Link: https://www.example.com/your-cookie-consent
+  LinkTarget: _blank
+  LinkText: data protection
+  Text: This site uses cookies. By clicking ok you accept our %s agreement.
 ]]></programlisting>
                     </para>
                 </listitem>
