@@ -208,13 +208,15 @@ otrs> scripts/DBUpdate-to-7.pl
         </warning>
 
         <para>
-            The migration script also checks if ACLs and SysConfig settings are correct. In case of an invalid SysConfig setting,
-            the system first tries to fix it automatically. In case it can't be fixed, it shows a list of possible values
-            for the setting.
+            The migration script also checks if ACLs and SysConfig settings are correct. In case of an invalid SysConfig
+            setting, script will offer you an opportunity to fix it by choosing from a list of possible values. In case
+            the script runs in a non-interactive mode, it will try to automatically fix invalid settings. If this fails,
+            you will be asked to manually update the setting after the migration.
         </para>
         <para>
-            If there are outdated ACLs, the system will not be able to fix them automatically, and they need to be corrected by the administrator.
-            Please see the <link linkend="manual-migration-tasks">last step for manual changes</link> for details.
+            If there are outdated ACLs, the system will not be able to fix them automatically, and they need to be
+            corrected by the administrator. Please see the <link linkend="manual-migration-tasks">last step for manual
+            changes</link> for details.
         </para>
     </section>
 
@@ -290,11 +292,13 @@ otrs> bin/otrs.WebServer.pl
         <title>Step 8: Manual migration tasks and changes (only for major updates from OTRS 6)</title>
 
         <para>
-            Since the old customer interface screens are no longer present, some ACLs need to be corrected manually by the administrator.
-            The migration script already told you if this is the case.
-            Affected ACLs are those that refer to a nonexisting customer interface screen in their <literal>Action</literal> setting.
-            This Frontend <literal>Action</literal> rule needs to be replaced with a corresponding
-            <literal>Endpoint</literal> rule. A table with possible mapping is included below.
+            Since the old customer interface screens are no longer present, some ACLs need to be corrected manually by
+            the administrator. The migration script already informed you if this is the case.
+        </para>
+        <para>
+            Affected ACLs are those that refer to a non-existing customer interface screen in their
+            <literal>Action</literal> setting. This Frontend <literal>Action</literal> rule needs to be replaced with a
+            corresponding <literal>Endpoint</literal> rule. A table with possible mapping is included below.
         </para>
         <para>
             <table id="table-of-acl-action-endpoint-mapping">
