@@ -208,49 +208,13 @@ otrs> scripts/DBUpdate-to-7.pl
         </warning>
 
         <para>
-            Migration script also checks if ACLs and SysConfig settings are correct. In case of SysConfig setting is not
-            correct, system tries to fix it automatically. In case it can't be fixed, it shows a list of possible values
+            The migration script also checks if ACLs and SysConfig settings are correct. In case of an invalid SysConfig setting,
+            the system first tries to fix it automatically. In case it can't be fixed, it shows a list of possible values
             for the setting.
         </para>
         <para>
-            If there are outdated ACLs, system will not be able to fix them automatically. Therefore, it must be done
-            manually after the migration is completed. Since the old customer interface screens are no longer present,
-            it's needed to replace any usage of Frontend <literal>Action</literal> rule with a corresponding
-            <literal>Endpoint</literal> rule. Table with possible mapping is included below.
-        </para>
-        <para>
-            <table id="table-of-acl-action-endpoint-mapping">
-                <title>ACL Frontend <literal>Action</literal> to <literal>Endpoint</literal> Mapping</title>
-                <tgroup cols="2">
-                    <thead>
-                        <row>
-                            <entry><literal>Action</literal></entry>
-                            <entry><literal>Endpoint</literal></entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry><literal>CustomerTicketPrint</literal></entry>
-                            <entry>No replacement (feature dropped)</entry>
-                        </row>
-                        <row>
-                            <entry><literal>CustomerTicketZoom</literal></entry>
-                            <entry><literal>ExternalFrontend::TicketDetailView</literal></entry>
-                        </row>
-                        <row>
-                            <entry><literal>CustomerTicketProcess</literal></entry>
-                            <entry>
-                                <literal>ExternalFrontend::ProcessTicketCreate</literal> or
-                                <literal>ExternalFrontend::ProcessTicketNextStep</literal>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry><literal>CustomerTicketMessage</literal></entry>
-                            <entry><literal>ExternalFrontend::TicketCreate</literal></entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+            If there are outdated ACLs, the system will not be able to fix them automatically, and they need to be corrected by the administrator.
+            Please see the <link linkend="manual-migration-tasks">last step for manual changes</link> for details.
         </para>
     </section>
 
@@ -322,4 +286,50 @@ otrs> bin/otrs.WebServer.pl
         </para>
     </section>
 
+    <section role="NotInToc" id="manual-migration-tasks">
+        <title>Step 8: Manual migration tasks and changes (only for major updates from OTRS 6)</title>
+
+        <para>
+            Since the old customer interface screens are no longer present, some ACLs need to be corrected manually by the administrator.
+            The migration script already told you if this is the case.
+            Affected ACLs are those that refer to a nonexisting customer interface screen in their <literal>Action</literal> setting.
+            This Frontend <literal>Action</literal> rule needs to be replaced with a corresponding
+            <literal>Endpoint</literal> rule. A table with possible mapping is included below.
+        </para>
+        <para>
+            <table id="table-of-acl-action-endpoint-mapping">
+                <title>ACL Frontend <literal>Action</literal> to <literal>Endpoint</literal> Mapping</title>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry><literal>Action</literal></entry>
+                            <entry><literal>Endpoint</literal></entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><literal>CustomerTicketPrint</literal></entry>
+                            <entry>No replacement (feature dropped)</entry>
+                        </row>
+                        <row>
+                            <entry><literal>CustomerTicketZoom</literal></entry>
+                            <entry><literal>ExternalFrontend::TicketDetailView</literal></entry>
+                        </row>
+                        <row>
+                            <entry><literal>CustomerTicketProcess</literal></entry>
+                            <entry>
+                                <literal>ExternalFrontend::ProcessTicketCreate</literal> or
+                                <literal>ExternalFrontend::ProcessTicketNextStep</literal>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><literal>CustomerTicketMessage</literal></entry>
+                            <entry><literal>ExternalFrontend::TicketCreate</literal></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+
+    </section>
 </section>
