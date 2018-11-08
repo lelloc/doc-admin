@@ -53,14 +53,20 @@
 
         <para>
             <screen><![CDATA[
-root> /etc/init.d/cron stop
-root> /etc/init.d/postfix stop
-root> /etc/init.d/apache stop
+root> systemctl stop postfix
+root> systemctl stop apache2
+
+# If you do a patch level update within OTRS 7 (using the new systemd files),
+#   stop the OTRS services via systemd:
+
+root> systemctl stop otrs-daemon
+root> systemctl stop otrs-webserver
             ]]></screen>
         </para>
 
         <para>
-        Stop OTRS cron jobs and the daemon (in this order):
+            If you do a major update form OTRS 6, you need to stop the old OTRS
+            cron jobs and daemon:
         </para>
 
         <para>
@@ -69,15 +75,6 @@ otrs> cd /opt/otrs/
 otrs> bin/Cron.sh stop
 otrs> bin/otrs.Daemon.pl stop
             ]]></screen>
-        </para>
-
-        <para>
-            If you perform a patch level update of OTRS 7, you need to also stop the built-in OTRS web server:
-
-            <screen>
-otrs> cd /opt/otrs/
-otrs> bin/otrs.WebServer.pl --stop
-            </screen>
         </para>
     </section>
 
@@ -252,9 +249,8 @@ otrs> bin/otrs.Console.pl Admin::Package::UpgradeAll
 
         <para>
         <screen><![CDATA[
-root> /etc/init.d/apache start
-root> /etc/init.d/postfix start
-root> /etc/init.d/cron start
+root> systemctl stop postfix
+root> systemctl stop apache2
         ]]></screen>
         </para>
 
@@ -279,10 +275,23 @@ root> /etc/init.d/cron start
             <screen><![CDATA[
 otrs> cd /opt/otrs/
 otrs> bin/otrs.Daemon.pl start
-otrs> bin/Cron.sh start
 otrs> bin/otrs.WebServer.pl
             ]]></screen>
         </para>
+
+        <para>
+            OTRS comes with example systemd configuration files that can be used
+            to make sure that the OTRS Daemon and web server are started automatically
+            after the system starts.
+        </para>
+
+        <para>
+            <screen><![CDATA[
+root> cd /opt/otrs/scripts/systemd
+root> for UNIT in *.service; do cp -vf $UNIT /usr/lib/systemd/system/; systemctl enable $UNIT; done
+            ]]></screen>
+        </para>
+
         <para>
             Now you can log into your system.
         </para>

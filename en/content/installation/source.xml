@@ -370,31 +370,17 @@ otrs> /opt/otrs/bin/otrs.WebServer.pl
     </section>
 
     <section role="NotInToc">
-        <title>Step 11: Setup Cron Jobs</title>
+        <title>Step 11: Setup Systemd Files</title>
         <para>
-            There are two default OTRS cron files in <filename>/opt/otrs/var/cron/*.dist</filename>,
-            and their purpose is to make sure that the OTRS Daemon is running.
-            They need to be be activated by copying them without the ".dist" filename extension.
+            OTRS comes with example systemd configuration files that can be used
+            to make sure that the OTRS Daemon and web server are started automatically
+            after the system starts.
         </para>
 
         <para>
             <screen><![CDATA[
-otrs> cd /opt/otrs/var/cron
-otrs> for foo in *.dist; do cp $foo `basename $foo .dist`; done
-            ]]></screen>
-        </para>
-
-        <para>
-            To schedule these cron jobs on your system, you can use the script <filename>Cron.sh</filename>
-            with the <literal>otrs</literal> user.
-        </para>
-
-        <para>
-            <screen><![CDATA[
-otrs> /opt/otrs/bin/Cron.sh start
-
-# Stopping the cron jobs is also possible (useful for maintenance):
-otrs> /opt/otrs/bin/Cron.sh stop
+otrs> cd /opt/otrs/scripts/systemd
+otrs> for UNIT in *.service; do cp -vf $UNIT /usr/lib/systemd/system/; systemctl enable $UNIT; done
             ]]></screen>
         </para>
 
