@@ -2005,7 +2005,7 @@ Module: Kernel::System::PostMaster::Filter::MatchDBSource
             <varlistentry id="ConfigReference_Setting_PostMaster::PreFilterModule_000-SMIMEFetchFromCustomer">
                 <term>PostMaster::PreFilterModule###000-SMIMEFetchFromCustomer</term>
                 <listitem>
-                    <para>Module to fetch customer users SMIME certificates of incoming messages.</para>
+                    <para>Модуль для извлечения клиентами SMIME-сертификатов входящих сообщений.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Module: Kernel::System::PostMaster::Filter::SMIMEFetchFromCustomer
@@ -2774,7 +2774,7 @@ Module: Kernel::System::Ticket::Event::TicketNewMessageUpdate
             <varlistentry id="ConfigReference_Setting_Ticket::EventModulePost_4100-DynamicFieldFromCustomerUser">
                 <term>Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser</term>
                 <listitem>
-                    <para>This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.</para>
+                    <para>Этот модуль событий сохраняет атрибуты Клиента как Динамические поля заявок. Пожалуйста, посмотрите DynamicFieldFromCustomerUser::Mapping настройку, чтобы понять как настроить отображение.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -3859,7 +3859,7 @@ Rows: '5'
             <varlistentry id="ConfigReference_Setting_SessionCustomerOnlineThreshold">
                 <term>SessionCustomerOnlineThreshold</term>
                 <listitem>
-                    <para>Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).</para>
+                    <para>Задает интервал времени (в минутах), после которого клиент будет помечен как "отсутствующий", потому как неактивен (например в "Залогированные Пользователи" виджете или в чате).</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '5'
@@ -4165,7 +4165,7 @@ Module: Kernel::System::Stats::Dynamic::TicketSolutionResponseTime
             <varlistentry id="ConfigReference_Setting_DynamicFieldFromCustomerUser::Mapping">
                 <term>DynamicFieldFromCustomerUser::Mapping</term>
                 <listitem>
-                    <para>Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser setting.</para>
+                    <para>Задает соответствие между данными о клиенте (ключи) и динамическими полями заявки (значения). Цель - сохранить данные о клиенте в динамических полях заявки. Динамические поля должны быть созданы в системе и доступны для AgentTicketFreeText, таким образом они смогут быть установлены/изменены агентом вручную. Они не должны быть доступны для AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. Если бы они были доступны, они имели бы приоритет над автоматически установленными значениями. Чтобы использовать данную настройку, Вы также должны активировать Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser настройку.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -6271,7 +6271,7 @@ Required: '1'
             <varlistentry id="ConfigReference_Setting_CustomerTicket::Permission_2-CustomerUserIDCheck">
                 <term>CustomerTicket::Permission###2-CustomerUserIDCheck</term>
                 <listitem>
-                    <para>Модуль, который дает доступ, если CustomerUserID  Заявки соответствует CustomerUserID  текущего пользователя .</para>
+                    <para>Модуль, который дает доступ, если CustomerUserID заявки соответствует CustomerUserID текущего клиента.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Granted: '1'
@@ -8649,7 +8649,7 @@ TaskName: GenericAgentFile5
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_GeneticInterfaceDebugLogCleanup">
                 <term>Daemon::SchedulerCronTaskManager::Task###GeneticInterfaceDebugLogCleanup</term>
                 <listitem>
-                    <para>Renew existing SMIME certificates from customer backend. Note: SMIME and SMIME::FetchFromCustomer needs to be enabled in SysConfig and customer backend needs to be configured to fetch UserSMIMECertificate attribute.</para>
+                    <para>Обновить существующие SMIME сертификаты из backend клиента. Примечание: SMIME и SMIME::FetchFromCustomer должны быть доступными в SysConfig и backend клиента должен быть настроен получать UserSMIMECertificate аттрибут.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Function: Execute
@@ -8767,7 +8767,7 @@ TaskName: RegistrationUpdateSend
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_RenewCustomerSMIMECertificates">
                 <term>Daemon::SchedulerCronTaskManager::Task###RenewCustomerSMIMECertificates</term>
                 <listitem>
-                    <para>Renew existing SMIME certificates from customer backend. Note: SMIME and SMIME::FetchFromCustomer needs to be enabled in SysConfig and customer backend needs to be configured to fetch UserSMIMECertificate attribute.</para>
+                    <para>Обновить существующие SMIME сертификаты из backend клиента. Примечание: SMIME и SMIME::FetchFromCustomer должны быть доступными в SysConfig и backend клиента должен быть настроен получать UserSMIMECertificate аттрибут.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
 Function: Execute
@@ -14004,7 +14004,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::CustomerInfoCompose">
                 <term>Ticket::Frontend::CustomerInfoCompose</term>
                 <listitem>
-                    <para>Показывать информацию о клиенте при создании сообщений для почтовой или телефонной заявки.</para>
+                    <para>Показывать информацию о клиенте (телефон и адрес электронной почты) при создании сообщений.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- '1'
@@ -17695,7 +17695,7 @@ Name: Edit customer company
             <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::Overview_AddressBook">
                 <term>CustomerUser::Frontend::Overview###AddressBook</term>
                 <listitem>
-                    <para>Задает модуль просмотра для отображения списка пользователей в формате адресной книги.</para>
+                    <para>Задает модуль просмотра для отображения списка клиентов в формате адресной книги.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -17925,7 +17925,7 @@ Title: Open Tickets / Need to be answered
             <varlistentry id="ConfigReference_Setting_CustomerUser::Frontend::AgentCustomerUserAddressBook_DefaultFields">
                 <term>CustomerUser::Frontend::AgentCustomerUserAddressBook###DefaultFields</term>
                 <listitem>
-                    <para>Задает поля фильтра по умолчанию  при поиске в адресной книге пользователей (Пользователь/CustomerUser или Компания/CustomerCompany). Для полей компании пользователя необходимо добавить префикс 'CustomerCompany_'.</para>
+                    <para>Задает поля фильтра по умолчанию при поиске в адресной книге клиентов (Клиент или Компания). Для полей компании клиента необходимо добавить префикс 'CustomerCompany_'.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -19276,7 +19276,7 @@ Prio: '3500'
             <varlistentry id="ConfigReference_Setting_Stats::CustomerUserLoginsAsMultiSelect">
                 <term>Stats::CustomerUserLoginsAsMultiSelect</term>
                 <listitem>
-                    <para>Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).</para>
+                    <para>Показывает все идентифкаторы клиента в поле с выбором нескольких значений (не пригодно, если имеется большое число идентификаторов клиента).</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[--- 0
@@ -26777,7 +26777,7 @@ Module: Kernel::Output::HTML::HeaderMeta::CustomerTicketSearch
             <varlistentry id="ConfigReference_Setting_CustomerGroupAlwaysGroups">
                 <term>CustomerGroupAlwaysGroups</term>
                 <listitem>
-                    <para>Задает список групп, в которые включаются все пользователи (если CustomerGroupSupport включена и вы не желаете делать это для каждого пользователя по отдельности).</para>
+                    <para>Задает группы, в которые включается каждый клиент (если CustomerGroupSupport включена и вы не желаете делать это для каждого клиента по отдельности).</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -27076,7 +27076,7 @@ URL: http://maps.google.com/maps?z=7&q=
             <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_15-OpenTickets">
                 <term>Frontend::CustomerUser::Item###15-OpenTickets</term>
                 <listitem>
-                    <para>Показать количество открытых заявок клиента в Информации о клиенте. Установка CustomerUserLogin в 1 считает все заявки для логина клиента, а не по CustomerID.</para>
+                    <para>Элемент интерфейса клиента (иконка), который показывает в виде информацинного блока количество заявок открытых текущим клиентом. При CustomerUserLogin, установленном в 1, поиск производится по логину клиента, а не по компании.</para>
                     <para>Этот параметр может быть изменен в личных настройках, но по умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -27099,7 +27099,7 @@ Text: Open tickets (customer)
             <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_16-OpenTicketsForCustomerUserLogin">
                 <term>Frontend::CustomerUser::Item###16-OpenTicketsForCustomerUserLogin</term>
                 <listitem>
-                    <para>Показать количество открытых заявок клиента в Информации о клиенте. Установка CustomerUserLogin в 1 считает все заявки для логина клиента, а не по CustomerID.</para>
+                    <para>Элемент интерфейса клиента (иконка), который показывает в виде информацинного блока количество заявок открытых текущим клиентом. При CustomerUserLogin, установленном в 1, поиск производится по логину клиента, а не по компании.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -27122,7 +27122,7 @@ Text: Open tickets (customer user)
             <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_17-ClosedTickets">
                 <term>Frontend::CustomerUser::Item###17-ClosedTickets</term>
                 <listitem>
-                    <para>Показать количество закрытых заявок клиента в Информации о клиенте. Установка CustomerUserLogin в 1 считает все заявки для логина клиента, а не по CustomerID.</para>
+                    <para>Элемент интерфейса клиента (иконка), который показывает в виде информацинного блока количество заявок закрытых текущим клиентом. При CustomerUserLogin, установленном в 1, поиск производится по логину клиента, а не по компании.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -27145,7 +27145,7 @@ Text: Closed tickets (customer)
             <varlistentry id="ConfigReference_Setting_Frontend::CustomerUser::Item_18-ClosedTicketsForCustomerUserLogin">
                 <term>Frontend::CustomerUser::Item###18-ClosedTicketsForCustomerUserLogin</term>
                 <listitem>
-                    <para>Показать количество закрытых заявок клиента в Информации о клиенте. Установка CustomerUserLogin в 1 считает все заявки для логина клиента, а не по CustomerID.</para>
+                    <para>Элемент интерфейса клиента (иконка), который показывает в виде информацинного блока количество заявок закрытых текущим клиентом. При CustomerUserLogin, установленном в 1, поиск производится по логину клиента, а не по компании.</para>
                     <para>Этот параметр по-умолчанию не активен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
@@ -27320,7 +27320,7 @@ Module: Kernel::Output::HTML::Notification::CustomerSystemMaintenanceCheck
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::NotifyModule_7-CustomerUserTimeZone-Check">
                 <term>CustomerFrontend::NotifyModule###7-CustomerUserTimeZone-Check</term>
                 <listitem>
-                    <para>Defines the module to display a notification in the customer interface, if the customer user has not yet selected a time zone.</para>
+                    <para>Задает модуль для отображения уведомлений в интерфейсе клиента, если клиент все еще не выбрал временную зону.</para>
                     <para>Этот параметр не может быть отключен.</para>
                     <para>Значение по умолчанию:
                         <programlisting><![CDATA[---
