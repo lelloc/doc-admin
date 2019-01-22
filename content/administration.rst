@@ -5,8 +5,6 @@ Any system requires configuration. Configuring a system should be an easy task a
 
 OTRS offers several administration tools to configure, monitor, control and extend OTRS.
 
-This is the chapter *Administration*.
-
 .. toctree::
    :maxdepth: 3
    :caption: Contents

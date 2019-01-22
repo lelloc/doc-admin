@@ -21,7 +21,7 @@ Use this screen to add mail accounts to the system. The mail account management 
 
 All data for the mail accounts are saved in the OTRS database. The ``bin/otrs.Console.pl Maint::PostMaster::MailAccountFetch`` command uses the settings in the database and fetches the mail. You can execute it manually to check if all your mail settings are working properly.
 
-On a default installation, the mail is fetched every 10 minutes when the OTRS Daemon is running.
+On a default installation, the mail is fetched every 10 minutes when the OTRS daemon is running.
 
 
 Manage Mail Accounts
@@ -102,7 +102,11 @@ Dispatching
    The distribution of incoming messages can be controlled if they need to be sorted by queue or by the content of the *To:* field.
 
    Dispatching by email To: field
-      The system checks if a queue is linked with the address in the *To:* field of the incoming mail. You can link an address to a queue in the :doc:`email-addresses` screen. If the address in the *To:* field is linked with a queue, the new message will be sorted into the linked queue. If no link is found between the address in the *To:* field and any queue, then the message flows into the *Raw* queue in the system, which is the ``PostmasterDefaultQueue`` after a default installation.
+      The system checks if a queue is linked with the address in the *To:* field of the incoming mail. You can link an address to a queue in the :doc:`email-addresses` screen. If the address in the *To:* field is linked with a queue, the new message will be sorted into the linked queue. If no link is found between the address in the *To:* field and any queue, then the message flows into the *Raw* queue in the system, which is the postmaster default queue after a default installation.
+
+      .. seealso::
+
+         The postmaster default queue can be changed in system configuration setting :sysconfig:`PostmasterDefaultQueue <core.html#postmasterdefaultqueue>`.
 
    Dispatching by selected Queue
       All incoming messages will be sorted into the specified queue. The address where the mail was sent to is disregarded in this case.

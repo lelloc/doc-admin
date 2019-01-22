@@ -7,7 +7,7 @@ OTRS (Open Technology – Real Service) is an open source ticket request system 
 About This Manual
 -----------------
 
-This manual is intended for use by OTRS administrators. The chapters describe the administration of the OTRS software. The administrator interface is available in the *Admin* menu item of the main menu, if you logged in as an administrator. Administrators are users, who are member of the *admin* group.
+This manual is intended for use by OTRS administrators. The chapters describe the administration of the OTRS software. The administrator interface is available in the *Admin* menu item of the main menu, when you logged in as an administrator. Administrators are users, who are member of the *admin* group.
 
 .. figure:: administration/images/admin-interface.png
    :alt: Administrator Interface

@@ -1,13 +1,13 @@
 PGP Keys
 ========
 
-Secure communications protect your customers and you. In the GDPR encryption is explicitly mentioned as one of the security and personal data protection measures in a few Articles. Although under the GDPR encryption is not mandatory, it is indeed essential in some areas.
+Secure communications protect your customers and you. In the GDPR encryption is explicitly mentioned as one of the security and personal data protection measures in a few articles. Although under the GDPR encryption is not mandatory, it is indeed essential in some areas.
 
-OTRS empowers you to encrypt communications where needed by means of :doc:`s-mime-certificates` or :doc:`pgp-keys`
+OTRS empowers you to encrypt communications where needed by means of :doc:`s-mime-certificates` or :doc:`pgp-keys`.
 
 .. note::
 
-	 Setup of services and software required for encryption are not covered here because of independence to this software.
+   Setup of services and software required for encryption are not covered here because of independence to this software.
 
 Use this screen to add PGP keys to the system. The PGP management screen is available in the *PGP Keys* module of the *Communication & Notifications* group.
 

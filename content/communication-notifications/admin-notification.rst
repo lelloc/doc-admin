@@ -1,7 +1,7 @@
 Admin Notification
 ==================
 
-Corporations may need to make general announcements to everyone or publish news to several groups of, or individual, agents. Also, OTRS administrator may need to contact with specific agents regarding an event.
+Corporations may need to make general announcements to everyone or publish news to several groups of agents or individuals. Also, OTRS administrator may need to contact with specific agents regarding an event.
 
 OTRS gives the administration the tool *Admin Notification* making sending announcements and news to the masses of users accurate and timely, to target group of people, simple. Administrators can send notifications based on a specific list of recipients, or a group of users inside OTRS, with powerful text editor enhanced content.
 
@@ -28,7 +28,7 @@ Send message to group members
    One or more :doc:`../users-groups-roles/groups` can be selected in this field, to whose members the message will be sent.
 
 Group members need to have permission
-   With these radio buttons can be selected, if a group member need a read-only or read-write permission to receive the message.
+   With these radio buttons can be selected, if a group member need read-only or read-write permissions to receive the message.
 
 Subject \*
    The subject of the messages.

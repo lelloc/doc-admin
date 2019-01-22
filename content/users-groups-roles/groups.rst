@@ -53,14 +53,14 @@ Name \*
 
    .. note::
 
-   	  Renaming a group does not affect permissions previously given. When *group1* is now called *group2*, then all the permissions are the same for the users which used to be assigned to *group1*. This result is because OTRS uses IDs for the relationship, and not the name.
+      Renaming a group does not affect permissions previously given. When *group1* is now called *group2*, then all the permissions are the same for the users which used to be assigned to *group1*. This result is because OTRS uses IDs for the relationship, and not the name.
 
 Validity \*
    Set the validity of this resource. Each resource can be used in OTRS only, if this field is set to *valid*. Setting this field to *invalid* or *invalid-temporarily* will disable the use of the resource.
 
    .. note::
 
-     Invalidating a group does not remove the permissions from the user, but only makes them invalid. If you reactivate this group, even with a new name, the permissions take effect.
+      Invalidating a group does not remove the permissions from the user, but only makes them invalid. If you reactivate this group, even with a new name, the permissions take effect.
 
 Comment
    Add additional information to this resource. It is recommended to always fill this field as a description of the resource with a full sentence for better clarity, because the comment will be also displayed in the overview table.
@@ -71,11 +71,11 @@ Default Groups
 
 Every agent's account should belong to at least one group or role. In a fresh installation, there are some pre-defined groups available:
 
-admin
+``admin``
    Allowed to perform administrative tasks in the system.
 
-stats
+``stats``
    Qualified to access the stats module of OTRS and generate statistics.
 
-users
+``users``
    Agents should belong to this group, with read and write permissions. They can then access all functions of the ticket system.

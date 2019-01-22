@@ -9,7 +9,7 @@ Missing appointments can damage your image with a customer. Once there is an app
 
 Notification relieves the agent the stress of mentally tracking appointments.
 
-OTRS Appointment Notifications satisfies this need. Here a person can easily set notifications with general rules, including trigger events and filters. Afterward, appointments fitting the bill notify the correct users at the correct time.
+OTRS appointment notifications satisfies this need. Here a person can easily set notifications with general rules, including trigger events and filters. Afterward, appointments fitting the bill notify the correct users at the correct time.
 
 Use this screen to add appointment notifications to the system. In a fresh OTRS installation an appointment reminder notification is already added by default. The appointment notification management screen is available in the *Appointment Notifications* module of the *Communication & Notifications* group.
 
@@ -217,7 +217,7 @@ Email template
 
    .. note::
 
-      Only for OnPremise users: Additional email templates can be added by placing a ``.tt`` file into the folder ``<OTRS_Home>/Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/``. See the existing email templates for an example. If your system is hosted by OTRS Group, please contact your Sales associate for an offer "Sales <sales@otrs.com>"
+      Additional email templates can be added by placing a ``.tt`` file into the folder ``<OTRS_Home>/Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/``. See the existing email templates for an example.
 
 Enable email security
    Checking this option will encrypt the notification email.
@@ -275,7 +275,7 @@ Text \*
    The localized body text for a specific language.
 
 Add new notification language
-   Select which languages should be added to create localized notifications. The language of the customer or agent will be used as found in the customer and agent preferences. Secondarily, the system default language will be chosen. The fall back will always be english.
+   Select which languages should be added to create localized notifications. The language of the customer or agent will be used as found in the customer and agent preferences. Secondarily, the system default language will be chosen. The fall back will always be English.
 
 .. warning::
 

@@ -3,7 +3,7 @@ Ticket Notifications
 
 Streamlining communication can save hours of labor and prevent mistakes. Sending certain messages at pre-defined stages of communication not only keeps the customer and agents informed about specific events, but it can also aid your agents by programmatically doing automated updates to the customer.
 
-The flexibility OTRS is an industry leader in email communication and offers you complete control of notifications based on any event in your system.
+The flexible OTRS is an industry leader in email communication and offers you complete control of notifications based on any event in your system.
 
 Use this screen to add ticket notifications to the system. In a fresh OTRS installation several ticket notifications are already added by default. The ticket notification management screen is available in the *Ticket Notifications* module of the *Communication & Notifications* group.
 
@@ -45,7 +45,7 @@ To export all ticket notifications:
 
 .. warning::
 
-	 Certain settings are exported as numeric ids and will break when importing to a system where these settings do not appear or reference other named items.
+   Certain settings are exported as numeric IDs and will break when importing to a system where these settings do not appear or reference other named items.
 
 To import ticket notifications:
 
@@ -96,7 +96,6 @@ Show in agent preferences
 
       Personal Ticket Notification Settings
 
-
 Agent preferences tooltip
    This message will be shown on the agent preferences screen as a tooltip for this notification.
 
@@ -128,7 +127,7 @@ This widget can optionally be used to narrow the list of tickets by matching con
 
 .. note::
 
-	 The values in this list can grow as your system grows. The more :doc:`../processes-automation/dynamic-fields` are and features you have in your system, the longer the list will be.
+   The values in this list can grow as your system grows. The more :doc:`../processes-automation/dynamic-fields` are and features you have in your system, the longer the list will be.
 
 State
    Filter for a state of the ticket.
@@ -330,7 +329,7 @@ Text \*
    The localized body text for a specific language.
 
 Add new notification language
-   Select which languages should be added to create localized notifications.
+   Select which languages should be added to create localized notifications. The language of the customer or agent will be used as found in the customer and agent preferences. Secondarily, the system default language will be chosen. The fall back will always be English.
 
 .. warning::
 

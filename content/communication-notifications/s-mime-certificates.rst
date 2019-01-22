@@ -3,11 +3,11 @@ S/MIME Certificates
 
 Faculty and staff have key roles safeguarding critical information by implementing information security policies, standards, and controls. Safe email communication is a vital part of protecting this communication.
 
-OTRS empowers you to encrypt communications where needed by means of :doc:`s-mime-certificates` or :doc:`pgp-keys`
+OTRS empowers you to encrypt communications where needed by means of :doc:`s-mime-certificates` or :doc:`pgp-keys`.
 
 .. note::
 
-	 Setup of services and software required for encryption are not covered here because of independence to this software.
+   Setup of services and software required for encryption are not covered here because of independence to this software.
 
 Use this screen to add S/MIME certificates to the system. The S/MIME management screen is available in the *S/MIME Certificates* module of the *Communication & Notifications* group.
 
@@ -43,7 +43,7 @@ To add an S/MIME certificate:
 
 .. note::
 
-	 Only non binary keys contain ASCII (Base64) armored data prefixed with a “—– BEGIN …” line can be uploaded which are most commonly ``key.pem`` or ``root.crt``. Conversion of other formats like ``cert.p7b`` must be done using openssl.
+   Only non binary keys contain ASCII (Base64) armored data started with a ``----- BEGIN CERTIFICATE -----`` line can be uploaded which are most commonly ``key.pem`` or ``root.crt``. Conversion of other formats like ``cert.p7b`` must be done using OpenSSL.
 
 To add a private key:
 
@@ -70,6 +70,7 @@ To delete an S/MIME certificate:
 .. note::
 
    If several S/MIME certificates are added to the system, use the filter box to find a particular S/MIME certificate by just typing the name to filter.
+
 
 S/MIME Configuration Options
 ----------------------------

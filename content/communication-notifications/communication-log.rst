@@ -3,7 +3,7 @@ Communication Log
 
 Managers, leaders, team leads, and system administrators may need to track past communication to follow up specific messages. In some cases, issues arise, and a target recipient did not receive a message. Without access to the mail server logs, tracking the communication is difficult.
 
-OTRS introduces the Communication Log module. It’s designed to track the communication: building and spooling the mail and the connection between client and server.
+OTRS introduces the *Communication Log* module. It’s designed to track the communication: building and spooling the mail and the connection between client and server.
 
 Use this screen to inspect the internal logs about communication handling. The communication log overview screen is available in the *Communication Log* module of the *Communication & Notifications* group.
 

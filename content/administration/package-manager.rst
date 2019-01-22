@@ -3,11 +3,11 @@ Package Manager
 
 Modular systems can be extended by adding additional software packages to the framework. Administrators need an easy way to see which features are installed in which version and for sure to add, update and remove packages.
 
-OTRS uses the package manager to perform all package-related activities as mentioned above in the graphical interface.
+OTRS uses a package manager to perform all package-related activities as mentioned above in the graphical interface.
 
 .. note::
 
-	This module is only available when using On-Pemise or the ((otrs)) Community Edition. To see a list of installed modules, you may also see the :doc:`../otrs-group-services/support-data-collector`
+   This module is only available when using *On-Pemise* or the *((OTRS)) Community Edition*. To see a list of installed modules, you may also see the :doc:`../otrs-group-services/support-data-collector`.
 
 Use this screen to install and manage packages that extend the functionality of OTRS. The package manager screen is available in the *Package Manager* module of the *Administration* group.
 
@@ -34,7 +34,7 @@ Install Packages
 
 To install a package from online repository:
 
-1. Select an online repository from the dropdown in the left sidebar.
+1. Select an online repository from the drop-down in the left sidebar.
 2. Click on the *Update repository information* button to refresh the available package list.
 3. Select a package from the *Online Repository* widget and click on the *Install* in the last column.
 4. Follow the installation instructions.

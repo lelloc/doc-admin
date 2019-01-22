@@ -25,11 +25,12 @@ Customer group support needs enabling in at least one customer user :term:`back 
 
 .. note::
 
-	 Customer group support is enabled per customer user :term:`back end` of OTRS. to enable this in systems using a directory server or multiple non.-default back ends, please contact the "Customer Solution Team <support@otrs.com>". Once activated, all customer users from this :term:`back end` will require group assignment.
+   Customer group support is enabled per customer user :term:`back end` of OTRS. To enable this in systems using a directory server or multiple non-default back ends, please contact the "Customer Solution Team <support@otrs.com>". Once activated, all customer users from this :term:`back end` will require group assignment.
 
-  .. warning::
+.. warning::
 
-  	  After making changes to the :term:`back end` the server cache will be deleted, which may cause a temporary drop in performance.
+   After making changes to the :term:`back end` the server cache will be deleted, which may cause a temporary drop in performance.
+
 
 Manage Customers ↔ Groups Relations
 -----------------------------------

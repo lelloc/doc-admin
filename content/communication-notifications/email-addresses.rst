@@ -1,14 +1,13 @@
 Email Addresses
 ===============
 
-The main channel of communication with the customers is often Email. An organization consists of multiple department or teams. Email addresses differ for each group which is servicing your customer. You may have the following.
+The main channel of communication with the customers is often email. An organization consists of multiple department or teams. Email addresses differ for each group which is servicing your customer. You may have the following:
 
 | ``support@example.org``
 | ``hr@exapmle.org``
 | ``sales@example.org``
 
-These addresses are just some examples, and you may have many more.
-You use these channels to receive and send messages, and in mail clients, one can often send with the wrong address.
+These addresses are just some examples, and you may have many more. You use these channels to receive and send messages, and in mail clients, one can often send with the wrong address.
 
 OTRS manages as many email addresses for your teams as needed. All your email addresses, whether for sending or receiving, are kept and configured nicely in one place. In the :ref:`queue settings`, the correct address is always chosen preventing that someone working in multiple roles sends an email out with the wrong account.
 
@@ -25,7 +24,7 @@ Use this screen to add system email addresses to the system. An email address is
 Manage Email Addresses
 ----------------------
 
-To add an email addresses:
+To add an email address:
 
 1. Click on the *Add System Address* button in the left sidebar.
 2. Fill in the required fields.
@@ -86,7 +85,7 @@ Queue \*
 
    .. note::
 
-   	 This setting will apply if the email is distributed via the recipient address. This setting can be overridden by :doc:`postmaster-filters` or in the :ref:`Mail Account Settings` when *Dispatching by selected Queue* is chosen.
+      This setting will apply if the email is distributed via the recipient address. This setting can be overridden by :doc:`postmaster-filters` or in the :ref:`Mail Account Settings` when *Dispatching by selected Queue* is chosen.
 
 Validity \*
    Set the validity of this resource. Each resource can be used in OTRS only, if this field is set to *valid*. Setting this field to *invalid* or *invalid-temporarily* will disable the use of the resource.

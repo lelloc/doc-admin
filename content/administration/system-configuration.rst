@@ -1,16 +1,15 @@
 System Configuration
 ====================
 
+Modern systems have many ways to configure their behavior. Some use configuration files edited on the command line, and some use a graphical interface (and save the information to configuration files in the background), yet others use a database. Maintaining changes and auditing can sometimes be an issue, as it's not always clear who made a change. Making bulk changes is not always possible, and rolling back changes a chore.
 
-Modern systems have many ways to configure their behavior. Some use configuration files edited on the command line, and some use a graphical interface (and save the information to config files in the background), yet others use a database. Maintaining changes and auditing can sometimes be an issue, as it's not always clear who made a change. Making bulk changes is not always possible, and rolling back changes a chore.
-
-OTRS uses a comfortable graphical interface to configure the system. All changes to the default system configuration are stored in the database and can be audited ("who changed a setting, when, what was the old and what is the new value?") and rolled back to a previous state in case of misconfiguration.
+OTRS uses a comfortable graphical interface to configure the system. All changes to the default system configuration are stored in the database and can be audited (who changed a setting and when, what was the old and what is the new value) and rolled back to a previous state in case of misconfiguration.
 
 Comfortable search allows finding the needed settings quickly and easily.
 
-.. note::
+.. seealso::
 
-	Using the OTRSSystemConfigurationHistory package, you can easily roll back changes made by users. Contact sales@otrs.com to add this feature to your system.
+   By using the `System Configuration History <https://otrs.com/hu/otrs-feature/system-configuration-history/>__` package, you can easily roll back changes made by users. Contact sales@otrs.com to add this feature to your system.
 
 Use this screen to manage the system configuration settings. OTRS brings about 2200 configuration settings. The system configuration management screen is available in the *System Configuration* module of the *Administration* group.
 
@@ -26,7 +25,7 @@ To modify a system configuration, you need to do several steps. The following ex
 
 1. Find the system configuration by entering a search term ``lastname`` into to search box.
 
-   With the full text search, all configuration settings can be scanned for one or more keywords. The full text search not only searches through the names of the configuration settings, but also the descriptions and values. This allows an element to be found easily even if its name is unknown.
+   With the full-text search, all configuration settings can be scanned for one or more keywords. The full-text search not only searches through the names of the configuration settings, but also the descriptions and values. This allows an element to be found easily even if its name is unknown.
 
    .. figure:: images/system-configuration-01-search.png
       :alt: System Configuration - Search For Setting
@@ -94,7 +93,7 @@ To modify a system configuration, you need to do several steps. The following ex
 
       System Configuration - Setting Different
 
-11. Click on the *Deploy selected changes* button. If several settings are changed, it is possible to deploy on the selected settings.
+11. Click on the *Deploy selected changes* button. If several settings are changed, it is possible to deploy only the selected settings.
 12. Add a deployment comment, that explain for other administrators, what is changed and why. Use full sentence here.
 
    .. figure:: images/system-configuration-10-deploy.png
@@ -161,5 +160,5 @@ To export the system configurations:
 To import the system configurations:
 
 1. Click on the *Browse…* button in the *Import* widget.
-2. Select a previusly exported ``.yml`` file.
+2. Select a previously exported ``.yml`` file.
 3. Click on the *Import system configuration* button.
