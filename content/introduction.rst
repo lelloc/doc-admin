@@ -18,8 +18,8 @@ The administrator interface contains several modules collected into groups. Use 
 
 This manual shows you the configuration possibilities needed to solve common problems. The chapters:
 
-1. Identify a typical use-case for the administrator, to aid in orientation, and explain **what** OTRS does to provide a solution (WARRANTY).
-2. Direct you **how** to configure OTRS to fit your use-case (UTILITY).
+1. Identify a typical use-case for the administrator, to aid in orientation, and explain **what** OTRS does to provide a solution (**warranty**).
+2. Direct you **how** to configure OTRS to fit your use-case (**utility**).
 
 The chapters are the same as the modules in the administrator interface. The order of the chapters are also the same as they are displayed alphabetically in the (English) administrator interface. However, the steps to do to configure a fresh new OTRS installation is different from this order. We recommend to configure OTRS to do the steps as explained below.
 
@@ -29,7 +29,7 @@ Getting Started
 
 .. note::
 
-   The installation of OTRS is displayed in a separate `Installation Guide <http://doc.otrs.com/doc/manual/installation/7.0/en/>`__. To install OTRS or upgrade OTRS from a previous version, follow the steps describe there.
+   The installation of OTRS is explained in a separate `Installation Guide <https://doc.otrs.com/doc/manual/installation/7.0/en/>`__. To install OTRS or upgrade OTRS from a previous version, follow the steps describe there.
 
 After the installation of OTRS is finished, you can login to the system with user ``root@localhost`` and using the generated password.
 
@@ -39,7 +39,7 @@ First, you need to check some :doc:`administration/system-configuration` and mod
 
 Then, open the :doc:`communication-notifications/postmaster-mail-accounts` module to add email addresses used by the system. For sending email, you can add more :doc:`communication-notifications/email-addresses`.
 
-To improve the security, :doc:`communication-notifications/pgp-keys` or :doc:`communication-notifications/s-mime-certificates` encryption can be enabled.
+To improve the security, :doc:`communication-notifications/pgp-keys` or :doc:`communication-notifications/s-mime-certificates` can be used for encryption of emails.
 
 Let's continue with users, but you might need to add some :doc:`users-groups-roles/groups` and/or :doc:`users-groups-roles/roles` to the system first. It is recommended to create new groups for each main queues. There are some groups in your OTRS, but no roles are defined by default. You can add roles, if needed, and you can set the :doc:`users-groups-roles/roles-groups` relations.
 
@@ -89,4 +89,4 @@ Finally, you can set the :doc:`external-interface/home-page`, the :doc:`external
 Become OTRS Expert
 ------------------
 
-The next chapters of this manual describe the features and configuration settings of OTRS more detailed. There is a separated manual for `Configuration Options References <http://doc.otrs.com/doc/manual/config-reference/7.0/en/>`_, that gives you a good overview of :doc:`administration/system-configuration`, that can be modify the behavior of OTRS.
+The next chapters of this manual describe the features and configuration settings of OTRS more detailed. There is a separated manual for `Configuration Options References <https://doc.otrs.com/doc/manual/config-reference/7.0/en/>`__, that gives you a good overview of :doc:`administration/system-configuration`, that can be modify the behavior of OTRS.

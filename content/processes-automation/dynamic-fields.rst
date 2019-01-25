@@ -3,7 +3,7 @@ Dynamic Fields
 
 Beside general information that required for all tickets, organizations have individual needs to add specific details to tickets. This needed information takes various formats like texts, integers, date-time and more.
 
-OTRS supports adding a so-called :term:`dynamic field` to handle texts, integers, dropdown lists, multi-select fields, date-time, checkboxes and more. OTRS administrators can define where those fields should be visible or editable, and of course, the dynamic fields are also available in statistics and reports.
+OTRS supports adding a so-called :term:`dynamic field` to handle texts, integers, drop-down lists, multi-select fields, date-time, checkboxes and more. OTRS administrators can define where those fields should be visible or editable, and of course, the dynamic fields are also available in statistics and reports.
 
 Use this screen to manage dynamic fields in the system. A fresh OTRS installation contains three dynamic fields by default. The dynamic field management screen is available in the *Dynamic Fields* module of the *Processes & Automation* group.
 
@@ -16,9 +16,9 @@ Use this screen to manage dynamic fields in the system. A fresh OTRS installatio
 Manage Dynamic Fields
 ---------------------
 
-To create a new dynamic fields:
+To create a new dynamic field:
 
-1. Choose an object in the left sidebar and select a dynamic field type from its dropdown.
+1. Choose an object in the left sidebar and select a dynamic field type from its drop-down.
 2. Fill in the required fields.
 3. Click on the *Save* button.
 
@@ -142,7 +142,7 @@ Mandatory fields
 
    .. note::
 
-      Keys *Name* and *ValidID* are always mandatory and doesn't have to be listed here.
+      Keys ``Name`` and ``ValidID`` are always mandatory and doesn't have to be listed here.
 
 Sorted fields
    Comma separated list of keys in sort order. Keys listed here come first, all remaining fields afterwards and sorted alphabetically.
@@ -152,7 +152,7 @@ Searchable fields
 
    .. note::
 
-      Key *Name* is always searchable and doesn't have to be listed here.
+      Key ``Name`` is always searchable and doesn't have to be listed here.
 
 Translatable values
    If you activate this option the values will be translated to the user defined language.
@@ -162,7 +162,7 @@ Translatable values
       You need to add the translations manually into the language translation files.
 
 Contact with data management
-   There is a link *Add/Edit*, that points to *Ticket* → *Edit contact with data* to add some data.
+   There is a link *Add/Edit*, that points to *Tickets* → *Edit contacts with data* to add some data.
 
 The usage of this type of dynamic field is more complex then the others. An exemplary usage of contacts with data is as follows:
 
@@ -178,10 +178,10 @@ The usage of this type of dynamic field is more complex then the others. An exem
 5. Add the list of searchable attribute keys comma separated (``Name`` is not needed).
 6. Populate the data source by adding at least one contact in the newly created data source by using *Tickets* → *Edit contacts with data* screen from the main navigation bar.
 7. Add the new dynamic field to the screen's configuration where it should be shown. For example in *New Phone Ticket* screen by updating the system configuration setting ``Ticket::Frontend::AgentTicketPhone###DynamicField`` and do the same for ``Ticket::Frontend::AgentTicketZoom###DynamicField``.
-8. Go to *New Phone Ticket* screen, and notice that the new field is there. Add all ticket needed information.
+8. Go to *New Phone Ticket* screen, and notice that the new field is there. Add all needed information to the ticket.
 9. Select an existing contact using autocomplete and choosing a contact.
 10. The assigned contact and its attributes will be shown in the *Ticket Zoom* screen.
-11. It is possible to update the attributes of the contact by clicking the *Edit contact data button* that appears in the right side of the title of the contact data box (if the current user is a member of the groups defined in system configuration setting ``Frontend::Module###AdminDynamicFieldContactWithData``).
+11. It is possible to update the attributes of the contact by clicking the *Edit contact data* button that appears in the right side of the title of the contact data box (if the current user is a member of the groups defined in system configuration setting ``Frontend::Module###AdminDynamicFieldContactWithData``).
 12. If is necessary to change the contact for this ticket, it can be done via any other ticket action where the dynamic field is configured for display.
 
 
@@ -243,7 +243,7 @@ The settings for this type of dynamic field is the same as for date dynamic fiel
 Dropdown Dynamic Field Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dropdown dynamic field is used to store a single value, from a closed list.
+Drop-down dynamic field is used to store a single value, from a closed list.
 
 .. figure:: images/dynamic-field-dropdown.png
    :alt: Dropdown Dynamic Field Settings
@@ -316,7 +316,7 @@ Text dynamic field is used to store a single line string.
 .. figure:: images/dynamic-field-text.png
    :alt: Text Dynamic Field Settings
 
-   Contact With Data Dynamic Field Settings
+   Text Dynamic Field Settings
 
 Default value
    This is the default value for this field and this will be shown on the edit screens.

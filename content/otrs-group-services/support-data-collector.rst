@@ -45,7 +45,7 @@ Collected Data
 
 The screen contains several sections. Each section has some entries with a traffic light, that indicates the following:
 
-- Gray LED means information, just display a value.
+- Gray LED means information, just displays a value.
 - Green LED means OK, the entry has a good value.
 - Yellow LED means notification, you have to check the value, but it is not an error.
 - Red LED means error, you have to do something to solve the issue.
@@ -111,7 +111,7 @@ Cluster
    The name of the used cluster.
 
 Cluster Health Details
-   Display some internal variable of the used cluster.
+   Display some internal variables of the used cluster.
 
 Indices Health
    Display information about indices.
@@ -168,7 +168,7 @@ Articles Per Communication Channel
    Display the number of articles per communication channels.
 
 Communication Log
-   Displayed aggregated information about communications.
+   Display aggregated information about communications.
 
 Communication Log Account Status (last 24 hours)
    Display information about communication log account status in the last 24 hours.

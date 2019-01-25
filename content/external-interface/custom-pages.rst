@@ -59,7 +59,7 @@ Custom Page Settings
 The following settings are available when adding or editing this resource. The fields marked with an asterisk are mandatory.
 
 Internal Title \*
-   The name of this resource, that are only displayed in the admin interface. Any type of characters can be entered to this field including uppercase letters and spaces. The name will be displayed in the overview table.
+   The name of this resource, that is only displayed in the admin interface. Any type of characters can be entered to this field including uppercase letters and spaces. The name will be displayed in the overview table.
 
 Slug \*
    This will be the URL of the custom page. Recommended characters are lowercase letters, numbers and minus sign.

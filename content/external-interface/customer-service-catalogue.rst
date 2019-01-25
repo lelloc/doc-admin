@@ -129,7 +129,7 @@ Item Settings
 The following settings are available when adding or editing this resource. The fields marked with an asterisk are mandatory.
 
 Internal Title \*
-   The name of this resource, that are only displayed in the admin interface. Any type of characters can be entered to this field including uppercase letters and spaces. The name will be displayed in the overview table.
+   The name of this resource, that is only displayed in the admin interface. Any type of characters can be entered to this field including uppercase letters and spaces. The name will be displayed in the overview table.
 
 Validity \*
    Set the validity of this resource. Each resource can be used in OTRS only, if this field is set to *valid*. Setting this field to *invalid* or *invalid-temporarily* will disable the use of the resource.

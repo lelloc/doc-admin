@@ -120,10 +120,10 @@ Title \*
    The heading text that are displayed in this item.
 
 Link Text
-   Add the text for the show more link.
+   Add the text for the *show more* link.
 
 Link Target
-   Add the URL for the show more link.
+   Add the URL for the *show more* link.
 
 Link List Type \*
    Specifies the functionality how the item will be added.
@@ -174,7 +174,7 @@ Text \*
    The text for this item.
 
 Link Text
-   Add the text for the show more link.
+   Add the text for the *show more* link.
 
 Link Target
    An URL that will be opened after clicking on this item in the external interface.

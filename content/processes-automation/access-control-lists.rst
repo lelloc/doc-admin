@@ -3,7 +3,7 @@ Access Control Lists (ACL)
 
 Working with tickets can become a bewildering task. Many options are given to process, or close tickets, even if they are not needed in the current state of a ticket or due to the role of the current agent. Hiding unneeded entries cleans up the menu bar and gets it easier to work with, hiding values from dynamic fields or next queues lowers chance of human error.
 
-OTRS uses Access Control Lists (ACL) to restrict agents and customer users on ticket options, allowing only correct and meaningful activities with a ticket. OTRS administrators can easily in the graphical interface generate ACLs to prevent ticket closure until meeting specific requirements, prevent tickets from being moved to queues before adding the defined information and much more.
+OTRS uses access control lists (ACL) to restrict agents and customer users on ticket options, allowing only correct and meaningful activities with a ticket. OTRS administrators can easily generate ACLs in the graphical interface to prevent ticket closure until meeting specific requirements, prevent tickets from being moved to queues before adding the defined information and much more.
 
 Use this screen to manage access control lists in the system. A fresh OTRS installation contains no access control lists by default. The access control lists management screen is available in the *Access Control Lists (ACL)* module of the *Processes & Automation* group.
 
@@ -115,7 +115,7 @@ Validity \*
 Edit ACL Structure
 ------------------
 
-The ACL definition can be split into two big parts, *Match settings* and *Change settings*. In the matching sections the ACLs contains attributes that has to be met in order to use the ACL. If the attributes defined in the ACL does not match with the attributes that are sent, then the ACL does not take any affect, but any other match ACL will. The change sections contains the rules to reduce the possible options for a ticket.
+The ACL definition can be split into two big parts, *Match settings* and *Change settings*. In the matching sections the ACLs contain attributes that has to be met in order to use the ACL. If the attributes defined in the ACL do not match with the attributes that are sent, then the ACL does not take any affect, but any other match ACL will. The change sections contain the rules to reduce the possible options for a ticket.
 
 
 Match settings
@@ -125,7 +125,7 @@ Match settings
    This section contains matching options that can be changed on the fly. For example on a ticket creation time the data of the ticket changes dynamically as the agent sets the information. If an ACL is set to match a ticket attribute then only when the matching attribute is selected the ACL will be active and might reduce other ticket attributes, but as soon as another value is selected the ACL will not take any affect.
 
 ``PropertiesDatabase``
-   This section is similar to Properties but does not take changes in ticket attributes that are not saved into the database, this means that changing an attribute without submit will not make any effect. This section is not use for ticket creation screens (as tickets are not yet created in the database).
+   This section is similar to ``Properties`` but does not take changes in ticket attributes that are not saved into the database, this means that changing an attribute without submit will not make any effect. This section is not use for ticket creation screens (as tickets are not yet created in the database).
 
 
 Change settings

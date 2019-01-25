@@ -67,7 +67,7 @@ To show the transmitted data:
 
 To overview the registered system:
 
-1. Click on the *Overview the registered systems* button in the left sidebar.
+1. Click on the *Overview of registered systems* button in the left sidebar.
 2. Log in the `OTRS Portal <https://portal.otrs.com/otrs/customer.pl?Action=CustomerOTRSSystems>`__.
 3. Review the list of registered systems.
 

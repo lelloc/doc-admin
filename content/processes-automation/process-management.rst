@@ -366,20 +366,20 @@ After all fields are filled in, click on the *Save and finish* button to save th
 
    Each module has its own and different parameters. Please review the module documentation to learn all require and optional parameters.
 
-   - `DynamicFieldSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/DynamicFieldSet.pm.html>`_
-   - `TicketArticleCreate <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketArticleCreate.pm.html>`_
-   - `TicketCreate <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCreate.pm.html>`_
-   - `TicketCustomerSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCustomerSet.pm.html>`_
-   - `TicketLockSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketLockSet.pm.html>`_
-   - `TicketOwnerSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketOwnerSet.pm.html>`_
-   - `TicketQueueSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketQueueSet.pm.html>`_
-   - `TicketResponsibleSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketResponsibleSet.pm.html>`_
-   - `TicketSendEmail <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSendEmail.pm.html>`_
-   - `TicketServiceSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketServiceSet.pm.html>`_
-   - `TicketSLASet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSLASet.pm.html>`_
-   - `TicketStateSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketStateSet.pm.html>`_
-   - `TicketTitleSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_
-   - `TicketTypeSet <http://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_
+   - `DynamicFieldSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/DynamicFieldSet.pm.html>`_
+   - `TicketArticleCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketArticleCreate.pm.html>`_
+   - `TicketCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCreate.pm.html>`_
+   - `TicketCustomerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCustomerSet.pm.html>`_
+   - `TicketLockSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketLockSet.pm.html>`_
+   - `TicketOwnerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketOwnerSet.pm.html>`_
+   - `TicketQueueSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketQueueSet.pm.html>`_
+   - `TicketResponsibleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketResponsibleSet.pm.html>`_
+   - `TicketSendEmail <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSendEmail.pm.html>`_
+   - `TicketServiceSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketServiceSet.pm.html>`_
+   - `TicketSLASet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSLASet.pm.html>`_
+   - `TicketStateSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketStateSet.pm.html>`_
+   - `TicketTitleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_
+   - `TicketTypeSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_
 
    All the sequence flow action modules are located in the legacy named ``Kernel/System/ProcessManagement/TransitionAction``.
 
