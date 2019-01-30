@@ -44,14 +44,23 @@ To edit a queue:
 
 .. note::
 
-   If several priorities are added to the system, use the filter box to find a particular priority by just typing the name to filter.
-
-If you change the name of a queue which is used in the system configuration, a validation check will warn you and give you the option to apply your changes now by clicking on *Save and update automatically*, manually make the changes your self by choosing another default later by clicking on *Don't save, update manually* or canceling the action by clicking on *Cancel*.
+   If several queues are added to the system, use the filter box to find a particular queue by just typing the name to filter.
 
 .. figure:: images/queue-system-config-validation.png
   :alt: System Queue Validation Check Screen
 
   System Queue Validation Check Screen
+
+If you change the name of a queue which is used in the system configuration, a validation check will warn you and give you the following options:
+
+Save and update automatically
+   Apply the change and also update the affected settings.
+
+Don't save, update manually
+   Apply the change, but don't update the affected settings. The updates need to be done manually.
+
+Cancel
+   Cancel the action.
 
 .. warning::
 

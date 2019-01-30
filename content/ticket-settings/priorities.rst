@@ -67,12 +67,21 @@ To edit a priority:
 
    If several priorities are added to the system, use the filter box to find a particular priority by just typing the name to filter.
 
-If you change the name of a priority which is used in the system configuration, a validation check will warn you and give you the option to apply your changes now by clicking on *Save and update automatically*, manually make the changes your self by choosing another default later by clicking on *Don't save, update manually* or canceling the action by clicking on *Cancel*.
-
 .. figure:: images/priority-system-config-validation.png
    :alt: System Priority Validation Check
 
    System Priority Validation Check
+
+If you change the name of a priority which is used in the system configuration, a validation check will warn you and give you the following options:
+
+Save and update automatically
+   Apply the change and also update the affected settings.
+
+Don't save, update manually
+   Apply the change, but don't update the affected settings. The updates need to be done manually.
+
+Cancel
+   Cancel the action.
 
 .. warning::
 

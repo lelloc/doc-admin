@@ -148,7 +148,7 @@ Customer User ID
    Filter for a customer user ID of the ticket.
 
 Dynamic Fields
-   Filter for some dynamic fields added to the system. For the complete list of dynamic fields see the the :doc:`../processes-automation/dynamic-fields` chapter.
+   Filter for some dynamic fields added to the system. For the complete list of dynamic fields see the :doc:`../processes-automation/dynamic-fields` chapter.
 
 
 Article Filter [1]_
@@ -339,7 +339,7 @@ Add new notification language
 Ticket Notification Variables
 -----------------------------
 
-Using variables in ticket notifications is possible. Variables, known as OTRS tags, are replaced by OTRS when generating the mail. Find a list of available tags stems for signatures at the bottom of both add and edit screens.
+Using variables in the text makes it possible to personalize messages. Variables, known as OTRS tags, are replaced by OTRS when generating the message. Find a list of available tags stems for this resource at the bottom of both add and edit screens.
 
 .. figure:: images/ticket-notification-variables.png
    :alt: Ticket Notification Variables

@@ -74,7 +74,7 @@ Comment
 Signature Variables
 -------------------
 
-Using variables in signatures is possible. Variables, known as OTRS tags, are replaced by OTRS when generating the mail. Find a list of available tags stems for signatures at the bottom of both add and edit screens.
+Using variables in the text makes it possible to personalize messages. Variables, known as OTRS tags, are replaced by OTRS when generating the message. Find a list of available tags stems for this resource at the bottom of both add and edit screens.
 
 .. figure:: images/signature-variables.png
    :alt: Signature Variables
@@ -88,7 +88,6 @@ For example, the variable ``<OTRS_CURRENT_UserFirstname> <OTRS_CURRENT_UserLastn
    Best regards,
 
    <OTRS_CURRENT_UserFirstname> <OTRS_CURRENT_UserLastname>
-
 
 This tag expands, for example to:
 

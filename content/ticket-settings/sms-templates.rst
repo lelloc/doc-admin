@@ -103,7 +103,7 @@ Comment
 SMS Template Variables
 ----------------------
 
-Using variables in SMS templates is possible. Variables, known as OTRS tags, are replaced by OTRS when generating the mail. Find a list of available tags stems for signatures at the bottom of both add and edit screens.
+Using variables in the text makes it possible to personalize messages. Variables, known as OTRS tags, are replaced by OTRS when generating the message. Find a list of available tags stems for this resource at the bottom of both add and edit screens.
 
 .. figure:: images/sms-template-variables.png
    :alt: SMS Template Variables

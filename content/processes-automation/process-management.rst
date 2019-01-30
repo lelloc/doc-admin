@@ -3,9 +3,9 @@ Process Management
 
 Maximizing performance while minimizing human error is a requirement of organizations of all sizes. This need is covered by defined processes and workflows, for recurring tasks. Ensuring all required information is available in the right place, and contacts are informed about their responsibilities like adding information, approving requests, etc.
 
-OTRS supports this requirement by Process Management. Process tickets help by using the required mandatory and optional fields (see Dynamic Fields) that information is not forgotten upon ticket creation or during later steps of the process. Process tickets are simple to handle for customer users and agents, so no intensive training is required.
+OTRS supports this requirement by process management. Process tickets help by using the required mandatory and optional fields (see :doc:`dynamic-fields`) that information is not forgotten upon ticket creation or during later steps of the process. Process tickets are simple to handle for customer users and agents, so no intensive training is required.
 
-Processes are designed completely and efficiently within the OTRS font end to fit the requirements of your organization.
+Processes are designed completely and efficiently within the OTRS front end to fit the requirements of your organization.
 
 Use this screen to manage processes in the system. The process management screen is available in the *Process Management* module of the *Processes & Automation* group.
 
@@ -52,6 +52,17 @@ To delete a process:
 
    Processes are written into file in Perl format. Without deploying, all processes are still in this cache file even if they are deleted or the *State* option is set to *Inactive* or *FadeAway*. Don't forget to deploy all processes after modifications!
 
+Give some time for agents to complete the running process tickets before the process will be deleted. It is possible to mark a process for deletion, i. e. set the process as not to be selected anymore. Process states can be:
+
+Active
+   Processes can be used in new process tickets.
+
+FadeAway
+   Processes cannot be selected any more for new tickets, but existing tickets still can use the process.
+
+Inactive
+   Processes are deactivated and cannot be used for new or existing tickets.
+
 To deploy all processes:
 
 1. Click on the *Deploy All Processes* button in the left sidebar.
@@ -65,9 +76,9 @@ To export a process:
 1. Click on the export icon in the fourth column of list of processes.
 2. Choose a location in your computer to save the ``Export_ProcessEntityID_xxx.yml`` file.
 
-.. note::
+.. warning::
 
-   The exported file contains only the process itself, and doesn't contain the :doc:`../ticket-settings/queues`, :doc:`../users-groups-roles/agents` and :doc:`dynamic-fields`, etc. needed for the process.
+   The exported file contains only the process itself, and doesn't contain the :doc:`../ticket-settings/queues`, :doc:`../users-groups-roles/agents`, :doc:`dynamic-fields`, etc. needed for the process.
 
 To import a process:
 
@@ -99,7 +110,7 @@ The book order process has four states.
 Recording the demand
    Before an order will be placed, the demand for literature by an employee will be recorded. The following book is needed in our example:
 
-   ::
+   .. code-block:: none
 
       Title: Prozessmanagement für Dummies
       Autor: Thilo Knuppertz
@@ -130,7 +141,7 @@ From the analysis of the example process we can identify the following necessary
 Now, with activities, user task activity dialogs, sequence flows and sequence flow actions we have the necessary tools to model the individual steps of our example. What is still missing is an area where for each workflow the order of the steps can be specified. Let's call this :term:`process`.
 
 
-Create necessary resources
+Create Necessary Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before the creation of the process and its parts is necessary to prepare the system. We need to define some :doc:`../ticket-settings/queues`, :doc:`../users-groups-roles/agents` and :doc:`dynamic-fields` as well as set some :doc:`../administration/system-configuration` settings.
@@ -149,32 +160,32 @@ Create the following :doc:`../users-groups-roles/agents`:
 
 Create the following :doc:`dynamic-fields`:
 
-+--------+----------+---------------+-----------------+---------------------+
-| Object | Type     | Name          | Label           | Possible values     |
-+========+==========+===============+=================+=====================+
-| Ticket | Text     | Title         | Title           |                     |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Text     | Author        | Author          |                     |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Text     | ISBN          | ISBN            |                     |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Dropdown | Status        | Status          | - Approval          |
-|        |          |               |                 | - Approval denied   |
-|        |          |               |                 | - Approved          |
-|        |          |               |                 | - Order denied      |
-|        |          |               |                 | - Order placed      |
-|        |          |               |                 | - Shipment received |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Text     | Suplier       | Suplier         |                     |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Text     | Price         | Price           |                     |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Date     | DeliveryDate  | Delivery date   |                     |
-+--------+----------+---------------+-----------------+---------------------+
-| Ticket | Date     | DateOfReceipt | Date of receipt |                     |
-+--------+----------+---------------+-----------------+---------------------+
++--------+----------+-------------------+-----------------+---------------------+
+| Object | Type     | Name              | Label           | Possible values     |
++========+==========+===================+=================+=====================+
+| Ticket | Text     | ``Title``         | Title           |                     |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Text     | ``Author``        | Author          |                     |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Text     | ``ISBN``          | ISBN            |                     |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Dropdown | ``Status``        | Status          | - Approval          |
+|        |          |                   |                 | - Approval denied   |
+|        |          |                   |                 | - Approved          |
+|        |          |                   |                 | - Order denied      |
+|        |          |                   |                 | - Order placed      |
+|        |          |                   |                 | - Shipment received |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Text     | ``Supplier``      | Supplier        |                     |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Text     | ``Price``         | Price           |                     |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Date     | ``DeliveryDate``  | Delivery date   |                     |
++--------+----------+-------------------+-----------------+---------------------+
+| Ticket | Date     | ``DateOfReceipt`` | Date of receipt |                     |
++--------+----------+-------------------+-----------------+---------------------+
 
-Set the the following :doc:`../administration/system-configuration` settings:
+Set the following :doc:`../administration/system-configuration` settings:
 
 - :sysconfig:`Ticket::Responsible <core.html#ticket-responsible>`
 
@@ -182,21 +193,21 @@ Set the the following :doc:`../administration/system-configuration` settings:
 
 - :sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicFieldGroups <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfieldgroups>`
 
-   - Book → Title,Author,ISBN
-   - General → Status
-   - Order → Price,Supplier,DeliveryDate
-   - Shipment → DateOfReceipt
+   - ``Book`` → ``Title,Author,ISBN``
+   - ``General`` → ``Status``
+   - ``Order`` → ``Price,Supplier,DeliveryDate``
+   - ``Shipment`` → ``DateOfReceipt``
 
 - :sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfield>`
 
-   - Author →  1 - Enabled
-   - DateOfReceipt →  1 - Enabled
-   - DeliveryDate →  1 - Enabled
-   - ISBN →  1 - Enabled
-   - Price →  1 - Enabled
-   - Status →  1 - Enabled
-   - Supplier →  1 - Enabled
-   - Title →  1 - Enabled
+   - ``Author`` →  *1 - Enabled*
+   - ``DateOfReceipt`` →  *1 - Enabled*
+   - ``DeliveryDate`` →  *1 - Enabled*
+   - ``ISBN`` →  *1 - Enabled*
+   - ``Price`` →  *1 - Enabled*
+   - ``Status`` →  *1 - Enabled*
+   - ``Supplier`` →  *1 - Enabled*
+   - ``Title`` →  *1 - Enabled*
 
 .. note::
 
@@ -229,26 +240,26 @@ In the opened popup screen fill in the *Dialog Name* as well as the *Description
 
    Book Ordering - Add User Task Activity Dialog
 
-To assign fields to the user task activity dialog simple drag the required field from the *Available Fields* pool and drop into the *Assigned Fields* pool. The order in the *Assigned Fields* pool is the order as the fields will have in the screen, to modify the order simply drag and drop the field within the pool to rearrange it in the correct place.
+To assign fields to the user task activity dialog simple drag the required field from the *Available Fields* pool and drop into the *Assigned Fields* pool. The order in the *Assigned Fields* pool is the order as the fields will have in the screen. To modify the order simply drag and drop the field within the pool to rearrange it in the correct place.
 
 In this example we will use:
 
-- *Article* field for comments.
-- *DynamicField_Title*, *DynamicField_Author*, *DynamicField_ISBN* fields for the data to be collected for the order.
-- *DynamicField_Status* with the possibility to choose *Approval*.
+- ``Article`` field for comments.
+- ``DynamicField_Title``, ``DynamicField_Author``, ``DynamicField_ISBN`` fields for the data to be collected for the order.
+- ``DynamicField_Status`` with the possibility to choose *Approval*.
 
 Drag these fields from the *Available Fields* pool and drop into the *Assigned Fields* pool.
 
 .. note::
 
-   In this screen all the dynamic fields has the prefix *DynamicField_* as in *DynamicField_Title*. Do not confuse with the field *Title* that is the ticket title.
+   In this screen all dynamic fields has the prefix ``DynamicField_`` as in ``DynamicField_Title``. Do not confuse with the field ``Title`` that is the ticket title.
 
 .. figure:: images/process-management-book-ordering-04-user-task-activity-dialog-fields.png
    :alt: Book Ordering - Add User Task Activity Dialog Fields
 
    Book Ordering - Add User Task Activity Dialog Fields
 
-As soon as the fields are dropped into the *Assigned Fields* pool another popup screen is shown with some details about the field. We will leave the default options and only for *Article* fields we should make sure that the *Communication Channel* field is set to *OTRS* and that the *Is visible for customer* is not checked.
+As soon as the fields are dropped into the *Assigned Fields* pool another popup screen is shown with some details about the field. We will leave the default options and only for ``Article`` fields we should make sure that the *Communication Channel* field is set to *OTRS* and that the *Is visible for customer* is not checked.
 
  .. figure:: images/process-management-book-ordering-05-user-task-activity-dialog-fields-edit.png
    :alt: Book Ordering - Edit User Task Activity Dialog Fields
@@ -261,33 +272,33 @@ Create the following user task activity dialogs with fields:
 
 - *Recording the demand* (already created before)
 
-   - *Article* field for comments.
-   - *DynamicField_Title*, *DynamicField_Author*, *DynamicField_ISBN* fields for the data to be collected for the order.
-   - *DynamicField_Status* with the possibility to choose *Approval*.
+   - ``Article`` field for comments.
+   - ``DynamicField_Title``, ``DynamicField_Author``, ``DynamicField_ISBN`` fields for the data to be collected for the order.
+   - ``DynamicField_Status`` with the possibility to choose *Approval*.
 
 - *Approval denied*
 
-   - *Article* field for comments.
-   - *DynamicField_Status* with the possibility to choose *Approval denied*.
+   - ``Article`` field for comments.
+   - ``DynamicField_Status`` with the possibility to choose *Approval denied*.
 
 - *Approved*
 
-   - *DynamicField_Status* with the possibility to choose *Approved*.
+   - ``DynamicField_Status`` with the possibility to choose *Approved*.
 
 - *Order denied*
 
-   - *Article* field for comments.
-   - *DynamicField_Status* with the possibility to choose *Order denied*.
+   - ``Article`` field for comments.
+   - ``DynamicField_Status`` with the possibility to choose *Order denied*.
 
 - *Order placed*
 
-   - *DynamicField_Supplier*, *DynamicField_Price*, *DynamicField_DeliveryDate* fields for purchasing.
-   - *DynamicField_Status* with the possibility to choose *Order placed*.
+   - ``DynamicField_Supplier``, ``DynamicField_Price``, ``DynamicField_DeliveryDate`` fields for purchasing.
+   - ``DynamicField_Status`` with the possibility to choose *Order placed*.
 
 - *Shipment received*
 
-   - *DynamicField_DateOfReceipt* for the mail room.
-   - *DynamicField_Status* with the possibility to choose *Shipment received*.
+   - ``DynamicField_DateOfReceipt`` for the mail room.
+   - ``DynamicField_Status`` with the possibility to choose *Shipment received*.
 
 
 Create Sequence Flows
@@ -300,7 +311,7 @@ Click on the *Sequence Flows* item in the *Available Process Elements* widget in
 
    Book Ordering - Sequence Flows
 
-In the opened popup screen fill in the *Sequence Flow Name*. For this example in the *Condition Expressions* we will use just one condition expression and just one field, for both we can leave the *Type of Linking* as *and* and we will use the filed match type value as *String*.
+In the opened popup screen fill in the *Sequence Flow Name*. For this example in the *Condition Expressions* we will use just one condition expression and just one field. For both we can leave the *Type of Linking* as *and* and we will use the filed match type value as *String*.
 
 .. figure:: images/process-management-book-ordering-07-sequence-flow-add.png
    :alt: Book Ordering - Add Sequence Flow
@@ -313,27 +324,27 @@ Create the following sequence flows:
 
 - *Approval* (already created before)
 
-   Check if the *DynamicField_Status* is set to *Approval*.
+   Check if the ``DynamicField_Status`` is set to *Approval*.
 
 - *Approval denied*
 
-   Check if the *DynamicField_Status* field is set to *Approval denied*.
+   Check if the ``DynamicField_Status`` field is set to *Approval denied*.
 
 - *Approved*
 
-   Check if the *DynamicField_Status* field is set to *Approved*.
+   Check if the ``DynamicField_Status`` field is set to *Approved*.
 
 - *Order denied*
 
-   Check if the *DynamicField_Status* field is set to *Order denied*.
+   Check if the ``DynamicField_Status`` field is set to *Order denied*.
 
 - *Order placed*
 
-   Check if the *DynamicField_Status* field is set to *Order placed*.
+   Check if the ``DynamicField_Status`` field is set to *Order placed*.
 
 - *Shipment received*
 
-   Check if the *DynamicField_Status* field is set to *Shipment received*.
+   Check if the ``DynamicField_Status`` field is set to *Shipment received*.
 
 
 Create Sequence Flow Actions
@@ -381,13 +392,13 @@ After all fields are filled in, click on the *Save and finish* button to save th
    - `TicketTitleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_
    - `TicketTypeSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_
 
-   All the sequence flow action modules are located in the legacy named ``Kernel/System/ProcessManagement/TransitionAction``.
+   All sequence flow action modules are located in the legacy named ``Kernel/System/ProcessManagement/TransitionAction``.
 
 Create the following sequence flow actions:
 
 - *Move the process ticket into the "Management" queue* (already created before)
 
-   This action is supposed to be executed when the sequence flow *Approval* applied.
+   To be executed when the sequence flow *Approval* applied.
 
 - *Change ticket responsible to "Manager"*
 
@@ -441,14 +452,14 @@ Click on the *Activities* item in the *Available Process Elements* widget in the
 
    Book Ordering - Activities
 
-In the opened popup screen fill in the *Activity name* field and select *User task activity* from the *Activity type* dropdown.
+In the opened popup screen fill in the *Activity name* field and select *User task activity* from the *Activity type* drop-down.
 
 .. figure:: images/process-management-book-ordering-12-activity-add.png
    :alt: Book Ordering - Add Activity
 
    Book Ordering - Add Activity
 
-To assign dialogs to the activity simple drag the required dialogs from the *Available User Task Activity Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool. The order in the *Assigned User Task Activity Dialogs* pool is the order as the dialogs will be presented in the ticket zoom screen. To modify the order simply drag and drop the field within the pool to rearrange it in the correct place.
+To assign dialogs to the activity simple drag the required dialogs from the *Available User Task Activity Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool. The order in the *Assigned User Task Activity Dialogs* pool is the order as the dialogs will be presented in the *Ticket Zoom* screen. To modify the order simply drag and drop the dialog within the pool to rearrange it in the correct place.
 
 .. note::
 
@@ -527,7 +538,7 @@ Now that the process path between the actions is defined, then we need to assign
 
 After the sequence flow actions are assigned, click on the *Save* button to go back to the main process edit screen. Click on *Save* button below the canvas to save all other changes.
 
-Complete the process path adding the following activities, sequence flows and sequence flow actions:
+Complete the process path by adding the following activities, sequence flows and sequence flow actions:
 
 - *Recording the demand* (already created before)
 
@@ -589,7 +600,7 @@ Complete the process path adding the following activities, sequence flows and se
    Additionally, the following sequence flow actions are executed:
 
       - *Move process ticket into the "Employees" queue*
-      - *Set ticket responsible to "Employee"*
+      - *Change ticket responsible to "Employee"*
       - *Close ticket unsuccessfully*
 
    Possible sequence flow: *Order placed*
@@ -617,7 +628,7 @@ Complete the process path adding the following activities, sequence flows and se
    Additionally, the following sequence flow actions are executed:
 
       - *Move process ticket into the "Employees" queue*
-      - *Set ticket responsible to "Employee"*
+      - *Change ticket responsible to "Employee"*
       - *Close ticket successfully*
 
 The complete process path for the book ordering process will then look like this:
@@ -633,4 +644,4 @@ Click on the *Deploy All Processes* button in the left sidebar. This will gather
 
 .. note::
 
-   Any change that is made of the process will require to re-deploy the process in order to get the change reflected in the system.
+   Any change that is made on the process will require to re-deploy the process in order to get the change reflected in the system.

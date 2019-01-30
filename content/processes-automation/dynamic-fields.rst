@@ -448,7 +448,7 @@ Example: activate *Field1* in ``TicketCreate`` event:
    This configuration can be set in any of the 16 ``Ticket::TicketDynamicFieldDefault###Element`` settings.
 
 .. seealso::
-   If more that 16 fields needs to be set up a custom XML file must be places in ``$OTRS_HOME/Kernel/Config/XML/Files`` directory to extend this feature.
+   If more than 16 fields needs to be set up, a custom XML file must be placed in ``$OTRS_HOME/Kernel/Config/Files/XML`` directory to extend this feature.
 
 
 Set Default Value via User Preferences

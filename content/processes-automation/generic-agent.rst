@@ -1,20 +1,20 @@
 Generic Agent
 =============
 
-Processing tickets require often a workflow. Let's say "if-then" activities:
+Processing tickets require often a workflow. Let's say "if-then" activities.
 
-If specific conditions match like: A ticket
+If specific conditions match like:
 
-| is from one particular customer
-| is assigned to an appropriate queue
-| has a defined priority
-| contains defined keywords
+- A ticket is from one particular customer.
+- A ticket is assigned to an appropriate queue.
+- A ticket has a defined priority.
+- A ticket contains defined keywords.
 
 Outlined activities must be performed like changing the ticket priority, moving the ticket to another group, assigning a service to a ticket, and many more.
 
 Also time-based activities can be required like cleaning up the spam-queue once a week.
 
-OTRS supports this with the Generic Agent. Here, simple or compound time and event-based tasks are configuarble in the OTRS front end without the requirement to learn a scripting language. Depending on search criteria, and time or event criteria, tickets will automatically be acted upon.
+OTRS supports this with the *Generic Agent*. Here, simple or compound time and event-based tasks are configurable in the OTRS front end without the requirement to learn a scripting language. Depending on search criteria, and time or event criteria, tickets will automatically be acted upon.
 
 Use this screen to manage generic agent jobs in the system. A fresh OTRS installation contains no generic agent jobs by default. The generic agent job management screen is available in the *Generic Agent* module of the *Processes & Automation* group.
 

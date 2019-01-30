@@ -3,7 +3,7 @@ Auto Responses
 
 Quick and transparent service is vital to maintaining a good working relationship with your customer. Email, fax, social media and other non-real-time communication are patient, but you want to engage your customer immediately upon receipt of a request.
 
-OTRS allows you to respond to a customer immediately upon receipt of a request giving the custmoers instantaneous feedback assuring them that their request is in processing, establishing expectation.
+OTRS allows you to respond to a customer immediately upon receipt of a request giving the customers instantaneous feedback assuring them that their request is in processing, establishing expectation.
 
 Automatic responses can be sent to customers based on the occurrence of certain events, such as the creation of a ticket in a specific queue, the receipt of a follow-up message in regards to a ticket, the closure or rejection of a ticket, etc.
 
@@ -98,7 +98,7 @@ Comment
 Auto Response Variables
 -----------------------
 
-Using variables in automatic responses is possible. Variables, known as OTRS tags, are replaced by OTRS when generating the mail. Find a list of available tags stems for automatic responses at the bottom of both add and edit screens.
+Using variables in the text makes it possible to personalize messages. Variables, known as OTRS tags, are replaced by OTRS when generating the message. Find a list of available tags stems for this resource at the bottom of both add and edit screens.
 
 .. figure:: images/auto-response-variables.png
    :alt: Auto Response Variables

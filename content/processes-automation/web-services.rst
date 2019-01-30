@@ -4,15 +4,15 @@ Web Services
 In a connected world, a ticket system needs to be able to react to requests from other systems and also to send requests or information to other systems:
 
 * CRM systems
-* Project Management systems
+* Project management systems
 * Documentation management systems
 * and many more
 
 The ticket system must be reachable by other services without manual intervention by an agent.
 
-OTRS supports this requirement by the Generic Interface. It empowers the administrator to create a web service for a specific task without scripting language knowledge. OTRS reacts on incoming REST or SOAP requests and create objects or provides object data to other systems transparently.
+OTRS supports this requirement by the *Generic Interface*. It empowers the administrator to create a web service for a specific task without scripting language knowledge. OTRS reacts on incoming REST or SOAP requests and create objects or provides object data to other systems transparently.
 
-A web service is a communication method between two systems, in our case OTRS and a remote system. In its configuration, the :term:`Operation` or :term:`Invoker` determine the direction of communication, and the :term:`Mapping` and :term:`Transport` take care of how the data is received and interpreted.
+A web service is a communication method between two systems, in our case OTRS and a remote system. In its configuration, the :term:`operation` or :term:`invoker` determine the direction of communication, and the :term:`mapping` and :term:`transport` take care of how the data is received and interpreted.
 
 In its configuration it can be defined what actions the web service can perform internally (operation), what actions the OTRS request can perform remote system (invokers), how data is converted from one system to the other (mapping), and over which protocol the communication will take place (transport).
 

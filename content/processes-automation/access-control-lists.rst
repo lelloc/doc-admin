@@ -132,10 +132,10 @@ Change settings
 ~~~~~~~~~~~~~~~
 
 ``Possible``
-   Possible section resets the data to be reduce to only the elements that are set in this section.
+   This section is used to reset the data to be reduce to only the elements that are set in this section.
 
 ``PossibleAdd``
-   Elements in ``PossibleAdd`` section add missing elements that were reduced in other ACLs. ``PossibleAdd`` is only used in together with other ACLs that have ``Possible`` or ``PossibleNot`` sections.
+   This section is used to add missing elements that were reduced in other ACLs. This section is only used in together with other ACLs that have ``Possible`` or ``PossibleNot`` sections.
 
 ``PossibleNot``
    This section is used to remove specific elements from the current data. It could be used stand alone or together with other ACLs with a ``Possible`` or ``PossibleAdd`` sections.
