@@ -42,9 +42,8 @@ To assign a queue to one or more SMS templates:
 
    If several SMS templates or queues are added to the system, use the filter box to find a particular SMS template or queue by just typing the name to filter.
 
-Multiple SMS templates or queues can be assigned in both screens at the same time. Additionally clicking on an SMS template or clicking on a queue in the *Relations screens* will open the edit SMS template screen or the edit queue screen accordingly.
+Multiple SMS templates or queues can be assigned in both screens at the same time. Additionally clicking on an SMS template or clicking on a queue in the relations screen will open the *Edit SMS Template* screen or the *Edit Queue* screen accordingly.
 
 .. warning::
 
-   Accessing a queue or template provides no backlink to the *Relations screen*.
-
+   Accessing a queue or an SMS template provides no back link to the relations screen.

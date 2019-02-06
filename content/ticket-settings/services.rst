@@ -3,7 +3,7 @@ Services
 
 Requests to your service desk should be categorized based on affected :term:`service` to correctly reach a team of experts to deal with the issue. Because not all your agents can deal with specific problems. Lack of experience or access to resources to fix an issue requires defining the service affected in a ticket helps to categorize the issue and target the correct teams.
 
-OTRS allows adding all services offered by to your customers. These services may be later bound to :doc:`service-level-agreements` to ensure a timely solution based on customer-specific agreements.
+OTRS allows adding all services offered to your customers. These services may be later bound to :doc:`service-level-agreements` to ensure a timely solution based on customer-specific agreements.
 
 Use this screen to add services to the system. A fresh OTRS installation doesn't contain any services by default. The service management screen is available in the *Services* module of the *Ticket Settings* group.
 

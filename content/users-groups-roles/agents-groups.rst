@@ -3,7 +3,7 @@ Agents ↔ Groups
 
 Efficient and straightforward management of permissions is essential in a growing business. Easy assignment of a particular user to a group for quick access, or to remove access, to resources is a must in every case.
 
-The OTRS interface provides you with both the possibility to manage an agent's access to one or more particular groups. As well, you can change multiple users access to any one group, efficiently and elegantly.
+The OTRS interface provides you both with the possibility to manage an agent's access to one or more particular groups. As well, you can change multiple users access to any one group, efficiently and elegantly.
 
 Use this screen to add one or more agents to one or more groups. To use this function, at least one agent and one group need to have been added to the system. The management screen is available in the *Agents ↔ Groups* module of the *Users, Groups & Roles* group.
 
@@ -42,7 +42,11 @@ To assign some agents to a group:
 
    If several agents or groups are added to the system, use the filter box to find a particular agent or group by just typing the name to filter.
 
-Multiple agents or groups can be assigned in both screens at the same time. Additionally clicking on an agent or clicking on a group will open the edit agent screen or the edit group screen for the selected resource.
+Multiple agents or groups can be assigned in both screens at the same time. Additionally clicking on an agent or clicking on a group in the relations screen will open the *Edit Agent* screen or the *Edit Group* screen accordingly.
+
+.. warning::
+
+   Accessing an agent or a group provides no back link to the relations screen.
 
 
 Agents ↔ Groups Relations Reference
@@ -97,7 +101,7 @@ rw
       Permissions to change the customer of a ticket.
 
    forward
-      Permissions to forward a messages (with the forward button).
+      Permissions to forward a message (with the forward button).
 
    pending
       Permissions to set a ticket to pending.

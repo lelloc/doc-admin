@@ -22,7 +22,7 @@ Manage Customer Users
 
 .. note::
 
-   Adding or editing a customer user is possible only by using database backend. Using external directory services like LDAP will disable the customer user management functionality.
+   Adding or editing a customer user is possible only by using database back end. Using external directory services like LDAP will disable the customer user management functionality.
 
 To add a customer user:
 
@@ -70,7 +70,11 @@ The customer user permissions can be controlled by adding a customer or a custom
 Customer User Settings
 ----------------------
 
-The following settings are available when adding or editing this resource. The fields marked with an asterisk are mandatory. These are the default field available for the internal database table.
+The following settings are available when adding or editing this resource. The fields marked with an asterisk are mandatory.
+
+.. note::
+
+   These are the default fields available for the internal database table.
 
 Title or salutation
    Some name prefix can be added here like *Mr.*, *Dr.*, *Jr.*, etc.

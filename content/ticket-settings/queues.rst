@@ -3,7 +3,7 @@ Queues
 
 Teams need a workspace and the ability to dispatch work based on skill level, security level, department or responsibility just to name a few. Other teams may also need to view or react in these requests as well.
 
-OTRS uses Queues to provide your teams with structure. Queues provide a powerful way to divide and disperse the work to the responsible group of people.
+OTRS uses queues to provide your teams with structure. Queues provide a powerful way to divide and disperse the work to the responsible group of people.
 
 Use this screen to add queues to the system. In a fresh OTRS installation there are 4 default queues: *Raw*, *Junk*, *Misc* and *Postmaster*. All incoming messages will be stored in the *Raw* queue if no filter rules are defined. The *Junk* queue can be used to store spam messages. The queue management screen is available in the *Queues* module of the *Ticket Settings* group.
 
@@ -47,9 +47,9 @@ To edit a queue:
    If several queues are added to the system, use the filter box to find a particular queue by just typing the name to filter.
 
 .. figure:: images/queue-system-config-validation.png
-  :alt: System Queue Validation Check Screen
+   :alt: Queue Validation Dialog
 
-  System Queue Validation Check Screen
+   Queue Validation Dialog
 
 If you change the name of a queue which is used in the system configuration, a validation check will warn you and give you the following options:
 
@@ -85,14 +85,14 @@ Unlock timeout minutes
    Any ticket on open, which is locked, in this queue will automatically unlock after the set amount of minutes. The value *0* (default) means tickets in this queue remain locked.
 
 Escalation - first response time (minutes)
-   The maximum amount of working time allowed before agent contact with the customer.
+   The maximum amount of working time allowed before the agent contacts with the customer.
 
    .. note::
 
       First response time will not trigger for an email ticket or telephone ticket created by an agent.
 
 Escalation - update time (minutes)
-   The maximum amount of working time allowed between agent contact with the customer.
+   The maximum amount of working time allowed between the agent contacts with the customer.
 
 Escalation - solution time (minutes)
    The maximum amount of working time allowed until the ticket is marked as solved.
@@ -108,13 +108,13 @@ Follow up Option \*
       The follow up will create a new ticket.
 
    possible
-      The follow up will re-open the already closed ticket.
+      The follow up will reopen the already closed ticket.
 
    reject
       The follow up will be rejected. See :doc:`auto-responses` chapter for more information.
 
 Ticket lock after a follow up \*
-   Only applicable if the *Follow up Option* is set to *possible*. Locks the previously closed ticket, upon re-opening, to the last owner. This ensures that a follow up for a ticket is processed by the agent that has previously handled that ticket.
+   Only applicable if the *Follow up Option* is set to *possible*. Locks the previously closed ticket, upon reopening, to the last owner. This ensures that a follow up for a ticket is processed by the agent that has previously handled that ticket.
 
    .. warning::
 

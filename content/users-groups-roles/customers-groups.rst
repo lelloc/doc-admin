@@ -12,24 +12,24 @@ OTRS allows you to assign :term:`group` permissions to a :term:`customer`. Acces
 Use this screen to add one or more customers to one or more groups. To use this function, at least one customer and one group need to have been added to the system. The management screen is available in the *Customers ↔ Groups* module of the *Users, Groups & Roles* group.
 
 .. figure:: images/customer-group-management.png
-   :alt: Manage Customer-Groups Relations
+   :alt: Manage Customer-Group Relations
 
-   Manage Customer-Groups Relations
+   Manage Customer-Group Relations
 
-Customer group support needs enabling in at least one customer user :term:`back end` to use this function. For the default OTRS :term:`back end`, this can be enabled in the system configuration by clicking on .
+Customer group support needs to be enabled in at least one customer user :term:`back end` to use this function. For the default OTRS :term:`back end`, this can be enabled in the system configuration by clicking on the *Enable it here!* button.
 
 .. figure:: images/customer-group-activation.png
-  :alt: Activate Customer Group Feature
+  :alt: Enable Customer Group Feature
 
-  Activate Customer Group Feature
+  Enable Customer Group Feature
 
 .. note::
 
-   Customer group support is enabled per customer user :term:`back end` of OTRS. To enable this in systems using a directory server or multiple non-default back ends, please contact the "Customer Solution Team <support@otrs.com>". Once activated, all customer users from this :term:`back end` will require group assignment.
+   To enable this feature in systems using a directory server or multiple non-default back ends, a custom configuration file needs to be placed in ``Kernel/Config/Files`` (for example named ``ZZZ_CustomerBackend.pm``). Once activated, all customer users from this back end will require group assignment.
 
 .. warning::
 
-   After making changes to the :term:`back end` the server cache will be deleted, which may cause a temporary drop in performance.
+   After making changes to the back end, the server cache will be deleted, which may cause a temporary drop in performance.
 
 
 Manage Customers ↔ Groups Relations
@@ -81,24 +81,28 @@ These groups are automatically assigned to all customers.
 
 .. note::
 
-   If several customers or groups are added to the system, use the serach box to find a particular customer or use the filter box to find a particular group by just typing the name to filter.
+   If several customers or groups are added to the system, use the search box to find a particular customer or use the filter box to find a particular group by just typing the name to filter.
 
-Multiple customers or groups can be assigned in both screens at the same time. Additionally clicking on a customer or clicking on a group will open the edit customer screen or the edit group screen for the selected resource.
+Multiple customers or groups can be assigned in both screens at the same time. Additionally clicking on a customer or clicking on a group in the relations will open the *Edit Customer* screen or the *Edit Group* screen accordingly.
+
+.. warning::
+
+   Accessing a customer or a group provides no back link to the relations screen.
 
 
 Customers ↔ Groups Relations Reference
 --------------------------------------
 
-When assigning a customer to a group or vice versa, some permissions can be set as connection between a customer and a group. The following permissions are available by default:
+When assigning a customer to a group or vice versa, several permissions can be set as connection between a customer and a group. The following permissions are available by default:
 
 Same Customer
    Gives customer users group based access to tickets from customer users of the same customer (ticket ``CustomerID`` is a ``CustomerID`` of the customer user).
 
 ro
-   Read only access to the :term:`resource`.
+   Read only access to the resource.
 
 rw
-   Full read and write access to the :term:`resource`.
+   Full read and write access to the resource.
 
 .. note::
 

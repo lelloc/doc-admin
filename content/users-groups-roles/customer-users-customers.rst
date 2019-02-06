@@ -18,7 +18,7 @@ Manage Customer Users ↔ Customers Relations
 
 .. note::
 
-   This module is for assigning a :term:`customer user` ta additional :term:`customer` records. The primary customer is assigned via the :ref:`Customer User Settings`.
+   This module is for assigning a :term:`customer user` to additional :term:`customer` records. The primary customer is assigned via the :ref:`Customer User Settings`.
 
 To assign some customers to a customer user:
 
@@ -46,7 +46,11 @@ To assign some customer users to a customer:
 
    If several customer users or customers are added to the system, use the search box to find a particular customer user or customer. Only the first 1000 customer users and customers are listed by default.
 
-Multiple customer users or customers can be assigned in both screens at the same time. Additionally clicking on a customer user or clicking on a customer will open the edit customer user screen or the edit customer screen for the selected resource.
+Multiple customer users or customers can be assigned in both screens at the same time. Additionally clicking on a customer user or clicking on a customer in the relations screen will open the *Edit Customer User* screen or the *Edit Customer* screen accordingly.
+
+.. warning::
+
+   Accessing a customer user or a customer provides no back link to the relations screen.
 
 .. note::
 

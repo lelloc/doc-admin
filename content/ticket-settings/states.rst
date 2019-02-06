@@ -7,6 +7,8 @@ OTRS uses ticket states to ensure that your agents always know which tickets are
 
 Nine states are pre-defined. More states can be added, but the default states are enough to get you going and mostly enough for any situation.
 
+The default states are the following:
+
 closed successful
    A ticket is complete. The customer received a solution which worked.
 
@@ -20,13 +22,13 @@ new
    The ticket is created by the customer without contact with an agent.
 
 open
-   The ticket is currently in progress. Customer and agent are in contact with one another.
+   The ticket is currently in progress. Customer and agent are in contact with each another.
 
 pending auto close+
-   The ticket will be marked *closed successful* upon reaching the set pending time.
+   The ticket will be set as *closed successful* upon reaching the pending time.
 
 pending auto close-
-   The ticket will *closed unsuccessful* upon reaching the pending time.
+   The ticket will be set as *closed unsuccessful* upon reaching the pending time.
 
 pending reminder
    The ticket should be worked on again upon reaching the pending time.
@@ -36,7 +38,7 @@ removed
 
 .. note::
 
-   Pending jobs are checked per default every two hours and forty-five minutes. This time is a static time, which means the times are 02:45, 4:45, 6:45 and so on. The job can be run more often or seldom and are configured in the *System Configuration* module of the *Administration* group.
+   Pending jobs are checked per default every two hours and forty-five minutes. This time is a static time, which means the times are 02:45, 04:45, 06:45 and so on. The job can be run more often or seldom and are configured in the *System Configuration* module of the *Administration* group.
 
 Use this screen to add states to the system. A fresh OTRS installation contains several states by default. The state management screen is available in the *States* module of the *Ticket Settings* group.
 
@@ -66,7 +68,7 @@ To add a state:
 
 To edit a state:
 
-1. Click on a state in the list of state.
+1. Click on a state in the list of states.
 2. Modify the fields.
 3. Click on the *Save* or *Save and finish* button.
 
@@ -79,16 +81,26 @@ To edit a state:
 
    If several states are added to the system, use the filter box to find a particular state by just typing the name to filter.
 
-If you change the name of a queue which is used in the system configuration, a validation check will warn you and give you the option to apply your changes now by clicking on *Save and update automatically*, manually make the changes your self by choosing another default later by clicking on *Don't save, update manually* or canceling the action by clicking on *Cancel*.
-
 .. figure:: images/queue-system-state-validation.png
-   :alt: System State Validation Check Screen
+   :alt: State Validation Dialog
 
-   System State Validation Check Screen
+   State Validation Dialog
+
+If you change the name of a state which is used in the system configuration, a validation check will warn you and give you the following options:
+
+Save and update automatically
+   Apply the change and also update the affected settings.
+
+Don't save, update manually
+   Apply the change, but don't update the affected settings. The updates need to be done manually.
+
+Cancel
+   Cancel the action.
 
 .. warning::
 
    Changing the name of this object should be done with care, the check only provides verification for certain settings and ignores things where the name can't be verified. Some examples are dashboard filters, action control lists (ACLs), and processes (sequence flow actions) to name a few. Documentation of your setup is key to surviving a name change.
+
 
 State Settings
 --------------

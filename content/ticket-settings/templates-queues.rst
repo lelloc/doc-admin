@@ -8,9 +8,9 @@ OTRS can quickly aid you in ensuring that all of your teams have the correct tem
 Use this screen to add one or more templates to one or more queues. To use this function, at least one template and one queue need to have been added to the system. The management screen is available in the *Templates ↔ Queues* module of the *Ticket Settings* group.
 
 .. figure:: images/template-queue-management.png
-   :alt: Template ↔ queue management screen
+   :alt: Manage Template-Queue Relations Screen
 
-   Template ↔ Queue Management Screen
+   Manage Template-Queue Relations Screen
 
 
 Manage Templates ↔ Queues Relations
@@ -42,8 +42,8 @@ To assign a queue to a template:
 
    If several templates or queues are added to the system, use the filter box to find a particular template or queue by just typing the name to filter.
 
-Multiple templates or queues can be assigned in both screens at the same time. Additionally clicking on a template  or clicking on a queue in the *Relations screens* will open the edit template screen or the edit queue screen accordingly.
+Multiple templates or queues can be assigned in both screens at the same time. Additionally clicking on a template or clicking on a queue in the relations screen will open the *Edit Template* screen or the *Edit Queue* screen accordingly.
 
 .. warning::
 
-   Accessing a queue or template provides no backlink to the *Relations screen*.
+   Accessing a queue or a template provides no back link to the relations screen.

@@ -1,9 +1,10 @@
 Types
 =====
 
-Good KPIs requires knowing the type of work you're organization performs. Not all tasks take the same amount of effort even when performed by the same team. Creating a queue structure for this purpose can be overpowered due to the amount of configuration required to create and manage a queue.
+Good KPIs require knowing the type of work your organization performs. Not all tasks take the same amount of effort even when performed by the same team. Creating a queue structure for this purpose can be overpowered due to the amount of configuration required to create and manage a queue.
 
-OTRS provisions for KPIs with minimal overhead using ticket types. Typical types used in IT service desks are Unclassified, Incident and Problem. You can quickly define new types with ease.
+OTRS provisions for KPIs with minimal overhead using ticket types. Typical types used in IT service desks are *unclassified*, *incident* and *problem*. You can quickly define new types with ease.
+
 Use this screen to add types to the system. A fresh OTRS installation contains an *unclassified* type by default. The type management screen is available in the *Types* module of the *Ticket Settings* group.
 
 .. figure:: images/type-management.png

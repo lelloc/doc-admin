@@ -42,19 +42,19 @@ Queues ↔ Auto Responses Settings
 The following settings are available when assigning some automatic responses to a queue.
 
 auto reply
-   This automatic response will be sent to users, if they send a message to the queue.
+   This automatic response will be sent to users, when they send a message to the queue.
 
 auto reject
-   This automatic response will be sent to users, if they send a message to the queue,m but the queue doesn't accept any message.
+   This automatic response will be sent to users, when they send a message to the queue, but the queue doesn't accept any message.
 
 auto follow up
-   This automatic response will be sent to users, if follow up option is enabled.
+   This automatic response will be sent to users, when follow up option is enabled.
 
 auto reply/new ticket
-   This automatic response will be sent to users, if they send the first message of a new ticket to the queue.
+   This automatic response will be sent to users, when they send the first message of a new ticket to the queue.
 
 auto remove
-   This automatic response will be sent to users, if the remove option is enabled.
+   This automatic response will be sent to users, when the remove option is enabled.
 
 .. note::
 

@@ -3,7 +3,7 @@ Agents
 
 Agent and access management for your service desk should be easy. Flexibility in adding, editing, invalidating access and a quick overview of which permissions a user has will help you maintain a clean permissions system and record of your setup in OTRS.
 
-OTRS aids you giving you the power to manage agents within OTRS across multiple backends. OTRS can use up-to ten backend sources, even marking some as read-only. Managing user settings centrally, an administrator can quickly invalidate a compromised account or set an account to out-of-office in case of an unexpected illness.
+OTRS aids you giving you the power to manage agents within OTRS across multiple back ends. OTRS can use up-to ten back end sources, even marking some as read-only. Managing user settings centrally, an administrator can quickly invalidate a compromised account or set an account to out-of-office in case of an unexpected illness.
 
 Use this screen to add agents to the system. A fresh OTRS installation contains an agent with administrator privileges by default. The agent management screen is available in the *Agents* module of the *Users, Groups & Roles* group.
 
@@ -14,7 +14,7 @@ Use this screen to add agents to the system. A fresh OTRS installation contains 
 
 .. warning::
 
-   The superuser account username is *root@localhost*. Don't use the superuser account to work with OTRS! Create new agents and work with these accounts instead. One of the adverse affects here is that :doc:`../processes-automation/access-control-lists` will not have an effect on this user.
+   The superuser account username is *root@localhost*. Don't use the superuser account to work with OTRS! Create new agents and work with these accounts instead. One of the adverse effects is that :doc:`../processes-automation/access-control-lists` will not have an effect on this user.
 
 
 Manage Agents
@@ -22,7 +22,7 @@ Manage Agents
 
 .. note::
 
-   Adding or editing an agent is possible only by using database backend. Using explicitly external directory services like LDAP and, based on configuration, some databases are read-only. Personal preferences like out-of-office can still be set.
+   Adding or editing an agent is possible only by using database back end. Using explicitly external directory services like LDAP and, based on configuration, some databases are read-only. Personal preferences like out-of-office can still be set.
 
 To add an agent:
 
@@ -72,11 +72,11 @@ The agent permissions can be controlled by adding an agent to :doc:`groups` or :
 Agent Settings
 --------------
 
-The following settings are available when adding or editing this resource. The fields marked with an asterisk are mandatory. These are the default field available for the internal database table.
+The following settings are available when adding or editing this resource. The fields marked with an asterisk are mandatory.
 
 .. note::
 
-   The fields seen below can be modified by contacting the "Customer Solution Team <support@otrs.com>".
+   These are the default fields available for the internal database table.
 
 Title or salutation
    Some name prefix can be added here like *Mr.*, *Dr.*, *Jr.*, etc.
@@ -102,7 +102,7 @@ Email \*
 
    .. note::
 
-      The email syntax and validity of an available MX record could prevent you from submitting this form. For some systems it may be acceptable to turn off these checks. See the :ref:`Agent Configuration Options`
+      The email syntax and validity of an available MX record could prevent you from submitting this form. For some systems it may be acceptable to turn off these checks. See the :ref:`Agent Configuration Options`.
 
 Mobile
    The mobile phone number of the agent.
@@ -181,7 +181,7 @@ The users table houses your agent data per default. You may attach a directory s
 
    You should uncomment the following settings as a minimum.
 
-The minimum required to connect to an directory server is:
+The minimum required to connect to a directory server is:
 
 .. code-block:: perl
 
@@ -190,20 +190,20 @@ The minimum required to connect to an directory server is:
    $Self->{'AuthModule::LDAP::BaseDN'} = 'dc=example,dc=com';
    $Self->{'AuthModule::LDAP::UID'} = 'uid';
 
-Host
+``Host``
    The DNS name or IP of your directory server.
 
-BaseDN
+``BaseDN``
    The starting point in your directory tree.
 
-UID
+``UID``
    The attribute used for login and identification.
 
    .. note::
 
       This is ``sAMAccountName`` for an Active Directory.
 
-To use multiple backends, add an additional section of the example code to the ``Config.pm``. Please make sure to add a numeric value [1-9] to all settings to indicate which settings belong to which back end.
+To use multiple back ends, add an additional section of the example code to the ``Config.pm``. Please make sure to add a numeric value [1-9] to all settings to indicate which settings belong to which back end.
 
 .. code-block:: perl
 
@@ -221,7 +221,7 @@ To use multiple backends, add an additional section of the example code to the `
 
 .. warning::
 
-   All backends will are used in succession. The UID must be unique to all back ends otherwise, some side effects may occur.
+   All back ends will are used in succession. The UID must be unique to all back ends, otherwise some side effects may occur.
 
 To synchronize with a specific directory server (see :ref:`Agent User Data` below), you must add the appropriate setting to your :ref:`Agent Authentication Back End`. To achieve this copy the following block from the ``Defaults.pm`` and paste it into the ``Config.pm``.
 
@@ -229,7 +229,7 @@ To synchronize with a specific directory server (see :ref:`Agent User Data` belo
 
    $Self->{'AuthModule::UseSyncBackend'} = 'AuthSyncBackend';
 
-To use multiple backends, add an additional section of the example code to the ``Config.pm``. Please make sure to add a numeric value [1-9] to all settings to indicate which settings belong to which back end.
+To use multiple back ends, add an additional section of the example code to the ``Config.pm``. Please make sure to add a numeric value [1-9] to all settings to indicate which settings belong to which back end.
 
 .. code-block:: perl
 
@@ -285,7 +285,7 @@ Syncing user data upon login. To achieve this copy the following block from the 
    #        UserEmail     => 'mail',
    #    };
 
-The minimum required to connect to an directory server is:
+The minimum required to connect to a directory server is:
 
 .. code-block:: perl
 
@@ -294,18 +294,18 @@ The minimum required to connect to an directory server is:
    $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=example,dc=com';
    $Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
 
-Host
+``Host``
    The DNS name or IP of your directory server.
 
-BaseDN
+``BaseDN``
    The starting point in your directory tree.
 
-UID
+``UID``
    The attribute used for login and identification.
 
    .. note::
 
-      This is ``sAMAccountName`` for an Active Directory
+      This is ``sAMAccountName`` for an Active Directory.
 
 .. note::
 
@@ -319,7 +319,7 @@ It is possible to use security objects to synchronize users to OTRS groups. To a
 
 .. note::
 
-   Groups must be available in OTRS to use this feature.
+   :doc:`groups` must be available in OTRS to use this feature.
 
 
 Agent Role Data
@@ -329,7 +329,7 @@ It is possible to use security objects to synchronize users to OTRS roles. To ac
 
 .. note::
 
-   Roles must be available in OTRS to use this feature.
+   :doc:`roles` must be available in OTRS to use this feature.
 
 
 Agent Configuration Options

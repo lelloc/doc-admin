@@ -3,7 +3,7 @@ Service Level Agreements
 
 Your organization must meet the time demands of your customers. Timely service matters. Response to questions, updates on issues, and solutions must be provided it an agreed amount of time. The agent must receive notification of possible breaches, to prevent ticket escalation.
 
-OTRS scales well with your needs and offers management of Service Level Agreements (SLAs). OTRS provides you with the possibility to create numerous service level agreements covering all of your service and customer need. Each :term:`SLA` can cover multiple services and define the availability of service and escalation periods.
+OTRS scales well with your needs and offers management of service level agreements (SLAs). OTRS provides you with the possibility to create numerous service level agreements covering all of your service and customer need. Each :term:`SLA` can cover multiple services and define the availability of service and escalation periods.
 
 Use this screen to add service level agreements to the system. A fresh OTRS installation doesn't contain any service level agreements by default. The service level agreement management screen is available in the *Service Level Agreements* module of the *Ticket Settings* group.
 
@@ -75,14 +75,14 @@ Calendar
    Select the calendar which defines working hours for this queue. Calendars are defined in the :doc:`../administration/system-configuration`.
 
 Escalation - first response time (minutes)
-   The maximum amount of working time allowed before agent contact with the customer.
+   The maximum amount of working time allowed before the agent contacts with the customer.
 
    .. note::
 
       First response time will not trigger for an email ticket or telephone ticket created by an agent.
 
 Escalation - update time (minutes)
-   The maximum amount of working time allowed between agent contact with the customer.
+   The maximum amount of working time allowed between the agent contacts with the customer.
 
 Escalation - solution time (minutes)
    The maximum amount of working time allowed until the ticket is marked as solved.

@@ -14,7 +14,7 @@ Manage Customers
 
 .. note::
 
-   Adding or editing a customer is possible only by using database backend. Using external directory services like LDAP will disable the customer management functionality.
+   Adding or editing a customer is possible only by using database back end. Using external directory services like LDAP will disable the customer management functionality.
 
 To add a customer:
 
@@ -49,7 +49,7 @@ To find a customer:
 
 .. note::
 
-   If several customers are added to the system, use the search box to find a particular agent. Only the first 1000 customers are listed by default.
+   If several customers are added to the system, use the search box to find a particular customer. Only the first 1000 customers are listed by default.
 
 
 Customer Settings

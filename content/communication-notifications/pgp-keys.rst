@@ -53,7 +53,7 @@ To delete a PGP key:
 
 .. note::
 
-   If several PGP keys are added to the system, a search box is useful to find a particular PGP key.
+   If several PGP keys are added to the system, use the search box to find a particular PGP key.
 
 
 PGP Configuration Options

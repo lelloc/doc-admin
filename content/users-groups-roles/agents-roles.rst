@@ -42,7 +42,11 @@ To assign some agents to a role:
 
    If several agents or roles are added to the system, use the filter box to find a particular agent or role by just typing the name to filter.
 
-Multiple agents or roles can be assigned in both screens at the same time. Additionally clicking on an agent or clicking on a role will open the edit agent screen or the edit role screen for the selected resource.
+Multiple agents or roles can be assigned in both screens at the same time. Additionally clicking on an agent or clicking on a role in the relations screen will open the *Edit Agent* screen or the *Edit Role* screen accordingly.
+
+.. warning::
+
+   Accessing an agent or a role provides no back link to the relations screen.
 
 .. note::
 

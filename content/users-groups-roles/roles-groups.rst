@@ -4,9 +4,9 @@ Roles ↔ Groups
 Use this screen to add one or more roles to one or more groups. To use this function, at least one role and one group need to have been added to the system. The management screen is available in the *Roles ↔ Groups* module of the *Users, Groups & Roles* group.
 
 .. figure:: images/role-group-management.png
-   :alt: Manage Roles-Groups Relations
+   :alt: Manage Role-Group Relations
 
-   Manage Roles-Groups Relations
+   Manage Role-Group Relations
 
 
 Manage Roles ↔ Groups Relations
@@ -38,7 +38,11 @@ To assign some roles to a group:
 
    If several roles or groups are added to the system, use the filter box to find a particular role or group by just typing the name to filter.
 
-Multiple roles or groups can be assigned in both screens at the same time. Additionally clicking on a role or clicking on a group will open the edit role screen or the edit group screen for the selected resource.
+Multiple roles or groups can be assigned in both screens at the same time. Additionally clicking on a role or clicking on a group in the relations screen will open the *Edit Role* screen or the *Edit Group* screen accordingly.
+
+.. warning::
+
+   Accessing a role or a group provides no back link to the relations screen.
 
 
 Roles ↔ Groups Relations Reference
@@ -93,7 +97,7 @@ rw
       Permissions to change the customer of a ticket.
 
    forward
-      Permissions to forward a messages (with the forward button).
+      Permissions to forward a message (with the forward button).
 
    pending
       Permissions to set a ticket to pending.

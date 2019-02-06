@@ -68,9 +68,9 @@ To edit a priority:
    If several priorities are added to the system, use the filter box to find a particular priority by just typing the name to filter.
 
 .. figure:: images/priority-system-config-validation.png
-   :alt: System Priority Validation Check
+   :alt: Priority Validation Dialog
 
-   System Priority Validation Check
+   Priority Validation Dialog
 
 If you change the name of a priority which is used in the system configuration, a validation check will warn you and give you the following options:
 

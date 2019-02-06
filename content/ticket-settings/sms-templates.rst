@@ -1,11 +1,11 @@
 SMS Templates
 =============
 
-An On-Call duty should be alarmed about incidents on an email servers, therefore cannot get an email from OTRS. Additionally, in the case where customers have no internet access, it's imperative to ensure good contact.
+An on-call duty should be alarmed about incidents on an email servers, therefore cannot get an email from OTRS. Additionally, in the case where customers have no internet access, it's imperative to ensure good contact.
 
 OTRS provides SMS as a cloud service and allows, as with email, management of this communication via templates.
 
-A SMS template is a default text which helps your agents to write faster tickets or answers.
+An SMS template is a default text which helps your agents to write faster tickets or answers.
 
 Use this screen to add SMS templates for use in communications. A fresh OTRS installation doesn't contain any SMS templates by default. The SMS template management screen is available in the *SMS Templates* module of the *Ticket Settings* group.
 

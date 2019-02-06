@@ -1,7 +1,7 @@
 Templates ↔ Attachments
 =======================
 
-Making changes to standard attachments is sometimes overwhelming. The question is, "Where were the attachments used?" or "How to quickly update them across the board?" It's also important to know which are using which attachments, before updating them. A new attachment can have multiple uses within your organization.
+Making changes to standard attachments is sometimes overwhelming. The question is, "Where were the attachments used?" or "How to quickly update them across the board?". It's also important to know who are using which attachments, before updating them. A new attachment can have multiple uses within your organization.
 
 OTRS empowers you to manage this providing you an overview to manage the 1:n relationships and quickly identify the templates using your attachments.
 
@@ -40,7 +40,10 @@ To assign an attachment to some templates:
 
 .. note::
 
-   If several attachments or templates are added to the system, use the filter box to find a particular attachment or template by just typing the name to filter.
+   If several templates or attachments are added to the system, use the filter box to find a particular template or attachment by just typing the name to filter.
 
-Multiple attachments or templates can be assigned in both screens at the same time. Additionally clicking on an attachment or clicking on a template will open the edit attachment screen or the edit template screen for the selected resource.
+Multiple templates or attachments can be assigned in both screens at the same time. Additionally clicking on a template or clicking on an attachment in the relations screen will open the *Edit Template* screen or the *Edit Attachment* screen accordingly.
 
+.. warning::
+
+   Accessing a template or an attachment provides no back link to the relations screen.

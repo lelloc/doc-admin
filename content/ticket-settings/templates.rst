@@ -3,7 +3,7 @@ Templates
 
 Providing the correct and consistent answer all the time regardless of employee or knowledge-level is important to maintain a professional appearance to your customers. Additionally, speed in sending standard answers is key to wading through the masses of requests in growing service desks.
 
-OTRS templates offer you a variety of ways to deal with standardizing communications and helps to predefine texts so that the customer always receives the same level and quality of service from all agents.
+OTRS templates offer you a variety of ways to deal with standardizing communications and help to pre-define texts so that the customer always receives the same level and quality of service from all agents.
 
 Use this screen to add templates for use in communications. A fresh OTRS installation already contains a template by default. The template management screen is available in the *Templates* module of the *Ticket Settings* group.
 
@@ -108,7 +108,7 @@ Template
    The body of the email sent to the users.
 
 Attachments
-   It is possible to add one ore more attachments to this template. Attachments can be added in the :doc:`attachments` screen.
+   It is possible to add one or more attachments to this template. Attachments can be added in the :doc:`attachments` screen.
 
 Validity \*
    Set the validity of this resource. Each resource can be used in OTRS only, if this field is set to *valid*. Setting this field to *invalid* or *invalid-temporarily* will disable the use of the resource.

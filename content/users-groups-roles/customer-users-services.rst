@@ -38,7 +38,11 @@ To allocate some customer users to a service:
 
    If several customer users or services are added to the system, use the search box to find a particular customer user or use the filter box to find a particular service by just typing the name to filter.
 
-Multiple customer users or services can be assigned in both screens at the same time. Additionally clicking on a customer user or clicking on a service will open the edit customer user screen or the edit service screen for the selected resource.
+Multiple customer users or services can be assigned in both screens at the same time. Additionally clicking on a customer user or clicking on a service in the relations screen will open the *Edit Customer User* screen or the *Edit Service* screen accordingly.
+
+.. warning::
+
+   Accessing a customer user or a service provides no back link to the relations screen.
 
 .. note::
 
