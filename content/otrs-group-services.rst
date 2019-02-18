@@ -1,7 +1,9 @@
 OTRS Group Services
 ===================
 
-This is the chapter *OTRS Group Services*.
+A strong partner is good to have when dealing with mission-critical systems. Whether it be maintenance or for consuming cloud services, your partner should be tightly integrated.
+
+The following chapter describes the tools you have available to integrate your system with the powerful cloud service offered by the *OTRS Group*.
 
 .. toctree::
    :maxdepth: 3
