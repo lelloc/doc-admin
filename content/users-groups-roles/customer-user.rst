@@ -66,6 +66,10 @@ The customer user permissions can be controlled by adding a customer or a custom
 
    Effective Permissions for Customer User Widget
 
+.. seealso::
+
+   :doc:`customer-users-groups` needs to be enabled to use this feature.
+
 
 Customer User Settings
 ----------------------
