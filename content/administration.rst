@@ -10,7 +10,7 @@ OTRS offers several administration tools to configure, monitor, control and exte
    :caption: Contents
 
    administration/calendars
-   administration/chat-channel
+   administration/chat-channels
    administration/package-manager
    administration/performance-log
    administration/session-management

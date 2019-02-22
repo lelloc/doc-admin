@@ -14,7 +14,7 @@ OTRS provides powerful tools for this purpose and their use is described in the 
    users-groups-roles/agents-roles
    users-groups-roles/customers
    users-groups-roles/customers-groups
-   users-groups-roles/customer-user
+   users-groups-roles/customer-users
    users-groups-roles/customer-users-customers
    users-groups-roles/customer-users-groups
    users-groups-roles/customer-users-services

@@ -45,7 +45,7 @@ Let's continue with users, but you might need to add some :doc:`users-groups-rol
 
 The next step is to add :doc:`users-groups-roles/agents` to the system and set the :doc:`users-groups-roles/agents-groups` and/or :doc:`users-groups-roles/agents-roles` relations.
 
-Now you can add :doc:`users-groups-roles/customers` and :doc:`users-groups-roles/customer-user`. Customers are companies and customer users are the employees of the company.
+Now you can add :doc:`users-groups-roles/customers` and :doc:`users-groups-roles/customer-users`. Customers are companies and customer users are the employees of the company.
 
 .. note::
 

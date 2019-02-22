@@ -7,10 +7,10 @@ OTRS empowers you to manage this providing you an overview to manage the 1:n rel
 
 Use this screen to add one or more attachments to one or more templates. To use this function, at least one attachment and one template need to have been added to the system. The management screen is available in the *Templates ↔ Attachments* module of the *Ticket Settings* group.
 
-.. figure:: images/attachment-template-management.png
-   :alt: Manage Templates-Attachments Relations
+.. figure:: images/template-attachment-management.png
+   :alt: Manage Template-Attachment Relations
 
-   Manage Templates-Attachments Relations
+   Manage Template-Attachment Relations
 
 
 Manage Templates ↔ Attachments Relations
@@ -22,7 +22,7 @@ To add some attachments to a template:
 2. Select the attachments you would like to add to the template.
 3. Click on the *Save* or *Save and finish* button.
 
-.. figure:: images/attachment-template-attachment.png
+.. figure:: images/template-attachment-attachment.png
    :alt: Change Attachment Relations for Template
 
    Change Attachment Relations for Template
@@ -33,7 +33,7 @@ To assign an attachment to some templates:
 2. Select the templates you would like to assign the attachment to.
 3. Click on the *Save* or *Save and finish* button.
 
-.. figure:: images/attachment-template-template.png
+.. figure:: images/template-attachment-template.png
    :alt: Change Template Relations for Attachment
 
    Change Template Relations for Attachment

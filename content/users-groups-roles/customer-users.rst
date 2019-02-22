@@ -1,11 +1,11 @@
-Customer User
-=============
+Customer Users
+==============
 
-A record of who your company deals with requires more information about that individual: Physical location, for shipping and billing purposes, as well as contact information for email and phone contact.
+A record of who your company deals with requires more information about that individual: physical location for shipping and billing purposes, as well as contact information for email and phone contact.
 
 OTRS offers a great way to save individual information about contacts within organizations which your company serves. You can add as many personal connections into OTRS as needed.
 
-Use this screen to add a :term:`customer user` to the system. A fresh OTRS installation contains no customer users by default. The customer user management screen is available in the *Customer User* module of the *Users, Groups & Roles* group.
+Use this screen to add a :term:`customer user` to the system. A fresh OTRS installation contains no customer users by default. The customer user management screen is available in the *Customer Users* module of the *Users, Groups & Roles* group.
 
 .. figure:: images/customer-user-management.png
    :alt: Customer User Management Screen
