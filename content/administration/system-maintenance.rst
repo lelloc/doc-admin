@@ -70,7 +70,7 @@ Login message
 
    .. seealso::
 
-      There are some default system maintenance massage set in the system configuration. For more information see the following system configuration settings:
+      There are some default system maintenance message set in the system configuration. For more information see the following system configuration settings:
 
       - :sysconfig:`SystemMaintenance::IsActiveDefaultLoginErrorMessage <core.html#systemmaintenance-isactivedefaultloginerrormessage>`
       - :sysconfig:`SystemMaintenance::IsActiveDefaultLoginMessage <core.html#systemmaintenance-isactivedefaultloginmessage>`
