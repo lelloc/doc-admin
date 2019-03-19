@@ -128,14 +128,21 @@ This dynamic field allows to add contacts with data to tickets.
 
    Contact With Data Dynamic Field Settings
 
-Possible values \*
-   These are the possible data attributes for contacts. Clicking on the *⊞* button will add two new fields, where a key (internal value) and a value (displayed value) can be set. With the button you can add multiple key-value pairs.
+Name Field \*
+   The attribute ``Name`` is always mandatory and it is not automatically added, so for each new data source this attribute must be added manually. Within the data source definition (or dynamic field configuration) they must be represented by the key ``Name`` and the value could be *Name* for example.
 
-   .. note::
+ValidID Field \*
+   The attribute ``ValidID`` is always mandatory and it is not automatically added, so for each new data source this attribute must be added manually. Within the data source definition (or dynamic field configuration) they must be represented by the key ``ValidID`` and the value could be *Validity* for example.
 
-      The attributes ``Name`` and ``ValidID`` are always mandatory and they are not automatically added, so for each new data source these attributes must be added manually.
+Other Fields
+   These are the possible data attributes for contacts. Clicking on the *⊞* button of the *Add Fields* will add two new fields, where a *Key* (internal value) and a *Value* (displayed value) can be set. With the button you can add multiple key-value pairs.
 
-      Within the data source definition (or dynamic field configuration) they must be represented by the keys ``Name`` and ``ValidID`` respectively while the values could be *Name* and *Validity* for example.
+   .. warning::
+
+      The keys ``Name`` and ``ValidID`` are already used by *Name Field* and *ValidID Field*. Do not use these keys again!
+
+Add Fields
+   Use this button to add more fields to dynamic field.
 
 Mandatory fields
    Comma separated list of mandatory keys.
@@ -161,17 +168,44 @@ Translatable values
 
       You need to add the translations manually into the language translation files.
 
-Contact with data management
-   There is a link *Add/Edit*, that points to *Tickets* → *Edit contacts with data* to add some data.
+When the dynamic field was saved, click on the name of the newly created field in the overview table. The *Edit Dynamic Field* will open. There is a button *Add or edit contacts*, that points to *Tickets* → *Edit contacts with data* to add some data.
+
+.. figure:: images/dynamic-field-contact-with-data-management.png
+   :alt: Contact With Data Management Screen
+
+   Contact With Data Management Screen
+
+To add a new contact with data:
+
+1. Select a dynamic field from the drop-down list in *Actions* widget of the left sidebar.
+2. Click on the *Add contact with data* button in the left sidebar.
+3. Fill in the required fields.
+4. Click on the *Save* button.
+
+.. figure:: images/dynamic-field-contact-with-data-add.png
+   :alt: Add Contact With Data Screen
+
+   Add Contact With Data Screen
+
+To edit a contact with data:
+
+1. Click on a contact with data in the list of contact with data entries.
+2. Modify the fields.
+3. Click on the *Save* or *Save and finish* button.
+
+.. figure:: images/dynamic-field-contact-with-data-edit.png
+   :alt: Edit Contact With Data Screen
+
+   Edit Contact With Data Screen
 
 The usage of this type of dynamic field is more complex then the others. An exemplary usage of contacts with data is as follows:
 
 1. Create a new dynamic field of type contact with data.
-2. Set the possible contact attributes (possible values). ``Name`` and ``ValidID`` are required for any contact with data dynamic field.
+2. Set the possible contact attributes (possible values).
 
-   - Add ``Name`` attribute (key: ``Name``, value: *Name*).
-   - Add ``ValidID`` attribute (key: ``ValidID``, value: *Validity*).
-   - Add any other attribute such as ``Telephone`` attribute (key: ``Telephone``, value: *Phone*).
+   - Type *Name* into *Name Field*.
+   - Type *Validity* into *ValidID Field*.
+   - Add any other attribute with *Add Fields* button such as ``Telephone`` attribute (key: ``Telephone``, value: *Phone*).
 
 3. Add the list of mandatory attribute keys comma separated (``Name`` and ``ValidID`` are not needed).
 4. Set the attribute key order list comma separated as: ``Name,Telephone,ValidID``.
@@ -396,10 +430,10 @@ To display a dynamic field on a screen:
 
 1. Make sure that the dynamic field *Validity* is set to *valid*.
 2. Open the *System Configuration* module in the admin interface.
-3. Navigate to *Fromtend* → *Agent* → *View* and select a view to add the dynamic field to.
+3. Navigate to *Frontend* → *Agent* → *View* and select a view to add the dynamic field to.
 4. Find the setting ends with ``###DynamicField`` and click on the *Edit this setting* button.
 5. Click on the *+* button to add the dynamic field.
-6. Enter the name of the dynamic field to the textbox and click on the tick button.
+6. Enter the name of the dynamic field to the text box and click on the tick button.
 7. Select *1 - Enabled* or *2 - Enabled and required*.
 8. Click on the tick button on the right to save the setting.
 9. Deploy the modified system configuration.
