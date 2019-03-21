@@ -16,7 +16,7 @@ Manage System Registration
 
 To register your system:
 
-1. Obtain an OTRS ID. You have to register in the `OTRS Portal <https://portal.otrs.com/otrs/customer.pl#Signup>`__. After the registration you will get your OTRS ID.
+1. Obtain an OTRS ID. You have to register in the `OTRS Portal <https://portal.otrs.com/>`__. After the registration you will get your OTRS ID.
 2. Go to the *System Registration* module of the *OTRS Group Services* group, and enter your OTRS ID and your password.
 
 .. figure:: images/system-registration-otrs-id.png
@@ -68,7 +68,7 @@ To show the transmitted data:
 To overview the registered system:
 
 1. Click on the *Overview of registered systems* button in the left sidebar.
-2. Log in the `OTRS Portal <https://portal.otrs.com/otrs/customer.pl?Action=CustomerOTRSSystems>`__.
+2. Log in to the `OTRS Portal <https://portal.otrs.com/external/otrssystems/overview>`__.
 3. Review the list of registered systems.
 
 To deregister a system:
