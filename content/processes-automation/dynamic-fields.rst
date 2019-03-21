@@ -129,10 +129,10 @@ This dynamic field allows to add contacts with data to tickets.
    Contact With Data Dynamic Field Settings
 
 Name Field \*
-   The attribute ``Name`` is always mandatory and it is not automatically added, so for each new data source this attribute must be added manually. Within the data source definition (or dynamic field configuration) they must be represented by the key ``Name`` and the value could be *Name* for example.
+   The attribute ``Name`` is always mandatory and it is not automatically added, so for each new data source this attribute must be added manually. Within the data source definition (or dynamic field configuration) this must be represented by the key ``Name`` and the value could be *Name* for example.
 
 ValidID Field \*
-   The attribute ``ValidID`` is always mandatory and it is not automatically added, so for each new data source this attribute must be added manually. Within the data source definition (or dynamic field configuration) they must be represented by the key ``ValidID`` and the value could be *Validity* for example.
+   The attribute ``ValidID`` is always mandatory and it is not automatically added, so for each new data source this attribute must be added manually. Within the data source definition (or dynamic field configuration) this must be represented by the key ``ValidID`` and the value could be *Validity* for example.
 
 Other Fields
    These are the possible data attributes for contacts. Clicking on the *⊞* button of the *Add Fields* will add two new fields, where a *Key* (internal value) and a *Value* (displayed value) can be set. With the button you can add multiple key-value pairs.
@@ -168,7 +168,7 @@ Translatable values
 
       You need to add the translations manually into the language translation files.
 
-When the dynamic field was saved, click on the name of the newly created field in the overview table. The *Edit Dynamic Field* will open. There is a button *Add or edit contacts*, that points to *Tickets* → *Edit contacts with data* to add some data.
+When the dynamic field was saved, click on the name of the newly created dynamic field in the overview table. The *Edit Dynamic Field* screen will open. There is a button *Add or edit contacts*, that points to *Tickets* → *Edit contacts with data* to add some data.
 
 .. figure:: images/dynamic-field-contact-with-data-management.png
    :alt: Contact With Data Management Screen
