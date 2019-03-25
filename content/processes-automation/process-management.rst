@@ -115,7 +115,7 @@ Recording the demand
       Title: Prozessmanagement für Dummies
       Autor: Thilo Knuppertz
       ISBN: 3527703713
-                
+
 Approval by manager
    The head of the employee's department needs to decide on the order. In case of a denial, a reason should be recorded by the manager. In case of approval, the order is passed to the purchasing department.
 
@@ -200,14 +200,14 @@ Set the following :doc:`../administration/system-configuration` settings:
 
 - :sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfield>`
 
-   - ``Author`` →  *1 - Enabled*
-   - ``DateOfReceipt`` →  *1 - Enabled*
-   - ``DeliveryDate`` →  *1 - Enabled*
-   - ``ISBN`` →  *1 - Enabled*
-   - ``Price`` →  *1 - Enabled*
-   - ``Status`` →  *1 - Enabled*
-   - ``Supplier`` →  *1 - Enabled*
-   - ``Title`` →  *1 - Enabled*
+   - ``Author`` → *1 - Enabled*
+   - ``DateOfReceipt`` → *1 - Enabled*
+   - ``DeliveryDate`` → *1 - Enabled*
+   - ``ISBN`` → *1 - Enabled*
+   - ``Price`` → *1 - Enabled*
+   - ``Status`` → *1 - Enabled*
+   - ``Supplier`` → *1 - Enabled*
+   - ``Title`` → *1 - Enabled*
 
 .. note::
 
