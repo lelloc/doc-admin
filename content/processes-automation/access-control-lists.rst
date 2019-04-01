@@ -250,3 +250,211 @@ This ACL restricts the process *P14* in the external interface using the custome
    :alt: 105-Example-ACL
 
    105-Example-ACL
+
+
+ACL Reference
+-------------
+
+Properties, keys and values that can be used in ACLs are highly depend on the OTRS installation. For example the possibilities can be extended by installing extension modules, as well as it can be depend on the customer user mapping set in ``Config.pm``. Therefore it is not possible to provide a full ACL reference, that contains all settings.
+
+For properties, keys and values that can be used in ACLs, see the following example ACL in YAML format.
+
+.. code-block:: yaml
+
+   ---
+   - ChangeBy: root@localhost
+     ChangeTime: 2019-01-07 10:42:59
+     Comment: ACL Reference.
+     ConfigMatch:
+       Properties:
+         # Match properties (current values from the form).
+         CustomerUser:
+           UserLogin:
+           - some login
+           UserCustomerID:
+           - some customer id
+           Group_rw:
+           - hotline
+         DynamicField:
+           # Names must be in DynamicField_<field_name> format.
+           # Values in [ ... ] must always be the untranslated internal data keys
+           #   specified in the dynamic field definition and not the data values
+           #   shown to the user.
+           DynamicField_Field1:
+           - some value
+           DynamicField_OtherField:
+           - some value
+           DynamicField_TicketFreeText2:
+           - some value
+           # more dynamic fileds
+         Frontend:
+           Action:
+           - AgentTicketPhone
+           - AgentTicketEmail
+           - ...
+         Owner:
+           UserLogin:
+           - some login
+           Group_rw:
+           - some group
+           Role:
+           - admin
+           # more owner attributes
+         Priority:
+           ID:
+           - some id
+           Name:
+           - some name
+           # more priority attributes
+         Process:
+           ProcessEntityID:
+           # the process that the current ticket is part of
+           - Process-9c378d7cc59f0fce4cee7bb9995ee3eb
+           ActivityEntityID:
+           # the current activity of the ticket
+           - Activity-f8b2fdebe54eeb7b147a5f8e1da5e35c
+           ActivityDialogEntityID:
+           # the current activity dialog that the agent/customer is using
+           - ActivityDialog-aff0ae05fe6803f38de8fff6cf33b7ce
+         Queue:
+           Name:
+           - Raw
+           QueueID:
+           - some id
+           GroupID:
+           - some id
+           Email:
+           - some email
+           RealName:
+           - OTRS System
+           # more queue attributes
+         Responsible:
+           UserLogin:
+           - some login
+           Group_rw:
+           - some group
+           Role:
+           - admin
+           # more responsible attributes
+         Service:
+           ServiceID:
+           - some id
+           Name:
+           - some name
+           ParentID:
+           - some id
+           # more service attributes
+         SLA:
+           SLAID:
+           - some id
+           Name:
+           - some name
+           Calendar:
+           - some calendar
+           # more SLA attributes
+         State:
+           ID:
+           - some id
+           Name:
+           - some name
+           TypeName:
+           - some state type name
+           TypeID:
+           - some state type id
+           # more state attributes
+         Ticket:
+           Queue:
+           - Raw
+           State:
+           - new
+           - open
+           Priority:
+           - some priority
+           Lock:
+           - lock
+           CustomerID:
+           - some id
+           CustomerUserID:
+           - some id
+           Owner:
+           - some owner
+           DynamicField_Field1:
+           - some value
+           DynamicField_MyField:
+           - some value
+           # more ticket attributes
+         Type:
+           ID:
+           - some id
+           Name:
+           - some name
+           # more type attributes
+         User:
+           UserLogin:
+           - some_login
+           Group_rw:
+           - hotline
+           Role:
+           - admin
+       PropertiesDatabase:
+         # Match properties (existing values from the database).
+         # Please note that Frontend is not in the database, but in the framework.
+         # See section "Properties", the same config can be used here.
+     ConfigChange:
+       Possible:
+         # Reset possible options (white list).
+         Action:
+         # Possible action options (white list).
+         - AgentTicketBounce
+         - AgentTicketPhone   # only used to show/hide the Split action
+         - AgentLinkObject    # only used to show/hide the Link action
+         - ...
+         ActivityDialog:
+         # Limit the number of possible activity dialogs the agent/customer can use in a process ticket.
+         - ActivityDialog-aff0ae05fe6803f38de8fff6cf33b7ce
+         - ActivityDialog-429d61180a593414789a8087cc4b3c6f
+         - ...
+         Endpoint:
+         # Limit the functions on external interface.
+         - ExternalFrontend::PersonalPreferences
+         - ExternalFrontend::ProcessTicketCreate
+         - ExternalFrontend::ProcessTicketNextStep
+         - ExternalFrontend::TicketCreate
+         - ExternalFrontend::TicketDetailView
+         Process:
+         # Limit the number of possible processes that can be started.
+         - Process-9c378d7cc59f0fce4cee7bb9995ee3eb
+         - Process-12345678901234567890123456789012
+         - ...
+         Ticket:
+         # Possible ticket options (white list).
+           Queue:
+           - Hotline
+           - Coordination
+           State:
+           - some state
+           Priority:
+           - 5 very high
+           DynamicField_Field1:
+           - some value
+           DynamicField_MyField:
+           - some value
+           # more dynamic fields
+           NewOwner:
+           - some owner
+           OldOwner:
+           - some owner
+           # more ticket attributes
+       PossibleAdd:
+          # Add options (white list).
+          # See section "Possible", the same config can be used here.
+       PossibleNot:
+          # Remove options (black list).
+          # See section "Possible", the same config can be used here.
+     CreateBy: root@localhost
+     CreateTime: 2019-01-07 10:42:59
+     Description: This is the long description of the ACL to explain its usage.
+     ID: 1
+     Name: 200-ACL-Reference
+     StopAfterMatch: 0
+     ValidID: 3
