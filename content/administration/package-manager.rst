@@ -7,7 +7,7 @@ OTRS uses a package manager to perform all package-related activities as mention
 
 .. note::
 
-   This module is only available when using *On-Pemise* or the *((OTRS)) Community Edition*. To see a list of installed modules, you may also see the :doc:`../otrs-group-services/support-data-collector`.
+   This module is only available when using *On-Premise* or the *((OTRS)) Community Edition*. To see a list of installed modules, you may also see the :doc:`../otrs-group-services/support-data-collector`.
 
 Use this screen to install and manage packages that extend the functionality of OTRS. The package manager screen is available in the *Package Manager* module of the *Administration* group.
 
