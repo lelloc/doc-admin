@@ -272,25 +272,32 @@ For properties, keys and values that can be used in ACLs, see the following exam
            UserLogin:
            - some login
            UserCustomerID:
-           - some customer id
+           - some customer ID
            Group_rw:
-           - hotline
+           - some group
          DynamicField:
            # Names must be in DynamicField_<field_name> format.
-           # Values in [ ... ] must always be the untranslated internal data keys
-           #   specified in the dynamic field definition and not the data values
-           #   shown to the user.
+           # Values for dynamic fields must always be the untranslated internal
+           #   data keys specified in the dynamic field definition and not the
+           #   data values shown to the user.
            DynamicField_Field1:
            - some value
            DynamicField_OtherField:
            - some value
            DynamicField_TicketFreeText2:
            - some value
-           # more dynamic fileds
+           # more dynamic fields
          Frontend:
            Action:
            - AgentTicketPhone
            - AgentTicketEmail
+           - ...
+           Endpoint:
+           - ExternalFrontend::PersonalPreferences
+           - ExternalFrontend::ProcessTicketCreate
+           - ExternalFrontend::ProcessTicketNextStep
+           - ExternalFrontend::TicketCreate
+           - ExternalFrontend::TicketDetailView
            - ...
          Owner:
            UserLogin:
@@ -302,7 +309,7 @@ For properties, keys and values that can be used in ACLs, see the following exam
            # more owner attributes
          Priority:
            ID:
-           - some id
+           - some ID
            Name:
            - some name
            # more priority attributes
@@ -320,9 +327,9 @@ For properties, keys and values that can be used in ACLs, see the following exam
            Name:
            - Raw
            QueueID:
-           - some id
+           - some ID
            GroupID:
-           - some id
+           - some ID
            Email:
            - some email
            RealName:
@@ -338,15 +345,15 @@ For properties, keys and values that can be used in ACLs, see the following exam
            # more responsible attributes
          Service:
            ServiceID:
-           - some id
+           - some ID
            Name:
            - some name
            ParentID:
-           - some id
+           - some ID
            # more service attributes
          SLA:
            SLAID:
-           - some id
+           - some ID
            Name:
            - some name
            Calendar:
@@ -354,13 +361,13 @@ For properties, keys and values that can be used in ACLs, see the following exam
            # more SLA attributes
          State:
            ID:
-           - some id
+           - some ID
            Name:
            - some name
            TypeName:
            - some state type name
            TypeID:
-           - some state type id
+           - some state type ID
            # more state attributes
          Ticket:
            Queue:
@@ -373,9 +380,9 @@ For properties, keys and values that can be used in ACLs, see the following exam
            Lock:
            - lock
            CustomerID:
-           - some id
+           - some ID
            CustomerUserID:
-           - some id
+           - some ID
            Owner:
            - some owner
            DynamicField_Field1:
@@ -385,7 +392,7 @@ For properties, keys and values that can be used in ACLs, see the following exam
            # more ticket attributes
          Type:
            ID:
-           - some id
+           - some ID
            Name:
            - some name
            # more type attributes
@@ -393,13 +400,13 @@ For properties, keys and values that can be used in ACLs, see the following exam
            UserLogin:
            - some_login
            Group_rw:
-           - hotline
+           - some group
            Role:
            - admin
        PropertiesDatabase:
          # Match properties (existing values from the database).
          # Please note that Frontend is not in the database, but in the framework.
-         # See section "Properties", the same config can be used here.
+         # See section "Properties", the same configuration can be used here.
      ConfigChange:
        Possible:
          # Reset possible options (white list).
@@ -421,6 +428,7 @@ For properties, keys and values that can be used in ACLs, see the following exam
          - ExternalFrontend::ProcessTicketNextStep
          - ExternalFrontend::TicketCreate
          - ExternalFrontend::TicketDetailView
+         - ...
          Process:
          # Limit the number of possible processes that can be started.
          - Process-9c378d7cc59f0fce4cee7bb9995ee3eb
@@ -429,8 +437,8 @@ For properties, keys and values that can be used in ACLs, see the following exam
          Ticket:
          # Possible ticket options (white list).
            Queue:
-           - Hotline
-           - Coordination
+           - Raw
+           - some other queue
            State:
            - some state
            Priority:
@@ -447,10 +455,10 @@ For properties, keys and values that can be used in ACLs, see the following exam
            # more ticket attributes
        PossibleAdd:
           # Add options (white list).
-          # See section "Possible", the same config can be used here.
+          # See section "Possible", the same configuration can be used here.
        PossibleNot:
           # Remove options (black list).
-          # See section "Possible", the same config can be used here.
+          # See section "Possible", the same configuration can be used here.
      CreateBy: root@localhost
      CreateTime: 2019-01-07 10:42:59
      Description: This is the long description of the ACL to explain its usage.
