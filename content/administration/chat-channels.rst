@@ -60,8 +60,37 @@ Available to customer users
 Available to public users
    Select the checkbox if you want to display the chat channel for public users.
 
-Validity \*
+Valid \*
    Set the validity of this resource. Each resource can be used in OTRS only, if this field is set to *valid*. Setting this field to *invalid* or *invalid-temporarily* will disable the use of the resource.
 
 Comment
    Add additional information to this resource. It is recommended to always fill this field as a description of the resource with a full sentence for better clarity, because the comment will be also displayed in the overview table.
+
+
+Enable Chat Support
+-------------------
+
+.. note::
+
+   The chat feature is not enabled by default.
+
+To enable the chat feature:
+
+1. Go to *System Configuration* screen.
+2. Navigate to *Core → Chat* in the navigation tree.
+3. Enable the setting ``ChatEngine::Active``.
+
+When the chat feature is enabled, the *Default channel* is automatically created if it does not exist.
+
+To review all chat related settings:
+
+1. Go to *System Configuration* screen.
+2. Search for the term ``ChatEngine`` in the search box.
+3. Review the settings.
+
+.. seealso::
+
+   Agents need to have at least *ro* permissions to the groups set up in the following settings:
+
+   - ``ChatEngine::PermissionGroup::ChatReceivingAgents``
+   - ``ChatEngine::PermissionGroup::ChatStartingAgents``
