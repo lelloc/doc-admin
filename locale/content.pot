@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OTRS Administration Manual 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-10 09:56+0200\n"
+"POT-Creation-Date: 2019-05-28 15:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -322,6 +322,9 @@ msgstr ""
 #: ../../content/processes-automation/access-control-lists.rst:97
 #: ../../content/processes-automation/dynamic-fields.rst:59
 #: ../../content/processes-automation/generic-agent.rst:70
+#: ../../content/processes-automation/process-management.rst:112
+#: ../../content/processes-automation/process-management.rst:148
+#: ../../content/processes-automation/process-management.rst:187
 #: ../../content/processes-automation/web-services.rst:119
 #: ../../content/ticket-settings/attachments.rst:59
 #: ../../content/ticket-settings/auto-responses.rst:59
@@ -2012,7 +2015,7 @@ msgstr ""
 
 #: ../../content/communication-notifications/appointment-notifications.rst:154
 #: ../../content/external-interface/home-page.rst:26
-#: ../../content/processes-automation/process-management.rst:166
+#: ../../content/processes-automation/process-management.rst:272
 msgid "Title"
 msgstr ""
 
@@ -3713,6 +3716,8 @@ msgid "Use of regular expressions as a filter do not work here."
 msgstr ""
 
 #: ../../content/external-interface.rst:2
+#: ../../content/processes-automation/process-management.rst:135
+#: ../../content/processes-automation/process-management.rst:171
 msgid "External Interface"
 msgstr ""
 
@@ -4504,14 +4509,14 @@ msgid "(see also :term:`Service Level Agreement`)."
 msgstr ""
 
 #: ../../content/glossary.rst:73
-#: ../../content/processes-automation/process-management.rst:166
-#: ../../content/processes-automation/process-management.rst:168
-#: ../../content/processes-automation/process-management.rst:170
-#: ../../content/processes-automation/process-management.rst:172
-#: ../../content/processes-automation/process-management.rst:179
-#: ../../content/processes-automation/process-management.rst:181
-#: ../../content/processes-automation/process-management.rst:183
-#: ../../content/processes-automation/process-management.rst:185
+#: ../../content/processes-automation/process-management.rst:272
+#: ../../content/processes-automation/process-management.rst:274
+#: ../../content/processes-automation/process-management.rst:276
+#: ../../content/processes-automation/process-management.rst:278
+#: ../../content/processes-automation/process-management.rst:285
+#: ../../content/processes-automation/process-management.rst:287
+#: ../../content/processes-automation/process-management.rst:289
+#: ../../content/processes-automation/process-management.rst:291
 msgid "Ticket"
 msgstr ""
 
@@ -6412,7 +6417,7 @@ msgstr ""
 
 #: ../../content/processes-automation/dynamic-fields.rst:288
 #: ../../content/processes-automation/dynamic-fields.rst:326
-#: ../../content/processes-automation/process-management.rst:164
+#: ../../content/processes-automation/process-management.rst:270
 msgid "Possible values"
 msgstr ""
 
@@ -7137,956 +7142,1118 @@ msgid "If several processes are added to the system, use the filter box to find 
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:100
-msgid "Example process"
+msgid "Process Elements"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:102
-msgid "Processes are more complex than other resources in OTRS. To create a process, you need to do several steps. The following chapters shows you, how to define a process from the specification and create the needed resources. Let's see an example to make it more demonstrative. We will define a book order process."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:106
-msgid "Process Specification"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:108
-msgid "The book order process has four states."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:117
-msgid "Recording the demand"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:111
-msgid "Before an order will be placed, the demand for literature by an employee will be recorded. The following book is needed in our example:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:120
-msgid "Approval by manager"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:120
-msgid "The head of the employee's department needs to decide on the order. In case of a denial, a reason should be recorded by the manager. In case of approval, the order is passed to the purchasing department."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:123
-msgid "Processing by purchasing department"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:123
-msgid "Purchasing now has the task to find out where the book can be ordered with the best conditions. If it is out of stock, this can be recorded in the order. In case of a successful order purchasing will record the supplier, the price and the delivery date."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:127
-msgid "Processing by the mail room"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:126
-msgid "The shipment will arrive at the company. The incoming goods department checks the shipment and records the date of receipt. Now the employee will be informed that their order has arrived and is ready to be collected."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:130
-msgid "Introduce The Process Elements"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:132
-msgid "If we assume that a ticket acts in this workflow like an accompanying document that can receive change notes, we already have a clear picture of process tickets."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:134
-msgid "From the analysis of the example process we can identify the following necessary items:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:136
-msgid "Possibility to record data, let's call this :term:`user task activity dialog`."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:137
-msgid "Check which can react to changed data automatically, let's call this :term:`sequence flow`."
+msgid "The element names of the process modeler have been adapted to the *Business Process Model and Notation* (BPMN) ISO naming convention. The following task activities can be used as basic elements of the process."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:138
-msgid "Change which can be applied to a process ticket after successful transitions of a process ticket, let's call this :term:`sequence flow action`."
+#: ../../content/processes-automation/process-management.rst:156
+#: ../../content/processes-automation/process-management.rst:195
+msgid "Script task activity"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:139
-msgid "A possibility to offer more than just one user task activity dialog to be available. In our example this is needed when the manager must have the choice between *Approve* and *Deny*. Let's call this :term:`activity`."
+#: ../../content/processes-automation/process-management.rst:105
+msgid "Script task activity is executed by the process management module and it can set dynamic field values or manage tickets automatically."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:110
+msgid "Script Task Activity Window"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:115
+#: ../../content/processes-automation/process-management.rst:151
+#: ../../content/processes-automation/process-management.rst:190
+msgid "Activity name \\*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:115
+#: ../../content/processes-automation/process-management.rst:151
+#: ../../content/processes-automation/process-management.rst:190
+msgid "The name of this resource. Any type of characters can be entered to this field including uppercase letters and spaces."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:122
+#: ../../content/processes-automation/process-management.rst:158
+#: ../../content/processes-automation/process-management.rst:197
+msgid "Activity type \\*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:118
+#: ../../content/processes-automation/process-management.rst:154
+#: ../../content/processes-automation/process-management.rst:193
+msgid "The following types of task activities can be used:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:120
+msgid "Script task activity (selected for now)"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:121
+#: ../../content/processes-automation/process-management.rst:177
+#: ../../content/processes-automation/process-management.rst:196
+msgid "Service task activity"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:122
+#: ../../content/processes-automation/process-management.rst:158
+#: ../../content/processes-automation/process-management.rst:203
+msgid "User task activity"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:125
+#: ../../content/processes-automation/process-management.rst:161
+msgid "Activity description"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:125
+#: ../../content/processes-automation/process-management.rst:161
+msgid "Add additional information to this resource. It is recommended to always fill this field as a description of the resource with a full sentence for better clarity."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:128
+#: ../../content/processes-automation/process-management.rst:164
+msgid "Activity error code"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:128
+#: ../../content/processes-automation/process-management.rst:164
+msgid "Define a custom error code for script or service task activities. The custom error code must be a positive integer number."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:135
+#: ../../content/processes-automation/process-management.rst:171
+msgid "Can start processes in"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:131
+#: ../../content/processes-automation/process-management.rst:167
+msgid "Defines, where can the processes be started by the agents or customer users. A process can be started in the following interfaces:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:133
+#: ../../content/processes-automation/process-management.rst:169
+msgid "Agent Interface"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:134
+#: ../../content/processes-automation/process-management.rst:170
+msgid "Agent and External Interface"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:138
+msgid "Script \\*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:138
+msgid "In this drop-down can be selected which script should be triggered immediately if the activity is set. Click on the *Configure* button to add parameters (key-value pairs) for the script."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:141
-msgid "Now, with activities, user task activity dialogs, sequence flows and sequence flow actions we have the necessary tools to model the individual steps of our example. What is still missing is an area where for each workflow the order of the steps can be specified. Let's call this :term:`process`."
+msgid "Service task activity uses a web service to complete the task."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:145
-msgid "Create Necessary Resources"
+#: ../../content/processes-automation/process-management.rst:146
+msgid "Service Task Activity Window"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:147
-msgid "Before the creation of the process and its parts is necessary to prepare the system. We need to define some :doc:`../ticket-settings/queues`, :doc:`../users-groups-roles/agents` and :doc:`dynamic-fields` as well as set some :doc:`../administration/system-configuration` settings."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:149
-msgid "Create the following :doc:`../ticket-settings/queues`:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:151
-msgid "Management"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:152
-msgid "Employees"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:153
-msgid "Purchasing"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:154
-msgid "Post office"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:156
-msgid "Create the following :doc:`../users-groups-roles/agents`:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:158
-msgid "Manager"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:159
-msgid "Employee"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:161
-msgid "Create the following :doc:`dynamic-fields`:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:164
-msgid "Object"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:164
-msgid "Type"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:164
-msgid "Name"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:164
-msgid "Label"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:166
-#: ../../content/processes-automation/process-management.rst:168
-#: ../../content/processes-automation/process-management.rst:170
-#: ../../content/processes-automation/process-management.rst:179
-#: ../../content/processes-automation/process-management.rst:181
-msgid "Text"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:166
-msgid "``Title``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:168
-msgid "``Author``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:168
-msgid "Author"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:170
-msgid "``ISBN``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:170
-msgid "ISBN"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:172
-msgid "Dropdown"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:172
-msgid "``Status``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:172
-msgid "Status"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:172
-msgid "Approval"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:173
-msgid "Approval denied"
+#: ../../content/processes-automation/process-management.rst:157
+msgid "Service task activity (selected for now)"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:174
-msgid "Approved"
+msgid "Web Service \\*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:175
-msgid "Order denied"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:176
-msgid "Order placed"
+#: ../../content/processes-automation/process-management.rst:174
+msgid "Select one of the :doc:`web-services` from the drop-down list."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:177
-msgid "Shipment received"
+msgid "Invoker \\*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:179
-msgid "``Supplier``"
+#: ../../content/processes-automation/process-management.rst:177
+msgid "Select an invoker for the web service. Click on the *Configure* button to add parameters for the invoker."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:179
-msgid "Supplier"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:181
-msgid "``Price``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:181
-msgid "Price"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:183
-#: ../../content/processes-automation/process-management.rst:185
-msgid "Date"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:183
-msgid "``DeliveryDate``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:183
-msgid "Delivery date"
+#: ../../content/processes-automation/process-management.rst:180
+msgid "User task activity can be used when the task is being done by an agent or a customer user."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:185
-msgid "``DateOfReceipt``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:185
-msgid "Date of receipt"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:188
-msgid "Set the following :doc:`../administration/system-configuration` settings:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:190
-msgid ":sysconfig:`Ticket::Responsible <core.html#ticket-responsible>`"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:192
-msgid "Enabled"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:194
-msgid ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicFieldGroups <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfieldgroups>`"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:196
-msgid "``Book`` → ``Title,Author,ISBN``"
+msgid "User Task Activity Window"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:197
-msgid "``General`` → ``Status``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:198
-msgid "``Order`` → ``Price,Supplier,DeliveryDate``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:199
-msgid "``Shipment`` → ``DateOfReceipt``"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:201
-msgid ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfield>`"
+msgid "User task activity (selected for now)"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:203
-msgid "``Author`` → *1 - Enabled*"
+msgid "User Task Activity Dialogs"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:204
-msgid "``DateOfReceipt`` → *1 - Enabled*"
+#: ../../content/processes-automation/process-management.rst:200
+msgid "You can assign user task activity dialogs to this activity by dragging the elements with the mouse from the left list to the right list. Ordering the elements within the list is also possible by drag and drop."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:205
-msgid "``DeliveryDate`` → *1 - Enabled*"
+#: ../../content/processes-automation/process-management.rst:202
+msgid "Click on the *Create New User Task Activity Dialog* button to create new dialogs."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:206
-msgid "``ISBN`` → *1 - Enabled*"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:207
-msgid "``Price`` → *1 - Enabled*"
+msgid "Example process"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:208
-msgid "``Status`` → *1 - Enabled*"
+msgid "Processes are more complex than other resources in OTRS. To create a process, you need to do several steps. The following chapters shows you, how to define a process from the specification and create the needed resources. Let's see an example to make it more demonstrative. We will define a book order process."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:209
-msgid "``Supplier`` → *1 - Enabled*"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:210
-msgid "``Title`` → *1 - Enabled*"
+#: ../../content/processes-automation/process-management.rst:212
+msgid "Process Specification"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:214
-msgid "Don't forget to deploy the modified system configuration settings."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:216
-msgid "Now, go back to the *Process Management* screen and click on the *Create New Process*. Fill in the required fields."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:221
-msgid "Book Ordering - Create New Process"
+msgid "The book order process has four states."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:223
-msgid "The new process is created. You can add some process element now."
+msgid "Recording the demand"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:227
-msgid "Create User Task Activity Dialogs"
+#: ../../content/processes-automation/process-management.rst:217
+msgid "Before an order will be placed, the demand for literature by an employee will be recorded. The following book is needed in our example:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:226
+msgid "Approval by manager"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:226
+msgid "The head of the employee's department needs to decide on the order. In case of a denial, a reason should be recorded by the manager. In case of approval, the order is passed to the purchasing department."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:229
-msgid "Click on the *User Task Activity Dialogs* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *User Task Activity Dialogs* options and will collapse all others doing an accordion like effect. Click on the *Create New User Task Activity Dialog* button."
+msgid "Processing by purchasing department"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:234
-msgid "Book Ordering - User Task Activity Dialogs"
+#: ../../content/processes-automation/process-management.rst:229
+msgid "Purchasing now has the task to find out where the book can be ordered with the best conditions. If it is out of stock, this can be recorded in the order. In case of a successful order purchasing will record the supplier, the price and the delivery date."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:233
+msgid "Processing by the mail room"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:232
+msgid "The shipment will arrive at the company. The incoming goods department checks the shipment and records the date of receipt. Now the employee will be informed that their order has arrived and is ready to be collected."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:236
-msgid "In the opened popup screen fill in the *Dialog Name* as well as the *Description (short)* fields. For this example we will leave all other fields as the default."
+msgid "Introduce The Process Elements"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:241
-msgid "Book Ordering - Add User Task Activity Dialog"
+#: ../../content/processes-automation/process-management.rst:238
+msgid "If we assume that a ticket acts in this workflow like an accompanying document that can receive change notes, we already have a clear picture of process tickets."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:240
+msgid "From the analysis of the example process we can identify the following necessary items:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:242
+msgid "Possibility to record data, let's call this :term:`user task activity dialog`."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:243
-msgid "To assign fields to the user task activity dialog simple drag the required field from the *Available Fields* pool and drop into the *Assigned Fields* pool. The order in the *Assigned Fields* pool is the order as the fields will have in the screen. To modify the order simply drag and drop the field within the pool to rearrange it in the correct place."
+msgid "Check which can react to changed data automatically, let's call this :term:`sequence flow`."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:244
+msgid "Change which can be applied to a process ticket after successful transitions of a process ticket, let's call this :term:`sequence flow action`."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:245
-msgid "In this example we will use:"
+msgid "A possibility to offer more than just one user task activity dialog to be available. In our example this is needed when the manager must have the choice between *Approve* and *Deny*. Let's call this :term:`activity`."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:247
-#: ../../content/processes-automation/process-management.rst:275
-#: ../../content/processes-automation/process-management.rst:281
-#: ../../content/processes-automation/process-management.rst:290
-msgid "``Article`` field for comments."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:248
-#: ../../content/processes-automation/process-management.rst:276
-msgid "``DynamicField_Title``, ``DynamicField_Author``, ``DynamicField_ISBN`` fields for the data to be collected for the order."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:249
-#: ../../content/processes-automation/process-management.rst:277
-msgid "``DynamicField_Status`` with the possibility to choose *Approval*."
+msgid "Now, with activities, user task activity dialogs, sequence flows and sequence flow actions we have the necessary tools to model the individual steps of our example. What is still missing is an area where for each workflow the order of the steps can be specified. Let's call this :term:`process`."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:251
-msgid "Drag these fields from the *Available Fields* pool and drop into the *Assigned Fields* pool."
+msgid "Create Necessary Resources"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:253
+msgid "Before the creation of the process and its parts is necessary to prepare the system. We need to define some :doc:`../ticket-settings/queues`, :doc:`../users-groups-roles/agents` and :doc:`dynamic-fields` as well as set some :doc:`../administration/system-configuration` settings."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:255
-msgid "In this screen all dynamic fields has the prefix ``DynamicField_`` as in ``DynamicField_Title``. Do not confuse with the field ``Title`` that is the ticket title."
+msgid "Create the following :doc:`../ticket-settings/queues`:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:257
+msgid "Management"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:258
+msgid "Employees"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:259
+msgid "Purchasing"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:260
-msgid "Book Ordering - Add User Task Activity Dialog Fields"
+msgid "Post office"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:262
-msgid "As soon as the fields are dropped into the *Assigned Fields* pool another popup screen is shown with some details about the field. We will leave the default options and only for ``Article`` fields we should make sure that the *Communication Channel* field is set to *OTRS* and that the *Is visible for customer* is not checked."
+msgid "Create the following :doc:`../users-groups-roles/agents`:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:264
+msgid "Manager"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:265
+msgid "Employee"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:267
-msgid "Book Ordering - Edit User Task Activity Dialog Fields"
+msgid "Create the following :doc:`dynamic-fields`:"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:269
-#: ../../content/processes-automation/process-management.rst:321
-#: ../../content/processes-automation/process-management.rst:374
-#: ../../content/processes-automation/process-management.rst:475
-msgid "After all fields are filled in, click on the *Save and finish* button to save the changes and go back to the project management screen."
+#: ../../content/processes-automation/process-management.rst:270
+msgid "Object"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:271
-msgid "Create the following user task activity dialogs with fields:"
+#: ../../content/processes-automation/process-management.rst:270
+msgid "Type"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:273
-#: ../../content/processes-automation/process-management.rst:479
-#: ../../content/processes-automation/process-management.rst:543
-msgid "*Recording the demand* (already created before)"
+#: ../../content/processes-automation/process-management.rst:270
+msgid "Name"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:270
+msgid "Label"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:272
+#: ../../content/processes-automation/process-management.rst:274
+#: ../../content/processes-automation/process-management.rst:276
+#: ../../content/processes-automation/process-management.rst:285
+#: ../../content/processes-automation/process-management.rst:287
+msgid "Text"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:272
+msgid "``Title``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:274
+msgid "``Author``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:274
+msgid "Author"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:276
+msgid "``ISBN``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:276
+msgid "ISBN"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:278
+msgid "Dropdown"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:278
+msgid "``Status``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:278
+msgid "Status"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:278
+msgid "Approval"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:279
-#: ../../content/processes-automation/process-management.rst:329
-msgid "*Approval denied*"
+msgid "Approval denied"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:280
+msgid "Approved"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:281
+msgid "Order denied"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:282
-msgid "``DynamicField_Status`` with the possibility to choose *Approval denied*."
+msgid "Order placed"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:284
-#: ../../content/processes-automation/process-management.rst:333
-msgid "*Approved*"
+#: ../../content/processes-automation/process-management.rst:283
+msgid "Shipment received"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:286
-msgid "``DynamicField_Status`` with the possibility to choose *Approved*."
+#: ../../content/processes-automation/process-management.rst:285
+msgid "``Supplier``"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:288
-#: ../../content/processes-automation/process-management.rst:337
-msgid "*Order denied*"
+#: ../../content/processes-automation/process-management.rst:285
+msgid "Supplier"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:287
+msgid "``Price``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:287
+msgid "Price"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:289
+#: ../../content/processes-automation/process-management.rst:291
+msgid "Date"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:289
+msgid "``DeliveryDate``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:289
+msgid "Delivery date"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:291
-msgid "``DynamicField_Status`` with the possibility to choose *Order denied*."
+msgid "``DateOfReceipt``"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:293
-#: ../../content/processes-automation/process-management.rst:341
-msgid "*Order placed*"
+#: ../../content/processes-automation/process-management.rst:291
+msgid "Date of receipt"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:295
-msgid "``DynamicField_Supplier``, ``DynamicField_Price``, ``DynamicField_DeliveryDate`` fields for purchasing."
+#: ../../content/processes-automation/process-management.rst:294
+msgid "Set the following :doc:`../administration/system-configuration` settings:"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:296
-msgid "``DynamicField_Status`` with the possibility to choose *Order placed*."
+msgid ":sysconfig:`Ticket::Responsible <core.html#ticket-responsible>`"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:298
-#: ../../content/processes-automation/process-management.rst:345
-msgid "*Shipment received*"
+msgid "Enabled"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:300
-msgid "``DynamicField_DateOfReceipt`` for the mail room."
+msgid ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicFieldGroups <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfieldgroups>`"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:301
-msgid "``DynamicField_Status`` with the possibility to choose *Shipment received*."
+#: ../../content/processes-automation/process-management.rst:302
+msgid "``Book`` → ``Title,Author,ISBN``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:303
+msgid "``General`` → ``Status``"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:304
+msgid "``Order`` → ``Price,Supplier,DeliveryDate``"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:305
-msgid "Create Sequence Flows"
+msgid "``Shipment`` → ``DateOfReceipt``"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:307
-msgid "Click on the *Sequence Flows* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *Sequence Flows* options and will collapse all others doing an accordion like effect. Click on the *Create New Sequence Flow* button."
+msgid ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfield>`"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:309
+msgid "``Author`` → *1 - Enabled*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:310
+msgid "``DateOfReceipt`` → *1 - Enabled*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:311
+msgid "``DeliveryDate`` → *1 - Enabled*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:312
-msgid "Book Ordering - Sequence Flows"
+msgid "``ISBN`` → *1 - Enabled*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:313
+msgid "``Price`` → *1 - Enabled*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:314
-msgid "In the opened popup screen fill in the *Sequence Flow Name*. For this example in the *Condition Expressions* we will use just one condition expression and just one field. For both we can leave the *Type of Linking* as *and* and we will use the filed match type value as *String*."
+msgid "``Status`` → *1 - Enabled*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:319
-msgid "Book Ordering - Add Sequence Flow"
+#: ../../content/processes-automation/process-management.rst:315
+msgid "``Supplier`` → *1 - Enabled*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:323
-msgid "Create the following sequence flows:"
+#: ../../content/processes-automation/process-management.rst:316
+msgid "``Title`` → *1 - Enabled*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:325
-msgid "*Approval* (already created before)"
+#: ../../content/processes-automation/process-management.rst:320
+msgid "Don't forget to deploy the modified system configuration settings."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:322
+msgid "Now, go back to the *Process Management* screen and click on the *Create New Process*. Fill in the required fields."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:327
-msgid "Check if the ``DynamicField_Status`` is set to *Approval*."
+msgid "Book Ordering - Create New Process"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:331
-msgid "Check if the ``DynamicField_Status`` field is set to *Approval denied*."
+#: ../../content/processes-automation/process-management.rst:329
+msgid "The new process is created. You can add some process element now."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:333
+msgid "Create User Task Activity Dialogs"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:335
-msgid "Check if the ``DynamicField_Status`` field is set to *Approved*."
+msgid "Click on the *User Task Activity Dialogs* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *User Task Activity Dialogs* options and will collapse all others doing an accordion like effect. Click on the *Create New User Task Activity Dialog* button."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:339
-msgid "Check if the ``DynamicField_Status`` field is set to *Order denied*."
+#: ../../content/processes-automation/process-management.rst:340
+msgid "Book Ordering - User Task Activity Dialogs"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:343
-msgid "Check if the ``DynamicField_Status`` field is set to *Order placed*."
+#: ../../content/processes-automation/process-management.rst:342
+msgid "In the opened popup screen fill in the *Dialog Name* as well as the *Description (short)* fields. For this example we will leave all other fields as the default."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:347
-msgid "Check if the ``DynamicField_Status`` field is set to *Shipment received*."
+msgid "Book Ordering - Add User Task Activity Dialog"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:349
+msgid "To assign fields to the user task activity dialog simple drag the required field from the *Available Fields* pool and drop into the *Assigned Fields* pool. The order in the *Assigned Fields* pool is the order as the fields will have in the screen. To modify the order simply drag and drop the field within the pool to rearrange it in the correct place."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:351
-msgid "Create Sequence Flow Actions"
+msgid "In this example we will use:"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:353
-msgid "Click on the *Sequence Flow Actions* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *Sequence Flow Actions* options and will collapse all others doing an accordion like effect. Click on the *Create New Sequence Flow Action* button."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:358
-msgid "Book Ordering - Sequence Flow Actions"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:360
-msgid "In the opened popup screen fill in the *Sequence Flow Action Name* and the *Sequence Flow Action module* then click on the *Save* button. A new *Configure* button will appear next to the module field."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:365
-msgid "Book Ordering - Add Sequence Flow Action"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:367
-msgid "Click on the *Configure* button and add the needed configuration parameter keys and values."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:372
-msgid "Book Ordering - Sequence Flow Action Parameters"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:378
-msgid "Each module has its own and different parameters. Please review the module documentation to learn all require and optional parameters."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:380
-msgid "`DynamicFieldSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/DynamicFieldSet.pm.html>`_"
-msgstr ""
-
 #: ../../content/processes-automation/process-management.rst:381
-msgid "`TicketArticleCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketArticleCreate.pm.html>`_"
+#: ../../content/processes-automation/process-management.rst:387
+#: ../../content/processes-automation/process-management.rst:396
+msgid "``Article`` field for comments."
 msgstr ""
 
+#: ../../content/processes-automation/process-management.rst:354
 #: ../../content/processes-automation/process-management.rst:382
-msgid "`TicketCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCreate.pm.html>`_"
+msgid "``DynamicField_Title``, ``DynamicField_Author``, ``DynamicField_ISBN`` fields for the data to be collected for the order."
 msgstr ""
 
+#: ../../content/processes-automation/process-management.rst:355
 #: ../../content/processes-automation/process-management.rst:383
-msgid "`TicketCustomerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCustomerSet.pm.html>`_"
+msgid "``DynamicField_Status`` with the possibility to choose *Approval*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:384
-msgid "`TicketLockSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketLockSet.pm.html>`_"
+#: ../../content/processes-automation/process-management.rst:357
+msgid "Drag these fields from the *Available Fields* pool and drop into the *Assigned Fields* pool."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:361
+msgid "In this screen all dynamic fields has the prefix ``DynamicField_`` as in ``DynamicField_Title``. Do not confuse with the field ``Title`` that is the ticket title."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:366
+msgid "Book Ordering - Add User Task Activity Dialog Fields"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:368
+msgid "As soon as the fields are dropped into the *Assigned Fields* pool another popup screen is shown with some details about the field. We will leave the default options and only for ``Article`` fields we should make sure that the *Communication Channel* field is set to *OTRS* and that the *Is visible for customer* is not checked."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:373
+msgid "Book Ordering - Edit User Task Activity Dialog Fields"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:375
+#: ../../content/processes-automation/process-management.rst:427
+#: ../../content/processes-automation/process-management.rst:480
+#: ../../content/processes-automation/process-management.rst:581
+msgid "After all fields are filled in, click on the *Save and finish* button to save the changes and go back to the project management screen."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:377
+msgid "Create the following user task activity dialogs with fields:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:379
+#: ../../content/processes-automation/process-management.rst:585
+#: ../../content/processes-automation/process-management.rst:649
+msgid "*Recording the demand* (already created before)"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:385
-msgid "`TicketOwnerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketOwnerSet.pm.html>`_"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:386
-msgid "`TicketQueueSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketQueueSet.pm.html>`_"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:387
-msgid "`TicketResponsibleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketResponsibleSet.pm.html>`_"
+#: ../../content/processes-automation/process-management.rst:435
+msgid "*Approval denied*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:388
-msgid "`TicketSendEmail <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSendEmail.pm.html>`_"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:389
-msgid "`TicketServiceSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketServiceSet.pm.html>`_"
+msgid "``DynamicField_Status`` with the possibility to choose *Approval denied*."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:390
-msgid "`TicketSLASet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSLASet.pm.html>`_"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:391
-msgid "`TicketStateSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketStateSet.pm.html>`_"
+#: ../../content/processes-automation/process-management.rst:439
+msgid "*Approved*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:392
-msgid "`TicketTitleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_"
+msgid "``DynamicField_Status`` with the possibility to choose *Approved*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:393
-msgid "`TicketTypeSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:395
-msgid "All sequence flow action modules are located in the legacy named ``Kernel/System/ProcessManagement/TransitionAction``."
+#: ../../content/processes-automation/process-management.rst:394
+#: ../../content/processes-automation/process-management.rst:443
+msgid "*Order denied*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:397
-msgid "Create the following sequence flow actions:"
+msgid "``DynamicField_Status`` with the possibility to choose *Order denied*."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:399
-msgid "*Move the process ticket into the \"Management\" queue* (already created before)"
+#: ../../content/processes-automation/process-management.rst:447
+msgid "*Order placed*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:401
-#: ../../content/processes-automation/process-management.rst:405
-msgid "To be executed when the sequence flow *Approval* applied."
+msgid "``DynamicField_Supplier``, ``DynamicField_Price``, ``DynamicField_DeliveryDate`` fields for purchasing."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:403
-#: ../../content/processes-automation/process-management.rst:556
-msgid "*Change ticket responsible to \"Manager\"*"
+#: ../../content/processes-automation/process-management.rst:402
+msgid "``DynamicField_Status`` with the possibility to choose *Order placed*."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:404
+#: ../../content/processes-automation/process-management.rst:451
+msgid "*Shipment received*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:406
+msgid "``DynamicField_DateOfReceipt`` for the mail room."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:407
-#: ../../content/processes-automation/process-management.rst:572
-#: ../../content/processes-automation/process-management.rst:602
-#: ../../content/processes-automation/process-management.rst:630
-msgid "*Move process ticket into the \"Employees\" queue*"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:409
-#: ../../content/processes-automation/process-management.rst:417
-#: ../../content/processes-automation/process-management.rst:437
-msgid "To be executed when:"
+msgid "``DynamicField_Status`` with the possibility to choose *Shipment received*."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:411
-#: ../../content/processes-automation/process-management.rst:419
-#: ../../content/processes-automation/process-management.rst:439
-msgid "The sequence flow *Approval denied* applied."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:412
-#: ../../content/processes-automation/process-management.rst:420
-#: ../../content/processes-automation/process-management.rst:440
-msgid "The sequence flow *Order denied* applied."
+msgid "Create Sequence Flows"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:413
-#: ../../content/processes-automation/process-management.rst:421
-msgid "The sequence flow *Shipment received* applied."
+msgid "Click on the *Sequence Flows* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *Sequence Flows* options and will collapse all others doing an accordion like effect. Click on the *Create New Sequence Flow* button."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:415
-#: ../../content/processes-automation/process-management.rst:573
-#: ../../content/processes-automation/process-management.rst:603
-#: ../../content/processes-automation/process-management.rst:631
-msgid "*Change ticket responsible to \"Employee\"*"
+#: ../../content/processes-automation/process-management.rst:418
+msgid "Book Ordering - Sequence Flows"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:423
-#: ../../content/processes-automation/process-management.rst:586
-msgid "*Move process ticket into the \"Purchasing\" queue*"
+#: ../../content/processes-automation/process-management.rst:420
+msgid "In the opened popup screen fill in the *Sequence Flow Name*. For this example in the *Condition Expressions* we will use just one condition expression and just one field. For both we can leave the *Type of Linking* as *and* and we will use the filed match type value as *String*."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:425
-msgid "To be executed when the sequence flow *Approved* applied."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:427
-#: ../../content/processes-automation/process-management.rst:616
-msgid "*Move process ticket into the \"Post office\" queue*"
+msgid "Book Ordering - Add Sequence Flow"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:429
-msgid "To be executed when the sequence flow *Order placed* applied."
+msgid "Create the following sequence flows:"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:431
-#: ../../content/processes-automation/process-management.rst:632
-msgid "*Close ticket successfully*"
+msgid "*Approval* (already created before)"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:433
-msgid "To be executed when the sequence flow *Shipment received* applied."
+msgid "Check if the ``DynamicField_Status`` is set to *Approval*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:435
-#: ../../content/processes-automation/process-management.rst:574
-#: ../../content/processes-automation/process-management.rst:604
-msgid "*Close ticket unsuccessfully*"
+#: ../../content/processes-automation/process-management.rst:437
+msgid "Check if the ``DynamicField_Status`` field is set to *Approval denied*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:442
-msgid "There are places where the same sequence flow actions should be executed. Therefore it is reasonable to make it possible to link sequence flow actions freely with sequence flows to be able to reuse them."
+#: ../../content/processes-automation/process-management.rst:441
+msgid "Check if the ``DynamicField_Status`` field is set to *Approved*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:446
-msgid "Create Activities"
+#: ../../content/processes-automation/process-management.rst:445
+msgid "Check if the ``DynamicField_Status`` field is set to *Order denied*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:448
-msgid "Click on the *Activities* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *Activities* options and will collapse all others doing an accordion like effect. Click on the *Create New Activity* button."
+#: ../../content/processes-automation/process-management.rst:449
+msgid "Check if the ``DynamicField_Status`` field is set to *Order placed*."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:453
-msgid "Book Ordering - Activities"
+msgid "Check if the ``DynamicField_Status`` field is set to *Shipment received*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:455
-msgid "In the opened popup screen fill in the *Activity name* field and select *User task activity* from the *Activity type* drop-down."
+#: ../../content/processes-automation/process-management.rst:457
+msgid "Create Sequence Flow Actions"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:460
-msgid "Book Ordering - Add Activity"
+#: ../../content/processes-automation/process-management.rst:459
+msgid "Click on the *Sequence Flow Actions* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *Sequence Flow Actions* options and will collapse all others doing an accordion like effect. Click on the *Create New Sequence Flow Action* button."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:462
-msgid "To assign dialogs to the activity simple drag the required dialogs from the *Available User Task Activity Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool. The order in the *Assigned User Task Activity Dialogs* pool is the order as the dialogs will be presented in the *Ticket Zoom* screen. To modify the order simply drag and drop the dialog within the pool to rearrange it in the correct place."
+#: ../../content/processes-automation/process-management.rst:464
+msgid "Book Ordering - Sequence Flow Actions"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:466
-msgid "This order is specially important in the first activity, since the first user task activity dialog for this activity is the only one that is presented when the process starts."
+msgid "In the opened popup screen fill in the *Sequence Flow Action Name* and the *Sequence Flow Action module* then click on the *Save* button. A new *Configure* button will appear next to the module field."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:468
-msgid "In this example we need to assign only the *Recording the demand* user task activity dialog. Drag this dialog from the *Available User Task Activity Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool."
+#: ../../content/processes-automation/process-management.rst:471
+msgid "Book Ordering - Add Sequence Flow Action"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:473
-msgid "Book Ordering - Assign User Task Activity Dialog"
+msgid "Click on the *Configure* button and add the needed configuration parameter keys and values."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:477
-msgid "Create the following activities:"
+#: ../../content/processes-automation/process-management.rst:478
+msgid "Book Ordering - Sequence Flow Action Parameters"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:481
-msgid "Assign the user task activity dialog *Recording the demand*."
+#: ../../content/processes-automation/process-management.rst:484
+msgid "Each module has its own and different parameters. Please review the module documentation to learn all require and optional parameters."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:483
-#: ../../content/processes-automation/process-management.rst:560
-msgid "*Approval*"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:485
-msgid "Assign the user task activity dialogs *Approval denied* and *Approved*."
+#: ../../content/processes-automation/process-management.rst:486
+msgid "`DynamicFieldSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/DynamicFieldSet.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:487
-#: ../../content/processes-automation/process-management.rst:590
-msgid "*Order*"
+msgid "`TicketArticleCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketArticleCreate.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:488
+msgid "`TicketCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCreate.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:489
-msgid "Assign the user task activity dialogs *Order denied* and *Order placed*."
+msgid "`TicketCustomerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCustomerSet.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:490
+msgid "`TicketLockSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketLockSet.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:491
-#: ../../content/processes-automation/process-management.rst:618
-msgid "*Incoming*"
+msgid "`TicketOwnerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketOwnerSet.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:492
+msgid "`TicketQueueSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketQueueSet.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:493
-msgid "Assign the user task activity dialog *Shipment received*."
+msgid "`TicketResponsibleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketResponsibleSet.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:494
+msgid "`TicketSendEmail <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSendEmail.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:495
-msgid "*Process complete*"
+msgid "`TicketServiceSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketServiceSet.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:496
+msgid "`TicketSLASet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSLASet.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:497
-msgid "This is an activity without possible user task activity dialogs. It will be set after *Approval denied*, *Order denied* or *Shipment received* and represents the end of the process."
+msgid "`TicketStateSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketStateSet.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:498
+msgid "`TicketTitleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:499
-msgid "Now we can clearly see that activities are precisely defined states of a process ticket. After a successful sequence flow a process ticket moves from one activity to another."
+msgid "`TicketTypeSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:501
+msgid "All sequence flow action modules are located in the legacy named ``Kernel/System/ProcessManagement/TransitionAction``."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:503
-msgid "Create Process Path"
+msgid "Create the following sequence flow actions:"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:505
-msgid "Let us conclude our example with the last missing piece in the puzzle, the process as the a flow describer. In our case this is the whole ordering workflow. Other processes could be office supply ordering or completely different processes."
+msgid "*Move the process ticket into the \"Management\" queue* (already created before)"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:507
-msgid "The process has a starting point which consists of the start activity and the start user task activity dialog. For any new book order, the first user task activity dialog of the first activity is the first screen that is displayed. If this is completed and saved, the process ticket will be created and can follow the configured workflow."
+#: ../../content/processes-automation/process-management.rst:511
+msgid "To be executed when the sequence flow *Approval* applied."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:509
-msgid "The process also contains the directions for how the process ticket can move through the process. Let's call this :term:`process path`. It consists of the start activity, one or more sequence flows (possibly with sequence flow actions) and other activities."
+#: ../../content/processes-automation/process-management.rst:662
+msgid "*Change ticket responsible to \"Manager\"*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:511
-msgid "Assuming that the activities has already assigned their user task activity dialogs, drag an activity from the accordion in the *Available Process Elements* widget in the left sidebar and drop it into the canvas area below the process information. Notice that an arrow from the process start (white circle) to the activity is placed automatically. This is the first activity and its first user task activity dialog is the first screen that will be shown when the process starts."
+#: ../../content/processes-automation/process-management.rst:513
+#: ../../content/processes-automation/process-management.rst:678
+#: ../../content/processes-automation/process-management.rst:708
+#: ../../content/processes-automation/process-management.rst:736
+msgid "*Move process ticket into the \"Employees\" queue*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:516
-msgid "Book Ordering - First Activity On Canvas"
+#: ../../content/processes-automation/process-management.rst:515
+#: ../../content/processes-automation/process-management.rst:523
+#: ../../content/processes-automation/process-management.rst:543
+msgid "To be executed when:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:517
+#: ../../content/processes-automation/process-management.rst:525
+#: ../../content/processes-automation/process-management.rst:545
+msgid "The sequence flow *Approval denied* applied."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:518
-msgid "Next, drag another activity into the canvas too. Now we will have two activities in the canvas. The first one is connected to the start point and the second has no connections. You can hover the mouse over each activity to reveal their own activity dialogs."
+#: ../../content/processes-automation/process-management.rst:526
+#: ../../content/processes-automation/process-management.rst:546
+msgid "The sequence flow *Order denied* applied."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:523
-msgid "Book Ordering - Second Activity On Canvas"
+#: ../../content/processes-automation/process-management.rst:519
+#: ../../content/processes-automation/process-management.rst:527
+msgid "The sequence flow *Shipment received* applied."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:525
-msgid "Then let's create the process path (connection) between this two activities. For this we will use the sequence flows. Click on sequence flow in the accordion, drag a sequence flow and drop it inside the first activity. As soon as the sequence flow is dropped the end point of the sequence flow arrow will be placed next to the process start point. Drag the sequence flow arrow end point and drop it inside the other activity to create the connection between the activities."
+#: ../../content/processes-automation/process-management.rst:521
+#: ../../content/processes-automation/process-management.rst:679
+#: ../../content/processes-automation/process-management.rst:709
+#: ../../content/processes-automation/process-management.rst:737
+msgid "*Change ticket responsible to \"Employee\"*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:530
-msgid "Book Ordering - First Sequence Flow On Canvas"
+#: ../../content/processes-automation/process-management.rst:529
+#: ../../content/processes-automation/process-management.rst:692
+msgid "*Move process ticket into the \"Purchasing\" queue*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:532
-msgid "Now that the process path between the actions is defined, then we need to assign the sequence flow actions to the sequence flow. Double click the sequence flow label in the canvas to open a new popup window."
+#: ../../content/processes-automation/process-management.rst:531
+msgid "To be executed when the sequence flow *Approved* applied."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:533
+#: ../../content/processes-automation/process-management.rst:722
+msgid "*Move process ticket into the \"Post office\" queue*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:535
+msgid "To be executed when the sequence flow *Order placed* applied."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:537
-msgid "Book Ordering - Assign First Sequence Flow Action"
+#: ../../content/processes-automation/process-management.rst:738
+msgid "*Close ticket successfully*"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:539
-msgid "After the sequence flow actions are assigned, click on the *Save* button to go back to the main process edit screen. Click on *Save* button below the canvas to save all other changes."
+msgid "To be executed when the sequence flow *Shipment received* applied."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:541
-msgid "Complete the process path by adding the following activities, sequence flows and sequence flow actions:"
+#: ../../content/processes-automation/process-management.rst:680
+#: ../../content/processes-automation/process-management.rst:710
+msgid "*Close ticket unsuccessfully*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:545
-msgid "Possible sequence flow: *Approval*"
+#: ../../content/processes-automation/process-management.rst:548
+msgid "There are places where the same sequence flow actions should be executed. Therefore it is reasonable to make it possible to link sequence flow actions freely with sequence flows to be able to reuse them."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:547
-msgid "Starting activity: *Recording the demand*"
+#: ../../content/processes-automation/process-management.rst:552
+msgid "Create Activities"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:549
-msgid "Next activity: *Approval*"
+#: ../../content/processes-automation/process-management.rst:554
+msgid "Click on the *Activities* item in the *Available Process Elements* widget in the left sidebar. This action will expand the *Activities* options and will collapse all others doing an accordion like effect. Click on the *Create New Activity* button."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:551
-msgid "If the condition of this activity is fulfilled, the ticket will move to activity *Approval*."
+#: ../../content/processes-automation/process-management.rst:559
+msgid "Book Ordering - Activities"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:553
-#: ../../content/processes-automation/process-management.rst:570
-#: ../../content/processes-automation/process-management.rst:584
-#: ../../content/processes-automation/process-management.rst:600
-#: ../../content/processes-automation/process-management.rst:614
-#: ../../content/processes-automation/process-management.rst:628
-msgid "Additionally, the following sequence flow actions are executed:"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:555
-msgid "*Move the process ticket into the \"Management\" queue*"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:558
-msgid "The activity *Recording the demand* is a defined step of the process ticket, where there is the possibility for the sequence flow *Approval*. If this applies, the ticket will move to the next activity *Approval*, and the sequence flow actions *Move the process ticket into the \"Management\" queue* and *Change ticket responsible to \"Manager\"* are executed. In the activity *Approval*, the user task activity dialogs *Approval denied* and *Approved* are available."
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:562
-msgid "Possible sequence flow: *Approval denied*"
-msgstr ""
-
-#: ../../content/processes-automation/process-management.rst:564
-#: ../../content/processes-automation/process-management.rst:578
-msgid "Starting activity: *Approval*"
+#: ../../content/processes-automation/process-management.rst:561
+msgid "In the opened popup screen fill in the *Activity name* field and select *User task activity* from the *Activity type* drop-down."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:566
-#: ../../content/processes-automation/process-management.rst:596
-#: ../../content/processes-automation/process-management.rst:624
-msgid "Next activity: *Process complete*"
+msgid "Book Ordering - Add Activity"
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:568
-#: ../../content/processes-automation/process-management.rst:598
-#: ../../content/processes-automation/process-management.rst:626
-msgid "If this matches, the process ticket will move to activity *Process complete*."
+msgid "To assign dialogs to the activity simple drag the required dialogs from the *Available User Task Activity Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool. The order in the *Assigned User Task Activity Dialogs* pool is the order as the dialogs will be presented in the *Ticket Zoom* screen. To modify the order simply drag and drop the dialog within the pool to rearrange it in the correct place."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:576
-msgid "Possible sequence flow: *Approved*"
+#: ../../content/processes-automation/process-management.rst:572
+msgid "This order is specially important in the first activity, since the first user task activity dialog for this activity is the only one that is presented when the process starts."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:580
-msgid "Next activity: *Order*"
+#: ../../content/processes-automation/process-management.rst:574
+msgid "In this example we need to assign only the *Recording the demand* user task activity dialog. Drag this dialog from the *Available User Task Activity Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:582
-msgid "If this matches, the process ticket will move to activity *Order*."
+#: ../../content/processes-automation/process-management.rst:579
+msgid "Book Ordering - Assign User Task Activity Dialog"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:588
-msgid "We can see that from the current activity, which defines a step of the process ticket, there are one or more possibilities for sequence flow which have exactly one target activity (and possibly one or more sequence flow actions)."
+#: ../../content/processes-automation/process-management.rst:583
+msgid "Create the following activities:"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:592
-msgid "Possible sequence flow: *Order denied*"
+#: ../../content/processes-automation/process-management.rst:587
+msgid "Assign the user task activity dialog *Recording the demand*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:594
-#: ../../content/processes-automation/process-management.rst:608
-msgid "Starting activity: *Order*"
+#: ../../content/processes-automation/process-management.rst:589
+#: ../../content/processes-automation/process-management.rst:666
+msgid "*Approval*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:606
-msgid "Possible sequence flow: *Order placed*"
+#: ../../content/processes-automation/process-management.rst:591
+msgid "Assign the user task activity dialogs *Approval denied* and *Approved*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:610
-msgid "Next activity: *Incoming*"
+#: ../../content/processes-automation/process-management.rst:593
+#: ../../content/processes-automation/process-management.rst:696
+msgid "*Order*"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:612
-msgid "If this matches, the process ticket will move to activity *Incoming*."
+#: ../../content/processes-automation/process-management.rst:595
+msgid "Assign the user task activity dialogs *Order denied* and *Order placed*."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:620
-msgid "Possible sequence flow: *Shipment received*"
+#: ../../content/processes-automation/process-management.rst:597
+#: ../../content/processes-automation/process-management.rst:724
+msgid "*Incoming*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:599
+msgid "Assign the user task activity dialog *Shipment received*."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:601
+msgid "*Process complete*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:603
+msgid "This is an activity without possible user task activity dialogs. It will be set after *Approval denied*, *Order denied* or *Shipment received* and represents the end of the process."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:605
+msgid "Now we can clearly see that activities are precisely defined states of a process ticket. After a successful sequence flow a process ticket moves from one activity to another."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:609
+msgid "Create Process Path"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:611
+msgid "Let us conclude our example with the last missing piece in the puzzle, the process as the a flow describer. In our case this is the whole ordering workflow. Other processes could be office supply ordering or completely different processes."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:613
+msgid "The process has a starting point which consists of the start activity and the start user task activity dialog. For any new book order, the first user task activity dialog of the first activity is the first screen that is displayed. If this is completed and saved, the process ticket will be created and can follow the configured workflow."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:615
+msgid "The process also contains the directions for how the process ticket can move through the process. Let's call this :term:`process path`. It consists of the start activity, one or more sequence flows (possibly with sequence flow actions) and other activities."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:617
+msgid "Assuming that the activities has already assigned their user task activity dialogs, drag an activity from the accordion in the *Available Process Elements* widget in the left sidebar and drop it into the canvas area below the process information. Notice that an arrow from the process start (white circle) to the activity is placed automatically. This is the first activity and its first user task activity dialog is the first screen that will be shown when the process starts."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:622
-msgid "Starting activity: *Incoming*"
+msgid "Book Ordering - First Activity On Canvas"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:634
-msgid "The complete process path for the book ordering process will then look like this:"
+#: ../../content/processes-automation/process-management.rst:624
+msgid "Next, drag another activity into the canvas too. Now we will have two activities in the canvas. The first one is connected to the start point and the second has no connections. You can hover the mouse over each activity to reveal their own activity dialogs."
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:639
-msgid "Book Ordering - Process Complete"
+#: ../../content/processes-automation/process-management.rst:629
+msgid "Book Ordering - Second Activity On Canvas"
 msgstr ""
 
-#: ../../content/processes-automation/process-management.rst:641
-msgid "After you finish the process path, click on *Save and finish* button below the canvas to go back to the process management screen."
+#: ../../content/processes-automation/process-management.rst:631
+msgid "Then let's create the process path (connection) between this two activities. For this we will use the sequence flows. Click on sequence flow in the accordion, drag a sequence flow and drop it inside the first activity. As soon as the sequence flow is dropped the end point of the sequence flow arrow will be placed next to the process start point. Drag the sequence flow arrow end point and drop it inside the other activity to create the connection between the activities."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:636
+msgid "Book Ordering - First Sequence Flow On Canvas"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:638
+msgid "Now that the process path between the actions is defined, then we need to assign the sequence flow actions to the sequence flow. Double click the sequence flow label in the canvas to open a new popup window."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:643
-msgid "Click on the *Deploy All Processes* button in the left sidebar. This will gather all processes information form the database and create a cache file (in Perl language). This cache file is actually the processes configuration that the system will use to create or use process tickets."
+msgid "Book Ordering - Assign First Sequence Flow Action"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:645
+msgid "After the sequence flow actions are assigned, click on the *Save* button to go back to the main process edit screen. Click on *Save* button below the canvas to save all other changes."
 msgstr ""
 
 #: ../../content/processes-automation/process-management.rst:647
+msgid "Complete the process path by adding the following activities, sequence flows and sequence flow actions:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:651
+msgid "Possible sequence flow: *Approval*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:653
+msgid "Starting activity: *Recording the demand*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:655
+msgid "Next activity: *Approval*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:657
+msgid "If the condition of this activity is fulfilled, the ticket will move to activity *Approval*."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:659
+#: ../../content/processes-automation/process-management.rst:676
+#: ../../content/processes-automation/process-management.rst:690
+#: ../../content/processes-automation/process-management.rst:706
+#: ../../content/processes-automation/process-management.rst:720
+#: ../../content/processes-automation/process-management.rst:734
+msgid "Additionally, the following sequence flow actions are executed:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:661
+msgid "*Move the process ticket into the \"Management\" queue*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:664
+msgid "The activity *Recording the demand* is a defined step of the process ticket, where there is the possibility for the sequence flow *Approval*. If this applies, the ticket will move to the next activity *Approval*, and the sequence flow actions *Move the process ticket into the \"Management\" queue* and *Change ticket responsible to \"Manager\"* are executed. In the activity *Approval*, the user task activity dialogs *Approval denied* and *Approved* are available."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:668
+msgid "Possible sequence flow: *Approval denied*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:670
+#: ../../content/processes-automation/process-management.rst:684
+msgid "Starting activity: *Approval*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:672
+#: ../../content/processes-automation/process-management.rst:702
+#: ../../content/processes-automation/process-management.rst:730
+msgid "Next activity: *Process complete*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:674
+#: ../../content/processes-automation/process-management.rst:704
+#: ../../content/processes-automation/process-management.rst:732
+msgid "If this matches, the process ticket will move to activity *Process complete*."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:682
+msgid "Possible sequence flow: *Approved*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:686
+msgid "Next activity: *Order*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:688
+msgid "If this matches, the process ticket will move to activity *Order*."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:694
+msgid "We can see that from the current activity, which defines a step of the process ticket, there are one or more possibilities for sequence flow which have exactly one target activity (and possibly one or more sequence flow actions)."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:698
+msgid "Possible sequence flow: *Order denied*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:700
+#: ../../content/processes-automation/process-management.rst:714
+msgid "Starting activity: *Order*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:712
+msgid "Possible sequence flow: *Order placed*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:716
+msgid "Next activity: *Incoming*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:718
+msgid "If this matches, the process ticket will move to activity *Incoming*."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:726
+msgid "Possible sequence flow: *Shipment received*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:728
+msgid "Starting activity: *Incoming*"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:740
+msgid "The complete process path for the book ordering process will then look like this:"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:745
+msgid "Book Ordering - Process Complete"
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:747
+msgid "After you finish the process path, click on *Save and finish* button below the canvas to go back to the process management screen."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:749
+msgid "Click on the *Deploy All Processes* button in the left sidebar. This will gather all processes information form the database and create a cache file (in Perl language). This cache file is actually the processes configuration that the system will use to create or use process tickets."
+msgstr ""
+
+#: ../../content/processes-automation/process-management.rst:753
 msgid "Any change that is made on the process will require to re-deploy the process in order to get the change reflected in the system."
 msgstr ""
 
