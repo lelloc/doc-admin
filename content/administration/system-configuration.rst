@@ -9,7 +9,7 @@ Comfortable search allows finding the needed settings quickly and easily.
 
 .. seealso::
 
-   By using the `System Configuration History <https://otrs.com/otrs-feature/system-configuration-history/>__` package, you can easily roll back changes made by users. Contact sales@otrs.com to add this feature to your system.
+   By using the `System Configuration History <https://otrs.com/otrs-feature/system-configuration-history/>`__ package, you can easily roll back changes made by users. Contact sales@otrs.com to add this feature to your system.
 
 Use this screen to manage the system configuration settings. OTRS brings about 2200 configuration settings. The system configuration management screen is available in the *System Configuration* module of the *Administration* group.
 
