@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OTRS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-10 09:56+0200\n"
-"PO-Revision-Date: 2019-05-17 07:44+0000\n"
+"POT-Creation-Date: 2019-05-29 16:55+0200\n"
+"PO-Revision-Date: 2019-05-30 08:39+0000\n"
 "Last-Translator: 汇民 王 <whuim@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/otrs/OTRS/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -354,6 +354,9 @@ msgstr "日历设置"
 #: ../../content/processes-automation/access-control-lists.rst:97
 #: ../../content/processes-automation/dynamic-fields.rst:59
 #: ../../content/processes-automation/generic-agent.rst:70
+#: ../../content/processes-automation/process-management.rst:112
+#: ../../content/processes-automation/process-management.rst:148
+#: ../../content/processes-automation/process-management.rst:187
 #: ../../content/processes-automation/web-services.rst:119
 #: ../../content/ticket-settings/attachments.rst:59
 #: ../../content/ticket-settings/auto-responses.rst:59
@@ -1451,7 +1454,7 @@ msgid ""
 "By using the `System Configuration History <https://otrs.com/otrs-feature"
 "/system-configuration-history/>`__ package, you can easily roll back changes"
 " made by users. Contact sales@otrs.com to add this feature to your system."
-msgstr "通过使用 `系统配置历史 <https://otrs.com/otrs-feature/system-configuration-history/>`__ 软件包，您可以轻松回滚用户所做的更改。 请联系sales@otrs.com将此功能添加到您的系统中。"
+msgstr "通过使用 `系统配置历史 <https://otrs.com/otrs-feature/system-configuration-history/>`__ 软件包，您可以轻松地回滚用户所做的更改。请联系 sales@otrs.com 以将此功能添加到您的系统中。"
 
 #: ../../content/administration/system-configuration.rst:14
 msgid ""
@@ -2414,7 +2417,7 @@ msgstr "选择相关预约需要参与的日历。"
 
 #: ../../content/communication-notifications/appointment-notifications.rst:154
 #: ../../content/external-interface/home-page.rst:26
-#: ../../content/processes-automation/process-management.rst:166
+#: ../../content/processes-automation/process-management.rst:272
 msgid "Title"
 msgstr "标题"
 
@@ -4454,6 +4457,8 @@ msgid "Use of regular expressions as a filter do not work here."
 msgstr "这里不能使用正则表达式作为过滤器。"
 
 #: ../../content/external-interface.rst:2
+#: ../../content/processes-automation/process-management.rst:135
+#: ../../content/processes-automation/process-management.rst:171
 msgid "External Interface"
 msgstr "外部人员界面"
 
@@ -5170,7 +5175,7 @@ msgid ""
 "select a new avatar image."
 msgstr "要更改头像，请单击 *选择上传的图片* 按钮，然后选择一个新的头像图片。"
 
-#: ../../content/external-interface/layout.rst:47
+#: ../../content/external-interface/layout.rst:49
 msgid "Custom CSS"
 msgstr "自定义CSS"
 
@@ -5183,6 +5188,316 @@ msgstr "使用此文本区域添加要在外部人员界面中应用的自定义
 #: ../../content/external-interface/layout.rst:48
 msgid "Custom CSS Widget"
 msgstr "自定义CSS小部件"
+
+#: ../../content/external-interface/layout.rst:52
+msgid "Include Custom Scripts"
+msgstr "包含自定义脚本"
+
+#: ../../content/external-interface/layout.rst:54
+msgid ""
+"External interface application has been built with security-first mindset in"
+" place. It contains several mechanisms to make sure that all code in the "
+"front end is provided directly by the OTRS framework."
+msgstr "外部人员界面应用程序的构建采用了安全第一的思想。它包含几个机制，以确保前端的所有代码都由OTRS框架直接提供。"
+
+#: ../../content/external-interface/layout.rst:56
+msgid ""
+"In addition, a security standard called `Content Security Policy "
+"<https://en.wikipedia.org/wiki/Content_Security_Policy>`__ headers is now "
+"leveraged by the built-in web server. It serves as a last line of defense "
+"and in case some unexpected code still makes it to the client, it will make "
+"sure that the user’s browser simply refuses to run it."
+msgstr "此外，内置 Web 服务器现在利用称为 `内容安全策略 <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ 标头的安全标准。 它作为最后一道防线，如果一些意外的代码仍然发送给客户端，它将确保用户的浏览器只是拒绝运行它。"
+
+#: ../../content/external-interface/layout.rst:58
+msgid ""
+"However, a use-case still exists in which even a modern web application "
+"might still need to run some additional code, provided it is vetted and "
+"included by the administrators. One example could be an external integrated "
+"chat solution, but could also be an inline code snippet used for external "
+"web analytics."
+msgstr "但是，仍然存在这样的用例，即使是现代的 WEB 应用程序也可能需要运行一些额外的代码，前提是由管理员审查和包含这些代码。例子可以是外部集成的聊天解决方案，也可以是用于外部 WEB 分析的内联代码片段。"
+
+#: ../../content/external-interface/layout.rst:62
+msgid ""
+"Including custom scripts can be done in the :doc:`../administration/system-"
+"configuration` with the following settings:"
+msgstr "包含自定义脚本在 :doc:`../administration/system-configuration` 中通过以下设置完成："
+
+#: ../../content/external-interface/layout.rst:64
+msgid "``ExternalFrontend::ExternalScripts``"
+msgstr "``ExternalFrontend::ExternalScripts``"
+
+#: ../../content/external-interface/layout.rst:65
+msgid "``ExternalFrontend::InlineScripts``"
+msgstr "``ExternalFrontend::InlineScripts``"
+
+#: ../../content/external-interface/layout.rst:66
+msgid "``WebApp::Server::AdditionalOrigins``"
+msgstr "``WebApp::Server::AdditionalOrigins``"
+
+#: ../../content/external-interface/layout.rst:70
+msgid "Web Analytics Example"
+msgstr "WEB 分析的例子"
+
+#: ../../content/external-interface/layout.rst:72
+msgid ""
+"In this example, we outline the steps to include custom scripts used by a "
+"web analytics provider in the external interface application. They will be "
+"run each time the application is used in order to track and report the "
+"behavior of the user for later analysis."
+msgstr "在本例中，我们概述了在外部人员界面应用程序中包含 WEB 分析提供者使用的自定义脚本的步骤。它们将在每次使用应用程序时运行，以便跟踪和报告用户的行为，供以后分析。"
+
+#: ../../content/external-interface/layout.rst:74
+msgid ""
+"We start with the provided code snippet below, from a third party provider."
+msgstr "我们从下面来自第三方供应商的代码片段开始。"
+
+#: ../../content/external-interface/layout.rst:87
+msgid ""
+"First line of the snippet refers to an *external* resource which should be "
+"loaded by the ``script`` tag."
+msgstr "代码片段的第一行引用一个 *外部* 资源，该资源会由 ``script`` 标签加载。"
+
+#: ../../content/external-interface/layout.rst:89
+msgid ""
+"In the script block below, we have some *inline* code which is run "
+"immediately when the page is loaded."
+msgstr "在下面的脚本块中，我们有一些 *内联* 代码，在加载页面后立即运行。"
+
+#: ../../content/external-interface/layout.rst:93
+msgid "Adding External Script Resources"
+msgstr "添加外部脚本资源"
+
+#: ../../content/external-interface/layout.rst:95
+msgid ""
+"First, we need to include the external script location in the appropriate "
+"configuration:"
+msgstr "首先，我们需要在适当的配置中包含外部脚本的位置:"
+
+#: ../../content/external-interface/layout.rst:97
+#: ../../content/external-interface/layout.rst:111
+#: ../../content/external-interface/layout.rst:159
+#: ../../content/external-interface/layout.rst:180
+msgid "Go to the *System Configuration* screen."
+msgstr "转到 *系统配置* 屏幕。"
+
+#: ../../content/external-interface/layout.rst:98
+msgid "Search for the setting ``ExternalFrontend::ExternalScripts``."
+msgstr "搜索设置 ``ExternalFrontend::ExternalScripts``。"
+
+#: ../../content/external-interface/layout.rst:99
+#: ../../content/external-interface/layout.rst:113
+#: ../../content/external-interface/layout.rst:161
+#: ../../content/external-interface/layout.rst:182
+msgid "Click on the setting in order to edit it."
+msgstr "点击该设置以编辑它。"
+
+#: ../../content/external-interface/layout.rst:100
+#: ../../content/external-interface/layout.rst:114
+msgid ""
+"In case a value is already present, click on the plus button. Otherwise, "
+"proceed below."
+msgstr "如果已经存在值，则单击加号按钮。否则，继续下面的步骤。"
+
+#: ../../content/external-interface/layout.rst:101
+msgid ""
+"Enter the full location of the *external* resource in the text field. For "
+"example: ``https://www.example.com/track/js?id=UA-XXXXXX-Y``."
+msgstr "在文本字段中输入 *外部* 资源的完整位置。例如： ``https://www.example.com/track/js?id=UA-XXXXXX-Y``。"
+
+#: ../../content/external-interface/layout.rst:102
+#: ../../content/external-interface/layout.rst:125
+#: ../../content/external-interface/layout.rst:166
+#: ../../content/external-interface/layout.rst:185
+msgid "Click on the check mark in order to save the modified setting."
+msgstr "点击复选标记以保存修改后的设置。"
+
+#: ../../content/external-interface/layout.rst:103
+#: ../../content/external-interface/layout.rst:126
+#: ../../content/external-interface/layout.rst:167
+#: ../../content/external-interface/layout.rst:186
+#: ../../content/processes-automation/dynamic-fields.rst:439
+#: ../../content/processes-automation/dynamic-fields.rst:460
+#: ../../content/processes-automation/dynamic-fields.rst:473
+#: ../../content/processes-automation/dynamic-fields.rst:497
+msgid "Deploy the modified system configuration."
+msgstr "部署修改后的系统配置。"
+
+#: ../../content/external-interface/layout.rst:107
+msgid "Adding Inline Code Snippets"
+msgstr "添加内联代码片段"
+
+#: ../../content/external-interface/layout.rst:109
+msgid "Next, we have to also include the inline part of the original snippet:"
+msgstr "接下来，我们还必须包含原始代码段的内联部分："
+
+#: ../../content/external-interface/layout.rst:112
+msgid "Search for the setting ``ExternalFrontend::InlineScripts``."
+msgstr "搜索设置 ``ExternalFrontend::InlineScripts``。"
+
+#: ../../content/external-interface/layout.rst:115
+msgid ""
+"Enter the full code snippet in the text area, minus any ``script`` tags. For"
+" example:"
+msgstr "在文本区域中输入完整的代码片段，去掉任何 ``script`` 标签。例如:"
+
+#: ../../content/external-interface/layout.rst:130
+msgid "Rebuilding the External Interface Application"
+msgstr "重新构建外部人员界面应用程序"
+
+#: ../../content/external-interface/layout.rst:132
+msgid ""
+"In order to apply the changes, we also need to rebuild the external "
+"interface application. Drop down to shell, and execute the following "
+"command:"
+msgstr "为了应用更改，我们还需要重新构建外部人员界面应用程序。下拉到 shell，执行以下命令:"
+
+#: ../../content/external-interface/layout.rst:140
+msgid "Whitelisting Additional Origins in the Security Headers"
+msgstr "将安全标头中的其它源列入白名单"
+
+#: ../../content/external-interface/layout.rst:142
+msgid ""
+"If you now try to access the external interface application, you will be "
+"able to verify that the scripts are included in the code. However, your "
+"browser will probably block access to all *inline* and *external* resources,"
+" therefore the code might fail with some errors."
+msgstr "如果您现在尝试访问外部人员界面应用程序，则可以验证脚本是否包含在代码中。 但是，您的浏览器可能会阻止访问所有 *内联* 和 *外部* 资源，因此代码可能会因某些错误而失败。"
+
+#: ../../content/external-interface/layout.rst:144
+msgid ""
+"This behavior is by design, since external resources can only be loaded if "
+"they are specifically whitelisted in the *Content Security Policy* headers."
+msgstr "这种情况是设计使然，因为只有在 *内容安全策略* 标头中明确列入白名单时才能加载外部资源。"
+
+#: ../../content/external-interface/layout.rst:146
+msgid ""
+"To check for blocked code, please use suitable web browser inspection tools."
+" In our example, we will be using Mozilla Firefox and its web console "
+"available via *Tools → Web Developer → Web Console* menu item, or via the "
+"*F12* shortcut key."
+msgstr "若要检查阻塞代码，请使用适当的 WEB 浏览器检查工具。在我们的示例中，我们将使用 Mozilla Firefox 及其 WEB 控制台，该控制台可通过 *工具→Web 开发者→web 控制台* 菜单项或 *F12* 快捷键获得。"
+
+#: ../../content/external-interface/layout.rst:148
+msgid ""
+"For the example code snippet, you might receive following errors in the "
+"console when the application is accessed:"
+msgstr "对于示例代码片段，在访问应用程序时，可能会在控制台收到以下错误:"
+
+#: ../../content/external-interface/layout.rst:153
+msgid "Browser Console Errors and Warnings"
+msgstr "浏览器控制台错误和警告"
+
+#: ../../content/external-interface/layout.rst:155
+msgid ""
+"From the console errors we can see that the external script resource was "
+"prevented from being loaded (lines 1 and 3). In addition to that, two "
+"evaluation calls were also blocked (lines 2 and 5). All errors reference a "
+"*Content Security Policy* rule under the name of ``script-src``, which "
+"signals script resources."
+msgstr "从控制台错误我们可以看到外部脚本资源不能被加载(1和3行)。除此之外,两个评估调用也被封锁(2和5行)。所有错误都引用了一个名为 ``script-src`` 的 *内容安全策略* 规则，该规则表示脚本资源。"
+
+#: ../../content/external-interface/layout.rst:157
+msgid ""
+"We need to add both the external resource and the evaluation calls to the "
+"additional origins list of the *Content Security Policy* headers:"
+msgstr "我们需要将外部资源和评估调用添加到 *内容安全策略* 标头的其它源列表中："
+
+#: ../../content/external-interface/layout.rst:160
+#: ../../content/external-interface/layout.rst:181
+msgid "Search for the setting ``WebApp::Server::AdditionalOrigins``."
+msgstr "搜索设置 ``WebApp::Server::AdditionalOrigins``。"
+
+#: ../../content/external-interface/layout.rst:162
+msgid ""
+"In case a value for ``script-src`` is already present, click on the plus "
+"button next to it. Otherwise, proceed below."
+msgstr "如果 ``script-src`` 已经存在值，请单击旁边的加号按钮。 否则，继续下面的步骤。"
+
+#: ../../content/external-interface/layout.rst:163
+msgid ""
+"Enter the domain part only of the blocked resource in the text field. For "
+"example: ``https://www.example.com``. This allows the external resource to "
+"be loaded."
+msgstr "在文本字段中只输入被阻塞资源的域部分。例如: ``https://www.example.com``。这允许加载外部资源。"
+
+#: ../../content/external-interface/layout.rst:164
+msgid "Click on the plus button next to the field, so another value is added."
+msgstr "点击字段旁边的加号按钮，这样就添加了另一个值。"
+
+#: ../../content/external-interface/layout.rst:165
+msgid ""
+"Enter the following directive in the new field, including the quotes: "
+"``'unsafe-eval'``. This allows the evaluation calls to be executed."
+msgstr "在新字段中输入以下指令，包括引号: ``'unsafe-eval'``。这允许执行评估调用。"
+
+#: ../../content/external-interface/layout.rst:169
+msgid ""
+"There is no need to rebuild the external interface application at this "
+"point, as the additional origins configuration should be immediately in "
+"effect."
+msgstr "此时不需要重新构建外部人员界面应用程序，因为其它源配置立即生效。"
+
+#: ../../content/external-interface/layout.rst:171
+msgid ""
+"If you reload the external interface application, you might get some "
+"additional errors. In our example, it might be the following:"
+msgstr "如果重新加载外部人员界面应用程序，可能会得到一些额外的错误。在我们的例子中，可能是这样的:"
+
+#: ../../content/external-interface/layout.rst:176
+msgid "Additional Browser Console Errors and Warnings"
+msgstr "其它的浏览器控制台错误和警告"
+
+#: ../../content/external-interface/layout.rst:178
+msgid ""
+"This error points that an additional resource that was also blocked, an "
+"image at a specific location (line 1). We can deduce this via the name of "
+"the *Content Security Policy* rule ``img-src``, which references an image "
+"resource. In order to add it to the whitelist, try the following:"
+msgstr "此错误表示还阻止了另一个资源，即特定位置的图像（第1行）。 我们可以通过引用图像资源的 *内容安全策略* 规则 ``img-src`` 的名称推断出这一点。 要将其添加到白名单，请尝试以下操作："
+
+#: ../../content/external-interface/layout.rst:183
+msgid ""
+"In case a value for ``img-src`` is already present, click on the plus button"
+" next to it. Otherwise, proceed below."
+msgstr "如果已经存在 ``img-src`` 的值，请单击旁边的加号按钮。 否则，继续下面的步骤。"
+
+#: ../../content/external-interface/layout.rst:184
+msgid ""
+"Enter the domain part only of the blocked resource in the text field. For "
+"example: ``https://www.example.com``. This allows the external image "
+"resource to be loaded."
+msgstr "在文本字段中只输入被阻塞资源的域部分。例如: ``https://www.example.com``。这允许加载外部图片资源。"
+
+#: ../../content/external-interface/layout.rst:188
+msgid ""
+"Try again to reload the external interface application and check if there "
+"are more errors. If not, your scripts are now probably working as expected."
+msgstr "再次尝试重新加载外部人员界面应用程序并检查是否有更多错误。 如果没有，您的脚本现在可能正常工作。"
+
+#: ../../content/external-interface/layout.rst:190
+msgid ""
+"Unfortunately, it is not possible to predict what kind of resources your "
+"scripts might be requiring. But, no worries, you can whitelist most of them,"
+" just make sure to follow the trail of hints shown in the browser console "
+"log. Find a corresponding header rule in the configuration and update it "
+"accordingly."
+msgstr "不幸的是，无法预测脚本可能需要哪种资源。 但是，不用担心，您可以将其中的大多数列入白名单，只需确保遵循浏览器控制台日志中显示的提示跟踪。 在配置中查找相应的标头规则并相应地进行更新。"
+
+#: ../../content/external-interface/layout.rst:194
+msgid ""
+"Some resources might only be requested by others, hence several iterations "
+"might be needed until everything is configured properly."
+msgstr "某些资源可能仅由其他人请求，因此可能需要多次迭代才能正确配置所有内容。"
+
+#: ../../content/external-interface/layout.rst:198
+msgid ""
+"Whitelisting external resources opens potential security risks in your OTRS "
+"application! Only allow those resources that you are sure are not malicious "
+"and come from reputable sources. Keep in mind that if something is secure "
+"today, does not mean it will be tomorrow. Stay safe!"
+msgstr "外部资源白名单会在您的 OTRS 应用程序中面临潜在的安全风险！只允许那些您确信没有恶意且来自可靠来源的资源。。 请记住，如果某些资源今天是安全的，那并不意味着它在明天仍然安全。 注意安全！"
 
 #: ../../content/glossary.rst:2
 msgid "Glossary"
@@ -5388,14 +5703,14 @@ msgid "(see also :term:`Service Level Agreement`)."
 msgstr "（参见 :term:`服务级别协议`）。"
 
 #: ../../content/glossary.rst:73
-#: ../../content/processes-automation/process-management.rst:166
-#: ../../content/processes-automation/process-management.rst:168
-#: ../../content/processes-automation/process-management.rst:170
-#: ../../content/processes-automation/process-management.rst:172
-#: ../../content/processes-automation/process-management.rst:179
-#: ../../content/processes-automation/process-management.rst:181
-#: ../../content/processes-automation/process-management.rst:183
-#: ../../content/processes-automation/process-management.rst:185
+#: ../../content/processes-automation/process-management.rst:272
+#: ../../content/processes-automation/process-management.rst:274
+#: ../../content/processes-automation/process-management.rst:276
+#: ../../content/processes-automation/process-management.rst:278
+#: ../../content/processes-automation/process-management.rst:285
+#: ../../content/processes-automation/process-management.rst:287
+#: ../../content/processes-automation/process-management.rst:289
+#: ../../content/processes-automation/process-management.rst:291
 msgid "Ticket"
 msgstr "工单"
 
@@ -7782,7 +8097,7 @@ msgstr "下拉框动态字段用于存储一个封闭列表中的单个值。"
 
 #: ../../content/processes-automation/dynamic-fields.rst:288
 #: ../../content/processes-automation/dynamic-fields.rst:326
-#: ../../content/processes-automation/process-management.rst:164
+#: ../../content/processes-automation/process-management.rst:270
 msgid "Possible values"
 msgstr "可能值"
 
@@ -7962,13 +8277,6 @@ msgstr "选择 *1 - 启用* 或 *2 - 启用且必填*。"
 #: ../../content/processes-automation/dynamic-fields.rst:496
 msgid "Click on the tick button on the right to save the setting."
 msgstr "点击右侧的勾选按钮以保存设置。"
-
-#: ../../content/processes-automation/dynamic-fields.rst:439
-#: ../../content/processes-automation/dynamic-fields.rst:460
-#: ../../content/processes-automation/dynamic-fields.rst:473
-#: ../../content/processes-automation/dynamic-fields.rst:497
-msgid "Deploy the modified system configuration."
-msgstr "部署修改后的系统配置。"
 
 #: ../../content/processes-automation/dynamic-fields.rst:444
 msgid "Display Dynamic Fields on Screen"
@@ -8650,10 +8958,198 @@ msgid ""
 msgstr "如果系统中添加了多个流程，只需键入要过滤的名称，即可使用过滤器框查找特定流程。"
 
 #: ../../content/processes-automation/process-management.rst:100
+msgid "Process Elements"
+msgstr "流程元素"
+
+#: ../../content/processes-automation/process-management.rst:102
+msgid ""
+"The element names of the process modeler have been adapted to the *Business "
+"Process Model and Notation* (BPMN) ISO naming convention. The following task"
+" activities can be used as basic elements of the process."
+msgstr "流程建模器的元素名称已适应于 *业务流程模型和符号* (BPMN) ISO命名约定。以下任务活动可以用作流程的基本元素。"
+
+#: ../../content/processes-automation/process-management.rst:138
+#: ../../content/processes-automation/process-management.rst:156
+#: ../../content/processes-automation/process-management.rst:195
+msgid "Script task activity"
+msgstr "脚本任务活动"
+
+#: ../../content/processes-automation/process-management.rst:105
+msgid ""
+"Script task activity is executed by the process management module and it can"
+" set dynamic field values or manage tickets automatically."
+msgstr "脚本任务活动由流程管理模块执行，它可以设置动态字段的值或自动管理工单。"
+
+#: ../../content/processes-automation/process-management.rst:110
+msgid "Script Task Activity Window"
+msgstr "脚本任务活动窗口"
+
+#: ../../content/processes-automation/process-management.rst:115
+#: ../../content/processes-automation/process-management.rst:151
+#: ../../content/processes-automation/process-management.rst:190
+msgid "Activity name \\*"
+msgstr "活动名称 \\*"
+
+#: ../../content/processes-automation/process-management.rst:115
+#: ../../content/processes-automation/process-management.rst:151
+#: ../../content/processes-automation/process-management.rst:190
+msgid ""
+"The name of this resource. Any type of characters can be entered to this "
+"field including uppercase letters and spaces."
+msgstr "此资源的名称。可以在此字段中输入任何类型的字符，包括大写字母和空格。"
+
+#: ../../content/processes-automation/process-management.rst:122
+#: ../../content/processes-automation/process-management.rst:158
+#: ../../content/processes-automation/process-management.rst:197
+msgid "Activity type \\*"
+msgstr "活动类型 \\*"
+
+#: ../../content/processes-automation/process-management.rst:118
+#: ../../content/processes-automation/process-management.rst:154
+#: ../../content/processes-automation/process-management.rst:193
+msgid "The following types of task activities can be used:"
+msgstr "可以使用以下类型的任务活动："
+
+#: ../../content/processes-automation/process-management.rst:120
+msgid "Script task activity (selected for now)"
+msgstr "脚本任务活动（当前选择）"
+
+#: ../../content/processes-automation/process-management.rst:121
+#: ../../content/processes-automation/process-management.rst:177
+#: ../../content/processes-automation/process-management.rst:196
+msgid "Service task activity"
+msgstr "服务任务活动"
+
+#: ../../content/processes-automation/process-management.rst:122
+#: ../../content/processes-automation/process-management.rst:158
+#: ../../content/processes-automation/process-management.rst:203
+msgid "User task activity"
+msgstr "用户任务活动"
+
+#: ../../content/processes-automation/process-management.rst:125
+#: ../../content/processes-automation/process-management.rst:161
+msgid "Activity description"
+msgstr "活动描述"
+
+#: ../../content/processes-automation/process-management.rst:125
+#: ../../content/processes-automation/process-management.rst:161
+msgid ""
+"Add additional information to this resource. It is recommended to always "
+"fill this field as a description of the resource with a full sentence for "
+"better clarity."
+msgstr "向此资源添加附加信息。 为了更加清晰，建议始终将此字段填充为带有完整句子的资源描述。"
+
+#: ../../content/processes-automation/process-management.rst:128
+#: ../../content/processes-automation/process-management.rst:164
+msgid "Activity error code"
+msgstr "活动错误代码"
+
+#: ../../content/processes-automation/process-management.rst:128
+#: ../../content/processes-automation/process-management.rst:164
+msgid ""
+"Define a custom error code for script or service task activities. The custom"
+" error code must be a positive integer number."
+msgstr "自定义产生于脚本或服务任务活动的错误代码。自定义的错误代码必须为正整数。"
+
+#: ../../content/processes-automation/process-management.rst:135
+#: ../../content/processes-automation/process-management.rst:171
+msgid "Can start processes in"
+msgstr "可以启动流程于"
+
+#: ../../content/processes-automation/process-management.rst:131
+#: ../../content/processes-automation/process-management.rst:167
+msgid ""
+"Defines, where can the processes be started by the agents or customer users."
+" A process can be started in the following interfaces:"
+msgstr "定义服务人员或客户用户在何处启动流程。 可以在以下界面中启动流程："
+
+#: ../../content/processes-automation/process-management.rst:133
+#: ../../content/processes-automation/process-management.rst:169
+msgid "Agent Interface"
+msgstr "服务人员界面"
+
+#: ../../content/processes-automation/process-management.rst:134
+#: ../../content/processes-automation/process-management.rst:170
+msgid "Agent and External Interface"
+msgstr "服务人员和外部人员界面"
+
+#: ../../content/processes-automation/process-management.rst:138
+msgid "Script \\*"
+msgstr "脚本 \\*"
+
+#: ../../content/processes-automation/process-management.rst:138
+msgid ""
+"In this drop-down can be selected which script should be triggered "
+"immediately if the activity is set. Click on the *Configure* button to add "
+"parameters (key-value pairs) for the script."
+msgstr "在这个下拉框中，可以选择如果设置了活动，应该立即触发哪个脚本。单击 *配置* 按钮为脚本添加参数(键值对)。"
+
+#: ../../content/processes-automation/process-management.rst:141
+msgid "Service task activity uses a web service to complete the task."
+msgstr "服务任务活动使用 WEB 服务来完成任务。"
+
+#: ../../content/processes-automation/process-management.rst:146
+msgid "Service Task Activity Window"
+msgstr "服务任务活动窗口"
+
+#: ../../content/processes-automation/process-management.rst:157
+msgid "Service task activity (selected for now)"
+msgstr "服务任务活动（当前选择）"
+
+#: ../../content/processes-automation/process-management.rst:174
+msgid "Web Service \\*"
+msgstr "Web 服务"
+
+#: ../../content/processes-automation/process-management.rst:174
+msgid "Select one of the :doc:`web-services` from the drop-down list."
+msgstr "从下拉列表中选择一个 :doc:`web-services` 。"
+
+#: ../../content/processes-automation/process-management.rst:177
+msgid "Invoker \\*"
+msgstr "调用程序 \\*"
+
+#: ../../content/processes-automation/process-management.rst:177
+msgid ""
+"Select an invoker for the web service. Click on the *Configure* button to "
+"add parameters for the invoker."
+msgstr "为 Web 服务选择一个调用程序。点击 *配置* 按钮为调用程序添加参数。"
+
+#: ../../content/processes-automation/process-management.rst:180
+msgid ""
+"User task activity can be used when the task is being done by an agent or a "
+"customer user."
+msgstr "当任务由服务人员或客户用户执行时，可以使用用户任务活动。"
+
+#: ../../content/processes-automation/process-management.rst:185
+msgid "User Task Activity Window"
+msgstr "用户任务活动窗口"
+
+#: ../../content/processes-automation/process-management.rst:197
+msgid "User task activity (selected for now)"
+msgstr "用户任务活动（当前选择）"
+
+#: ../../content/processes-automation/process-management.rst:203
+msgid "User Task Activity Dialogs"
+msgstr "用户任务活动对话框"
+
+#: ../../content/processes-automation/process-management.rst:200
+msgid ""
+"You can assign user task activity dialogs to this activity by dragging the "
+"elements with the mouse from the left list to the right list. Ordering the "
+"elements within the list is also possible by drag and drop."
+msgstr "通过用鼠标将元素从左列表拖到右列表，可以将用户任务活动对话框分配给该活动。通过拖放也可以对列表中的元素进行排序。"
+
+#: ../../content/processes-automation/process-management.rst:202
+msgid ""
+"Click on the *Create New User Task Activity Dialog* button to create new "
+"dialogs."
+msgstr "点击 *创建新用户任务活动对话框* 按钮创建新对话框。"
+
+#: ../../content/processes-automation/process-management.rst:206
 msgid "Example process"
 msgstr "流程示例"
 
-#: ../../content/processes-automation/process-management.rst:102
+#: ../../content/processes-automation/process-management.rst:208
 msgid ""
 "Processes are more complex than other resources in OTRS. To create a "
 "process, you need to do several steps. The following chapters shows you, how"
@@ -8662,40 +9158,40 @@ msgid ""
 "order process."
 msgstr "流程比OTRS中的其他资源更复杂。要创建流程，需要执行几个步骤。下面的章节向您展示了如何根据规范定义流程并创建所需的资源。让我们看一个例子，让它更具演示性。我们将定义图书订购流程。"
 
-#: ../../content/processes-automation/process-management.rst:106
+#: ../../content/processes-automation/process-management.rst:212
 msgid "Process Specification"
 msgstr "流程规范"
 
-#: ../../content/processes-automation/process-management.rst:108
+#: ../../content/processes-automation/process-management.rst:214
 msgid "The book order process has four states."
 msgstr "图书订购流程有四种状态。"
 
-#: ../../content/processes-automation/process-management.rst:117
+#: ../../content/processes-automation/process-management.rst:223
 msgid "Recording the demand"
 msgstr "记录需求"
 
-#: ../../content/processes-automation/process-management.rst:111
+#: ../../content/processes-automation/process-management.rst:217
 msgid ""
 "Before an order will be placed, the demand for literature by an employee "
 "will be recorded. The following book is needed in our example:"
 msgstr "在生成订单之前，雇员对书籍的需求将被记录。下列书籍是我们示例中所需要的："
 
-#: ../../content/processes-automation/process-management.rst:120
+#: ../../content/processes-automation/process-management.rst:226
 msgid "Approval by manager"
 msgstr "经理审批"
 
-#: ../../content/processes-automation/process-management.rst:120
+#: ../../content/processes-automation/process-management.rst:226
 msgid ""
 "The head of the employee's department needs to decide on the order. In case "
 "of a denial, a reason should be recorded by the manager. In case of "
 "approval, the order is passed to the purchasing department."
 msgstr "部门经理需要确认需求。若经理拒绝，需要记录决定原因。若同意，流程将会跳转到采购部。"
 
-#: ../../content/processes-automation/process-management.rst:123
+#: ../../content/processes-automation/process-management.rst:229
 msgid "Processing by purchasing department"
 msgstr "采购部处理"
 
-#: ../../content/processes-automation/process-management.rst:123
+#: ../../content/processes-automation/process-management.rst:229
 msgid ""
 "Purchasing now has the task to find out where the book can be ordered with "
 "the best conditions. If it is out of stock, this can be recorded in the "
@@ -8703,60 +9199,60 @@ msgid ""
 "the price and the delivery date."
 msgstr "现在采购人员需要找出如何以最好的条件购买所需书籍。若书籍缺货，需要在工单中进行记录。如果成功下单，将需要记录供应商、售价与交货时间。"
 
-#: ../../content/processes-automation/process-management.rst:127
+#: ../../content/processes-automation/process-management.rst:233
 msgid "Processing by the mail room"
 msgstr "收发室处理"
 
-#: ../../content/processes-automation/process-management.rst:126
+#: ../../content/processes-automation/process-management.rst:232
 msgid ""
 "The shipment will arrive at the company. The incoming goods department "
 "checks the shipment and records the date of receipt. Now the employee will "
 "be informed that their order has arrived and is ready to be collected."
 msgstr "这批货物将到达公司。进货部门负责检查货物，并记录货品到达日期。接着员工将被告知他们的订单已经到达，并已准备好进行接收。"
 
-#: ../../content/processes-automation/process-management.rst:130
+#: ../../content/processes-automation/process-management.rst:236
 msgid "Introduce The Process Elements"
 msgstr "介绍流程元素"
 
-#: ../../content/processes-automation/process-management.rst:132
+#: ../../content/processes-automation/process-management.rst:238
 msgid ""
 "If we assume that a ticket acts in this workflow like an accompanying "
 "document that can receive change notes, we already have a clear picture of "
 "process tickets."
 msgstr "如果我们假设一个工单在这个工作流中像一个可以接收变更通知的附带文档一样工作，那么我们已经有了一个流程工单的清晰图片。"
 
-#: ../../content/processes-automation/process-management.rst:134
+#: ../../content/processes-automation/process-management.rst:240
 msgid ""
 "From the analysis of the example process we can identify the following "
 "necessary items:"
 msgstr "通过示例流程分析，我们可以确定下列需要的条目："
 
-#: ../../content/processes-automation/process-management.rst:136
+#: ../../content/processes-automation/process-management.rst:242
 msgid ""
 "Possibility to record data, let's call this :term:`user task activity "
 "dialog`."
 msgstr "记录数据的可能性，让我们称之为 :term:`用户任务活动对话框`。"
 
-#: ../../content/processes-automation/process-management.rst:137
+#: ../../content/processes-automation/process-management.rst:243
 msgid ""
 "Check which can react to changed data automatically, let's call this "
 ":term:`sequence flow`."
 msgstr "检查哪些可以自动对已更改的数据做出反应，让我们称之为 :term:`序列流`。"
 
-#: ../../content/processes-automation/process-management.rst:138
+#: ../../content/processes-automation/process-management.rst:244
 msgid ""
 "Change which can be applied to a process ticket after successful transitions"
 " of a process ticket, let's call this :term:`sequence flow action`."
 msgstr "在成功转换流程工单后，可以应用于流程工单的更改，我们将其称为 :term:`序列流操作`。"
 
-#: ../../content/processes-automation/process-management.rst:139
+#: ../../content/processes-automation/process-management.rst:245
 msgid ""
 "A possibility to offer more than just one user task activity dialog to be "
 "available. In our example this is needed when the manager must have the "
 "choice between *Approve* and *Deny*. Let's call this :term:`activity`."
 msgstr "提供多个用户任务活动对话框的可能性。在我们的示例中，当经理必须在 *批准* 和 *拒绝* 之间进行选择时，就需要这样做。让我们称之为 :term:`活动`。"
 
-#: ../../content/processes-automation/process-management.rst:141
+#: ../../content/processes-automation/process-management.rst:247
 msgid ""
 "Now, with activities, user task activity dialogs, sequence flows and "
 "sequence flow actions we have the necessary tools to model the individual "
@@ -8765,11 +9261,11 @@ msgid ""
 ":term:`process`."
 msgstr "现在，有了活动、用户任务活动对话框、序列流和序列流操作，我们就有了必要的工具来建模示例中的各个步骤。仍然缺少的是一个可以为每个工作流指定步骤顺序的区域。让我们称之为 :term:`流程`。"
 
-#: ../../content/processes-automation/process-management.rst:145
+#: ../../content/processes-automation/process-management.rst:251
 msgid "Create Necessary Resources"
 msgstr "创建必要的资源"
 
-#: ../../content/processes-automation/process-management.rst:147
+#: ../../content/processes-automation/process-management.rst:253
 msgid ""
 "Before the creation of the process and its parts is necessary to prepare the"
 " system. We need to define some :doc:`../ticket-settings/queues`, :doc"
@@ -8777,256 +9273,256 @@ msgid ""
 "some :doc:`../administration/system-configuration` settings."
 msgstr "在创建流程及其部件之前，必须准备好系统。我们需要定义一些 :doc:`../ticket-settings/queues`、 :doc:`../users-groups-roles/agents` 和 :doc:`dynamic-fields` 并设置一些 :doc:`../administration/system-configuration` 设置。"
 
-#: ../../content/processes-automation/process-management.rst:149
+#: ../../content/processes-automation/process-management.rst:255
 msgid "Create the following :doc:`../ticket-settings/queues`:"
 msgstr "创建以下 :doc:`../ticket-settings/queues`："
 
-#: ../../content/processes-automation/process-management.rst:151
+#: ../../content/processes-automation/process-management.rst:257
 msgid "Management"
 msgstr "管理"
 
-#: ../../content/processes-automation/process-management.rst:152
+#: ../../content/processes-automation/process-management.rst:258
 msgid "Employees"
 msgstr "员工"
 
-#: ../../content/processes-automation/process-management.rst:153
+#: ../../content/processes-automation/process-management.rst:259
 msgid "Purchasing"
 msgstr "采购"
 
-#: ../../content/processes-automation/process-management.rst:154
+#: ../../content/processes-automation/process-management.rst:260
 msgid "Post office"
 msgstr "收发室"
 
-#: ../../content/processes-automation/process-management.rst:156
+#: ../../content/processes-automation/process-management.rst:262
 msgid "Create the following :doc:`../users-groups-roles/agents`:"
 msgstr "创建以下 :doc:`../users-groups-roles/agents`："
 
-#: ../../content/processes-automation/process-management.rst:158
+#: ../../content/processes-automation/process-management.rst:264
 msgid "Manager"
 msgstr "经理"
 
-#: ../../content/processes-automation/process-management.rst:159
+#: ../../content/processes-automation/process-management.rst:265
 msgid "Employee"
 msgstr "员工"
 
-#: ../../content/processes-automation/process-management.rst:161
+#: ../../content/processes-automation/process-management.rst:267
 msgid "Create the following :doc:`dynamic-fields`:"
 msgstr "创建以下 :doc:`dynamic-fields`："
 
-#: ../../content/processes-automation/process-management.rst:164
+#: ../../content/processes-automation/process-management.rst:270
 msgid "Object"
 msgstr "对象"
 
-#: ../../content/processes-automation/process-management.rst:164
+#: ../../content/processes-automation/process-management.rst:270
 msgid "Type"
 msgstr "类型"
 
-#: ../../content/processes-automation/process-management.rst:164
+#: ../../content/processes-automation/process-management.rst:270
 msgid "Name"
 msgstr "名称"
 
-#: ../../content/processes-automation/process-management.rst:164
+#: ../../content/processes-automation/process-management.rst:270
 msgid "Label"
 msgstr "标签"
 
-#: ../../content/processes-automation/process-management.rst:166
-#: ../../content/processes-automation/process-management.rst:168
-#: ../../content/processes-automation/process-management.rst:170
-#: ../../content/processes-automation/process-management.rst:179
-#: ../../content/processes-automation/process-management.rst:181
+#: ../../content/processes-automation/process-management.rst:272
+#: ../../content/processes-automation/process-management.rst:274
+#: ../../content/processes-automation/process-management.rst:276
+#: ../../content/processes-automation/process-management.rst:285
+#: ../../content/processes-automation/process-management.rst:287
 msgid "Text"
 msgstr "文本"
 
-#: ../../content/processes-automation/process-management.rst:166
+#: ../../content/processes-automation/process-management.rst:272
 msgid "``Title``"
 msgstr "``Title``"
 
-#: ../../content/processes-automation/process-management.rst:168
+#: ../../content/processes-automation/process-management.rst:274
 msgid "``Author``"
 msgstr "``Author``"
 
-#: ../../content/processes-automation/process-management.rst:168
+#: ../../content/processes-automation/process-management.rst:274
 msgid "Author"
 msgstr "作者"
 
-#: ../../content/processes-automation/process-management.rst:170
+#: ../../content/processes-automation/process-management.rst:276
 msgid "``ISBN``"
 msgstr "``ISBN``"
 
-#: ../../content/processes-automation/process-management.rst:170
+#: ../../content/processes-automation/process-management.rst:276
 msgid "ISBN"
 msgstr "ISBN"
 
-#: ../../content/processes-automation/process-management.rst:172
+#: ../../content/processes-automation/process-management.rst:278
 msgid "Dropdown"
 msgstr "下拉选项框"
 
-#: ../../content/processes-automation/process-management.rst:172
+#: ../../content/processes-automation/process-management.rst:278
 msgid "``Status``"
 msgstr "``Status``"
 
-#: ../../content/processes-automation/process-management.rst:172
+#: ../../content/processes-automation/process-management.rst:278
 msgid "Status"
 msgstr "状态"
 
-#: ../../content/processes-automation/process-management.rst:172
+#: ../../content/processes-automation/process-management.rst:278
 msgid "Approval"
 msgstr "审批"
 
-#: ../../content/processes-automation/process-management.rst:173
+#: ../../content/processes-automation/process-management.rst:279
 msgid "Approval denied"
 msgstr "审批拒绝"
 
-#: ../../content/processes-automation/process-management.rst:174
+#: ../../content/processes-automation/process-management.rst:280
 msgid "Approved"
 msgstr "通过审批"
 
-#: ../../content/processes-automation/process-management.rst:175
+#: ../../content/processes-automation/process-management.rst:281
 msgid "Order denied"
 msgstr "采购拒绝"
 
-#: ../../content/processes-automation/process-management.rst:176
+#: ../../content/processes-automation/process-management.rst:282
 msgid "Order placed"
 msgstr "生成订单"
 
-#: ../../content/processes-automation/process-management.rst:177
+#: ../../content/processes-automation/process-management.rst:283
 msgid "Shipment received"
 msgstr "货品收到"
 
-#: ../../content/processes-automation/process-management.rst:179
+#: ../../content/processes-automation/process-management.rst:285
 msgid "``Supplier``"
 msgstr "``Supplier``"
 
-#: ../../content/processes-automation/process-management.rst:179
+#: ../../content/processes-automation/process-management.rst:285
 msgid "Supplier"
 msgstr "供应商"
 
-#: ../../content/processes-automation/process-management.rst:181
+#: ../../content/processes-automation/process-management.rst:287
 msgid "``Price``"
 msgstr "``Price``"
 
-#: ../../content/processes-automation/process-management.rst:181
+#: ../../content/processes-automation/process-management.rst:287
 msgid "Price"
 msgstr "价格"
 
-#: ../../content/processes-automation/process-management.rst:183
-#: ../../content/processes-automation/process-management.rst:185
+#: ../../content/processes-automation/process-management.rst:289
+#: ../../content/processes-automation/process-management.rst:291
 msgid "Date"
 msgstr "日期"
 
-#: ../../content/processes-automation/process-management.rst:183
+#: ../../content/processes-automation/process-management.rst:289
 msgid "``DeliveryDate``"
 msgstr "``DeliveryDate``"
 
-#: ../../content/processes-automation/process-management.rst:183
+#: ../../content/processes-automation/process-management.rst:289
 msgid "Delivery date"
 msgstr "交货日期"
 
-#: ../../content/processes-automation/process-management.rst:185
+#: ../../content/processes-automation/process-management.rst:291
 msgid "``DateOfReceipt``"
 msgstr "``DateOfReceipt``"
 
-#: ../../content/processes-automation/process-management.rst:185
+#: ../../content/processes-automation/process-management.rst:291
 msgid "Date of receipt"
 msgstr "收件日期"
 
-#: ../../content/processes-automation/process-management.rst:188
+#: ../../content/processes-automation/process-management.rst:294
 msgid ""
 "Set the following :doc:`../administration/system-configuration` settings:"
 msgstr "设置以下内容 :doc:`../administration/system-configuration` 设置："
 
-#: ../../content/processes-automation/process-management.rst:190
+#: ../../content/processes-automation/process-management.rst:296
 msgid ":sysconfig:`Ticket::Responsible <core.html#ticket-responsible>`"
 msgstr ":sysconfig:`Ticket::Responsible <core.html#ticket-responsible>`"
 
-#: ../../content/processes-automation/process-management.rst:192
+#: ../../content/processes-automation/process-management.rst:298
 msgid "Enabled"
 msgstr "已启用"
 
-#: ../../content/processes-automation/process-management.rst:194
+#: ../../content/processes-automation/process-management.rst:300
 msgid ""
 ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicFieldGroups"
 " <frontend.html#ticket-frontend-agentticketzoom-"
 "processwidgetdynamicfieldgroups>`"
 msgstr ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicFieldGroups <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfieldgroups>`"
 
-#: ../../content/processes-automation/process-management.rst:196
+#: ../../content/processes-automation/process-management.rst:302
 msgid "``Book`` → ``Title,Author,ISBN``"
 msgstr "``Book`` → ``Title,Author,ISBN``"
 
-#: ../../content/processes-automation/process-management.rst:197
+#: ../../content/processes-automation/process-management.rst:303
 msgid "``General`` → ``Status``"
 msgstr "``General`` → ``Status``"
 
-#: ../../content/processes-automation/process-management.rst:198
+#: ../../content/processes-automation/process-management.rst:304
 msgid "``Order`` → ``Price,Supplier,DeliveryDate``"
 msgstr "``Order`` → ``Price,Supplier,DeliveryDate``"
 
-#: ../../content/processes-automation/process-management.rst:199
+#: ../../content/processes-automation/process-management.rst:305
 msgid "``Shipment`` → ``DateOfReceipt``"
 msgstr "``Shipment`` → ``DateOfReceipt``"
 
-#: ../../content/processes-automation/process-management.rst:201
+#: ../../content/processes-automation/process-management.rst:307
 msgid ""
 ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField "
 "<frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfield>`"
 msgstr ":sysconfig:`Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField <frontend.html#ticket-frontend-agentticketzoom-processwidgetdynamicfield>`"
 
-#: ../../content/processes-automation/process-management.rst:203
+#: ../../content/processes-automation/process-management.rst:309
 msgid "``Author`` → *1 - Enabled*"
 msgstr "``Author`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:204
+#: ../../content/processes-automation/process-management.rst:310
 msgid "``DateOfReceipt`` → *1 - Enabled*"
 msgstr "``DateOfReceipt`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:205
+#: ../../content/processes-automation/process-management.rst:311
 msgid "``DeliveryDate`` → *1 - Enabled*"
 msgstr "``DeliveryDate`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:206
+#: ../../content/processes-automation/process-management.rst:312
 msgid "``ISBN`` → *1 - Enabled*"
 msgstr "``ISBN`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:207
+#: ../../content/processes-automation/process-management.rst:313
 msgid "``Price`` → *1 - Enabled*"
 msgstr "``Price`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:208
+#: ../../content/processes-automation/process-management.rst:314
 msgid "``Status`` → *1 - Enabled*"
 msgstr "``Status`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:209
+#: ../../content/processes-automation/process-management.rst:315
 msgid "``Supplier`` → *1 - Enabled*"
 msgstr "``Supplier`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:210
+#: ../../content/processes-automation/process-management.rst:316
 msgid "``Title`` → *1 - Enabled*"
 msgstr "``Title`` → *1 - Enabled*"
 
-#: ../../content/processes-automation/process-management.rst:214
+#: ../../content/processes-automation/process-management.rst:320
 msgid "Don't forget to deploy the modified system configuration settings."
 msgstr "不要忘记部署修改后的系统配置设置。"
 
-#: ../../content/processes-automation/process-management.rst:216
+#: ../../content/processes-automation/process-management.rst:322
 msgid ""
 "Now, go back to the *Process Management* screen and click on the *Create New"
 " Process*. Fill in the required fields."
 msgstr "现在，返回到 *流程管理* 屏幕并单击 *创建新的流程*。填写所需字段。"
 
-#: ../../content/processes-automation/process-management.rst:221
+#: ../../content/processes-automation/process-management.rst:327
 msgid "Book Ordering - Create New Process"
 msgstr "图书预订 - 创建新的流程"
 
-#: ../../content/processes-automation/process-management.rst:223
+#: ../../content/processes-automation/process-management.rst:329
 msgid "The new process is created. You can add some process element now."
 msgstr "新的流程已创建。现在可以添加一些流程元素。"
 
-#: ../../content/processes-automation/process-management.rst:227
+#: ../../content/processes-automation/process-management.rst:333
 msgid "Create User Task Activity Dialogs"
 msgstr "创建用户任务活动对话框"
 
-#: ../../content/processes-automation/process-management.rst:229
+#: ../../content/processes-automation/process-management.rst:335
 msgid ""
 "Click on the *User Task Activity Dialogs* item in the *Available Process "
 "Elements* widget in the left sidebar. This action will expand the *User Task"
@@ -9034,22 +9530,22 @@ msgid ""
 "like effect. Click on the *Create New User Task Activity Dialog* button."
 msgstr "单击左侧边栏中的 *可用的流程元素* 小部件中的 *用户任务活动对话框* 项。此操作将展开 *用户任务活动对话框* 选项，并折叠所有其他的选项，类似手风琴效果。单击 *创建新用户任务活动对话框* 按钮。"
 
-#: ../../content/processes-automation/process-management.rst:234
+#: ../../content/processes-automation/process-management.rst:340
 msgid "Book Ordering - User Task Activity Dialogs"
 msgstr "图书预订 - 用户任务活动对话框"
 
-#: ../../content/processes-automation/process-management.rst:236
+#: ../../content/processes-automation/process-management.rst:342
 msgid ""
 "In the opened popup screen fill in the *Dialog Name* as well as the "
 "*Description (short)* fields. For this example we will leave all other "
 "fields as the default."
 msgstr "在打开的弹出屏幕中，填写 *对话框名称* 和 *说明（短）* 字段。对于这个示例，我们将保留所有其他字段作为默认值。"
 
-#: ../../content/processes-automation/process-management.rst:241
+#: ../../content/processes-automation/process-management.rst:347
 msgid "Book Ordering - Add User Task Activity Dialog"
 msgstr "图书预订 - 添加用户任务活动对话框"
 
-#: ../../content/processes-automation/process-management.rst:243
+#: ../../content/processes-automation/process-management.rst:349
 msgid ""
 "To assign fields to the user task activity dialog simple drag the required "
 "field from the *Available Fields* pool and drop into the *Assigned Fields* "
@@ -9058,47 +9554,47 @@ msgid ""
 "within the pool to rearrange it in the correct place."
 msgstr "要将字段分配给用户任务活动对话框，只需从 *可用字段* 池中拖动所需字段，并将其放到 *已分配字段* 池中。*已分配字段* 池中的顺序与屏幕中字段的顺序相同。要修改顺序，只需拖放池中的字段，将其重新排列到正确的位置。"
 
-#: ../../content/processes-automation/process-management.rst:245
+#: ../../content/processes-automation/process-management.rst:351
 msgid "In this example we will use:"
 msgstr "在本例中，我们将使用："
 
-#: ../../content/processes-automation/process-management.rst:247
-#: ../../content/processes-automation/process-management.rst:275
-#: ../../content/processes-automation/process-management.rst:281
-#: ../../content/processes-automation/process-management.rst:290
+#: ../../content/processes-automation/process-management.rst:353
+#: ../../content/processes-automation/process-management.rst:381
+#: ../../content/processes-automation/process-management.rst:387
+#: ../../content/processes-automation/process-management.rst:396
 msgid "``Article`` field for comments."
 msgstr "``Article`` 字段用于备注。"
 
-#: ../../content/processes-automation/process-management.rst:248
-#: ../../content/processes-automation/process-management.rst:276
+#: ../../content/processes-automation/process-management.rst:354
+#: ../../content/processes-automation/process-management.rst:382
 msgid ""
 "``DynamicField_Title``, ``DynamicField_Author``, ``DynamicField_ISBN`` "
 "fields for the data to be collected for the order."
 msgstr "``DynamicField_Title``、 ``DynamicField_Author``、``DynamicField_ISBN`` 字段用于为订单收集的数据。"
 
-#: ../../content/processes-automation/process-management.rst:249
-#: ../../content/processes-automation/process-management.rst:277
+#: ../../content/processes-automation/process-management.rst:355
+#: ../../content/processes-automation/process-management.rst:383
 msgid "``DynamicField_Status`` with the possibility to choose *Approval*."
 msgstr "``DynamicField_Status`` 可选择 *批准*。"
 
-#: ../../content/processes-automation/process-management.rst:251
+#: ../../content/processes-automation/process-management.rst:357
 msgid ""
 "Drag these fields from the *Available Fields* pool and drop into the "
 "*Assigned Fields* pool."
 msgstr "将这些字段从 *可用字段* 池中拖动并放到 *已分配字段* 池中。"
 
-#: ../../content/processes-automation/process-management.rst:255
+#: ../../content/processes-automation/process-management.rst:361
 msgid ""
 "In this screen all dynamic fields has the prefix ``DynamicField_`` as in "
 "``DynamicField_Title``. Do not confuse with the field ``Title`` that is the "
 "ticket title."
 msgstr "在这个屏幕中，所有动态字段都有 ``DynamicField_`` 前缀比如 ``DynamicField_Title``。不会与工单标题字段 ``Title`` 混淆。"
 
-#: ../../content/processes-automation/process-management.rst:260
+#: ../../content/processes-automation/process-management.rst:366
 msgid "Book Ordering - Add User Task Activity Dialog Fields"
 msgstr "图书预订 - 添加用户任务活动对话框字段"
 
-#: ../../content/processes-automation/process-management.rst:262
+#: ../../content/processes-automation/process-management.rst:368
 msgid ""
 "As soon as the fields are dropped into the *Assigned Fields* pool another "
 "popup screen is shown with some details about the field. We will leave the "
@@ -9107,91 +9603,91 @@ msgid ""
 " customer* is not checked."
 msgstr "一旦这些字段被放到 *已分配字段* 池中，就会显示另一个弹出屏幕，其中包含有关该字段的一些详细信息。我们将保留默认选项，并且仅对于 ``Article`` 字段，我们应确保将 *通信渠道* 字段设置为 *OTRS*，并且未选中 *客户可见*。"
 
-#: ../../content/processes-automation/process-management.rst:267
+#: ../../content/processes-automation/process-management.rst:373
 msgid "Book Ordering - Edit User Task Activity Dialog Fields"
 msgstr "图书预订 - 编辑用户任务活动对话框字段"
 
-#: ../../content/processes-automation/process-management.rst:269
-#: ../../content/processes-automation/process-management.rst:321
-#: ../../content/processes-automation/process-management.rst:374
-#: ../../content/processes-automation/process-management.rst:475
+#: ../../content/processes-automation/process-management.rst:375
+#: ../../content/processes-automation/process-management.rst:427
+#: ../../content/processes-automation/process-management.rst:480
+#: ../../content/processes-automation/process-management.rst:581
 msgid ""
 "After all fields are filled in, click on the *Save and finish* button to "
 "save the changes and go back to the project management screen."
 msgstr "填写完所有字段后，单击 *保存并完成* 按钮保存更改并返回到流程管理屏幕。"
 
-#: ../../content/processes-automation/process-management.rst:271
+#: ../../content/processes-automation/process-management.rst:377
 msgid "Create the following user task activity dialogs with fields:"
 msgstr "创建以下带有字段的用户任务活动对话框："
 
-#: ../../content/processes-automation/process-management.rst:273
-#: ../../content/processes-automation/process-management.rst:479
-#: ../../content/processes-automation/process-management.rst:543
+#: ../../content/processes-automation/process-management.rst:379
+#: ../../content/processes-automation/process-management.rst:585
+#: ../../content/processes-automation/process-management.rst:649
 msgid "*Recording the demand* (already created before)"
 msgstr "*记录需求* （前面已创建）"
 
-#: ../../content/processes-automation/process-management.rst:279
-#: ../../content/processes-automation/process-management.rst:329
+#: ../../content/processes-automation/process-management.rst:385
+#: ../../content/processes-automation/process-management.rst:435
 msgid "*Approval denied*"
 msgstr "*审批拒绝*"
 
-#: ../../content/processes-automation/process-management.rst:282
+#: ../../content/processes-automation/process-management.rst:388
 msgid ""
 "``DynamicField_Status`` with the possibility to choose *Approval denied*."
 msgstr "``DynamicField_Status`` 可选择 *审批拒绝*。"
 
-#: ../../content/processes-automation/process-management.rst:284
-#: ../../content/processes-automation/process-management.rst:333
+#: ../../content/processes-automation/process-management.rst:390
+#: ../../content/processes-automation/process-management.rst:439
 msgid "*Approved*"
 msgstr "*通过审批*"
 
-#: ../../content/processes-automation/process-management.rst:286
+#: ../../content/processes-automation/process-management.rst:392
 msgid "``DynamicField_Status`` with the possibility to choose *Approved*."
 msgstr "``DynamicField_Status`` 可选择 *批准*。"
 
-#: ../../content/processes-automation/process-management.rst:288
-#: ../../content/processes-automation/process-management.rst:337
+#: ../../content/processes-automation/process-management.rst:394
+#: ../../content/processes-automation/process-management.rst:443
 msgid "*Order denied*"
 msgstr "*采购拒绝*"
 
-#: ../../content/processes-automation/process-management.rst:291
+#: ../../content/processes-automation/process-management.rst:397
 msgid "``DynamicField_Status`` with the possibility to choose *Order denied*."
 msgstr "``DynamicField_Status`` 可选择 *采购拒绝*。"
 
-#: ../../content/processes-automation/process-management.rst:293
-#: ../../content/processes-automation/process-management.rst:341
+#: ../../content/processes-automation/process-management.rst:399
+#: ../../content/processes-automation/process-management.rst:447
 msgid "*Order placed*"
 msgstr "*生成订单*"
 
-#: ../../content/processes-automation/process-management.rst:295
+#: ../../content/processes-automation/process-management.rst:401
 msgid ""
 "``DynamicField_Supplier``, ``DynamicField_Price``, "
 "``DynamicField_DeliveryDate`` fields for purchasing."
 msgstr "``DynamicField_Supplier``、``DynamicField_Price``、 ``DynamicField_DeliveryDate`` 字段用于采购。"
 
-#: ../../content/processes-automation/process-management.rst:296
+#: ../../content/processes-automation/process-management.rst:402
 msgid "``DynamicField_Status`` with the possibility to choose *Order placed*."
 msgstr "``DynamicField_Status`` 可选择 *订单已生成*。"
 
-#: ../../content/processes-automation/process-management.rst:298
-#: ../../content/processes-automation/process-management.rst:345
+#: ../../content/processes-automation/process-management.rst:404
+#: ../../content/processes-automation/process-management.rst:451
 msgid "*Shipment received*"
 msgstr "*货品收到*"
 
-#: ../../content/processes-automation/process-management.rst:300
+#: ../../content/processes-automation/process-management.rst:406
 msgid "``DynamicField_DateOfReceipt`` for the mail room."
 msgstr "``DynamicField_DateOfReceipt`` 用于收发室。"
 
-#: ../../content/processes-automation/process-management.rst:301
+#: ../../content/processes-automation/process-management.rst:407
 msgid ""
 "``DynamicField_Status`` with the possibility to choose *Shipment received*."
 msgstr "``DynamicField_Status`` 可选择 *货品收到*。"
 
-#: ../../content/processes-automation/process-management.rst:305
+#: ../../content/processes-automation/process-management.rst:411
 msgid "Create Sequence Flows"
 msgstr "创建序列流"
 
-#: ../../content/processes-automation/process-management.rst:307
+#: ../../content/processes-automation/process-management.rst:413
 msgid ""
 "Click on the *Sequence Flows* item in the *Available Process Elements* "
 "widget in the left sidebar. This action will expand the *Sequence Flows* "
@@ -9199,11 +9695,11 @@ msgid ""
 "on the *Create New Sequence Flow* button."
 msgstr "单击左侧边栏中的 *可用的流程元素* 小部件中的 *序列流* 项。此操作将扩展 *序列流* 选项，并折叠所有其他的选项，类似手风琴效果。单击 *创建新序列流* 按钮。"
 
-#: ../../content/processes-automation/process-management.rst:312
+#: ../../content/processes-automation/process-management.rst:418
 msgid "Book Ordering - Sequence Flows"
 msgstr "图书预订 - 序列流"
 
-#: ../../content/processes-automation/process-management.rst:314
+#: ../../content/processes-automation/process-management.rst:420
 msgid ""
 "In the opened popup screen fill in the *Sequence Flow Name*. For this "
 "example in the *Condition Expressions* we will use just one condition "
@@ -9211,49 +9707,49 @@ msgid ""
 "as *and* and we will use the filed match type value as *String*."
 msgstr "在打开的弹出屏幕中，填写 *序列流名称*。在这个示例中对于 *条件表达式*，我们将只使用一个条件表达式和一个字段。对于这两种情况，我们都将 *链接类型* 保持为 *and/和*，并且我们将使用字段匹配类型值作为 *字符串*。"
 
-#: ../../content/processes-automation/process-management.rst:319
+#: ../../content/processes-automation/process-management.rst:425
 msgid "Book Ordering - Add Sequence Flow"
 msgstr "图书预订 - 添加序列流"
 
-#: ../../content/processes-automation/process-management.rst:323
+#: ../../content/processes-automation/process-management.rst:429
 msgid "Create the following sequence flows:"
 msgstr "创建以下序列流："
 
-#: ../../content/processes-automation/process-management.rst:325
+#: ../../content/processes-automation/process-management.rst:431
 msgid "*Approval* (already created before)"
 msgstr "*审批* （前面已创建）"
 
-#: ../../content/processes-automation/process-management.rst:327
+#: ../../content/processes-automation/process-management.rst:433
 msgid "Check if the ``DynamicField_Status`` is set to *Approval*."
 msgstr "检查 ``DynamicField_Status`` 是否设置为 *批准*。"
 
-#: ../../content/processes-automation/process-management.rst:331
+#: ../../content/processes-automation/process-management.rst:437
 msgid ""
 "Check if the ``DynamicField_Status`` field is set to *Approval denied*."
 msgstr "检查 ``DynamicField_Status`` 是否设置为 *审批拒绝*。"
 
-#: ../../content/processes-automation/process-management.rst:335
+#: ../../content/processes-automation/process-management.rst:441
 msgid "Check if the ``DynamicField_Status`` field is set to *Approved*."
 msgstr "检查 ``DynamicField_Status`` 是否设置为 *批准*。"
 
-#: ../../content/processes-automation/process-management.rst:339
+#: ../../content/processes-automation/process-management.rst:445
 msgid "Check if the ``DynamicField_Status`` field is set to *Order denied*."
 msgstr "检查 ``DynamicField_Status`` 是否设置为 *采购拒绝*。"
 
-#: ../../content/processes-automation/process-management.rst:343
+#: ../../content/processes-automation/process-management.rst:449
 msgid "Check if the ``DynamicField_Status`` field is set to *Order placed*."
 msgstr "检查 ``DynamicField_Status`` 是否设置为 *订单已生成*。"
 
-#: ../../content/processes-automation/process-management.rst:347
+#: ../../content/processes-automation/process-management.rst:453
 msgid ""
 "Check if the ``DynamicField_Status`` field is set to *Shipment received*."
 msgstr "检查 ``DynamicField_Status`` 是否设置为 *货品收到*。"
 
-#: ../../content/processes-automation/process-management.rst:351
+#: ../../content/processes-automation/process-management.rst:457
 msgid "Create Sequence Flow Actions"
 msgstr "创建顺序流动作"
 
-#: ../../content/processes-automation/process-management.rst:353
+#: ../../content/processes-automation/process-management.rst:459
 msgid ""
 "Click on the *Sequence Flow Actions* item in the *Available Process "
 "Elements* widget in the left sidebar. This action will expand the *Sequence "
@@ -9261,229 +9757,229 @@ msgid ""
 "effect. Click on the *Create New Sequence Flow Action* button."
 msgstr "单击左侧边栏中的 *可用的流程元素* 小部件中的 *序列流操作* 项。此操作将扩展 *序列流操作* 选项，并折叠所有其他的选项，类似手风琴效果。单击 *创建新序列流操作* 按钮。"
 
-#: ../../content/processes-automation/process-management.rst:358
+#: ../../content/processes-automation/process-management.rst:464
 msgid "Book Ordering - Sequence Flow Actions"
 msgstr "图书预订 - 序列流操作"
 
-#: ../../content/processes-automation/process-management.rst:360
+#: ../../content/processes-automation/process-management.rst:466
 msgid ""
 "In the opened popup screen fill in the *Sequence Flow Action Name* and the "
 "*Sequence Flow Action module* then click on the *Save* button. A new "
 "*Configure* button will appear next to the module field."
 msgstr "在打开的弹出屏幕中，填写 *序列流操作名称* 和 *序列流操作模块*，然后单击 *保存* 按钮。模块字段旁边将出现一个新的 *配置* 按钮。"
 
-#: ../../content/processes-automation/process-management.rst:365
+#: ../../content/processes-automation/process-management.rst:471
 msgid "Book Ordering - Add Sequence Flow Action"
 msgstr "图书预订 - 添加序列流操作"
 
-#: ../../content/processes-automation/process-management.rst:367
+#: ../../content/processes-automation/process-management.rst:473
 msgid ""
 "Click on the *Configure* button and add the needed configuration parameter "
 "keys and values."
 msgstr "单击*配置*按钮，添加所需的配置参数键和值。"
 
-#: ../../content/processes-automation/process-management.rst:372
+#: ../../content/processes-automation/process-management.rst:478
 msgid "Book Ordering - Sequence Flow Action Parameters"
 msgstr "图书预订 - 序列流操作参数"
 
-#: ../../content/processes-automation/process-management.rst:378
+#: ../../content/processes-automation/process-management.rst:484
 msgid ""
 "Each module has its own and different parameters. Please review the module "
 "documentation to learn all require and optional parameters."
 msgstr "每个模块都有自己的不同参数。请查看模块文档以了解所有必需和可选参数。"
 
-#: ../../content/processes-automation/process-management.rst:380
+#: ../../content/processes-automation/process-management.rst:486
 msgid ""
 "`DynamicFieldSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/DynamicFieldSet.pm.html>`_"
 msgstr "`DynamicFieldSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/DynamicFieldSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:381
+#: ../../content/processes-automation/process-management.rst:487
 msgid ""
 "`TicketArticleCreate "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketArticleCreate.pm.html>`_"
 msgstr "`TicketArticleCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketArticleCreate.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:382
+#: ../../content/processes-automation/process-management.rst:488
 msgid ""
 "`TicketCreate "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCreate.pm.html>`_"
 msgstr "`TicketCreate <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCreate.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:383
+#: ../../content/processes-automation/process-management.rst:489
 msgid ""
 "`TicketCustomerSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCustomerSet.pm.html>`_"
 msgstr "`TicketCustomerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketCustomerSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:384
+#: ../../content/processes-automation/process-management.rst:490
 msgid ""
 "`TicketLockSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketLockSet.pm.html>`_"
 msgstr "`TicketLockSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketLockSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:385
+#: ../../content/processes-automation/process-management.rst:491
 msgid ""
 "`TicketOwnerSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketOwnerSet.pm.html>`_"
 msgstr "`TicketOwnerSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketOwnerSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:386
+#: ../../content/processes-automation/process-management.rst:492
 msgid ""
 "`TicketQueueSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketQueueSet.pm.html>`_"
 msgstr "`TicketQueueSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketQueueSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:387
+#: ../../content/processes-automation/process-management.rst:493
 msgid ""
 "`TicketResponsibleSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketResponsibleSet.pm.html>`_"
 msgstr "`TicketResponsibleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketResponsibleSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:388
+#: ../../content/processes-automation/process-management.rst:494
 msgid ""
 "`TicketSendEmail "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSendEmail.pm.html>`_"
 msgstr "`TicketSendEmail <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSendEmail.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:389
+#: ../../content/processes-automation/process-management.rst:495
 msgid ""
 "`TicketServiceSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketServiceSet.pm.html>`_"
 msgstr "`TicketServiceSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketServiceSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:390
+#: ../../content/processes-automation/process-management.rst:496
 msgid ""
 "`TicketSLASet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSLASet.pm.html>`_"
 msgstr "`TicketSLASet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketSLASet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:391
+#: ../../content/processes-automation/process-management.rst:497
 msgid ""
 "`TicketStateSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketStateSet.pm.html>`_"
 msgstr "`TicketStateSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketStateSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:392
+#: ../../content/processes-automation/process-management.rst:498
 msgid ""
 "`TicketTitleSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_"
 msgstr "`TicketTitleSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTitleSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:393
+#: ../../content/processes-automation/process-management.rst:499
 msgid ""
 "`TicketTypeSet "
 "<https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_"
 msgstr "`TicketTypeSet <https://doc.otrs.com/doc/api/otrs/7.0/Perl/Kernel/System/ProcessManagement/Modules/TicketTypeSet.pm.html>`_"
 
-#: ../../content/processes-automation/process-management.rst:395
+#: ../../content/processes-automation/process-management.rst:501
 msgid ""
 "All sequence flow action modules are located in the legacy named "
 "``Kernel/System/ProcessManagement/TransitionAction``."
 msgstr "所有序列流操作模块都位于名为 ``Kernel/System/ProcessManagement/TransitionAction`` 的旧版本目录中。"
 
-#: ../../content/processes-automation/process-management.rst:397
+#: ../../content/processes-automation/process-management.rst:503
 msgid "Create the following sequence flow actions:"
 msgstr "创建以下序列流操作："
 
-#: ../../content/processes-automation/process-management.rst:399
+#: ../../content/processes-automation/process-management.rst:505
 msgid ""
 "*Move the process ticket into the \"Management\" queue* (already created "
 "before)"
 msgstr "*将流程工单移动到“Management（管理）”队列中* (之前已经创建)"
 
-#: ../../content/processes-automation/process-management.rst:401
-#: ../../content/processes-automation/process-management.rst:405
+#: ../../content/processes-automation/process-management.rst:507
+#: ../../content/processes-automation/process-management.rst:511
 msgid "To be executed when the sequence flow *Approval* applied."
 msgstr "当序列流应用了 *批准* 时执行。"
 
-#: ../../content/processes-automation/process-management.rst:403
-#: ../../content/processes-automation/process-management.rst:556
+#: ../../content/processes-automation/process-management.rst:509
+#: ../../content/processes-automation/process-management.rst:662
 msgid "*Change ticket responsible to \"Manager\"*"
 msgstr "*更改这个工单的负责人为 \"Manager（经理）\"*"
 
-#: ../../content/processes-automation/process-management.rst:407
-#: ../../content/processes-automation/process-management.rst:572
-#: ../../content/processes-automation/process-management.rst:602
-#: ../../content/processes-automation/process-management.rst:630
+#: ../../content/processes-automation/process-management.rst:513
+#: ../../content/processes-automation/process-management.rst:678
+#: ../../content/processes-automation/process-management.rst:708
+#: ../../content/processes-automation/process-management.rst:736
 msgid "*Move process ticket into the \"Employees\" queue*"
 msgstr "*将流程工单转移到\"Employees（员工）\" 队列*"
 
-#: ../../content/processes-automation/process-management.rst:409
-#: ../../content/processes-automation/process-management.rst:417
-#: ../../content/processes-automation/process-management.rst:437
+#: ../../content/processes-automation/process-management.rst:515
+#: ../../content/processes-automation/process-management.rst:523
+#: ../../content/processes-automation/process-management.rst:543
 msgid "To be executed when:"
 msgstr "当遇到如下情况时执行："
 
-#: ../../content/processes-automation/process-management.rst:411
-#: ../../content/processes-automation/process-management.rst:419
-#: ../../content/processes-automation/process-management.rst:439
+#: ../../content/processes-automation/process-management.rst:517
+#: ../../content/processes-automation/process-management.rst:525
+#: ../../content/processes-automation/process-management.rst:545
 msgid "The sequence flow *Approval denied* applied."
 msgstr "序列流应用了 *审批拒绝*。"
 
-#: ../../content/processes-automation/process-management.rst:412
-#: ../../content/processes-automation/process-management.rst:420
-#: ../../content/processes-automation/process-management.rst:440
+#: ../../content/processes-automation/process-management.rst:518
+#: ../../content/processes-automation/process-management.rst:526
+#: ../../content/processes-automation/process-management.rst:546
 msgid "The sequence flow *Order denied* applied."
 msgstr "序列流应用了 *采购拒绝*。"
 
-#: ../../content/processes-automation/process-management.rst:413
-#: ../../content/processes-automation/process-management.rst:421
+#: ../../content/processes-automation/process-management.rst:519
+#: ../../content/processes-automation/process-management.rst:527
 msgid "The sequence flow *Shipment received* applied."
 msgstr "序列流应用了 *货品收到*。"
 
-#: ../../content/processes-automation/process-management.rst:415
-#: ../../content/processes-automation/process-management.rst:573
-#: ../../content/processes-automation/process-management.rst:603
-#: ../../content/processes-automation/process-management.rst:631
+#: ../../content/processes-automation/process-management.rst:521
+#: ../../content/processes-automation/process-management.rst:679
+#: ../../content/processes-automation/process-management.rst:709
+#: ../../content/processes-automation/process-management.rst:737
 msgid "*Change ticket responsible to \"Employee\"*"
 msgstr "*更改这个工单的负责人为 \"Employee（员工）\"*"
 
-#: ../../content/processes-automation/process-management.rst:423
-#: ../../content/processes-automation/process-management.rst:586
+#: ../../content/processes-automation/process-management.rst:529
+#: ../../content/processes-automation/process-management.rst:692
 msgid "*Move process ticket into the \"Purchasing\" queue*"
 msgstr "*将流程工单转移到\"Purchasing（采购）\" 队列*"
 
-#: ../../content/processes-automation/process-management.rst:425
+#: ../../content/processes-automation/process-management.rst:531
 msgid "To be executed when the sequence flow *Approved* applied."
 msgstr "当序列流应用了 *批准* 时执行。"
 
-#: ../../content/processes-automation/process-management.rst:427
-#: ../../content/processes-automation/process-management.rst:616
+#: ../../content/processes-automation/process-management.rst:533
+#: ../../content/processes-automation/process-management.rst:722
 msgid "*Move process ticket into the \"Post office\" queue*"
 msgstr "*将流程工单转移到\"Post office（收发室）\" 队列*"
 
-#: ../../content/processes-automation/process-management.rst:429
+#: ../../content/processes-automation/process-management.rst:535
 msgid "To be executed when the sequence flow *Order placed* applied."
 msgstr "当序列流应用了 *订单已生成* 时执行。"
 
-#: ../../content/processes-automation/process-management.rst:431
-#: ../../content/processes-automation/process-management.rst:632
+#: ../../content/processes-automation/process-management.rst:537
+#: ../../content/processes-automation/process-management.rst:738
 msgid "*Close ticket successfully*"
 msgstr "*成功关闭工单*"
 
-#: ../../content/processes-automation/process-management.rst:433
+#: ../../content/processes-automation/process-management.rst:539
 msgid "To be executed when the sequence flow *Shipment received* applied."
 msgstr "当序列流应用了 *货品收到* 时执行。"
 
-#: ../../content/processes-automation/process-management.rst:435
-#: ../../content/processes-automation/process-management.rst:574
-#: ../../content/processes-automation/process-management.rst:604
+#: ../../content/processes-automation/process-management.rst:541
+#: ../../content/processes-automation/process-management.rst:680
+#: ../../content/processes-automation/process-management.rst:710
 msgid "*Close ticket unsuccessfully*"
 msgstr "*失败关闭工单*"
 
-#: ../../content/processes-automation/process-management.rst:442
+#: ../../content/processes-automation/process-management.rst:548
 msgid ""
 "There are places where the same sequence flow actions should be executed. "
 "Therefore it is reasonable to make it possible to link sequence flow actions"
 " freely with sequence flows to be able to reuse them."
 msgstr "有些地方应该执行相同的序列流操作。因此，可以将序列流操作与序列流自由地链接起来，以便能够重用它们。"
 
-#: ../../content/processes-automation/process-management.rst:446
+#: ../../content/processes-automation/process-management.rst:552
 msgid "Create Activities"
 msgstr "创建活动"
 
-#: ../../content/processes-automation/process-management.rst:448
+#: ../../content/processes-automation/process-management.rst:554
 msgid ""
 "Click on the *Activities* item in the *Available Process Elements* widget in"
 " the left sidebar. This action will expand the *Activities* options and will"
@@ -9491,21 +9987,21 @@ msgid ""
 "New Activity* button."
 msgstr "单击左侧边栏中的 *可用的流程元素* 小部件中的 *活动* 项。此操作将扩展 *活动* 选项，并折叠所有其他的选项，类似手风琴效果。单击 *创建新活动* 按钮。"
 
-#: ../../content/processes-automation/process-management.rst:453
+#: ../../content/processes-automation/process-management.rst:559
 msgid "Book Ordering - Activities"
 msgstr "图书预订 - 活动"
 
-#: ../../content/processes-automation/process-management.rst:455
+#: ../../content/processes-automation/process-management.rst:561
 msgid ""
 "In the opened popup screen fill in the *Activity name* field and select "
 "*User task activity* from the *Activity type* drop-down."
 msgstr "在打开的弹出屏幕中，填写 *活动名称* 字段，然后从 *活动类型* 下拉列表中选择 *用户任务活动*。"
 
-#: ../../content/processes-automation/process-management.rst:460
+#: ../../content/processes-automation/process-management.rst:566
 msgid "Book Ordering - Add Activity"
 msgstr "图书预订 - 添加活动"
 
-#: ../../content/processes-automation/process-management.rst:462
+#: ../../content/processes-automation/process-management.rst:568
 msgid ""
 "To assign dialogs to the activity simple drag the required dialogs from the "
 "*Available User Task Activity Dialogs* pool and drop into the *Assigned User"
@@ -9515,84 +10011,84 @@ msgid ""
 " pool to rearrange it in the correct place."
 msgstr "要将对话框分配给活动，只需将所需对话框从 *可用用户任务活动对话框* 池中拖动，然后放到 *已分配用户任务活动对话框* 池中。*已分配用户任务活动对话框* 池中的顺序是对话框将在 *工单详情* 屏幕中显示的顺序。要修改顺序，只需在池中拖放对话框，将其重新排列到正确的位置。"
 
-#: ../../content/processes-automation/process-management.rst:466
+#: ../../content/processes-automation/process-management.rst:572
 msgid ""
 "This order is specially important in the first activity, since the first "
 "user task activity dialog for this activity is the only one that is "
 "presented when the process starts."
 msgstr "此顺序在第一个活动中特别重要，因为此活动的第一个用户任务活动对话框是流程启动时唯一出现的对话框。"
 
-#: ../../content/processes-automation/process-management.rst:468
+#: ../../content/processes-automation/process-management.rst:574
 msgid ""
 "In this example we need to assign only the *Recording the demand* user task "
 "activity dialog. Drag this dialog from the *Available User Task Activity "
 "Dialogs* pool and drop into the *Assigned User Task Activity Dialogs* pool."
 msgstr "在这个例子中，我们只需要分配 *记录需求* 用户任务活动对话框。将此对话框从 *可用用户任务活动对话框* 池中拖动，并放到 *已分配用户任务活动对话框* 池中。"
 
-#: ../../content/processes-automation/process-management.rst:473
+#: ../../content/processes-automation/process-management.rst:579
 msgid "Book Ordering - Assign User Task Activity Dialog"
 msgstr "图书预订 - 分配用户任务活动对话框"
 
-#: ../../content/processes-automation/process-management.rst:477
+#: ../../content/processes-automation/process-management.rst:583
 msgid "Create the following activities:"
 msgstr "创建以下活动："
 
-#: ../../content/processes-automation/process-management.rst:481
+#: ../../content/processes-automation/process-management.rst:587
 msgid "Assign the user task activity dialog *Recording the demand*."
 msgstr "分配用户任务活动对话框 *记录需求*。"
 
-#: ../../content/processes-automation/process-management.rst:483
-#: ../../content/processes-automation/process-management.rst:560
+#: ../../content/processes-automation/process-management.rst:589
+#: ../../content/processes-automation/process-management.rst:666
 msgid "*Approval*"
 msgstr "*审批*"
 
-#: ../../content/processes-automation/process-management.rst:485
+#: ../../content/processes-automation/process-management.rst:591
 msgid ""
 "Assign the user task activity dialogs *Approval denied* and *Approved*."
 msgstr "分配用户任务活动对话框 *审批拒绝* 和 *批准*。"
 
-#: ../../content/processes-automation/process-management.rst:487
-#: ../../content/processes-automation/process-management.rst:590
+#: ../../content/processes-automation/process-management.rst:593
+#: ../../content/processes-automation/process-management.rst:696
 msgid "*Order*"
 msgstr "*订单*"
 
-#: ../../content/processes-automation/process-management.rst:489
+#: ../../content/processes-automation/process-management.rst:595
 msgid ""
 "Assign the user task activity dialogs *Order denied* and *Order placed*."
 msgstr "分配用户任务活动对话框 *采购拒绝* 和 *订单已生成*。"
 
-#: ../../content/processes-automation/process-management.rst:491
-#: ../../content/processes-automation/process-management.rst:618
+#: ../../content/processes-automation/process-management.rst:597
+#: ../../content/processes-automation/process-management.rst:724
 msgid "*Incoming*"
 msgstr "*收货*"
 
-#: ../../content/processes-automation/process-management.rst:493
+#: ../../content/processes-automation/process-management.rst:599
 msgid "Assign the user task activity dialog *Shipment received*."
 msgstr "分配用户任务活动对话框 *货品收到*。"
 
-#: ../../content/processes-automation/process-management.rst:495
+#: ../../content/processes-automation/process-management.rst:601
 msgid "*Process complete*"
 msgstr "*流程完成*"
 
-#: ../../content/processes-automation/process-management.rst:497
+#: ../../content/processes-automation/process-management.rst:603
 msgid ""
 "This is an activity without possible user task activity dialogs. It will be "
 "set after *Approval denied*, *Order denied* or *Shipment received* and "
 "represents the end of the process."
 msgstr "这是一个没有可能的用户任务活动对话框的活动。它将在 *审批拒绝*、*采购拒绝* 或 *货品收到* 之后设置，并表示流程结束。"
 
-#: ../../content/processes-automation/process-management.rst:499
+#: ../../content/processes-automation/process-management.rst:605
 msgid ""
 "Now we can clearly see that activities are precisely defined states of a "
 "process ticket. After a successful sequence flow a process ticket moves from"
 " one activity to another."
 msgstr "现在我们可以清楚地看到，活动是流程工单的精确定义状态。成功的序列流之后，流程工单从一个活动移动到另一个活动。"
 
-#: ../../content/processes-automation/process-management.rst:503
+#: ../../content/processes-automation/process-management.rst:609
 msgid "Create Process Path"
 msgstr "创建流程路径"
 
-#: ../../content/processes-automation/process-management.rst:505
+#: ../../content/processes-automation/process-management.rst:611
 msgid ""
 "Let us conclude our example with the last missing piece in the puzzle, the "
 "process as the a flow describer. In our case this is the whole ordering "
@@ -9600,7 +10096,7 @@ msgid ""
 "different processes."
 msgstr "让我们用拼图中最后一个缺失的部分来结束我们的示例，流程就像一个流动的描述者。在我们的例子中，这是整个订购工作流程。其他流程可以是办公用品订购或完全不同的流程。"
 
-#: ../../content/processes-automation/process-management.rst:507
+#: ../../content/processes-automation/process-management.rst:613
 msgid ""
 "The process has a starting point which consists of the start activity and "
 "the start user task activity dialog. For any new book order, the first user "
@@ -9609,7 +10105,7 @@ msgid ""
 "created and can follow the configured workflow."
 msgstr "流程有一个起始点，由初始活动和初始用户任务活动对话框组成。对于任何新的图书订单，第一个活动的第一个用户任务活动对话框是显示的第一个屏幕。如果此操作完成并保存，将创建流程工单，并可以按照配置的工作流操作。"
 
-#: ../../content/processes-automation/process-management.rst:509
+#: ../../content/processes-automation/process-management.rst:615
 msgid ""
 "The process also contains the directions for how the process ticket can move"
 " through the process. Let's call this :term:`process path`. It consists of "
@@ -9617,7 +10113,7 @@ msgid ""
 "actions) and other activities."
 msgstr "流程还包含流程工单如何在流程中移动的说明。我们称之为 :term:`流程路径`。它由初始活动、一个或多个序列流（可能带有序列流操作）和其他活动组成。"
 
-#: ../../content/processes-automation/process-management.rst:511
+#: ../../content/processes-automation/process-management.rst:617
 msgid ""
 "Assuming that the activities has already assigned their user task activity "
 "dialogs, drag an activity from the accordion in the *Available Process "
@@ -9628,11 +10124,11 @@ msgid ""
 "shown when the process starts."
 msgstr "假设活动已经有分配给它们的用户任务活动对话框，从左侧边栏的 *可用的流程元素* 小部件中的相应位置拖动一个活动，并将其放到流程信息下方的画布区域。请注意，从流程开始（白色圆圈）到活动的箭头将自动放置。这是第一个活动，它的第一个用户任务活动对话框是流程启动时将显示的第一个屏幕。"
 
-#: ../../content/processes-automation/process-management.rst:516
+#: ../../content/processes-automation/process-management.rst:622
 msgid "Book Ordering - First Activity On Canvas"
 msgstr "图书预订 - 画布上的第一个活动"
 
-#: ../../content/processes-automation/process-management.rst:518
+#: ../../content/processes-automation/process-management.rst:624
 msgid ""
 "Next, drag another activity into the canvas too. Now we will have two "
 "activities in the canvas. The first one is connected to the start point and "
@@ -9640,11 +10136,11 @@ msgid ""
 " reveal their own activity dialogs."
 msgstr "接下来，将另一个活动拖到画布中。现在我们在画布中有两个活动。第一个连接到起点，第二个没有连接。您可以将鼠标悬停在每个活动上，以显示它们自己的活动对话框。"
 
-#: ../../content/processes-automation/process-management.rst:523
+#: ../../content/processes-automation/process-management.rst:629
 msgid "Book Ordering - Second Activity On Canvas"
 msgstr "图书预订 - 画布上的第二个活动"
 
-#: ../../content/processes-automation/process-management.rst:525
+#: ../../content/processes-automation/process-management.rst:631
 msgid ""
 "Then let's create the process path (connection) between this two activities."
 " For this we will use the sequence flows. Click on sequence flow in the "
@@ -9655,66 +10151,66 @@ msgid ""
 "connection between the activities."
 msgstr "然后让我们在这两个活动之间创建流程路径（连接）。为此，我们将使用序列流。单击手风琴中的序列流，拖动序列流并将其放到第一个活动中。一旦序列流被放下，序列流箭头的终点将被放置在流程起点的旁边。拖动序列流箭头端点并将其放到其他活动中，以创建活动之间的连接。"
 
-#: ../../content/processes-automation/process-management.rst:530
+#: ../../content/processes-automation/process-management.rst:636
 msgid "Book Ordering - First Sequence Flow On Canvas"
 msgstr "图书预订 - 画布上的第一个序列流"
 
-#: ../../content/processes-automation/process-management.rst:532
+#: ../../content/processes-automation/process-management.rst:638
 msgid ""
 "Now that the process path between the actions is defined, then we need to "
 "assign the sequence flow actions to the sequence flow. Double click the "
 "sequence flow label in the canvas to open a new popup window."
 msgstr "既然已经定义了动作之间的流程路径，那么我们需要将序列流操作分配给序列流。双击画布中的序列流标签以打开新的弹出窗口。"
 
-#: ../../content/processes-automation/process-management.rst:537
+#: ../../content/processes-automation/process-management.rst:643
 msgid "Book Ordering - Assign First Sequence Flow Action"
 msgstr "图书预订 - 分配第一个序列流操作"
 
-#: ../../content/processes-automation/process-management.rst:539
+#: ../../content/processes-automation/process-management.rst:645
 msgid ""
 "After the sequence flow actions are assigned, click on the *Save* button to "
 "go back to the main process edit screen. Click on *Save* button below the "
 "canvas to save all other changes."
 msgstr "分配序列流操作后，单击 *保存* 按钮返回主流程编辑屏幕。单击画布下方的 *保存* 按钮保存所有其他更改。"
 
-#: ../../content/processes-automation/process-management.rst:541
+#: ../../content/processes-automation/process-management.rst:647
 msgid ""
 "Complete the process path by adding the following activities, sequence flows"
 " and sequence flow actions:"
 msgstr "通过添加以下活动、序列流和序列流操作来完成流程路径："
 
-#: ../../content/processes-automation/process-management.rst:545
+#: ../../content/processes-automation/process-management.rst:651
 msgid "Possible sequence flow: *Approval*"
 msgstr "可能的序列流：*审批*"
 
-#: ../../content/processes-automation/process-management.rst:547
+#: ../../content/processes-automation/process-management.rst:653
 msgid "Starting activity: *Recording the demand*"
 msgstr "初始活动：*记录需求*"
 
-#: ../../content/processes-automation/process-management.rst:549
+#: ../../content/processes-automation/process-management.rst:655
 msgid "Next activity: *Approval*"
 msgstr "下一活动：*审批*"
 
-#: ../../content/processes-automation/process-management.rst:551
+#: ../../content/processes-automation/process-management.rst:657
 msgid ""
 "If the condition of this activity is fulfilled, the ticket will move to "
 "activity *Approval*."
 msgstr "如果满足此活动的条件，则工单将移动到活动 *审批*。"
 
-#: ../../content/processes-automation/process-management.rst:553
-#: ../../content/processes-automation/process-management.rst:570
-#: ../../content/processes-automation/process-management.rst:584
-#: ../../content/processes-automation/process-management.rst:600
-#: ../../content/processes-automation/process-management.rst:614
-#: ../../content/processes-automation/process-management.rst:628
+#: ../../content/processes-automation/process-management.rst:659
+#: ../../content/processes-automation/process-management.rst:676
+#: ../../content/processes-automation/process-management.rst:690
+#: ../../content/processes-automation/process-management.rst:706
+#: ../../content/processes-automation/process-management.rst:720
+#: ../../content/processes-automation/process-management.rst:734
 msgid "Additionally, the following sequence flow actions are executed:"
 msgstr "此外，还执行以下序列流操作："
 
-#: ../../content/processes-automation/process-management.rst:555
+#: ../../content/processes-automation/process-management.rst:661
 msgid "*Move the process ticket into the \"Management\" queue*"
 msgstr "*将流程工单移动到“Management（管理）”队列中*"
 
-#: ../../content/processes-automation/process-management.rst:558
+#: ../../content/processes-automation/process-management.rst:664
 msgid ""
 "The activity *Recording the demand* is a defined step of the process ticket,"
 " where there is the possibility for the sequence flow *Approval*. If this "
@@ -9725,42 +10221,42 @@ msgid ""
 "*Approved* are available."
 msgstr "*记录需求* 活动是流程工单的一个定义步骤，在该步骤中，序列流 *批准* 是可能的。如果适用，则工单将移动到下一个活动 *审批*，并执行序列流操作 *将流程票据移动到“管理”队列* 和 *将工单负责人更改为“经理”*。在活动 *审批* 中，用户任务活动对话框 *审批拒绝* 和 *批准* 可用。"
 
-#: ../../content/processes-automation/process-management.rst:562
+#: ../../content/processes-automation/process-management.rst:668
 msgid "Possible sequence flow: *Approval denied*"
 msgstr "可能的序列流：*审批拒绝*"
 
-#: ../../content/processes-automation/process-management.rst:564
-#: ../../content/processes-automation/process-management.rst:578
+#: ../../content/processes-automation/process-management.rst:670
+#: ../../content/processes-automation/process-management.rst:684
 msgid "Starting activity: *Approval*"
 msgstr "初始活动：*审批*"
 
-#: ../../content/processes-automation/process-management.rst:566
-#: ../../content/processes-automation/process-management.rst:596
-#: ../../content/processes-automation/process-management.rst:624
+#: ../../content/processes-automation/process-management.rst:672
+#: ../../content/processes-automation/process-management.rst:702
+#: ../../content/processes-automation/process-management.rst:730
 msgid "Next activity: *Process complete*"
 msgstr "下一活动：*流程完成*"
 
-#: ../../content/processes-automation/process-management.rst:568
-#: ../../content/processes-automation/process-management.rst:598
-#: ../../content/processes-automation/process-management.rst:626
+#: ../../content/processes-automation/process-management.rst:674
+#: ../../content/processes-automation/process-management.rst:704
+#: ../../content/processes-automation/process-management.rst:732
 msgid ""
 "If this matches, the process ticket will move to activity *Process "
 "complete*."
 msgstr "如果匹配，流程工单将移动到活动 *进程完成*。"
 
-#: ../../content/processes-automation/process-management.rst:576
+#: ../../content/processes-automation/process-management.rst:682
 msgid "Possible sequence flow: *Approved*"
 msgstr "可能的序列流：*批准*"
 
-#: ../../content/processes-automation/process-management.rst:580
+#: ../../content/processes-automation/process-management.rst:686
 msgid "Next activity: *Order*"
 msgstr "下一活动：*采购*"
 
-#: ../../content/processes-automation/process-management.rst:582
+#: ../../content/processes-automation/process-management.rst:688
 msgid "If this matches, the process ticket will move to activity *Order*."
 msgstr "如果匹配，流程工单将移动到活动 *采购*。"
 
-#: ../../content/processes-automation/process-management.rst:588
+#: ../../content/processes-automation/process-management.rst:694
 msgid ""
 "We can see that from the current activity, which defines a step of the "
 "process ticket, there are one or more possibilities for sequence flow which "
@@ -9768,52 +10264,52 @@ msgid ""
 "actions)."
 msgstr "我们可以从当前活动（它定义了流程工单的一个步骤）中看到，活动可能有一个或多个序列流，每个序列流只有一个目标活动（并且可能有一个或多个序列流操作）。"
 
-#: ../../content/processes-automation/process-management.rst:592
+#: ../../content/processes-automation/process-management.rst:698
 msgid "Possible sequence flow: *Order denied*"
 msgstr "可能的序列流：*采购拒绝*"
 
-#: ../../content/processes-automation/process-management.rst:594
-#: ../../content/processes-automation/process-management.rst:608
+#: ../../content/processes-automation/process-management.rst:700
+#: ../../content/processes-automation/process-management.rst:714
 msgid "Starting activity: *Order*"
 msgstr "初始活动：*采购*"
 
-#: ../../content/processes-automation/process-management.rst:606
+#: ../../content/processes-automation/process-management.rst:712
 msgid "Possible sequence flow: *Order placed*"
 msgstr "可能的序列流：*订单已生成*"
 
-#: ../../content/processes-automation/process-management.rst:610
+#: ../../content/processes-automation/process-management.rst:716
 msgid "Next activity: *Incoming*"
 msgstr "下一活动：*收货*"
 
-#: ../../content/processes-automation/process-management.rst:612
+#: ../../content/processes-automation/process-management.rst:718
 msgid "If this matches, the process ticket will move to activity *Incoming*."
 msgstr "如果匹配，流程工单将移动到活动 *收货*。"
 
-#: ../../content/processes-automation/process-management.rst:620
+#: ../../content/processes-automation/process-management.rst:726
 msgid "Possible sequence flow: *Shipment received*"
 msgstr "可能的序列流：*货品收到*"
 
-#: ../../content/processes-automation/process-management.rst:622
+#: ../../content/processes-automation/process-management.rst:728
 msgid "Starting activity: *Incoming*"
 msgstr "初始活动：*收货*"
 
-#: ../../content/processes-automation/process-management.rst:634
+#: ../../content/processes-automation/process-management.rst:740
 msgid ""
 "The complete process path for the book ordering process will then look like "
 "this:"
 msgstr "图书订购流程的完整流程路径如下所示："
 
-#: ../../content/processes-automation/process-management.rst:639
+#: ../../content/processes-automation/process-management.rst:745
 msgid "Book Ordering - Process Complete"
 msgstr "图书预订 - 流程完成"
 
-#: ../../content/processes-automation/process-management.rst:641
+#: ../../content/processes-automation/process-management.rst:747
 msgid ""
 "After you finish the process path, click on *Save and finish* button below "
 "the canvas to go back to the process management screen."
 msgstr "完成流程路径后，单击画布下方的 *保存并完成* 按钮返回到流程管理屏幕。"
 
-#: ../../content/processes-automation/process-management.rst:643
+#: ../../content/processes-automation/process-management.rst:749
 msgid ""
 "Click on the *Deploy All Processes* button in the left sidebar. This will "
 "gather all processes information form the database and create a cache file "
@@ -9821,7 +10317,7 @@ msgid ""
 "that the system will use to create or use process tickets."
 msgstr "单击左侧边栏中的 *部署所有流程* 按钮。这将从数据库中收集所有流程信息，并创建一个缓存文件（使用Perl语言）。这个缓存文件实际上是系统用来创建或使用流程工单的流程配置。"
 
-#: ../../content/processes-automation/process-management.rst:647
+#: ../../content/processes-automation/process-management.rst:753
 msgid ""
 "Any change that is made on the process will require to re-deploy the process"
 " in order to get the change reflected in the system."
