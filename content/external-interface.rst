@@ -15,4 +15,3 @@ The following chapter describes the administration tools needed to implement cor
    external-interface/custom-pages
    external-interface/home-page
    external-interface/layout
-
