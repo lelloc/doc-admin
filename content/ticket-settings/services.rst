@@ -12,14 +12,9 @@ Use this screen to add services to the system. A fresh OTRS installation doesn't
 
    Service Management Screen
 
-.. warning::
+.. seealso::
 
-   Services must first be activated via :doc:`../administration/system-configuration` under the *Administration* group to be selectable in the ticket screens. You may click on the link in the warning message to directly jump to the configuration setting.
-
-.. figure:: images/service-activate-warning.png
-   :alt: Service Activation Warning
-
-   Service Activation Warning
+   To use this feature, :sysconfig:`Ticket::Service <core.html#ticket-service>` must be activated in the :doc:`../administration/system-configuration` under the *Administration* group to be selectable in the ticket screens. You may click on the link in the warning message of the notification bar to directly jump to the configuration setting.
 
 
 Manage Services
@@ -59,6 +54,7 @@ To edit a service:
 
    Changing the name of this object should be done with care, the check only provides verification for certain settings and ignores things where the name can't be verified. Some examples are dashboard filters, action control lists (ACLs), and processes (sequence flow actions) to name a few. Documentation of your setup is key to surviving a name change.
 
+
 Service Settings
 ----------------
 
@@ -75,3 +71,7 @@ Validity \*
 
 Comment
    Add additional information to this resource. It is recommended to always fill this field as a description of the resource with a full sentence for better clarity, because the comment will be also displayed in the overview table.
+
+.. note::
+
+   A service can only be selectable in the ticket screens, if the service is assigned to the customer user of the ticket or it is set as default service for all customer users in the :doc:`../users-groups-roles/customer-users-services` screen.

@@ -47,3 +47,24 @@ Multiple customer users or services can be assigned in both screens at the same 
 .. note::
 
    By setting a checkbox in the header of a column will set all the checkboxes in the selected column.
+
+
+Manage Default Services
+-----------------------
+
+It is possible to add default services, so that all customer users may access them. This prevents having to add each service to each customer user.
+
+To edit the default services:
+
+1. Click on the *Edit default services* button in the left sidebar.
+2. Select the services which should be selectable for all customer users.
+3. Click on the *Save* or *Save and finish* button.
+
+.. figure:: images/customer-user-service-default-services.png
+   :alt: Allocate Services to Customer User Screen
+
+   Allocate Services to Customer User Screen
+
+.. warning::
+
+   Mixing default services and customer specific services can be confusing. If a customer user has specific services assigned, then the default services will be not applied.
