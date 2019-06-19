@@ -261,7 +261,7 @@ Enable this notification method
       To use the SMS notification method, :doc:`../otrs-group-services/cloud-services` need to be enabled.
 
 Additional recipient email addresses
-   Additional recipients can be added here.
+   Additional recipients can be added here. Use comma or semicolon to separate the email addresses.
 
 Article visible for customer
    An article will be created if the notification is sent to the customer or an additional email address.
