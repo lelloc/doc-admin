@@ -555,7 +555,7 @@ Name: DynamicField_%s
             <varlistentry id="ConfigReference_Setting_Customer::AuthModule::HTTPBasicAuth::ReplaceRegExp">
                 <term>Customer::AuthModule::HTTPBasicAuth::ReplaceRegExp</term>
                 <listitem>
-                    <para>Ha „HTTPBasicAuth” lett kiválasztva a Customer::AuthModule modulnál, akkor megadhatja (reguláris kifejezés használatával) a TÁVOLI_FELHASZNÁLÓ részeinek felvágását (például a záró tartományok eltávolításához). Reguláris kifejezés megjegyzés, a $1 lesz az új bejelentkezés.</para>
+                    <para>Ha „HTTPBasicAuth” lett kiválasztva a Customer::AuthModule modulnál, akkor megadhatja (reguláris kifejezés használatával) a REMOTE_USER részeinek felvágását (például a záró tartományok eltávolításához). Reguláris kifejezés megjegyzés, a $1 lesz az új bejelentkezés.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ^(.+?)@.+?$
@@ -978,7 +978,7 @@ Name: Phone
             <varlistentry id="ConfigReference_Setting_CommunicationLog::PurgeAfterHours::SuccessfulCommunications">
                 <term>CommunicationLog::PurgeAfterHours::SuccessfulCommunications</term>
                 <listitem>
-                    <para>Meghatározza azon órák számát, amíg egy sikeres kommunikációt el lesz tárolva.</para>
+                    <para>Meghatározza azon órák számát, amíg egy sikeres kommunikáció el lesz tárolva.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '168'
@@ -1577,7 +1577,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_NotificationSenderEmail">
                 <term>NotificationSenderEmail</term>
                 <listitem>
-                    <para>Azt az e-mail címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz „OTRS értesítések” otrs@your.example.com). Használhatja az OTRS_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail címet.</para>
+                    <para>Azt az e-mail címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "OTRS értesítések" &lt;otrs@your.example.com&gt;). Használhatja az OTRS_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail címet.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- otrs@<OTRS_CONFIG_FQDN>
@@ -1588,7 +1588,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_NotificationSenderName">
                 <term>NotificationSenderName</term>
                 <listitem>
-                    <para>Azt a nevet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. A küldő neve a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz „OTRS értesítésiek” otrs@your.example.com).</para>
+                    <para>Azt a nevet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. A küldő neve a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "OTRS értesítésiek" &lt;otrs@your.example.com&gt;).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- OTRS Notifications
@@ -1612,7 +1612,7 @@ Prio: '100'
             <varlistentry id="ConfigReference_Setting_SendmailBcc">
                 <term>SendmailBcc</term>
                 <listitem>
-                    <para>Elküld minden kimenő e-mailt titkos másolatként egy megadott címre. Ez csak biztonsági mentés céljából használja.</para>
+                    <para>Elküld minden kimenő e-mailt titkos másolatként egy megadott címre. Ezt csak biztonsági mentés céljából használja.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- ''
 ]]></programlisting>
@@ -3080,7 +3080,7 @@ TargetName: Child
             <varlistentry id="ConfigReference_Setting_LogModule::SysLog::Facility">
                 <term>LogModule::SysLog::Facility</term>
                 <listitem>
-                    <para>Ha „SysLog” lett kiválasztva a LogModule modulnál, akkor megadható egy speciális naplózó képesség.</para>
+                    <para>Ha „SysLog” lett kiválasztva a LogModule modulnál, akkor megadható egy speciális naplózó összetevő.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- user
@@ -3308,7 +3308,7 @@ ItemMaxAttempts: '3'
             <varlistentry id="ConfigReference_Setting_Package::RepositoryAccessRegExp">
                 <term>Package::RepositoryAccessRegExp</term>
                 <listitem>
-                    <para>Az IP reguláris kifejezést határozza meg a helyi tárolóhoz való hozzáféréshez. Engedélyeznie kell ezt a helyi tárolóhoz való hozzáféréshez, továbbá a package::RepositoryList szükséges a távoli kiszolgálón.</para>
+                    <para>Az IP reguláris kifejezést határozza meg a helyi tárolóhoz való hozzáféréshez. Engedélyeznie kell ezt a helyi tárolóhoz való hozzáféréshez, továbbá a Package::RepositoryList szükséges a távoli kiszolgálón.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 127\.0\.0\.1
@@ -4364,7 +4364,7 @@ PhoneCall: Phone call
             <varlistentry id="ConfigReference_Setting_Ticket::GenericAgentRunLimit">
                 <term>Ticket::GenericAgentRunLimit</term>
                 <listitem>
-                    <para>Azon jegyek korlátjának beállítása, amelyek egy egyedüli genericagent feladat végrehajtásakor lesznek végrehajtva.</para>
+                    <para>Azon jegyek korlátjának beállítása, amelyek egy önálló általános ügyintéző feladat végrehajtásakor lesznek végrehajtva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- '4000'
 ]]></programlisting>
@@ -6410,7 +6410,7 @@ Required: '0'
             <varlistentry id="ConfigReference_Setting_Ticket::Permission::CreatorCheck::Queues">
                 <term>Ticket::Permission::CreatorCheck::Queues</term>
                 <listitem>
-                    <para>Opcionális várólista korlátozás a CreatorCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a jegyeknél vannak engedélyezve a megadott várólistákban.</para>
+                    <para>Opcionális várólista korlátozás a CreatorCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a megadott várólistákban lévő jegyeknél vannak engedélyezve.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -6424,7 +6424,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_Ticket::Permission::InvolvedCheck::Queues">
                 <term>Ticket::Permission::InvolvedCheck::Queues</term>
                 <listitem>
-                    <para>Opcionális várólista korlátozás az InvolvedCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a jegyeknél vannak engedélyezve a megadott várólistákban.</para>
+                    <para>Opcionális várólista korlátozás az InvolvedCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a megadott várólistákban lévő jegyeknél vannak engedélyezve.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -6438,7 +6438,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_Ticket::Permission::OwnerCheck::Queues">
                 <term>Ticket::Permission::OwnerCheck::Queues</term>
                 <listitem>
-                    <para>Opcionális várólista korlátozás az OwnerCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a jegyeknél vannak engedélyezve a megadott várólistákban.</para>
+                    <para>Opcionális várólista korlátozás az OwnerCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a megadott várólistákban lévő jegyeknél vannak engedélyezve.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -6452,7 +6452,7 @@ Raw: rw
             <varlistentry id="ConfigReference_Setting_Ticket::Permission::ResponsibleCheck::Queues">
                 <term>Ticket::Permission::ResponsibleCheck::Queues</term>
                 <listitem>
-                    <para>Opcionális várólista korlátozás a ResponsibleCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a jegyeknél vannak engedélyezve a megadott várólistákban.</para>
+                    <para>Opcionális várólista korlátozás a ResponsibleCheck jogosultsági modulnál. Ha be van állítva, akkor a jogosultságok csak a megadott várólistákban lévő jegyeknél vannak engedélyezve.</para>
                     <para>Ez a beállítás alapértelmezetten nincs bekapcsolva.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
@@ -8868,7 +8868,7 @@ TaskName: TicketAcceleratorRebuild
             <varlistentry id="ConfigReference_Setting_Daemon::SchedulerCronTaskManager::Task_TicketDraftDeleteExpired">
                 <term>Daemon::SchedulerCronTaskManager::Task###TicketDraftDeleteExpired</term>
                 <listitem>
-                    <para>Lejárt jegy piszkozatbejegyzések törlése.</para>
+                    <para>Jegyek lejárt piszkozatbejegyzéseinek törlése.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Function: Execute
@@ -13490,7 +13490,7 @@ Prio: '120'
             <varlistentry id="ConfigReference_Setting_AdminSelectBox::AllowDatabaseModification">
                 <term>AdminSelectBox::AllowDatabaseModification</term>
                 <listitem>
-                    <para>Azt szabályozza, hogy az adminisztrátornak megengedett-e az adatbázison módosításokat végrehajtania az adminisztrátori lekérdeződobon keresztül.</para>
+                    <para>Azt szabályozza, hogy az adminisztrátornak megengedett-e az adatbázison módosításokat végrehajtani az adminisztrátori lekérdeződobozon keresztül.</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -13820,7 +13820,7 @@ Module: Kernel::Output::HTML::HeaderMeta::Refresh
             <varlistentry id="ConfigReference_Setting_Frontend::HeaderMetaModule_2-TicketSearch">
                 <term>Frontend::HeaderMetaModule###2-TicketSearch</term>
                 <listitem>
-                    <para>Egy modul a HTML OpenSearch profil előállításához a rövid jegykeresésnél az ügyintézői felületen.</para>
+                    <para>Egy modul a gyors jegykeresés HTML OpenSearch profiljának előállításához az ügyintézői felületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: AgentTicketSearch
@@ -14123,7 +14123,7 @@ Module: Kernel::Output::HTML::HeaderMeta::AgentTicketSearch
             <varlistentry id="ConfigReference_Setting_Ticket::Frontend::NeedAccountedTime">
                 <term>Ticket::Frontend::NeedAccountedTime</term>
                 <listitem>
-                    <para>Meghatározza, hogy az időelszámolás kötelező-e az ügyintézői felületen. Ha engedélyezve van, akkor egy jegyzetet kell megadni minden jegyműveletnél (nem számít, hogy maga a jegyzet aktívként van-e beállítva, vagy eredetileg is kötelező az egyedüli jegyművelet képernyőnél).</para>
+                    <para>Meghatározza, hogy az időelszámolás kötelező-e az ügyintézői felületen. Ha engedélyezve van, akkor egy jegyzetet kell megadni minden jegyműveletnél (nem számít, hogy maga a jegyzet aktívként van-e beállítva, vagy eredetileg is kötelező az egyéni jegyművelet képernyőnél).</para>
                     <para>Ez a beállítás nem kapcsolható ki.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[--- 0
@@ -26809,7 +26809,7 @@ Module: Kernel::Output::HTML::HeaderMeta::Refresh
             <varlistentry id="ConfigReference_Setting_CustomerFrontend::HeaderMetaModule_2-TicketSearch">
                 <term>CustomerFrontend::HeaderMetaModule###2-TicketSearch</term>
                 <listitem>
-                    <para>Egy modul a HTML OpenSearch profil előállításához a rövid jegykeresésnél az ügyfélfelületen.</para>
+                    <para>Egy modul a gyors jegykeresés HTML OpenSearch profiljának előállításához az ügyfélfelületen.</para>
                     <para>Alapértelmezett érték:
                         <programlisting><![CDATA[---
 Action: CustomerTicketSearch
