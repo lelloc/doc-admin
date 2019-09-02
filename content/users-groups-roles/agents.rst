@@ -114,9 +114,13 @@ Validity \*
 Agent Back End Sources
 ----------------------
 
+Agents can be read and synchronized from an Active Directory® or LDAP server.
+
+In case of using *On-Premise* system or *((OTRS)) Community Edition*, you may use the following section to configure your system.
+
 .. note::
 
-   Agents can be read and synchronized from an Active Directory® or LDAP server. The following configurations are taken care of by the "Customer Solution Team <support@otrs.com>". In case you use OnPremise or the ((OTRS)) Community Edition, then you may also use this section to configure your system.
+   The following configurations are taken care of by the *Customer Solution Team* in **OTRS**. Please contact the *Customer Solution Team* via support@otrs.com or in the `OTRS Portal <https://portal.otrs.com/>`__.
 
 
 Agent Authentication Back End
