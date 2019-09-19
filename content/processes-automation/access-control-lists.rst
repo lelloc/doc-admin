@@ -449,8 +449,13 @@ For properties, keys and values that can be used in ACLs, see the following exam
            - some value
            # more dynamic fields
            NewOwner:
+           # For ticket action screens, where the Owner is already set.
            - some owner
            OldOwner:
+           # For ticket action screens, where the Owner is already set.
+           - some owner
+           Owner:
+           # For ticket create screens, because Owner is not set yet.
            - some owner
            # more ticket attributes
        PossibleAdd:
