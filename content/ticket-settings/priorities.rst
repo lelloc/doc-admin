@@ -5,16 +5,11 @@ Sometimes tickets are not equally created. One ticket may need more focus than a
 
 OTRS provides a traffic light system based per default five levels of priorities to handle this task.
 
-Blue
-   Very low
-Green
-   Low
-Grey
-   Normal
-Orange
-   High
-Red
-   Very high
+- Blue: very low
+- Green: low
+- Grey: normal
+- Pink: high
+- Red: very high
 
 The colors are based on the ID (very low being ID 1) in the database. Changing the names should be done with this in mind. New priorities have the color gray.
 

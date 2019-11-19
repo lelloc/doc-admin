@@ -63,11 +63,11 @@ To reduce the time needed for answering the tickets, :doc:`ticket-settings/templ
 
 Normal templates can contain :doc:`ticket-settings/attachments`, and you can assign the uploaded attachments to templates using the :doc:`ticket-settings/templates-attachments` management screen.
 
-If templates are created and attachments are assigned to them, you can set the templates to use in queues in the :doc:`ticket-settings/templates-queues` or :doc:`ticket-settings/sms-templates-queues` management screens.
+When templates are created, you can set the templates to use in queues in the :doc:`ticket-settings/templates-queues` or :doc:`ticket-settings/sms-templates-queues` management screens.
 
 You need to review the default :doc:`ticket-settings/priorities`, :doc:`ticket-settings/states` and :doc:`ticket-settings/types`, and add new elements, if needed.
 
-The customer requests can be categorize into services. If you would like to use this possibility, then create some :doc:`ticket-settings/services` and assign :doc:`ticket-settings/service-level-agreements` to the services. Furthermore, you can set the :doc:`users-groups-roles/customer-users-services` relations.
+The customer requests can be categorize into services. If you would like to use this possibility, then create some :doc:`ticket-settings/services` and set the :doc:`users-groups-roles/customer-users-services` relations. Furthermore, :doc:`ticket-settings/service-level-agreements` can be assign to the services.
 
 Now you can add some notifications to be received by agents, if particular events occur. You can do this in the :doc:`communication-notifications/ticket-notifications` screen.
 

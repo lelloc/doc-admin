@@ -30,6 +30,13 @@ Send message to group members
 Group members need to have permission
    With these radio buttons can be selected, if a group member need read-only or read-write permissions to receive the message.
 
+Also send to customers in groups
+   Select this checkbox to send the message also for customers in groups.
+
+   .. note::
+
+      This option is available only, if :sysconfig:`CustomerGroupSupport <core.html#customergroupsupport>` setting is enabled.
+
 Subject \*
    The subject of the messages.
 
