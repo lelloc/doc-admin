@@ -18,7 +18,7 @@ Manage Postmaster Filters
 
 .. note::
 
-   When adding or editing a postmaster filter, please keep in mind that they are evaluated in alphabetical order by name.
+   When adding or editing a postmaster filter, please keep in mind that they are evaluated in *ASCIIbetical* order by name.
 
 To add a postmaster filter:
 
@@ -72,10 +72,10 @@ Name \*
 
    .. note::
 
-      When adding or editing one of the postmaster filters, remember multiple filters may apply to a single mail. The last rule wins. Rules execute and sort by the ASCII value of the names. Based on the sorted order in the overview, they are applied top to bottom. Look to the `ASCI chart <http://www.asciitable.com>`_ to see how to sort your names based on the *ASCII-bet*.
+      When adding or editing one of the postmaster filters, remember multiple filters may apply to a single mail. Rules are executed and sorted by the ASCII value of the names. Based on the sorted order in the overview, they are applied from top to bottom. Look at the `ASCII table <https://en.wikipedia.org/wiki/Ascii>`__ to see how to sort your names based on the *ASCIIbetical* order.
 
 Stop after match \*
-   Postmaster filters are evaluated in alphabetical order. This setting defines the evaluation of the subsequent postmaster filters.
+   Postmaster filters are evaluated in *ASCIIbetical* order. This setting defines the evaluation of the subsequent postmaster filters.
 
    No
       All postmaster filters are executed.
@@ -94,14 +94,16 @@ Filter Condition
 
 A postmaster filter consists of one or more conditions that must be met in order for the defined actions to be executed on the email. Filter conditions can be defined for specific mail header entries or for strings in the mail body.
 
-Search header field
+Search header field … for value
+   Select a mail header or an ``X-OTRS`` header from the first drop-down list, and enter a value as search term for the selected mail header to the second field. Even regular expressions can be used for extended pattern matching.
+
    A list of mail header entries can be found in `RFC5322 <https://tools.ietf.org/html/rfc5322>`_. It is also possible to define ``X-OTRS`` headers as filter condition. The different ``X-OTRS`` headers and their meaning are the following:
 
    ``X-OTRS-AttachmentCount``
       This contains as value the number of attachments which are contained in the email (e.g. *0* for mails without attachments).
 
    ``X-OTRS-AttachmentExists``
-      Depending on whether attachments are included in the email this ``X-OTRS`` header is set to *yes*, or it has a *no* value if no attachments are included.
+      Depending on whether attachments are included in the email this ``X-OTRS`` header is set to ``yes``, or it has a ``no`` value if no attachments are included.
 
    ``X-OTRS-BodyDecrypted``
       If the incoming mail was encrypted, it is possible to add a search term to look for the body of the incoming encrypted mail.
@@ -122,16 +124,16 @@ Search header field
       If set to *1*, the incoming follow-up message will not change the ticket state. For this purpose the header can be customized in the system configuration using option ``KeepStateHeader``.
 
    ``X-OTRS-Ignore``
-      If set to *Yes* or *True*, the incoming message will completely be ignored and never delivered to the system.
+      If set to ``Yes`` or ``True``, the incoming message will completely be ignored and never delivered to the system.
 
    ``X-OTRS-IsVisibleForCustomer``
       Controls if the article is shown to customer users. Possible values are *0* or *1*.
 
    ``X-OTRS-Lock``
-      Set the lock state of a ticket. Possible values are *locked* or *unlocked*.
+      Set the lock state of a ticket. Possible values are ``locked`` or ``unlocked``.
 
    ``X-OTRS-Loop``
-      If set to *True*, no auto answer is delivered to the sender of the message (mail loop protection).
+      If set to ``Yes`` or ``True``, no auto answer is delivered to the sender of the message (mail loop protection).
 
    ``X-OTRS-Owner``
       Set the agent as owner for the ticket.
@@ -152,7 +154,7 @@ Search header field
       Set the agent ID as responsible for the ticket.
 
    ``X-OTRS-SenderType``
-      Set the sender type for the ticket. Possible values are *agent*, *system* or *customer*.
+      Set the sender type for the ticket. Possible values are ``agent``, ``system`` or ``customer``.
 
    ``X-OTRS-Service``
       Set the service for the ticket. If you use a sub-service, specify it as *Parent::Sub*.
@@ -164,7 +166,7 @@ Search header field
       Set the state for the ticket.
 
    ``X-OTRS-State-PendingTime``
-      Set the pending time for the ticket (you also should sent a pending state via ``X-OTRS-State``). You can specify absolute dates like *2010-11-20 00:00:00* or relative dates, based on the arrival time of the email. Use the form ``+ $Number $Unit``, where ``$Unit`` can be *s* (seconds), *m* (minutes), *h* (hours) or *d* (days). Only one unit can be specified. Examples of valid settings: *+50s* (pending in 50 seconds), *+30m* (30 minutes), *+12d* (12 days).
+      Set the pending time for the ticket (you should sent a pending state via ``X-OTRS-State``). You can specify absolute dates like *2010-11-20 00:00:00* or relative dates, based on the arrival time of the email. Use the form ``+ $Number $Unit``, where ``$Unit`` can be *s* (seconds), *m* (minutes), *h* (hours) or *d* (days). Only one unit can be specified. Examples of valid settings: *+50s* (pending in 50 seconds), *+30m* (30 minutes), *+12d* (12 days).
 
       .. note::
 
@@ -184,9 +186,6 @@ Search header field
 
    The :ref:`Mail Account Settings` defines the trust level.
 
-for value
-   Enter a search term to this field. Even regular expressions can be used for extended pattern matching.
-
 Negate
    If checked, the condition will use the negate search term.
 
@@ -201,8 +200,9 @@ Set Email Headers
 
 In this section you can choose the actions that are triggered if the filter rules match.
 
-Set email header
-   Select an ``X-OTRS`` header. The ``X-OTRS`` headers are already described above.
+Set email header … with value
+   Select an ``X-OTRS`` header from the first drop-down list, and add a value to the second field that should be set as value of the selected ``X-OTRS`` header.
 
-with value
-   Add a value to this field that should be set as value of the selected ``X-OTRS`` header.
+   .. seealso::
+
+      The ``X-OTRS`` headers are already described above.

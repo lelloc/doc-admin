@@ -9,7 +9,7 @@ Missing appointments can damage your image with a customer. Once there is an app
 
 Notification relieves the agent the stress of mentally tracking appointments.
 
-OTRS appointment notifications satisfies this need. Here a person can easily set notifications with general rules, including trigger events and filters. Afterward, appointments fitting the bill notify the correct users at the correct time.
+OTRS appointment notifications satisfies this need. Here an administrator can easily set notifications with general rules, including trigger events and filters. Afterward, appointments fitting the bill notify the correct users at the correct time.
 
 Use this screen to add appointment notifications to the system. In a fresh OTRS installation an appointment reminder notification is already added by default. The appointment notification management screen is available in the *Appointment Notifications* module of the *Communication & Notifications* group.
 
@@ -188,7 +188,7 @@ Send on out of office
    If this option is checked, the notification will be sent even if the agent is currently out of office.
 
 Once per day
-   Notify users just once per day about a single appointment using a selected transport.
+   Notify users just once per day about a single appointment using a selected transport. If this is the first notification about an appointment, then the notification will be sent. If a notification was already sent before and this option is checked, the OTRS daemon will check the time the last notification was sent. If there was no notification sent in the last 24 hours, the notification will be sent again.
 
 
 Appointment Notification Methods

@@ -111,7 +111,11 @@ Follow up Option \*
       The follow up will reopen the already closed ticket.
 
    reject
-      The follow up will be rejected. See :doc:`auto-responses` chapter for more information.
+      The follow up will be rejected.
+
+   .. seealso::
+
+      See :doc:`auto-responses` chapter for more information.
 
 Ticket lock after a follow up \*
    Only applicable if the *Follow up Option* is set to *possible*. Locks the previously closed ticket, upon reopening, to the last owner. This ensures that a follow up for a ticket is processed by the agent that has previously handled that ticket.

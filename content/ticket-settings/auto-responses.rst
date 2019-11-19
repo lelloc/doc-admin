@@ -5,7 +5,7 @@ Quick and transparent service is vital to maintaining a good working relationshi
 
 OTRS allows you to respond to a customer immediately upon receipt of a request giving the customers instantaneous feedback assuring them that their request is in processing, establishing expectation.
 
-Automatic responses can be sent to customers based on the occurrence of certain events, such as the creation of a ticket in a specific queue, the receipt of a follow-up message in regards to a ticket, the closure or rejection of a ticket, etc.
+Automatic responses can be sent to customers based on the occurrence of certain events, such as the creation of a ticket in a specific queue, the receipt of a follow-up message in regards to a closed or rejected ticket, etc.
 
 Use this screen to add automatic responses for use in queues. A fresh OTRS installation contains some automatic responses by default. The automatic response management screen is available in the *Auto Responses* module of the *Ticket Settings* group.
 

@@ -72,25 +72,25 @@ Type \*
       To be used for new phone or email ticket.
 
    Email
-      To be used for writing an email to a customer user.
+      To be used for writing an email to a customer user or to someone else.
 
    Forward
       To be used to forward an article to someone else.
 
    Note
-      To be used to create internal notes.
+      To be used to create notes.
 
    Phone call
       To be used for inbound and outbound phone calls.
 
    Process dialog
-      To be used in process management.
+      To be used in process management to pre-fill text of articles in user task activity dialogs.
 
 Name \*
    The name of this resource. Any type of characters can be entered to this field including uppercase letters and spaces. The name will be displayed in the overview table.
 
 Subject
-   The subject of the email sent to the users.
+   The subject of the article added by the template.
 
 Subject method
    Specify how the current article subject should be dealt with. The following methods are available:
@@ -105,7 +105,7 @@ Subject method
       The current article subject will be replaced with the template subject.
 
 Template
-   The body of the email sent to the users.
+   The body of the article added by the template.
 
 Attachments
    It is possible to add one or more attachments to this template. Attachments can be added in the :doc:`attachments` screen.
