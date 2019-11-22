@@ -1,7 +1,7 @@
 Service Level Agreements
 ========================
 
-Your organization must meet the time demands of your customers. Timely service matters. Response to questions, updates on issues, and solutions must be provided it an agreed amount of time. The agent must receive notification of possible breaches, to prevent ticket escalation.
+Your organization must meet the time demands of your customers. Timely service matters. Response to questions, updates on issues, and solutions must be provided in an agreed amount of time. The agent must receive notification of possible breaches, to prevent ticket escalation.
 
 OTRS scales well with your needs and offers management of service level agreements (SLAs). OTRS provides you with the possibility to create numerous service level agreements covering all of your service and customer need. Each :term:`SLA` can cover multiple services and define the availability of service and escalation periods.
 
